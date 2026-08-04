@@ -28,9 +28,9 @@ const dateFormatee = new Intl.DateTimeFormat('fr-FR', {
       <time datetime={date.toISOString().split('T')[0]} class="mono-data text-slate">
         {dateFormatee}
       </time>
-      <span class="mono-label font-normal text-copper">{categories[0]}</span>
+      <span class="mono-label font-normal text-copper-text">{categories[0]}</span>
     </div>
-    <h3 class="type-h2 text-marine text-base leading-[1.15] mt-3 group-hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">
+    <h3 class="type-h2 text-marine text-base leading-[1.15] mt-3 group-hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">
       {titre}
     </h3>
     <p class="mt-2.5 text-[15px] font-light text-slate leading-[1.55] line-clamp-3">

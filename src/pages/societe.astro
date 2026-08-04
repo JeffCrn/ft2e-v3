@@ -47,7 +47,7 @@ const proseClasses = `text-[17px] font-light text-slate leading-[1.6] space-y-6
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
       <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
         <h2 class="type-h2 text-marine text-[22px]">Quatre piliers</h2>
-        <p class="mono-label font-normal text-mist">ce qui guide la pratique au quotidien</p>
+        <p class="mono-label font-normal text-slate">ce qui guide la pratique au quotidien</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-line border border-line" data-reveal-stagger>
         {[
@@ -57,7 +57,7 @@ const proseClasses = `text-[17px] font-light text-slate leading-[1.6] space-y-6
           { n: '04', titre: 'Cohérence chantier', texte: "Études d’exécution pour les entreprises titulaires. Ce qui est conçu est constructible." },
         ].map((pilier) => (
           <div class="p-6 bg-cool-white transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:bg-paper">
-            <span class="mono-label font-normal text-copper tabular-nums" aria-hidden="true">{pilier.n}</span>
+            <span class="mono-label font-normal text-copper-text tabular-nums" aria-hidden="true">{pilier.n}</span>
             <h3 class="type-h2 text-marine text-[19px] mt-3">{pilier.titre}</h3>
             <p class="mt-3 text-[15px] font-light text-slate leading-[1.55]">{pilier.texte}</p>
           </div>

@@ -14,11 +14,11 @@ const suffixeAffiche = suffixe && /^[a-zA-Zà-ÿ]/.test(suffixe) ? ` ${suffixe}`
 ---
 
 <div class="bg-cool-white p-5" data-chiffre data-target={valeur}>
-  <p class="mono-label text-mist font-normal" data-chiffre-label>{label}</p>
+  <p class="mono-label text-slate font-normal" data-chiffre-label>{label}</p>
   <p class="font-mono text-[22px] text-marine tabular-nums mt-2.5" data-chiffre-nombre>
     <span data-chiffre-valeur>0</span>{suffixeAffiche}
   </p>
-  {demo && <p class="mono-label text-copper mt-1.5" aria-label="Donnée de démonstration">[démo]</p>}
+  {demo && <p class="mono-label text-copper-text mt-1.5" aria-label="Donnée de démonstration">[démo]</p>}
 </div>
 
 <script>

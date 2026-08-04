@@ -24,8 +24,9 @@
   --color-mist: #8fa2b4;             /* labels, texte secondaire sur encre */
 
   /* Identité & action — le cuivre porte les deux */
-  --color-copper: #c46a38;
-  --color-bright-copper: #e08a50;
+  --color-copper: #c46a38;       /* filets, bordures, texte sur encre (4,9:1) */
+  --color-bright-copper: #e08a50; /* hover et annotations sur encre (7,1:1) */
+  --color-copper-text: #a04e20;  /* petit texte cuivre sur fond clair (≥ 5:1) */
 
   /* Filets */
   --color-line: rgba(74, 96, 118, 0.35);  /* filet standard */

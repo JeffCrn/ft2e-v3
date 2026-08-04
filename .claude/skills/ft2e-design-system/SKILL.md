@@ -1,173 +1,60 @@
 ---
 name: ft2e-design-system
-description: Source de vérité du design system Apple-style FT2E — tokens de couleur, typographie, espacement, rayons, ombres, navigation glass. À consulter à chaque création de composant ou de page pour garantir la cohérence visuelle. Déclenche-toi sur toute mention de couleur, typo, espacement, hero, CTA, bouton, lien.
+description: Source de vérité du design system « Ingénierie de l'invisible » FT2E v2 — tokens de couleur (encre/marine/cuivre), typographie Archivo + IBM Plex Mono, cartouches, filets, duotone, boutons blueprint. À consulter à chaque création de composant ou de page pour garantir la cohérence visuelle. Déclenche-toi sur toute mention de couleur, typo, espacement, hero, CTA, bouton, lien, cartouche, duotone.
 ---
 
-# Skill : FT2E Design System (Apple-style)
+# Skill : FT2E Design System — « Ingénierie de l'invisible »
 
 ## Philosophie
 
-Esthétique Apple : minimalisme cinématique, fondation chromatique dérivée du logo « flux dans le cadre » (marine + blanc froid) avec accent bleu unique pour l'action, sections alternées pour un rythme visuel fort, Inter Variable comme police unique.
+Le site ressemble à un **document d'ingénierie** : cartouches bordées, filets 1 px, annotations mono uppercase, chiffres tabulaires, coins cuivre sur les médias, images duotone. La technique invisible dans le bâtiment devient visible dans le design. Référence : bundle Claude Design `FT2E Démo V2.dc.html` (2026-08-04) et spec `docs/superpowers/specs/2026-08-04-ft2e-v2-ingenierie-invisible-design.md`.
 
-## Tokens — uniques sources de vérité
+## Tokens — source de vérité : `src/styles/global.css` (@theme)
 
-Source : `src/styles/global.css` (bloc `@theme`).
+### Couleurs
 
-### Palette
+| Token | Hex | Usage |
+|---|---|---|
+| `encre` / `marine-deep` | `#08131f` | nav, hero, footer, CTA final |
+| `marine` | `#16324f` | titres sur clair, texte fort, données de cartouche |
+| `cool-white` | `#edf0f2` | fond clair principal, texte sur encre |
+| `paper` | `#f7f9fa` | surface claire secondaire, hover, encarts |
+| `slate` | `#4a6076` | corps de texte et labels sur fond clair |
+| `mist` | `#8fa2b4` | labels et texte secondaire sur encre UNIQUEMENT (2,3:1 sur clair) |
+| `copper` | `#c46a38` | filets, bordures, équerres ; texte sur encre (4,9:1) |
+| `bright-copper` | `#e08a50` | hover liens / annotations sur encre (7,1:1) |
+| `copper-text` | `#a04e20` | petit texte cuivre sur fond clair (≥ 5:1) |
+| `line` / `line-strong` | `rgba(74,96,118,.35)` / `#4a6076` | filet standard / contour de cartouche |
 
-| Token Tailwind | Hex | Usage |
-| --- | --- | --- |
-| `marine-deep` | `#0f2436` | hero, CTA final, nav solidifiée — fond le plus immersif |
-| `marine` | `#16324f` | sections sombres, **titres** (`h1`–`h6`) sur fond clair, nav |
-| `marine-surface` | `#1d3a57` | cartes sur fond sombre |
-| `marine-surface-2` | `#223f5e` | variation de surface sombre |
-| `cool-white` | `#edf1f5` | fonds de section, cartes, footer |
-| `near-black` | `#1d1d1f` | **body** (texte courant) sur fond clair — inchangé |
-| `slate` | `#45535f` | texte secondaire, légendes, baseline sur fond clair |
-| `mist` | `#9fb0bf` | texte secondaire, baseline sur fond marine |
-| `apple-blue` | `#0071e3` | accent d'action, CTA principal, focus ring |
-| `link-blue` | `#0066cc` | liens texte sur fond clair |
-| `bright-blue` | `#2997ff` | liens sur fond sombre — réservé à `marine-deep` |
-| `copper` | `#c46a38` | accent d'identité (logo, eyebrow, filet) — fond clair |
-| `bright-copper` | `#d98a55` | accent d'identité (logo, eyebrow) — fond sombre |
-| `pure-black` | `#000000` | **legacy** — n'est plus utilisé pour les surfaces |
-| `text-secondary` | `rgba(0,0,0,0.8)` | texte secondaire |
-| `text-tertiary` | `rgba(0,0,0,0.48)` | légendes, captions |
-
-**Trois registres, un accent d'action isolé.** Le marine (`marine-deep` / `marine` / `marine-surface`) porte la **structure** (surfaces sombres, titres). Apple Blue reste l'accent d'**action** (CTA, liens, focus). Cuivre (`copper` / `bright-copper`) = accent d'**identité** de marque (logo, chiffre « 2 », eyebrow, filet), jamais pour signaler une action. Règle titres/body : titres → `text-marine` ; body/texte courant → `text-near-black`.
-
-### Repointage (churn minimal)
-
-`light-gray` → `#edf1f5` ; `dark-surface-1` → `#1d3a57` ; `dark-surface-2` → `#223f5e`. Les classes historiques (`bg-light-gray`, `bg-dark-surface-1`, `bg-dark-surface-2`) restent valides et rendent les nouvelles valeurs automatiquement.
-
-### Aliases legacy (rétrocompatibilité)
-
-| Ancien token | Pointe vers |
-| --- | --- |
-| `bleu-nuit` | `#0f2436` (marine-deep) |
-| `sarcelle` | `#0071e3` (apple-blue) |
-| `cuivre` | `#0071e3` (apple-blue) — alias legacy ; cuivre de marque = `copper` / `bright-copper` |
-| `creme-pierre` | `#edf1f5` (cool-white) |
-| `anthracite` | `#1d1d1f` (near-black) |
-
-### Combinaisons validées (contraste RGAA AA)
-
-- `marine` sur blanc → 13.1:1 ✅ (titres)
-- `marine` sur `cool-white` → 11.5:1 ✅ (titres)
-- Blanc sur `marine-deep` → 15.8:1 ✅ (body sombre)
-- Blanc sur `marine-surface` → 11.7:1 ✅ (cartes)
-- `near-black` sur blanc → 16.5:1 ✅ (body)
-- `slate` sur blanc → 7.9:1 ✅
-- `mist` sur `marine` → 5.9:1 ✅
-- `link-blue` sur blanc → 5.3:1 ✅
-- `apple-blue` sur blanc → 4.6:1 ✅
-- `bright-blue` sur `marine-deep` → 5.25:1 ✅ (liens sombres)
-- `bright-blue` sur `marine` moyen → 4.34:1 ⚠️ texte large / UI uniquement, pas de lien texte
-- `bright-copper` sur `marine-deep` → 5.8:1 ✅ (eyebrow, « 2 »)
-- `copper` sur blanc → 3.8:1 ⚠️ gros glyphe de logo uniquement
-- `text-tertiary` sur blanc → ~3.7:1 ⚠️ texte large uniquement
+**Pas de bleu.** Le cuivre porte identité + interaction (hover, focus `2px solid copper`). Aliases legacy (`apple-blue`, `link-blue`, `bright-blue`, `near-black`, `light-gray`, `dark-surface-*`) repointés — ne plus les utiliser.
 
 ### Typographie
 
-```css
-/* src/styles/global.css → @theme */
---font-heading: "Inter Variable", "Helvetica Neue", "Helvetica", "Arial", system-ui, sans-serif;
---font-body: "Inter Variable", "Helvetica Neue", "Helvetica", "Arial", system-ui, sans-serif;
-```
+- **Archivo Variable** — titres condensés-larges uppercase via `font-stretch` (112 % sections, 118 % wordmark, 125 % display), corps `font-light` (300) 15–17 px, `line-height` 1.55–1.6.
+- **IBM Plex Mono** 400/500 — labels 11 px `tracking .14em` uppercase, données 13 px `tabular-nums`, nav, boutons, breadcrumbs.
 
-Échelle Apple-style :
+### Classes recettes (global.css, @layer components)
 
-| Rôle | Taille | Poids | Line-height | Letter-spacing |
-| --- | --- | --- | --- | --- |
-| Display Hero | clamp(2.5rem, 5vw, 3.5rem) | 600 | 1.07 | -0.015em |
-| Section Heading | clamp(1.75rem, 3vw, 2.5rem) | 600 | 1.10 | -0.01em |
-| Body | 1rem | 400 | 1.5 | tracking-tight |
-| Small | 0.875rem | 400 | 1.43 | tracking-tight |
-| Caption | 0.75rem | 400 | 1.33 | tracking-widest uppercase |
+`type-display` (hero), `type-h2` (sections/cartes), `mono-label`, `mono-data`, `filet-top` (filet cuivre au-dessus des h2 éditoriaux), `btn-blueprint` (filaire), `btn-blueprint-solid` (plein clair sur encre), `btn-blueprint-dark` (plein encre sur clair), `chip-blueprint` (filtres), `duotone-media` (placeholder hachuré), `duotone-photo` (photo duotone). Composant `CoinsCuivre.astro` pour les équerres.
 
-### Espacements autorisés
+## Grammaire des blocs
 
-Tailwind par défaut, **multiples permis** : `1, 2, 3, 4, 6, 8, 12, 16, 24, 32`.
-Sections : `py-20` standard, `py-24` pour CTA final. Gaps cartes : `gap-4`.
+- **Section claire** : `bg-cool-white`, titre `type-h2 text-marine text-[22px]` en baseline avec un `mono-label text-slate`.
+- **Section encre** : `bg-encre border-t border-copper text-cool-white` (CTA final, bandeaux).
+- **Cartouche** : `border border-line-strong` + grille `gap-px bg-line`, cellules `bg-cool-white p-5`, label mono + valeur mono marine.
+- **Carte** : `border border-line bg-paper hover:border-copper`, média duotone 3:2 avec référence `FT2E—{année}` en bas à gauche, titre `type-h2 text-base`, méta `mono-data`.
+- **Liste secteurs** : lignes `border-b border-line` avec n° cuivre tabulaire, hover `border-b-copper bg-paper`.
+- **Média** : parent `relative` + `duotone-media`/`duotone-photo` + `CoinsCuivre` + annotation `mono-label text-cool-white` en bas à gauche.
+- **Prose éditoriale** : `max-w-[840px]`, h2 `filet-top`, corps `text-slate font-light text-[17px]`, listes à `border-l border-copper`, liens soulignés marine hover `copper-text`.
 
-### Rayons
+## Interdits
 
-- `rounded-lg` (8 px) — cartes, conteneurs, inputs
-- `rounded-[980px]` — CTA pill, capsules, badges, filtres (signature Apple)
-- `rounded-full` (50%) — contrôles media circulaires
+- Rayons (`rounded-lg`, pill `rounded-[980px]`) — seuls les inputs ont `rounded-[2px]`.
+- Ombres (`shadow-*`).
+- Bleu d'action, glass/blur, tilt 3D.
+- Texte `copper` standard ou `mist` sur fond clair (contraste insuffisant → `copper-text` / `slate`).
+- Couleur forcée sur `h1`–`h6` en CSS global (Tailwind v4 : utilitaires d'abord).
 
-Pas de `rounded-sm` ni `rounded` (4 px).
+## Motion
 
-### Ombres
-
-`shadow-soft` unique : `3px 5px 30px rgba(0, 0, 0, 0.22)`. **Rare** — hover cartes uniquement.
-
-### Conteneur
-
-`max-w-[980px] mx-auto px-4 md:px-6` — pas `max-w-screen-xl`.
-
-## Patterns récurrents
-
-### CTA principal (pill Apple Blue)
-
-```astro
-<a href="…" class="inline-flex items-center gap-2 bg-apple-blue text-white px-4 py-2 rounded-[980px] text-sm hover:bg-[#0077ED] transition-colors">
-  Parlons de votre projet
-</a>
-```
-
-### Lien « En savoir plus »
-
-```astro
-<a href="…" class="text-link-blue text-sm hover:underline tracking-tight">
-  En savoir plus ›
-</a>
-```
-
-### Titre de section (sur fond clair)
-
-```astro
-<h2 class="text-marine font-semibold">Nos expertises</h2>
-```
-
-Le body et le texte courant restent en `text-near-black` ; seuls les titres passent en `text-marine`.
-
-### Capsule (badge secteur/mission)
-
-```astro
-<span class="inline-flex items-center px-3 py-1 rounded-[980px] text-xs bg-apple-blue/10 text-apple-blue tracking-tight">
-  Logement
-</span>
-```
-
-### Carte (fond clair, sans bordure)
-
-```astro
-<div class="bg-light-gray rounded-lg p-6 transition-all hover:shadow-soft">
-  …
-</div>
-```
-
-### Navigation glass
-
-```astro
-<header class="fixed top-0 inset-x-0 z-50 h-12 bg-marine-deep/80 backdrop-blur-[20px] backdrop-saturate-[180%]">
-  …
-</header>
-<div class="h-12" aria-hidden="true"></div>
-```
-
-Panneau mobile : `bg-marine-deep/95`.
-
-### Rythme cinématique des sections
-
-```
-Hero         → bg-marine-deep (texte blanc froid / eyebrow cuivre clair)
-Chiffres     → bg-cool-white
-Services     → bg-white
-Secteurs     → bg-marine (texte blanc froid / eyebrow cuivre clair)
-Références   → bg-white
-Équipe       → bg-cool-white
-Partenaires  → bg-white
-CTA final    → bg-marine-deep (texte blanc froid)
-```
+Easing unique `--ease-blueprint: cubic-bezier(0.16, 1, 0.3, 1)` (alias `--ease-apple` conservé). Hero reveal mot à mot, scroll reveal 12 px, compteurs, transitions de bordure 400 ms. `prefers-reduced-motion` respecté partout.

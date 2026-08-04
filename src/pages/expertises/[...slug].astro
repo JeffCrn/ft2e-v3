@@ -68,7 +68,7 @@ const jsonLd = {
                [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
                [&>ul>li]:border-l [&>ul>li]:border-copper [&>ul>li]:pl-4
                [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
-               [&_a]:text-marine [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-copper
+               [&_a]:text-marine [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-copper-text
                [&_strong]:text-marine [&_strong]:font-semibold"
         data-reveal
       >
@@ -78,7 +78,7 @@ const jsonLd = {
       <aside class="lg:col-span-5" data-reveal>
         {livrables.length > 0 && (
           <Fragment>
-            <h2 class="mono-label text-mist mb-3.5">livrables</h2>
+            <h2 class="mono-label text-slate mb-3.5">livrables</h2>
             <ul class="border border-line bg-paper list-none" role="list">
               {livrables.map((l) => (
                 <li class="mono-data text-marine px-4 py-3 border-b border-line/60 last:border-b-0">{l}</li>
@@ -89,7 +89,7 @@ const jsonLd = {
 
         {typique_pour && typique_pour.length > 0 && (
           <Fragment>
-            <h2 class="mono-label text-mist mt-8 mb-3.5">typique pour</h2>
+            <h2 class="mono-label text-slate mt-8 mb-3.5">typique pour</h2>
             <div class="flex flex-wrap">
               {typique_pour.map((s) => (
                 <span class="chip-blueprint -ml-px -mt-px">{s}</span>
@@ -100,7 +100,7 @@ const jsonLd = {
 
         {faq && faq.length > 0 && (
           <Fragment>
-            <h2 class="mono-label text-mist mt-8 mb-3.5">questions fréquentes</h2>
+            <h2 class="mono-label text-slate mt-8 mb-3.5">questions fréquentes</h2>
             <FAQ items={faq} />
           </Fragment>
         )}
@@ -114,7 +114,7 @@ const jsonLd = {
       <div class="max-w-[1200px] mx-auto px-4 md:px-6">
         <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
           <h2 class="type-h2 text-marine text-[20px]">Projets représentatifs</h2>
-          <a href="/references" class="mono-label font-normal text-slate hover:text-copper motion-safe:transition-colors motion-safe:duration-[400ms] motion-safe:ease-[var(--ease-blueprint)]">
+          <a href="/references" class="mono-label font-normal text-slate hover:text-copper-text motion-safe:transition-colors motion-safe:duration-[400ms] motion-safe:ease-[var(--ease-blueprint)]">
             voir toutes les références <span class="chevron-arrow">→</span>
           </a>
         </div>

@@ -1,6 +1,6 @@
-# FT2E — Site internet
+# FT2E v2 — Site internet
 
-> Site institutionnel de FT2E, société d'ingénierie pluridisciplinaire créée en 2008 et basée à La Rochelle. Build Astro statique, déployée sur Vercel (`ft2e-site.vercel.app`), destinée à migrer vers `ft2e.fr`. Esthétique Apple-style, navigation glass, motion design vanilla.
+> Site institutionnel de FT2E, société d'ingénierie pluridisciplinaire créée en 2008 et basée à La Rochelle. **v2 = fork de `ft2e-site`** : contenus, collections et CMS identiques, design system remplacé par « l'ingénierie de l'invisible » (blueprint technique : Archivo condensé uppercase + IBM Plex Mono, encre/marine/cuivre, cartouches, filets 1 px). Build Astro statique, à déployer sur Vercel (`ft2e-v2.vercel.app`), destinée à migrer vers `ft2e.fr`.
 
 ## Quoi, exactement
 
@@ -8,9 +8,9 @@ Une **build Astro statique** fonctionnelle, déployée sur Vercel, qui :
 
 1. Implémente intégralement le sitemap (Accueil, Société, Équipe, Expertises, Références, Fiche projet, Actualités, Article, Contact, pages légales).
 2. Présente des fiches projets structurées (encore largement en `[DÉMO]` en attendant la phase de production).
-3. Donne à voir le design system complet (palette Apple-style, typo Inter, composants).
+3. Donne à voir le design system complet (palette encre/marine/cuivre, typo Archivo + IBM Plex Mono, composants blueprint).
 4. Démontre les filtres de la page Références, le gabarit de fiche projet, le composant `HeroPage` unifié, la signature éditoriale, le JSON-LD, les performances.
-5. Anime le tout via un système de motion design vanilla (hero reveal, scroll reveal, card tilt 3D, nav glass dynamique, View Transitions Astro).
+5. Anime le tout via un système de motion design vanilla (hero reveal, scroll reveal, compteurs, View Transitions Astro), easing unique `cubic-bezier(0.16, 1, 0.3, 1)`.
 
 Ce qui n'est pas encore en place :
 
@@ -22,7 +22,7 @@ Ce qui n'est pas encore en place :
 
 ## Référentiel : le PDF de proposition stratégique + informations FT2E
 
-La spécification initiale (positionnement, sitemap, modèle de contenu, filtres, gabarit fiche projet) **provient du PDF de proposition** (mai 2026). Les informations sur l'équipe et la société ont été précisées par FT2E le 2026-05-28 (voir `docs/00-vision-produit.md` et la mémoire `project-team-info`). Le design system a été refondu vers une esthétique Apple-style ; en cas de conflit sur le design, **`docs/02-design-system.md` et `.claude/rules/tailwind-design-tokens.md` font foi**.
+La spécification initiale (positionnement, sitemap, modèle de contenu, filtres, gabarit fiche projet) **provient du PDF de proposition** (mai 2026). Les informations sur l'équipe et la société ont été précisées par FT2E le 2026-05-28 (voir `docs/00-vision-produit.md` et la mémoire `project-team-info`). Le design system v2 provient du bundle Claude Design « Ingénierie de l'invisible » (`FT2E Démo V2.dc.html`, 2026-08-04) ; en cas de conflit sur le design, **`docs/superpowers/specs/2026-08-04-ft2e-v2-ingenierie-invisible-design.md` et `.claude/rules/tailwind-design-tokens.md` font foi** (`docs/02-design-system.md` décrit l'ancien système Apple-style de la v1 et n'est conservé que pour l'historique).
 
 ## Stack — versions en production
 
@@ -31,72 +31,73 @@ La spécification initiale (positionnement, sitemap, modèle de contenu, filtres
 | Framework | Astro (génération statique) | 6.x |
 | Styling | Tailwind CSS | 4.x |
 | Langage | TypeScript strict | 5.x |
-| Polices | `@fontsource-variable/inter` | dernière |
+| Polices | `@fontsource-variable/archivo` (axe wdth) + `@fontsource/ibm-plex-mono` | dernière |
 | Runtime build | Node.js | 20+ |
 | Hébergement | **Vercel** (déploiement continu via GitHub) | n/a |
 | View Transitions | `astro:transitions/ClientRouter` | natif |
 
-## Design system — esthétique Apple-style
+## Design system — « Ingénierie de l'invisible » (blueprint technique)
 
-Le design system adopte les codes visuels Apple. Source de vérité : `docs/02-design-system.md` et `.claude/rules/tailwind-design-tokens.md`.
+Le site ressemble à un document d'ingénierie : cartouches, filets 1 px, annotations mono, chiffres tabulaires, coins cuivre, médias duotone. Source de vérité : `.claude/rules/tailwind-design-tokens.md` et `docs/superpowers/specs/2026-08-04-ft2e-v2-ingenierie-invisible-design.md`.
 
 ### Palette
 
 | Token | Hex | Usage |
 |---|---|---|
-| `marine-deep` | `#0f2436` | hero, CTA final, nav solidifiée — fond le plus immersif |
-| `marine` | `#16324f` | sections sombres, **titres** (`h1`–`h6`) sur fond clair, nav |
-| `marine-surface` | `#1d3a57` | cartes sur fond sombre |
-| `marine-surface-2` | `#223f5e` | variation de surface sombre |
-| `cool-white` | `#edf1f5` | fonds de section alternés, cartes, footer |
-| `near-black` | `#1d1d1f` | **body** (texte courant) sur fond clair — inchangé |
-| `slate` | `#45535f` | texte secondaire, légendes, baseline sur fond clair |
-| `mist` | `#9fb0bf` | texte secondaire, baseline sur fond marine |
-| `apple-blue` | `#0071e3` | CTA principal, accent d'action |
-| `link-blue` | `#0066cc` | liens texte sur fond clair |
-| `bright-blue` | `#2997ff` | liens sur fond sombre (sur `marine-deep` uniquement, voir a11y) |
-| `copper` | `#c46a38` | accent d'identité (logo, eyebrow, filet) — fond clair |
-| `bright-copper` | `#d98a55` | accent d'identité (logo, eyebrow) — fond sombre |
-| `pure-black` | `#000000` | **legacy** — n'est plus utilisé pour les surfaces (remplacé par `marine-deep`) |
+| `encre` (= `marine-deep`) | `#08131f` | nav, hero, footer, CTA final |
+| `marine` | `#16324f` | **titres** sur fond clair, texte fort |
+| `marine-surface` / `-2` | `#0e2233` / `#123049` | surfaces sur fond encre |
+| `cool-white` | `#edf0f2` | fond clair principal, texte sur encre |
+| `paper` | `#f7f9fa` | surface claire secondaire, hover, encarts |
+| `slate` | `#4a6076` | corps de texte et labels sur fond clair |
+| `mist` | `#8fa2b4` | labels et texte secondaire **sur encre uniquement** |
+| `copper` | `#c46a38` | filets, bordures, coins, texte sur encre |
+| `bright-copper` | `#e08a50` | hover liens et annotations sur encre |
+| `copper-text` | `#a04e20` | petit texte cuivre sur fond clair (contraste ≥ 5:1) |
+| `line` / `line-strong` | `rgba(74,96,118,.35)` / `#4a6076` | filets standard / cartouches |
+
+Plus de bleu d'action : le cuivre porte l'identité **et** l'interaction (hover, focus ring). Les tokens bleus et Apple de la v1 sont des aliases repointés, à ne plus utiliser.
 
 ### Typographie
 
-- **Police unique : Inter Variable** (substitute libre de SF Pro). Pas de Manrope.
-- Chargement via `@fontsource-variable/inter`. `font-display: swap` obligatoire.
-- Headings : `font-semibold` (600), `line-height: 1.07`, `letter-spacing: -0.02em`.
-- Texte courant : `font-normal` (400), `line-height: 1.47`.
+- **Archivo Variable** (axe `wdth` via `font-stretch` 112–125 %) : titres condensés-larges **uppercase**, corps 300.
+- **IBM Plex Mono** (400/500) : labels 11 px `tracking .14em` uppercase, données 13 px tabulaires, nav, boutons.
+- Classes recettes globales : `type-display`, `type-h2`, `mono-label`, `mono-data`, `filet-top`, `btn-blueprint*`, `chip-blueprint`, `duotone-media`, `duotone-photo`.
+- Chargement fontsource, `font-display: swap`, pas de CDN Google.
 
 ### Navigation
 
-- Glass nav fixe, hauteur 48 px.
-- Sur hero sombre (`data-hero-dark`) : transparente au chargement, puis se solidifie au scroll (`bg-marine-deep/80` + `backdrop-blur(20px)` + `saturate(180%)`).
-- Sur les autres pages : opaque dès le chargement.
+- Barre fixe **opaque** encre, 56 px mobile / 74 px desktop, filet bas `mist/25`.
+- Liens mono uppercase `mist` → hover `bright-copper` ; page courante `cool-white` + filet cuivre.
+- Plus de glass/blur ni de nav transparente (le script navGlass a été supprimé).
 
 ### Composant HeroPage
 
 - `src/components/blocs/HeroPage.astro` — building block unique pour le hero de toutes les pages internes.
-- Hero marine profond + breadcrumb intégré (theme dark) + eyebrow + h1 + sous-titre + slot `metadata`.
+- Hero encre aligné à gauche + breadcrumb mono intégré (theme dark) + eyebrow cuivre + h1 `type-display` + sous-titre `mist` + slot `metadata`.
 - Prop `size: 'default' | 'compact'` (compact = pages légales).
 - Toutes les pages internes l'utilisent obligatoirement.
 
-### Boutons & cartes
+### Boutons, cartes & médias
 
-- Boutons : **pill shape** (`border-radius: 980px`).
-- Cartes : **pas de bordures**, fond plein ou transparent.
+- Boutons : **rectangles mono uppercase** (`btn-blueprint-dark` plein encre sur clair, `btn-blueprint-solid` plein clair sur encre, `btn-blueprint` filaire). Jamais de pill.
+- Cartes : **bordure 1 px** (`border-line`), hover `border-copper`, fond `paper` — pas d'ombre, pas de rayon.
+- Cartouches : grilles bordées `gap-px bg-line` (chiffres clés, fiche technique).
+- Médias : `duotone-media` (placeholder hachuré) / `duotone-photo` (photo duotone) + composant `CoinsCuivre` (équerres 16 px).
 
 ### Layout
 
-- Conteneur principal : `max-w-[980px]`.
-- Sections alternées marine / blanc / blanc froid.
+- Conteneur principal : `max-w-[1200px]` ; prose éditoriale `max-w-[840px]`.
+- Fond global `cool-white`, sections encre pour hero/CTA (avec `border-t border-copper`).
 
-### Ombre
+### Ombre & rayons
 
-- Une seule ombre autorisée : `3px 5px 30px rgba(0, 0, 0, 0.22)`.
+- **Aucune ombre** (`--shadow-soft: none`). **Aucun rayon** (2 px max sur les inputs).
 
 ### Motion design
 
 - Système vanilla JS/CSS (~14 KB gzip total, zéro dépendance externe).
-- Hero reveal mot par mot (40 ms stagger), scroll reveal IntersectionObserver, card tilt 3D, nav glass dynamique, compteur pulse, parallax CTA, chevron animé, filtre Références animé.
+- Hero reveal mot par mot (40 ms stagger), scroll reveal IntersectionObserver (12 px), compteur pulse, parallax CTA, chevron animé, filtre Références animé. Easing unique `--ease-blueprint` (le tilt 3D et la nav glass de la v1 ont été supprimés).
 - View Transitions Astro pour cross-fade entre pages.
 - Toutes les animations respectent `prefers-reduced-motion`.
 - Implémenté dans `src/styles/motion.css` + script inline dans `src/layouts/BaseLayout.astro`.
@@ -105,14 +106,14 @@ Le design system adopte les codes visuels Apple. Source de vérité : `docs/02-d
 
 1. **Toute donnée métier de démo** (titre projet, MOA, surface, performance, chiffre) doit être **plausible** mais clairement signalée par le tag `[DÉMO]` dans le contenu Markdown ET par un badge visuel sur la page.
 2. **L'équipe de sept personnes** (Mathieu, Géraldine, Sandrine, Vincent, Tanguy, Emma, Carole) est désignée uniformément par prénom dans toute la narration. Aucun membre n'est distingué individuellement — le bureau est porté collectivement. Les rôles (co-gérants associés, associés, collaborateurs) ne s'affichent que dans la grille structurée de la page Équipe, avec un traitement visuel identique pour tous les profils.
-3. **Design system Apple-style** — voir `docs/02-design-system.md` et `.claude/rules/tailwind-design-tokens.md`.
+3. **Design system « Ingénierie de l'invisible »** — voir `.claude/rules/tailwind-design-tokens.md` et la spec `docs/superpowers/specs/2026-08-04-ft2e-v2-ingenierie-invisible-design.md`.
 4. **Audit RGAA AA** dès le premier composant.
 5. **Performance** : Lighthouse mobile ≥ 90 sur la home, 100/100/100 sur A11y / BP / SEO.
 6. **Aucun lorem ipsum.** Tout texte est en français, conforme à la voix FT2E, et marqué `[DÉMO]` si non vérifié.
 7. **Tout contenu = un `.md` dans `src/content/`.** Aucune donnée en dur.
-8. **Toute nouvelle page interne** utilise le composant `HeroPage` pour son hero — garantit la cohérence visuelle et la nav glass correcte.
+8. **Toute nouvelle page interne** utilise le composant `HeroPage` pour son hero — garantit la cohérence visuelle (hero encre, breadcrumb mono, eyebrow cuivre).
 9. **Tout `<script>` de composant Astro** qui appelle `addEventListener` doit s'initialiser via `document.addEventListener('astro:page-load', initX)` avec guard `dataset.bound`. Sinon le composant devient inerte après la première navigation View Transitions. Règle détaillée : `.claude/rules/astro-conventions.md` § « Scripts client & View Transitions ».
-10. **Indexation moteurs bloquée** tant que le site est sur `ft2e-site.vercel.app` (démo). Trois fichiers verrouillent le SEO : `public/robots.txt`, `vercel.json`, valeur par défaut de `noindex` dans `BaseLayout.astro`. **Ne PAS débloquer sans validation FT2E**. Procédure de revert détaillée : `docs/19-migration-production.md`.
+10. **Indexation moteurs bloquée** tant que le site est en démo Vercel (`ft2e-v2.vercel.app`). Trois fichiers verrouillent le SEO : `public/robots.txt`, `vercel.json`, valeur par défaut de `noindex` dans `BaseLayout.astro`. **Ne PAS débloquer sans validation FT2E**. Procédure de revert détaillée : `docs/19-migration-production.md`.
 
 ## Workflow
 
@@ -131,7 +132,7 @@ Le design system adopte les codes visuels Apple. Source de vérité : `docs/02-d
 | Écosystème clients FT2E | `docs/16-ecosysteme-clients.md` |
 | Contenus de démonstration | `docs/18-contenus-demonstration.md` |
 | Architecture technique | `docs/01-architecture-technique.md` |
-| Design tokens stricts | `docs/02-design-system.md` |
+| Design tokens stricts | `.claude/rules/tailwind-design-tokens.md` (v2) — `docs/02-design-system.md` = historique v1 |
 | Modèle de contenu | `docs/03-modele-contenu.md` |
 | Spécifications page-par-page | `docs/04-specifications-pages.md` |
 | Bibliothèque de composants | `docs/05-bibliotheque-composants.md` |

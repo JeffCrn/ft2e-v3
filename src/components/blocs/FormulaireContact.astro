@@ -15,7 +15,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
 
         <form id="form-contact" class="space-y-6" novalidate>
           <fieldset>
-            <legend class="mono-label text-mist mb-3">vous êtes</legend>
+            <legend class="mono-label text-slate mb-3">vous êtes</legend>
             <div class="grid grid-cols-2 sm:grid-cols-4 -mr-px">
               {["Architecte", "Maître d’ouvrage", "Candidat", "Autre"].map((role) => (
                 <label class="chip-blueprint justify-center cursor-pointer -ml-px -mt-px hover:border-copper hover:text-marine has-[:checked]:border-copper has-[:checked]:bg-paper has-[:checked]:text-marine has-[:checked]:z-10 relative">
@@ -29,7 +29,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
           <div class="space-y-4">
             <div>
               <label for="nom" class={labelClasses}>
-                Nom et prénom <span class="text-copper" aria-hidden="true">*</span>
+                Nom et prénom <span class="text-copper-text" aria-hidden="true">*</span>
               </label>
               <input
                 type="text"
@@ -43,7 +43,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
 
             <div>
               <label for="email" class={labelClasses}>
-                Email <span class="text-copper" aria-hidden="true">*</span>
+                Email <span class="text-copper-text" aria-hidden="true">*</span>
               </label>
               <input
                 type="email"
@@ -69,7 +69,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
 
             <div>
               <label for="message" class={labelClasses}>
-                Message <span class="text-copper" aria-hidden="true">*</span>
+                Message <span class="text-copper-text" aria-hidden="true">*</span>
               </label>
               <textarea
                 id="message"
@@ -91,7 +91,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
                   class="mt-1 accent-[#c46a38]"
                 />
                 <span class="text-[15px] font-light text-slate leading-[1.55]">
-                  J’accepte que mes données soient traitées par FT2E dans le cadre de ma demande, conformément à la <a href="/politique-confidentialite" class="text-marine underline underline-offset-2 hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">politique de confidentialité</a>.
+                  J’accepte que mes données soient traitées par FT2E dans le cadre de ma demande, conformément à la <a href="/politique-confidentialite" class="text-marine underline underline-offset-2 hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">politique de confidentialité</a>.
                 </span>
               </label>
             </div>
@@ -101,7 +101,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
             <button
               type="button"
               disabled
-              class="btn-blueprint text-mist cursor-not-allowed hover:border-mist/40 hover:text-mist"
+              class="btn-blueprint text-slate cursor-not-allowed hover:border-mist/40 hover:text-slate"
             >
               Envoyer (désactivé en version liminaire)
             </button>
@@ -118,18 +118,18 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
 
       <div class="space-y-8">
         <div class="border border-line-strong">
-          <p class="mono-label text-mist px-5 py-3 border-b border-line">coordonnées</p>
+          <p class="mono-label text-slate px-5 py-3 border-b border-line">coordonnées</p>
           <address class="not-italic mono-data text-marine leading-[1.7] px-5 py-4">
             <p>35 Rue Nicolas Denys de Fronsac<br />17000 La Rochelle</p>
             <p class="mt-3">
-              <a href="tel:+33546278593" class="hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a><br />
-              <a href="mailto:ft2e@ft2e.fr" class="hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
+              <a href="tel:+33546278593" class="hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a><br />
+              <a href="mailto:ft2e@ft2e.fr" class="hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
             </p>
           </address>
           <div class="px-5 py-4 bg-paper border-t border-line">
-            <p class="mono-label font-normal text-mist mb-1.5">disponibilité</p>
+            <p class="mono-label font-normal text-slate mb-1.5">disponibilité</p>
             <p class="mono-data text-marine">lun. – ven., 8&nbsp;h&nbsp;30&nbsp;–&nbsp;18&nbsp;h</p>
-            <p class="mono-label font-normal text-copper mt-2">réponse sous 48&nbsp;h ouvrées</p>
+            <p class="mono-label font-normal text-copper-text mt-2">réponse sous 48&nbsp;h ouvrées</p>
           </div>
         </div>
 
@@ -151,7 +151,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
               href="https://www.openstreetmap.org/?mlat=46.1624398&amp;mlon=-1.2089345#map=17/46.1624398/-1.2089345"
               target="_blank"
               rel="noopener noreferrer"
-              class="underline underline-offset-2 hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]"
+              class="underline underline-offset-2 hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]"
             >Ouvrir dans OpenStreetMap (nouvel onglet)</a>
             <span aria-hidden="true"> · </span>© OpenStreetMap
           </p>

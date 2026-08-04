@@ -1,150 +1,100 @@
-# Tailwind & Design Tokens
+# Tailwind & Design Tokens — « Ingénierie de l'invisible »
 
 **Scope** : tout fichier utilisant Tailwind (`.astro`, `.tsx`, `.html`).
 
 ## Principe directeur
 
-**Aucune valeur de couleur, espacement, typographie ou rayon hard-codée** en dehors de `src/styles/global.css` (section `@theme`). Tout passe par les *tokens*. La source de verite est `src/styles/global.css`, **pas** un `tailwind.config.ts`.
+**Aucune valeur de couleur, espacement, typographie ou rayon hard-codée** en dehors de `src/styles/global.css` (bloc `@theme` + `@layer components`). Tout passe par les *tokens* et les *classes recettes*. La source de verite est `src/styles/global.css`, **pas** un `tailwind.config.ts`.
 
-## Tokens autorises — uniques sources de verite
+Le langage visuel est celui d'un **document d'ingenierie** : cartouches, filets 1 px, annotations mono, chiffres tabulaires, coins cuivre, medias duotone. Zero rayon (2 px max sur les inputs), zero ombre.
 
-### Couleurs
+## Couleurs
 
 | Token | Hex | Usage exclusif |
 |---|---|---|
-| `marine-deep` | `#0f2436` | Hero, CTA final, nav solidifiee — fond le plus immersif |
-| `marine` | `#16324f` | Sections sombres, **titres** (`h1`–`h6`) sur fond clair, nav |
-| `marine-surface` | `#1d3a57` | Cartes sur fond sombre |
-| `marine-surface-2` | `#223f5e` | Variation de surface sombre |
-| `cool-white` | `#edf1f5` | Fonds de section alternatifs, cartes |
-| `near-black` | `#1d1d1f` | **Body** (texte courant) sur fond clair — inchange |
-| `slate` | `#45535f` | Texte secondaire, legendes, baseline sur fond clair |
-| `mist` | `#9fb0bf` | Texte secondaire, baseline sur fond marine |
-| `apple-blue` | `#0071e3` | CTA principal, accent d'action, focus ring |
-| `link-blue` | `#0066cc` | Liens texte sur fond clair |
-| `bright-blue` | `#2997ff` | Liens sur fond sombre — reserve a `marine-deep` (voir a11y) |
-| `copper` | `#c46a38` | Accent d'identite sur fond clair (logo, eyebrow, filet) |
-| `bright-copper` | `#d98a55` | Accent d'identite sur fond sombre (logo, eyebrow) |
-| `pure-black` | `#000000` | **Legacy** — n'est plus utilise pour les surfaces |
-| `button-active` | `#ededf2` | Etat actif boutons clairs |
-| `button-light` | `#fafafc` | Boutons de filtre |
-| `text-primary` | `#1d1d1f` | Texte principal |
-| `text-secondary` | `rgba(0,0,0,0.8)` | Texte secondaire |
-| `text-tertiary` | `rgba(0,0,0,0.48)` | Texte tertiaire, legendes |
+| `encre` (= `marine-deep`) | `#08131f` | fond nav, hero, footer, CTA final |
+| `marine` | `#16324f` | titres sur clair, texte fort, encre secondaire |
+| `marine-surface` / `-2` | `#0e2233` / `#123049` | surfaces sur fond encre |
+| `cool-white` | `#edf0f2` | fond clair principal, texte sur encre |
+| `paper` | `#f7f9fa` | surface claire secondaire, hover, encarts |
+| `slate` | `#4a6076` | corps de texte sur clair |
+| `mist` | `#8fa2b4` | labels mono, texte secondaire sur encre |
+| `copper` | `#c46a38` | filets, bordures, numeros decoratifs, texte sur **encre** (4,9:1) |
+| `bright-copper` | `#e08a50` | hover liens et annotations sur **encre** (7,1:1) |
+| `copper-text` | `#a04e20` | petit texte cuivre sur fond **clair** (≥ 5:1) |
+| `line` | `rgba(74,96,118,.35)` | filet standard (bordures, separateurs) |
+| `line-strong` | `#4a6076` | filet fort (contour de cartouche) |
 
-**Trois registres, un accent d'action isole.** Le marine (`marine-deep` / `marine` / `marine-surface`) porte la **structure** : surfaces sombres et titres, a la place du noir/near-black d'origine. Le bleu (`apple-blue` / `bright-blue` / `link-blue`) signale l'**action** : CTA, liens, focus — inchange. Le cuivre (`copper` / `bright-copper`) porte l'**identite** de marque — logo, chiffre « 2 » du wordmark, eyebrow, filet — et ne doit jamais signaler un element cliquable, inchange. Le gris-bleu de baseline (`slate` / `mist`) porte le texte secondaire.
+**Plus de bleu d'action.** Le cuivre porte l'identite **et** l'interaction : hover (`border-copper`, `text-bright-copper` sur encre, `text-copper-text` sur clair), focus ring `2px solid copper`. Les anciens tokens (`apple-blue`, `link-blue`, `bright-blue`, `near-black`, `light-gray`, `dark-surface-*`, `pure-black`…) sont des **aliases repointes** vers cette palette — valides mais a eviter dans le nouveau code.
 
-Regle titres/body : `text-near-black` **sur un titre** (`h1`–`h6`) devient `text-marine` ; le **body** (paragraphes, texte courant) conserve `text-near-black`.
+**Regle cuivre / contraste** : `copper` sur fond clair = 3,4:1 → uniquement filets, bordures, gros glyphes. Tout **texte** cuivre sur fond clair utilise `copper-text`. Sur encre, `copper` et `bright-copper` sont surs.
 
-Contrastes cles : `bright-copper` sur `marine-deep` = 5,8:1 (OK) ; `copper` sur blanc = 3,8:1 (gros glyphes de marque uniquement, jamais de texte courant ni de lien) ; `bright-blue` sur `marine-deep` = 5,25:1 (OK, liens) mais `bright-blue` sur `marine` moyen = 4,34:1 (texte large / UI uniquement, pas de lien texte en petits caracteres).
+## Typographie
 
-### Repointage (churn minimal)
+- **Archivo Variable** (axes `wdth` 62–125 via `font-stretch`, `wght` 100–900) : titres condenses-larges **uppercase** et corps en 300.
+- **IBM Plex Mono** (400/500) : labels, donnees, navigation, boutons, breadcrumbs.
+- Chargement `@fontsource-variable/archivo/wdth.css` + `@fontsource/ibm-plex-mono`. `font-display: swap`. Pas de CDN Google (RGPD).
 
-`light-gray` → repointe vers `#edf1f5` (meme role : fond clair alterne). `dark-surface-1` / `dark-surface-2` → repointes vers `#1d3a57` / `#223f5e` (meme role : cartes sur fond sombre). Les classes `bg-light-gray`, `bg-dark-surface-1`, `bg-dark-surface-2` restent valides et rendent desormais les nouvelles valeurs automatiquement.
+### Classes recettes (`@layer components` — les utilitaires les surchargent)
 
-### Aliases legacy
-
-Les anciens tokens sont conserves comme aliases pour eviter les regressions :
-
-| Ancien token | Redirige vers |
+| Classe | Effet |
 |---|---|
-| `bleu-nuit` | `#0f2436` (marine-deep) |
-| `sarcelle` | `#0071e3` (apple-blue) |
-| `cuivre` | `#0071e3` (apple-blue) |
-| `creme-pierre` | `#edf1f5` (cool-white) |
-| `anthracite` | `#1d1d1f` (near-black) |
+| `type-display` | Archivo stretch 125 %, 700, uppercase, ls −0.02em, lh 0.98 — heros |
+| `type-h2` | stretch 112 %, 600, uppercase, lh 1.1 — titres de section/carte |
+| `mono-label` | mono 11 px, 500, ls .14em, uppercase — labels techniques |
+| `mono-data` | mono 13 px, tabular-nums — donnees |
+| `filet-top` | filet cuivre 1 px au-dessus (titres editoriaux) |
+| `btn-blueprint` | bouton filaire mono uppercase |
+| `btn-blueprint-solid` | bouton plein clair (sur encre), hover fond cuivre |
+| `btn-blueprint-dark` | bouton plein encre (sur clair), hover fond cuivre |
+| `chip-blueprint` | chip filtre 1 px, mono uppercase |
+| `duotone-media` | placeholder hachure encre + voile marine |
+| `duotone-photo` | photo passee en duotone (grayscale + voile multiply) |
 
-**Preferer les nouveaux tokens.** Les aliases legacy sont destines a la transition ; les nouveaux composants doivent utiliser exclusivement la palette marine/cuivre/bleu.
+Les `h1`–`h6` recoivent par defaut (layer base) : Archivo stretch 112 %, 600, uppercase, ls −0.02em — **jamais de couleur en CSS global** (regle Tailwind v4 : les utilitaires doivent gagner).
 
-### Typographie
+## Vocabulaire graphique
 
-- **Titres et texte courant** : `Inter Variable`, fallback `Helvetica Neue`, `Helvetica`, `Arial`, `system-ui`.
-- **Mono** : `JetBrains Mono`, fallback `monospace` (pour bloc code uniquement).
+- **Bordures 1 px partout** : `border-line` (standard), `border-line-strong` (cartouches), `border-copper` (accent, hover, top des sections encre).
+- **Cartouches** : grilles bordees `border border-line-strong` + `gap-px bg-line` avec cellules `bg-cool-white` — l'anti-carte.
+- **Coins cuivre** : composant `CoinsCuivre.astro` (equerres 16 px) sur les medias, parent `relative`.
+- **Hover systemique** : `border-color → copper`, transition `400ms var(--ease-blueprint)` (`cubic-bezier(0.16, 1, 0.3, 1)`).
+- **Rayons** : `rounded-none` par defaut ; `rounded-[2px]` uniquement inputs. Jamais `rounded-lg`, jamais pill `rounded-[980px]`.
+- **Ombres** : aucune (`--shadow-soft` repointe sur `none`).
 
-Une seule police pour heading et body. Charger via `@fontsource-variable/inter`. **`font-display: swap`** systematique. Pas de Google Fonts CDN (RGPD).
+## Conteneur & espacements
 
-#### Headlines
+- Conteneur principal : `max-w-[1200px] mx-auto px-4 md:px-6`.
+- Prose editoriale : `max-w-[840px]`.
+- Echelle Tailwind par defaut, multiples `1 2 3 4 6 8 12 16 24 32` (+ demi-crans `2.5/3.5` pour les cartouches denses).
 
-- `font-semibold` (600) pour tous les titres.
-- `line-height: 1.07` pour les hero headlines, `1.10` pour les titres de section.
-- `letter-spacing: -0.02em` sur tous les titres.
-
-Echelle :
-
-| Token | Taille / line-height |
-|---|---|
-| `text-h1` | clamp(2.25rem, 4vw, 3.5rem) / 1.07 |
-| `text-h2` | clamp(1.75rem, 3vw, 2.5rem) / 1.10 |
-| `text-h3` | 1.5rem / 1.15 |
-| `text-body` | 1rem / 1.6 |
-| `text-small` | 0.875rem / 1.5 |
-| `text-caption` | 0.75rem / 1.4 (uppercase, tracking) |
-
-### Espacements
-
-Echelle Tailwind par defaut, mais **utiliser uniquement** les multiples : `1`, `2`, `3`, `4`, `6`, `8`, `12`, `16`, `24`, `32`. Pas de valeurs intermediaires (`5`, `7`, `9`...) sauf cas justifie.
-
-### Conteneur
-
-Largeur maximale : `max-w-[980px]` (au lieu de `max-w-screen-xl`). Centre avec `mx-auto px-6`.
-
-### Rayons
-
-- `rounded-lg` (8 px) : rayon standard pour cartes et conteneurs.
-- `rounded-[980px]` : CTA pill (bouton arrondi Apple).
-- `rounded-full` (50 %) : media controls, avatars.
-- `rounded-none` : cas exceptionnel.
-
-Pas de `rounded-sm`, `rounded`, `rounded-xl` sauf justification explicite.
-
-### Ombres
-
-Sobres et rares. Un seul `shadow-soft` autorise : `3px 5px 30px rgba(0,0,0,0.22)`.
-
-### Bordures
-
-**Pas de bordures sur les cartes.** L'esthetique Apple repose sur le contraste de surface (fond blanc / fond blanc froid / fond marine) et non sur des bordures visibles. Seule exception : les champs de formulaire et les separateurs semantiques (`<hr>`).
-
-## Patterns autorises
+## Patterns
 
 ```astro
-<!-- ✅ Bon — lien Apple sur fond clair -->
-<a class="text-link-blue hover:underline">En savoir plus ›</a>
+<!-- ✅ Section encre avec filet cuivre -->
+<section class="bg-encre border-t border-copper text-cool-white">…</section>
 
-<!-- ✅ Bon — lien Apple sur fond sombre (marine-deep uniquement) -->
-<a class="text-bright-blue hover:underline">En savoir plus ›</a>
+<!-- ✅ Titre de section + label mono en baseline -->
+<div class="flex items-baseline gap-x-5">
+  <h2 class="type-h2 text-marine text-[22px]">Six expertises</h2>
+  <span class="mono-label font-normal text-mist">de l'audit au DOE numérique</span>
+</div>
 
-<!-- ✅ Bon — CTA pill -->
-<a class="bg-apple-blue text-white rounded-[980px] px-4 py-2">Parlons-en</a>
+<!-- ✅ Carte blueprint (bordure, pas d'ombre) -->
+<a class="block border border-line bg-paper hover:border-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">…</a>
 
-<!-- ✅ Bon — section hero / CTA final, fond le plus immersif -->
-<section class="bg-marine-deep text-white">…</section>
+<!-- ✅ Media duotone avec coins cuivre -->
+<div class="relative">
+  <div class="aspect-[3/2] duotone-media">…</div>
+  <CoinsCuivre />
+</div>
 
-<!-- ✅ Bon — section sombre secondaire (ex. Secteurs) -->
-<section class="bg-marine text-white">…</section>
-
-<!-- ✅ Bon — titre sur fond clair -->
-<h2 class="text-marine">Nos expertises</h2>
-
-<!-- ✅ Bon — carte sur fond blanc froid, sans bordure -->
-<div class="bg-cool-white rounded-lg shadow-soft p-6">…</div>
-
-<!-- ❌ Mauvais — couleur arbitraire -->
-<a class="text-[#0071e3]">…</a>
-
-<!-- ❌ Mauvais — bordure sur carte -->
-<div class="border border-gray-200 rounded">…</div>
-
-<!-- ❌ Mauvais — typographie hors echelle -->
-<h2 class="text-[28px]">…</h2>
-
-<!-- ❌ Mauvais — ancien conteneur trop large -->
-<div class="max-w-screen-xl">…</div>
-
-<!-- ❌ Mauvais — noir pur pour une surface (legacy) -->
-<section class="bg-pure-black">…</section>
+<!-- ❌ Ancien langage Apple -->
+<a class="bg-apple-blue rounded-[980px]">…</a>
+<div class="rounded-lg shadow-soft">…</div>
+<a class="text-copper">lien sur fond clair</a> <!-- contraste 3,4:1 : utiliser copper-text -->
 ```
 
 ## Mode sombre
 
-**Non applicable.** Le site utilise deja des sections marine / blanc froid alternees pour creer le rythme visuel. Ne pas implementer `dark:`.
+**Non applicable.** Le rythme visuel vient de l'alternance encre / blanc froid. Ne pas implementer `dark:`.

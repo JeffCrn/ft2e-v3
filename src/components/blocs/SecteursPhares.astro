@@ -19,15 +19,15 @@ const secteurs = (await getCollection('secteurs'))
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
     <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
       <h2 class="type-h2 text-marine text-[22px]">Six secteurs</h2>
-      <p class="mono-label font-normal text-mist">charente-maritime, vendée, deux-sèvres</p>
+      <p class="mono-label font-normal text-slate">charente-maritime, vendée, deux-sèvres</p>
     </div>
     <ul class="border-t border-line-strong" role="list" data-reveal-stagger>
       {secteurs.map((secteur) => (
         <li class="grid grid-cols-[44px_1fr] md:grid-cols-[44px_200px_1fr_90px] gap-x-6 gap-y-1 py-4 border-b border-line items-baseline transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:border-b-copper hover:bg-paper">
-          <span class="mono-label font-normal text-copper tabular-nums" aria-hidden="true">{secteur.numero}</span>
+          <span class="mono-label font-normal text-copper-text tabular-nums" aria-hidden="true">{secteur.numero}</span>
           <h3 class="type-h2 text-marine text-[19px]" style="font-stretch: 118%;">{secteur.data.titre}</h3>
           <p class="col-start-2 md:col-start-3 text-[15px] font-light text-slate leading-[1.55]">{secteur.data.accroche}</p>
-          <span class="mono-data text-mist md:text-right col-start-2 md:col-start-4">{secteur.fiches}</span>
+          <span class="mono-data text-slate md:text-right col-start-2 md:col-start-4">{secteur.fiches}</span>
         </li>
       ))}
     </ul>
