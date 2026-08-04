@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import HeroPage from '../../components/blocs/HeroPage.astro';
+import CarteProjet from '../../components/blocs/CarteProjet.astro';
+import CtaFinal from '../../components/blocs/CtaFinal.astro';
+
+const projets = (await getCollection('projets')).sort((a, b) => b.data.annee - a.data.annee);
+
+const secteurs = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Patrimoine'];
+---
+
+<PageLayout
+  title="Références — FT2E"
+  description="Plus de 150 projets livrés en Charente-Maritime, Vendée et Deux-Sèvres. Logement, tertiaire, santé, sport, patrimoine."
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Références', href: '/references' },
+    ]}
+    eyebrow="Projets livrés"
+    titre="Nos références"
+    sousTitre="Une sélection de projets représentatifs de notre activité en Charente-Maritime, Vendée et Deux-Sèvres."
+  />
+
+  <section class="bg-white py-20">
+    <div class="max-w-[980px] mx-auto px-4 md:px-6">
+      <div class="flex flex-wrap justify-center gap-2 mb-4" role="group" aria-label="Filtres par secteur">
+        <button
+          class="px-4 py-2 rounded-[980px] text-sm bg-near-black text-white transition-colors"
+          data-filtre="tous"
+          aria-pressed="true"
+        >
+          Tous ({projets.length})
+        </button>
+        {secteurs.map((s) => {
+          const count = projets.filter((p) => p.data.secteur === s).length;
+          return count > 0 ? (
+            <button
+              class="px-4 py-2 rounded-[980px] text-sm bg-light-gray text-text-secondary hover:bg-near-black hover:text-white transition-colors"
+              data-filtre={s}
+              aria-pressed="false"
+            >
+              {s} ({count})
+            </button>
+          ) : null;
+        })}
+      </div>
+
+      <p class="text-center text-xs text-text-secondary mb-8" data-compteur aria-live="polite">
+        {projets.length} projets
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-grille>
+        {projets.map((projet) => (
+          <div data-secteur={projet.data.secteur}>
+            <CarteProjet projet={projet} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaFinal />
+</PageLayout>
+
+<script>
+  function initFiltres() {
+    const grille = document.querySelector<HTMLElement>('[data-grille]');
+    if (!grille) return;
+    if (grille.dataset.filtresBound) return;
+    grille.dataset.filtresBound = '1';
+
+    const filtres = document.querySelectorAll<HTMLButtonElement>('[data-filtre]');
+    const cartes = document.querySelectorAll<HTMLElement>('[data-secteur]');
+    const compteur = document.querySelector('[data-compteur]');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const appliquer = (secteur: string | null) => {
+      let visible = 0;
+      cartes.forEach((carte) => {
+        const match = secteur === 'tous' || carte.getAttribute('data-secteur') === secteur;
+        carte.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      if (compteur) compteur.textContent = `${visible} projet${visible > 1 ? 's' : ''}`;
+    };
+
+    filtres.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const secteur = btn.getAttribute('data-filtre');
+
+        filtres.forEach((b) => {
+          b.setAttribute('aria-pressed', 'false');
+          b.classList.remove('bg-near-black', 'text-white');
+          b.classList.add('bg-light-gray', 'text-text-secondary');
+        });
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.remove('bg-light-gray', 'text-text-secondary');
+        btn.classList.add('bg-near-black', 'text-white');
+
+        if (reduced) {
+          appliquer(secteur);
+          return;
+        }
+
+        grille.style.opacity = '0';
+        grille.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          appliquer(secteur);
+          requestAnimationFrame(() => {
+            grille.style.opacity = '1';
+            grille.style.transform = 'scale(1)';
+          });
+        }, 200);
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initFiltres);
+</script>

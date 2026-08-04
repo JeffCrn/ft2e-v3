@@ -1,0 +1,178 @@
+---
+import { getCollection, render } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import HeroPage from '../../components/blocs/HeroPage.astro';
+import FAQ from '../../components/blocs/FAQ.astro';
+import CtaFinal from '../../components/blocs/CtaFinal.astro';
+import CarteProjet from '../../components/blocs/CarteProjet.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+
+export async function getStaticPaths() {
+  const expertises = await getCollection('expertises');
+  return expertises.map((expertise) => ({
+    params: { slug: expertise.id },
+    props: { expertise },
+  }));
+}
+
+const { expertise } = Astro.props;
+const { titre, accroche, livrables, typique_pour, faq } = expertise.data;
+const { Content } = await render(expertise);
+
+const projets = await getCollection('projets');
+const missionsExpertise = expertise.data.missions_liees ?? [];
+const projetsLies = projets
+  .filter((p) => p.data.mission_ft2e.some((m) => missionsExpertise.includes(m)))
+  .slice(0, 3);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: titre,
+  description: accroche,
+  provider: {
+    '@type': 'ProfessionalService',
+    name: 'FT2E',
+    url: 'https://ft2e.fr',
+  },
+  areaServed: ['La Rochelle', 'Charente-Maritime', 'Vendée', 'Deux-Sèvres'],
+};
+---
+
+<PageLayout
+  title={`${titre} — FT2E`}
+  description={accroche}
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Expertises', href: '/expertises' },
+      { label: titre, href: `/expertises/${expertise.id}` },
+    ]}
+    eyebrow="Expertise"
+    titre={titre}
+    sousTitre={accroche}
+  >
+    {typique_pour && typique_pour.length > 0 && (
+      <div slot="metadata" class="flex flex-wrap justify-center gap-2">
+        {typique_pour.map((s) => (
+          <span class="inline-flex items-center px-3 py-1 rounded-[980px] text-xs bg-white/10 text-white/80 tracking-tight">
+            {s}
+          </span>
+        ))}
+      </div>
+    )}
+  </HeroPage>
+
+  {/* ─── Contenu (markdown) ───────────────────── */}
+  <section class="bg-white py-20">
+    <div class="max-w-[720px] mx-auto px-4 md:px-6">
+      <div
+        class="text-text-secondary leading-relaxed tracking-tight space-y-6
+               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
+               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
+               [&>h2:first-child]:mt-0
+               [&>h3]:font-heading [&>h3]:font-semibold [&>h3]:text-marine [&>h3]:tracking-tight
+               [&>h3]:text-lg [&>h3]:mt-8 [&>h3]:mb-3
+               [&>p]:text-text-secondary [&>p]:leading-relaxed
+               [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2
+               [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
+               [&_a]:text-link-blue [&_a]:hover:underline
+               [&_strong]:text-near-black [&_strong]:font-semibold"
+        data-reveal
+      >
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  {/* ─── Livrables (cartes) ────────────────────── */}
+  {livrables.length > 0 && (
+    <section class="bg-light-gray py-20">
+      <div class="max-w-[980px] mx-auto px-4 md:px-6">
+        <h2
+          class="font-heading font-semibold text-marine text-center mb-2 tracking-tight"
+          style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;"
+          data-reveal
+        >
+          Livrables
+        </h2>
+        <p class="text-text-secondary text-center text-lg tracking-tight mb-12" data-reveal>
+          Ce que FT2E remet à la fin de la mission.
+        </p>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none" data-reveal-stagger>
+          {livrables.map((l) => (
+            <li class="bg-white rounded-lg p-6 flex items-start gap-3 transition-all hover:shadow-soft">
+              <span class="text-apple-blue shrink-0 mt-0.5" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="text-sm text-near-black leading-relaxed tracking-tight">{l}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {/* ─── Projets représentatifs ──────────────────── */}
+  {projetsLies.length > 0 && (
+    <section class="bg-white py-20">
+      <div class="max-w-[980px] mx-auto px-4 md:px-6">
+        <h2
+          class="font-heading font-semibold text-marine text-center mb-2 tracking-tight"
+          style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;"
+          data-reveal
+        >
+          Projets représentatifs
+        </h2>
+        <p class="text-text-secondary text-center mb-12" data-reveal>
+          <a href="/references" class="text-link-blue hover:underline text-sm tracking-tight">
+            Voir toutes les références <span class="chevron-arrow">›</span>
+          </a>
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-reveal-stagger>
+          {projetsLies.map((p) => (
+            <CarteProjet projet={p} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* ─── FAQ ──────────────────────────────────── */}
+  {faq && faq.length > 0 && (
+    <section class="bg-light-gray py-20">
+      <div class="max-w-[720px] mx-auto px-4 md:px-6">
+        <h2
+          class="font-heading font-semibold text-marine text-center mb-12 tracking-tight"
+          style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;"
+          data-reveal
+        >
+          Questions fréquentes
+        </h2>
+        <div data-reveal>
+          <FAQ items={faq} />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaFinal />
+
+  <Fragment slot="json-ld">
+    <JsonLd data={jsonLd} />
+    {faq && faq.length > 0 && (
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.map((q) => ({
+          '@type': 'Question',
+          name: q.question,
+          acceptedAnswer: { '@type': 'Answer', text: q.reponse },
+        })),
+      }} />
+    )}
+  </Fragment>
+</PageLayout>

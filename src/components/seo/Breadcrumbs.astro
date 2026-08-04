@@ -1,0 +1,68 @@
+---
+import JsonLd from './JsonLd.astro';
+
+interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  theme?: 'light' | 'dark';
+}
+
+const { items, theme = 'light' } = Astro.props;
+
+const siteUrl = 'https://ft2e.fr';
+
+const jsonLdData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: `${siteUrl}${item.href}`,
+  })),
+};
+
+const themeClasses = {
+  light: {
+    container: 'text-text-secondary',
+    separator: 'text-text-tertiary/50',
+    link: 'hover:text-link-blue hover:underline transition-colors',
+    current: 'text-marine font-medium',
+  },
+  dark: {
+    container: 'text-white/50',
+    separator: 'text-white/30',
+    link: 'hover:text-bright-blue hover:underline transition-colors',
+    current: 'text-white/90 font-medium',
+  },
+};
+
+const t = themeClasses[theme];
+---
+
+<nav aria-label="Fil d’Ariane" class={`max-w-[980px] mx-auto px-4 md:px-6 ${theme === 'dark' ? '' : 'py-4'}`}>
+  <ol class:list={['flex flex-wrap items-center gap-1 text-xs tracking-tight', t.container]} role="list">
+    {items.map((item, index) => (
+      <li class="flex items-center gap-1">
+        {index > 0 && (
+          <span aria-hidden="true" class={t.separator}>›</span>
+        )}
+        {index < items.length - 1 ? (
+          <a href={item.href} class={t.link}>
+            {item.label}
+          </a>
+        ) : (
+          <span aria-current="page" class={t.current}>
+            {item.label}
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<JsonLd data={jsonLdData} />

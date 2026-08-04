@@ -1,0 +1,71 @@
+---
+import Breadcrumbs from '../seo/Breadcrumbs.astro';
+
+interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  breadcrumbs: BreadcrumbItem[];
+  eyebrow?: string;
+  titre: string;
+  sousTitre?: string;
+  size?: 'default' | 'compact';
+}
+
+const {
+  breadcrumbs,
+  eyebrow,
+  titre,
+  sousTitre,
+  size = 'default',
+} = Astro.props;
+
+const paddingClasses = {
+  default: 'pt-20 pb-20 md:pt-24 md:pb-24',
+  compact: 'pt-16 pb-16 md:pt-20 md:pb-20',
+};
+
+const titleSize = {
+  default: 'font-size: clamp(2.25rem, 4.5vw, 3.25rem); line-height: 1.07; letter-spacing: -0.015em;',
+  compact: 'font-size: clamp(1.875rem, 3.5vw, 2.5rem); line-height: 1.10; letter-spacing: -0.01em;',
+};
+---
+
+<section class:list={['bg-marine-deep', paddingClasses[size]]} data-hero-dark>
+  <div class="pt-4">
+    <Breadcrumbs theme="dark" items={breadcrumbs} />
+  </div>
+
+  <div class="max-w-[980px] mx-auto px-4 md:px-6 text-center mt-10 md:mt-12">
+    {eyebrow && (
+      <p class="text-xs text-bright-copper uppercase tracking-widest mb-4" data-reveal>
+        {eyebrow}
+      </p>
+    )}
+
+    <h1
+      class="font-heading font-semibold text-white tracking-tight max-w-3xl mx-auto"
+      style={titleSize[size]}
+      data-reveal
+    >
+      {titre}
+    </h1>
+
+    {sousTitre && (
+      <p
+        class="mt-6 text-lg text-mist max-w-2xl mx-auto leading-relaxed tracking-tight"
+        data-reveal
+      >
+        {sousTitre}
+      </p>
+    )}
+
+    {Astro.slots.has('metadata') && (
+      <div class="mt-8" data-reveal>
+        <slot name="metadata" />
+      </div>
+    )}
+  </div>
+</section>

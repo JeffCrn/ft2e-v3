@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BadgeDemo from '../primitives/BadgeDemo.astro';
+
+interface Props {
+  article: CollectionEntry<'actualites'>;
+}
+
+const { article } = Astro.props;
+const { titre, chapo, date, categories, demo } = article.data;
+
+const dateFormatee = new Intl.DateTimeFormat('fr-FR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(date);
+---
+
+<a
+  href={`/actualites/${article.id}`}
+  class="group block bg-light-gray rounded-lg overflow-hidden transition-all hover:shadow-soft"
+  data-card-tilt
+>
+  <div class="h-48 bg-dark-surface-1 flex items-center justify-center">
+    <p class="text-white/40 text-sm" aria-hidden="true">[Photo à venir]</p>
+  </div>
+  <div class="p-4">
+    <div class="flex items-center gap-2 mb-2">
+      <time datetime={date.toISOString().split('T')[0]} class="text-xs text-text-secondary">
+        {dateFormatee}
+      </time>
+      {demo && <BadgeDemo />}
+    </div>
+    <span class="inline-block px-2.5 py-0.5 text-xs bg-apple-blue/10 text-apple-blue rounded-[980px] mb-2 tracking-tight">
+      {categories[0]}
+    </span>
+    <h3 class="font-heading font-semibold text-marine text-sm leading-snug tracking-tight group-hover:text-apple-blue transition-colors">
+      {titre}
+    </h3>
+    <p class="mt-2 text-sm text-text-secondary line-clamp-3 tracking-tight">
+      {chapo}
+    </p>
+  </div>
+</a>

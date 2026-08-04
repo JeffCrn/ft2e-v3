@@ -1,0 +1,22 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroPage from '../components/blocs/HeroPage.astro';
+import FormulaireContact from '../components/blocs/FormulaireContact.astro';
+---
+
+<PageLayout
+  title="Contact — FT2E"
+  description={"Contactez FT2E, bureau d’études techniques à La Rochelle. Formulaire qualifié, coordonnées et disponibilités. Réponse sous 48 h ouvrées."}
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Contact', href: '/contact' },
+    ]}
+    eyebrow="Échangeons"
+    titre="Parlons de votre projet."
+    sousTitre={"Architectes, maîtres d’ouvrage publics, promoteurs, candidats — l’équipe répond sous 48 h ouvrées."}
+  />
+
+  <FormulaireContact />
+</PageLayout>

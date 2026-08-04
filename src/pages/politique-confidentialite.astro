@@ -1,0 +1,73 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroPage from '../components/blocs/HeroPage.astro';
+---
+
+<PageLayout
+  title="Politique de confidentialité — FT2E"
+  description="Politique de confidentialité et protection des données personnelles du site ft2e.fr. Conforme RGPD."
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Confidentialité', href: '/politique-confidentialite' },
+    ]}
+    titre="Politique de confidentialité"
+    size="compact"
+  />
+
+  <section class="bg-white py-20">
+    <div class="max-w-[720px] mx-auto px-4 md:px-6">
+      <div
+        class="text-text-secondary leading-relaxed tracking-tight space-y-6
+               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
+               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
+               [&>h2:first-child]:mt-0
+               [&>p]:text-text-secondary [&>p]:leading-relaxed
+               [&_a]:text-link-blue [&_a]:hover:underline
+               [&_strong]:text-near-black [&_strong]:font-semibold
+               [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-1"
+        data-reveal
+      >
+        <p class="text-sm text-text-secondary italic">[À valider — squelette RGPD type]</p>
+
+        <h2>Responsable du traitement</h2>
+        <p>
+          FT2E — 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle<br />
+          Contact&nbsp;: <a href="mailto:ft2e@ft2e.fr">ft2e@ft2e.fr</a>
+        </p>
+
+        <h2>Données collectées</h2>
+        <p>Le site ft2e.fr collecte les données personnelles suivantes, uniquement dans le cadre du formulaire de contact&nbsp;:</p>
+        <ul>
+          <li>Nom et prénom</li>
+          <li>Adresse email</li>
+          <li>Numéro de téléphone (facultatif)</li>
+          <li>Contenu du message</li>
+        </ul>
+
+        <h2>Finalité du traitement</h2>
+        <p>Les données sont collectées pour répondre à votre demande de contact et ne sont utilisées à aucune autre fin.</p>
+
+        <h2>Durée de conservation</h2>
+        <p>Les données du formulaire de contact sont conservées pendant une durée maximale de 36 mois à compter de la dernière interaction.</p>
+
+        <h2>Cookies et mesure d’audience</h2>
+        <p>
+          Le site utilise Plausible Analytics, une solution de mesure d’audience conforme au RGPD qui ne dépose aucun cookie et ne collecte aucune donnée personnelle. Aucun bandeau de consentement n’est nécessaire.
+        </p>
+
+        <h2>Vos droits</h2>
+        <p>
+          Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, d’effacement et de portabilité de vos données. Pour exercer ces droits, contactez-nous à <a href="mailto:ft2e@ft2e.fr">ft2e@ft2e.fr</a>.
+        </p>
+
+        <h2>Sous-traitants</h2>
+        <p>
+          Hébergement&nbsp;: OVHcloud (2, rue Kellermann, 59100 Roubaix, France)<br />
+          Formulaire de contact&nbsp;: [À compléter]
+        </p>
+      </div>
+    </div>
+  </section>
+</PageLayout>

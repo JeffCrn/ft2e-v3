@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import CarteExpertise from './CarteExpertise.astro';
+
+const expertises = (await getCollection('expertises')).sort((a, b) => a.data.ordre - b.data.ordre);
+---
+
+<section class="py-20 bg-white">
+  <div class="max-w-[980px] mx-auto px-4 md:px-6">
+    <h2 class="font-heading font-semibold text-marine text-center mb-2 tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;" data-reveal>
+      Nos domaines d’expertise
+    </h2>
+    <p class="text-text-secondary text-center text-lg tracking-tight mb-12" data-reveal>
+      Six savoir-faire complémentaires, un interlocuteur unique.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-reveal-stagger>
+      {expertises.map((expertise) => (
+        <CarteExpertise expertise={expertise} />
+      ))}
+    </div>
+  </div>
+</section>

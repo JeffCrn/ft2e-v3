@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 90" role="img" aria-label="FT2E — Bureau d&#39;études techniques">
+  <g transform="translate(5,5)" fill="none" stroke-width="7">
+    <path stroke="#16324F" stroke-linejoin="miter" d="M3.5,42 V3.5 H76.5 V42 M76.5,66 V76.5 H3.5 V66"></path>
+    <path stroke="#C46A38" stroke-linecap="round" stroke-linejoin="round" d="M-3,54 H26 V26 H54 V54 H83"></path>
+  </g>
+
+  <g transform="translate(104,16)">
+    <path fill="#16324F" d="M0,0 H24 V7 H7 V17.5 H19 V24.5 H7 V40 H0 Z"></path>
+    <path fill="#16324F" transform="translate(35,0)" d="M0,0 H26 V7 H16.5 V40 H9.5 V7 H0 Z"></path>
+    <g transform="translate(72,0)" fill="none" stroke="#C46A38" stroke-width="7">
+      <path d="M3.5,12 A8.5,8.5 0 0 1 20.5,12 C20.5,19 17,27.5 3,36.5"></path>
+      <path d="M0,36.5 H24"></path>
+    </g>
+    <path fill="#16324F" transform="translate(107,0)" d="M0,0 H24 V7 H7 V16.5 H18 V23.5 H7 V33 H24 V40 H0 Z"></path>
+  </g>
+
+  <text x="104" y="74" font-family="Arial, Helvetica, sans-serif" font-size="8.5" letter-spacing="2.6" fill="#45535F">BUREAU D&#39;ÉTUDES TECHNIQUES</text>
+</svg>

@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "./motion.css";
+
+@theme {
+  /* Palette FT2E — évolution logo « flux dans le cadre » */
+  /* Structure — échelle marine (remplace le noir) */
+  --color-marine-deep: #0f2436;      /* hero, CTA final, nav solidifiée */
+  --color-marine: #16324f;           /* sections sombres, titres sur clair, nav */
+  --color-marine-surface: #1d3a57;   /* cartes sur fond sombre */
+  --color-marine-surface-2: #223f5e; /* variation surface sombre */
+
+  /* Lumière & encre */
+  --color-cool-white: #edf1f5;       /* fond clair alterné, cartes, footer */
+  --color-near-black: #1d1d1f;       /* body sur fond clair (inchangé) */
+  --color-slate: #45535f;            /* texte secondaire / baseline sur clair */
+  --color-mist: #9fb0bf;             /* texte secondaire / baseline sur marine */
+
+  /* Identité — cuivre (inchangé, déjà exact) */
+  --color-copper: #c46a38;
+  --color-bright-copper: #d98a55;
+
+  /* Action — bleu, isolé (inchangé) */
+  --color-apple-blue: #0071e3;
+  --color-link-blue: #0066cc;
+  --color-bright-blue: #2997ff;
+
+  /* Surfaces & boutons */
+  --color-light-gray: #edf1f5;       /* repointé → blanc froid */
+  --color-dark-surface-1: #1d3a57;   /* repointé → marine-surface */
+  --color-dark-surface-2: #223f5e;   /* repointé → marine-surface-2 */
+  --color-pure-black: #000000;       /* legacy — ne plus utiliser pour surfaces */
+  --color-button-active: #ededf2;
+  --color-button-light: #fafafc;
+
+  /* Semantic aliases */
+  --color-text-primary: #1d1d1f;
+  --color-text-secondary: rgba(0, 0, 0, 0.8);
+  --color-text-tertiary: rgba(0, 0, 0, 0.48);
+
+  /* Legacy mappings for gradual migration */
+  --color-bleu-nuit: #0f2436;        /* repointé → marine-deep */
+  --color-sarcelle: #0071e3;
+  --color-cuivre: #0071e3;
+  --color-creme-pierre: #edf1f5;     /* repointé → blanc froid */
+  --color-anthracite: #1d1d1f;
+  --color-gris-bord: rgba(0, 0, 0, 0.08);
+  --color-gris-doux: rgba(0, 0, 0, 0.48);
+  --color-success: #30d158;
+  --color-error: #ff3b30;
+
+  /* Typography — Inter as SF Pro substitute */
+  --font-heading: "Inter Variable", "Helvetica Neue", "Helvetica", "Arial", system-ui, sans-serif;
+  --font-body: "Inter Variable", "Helvetica Neue", "Helvetica", "Arial", system-ui, sans-serif;
+  --font-mono: monospace;
+
+  /* Apple shadow — rare, soft, diffused */
+  --shadow-soft: 3px 5px 30px rgba(0, 0, 0, 0.22);
+}
+
+:root {
+  --c-bleu-nuit: #000000;
+  --c-sarcelle: #0071e3;
+  --c-cuivre: #0071e3;
+  --c-creme-pierre: #f5f5f7;
+  --c-anthracite: #1d1d1f;
+}
+
+html {
+  font-family: var(--font-body);
+  color: var(--color-near-black);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-apple-blue);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--color-apple-blue);
+  color: white;
+}

@@ -1,0 +1,22 @@
+---
+import Chiffre from '../primitives/Chiffre.astro';
+import { CHIFFRES_CLES } from '../../lib/constants';
+---
+
+<section class="bg-light-gray py-20">
+  <div class="max-w-[980px] mx-auto px-4 md:px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8" data-reveal-stagger>
+      {CHIFFRES_CLES.map((chiffre) => (
+        <Chiffre
+          valeur={chiffre.valeur}
+          suffixe={chiffre.suffixe}
+          label={chiffre.label}
+          demo={chiffre.demo}
+        />
+      ))}
+    </div>
+    <p class="text-center text-xs text-text-secondary mt-8">
+      * Chiffres en cours de consolidation par l’équipe FT2E.
+    </p>
+  </div>
+</section>

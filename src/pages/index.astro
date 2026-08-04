@@ -1,0 +1,38 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/blocs/Hero.astro';
+import ChiffresCles from '../components/blocs/ChiffresCles.astro';
+import CartesExpertises from '../components/blocs/CartesExpertises.astro';
+import SecteursPhares from '../components/blocs/SecteursPhares.astro';
+import ReferencesRecentes from '../components/blocs/ReferencesRecentes.astro';
+import EquipePreview from '../components/blocs/EquipePreview.astro';
+import BandeauPartenaires from '../components/blocs/BandeauPartenaires.astro';
+import CtaFinal from '../components/blocs/CtaFinal.astro';
+---
+
+<PageLayout
+  title="FT2E — Bureau d’études techniques, La Rochelle"
+  description="Bureau d’études fluides, thermique, électricité, SSI, BIM à La Rochelle. Au service des architectes et MOA depuis 2008."
+>
+  <Hero
+    variante="accueil"
+    titre={"L’ingénierie technique du bâtiment\\ndu Centre Ouest Atlantique"}
+    sousTitre="Bureau d’études pluridisciplinaire à La Rochelle. Fluides, thermique, électricité, sécurité incendie, BIM. Au service des architectes, maîtres d’ouvrage publics et promoteurs depuis 2008."
+    ctaPrincipal={{ label: 'Parlons de votre projet', href: '/contact' }}
+    ctaSecondaire={{ label: 'Nos références', href: '/references' }}
+  />
+
+  <ChiffresCles />
+
+  <CartesExpertises />
+
+  <SecteursPhares />
+
+  <ReferencesRecentes />
+
+  <EquipePreview />
+
+  <BandeauPartenaires />
+
+  <CtaFinal />
+</PageLayout>

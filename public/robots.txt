@@ -1,0 +1,7 @@
+# TEMPORAIRE — site de démonstration pour validation client sur ft2e-site.vercel.app.
+# À remplacer en phase de production (migration sur ft2e.fr) par :
+#   User-agent: *
+#   Allow: /
+#   Sitemap: https://ft2e.fr/sitemap-index.xml
+User-agent: *
+Disallow: /

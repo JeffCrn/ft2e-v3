@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#000000"/>
+  <text x="16" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="13" letter-spacing="-0.5">
+    <tspan fill="#FFFFFF">FT</tspan><tspan fill="#0071e3">2</tspan><tspan fill="#FFFFFF">E</tspan>
+  </text>
+</svg>

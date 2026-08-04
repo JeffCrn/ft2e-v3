@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  expertise: CollectionEntry<'expertises'>;
+}
+
+const { expertise } = Astro.props;
+const { titre, accroche } = expertise.data;
+---
+
+<a
+  href={`/expertises/${expertise.id}`}
+  class="group block bg-light-gray rounded-lg p-6 transition-all hover:shadow-soft"
+  data-card-tilt
+>
+  <h3 class="font-heading font-semibold text-marine text-lg tracking-tight group-hover:text-apple-blue transition-colors">
+    {titre}
+  </h3>
+  <p class="mt-3 text-sm text-text-secondary leading-relaxed line-clamp-3 tracking-tight">
+    {accroche}
+  </p>
+  <span class="inline-block mt-4 text-sm text-link-blue tracking-tight">
+    En savoir plus <span class="chevron-arrow">›</span>
+  </span>
+</a>

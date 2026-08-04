@@ -1,0 +1,25 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import HeroPage from '../../components/blocs/HeroPage.astro';
+import CartesExpertises from '../../components/blocs/CartesExpertises.astro';
+import CtaFinal from '../../components/blocs/CtaFinal.astro';
+---
+
+<PageLayout
+  title="Expertises — FT2E"
+  description="Audit, thermique, CVC, électricité, SSI, BIM. Six domaines d’expertise technique pour vos projets de bâtiment en Charente-Maritime."
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Expertises', href: '/expertises' },
+    ]}
+    eyebrow="Domaines techniques"
+    titre="Nos expertises"
+    sousTitre="FT2E couvre l’ensemble de la chaîne technique du bâtiment : de l’audit initial aux études d’exécution BIM, en passant par la thermique, le CVC, l’électricité et la coordination SSI."
+  />
+
+  <CartesExpertises />
+
+  <CtaFinal titre={"Quelle expertise pour votre projet ?"} texte="Décrivez-nous votre programme — nous identifierons les lots techniques à mobiliser." />
+</PageLayout>

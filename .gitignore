@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment
+.env
+.env.local
+
+# Astro
+.astro/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+.vercel
+
+# Local screenshots & working artifacts (never commit)
+/*.png
+.playwright-mcp/
+assets/

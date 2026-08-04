@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import CarteProjet from './CarteProjet.astro';
+import Bouton from '../primitives/Bouton.astro';
+
+const projets = (await getCollection('projets'))
+  .filter((p) => p.data.en_avant)
+  .sort((a, b) => b.data.annee - a.data.annee)
+  .slice(0, 4);
+---
+
+<section class="py-20 bg-white">
+  <div class="max-w-[980px] mx-auto px-4 md:px-6">
+    <h2 class="font-heading font-semibold text-marine text-center mb-2 tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;" data-reveal>
+      Références récentes
+    </h2>
+    <p class="text-text-secondary text-center mb-12" data-reveal>
+      <a href="/references" class="text-link-blue hover:underline text-sm tracking-tight">Voir toutes les références <span class="chevron-arrow">›</span></a>
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-reveal-stagger>
+      {projets.map((projet) => (
+        <CarteProjet projet={projet} />
+      ))}
+    </div>
+    <div class="mt-8 text-center md:hidden">
+      <Bouton href="/references" variante="secondary">
+        Voir toutes les références
+      </Bouton>
+    </div>
+  </div>
+</section>

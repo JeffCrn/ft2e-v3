@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BadgeDemo from '../primitives/BadgeDemo.astro';
+import Capsule from '../primitives/Capsule.astro';
+
+interface Props {
+  projet: CollectionEntry<'projets'>;
+}
+
+const { projet } = Astro.props;
+const { secteur, typologie, moa, architecte, lieu, surface_m2, annee, performance, mission_ft2e, demo } = projet.data;
+
+const lignes = [
+  { label: "Maître d’ouvrage", valeur: moa },
+  { label: 'Architecte', valeur: architecte },
+  { label: 'Lieu', valeur: lieu },
+  { label: 'Surface', valeur: surface_m2 ? `${surface_m2.toLocaleString('fr-FR')} m²` : undefined },
+  { label: 'Année', valeur: String(annee) },
+  { label: 'Performance', valeur: performance },
+].filter((l) => l.valeur && l.valeur !== '—');
+---
+
+<aside class="bg-light-gray rounded-lg p-6">
+  <div class="flex items-center gap-3 mb-4">
+    <h2 class="font-heading font-semibold text-marine text-lg tracking-tight">Fiche technique</h2>
+    {demo && <BadgeDemo />}
+  </div>
+
+  <div class="flex flex-wrap gap-2 mb-4">
+    <Capsule variante="secteur">{secteur}</Capsule>
+    <Capsule variante="typologie">{typologie}</Capsule>
+  </div>
+
+  <dl class="space-y-3">
+    {lignes.map((ligne) => (
+      <div class="flex flex-col">
+        <dt class="text-xs uppercase tracking-widest text-text-secondary">{ligne.label}</dt>
+        <dd class="text-sm text-near-black font-medium tracking-tight">{ligne.valeur}</dd>
+      </div>
+    ))}
+  </dl>
+
+  <div class="mt-4 pt-4 border-t border-gris-bord">
+    <p class="text-xs uppercase tracking-widest text-text-secondary mb-2">Mission FT2E</p>
+    <div class="flex flex-wrap gap-2">
+      {mission_ft2e.map((mission) => (
+        <Capsule variante="mission">{mission}</Capsule>
+      ))}
+    </div>
+  </div>
+</aside>

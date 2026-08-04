@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import CarteProjet from './CarteProjet.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  projetActuel: CollectionEntry<'projets'>;
+  max?: number;
+}
+
+const { projetActuel, max = 3 } = Astro.props;
+
+const tous = await getCollection('projets');
+const similaires = tous
+  .filter((p) => p.id !== projetActuel.id)
+  .sort((a, b) => {
+    let scoreA = 0;
+    let scoreB = 0;
+    if (a.data.secteur === projetActuel.data.secteur) scoreA += 2;
+    if (b.data.secteur === projetActuel.data.secteur) scoreB += 2;
+    if (a.data.typologie === projetActuel.data.typologie) scoreA += 1;
+    if (b.data.typologie === projetActuel.data.typologie) scoreB += 1;
+    return scoreB - scoreA;
+  })
+  .slice(0, max);
+---
+
+{similaires.length > 0 && (
+  <section class="py-20 bg-light-gray">
+    <div class="max-w-[980px] mx-auto px-4 md:px-6">
+      <h2 class="font-heading font-semibold text-marine text-center mb-12 tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;">
+        Projets similaires
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {similaires.map((projet) => (
+          <CarteProjet projet={projet} />
+        ))}
+      </div>
+    </div>
+  </section>
+)}

@@ -1,0 +1,73 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroPage from '../components/blocs/HeroPage.astro';
+---
+
+<PageLayout
+  title="Accessibilité — FT2E"
+  description="Déclaration d’accessibilité du site ft2e.fr. Conformité RGAA AA visée. Audit en cours."
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Accessibilité', href: '/accessibilite' },
+    ]}
+    titre="Déclaration d’accessibilité"
+    size="compact"
+  />
+
+  <section class="bg-white py-20">
+    <div class="max-w-[720px] mx-auto px-4 md:px-6">
+      <div
+        class="text-text-secondary leading-relaxed tracking-tight space-y-6
+               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
+               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
+               [&>h2:first-child]:mt-0
+               [&>p]:text-text-secondary [&>p]:leading-relaxed
+               [&_a]:text-link-blue [&_a]:hover:underline
+               [&_strong]:text-near-black [&_strong]:font-semibold
+               [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-1"
+        data-reveal
+      >
+        <p>
+          FT2E s’engage à rendre son site internet accessible, conformément au Référentiel Général d’Amélioration de l’Accessibilité (RGAA 4.1), niveau AA.
+        </p>
+
+        <h2>État de conformité</h2>
+        <p>
+          Le site <strong>ft2e.fr</strong> est en <strong>conformité partielle</strong> avec le RGAA 4.1.
+        </p>
+
+        <h2>Contenus non accessibles</h2>
+        <p>
+          Les contenus listés ci-dessous ne sont pas encore accessibles pour la raison suivante&nbsp;: audit détaillé non encore réalisé. Les points d’attention identifiés seront corrigés avant le lancement officiel du site.
+        </p>
+
+        <h2>Établissement de cette déclaration</h2>
+        <p>
+          Cette déclaration a été établie le [À compléter]. Elle sera mise à jour à l’issue de l’audit RGAA complet.
+        </p>
+
+        <h2>Retour d’information et contact</h2>
+        <p>
+          Si vous n’arrivez pas à accéder à un contenu ou à un service, vous pouvez contacter FT2E pour être orienté vers une alternative accessible ou obtenir le contenu sous une autre forme&nbsp;:
+        </p>
+        <ul>
+          <li>Email&nbsp;: <a href="mailto:ft2e@ft2e.fr">ft2e@ft2e.fr</a></li>
+          <li>Téléphone&nbsp;: <a href="tel:+33546278593">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a></li>
+          <li>Adresse&nbsp;: 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle</li>
+        </ul>
+
+        <h2>Voies de recours</h2>
+        <p>
+          Si vous constatez un défaut d’accessibilité vous empêchant d’accéder à un contenu ou une fonctionnalité du site, et que vous nous le signalez sans obtenir de réponse satisfaisante, vous êtes en droit de&nbsp;:
+        </p>
+        <ul>
+          <li>Écrire un message au Défenseur des droits</li>
+          <li>Contacter le délégué du Défenseur des droits dans votre région</li>
+          <li>Envoyer un courrier par voie postale au Défenseur des droits — Libre réponse 71120 — 75342 Paris CEDEX 07</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,28 @@
+{
+  "_comment": "Settings Claude Code — projet ft2e-site. Activer les hooks après scaffolding initial.",
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npm install)",
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(npx astro *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)"
+    ]
+  },
+  "hooks": {
+    "_comment_PostToolUse_à_activer": "Hook Prettier à activer après installation : { matcher: 'Edit|Write', hooks: [{ type: 'command', command: 'npx prettier --write \"$CLAUDE_FILE_PATH\"' }] }",
+    "_comment_PreToolUse_à_activer": "Hook guard force-push (déjà couvert par deny Bash(git push --force*) ci-dessus) : { matcher: 'Bash', hooks: [{ type: 'command', command: 'scripts/guard-force-push.sh' }] }",
+    "_comment_Stop_recommandé": "Stop hook recommandé après installation : npm run lint && npm run typecheck && npm run build."
+  },
+  "env": {
+    "_comment": "Variables d'env à exposer à Claude Code ; ne JAMAIS y mettre de secret."
+  }
+}

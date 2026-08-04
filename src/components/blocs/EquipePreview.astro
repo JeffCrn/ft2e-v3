@@ -1,0 +1,43 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import Bouton from '../primitives/Bouton.astro';
+
+const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/images/equipe/collectif.jpg'));
+---
+
+<section class="py-20 bg-light-gray">
+  <div class="max-w-[980px] mx-auto px-4 md:px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      {collectifExiste ? (
+        <img
+          src="/images/equipe/collectif.jpg"
+          alt="L’équipe FT2E réunie dans ses locaux à La Rochelle"
+          class="w-full h-64 md:h-80 object-cover rounded-lg"
+          loading="lazy"
+          data-reveal
+        />
+      ) : (
+        <div class="w-full h-64 md:h-80 rounded-lg bg-dark-surface-1 flex items-center justify-center" data-reveal>
+          <p class="text-white/40 text-sm" aria-hidden="true">[Photo à venir]</p>
+        </div>
+      )}
+      <div data-reveal>
+        <h2 class="font-heading font-semibold text-marine tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;">
+          L’équipe
+        </h2>
+        <p class="mt-4 text-text-secondary leading-relaxed tracking-tight">
+          Une équipe de sept personnes, ancrée à La Rochelle depuis 2008. Chacun pilote ses projets de bout en bout, de l’étude au suivi de chantier.
+        </p>
+        <p class="mt-3 text-text-secondary leading-relaxed tracking-tight">
+          Une organisation à taille humaine où la responsabilité est partagée et l’expertise mutualisée&nbsp;: fluides, thermique, électricité, SSI, BIM.
+        </p>
+        <div class="mt-6">
+          <Bouton href="/equipe" variante="secondary">
+            Découvrir l’équipe
+          </Bouton>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

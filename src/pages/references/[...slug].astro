@@ -1,0 +1,104 @@
+---
+import { getCollection, render } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
+import PageLayout from '../../layouts/PageLayout.astro';
+import HeroPage from '../../components/blocs/HeroPage.astro';
+import FicheTechnique from '../../components/blocs/FicheTechnique.astro';
+import ProjetsSimilaires from '../../components/blocs/ProjetsSimilaires.astro';
+import CtaFinal from '../../components/blocs/CtaFinal.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+
+export async function getStaticPaths() {
+  const projets = await getCollection('projets');
+  return projets.map((projet) => ({
+    params: { slug: projet.id },
+    props: { projet },
+  }));
+}
+
+const { projet } = Astro.props;
+const { titre, secteur, lieu, annee, image_principale, image_principale_alt } = projet.data;
+const { Content } = await render(projet);
+
+const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_principale));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: titre,
+  dateCreated: String(annee),
+  locationCreated: {
+    '@type': 'Place',
+    name: lieu,
+  },
+  about: projet.data.secteur,
+  keywords: projet.data.mission_ft2e.join(', '),
+};
+---
+
+<PageLayout
+  title={`${titre} — Référence FT2E`}
+  description={`${titre} — ${projet.data.secteur}, ${lieu}. Mission FT2E : ${projet.data.mission_ft2e.join(', ')}.`}
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Références', href: '/references' },
+      { label: titre, href: `/references/${projet.id}` },
+    ]}
+    eyebrow={secteur}
+    titre={titre}
+    sousTitre={`${lieu} · ${annee}`}
+  />
+
+  <section class="bg-white py-20">
+    <div class="max-w-[980px] mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          {imageExiste ? (
+            <img
+              src={image_principale}
+              alt={image_principale_alt}
+              class="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
+              loading="lazy"
+              data-reveal
+            />
+          ) : (
+            <div class="bg-dark-surface-1 rounded-lg h-64 md:h-96 flex items-center justify-center mb-8" data-reveal>
+              <p class="text-white/40 text-sm" aria-hidden="true">[Photo du projet à venir]</p>
+            </div>
+          )}
+
+          <div
+            class="text-text-secondary leading-relaxed tracking-tight space-y-6
+                   [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
+                   [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
+                   [&>h2:first-child]:mt-0
+                   [&>h3]:font-heading [&>h3]:font-semibold [&>h3]:text-marine [&>h3]:tracking-tight
+                   [&>h3]:text-lg [&>h3]:mt-8 [&>h3]:mb-3
+                   [&>p]:text-text-secondary [&>p]:leading-relaxed
+                   [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2
+                   [&_a]:text-link-blue [&_a]:hover:underline
+                   [&_strong]:text-near-black [&_strong]:font-semibold"
+            data-reveal
+          >
+            <Content />
+          </div>
+        </div>
+
+        <div data-reveal>
+          <FicheTechnique projet={projet} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ProjetsSimilaires projetActuel={projet} />
+
+  <CtaFinal titre={"Un projet similaire ?"} texte="Discutons de votre programme — nous identifierons les lots techniques à mobiliser." />
+
+  <Fragment slot="json-ld">
+    <JsonLd data={jsonLd} />
+  </Fragment>
+</PageLayout>

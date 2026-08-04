@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>FT2E — Administration du contenu</title>
+  <link rel="icon" href="/favicon.svg" />
+  <!-- Chemin absolu du config : Decap le charge ainsi quelle que soit la forme de l'URL (/admin, /admin/, /admin#/) -->
+  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+  <style>
+    body { font-family: system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <!-- Version épinglée (et non ^3.0.0) + SRI pour garantir un chargement stable et intègre le jour de la démo -->
+  <script
+    src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js"
+    integrity="sha384-K+E/B3QG3FJrtRXoyUjME4ilx71pYGyrvAVxYvd/p0zCPuXsc3eoEuSzUW3Ke63V"
+    crossorigin="anonymous"
+  ></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+---
+interface FaqItem {
+  question: string;
+  reponse: string;
+}
+
+interface Props {
+  items: FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+{items.length > 0 && (
+  <div class="space-y-2">
+    {items.map((item) => (
+      <details class="group bg-white rounded-lg">
+        <summary class="flex items-center justify-between cursor-pointer px-6 py-4 font-heading font-medium text-marine text-sm tracking-tight hover:text-apple-blue transition-colors list-none">
+          <span>{item.question}</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="shrink-0 ml-4 transition-transform group-open:rotate-180 text-text-tertiary"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </summary>
+        <div class="px-6 pb-4 text-sm text-text-secondary leading-relaxed tracking-tight">
+          {item.reponse}
+        </div>
+      </details>
+    ))}
+  </div>
+)}

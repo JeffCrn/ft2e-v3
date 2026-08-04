@@ -1,0 +1,49 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { getCollection } from 'astro:content';
+
+const secteurs = (await getCollection('secteurs'))
+  .sort((a, b) => a.data.ordre - b.data.ordre)
+  .slice(0, 3)
+  .map((s) => ({
+    ...s,
+    imageExiste: fs.existsSync(path.join(process.cwd(), 'public', s.data.image)),
+  }));
+---
+
+<section class="py-20 bg-marine">
+  <div class="max-w-[980px] mx-auto px-4 md:px-6">
+    <h2 class="font-heading font-semibold text-white text-center mb-12 tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;" data-reveal>
+      Secteurs d’intervention
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" data-reveal-stagger>
+      {secteurs.map((secteur) => (
+        <div class="group bg-dark-surface-1 rounded-lg overflow-hidden transition-all hover:bg-dark-surface-2" data-card-tilt>
+          <div class="h-48 bg-dark-surface-2 overflow-hidden">
+            {secteur.imageExiste ? (
+              <img
+                src={secteur.data.image}
+                alt={secteur.data.image_alt || secteur.data.titre}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center">
+                <p class="text-text-tertiary text-sm" aria-hidden="true">[Photo à venir]</p>
+              </div>
+            )}
+          </div>
+          <div class="p-6">
+            <h3 class="font-heading font-semibold text-white text-lg tracking-tight">
+              {secteur.data.titre}
+            </h3>
+            <p class="mt-3 text-sm text-mist leading-relaxed tracking-tight">
+              {secteur.data.accroche}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

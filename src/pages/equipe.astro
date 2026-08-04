@@ -1,0 +1,135 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroPage from '../components/blocs/HeroPage.astro';
+import Bouton from '../components/primitives/Bouton.astro';
+import CtaFinal from '../components/blocs/CtaFinal.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+
+const membres = (await getCollection('equipe'))
+  .sort((a, b) => a.data.ordre - b.data.ordre)
+  .map((m) => ({
+    ...m.data,
+    hasPhoto: fs.existsSync(path.join(process.cwd(), 'public', m.data.photo)),
+  }));
+
+const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/images/equipe/collectif.jpg'));
+---
+
+<PageLayout
+  title="L’équipe — FT2E"
+  description="Sept collaborateurs à La Rochelle. Efficacité énergétique, énergies renouvelables, électrotechnique, coordination SSI, projection et service administratif."
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Équipe', href: '/equipe' },
+    ]}
+    eyebrow="L’équipe"
+    titre="Sept profils, une responsabilité partagée."
+    sousTitre="FT2E s’appuie sur une équipe de sept personnes qui a su développer une réelle expertise dans les multiples secteurs de la construction."
+  />
+
+  <section class="bg-white py-20">
+    <div class="max-w-[980px] mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {collectifExiste ? (
+          <img
+            src="/images/equipe/collectif.jpg"
+            alt="L’équipe FT2E réunie dans ses locaux à La Rochelle"
+            class="w-full h-80 object-cover rounded-lg"
+            loading="lazy"
+            data-reveal
+          />
+        ) : (
+          <div class="w-full h-80 rounded-lg bg-dark-surface-1 flex items-center justify-center" data-reveal>
+            <p class="text-white/40 text-sm" aria-hidden="true">[Photo à venir]</p>
+          </div>
+        )}
+
+        <div class="space-y-4 text-text-secondary leading-relaxed tracking-tight" data-reveal>
+          <p>
+            Chacun pilote ses projets de bout en bout, de la phase d’études au suivi de chantier. Cette organisation à taille humaine garantit une réactivité directe pour nos clients et nos collaborateurs partenaires.
+          </p>
+          <p>
+            Les compétences couvrent l’ensemble du spectre technique du bâtiment&nbsp;: efficacité énergétique, énergies renouvelables, électrotechnique courants forts et faibles, coordination sécurité incendie, études d’exécution et modélisation BIM.
+          </p>
+          <p>
+            Le bureau privilégie depuis sa création la proximité avec les projets — disponibilité auprès des maîtres d’ouvrage, dialogue continu avec les architectes, présence régulière sur les chantiers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-light-gray py-20">
+    <div class="max-w-[980px] mx-auto px-4 md:px-6">
+      <h2 class="font-heading font-semibold text-marine text-center mb-2 tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;" data-reveal>
+        Les sept profils
+      </h2>
+      <p class="text-text-secondary text-center text-lg tracking-tight mb-12" data-reveal>
+        Une équipe pluridisciplinaire, ancrée à La Rochelle.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-reveal-stagger>
+        {membres.map((membre) => (
+          <div class="bg-white rounded-lg p-6 transition-all hover:shadow-soft">
+            {membre.hasPhoto ? (
+              <img
+                src={membre.photo}
+                alt={membre.photo_alt}
+                class="w-16 h-16 rounded-full object-cover mb-4"
+                loading="lazy"
+              />
+            ) : (
+              <div class="w-16 h-16 rounded-full bg-dark-surface-1 mb-4 flex items-center justify-center">
+                <span class="text-white/40 text-xs" aria-hidden="true">[Photo]</span>
+              </div>
+            )}
+            <h3 class="font-heading font-semibold text-marine tracking-tight">
+              {membre.prenom}
+            </h3>
+            <p class="mt-1 text-xs text-apple-blue uppercase tracking-widest">
+              {membre.role}
+            </p>
+            <p class="mt-3 text-sm text-text-secondary leading-relaxed tracking-tight">
+              {membre.fonction}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-marine-deep py-20">
+    <div class="max-w-[720px] mx-auto px-4 md:px-6 text-center">
+      <h2 class="font-heading font-semibold text-white tracking-tight mb-4" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;" data-reveal>
+        Vous voulez rejoindre l’équipe&nbsp;?
+      </h2>
+      <p class="text-mist leading-relaxed mb-8 max-w-xl mx-auto tracking-tight" data-reveal>
+        FT2E recrute occasionnellement des profils techniques&nbsp;: thermiciens, électriciens, coordinateurs SSI, projeteurs. Si vous cherchez un bureau d’études à taille humaine, ancré sur le littoral atlantique, avec une vraie autonomie sur vos projets — parlons-en.
+      </p>
+      <div data-reveal>
+        <Bouton href="/contact" variante="primary">
+          Candidature spontanée
+        </Bouton>
+      </div>
+    </div>
+  </section>
+
+  <CtaFinal titre={"Un projet en tête ?"} texte="L’équipe est disponible pour en discuter." />
+  <Fragment slot="json-ld">
+    {membres.map((m) => (
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: `${m.prenom} ${m.nom}`,
+        jobTitle: m.fonction,
+        knowsAbout: m.specialites,
+        worksFor: { '@type': 'ProfessionalService', name: 'FT2E', url: 'https://ft2e.fr' },
+      }} />
+    ))}
+  </Fragment>
+</PageLayout>

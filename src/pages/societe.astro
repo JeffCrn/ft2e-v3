@@ -1,0 +1,104 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import HeroPage from '../components/blocs/HeroPage.astro';
+import Bouton from '../components/primitives/Bouton.astro';
+import CtaFinal from '../components/blocs/CtaFinal.astro';
+---
+
+<PageLayout
+  title="La société — FT2E"
+  description="Société d’ingénierie pluridisciplinaire créée en 2008 et basée à La Rochelle. Études de conception et suivi de travaux en fluides, thermique, électricité, SSI et BIM."
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Société', href: '/societe' },
+    ]}
+    eyebrow="La société"
+    titre="Une ingénierie pluridisciplinaire, à La Rochelle depuis 2008."
+    sousTitre="Société d’ingénierie qui réalise l’ensemble des études de conception et de suivi de travaux dans le domaine du bâtiment."
+  />
+
+  <section class="bg-white py-20">
+    <div class="max-w-[720px] mx-auto px-4 md:px-6">
+      <div
+        class="text-text-secondary leading-relaxed tracking-tight space-y-6
+               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
+               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
+               [&>h2:first-child]:mt-0
+               [&>p]:text-text-secondary [&>p]:leading-relaxed"
+        data-reveal
+      >
+        <h2>Le bureau d’études</h2>
+        <p>
+          FT2E est une société d’ingénierie pluridisciplinaire créée en 2008 à La Rochelle. Le bureau couvre l’ensemble de la chaîne technique du bâtiment&nbsp;: de l’audit initial des installations aux études d’exécution pour entreprise, en passant par la simulation thermique réglementaire, la conception CVC, l’électricité courants forts et faibles, la coordination SSI et la modélisation BIM.
+        </p>
+        <p>
+          Cette pluridisciplinarité est portée par une équipe de sept personnes qui a développé, au fil des dix-sept dernières années, une expertise dans de multiples secteurs de la construction&nbsp;: logement, tertiaire, santé, sport, patrimoine.
+        </p>
+
+        <h2>La proximité comme méthode</h2>
+        <p>
+          FT2E a toujours privilégié une proximité avec ses projets afin de garantir une disponibilité efficace auprès des clients et des collaborateurs partenaires, ainsi qu’une réactivité optimale dans le suivi des chantiers. Cette posture conditionne nos choix d’organisation&nbsp;: ancrage rochelais, intervention sur la façade atlantique, équipes resserrées où chaque ingénieur pilote ses lots de bout en bout.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-light-gray py-20">
+    <div class="max-w-[980px] mx-auto px-4 md:px-6">
+      <h2 class="font-heading font-semibold text-marine text-center mb-2 tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;" data-reveal>
+        Quatre piliers
+      </h2>
+      <p class="text-text-secondary text-center text-lg tracking-tight mb-12" data-reveal>
+        Ce qui guide notre pratique au quotidien.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-reveal-stagger>
+        {[
+          { titre: 'Proximité', texte: "Ancrage rochelais et intervention sur la façade atlantique. Disponibilité et réactivité dans le suivi des chantiers." },
+          { titre: 'Expertise pluridisciplinaire', texte: "Audit, thermique, CVC, électricité CFO/CFA, coordination SSI, études d’exécution, BIM. Une équipe qui couvre toute la chaîne technique." },
+          { titre: 'Engagement énergétique', texte: "Études réglementaires, simulations thermiques dynamiques, intégration des énergies renouvelables. Un vrai métier, sans posture." },
+          { titre: 'Cohérence chantier', texte: "Études d’exécution pour les entreprises titulaires. Ce qui est conçu est constructible." },
+        ].map((pilier) => (
+          <div class="p-6 bg-white rounded-lg transition-all hover:shadow-soft">
+            <h3 class="font-heading font-semibold text-marine tracking-tight">{pilier.titre}</h3>
+            <p class="mt-2 text-sm text-text-secondary tracking-tight">{pilier.texte}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20">
+    <div class="max-w-[720px] mx-auto px-4 md:px-6">
+      <div
+        class="text-text-secondary leading-relaxed tracking-tight space-y-6
+               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
+               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
+               [&>h2:first-child]:mt-0
+               [&>p]:text-text-secondary [&>p]:leading-relaxed"
+        data-reveal
+      >
+        <h2>Approche et méthodologie</h2>
+        <p>
+          FT2E intervient à toutes les phases d’un projet de bâtiment. En amont, l’audit énergétique ou le diagnostic technique pose le cadre. En phase de conception, les ingénieurs dimensionnent les installations et rédigent les cahiers des charges. En phase DCE, ils produisent les pièces écrites des lots fluides, thermique, électricité et SSI. En phase chantier, ils assurent le visa des plans d’exécution, la coordination avec les entreprises titulaires et la réception des installations.
+        </p>
+        <p>
+          Cette continuité entre la conception et la réalisation est ce qui distingue FT2E d’un bureau d’études intervenant uniquement en amont. Elle garantit que les choix techniques faits en conception sont effectivement réalisables — et réalisés — sur le chantier.
+        </p>
+
+        <h2>Engagements énergétiques et environnementaux</h2>
+        <p>
+          Les études thermiques et énergétiques sont au cœur du savoir-faire historique du bureau. FT2E conçoit ses installations dans le cadre des réglementations en vigueur (RT2012, RE2020) et accompagne ses clients dans l’obtention des labels associés. L’intégration des énergies renouvelables — pompes à chaleur aérothermiques et géothermiques, panneaux solaires, récupération de chaleur — fait partie de l’approche standard de dimensionnement.
+        </p>
+      </div>
+
+      <div class="mt-12 flex flex-wrap justify-center gap-4" data-reveal>
+        <Bouton href="/expertises" variante="secondary">Nos expertises</Bouton>
+        <Bouton href="/contact" variante="primary">Parlons de votre projet</Bouton>
+      </div>
+    </div>
+  </section>
+
+  <CtaFinal />
+</PageLayout>

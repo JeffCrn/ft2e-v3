@@ -1,0 +1,87 @@
+---
+import { NAV_LINKS } from '../../lib/constants';
+import Logo from './Logo.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 inset-x-0 z-50 h-12 bg-marine-deep/80 backdrop-blur-[20px] backdrop-saturate-[180%]" data-nav-glass>
+  <nav class="max-w-[980px] mx-auto px-4 md:px-6 flex items-center justify-between h-full" aria-label="Navigation principale">
+    <a href="/" class="group flex items-center gap-2 font-heading font-semibold text-lg leading-none text-white hover:text-bright-copper tracking-tight motion-safe:transition-colors motion-safe:duration-500 motion-safe:ease-[var(--ease-apple)]" aria-label="FT2E — Accueil">
+      <Logo />
+      <span aria-hidden="true">FT<span class="text-bright-copper group-hover:text-white motion-safe:transition-colors motion-safe:duration-500 motion-safe:ease-[var(--ease-apple)]">2</span>E</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-6" role="list">
+      {NAV_LINKS.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              'text-sm font-normal tracking-tight transition-colors',
+              currentPath === link.href
+                ? 'text-white'
+                : 'text-white/90 hover:text-white',
+            ]}
+            aria-current={currentPath === link.href ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <button
+      class="md:hidden p-2 text-white"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </nav>
+
+  <div class="hidden md:hidden bg-marine-deep/95 backdrop-blur-[20px]" data-menu-panel>
+    <ul class="max-w-[980px] mx-auto px-4 py-4 space-y-1" role="list">
+      {NAV_LINKS.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              'block py-3 text-base font-normal text-white border-b border-white/10 transition-opacity hover:opacity-100',
+              currentPath === link.href ? 'opacity-100' : 'opacity-80',
+            ]}
+            aria-current={currentPath === link.href ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<div class="h-12" aria-hidden="true" data-nav-spacer></div>
+
+<script>
+  function initMenu() {
+    const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    const panel = document.querySelector<HTMLElement>('[data-menu-panel]');
+    if (!toggle || !panel) return;
+
+    if (toggle.dataset.menuBound) return;
+    toggle.dataset.menuBound = '1';
+
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      panel.classList.toggle('hidden');
+    });
+  }
+
+  document.addEventListener('astro:page-load', initMenu);
+</script>

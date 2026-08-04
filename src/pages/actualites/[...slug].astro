@@ -1,0 +1,95 @@
+---
+import { getCollection, render } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import HeroPage from '../../components/blocs/HeroPage.astro';
+import BadgeDemo from '../../components/primitives/BadgeDemo.astro';
+import CtaFinal from '../../components/blocs/CtaFinal.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('actualites');
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { titre, chapo, date, auteur, categories, demo } = article.data;
+const { Content } = await render(article);
+
+const dateFormatee = new Intl.DateTimeFormat('fr-FR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(date);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: titre,
+  description: chapo,
+  datePublished: date.toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: auteur ?? 'FT2E',
+  },
+};
+---
+
+<PageLayout
+  title={`${titre} — FT2E`}
+  description={chapo}
+  ogType="article"
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Actualités', href: '/actualites' },
+      { label: titre, href: `/actualites/${article.id}` },
+    ]}
+    eyebrow={categories[0]}
+    titre={titre}
+    sousTitre={chapo}
+  >
+    <div slot="metadata" class="flex items-center justify-center gap-3 flex-wrap">
+      <time datetime={date.toISOString().split('T')[0]} class="text-sm text-white/60 tracking-tight">
+        {dateFormatee}
+      </time>
+      {auteur && (
+        <>
+          <span class="text-white/30">·</span>
+          <span class="text-sm text-white/60 tracking-tight">Par {auteur}</span>
+        </>
+      )}
+      {demo && <BadgeDemo />}
+    </div>
+  </HeroPage>
+
+  <article class="bg-white py-20">
+    <div class="max-w-[720px] mx-auto px-4 md:px-6">
+      <div
+        class="text-text-secondary leading-relaxed tracking-tight space-y-6
+               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
+               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
+               [&>h2:first-child]:mt-0
+               [&>h3]:font-heading [&>h3]:font-semibold [&>h3]:text-marine [&>h3]:tracking-tight
+               [&>h3]:text-lg [&>h3]:mt-8 [&>h3]:mb-3
+               [&>p]:text-text-secondary [&>p]:leading-relaxed
+               [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2
+               [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
+               [&_a]:text-link-blue [&_a]:hover:underline
+               [&_strong]:text-near-black [&_strong]:font-semibold"
+        data-reveal
+      >
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <CtaFinal />
+
+  <Fragment slot="json-ld">
+    <JsonLd data={jsonLd} />
+  </Fragment>
+</PageLayout>

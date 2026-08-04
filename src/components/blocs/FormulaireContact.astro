@@ -1,0 +1,167 @@
+---
+const isLiminaire = import.meta.env.PUBLIC_MODE === 'liminaire';
+---
+
+<section class="py-20">
+  <div class="max-w-[980px] mx-auto px-4 md:px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div>
+        <h2 class="font-heading font-semibold text-marine mb-6 tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;">
+          Parlons de votre projet
+        </h2>
+
+        <form id="form-contact" class="space-y-6" novalidate>
+          <fieldset>
+            <legend class="font-heading font-semibold text-marine mb-3 tracking-tight">Vous êtes&nbsp;?</legend>
+            <div class="grid grid-cols-2 gap-3">
+              {["Architecte", "Maître d’ouvrage", "Candidat", "Autre"].map((role) => (
+                <label class="flex items-center gap-2 px-4 py-3 bg-light-gray rounded-lg cursor-pointer hover:bg-button-active transition-colors has-[:checked]:bg-apple-blue/10 has-[:checked]:text-apple-blue">
+                  <input type="radio" name="role" value={role} class="accent-apple-blue" />
+                  <span class="text-sm tracking-tight">{role}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div class="space-y-4">
+            <div>
+              <label for="nom" class="block text-sm font-medium text-near-black mb-1 tracking-tight">
+                Nom et prénom <span class="text-error" aria-hidden="true">*</span>
+              </label>
+              <input
+                type="text"
+                id="nom"
+                name="nom"
+                required
+                aria-required="true"
+                class="w-full px-4 py-3 bg-light-gray rounded-lg text-near-black text-sm tracking-tight focus:outline-none focus:ring-2 focus:ring-apple-blue form-input"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-near-black mb-1 tracking-tight">
+                Email <span class="text-error" aria-hidden="true">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                aria-required="true"
+                class="w-full px-4 py-3 bg-light-gray rounded-lg text-near-black text-sm tracking-tight focus:outline-none focus:ring-2 focus:ring-apple-blue form-input"
+              />
+            </div>
+
+            <div>
+              <label for="telephone" class="block text-sm font-medium text-near-black mb-1 tracking-tight">
+                Téléphone <span class="text-text-secondary">(facultatif)</span>
+              </label>
+              <input
+                type="tel"
+                id="telephone"
+                name="telephone"
+                class="w-full px-4 py-3 bg-light-gray rounded-lg text-near-black text-sm tracking-tight focus:outline-none focus:ring-2 focus:ring-apple-blue form-input"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-near-black mb-1 tracking-tight">
+                Message <span class="text-error" aria-hidden="true">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={5}
+                required
+                aria-required="true"
+                class="w-full px-4 py-3 bg-light-gray rounded-lg text-near-black text-sm tracking-tight focus:outline-none focus:ring-2 focus:ring-apple-blue transition-all resize-y"
+              ></textarea>
+            </div>
+
+            <div>
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="rgpd"
+                  required
+                  aria-required="true"
+                  class="mt-1 accent-apple-blue"
+                />
+                <span class="text-sm text-text-secondary leading-relaxed tracking-tight">
+                  J’accepte que mes données soient traitées par FT2E dans le cadre de ma demande, conformément à la <a href="/politique-confidentialite" class="text-link-blue hover:underline">politique de confidentialité</a>.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          {isLiminaire ? (
+            <button
+              type="button"
+              disabled
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-[980px] text-sm bg-button-active text-text-tertiary cursor-not-allowed"
+            >
+              Envoyer (désactivé en version liminaire)
+            </button>
+          ) : (
+            <button
+              type="submit"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-[980px] text-sm bg-apple-blue text-white hover:bg-apple-blue/90 transition-colors"
+            >
+              Envoyer le message
+            </button>
+          )}
+        </form>
+      </div>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="font-heading font-semibold text-marine mb-3 tracking-tight">Coordonnées</h3>
+          <address class="not-italic text-sm text-text-secondary leading-relaxed space-y-2 tracking-tight">
+            <p>35 Rue Nicolas Denys de Fronsac</p>
+            <p>17000 La Rochelle</p>
+            <p>
+              Tél.&nbsp;:
+              <a href="tel:+33546278593" class="text-link-blue hover:underline transition-colors">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a>
+            </p>
+            <p>
+              Email&nbsp;:
+              <a href="mailto:ft2e@ft2e.fr" class="text-link-blue hover:underline transition-colors">
+                ft2e@ft2e.fr
+              </a>
+            </p>
+          </address>
+        </div>
+
+        <div>
+          <h3 class="font-heading font-semibold text-marine mb-3 tracking-tight">Disponibilité</h3>
+          <p class="text-sm text-text-secondary tracking-tight">
+            Du lundi au vendredi, 8&nbsp;h&nbsp;30&nbsp;–&nbsp;18&nbsp;h. Fermé le week-end.
+          </p>
+          <p class="text-sm text-text-secondary mt-2 tracking-tight">
+            Réponse sous 48&nbsp;h ouvrées.
+          </p>
+        </div>
+
+        <div>
+          <div class="rounded-lg overflow-hidden shadow-soft">
+            <iframe
+              title="Carte de localisation de FT2E — 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-1.2149345%2C46.1594398%2C-1.2029345%2C46.1654398&amp;layer=mapnik&amp;marker=46.1624398%2C-1.2089345"
+              class="w-full h-64 border-0"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <p class="mt-2 text-xs text-text-secondary tracking-tight">
+            <a
+              href="https://www.openstreetmap.org/?mlat=46.1624398&amp;mlon=-1.2089345#map=17/46.1624398/-1.2089345"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-link-blue hover:underline"
+            >Ouvrir dans OpenStreetMap (nouvel onglet)</a>
+            <span aria-hidden="true"> · </span>© OpenStreetMap
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

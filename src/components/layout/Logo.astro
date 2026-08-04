@@ -1,0 +1,43 @@
+---
+// Pictogramme « flux dans le cadre » — mark de marque FT2E.
+// Cadre bâti (encre) traversé par un flux continu (cuivre) : l'ingénierie
+// rend le bâtiment perméable à l'énergie.
+//
+// Décoratif : le lien parent porte déjà aria-label + le wordmark texte « FT2E ».
+// theme='dark'  → nav / fond sombre : cadre blanc froid, flux cuivre clair.
+// theme='light' → footer / fond clair : cadre marine, flux cuivre.
+interface Props {
+  class?: string;
+  theme?: 'dark' | 'light';
+}
+
+const { class: className, theme = 'dark' } = Astro.props;
+
+const frame = theme === 'dark' ? 'stroke-cool-white' : 'stroke-marine';
+const flux = theme === 'dark' ? 'stroke-bright-copper' : 'stroke-copper';
+const frameHover = theme === 'dark' ? 'group-hover:stroke-bright-copper' : 'group-hover:stroke-copper';
+const fluxHover = theme === 'dark' ? 'group-hover:stroke-cool-white' : 'group-hover:stroke-marine';
+---
+
+<svg
+  viewBox="0 0 90 90"
+  class:list={['block h-[26px] w-auto shrink-0', className]}
+  aria-hidden="true"
+  focusable="false"
+>
+  <g transform="translate(5,5)" fill="none" stroke-width="7">
+    <!-- Cadre structurel, ouvert à gauche et à droite au passage du flux -->
+    <path
+      class:list={[frame, frameHover, 'motion-safe:transition-colors motion-safe:duration-500 motion-safe:ease-[var(--ease-apple)]']}
+      stroke-linejoin="miter"
+      d="M3.5,42 V3.5 H76.5 V42 M76.5,66 V76.5 H3.5 V66"
+    />
+    <!-- Flux continu : entre, dessert, ressort -->
+    <path
+      class:list={[flux, fluxHover, 'motion-safe:transition-colors motion-safe:duration-500 motion-safe:ease-[var(--ease-apple)]']}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M-3,54 H26 V26 H54 V54 H83"
+    />
+  </g>
+</svg>

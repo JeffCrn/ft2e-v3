@@ -1,0 +1,213 @@
+---
+import '../styles/global.css';
+import { ClientRouter, fade } from 'astro:transitions';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og/accueil.jpg',
+  ogType = 'website',
+  canonical,
+  // TEMPORAIRE : noindex global tant que le site est en démo sur ft2e-site.vercel.app.
+  // Remettre à `false` lors de la migration sur ft2e.fr (phase de production).
+  noindex = true,
+} = Astro.props;
+
+const siteUrl = 'https://ft2e.fr';
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = new URL(ogImage, siteUrl).href;
+
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="FT2E" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <ClientRouter />
+
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-near-black font-body">
+    <a
+      href="#contenu-principal"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-12 focus:left-4 focus:z-50 focus:bg-apple-blue focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
+    >
+      Aller au contenu principal
+    </a>
+
+    <slot name="header" />
+
+    <main id="contenu-principal" class="flex-1" transition:animate={fade({ duration: '0.3s' })}>
+      <slot />
+    </main>
+
+    <slot name="footer" />
+
+    <slot name="json-ld" />
+
+    <script>
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ─── Hero reveal ────────────────────────────── */
+      function heroReveal() {
+        const words = document.querySelectorAll('[data-hero-word]');
+        const subtitle = document.querySelector('[data-hero-subtitle]');
+        const cta = document.querySelector('[data-hero-cta]');
+        if (!words.length) return;
+
+        if (reduced) {
+          words.forEach(w => w.classList.add('revealed'));
+          subtitle?.classList.add('revealed');
+          cta?.classList.add('revealed');
+          return;
+        }
+
+        const lastDelay = (words.length - 1) * 40 + 500;
+        words.forEach(w => w.classList.add('revealed'));
+        setTimeout(() => subtitle?.classList.add('revealed'), lastDelay + 300);
+        setTimeout(() => cta?.classList.add('revealed'), lastDelay + 500);
+      }
+
+      /* ─── Scroll reveal ──────────────────────────── */
+      function scrollReveal() {
+        const targets = document.querySelectorAll('[data-reveal]:not(.revealed), [data-reveal-stagger]:not(.revealed)');
+        if (!targets.length) return;
+
+        if (reduced) {
+          targets.forEach(el => el.classList.add('revealed'));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 },
+        );
+
+        targets.forEach(el => observer.observe(el));
+      }
+
+      /* ─── Nav glass dynamic ──────────────────────── */
+      let navObserver: IntersectionObserver | null = null;
+
+      function navGlass() {
+        const nav = document.querySelector<HTMLElement>('[data-nav-glass]');
+        if (!nav) return;
+
+        navObserver?.disconnect();
+        nav.classList.remove('nav-transparent');
+
+        const hasDarkHero = !!document.querySelector('[data-hero-dark]');
+        if (!hasDarkHero || reduced) return;
+
+        nav.classList.add('nav-transparent');
+
+        const spacer = document.querySelector<HTMLElement>('[data-nav-spacer]');
+        if (spacer) spacer.style.display = 'none';
+
+        navObserver = new IntersectionObserver(
+          ([entry]) => {
+            nav.classList.toggle('nav-transparent', entry.intersectionRatio > 0.5);
+          },
+          { threshold: [0, 0.5, 1] },
+        );
+
+        const hero = document.querySelector('[data-hero-dark]');
+        if (hero) navObserver.observe(hero);
+      }
+
+      /* ─── Card 3D tilt (desktop) ─────────────────── */
+      function cardTilt() {
+        if (reduced || matchMedia('(hover: none)').matches) return;
+
+        document.querySelectorAll<HTMLElement>('[data-card-tilt]').forEach(card => {
+          if (card.dataset.tiltBound) return;
+          card.dataset.tiltBound = '1';
+          card.style.perspective = '1000px';
+
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateZ(10px)`;
+            card.style.transition = 'transform 100ms ease-out';
+          });
+
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+            card.style.transition = 'transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          });
+        });
+      }
+
+      /* ─── CTA parallax ──────────────────────────── */
+      function parallax() {
+        const targets = document.querySelectorAll<HTMLElement>('[data-parallax]');
+        if (!targets.length || reduced) return;
+
+        const thresholds = Array.from({ length: 20 }, (_, i) => i / 19);
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const y = (1 - entry.intersectionRatio) * -15;
+                (entry.target as HTMLElement).style.transform = `translateY(${y}px)`;
+              }
+            });
+          },
+          { threshold: thresholds },
+        );
+
+        targets.forEach(el => observer.observe(el));
+      }
+
+      /* ─── Init on each page (including View Transitions) */
+      function initMotion() {
+        heroReveal();
+        scrollReveal();
+        navGlass();
+        cardTilt();
+        parallax();
+      }
+
+      document.addEventListener('astro:page-load', initMotion);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+---
+import { NAV_LINKS, SITE_NAME, FT2E_BUSINESS } from '../../lib/constants';
+import JsonLd from '../seo/JsonLd.astro';
+import Logo from './Logo.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-light-gray mt-auto" role="contentinfo">
+  <div class="max-w-[980px] mx-auto px-4 md:px-6">
+    <div class="py-6 border-b border-gris-bord flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="flex items-center gap-2 text-marine font-heading font-semibold text-lg leading-none tracking-tight shrink-0">
+        <Logo theme="light" />
+        <span aria-hidden="true">FT<span class="text-copper">2</span>E</span>
+        <span class="ml-3 text-[0.7rem] font-normal uppercase tracking-[0.16em] text-slate" aria-hidden="true">Bureau d’études techniques</span>
+      </div>
+      <p class="text-xs text-text-secondary leading-relaxed max-w-2xl">
+        Bureau d’études techniques pluridisciplinaire à La Rochelle. Fluides, thermique, électricité, SSI, BIM. Au service des architectes et maîtres d’ouvrage depuis 2008.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-6">
+      <div>
+        <p class="text-xs font-semibold text-near-black mb-3">Découvrir</p>
+        <ul class="space-y-2" role="list">
+          {NAV_LINKS.slice(0, 4).map((link) => (
+            <li>
+              <a href={link.href} class="text-xs text-text-secondary hover:text-link-blue hover:underline transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold text-near-black mb-3">Explorer</p>
+        <ul class="space-y-2" role="list">
+          {NAV_LINKS.slice(4).map((link) => (
+            <li>
+              <a href={link.href} class="text-xs text-text-secondary hover:text-link-blue hover:underline transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold text-near-black mb-3">Contact</p>
+        <address class="not-italic text-xs text-text-secondary space-y-2">
+          <p>35 Rue Nicolas Denys de Fronsac</p>
+          <p>17000 La Rochelle</p>
+          <p>
+            <a href="tel:+33546278593" class="hover:text-link-blue hover:underline transition-colors">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a>
+          </p>
+          <p>
+            <a href="mailto:ft2e@ft2e.fr" class="hover:text-link-blue hover:underline transition-colors">ft2e@ft2e.fr</a>
+          </p>
+        </address>
+      </div>
+
+      <div>
+        <p class="text-xs font-semibold text-near-black mb-3">Zone d’intervention</p>
+        <p class="text-xs text-text-secondary leading-relaxed">
+          La Rochelle · Rochefort · Royan · Saintes · Île de Ré · Niort
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-gris-bord py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-text-secondary">
+      <p>© {year} {SITE_NAME}. Tous droits réservés.</p>
+      <nav aria-label="Mentions légales" class="flex gap-4">
+        <a href="/mentions-legales" class="hover:text-text-secondary hover:underline transition-colors">Mentions légales</a>
+        <a href="/politique-confidentialite" class="hover:text-text-secondary hover:underline transition-colors">Confidentialité</a>
+        <a href="/accessibilite" class="hover:text-text-secondary hover:underline transition-colors">Accessibilité</a>
+      </nav>
+    </div>
+  </div>
+  <JsonLd data={FT2E_BUSINESS} />
+</footer>

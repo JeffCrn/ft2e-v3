@@ -1,0 +1,23 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Bouton from '../components/primitives/Bouton.astro';
+---
+
+<PageLayout
+  title="Page introuvable — FT2E"
+  description="La page que vous cherchez n’existe pas ou a été déplacée."
+  noindex={true}
+>
+  <section class="py-32 text-center">
+    <div class="max-w-[980px] mx-auto px-4 md:px-6">
+      <p class="text-7xl font-heading font-semibold text-marine mb-4 tracking-tight">404</p>
+      <h1 class="font-heading font-semibold text-marine text-2xl mb-4 tracking-tight">
+        Page introuvable
+      </h1>
+      <p class="text-text-secondary mb-8 max-w-md mx-auto tracking-tight">
+        La page que vous cherchez n’existe pas ou a été déplacée. Revenez à l’accueil pour continuer votre navigation.
+      </p>
+      <Bouton href="/" variante="primary">Retour à l’accueil</Bouton>
+    </div>
+  </section>
+</PageLayout>

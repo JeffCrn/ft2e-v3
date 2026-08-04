@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import HeroPage from '../../components/blocs/HeroPage.astro';
+import CarteActualite from '../../components/blocs/CarteActualite.astro';
+
+const articles = (await getCollection('actualites')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<PageLayout
+  title="Actualités — FT2E"
+  description="Actualités du bureau d’études FT2E : chantiers en cours, livraisons, événements et articles techniques."
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Actualités', href: '/actualites' },
+    ]}
+    eyebrow="Le journal"
+    titre="Actualités"
+    sousTitre="Chantiers en cours, livraisons, événements et articles techniques de l’équipe FT2E."
+  />
+
+  <section class="bg-white py-20">
+    <div class="max-w-[980px] mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-reveal-stagger>
+        {articles.map((article) => (
+          <CarteActualite article={article} />
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>

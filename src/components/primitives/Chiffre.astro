@@ -1,0 +1,77 @@
+---
+interface Props {
+  valeur: number;
+  suffixe?: string;
+  label: string;
+  demo?: boolean;
+}
+
+const { valeur, suffixe = '', label, demo = false } = Astro.props;
+
+// Espace insécable avant une unité alphabétique (« 17 ans ») ; collé pour un symbole (« 150+ »).
+const suffixeAffiche = suffixe && /^[a-zA-Zà-ÿ]/.test(suffixe) ? ` ${suffixe}` : suffixe;
+---
+
+<div class="text-center" data-chiffre data-target={valeur}>
+  <p class="font-heading font-semibold text-marine tracking-tight" style="font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.07; letter-spacing: -0.02em;" data-chiffre-nombre>
+    <span data-chiffre-valeur>0</span>{suffixeAffiche}
+    {demo && <span class="text-xs text-text-secondary align-super">*</span>}
+  </p>
+  <p class="text-sm text-text-secondary mt-2 tracking-tight" data-chiffre-label>{label}</p>
+</div>
+
+<script>
+  function initChiffres() {
+    document.querySelectorAll('[data-chiffre]').forEach((el, index) => {
+      if (el.hasAttribute('data-chiffre-init')) return;
+      el.setAttribute('data-chiffre-init', '');
+
+      const target = Number(el.getAttribute('data-target'));
+      const span = el.querySelector('[data-chiffre-valeur]');
+      const nombre = el.querySelector('[data-chiffre-nombre]');
+      const labelEl = el.querySelector('[data-chiffre-label]');
+      if (!span) return;
+
+      const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+
+          if (prefersReduced) {
+            span.textContent = target.toLocaleString('fr-FR');
+            labelEl?.classList.add('revealed');
+            return;
+          }
+
+          const staggerDelay = index * 150;
+
+          setTimeout(() => {
+            const duration = 1000;
+            const start = performance.now();
+
+            function animate(now: number) {
+              const progress = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              span!.textContent = Math.round(eased * target).toLocaleString('fr-FR');
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              } else {
+                nombre?.classList.add('counter-pulse');
+                setTimeout(() => labelEl?.classList.add('revealed'), 200);
+              }
+            }
+
+            requestAnimationFrame(animate);
+          }, staggerDelay);
+        },
+        { threshold: 0.3 },
+      );
+
+      observer.observe(el);
+    });
+  }
+
+  document.addEventListener('astro:page-load', initChiffres);
+</script>
