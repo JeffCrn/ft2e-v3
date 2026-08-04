@@ -26,12 +26,13 @@ const similaires = tous
 ---
 
 {similaires.length > 0 && (
-  <section class="py-20 bg-light-gray">
-    <div class="max-w-[980px] mx-auto px-4 md:px-6">
-      <h2 class="font-heading font-semibold text-marine text-center mb-12 tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;">
-        Projets similaires
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <section class="py-16 md:py-20 bg-cool-white">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
+        <h2 class="type-h2 text-marine text-[22px]">Projets similaires</h2>
+        <p class="mono-label font-normal text-mist">même secteur, même typologie</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {similaires.map((projet) => (
           <CarteProjet projet={projet} />
         ))}

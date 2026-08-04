@@ -3,6 +3,11 @@ import PageLayout from '../layouts/PageLayout.astro';
 import HeroPage from '../components/blocs/HeroPage.astro';
 import Bouton from '../components/primitives/Bouton.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
+
+const proseClasses = `text-[17px] font-light text-slate leading-[1.6] space-y-6
+  [&>h2]:type-h2 [&>h2]:text-marine [&>h2]:text-[20px] [&>h2]:filet-top
+  [&>h2]:mt-12 [&>h2]:mb-4
+  [&>h2:first-child]:mt-0`;
 ---
 
 <PageLayout
@@ -14,21 +19,14 @@ import CtaFinal from '../components/blocs/CtaFinal.astro';
       { label: 'Accueil', href: '/' },
       { label: 'Société', href: '/societe' },
     ]}
-    eyebrow="La société"
+    eyebrow="la société — la rochelle, depuis 2008"
     titre="Une ingénierie pluridisciplinaire, à La Rochelle depuis 2008."
     sousTitre="Société d’ingénierie qui réalise l’ensemble des études de conception et de suivi de travaux dans le domaine du bâtiment."
   />
 
-  <section class="bg-white py-20">
-    <div class="max-w-[720px] mx-auto px-4 md:px-6">
-      <div
-        class="text-text-secondary leading-relaxed tracking-tight space-y-6
-               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
-               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
-               [&>h2:first-child]:mt-0
-               [&>p]:text-text-secondary [&>p]:leading-relaxed"
-        data-reveal
-      >
+  <section class="bg-cool-white py-16 md:py-20">
+    <div class="max-w-[840px] mx-auto px-4 md:px-6">
+      <div class={proseClasses} data-reveal>
         <h2>Le bureau d’études</h2>
         <p>
           FT2E est une société d’ingénierie pluridisciplinaire créée en 2008 à La Rochelle. Le bureau couvre l’ensemble de la chaîne technique du bâtiment&nbsp;: de l’audit initial des installations aux études d’exécution pour entreprise, en passant par la simulation thermique réglementaire, la conception CVC, l’électricité courants forts et faibles, la coordination SSI et la modélisation BIM.
@@ -45,40 +43,32 @@ import CtaFinal from '../components/blocs/CtaFinal.astro';
     </div>
   </section>
 
-  <section class="bg-light-gray py-20">
-    <div class="max-w-[980px] mx-auto px-4 md:px-6">
-      <h2 class="font-heading font-semibold text-marine text-center mb-2 tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;" data-reveal>
-        Quatre piliers
-      </h2>
-      <p class="text-text-secondary text-center text-lg tracking-tight mb-12" data-reveal>
-        Ce qui guide notre pratique au quotidien.
-      </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-reveal-stagger>
+  <section class="bg-cool-white py-16 md:py-20">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
+        <h2 class="type-h2 text-marine text-[22px]">Quatre piliers</h2>
+        <p class="mono-label font-normal text-mist">ce qui guide la pratique au quotidien</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-line border border-line" data-reveal-stagger>
         {[
-          { titre: 'Proximité', texte: "Ancrage rochelais et intervention sur la façade atlantique. Disponibilité et réactivité dans le suivi des chantiers." },
-          { titre: 'Expertise pluridisciplinaire', texte: "Audit, thermique, CVC, électricité CFO/CFA, coordination SSI, études d’exécution, BIM. Une équipe qui couvre toute la chaîne technique." },
-          { titre: 'Engagement énergétique', texte: "Études réglementaires, simulations thermiques dynamiques, intégration des énergies renouvelables. Un vrai métier, sans posture." },
-          { titre: 'Cohérence chantier', texte: "Études d’exécution pour les entreprises titulaires. Ce qui est conçu est constructible." },
+          { n: '01', titre: 'Proximité', texte: "Ancrage rochelais et intervention sur la façade atlantique. Disponibilité et réactivité dans le suivi des chantiers." },
+          { n: '02', titre: 'Expertise pluridisciplinaire', texte: "Audit, thermique, CVC, électricité CFO/CFA, coordination SSI, études d’exécution, BIM. Une équipe qui couvre toute la chaîne technique." },
+          { n: '03', titre: 'Engagement énergétique', texte: "Études réglementaires, simulations thermiques dynamiques, intégration des énergies renouvelables. Un vrai métier, sans posture." },
+          { n: '04', titre: 'Cohérence chantier', texte: "Études d’exécution pour les entreprises titulaires. Ce qui est conçu est constructible." },
         ].map((pilier) => (
-          <div class="p-6 bg-white rounded-lg transition-all hover:shadow-soft">
-            <h3 class="font-heading font-semibold text-marine tracking-tight">{pilier.titre}</h3>
-            <p class="mt-2 text-sm text-text-secondary tracking-tight">{pilier.texte}</p>
+          <div class="p-6 bg-cool-white transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:bg-paper">
+            <span class="mono-label font-normal text-copper tabular-nums" aria-hidden="true">{pilier.n}</span>
+            <h3 class="type-h2 text-marine text-[19px] mt-3">{pilier.titre}</h3>
+            <p class="mt-3 text-[15px] font-light text-slate leading-[1.55]">{pilier.texte}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="bg-white py-20">
-    <div class="max-w-[720px] mx-auto px-4 md:px-6">
-      <div
-        class="text-text-secondary leading-relaxed tracking-tight space-y-6
-               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
-               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
-               [&>h2:first-child]:mt-0
-               [&>p]:text-text-secondary [&>p]:leading-relaxed"
-        data-reveal
-      >
+  <section class="bg-cool-white py-16 md:py-20">
+    <div class="max-w-[840px] mx-auto px-4 md:px-6">
+      <div class={proseClasses} data-reveal>
         <h2>Approche et méthodologie</h2>
         <p>
           FT2E intervient à toutes les phases d’un projet de bâtiment. En amont, l’audit énergétique ou le diagnostic technique pose le cadre. En phase de conception, les ingénieurs dimensionnent les installations et rédigent les cahiers des charges. En phase DCE, ils produisent les pièces écrites des lots fluides, thermique, électricité et SSI. En phase chantier, ils assurent le visa des plans d’exécution, la coordination avec les entreprises titulaires et la réception des installations.
@@ -93,8 +83,8 @@ import CtaFinal from '../components/blocs/CtaFinal.astro';
         </p>
       </div>
 
-      <div class="mt-12 flex flex-wrap justify-center gap-4" data-reveal>
-        <Bouton href="/expertises" variante="secondary">Nos expertises</Bouton>
+      <div class="mt-12 flex flex-wrap gap-4" data-reveal>
+        <Bouton href="/expertises" variante="ghost">Nos expertises</Bouton>
         <Bouton href="/contact" variante="primary">Parlons de votre projet</Bouton>
       </div>
     </div>

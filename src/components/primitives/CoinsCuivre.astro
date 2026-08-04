@@ -1,0 +1,17 @@
+---
+// Équerres cuivre 16 px aux angles d'un média — signature « ingénierie de
+// l'invisible ». À placer dans un parent `relative` ; purement décoratif.
+// `coins="deux"` n'affiche que haut-gauche / bas-droite (variante mobile).
+interface Props {
+  coins?: 'quatre' | 'deux';
+}
+
+const { coins = 'quatre' } = Astro.props;
+---
+
+<div aria-hidden="true">
+  <div class="absolute -left-2 -top-2 w-4 h-4 border-l border-t border-copper"></div>
+  {coins === 'quatre' && <div class="absolute -right-2 -top-2 w-4 h-4 border-r border-t border-copper"></div>}
+  {coins === 'quatre' && <div class="absolute -left-2 -bottom-2 w-4 h-4 border-l border-b border-copper"></div>}
+  <div class="absolute -right-2 -bottom-2 w-4 h-4 border-r border-b border-copper"></div>
+</div>

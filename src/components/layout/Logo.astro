@@ -21,7 +21,7 @@ const fluxHover = theme === 'dark' ? 'group-hover:stroke-cool-white' : 'group-ho
 
 <svg
   viewBox="0 0 90 90"
-  class:list={['block h-[26px] w-auto shrink-0', className]}
+  class:list={['block w-auto shrink-0', className ?? 'h-[26px]']}
   aria-hidden="true"
   focusable="false"
 >

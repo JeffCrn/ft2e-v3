@@ -28,28 +28,28 @@ const jsonLdData = {
 
 const themeClasses = {
   light: {
-    container: 'text-text-secondary',
-    separator: 'text-text-tertiary/50',
-    link: 'hover:text-link-blue hover:underline transition-colors',
-    current: 'text-marine font-medium',
+    container: 'text-slate',
+    separator: 'text-mist',
+    link: 'hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]',
+    current: 'text-marine',
   },
   dark: {
-    container: 'text-white/50',
-    separator: 'text-white/30',
-    link: 'hover:text-bright-blue hover:underline transition-colors',
-    current: 'text-white/90 font-medium',
+    container: 'text-mist',
+    separator: 'text-mist/50',
+    link: 'hover:text-bright-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]',
+    current: 'text-cool-white',
   },
 };
 
 const t = themeClasses[theme];
 ---
 
-<nav aria-label="Fil d’Ariane" class={`max-w-[980px] mx-auto px-4 md:px-6 ${theme === 'dark' ? '' : 'py-4'}`}>
-  <ol class:list={['flex flex-wrap items-center gap-1 text-xs tracking-tight', t.container]} role="list">
+<nav aria-label="Fil d’Ariane" class="max-w-[1200px] mx-auto px-4 md:px-6 py-4">
+  <ol class:list={['mono-label font-normal flex flex-wrap items-center gap-2', t.container]} role="list">
     {items.map((item, index) => (
-      <li class="flex items-center gap-1">
+      <li class="flex items-center gap-2">
         {index > 0 && (
-          <span aria-hidden="true" class={t.separator}>›</span>
+          <span aria-hidden="true" class={t.separator}>/</span>
         )}
         {index < items.length - 1 ? (
           <a href={item.href} class={t.link}>

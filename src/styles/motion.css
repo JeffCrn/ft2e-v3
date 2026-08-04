@@ -1,12 +1,13 @@
 /* ═══════════════════════════════════════════════
-   Motion Design — Apple-style animations
-   GPU-composited only: opacity, transform, filter
+   Motion Design — blueprint « ingénierie de l'invisible »
+   GPU-composited only: opacity, transform
+   Easing unique : cubic-bezier(0.16, 1, 0.3, 1)
    ═══════════════════════════════════════════════ */
 
 :root {
-  --ease-apple: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-apple-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --ease-apple-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1); /* alias legacy → blueprint */
+  --ease-apple-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-apple-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ─── Hero word-by-word reveal ─────────────────── */
@@ -46,7 +47,7 @@
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(12px);
 }
 [data-reveal].revealed {
   opacity: 1;
@@ -58,7 +59,7 @@
 
 [data-reveal-stagger] > * {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(10px);
 }
 [data-reveal-stagger].revealed > * {
   opacity: 1;
@@ -75,13 +76,6 @@
 [data-reveal-stagger].revealed > *:nth-child(8) { transition-delay: 560ms; }
 [data-reveal-stagger].revealed > *:nth-child(9) { transition-delay: 640ms; }
 
-/* ─── Card 3D tilt (desktop only) ─────────────── */
-
-[data-card-tilt] {
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
 /* ─── Chevron link micro-interaction ──────────── */
 
 .chevron-arrow {
@@ -91,19 +85,6 @@
 *:hover > .chevron-arrow,
 *:hover .chevron-arrow {
   transform: translateX(4px);
-}
-
-/* ─── Nav glass dynamic ───────────────────────── */
-
-[data-nav-glass] {
-  transition: background-color 300ms var(--ease-apple),
-              backdrop-filter 300ms var(--ease-apple),
-              -webkit-backdrop-filter 300ms var(--ease-apple);
-}
-[data-nav-glass].nav-transparent {
-  background-color: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
 }
 
 /* ─── Counter pulse ───────────────────────────── */
@@ -171,11 +152,6 @@
     transition-delay: 0ms !important;
   }
 
-  [data-card-tilt] {
-    transform: none !important;
-    will-change: auto;
-  }
-
   [data-parallax] {
     will-change: auto;
     transform: none !important;
@@ -186,10 +162,6 @@
   }
 
   .chevron-arrow {
-    transition: none !important;
-  }
-
-  [data-nav-glass] {
     transition: none !important;
   }
 }

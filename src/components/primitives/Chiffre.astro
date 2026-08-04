@@ -1,4 +1,5 @@
 ---
+// Cellule de cartouche : label mono, valeur tabulaire, note [démo] cuivre.
 interface Props {
   valeur: number;
   suffixe?: string;
@@ -9,15 +10,15 @@ interface Props {
 const { valeur, suffixe = '', label, demo = false } = Astro.props;
 
 // Espace insécable avant une unité alphabétique (« 17 ans ») ; collé pour un symbole (« 150+ »).
-const suffixeAffiche = suffixe && /^[a-zA-Zà-ÿ]/.test(suffixe) ? ` ${suffixe}` : suffixe;
+const suffixeAffiche = suffixe && /^[a-zA-Zà-ÿ]/.test(suffixe) ? ` ${suffixe}` : suffixe;
 ---
 
-<div class="text-center" data-chiffre data-target={valeur}>
-  <p class="font-heading font-semibold text-marine tracking-tight" style="font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.07; letter-spacing: -0.02em;" data-chiffre-nombre>
+<div class="bg-cool-white p-5" data-chiffre data-target={valeur}>
+  <p class="mono-label text-mist font-normal" data-chiffre-label>{label}</p>
+  <p class="font-mono text-[22px] text-marine tabular-nums mt-2.5" data-chiffre-nombre>
     <span data-chiffre-valeur>0</span>{suffixeAffiche}
-    {demo && <span class="text-xs text-text-secondary align-super">*</span>}
   </p>
-  <p class="text-sm text-text-secondary mt-2 tracking-tight" data-chiffre-label>{label}</p>
+  {demo && <p class="mono-label text-copper mt-1.5" aria-label="Donnée de démonstration">[démo]</p>}
 </div>
 
 <script>

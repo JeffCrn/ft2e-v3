@@ -18,14 +18,14 @@ const articles = (await getCollection('actualites')).sort(
       { label: 'Accueil', href: '/' },
       { label: 'Actualités', href: '/actualites' },
     ]}
-    eyebrow="Le journal"
+    eyebrow="le journal du bureau"
     titre="Actualités"
     sousTitre="Chantiers en cours, livraisons, événements et articles techniques de l’équipe FT2E."
   />
 
-  <section class="bg-white py-20">
-    <div class="max-w-[980px] mx-auto px-4 md:px-6">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-reveal-stagger>
+  <section class="bg-cool-white py-14 md:py-16">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-reveal-stagger>
         {articles.map((article) => (
           <CarteActualite article={article} />
         ))}

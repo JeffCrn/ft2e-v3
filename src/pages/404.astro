@@ -8,16 +8,19 @@ import Bouton from '../components/primitives/Bouton.astro';
   description="La page que vous cherchez n’existe pas ou a été déplacée."
   noindex={true}
 >
-  <section class="py-32 text-center">
-    <div class="max-w-[980px] mx-auto px-4 md:px-6">
-      <p class="text-7xl font-heading font-semibold text-marine mb-4 tracking-tight">404</p>
-      <h1 class="font-heading font-semibold text-marine text-2xl mb-4 tracking-tight">
+  <section class="bg-cool-white py-24 md:py-32">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <p class="mono-label text-copper mb-6">erreur — référence introuvable</p>
+      <p class="type-display text-marine text-[clamp(4rem,10vw,8rem)]" aria-hidden="true">404</p>
+      <h1 class="type-h2 text-marine text-[22px] mt-6">
         Page introuvable
       </h1>
-      <p class="text-text-secondary mb-8 max-w-md mx-auto tracking-tight">
+      <p class="mt-4 text-[17px] font-light text-slate leading-[1.6] max-w-[52ch]">
         La page que vous cherchez n’existe pas ou a été déplacée. Revenez à l’accueil pour continuer votre navigation.
       </p>
-      <Bouton href="/" variante="primary">Retour à l’accueil</Bouton>
+      <div class="mt-8">
+        <Bouton href="/" variante="primary">Retour à l’accueil&nbsp;→</Bouton>
+      </div>
     </div>
   </section>
 </PageLayout>

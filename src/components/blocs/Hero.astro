@@ -4,6 +4,7 @@ import Bouton from '../primitives/Bouton.astro';
 interface Props {
   titre: string;
   sousTitre?: string;
+  eyebrow?: string;
   ctaPrincipal?: { label: string; href: string };
   ctaSecondaire?: { label: string; href: string };
   variante?: 'accueil' | 'page';
@@ -12,6 +13,7 @@ interface Props {
 const {
   titre,
   sousTitre,
+  eyebrow,
   ctaPrincipal,
   ctaSecondaire,
   variante = 'page',
@@ -28,19 +30,25 @@ const lignesMots = titre.split('\\n').map((ligne) =>
 <section
   class:list={[
     'relative overflow-hidden',
-    isAccueil ? 'bg-marine-deep text-white py-24 md:py-32 lg:py-40' : 'bg-light-gray py-16 md:py-20',
+    isAccueil ? 'bg-encre text-cool-white py-20 md:py-28' : 'bg-paper py-16 md:py-20',
   ]}
   data-hero-dark={isAccueil ? '' : undefined}
 >
-  <div class="max-w-[980px] mx-auto px-4 md:px-6 text-center">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+    {eyebrow && (
+      <p class="mono-label text-copper mb-7" data-reveal>
+        {eyebrow}
+      </p>
+    )}
+
     <h1
       class:list={[
-        'font-heading font-semibold tracking-tight mx-auto',
-        isAccueil ? 'text-white max-w-5xl' : 'text-marine max-w-3xl',
+        'type-display',
+        isAccueil ? 'text-cool-white max-w-[22ch]' : 'text-marine max-w-[28ch]',
       ]}
       style={isAccueil
-        ? 'font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.07; letter-spacing: -0.015em;'
-        : 'font-size: clamp(2rem, 3.5vw, 2.5rem); line-height: 1.10; letter-spacing: -0.01em;'}
+        ? 'font-size: clamp(2.25rem, 5vw, 3.75rem);'
+        : 'font-size: clamp(1.875rem, 3.5vw, 3rem);'}
       data-hero-title={isAccueil ? '' : undefined}
     >
       {isAccueil
@@ -62,8 +70,8 @@ const lignesMots = titre.split('\\n').map((ligne) =>
     {sousTitre && (
       <p
         class:list={[
-          'mt-4 text-[21px] font-light leading-relaxed max-w-2xl mx-auto tracking-tight',
-          isAccueil ? 'text-mist' : 'text-text-secondary',
+          'mt-7 text-[17px] font-light leading-[1.6] max-w-[52ch]',
+          isAccueil ? 'text-mist' : 'text-slate',
         ]}
         data-hero-subtitle={isAccueil ? '' : undefined}
       >
@@ -73,16 +81,16 @@ const lignesMots = titre.split('\\n').map((ligne) =>
 
     {(ctaPrincipal || ctaSecondaire) && (
       <div
-        class="mt-8 flex flex-wrap justify-center gap-4"
+        class="mt-9 flex flex-wrap gap-4"
         data-hero-cta={isAccueil ? '' : undefined}
       >
         {ctaPrincipal && (
-          <Bouton href={ctaPrincipal.href} variante="primary">
-            {ctaPrincipal.label}
+          <Bouton href={ctaPrincipal.href} variante={isAccueil ? 'secondary' : 'primary'}>
+            {ctaPrincipal.label}&nbsp;→
           </Bouton>
         )}
         {ctaSecondaire && (
-          <Bouton href={ctaSecondaire.href} variante={isAccueil ? 'ghost' : 'secondary'}>
+          <Bouton href={ctaSecondaire.href} variante="ghost" class={isAccueil ? 'text-cool-white' : undefined}>
             {ctaSecondaire.label}
           </Bouton>
         )}

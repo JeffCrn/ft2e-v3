@@ -12,29 +12,28 @@ const { items } = Astro.props;
 ---
 
 {items.length > 0 && (
-  <div class="space-y-2">
+  <div class="border-l border-copper pl-4">
     {items.map((item) => (
-      <details class="group bg-white rounded-lg">
-        <summary class="flex items-center justify-between cursor-pointer px-6 py-4 font-heading font-medium text-marine text-sm tracking-tight hover:text-apple-blue transition-colors list-none">
+      <details class="group py-2.5">
+        <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-marine text-base leading-[1.3] hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)] list-none" style="font-stretch: 112%;">
           <span>{item.question}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="shrink-0 ml-4 transition-transform group-open:rotate-180 text-text-tertiary"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            class="shrink-0 ml-4 transition-transform group-open:rotate-180 text-mist"
             aria-hidden="true"
             focusable="false"
           >
             <polyline points="6 9 12 15 18 9" />
           </svg>
         </summary>
-        <div class="px-6 pb-4 text-sm text-text-secondary leading-relaxed tracking-tight">
+        <div class="mt-2 pb-2 text-[15px] font-light text-slate leading-[1.55]">
           {item.reponse}
         </div>
       </details>

@@ -52,34 +52,33 @@ const jsonLd = {
     titre={titre}
     sousTitre={chapo}
   >
-    <div slot="metadata" class="flex items-center justify-center gap-3 flex-wrap">
-      <time datetime={date.toISOString().split('T')[0]} class="text-sm text-white/60 tracking-tight">
+    <div slot="metadata" class="flex items-baseline gap-4 flex-wrap">
+      <time datetime={date.toISOString().split('T')[0]} class="mono-data text-mist">
         {dateFormatee}
       </time>
       {auteur && (
         <>
-          <span class="text-white/30">·</span>
-          <span class="text-sm text-white/60 tracking-tight">Par {auteur}</span>
+          <span class="text-mist/50" aria-hidden="true">/</span>
+          <span class="mono-data text-mist">Par {auteur}</span>
         </>
       )}
       {demo && <BadgeDemo />}
     </div>
   </HeroPage>
 
-  <article class="bg-white py-20">
-    <div class="max-w-[720px] mx-auto px-4 md:px-6">
+  <article class="bg-cool-white py-14 md:py-16">
+    <div class="max-w-[840px] mx-auto px-4 md:px-6">
       <div
-        class="text-text-secondary leading-relaxed tracking-tight space-y-6
-               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
-               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
+        class="text-[17px] font-light text-slate leading-[1.6] space-y-6
+               [&>h2]:type-h2 [&>h2]:text-marine [&>h2]:text-[20px] [&>h2]:filet-top
+               [&>h2]:mt-9 [&>h2]:mb-3.5
                [&>h2:first-child]:mt-0
-               [&>h3]:font-heading [&>h3]:font-semibold [&>h3]:text-marine [&>h3]:tracking-tight
-               [&>h3]:text-lg [&>h3]:mt-8 [&>h3]:mb-3
-               [&>p]:text-text-secondary [&>p]:leading-relaxed
-               [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2
+               [&>h3]:type-h2 [&>h3]:text-marine [&>h3]:text-[17px] [&>h3]:mt-8 [&>h3]:mb-3
+               [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
+               [&>ul>li]:border-l [&>ul>li]:border-copper [&>ul>li]:pl-4
                [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
-               [&_a]:text-link-blue [&_a]:hover:underline
-               [&_strong]:text-near-black [&_strong]:font-semibold"
+               [&_a]:text-marine [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-copper
+               [&_strong]:text-marine [&_strong]:font-semibold"
         data-reveal
       >
         <Content />

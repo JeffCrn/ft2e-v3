@@ -23,30 +23,30 @@ const {
 } = Astro.props;
 
 const paddingClasses = {
-  default: 'pt-20 pb-20 md:pt-24 md:pb-24',
-  compact: 'pt-16 pb-16 md:pt-20 md:pb-20',
+  default: 'pb-14 md:pb-16',
+  compact: 'pb-10 md:pb-12',
 };
 
 const titleSize = {
-  default: 'font-size: clamp(2.25rem, 4.5vw, 3.25rem); line-height: 1.07; letter-spacing: -0.015em;',
-  compact: 'font-size: clamp(1.875rem, 3.5vw, 2.5rem); line-height: 1.10; letter-spacing: -0.01em;',
+  default: 'font-size: clamp(2rem, 4.5vw, 3.5rem);',
+  compact: 'font-size: clamp(1.625rem, 3.5vw, 2.5rem);',
 };
 ---
 
-<section class:list={['bg-marine-deep', paddingClasses[size]]} data-hero-dark>
-  <div class="pt-4">
+<section class:list={['bg-encre', paddingClasses[size]]} data-hero-dark>
+  <div class="border-b border-mist/25">
     <Breadcrumbs theme="dark" items={breadcrumbs} />
   </div>
 
-  <div class="max-w-[980px] mx-auto px-4 md:px-6 text-center mt-10 md:mt-12">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-6 mt-10 md:mt-14">
     {eyebrow && (
-      <p class="text-xs text-bright-copper uppercase tracking-widest mb-4" data-reveal>
+      <p class="mono-label text-copper mb-5" data-reveal>
         {eyebrow}
       </p>
     )}
 
     <h1
-      class="font-heading font-semibold text-white tracking-tight max-w-3xl mx-auto"
+      class="type-display text-cool-white max-w-[24ch]"
       style={titleSize[size]}
       data-reveal
     >
@@ -55,7 +55,7 @@ const titleSize = {
 
     {sousTitre && (
       <p
-        class="mt-6 text-lg text-mist max-w-2xl mx-auto leading-relaxed tracking-tight"
+        class="mt-6 text-[17px] font-light text-mist max-w-[60ch] leading-[1.6]"
         data-reveal
       >
         {sousTitre}

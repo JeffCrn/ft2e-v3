@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import BadgeDemo from '../primitives/BadgeDemo.astro';
 
 interface Props {
   article: CollectionEntry<'actualites'>;
@@ -18,26 +17,23 @@ const dateFormatee = new Intl.DateTimeFormat('fr-FR', {
 
 <a
   href={`/actualites/${article.id}`}
-  class="group block bg-light-gray rounded-lg overflow-hidden transition-all hover:shadow-soft"
-  data-card-tilt
+  class="group block border border-line bg-paper transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:border-copper"
 >
-  <div class="h-48 bg-dark-surface-1 flex items-center justify-center">
-    <p class="text-white/40 text-sm" aria-hidden="true">[Photo à venir]</p>
+  <div class="aspect-[3/2] duotone-media">
+    <span class="absolute left-3 bottom-2.5 mono-label font-normal text-cool-white z-10" aria-hidden="true">{categories[0]?.toLowerCase()}</span>
+    {demo && <span class="absolute right-3 top-2.5 mono-label font-normal text-bright-copper z-10">[démo]</span>}
   </div>
   <div class="p-4">
-    <div class="flex items-center gap-2 mb-2">
-      <time datetime={date.toISOString().split('T')[0]} class="text-xs text-text-secondary">
+    <div class="flex items-baseline justify-between gap-3">
+      <time datetime={date.toISOString().split('T')[0]} class="mono-data text-slate">
         {dateFormatee}
       </time>
-      {demo && <BadgeDemo />}
+      <span class="mono-label font-normal text-copper">{categories[0]}</span>
     </div>
-    <span class="inline-block px-2.5 py-0.5 text-xs bg-apple-blue/10 text-apple-blue rounded-[980px] mb-2 tracking-tight">
-      {categories[0]}
-    </span>
-    <h3 class="font-heading font-semibold text-marine text-sm leading-snug tracking-tight group-hover:text-apple-blue transition-colors">
+    <h3 class="type-h2 text-marine text-base leading-[1.15] mt-3 group-hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">
       {titre}
     </h3>
-    <p class="mt-2 text-sm text-text-secondary line-clamp-3 tracking-tight">
+    <p class="mt-2.5 text-[15px] font-light text-slate leading-[1.55] line-clamp-3">
       {chapo}
     </p>
   </div>

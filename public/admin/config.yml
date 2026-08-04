@@ -5,15 +5,18 @@
 # (le client_secret reste côté serveur). Variables d'env requises sur Vercel :
 #   OAUTH_GITHUB_CLIENT_ID, OAUTH_GITHUB_CLIENT_SECRET
 # OAuth App GitHub — Authorization callback URL :
-#   https://ft2e-site.vercel.app/api/callback
+#   https://ft2e-v2.vercel.app/api/callback
+# ⚠ ft2e-v2 : au premier déploiement Vercel, reporter ces deux variables
+# d'env sur le nouveau projet et mettre à jour la callback de l'OAuth App
+# GitHub (ou créer une seconde OAuth App dédiée à la v2).
 # À refaire au passage en production (OVH/souverain). Voir docs/20.
 # ──────────────────────────────────────────────────────────────
 
 backend:
   name: github
-  repo: JeffCrn/ft2e-site
+  repo: JeffCrn/ft2e-v2
   branch: master
-  base_url: https://ft2e-site.vercel.app
+  base_url: https://ft2e-v2.vercel.app
   auth_endpoint: api/auth
 
 media_folder: "public/images"

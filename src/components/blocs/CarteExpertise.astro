@@ -6,21 +6,24 @@ interface Props {
 }
 
 const { expertise } = Astro.props;
-const { titre, accroche } = expertise.data;
+const { titre, accroche, ordre, missions_liees } = expertise.data;
+
+const numero = String(ordre).padStart(2, '0');
+const missions = (missions_liees ?? []).join(' · ').toLowerCase();
 ---
 
 <a
   href={`/expertises/${expertise.id}`}
-  class="group block bg-light-gray rounded-lg p-6 transition-all hover:shadow-soft"
-  data-card-tilt
+  class="group block bg-cool-white p-6 transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:bg-paper"
 >
-  <h3 class="font-heading font-semibold text-marine text-lg tracking-tight group-hover:text-apple-blue transition-colors">
+  <div class="flex justify-between items-baseline gap-4">
+    <span class="mono-label font-normal text-copper tabular-nums">{numero}</span>
+    {missions && <span class="mono-label font-normal text-mist normal-case tracking-[0.1em]">{missions}</span>}
+  </div>
+  <h3 class="type-h2 text-marine text-[19px] leading-[1.1] mt-4 group-hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">
     {titre}
   </h3>
-  <p class="mt-3 text-sm text-text-secondary leading-relaxed line-clamp-3 tracking-tight">
+  <p class="mt-3 text-[15px] font-light text-slate leading-[1.55] line-clamp-3">
     {accroche}
   </p>
-  <span class="inline-block mt-4 text-sm text-link-blue tracking-tight">
-    En savoir plus <span class="chevron-arrow">›</span>
-  </span>
 </a>

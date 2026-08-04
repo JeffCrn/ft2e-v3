@@ -7,21 +7,23 @@ interface Props {
 }
 
 const {
-  titre = 'Un projet en tête ?',
-  texte = 'Parlons-en. Nous répondons sous 48 h ouvrées.',
+  titre = 'Un projet en tête ? Parlons-en.',
+  texte = 'Nous répondons sous 48 h ouvrées.',
 } = Astro.props;
 ---
 
-<section class="bg-marine-deep py-24">
-  <div class="max-w-[980px] mx-auto px-4 md:px-6 text-center">
-    <h2 class="font-heading font-semibold text-white tracking-tight" style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;" data-reveal data-parallax>
-      {titre}
-    </h2>
-    <p class="mt-4 text-mist text-lg tracking-tight max-w-xl mx-auto" data-reveal>
-      {texte}
-    </p>
-    <div class="mt-8" data-reveal>
-      <Bouton href="/contact" variante="primary">
+<section class="bg-encre border-t border-copper py-16 md:py-20">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-6 flex flex-col md:flex-row md:items-center gap-8">
+    <div class="md:flex-1" data-reveal data-parallax>
+      <h2 class="type-h2 text-cool-white text-xl" style="font-stretch: 118%;">
+        {titre}
+      </h2>
+      <p class="mono-label text-copper mt-4">
+        {texte}
+      </p>
+    </div>
+    <div data-reveal>
+      <Bouton href="/contact" variante="secondary">
         Parlons de votre projet
       </Bouton>
     </div>

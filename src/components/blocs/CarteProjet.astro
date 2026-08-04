@@ -2,49 +2,46 @@
 import type { CollectionEntry } from 'astro:content';
 import fs from 'node:fs';
 import path from 'node:path';
-import BadgeDemo from '../primitives/BadgeDemo.astro';
-import Capsule from '../primitives/Capsule.astro';
 
 interface Props {
   projet: CollectionEntry<'projets'>;
 }
 
 const { projet } = Astro.props;
-const { titre, secteur, moa, annee, demo, image_principale, image_principale_alt } = projet.data;
+const { titre, moa, lieu, annee, surface_m2, mission_ft2e, demo, image_principale, image_principale_alt } = projet.data;
 
 const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_principale));
+
+const reference = `FT2E—${annee}`;
+const meta = [lieu, surface_m2 ? `${surface_m2.toLocaleString('fr-FR')} m²` : null, moa]
+  .filter(Boolean)
+  .join(' · ');
+const missions = mission_ft2e.join(' · ').toLowerCase();
 ---
 
 <a
   href={`/references/${projet.id}`}
-  class="group block bg-light-gray rounded-lg overflow-hidden transition-all hover:shadow-soft"
-  data-card-tilt
+  class="group block border border-line bg-paper transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:border-copper"
 >
-  <div class="h-48 bg-dark-surface-1 flex items-center justify-center relative overflow-hidden">
-    {imageExiste ? (
+  <div class:list={['aspect-[3/2] relative', imageExiste ? 'duotone-photo' : 'duotone-media']}>
+    {imageExiste && (
       <img
         src={image_principale}
         alt={image_principale_alt}
-        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        class="w-full h-full object-cover"
         loading="lazy"
       />
-    ) : (
-      <p class="text-white/40 text-sm" aria-hidden="true">[Photo à venir]</p>
     )}
+    <span class="absolute left-3 bottom-2.5 mono-label font-normal text-cool-white z-10" aria-hidden="true">{reference}</span>
     {demo && (
-      <div class="absolute top-3 right-3">
-        <BadgeDemo />
-      </div>
+      <span class="absolute right-3 top-2.5 mono-label font-normal text-bright-copper z-10">[démo]</span>
     )}
   </div>
   <div class="p-4">
-    <div class="flex items-start justify-between gap-2 mb-2">
-      <Capsule variante="secteur">{secteur}</Capsule>
-      <span class="text-xs text-text-secondary">{annee}</span>
-    </div>
-    <h3 class="font-heading font-semibold text-marine text-sm leading-snug tracking-tight group-hover:text-apple-blue transition-colors">
+    <h3 class="type-h2 text-marine text-base leading-[1.15] group-hover:text-copper transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">
       {titre}
     </h3>
-    <p class="mt-1 text-xs text-text-secondary tracking-tight">{moa}</p>
+    <p class="mono-data text-slate mt-2.5">{meta}</p>
+    <p class="mono-label font-normal text-mist tracking-[0.1em] mt-2">{missions}</p>
   </div>
 </a>

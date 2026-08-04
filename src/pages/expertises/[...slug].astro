@@ -16,14 +16,16 @@ export async function getStaticPaths() {
 }
 
 const { expertise } = Astro.props;
-const { titre, accroche, livrables, typique_pour, faq } = expertise.data;
+const { titre, accroche, livrables, typique_pour, faq, ordre } = expertise.data;
 const { Content } = await render(expertise);
+
+const numero = String(ordre).padStart(2, '0');
 
 const projets = await getCollection('projets');
 const missionsExpertise = expertise.data.missions_liees ?? [];
 const projetsLies = projets
   .filter((p) => p.data.mission_ft2e.some((m) => missionsExpertise.includes(m)))
-  .slice(0, 3);
+  .slice(0, 4);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -49,111 +51,77 @@ const jsonLd = {
       { label: 'Expertises', href: '/expertises' },
       { label: titre, href: `/expertises/${expertise.id}` },
     ]}
-    eyebrow="Expertise"
+    eyebrow={`expertise ${numero} — sur 6`}
     titre={titre}
     sousTitre={accroche}
-  >
-    {typique_pour && typique_pour.length > 0 && (
-      <div slot="metadata" class="flex flex-wrap justify-center gap-2">
-        {typique_pour.map((s) => (
-          <span class="inline-flex items-center px-3 py-1 rounded-[980px] text-xs bg-white/10 text-white/80 tracking-tight">
-            {s}
-          </span>
-        ))}
-      </div>
-    )}
-  </HeroPage>
+  />
 
-  {/* ─── Contenu (markdown) ───────────────────── */}
-  <section class="bg-white py-20">
-    <div class="max-w-[720px] mx-auto px-4 md:px-6">
+  {/* ─── Contenu (markdown) + panneau technique ── */}
+  <section class="bg-cool-white py-14 md:py-16">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
       <div
-        class="text-text-secondary leading-relaxed tracking-tight space-y-6
-               [&>h2]:font-heading [&>h2]:font-semibold [&>h2]:text-marine [&>h2]:tracking-tight
-               [&>h2]:text-2xl [&>h2]:mt-12 [&>h2]:mb-4 [&>h2]:leading-snug
+        class="lg:col-span-7 text-[17px] font-light text-slate leading-[1.6] space-y-6
+               [&>h2]:type-h2 [&>h2]:text-marine [&>h2]:text-[20px] [&>h2]:filet-top
+               [&>h2]:mt-9 [&>h2]:mb-3.5
                [&>h2:first-child]:mt-0
-               [&>h3]:font-heading [&>h3]:font-semibold [&>h3]:text-marine [&>h3]:tracking-tight
-               [&>h3]:text-lg [&>h3]:mt-8 [&>h3]:mb-3
-               [&>p]:text-text-secondary [&>p]:leading-relaxed
-               [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2
+               [&>h3]:type-h2 [&>h3]:text-marine [&>h3]:text-[17px] [&>h3]:mt-8 [&>h3]:mb-3
+               [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
+               [&>ul>li]:border-l [&>ul>li]:border-copper [&>ul>li]:pl-4
                [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
-               [&_a]:text-link-blue [&_a]:hover:underline
-               [&_strong]:text-near-black [&_strong]:font-semibold"
+               [&_a]:text-marine [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-copper
+               [&_strong]:text-marine [&_strong]:font-semibold"
         data-reveal
       >
         <Content />
       </div>
+
+      <aside class="lg:col-span-5" data-reveal>
+        {livrables.length > 0 && (
+          <Fragment>
+            <h2 class="mono-label text-mist mb-3.5">livrables</h2>
+            <ul class="border border-line bg-paper list-none" role="list">
+              {livrables.map((l) => (
+                <li class="mono-data text-marine px-4 py-3 border-b border-line/60 last:border-b-0">{l}</li>
+              ))}
+            </ul>
+          </Fragment>
+        )}
+
+        {typique_pour && typique_pour.length > 0 && (
+          <Fragment>
+            <h2 class="mono-label text-mist mt-8 mb-3.5">typique pour</h2>
+            <div class="flex flex-wrap">
+              {typique_pour.map((s) => (
+                <span class="chip-blueprint -ml-px -mt-px">{s}</span>
+              ))}
+            </div>
+          </Fragment>
+        )}
+
+        {faq && faq.length > 0 && (
+          <Fragment>
+            <h2 class="mono-label text-mist mt-8 mb-3.5">questions fréquentes</h2>
+            <FAQ items={faq} />
+          </Fragment>
+        )}
+      </aside>
     </div>
   </section>
 
-  {/* ─── Livrables (cartes) ────────────────────── */}
-  {livrables.length > 0 && (
-    <section class="bg-light-gray py-20">
-      <div class="max-w-[980px] mx-auto px-4 md:px-6">
-        <h2
-          class="font-heading font-semibold text-marine text-center mb-2 tracking-tight"
-          style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;"
-          data-reveal
-        >
-          Livrables
-        </h2>
-        <p class="text-text-secondary text-center text-lg tracking-tight mb-12" data-reveal>
-          Ce que FT2E remet à la fin de la mission.
-        </p>
-        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none" data-reveal-stagger>
-          {livrables.map((l) => (
-            <li class="bg-white rounded-lg p-6 flex items-start gap-3 transition-all hover:shadow-soft">
-              <span class="text-apple-blue shrink-0 mt-0.5" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span class="text-sm text-near-black leading-relaxed tracking-tight">{l}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
-
   {/* ─── Projets représentatifs ──────────────────── */}
   {projetsLies.length > 0 && (
-    <section class="bg-white py-20">
-      <div class="max-w-[980px] mx-auto px-4 md:px-6">
-        <h2
-          class="font-heading font-semibold text-marine text-center mb-2 tracking-tight"
-          style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;"
-          data-reveal
-        >
-          Projets représentatifs
-        </h2>
-        <p class="text-text-secondary text-center mb-12" data-reveal>
-          <a href="/references" class="text-link-blue hover:underline text-sm tracking-tight">
-            Voir toutes les références <span class="chevron-arrow">›</span>
+    <section class="bg-cool-white pb-16 md:pb-20">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+        <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
+          <h2 class="type-h2 text-marine text-[20px]">Projets représentatifs</h2>
+          <a href="/references" class="mono-label font-normal text-slate hover:text-copper motion-safe:transition-colors motion-safe:duration-[400ms] motion-safe:ease-[var(--ease-blueprint)]">
+            voir toutes les références <span class="chevron-arrow">→</span>
           </a>
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-reveal-stagger>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-reveal-stagger>
           {projetsLies.map((p) => (
             <CarteProjet projet={p} />
           ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  {/* ─── FAQ ──────────────────────────────────── */}
-  {faq && faq.length > 0 && (
-    <section class="bg-light-gray py-20">
-      <div class="max-w-[720px] mx-auto px-4 md:px-6">
-        <h2
-          class="font-heading font-semibold text-marine text-center mb-12 tracking-tight"
-          style="font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.10;"
-          data-reveal
-        >
-          Questions fréquentes
-        </h2>
-        <div data-reveal>
-          <FAQ items={faq} />
         </div>
       </div>
     </section>

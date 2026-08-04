@@ -1,6 +1,10 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
+// Boutons blueprint : rectangulaires, mono uppercase, 1 px de bordure.
+// primary   → plein encre sur fond clair (hover fond cuivre)
+// secondary → plein clair sur fond encre (hover fond cuivre)
+// ghost     → filaire (hover bordure + texte cuivre) — fonds clair et sombre
 interface Props extends HTMLAttributes<'a'> {
   variante?: 'primary' | 'secondary' | 'ghost';
   href: string;
@@ -10,9 +14,9 @@ interface Props extends HTMLAttributes<'a'> {
 const { variante = 'primary', href, externe = false, class: className, ...rest } = Astro.props;
 
 const classes: Record<string, string> = {
-  primary: 'bg-apple-blue text-white hover:bg-apple-blue/90',
-  secondary: 'bg-near-black text-white hover:bg-near-black/90',
-  ghost: 'bg-transparent text-link-blue border border-link-blue hover:bg-link-blue/5',
+  primary: 'btn-blueprint-dark',
+  secondary: 'btn-blueprint-solid',
+  ghost: 'btn-blueprint text-slate hover:text-bright-copper',
 };
 
 const externeAttrs = externe
@@ -22,11 +26,7 @@ const externeAttrs = externe
 
 <a
   href={href}
-  class:list={[
-    'inline-flex items-center justify-center gap-2 px-4 py-2 rounded-[980px] font-normal text-sm tracking-tight transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue focus-visible:ring-offset-2',
-    classes[variante],
-    className,
-  ]}
+  class:list={[classes[variante], className]}
   {...externeAttrs}
   {...rest}
 >

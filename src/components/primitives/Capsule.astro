@@ -1,4 +1,5 @@
 ---
+// Capsule technique blueprint : rectangle mono 1 px, pas de rayon.
 interface Props {
   variante?: 'secteur' | 'typologie' | 'mission';
   class?: string;
@@ -7,18 +8,14 @@ interface Props {
 const { variante = 'secteur', class: className } = Astro.props;
 
 const classes: Record<string, string> = {
-  secteur: 'bg-apple-blue/10 text-apple-blue',
-  typologie: 'bg-near-black/8 text-near-black',
-  mission: 'bg-apple-blue/10 text-apple-blue',
+  secteur: 'text-marine border-copper/60',
+  typologie: 'text-slate',
+  mission: 'text-slate',
 };
 ---
 
 <span
-  class:list={[
-    'inline-flex items-center px-3 py-1 rounded-[980px] text-xs tracking-tight font-normal',
-    classes[variante],
-    className,
-  ]}
+  class:list={['chip-blueprint', classes[variante], className]}
 >
   <slot />
 </span>
