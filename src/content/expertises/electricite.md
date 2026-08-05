@@ -1,6 +1,6 @@
 ---
 titre: "Électricité CFO/CFA"
-accroche: "Courants forts, courants faibles, IRVE, gestion technique du bâtiment. Conception conforme NF C 15-100."
+accroche: "Courants forts, courants faibles, photovoltaïque, IRVE, gestion technique du bâtiment. Conception conforme NF C 15-100."
 icone: "electricite"
 ordre: 4
 livrables:
@@ -29,7 +29,7 @@ Toute étude électrique commence par le bilan de puissance : inventaire des r�
 
 ## IRVE : anticiper la mobilité électrique
 
-La loi LOM (loi d’orientation des mobilités) impose un pré-équipement en bornes de recharge pour véhicules électriques (IRVE) dans les bâtiments neufs et rénovés disposant de places de stationnement. FT2E dimensionne le pré-câblage (fourreaux, câbles, protections) et les bornes elles-mêmes en fonction du programme : résidentiel collectif, tertiaire, ERP. [DÉMO] Sur une [résidence de 48 logements à La Rochelle](/references/residence-quais-domidylle), le dimensionnement a prévu 100 % de places pré-câblées et 20 % de bornes installées dès la livraison, avec un schéma d’extension progressif compatible avec la capacité du transformateur.
+La loi LOM (loi d’orientation des mobilités) impose un pré-équipement en bornes de recharge pour véhicules électriques (IRVE) dans les bâtiments neufs et rénovés disposant de places de stationnement. FT2E dimensionne le pré-câblage (fourreaux, câbles, protections) et les bornes elles-mêmes en fonction du programme : résidentiel collectif, tertiaire, ERP. [DÉMO] Sur une [résidence de 48 logements à La Rochelle](/references/residence-quais-domidylle), le dimensionnement a prévu 100 % de places pré-câblées et 20 % de bornes installées dès la livraison, avec un schéma d’extension progressif compatible avec la capacité du transformateur. Dans la même logique d’électrification des usages, FT2E conçoit également les installations photovoltaïques associées aux bâtiments tertiaires et industriels, du dimensionnement au raccordement.
 
 ## GTB : piloter et optimiser en exploitation
 
