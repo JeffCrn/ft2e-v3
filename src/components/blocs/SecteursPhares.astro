@@ -1,18 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 
-// Liste blueprint des six secteurs, avec compteur de fiches publiées par secteur.
-const projets = await getCollection('projets');
+// Liste blueprint des six secteurs.
 const secteurs = (await getCollection('secteurs'))
   .sort((a, b) => a.data.ordre - b.data.ordre)
-  .map((s) => {
-    const nb = projets.filter((p) => p.data.secteur === s.data.titre).length;
-    return {
-      ...s,
-      numero: String(s.data.ordre).padStart(2, '0'),
-      fiches: nb === 0 ? '—' : nb === 1 ? '1 fiche' : `${nb} fiches`,
-    };
-  });
+  .map((s) => ({
+    ...s,
+    numero: String(s.data.ordre).padStart(2, '0'),
+  }));
 ---
 
 <section class="py-16 md:py-20 bg-cool-white">
@@ -23,11 +18,10 @@ const secteurs = (await getCollection('secteurs'))
     </div>
     <ul class="border-t border-line-strong" role="list" data-reveal-stagger>
       {secteurs.map((secteur) => (
-        <li class="grid grid-cols-[44px_1fr] md:grid-cols-[44px_200px_1fr_90px] gap-x-6 gap-y-1 py-4 border-b border-line items-baseline transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:border-b-copper hover:bg-paper">
+        <li class="grid grid-cols-[44px_1fr] md:grid-cols-[44px_200px_1fr] gap-x-6 gap-y-1 py-4 border-b border-line items-baseline transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:border-b-copper hover:bg-paper">
           <span class="mono-label font-normal text-copper-text tabular-nums" aria-hidden="true">{secteur.numero}</span>
           <h3 class="type-h2 text-marine text-[19px]" style="font-stretch: 118%;">{secteur.data.titre}</h3>
           <p class="col-start-2 md:col-start-3 text-[15px] font-light text-slate leading-[1.55]">{secteur.data.accroche}</p>
-          <span class="mono-data text-slate md:text-right col-start-2 md:col-start-4">{secteur.fiches}</span>
         </li>
       ))}
     </ul>
