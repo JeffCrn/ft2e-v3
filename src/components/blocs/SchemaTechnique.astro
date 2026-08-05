@@ -1,0 +1,56 @@
+---
+// Média technique annoté du hero d'accueil — planche système, section 02 :
+// placeholder duotone + schéma de flux cuivre + annotations mono cuivre clair.
+// Le trait principal se dessine après le reveal du hero (data-hero-schema),
+// puis les annotations apparaissent en séquence (transition-delay inline).
+// Illustration décorative : contenu marqué [démo], bloc aria-hidden.
+import CoinsCuivre from '../primitives/CoinsCuivre.astro';
+
+// Espaces fines insécables (U+202F) dans les nombres et unités.
+const annotations = [
+  { texte: 'CTA double flux — 4 200 m³/h', style: 'left: 16.5%; top: 8%; max-width: 44%;', delai: 1100 },
+  { texte: 'TGBT 630 kVA', style: 'left: 41%; top: 54%; max-width: 30%;', delai: 1300 },
+  { texte: 'désenfumage cage C', style: 'right: 3%; top: 70%; text-align: right; max-width: 34%;', delai: 1500 },
+];
+---
+
+<div class="relative" data-hero-schema aria-hidden="true">
+  <div class="aspect-[4/3] lg:aspect-[16/10] duotone-media">
+    <svg viewBox="0 0 800 500" preserveAspectRatio="none" class="absolute inset-0 w-full h-full z-[1]">
+      <polyline
+        points="120,65 120,170 330,170 330,290 560,290"
+        fill="none"
+        stroke="#c46a38"
+        stroke-width="1"
+        vector-effect="non-scaling-stroke"
+        data-schema-trait
+      />
+      <polyline
+        points="560,290 560,375 700,375"
+        fill="none"
+        stroke="#c46a38"
+        stroke-width="1"
+        stroke-dasharray="4 4"
+        vector-effect="non-scaling-stroke"
+        data-hero-annot
+        style="transition-delay: 950ms;"
+      />
+      <rect x="116" y="61" width="8" height="8" fill="#c46a38" data-hero-annot style="transition-delay: 1000ms;" />
+      <rect x="326" y="286" width="8" height="8" fill="#c46a38" data-hero-annot style="transition-delay: 1250ms;" />
+      <rect x="696" y="371" width="8" height="8" fill="#c46a38" data-hero-annot style="transition-delay: 1450ms;" />
+    </svg>
+    {annotations.map((a) => (
+      <span
+        class="absolute mono-label font-normal text-bright-copper z-[2]"
+        style={`${a.style} transition-delay: ${a.delai}ms;`}
+        data-hero-annot
+      >
+        {a.texte}
+      </span>
+    ))}
+    <span class="absolute left-4 bottom-3 right-4 mono-label font-normal text-cool-white z-[2] truncate">
+      schéma de principe — lots techniques [démo]
+    </span>
+  </div>
+  <CoinsCuivre />
+</div>

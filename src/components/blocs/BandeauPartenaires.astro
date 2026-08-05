@@ -14,15 +14,17 @@ const partenaires = [
 ];
 ---
 
-<section class="py-14 bg-cool-white">
-  <div class="max-w-[1200px] mx-auto px-4 md:px-6 border-t border-line pt-5">
-    <div class="flex items-center gap-3 mb-4" data-reveal>
-      <h2 class="mono-label text-slate font-medium">maîtres d’ouvrage et partenaires cités</h2>
+{/* Bande marine « cartouche sombre » (planche système : encre #16324F).
+    Contrastes : cool-white/marine 11,4:1 ; mist/marine 4,6:1 (AA texte normal). */}
+<section class="py-14 bg-marine border-t border-copper">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-3 mb-5" data-reveal>
+      <h2 class="mono-label text-mist font-medium">maîtres d’ouvrage et partenaires cités</h2>
       <BadgeDemo />
     </div>
     <div class="flex flex-wrap gap-x-6 gap-y-2" data-reveal-stagger>
       {partenaires.map((nom) => (
-        <span class="type-h2 text-slate text-base">
+        <span class="type-h2 text-cool-white text-base">
           {nom}
         </span>
       ))}

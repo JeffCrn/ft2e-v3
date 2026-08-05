@@ -8,6 +8,8 @@ import ReferencesRecentes from '../components/blocs/ReferencesRecentes.astro';
 import EquipePreview from '../components/blocs/EquipePreview.astro';
 import BandeauPartenaires from '../components/blocs/BandeauPartenaires.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
+import SchemaTechnique from '../components/blocs/SchemaTechnique.astro';
+import TraceFlux from '../components/primitives/TraceFlux.astro';
 ---
 
 <PageLayout
@@ -21,17 +23,30 @@ import CtaFinal from '../components/blocs/CtaFinal.astro';
     sousTitre="Bureau d’études pluridisciplinaire à La Rochelle. Fluides, thermique, électricité, sécurité incendie, BIM. Au service des architectes, maîtres d’ouvrage publics et promoteurs depuis 2008."
     ctaPrincipal={{ label: 'Parlons de votre projet', href: '/contact' }}
     ctaSecondaire={{ label: 'Nos références', href: '/references' }}
-  />
+  >
+    <SchemaTechnique slot="media" />
+  </Hero>
 
-  <ChiffresCles />
+  {/* Zone claire « câblée » : le tracé de flux cuivre longe la colonne de
+      contenu et se dessine au défilement (marges larges uniquement). */}
+  <div class="relative">
+    <div
+      class="hidden min-[1360px]:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] pointer-events-none"
+      aria-hidden="true"
+    >
+      <TraceFlux class="absolute top-10 bottom-10 -left-14 w-10" />
+    </div>
 
-  <CartesExpertises />
+    <ChiffresCles />
 
-  <SecteursPhares />
+    <CartesExpertises />
 
-  <ReferencesRecentes />
+    <SecteursPhares />
 
-  <EquipePreview />
+    <ReferencesRecentes />
+
+    <EquipePreview />
+  </div>
 
   <BandeauPartenaires />
 

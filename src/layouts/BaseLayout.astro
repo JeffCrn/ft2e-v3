@@ -84,12 +84,14 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
         const words = document.querySelectorAll('[data-hero-word]');
         const subtitle = document.querySelector('[data-hero-subtitle]');
         const cta = document.querySelector('[data-hero-cta]');
+        const schema = document.querySelector('[data-hero-schema]');
         if (!words.length) return;
 
         if (reduced) {
           words.forEach(w => w.classList.add('revealed'));
           subtitle?.classList.add('revealed');
           cta?.classList.add('revealed');
+          schema?.classList.add('revealed');
           return;
         }
 
@@ -97,6 +99,7 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
         words.forEach(w => w.classList.add('revealed'));
         setTimeout(() => subtitle?.classList.add('revealed'), lastDelay + 300);
         setTimeout(() => cta?.classList.add('revealed'), lastDelay + 500);
+        setTimeout(() => schema?.classList.add('revealed'), lastDelay + 650);
       }
 
       /* ─── Scroll reveal ──────────────────────────── */

@@ -17,7 +17,7 @@ const dateFormatee = new Intl.DateTimeFormat('fr-FR', {
 
 <a
   href={`/actualites/${article.id}`}
-  class="group block border border-line bg-paper transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:border-copper"
+  class="group block border border-line bg-paper transition-[border-color,transform] duration-[400ms] ease-[var(--ease-blueprint)] hover:border-copper motion-safe:hover:-translate-y-[2px]"
 >
   <div class="aspect-[3/2] duotone-media">
     <span class="absolute left-3 bottom-2.5 mono-label font-normal text-cool-white z-10" aria-hidden="true">{categories[0]?.toLowerCase()}</span>

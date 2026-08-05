@@ -50,6 +50,17 @@ Le langage visuel est celui d'un **document d'ingenierie** : cartouches, filets 
 | `chip-blueprint` | chip filtre 1 px, mono uppercase |
 | `duotone-media` | placeholder hachure encre + voile marine |
 | `duotone-photo` | photo passee en duotone (grayscale + voile multiply) |
+| `filet-trace` | variante animee de `filet-top` : le filet cuivre se dessine (scaleX) au reveal |
+
+### Dispositifs de couleur structurante (2026-08-05)
+
+La palette reste fermee a 8 valeurs (« aucune extension », planche systeme), mais trois usages prevus par la planche sont actives :
+
+- **Trace de flux** (`TraceFlux.astro`, primitives) : polyligne cuivre verticale + nœuds carres 7 px, dessinee au defilement (stroke-dashoffset pilote par le scroll). Usage : colonne de marge de l'accueil. Decoratif, `aria-hidden`, ecrans ≥ 1360 px.
+- **Schema technique annote** (`SchemaTechnique.astro`, blocs) : media duotone + polylignes cuivre + annotations mono `bright-copper`, revele en sequence apres le hero (`data-hero-schema`, `data-schema-trait`, `data-hero-annot`). Annotations marquees `[démo]`.
+- **Cartouche sombre marine** : `bg-marine border-t border-copper` en bande intermediaire (ex. bandeau partenaires). Contrastes valides : `cool-white`/marine 11,4:1 ; `mist`/marine 4,6:1 (AA texte normal) ; accents en `bright-copper` uniquement.
+- **Gros glyphes cuivre** : valeurs de cartouche en mono 32 px `text-copper` sur clair (texte large, 3,4:1 ≥ 3:1) + nœud carre `bg-copper` 7 px sur le filet haut `border-t-copper`. Jamais en dessous de 24 px.
+- **Hover lift** : cartes autoportees `hover:border-copper` + `motion-safe:hover:-translate-y-[2px]` (etat « survol » de la planche). Pas de lift sur les cellules de grilles `gap-px`.
 
 Les `h1`–`h6` recoivent par defaut (layer base) : Archivo stretch 112 %, 600, uppercase, ls −0.02em — **jamais de couleur en CSS global** (regle Tailwind v4 : les utilitaires doivent gagner).
 

@@ -20,11 +20,19 @@ const {
 } = Astro.props;
 
 const isAccueil = variante === 'accueil';
+// Média technique annoté (slot "media") : hero accueil en deux colonnes.
+const hasMedia = isAccueil && Astro.slots.has('media');
 // Le titre accepte des sauts de ligne explicites (\n) ; le stagger reste continu sur tous les mots.
 let indexMot = 0;
 const lignesMots = titre.split('\\n').map((ligne) =>
   ligne.split(' ').map((mot) => ({ mot, delai: indexMot++ * 40 })),
 );
+
+const tailleTitre = isAccueil
+  ? hasMedia
+    ? 'font-size: clamp(2.1rem, 3.6vw, 3.25rem);'
+    : 'font-size: clamp(2.25rem, 5vw, 3.75rem);'
+  : 'font-size: clamp(1.875rem, 3.5vw, 3rem);';
 ---
 
 <section
@@ -35,6 +43,8 @@ const lignesMots = titre.split('\\n').map((ligne) =>
   data-hero-dark={isAccueil ? '' : undefined}
 >
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+    <div class:list={[hasMedia && 'grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center']}>
+    <div class:list={[hasMedia && 'lg:col-span-6']}>
     {eyebrow && (
       <p class="mono-label text-copper mb-7" data-reveal>
         {eyebrow}
@@ -46,9 +56,7 @@ const lignesMots = titre.split('\\n').map((ligne) =>
         'type-display',
         isAccueil ? 'text-cool-white max-w-[22ch]' : 'text-marine max-w-[28ch]',
       ]}
-      style={isAccueil
-        ? 'font-size: clamp(2.25rem, 5vw, 3.75rem);'
-        : 'font-size: clamp(1.875rem, 3.5vw, 3rem);'}
+      style={tailleTitre}
       data-hero-title={isAccueil ? '' : undefined}
     >
       {isAccueil
@@ -96,5 +104,12 @@ const lignesMots = titre.split('\\n').map((ligne) =>
         )}
       </div>
     )}
+    </div>
+    {hasMedia && (
+      <div class="lg:col-span-6">
+        <slot name="media" />
+      </div>
+    )}
+    </div>
   </div>
 </section>

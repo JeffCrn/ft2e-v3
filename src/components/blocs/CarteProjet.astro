@@ -21,7 +21,7 @@ const missions = mission_ft2e.join(' · ').toLowerCase();
 
 <a
   href={`/references/${projet.id}`}
-  class="group block border border-line bg-paper transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:border-copper"
+  class="group block border border-line bg-paper transition-[border-color,transform] duration-[400ms] ease-[var(--ease-blueprint)] hover:border-copper motion-safe:hover:-translate-y-[2px]"
 >
   <div class:list={['aspect-[3/2] relative', imageExiste ? 'duotone-photo' : 'duotone-media']}>
     {imageExiste && (

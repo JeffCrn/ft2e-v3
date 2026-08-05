@@ -133,6 +133,84 @@
   transition: transform 100ms linear;
 }
 
+/* ─── Tracé de flux — se dessine au défilement ── */
+/* Le JS de TraceFlux.astro pilote stroke-dashoffset selon la
+   progression du scroll (planche système, section 02). */
+
+[data-trace-flux] polyline {
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+}
+.trace-noeud {
+  opacity: 0;
+  transition: opacity 400ms var(--ease-apple);
+}
+.trace-noeud.revealed {
+  opacity: 1;
+}
+
+/* ─── Schéma technique du hero ─────────────────── */
+/* Séquence : mots → sous-titre → CTA → schéma ; le trait
+   principal se trace, puis les annotations cuivre clair
+   apparaissent (transition-delay inline). */
+
+[data-hero-schema] {
+  opacity: 0;
+  transform: translateY(14px);
+}
+[data-hero-schema].revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 700ms var(--ease-apple), transform 700ms var(--ease-apple);
+}
+
+[data-schema-trait] {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+}
+[data-hero-schema].revealed [data-schema-trait] {
+  animation: trace-draw 1100ms var(--ease-apple) 250ms forwards;
+}
+@keyframes trace-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+[data-hero-annot] {
+  opacity: 0;
+  transform: translateY(6px);
+}
+[data-hero-schema].revealed [data-hero-annot] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms var(--ease-apple), transform 500ms var(--ease-apple);
+}
+
+/* ─── Filet cuivre qui se trace au reveal ──────── */
+/* Variante animée de .filet-top : la ligne se dessine de
+   gauche à droite quand le bloc entre dans le viewport. */
+
+.filet-trace {
+  position: relative;
+  padding-top: 14px;
+}
+.filet-trace::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #c46a38;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 900ms var(--ease-apple) 150ms;
+}
+.filet-trace.revealed::before,
+[data-reveal].revealed .filet-trace::before,
+[data-reveal-stagger].revealed .filet-trace::before {
+  transform: scaleX(1);
+}
+
 /* ═══════════════════════════════════════════════
    Reduced motion — instant everything
    Works WITH global.css's transition-duration override
@@ -143,13 +221,27 @@
   [data-hero-word],
   [data-hero-subtitle],
   [data-hero-cta],
+  [data-hero-schema],
+  [data-hero-annot],
   [data-reveal],
   [data-reveal-stagger] > *,
-  [data-chiffre-label] {
+  [data-chiffre-label],
+  .trace-noeud {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
     transition-delay: 0ms !important;
+  }
+
+  [data-trace-flux] polyline,
+  [data-schema-trait] {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+
+  .filet-trace::before {
+    transform: scaleX(1) !important;
+    transition: none !important;
   }
 
   [data-parallax] {
