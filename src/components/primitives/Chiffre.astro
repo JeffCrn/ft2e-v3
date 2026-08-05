@@ -2,12 +2,13 @@
 // Cellule de cartouche : label mono, valeur tabulaire, note [démo] cuivre.
 interface Props {
   valeur: number;
+  prefixe?: string;
   suffixe?: string;
   label: string;
   demo?: boolean;
 }
 
-const { valeur, suffixe = '', label, demo = false } = Astro.props;
+const { valeur, prefixe = '', suffixe = '', label, demo = false } = Astro.props;
 
 // Espace insécable avant une unité alphabétique (« 17 ans ») ; collé pour un symbole (« 150+ »).
 const suffixeAffiche = suffixe && /^[a-zA-Zà-ÿ]/.test(suffixe) ? ` ${suffixe}` : suffixe;
@@ -17,7 +18,7 @@ const suffixeAffiche = suffixe && /^[a-zA-Zà-ÿ]/.test(suffixe) ? ` ${suffixe}`
   <p class="mono-label text-slate font-normal" data-chiffre-label>{label}</p>
   {/* Gros glyphe cuivre : 32 px = texte large, copper sur clair 3,4:1 ≥ 3:1 (RGAA) */}
   <p class="font-mono text-[32px] leading-none text-copper tabular-nums mt-3" data-chiffre-nombre>
-    <span data-chiffre-valeur>0</span>{suffixeAffiche}
+    {prefixe}<span data-chiffre-valeur>0</span>{suffixeAffiche}
   </p>
   {demo && <p class="mono-label text-copper-text mt-1.5" aria-label="Donnée de démonstration">[démo]</p>}
 </div>

@@ -51,6 +51,6 @@ export const FT2E_BUSINESS = {
 export const CHIFFRES_CLES = [
   { valeur: 17, suffixe: 'ans', label: "d’expertise", demo: false },
   { valeur: 7, suffixe: '', label: 'collaborateurs', demo: false },
-  { valeur: 1686, suffixe: '', label: 'logements étudiés 2018–2023', demo: false },
-  { valeur: 98, suffixe: '', label: 'projets tertiaires 2019–2024', demo: false },
+  { valeur: 1686, prefixe: '+', suffixe: '', label: 'logements étudiés', demo: false },
+  { valeur: 98, prefixe: '+', suffixe: '', label: 'projets tertiaires', demo: false },
 ] as const;

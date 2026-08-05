@@ -10,6 +10,7 @@ import { CHIFFRES_CLES } from '../../lib/constants';
       {CHIFFRES_CLES.map((chiffre) => (
         <Chiffre
           valeur={chiffre.valeur}
+          prefixe={'prefixe' in chiffre ? chiffre.prefixe : ''}
           suffixe={chiffre.suffixe}
           label={chiffre.label}
           demo={chiffre.demo}
