@@ -13,8 +13,7 @@ const { valeur, suffixe = '', label, demo = false } = Astro.props;
 const suffixeAffiche = suffixe && /^[a-zA-Zà-ÿ]/.test(suffixe) ? ` ${suffixe}` : suffixe;
 ---
 
-<div class="relative bg-cool-white p-5" data-chiffre data-target={valeur}>
-  <span class="absolute -top-1 left-0 w-[7px] h-[7px] bg-copper" aria-hidden="true"></span>
+<div class="bg-cool-white p-5" data-chiffre data-target={valeur}>
   <p class="mono-label text-slate font-normal" data-chiffre-label>{label}</p>
   {/* Gros glyphe cuivre : 32 px = texte large, copper sur clair 3,4:1 ≥ 3:1 (RGAA) */}
   <p class="font-mono text-[32px] leading-none text-copper tabular-nums mt-3" data-chiffre-nombre>

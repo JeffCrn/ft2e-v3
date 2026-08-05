@@ -98,7 +98,7 @@ Plus de bleu d'action : le cuivre porte l'identité **et** l'interaction (hover,
 
 - Système vanilla JS/CSS (~14 KB gzip total, zéro dépendance externe).
 - Hero reveal mot par mot (40 ms stagger), scroll reveal IntersectionObserver (12 px), compteur pulse, parallax CTA, chevron animé, filtre Références animé. Easing unique `--ease-blueprint` (le tilt 3D et la nav glass de la v1 ont été supprimés).
-- Dispositifs blueprint (2026-08-05) : tracé de flux cuivre dessiné au scroll (`TraceFlux.astro`), schéma technique annoté du hero (`SchemaTechnique.astro`, séquence après le reveal), filet cuivre animé (`filet-trace`), hover lift 2 px sur les cartes. Détail : `.claude/rules/tailwind-design-tokens.md` § « Dispositifs de couleur structurante ».
+- Dispositifs blueprint (2026-08-05) : tracé de flux cuivre suivant le scroll (`TraceFlux.astro`), filet cuivre animé (`filet-trace`), hover lift 2 px sur les cartes. `SchemaTechnique.astro` retiré du hero (chantier en attente d'une solution plus impactante). Détail : `.claude/rules/tailwind-design-tokens.md` § « Dispositifs de couleur structurante ».
 - View Transitions Astro pour cross-fade entre pages.
 - Toutes les animations respectent `prefers-reduced-motion`.
 - Implémenté dans `src/styles/motion.css` + script inline dans `src/layouts/BaseLayout.astro`.

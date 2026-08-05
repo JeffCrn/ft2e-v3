@@ -73,7 +73,9 @@ const noeuds = [
           ticking = false;
           const r = el.getBoundingClientRect();
           const vh = window.innerHeight || 800;
-          const p = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh * 0.4)));
+          // La pointe du tracé suit le bas du viewport : p = fraction du
+          // tracé déjà « traversée » par le lecteur, sans inertie.
+          const p = Math.min(1, Math.max(0, (vh - r.top) / r.height));
           line.style.strokeDashoffset = String(len * (1 - p));
           noeuds.forEach((n) => {
             if (p * 100 >= Number(n.dataset.noeudAt ?? 0)) n.classList.add('revealed');
