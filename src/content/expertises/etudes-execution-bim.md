@@ -20,7 +20,7 @@ faq:
 
 ## De la conception au chantier : le maillon des études d’exécution
 
-Les études d’exécution (EXE) transforment les principes définis en phase de conception en documents directement exploitables sur le chantier. Plans de réservation, carnets de détails, nomenclatures d’équipements, schémas de raccordement : chaque pièce doit permettre à l’entreprise de poser sans ambiguïté. FT2E réalise ces études en interne sur les lots [CVC](/expertises/cvc), plomberie et [électricité](/expertises/electricite), en coordination étroite avec les entreprises titulaires des marchés — Hervé Thermique, Eustache, Brunet et les autres partenaires habituels du tissu local.
+Les études d’exécution (EXE) transforment les principes définis en phase de conception en documents directement exploitables sur le chantier. Plans de réservation, carnets de détails, nomenclatures d’équipements, schémas de raccordement : chaque pièce doit permettre à l’entreprise de poser sans ambiguïté. FT2E réalise ces études en interne sur les lots [CVC](/expertises/cvc), plomberie et [électricité](/expertises/electricite), en coordination étroite avec les entreprises titulaires des marchés — Hervé Thermique, Eustache, Brunet et les autres partenaires habituels du tissu local. Le bureau a notamment mené les études d’exécution du site Carl Zeiss Meditec à Périgny, un environnement industriel de haute technicité.
 
 ## La maquette Revit MEP au cœur du processus
 

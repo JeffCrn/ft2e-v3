@@ -24,7 +24,7 @@ Depuis le 1ᵉʳ janvier 2022, la réglementation environnementale RE2020 rempla
 
 ## Du calcul réglementaire à la simulation thermique dynamique
 
-Le calcul réglementaire vérifie la conformité aux seuils imposés par la RE2020. Il constitue la base de l’attestation Bbio exigée au dépôt de permis de construire. Pour les projets complexes — bâtiments tertiaires de grande surface, équipements sportifs, établissements de santé — FT2E complète cette approche par une simulation thermique dynamique (STD). La STD modélise le comportement du bâtiment heure par heure sur une année type : températures intérieures, apports solaires, besoins de chauffage et de rafraîchissement. Elle permet d’affiner le dimensionnement des [installations CVC](/expertises/cvc) et d’optimiser le confort d’été sans recourir systématiquement à la climatisation active.
+Le calcul réglementaire — mené sous Perrenoud, outil de référence du métier — vérifie la conformité aux seuils imposés par la RE2020. Il constitue la base de l’attestation Bbio exigée au dépôt de permis de construire. FT2E est qualifié OPQIBI pour les études thermiques, gage de fiabilité pour les maîtres d’ouvrage et les organismes certificateurs. Pour les projets complexes — bâtiments tertiaires de grande surface, équipements sportifs, établissements de santé — FT2E complète cette approche par une simulation thermique dynamique (STD). La STD modélise le comportement du bâtiment heure par heure sur une année type : températures intérieures, apports solaires, besoins de chauffage et de rafraîchissement. Elle permet d’affiner le dimensionnement des [installations CVC](/expertises/cvc) et d’optimiser le confort d’été sans recourir systématiquement à la climatisation active.
 
 ## L’analyse du cycle de vie : le carbone entre en jeu
 
@@ -36,4 +36,4 @@ L’enjeu d’une étude thermique bien conduite n’est pas de viser le seuil r
 
 ## Un accompagnement de bout en bout
 
-FT2E assure l’étude thermique de la phase esquisse jusqu’à l’attestation de fin de travaux. L’attestation Bbio accompagne le dépôt de permis de construire ; l’attestation de conformité RE2020 est remise à la livraison. Entre les deux, le suivi des choix constructifs en phase projet et la vérification des mises en œuvre en phase chantier garantissent que la performance calculée se retrouve dans le bâtiment construit.
+FT2E assure l’étude thermique de la phase esquisse jusqu’à l’attestation de fin de travaux, et intègre les référentiels des labels et certifications de l’habitat lorsque le programme les vise&nbsp;: CERQUAL, Qualitel, Habitat &amp; Environnement, BBC Effinergie. L’attestation Bbio accompagne le dépôt de permis de construire ; l’attestation de conformité RE2020 est remise à la livraison. Entre les deux, le suivi des choix constructifs en phase projet et la vérification des mises en œuvre en phase chantier garantissent que la performance calculée se retrouve dans le bâtiment construit.

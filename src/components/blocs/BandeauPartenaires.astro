@@ -1,16 +1,16 @@
 ---
-import BadgeDemo from '../primitives/BadgeDemo.astro';
-
+// Maîtres d'ouvrage et clients réels cités dans la plaquette FT2E 2024
+// (docs/20-source-plaquette-2024.md) — données vérifiées, pas de badge démo.
 const partenaires = [
-  'Domidylle',
-  'Médiatim',
-  'Édouard Denis',
-  'Pitch',
-  'Réalités',
-  'Bouygues',
-  'OPH La Rochelle',
-  'Habitat 17',
-  'Ville de Rochefort',
+  'Fountaine Pajot',
+  'Clairsienne',
+  'Compagnie Vendéenne du Logement',
+  'Dufour',
+  'Catana Group',
+  'Carl Zeiss Meditec',
+  'Altarea',
+  'Port de Plaisance de La Rochelle',
+  'Groupe hospitalier La Rochelle-Ré-Aunis',
 ];
 ---
 
@@ -19,8 +19,7 @@ const partenaires = [
 <section class="py-14 bg-marine border-t border-copper">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
     <div class="flex items-center gap-3 mb-5" data-reveal>
-      <h2 class="mono-label text-mist font-medium">maîtres d’ouvrage et partenaires cités</h2>
-      <BadgeDemo />
+      <h2 class="mono-label text-mist font-medium">ils ont confié leurs projets à FT2E</h2>
     </div>
     <div class="flex flex-wrap gap-x-6 gap-y-2" data-reveal-stagger>
       {partenaires.map((nom) => (

@@ -146,6 +146,7 @@ Plus de bleu d'action : le cuivre porte l'identité **et** l'interaction (hover,
 | Calendrier 6 phases | `docs/12-cadrage-jalons.md` |
 | Glossaire BET | `docs/13-glossaire-bet.md` |
 | **Migration vers `ft2e.fr` (revert SEO inclus)** | **`docs/19-migration-production.md`** |
+| Faits vérifiés issus de la plaquette 2024 (références réelles, chiffres, qualifications) | `docs/20-source-plaquette-2024.md` |
 
 ## Commandes disponibles
 

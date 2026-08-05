@@ -43,12 +43,14 @@ export const FT2E_BUSINESS = {
   knowsAbout: [
     'Fluides', 'Thermique', 'Électricité', 'Sécurité incendie',
     'BIM', 'RT2012', 'RE2020', 'Simulation thermique dynamique',
+    'Audit énergétique', 'Photovoltaïque', 'Coordination SSI', 'Plomberie',
   ],
 };
 
+// Chiffres vérifiés — plaquette FT2E 2024 (docs/20-source-plaquette-2024.md).
 export const CHIFFRES_CLES = [
   { valeur: 17, suffixe: 'ans', label: "d’expertise", demo: false },
   { valeur: 7, suffixe: '', label: 'collaborateurs', demo: false },
-  { valeur: 150, suffixe: '+', label: 'projets livrés', demo: true },
-  { valeur: 3200, suffixe: '+', label: 'logements conçus', demo: true },
+  { valeur: 1686, suffixe: '', label: 'logements étudiés 2018–2023', demo: false },
+  { valeur: 98, suffixe: '', label: 'projets tertiaires 2019–2024', demo: false },
 ] as const;

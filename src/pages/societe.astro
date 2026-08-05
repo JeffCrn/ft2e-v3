@@ -29,10 +29,13 @@ const proseClasses = `text-[17px] font-light text-slate leading-[1.6] space-y-6
       <div class={proseClasses} data-reveal>
         <h2>Le bureau d’études</h2>
         <p>
-          FT2E est une société d’ingénierie pluridisciplinaire créée en 2008 à La Rochelle. Le bureau couvre l’ensemble de la chaîne technique du bâtiment&nbsp;: de l’audit initial des installations aux études d’exécution pour entreprise, en passant par la simulation thermique réglementaire, la conception CVC, l’électricité courants forts et faibles, la coordination SSI et la modélisation BIM.
+          FT2E — pour ingénierie <em>Fluide, Thermique, Énergie, Électricité</em> — est une société d’ingénierie pluridisciplinaire créée en 2008 à La Rochelle. Le bureau couvre l’ensemble de la chaîne technique du bâtiment&nbsp;: de l’audit initial des installations aux études d’exécution pour entreprise, en passant par la simulation thermique réglementaire, la conception CVC et plomberie, l’électricité courants forts et faibles, la coordination SSI et la modélisation BIM. Les prestations vont des pré-études jusqu’à la réception des travaux — et au-delà, avec le suivi des installations pendant l’année de parfait achèvement.
         </p>
         <p>
-          Cette pluridisciplinarité est portée par une équipe de sept personnes qui a développé, au fil des dix-sept dernières années, une expertise dans de multiples secteurs de la construction&nbsp;: logement, tertiaire, santé, sport, industriel, patrimoine. Certains membres de l’équipe sont présents depuis la création du bureau&nbsp;; d’autres l’ont rejoint par un stage de fin d’études avant d’y être embauchés.
+          Cette pluridisciplinarité est portée par une équipe de sept personnes qui a développé, au fil des dix-sept dernières années, une expertise dans de multiples secteurs de la construction&nbsp;: logement, tertiaire, santé, sport, industriel, patrimoine. Depuis le départ en retraite d’Éric Moinet, gérant-fondateur, la direction du bureau est portée collectivement par les associés. Certains membres de l’équipe sont présents depuis la création&nbsp;; d’autres l’ont rejointe par un stage de fin d’études avant d’y être embauchés.
+        </p>
+        <p>
+          FT2E est une agence qualifiée OPQIBI, notamment pour les audits énergétiques et les études thermiques, et s’appuie sur la veille réglementaire I-Reef du CSTB pour garantir la conformité de ses études aux textes en vigueur.
         </p>
 
         <h2>La proximité comme méthode</h2>
@@ -67,6 +70,29 @@ const proseClasses = `text-[17px] font-light text-slate leading-[1.6] space-y-6
   </section>
 
   <section class="bg-cool-white py-16 md:py-20">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
+        <h2 class="type-h2 text-marine text-[22px]">La mission, en quatre temps</h2>
+        <p class="mono-label font-normal text-slate">des pré-études à l’année de parfait achèvement</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-line border border-line" data-reveal-stagger>
+        {[
+          { n: '01', titre: 'L’accompagnement', texte: "Comprendre les besoins du maître d’ouvrage : visites de sites, réunions MOE/MOA, définition du programme. La proximité avec les projets rend cette disponibilité concrète." },
+          { n: '02', titre: 'L’analyse', texte: "Faisabilité des besoins dans l’enveloppe budgétaire du projet. C’est ici que se jouent les choix techniques et leurs incidences financières — jusqu’aux études de faisabilité d’approvisionnement en énergie (FAE)." },
+          { n: '03', titre: 'La conception', texte: "Études techniques conformes aux normes en vigueur, appuyées sur la veille réglementaire I-Reef et la qualification OPQIBI. Un lien étroit avec les fournisseurs maintient l’accès aux solutions nouvelles." },
+          { n: '04', titre: 'Le suivi', texte: "Exécution conforme au cahier des charges et au planning : opérations préalables à la réception, levées de réserves, puis suivi des dysfonctionnements pendant l’année de parfait achèvement (GPA)." },
+        ].map((temps) => (
+          <div class="p-6 bg-cool-white transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:bg-paper">
+            <span class="mono-label font-normal text-copper-text tabular-nums" aria-hidden="true">{temps.n}</span>
+            <h3 class="type-h2 text-marine text-[19px] mt-3">{temps.titre}</h3>
+            <p class="mt-3 text-[15px] font-light text-slate leading-[1.55]">{temps.texte}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cool-white py-16 md:py-20">
     <div class="max-w-[840px] mx-auto px-4 md:px-6">
       <div class={proseClasses} data-reveal>
         <h2>Approche et méthodologie</h2>
@@ -74,12 +100,15 @@ const proseClasses = `text-[17px] font-light text-slate leading-[1.6] space-y-6
           FT2E intervient à toutes les phases d’un projet de bâtiment. En amont, l’audit énergétique ou le diagnostic technique pose le cadre. En phase de conception, les ingénieurs dimensionnent les installations et rédigent les cahiers des charges. En phase DCE, ils produisent les pièces écrites des lots fluides, thermique, électricité et SSI. En phase chantier, ils assurent le visa des plans d’exécution, la coordination avec les entreprises titulaires et la réception des installations.
         </p>
         <p>
-          Cette continuité entre la conception et la réalisation est ce qui distingue FT2E d’un bureau d’études intervenant uniquement en amont. Elle garantit que les choix techniques faits en conception sont effectivement réalisables — et réalisés — sur le chantier.
+          Cette continuité entre la conception et la réalisation est ce qui distingue FT2E d’un bureau d’études intervenant uniquement en amont. Elle garantit que les choix techniques faits en conception sont effectivement réalisables — et réalisés — sur le chantier. L’ambition est constante&nbsp;: être un partenaire des projets, pas un simple prestataire d’études.
+        </p>
+        <p>
+          À côté des missions complètes de maîtrise d’œuvre, FT2E assure des interventions monotechniques&nbsp;: une seule spécialité technique, dont le bureau prend en charge l’ensemble des études et le suivi de réalisation. Remplacement d’une chaufferie, diagnostic légionnelle, dévoiement d’un réseau gaz, installation de vidéosurveillance — des missions courtes, cadrées, menées avec la même rigueur que les grandes opérations.
         </p>
 
         <h2>Engagements énergétiques et environnementaux</h2>
         <p>
-          Les études thermiques et énergétiques sont au cœur du savoir-faire historique du bureau. FT2E conçoit ses installations dans le cadre des réglementations en vigueur (RT2012, RE2020) et accompagne ses clients dans l’obtention des labels associés. L’intégration des énergies renouvelables — pompes à chaleur aérothermiques et géothermiques, panneaux solaires, récupération de chaleur — fait partie de l’approche standard de dimensionnement.
+          Les études thermiques et énergétiques sont au cœur du savoir-faire historique du bureau. FT2E conçoit ses installations dans le cadre des réglementations en vigueur (RT2012, RE2020) et accompagne ses clients dans l’obtention des labels et certifications de l’habitat et du tertiaire&nbsp;: CERQUAL, Qualitel, Habitat &amp; Environnement, BBC, Effinergie, HQE. L’intégration des énergies renouvelables — pompes à chaleur aérothermiques et géothermiques, photovoltaïque, récupération de chaleur — fait partie de l’approche standard de dimensionnement.
         </p>
       </div>
 

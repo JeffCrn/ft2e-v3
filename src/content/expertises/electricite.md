@@ -21,11 +21,11 @@ faq:
 
 ## Courants forts, courants faibles : deux disciplines, une coordination
 
-L’électricité d’un bâtiment se structure en deux familles complémentaires. Les courants forts (CFO) couvrent l’alimentation générale, la distribution, l’éclairage et les prises de courant. Les courants faibles (CFA) regroupent les réseaux de communication, le contrôle d’accès, la vidéosurveillance, la sonorisation et la détection incendie. FT2E conçoit les deux lots de manière intégrée, en garantissant la conformité à la norme NF C 15-100 et la cohérence des chemins de câbles, des locaux techniques et des tableaux de distribution.
+L’électricité d’un bâtiment se structure en deux familles complémentaires. Les courants forts (CFO) couvrent l’alimentation générale, la distribution, l’éclairage et les prises de courant. Les courants faibles (CFA) regroupent les réseaux de communication, le contrôle d’accès, la vidéosurveillance, la sonorisation et la détection incendie — FT2E a notamment conçu l’installation de vidéosurveillance du centre hospitalier Marius Lacroix à La Rochelle, pour le Groupe hospitalier La Rochelle-Ré-Aunis. FT2E conçoit les deux lots de manière intégrée, en garantissant la conformité à la norme NF C 15-100 et la cohérence des chemins de câbles, des locaux techniques et des tableaux de distribution.
 
 ## Du bilan de puissance au schéma unifilaire
 
-Toute étude électrique commence par le bilan de puissance : inventaire des récepteurs, simultanéité d’usage, puissance souscrite. Ce bilan conditionne le dimensionnement du poste de transformation, du TGBT et des tableaux divisionnaires. FT2E produit les schémas unifilaires, les plans de distribution et les spécifications détaillées au CCTP. Chaque choix — calibre de protection, section de câble, type de chemin de câbles — est tracé et justifié. Le dossier est conçu pour être directement exploitable par les entreprises en phase d’appel d’offres.
+Toute étude électrique commence par le bilan de puissance : inventaire des récepteurs, simultanéité d’usage, puissance souscrite. Ce bilan conditionne le dimensionnement du poste de transformation, du TGBT et des tableaux divisionnaires. FT2E établit également les pré-dossiers de raccordement ENEDIS et, sur les sites industriels, dimensionne la distribution HTA/BT et les installations de protection contre la foudre à partir de l’analyse du risque foudre (ARF). FT2E produit les schémas unifilaires, les plans de distribution et les spécifications détaillées au CCTP. Chaque choix — calibre de protection, section de câble, type de chemin de câbles — est tracé et justifié. Le dossier est conçu pour être directement exploitable par les entreprises en phase d’appel d’offres.
 
 ## IRVE : anticiper la mobilité électrique
 

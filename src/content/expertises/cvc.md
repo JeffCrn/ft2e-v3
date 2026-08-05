@@ -29,7 +29,7 @@ Les installations CVC ne se conçoivent pas par équipement isolé. La productio
 
 ## Des compétences adaptées à chaque programme
 
-Le dimensionnement CVC d’un gymnase avec piscine n’a rien de commun avec celui d’un immeuble de logements collectifs. Le premier exige un traitement d’air capable de gérer l’hygrométrie et la condensation ; le second privilégie la sobriété de la production et l’équilibrage des réseaux. FT2E intervient sur l’ensemble des typologies — logement, tertiaire, santé, sport, industrie — avec une expérience acquise sur [DÉMO] plus de 150 opérations depuis 2008. Sur les programmes industriels, le périmètre s’étend aux fluides spéciaux&nbsp;: réseaux d’air comprimé et protection incendie par RIA (robinets d’incendie armés). Cette diversité nourrit une capacité d’adaptation que les programmes complexes rendent indispensable.
+Le dimensionnement CVC d’un gymnase avec piscine n’a rien de commun avec celui d’un immeuble de logements collectifs. Le premier exige un traitement d’air capable de gérer l’hygrométrie et la condensation ; le second privilégie la sobriété de la production et l’équilibrage des réseaux. FT2E intervient sur l’ensemble des typologies — logement, tertiaire, santé, sport, industrie — avec une expérience acquise sur [DÉMO] plus de 150 opérations depuis 2008. Sur les programmes industriels, le périmètre s’étend aux fluides spéciaux&nbsp;: réseaux d’air comprimé, réseaux gaz et protection incendie par RIA (robinets d’incendie armés). En logement, le dimensionnement des réseaux de VMC est conduit sous Optima 3D, du calcul des débits réglementaires au tracé des collecteurs. Cette diversité nourrit une capacité d’adaptation que les programmes complexes rendent indispensable.
 
 ## La continuité conception-chantier
 
