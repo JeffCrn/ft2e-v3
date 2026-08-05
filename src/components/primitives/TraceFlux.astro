@@ -4,6 +4,12 @@
 // au fil du défilement, avec des nœuds carrés 7 px révélés au passage.
 // Purement décoratif (aria-hidden). À placer dans un parent `relative`
 // dimensionné ; la hauteur du tracé suit celle du parent.
+//
+// La géométrie est régénérée en pixels réels par le script (viewBox = hauteur
+// mesurée, points recalculés) : dasharray, dashoffset et getTotalLength
+// travaillent ainsi dans la même unité — pas d'étirement SVG, pas de
+// vector-effect (qui ferait calculer les tirets en pixels écran et
+// fragmenterait le tracé en tronçons).
 interface Props {
   class?: string;
 }
@@ -13,9 +19,9 @@ const { class: className } = Astro.props;
 // Nœuds de connexion posés sur les coudes de la polyligne
 // (top en % de la hauteur, left en px dans la colonne de 40 px).
 const noeuds = [
-  { top: 17, left: 20 },
-  { top: 43, left: 32 },
-  { top: 70, left: 20 },
+  { top: 16.8, left: 20 },
+  { top: 42.8, left: 32 },
+  { top: 69.8, left: 20 },
 ];
 ---
 
@@ -26,7 +32,6 @@ const noeuds = [
       fill="none"
       stroke="#c46a38"
       stroke-width="1"
-      vector-effect="non-scaling-stroke"
     />
   </svg>
   {noeuds.map((n) => (
@@ -39,19 +44,44 @@ const noeuds = [
 </div>
 
 <script>
+  // Gabarit du tracé : x en px (colonne de 40), y en fraction de la hauteur.
+  const GABARIT: Array<[number, number]> = [
+    [20, 0],
+    [20, 0.168],
+    [32, 0.172],
+    [32, 0.428],
+    [20, 0.432],
+    [20, 0.698],
+    [32, 0.702],
+    [32, 1],
+  ];
+
   function initTraceFlux() {
     document.querySelectorAll<HTMLElement>('[data-trace-flux]').forEach((el) => {
       if (el.dataset.bound) return;
       el.dataset.bound = '1';
 
+      const svg = el.querySelector('svg');
       const line = el.querySelector('polyline');
-      if (!line) return;
+      if (!svg || !line) return;
       const noeuds = el.querySelectorAll<HTMLElement>('.trace-noeud');
 
-      // stroke-dasharray/offset opèrent en unités viewBox : getTotalLength
-      // reste valide malgré l'étirement preserveAspectRatio="none".
-      const len = line.getTotalLength();
-      line.style.strokeDasharray = String(len);
+      let len = 0;
+
+      // Régénère la géométrie en pixels réels (unité unique pour
+      // dasharray/dashoffset/getTotalLength).
+      const layout = () => {
+        const h = Math.max(el.clientHeight, 1);
+        svg.setAttribute('viewBox', `0 0 40 ${h}`);
+        line.setAttribute(
+          'points',
+          GABARIT.map(([x, f]) => `${x},${Math.round(f * h)}`).join(' '),
+        );
+        len = line.getTotalLength();
+        line.style.strokeDasharray = String(len);
+      };
+
+      layout();
 
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
         line.style.strokeDashoffset = '0';
@@ -62,6 +92,18 @@ const noeuds = [
       line.style.strokeDashoffset = String(len);
 
       let ticking = false;
+      const applique = () => {
+        const r = el.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        // La pointe du tracé suit le bas du viewport : fraction du tracé
+        // déjà « traversée » par le lecteur, sans inertie.
+        const p = Math.min(1, Math.max(0, (vh - r.top) / r.height));
+        line.style.strokeDashoffset = String(len * (1 - p));
+        noeuds.forEach((n) => {
+          if (p * 100 >= Number(n.dataset.noeudAt ?? 0)) n.classList.add('revealed');
+        });
+      };
+
       const onScroll = () => {
         if (!el.isConnected) {
           window.removeEventListener('scroll', onScroll);
@@ -71,20 +113,26 @@ const noeuds = [
         ticking = true;
         requestAnimationFrame(() => {
           ticking = false;
-          const r = el.getBoundingClientRect();
-          const vh = window.innerHeight || 800;
-          // La pointe du tracé suit le bas du viewport : p = fraction du
-          // tracé déjà « traversée » par le lecteur, sans inertie.
-          const p = Math.min(1, Math.max(0, (vh - r.top) / r.height));
-          line.style.strokeDashoffset = String(len * (1 - p));
-          noeuds.forEach((n) => {
-            if (p * 100 >= Number(n.dataset.noeudAt ?? 0)) n.classList.add('revealed');
-          });
+          applique();
         });
       };
 
+      // La hauteur de la zone change au chargement des images/polices :
+      // on recale la géométrie dès que l'élément est redimensionné.
+      if ('ResizeObserver' in window) {
+        const ro = new ResizeObserver(() => {
+          if (!el.isConnected) {
+            ro.disconnect();
+            return;
+          }
+          layout();
+          applique();
+        });
+        ro.observe(el);
+      }
+
       window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      applique();
     });
   }
 

@@ -137,9 +137,12 @@
 /* Le JS de TraceFlux.astro pilote stroke-dashoffset selon la
    progression du scroll (planche système, section 02). */
 
+/* Valeur volontairement très grande : masque toute la polyligne avant que
+   le JS recalcule la géométrie en pixels réels (un motif trop court se
+   répéterait en tronçons tiret/trou sur les tracés hauts). */
 [data-trace-flux] polyline {
-  stroke-dasharray: 2400;
-  stroke-dashoffset: 2400;
+  stroke-dasharray: 100000;
+  stroke-dashoffset: 100000;
 }
 .trace-noeud {
   opacity: 0;
