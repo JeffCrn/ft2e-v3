@@ -64,7 +64,7 @@ Logements individuels et collectifs (accession + social) · bâtiments tertiaire
 | Extension Fountaine Pajot | Aigrefeuille-d'Aunis | 2024 | Fountaine Pajot / S. Pellereau |
 | NDC Foundry | Rochefort | 2024 | — / SD Architectes |
 | AP Yacht — Catana Group | Marans | 2023 | — / Cabinet Simoneau |
-| Voltareo | Aérodrome de Saint-Agnant | 2024 | — / SD Architectes |
+| VoltAero (graphie plaquette « VOLTAREO » erronée — CV : VOLTAERO) | Aérodrome de Saint-Agnant | études 2022 (CV) / photo plaquette 2024 | — / SD Architectes |
 | Rénovation et extension de la mairie | Angoulins | 2021 | Commune / BTB |
 | Bâtiment Altarea | La Rochelle | 2021 | — / S.MART |
 | Les Cabanes Urbaines (+ essai de foyer SSI) | La Rochelle | 2022 | — / Alterlab |
@@ -83,4 +83,34 @@ Logements individuels et collectifs (accession + social) · bâtiments tertiaire
 
 ## Clients industriels cités
 
-Dufour · Airbus · Sooruz · Elixir · Innovia · Fountaine Pajot · Catana Group · NDC Foundry · Voltareo · Carl Zeiss Meditec.
+Dufour · Airbus · Sooruz · Elixir · Innovia · Fountaine Pajot · Catana Group · NDC Foundry · VoltAero · Carl Zeiss Meditec.
+
+## Croisement avec les CV de l'équipe (livrables/cv-ft2e, édition août 2026)
+
+Audit de cohérence réalisé le 2026-08-05 : les CV confirment la plaquette sur Fountaine Pajot (2024, CFO/CFA/SSI), AP Yacht (2023), les Cabanes Urbaines (2022, coordination SSI), le SSI (> 20 ans de pratique — formation coordinateur SSI en 2003) et les outils (Perrenoud, BAO Évolution, Optima Sydev, Revit, AutoCAD LT, Finalcad, Dialux Evo, Caneco, Elium).
+
+**Corrections apportées par les CV** :
+
+- **VoltAero** (et non « Voltareo », coquille de la plaquette) — études FT2E datées 2022 dans les CV (RT2012 Cep −40 %), photo plaquette datée 2024. Sur le site : nom corrigé, année omise.
+- La Flotte-en-Ré : la plaquette cite le remplacement de chaufferie fioul par PAC de l'**école maternelle** ; le CV de Géraldine cite un audit énergétique format ADEME de l'**école primaire** (2024). Deux missions distinctes a priori — à clarifier avec FT2E avant d'en faire une fiche.
+- **Co-gérance** : Mathieu et Géraldine sont co-gérants de FT2E depuis le 1ᵉʳ janvier 2026 (encadré des CV) — cohérent avec la grille de rôles de la page Équipe.
+
+**Références supplémentaires apportées par les CV** (matière à fiches projet) :
+
+| Projet | Lieu | Année | Mission (CV) |
+|---|---|---|---|
+| AURORA — 150 logements | La Rochelle | 2019–2021 | RT2012 −20 % (Géraldine) · CVC/plomberie (Mathieu) · électricité (Tanguy) |
+| Caravelle — réhabilitation d'un hôtel en logements | Rochefort | 2025 | Chauffage / VMC / plomberie |
+| Dufour Yachts — bâtiment industriel | La Rochelle / Périgny | 2023–2024 | CVC · air comprimé / RIA · CFO/CFA/SSI |
+| NEREA — 48 logements sociaux (= Clairsienne Aytré) | Aytré | 2023 | RT2012 −20 %, label NF Habitat |
+| 20 logements | Saint-Rogatien | 2023 | RE2020, label NF Habitat HQE, conception CVC/plomberie |
+| 10 logements sociaux | Le Bois-Plage-en-Ré | 2024 | RE2020 −10 %, conception CVC/plomberie |
+| Résidence intergénérationnelle | Saint-Agnant | 2023 | RE2020 −10 %, ventilation/plomberie |
+| Chambre des métiers et de l'artisanat | La Rochelle | 2023 | Audit énergétique décret tertiaire |
+| École primaire (audit ADEME) | La Flotte-en-Ré | 2024 | Audit énergétique format ADEME |
+| Undertech — bureaux | La Rochelle | 2023 | CFO/CFA + photovoltaïque |
+| Bureaux Enersteel | La Rochelle | 2025 | CVC / air comprimé / RIA |
+| Hangar 17 — 34 logements | La Rochelle | 2023 | VMC / plomberie |
+| Auberge Central Hostel | La Rochelle | 2022 | CFO/CFA |
+| Salle polyvalente (restructuration) | Saint-Trojan-les-Bains | 2021 | CFO/CFA + coordination SSI |
+| La Poste | Saint-Martin-de-Ré | 2017 | Électricité |
