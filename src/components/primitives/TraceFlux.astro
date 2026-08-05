@@ -91,30 +91,39 @@ const noeuds = [
 
       line.style.strokeDashoffset = String(len);
 
-      let ticking = false;
-      const applique = () => {
+      // Cible : fraction du tracé « traversée » par le bas du viewport.
+      // Courant : position réelle de la pointe, qui rattrape la cible par
+      // lissage exponentiel — c'est ce retard contrôlé qui rend le tracé
+      // visible (sans lui, le trait est figé au bord du viewport).
+      let cible = 0;
+      let courant = 0;
+      let raf = 0;
+
+      const mesure = () => {
         const r = el.getBoundingClientRect();
         const vh = window.innerHeight || 800;
-        // La pointe du tracé suit le bas du viewport : fraction du tracé
-        // déjà « traversée » par le lecteur, sans inertie.
-        const p = Math.min(1, Math.max(0, (vh - r.top) / r.height));
-        line.style.strokeDashoffset = String(len * (1 - p));
+        cible = Math.min(1, Math.max(0, (vh - r.top) / r.height));
+      };
+
+      const rend = () => {
+        raf = 0;
+        courant += (cible - courant) * 0.07;
+        if (Math.abs(cible - courant) < 0.001) courant = cible;
+        line.style.strokeDashoffset = String(len * (1 - courant));
         noeuds.forEach((n) => {
-          if (p * 100 >= Number(n.dataset.noeudAt ?? 0)) n.classList.add('revealed');
+          if (courant * 100 >= Number(n.dataset.noeudAt ?? 0)) n.classList.add('revealed');
         });
+        if (courant !== cible) raf = requestAnimationFrame(rend);
       };
 
       const onScroll = () => {
         if (!el.isConnected) {
           window.removeEventListener('scroll', onScroll);
+          if (raf) cancelAnimationFrame(raf);
           return;
         }
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          ticking = false;
-          applique();
-        });
+        mesure();
+        if (!raf) raf = requestAnimationFrame(rend);
       };
 
       // La hauteur de la zone change au chargement des images/polices :
@@ -126,13 +135,15 @@ const noeuds = [
             return;
           }
           layout();
-          applique();
+          mesure();
+          if (!raf) raf = requestAnimationFrame(rend);
         });
         ro.observe(el);
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
-      applique();
+      mesure();
+      raf = requestAnimationFrame(rend);
     });
   }
 

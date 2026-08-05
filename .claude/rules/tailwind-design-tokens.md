@@ -56,7 +56,7 @@ Le langage visuel est celui d'un **document d'ingenierie** : cartouches, filets 
 
 La palette reste fermee a 8 valeurs (« aucune extension », planche systeme), mais trois usages prevus par la planche sont actives :
 
-- **Trace de flux** (`TraceFlux.astro`, primitives) : polyligne cuivre verticale + nœuds carres 7 px, dessinee au defilement — la pointe du trait suit le bas du viewport, sans inertie (arbitrage 2026-08-05). Usage : colonne de marge de l'accueil. Decoratif, `aria-hidden`, ecrans ≥ 1360 px.
+- **Trace de flux** (`TraceFlux.astro`, primitives) : polyligne cuivre verticale + nœuds carres 7 px, dessinee au defilement — la pointe vise le bas du viewport et le rattrape par lissage exponentiel (~0,7 s), ce retard controle rendant le trace visible (arbitrage 2026-08-05). Usage : colonne de marge de l'accueil. Decoratif, `aria-hidden`, ecrans ≥ 1360 px.
 - **Schema technique annote** (`SchemaTechnique.astro`, blocs) : media duotone + polylignes cuivre + annotations mono `bright-copper` sequencees. **Retire du hero le 2026-08-05** (implantation jugee trop standardisee) — composant conserve en reserve, chantier de reprise en attente d'une solution plus impactante.
 - **Cartouche sombre marine** : `bg-marine border-t border-copper` en bande intermediaire (ex. bandeau partenaires). Contrastes valides : `cool-white`/marine 11,4:1 ; `mist`/marine 4,6:1 (AA texte normal) ; accents en `bright-copper` uniquement.
 - **Gros glyphes cuivre** : valeurs de cartouche en mono 32 px `text-copper` sur clair (texte large, 3,4:1 ≥ 3:1). Jamais en dessous de 24 px. Le cartouche garde son encadrement gris `border-line-strong` — pas de filet cuivre ni de nœuds sur ses lignes (arbitrage 2026-08-05).
