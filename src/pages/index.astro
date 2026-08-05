@@ -34,15 +34,17 @@ import TraceFlux from '../components/primitives/TraceFlux.astro';
       <TraceFlux class="absolute top-10 bottom-10 -left-14 w-10" />
     </div>
 
-    <ChiffresCles />
+    {/* Chaque grande section est un jalon : les nœuds du tracé se posent
+        exactement sur les frontières entre jalons consécutifs. */}
+    <div data-trace-jalon><ChiffresCles /></div>
 
-    <CartesExpertises />
+    <div data-trace-jalon><CartesExpertises /></div>
 
-    <SecteursPhares />
+    <div data-trace-jalon><SecteursPhares /></div>
 
-    <ReferencesRecentes />
+    <div data-trace-jalon><ReferencesRecentes /></div>
 
-    <EquipePreview />
+    <div data-trace-jalon><EquipePreview /></div>
   </div>
 
   <BandeauPartenaires />

@@ -1,60 +1,43 @@
 ---
 // Tracé de flux cuivre — signature motion de la planche système (section 02) :
-// une polyligne verticale qui « câble » les sections entre elles et se dessine
-// au fil du défilement, avec des nœuds carrés 7 px révélés au passage.
-// Purement décoratif (aria-hidden). À placer dans un parent `relative`
-// dimensionné ; la hauteur du tracé suit celle du parent.
+// une polyligne verticale qui « câble » les grandes sections entre elles et se
+// dessine au fil du défilement, avec un effet de rattrapage (~0,7 s).
 //
-// La géométrie est régénérée en pixels réels par le script (viewBox = hauteur
-// mesurée, points recalculés) : dasharray, dashoffset et getTotalLength
-// travaillent ainsi dans la même unité — pas d'étirement SVG, pas de
-// vector-effect (qui ferait calculer les tirets en pixels écran et
-// fragmenterait le tracé en tronçons).
+// Les nœuds carrés 7 px sont posés EXACTEMENT sur les frontières entre les
+// sections marquées `data-trace-jalon` (mesurées dans le DOM au chargement),
+// et la polyligne fait son coude sur chaque nœud. ResizeObserver recale la
+// géométrie quand la hauteur de la zone change (images, polices, responsive).
+//
+// Géométrie générée en pixels réels (viewBox = hauteur mesurée) : dasharray,
+// dashoffset et getTotalLength partagent la même unité — pas d'étirement SVG,
+// pas de vector-effect (qui fragmenterait le tracé en tronçons).
+//
+// Purement décoratif (aria-hidden). À placer dans un parent `relative`
+// dimensionné qui contient (ou côtoie) les sections jalons.
 interface Props {
   class?: string;
+  /** Sélecteur des sections dont les frontières portent les nœuds. */
+  jalons?: string;
 }
 
-const { class: className } = Astro.props;
-
-// Nœuds de connexion posés sur les coudes de la polyligne
-// (top en % de la hauteur, left en px dans la colonne de 40 px).
-const noeuds = [
-  { top: 16.8, left: 20 },
-  { top: 42.8, left: 32 },
-  { top: 69.8, left: 20 },
-];
+const { class: className, jalons = '[data-trace-jalon]' } = Astro.props;
 ---
 
-<div class:list={['pointer-events-none', className]} data-trace-flux aria-hidden="true">
+<div
+  class:list={['pointer-events-none', className]}
+  data-trace-flux
+  data-trace-jalons={jalons}
+  aria-hidden="true"
+>
   <svg viewBox="0 0 40 1000" preserveAspectRatio="none" class="block w-full h-full">
-    <polyline
-      points="20,0 20,168 32,172 32,428 20,432 20,698 32,702 32,1000"
-      fill="none"
-      stroke="#c46a38"
-      stroke-width="1"
-    />
+    <polyline points="20,0 20,1000" fill="none" stroke="#c46a38" stroke-width="1" />
   </svg>
-  {noeuds.map((n) => (
-    <span
-      class="trace-noeud absolute w-[7px] h-[7px] bg-copper"
-      style={`top: ${n.top}%; left: ${n.left}px; transform: translate(-50%, -50%);`}
-      data-noeud-at={n.top}
-    ></span>
-  ))}
 </div>
 
 <script>
-  // Gabarit du tracé : x en px (colonne de 40), y en fraction de la hauteur.
-  const GABARIT: Array<[number, number]> = [
-    [20, 0],
-    [20, 0.168],
-    [32, 0.172],
-    [32, 0.428],
-    [20, 0.432],
-    [20, 0.698],
-    [32, 0.702],
-    [32, 1],
-  ];
+  const X_GAUCHE = 20;
+  const X_DROITE = 32;
+  const DEMI_COUDE = 8; // le coude s'étend sur ±8 px autour du nœud
 
   function initTraceFlux() {
     document.querySelectorAll<HTMLElement>('[data-trace-flux]').forEach((el) => {
@@ -64,19 +47,57 @@ const noeuds = [
       const svg = el.querySelector('svg');
       const line = el.querySelector('polyline');
       if (!svg || !line) return;
-      const noeuds = el.querySelectorAll<HTMLElement>('.trace-noeud');
 
       let len = 0;
+      let noeudEls: HTMLElement[] = [];
 
-      // Régénère la géométrie en pixels réels (unité unique pour
-      // dasharray/dashoffset/getTotalLength).
+      // Frontières entre sections jalons consécutives, en px depuis le haut
+      // du tracé (milieu entre le bas de l'une et le haut de la suivante).
+      const frontieres = (h: number) => {
+        const sel = el.dataset.traceJalons;
+        if (!sel) return [];
+        const sections = Array.from(document.querySelectorAll(sel));
+        const elTop = el.getBoundingClientRect().top;
+        const ys: number[] = [];
+        for (let i = 0; i < sections.length - 1; i++) {
+          const a = sections[i].getBoundingClientRect();
+          const b = sections[i + 1].getBoundingClientRect();
+          const y = (a.bottom + b.top) / 2 - elTop;
+          if (y > DEMI_COUDE + 4 && y < h - DEMI_COUDE - 4) ys.push(Math.round(y));
+        }
+        return ys;
+      };
+
+      // Régénère polyligne + nœuds en pixels réels : un coude par frontière,
+      // le nœud centré sur l'amorce du coude (planche système).
       const layout = () => {
         const h = Math.max(el.clientHeight, 1);
         svg.setAttribute('viewBox', `0 0 40 ${h}`);
-        line.setAttribute(
-          'points',
-          GABARIT.map(([x, f]) => `${x},${Math.round(f * h)}`).join(' '),
-        );
+
+        const ys = frontieres(h);
+        let x = X_GAUCHE;
+        const pts: string[] = [`${x},0`];
+        const noeuds: Array<{ x: number; y: number }> = [];
+
+        ys.forEach((y) => {
+          pts.push(`${x},${y - DEMI_COUDE}`);
+          noeuds.push({ x, y: y - DEMI_COUDE });
+          x = x === X_GAUCHE ? X_DROITE : X_GAUCHE;
+          pts.push(`${x},${y + DEMI_COUDE}`);
+        });
+        pts.push(`${x},${h}`);
+        line.setAttribute('points', pts.join(' '));
+
+        noeudEls.forEach((n) => n.remove());
+        noeudEls = noeuds.map(({ x: nx, y: ny }) => {
+          const s = document.createElement('span');
+          s.className = 'trace-noeud absolute w-[7px] h-[7px] bg-copper';
+          s.style.cssText = `top:${ny}px;left:${nx}px;transform:translate(-50%,-50%);`;
+          s.dataset.noeudAt = String((ny / h) * 100);
+          el.appendChild(s);
+          return s;
+        });
+
         len = line.getTotalLength();
         line.style.strokeDasharray = String(len);
       };
@@ -85,7 +106,7 @@ const noeuds = [
 
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
         line.style.strokeDashoffset = '0';
-        noeuds.forEach((n) => n.classList.add('revealed'));
+        noeudEls.forEach((n) => n.classList.add('revealed'));
         return;
       }
 
@@ -93,8 +114,7 @@ const noeuds = [
 
       // Cible : fraction du tracé « traversée » par le bas du viewport.
       // Courant : position réelle de la pointe, qui rattrape la cible par
-      // lissage exponentiel — c'est ce retard contrôlé qui rend le tracé
-      // visible (sans lui, le trait est figé au bord du viewport).
+      // lissage exponentiel — ce retard contrôlé rend le tracé visible.
       let cible = 0;
       let courant = 0;
       let raf = 0;
@@ -110,7 +130,7 @@ const noeuds = [
         courant += (cible - courant) * 0.07;
         if (Math.abs(cible - courant) < 0.001) courant = cible;
         line.style.strokeDashoffset = String(len * (1 - courant));
-        noeuds.forEach((n) => {
+        noeudEls.forEach((n) => {
           if (courant * 100 >= Number(n.dataset.noeudAt ?? 0)) n.classList.add('revealed');
         });
         if (courant !== cible) raf = requestAnimationFrame(rend);
@@ -126,8 +146,6 @@ const noeuds = [
         if (!raf) raf = requestAnimationFrame(rend);
       };
 
-      // La hauteur de la zone change au chargement des images/polices :
-      // on recale la géométrie dès que l'élément est redimensionné.
       if ('ResizeObserver' in window) {
         const ro = new ResizeObserver(() => {
           if (!el.isConnected) {
