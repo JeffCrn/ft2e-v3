@@ -20,5 +20,8 @@
     "astro": "^6.3.8",
     "tailwindcss": "^4.1.0",
     "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "docx": "^9.7.1"
   }
 }
