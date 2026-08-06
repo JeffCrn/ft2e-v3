@@ -2,31 +2,39 @@
 @import "@fontsource-variable/archivo/wdth.css";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
 @import "./motion.css";
 
 @theme {
-  /* ══ Palette « ingénierie de l'invisible » — charte v2 (août 2026) ══
-     Une teinte unique (197°), cinq valeurs teintées, deux neutres.
-     Aucune couleur d'accent : la hiérarchie passe par la valeur,
-     l'épaisseur de trait et la largeur de caractère. */
+  /* ══ Palette « ingénierie de l'invisible » — charte v3 (révision 2, août 2026) ══
+     Une teinte unique (197°), sept valeurs, aucune couleur d'accent.
+     La hiérarchie passe par la valeur, la chasse de caractère et la
+     profondeur des plans (trois rangs d'ombre à l'encre translucide). */
 
-  /* Rampe 197° — de la réserve au voile */
-  --color-profond: #001718;   /* réserve — 1/5 max, une apparition par écran (relevés, duotone, couverture) */
-  --color-encre: #00393a;     /* texte et titres — toute la lecture, filets porteurs, cadres */
-  --color-pivot: #336667;     /* données et mentions — références, dates, texte secondaire (valeur client) */
-  --color-clair: #99cccd;     /* filets et aplats — étiquettes, texte sur fond profond (valeur client) */
+  /* Rampe 197° — de la réserve au voile (inchangée depuis la révision 1) */
+  --color-profond: #001718;   /* réserve — 1/5 max, une par écran : couverture, relevé, panneau, duotone */
+  --color-encre: #00393a;     /* toute la lecture : titres, paragraphes, filets porteurs, cadres */
+  --color-pivot: #336667;     /* valeur pivot : données, dates, mentions, filets de second rang */
+  --color-clair: #99cccd;     /* filets, aplats ; texte sur fond profond uniquement (jamais en texte sur papier) */
   --color-voile: #e1f4f4;     /* pôle clair du duotone — titres/chiffres sur réserve profonde uniquement */
 
   /* Neutres — le support n'est pas une couleur de marque */
-  --color-papier: #f7f9fa;    /* support par défaut : fond de toute page lue en continu */
-  --color-calcaire: #edf0f2;  /* surface secondaire : blocs de rappel, en-têtes de tableau */
+  --color-papier: #f7f9fa;    /* fond de toute page lue en continu — la planche posée */
+  --color-calcaire: #edf0f2;  /* surface secondaire : fond de planche, blocs de rappel, en-têtes de tableau */
 
-  /* Filets — alpha d'encre (jamais porteurs de rang par la valeur) */
-  --color-line: rgba(0, 57, 58, 0.18);        /* filet d'indication, séparateurs de lignes */
-  --color-line-strong: rgba(0, 57, 58, 0.3);  /* contour de cartouche, cadres */
+  /* Filets 1 px — trois rangs portés par l'OPACITÉ d'encre (charte v3 § 08),
+     plus le filet d'étiquette à 28 %. L'épaisseur ne porte plus le rang. */
+  --color-filet-1: rgba(0, 57, 58, 0.22);     /* rang 1 : porteur, contour de plan appuyé */
+  --color-filet-2: rgba(0, 57, 58, 0.16);     /* rang 2 : bordure de plan, séparateur de colonnes */
+  --color-filet-3: rgba(0, 57, 58, 0.12);     /* rang 3 : indication, note, archive */
+  --color-filet-chip: rgba(0, 57, 58, 0.28);  /* étiquette de mission, chip de filtre */
 
-  /* ── Aliases legacy repointés (transition cuivre → monochrome 197°) ──
-     Valides au build, à ne plus employer dans le nouveau code. */
+  /* Aliases v2 repointés (line/line-strong) — valides au build, à remplacer */
+  --color-line: rgba(0, 57, 58, 0.16);
+  --color-line-strong: rgba(0, 57, 58, 0.22);
+
+  /* ── Aliases legacy repointés (transitions successives cuivre → 197°) ──
+     Valides au build, interdits dans le nouveau code. */
   --color-marine-deep: #001718;
   --color-marine: #00393a;
   --color-marine-surface: #001718;
@@ -36,9 +44,9 @@
   --color-near-black: #00393a;
   --color-slate: #336667;
   --color-mist: #99cccd;
-  --color-copper: #336667;        /* l'accent cuivre n'existe plus : filet pivot */
-  --color-bright-copper: #99cccd; /* hover sur fond sombre → clair */
-  --color-copper-text: #336667;   /* petit texte fort sur clair → pivot */
+  --color-copper: #336667;
+  --color-bright-copper: #99cccd;
+  --color-copper-text: #336667;
   --color-apple-blue: #336667;
   --color-link-blue: #00393a;
   --color-bright-blue: #99cccd;
@@ -56,34 +64,51 @@
   --color-cuivre: #336667;
   --color-creme-pierre: #edf0f2;
   --color-anthracite: #00393a;
-  --color-gris-bord: rgba(0, 57, 58, 0.18);
+  --color-gris-bord: rgba(0, 57, 58, 0.16);
   --color-gris-doux: #99cccd;
   /* Alerte : un signe, pas une couleur (filet doublé + mention explicite) */
   --color-success: #00393a;
   --color-error: #00393a;
 
-  /* Typographie — Archivo (axe wdth 62–125) & IBM Plex Mono (données) */
+  /* Typographie — Archivo (wdth 62–125, graisses 300/600/700)
+     & IBM Plex Mono (400/500/600 — tout ce qui se mesure ou se référence) */
   --font-heading: "Archivo Variable", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-body: "Archivo Variable", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  /* Ombres : aucune — les blocs se séparent par le filet et le fond */
-  --shadow-soft: none;
+  /* ══ Plans et profondeur — trois rangs d'ombre (charte v3 § 09).
+     L'ombre est toujours de l'encre translucide, jamais du noir :
+     aucun flou > 70 px (90 px réservé à la planche de page), aucun
+     décalage horizontal, aucune ombre intérieure ni sur un texte. ══ */
+  --shadow-plan-1: 0 24px 60px rgba(0, 57, 58, 0.12);  /* plan posé — bordure 1 px obligatoire */
+  --shadow-plan-2: 0 32px 70px rgba(0, 57, 58, 0.16);  /* plan qui déborde — 1×/écran max */
+  --shadow-plan-3: 0 30px 64px rgba(0, 57, 58, 0.30);  /* ligne encrée — la réserve profonde */
+  --shadow-page: 0 0 90px rgba(0, 57, 58, 0.18);       /* la planche de page sur le calcaire */
+  /* alias legacy repointé sur le rang 1 */
+  --shadow-soft: 0 24px 60px rgba(0, 57, 58, 0.12);
 }
 
 :root {
-  --ease-blueprint: cubic-bezier(0.16, 1, 0.3, 1);
-  /* alias legacy conservé pour motion.css */
-  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Courbe unique de la charte v3 (§ 13) — remplace cubic-bezier(0.16,1,0.3,1) */
+  --ease-blueprint: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* alias legacy conservé pour les composants existants */
+  --ease-apple: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 html {
   font-family: var(--font-body);
   color: var(--color-encre);
-  background-color: var(--color-papier);
+  /* Le site est une planche papier posée sur le calcaire (BaseLayout).
+     Le calcaire n'apparaît qu'au-delà de 1440 px. */
+  background-color: var(--color-calcaire);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  /* Corps : lecture longue en 300 (trois graisses seulement : 300, 600, 700) */
+  font-weight: 300;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -101,8 +126,10 @@ html {
   }
 }
 
-/* Titres : rang « Titre » par défaut (wdth 118, 600, capitales).
-   Pas de couleur ici (règle Tailwind v4 : les utilitaires doivent gagner). */
+/* Titres : rang « Section » par défaut (wdth 118, 700, capitales).
+   Le rang « Titre d'écran » (casse normale, wdth 100, 600) se demande
+   explicitement via .type-ecran. Pas de couleur ici (règle Tailwind v4 :
+   les utilitaires doivent gagner). */
 @layer base {
   h1,
   h2,
@@ -112,13 +139,22 @@ html {
   h6 {
     font-family: var(--font-heading);
     font-stretch: 118%;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -0.02em;
   }
+
+  /* Rayon d'angle : 0 partout — la puce de section (cercle 7 px) est
+     la seule exception admise par la charte (§ 08). */
+  input,
+  textarea,
+  select,
+  button {
+    border-radius: 0;
+  }
 }
 
-/* Focus : cadre 2 px au pivot, décalé de 2 px (charte § 08) */
+/* Focus : cadre 2 px au pivot, décalé de 2 px */
 :focus-visible {
   outline: 2px solid var(--color-pivot);
   outline-offset: 2px;
@@ -129,39 +165,57 @@ html {
   color: var(--color-papier);
 }
 
-/* ══ Recettes — rangs typographiques et vocabulaire de trait (charte v2) ══ */
+/* ══ Recettes — rangs typographiques, trame, plans et composants (charte v3) ══ */
 @layer components {
-  /* Vedette : ouverture de document — une seule par page (wdth 125, 700) */
+  /* ── Échelle de titrage (§ 06) ── */
+
+  /* Vedette : couverture, panneau, ouverture de document — une seule par
+     page (wdth 125, 700, interligne 0,92). Réservée à l'accueil. */
   .type-display {
     font-family: var(--font-heading);
     font-stretch: 125%;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -0.025em;
-    line-height: 0.96;
+    line-height: 0.92;
   }
 
-  /* Titre : section, intitulé de fiche d'affaire (wdth 118, 600) */
+  /* Titre d'écran : accroche de page interne — casse normale, jamais en
+     capitales (wdth 100, 600, interligne 1,02). */
+  .type-ecran {
+    font-family: var(--font-heading);
+    font-stretch: 100%;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+
+  /* Section : puce profonde, mot porteur en encre, complément en clair
+     précédé d'une barre oblique (wdth 118, 700, interligne 1,1). */
+  .type-section,
   .type-h2 {
     font-family: var(--font-heading);
     font-stretch: 118%;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
 
-  /* Intitulé : nom d'affaire en nomenclature, en-tête de bloc (wdth 112, 600) */
+  /* Intitulé : carte, cellule, ligne de tableau, expertise
+     (wdth 112, 600, interligne 1,15). */
   .type-intitule {
     font-family: var(--font-heading);
     font-stretch: 112%;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     line-height: 1.15;
   }
 
-  /* Annexe : mention accessoire, troisième rang (wdth 72, 600 — condensé) */
+  /* Annexe (legacy v2, wdth 72) — conservé pour la nomenclature archive ;
+     la v3 hiérarchise par la graisse (700/600/300) et l'opacité de filet. */
   .type-annexe {
     font-family: var(--font-heading);
     font-stretch: 72%;
@@ -170,7 +224,8 @@ html {
     line-height: 1.2;
   }
 
-  /* Étiquette mono : 11 px, 0,14 em, capitales — jamais plus grand */
+  /* Étiquette mono : 11/10 px, 0,14 em, capitales — jamais plus grand,
+     jamais en texte courant. */
   .mono-label {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -186,15 +241,87 @@ html {
     font-variant-numeric: tabular-nums;
   }
 
-  /* Filet de section (rang 2 px) au-dessus d'un titre éditorial */
+  /* ── Trame et marges (§ 08) ── */
+
+  /* Trame de fond : pas de 28 px à 7 % d'encre. Elle porte le fond de
+     page et n'est jamais visible sous un plan posé. */
+  .trame-fond {
+    background-image:
+      linear-gradient(rgba(0, 57, 58, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 57, 58, 0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Puce de section : cercle de 7 px au profond — la seule exception
+     au rayon 0. Accompagne le numéro mono de la section. */
+  .puce-section {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background-color: var(--color-profond);
+    flex-shrink: 0;
+  }
+
+  /* Filet de section legacy (v2) — repointé rang 1 (1 px, encre 22 %) */
   .filet-top {
-    border-top: 2px solid var(--color-encre);
+    border-top: 1px solid var(--color-filet-1);
     padding-top: 14px;
   }
 
-  /* ── Boutons : filaires mono uppercase — aucun bouton plein sans nécessité.
-     Le survol épaissit le filet d'un cran (1→2, 2→4), sans changement de
-     teinte ni déplacement. ── */
+  /* ── Plans (§ 09) — la profondeur remplace l'ornement ── */
+
+  /* Rang 1 — plan posé : planche principale d'un écran.
+     Bordure de 1 px obligatoire. */
+  .plan-pose {
+    background-color: var(--color-papier);
+    border: 1px solid var(--color-filet-2);
+    box-shadow: var(--shadow-plan-1);
+  }
+
+  /* Rang 2 — plan qui déborde : chevauche le précédent. 1×/écran max. */
+  .plan-deborde {
+    background-color: var(--color-papier);
+    border: 1px solid var(--color-filet-2);
+    box-shadow: var(--shadow-plan-2);
+  }
+
+  /* Rang 3 — ligne encrée : la réserve profonde de l'écran.
+     Filet de 3 px en clair sur son flanc gauche, pas de bordure. */
+  .plan-encre {
+    background-color: var(--color-profond);
+    border-left: 3px solid var(--color-clair);
+    box-shadow: var(--shadow-plan-3);
+  }
+
+  /* ── Boutons (§ 10) — le principal est un aplat encre à filet clair ── */
+
+  /* Bouton principal : encre, filet clair de 3 px à gauche, mono 11 px.
+     Actif : profond, 260 ms. (.btn-blueprint-dark = alias v2 repointé) */
+  .btn-principal,
+  .btn-blueprint-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 15px 20px;
+    color: var(--color-papier);
+    background-color: var(--color-encre);
+    border-left: 3px solid var(--color-clair);
+    transition: background-color 260ms ease;
+  }
+  .btn-principal:hover,
+  .btn-blueprint-dark:hover {
+    background-color: var(--color-profond);
+  }
+
+  /* Bouton filaire (secondaire) : filet 1 px à 28 % d'encre.
+     (.btn-blueprint = alias v2 repointé) */
+  .btn-filaire,
   .btn-blueprint {
     display: inline-flex;
     align-items: center;
@@ -207,36 +334,17 @@ html {
     text-transform: uppercase;
     padding: 14px 20px;
     color: var(--color-pivot);
-    border: 1px solid var(--color-line-strong);
-    transition: box-shadow 200ms var(--ease-blueprint), color 200ms var(--ease-blueprint), border-color 200ms var(--ease-blueprint);
+    border: 1px solid var(--color-filet-chip);
+    transition: color 260ms ease, border-color 260ms ease;
   }
+  .btn-filaire:hover,
   .btn-blueprint:hover {
+    color: var(--color-encre);
     border-color: var(--color-encre);
-    color: var(--color-encre);
-    box-shadow: inset 0 0 0 1px var(--color-encre);
   }
 
-  /* Bouton principal sur fond clair : filet fort 2 px à l'encre */
-  .btn-blueprint-dark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 14px 20px;
-    color: var(--color-encre);
-    border: 2px solid var(--color-encre);
-    transition: box-shadow 200ms var(--ease-blueprint);
-  }
-  .btn-blueprint-dark:hover {
-    box-shadow: inset 0 0 0 2px var(--color-encre);
-  }
-
-  /* Bouton sur réserve profonde ou aplat encre : filet clair */
+  /* Bouton sur réserve profonde : filaire clair (le vert FT2E est
+     interdit en texte sur profond — rapport 3,67). */
   .btn-blueprint-solid {
     display: inline-flex;
     align-items: center;
@@ -249,15 +357,33 @@ html {
     text-transform: uppercase;
     padding: 14px 20px;
     color: var(--color-clair);
-    border: 2px solid var(--color-clair);
-    transition: box-shadow 200ms var(--ease-blueprint), color 200ms var(--ease-blueprint);
+    border: 1px solid var(--color-clair);
+    transition: color 260ms ease, border-color 260ms ease;
   }
   .btn-blueprint-solid:hover {
     color: var(--color-voile);
-    box-shadow: inset 0 0 0 2px var(--color-clair);
+    border-color: var(--color-voile);
   }
 
-  /* Chip de filtre : filaire mono ; l'état actif épaissit le filet */
+  /* ── Étiquettes et chips (§ 10) ── */
+
+  /* Étiquette de mission : filet 1 px à 28 % d'encre, jamais d'aplat.
+     Six au maximum par bloc. */
+  .etiquette-mission {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border: 1px solid var(--color-filet-chip);
+    color: var(--color-pivot);
+  }
+
+  /* Chip de filtre (interactif) : même dessin ; l'état actif bascule
+     à l'aplat encre — cohérent avec le bouton principal. */
   .chip-blueprint {
     display: inline-flex;
     align-items: center;
@@ -267,9 +393,9 @@ html {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 9px 13px;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-filet-chip);
     color: var(--color-pivot);
-    transition: box-shadow 200ms var(--ease-blueprint), color 200ms var(--ease-blueprint), border-color 200ms var(--ease-blueprint);
+    transition: color 260ms ease, border-color 260ms ease, background-color 260ms ease;
   }
   .chip-blueprint:hover {
     border-color: var(--color-encre);
@@ -277,18 +403,55 @@ html {
   }
   .chip-blueprint[aria-pressed="true"],
   .chip-blueprint.chip-active {
+    background-color: var(--color-encre);
     border-color: var(--color-encre);
-    color: var(--color-encre);
-    box-shadow: inset 0 0 0 1px var(--color-encre);
+    color: var(--color-papier);
   }
 
-  /* ── Images : duotone 197° — point noir #001718, point blanc #E1F4F4 ── */
+  /* ── Cellule de liste (§ 10) : numéro en tête, intitulé en pied.
+     Calcaire au repos, papier au survol (300 ms). ── */
+  .cellule-liste {
+    display: flex;
+    flex-direction: column;
+    min-height: 112px;
+    padding: 20px 18px 22px;
+    background-color: var(--color-calcaire);
+    border: 1px solid var(--color-filet-1);
+    transition: background-color 300ms ease;
+  }
+  .cellule-liste:hover {
+    background-color: var(--color-papier);
+  }
 
-  /* Placeholder hachuré (photo à venir) : une seule masse sombre */
+  /* ── Relevé chiffré (§ 11) : le commentaire précède le chiffre.
+     Un seul chiffre plein (encre) par relevé ; les autres en retrait. ── */
+  .releve-chiffre {
+    font-family: var(--font-heading);
+    font-stretch: 118%;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Retrait au pivot (6,14:1 sur papier) et non à l'encre 13 % (≈ 1,1:1) :
+     ces chiffres sont des données réelles — RGAA 3.3 exige ≥ 3:1 même en
+     texte large. La hiérarchie tient (encre 12,1:1 vs pivot 6,1:1). */
+  .releve-retrait {
+    color: var(--color-pivot);
+  }
+
+  /* ── Images (§ 12) : duotone 197° — point noir profond, point blanc voile ── */
+
+  /* Placeholder hachuré (photo à venir) : hachure claire 112°, hors
+     comptage de la réserve profonde. */
   .duotone-media {
     position: relative;
     overflow: hidden;
-    background: repeating-linear-gradient(135deg, #001718 0 1px, #00393a 1px 8px);
+    background: repeating-linear-gradient(
+      112deg,
+      #c9dcdd 0 2px,
+      var(--color-calcaire) 2px 10px
+    );
   }
 
   /* Duotone réel appliqué à une photo : sandwich lighten/darken.

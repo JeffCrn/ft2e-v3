@@ -1,20 +1,48 @@
 /* ═══════════════════════════════════════════════
-   Motion — charte v2 « ingénierie de l'invisible »
+   Motion — charte v3 « ingénierie de l'invisible » (§ 13)
 
-   Un seul tracé animé sur tout le site : le filet de flux qui relie
-   les sections, 900 ms, une fois par chargement. Aucun compteur qui
-   s'incrémente, aucune apparition au défilement, aucun déplacement
-   au survol. Les états interactifs jouent sur l'épaisseur de filet
-   et la bascule de valeur (transitions courtes, 200 ms).
+   Quatre mouvements, une seule courbe : cubic-bezier(0.2, 0.7, 0.2, 1).
 
-   Easing unique : cubic-bezier(0.16, 1, 0.3, 1)
+   1. Révélation de plan — 760 ms, 22 px, à l'entrée dans la vue, une
+      seule fois (data-plan, initié par BaseLayout).
+   2. Survol de cellule — 300 ms, calcaire vers papier, aucun déplacement.
+   3. Survol de bouton — 260 ms, encre vers profond, le filet ne bouge pas.
+   4. Filet de flux — 900 ms au chargement, une fois. Le seul tracé
+      animé du système (TraceFlux.astro).
+
+   Rien d'autre ne bouge : ni les titres, ni les chiffres, ni les
+   images, ni le monogramme après son tracé.
    ═══════════════════════════════════════════════ */
 
 :root {
-  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1); /* alias legacy → blueprint */
+  --ease-apple: cubic-bezier(0.2, 0.7, 0.2, 1); /* alias legacy → blueprint */
 }
 
-/* ─── Tracé de flux — se dessine une fois au chargement ─── */
+/* ─── 1. Révélation de plan — une seule fois à l'entrée dans la vue ───
+   Les éléments [data-plan] ne sont masqués que lorsque le JS est là
+   (html.js-plans, posé par initPlans avant l'observation) : sans
+   script, tout est visible d'emblée. */
+
+html.js-plans [data-plan] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+html.js-plans [data-plan].plan-revele {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 760ms var(--ease-blueprint),
+    transform 760ms var(--ease-blueprint);
+}
+
+/* Plan déjà dans la vue à l'initialisation (au-dessus du fold) : posé
+   d'emblée, sans transition — le contenu critique ne fond jamais. */
+html.js-plans [data-plan].plan-immediat {
+  transition: none;
+}
+
+/* ─── 4. Tracé de flux — se dessine une fois au chargement ─── */
 /* Le JS de TraceFlux.astro mesure la polyligne en pixels réels puis
    déclenche le dessin (stroke-dashoffset → 0) en 900 ms. */
 
@@ -27,7 +55,7 @@
 
 .trace-noeud {
   opacity: 0;
-  transition: opacity 300ms var(--ease-apple);
+  transition: opacity 300ms var(--ease-blueprint);
 }
 .trace-noeud.revealed {
   opacity: 1;
@@ -38,6 +66,12 @@
    ═══════════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
+  html.js-plans [data-plan] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
   [data-trace-flux] polyline {
     stroke-dasharray: none;
     stroke-dashoffset: 0 !important;

@@ -1,22 +1,23 @@
 ---
-// Équerres d'image — charte v2 (planche 06) : quatre équerres d'un pixel
-// au voile (#E1F4F4), posées DANS les angles, qui cadrent la vue sans
-// l'enfermer. C'est le repère de tirage, pas un encadrement décoratif.
-// À placer dans un parent `relative` (média duotone) ; purement décoratif.
+// Équerres d'image — charte v3 (§ 12) : quatre équerres d'un pixel au
+// voile (#E1F4F4), 18 px de côté UNIFORMES, posées DANS les angles.
+// Repère de tirage, pas un encadrement décoratif. Parent `relative`
+// requis (média duotone) ; purement décoratif. Nom de fichier conservé
+// pour l'historique (le cuivre n'existe plus).
 // `coins="deux"` n'affiche que haut-gauche / bas-droite (variante mobile).
-// Tailles : 18 px (standard), 16 px (fiche), 14 px (vignette).
 interface Props {
   coins?: 'quatre' | 'deux';
+  /** Ignoré depuis la charte v3 — les équerres sont uniformes (18 px). */
   taille?: 18 | 16 | 14;
 }
 
-const { coins = 'quatre', taille = 18 } = Astro.props;
-const dim = `width:${taille}px;height:${taille}px;`;
+const { coins = 'quatre' } = Astro.props;
+const dim = 'w-[18px] h-[18px]';
 ---
 
 <div aria-hidden="true">
-  <div class="absolute left-0 top-0 border-l border-t border-voile" style={dim}></div>
-  {coins === 'quatre' && <div class="absolute right-0 top-0 border-r border-t border-voile" style={dim}></div>}
-  {coins === 'quatre' && <div class="absolute left-0 bottom-0 border-l border-b border-voile" style={dim}></div>}
-  <div class="absolute right-0 bottom-0 border-r border-b border-voile" style={dim}></div>
+  <div class:list={['absolute left-0 top-0 border-l border-t border-voile', dim]}></div>
+  {coins === 'quatre' && <div class:list={['absolute right-0 top-0 border-r border-t border-voile', dim]}></div>}
+  {coins === 'quatre' && <div class:list={['absolute left-0 bottom-0 border-l border-b border-voile', dim]}></div>}
+  <div class:list={['absolute right-0 bottom-0 border-r border-b border-voile', dim]}></div>
 </div>

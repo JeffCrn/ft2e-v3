@@ -1,5 +1,7 @@
 ---
-// Capsule technique blueprint : rectangle mono 1 px, pas de rayon.
+// Étiquette de mission — charte v3 (§ 10) : mono 10 px, filet 1 px à
+// 28 % d'encre, jamais d'aplat. Six au maximum par bloc. Étiquette
+// passive : le chip interactif (.chip-blueprint) reste réservé aux filtres.
 interface Props {
   variante?: 'secteur' | 'typologie' | 'mission';
   class?: string;
@@ -8,14 +10,14 @@ interface Props {
 const { variante = 'secteur', class: className } = Astro.props;
 
 const classes: Record<string, string> = {
-  secteur: 'text-encre border-line-strong',
-  typologie: 'text-pivot',
-  mission: 'text-pivot',
+  secteur: 'text-encre',
+  typologie: '',
+  mission: '',
 };
 ---
 
 <span
-  class:list={['chip-blueprint', classes[variante], className]}
+  class:list={['etiquette-mission', classes[variante], className]}
 >
   <slot />
 </span>

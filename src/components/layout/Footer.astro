@@ -6,12 +6,15 @@ import Logo from './Logo.astro';
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-calcaire border-t-2 border-encre mt-auto" role="contentinfo">
+{/* Pied de page (charte v3) : le rang n'est plus porté par l'épaisseur —
+    filet haut 1 px au rang porteur (filet-1), séparateur interne au rang 3. */}
+<footer class="bg-calcaire border-t border-filet-1 mt-auto" role="contentinfo">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 py-10">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
       <div class="col-span-2 md:col-span-1">
         <Logo forme="complet" baseline decoratif={false} class="h-[52px] w-auto" />
-        <p class="mono-data text-pivot mt-4 leading-relaxed max-w-[36ch]">
+        {/* Texte courant : Archivo 300 — le mono est réservé aux données et coordonnées */}
+        <p class="text-sm text-pivot mt-4 leading-relaxed max-w-[42ch]">
           Bureau d’études techniques pluridisciplinaire à La Rochelle. Fluides, thermique, électricité, SSI, BIM. Au service des architectes et maîtres d’ouvrage depuis 2008.
         </p>
       </div>
@@ -21,7 +24,7 @@ const year = new Date().getFullYear();
         <ul class="space-y-2" role="list">
           {NAV_LINKS.map((link) => (
             <li>
-              <a href={link.href} class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">
+              <a href={link.href} class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">
                 {link.label}
               </a>
             </li>
@@ -34,10 +37,10 @@ const year = new Date().getFullYear();
         <address class="not-italic mono-data text-encre space-y-2 leading-relaxed">
           <p>35 Rue Nicolas Denys de Fronsac<br />17000 La Rochelle</p>
           <p>
-            <a href="tel:+33546278593" class="hover:text-pivot motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a>
+            <a href="tel:+33546278593" class="hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a>
           </p>
           <p>
-            <a href="mailto:ft2e@ft2e.fr" class="hover:text-pivot motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
+            <a href="mailto:ft2e@ft2e.fr" class="hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
           </p>
         </address>
         <p class="mono-label text-pivot mt-4">réponse sous 48&nbsp;h ouvrées</p>
@@ -51,12 +54,12 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <div class="border-t border-line mt-10 pt-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+    <div class="border-t border-filet-3 mt-10 pt-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
       <p class="mono-data text-pivot">© {year} {SITE_NAME}. Tous droits réservés.</p>
       <nav aria-label="Mentions légales" class="flex flex-wrap gap-5">
-        <a href="/mentions-legales" class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">Mentions légales</a>
-        <a href="/politique-confidentialite" class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">Confidentialité</a>
-        <a href="/accessibilite" class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">Accessibilité</a>
+        <a href="/mentions-legales" class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">Mentions légales</a>
+        <a href="/politique-confidentialite" class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">Confidentialité</a>
+        <a href="/accessibilite" class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">Accessibilité</a>
       </nav>
     </div>
   </div>

@@ -28,33 +28,35 @@ const paddingClasses = {
 };
 
 const titleSize = {
-  default: 'font-size: clamp(2rem, 4.5vw, 3.5rem);',
-  compact: 'font-size: clamp(1.625rem, 3.5vw, 2.5rem);',
+  default: 'font-size: clamp(2.25rem, 5vw, 3.875rem);',
+  compact: 'font-size: clamp(1.75rem, 3.5vw, 2.75rem);',
 };
 ---
 
-{/* Hero clair — le papier gouverne (charte v2). La vedette est la seule
-    ouverture de la page ; la barre de rang 4 px marque l'entrée principale. */}
-<section class:list={['bg-papier', paddingClasses[size]]}>
-  <div class="border-b border-line">
+{/* Hero clair — charte v3 : le h1 des pages internes est un titre d'écran
+    (.type-ecran, casse normale, encre), précédé de la ligne puce + étiquette.
+    Posé sur la trame de la planche ; plus de barre de rang. */}
+<section class:list={[paddingClasses[size]]}>
+  <div class="border-b border-filet-3">
     <Breadcrumbs items={breadcrumbs} />
   </div>
 
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 mt-10 md:mt-14">
     {eyebrow && (
-      <p class="mono-label text-pivot mb-5">
-        {eyebrow}
-      </p>
+      <div class="flex items-center gap-3 mb-5">
+        <span class="puce-section" aria-hidden="true"></span>
+        <p class="mono-label text-pivot">
+          {eyebrow}
+        </p>
+      </div>
     )}
 
     <h1
-      class="type-display text-profond max-w-[24ch] text-balance"
+      class="type-ecran text-encre max-w-[26ch] text-balance"
       style={titleSize[size]}
     >
       {titre}
     </h1>
-
-    <div class="w-[110px] h-1 bg-encre mt-7" aria-hidden="true"></div>
 
     {sousTitre && (
       <p class="mt-6 text-base leading-[1.6] text-pivot max-w-[60ch] text-pretty">

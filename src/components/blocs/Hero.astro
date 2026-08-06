@@ -1,9 +1,9 @@
 ---
-import Bouton from '../primitives/Bouton.astro';
-
-// Hero clair — charte v2, planche 08 (écran 1) : le papier gouverne,
-// l'image recule dans sa colonne, elle ne porte pas le titre.
-// Vedette au profond, barre de rang 4 px à l'encre, corps au pivot.
+// Hero de couverture — charte v3 « plans et profondeur » (accueil) :
+// la vedette (type-display, capitales, une seule par page) s'ouvre en très
+// grand, posée sur la trame de la planche ; le sous-titre, les CTA et le
+// média d'appui se rangent en dessous. Le rang n'est plus porté par
+// l'épaisseur d'un filet : plus de barre de rang.
 interface Props {
   titre: string;
   sousTitre?: string;
@@ -23,21 +23,23 @@ const {
 } = Astro.props;
 
 const isAccueil = variante === 'accueil';
-// Média technique annoté (slot "media") : hero accueil en deux colonnes.
+// Média technique annoté (slot "media") : rangé sous la vedette, dans la
+// colonne de droite — il ne porte jamais le titre.
 const hasMedia = isAccueil && Astro.slots.has('media');
+const hasStats = Astro.slots.has('stats');
+const hasAppui = Boolean(sousTitre || ctaPrincipal || ctaSecondaire || hasMedia || hasStats);
 const lignes = titre.split('\\n');
 
+// Vedette de couverture (accueil) ou titre d'écran (variante page, aligné
+// sur HeroPage) — l'interligne vient des recettes .type-display / .type-ecran.
+const titreClasses = isAccueil ? 'type-display text-profond' : 'type-ecran text-encre';
 const tailleTitre = isAccueil
-  ? hasMedia
-    ? 'font-size: clamp(2.1rem, 3.6vw, 3.25rem);'
-    : 'font-size: clamp(2.25rem, 5vw, 3.75rem);'
-  : 'font-size: clamp(1.875rem, 3.5vw, 3rem);';
+  ? 'font-size: clamp(3rem, 7.5vw, 6.5rem);'
+  : 'font-size: clamp(2.25rem, 5vw, 3.875rem);';
 ---
 
-<section class="bg-papier py-16 md:py-20">
+<section class="py-16 md:py-20">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-    <div class:list={[hasMedia && 'grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center']}>
-    <div class:list={[hasMedia && 'lg:col-span-6']}>
     {eyebrow && (
       <p class="mono-label text-pivot mb-6">
         {eyebrow}
@@ -45,7 +47,7 @@ const tailleTitre = isAccueil
     )}
 
     <h1
-      class:list={['type-display text-profond', hasMedia ? 'max-w-[22ch]' : 'max-w-[24ch]']}
+      class:list={[titreClasses, 'max-w-[24ch] text-balance']}
       style={tailleTitre}
     >
       {lignes.map((ligne, i) => (
@@ -53,40 +55,44 @@ const tailleTitre = isAccueil
       ))}
     </h1>
 
-    <div class="w-[110px] h-1 bg-encre mt-7" aria-hidden="true"></div>
+    {hasAppui && (
+      <div class:list={['mt-8 md:mt-10', hasMedia && 'grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start']}>
+        <div class:list={[hasMedia && 'lg:col-span-6']}>
+          {sousTitre && (
+            <p class="text-base leading-[1.6] text-pivot max-w-[46ch] text-pretty">
+              {sousTitre}
+            </p>
+          )}
 
-    {sousTitre && (
-      <p class="mt-6 text-base leading-[1.6] text-pivot max-w-[46ch] text-pretty">
-        {sousTitre}
-      </p>
-    )}
+          {(ctaPrincipal || ctaSecondaire) && (
+            <div class="mt-9 flex flex-wrap gap-4">
+              {ctaPrincipal && (
+                <a href={ctaPrincipal.href} class="btn-principal">
+                  {ctaPrincipal.label}
+                  <span aria-hidden="true">→</span>
+                </a>
+              )}
+              {ctaSecondaire && (
+                <a href={ctaSecondaire.href} class="btn-filaire">
+                  {ctaSecondaire.label}
+                </a>
+              )}
+            </div>
+          )}
 
-    {(ctaPrincipal || ctaSecondaire) && (
-      <div class="mt-9 flex flex-wrap gap-4">
-        {ctaPrincipal && (
-          <Bouton href={ctaPrincipal.href} variante="primary">
-            {ctaPrincipal.label}&nbsp;→
-          </Bouton>
+          {hasStats && (
+            <div class="mt-9 pt-6 border-t border-filet-1">
+              <slot name="stats" />
+            </div>
+          )}
+        </div>
+
+        {hasMedia && (
+          <div class="lg:col-span-6">
+            <slot name="media" />
+          </div>
         )}
-        {ctaSecondaire && (
-          <Bouton href={ctaSecondaire.href} variante="ghost">
-            {ctaSecondaire.label}
-          </Bouton>
-        )}
       </div>
     )}
-
-    {Astro.slots.has('stats') && (
-      <div class="mt-9 pt-6 border-t border-line">
-        <slot name="stats" />
-      </div>
-    )}
-    </div>
-    {hasMedia && (
-      <div class="lg:col-span-6">
-        <slot name="media" />
-      </div>
-    )}
-    </div>
   </div>
 </section>

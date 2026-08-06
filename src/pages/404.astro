@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import HeroPage from '../components/blocs/HeroPage.astro';
 import Bouton from '../components/primitives/Bouton.astro';
 ---
 
@@ -8,17 +9,23 @@ import Bouton from '../components/primitives/Bouton.astro';
   description="La page que vous cherchez n’existe pas ou a été déplacée."
   noindex={true}
 >
-  <section class="bg-papier py-24 md:py-32">
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Page introuvable', href: '/404' },
+    ]}
+    eyebrow="erreur — référence introuvable"
+    titre="Page introuvable"
+    sousTitre="La page que vous cherchez n’existe pas ou a été déplacée. Revenez à l’accueil pour continuer votre navigation."
+    size="compact"
+  />
+
+  <section class="pb-20 md:pb-28">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <p class="mono-label text-pivot mb-6">erreur — référence introuvable</p>
-      <p class="type-display text-encre text-[clamp(4rem,10vw,8rem)]" aria-hidden="true">404</p>
-      <h1 class="type-h2 text-encre text-[22px] mt-6">
-        Page introuvable
-      </h1>
-      <p class="mt-4 text-[17px] font-normal text-pivot leading-[1.6] max-w-[52ch]">
-        La page que vous cherchez n’existe pas ou a été déplacée. Revenez à l’accueil pour continuer votre navigation.
-      </p>
-      <div class="mt-8">
+      {/* Le code d’erreur en relevé (charte v3 § 11) : le seul chiffre
+          plein encre de l’écran. */}
+      <p class="releve-chiffre text-encre text-[clamp(3.5rem,7vw,5.75rem)]" aria-hidden="true">404</p>
+      <div class="mt-10">
         <Bouton href="/" variante="primary">Retour à l’accueil&nbsp;→</Bouton>
       </div>
     </div>

@@ -1,6 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
+// Carte d'actualité — charte v3 (§ 09/10) : un plan posé (bordure 1 px
+// filet-2, ombre de rang 1), vignette duotone 3:2, pied cartouche calcaire
+// avec date et catégorie mono. Survol : bascule calcaire → papier (300 ms).
 interface Props {
   article: CollectionEntry<'actualites'>;
 }
@@ -15,25 +18,22 @@ const dateFormatee = new Intl.DateTimeFormat('fr-FR', {
 }).format(date);
 ---
 
-<a
-  href={`/actualites/${article.id}`}
-  class="group block border border-line-strong transition-[border-color,box-shadow] duration-200 ease-[var(--ease-blueprint)] hover:border-encre hover:shadow-[inset_0_0_0_1px_var(--color-encre)]"
->
+<a href={`/actualites/${article.id}`} class="group block plan-pose">
   <div class="aspect-[3/2] duotone-media">
-    <span class="absolute left-3 bottom-2.5 mono-label font-normal text-voile z-10" aria-hidden="true">{categories[0]?.toLowerCase()}</span>
-    {demo && <span class="absolute right-3 top-2.5 mono-label font-normal text-voile z-10">[démo]</span>}
+    <span class="absolute left-3 bottom-2.5 mono-label font-normal text-pivot z-10" aria-hidden="true">{categories[0]?.toLowerCase()}</span>
+    {demo && <span class="absolute right-3 top-2.5 mono-label font-normal text-pivot z-10">[démo]</span>}
   </div>
-  <div class="p-4">
+  <div class="bg-calcaire border-t border-filet-2 p-4 transition-colors duration-300 ease-[var(--ease-blueprint)] group-hover:bg-papier">
     <div class="flex items-baseline justify-between gap-3">
       <time datetime={date.toISOString().split('T')[0]} class="mono-data text-pivot">
         {dateFormatee}
       </time>
       <span class="mono-label font-normal text-pivot">{categories[0]}</span>
     </div>
-    <h3 class="type-h2 text-encre text-base leading-[1.15] mt-3 group-hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]">
+    <h3 class="type-intitule text-encre text-[17px] mt-3">
       {titre}
     </h3>
-    <p class="mt-2.5 text-[15px] font-normal text-pivot leading-[1.55] line-clamp-3">
+    <p class="mt-2.5 text-[15px] text-pivot leading-[1.55] line-clamp-3">
       {chapo}
     </p>
   </div>

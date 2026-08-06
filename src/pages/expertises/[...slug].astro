@@ -56,65 +56,75 @@ const jsonLd = {
     sousTitre={accroche}
   />
 
-  {/* ─── Contenu (markdown) + panneau technique ── */}
-  <section class="bg-papier py-14 md:py-16">
-    <div class="max-w-[1200px] mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-      <div
-        class="lg:col-span-7 text-[17px] font-normal text-pivot leading-[1.6] space-y-6
-               [&>h2]:type-h2 [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:filet-top
-               [&>h2]:mt-9 [&>h2]:mb-3.5
-               [&>h2:first-child]:mt-0
-               [&>h3]:type-h2 [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:mt-8 [&>h3]:mb-3
-               [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
-               [&>ul>li]:border-l [&>ul>li]:border-line-strong [&>ul>li]:pl-4
-               [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
-               [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
-               [&_strong]:text-encre [&_strong]:font-semibold"
-       
-      >
-        <Content />
+  {/* ─── Contenu (markdown) + panneau technique sur un plan posé ── */}
+  <section class="py-14 md:py-16">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="plan-pose p-5 md:p-10" data-plan>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div
+            class="lg:col-span-7 max-w-[840px] text-[17px] text-pivot leading-[1.6] space-y-6
+                   [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:border-t [&>h2]:border-filet-1 [&>h2]:pt-3.5
+                   [&>h2]:mt-9 [&>h2]:mb-3.5
+                   [&>h2:first-child]:mt-0
+                   [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:font-semibold [&>h3]:[font-stretch:112%] [&>h3]:mt-8 [&>h3]:mb-3
+                   [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
+                   [&>ul>li]:border-l [&>ul>li]:border-filet-1 [&>ul>li]:pl-4
+                   [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
+                   [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
+                   [&_strong]:text-encre [&_strong]:font-semibold"
+          >
+            <Content />
+          </div>
+
+          <aside class="lg:col-span-5">
+            {livrables.length > 0 && (
+              <Fragment>
+                <h2 class="mono-label text-pivot mb-3.5">livrables</h2>
+                <ul class="border border-filet-1 bg-calcaire list-none" role="list">
+                  {livrables.map((l) => (
+                    <li class="mono-data text-encre px-4 py-3 border-b border-filet-3 last:border-b-0">{l}</li>
+                  ))}
+                </ul>
+              </Fragment>
+            )}
+
+            {typique_pour && typique_pour.length > 0 && (
+              <Fragment>
+                <h2 class="mono-label text-pivot mt-8 mb-3.5">typique pour</h2>
+                <div class="flex flex-wrap gap-2">
+                  {typique_pour.map((s) => (
+                    <span class="etiquette-mission">{s}</span>
+                  ))}
+                </div>
+              </Fragment>
+            )}
+
+            {faq && faq.length > 0 && (
+              <Fragment>
+                <h2 class="mono-label text-pivot mt-8 mb-3.5">questions fréquentes</h2>
+                <FAQ items={faq} />
+              </Fragment>
+            )}
+          </aside>
+        </div>
       </div>
-
-      <aside class="lg:col-span-5">
-        {livrables.length > 0 && (
-          <Fragment>
-            <h2 class="mono-label text-pivot mb-3.5">livrables</h2>
-            <ul class="border border-line bg-calcaire list-none" role="list">
-              {livrables.map((l) => (
-                <li class="mono-data text-encre px-4 py-3 border-b border-line/60 last:border-b-0">{l}</li>
-              ))}
-            </ul>
-          </Fragment>
-        )}
-
-        {typique_pour && typique_pour.length > 0 && (
-          <Fragment>
-            <h2 class="mono-label text-pivot mt-8 mb-3.5">typique pour</h2>
-            <div class="flex flex-wrap">
-              {typique_pour.map((s) => (
-                <span class="chip-blueprint -ml-px -mt-px">{s}</span>
-              ))}
-            </div>
-          </Fragment>
-        )}
-
-        {faq && faq.length > 0 && (
-          <Fragment>
-            <h2 class="mono-label text-pivot mt-8 mb-3.5">questions fréquentes</h2>
-            <FAQ items={faq} />
-          </Fragment>
-        )}
-      </aside>
     </div>
   </section>
 
   {/* ─── Projets représentatifs ──────────────────── */}
   {projetsLies.length > 0 && (
-    <section class="bg-papier pb-16 md:pb-20">
+    <section class="pb-16 md:pb-20">
       <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-        <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
-          <h2 class="type-h2 text-encre text-[20px]">Projets représentatifs</h2>
-          <a href="/references" class="mono-label font-normal text-pivot hover:text-encre motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">
+        <div class="flex items-center gap-3">
+          <span class="puce-section" aria-hidden="true"></span>
+          <p class="mono-label text-pivot">références liées</p>
+        </div>
+        <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mt-4 mb-6">
+          <h2 class="type-section text-[22px] md:text-[24px]">
+            <span class="text-encre">Projets représentatifs</span>
+            <span class="text-clair" aria-hidden="true">/par mission</span>
+          </h2>
+          <a href="/references" class="mono-label font-normal text-pivot hover:text-encre motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">
             voir toutes les références →
           </a>
         </div>

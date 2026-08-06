@@ -66,22 +66,25 @@ const jsonLd = {
     </div>
   </HeroPage>
 
-  <article class="bg-papier py-14 md:py-16">
+  {/* Plan posé (charte v3) : le récit sur sa planche, corps en 300,
+      filets 1 px portés par l’opacité d’encre. */}
+  <article class="py-14 md:py-16">
     <div class="max-w-[840px] mx-auto px-4 md:px-6">
-      <div
-        class="text-[17px] font-normal text-pivot leading-[1.6] space-y-6
-               [&>h2]:type-h2 [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:filet-top
-               [&>h2]:mt-9 [&>h2]:mb-3.5
-               [&>h2:first-child]:mt-0
-               [&>h3]:type-h2 [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:mt-8 [&>h3]:mb-3
-               [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
-               [&>ul>li]:border-l [&>ul>li]:border-line-strong [&>ul>li]:pl-4
-               [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
-               [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
-               [&_strong]:text-encre [&_strong]:font-semibold"
-       
-      >
-        <Content />
+      <div class="plan-pose p-6 md:p-10" data-plan>
+        <div
+          class="text-[17px] text-pivot leading-[1.6] space-y-6
+                 [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:border-t [&>h2]:border-filet-1 [&>h2]:pt-3.5
+                 [&>h2]:mt-9 [&>h2]:mb-3.5
+                 [&>h2:first-child]:mt-0
+                 [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:font-semibold [&>h3]:[font-stretch:112%] [&>h3]:mt-8 [&>h3]:mb-3
+                 [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
+                 [&>ul>li]:border-l [&>ul>li]:border-filet-1 [&>ul>li]:pl-4
+                 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
+                 [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
+                 [&_strong]:text-encre [&_strong]:font-semibold"
+        >
+          <Content />
+        </div>
       </div>
     </div>
   </article>

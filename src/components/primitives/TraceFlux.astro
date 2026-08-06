@@ -1,7 +1,8 @@
 ---
-// Tracé de flux — le seul mouvement du site (charte v2, planche 08) :
+// Tracé de flux — le seul tracé animé du système (charte v3, § 13) :
 // une polyligne verticale qui « câble » les grandes sections entre elles et
-// se dessine UNE FOIS au chargement, en 900 ms. Aucun suivi de défilement.
+// se dessine UNE FOIS au chargement, en 900 ms, sur la courbe unique
+// cubic-bezier(0.2, 0.7, 0.2, 1). Aucun suivi de défilement.
 //
 // Les nœuds carrés 7 px sont posés EXACTEMENT sur les frontières entre les
 // sections marquées `data-trace-jalon` (mesurées dans le DOM au chargement),
@@ -113,7 +114,7 @@ const { class: className, jalons = '[data-trace-jalon]' } = Astro.props;
       // Dessin unique : dashoffset len → 0 en 900 ms ; chaque nœud se pose
       // au moment où la pointe le franchit.
       const dessine = () => {
-        line.style.transition = `stroke-dashoffset ${DUREE}ms var(--ease-apple)`;
+        line.style.transition = `stroke-dashoffset ${DUREE}ms var(--ease-blueprint)`;
         line.style.strokeDashoffset = '0';
         el.dataset.dessine = '1';
         noeudEls.forEach((n) => {

@@ -58,7 +58,7 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
 
     <slot name="head" />
   </head>
-  <body class="min-h-screen flex flex-col bg-papier text-encre font-body">
+  <body class="min-h-screen bg-calcaire text-encre font-body">
     <a
       href="#contenu-principal"
       class="mono-label sr-only focus:not-sr-only focus:absolute focus:top-20 focus:left-4 focus:z-50 focus:bg-encre focus:text-papier focus:px-4 focus:py-3"
@@ -66,14 +66,63 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
       Aller au contenu principal
     </a>
 
-    <slot name="header" />
+    {/* La planche de page (charte v3 § 09) : le site est une feuille papier
+        posée sur le calcaire, portée par l'ombre de page (0 0 90px encre 18 %).
+        La trame 28 px à 7 % d'encre porte le fond ; les plans posés l'occultent. */}
+    <div class="min-h-screen flex flex-col max-w-[1440px] mx-auto bg-papier trame-fond shadow-[var(--shadow-page)]">
+      <slot name="header" />
 
-    <main id="contenu-principal" class="flex-1" transition:animate={fade({ duration: '0.3s' })}>
-      <slot />
-    </main>
+      <main id="contenu-principal" class="flex-1" transition:animate={fade({ duration: '0.3s' })}>
+        <slot />
+      </main>
 
-    <slot name="footer" />
+      <slot name="footer" />
+    </div>
 
     <slot name="json-ld" />
+
+    {/* Révélation de plan (charte v3 § 13) : 760 ms, 22 px, à l'entrée
+        dans la vue, une seule fois par élément [data-plan]. Le CSS ne
+        masque rien tant que html.js-plans n'est pas posé (fallback sans JS). */}
+    <script>
+      function initPlans() {
+        document.documentElement.classList.add('js-plans');
+
+        const plans = document.querySelectorAll<HTMLElement>('[data-plan]');
+        if (!plans.length) return;
+
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const io = new IntersectionObserver(
+          (entries, observer) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('plan-revele');
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        plans.forEach((el) => {
+          if (el.dataset.planBound) return;
+          el.dataset.planBound = '1';
+          if (reduced) {
+            el.classList.add('plan-revele');
+            return;
+          }
+          // Plan déjà dans le viewport (au-dessus du fold) : posé d'emblée,
+          // sans fondu — l'élément LCP n'attend pas les 760 ms de révélation.
+          if (el.getBoundingClientRect().top < window.innerHeight) {
+            el.classList.add('plan-immediat', 'plan-revele');
+            return;
+          }
+          io.observe(el);
+        });
+      }
+
+      document.addEventListener('astro:page-load', initPlans);
+    </script>
   </body>
 </html>

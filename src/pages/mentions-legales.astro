@@ -16,48 +16,50 @@ import HeroPage from '../components/blocs/HeroPage.astro';
     size="compact"
   />
 
-  <section class="bg-papier py-14 md:py-16">
+  <section class="py-14 md:py-16">
     <div class="max-w-[840px] mx-auto px-4 md:px-6">
-      <div
-        class="text-[17px] font-normal text-pivot leading-[1.6] space-y-6
-               [&>h2]:type-h2 [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:filet-top
-               [&>h2]:mt-9 [&>h2]:mb-3.5
-               [&>h2:first-child]:mt-0
-               [&>p]:text-pivot
-               [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
-               [&_strong]:text-encre [&_strong]:font-semibold"
-       
-      >
-        <p class="text-sm text-text-secondary italic">[À valider — squelette juridique type]</p>
+      {/* Plan posé (charte v3) : la prose légale sur sa planche, corps en 300,
+          filets 1 px portés par l’opacité d’encre. */}
+      <div class="plan-pose p-6 md:p-10" data-plan>
+        <div
+          class="text-[17px] text-pivot leading-[1.6] space-y-6
+                 [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:border-t [&>h2]:border-filet-1 [&>h2]:pt-3.5
+                 [&>h2]:mt-9 [&>h2]:mb-3.5
+                 [&>p]:text-pivot
+                 [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
+                 [&_strong]:text-encre [&_strong]:font-semibold"
+        >
+          <p class="text-sm text-pivot italic">[À valider — squelette juridique type]</p>
 
-        <h2>Éditeur du site</h2>
-        <p>
-          <strong>FT2E</strong><br />
-          Société à responsabilité limitée (SARL)<br />
-          SIRET&nbsp;: 501&nbsp;665&nbsp;962&nbsp;00020<br />
-          Siège social&nbsp;: 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle<br />
-          Téléphone&nbsp;: <a href="tel:+33546278593">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a><br />
-          Email&nbsp;: <a href="mailto:ft2e@ft2e.fr">ft2e@ft2e.fr</a>
-        </p>
-        <p>Directrice de la publication&nbsp;: Géraldine Michaud</p>
+          <h2>Éditeur du site</h2>
+          <p>
+            <strong>FT2E</strong><br />
+            Société à responsabilité limitée (SARL)<br />
+            SIRET&nbsp;: 501&nbsp;665&nbsp;962&nbsp;00020<br />
+            Siège social&nbsp;: 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle<br />
+            Téléphone&nbsp;: <a href="tel:+33546278593">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a><br />
+            Email&nbsp;: <a href="mailto:ft2e@ft2e.fr">ft2e@ft2e.fr</a>
+          </p>
+          <p>Directrice de la publication&nbsp;: Géraldine Michaud</p>
 
-        <h2>Hébergeur</h2>
-        <p>
-          OVHcloud<br />
-          2, rue Kellermann — 59100 Roubaix — France<br />
-          Téléphone&nbsp;: 1007
-        </p>
+          <h2>Hébergeur</h2>
+          <p>
+            OVHcloud<br />
+            2, rue Kellermann — 59100 Roubaix — France<br />
+            Téléphone&nbsp;: 1007
+          </p>
 
-        <h2>Propriété intellectuelle</h2>
-        <p>
-          L’ensemble de ce site relève de la législation française et internationale sur le droit d’auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques.
-        </p>
+          <h2>Propriété intellectuelle</h2>
+          <p>
+            L’ensemble de ce site relève de la législation française et internationale sur le droit d’auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques.
+          </p>
 
-        <h2>Crédits</h2>
-        <p>
-          Conception et développement&nbsp;: <a href="https://agalma-etudes.com/" target="_blank" rel="noopener noreferrer" class="text-encre underline underline-offset-2 hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]" aria-label="Agalma Études — ouvre dans un nouvel onglet">Agalma Études</a><br />
-          Photographies&nbsp;: [À compléter]
-        </p>
+          <h2>Crédits</h2>
+          <p>
+            Conception et développement&nbsp;: <a href="https://agalma-etudes.com/" target="_blank" rel="noopener noreferrer" aria-label="Agalma Études — ouvre dans un nouvel onglet">Agalma Études</a><br />
+            Photographies&nbsp;: [À compléter]
+          </p>
+        </div>
       </div>
     </div>
   </section>

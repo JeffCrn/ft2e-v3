@@ -1,29 +1,33 @@
 ---
-// Cellule de cartouche : étiquette mono, valeur vedette statique.
-// Charte v2 : aucun compteur qui s'incrémente — le chiffre est posé.
-// Les vedettes chiffrées sont en Archivo 118/600 tabulaire (planche 08) ;
-// les données de cartouche restent en mono.
+// Colonne du relevé clair — charte v3 (§ 11) : le commentaire précède le
+// chiffre, l'étiquette mono s'intercale (« — libellé »), puis le chiffre
+// est posé en .releve-chiffre — aucun compteur qui s'incrémente.
+// Un seul chiffre plein (encre) par relevé : la preuve que la page défend.
+// Les autres se tiennent en retrait (.releve-retrait, pivot — lisible RGAA).
 interface Props {
   valeur: number;
   prefixe?: string;
   suffixe?: string;
   label: string;
+  commentaire: string;
+  plein?: boolean;
   demo?: boolean;
 }
 
-const { valeur, prefixe = '', suffixe = '', label, demo = false } = Astro.props;
+const { valeur, prefixe = '', suffixe = '', label, commentaire, plein = false, demo = false } = Astro.props;
 
-// Espace insécable avant une unité alphabétique (« 17 ans ») ; collé pour un symbole (« 150+ »).
-const suffixeAffiche = suffixe && /^[a-zA-Zà-ÿ]/.test(suffixe) ? ` ${suffixe}` : suffixe;
+// Un suffixe alphabétique (« ans ») rejoint l'étiquette : le grand chiffre
+// du relevé ne porte que la mesure. Un symbole reste collé au nombre.
+const suffixeAlpha = Boolean(suffixe) && /^[a-zà-ÿ]/i.test(suffixe);
+const etiquette = suffixeAlpha ? `${suffixe} ${label}` : label;
+const chiffreAffiche = `${prefixe}${valeur.toLocaleString('fr-FR')}${suffixeAlpha ? '' : suffixe}`;
 ---
 
-<div class="bg-papier p-5">
-  <p class="mono-label text-pivot font-normal">{label}</p>
-  <p
-    class="font-heading font-semibold text-[32px] leading-none text-profond tabular-nums mt-3"
-    style="font-stretch: 118%; letter-spacing: -0.02em;"
-  >
-    {prefixe}{valeur.toLocaleString('fr-FR')}{suffixeAffiche}
+<div class="flex flex-col bg-papier px-4 py-6 md:px-5 md:py-7">
+  <p class="text-sm font-light leading-relaxed text-pivot min-h-[4.5rem]">{commentaire}</p>
+  <p class="mono-label text-pivot mt-auto pt-5">—&nbsp;{etiquette}</p>
+  <p class:list={['releve-chiffre text-[clamp(3.5rem,7vw,5.75rem)] mt-2', plein ? 'text-encre' : 'releve-retrait']}>
+    {chiffreAffiche}
   </p>
-  {demo && <p class="mono-label text-pivot mt-1.5" aria-label="Donnée de démonstration">[démo]</p>}
+  {demo && <p class="mono-label text-pivot mt-2" aria-label="Donnée de démonstration">[démo]</p>}
 </div>

@@ -1,16 +1,14 @@
-# ft2e-site — Version liminaire
+# ft2e-v3 — Site internet FT2E
 
-Site institutionnel de **FT2E** — bureau d'études techniques pluridisciplinaire, La Rochelle.
+Site institutionnel de **FT2E** — bureau d'études techniques pluridisciplinaire, La Rochelle (depuis 2008).
 
-**Prestataire** : EuporIA Factory (Jean-François Caron) — La Rochelle.
-**Référentiel** : proposition stratégique mai 2026 (PDF).
-**Cible finale** : `https://ft2e.fr` — mise en ligne fin août / début septembre 2026.
+**v3 = fork de `ft2e-v2`** : contenus, collections et CMS identiques ; le design system passe à la charte v3 « plans et profondeur » (« FT2E Charte graphique » document 10 · révision 2, août 2026, bundle `branding-v3/`) — rampe monochrome 197° inchangée, relief par trois rangs d'ombre à l'encre translucide, filets 1 px hiérarchisés par l'opacité, trame 28 px, planche de page 1440 px posée sur calcaire, bouton principal en aplat encre.
 
-## Ce dossier — version liminaire
+- **Prestataire** : EuporIA Factory (Jean-François Caron) — La Rochelle.
+- **Déploiement de démo** : `https://ft2e-v3.vercel.app` (Vercel, statique).
+- **Cible finale** : `https://ft2e.fr`.
 
-Ce dépôt construit une **version liminaire** du site : maquette navigable haute fidélité destinée à être présentée à l'équipe associée FT2E lors de l'atelier de cadrage initial. **Ce n'est pas encore le site de production** — les contenus sont marqués `[DÉMO]`, le CMS n'est pas configuré, le formulaire Contact n'est pas branché.
-
-Cadrage central : **`docs/14-version-liminaire.md`**. À lire en priorité.
+> ⚠️ **Site en démo client — indexation par les moteurs bloquée volontairement** (robots.txt, `X-Robots-Tag`, `noindex` global). Ne pas débloquer sans validation FT2E — procédure de revert : `docs/19-migration-production.md`.
 
 ## Démarrage
 
@@ -19,69 +17,24 @@ npm install
 cp .env.example .env       # PUBLIC_MODE=liminaire par défaut
 npm run dev                # http://localhost:4321
 npm run build              # build de production dans ./dist
-npm run preview            # serve le build local
+npm run preview            # sert le build local
 ```
 
-## Structure du dépôt
+## Repères
 
-```
-ft2e-site/
-├── CLAUDE.md                  # mémoire principale Claude Code
-├── README.md                  # ce fichier
-├── .claude/                   # configuration Claude Code (rules, agents, skills, commands)
-├── docs/                      # cadrage produit / technique / éditorial (19 fichiers)
-│   ├── 14-version-liminaire.md     ← À LIRE EN PREMIER
-│   ├── 15-audit-site-actuel.md
-│   ├── 16-ecosysteme-clients.md
-│   ├── 17-perimetre-livrable.md
-│   └── 18-contenus-demonstration.md
-├── adr/                       # Architecture Decision Records
-├── content-models/            # schémas Zod des collections
-├── content-templates/         # gabarits prêts à dupliquer
-├── prompts/                   # prompts réutilisables
-│   └── build-version-liminaire.md  ← prompt master
-├── public/                    # statiques + interface Decap (V2)
-└── src/                       # application Astro (à générer)
-```
+| Besoin | Fichier |
+|---|---|
+| Mémoire principale Claude Code | `CLAUDE.md` — à lire en premier |
+| Design tokens stricts (charte v3) | `.claude/rules/tailwind-design-tokens.md` |
+| Spec charte v3 « plans et profondeur » | `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md` |
+| Recettes CSS (rampe, plans, composants) | `src/styles/global.css` |
+| Spécifications page-par-page | `docs/04-specifications-pages.md` |
+| Contenus de démonstration (`[DÉMO]`) | `docs/18-contenus-demonstration.md` |
+| Migration vers `ft2e.fr` (revert SEO inclus) | `docs/19-migration-production.md` |
 
-## Pour Claude Code
-
-Toute session démarre par :
-1. Lecture de **`CLAUDE.md`** à la racine.
-2. Lecture de **`docs/14-version-liminaire.md`**.
-3. Lecture des docs liés à la tâche en cours.
-
-Conventions dans `.claude/rules/`. Commandes répétables dans `.claude/commands/`. Prompt master dans `prompts/build-version-liminaire.md`.
-
-## Pour un développeur humain
-
-Lire dans l'ordre :
-1. `CLAUDE.md`
-2. `docs/14-version-liminaire.md` — ce qu'est exactement la liminaire
-3. `docs/15-audit-site-actuel.md` — pourquoi cette refonte
-4. `docs/00-vision-produit.md` — vision globale
-5. `docs/04-specifications-pages.md` — pages détaillées
-6. `docs/12-cadrage-jalons.md` — calendrier 6 phases / 13 semaines
-
-## Pour passer en production
-
-Quand la liminaire aura été validée par FT2E :
-
-1. `PUBLIC_MODE=production` dans `.env`
-2. Substitution des fiches projets démo par les fiches FT2E réelles
-3. Suppression du flag `demo: true` dans les fiches validées
-4. Remplacement des images placeholder par les photos réelles
-5. Logo final
-6. Activation Formspree/n8n pour le formulaire
-7. Configuration Decap CMS complète + formation équipe
-8. Bascule DNS `ft2e.fr`
-9. **Revert du blocage SEO triple-couche** (`robots.txt`, `vercel.json`, `noindex` par défaut dans `BaseLayout.astro`)
-
-→ **Checklist exhaustive et ordonnée** : [`docs/19-migration-production.md`](docs/19-migration-production.md). Cf. aussi `docs/14-version-liminaire.md` § « Du liminaire au production ».
-
-> ⚠️ **Site actuellement en démo client sur `https://ft2e-site.vercel.app` — indexation par les moteurs bloquée volontairement.** Ne pas débloquer sans validation FT2E.
+Conventions dans `.claude/rules/`, commandes répétables dans `.claude/commands/`, cadrage complet dans `docs/`.
 
 ## Contact
 
-- **MOA** : équipe associée FT2E (interlocuteur principal à désigner collégialement)
+- **MOA** : équipe associée FT2E (interlocuteur principal à désigner collégialement).
 - **Prestataire** : Jean-François Caron — `contact@euporia-factory.com`

@@ -4,10 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import CoinsCuivre from '../primitives/CoinsCuivre.astro';
 
-// Vignette cartouche — charte v2 (planche 07, format « vignette ») :
-// média duotone à équerres 14 px, puis bandeau à barre de rang 4 px,
-// intitulé et référence mono. Même ordre de lecture que le cartouche
-// plein : intitulé, référence, date.
+// Vignette de projet — charte v3 (§ 09/10) : un plan posé (bordure 1 px
+// filet-2, ombre de rang 1), média duotone 3:2 à équerres, pied cartouche
+// calcaire avec intitulé et données mono. Le survol bascule le pied du
+// calcaire au papier (300 ms) — aucun déplacement, le plan ne bouge pas.
 interface Props {
   projet: CollectionEntry<'projets'>;
 }
@@ -20,10 +20,7 @@ const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_princ
 const reference = `FT2E—${annee}`;
 ---
 
-<a
-  href={`/references/${projet.id}`}
-  class="group block border border-line-strong transition-[box-shadow,border-color] duration-200 ease-[var(--ease-blueprint)] hover:border-encre hover:shadow-[inset_0_0_0_1px_var(--color-encre)]"
->
+<a href={`/references/${projet.id}`} class="group block plan-pose">
   <div class:list={['aspect-[3/2] relative', imageExiste ? 'duotone-photo' : 'duotone-media']}>
     {imageExiste && (
       <img
@@ -33,18 +30,15 @@ const reference = `FT2E—${annee}`;
         loading="lazy"
       />
     )}
-    <CoinsCuivre taille={14} />
+    <CoinsCuivre />
     {demo && (
-      <span class="absolute right-3 top-2.5 mono-label font-normal text-voile z-10">[démo]</span>
+      <span class:list={['absolute right-3 top-2.5 mono-label font-normal z-10', imageExiste ? 'text-voile' : 'text-pivot']}>[démo]</span>
     )}
   </div>
-  <div class="grid grid-cols-[4px_1fr] border-t border-line">
-    <div class="bg-encre" aria-hidden="true"></div>
-    <div class="px-4 py-3.5">
-      <h3 class="type-intitule text-profond text-[15px]">
-        {titre}
-      </h3>
-      <p class="mono-data text-[11px] text-pivot mt-1.5">{reference} · {lieu}</p>
-    </div>
+  <div class="bg-calcaire border-t border-filet-2 px-4 py-3.5 transition-colors duration-300 ease-[var(--ease-blueprint)] group-hover:bg-papier">
+    <h3 class="type-intitule text-encre text-[15px]">
+      {titre}
+    </h3>
+    <p class="mono-data text-pivot mt-1.5">{reference} · {lieu}</p>
   </div>
 </a>

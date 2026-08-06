@@ -33,80 +33,99 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
     sousTitre="FT2E s’appuie sur une équipe de sept personnes qui a su développer une réelle expertise dans les multiples secteurs de la construction."
   />
 
-  <section class="bg-papier py-16 md:py-20">
+  {/* Plan posé sur la trame (charte v3) : la photographie collective et le
+      texte d’équipe partagent la même planche. */}
+  <section class="py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div class="relative">
-          <div class:list={['w-full aspect-[3/2]', collectifExiste ? 'duotone-photo' : 'duotone-media']}>
-            {collectifExiste && (
-              <img
-                src="/images/equipe/collectif.jpg"
-                alt="L’équipe FT2E réunie dans ses locaux à La Rochelle"
-                class="w-full h-full object-cover"
-                loading="lazy"
-              />
-            )}
-            <span class="absolute left-4 bottom-3 mono-label font-normal text-voile z-10" aria-hidden="true">l’équipe ft2e, la rochelle</span>
-          </div>
-          <CoinsCuivre />
-        </div>
-
-        <div class="space-y-4 text-[15px] font-normal text-pivot leading-[1.6]">
-          <p>
-            Chacun pilote ses projets de bout en bout, de la phase d’études au suivi de chantier. Cette organisation à taille humaine garantit une réactivité directe pour nos clients et nos collaborateurs partenaires.
-          </p>
-          <p>
-            Les compétences couvrent l’ensemble du spectre technique du bâtiment&nbsp;: efficacité énergétique, énergies renouvelables, électrotechnique courants forts et faibles, coordination sécurité incendie, études d’exécution et modélisation BIM. L’équipe cumule près de 70&nbsp;ans d’expérience en bureau d’études techniques, des calculs réglementaires RT2012 et RE2020 à la coordination SSI.
-          </p>
-          <p>
-            Le bureau privilégie depuis sa création la proximité avec les projets — disponibilité auprès des maîtres d’ouvrage, dialogue continu avec les architectes, présence régulière sur les chantiers. Cette stabilité se lit dans les parcours&nbsp;: plusieurs membres de l’équipe ont rejoint le bureau par un stage de fin d’études avant d’y être embauchés.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-papier py-16 md:py-20">
-    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
-        <h2 class="type-h2 text-encre text-[22px]">Les sept profils</h2>
-        <p class="mono-label font-normal text-pivot">une équipe pluridisciplinaire, ancrée à la rochelle</p>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-px bg-line border border-line">
-        {membres.map((membre) => (
-          <div class="bg-papier">
-            <div class:list={['aspect-[3/2]', membre.hasPhoto ? 'duotone-photo' : 'duotone-media']}>
-              {membre.hasPhoto && (
+      <div class="plan-pose p-6 md:p-10" data-plan>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
+          <div class="relative">
+            <div class:list={['w-full aspect-[3/2]', collectifExiste ? 'duotone-photo' : 'duotone-media']}>
+              {collectifExiste && (
                 <img
-                  src={membre.photo}
-                  alt={membre.photo_alt}
+                  src="/images/equipe/collectif.jpg"
+                  alt="L’équipe FT2E réunie dans ses locaux à La Rochelle"
                   class="w-full h-full object-cover"
                   loading="lazy"
                 />
               )}
+              <span
+                class:list={['absolute left-4 bottom-3 mono-label font-normal z-10', collectifExiste ? 'text-voile' : 'text-pivot']}
+                aria-hidden="true"
+              >l’équipe ft2e, la rochelle</span>
             </div>
-            <div class="px-3.5 py-3">
-              <h3 class="type-h2 text-encre text-base">
-                {membre.prenom}
-              </h3>
-              <p class="mono-label font-normal text-pivot mt-1.5">
-                {membre.role}
-              </p>
-              <p class="mono-label font-normal text-pivot tracking-[0.06em] mt-2 leading-[1.5]">
-                {membre.fonction}
-              </p>
-            </div>
+            <CoinsCuivre />
           </div>
-        ))}
+
+          <div class="space-y-4 text-[15px] text-pivot leading-[1.6]">
+            <p>
+              Chacun pilote ses projets de bout en bout, de la phase d’études au suivi de chantier. Cette organisation à taille humaine garantit une réactivité directe pour nos clients et nos collaborateurs partenaires.
+            </p>
+            <p>
+              Les compétences couvrent l’ensemble du spectre technique du bâtiment&nbsp;: efficacité énergétique, énergies renouvelables, électrotechnique courants forts et faibles, coordination sécurité incendie, études d’exécution et modélisation BIM. L’équipe cumule près de 70&nbsp;ans d’expérience en bureau d’études techniques, des calculs réglementaires RT2012 et RE2020 à la coordination SSI.
+            </p>
+            <p>
+              Le bureau privilégie depuis sa création la proximité avec les projets — disponibilité auprès des maîtres d’ouvrage, dialogue continu avec les architectes, présence régulière sur les chantiers. Cette stabilité se lit dans les parcours&nbsp;: plusieurs membres de l’équipe ont rejoint le bureau par un stage de fin d’études avant d’y être embauchés.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="bg-papier border-t-2 border-encre py-16 md:py-20">
+  <section class="py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <p class="mono-label text-pivot">01 — une équipe pluridisciplinaire, ancrée à la rochelle</p>
+      </div>
+      <h2 class="type-section text-[24px] mt-4 mb-8">
+        <span class="text-encre">Les sept profils</span>
+        <span class="text-clair" aria-hidden="true">/la rochelle</span>
+      </h2>
+
+      {/* Sept cellules au traitement strictement identique — aucun profil
+          n’est distingué (règle non négociable). */}
+      <div class="plan-pose" data-plan>
+        <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-px bg-filet-2">
+          {membres.map((membre) => (
+            <div class="bg-papier">
+              <div class:list={['aspect-[3/2]', membre.hasPhoto ? 'duotone-photo' : 'duotone-media']}>
+                {membre.hasPhoto && (
+                  <img
+                    src={membre.photo}
+                    alt={membre.photo_alt}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                )}
+              </div>
+              <div class="px-3.5 py-3.5">
+                <h3 class="type-intitule text-encre text-[17px]">
+                  {membre.prenom}
+                </h3>
+                <p class="mono-label font-normal text-pivot mt-1.5">
+                  {membre.role}
+                </p>
+                <p class="mono-label font-normal text-pivot tracking-[0.06em] mt-2 leading-[1.5]">
+                  {membre.fonction}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <p class="mono-label text-pivot">02 — recrutement</p>
+      </div>
       <div class="max-w-[70ch]">
-        <h2 class="type-h2 text-encre text-[22px] mb-4">
+        <h2 class="type-section text-[22px] mt-4 mb-4">
           Vous voulez rejoindre l’équipe&nbsp;?
         </h2>
         <p class="text-[15px] text-pivot leading-[1.6] mb-8">
@@ -121,7 +140,7 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
     </div>
   </section>
 
-  <CtaFinal titre={"Un projet en tête ?"} texte="L’équipe est disponible pour en discuter." />
+  <CtaFinal titre={'Un projet en tête ?'} texte="L’équipe est disponible pour en discuter." />
   <Fragment slot="json-ld">
     {membres.map((m) => (
       <JsonLd data={{

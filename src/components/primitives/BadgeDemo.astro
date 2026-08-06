@@ -1,4 +1,5 @@
 ---
+// Badge [DÉMO] — mono, filet 1 px à 28 % d'encre, aucun aplat (charte v3).
 interface Props {
   class?: string;
 }
@@ -10,7 +11,7 @@ const isLiminaire = import.meta.env.PUBLIC_MODE === 'liminaire';
 {isLiminaire && (
   <span
     class:list={[
-      'mono-label inline-flex items-center px-2 py-0.5 border border-line-strong text-pivot',
+      'mono-label inline-flex items-center px-2 py-0.5 border border-filet-chip text-pivot',
       className,
     ]}
     aria-label="Contenu de démonstration"

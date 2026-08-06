@@ -6,19 +6,20 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 
-// Index des affaires — charte v2 (planche 08, écran 2) : une nomenclature,
-// pas une grille de cartes. Le rang est porté par le filet gauche
-// (4 px livré · 2 px en cours · 1 px archive), la largeur d'Archivo suit.
-// Toutes les lignes sont sur une seule page ; le filtre réduit la liste,
-// il ne pagine pas.
+// Index des affaires — charte v3 : une nomenclature, pas une grille de cartes.
+// Le rang de statut est porté par l'OPACITÉ du filet gauche 1 px
+// (livré 22 % · en cours 16 % · archive 12 %) et par la graisse de
+// l'intitulé (700 / 600 / 300), à chasse constante 112. Le statut est
+// affiché en mono-label. Toutes les lignes sont sur une seule page ;
+// le filtre réduit la liste, il ne pagine pas.
 const projets = (await getCollection('projets')).sort((a, b) => b.data.annee - a.data.annee);
 
 const secteurs = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Patrimoine'];
 
 const rangs = {
-  livré: { barre: 'w-1', titre: 'text-profond', stretch: '118%' },
-  'en cours': { barre: 'w-[2px]', titre: 'text-encre', stretch: '100%' },
-  archive: { barre: 'w-px', titre: 'text-pivot', stretch: '72%' },
+  livré: { filet: 'border-l-filet-1', graisse: 'font-bold', statut: 'livré' },
+  'en cours': { filet: 'border-l-filet-2', graisse: 'font-semibold', statut: 'en cours' },
+  archive: { filet: 'border-l-filet-3', graisse: 'font-light', statut: 'archive' },
 } as const;
 
 const lignes = projets.map((projet) => ({
@@ -42,89 +43,92 @@ const lignes = projets.map((projet) => ({
     sousTitre="Une sélection de projets représentatifs de notre activité en Charente-Maritime, Vendée et Deux-Sèvres."
   />
 
-  <section class="bg-papier py-14 md:py-16">
+  <section class="py-14 md:py-16">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="border-t border-line border-b py-3.5 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:items-center mb-6">
-        <p class="mono-label font-normal text-pivot">secteur</p>
-        <div class="flex flex-wrap" role="group" aria-label="Filtres par secteur">
-          <button
-            class="chip-blueprint -ml-px -mt-px cursor-pointer"
-            data-filtre="tous"
-            aria-pressed="true"
-          >
-            Tous ({projets.length})
-          </button>
-          {secteurs.map((s) => {
-            const count = projets.filter((p) => p.data.secteur === s).length;
-            return count > 0 ? (
-              <button
-                class="chip-blueprint -ml-px -mt-px cursor-pointer"
-                data-filtre={s}
-                aria-pressed="false"
-              >
-                {s} ({count})
-              </button>
-            ) : null;
-          })}
-        </div>
-      </div>
-
-      {/* En-tête de nomenclature */}
-      <div
-        class="hidden md:grid grid-cols-[4px_56px_1fr_140px_110px_84px] gap-4 items-center pb-3 border-b-2 border-encre"
-        aria-hidden="true"
-      >
-        <div></div>
-        <p class="mono-label font-normal text-[10px] text-pivot">vue</p>
-        <p class="mono-label font-normal text-[10px] text-pivot">affaire</p>
-        <p class="mono-label font-normal text-[10px] text-pivot">secteur</p>
-        <p class="mono-label font-normal text-[10px] text-pivot">référence</p>
-        <p class="mono-label font-normal text-[10px] text-pivot text-right">année</p>
-      </div>
-
-      <ul role="list" data-grille>
-        {lignes.map(({ projet, rang, imageExiste }) => (
-          <li data-secteur={projet.data.secteur}>
-            <a
-              href={`/references/${projet.id}`}
-              class="grid grid-cols-[4px_1fr_auto] md:grid-cols-[4px_56px_1fr_140px_110px_84px] gap-x-4 gap-y-1 items-center py-3.5 border-b border-line hover:bg-calcaire transition-colors duration-200 ease-[var(--ease-blueprint)]"
+      {/* La planche principale de l'écran : la nomenclature entière est un plan posé */}
+      <div class="plan-pose p-5 md:p-10" data-plan>
+        <div class="border-t border-b border-filet-2 py-3.5 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:items-center mb-6">
+          <p class="mono-label font-normal text-pivot">secteur</p>
+          <div class="flex flex-wrap" role="group" aria-label="Filtres par secteur">
+            <button
+              class="chip-blueprint -ml-px -mt-px cursor-pointer"
+              data-filtre="tous"
+              aria-pressed="true"
             >
-              <span class="h-full justify-self-start flex items-stretch" aria-hidden="true">
-                <span class:list={['block', rang.barre, 'bg-encre']}></span>
-              </span>
-              <span class:list={['hidden md:block aspect-[3/2] overflow-hidden', imageExiste ? 'duotone-photo' : 'duotone-media']} aria-hidden="true">
-                {imageExiste && (
-                  <img src={projet.data.image_principale} alt="" class="w-full h-full object-cover" loading="lazy" />
-                )}
-              </span>
-              <span class="min-w-0">
-                <span
-                  class:list={['type-intitule block text-[16px] md:text-[17px] truncate', rang.titre]}
-                  style={`font-stretch: ${rang.stretch};`}
+              Tous ({projets.length})
+            </button>
+            {secteurs.map((s) => {
+              const count = projets.filter((p) => p.data.secteur === s).length;
+              return count > 0 ? (
+                <button
+                  class="chip-blueprint -ml-px -mt-px cursor-pointer"
+                  data-filtre={s}
+                  aria-pressed="false"
                 >
-                  {projet.data.titre}
-                </span>
-                <span class="md:hidden mono-data text-[11px] text-pivot block mt-0.5">
-                  {projet.data.secteur} · FT2E—{projet.data.annee}
-                  {projet.data.demo && <span class="mono-label font-normal text-[10px]"> [démo]</span>}
-                </span>
-              </span>
-              <span class="hidden md:block text-sm text-pivot">
-                {projet.data.secteur}
-                {projet.data.demo && <span class="mono-label font-normal text-[10px] block">[démo]</span>}
-              </span>
-              <span class="hidden md:block mono-data text-[12px] text-encre">FT2E—{projet.data.annee}</span>
-              <span class="mono-data text-[12px] text-pivot md:text-right row-start-1 col-start-3 md:row-auto md:col-auto">{projet.data.annee}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+                  {s} ({count})
+                </button>
+              ) : null;
+            })}
+          </div>
+        </div>
 
-      <div class="flex flex-col md:flex-row md:justify-between gap-2 mt-5">
-        <p class="mono-label font-normal text-pivot">rang du filet : 4 px livré · 2 px en cours · 1 px archive</p>
-        <p class="mono-data text-pivot" data-compteur data-total={projets.length} aria-live="polite">
-          {projets.length} lignes sur {projets.length}
-        </p>
+        {/* En-tête de nomenclature */}
+        <div
+          class="hidden md:grid grid-cols-[56px_1fr_120px_88px_104px_56px] gap-4 items-center pb-3 pl-4 border-b border-filet-1"
+          aria-hidden="true"
+        >
+          <p class="mono-label font-normal text-[10px] text-pivot">vue</p>
+          <p class="mono-label font-normal text-[10px] text-pivot">affaire</p>
+          <p class="mono-label font-normal text-[10px] text-pivot">secteur</p>
+          <p class="mono-label font-normal text-[10px] text-pivot">statut</p>
+          <p class="mono-label font-normal text-[10px] text-pivot">référence</p>
+          <p class="mono-label font-normal text-[10px] text-pivot text-right">année</p>
+        </div>
+
+        <ul role="list" data-grille>
+          {lignes.map(({ projet, rang, imageExiste }) => (
+            <li data-secteur={projet.data.secteur}>
+              <a
+                href={`/references/${projet.id}`}
+                class:list={[
+                  'grid grid-cols-[1fr_auto] md:grid-cols-[56px_1fr_120px_88px_104px_56px] gap-x-4 gap-y-1 items-center',
+                  'py-3.5 pl-4 pr-2 border-b border-l border-b-filet-2',
+                  rang.filet,
+                  'hover:bg-calcaire transition-colors duration-300 ease-[var(--ease-blueprint)]',
+                ]}
+              >
+                <span class:list={['hidden md:block aspect-[3/2] overflow-hidden', imageExiste ? 'duotone-photo' : 'duotone-media']} aria-hidden="true">
+                  {imageExiste && (
+                    <img src={projet.data.image_principale} alt="" class="w-full h-full object-cover" loading="lazy" />
+                  )}
+                </span>
+                <span class="min-w-0">
+                  <span class:list={['type-intitule block text-[16px] md:text-[17px] truncate text-encre', rang.graisse]}>
+                    {projet.data.titre}
+                  </span>
+                  <span class="md:hidden mono-data text-[11px] text-pivot block mt-0.5">
+                    {projet.data.secteur} · {rang.statut} · FT2E—{projet.data.annee}
+                    {projet.data.demo && <span class="mono-label font-normal text-[10px]"> [démo]</span>}
+                  </span>
+                </span>
+                <span class="hidden md:block text-sm text-pivot">
+                  {projet.data.secteur}
+                  {projet.data.demo && <span class="mono-label font-normal text-[10px] block">[démo]</span>}
+                </span>
+                <span class="hidden md:block mono-label font-normal text-[10px] text-pivot">{rang.statut}</span>
+                <span class="hidden md:block mono-data text-[12px] text-encre">FT2E—{projet.data.annee}</span>
+                <span class="mono-data text-[12px] text-pivot md:text-right row-start-1 col-start-2 md:row-auto md:col-auto">{projet.data.annee}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div class="flex flex-col md:flex-row md:justify-between gap-2 mt-5">
+          <p class="mono-label font-normal text-pivot">rang&nbsp;: opacité du filet — livré 22&nbsp;% · en cours 16&nbsp;% · archive 12&nbsp;%</p>
+          <p class="mono-data text-pivot" data-compteur data-total={projets.length} aria-live="polite">
+            {projets.length} lignes sur {projets.length}
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -144,7 +148,7 @@ const lignes = projets.map((projet) => ({
     const compteur = document.querySelector<HTMLElement>('[data-compteur]');
     const total = compteur?.dataset.total ?? String(rangees.length);
 
-    // Le filtre réduit la liste, sans transition d'apparition (charte v2).
+    // Le filtre réduit la liste, sans transition d'apparition (charte v3).
     const appliquer = (secteur: string | null) => {
       let visible = 0;
       rangees.forEach((ligne) => {

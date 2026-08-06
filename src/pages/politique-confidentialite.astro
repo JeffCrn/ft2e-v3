@@ -16,57 +16,59 @@ import HeroPage from '../components/blocs/HeroPage.astro';
     size="compact"
   />
 
-  <section class="bg-papier py-14 md:py-16">
+  <section class="py-14 md:py-16">
     <div class="max-w-[840px] mx-auto px-4 md:px-6">
-      <div
-        class="text-[17px] font-normal text-pivot leading-[1.6] space-y-6
-               [&>h2]:type-h2 [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:filet-top
-               [&>h2]:mt-9 [&>h2]:mb-3.5
-               [&>h2:first-child]:mt-0
-               [&>p]:text-pivot
-               [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
-               [&_strong]:text-encre [&_strong]:font-semibold
-               [&>ul]:list-none [&>ul]:pl-0 [&>ul>li]:border-l [&>ul>li]:border-line-strong [&>ul>li]:pl-4 [&>ul]:space-y-1"
-       
-      >
-        <p class="text-sm text-text-secondary italic">[À valider — squelette RGPD type]</p>
+      {/* Plan posé (charte v3) : la prose légale sur sa planche, corps en 300,
+          filets 1 px portés par l’opacité d’encre. */}
+      <div class="plan-pose p-6 md:p-10" data-plan>
+        <div
+          class="text-[17px] text-pivot leading-[1.6] space-y-6
+                 [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:border-t [&>h2]:border-filet-1 [&>h2]:pt-3.5
+                 [&>h2]:mt-9 [&>h2]:mb-3.5
+                 [&>p]:text-pivot
+                 [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
+                 [&_strong]:text-encre [&_strong]:font-semibold
+                 [&>ul]:list-none [&>ul]:pl-0 [&>ul>li]:border-l [&>ul>li]:border-filet-1 [&>ul>li]:pl-4 [&>ul]:space-y-1"
+        >
+          <p class="text-sm text-pivot italic">[À valider — squelette RGPD type]</p>
 
-        <h2>Responsable du traitement</h2>
-        <p>
-          FT2E — 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle<br />
-          Contact&nbsp;: <a href="mailto:ft2e@ft2e.fr">ft2e@ft2e.fr</a>
-        </p>
+          <h2>Responsable du traitement</h2>
+          <p>
+            FT2E — 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle<br />
+            Contact&nbsp;: <a href="mailto:ft2e@ft2e.fr">ft2e@ft2e.fr</a>
+          </p>
 
-        <h2>Données collectées</h2>
-        <p>Le site ft2e.fr collecte les données personnelles suivantes, uniquement dans le cadre du formulaire de contact&nbsp;:</p>
-        <ul>
-          <li>Nom et prénom</li>
-          <li>Adresse email</li>
-          <li>Numéro de téléphone (facultatif)</li>
-          <li>Contenu du message</li>
-        </ul>
+          <h2>Données collectées</h2>
+          <p>Le site ft2e.fr collecte les données personnelles suivantes, uniquement dans le cadre du formulaire de contact&nbsp;:</p>
+          <ul>
+            <li>Nom et prénom</li>
+            <li>Adresse email</li>
+            <li>Numéro de téléphone (facultatif)</li>
+            <li>Contenu du message</li>
+          </ul>
 
-        <h2>Finalité du traitement</h2>
-        <p>Les données sont collectées pour répondre à votre demande de contact et ne sont utilisées à aucune autre fin.</p>
+          <h2>Finalité du traitement</h2>
+          <p>Les données sont collectées pour répondre à votre demande de contact et ne sont utilisées à aucune autre fin.</p>
 
-        <h2>Durée de conservation</h2>
-        <p>Les données du formulaire de contact sont conservées pendant une durée maximale de 36 mois à compter de la dernière interaction.</p>
+          <h2>Durée de conservation</h2>
+          <p>Les données du formulaire de contact sont conservées pendant une durée maximale de 36 mois à compter de la dernière interaction.</p>
 
-        <h2>Cookies et mesure d’audience</h2>
-        <p>
-          Le site utilise Plausible Analytics, une solution de mesure d’audience conforme au RGPD qui ne dépose aucun cookie et ne collecte aucune donnée personnelle. Aucun bandeau de consentement n’est nécessaire.
-        </p>
+          <h2>Cookies et mesure d’audience</h2>
+          <p>
+            Le site utilise Plausible Analytics, une solution de mesure d’audience conforme au RGPD qui ne dépose aucun cookie et ne collecte aucune donnée personnelle. Aucun bandeau de consentement n’est nécessaire.
+          </p>
 
-        <h2>Vos droits</h2>
-        <p>
-          Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, d’effacement et de portabilité de vos données. Pour exercer ces droits, contactez-nous à <a href="mailto:ft2e@ft2e.fr">ft2e@ft2e.fr</a>.
-        </p>
+          <h2>Vos droits</h2>
+          <p>
+            Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, d’effacement et de portabilité de vos données. Pour exercer ces droits, contactez-nous à <a href="mailto:ft2e@ft2e.fr">ft2e@ft2e.fr</a>.
+          </p>
 
-        <h2>Sous-traitants</h2>
-        <p>
-          Hébergement&nbsp;: OVHcloud (2, rue Kellermann, 59100 Roubaix, France)<br />
-          Formulaire de contact&nbsp;: [À compléter]
-        </p>
+          <h2>Sous-traitants</h2>
+          <p>
+            Hébergement&nbsp;: OVHcloud (2, rue Kellermann, 59100 Roubaix, France)<br />
+            Formulaire de contact&nbsp;: [À compléter]
+          </p>
+        </div>
       </div>
     </div>
   </section>

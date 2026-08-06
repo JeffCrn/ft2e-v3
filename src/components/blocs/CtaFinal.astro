@@ -1,33 +1,46 @@
 ---
 import Bouton from '../primitives/Bouton.astro';
 
-// Bande d'appel finale — claire (le papier gouverne ; la réserve profonde
-// est réservée aux relevés mesurés). Filet de tête au rang ouvrage (4 px).
+// Bande d'appel finale — charte v3 (§ 09/10) : bande calcaire sous filet
+// haut d'indication 1 px, plan posé (data-plan) portant le motif de titre
+// de section (puce + étiquette mono, mot porteur encre + complément clair
+// « / » — toujours redondant ou accessoire) et le bouton principal.
 interface Props {
   titre?: string;
+  complement?: string;
+  etiquette?: string;
   texte?: string;
 }
 
 const {
-  titre = 'Un projet en tête ? Parlons-en.',
-  texte = 'Nous répondons sous 48 h ouvrées.',
+  titre = 'Un projet en tête ?',
+  complement = 'parlons-en',
+  etiquette = 'contact',
+  texte = 'Nous répondons sous 48 h ouvrées.',
 } = Astro.props;
 ---
 
-<section class="bg-calcaire border-t-4 border-encre py-16 md:py-20">
-  <div class="max-w-[1200px] mx-auto px-4 md:px-6 flex flex-col md:flex-row md:items-center gap-8">
-    <div class="md:flex-1">
-      <h2 class="type-h2 text-encre text-xl">
-        {titre}
-      </h2>
-      <p class="mono-label text-pivot mt-4">
-        {texte}
-      </p>
-    </div>
-    <div>
-      <Bouton href="/contact" variante="primary">
-        Parlons de votre projet
-      </Bouton>
+<section class="bg-calcaire border-t border-filet-1 py-16 md:py-20">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+    <div class="plan-pose p-7 md:p-14 flex flex-col md:flex-row md:items-center gap-8" data-plan>
+      <div class="md:flex-1">
+        <div class="flex items-center gap-3">
+          <span class="puce-section" aria-hidden="true"></span>
+          <span class="mono-label text-pivot">{etiquette}</span>
+        </div>
+        <h2 class="type-section text-[22px] md:text-[26px] mt-4">
+          <span class="text-encre">{titre}</span>
+          <span class="text-clair" aria-hidden="true">/{complement}</span>
+        </h2>
+        <p class="text-pivot text-[15px] leading-[1.6] mt-4 max-w-[52ch]">
+          {texte}
+        </p>
+      </div>
+      <div>
+        <Bouton href="/contact" variante="primary">
+          Parlons de votre projet&nbsp;→
+        </Bouton>
+      </div>
     </div>
   </div>
 </section>

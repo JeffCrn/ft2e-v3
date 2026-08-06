@@ -1,14 +1,15 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-// Boutons : rectangulaires, mono uppercase, filaires — aucun bouton plein
-// sans nécessité (charte v2, interdit 04). Le survol épaissit le filet
-// d'un cran, sans changement de teinte ni déplacement.
-// primary   → filet fort 2 px à l'encre (fond clair)
-// secondary → filet clair 2 px (réserve profonde ou aplat encre)
-// ghost     → filet d'indication 1 px (fond clair)
+// Boutons — charte v3 (§ 10) : rectangulaires, mono uppercase.
+// Le survol bascule le fond (260 ms), le filet ne bouge pas.
+// primary   → .btn-principal : aplat encre, filet clair 3 px à gauche,
+//             survol → profond ; flèche « → » admise dans le libellé
+// secondary → .btn-filaire : filaire 1 px à 28 % d'encre (fond clair)
+// ghost     → alias legacy de secondary (.btn-filaire)
+// profond   → .btn-blueprint-solid : filaire clair, sur réserve profonde uniquement
 interface Props extends HTMLAttributes<'a'> {
-  variante?: 'primary' | 'secondary' | 'ghost';
+  variante?: 'primary' | 'secondary' | 'ghost' | 'profond';
   href: string;
   externe?: boolean;
 }
@@ -16,9 +17,10 @@ interface Props extends HTMLAttributes<'a'> {
 const { variante = 'primary', href, externe = false, class: className, ...rest } = Astro.props;
 
 const classes: Record<string, string> = {
-  primary: 'btn-blueprint-dark',
-  secondary: 'btn-blueprint-solid',
-  ghost: 'btn-blueprint',
+  primary: 'btn-principal',
+  secondary: 'btn-filaire',
+  ghost: 'btn-filaire',
+  profond: 'btn-blueprint-solid',
 };
 
 const externeAttrs = externe

@@ -1,6 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
+// Cellule de liste — charte v3 (§ 10) : calcaire, bordure 1 px filet-1,
+// numéro mono en tête, intitulé (112/600) en pied aligné à droite.
+// Survol : bascule calcaire → papier (300 ms), aucun déplacement.
 interface Props {
   expertise: CollectionEntry<'expertises'>;
   /** Variante enrichie de l'index /expertises : accroche complète + extrait des livrables. */
@@ -11,29 +14,28 @@ const { expertise, detaillee = false } = Astro.props;
 const { titre, accroche, ordre, missions_liees, livrables } = expertise.data;
 
 const numero = String(ordre).padStart(2, '0');
-const missions = (missions_liees ?? []).join(' · ').toLowerCase();
+const missions = (missions_liees ?? []).slice(0, 6);
 const livrablesExtrait = detaillee ? livrables.slice(0, 3) : [];
 const livrablesReste = detaillee ? livrables.length - livrablesExtrait.length : 0;
 ---
 
-<a
-  href={`/expertises/${expertise.id}`}
-  class="group block bg-papier p-6 transition-colors duration-200 ease-[var(--ease-blueprint)] hover:bg-calcaire"
->
-  <div class="flex justify-between items-baseline gap-4">
-    <span class="mono-label font-normal text-pivot tabular-nums">{numero}</span>
-    {missions && <span class="mono-label font-normal text-pivot normal-case tracking-[0.1em]">{missions}</span>}
-  </div>
-  <h3 class="type-intitule text-encre text-[19px] mt-4 group-hover:text-profond transition-colors duration-200 ease-[var(--ease-blueprint)]">
-    {titre}
-  </h3>
+<a href={`/expertises/${expertise.id}`} class="cellule-liste">
+  <span class="mono-data text-pivot" aria-hidden="true">{numero}</span>
   <p class:list={['mt-3 text-[15px] text-pivot leading-[1.55]', !detaillee && 'line-clamp-3']}>
     {accroche}
   </p>
 
+  {missions.length > 0 && (
+    <ul class="flex flex-wrap gap-1.5 mt-4" role="list">
+      {missions.map((mission) => (
+        <li class="etiquette-mission">{mission}</li>
+      ))}
+    </ul>
+  )}
+
   {detaillee && (
     <Fragment>
-      <ul class="mt-5 space-y-2 border-l border-line-strong pl-4" role="list">
+      <ul class="mt-5 space-y-2 border-l border-filet-2 pl-4" role="list">
         {livrablesExtrait.map((livrable) => (
           <li class="mono-data text-encre">{livrable}</li>
         ))}
@@ -43,4 +45,8 @@ const livrablesReste = detaillee ? livrables.length - livrablesExtrait.length : 
       </p>
     </Fragment>
   )}
+
+  <h3 class="type-intitule text-encre text-[17px] self-end text-right mt-auto pt-5">
+    {titre}
+  </h3>
 </a>

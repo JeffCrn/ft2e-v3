@@ -1,19 +1,37 @@
 ---
 const isLiminaire = import.meta.env.PUBLIC_MODE === 'liminaire';
 
-const inputClasses = 'w-full px-4 py-3 bg-calcaire border border-line rounded-[2px] mono-data text-encre focus:outline-none focus-visible:outline-2 focus-visible:outline-pivot';
-const labelClasses = 'mono-label font-normal block text-pivot mb-1.5';
+// Inputs — charte v3 (§ 10) : fond calcaire, filet 1 px de rang 1,
+// rayon 0. Le focus est porté par le cadre global 2 px pivot (:focus-visible).
+const inputClasses = 'w-full px-4 py-3 bg-calcaire border border-filet-1 mono-data text-encre';
+const labelClasses = 'mono-label block text-pivot mb-1.5';
 ---
 
 <section class="py-16 md:py-20 bg-papier">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
       <div>
-        <h2 class="type-h2 text-encre text-[22px] filet-top mb-6">
+        <div class="flex items-center gap-3">
+          <span class="puce-section" aria-hidden="true"></span>
+          <span class="mono-label text-pivot">votre demande</span>
+        </div>
+        <h2 class="type-section text-encre text-[22px] md:text-[26px] mt-4 mb-6">
           Parlons de votre projet
         </h2>
 
         <form id="form-contact" class="space-y-6" novalidate>
+          {/* Honeypot anti-spam : champ invisible, hors tabulation, à laisser vide */}
+          <div class="hidden" aria-hidden="true">
+            <label for="site-web">Ne pas remplir ce champ</label>
+            <input
+              type="text"
+              id="site-web"
+              name="site-web"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
           <fieldset>
             <legend class="mono-label text-pivot mb-3">vous êtes</legend>
             <div class="grid grid-cols-2 sm:grid-cols-4 -mr-px">
@@ -90,8 +108,8 @@ const labelClasses = 'mono-label font-normal block text-pivot mb-1.5';
                   aria-required="true"
                   class="mt-1 accent-encre"
                 />
-                <span class="text-[15px] font-normal text-pivot leading-[1.55]">
-                  J’accepte que mes données soient traitées par FT2E dans le cadre de ma demande, conformément à la <a href="/politique-confidentialite" class="text-encre underline underline-offset-2 hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]">politique de confidentialité</a>.
+                <span class="text-[15px] text-pivot leading-[1.55]">
+                  J’accepte que mes données soient traitées par FT2E dans le cadre de ma demande, conformément à la <a href="/politique-confidentialite" class="text-encre underline underline-offset-2 hover:text-pivot transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">politique de confidentialité</a>.
                 </span>
               </label>
             </div>
@@ -101,14 +119,14 @@ const labelClasses = 'mono-label font-normal block text-pivot mb-1.5';
             <button
               type="button"
               disabled
-              class="btn-blueprint text-pivot cursor-not-allowed hover:border-line hover:text-pivot"
+              class="btn-filaire text-pivot cursor-not-allowed hover:border-filet-chip hover:text-pivot"
             >
               Envoyer (désactivé en version liminaire)
             </button>
           ) : (
             <button
               type="submit"
-              class="btn-blueprint-dark cursor-pointer"
+              class="btn-principal cursor-pointer"
             >
               Envoyer le message&nbsp;→
             </button>
@@ -117,41 +135,37 @@ const labelClasses = 'mono-label font-normal block text-pivot mb-1.5';
       </div>
 
       <div class="space-y-8">
-        <div class="border border-line-strong">
-          <p class="mono-label text-pivot px-5 py-3 border-b border-line">coordonnées</p>
+        {/* Cartouche coordonnées — charte v3 (§ 10) : plan posé (bordure 1 px,
+            ombre de rang 1), en-tête calcaire, filets internes de rang 2. */}
+        <div class="plan-pose">
+          <p class="mono-label text-pivot px-5 py-3 bg-calcaire border-b border-filet-2">coordonnées</p>
           <address class="not-italic mono-data text-encre leading-[1.7] px-5 py-4">
             <p>35 Rue Nicolas Denys de Fronsac<br />17000 La Rochelle</p>
             <p class="mt-3">
-              <a href="tel:+33546278593" class="hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a><br />
-              <a href="mailto:ft2e@ft2e.fr" class="hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
+              <a href="tel:+33546278593" class="hover:text-pivot transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a><br />
+              <a href="mailto:ft2e@ft2e.fr" class="hover:text-pivot transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
             </p>
           </address>
-          <div class="px-5 py-4 bg-calcaire border-t border-line">
-            <p class="mono-label font-normal text-pivot mb-1.5">disponibilité</p>
+          <div class="px-5 py-4 bg-calcaire border-t border-filet-2">
+            <p class="mono-label text-pivot mb-1.5">disponibilité</p>
             <p class="mono-data text-encre">lun. – ven., 8&nbsp;h&nbsp;30&nbsp;–&nbsp;18&nbsp;h</p>
-            <p class="mono-label font-normal text-pivot mt-2">réponse sous 48&nbsp;h ouvrées</p>
+            <p class="mono-label text-pivot mt-2">réponse sous 48&nbsp;h ouvrées</p>
           </div>
         </div>
 
         <div>
-          <div class="relative">
-            <iframe
-              title="Carte de localisation de FT2E — 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-1.2149345%2C46.1594398%2C-1.2029345%2C46.1654398&amp;layer=mapnik&amp;marker=46.1624398%2C-1.2089345"
-              class="w-full h-64 border border-line"
-              loading="lazy"
-            ></iframe>
-            <div aria-hidden="true">
-              <div class="absolute -left-2 -top-2 w-4 h-4 border-l border-t border-line-strong"></div>
-              <div class="absolute -right-2 -bottom-2 w-4 h-4 border-r border-b border-line-strong"></div>
-            </div>
-          </div>
+          <iframe
+            title="Carte de localisation de FT2E — 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-1.2149345%2C46.1594398%2C-1.2029345%2C46.1654398&amp;layer=mapnik&amp;marker=46.1624398%2C-1.2089345"
+            class="w-full h-64 border border-filet-2"
+            loading="lazy"
+          ></iframe>
           <p class="mt-3 mono-data text-pivot">
             <a
               href="https://www.openstreetmap.org/?mlat=46.1624398&amp;mlon=-1.2089345#map=17/46.1624398/-1.2089345"
               target="_blank"
               rel="noopener noreferrer"
-              class="underline underline-offset-2 hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]"
+              class="underline underline-offset-2 hover:text-encre transition-colors duration-[260ms] ease-[var(--ease-blueprint)]"
             >Ouvrir dans OpenStreetMap (nouvel onglet)</a>
             <span aria-hidden="true"> · </span>© OpenStreetMap
           </p>

@@ -5,7 +5,9 @@ import Logo from './Logo.astro';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 inset-x-0 z-50 h-14 md:h-[74px] bg-papier border-b border-line">
+{/* Barre claire fixe (charte v3) : papier, filet bas 1 px filet-2 — pas une
+    planche, donc aucune ombre. Alignée sur la planche de page (1440 px). */}
+<header class="fixed top-0 inset-x-0 z-50 h-14 md:h-[74px] max-w-[1440px] mx-auto bg-papier border-b border-filet-2">
   <nav class="max-w-[1200px] mx-auto px-4 md:px-6 flex items-center gap-6 md:gap-8 h-full" aria-label="Navigation principale">
     <a href="/" class="flex items-center shrink-0" aria-label="FT2E — Accueil">
       {/* Sous 180 px de large, le mot tombe : cadre seul sur mobile */}
@@ -21,7 +23,7 @@ const currentPath = Astro.url.pathname;
           <a
             href={link.href}
             class:list={[
-              'mono-label pb-1 border-b-2 motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]',
+              'mono-label pb-1 border-b motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]',
               currentPath === link.href
                 ? 'text-encre border-encre'
                 : 'text-pivot border-transparent hover:text-encre',
@@ -48,14 +50,14 @@ const currentPath = Astro.url.pathname;
     </button>
   </nav>
 
-  <div class="hidden md:hidden bg-papier border-t border-line" data-menu-panel>
+  <div class="hidden md:hidden bg-papier border-t border-filet-2" data-menu-panel>
     <ul class="max-w-[1200px] mx-auto px-4 py-4" role="list">
       {NAV_LINKS.map((link) => (
         <li>
           <a
             href={link.href}
             class:list={[
-              'mono-label block py-3 border-b border-line motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]',
+              'mono-label block py-3 border-b border-filet-3 motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]',
               currentPath === link.href ? 'text-encre' : 'text-pivot hover:text-encre',
             ]}
             aria-current={currentPath === link.href ? 'page' : undefined}

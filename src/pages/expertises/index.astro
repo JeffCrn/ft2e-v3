@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
-import CarteExpertise from '../../components/blocs/CarteExpertise.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 
 const expertises = (await getCollection('expertises')).sort((a, b) => a.data.ordre - b.data.ordre);
@@ -30,74 +29,102 @@ const deroulesMission = [
     sousTitre="FT2E couvre l’ensemble de la chaîne technique du bâtiment : de l’audit initial aux études d’exécution BIM, en passant par la thermique, le CVC, l’électricité et la coordination SSI."
   />
 
-  {/* ── L'approche : continuité conception-chantier + encart monotechnique ── */}
-  <section class="bg-papier py-16 md:py-20">
+  {/* ── 01 · L'approche : continuité conception-chantier + encart monotechnique ── */}
+  <section class="py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-8">
-        <h2 class="type-h2 text-encre text-[22px]">L’approche</h2>
-        <p class="mono-label font-normal text-pivot">de la conception à la réalisation, sans rupture</p>
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <p class="mono-label text-pivot">01 — l’approche</p>
       </div>
+      <h2 class="type-section text-[24px] md:text-[26px] mt-4 mb-8">
+        <span class="text-encre">L’approche</span>
+        <span class="text-clair" aria-hidden="true">/de la conception à la réalisation</span>
+      </h2>
 
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 lg:gap-16 items-start">
-        <div class="text-[17px] font-normal text-pivot leading-[1.6] space-y-6">
-          <p>
-            FT2E intervient à toutes les phases d’un projet de bâtiment. En amont, l’audit énergétique ou le diagnostic technique pose le cadre. En phase de conception, les ingénieurs dimensionnent les installations et rédigent les cahiers des charges. En phase DCE, ils produisent les pièces écrites des lots fluides, thermique, électricité et SSI. En phase chantier, ils assurent le visa des plans d’exécution, la coordination avec les entreprises titulaires et la réception des installations.
-          </p>
-          <p>
-            Cette continuité entre la conception et la réalisation est ce qui distingue FT2E d’un bureau d’études intervenant uniquement en amont. Elle garantit que les choix techniques faits en conception sont effectivement réalisables — et réalisés — sur le chantier. L’ambition est constante&nbsp;: être un partenaire des projets, pas un simple prestataire d’études.
-          </p>
-        </div>
-
-        <aside class="border border-line bg-calcaire p-6">
-          <h3 class="mono-label text-pivot font-medium">interventions monotechniques</h3>
-          <p class="mt-4 text-[15px] font-normal text-pivot leading-[1.55]">
-            Une seule spécialité technique, dont le bureau prend en charge l’ensemble des études et le suivi de réalisation. Des missions courtes, cadrées, menées avec la même rigueur que les grandes opérations.
-          </p>
-          <ul class="mt-5 space-y-2.5 border-l border-line-strong pl-4" role="list">
-            {[
-              'Remplacement d’une chaufferie',
-              'Diagnostic légionnelle',
-              'Dévoiement d’un réseau gaz',
-              'Installation de vidéosurveillance',
-            ].map((mission) => (
-              <li class="mono-data text-encre">{mission}</li>
-            ))}
-          </ul>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  {/* ── Les six expertises en cartes enrichies ── */}
-  <section class="bg-papier py-16 md:py-20">
-    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
-        <h2 class="type-h2 text-encre text-[22px]">Six expertises</h2>
-        <p class="mono-label font-normal text-pivot">livrables, méthode et projets — le détail par domaine</p>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-line border border-line">
-        {expertises.map((expertise) => (
-          <CarteExpertise expertise={expertise} detaillee />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* ── Le déroulé d'une mission complète ── */}
-  <section class="bg-papier py-16 md:py-20">
-    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
-        <h2 class="type-h2 text-encre text-[22px]">Le déroulé d’une mission</h2>
-        <p class="mono-label font-normal text-pivot">des pré-études à l’année de parfait achèvement</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-line border border-line">
-        {deroulesMission.map((temps) => (
-          <div class="p-6 bg-papier transition-colors duration-200 ease-[var(--ease-blueprint)] hover:bg-calcaire">
-            <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{temps.n}</span>
-            <h3 class="type-h2 text-encre text-[19px] mt-3">{temps.titre}</h3>
-            <p class="mt-3 text-[15px] font-normal text-pivot leading-[1.55]">{temps.texte}</p>
+      <div class="plan-pose p-6 md:p-10" data-plan>
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-10 lg:gap-16 items-start">
+          <div class="max-w-[840px] text-[17px] text-pivot leading-[1.6] space-y-6">
+            <p>
+              FT2E intervient à toutes les phases d’un projet de bâtiment. En amont, l’audit énergétique ou le diagnostic technique pose le cadre. En phase de conception, les ingénieurs dimensionnent les installations et rédigent les cahiers des charges. En phase DCE, ils produisent les pièces écrites des lots fluides, thermique, électricité et SSI. En phase chantier, ils assurent le visa des plans d’exécution, la coordination avec les entreprises titulaires et la réception des installations.
+            </p>
+            <p>
+              Cette continuité entre la conception et la réalisation est ce qui distingue FT2E d’un bureau d’études intervenant uniquement en amont. Elle garantit que les choix techniques faits en conception sont effectivement réalisables — et réalisés — sur le chantier. L’ambition est constante&nbsp;: être un partenaire des projets, pas un simple prestataire d’études.
+            </p>
           </div>
-        ))}
+
+          <aside class="border border-filet-1 bg-calcaire p-6">
+            <h3 class="mono-label text-pivot">interventions monotechniques</h3>
+            <p class="mt-4 text-[15px] text-pivot leading-[1.55]">
+              Une seule spécialité technique, dont le bureau prend en charge l’ensemble des études et le suivi de réalisation. Des missions courtes, cadrées, menées avec la même rigueur que les grandes opérations.
+            </p>
+            <ul class="mt-5 space-y-2.5 border-l border-filet-1 pl-4" role="list">
+              {[
+                'Remplacement d’une chaufferie',
+                'Diagnostic légionnelle',
+                'Dévoiement d’un réseau gaz',
+                'Installation de vidéosurveillance',
+              ].map((mission) => (
+                <li class="mono-data text-encre">{mission}</li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── 02 · Les six expertises en cellules de liste (charte v3 § 10) ── */}
+  <section class="py-16 md:py-20">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <p class="mono-label text-pivot">02 — expertises</p>
+      </div>
+      <h2 class="type-section text-[24px] md:text-[26px] mt-4">
+        <span class="text-encre">Six</span>
+        <span class="text-clair" aria-hidden="true">/expertises</span>
+      </h2>
+      <p class="mono-label font-normal text-pivot mt-3">livrables, méthode et projets — le détail par domaine</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-8">
+        {expertises.map((expertise) => {
+          const numero = String(expertise.data.ordre).padStart(2, '0');
+          return (
+            <a href={`/expertises/${expertise.id}`} class="cellule-liste lg:min-h-[168px]">
+              <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{numero}</span>
+              <span class="type-intitule text-encre text-[17px] md:text-[19px] mt-auto self-end text-right pt-6">
+                {expertise.data.titre}
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  {/* ── 03 · Le déroulé d'une mission complète ── */}
+  <section class="py-16 md:py-20">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <p class="mono-label text-pivot">03 — déroulé d’une mission</p>
+      </div>
+      <h2 class="type-section text-[24px] md:text-[26px] mt-4">
+        <span class="text-encre">Le déroulé</span>
+        <span class="text-clair" aria-hidden="true">/d’une mission</span>
+      </h2>
+      <p class="mono-label font-normal text-pivot mt-3">des pré-études à l’année de parfait achèvement</p>
+
+      <div class="plan-pose mt-8" data-plan>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-filet-2">
+          {deroulesMission.map((temps) => (
+            <div class="p-6 bg-papier">
+              <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{temps.n}</span>
+              <h3 class="type-intitule text-encre text-[18px] mt-3">{temps.titre}</h3>
+              <p class="mt-3 text-[15px] text-pivot leading-[1.55]">{temps.texte}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>

@@ -1,7 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 
-// Liste blueprint des six secteurs.
+// Section des secteurs — charte v3 (§ 10) : cellules de liste (calcaire,
+// bordure 1 px filet-1), numéro mono en tête, intitulé en pied aligné à
+// droite, survol calcaire → papier (300 ms).
+interface Props {
+  /** Numéro de section sur la planche (ex. « 04 ») — optionnel. */
+  numero?: string;
+}
+
+const { numero } = Astro.props;
+
 const secteurs = (await getCollection('secteurs'))
   .sort((a, b) => a.data.ordre - b.data.ordre)
   .map((s) => ({
@@ -10,22 +19,23 @@ const secteurs = (await getCollection('secteurs'))
   }));
 ---
 
-<section class="py-16 md:py-20 bg-papier">
+<section class="py-12 md:py-[76px]">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-    <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
-      <h2 class="type-h2 text-encre text-[22px]">Six secteurs</h2>
-      <p class="mono-label font-normal text-pivot">charente-maritime, vendée, deux-sèvres</p>
+    <div class="flex items-center gap-3">
+      <span class="puce-section" aria-hidden="true"></span>
+      <span class="mono-label text-pivot">{numero ? `${numero} — secteurs` : 'secteurs'}</span>
     </div>
-    <ul class="border-t-2 border-encre" role="list">
+    <h2 class="type-section text-[26px] mt-4">
+      <span class="text-encre">Six secteurs</span>
+      <span class="text-clair" aria-hidden="true">/charente-maritime, vendée, deux-sèvres</span>
+    </h2>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8" role="list">
       {secteurs.map((secteur) => (
-        <li class="border-b border-line transition-colors duration-200 ease-[var(--ease-blueprint)] hover:bg-calcaire">
-          <a
-            href={`/secteurs/${secteur.id}`}
-            class="group grid grid-cols-[44px_1fr] md:grid-cols-[44px_200px_1fr] gap-x-6 gap-y-1 py-4 items-baseline"
-          >
-            <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{secteur.numero}</span>
-            <h3 class="type-h2 text-encre text-[19px] group-hover:text-profond transition-colors duration-200 ease-[var(--ease-blueprint)]">{secteur.data.titre}</h3>
-            <p class="col-start-2 md:col-start-3 text-[15px] text-pivot leading-[1.55]">{secteur.data.accroche}</p>
+        <li>
+          <a href={`/secteurs/${secteur.id}`} class="cellule-liste h-full">
+            <span class="mono-data text-pivot" aria-hidden="true">{secteur.numero}</span>
+            <p class="mt-3 text-[15px] text-pivot leading-[1.55]">{secteur.data.accroche}</p>
+            <h3 class="type-intitule text-encre text-[17px] self-end text-right mt-auto pt-5">{secteur.data.titre}</h3>
           </a>
         </li>
       ))}

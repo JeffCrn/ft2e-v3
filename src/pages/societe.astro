@@ -1,10 +1,14 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import PageLayout from '../layouts/PageLayout.astro';
 import HeroPage from '../components/blocs/HeroPage.astro';
 import Bouton from '../components/primitives/Bouton.astro';
+import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
 
-// Fiche d'identité du bureau — cartouche latéral (gabarit « fiche technique »).
+// Fiche d'identité du bureau — cartouche v3 : plan posé (bordure 1 px,
+// ombre rang 1), en-tête calcaire, filets internes par rangs d'opacité.
 const ficheIdentite = [
   { label: 'création', valeur: '2008' },
   { label: 'implantation', valeur: 'La Rochelle' },
@@ -13,6 +17,10 @@ const ficheIdentite = [
   { label: 'veille réglementaire', valeur: 'I-Reef (CSTB)' },
   { label: 'périmètre', valeur: 'pré-études → réception' },
 ];
+
+// Bandeau 21:8 (charte v3 : bandeau / 16:10 / 3:2 seulement) — photo
+// collective en duotone 197°, hachure claire en attendant le reportage.
+const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/images/equipe/collectif.jpg'));
 ---
 
 <PageLayout
@@ -29,80 +37,116 @@ const ficheIdentite = [
     sousTitre="Société d’ingénierie qui réalise l’ensemble des études de conception et de suivi de travaux dans le domaine du bâtiment."
   />
 
-  {/* ── Le bureau d'études : prose + fiche d'identité en cartouche ── */}
-  <section class="bg-papier py-16 md:py-20">
+  {/* ── 01 · Le bureau d'études : prose + fiche d'identité en plan posé ── */}
+  <section class="py-12 md:py-[76px]">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-8">
-        <h2 class="type-h2 text-encre text-[22px]">Le bureau d’études</h2>
-        <p class="mono-label font-normal text-pivot">ingénierie fluide · thermique · énergie · électricité</p>
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <span class="mono-label text-pivot">01 — le bureau</span>
       </div>
+      <h2 class="type-section text-[26px] mt-4">
+        <span class="text-encre">Le bureau d’études</span>
+        <span class="text-clair" aria-hidden="true">/fluide, thermique, énergie, électricité</span>
+      </h2>
+      <p class="mono-label font-normal text-pivot mt-3">fluide, thermique, énergie, électricité</p>
 
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 lg:gap-16 items-start">
-        <div class="text-[17px] font-normal text-pivot leading-[1.6] space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 lg:gap-16 items-start mt-8">
+        <div class="text-[17px] text-pivot leading-[1.6] space-y-6">
           <p>
             FT2E est une société d’ingénierie pluridisciplinaire créée en 2008 à La Rochelle. Le bureau couvre l’ensemble de la chaîne technique du bâtiment&nbsp;: de l’audit initial des installations aux études d’exécution pour entreprise, en passant par la simulation thermique réglementaire, la conception CVC et plomberie, l’électricité courants forts et faibles, la coordination SSI et la modélisation BIM. Les prestations vont des pré-études jusqu’à la réception des travaux — et au-delà, avec le suivi des installations pendant l’année de parfait achèvement.
           </p>
           <p>
-            Cette pluridisciplinarité est portée par une <a href="/equipe" class="text-encre underline underline-offset-2 hover:text-encre motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">équipe de sept personnes</a> qui a développé, au fil des dix-sept dernières années, une expertise dans de multiples secteurs de la construction&nbsp;: logement, tertiaire, santé, sport, industriel, patrimoine. La direction du bureau est portée collectivement par les associés.
+            Cette pluridisciplinarité est portée par une <a href="/equipe" class="text-encre underline underline-offset-2 hover:text-profond transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">équipe de sept personnes</a> qui a développé, au fil des dix-sept dernières années, une expertise dans de multiples secteurs de la construction&nbsp;: logement, tertiaire, santé, sport, industriel, patrimoine. La direction du bureau est portée collectivement par les associés.
           </p>
         </div>
 
-        <dl class="border border-line-strong grid grid-cols-1 gap-px bg-line">
-          {ficheIdentite.map((ligne) => (
-            <div class="bg-papier px-5 py-3.5 flex items-baseline justify-between gap-4">
-              <dt class="mono-label font-normal text-pivot">{ligne.label}</dt>
-              <dd class="mono-data text-encre text-right">{ligne.valeur}</dd>
+        <div class="plan-pose" data-plan>
+          <p class="mono-label text-pivot bg-calcaire px-5 py-3 border-b border-filet-2">fiche d’identité</p>
+          <dl class="divide-y divide-filet-3">
+            {ficheIdentite.map((ligne) => (
+              <div class="px-5 py-3.5 flex items-baseline justify-between gap-4">
+                <dt class="mono-label font-normal text-pivot">{ligne.label}</dt>
+                <dd class="mono-data text-encre text-right">{ligne.valeur}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+
+      {/* Bandeau 21:8 en duotone — repères d'équerres, une seule annotation. */}
+      <div class:list={['relative aspect-[21/8] mt-12 md:mt-16', collectifExiste ? 'duotone-photo' : 'duotone-media']}>
+        {collectifExiste && (
+          <img
+            src="/images/equipe/collectif.jpg"
+            alt="L’équipe FT2E réunie dans ses locaux à La Rochelle"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        )}
+        <CoinsCuivre taille={18} />
+        <div class="absolute left-[12.5%] bottom-5 flex items-center gap-2.5 z-10" aria-hidden="true">
+          <span class:list={['block w-14 h-px', collectifExiste ? 'bg-voile' : 'bg-pivot']}></span>
+          <span class:list={['mono-label font-normal text-[10px]', collectifExiste ? 'text-voile' : 'text-pivot']}>ft2e — la rochelle, depuis 2008</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── 02 · Quatre piliers — planche posée, cases séparées par filets de rang 2 ── */}
+  <section class="py-12 md:py-[76px]">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <span class="mono-label text-pivot">02 — piliers</span>
+      </div>
+      <h2 class="type-section text-[26px] mt-4">
+        <span class="text-encre">Quatre piliers</span>
+        <span class="text-clair" aria-hidden="true">/ce qui guide la pratique au quotidien</span>
+      </h2>
+
+      <div class="plan-pose mt-8" data-plan>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-filet-2">
+          {[
+            { n: '01', titre: 'Proximité', texte: "Ancrage rochelais et intervention sur la façade atlantique. Disponibilité et réactivité dans le suivi des chantiers." },
+            { n: '02', titre: 'Expertise pluridisciplinaire', texte: "Audit, thermique, CVC, électricité CFO/CFA, coordination SSI, études d’exécution, BIM. Une équipe qui couvre toute la chaîne technique." },
+            { n: '03', titre: 'Engagement énergétique', texte: "Études réglementaires, simulations thermiques dynamiques, intégration des énergies renouvelables. Un vrai métier, sans posture." },
+            { n: '04', titre: 'Cohérence chantier', texte: "Études d’exécution pour les entreprises titulaires. Ce qui est conçu est constructible." },
+          ].map((pilier) => (
+            <div class="p-6 bg-papier transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-calcaire">
+              <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{pilier.n}</span>
+              <h3 class="type-intitule text-encre text-[17px] mt-3">{pilier.titre}</h3>
+              <p class="mt-3 text-[15px] text-pivot leading-[1.55]">{pilier.texte}</p>
             </div>
           ))}
-        </dl>
-      </div>
-
-    </div>
-  </section>
-
-  {/* ── Quatre piliers ── */}
-  <section class="bg-papier py-16 md:py-20">
-    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
-        <h2 class="type-h2 text-encre text-[22px]">Quatre piliers</h2>
-        <p class="mono-label font-normal text-pivot">ce qui guide la pratique au quotidien</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-line border border-line">
-        {[
-          { n: '01', titre: 'Proximité', texte: "Ancrage rochelais et intervention sur la façade atlantique. Disponibilité et réactivité dans le suivi des chantiers." },
-          { n: '02', titre: 'Expertise pluridisciplinaire', texte: "Audit, thermique, CVC, électricité CFO/CFA, coordination SSI, études d’exécution, BIM. Une équipe qui couvre toute la chaîne technique." },
-          { n: '03', titre: 'Engagement énergétique', texte: "Études réglementaires, simulations thermiques dynamiques, intégration des énergies renouvelables. Un vrai métier, sans posture." },
-          { n: '04', titre: 'Cohérence chantier', texte: "Études d’exécution pour les entreprises titulaires. Ce qui est conçu est constructible." },
-        ].map((pilier) => (
-          <div class="p-6 bg-papier transition-colors duration-200 ease-[var(--ease-blueprint)] hover:bg-calcaire">
-            <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{pilier.n}</span>
-            <h3 class="type-h2 text-encre text-[19px] mt-3">{pilier.titre}</h3>
-            <p class="mt-3 text-[15px] font-normal text-pivot leading-[1.55]">{pilier.texte}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* ── La proximité comme méthode : bande calcaire, filet de section ── */}
-  <section class="bg-calcaire border-t-2 border-encre py-16 md:py-20">
-    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,520px)_1fr] gap-10 lg:gap-16 items-start">
-        <div>
-          <p class="mono-label text-pivot mb-4">la méthode</p>
-          <h2 class="type-h2 text-encre text-[22px]">La proximité comme méthode</h2>
-          <p class="mt-5 text-[17px] text-pivot leading-[1.6]">
-            FT2E a toujours privilégié une proximité avec ses projets afin de garantir une disponibilité efficace auprès des clients et des partenaires, ainsi qu’une réactivité optimale dans le suivi des chantiers. Cette posture n’est pas un argument — elle conditionne l’organisation du bureau.
-          </p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:pt-12">
+      </div>
+    </div>
+  </section>
+
+  {/* ── 03 · La proximité comme méthode — bande calcaire opaque sur la trame ── */}
+  <section class="py-12 md:py-[76px] bg-calcaire border-t border-filet-1">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <span class="mono-label text-pivot">03 — méthode</span>
+      </div>
+      <h2 class="type-section text-[26px] mt-4">
+        <span class="text-encre">La proximité comme méthode</span>
+        <span class="text-clair" aria-hidden="true">/disponibilité et réactivité</span>
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,520px)_1fr] gap-10 lg:gap-16 items-start mt-8">
+        <p class="text-[17px] text-pivot leading-[1.6]">
+          FT2E a toujours privilégié une proximité avec ses projets afin de garantir une disponibilité efficace auprès des clients et des partenaires, ainsi qu’une réactivité optimale dans le suivi des chantiers. Cette posture n’est pas un argument — elle conditionne l’organisation du bureau.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {[
             { label: 'ancrage', texte: 'Un bureau unique à La Rochelle, au plus près des opérations suivies.' },
             { label: 'rayon d’action', texte: 'Charente-Maritime, Vendée, Deux-Sèvres — la façade atlantique du Centre-Ouest.' },
-            { label: 'organisation', texte: 'Équipes resserrées : chaque ingénieur pilote ses lots de bout en bout.' },
+            { label: 'organisation', texte: 'Équipes resserrées : chaque ingénieur pilote ses lots de bout en bout.' },
           ].map((item) => (
-            <div class="border-t border-line-strong pt-4">
-              <h3 class="mono-label text-encre font-medium">{item.label}</h3>
+            <div class="border-t border-filet-1 pt-4">
+              <h3 class="mono-label text-encre">{item.label}</h3>
               <p class="mt-3 text-[15px] text-pivot leading-[1.55]">{item.texte}</p>
             </div>
           ))}
@@ -111,16 +155,20 @@ const ficheIdentite = [
     </div>
   </section>
 
-  {/* ── Engagements énergétiques ── */}
-  <section class="bg-papier py-16 md:py-20">
+  {/* ── 04 · Engagements énergétiques ── */}
+  <section class="py-12 md:py-[76px]">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-8">
-        <h2 class="type-h2 text-encre text-[22px]">Engagements énergétiques et environnementaux</h2>
-        <p class="mono-label font-normal text-pivot">le savoir-faire historique du bureau</p>
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <span class="mono-label text-pivot">04 — engagements</span>
       </div>
+      <h2 class="type-section text-[26px] mt-4">
+        <span class="text-encre">Engagements énergétiques et environnementaux</span>
+        <span class="text-clair" aria-hidden="true">/le savoir-faire historique du bureau</span>
+      </h2>
 
-      <div class="max-w-[840px]">
-        <p class="text-[17px] font-normal text-pivot leading-[1.6]">
+      <div class="max-w-[840px] mt-8">
+        <p class="text-[17px] text-pivot leading-[1.6]">
           Les études thermiques et énergétiques sont au cœur du métier depuis la création. FT2E conçoit ses installations dans le cadre des réglementations en vigueur (RT2012, RE2020) et accompagne ses clients dans l’obtention des labels et certifications de l’habitat et du tertiaire. L’intégration des énergies renouvelables — pompes à chaleur aérothermiques et géothermiques, photovoltaïque, récupération de chaleur — fait partie de l’approche standard de dimensionnement.
         </p>
         <p class="mono-data text-pivot mt-6">
@@ -129,7 +177,7 @@ const ficheIdentite = [
       </div>
 
       <div class="mt-12 flex flex-wrap gap-4">
-        <Bouton href="/expertises" variante="ghost">Nos expertises</Bouton>
+        <Bouton href="/expertises" variante="secondary">Nos expertises</Bouton>
         <Bouton href="/contact" variante="primary">Parlons de votre projet</Bouton>
       </div>
     </div>

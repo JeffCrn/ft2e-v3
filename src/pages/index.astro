@@ -4,16 +4,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/blocs/Hero.astro';
-import ChiffresCles from '../components/blocs/ChiffresCles.astro';
-import AcronymeFT2E from '../components/blocs/AcronymeFT2E.astro';
-import CartesExpertises from '../components/blocs/CartesExpertises.astro';
-import SecteursPhares from '../components/blocs/SecteursPhares.astro';
-import ReferencesRecentes from '../components/blocs/ReferencesRecentes.astro';
-import EquipePreview from '../components/blocs/EquipePreview.astro';
-import BandeauPartenaires from '../components/blocs/BandeauPartenaires.astro';
+import CarteExpertise from '../components/blocs/CarteExpertise.astro';
+import CarteProjet from '../components/blocs/CarteProjet.astro';
+import Bouton from '../components/primitives/Bouton.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
 import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
 import TraceFlux from '../components/primitives/TraceFlux.astro';
+import { CHIFFRES_CLES } from '../lib/constants';
 
 // Média du hero (écran 1 de la charte) : l'image recule dans sa colonne,
 // elle ne porte pas le titre. Projet mis en avant le plus récent.
@@ -24,12 +21,67 @@ const enAvant = (await getCollection('projets'))
 const heroImageExiste = enAvant
   ? fs.existsSync(path.join(process.cwd(), 'public', enAvant.data.image_principale))
   : false;
+
+// Relevé clair (charte v3 § 10) : le commentaire précède le chiffre, un seul
+// chiffre plein par relevé — celui que la page défend (17 ans, depuis 2008).
+const commentaires = [
+  'Le bureau est créé en 2008 à La Rochelle.',
+  'Une direction portée collectivement.',
+  'Chiffre arrêté à la plaquette 2024.',
+  'Chiffre arrêté à la plaquette 2024.',
+];
+const releves = CHIFFRES_CLES.map((c, i) => ({
+  chiffre: `${'prefixe' in c ? c.prefixe : ''}${c.valeur.toLocaleString('fr-FR')}`,
+  etiquette: [c.suffixe, c.label].filter(Boolean).join(' '),
+  commentaire: commentaires[i],
+  plein: i === 0,
+  demo: c.demo,
+}));
+
+// L'acronyme déployé — quatre lettres, quatre champs d'ingénierie.
+const acronyme = [
+  { lettre: 'F', mot: 'Fluide', detail: 'CVC · plomberie · traitement d’air' },
+  { lettre: 'T', mot: 'Thermique', detail: 'RE2020 · STD · audit énergétique' },
+  { lettre: 'E', mot: 'Énergie', detail: 'EnR · photovoltaïque · FAE' },
+  { lettre: 'E', mot: 'Électricité', detail: 'CFO/CFA · SSI · IRVE' },
+];
+
+const expertises = (await getCollection('expertises')).sort((a, b) => a.data.ordre - b.data.ordre);
+
+const secteurs = (await getCollection('secteurs'))
+  .sort((a, b) => a.data.ordre - b.data.ordre)
+  .map((s) => ({
+    ...s,
+    numero: String(s.data.ordre).padStart(2, '0'),
+  }));
+
+const projetsRecents = (await getCollection('projets'))
+  .filter((p) => p.data.en_avant)
+  .sort((a, b) => b.data.annee - a.data.annee)
+  .slice(0, 4);
+
+const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/images/equipe/collectif.jpg'));
+
+// Maîtres d'ouvrage et clients réels cités dans la plaquette FT2E 2024
+// (docs/20-source-plaquette-2024.md) — données vérifiées, pas de badge démo.
+const partenaires = [
+  'Fountaine Pajot',
+  'Clairsienne',
+  'Compagnie Vendéenne du Logement',
+  'Dufour',
+  'Catana Group',
+  'Carl Zeiss Meditec',
+  'Altarea',
+  'Port de Plaisance de La Rochelle',
+  'Groupe hospitalier La Rochelle-Ré-Aunis',
+];
 ---
 
 <PageLayout
   title="FT2E — Bureau d’études techniques, La Rochelle"
   description="Bureau d’études fluides, thermique, électricité, SSI, BIM à La Rochelle. Au service des architectes et MOA depuis 2008."
 >
+  {/* La seule vedette de la page (charte v3 : une vedette par page, accueil uniquement). */}
   <Hero
     variante="accueil"
     eyebrow="la rochelle — depuis 2008 — 7 personnes"
@@ -50,28 +102,25 @@ const heroImageExiste = enAvant
           )}
           <CoinsCuivre taille={18} />
           <div class="absolute left-[12.5%] top-8 flex items-center gap-2.5 z-10" aria-hidden="true">
-            <span class="block w-14 h-px bg-voile"></span>
-            <span class="mono-label font-normal text-[10px] text-voile">
+            <span class:list={['block w-14 h-px', heroImageExiste ? 'bg-voile' : 'bg-pivot']}></span>
+            <span class:list={['mono-label font-normal text-[10px]', heroImageExiste ? 'text-voile' : 'text-pivot']}>
               {enAvant.data.demo ? '[démo] ' : ''}{enAvant.data.mission_ft2e.slice(0, 2).join(' · ').toLowerCase()}
             </span>
           </div>
         </div>
         <a
           href={`/references/${enAvant.id}`}
-          class="grid grid-cols-[4px_1fr] border-x border-b border-line-strong hover:bg-calcaire transition-colors duration-200 ease-[var(--ease-blueprint)]"
+          class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier"
         >
-          <span class="bg-encre" aria-hidden="true"></span>
-          <span class="px-4 py-3 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <span class="type-intitule text-profond text-[15px]">{enAvant.data.titre}</span>
-            <span class="mono-data text-[11px] text-pivot ml-auto">FT2E—{enAvant.data.annee} · {enAvant.data.lieu}</span>
-          </span>
+          <span class="type-intitule text-encre text-[15px]">{enAvant.data.titre}</span>
+          <span class="mono-data text-[11px] text-pivot ml-auto">FT2E—{enAvant.data.annee} · {enAvant.data.lieu}</span>
         </a>
       </Fragment>
     )}
   </Hero>
 
   {/* Zone « câblée » : le tracé de flux longe la colonne de contenu et se
-      dessine une fois au chargement (900 ms) — le seul mouvement du site. */}
+      dessine une fois au chargement (900 ms). */}
   <div class="relative">
     <div
       class="hidden min-[1360px]:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] pointer-events-none"
@@ -82,20 +131,233 @@ const heroImageExiste = enAvant
 
     {/* Chaque grande section est un jalon : les nœuds du tracé se posent
         exactement sur les frontières entre jalons consécutifs. */}
-    <div data-trace-jalon><ChiffresCles /></div>
 
-    <div data-trace-jalon><AcronymeFT2E /></div>
+    {/* ── 01 · Relevé clair (charte v3 § 10) : un seul chiffre plein ── */}
+    <div data-trace-jalon>
+      <section class="py-12 md:py-[76px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+          <div class="flex items-center gap-3">
+            <span class="puce-section" aria-hidden="true"></span>
+            <span class="mono-label text-pivot">01 — relevé</span>
+          </div>
+          <h2 class="type-section text-[26px] mt-4">
+            <span class="text-encre">Le bureau en chiffres</span>
+            <span class="text-clair" aria-hidden="true">/relevé 2024</span>
+          </h2>
 
-    <div data-trace-jalon><CartesExpertises /></div>
+          <div class="plan-pose mt-8" data-plan>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-filet-2">
+              {releves.map((r) => (
+                <div class="bg-papier p-6 flex flex-col">
+                  <p class="text-[14px] text-pivot leading-[1.5]">{r.commentaire}</p>
+                  <p class="mono-label text-pivot mt-4">— {r.etiquette}</p>
+                  <p
+                    class:list={[
+                      'releve-chiffre mt-3 text-[clamp(2.5rem,4.5vw,3.75rem)]',
+                      r.plein ? 'text-encre' : 'releve-retrait',
+                    ]}
+                  >
+                    {r.chiffre}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-    <div data-trace-jalon><SecteursPhares /></div>
+          <p class="mono-data text-pivot mt-4">
+            Domaines — Fluides · Thermique · Électricité · Sécurité incendie · BIM · RE2020 · STD
+          </p>
+        </div>
+      </section>
+    </div>
 
-    <div data-trace-jalon><ReferencesRecentes /></div>
+    {/* ── 02 · L'acronyme déployé + énoncé de méthode en plan qui déborde ── */}
+    <div data-trace-jalon>
+      <section class="py-12 md:py-[76px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+          <div class="flex items-center gap-3">
+            <span class="puce-section" aria-hidden="true"></span>
+            <span class="mono-label text-pivot">02 — identité</span>
+          </div>
+          <h2 class="type-section text-[26px] mt-4">
+            <span class="text-encre">Ce que le nom contient</span>
+            <span class="text-clair" aria-hidden="true">/quatre lettres, quatre champs d’ingénierie</span>
+          </h2>
 
-    <div data-trace-jalon><EquipePreview /></div>
+          <div class="plan-pose mt-8" data-plan>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-filet-2">
+              {acronyme.map((champ) => (
+                <div class="bg-papier p-5 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-calcaire">
+                  <p class="font-heading font-bold text-[32px] leading-none text-profond" style="font-stretch: 125%;" aria-hidden="true">{champ.lettre}</p>
+                  <h3 class="type-intitule text-encre text-[17px] mt-3">{champ.mot}</h3>
+                  <p class="mono-label font-normal text-pivot mt-2 normal-case tracking-[.08em]">{champ.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Énoncé de méthode — LE plan qui déborde de l'écran (charte v3 § 09) :
+              chevauche la planche de l'acronyme de 40 px, se retire de 92 px
+              sur son flanc gauche. Une fois par écran. */}
+          <div class="plan-deborde relative -mt-10 md:ml-[92px] max-w-[840px] px-6 py-8 md:px-10 md:py-9" data-plan>
+            <p class="type-section text-[22px] md:text-[26px] leading-[1.2] text-encre">
+              Quatre champs, une seule chaîne&nbsp;: le bureau suit ses projets de la conception à la réception, <span class="text-profond">sans passage de relais</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {/* ── 03 · Six expertises ── */}
+    <div data-trace-jalon>
+      <section class="py-12 md:py-[76px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+          <div class="flex items-center gap-3">
+            <span class="puce-section" aria-hidden="true"></span>
+            <span class="mono-label text-pivot">03 — expertises</span>
+          </div>
+          <h2 class="type-section text-[26px] mt-4">
+            <span class="text-encre">Six expertises</span>
+            <span class="text-clair" aria-hidden="true">/de l’audit au DOE numérique — un interlocuteur unique</span>
+          </h2>
+          <p class="mono-label font-normal text-pivot mt-3">de l’audit au doe numérique — un interlocuteur unique</p>
+
+          <div class="plan-pose mt-8" data-plan>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-filet-2">
+              {expertises.map((expertise) => (
+                <CarteExpertise expertise={expertise} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {/* ── 04 · Six secteurs — liste tabulaire sur la trame ── */}
+    <div data-trace-jalon>
+      <section class="py-12 md:py-[76px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+          <div class="flex items-center gap-3">
+            <span class="puce-section" aria-hidden="true"></span>
+            <span class="mono-label text-pivot">04 — secteurs</span>
+          </div>
+          <h2 class="type-section text-[26px] mt-4">
+            <span class="text-encre">Six secteurs</span>
+            <span class="text-clair" aria-hidden="true">/charente-maritime, vendée, deux-sèvres</span>
+          </h2>
+          <p class="mono-label font-normal text-pivot mt-3">charente-maritime, vendée, deux-sèvres</p>
+
+          <ul class="border-t border-filet-1 mt-8" role="list">
+            {secteurs.map((secteur) => (
+              <li class="border-b border-filet-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-calcaire">
+                <a
+                  href={`/secteurs/${secteur.id}`}
+                  class="grid grid-cols-[44px_1fr] md:grid-cols-[44px_200px_1fr] gap-x-6 gap-y-1 py-4 items-baseline"
+                >
+                  <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{secteur.numero}</span>
+                  <h3 class="type-intitule text-encre text-[19px]">{secteur.data.titre}</h3>
+                  <p class="col-start-2 md:col-start-3 text-[15px] text-pivot leading-[1.55]">{secteur.data.accroche}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    {/* ── 05 · Références récentes ── */}
+    <div data-trace-jalon>
+      <section class="py-12 md:py-[76px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+          <div class="flex items-center gap-3">
+            <span class="puce-section" aria-hidden="true"></span>
+            <span class="mono-label text-pivot">05 — références</span>
+          </div>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 mt-4">
+            <h2 class="type-section text-[26px]">
+              <span class="text-encre">Références récentes</span>
+              <span class="text-clair" aria-hidden="true">/quatre affaires mises en avant</span>
+            </h2>
+            <a href="/references" class="mono-label font-normal text-pivot hover:text-encre transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">
+              voir toutes les références →
+            </a>
+          </div>
+          <p class="mono-label font-normal text-pivot mt-3">quatre affaires mises en avant</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+            {projetsRecents.map((projet) => (
+              <CarteProjet projet={projet} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    {/* ── 06 · L'équipe en aperçu ── */}
+    <div data-trace-jalon>
+      <section class="py-12 md:py-[76px]">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+          <div class="flex items-center gap-3">
+            <span class="puce-section" aria-hidden="true"></span>
+            <span class="mono-label text-pivot">06 — équipe</span>
+          </div>
+          <h2 class="type-section text-[26px] mt-4">
+            <span class="text-encre">Sept profils</span>
+            <span class="text-clair" aria-hidden="true">/une responsabilité partagée</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-8">
+            <div class:list={['relative w-full aspect-[3/2]', collectifExiste ? 'duotone-photo' : 'duotone-media']}>
+              {collectifExiste && (
+                <img
+                  src="/images/equipe/collectif.jpg"
+                  alt="L’équipe FT2E réunie dans ses locaux à La Rochelle"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              )}
+              <CoinsCuivre taille={18} />
+              <span class:list={['absolute left-[12.5%] bottom-4 mono-label font-normal z-10', collectifExiste ? 'text-voile' : 'text-pivot']} aria-hidden="true">l’équipe ft2e, la rochelle</span>
+            </div>
+            <div>
+              <p class="text-[15px] text-pivot leading-[1.55]">
+                Une équipe de sept personnes, ancrée à La Rochelle depuis 2008. Chacun pilote ses projets de bout en bout, de l’étude au suivi de chantier.
+              </p>
+              <p class="mt-3 text-[15px] text-pivot leading-[1.55]">
+                Une organisation à taille humaine où la responsabilité est partagée et l’expertise mutualisée&nbsp;: fluides, thermique, électricité, SSI, BIM.
+              </p>
+              <div class="mt-6">
+                <Bouton href="/equipe" variante="primary">
+                  Découvrir l’équipe
+                </Bouton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 
-  <BandeauPartenaires />
+  {/* ── 07 · Maîtres d'ouvrage — bande calcaire, surface secondaire opaque sur la trame ── */}
+  <section class="py-12 md:py-[76px] bg-calcaire border-t border-filet-1">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <span class="mono-label text-pivot">07 — maîtres d'ouvrage</span>
+      </div>
+      <h2 class="type-section text-[26px] mt-4">
+        <span class="text-encre">Ils ont confié leurs projets à FT2E</span>
+        <span class="text-clair" aria-hidden="true">/maîtres d'ouvrage et clients</span>
+      </h2>
+      <div class="flex flex-wrap gap-x-6 gap-y-2 mt-8">
+        {partenaires.map((nom) => (
+          <span class="type-intitule text-encre text-base">
+            {nom}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <CtaFinal />
 </PageLayout>

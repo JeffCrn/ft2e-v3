@@ -9,27 +9,37 @@ const acronyme = [
 ];
 ---
 
-<section class="bg-papier py-16 md:py-20">
+<section class="bg-papier py-12 md:py-[76px]">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-    <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
-      <h2 class="type-h2 text-encre text-[22px]">Ce que le nom contient</h2>
-      <p class="mono-label font-normal text-pivot">quatre lettres, quatre champs d’ingénierie</p>
+    <div class="flex items-center gap-3">
+      <span class="puce-section" aria-hidden="true"></span>
+      <p class="mono-label text-pivot">identité</p>
+    </div>
+    <h2 class="type-section text-[22px] md:text-[26px] mt-4">
+      <span class="text-encre">Ce que le nom contient</span>
+      <span class="text-clair" aria-hidden="true">/quatre lettres, quatre champs d’ingénierie</span>
+    </h2>
+
+    <div class="plan-pose mt-8" data-plan>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-filet-2">
+        {acronyme.map((champ) => (
+          <div class="bg-papier p-5 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-calcaire">
+            <p class="font-heading font-bold text-[32px] leading-none text-profond" style="font-stretch: 125%;" aria-hidden="true">{champ.lettre}</p>
+            <h3 class="type-intitule text-encre text-[17px] mt-3">{champ.mot}</h3>
+            <p class="mono-label font-normal text-pivot mt-2 normal-case tracking-[.08em]">{champ.detail}</p>
+          </div>
+        ))}
+      </div>
     </div>
 
-    <div class="border border-line-strong grid grid-cols-2 lg:grid-cols-4 gap-px bg-line">
-      {acronyme.map((champ) => (
-        <div class="bg-papier p-5 transition-colors duration-200 ease-[var(--ease-blueprint)] hover:bg-calcaire">
-          <p class="font-heading font-bold text-[32px] leading-none text-profond" style="font-stretch: 125%;" aria-hidden="true">{champ.lettre}</p>
-          <h3 class="type-intitule text-encre text-[17px] mt-3">{champ.mot}</h3>
-          <p class="mono-label font-normal text-pivot mt-2 normal-case tracking-[.08em]">{champ.detail}</p>
-        </div>
-      ))}
+    {/* Énoncé de méthode — le plan qui déborde (charte v3 § 09) : chevauche
+        la planche de l'acronyme de 40 px, se retire de 92 px sur son flanc
+        gauche. Une seule fois par écran ; la chute est portée par la valeur
+        (profond). */}
+    <div class="plan-deborde relative -mt-10 md:ml-[92px] max-w-[840px] px-6 py-8 md:px-10 md:py-9" data-plan>
+      <p class="type-section text-[22px] md:text-[26px] leading-[1.2] text-encre">
+        Quatre champs, une seule chaîne&nbsp;: le bureau suit ses projets de la conception à la réception, <span class="text-profond">sans passage de relais</span>.
+      </p>
     </div>
-
-    {/* Énoncé de méthode — pull-quote : filet de section 2 px, Archivo
-        condensé uppercase ; la chute est portée par la valeur (profond). */}
-    <p class="filet-top mt-8 md:mt-10 max-w-[840px] type-h2 text-encre text-[22px] md:text-[26px] leading-[1.2]">
-      Quatre champs, une seule chaîne&nbsp;: le bureau suit ses projets de la conception à la réception, <span class="text-profond">sans passage de relais</span>.
-    </p>
   </div>
 </section>
