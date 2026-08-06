@@ -1,0 +1,34 @@
+---
+// L'acronyme déployé — quatre lettres, quatre champs d'ingénierie.
+// Bloc d'identité de l'accueil (déplacé depuis la page Société le 2026-08-06).
+const acronyme = [
+  { lettre: 'F', mot: 'Fluide', detail: 'CVC · plomberie · traitement d’air' },
+  { lettre: 'T', mot: 'Thermique', detail: 'RE2020 · STD · audit énergétique' },
+  { lettre: 'E', mot: 'Énergie', detail: 'EnR · photovoltaïque · FAE' },
+  { lettre: 'E', mot: 'Électricité', detail: 'CFO/CFA · SSI · IRVE' },
+];
+---
+
+<section class="bg-cool-white py-16 md:py-20">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+    <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
+      <h2 class="type-h2 text-marine text-[22px]">Ce que le nom contient</h2>
+      <p class="mono-label font-normal text-slate">quatre lettres, quatre champs d’ingénierie</p>
+    </div>
+
+    <div class="border border-line-strong grid grid-cols-2 lg:grid-cols-4 gap-px bg-line" data-reveal-stagger>
+      {acronyme.map((champ) => (
+        <div class="bg-cool-white p-5 transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:bg-paper">
+          <p class="font-mono text-[32px] leading-none text-copper" aria-hidden="true">{champ.lettre}</p>
+          <h3 class="type-h2 text-marine text-[17px] mt-3">{champ.mot}</h3>
+          <p class="mono-label font-normal text-slate mt-2 normal-case tracking-[.08em]">{champ.detail}</p>
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-6 max-w-[840px] text-[15px] font-light text-slate leading-[1.55]" data-reveal>
+      Quatre champs, une seule chaîne&nbsp;: le bureau suit ses projets de la conception à la réception, sans passage de relais.
+      <a href="/expertises" class="text-marine underline underline-offset-2 hover:text-copper-text motion-safe:transition-colors motion-safe:duration-[400ms] motion-safe:ease-[var(--ease-blueprint)]">Notre approche et nos expertises</a>.
+    </p>
+  </div>
+</section>

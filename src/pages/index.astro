@@ -2,6 +2,7 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/blocs/Hero.astro';
 import ChiffresCles from '../components/blocs/ChiffresCles.astro';
+import AcronymeFT2E from '../components/blocs/AcronymeFT2E.astro';
 import CartesExpertises from '../components/blocs/CartesExpertises.astro';
 import SecteursPhares from '../components/blocs/SecteursPhares.astro';
 import ReferencesRecentes from '../components/blocs/ReferencesRecentes.astro';
@@ -37,6 +38,8 @@ import TraceFlux from '../components/primitives/TraceFlux.astro';
     {/* Chaque grande section est un jalon : les nœuds du tracé se posent
         exactement sur les frontières entre jalons consécutifs. */}
     <div data-trace-jalon><ChiffresCles /></div>
+
+    <div data-trace-jalon><AcronymeFT2E /></div>
 
     <div data-trace-jalon><CartesExpertises /></div>
 

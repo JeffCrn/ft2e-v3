@@ -18,10 +18,15 @@ const secteurs = (await getCollection('secteurs'))
     </div>
     <ul class="border-t border-line-strong" role="list" data-reveal-stagger>
       {secteurs.map((secteur) => (
-        <li class="grid grid-cols-[44px_1fr] md:grid-cols-[44px_200px_1fr] gap-x-6 gap-y-1 py-4 border-b border-line items-baseline transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:border-b-copper hover:bg-paper">
-          <span class="mono-label font-normal text-copper-text tabular-nums" aria-hidden="true">{secteur.numero}</span>
-          <h3 class="type-h2 text-marine text-[19px]" style="font-stretch: 118%;">{secteur.data.titre}</h3>
-          <p class="col-start-2 md:col-start-3 text-[15px] font-light text-slate leading-[1.55]">{secteur.data.accroche}</p>
+        <li class="border-b border-line transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:border-b-copper hover:bg-paper">
+          <a
+            href={`/secteurs/${secteur.id}`}
+            class="group grid grid-cols-[44px_1fr] md:grid-cols-[44px_200px_1fr] gap-x-6 gap-y-1 py-4 items-baseline"
+          >
+            <span class="mono-label font-normal text-copper-text tabular-nums" aria-hidden="true">{secteur.numero}</span>
+            <h3 class="type-h2 text-marine text-[19px] group-hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]" style="font-stretch: 118%;">{secteur.data.titre}</h3>
+            <p class="col-start-2 md:col-start-3 text-[15px] font-light text-slate leading-[1.55]">{secteur.data.accroche}</p>
+          </a>
         </li>
       ))}
     </ul>
