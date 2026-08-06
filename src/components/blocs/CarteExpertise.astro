@@ -3,13 +3,17 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   expertise: CollectionEntry<'expertises'>;
+  /** Variante enrichie de l'index /expertises : accroche complète + extrait des livrables. */
+  detaillee?: boolean;
 }
 
-const { expertise } = Astro.props;
-const { titre, accroche, ordre, missions_liees } = expertise.data;
+const { expertise, detaillee = false } = Astro.props;
+const { titre, accroche, ordre, missions_liees, livrables } = expertise.data;
 
 const numero = String(ordre).padStart(2, '0');
 const missions = (missions_liees ?? []).join(' · ').toLowerCase();
+const livrablesExtrait = detaillee ? livrables.slice(0, 3) : [];
+const livrablesReste = detaillee ? livrables.length - livrablesExtrait.length : 0;
 ---
 
 <a
@@ -23,7 +27,20 @@ const missions = (missions_liees ?? []).join(' · ').toLowerCase();
   <h3 class="type-h2 text-marine text-[19px] leading-[1.1] mt-4 group-hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">
     {titre}
   </h3>
-  <p class="mt-3 text-[15px] font-light text-slate leading-[1.55] line-clamp-3">
+  <p class:list={['mt-3 text-[15px] font-light text-slate leading-[1.55]', !detaillee && 'line-clamp-3']}>
     {accroche}
   </p>
+
+  {detaillee && (
+    <Fragment>
+      <ul class="mt-5 space-y-2 border-l border-copper pl-4" role="list">
+        {livrablesExtrait.map((livrable) => (
+          <li class="mono-data text-marine">{livrable}</li>
+        ))}
+      </ul>
+      <p class="mono-label font-normal text-slate mt-5">
+        {livrablesReste > 0 ? `+ ${livrablesReste} livrables — ` : ''}méthode, FAQ et projets <span class="chevron-arrow">→</span>
+      </p>
+    </Fragment>
+  )}
 </a>
