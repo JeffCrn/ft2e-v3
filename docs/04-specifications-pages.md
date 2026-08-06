@@ -9,7 +9,7 @@ Chacune des 8 pages du sitemap V1 est spécifiée ici de manière opérationnell
 ### Objectif
 Première impression. Donner en moins de 30 secondes une lecture juste de FT2E : identité, savoir-faire, références récentes, contact.
 
-### Sitemap interne (9 blocs, de haut en bas)
+### Sitemap interne (10 blocs, de haut en bas — réorganisation 2026-08-06)
 
 1. **Hero**
    - Image forte de chantier emblématique (recommandation : Maison Pierre Loti ou un grutage CTA).
@@ -18,13 +18,14 @@ Première impression. Donner en moins de 30 secondes une lecture juste de FT2E :
    - CTA principal → `/contact`.
    - CTA secondaire → `/references`.
 2. **Chiffres clés** — 4 chiffres animés au scroll : *Années d'expertise* / *Ingénieurs associés* / *Projets livrés* / *Logements conçus*. **Valeurs à fournir par FT2E.**
-3. **Six expertises en cartes** — Audit · Thermique · CVC · Électricité · SSI · Exécution-BIM. Chaque carte : icône, titre, accroche 15 mots, lien.
-4. **Trois secteurs phares** — Logement, Tertiaire institutionnel, Santé. Visuel + chiffre + lien.
-5. **Références récentes** — 4 projets en grille (depuis `projets` avec `en_avant: true`, triés par `annee` desc.).
-6. **L'équipe** — Photo collective, accroche humaine sur la pluridisciplinarité du bureau, lien vers `/equipe`.
-7. **Bandeau partenaires** — Logos discrets des MOA et architectes (avec accord écrit obligatoire, voir `docs/13-glossaire-bet.md` § « Droits image »).
-8. **CTA final** — « Un projet en tête ? Parlons-en. » + bouton vers `/contact`.
-9. **Footer riche** — Coordonnées, plan, réseaux, mentions, sitemap (composant global).
+3. **L'acronyme déployé** (`AcronymeFT2E`) — F/T/E/E, quatre champs d'ingénierie + phrase de continuité conception → réception + lien `/expertises`. Bloc d'identité déplacé depuis Société (2026-08-06).
+4. **Six expertises en cartes** — Audit · Thermique · CVC · Électricité · SSI · Exécution-BIM. Cartes compactes (accroche tronquée) ; le détail vit sur `/expertises`.
+5. **Six secteurs** — liste blueprint numérotée, chaque ligne liant vers `/secteurs/[slug]`.
+6. **Références récentes** — 4 projets en grille (depuis `projets` avec `en_avant: true`, triés par `annee` desc.).
+7. **L'équipe** — Photo collective, accroche humaine sur la pluridisciplinarité du bureau, lien vers `/equipe`.
+8. **Bandeau partenaires** — Logos discrets des MOA et architectes (avec accord écrit obligatoire, voir `docs/13-glossaire-bet.md` § « Droits image »).
+9. **CTA final** — « Un projet en tête ? Parlons-en. » + bouton vers `/contact`.
+10. **Footer riche** — Coordonnées, plan, réseaux, mentions, sitemap (composant global).
 
 ### Métadonnées SEO
 
@@ -47,11 +48,13 @@ Crédibilité et profondeur. Raconter FT2E sans flatterie : histoire, pluridisci
 ### Blocs
 
 1. **Hero court** — Photo bureau ou équipe.
-2. **Histoire depuis 2008** — Récit synthétique (3–4 paragraphes), ancrage rochelais et pluridisciplinarité.
+2. **Le bureau d'études** — Récit synthétique (2 paragraphes), ancrage rochelais et pluridisciplinarité + fiche d'identité en cartouche.
 3. **Valeurs** — Liste illustrée des 4 piliers (Proximité, Expertise pluridisciplinaire, Engagement énergétique, Cohérence chantier).
-4. **Approche & méthodologie** — Comment FT2E travaille : du DCE au DOE.
+4. **La proximité comme méthode** — Cartouche sombre marine : ancrage, rayon d'action, organisation.
 5. **Engagements environnementaux & qualité** — RT2012, RE2020, Effinergie+, NF Habitat HQE, démarche RGE, qualifications spécifiques.
 6. **CTA** vers `/expertises` et `/contact`.
+
+> Réorganisation 2026-08-06 : l'acronyme déployé est remonté sur l'accueil ; « La mission, en quatre temps », « Approche & méthodologie » et l'encart monotechnique sont déplacés sur `/expertises`. Société se concentre sur l'identité (qui est FT2E), Expertises sur l'offre et la méthode (ce que fait FT2E, comment).
 
 ### Métadonnées
 - `title` : `La société — FT2E` 
@@ -83,11 +86,13 @@ Visage humain. Présenter les 7 membres de l'équipe de manière uniforme (5 ass
 ### Objectif
 Vitrine de l'expertise pluridisciplinaire. Une page index + 6 sous-pages dédiées.
 
-### Page index (`/expertises`)
+### Page index (`/expertises`) — page pilier (réorganisation 2026-08-06)
 
 1. Hero éditorial (composant `HeroPage`).
-2. Grille des 6 expertises (mêmes cartes qu'en accueil mais avec accroche élargie).
-3. CTA contact (« Quelle expertise pour votre projet ? »).
+2. **L'approche** — prose continuité conception-chantier + encart « interventions monotechniques » (déplacés depuis Société).
+3. Grille des 6 expertises en **cartes enrichies** (`CarteExpertise` variante `detaillee` : accroche complète + 3 premiers livrables).
+4. **Le déroulé d'une mission** — 4 temps : accompagnement / analyse / conception / suivi (déplacé depuis Société).
+5. CTA contact (« Quelle expertise pour votre projet ? »).
 
 ### Sous-pages expertise (`/expertises/[slug]`)
 
@@ -146,6 +151,28 @@ Gabarit standard de la fiche :
 - `title` : `<Titre projet> — Référence FT2E`
 - `og_image` : `image_principale` du projet (1200×630 dérivée).
 - JSON-LD : `CreativeWork` + `BreadcrumbList`.
+
+---
+
+## Pages satellites — **Secteurs** (`/secteurs/[slug]`) — ajout 2026-08-06
+
+### Objectif
+Rendre visibles les corps de texte de la collection `secteurs` (faits vérifiés de la plaquette 2024), invisibles jusqu'ici — seule l'accroche apparaissait sur l'accueil. Renforce le cocon sémantique (accueil → secteur → références).
+
+### Statut
+Hors sitemap V1 du PDF — **ajout à faire valider par FT2E**. Aucune entrée de navigation (pages satellites, comme les fiches projet). 6 pages statiques générées depuis la collection `secteurs`.
+
+### Blocs
+
+1. `HeroPage` — breadcrumb Accueil / secteur, eyebrow `secteur NN — sur 6`, sous-titre = accroche.
+2. **Récit du secteur** — corps Markdown de la fiche + image duotone (`fs.existsSync` + placeholder) avec coins cuivre.
+3. **Références du secteur** — jusqu'à 4 cartes projet filtrées par `secteur` + lien `/references`.
+4. CTA final standard.
+
+### Métadonnées
+- `title` : `Secteur <Titre> — FT2E`
+- `description` : accroche de la fiche secteur.
+- JSON-LD : `BreadcrumbList` (via `Breadcrumbs`).
 
 ---
 
