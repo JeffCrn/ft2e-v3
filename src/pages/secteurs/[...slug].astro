@@ -1,0 +1,98 @@
+---
+import { getCollection, render } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
+import PageLayout from '../../layouts/PageLayout.astro';
+import HeroPage from '../../components/blocs/HeroPage.astro';
+import CarteProjet from '../../components/blocs/CarteProjet.astro';
+import CoinsCuivre from '../../components/primitives/CoinsCuivre.astro';
+import CtaFinal from '../../components/blocs/CtaFinal.astro';
+
+export async function getStaticPaths() {
+  const secteurs = await getCollection('secteurs');
+  return secteurs.map((secteur) => ({
+    params: { slug: secteur.id },
+    props: { secteur },
+  }));
+}
+
+const { secteur } = Astro.props;
+const { titre, accroche, image, image_alt, ordre } = secteur.data;
+const { Content } = await render(secteur);
+
+const numero = String(ordre).padStart(2, '0');
+const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image));
+
+const projetsSecteur = (await getCollection('projets'))
+  .filter((p) => p.data.secteur === titre)
+  .sort((a, b) => b.data.annee - a.data.annee);
+---
+
+<PageLayout
+  title={`Secteur ${titre} — FT2E`}
+  description={accroche}
+>
+  <HeroPage
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: titre, href: `/secteurs/${secteur.id}` },
+    ]}
+    eyebrow={`secteur ${numero} — sur 6`}
+    titre={titre}
+    sousTitre={accroche}
+  />
+
+  {/* ── Récit du secteur + image duotone ── */}
+  <section class="bg-cool-white py-14 md:py-16">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div
+        class="lg:col-span-7 text-[17px] font-light text-slate leading-[1.6] space-y-6
+               [&_a]:text-marine [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-copper-text
+               [&_strong]:text-marine [&_strong]:font-semibold"
+        data-reveal
+      >
+        <Content />
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="relative" data-reveal>
+          <div class:list={['w-full aspect-[3/2]', imageExiste ? 'duotone-photo' : 'duotone-media']}>
+            {imageExiste && (
+              <img
+                src={image}
+                alt={image_alt}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            )}
+            <span class="absolute left-4 bottom-3 mono-label font-normal text-cool-white z-10" aria-hidden="true">
+              secteur {titre.toLowerCase()}
+            </span>
+          </div>
+          <CoinsCuivre />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Projets du secteur ── */}
+  {projetsSecteur.length > 0 && (
+    <section class="bg-cool-white pb-16 md:pb-20">
+      <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+        <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
+          <h2 class="type-h2 text-marine text-[20px]">Références {titre.toLowerCase()}</h2>
+          <a href="/references" class="mono-label font-normal text-slate hover:text-copper-text motion-safe:transition-colors motion-safe:duration-[400ms] motion-safe:ease-[var(--ease-blueprint)]">
+            voir toutes les références <span class="chevron-arrow">→</span>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-reveal-stagger>
+          {projetsSecteur.slice(0, 4).map((p) => (
+            <CarteProjet projet={p} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaFinal />
+</PageLayout>
