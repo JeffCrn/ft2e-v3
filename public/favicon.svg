@@ -1,6 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#000000"/>
-  <text x="16" y="22" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="13" letter-spacing="-0.5">
-    <tspan fill="#FFFFFF">FT</tspan><tspan fill="#0071e3">2</tspan><tspan fill="#FFFFFF">E</tspan>
-  </text>
+  <!-- Monogramme FT2E, forme réduite « cadre seul » inversée (charte v2) :
+       tuile profonde, cadre au clair, flux au voile, zéro rayon. -->
+  <rect width="32" height="32" fill="#001718"/>
+  <g fill="none" stroke-width="3.2" transform="translate(4,4) scale(0.2667)">
+    <path stroke="#99CCCD" stroke-linejoin="miter" stroke-width="12" d="M8,42 V8 H82 V42 M82,64 V82 H8 V64"/>
+    <path stroke="#E1F4F4" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M0,54 H28 V26 H58 V54 H90"/>
+  </g>
 </svg>

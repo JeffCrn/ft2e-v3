@@ -58,10 +58,10 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
 
     <slot name="head" />
   </head>
-  <body class="min-h-screen flex flex-col bg-cool-white text-near-black font-body">
+  <body class="min-h-screen flex flex-col bg-papier text-encre font-body">
     <a
       href="#contenu-principal"
-      class="mono-label sr-only focus:not-sr-only focus:absolute focus:top-20 focus:left-4 focus:z-50 focus:bg-encre focus:text-cool-white focus:px-4 focus:py-3 focus:border focus:border-copper"
+      class="mono-label sr-only focus:not-sr-only focus:absolute focus:top-20 focus:left-4 focus:z-50 focus:bg-encre focus:text-papier focus:px-4 focus:py-3"
     >
       Aller au contenu principal
     </a>
@@ -75,87 +75,5 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <slot name="footer" />
 
     <slot name="json-ld" />
-
-    <script>
-      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      /* ─── Hero reveal ────────────────────────────── */
-      function heroReveal() {
-        const words = document.querySelectorAll('[data-hero-word]');
-        const subtitle = document.querySelector('[data-hero-subtitle]');
-        const cta = document.querySelector('[data-hero-cta]');
-        const schema = document.querySelector('[data-hero-schema]');
-        if (!words.length) return;
-
-        if (reduced) {
-          words.forEach(w => w.classList.add('revealed'));
-          subtitle?.classList.add('revealed');
-          cta?.classList.add('revealed');
-          schema?.classList.add('revealed');
-          return;
-        }
-
-        const lastDelay = (words.length - 1) * 40 + 500;
-        words.forEach(w => w.classList.add('revealed'));
-        setTimeout(() => subtitle?.classList.add('revealed'), lastDelay + 300);
-        setTimeout(() => cta?.classList.add('revealed'), lastDelay + 500);
-        setTimeout(() => schema?.classList.add('revealed'), lastDelay + 650);
-      }
-
-      /* ─── Scroll reveal ──────────────────────────── */
-      function scrollReveal() {
-        const targets = document.querySelectorAll('[data-reveal]:not(.revealed), [data-reveal-stagger]:not(.revealed)');
-        if (!targets.length) return;
-
-        if (reduced) {
-          targets.forEach(el => el.classList.add('revealed'));
-          return;
-        }
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15 },
-        );
-
-        targets.forEach(el => observer.observe(el));
-      }
-
-      /* ─── CTA parallax ──────────────────────────── */
-      function parallax() {
-        const targets = document.querySelectorAll<HTMLElement>('[data-parallax]');
-        if (!targets.length || reduced) return;
-
-        const thresholds = Array.from({ length: 20 }, (_, i) => i / 19);
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const y = (1 - entry.intersectionRatio) * -15;
-                (entry.target as HTMLElement).style.transform = `translateY(${y}px)`;
-              }
-            });
-          },
-          { threshold: thresholds },
-        );
-
-        targets.forEach(el => observer.observe(el));
-      }
-
-      /* ─── Init on each page (including View Transitions) */
-      function initMotion() {
-        heroReveal();
-        scrollReveal();
-        parallax();
-      }
-
-      document.addEventListener('astro:page-load', initMotion);
-    </script>
   </body>
 </html>

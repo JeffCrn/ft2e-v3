@@ -1,262 +1,51 @@
 /* ═══════════════════════════════════════════════
-   Motion Design — blueprint « ingénierie de l'invisible »
-   GPU-composited only: opacity, transform
+   Motion — charte v2 « ingénierie de l'invisible »
+
+   Un seul tracé animé sur tout le site : le filet de flux qui relie
+   les sections, 900 ms, une fois par chargement. Aucun compteur qui
+   s'incrémente, aucune apparition au défilement, aucun déplacement
+   au survol. Les états interactifs jouent sur l'épaisseur de filet
+   et la bascule de valeur (transitions courtes, 200 ms).
+
    Easing unique : cubic-bezier(0.16, 1, 0.3, 1)
    ═══════════════════════════════════════════════ */
 
 :root {
   --ease-apple: cubic-bezier(0.16, 1, 0.3, 1); /* alias legacy → blueprint */
-  --ease-apple-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-apple-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─── Hero word-by-word reveal ─────────────────── */
+/* ─── Tracé de flux — se dessine une fois au chargement ─── */
+/* Le JS de TraceFlux.astro mesure la polyligne en pixels réels puis
+   déclenche le dessin (stroke-dashoffset → 0) en 900 ms. */
 
-[data-hero-word] {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(-8px);
-}
-[data-hero-word].revealed {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 500ms var(--ease-apple), transform 500ms var(--ease-apple);
-}
-
-[data-hero-subtitle] {
-  opacity: 0;
-  transform: translateY(10px);
-}
-[data-hero-subtitle].revealed {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 600ms var(--ease-apple), transform 600ms var(--ease-apple);
-}
-
-[data-hero-cta] {
-  opacity: 0;
-  transform: scale(0.95);
-}
-[data-hero-cta].revealed {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 500ms var(--ease-apple), transform 500ms var(--ease-apple);
-}
-
-/* ─── Scroll reveal (individual elements) ──────── */
-
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(12px);
-}
-[data-reveal].revealed {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 700ms var(--ease-apple), transform 700ms var(--ease-apple);
-}
-
-/* ─── Stagger grid children ────────────────────── */
-
-[data-reveal-stagger] > * {
-  opacity: 0;
-  transform: translateY(10px);
-}
-[data-reveal-stagger].revealed > * {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 500ms var(--ease-apple), transform 500ms var(--ease-apple);
-}
-[data-reveal-stagger].revealed > *:nth-child(1) { transition-delay: 0ms; }
-[data-reveal-stagger].revealed > *:nth-child(2) { transition-delay: 80ms; }
-[data-reveal-stagger].revealed > *:nth-child(3) { transition-delay: 160ms; }
-[data-reveal-stagger].revealed > *:nth-child(4) { transition-delay: 240ms; }
-[data-reveal-stagger].revealed > *:nth-child(5) { transition-delay: 320ms; }
-[data-reveal-stagger].revealed > *:nth-child(6) { transition-delay: 400ms; }
-[data-reveal-stagger].revealed > *:nth-child(7) { transition-delay: 480ms; }
-[data-reveal-stagger].revealed > *:nth-child(8) { transition-delay: 560ms; }
-[data-reveal-stagger].revealed > *:nth-child(9) { transition-delay: 640ms; }
-
-/* ─── Chevron link micro-interaction ──────────── */
-
-.chevron-arrow {
-  display: inline-block;
-  transition: transform 300ms var(--ease-apple-spring);
-}
-*:hover > .chevron-arrow,
-*:hover .chevron-arrow {
-  transform: translateX(4px);
-}
-
-/* ─── Counter pulse ───────────────────────────── */
-
-@keyframes counter-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-.counter-pulse {
-  animation: counter-pulse 300ms var(--ease-apple) 1;
-}
-
-/* ─── Chiffre label fade-in ───────────────────── */
-
-[data-chiffre-label] {
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 400ms var(--ease-apple), transform 400ms var(--ease-apple);
-}
-[data-chiffre-label].revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ─── Filter grid transition ─────────────────── */
-
-[data-grille] {
-  transition: opacity 200ms var(--ease-apple), transform 200ms var(--ease-apple);
-}
-
-/* ─── Form focus enhancement ──────────────────── */
-
-.form-input {
-  transition: box-shadow 200ms var(--ease-apple),
-              transform 200ms var(--ease-apple),
-              background-color 200ms var(--ease-apple) !important;
-}
-.form-input:focus {
-  transform: scale(1.005);
-}
-
-/* ─── CTA parallax ────────────────────────────── */
-
-[data-parallax] {
-  will-change: transform;
-  transition: transform 100ms linear;
-}
-
-/* ─── Tracé de flux — se dessine au défilement ── */
-/* Le JS de TraceFlux.astro pilote stroke-dashoffset selon la
-   progression du scroll (planche système, section 02). */
-
-/* Valeur volontairement très grande : masque toute la polyligne avant que
-   le JS recalcule la géométrie en pixels réels (un motif trop court se
-   répéterait en tronçons tiret/trou sur les tracés hauts). */
+/* État initial masqué (valeur volontairement très grande : le JS recalcule
+   dasharray/dashoffset en pixels réels, puis anime l'offset vers 0 en inline). */
 [data-trace-flux] polyline {
   stroke-dasharray: 100000;
   stroke-dashoffset: 100000;
 }
+
 .trace-noeud {
   opacity: 0;
-  transition: opacity 400ms var(--ease-apple);
+  transition: opacity 300ms var(--ease-apple);
 }
 .trace-noeud.revealed {
   opacity: 1;
 }
 
-/* ─── Schéma technique du hero ─────────────────── */
-/* Séquence : mots → sous-titre → CTA → schéma ; le trait
-   principal se trace, puis les annotations cuivre clair
-   apparaissent (transition-delay inline). */
-
-[data-hero-schema] {
-  opacity: 0;
-  transform: translateY(14px);
-}
-[data-hero-schema].revealed {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 700ms var(--ease-apple), transform 700ms var(--ease-apple);
-}
-
-[data-schema-trait] {
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-}
-[data-hero-schema].revealed [data-schema-trait] {
-  animation: trace-draw 1100ms var(--ease-apple) 250ms forwards;
-}
-@keyframes trace-draw {
-  to { stroke-dashoffset: 0; }
-}
-
-[data-hero-annot] {
-  opacity: 0;
-  transform: translateY(6px);
-}
-[data-hero-schema].revealed [data-hero-annot] {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 500ms var(--ease-apple), transform 500ms var(--ease-apple);
-}
-
-/* ─── Filet cuivre qui se trace au reveal ──────── */
-/* Variante animée de .filet-top : la ligne se dessine de
-   gauche à droite quand le bloc entre dans le viewport. */
-
-.filet-trace {
-  position: relative;
-  padding-top: 14px;
-}
-.filet-trace::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: #c46a38;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 900ms var(--ease-apple) 150ms;
-}
-.filet-trace.revealed::before,
-[data-reveal].revealed .filet-trace::before,
-[data-reveal-stagger].revealed .filet-trace::before {
-  transform: scaleX(1);
-}
-
 /* ═══════════════════════════════════════════════
-   Reduced motion — instant everything
-   Works WITH global.css's transition-duration override
-   but also resets initial hidden states
+   Reduced motion — tout est posé d'emblée
    ═══════════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
-  [data-hero-word],
-  [data-hero-subtitle],
-  [data-hero-cta],
-  [data-hero-schema],
-  [data-hero-annot],
-  [data-reveal],
-  [data-reveal-stagger] > *,
-  [data-chiffre-label],
+  [data-trace-flux] polyline {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+
   .trace-noeud {
     opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    transition-delay: 0ms !important;
-  }
-
-  [data-trace-flux] polyline,
-  [data-schema-trait] {
-    stroke-dashoffset: 0 !important;
-    animation: none !important;
-  }
-
-  .filet-trace::before {
-    transform: scaleX(1) !important;
-    transition: none !important;
-  }
-
-  [data-parallax] {
-    will-change: auto;
-    transform: none !important;
-  }
-
-  .counter-pulse {
-    animation: none !important;
-  }
-
-  .chevron-arrow {
     transition: none !important;
   }
 }

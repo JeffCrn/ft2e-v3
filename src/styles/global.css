@@ -5,68 +5,69 @@
 @import "./motion.css";
 
 @theme {
-  /* ══ Palette « ingénierie de l'invisible » — blueprint technique ══ */
+  /* ══ Palette « ingénierie de l'invisible » — charte v2 (août 2026) ══
+     Une teinte unique (197°), cinq valeurs teintées, deux neutres.
+     Aucune couleur d'accent : la hiérarchie passe par la valeur,
+     l'épaisseur de trait et la largeur de caractère. */
 
-  /* Structure — encre & marine */
-  --color-encre: #08131f;            /* fond nav, hero, footer, CTA final */
-  --color-marine-deep: #08131f;      /* alias historique → encre */
-  --color-marine: #16324f;           /* titres sur clair, encre secondaire */
-  --color-marine-surface: #0e2233;   /* surface sur fond encre */
-  --color-marine-surface-2: #123049; /* variation surface sombre */
+  /* Rampe 197° — de la réserve au voile */
+  --color-profond: #001718;   /* réserve — 1/5 max, une apparition par écran (relevés, duotone, couverture) */
+  --color-encre: #00393a;     /* texte et titres — toute la lecture, filets porteurs, cadres */
+  --color-pivot: #336667;     /* données et mentions — références, dates, texte secondaire (valeur client) */
+  --color-clair: #99cccd;     /* filets et aplats — étiquettes, texte sur fond profond (valeur client) */
+  --color-voile: #e1f4f4;     /* pôle clair du duotone — titres/chiffres sur réserve profonde uniquement */
 
-  /* Lumière */
-  --color-cool-white: #edf0f2;       /* fond clair principal, texte sur encre */
-  --color-paper: #f7f9fa;            /* surface claire secondaire, hover, encarts */
+  /* Neutres — le support n'est pas une couleur de marque */
+  --color-papier: #f7f9fa;    /* support par défaut : fond de toute page lue en continu */
+  --color-calcaire: #edf0f2;  /* surface secondaire : blocs de rappel, en-têtes de tableau */
 
-  /* Texte */
-  --color-near-black: #16324f;       /* repointé → encre marine (texte fort sur clair) */
-  --color-slate: #4a6076;            /* corps de texte sur clair */
-  --color-mist: #8fa2b4;             /* labels, texte secondaire sur encre */
+  /* Filets — alpha d'encre (jamais porteurs de rang par la valeur) */
+  --color-line: rgba(0, 57, 58, 0.18);        /* filet d'indication, séparateurs de lignes */
+  --color-line-strong: rgba(0, 57, 58, 0.3);  /* contour de cartouche, cadres */
 
-  /* Identité & action — le cuivre porte les deux */
-  --color-copper: #c46a38;       /* filets, bordures, texte sur encre (4,9:1) */
-  --color-bright-copper: #e08a50; /* hover et annotations sur encre (7,1:1) */
-  --color-copper-text: #a04e20;  /* petit texte cuivre sur fond clair (≥ 5:1) */
-
-  /* Filets */
-  --color-line: rgba(74, 96, 118, 0.35);  /* filet standard */
-  --color-line-strong: #4a6076;           /* filet fort (cartouches) */
-
-  /* Aliases action legacy — repointés cuivre/marine (plus de bleu) */
-  --color-apple-blue: #c46a38;
-  --color-link-blue: #16324f;
-  --color-bright-blue: #e08a50;
-
-  /* Surfaces & boutons legacy — repointés */
+  /* ── Aliases legacy repointés (transition cuivre → monochrome 197°) ──
+     Valides au build, à ne plus employer dans le nouveau code. */
+  --color-marine-deep: #001718;
+  --color-marine: #00393a;
+  --color-marine-surface: #001718;
+  --color-marine-surface-2: #00393a;
+  --color-cool-white: #edf0f2;
+  --color-paper: #f7f9fa;
+  --color-near-black: #00393a;
+  --color-slate: #336667;
+  --color-mist: #99cccd;
+  --color-copper: #336667;        /* l'accent cuivre n'existe plus : filet pivot */
+  --color-bright-copper: #99cccd; /* hover sur fond sombre → clair */
+  --color-copper-text: #336667;   /* petit texte fort sur clair → pivot */
+  --color-apple-blue: #336667;
+  --color-link-blue: #00393a;
+  --color-bright-blue: #99cccd;
   --color-light-gray: #f7f9fa;
-  --color-dark-surface-1: #0e2233;
-  --color-dark-surface-2: #123049;
-  --color-pure-black: #08131f;
-  --color-button-active: #e4e9ec;
+  --color-dark-surface-1: #001718;
+  --color-dark-surface-2: #00393a;
+  --color-pure-black: #001718;
+  --color-button-active: #edf0f2;
   --color-button-light: #f7f9fa;
-
-  /* Semantic aliases */
-  --color-text-primary: #16324f;
-  --color-text-secondary: #4a6076;
-  --color-text-tertiary: #8fa2b4;
-
-  /* Legacy mappings (transition) */
-  --color-bleu-nuit: #08131f;
-  --color-sarcelle: #c46a38;
-  --color-cuivre: #c46a38;
+  --color-text-primary: #00393a;
+  --color-text-secondary: #336667;
+  --color-text-tertiary: #99cccd;
+  --color-bleu-nuit: #001718;
+  --color-sarcelle: #336667;
+  --color-cuivre: #336667;
   --color-creme-pierre: #edf0f2;
-  --color-anthracite: #16324f;
-  --color-gris-bord: rgba(74, 96, 118, 0.35);
-  --color-gris-doux: #8fa2b4;
-  --color-success: #2f7d4f;
-  --color-error: #b3402a;
+  --color-anthracite: #00393a;
+  --color-gris-bord: rgba(0, 57, 58, 0.18);
+  --color-gris-doux: #99cccd;
+  /* Alerte : un signe, pas une couleur (filet doublé + mention explicite) */
+  --color-success: #00393a;
+  --color-error: #00393a;
 
-  /* Typographie — Archivo (display + corps) & IBM Plex Mono (données) */
+  /* Typographie — Archivo (axe wdth 62–125) & IBM Plex Mono (données) */
   --font-heading: "Archivo Variable", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-body: "Archivo Variable", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  /* Ombres : aucune dans le langage blueprint */
+  /* Ombres : aucune — les blocs se séparent par le filet et le fond */
   --shadow-soft: none;
 }
 
@@ -78,8 +79,8 @@
 
 html {
   font-family: var(--font-body);
-  color: var(--color-near-black);
-  background-color: var(--color-cool-white);
+  color: var(--color-encre);
+  background-color: var(--color-papier);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -100,7 +101,7 @@ html {
   }
 }
 
-/* Titres : condensés-larges, capitales, serrés.
+/* Titres : rang « Titre » par défaut (wdth 118, 600, capitales).
    Pas de couleur ici (règle Tailwind v4 : les utilitaires doivent gagner). */
 @layer base {
   h1,
@@ -110,46 +111,66 @@ html {
   h5,
   h6 {
     font-family: var(--font-heading);
-    font-stretch: 112%;
+    font-stretch: 118%;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: -0.02em;
   }
 }
 
+/* Focus : cadre 2 px au pivot, décalé de 2 px (charte § 08) */
 :focus-visible {
-  outline: 2px solid var(--color-copper);
+  outline: 2px solid var(--color-pivot);
   outline-offset: 2px;
 }
 
 ::selection {
-  background-color: var(--color-copper);
-  color: #f7f9fa;
+  background-color: var(--color-encre);
+  color: var(--color-papier);
 }
 
-/* ══ Recettes blueprint — @layer components (les utilitaires gagnent) ══ */
+/* ══ Recettes — rangs typographiques et vocabulaire de trait (charte v2) ══ */
 @layer components {
-  /* Display hero : Archivo étiré au maximum */
+  /* Vedette : ouverture de document — une seule par page (wdth 125, 700) */
   .type-display {
     font-family: var(--font-heading);
     font-stretch: 125%;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: -0.02em;
-    line-height: 0.98;
+    letter-spacing: -0.025em;
+    line-height: 0.96;
   }
 
-  /* Titre de section */
+  /* Titre : section, intitulé de fiche d'affaire (wdth 118, 600) */
   .type-h2 {
     font-family: var(--font-heading);
-    font-stretch: 112%;
+    font-stretch: 118%;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
 
-  /* Label technique mono : 11 px, espacé, capitales */
+  /* Intitulé : nom d'affaire en nomenclature, en-tête de bloc (wdth 112, 600) */
+  .type-intitule {
+    font-family: var(--font-heading);
+    font-stretch: 112%;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  /* Annexe : mention accessoire, troisième rang (wdth 72, 600 — condensé) */
+  .type-annexe {
+    font-family: var(--font-heading);
+    font-stretch: 72%;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  /* Étiquette mono : 11 px, 0,14 em, capitales — jamais plus grand */
   .mono-label {
     font-family: var(--font-mono);
     font-size: 11px;
@@ -158,20 +179,22 @@ html {
     text-transform: uppercase;
   }
 
-  /* Donnée mono : 13 px, chiffres tabulaires */
+  /* Donnée mono : 13 px, chiffres tabulaires — tout ce qui est mesuré */
   .mono-data {
     font-family: var(--font-mono);
     font-size: 13px;
     font-variant-numeric: tabular-nums;
   }
 
-  /* Filet cuivre au-dessus d'un titre éditorial */
+  /* Filet de section (rang 2 px) au-dessus d'un titre éditorial */
   .filet-top {
-    border-top: 1px solid var(--color-copper);
+    border-top: 2px solid var(--color-encre);
     padding-top: 14px;
   }
 
-  /* Bouton filaire (fond sombre ou clair) */
+  /* ── Boutons : filaires mono uppercase — aucun bouton plein sans nécessité.
+     Le survol épaissit le filet d'un cran (1→2, 2→4), sans changement de
+     teinte ni déplacement. ── */
   .btn-blueprint {
     display: inline-flex;
     align-items: center;
@@ -183,38 +206,17 @@ html {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 14px 20px;
-    border: 1px solid rgba(143, 162, 180, 0.4);
-    transition: border-color 400ms var(--ease-blueprint), color 400ms var(--ease-blueprint), background-color 400ms var(--ease-blueprint);
+    color: var(--color-pivot);
+    border: 1px solid var(--color-line-strong);
+    transition: box-shadow 200ms var(--ease-blueprint), color 200ms var(--ease-blueprint), border-color 200ms var(--ease-blueprint);
   }
   .btn-blueprint:hover {
-    border-color: var(--color-bright-copper);
-    color: var(--color-bright-copper);
-  }
-
-  /* Bouton plein clair sur fond encre */
-  .btn-blueprint-solid {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 14px 20px;
+    border-color: var(--color-encre);
     color: var(--color-encre);
-    background: var(--color-cool-white);
-    border: 1px solid var(--color-cool-white);
-    transition: border-color 400ms var(--ease-blueprint), color 400ms var(--ease-blueprint), background-color 400ms var(--ease-blueprint);
-  }
-  .btn-blueprint-solid:hover {
-    background: var(--color-copper);
-    border-color: var(--color-copper);
-    color: var(--color-paper);
+    box-shadow: inset 0 0 0 1px var(--color-encre);
   }
 
-  /* Bouton plein encre sur fond clair */
+  /* Bouton principal sur fond clair : filet fort 2 px à l'encre */
   .btn-blueprint-dark {
     display: inline-flex;
     align-items: center;
@@ -226,18 +228,36 @@ html {
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 14px 20px;
-    color: var(--color-cool-white);
-    background: var(--color-encre);
-    border: 1px solid var(--color-encre);
-    transition: border-color 400ms var(--ease-blueprint), color 400ms var(--ease-blueprint), background-color 400ms var(--ease-blueprint);
+    color: var(--color-encre);
+    border: 2px solid var(--color-encre);
+    transition: box-shadow 200ms var(--ease-blueprint);
   }
   .btn-blueprint-dark:hover {
-    background: var(--color-copper);
-    border-color: var(--color-copper);
-    color: var(--color-paper);
+    box-shadow: inset 0 0 0 2px var(--color-encre);
   }
 
-  /* Chip de filtre / capsule technique */
+  /* Bouton sur réserve profonde ou aplat encre : filet clair */
+  .btn-blueprint-solid {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    color: var(--color-clair);
+    border: 2px solid var(--color-clair);
+    transition: box-shadow 200ms var(--ease-blueprint), color 200ms var(--ease-blueprint);
+  }
+  .btn-blueprint-solid:hover {
+    color: var(--color-voile);
+    box-shadow: inset 0 0 0 2px var(--color-clair);
+  }
+
+  /* Chip de filtre : filaire mono ; l'état actif épaissit le filet */
   .chip-blueprint {
     display: inline-flex;
     align-items: center;
@@ -248,41 +268,53 @@ html {
     text-transform: uppercase;
     padding: 9px 13px;
     border: 1px solid var(--color-line);
-    color: var(--color-slate);
-    transition: border-color 400ms var(--ease-blueprint), color 400ms var(--ease-blueprint), background-color 400ms var(--ease-blueprint);
+    color: var(--color-pivot);
+    transition: box-shadow 200ms var(--ease-blueprint), color 200ms var(--ease-blueprint), border-color 200ms var(--ease-blueprint);
+  }
+  .chip-blueprint:hover {
+    border-color: var(--color-encre);
+    color: var(--color-encre);
+  }
+  .chip-blueprint[aria-pressed="true"],
+  .chip-blueprint.chip-active {
+    border-color: var(--color-encre);
+    color: var(--color-encre);
+    box-shadow: inset 0 0 0 1px var(--color-encre);
   }
 
-  /* Média duotone hachuré (placeholder & traitement image) */
+  /* ── Images : duotone 197° — point noir #001718, point blanc #E1F4F4 ── */
+
+  /* Placeholder hachuré (photo à venir) : une seule masse sombre */
   .duotone-media {
     position: relative;
     overflow: hidden;
-    background: repeating-linear-gradient(135deg, #08131f 0 1px, #2c4560 1px 8px);
-  }
-  .duotone-media::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(150deg, rgba(22, 50, 79, 0.6), rgba(237, 240, 242, 0.18));
-    pointer-events: none;
-    z-index: 1;
+    background: repeating-linear-gradient(135deg, #001718 0 1px, #00393a 1px 8px);
   }
 
-  /* Voile duotone appliqué par-dessus une vraie photo.
-     Désaturation partielle (70 %) : une pointe de couleur réelle filtre
-     sous le voile marine — arbitrage 2026-08-05. */
+  /* Duotone réel appliqué à une photo : sandwich lighten/darken.
+     Les ombres remontent au profond, les hautes lumières plafonnent au voile. */
   .duotone-photo {
     position: relative;
     overflow: hidden;
+    isolation: isolate;
+    background: var(--color-profond);
   }
   .duotone-photo > img {
-    filter: grayscale(70%) contrast(1.05);
+    filter: grayscale(100%) contrast(1.05);
+    mix-blend-mode: lighten;
   }
   .duotone-photo::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(150deg, rgba(22, 50, 79, 0.38), rgba(237, 240, 242, 0.12));
-    mix-blend-mode: multiply;
+    background: var(--color-voile);
+    mix-blend-mode: darken;
     pointer-events: none;
+  }
+  /* Les équerres et annotations passent au-dessus du voile darken */
+  .duotone-photo > .z-duotone,
+  .duotone-media > .z-duotone {
+    position: absolute;
+    z-index: 1;
   }
 }

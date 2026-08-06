@@ -1,6 +1,8 @@
 ---
 import Bouton from '../primitives/Bouton.astro';
 
+// Bande d'appel finale — claire (le papier gouverne ; la réserve profonde
+// est réservée aux relevés mesurés). Filet de tête au rang ouvrage (4 px).
 interface Props {
   titre?: string;
   texte?: string;
@@ -12,18 +14,18 @@ const {
 } = Astro.props;
 ---
 
-<section class="bg-encre border-t border-copper py-16 md:py-20">
+<section class="bg-calcaire border-t-4 border-encre py-16 md:py-20">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 flex flex-col md:flex-row md:items-center gap-8">
-    <div class="md:flex-1" data-reveal data-parallax>
-      <h2 class="type-h2 text-cool-white text-xl" style="font-stretch: 118%;">
+    <div class="md:flex-1">
+      <h2 class="type-h2 text-encre text-xl">
         {titre}
       </h2>
-      <p class="mono-label text-copper mt-4">
+      <p class="mono-label text-pivot mt-4">
         {texte}
       </p>
     </div>
-    <div data-reveal>
-      <Bouton href="/contact" variante="secondary">
+    <div>
+      <Bouton href="/contact" variante="primary">
         Parlons de votre projet
       </Bouton>
     </div>

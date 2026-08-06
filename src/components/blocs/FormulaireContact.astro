@@ -1,25 +1,25 @@
 ---
 const isLiminaire = import.meta.env.PUBLIC_MODE === 'liminaire';
 
-const inputClasses = 'form-input w-full px-4 py-3 bg-paper border border-line rounded-[2px] mono-data text-marine focus:outline-none focus-visible:outline-2 focus-visible:outline-copper';
-const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
+const inputClasses = 'w-full px-4 py-3 bg-calcaire border border-line rounded-[2px] mono-data text-encre focus:outline-none focus-visible:outline-2 focus-visible:outline-pivot';
+const labelClasses = 'mono-label font-normal block text-pivot mb-1.5';
 ---
 
-<section class="py-16 md:py-20 bg-cool-white">
+<section class="py-16 md:py-20 bg-papier">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
       <div>
-        <h2 class="type-h2 text-marine text-[22px] filet-top mb-6">
+        <h2 class="type-h2 text-encre text-[22px] filet-top mb-6">
           Parlons de votre projet
         </h2>
 
         <form id="form-contact" class="space-y-6" novalidate>
           <fieldset>
-            <legend class="mono-label text-slate mb-3">vous êtes</legend>
+            <legend class="mono-label text-pivot mb-3">vous êtes</legend>
             <div class="grid grid-cols-2 sm:grid-cols-4 -mr-px">
               {["Architecte", "Maître d’ouvrage", "Candidat", "Autre"].map((role) => (
-                <label class="chip-blueprint justify-center cursor-pointer -ml-px -mt-px hover:border-copper hover:text-marine has-[:checked]:border-copper has-[:checked]:bg-paper has-[:checked]:text-marine has-[:checked]:z-10 relative">
-                  <input type="radio" name="role" value={role} class="accent-[#c46a38] mr-2" />
+                <label class="chip-blueprint justify-center cursor-pointer -ml-px -mt-px hover:border-encre hover:text-encre has-[:checked]:border-encre has-[:checked]:bg-calcaire has-[:checked]:text-encre has-[:checked]:z-10 relative">
+                  <input type="radio" name="role" value={role} class="accent-encre mr-2" />
                   <span>{role}</span>
                 </label>
               ))}
@@ -29,7 +29,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
           <div class="space-y-4">
             <div>
               <label for="nom" class={labelClasses}>
-                Nom et prénom <span class="text-copper-text" aria-hidden="true">*</span>
+                Nom et prénom <span class="text-pivot" aria-hidden="true">*</span>
               </label>
               <input
                 type="text"
@@ -43,7 +43,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
 
             <div>
               <label for="email" class={labelClasses}>
-                Email <span class="text-copper-text" aria-hidden="true">*</span>
+                Email <span class="text-pivot" aria-hidden="true">*</span>
               </label>
               <input
                 type="email"
@@ -69,7 +69,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
 
             <div>
               <label for="message" class={labelClasses}>
-                Message <span class="text-copper-text" aria-hidden="true">*</span>
+                Message <span class="text-pivot" aria-hidden="true">*</span>
               </label>
               <textarea
                 id="message"
@@ -88,10 +88,10 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
                   name="rgpd"
                   required
                   aria-required="true"
-                  class="mt-1 accent-[#c46a38]"
+                  class="mt-1 accent-encre"
                 />
-                <span class="text-[15px] font-light text-slate leading-[1.55]">
-                  J’accepte que mes données soient traitées par FT2E dans le cadre de ma demande, conformément à la <a href="/politique-confidentialite" class="text-marine underline underline-offset-2 hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">politique de confidentialité</a>.
+                <span class="text-[15px] font-normal text-pivot leading-[1.55]">
+                  J’accepte que mes données soient traitées par FT2E dans le cadre de ma demande, conformément à la <a href="/politique-confidentialite" class="text-encre underline underline-offset-2 hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]">politique de confidentialité</a>.
                 </span>
               </label>
             </div>
@@ -101,7 +101,7 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
             <button
               type="button"
               disabled
-              class="btn-blueprint text-slate cursor-not-allowed hover:border-mist/40 hover:text-slate"
+              class="btn-blueprint text-pivot cursor-not-allowed hover:border-line hover:text-pivot"
             >
               Envoyer (désactivé en version liminaire)
             </button>
@@ -118,18 +118,18 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
 
       <div class="space-y-8">
         <div class="border border-line-strong">
-          <p class="mono-label text-slate px-5 py-3 border-b border-line">coordonnées</p>
-          <address class="not-italic mono-data text-marine leading-[1.7] px-5 py-4">
+          <p class="mono-label text-pivot px-5 py-3 border-b border-line">coordonnées</p>
+          <address class="not-italic mono-data text-encre leading-[1.7] px-5 py-4">
             <p>35 Rue Nicolas Denys de Fronsac<br />17000 La Rochelle</p>
             <p class="mt-3">
-              <a href="tel:+33546278593" class="hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a><br />
-              <a href="mailto:ft2e@ft2e.fr" class="hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
+              <a href="tel:+33546278593" class="hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a><br />
+              <a href="mailto:ft2e@ft2e.fr" class="hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
             </p>
           </address>
-          <div class="px-5 py-4 bg-paper border-t border-line">
-            <p class="mono-label font-normal text-slate mb-1.5">disponibilité</p>
-            <p class="mono-data text-marine">lun. – ven., 8&nbsp;h&nbsp;30&nbsp;–&nbsp;18&nbsp;h</p>
-            <p class="mono-label font-normal text-copper-text mt-2">réponse sous 48&nbsp;h ouvrées</p>
+          <div class="px-5 py-4 bg-calcaire border-t border-line">
+            <p class="mono-label font-normal text-pivot mb-1.5">disponibilité</p>
+            <p class="mono-data text-encre">lun. – ven., 8&nbsp;h&nbsp;30&nbsp;–&nbsp;18&nbsp;h</p>
+            <p class="mono-label font-normal text-pivot mt-2">réponse sous 48&nbsp;h ouvrées</p>
           </div>
         </div>
 
@@ -142,16 +142,16 @@ const labelClasses = 'mono-label font-normal block text-slate mb-1.5';
               loading="lazy"
             ></iframe>
             <div aria-hidden="true">
-              <div class="absolute -left-2 -top-2 w-4 h-4 border-l border-t border-copper"></div>
-              <div class="absolute -right-2 -bottom-2 w-4 h-4 border-r border-b border-copper"></div>
+              <div class="absolute -left-2 -top-2 w-4 h-4 border-l border-t border-line-strong"></div>
+              <div class="absolute -right-2 -bottom-2 w-4 h-4 border-r border-b border-line-strong"></div>
             </div>
           </div>
-          <p class="mt-3 mono-data text-slate">
+          <p class="mt-3 mono-data text-pivot">
             <a
               href="https://www.openstreetmap.org/?mlat=46.1624398&amp;mlon=-1.2089345#map=17/46.1624398/-1.2089345"
               target="_blank"
               rel="noopener noreferrer"
-              class="underline underline-offset-2 hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]"
+              class="underline underline-offset-2 hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)]"
             >Ouvrir dans OpenStreetMap (nouvel onglet)</a>
             <span aria-hidden="true"> · </span>© OpenStreetMap
           </p>

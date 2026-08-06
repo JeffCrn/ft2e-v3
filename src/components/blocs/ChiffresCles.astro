@@ -3,10 +3,10 @@ import Chiffre from '../primitives/Chiffre.astro';
 import { CHIFFRES_CLES } from '../../lib/constants';
 ---
 
-<section class="bg-cool-white py-16 md:py-20">
+<section class="bg-papier py-16 md:py-20">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-    <p class="mono-label text-slate mb-4" data-reveal>cartouche agence</p>
-    <div class="border border-line-strong grid grid-cols-2 md:grid-cols-4 gap-px bg-line" data-reveal-stagger>
+    <p class="mono-label text-pivot mb-4">cartouche agence</p>
+    <div class="border border-line-strong grid grid-cols-2 md:grid-cols-4 gap-px bg-line">
       {CHIFFRES_CLES.map((chiffre) => (
         <Chiffre
           valeur={chiffre.valeur}
@@ -17,7 +17,7 @@ import { CHIFFRES_CLES } from '../../lib/constants';
         />
       ))}
     </div>
-    <p class="mono-data text-slate mt-4">
+    <p class="mono-data text-pivot mt-4">
       Domaines — Fluides · Thermique · Électricité · Sécurité incendie · BIM · RE2020 · STD
     </p>
   </div>

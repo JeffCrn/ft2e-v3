@@ -1,6 +1,9 @@
 ---
 import Bouton from '../primitives/Bouton.astro';
 
+// Hero clair — charte v2, planche 08 (écran 1) : le papier gouverne,
+// l'image recule dans sa colonne, elle ne porte pas le titre.
+// Vedette au profond, barre de rang 4 px à l'encre, corps au pivot.
 interface Props {
   titre: string;
   sousTitre?: string;
@@ -22,11 +25,7 @@ const {
 const isAccueil = variante === 'accueil';
 // Média technique annoté (slot "media") : hero accueil en deux colonnes.
 const hasMedia = isAccueil && Astro.slots.has('media');
-// Le titre accepte des sauts de ligne explicites (\n) ; le stagger reste continu sur tous les mots.
-let indexMot = 0;
-const lignesMots = titre.split('\\n').map((ligne) =>
-  ligne.split(' ').map((mot) => ({ mot, delai: indexMot++ * 40 })),
-);
+const lignes = titre.split('\\n');
 
 const tailleTitre = isAccueil
   ? hasMedia
@@ -35,73 +34,51 @@ const tailleTitre = isAccueil
   : 'font-size: clamp(1.875rem, 3.5vw, 3rem);';
 ---
 
-<section
-  class:list={[
-    'relative overflow-hidden',
-    isAccueil ? 'bg-encre text-cool-white py-20 md:py-28' : 'bg-paper py-16 md:py-20',
-  ]}
-  data-hero-dark={isAccueil ? '' : undefined}
->
+<section class="bg-papier py-16 md:py-20">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
     <div class:list={[hasMedia && 'grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center']}>
     <div class:list={[hasMedia && 'lg:col-span-6']}>
     {eyebrow && (
-      <p class="mono-label text-copper mb-7" data-reveal>
+      <p class="mono-label text-pivot mb-6">
         {eyebrow}
       </p>
     )}
 
     <h1
-      class:list={[
-        'type-display',
-        isAccueil ? 'text-cool-white max-w-[22ch]' : 'text-marine max-w-[28ch]',
-      ]}
+      class:list={['type-display text-profond', hasMedia ? 'max-w-[22ch]' : 'max-w-[24ch]']}
       style={tailleTitre}
-      data-hero-title={isAccueil ? '' : undefined}
     >
-      {isAccueil
-        ? lignesMots.map((motsLigne, li) => (
-            <Fragment>
-              {motsLigne.map(({ mot, delai }, i) => (
-                <Fragment>
-                  <span data-hero-word style={`transition-delay: ${delai}ms`}>{mot}</span>{i < motsLigne.length - 1 ? ' ' : ''}
-                </Fragment>
-              ))}
-              {li < lignesMots.length - 1 ? <br /> : ''}
-            </Fragment>
-          ))
-        : titre.split('\\n').map((ligne, i, arr) => (
-            <Fragment>{ligne}{i < arr.length - 1 ? <br /> : ''}</Fragment>
-          ))}
+      {lignes.map((ligne, i) => (
+        <Fragment>{ligne}{i < lignes.length - 1 ? <br /> : ''}</Fragment>
+      ))}
     </h1>
 
+    <div class="w-[110px] h-1 bg-encre mt-7" aria-hidden="true"></div>
+
     {sousTitre && (
-      <p
-        class:list={[
-          'mt-7 text-[17px] font-light leading-[1.6] max-w-[52ch]',
-          isAccueil ? 'text-mist' : 'text-slate',
-        ]}
-        data-hero-subtitle={isAccueil ? '' : undefined}
-      >
+      <p class="mt-6 text-base leading-[1.6] text-pivot max-w-[46ch] text-pretty">
         {sousTitre}
       </p>
     )}
 
     {(ctaPrincipal || ctaSecondaire) && (
-      <div
-        class="mt-9 flex flex-wrap gap-4"
-        data-hero-cta={isAccueil ? '' : undefined}
-      >
+      <div class="mt-9 flex flex-wrap gap-4">
         {ctaPrincipal && (
-          <Bouton href={ctaPrincipal.href} variante={isAccueil ? 'secondary' : 'primary'}>
+          <Bouton href={ctaPrincipal.href} variante="primary">
             {ctaPrincipal.label}&nbsp;→
           </Bouton>
         )}
         {ctaSecondaire && (
-          <Bouton href={ctaSecondaire.href} variante="ghost" class={isAccueil ? 'text-cool-white' : undefined}>
+          <Bouton href={ctaSecondaire.href} variante="ghost">
             {ctaSecondaire.label}
           </Bouton>
         )}
+      </div>
+    )}
+
+    {Astro.slots.has('stats') && (
+      <div class="mt-9 pt-6 border-t border-line">
+        <slot name="stats" />
       </div>
     )}
     </div>

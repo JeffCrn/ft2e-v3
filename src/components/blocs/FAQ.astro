@@ -12,10 +12,10 @@ const { items } = Astro.props;
 ---
 
 {items.length > 0 && (
-  <div class="border-l border-copper pl-4">
+  <div class="border-l border-line-strong pl-4">
     {items.map((item) => (
       <details class="group py-2.5">
-        <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-marine text-base leading-[1.3] hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)] list-none" style="font-stretch: 112%;">
+        <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-encre text-base leading-[1.3] hover:text-encre transition-colors duration-200 ease-[var(--ease-blueprint)] list-none" style="font-stretch: 112%;">
           <span>{item.question}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,14 +26,14 @@ const { items } = Astro.props;
             stroke="currentColor"
             stroke-width="1.5"
             stroke-linecap="square"
-            class="shrink-0 ml-4 transition-transform group-open:rotate-180 text-slate"
+            class="shrink-0 ml-4 transition-transform group-open:rotate-180 text-pivot"
             aria-hidden="true"
             focusable="false"
           >
             <polyline points="6 9 12 15 18 9" />
           </svg>
         </summary>
-        <div class="mt-2 pb-2 text-[15px] font-light text-slate leading-[1.55]">
+        <div class="mt-2 pb-2 text-[15px] font-normal text-pivot leading-[1.55]">
           {item.reponse}
         </div>
       </details>

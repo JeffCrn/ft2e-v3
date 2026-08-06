@@ -9,27 +9,27 @@ const acronyme = [
 ];
 ---
 
-<section class="bg-cool-white py-16 md:py-20">
+<section class="bg-papier py-16 md:py-20">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-    <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
-      <h2 class="type-h2 text-marine text-[22px]">Ce que le nom contient</h2>
-      <p class="mono-label font-normal text-slate">quatre lettres, quatre champs d’ingénierie</p>
+    <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
+      <h2 class="type-h2 text-encre text-[22px]">Ce que le nom contient</h2>
+      <p class="mono-label font-normal text-pivot">quatre lettres, quatre champs d’ingénierie</p>
     </div>
 
-    <div class="border border-line-strong grid grid-cols-2 lg:grid-cols-4 gap-px bg-line" data-reveal-stagger>
+    <div class="border border-line-strong grid grid-cols-2 lg:grid-cols-4 gap-px bg-line">
       {acronyme.map((champ) => (
-        <div class="bg-cool-white p-5 transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:bg-paper">
-          <p class="font-mono text-[32px] leading-none text-copper" aria-hidden="true">{champ.lettre}</p>
-          <h3 class="type-h2 text-marine text-[17px] mt-3">{champ.mot}</h3>
-          <p class="mono-label font-normal text-slate mt-2 normal-case tracking-[.08em]">{champ.detail}</p>
+        <div class="bg-papier p-5 transition-colors duration-200 ease-[var(--ease-blueprint)] hover:bg-calcaire">
+          <p class="font-heading font-bold text-[32px] leading-none text-profond" style="font-stretch: 125%;" aria-hidden="true">{champ.lettre}</p>
+          <h3 class="type-intitule text-encre text-[17px] mt-3">{champ.mot}</h3>
+          <p class="mono-label font-normal text-pivot mt-2 normal-case tracking-[.08em]">{champ.detail}</p>
         </div>
       ))}
     </div>
 
-    {/* Énoncé de méthode — pull-quote blueprint : filet cuivre tracé au reveal,
-        Archivo condensé uppercase, accent cuivre sur la chute. */}
-    <p class="filet-trace mt-8 md:mt-10 max-w-[840px] type-h2 text-marine text-[22px] md:text-[26px] leading-[1.2]" data-reveal>
-      Quatre champs, une seule chaîne&nbsp;: le bureau suit ses projets de la conception à la réception, <span class="text-copper-text">sans passage de relais</span>.
+    {/* Énoncé de méthode — pull-quote : filet de section 2 px, Archivo
+        condensé uppercase ; la chute est portée par la valeur (profond). */}
+    <p class="filet-top mt-8 md:mt-10 max-w-[840px] type-h2 text-encre text-[22px] md:text-[26px] leading-[1.2]">
+      Quatre champs, une seule chaîne&nbsp;: le bureau suit ses projets de la conception à la réception, <span class="text-profond">sans passage de relais</span>.
     </p>
   </div>
 </section>

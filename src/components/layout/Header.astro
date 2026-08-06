@@ -5,14 +5,15 @@ import Logo from './Logo.astro';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 inset-x-0 z-50 h-14 md:h-[74px] bg-encre border-b border-mist/25">
+<header class="fixed top-0 inset-x-0 z-50 h-14 md:h-[74px] bg-papier border-b border-line">
   <nav class="max-w-[1200px] mx-auto px-4 md:px-6 flex items-center gap-6 md:gap-8 h-full" aria-label="Navigation principale">
-    <a href="/" class="group flex items-center gap-3 shrink-0" aria-label="FT2E — Accueil">
-      <Logo class="h-[30px] md:h-[36px]" />
-      <span aria-hidden="true" class="font-heading font-bold uppercase tracking-tight text-lg leading-none text-cool-white group-hover:text-bright-copper motion-safe:transition-colors motion-safe:duration-500 motion-safe:ease-[var(--ease-blueprint)]" style="font-stretch: 118%;">FT<span class="text-bright-copper group-hover:text-cool-white motion-safe:transition-colors motion-safe:duration-500 motion-safe:ease-[var(--ease-blueprint)]">2</span>E</span>
+    <a href="/" class="flex items-center shrink-0" aria-label="FT2E — Accueil">
+      {/* Sous 180 px de large, le mot tombe : cadre seul sur mobile */}
+      <Logo forme="cadre" class="h-[30px] md:hidden" />
+      <Logo forme="complet" class="hidden md:block h-[44px] w-auto" />
     </a>
 
-    <span class="mono-label hidden xl:inline text-mist" aria-hidden="true">{SITE_TAGLINE}</span>
+    <span class="mono-label hidden xl:inline text-pivot" aria-hidden="true">{SITE_TAGLINE}</span>
 
     <ul class="hidden md:flex items-center gap-6 ml-auto" role="list">
       {NAV_LINKS.map((link) => (
@@ -20,10 +21,10 @@ const currentPath = Astro.url.pathname;
           <a
             href={link.href}
             class:list={[
-              'mono-label motion-safe:transition-colors motion-safe:duration-[400ms] motion-safe:ease-[var(--ease-blueprint)]',
+              'mono-label pb-1 border-b-2 motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]',
               currentPath === link.href
-                ? 'text-cool-white border-b border-copper pb-1'
-                : 'text-mist hover:text-bright-copper',
+                ? 'text-encre border-encre'
+                : 'text-pivot border-transparent hover:text-encre',
             ]}
             aria-current={currentPath === link.href ? 'page' : undefined}
           >
@@ -34,7 +35,7 @@ const currentPath = Astro.url.pathname;
     </ul>
 
     <button
-      class="md:hidden ml-auto p-2 text-cool-white"
+      class="md:hidden ml-auto p-2 text-encre"
       aria-label="Ouvrir le menu"
       aria-expanded="false"
       data-menu-toggle
@@ -47,15 +48,15 @@ const currentPath = Astro.url.pathname;
     </button>
   </nav>
 
-  <div class="hidden md:hidden bg-encre border-t border-mist/25" data-menu-panel>
+  <div class="hidden md:hidden bg-papier border-t border-line" data-menu-panel>
     <ul class="max-w-[1200px] mx-auto px-4 py-4" role="list">
       {NAV_LINKS.map((link) => (
         <li>
           <a
             href={link.href}
             class:list={[
-              'mono-label block py-3 border-b border-mist/15 motion-safe:transition-colors motion-safe:duration-[400ms] motion-safe:ease-[var(--ease-blueprint)]',
-              currentPath === link.href ? 'text-cool-white' : 'text-mist hover:text-bright-copper',
+              'mono-label block py-3 border-b border-line motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]',
+              currentPath === link.href ? 'text-encre' : 'text-pivot hover:text-encre',
             ]}
             aria-current={currentPath === link.href ? 'page' : undefined}
           >

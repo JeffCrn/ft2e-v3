@@ -14,16 +14,16 @@ const partenaires = [
 ];
 ---
 
-{/* Bande marine « cartouche sombre » (planche système : encre #16324F).
-    Contrastes : cool-white/marine 11,4:1 ; mist/marine 4,6:1 (AA texte normal). */}
-<section class="py-14 bg-marine border-t border-copper">
+{/* Bande claire — le clair gouverne (charte v2) : surface calcaire,
+    filet de section 2 px, intitulés à l'encre. */}
+<section class="py-14 bg-calcaire border-t-2 border-encre">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-    <div class="flex items-center gap-3 mb-5" data-reveal>
-      <h2 class="mono-label text-mist font-medium">ils ont confié leurs projets à FT2E</h2>
+    <div class="flex items-center gap-3 mb-5">
+      <h2 class="mono-label text-pivot font-medium">ils ont confié leurs projets à FT2E</h2>
     </div>
-    <div class="flex flex-wrap gap-x-6 gap-y-2" data-reveal-stagger>
+    <div class="flex flex-wrap gap-x-6 gap-y-2">
       {partenaires.map((nom) => (
-        <span class="type-h2 text-cool-white text-base">
+        <span class="type-h2 text-encre text-base">
           {nom}
         </span>
       ))}

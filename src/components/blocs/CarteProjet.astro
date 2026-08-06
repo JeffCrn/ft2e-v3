@@ -2,26 +2,27 @@
 import type { CollectionEntry } from 'astro:content';
 import fs from 'node:fs';
 import path from 'node:path';
+import CoinsCuivre from '../primitives/CoinsCuivre.astro';
 
+// Vignette cartouche — charte v2 (planche 07, format « vignette ») :
+// média duotone à équerres 14 px, puis bandeau à barre de rang 4 px,
+// intitulé et référence mono. Même ordre de lecture que le cartouche
+// plein : intitulé, référence, date.
 interface Props {
   projet: CollectionEntry<'projets'>;
 }
 
 const { projet } = Astro.props;
-const { titre, moa, lieu, annee, surface_m2, mission_ft2e, demo, image_principale, image_principale_alt } = projet.data;
+const { titre, lieu, annee, demo, image_principale, image_principale_alt } = projet.data;
 
 const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_principale));
 
 const reference = `FT2E—${annee}`;
-const meta = [lieu, surface_m2 ? `${surface_m2.toLocaleString('fr-FR')} m²` : null, moa]
-  .filter(Boolean)
-  .join(' · ');
-const missions = mission_ft2e.join(' · ').toLowerCase();
 ---
 
 <a
   href={`/references/${projet.id}`}
-  class="group block border border-line bg-paper transition-[border-color,transform] duration-[400ms] ease-[var(--ease-blueprint)] hover:border-copper motion-safe:hover:-translate-y-[2px]"
+  class="group block border border-line-strong transition-[box-shadow,border-color] duration-200 ease-[var(--ease-blueprint)] hover:border-encre hover:shadow-[inset_0_0_0_1px_var(--color-encre)]"
 >
   <div class:list={['aspect-[3/2] relative', imageExiste ? 'duotone-photo' : 'duotone-media']}>
     {imageExiste && (
@@ -32,16 +33,18 @@ const missions = mission_ft2e.join(' · ').toLowerCase();
         loading="lazy"
       />
     )}
-    <span class="absolute left-3 bottom-2.5 mono-label font-normal text-cool-white z-10" aria-hidden="true">{reference}</span>
+    <CoinsCuivre taille={14} />
     {demo && (
-      <span class="absolute right-3 top-2.5 mono-label font-normal text-bright-copper z-10">[démo]</span>
+      <span class="absolute right-3 top-2.5 mono-label font-normal text-voile z-10">[démo]</span>
     )}
   </div>
-  <div class="p-4">
-    <h3 class="type-h2 text-marine text-base leading-[1.15] group-hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">
-      {titre}
-    </h3>
-    <p class="mono-data text-slate mt-2.5">{meta}</p>
-    <p class="mono-label font-normal text-slate tracking-[0.1em] mt-2">{missions}</p>
+  <div class="grid grid-cols-[4px_1fr] border-t border-line">
+    <div class="bg-encre" aria-hidden="true"></div>
+    <div class="px-4 py-3.5">
+      <h3 class="type-intitule text-profond text-[15px]">
+        {titre}
+      </h3>
+      <p class="mono-data text-[11px] text-pivot mt-1.5">{reference} · {lieu}</p>
+    </div>
   </div>
 </a>

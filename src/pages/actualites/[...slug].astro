@@ -53,33 +53,33 @@ const jsonLd = {
     sousTitre={chapo}
   >
     <div slot="metadata" class="flex items-baseline gap-4 flex-wrap">
-      <time datetime={date.toISOString().split('T')[0]} class="mono-data text-mist">
+      <time datetime={date.toISOString().split('T')[0]} class="mono-data text-pivot">
         {dateFormatee}
       </time>
       {auteur && (
         <>
-          <span class="text-mist/50" aria-hidden="true">/</span>
-          <span class="mono-data text-mist">Par {auteur}</span>
+          <span class="text-pivot" aria-hidden="true">/</span>
+          <span class="mono-data text-pivot">Par {auteur}</span>
         </>
       )}
       {demo && <BadgeDemo />}
     </div>
   </HeroPage>
 
-  <article class="bg-cool-white py-14 md:py-16">
+  <article class="bg-papier py-14 md:py-16">
     <div class="max-w-[840px] mx-auto px-4 md:px-6">
       <div
-        class="text-[17px] font-light text-slate leading-[1.6] space-y-6
-               [&>h2]:type-h2 [&>h2]:text-marine [&>h2]:text-[20px] [&>h2]:filet-top
+        class="text-[17px] font-normal text-pivot leading-[1.6] space-y-6
+               [&>h2]:type-h2 [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:filet-top
                [&>h2]:mt-9 [&>h2]:mb-3.5
                [&>h2:first-child]:mt-0
-               [&>h3]:type-h2 [&>h3]:text-marine [&>h3]:text-[17px] [&>h3]:mt-8 [&>h3]:mb-3
+               [&>h3]:type-h2 [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:mt-8 [&>h3]:mb-3
                [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
-               [&>ul>li]:border-l [&>ul>li]:border-copper [&>ul>li]:pl-4
+               [&>ul>li]:border-l [&>ul>li]:border-line-strong [&>ul>li]:pl-4
                [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2
-               [&_a]:text-marine [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-copper-text
-               [&_strong]:text-marine [&_strong]:font-semibold"
-        data-reveal
+               [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
+               [&_strong]:text-encre [&_strong]:font-semibold"
+       
       >
         <Content />
       </div>

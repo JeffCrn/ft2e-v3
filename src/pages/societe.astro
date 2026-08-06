@@ -30,28 +30,28 @@ const ficheIdentite = [
   />
 
   {/* ── Le bureau d'études : prose + fiche d'identité en cartouche ── */}
-  <section class="bg-cool-white py-16 md:py-20">
+  <section class="bg-papier py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-8" data-reveal>
-        <h2 class="type-h2 text-marine text-[22px]">Le bureau d’études</h2>
-        <p class="mono-label font-normal text-slate">ingénierie fluide · thermique · énergie · électricité</p>
+      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-8">
+        <h2 class="type-h2 text-encre text-[22px]">Le bureau d’études</h2>
+        <p class="mono-label font-normal text-pivot">ingénierie fluide · thermique · énergie · électricité</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 lg:gap-16 items-start">
-        <div class="text-[17px] font-light text-slate leading-[1.6] space-y-6" data-reveal>
+        <div class="text-[17px] font-normal text-pivot leading-[1.6] space-y-6">
           <p>
             FT2E est une société d’ingénierie pluridisciplinaire créée en 2008 à La Rochelle. Le bureau couvre l’ensemble de la chaîne technique du bâtiment&nbsp;: de l’audit initial des installations aux études d’exécution pour entreprise, en passant par la simulation thermique réglementaire, la conception CVC et plomberie, l’électricité courants forts et faibles, la coordination SSI et la modélisation BIM. Les prestations vont des pré-études jusqu’à la réception des travaux — et au-delà, avec le suivi des installations pendant l’année de parfait achèvement.
           </p>
           <p>
-            Cette pluridisciplinarité est portée par une <a href="/equipe" class="text-marine underline underline-offset-2 hover:text-copper-text motion-safe:transition-colors motion-safe:duration-[400ms] motion-safe:ease-[var(--ease-blueprint)]">équipe de sept personnes</a> qui a développé, au fil des dix-sept dernières années, une expertise dans de multiples secteurs de la construction&nbsp;: logement, tertiaire, santé, sport, industriel, patrimoine. La direction du bureau est portée collectivement par les associés.
+            Cette pluridisciplinarité est portée par une <a href="/equipe" class="text-encre underline underline-offset-2 hover:text-encre motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">équipe de sept personnes</a> qui a développé, au fil des dix-sept dernières années, une expertise dans de multiples secteurs de la construction&nbsp;: logement, tertiaire, santé, sport, industriel, patrimoine. La direction du bureau est portée collectivement par les associés.
           </p>
         </div>
 
-        <dl class="border border-line-strong grid grid-cols-1 gap-px bg-line" data-reveal>
+        <dl class="border border-line-strong grid grid-cols-1 gap-px bg-line">
           {ficheIdentite.map((ligne) => (
-            <div class="bg-cool-white px-5 py-3.5 flex items-baseline justify-between gap-4">
-              <dt class="mono-label font-normal text-slate">{ligne.label}</dt>
-              <dd class="mono-data text-marine text-right">{ligne.valeur}</dd>
+            <div class="bg-papier px-5 py-3.5 flex items-baseline justify-between gap-4">
+              <dt class="mono-label font-normal text-pivot">{ligne.label}</dt>
+              <dd class="mono-data text-encre text-right">{ligne.valeur}</dd>
             </div>
           ))}
         </dl>
@@ -61,49 +61,49 @@ const ficheIdentite = [
   </section>
 
   {/* ── Quatre piliers ── */}
-  <section class="bg-cool-white py-16 md:py-20">
+  <section class="bg-papier py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
-        <h2 class="type-h2 text-marine text-[22px]">Quatre piliers</h2>
-        <p class="mono-label font-normal text-slate">ce qui guide la pratique au quotidien</p>
+      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
+        <h2 class="type-h2 text-encre text-[22px]">Quatre piliers</h2>
+        <p class="mono-label font-normal text-pivot">ce qui guide la pratique au quotidien</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-line border border-line" data-reveal-stagger>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-line border border-line">
         {[
           { n: '01', titre: 'Proximité', texte: "Ancrage rochelais et intervention sur la façade atlantique. Disponibilité et réactivité dans le suivi des chantiers." },
           { n: '02', titre: 'Expertise pluridisciplinaire', texte: "Audit, thermique, CVC, électricité CFO/CFA, coordination SSI, études d’exécution, BIM. Une équipe qui couvre toute la chaîne technique." },
           { n: '03', titre: 'Engagement énergétique', texte: "Études réglementaires, simulations thermiques dynamiques, intégration des énergies renouvelables. Un vrai métier, sans posture." },
           { n: '04', titre: 'Cohérence chantier', texte: "Études d’exécution pour les entreprises titulaires. Ce qui est conçu est constructible." },
         ].map((pilier) => (
-          <div class="p-6 bg-cool-white transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:bg-paper">
-            <span class="mono-label font-normal text-copper-text tabular-nums" aria-hidden="true">{pilier.n}</span>
-            <h3 class="type-h2 text-marine text-[19px] mt-3">{pilier.titre}</h3>
-            <p class="mt-3 text-[15px] font-light text-slate leading-[1.55]">{pilier.texte}</p>
+          <div class="p-6 bg-papier transition-colors duration-200 ease-[var(--ease-blueprint)] hover:bg-calcaire">
+            <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{pilier.n}</span>
+            <h3 class="type-h2 text-encre text-[19px] mt-3">{pilier.titre}</h3>
+            <p class="mt-3 text-[15px] font-normal text-pivot leading-[1.55]">{pilier.texte}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  {/* ── La proximité comme méthode : cartouche sombre marine ── */}
-  <section class="bg-marine border-t border-copper py-16 md:py-20">
+  {/* ── La proximité comme méthode : bande calcaire, filet de section ── */}
+  <section class="bg-calcaire border-t-2 border-encre py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
       <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,520px)_1fr] gap-10 lg:gap-16 items-start">
-        <div data-reveal>
-          <p class="mono-label text-mist mb-4">la méthode</p>
-          <h2 class="type-h2 text-cool-white text-[22px]">La proximité comme méthode</h2>
-          <p class="mt-5 text-[17px] font-light text-cool-white leading-[1.6]">
+        <div>
+          <p class="mono-label text-pivot mb-4">la méthode</p>
+          <h2 class="type-h2 text-encre text-[22px]">La proximité comme méthode</h2>
+          <p class="mt-5 text-[17px] text-pivot leading-[1.6]">
             FT2E a toujours privilégié une proximité avec ses projets afin de garantir une disponibilité efficace auprès des clients et des partenaires, ainsi qu’une réactivité optimale dans le suivi des chantiers. Cette posture n’est pas un argument — elle conditionne l’organisation du bureau.
           </p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:pt-12" data-reveal-stagger>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:pt-12">
           {[
             { label: 'ancrage', texte: 'Un bureau unique à La Rochelle, au plus près des opérations suivies.' },
             { label: 'rayon d’action', texte: 'Charente-Maritime, Vendée, Deux-Sèvres — la façade atlantique du Centre-Ouest.' },
             { label: 'organisation', texte: 'Équipes resserrées : chaque ingénieur pilote ses lots de bout en bout.' },
           ].map((item) => (
-            <div class="border-t border-copper pt-4">
-              <h3 class="mono-label text-bright-copper font-medium">{item.label}</h3>
-              <p class="mt-3 text-[15px] font-light text-cool-white leading-[1.55]">{item.texte}</p>
+            <div class="border-t border-line-strong pt-4">
+              <h3 class="mono-label text-encre font-medium">{item.label}</h3>
+              <p class="mt-3 text-[15px] text-pivot leading-[1.55]">{item.texte}</p>
             </div>
           ))}
         </div>
@@ -112,23 +112,23 @@ const ficheIdentite = [
   </section>
 
   {/* ── Engagements énergétiques ── */}
-  <section class="bg-cool-white py-16 md:py-20">
+  <section class="bg-papier py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-8" data-reveal>
-        <h2 class="type-h2 text-marine text-[22px]">Engagements énergétiques et environnementaux</h2>
-        <p class="mono-label font-normal text-slate">le savoir-faire historique du bureau</p>
+      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-8">
+        <h2 class="type-h2 text-encre text-[22px]">Engagements énergétiques et environnementaux</h2>
+        <p class="mono-label font-normal text-pivot">le savoir-faire historique du bureau</p>
       </div>
 
-      <div class="max-w-[840px]" data-reveal>
-        <p class="text-[17px] font-light text-slate leading-[1.6]">
+      <div class="max-w-[840px]">
+        <p class="text-[17px] font-normal text-pivot leading-[1.6]">
           Les études thermiques et énergétiques sont au cœur du métier depuis la création. FT2E conçoit ses installations dans le cadre des réglementations en vigueur (RT2012, RE2020) et accompagne ses clients dans l’obtention des labels et certifications de l’habitat et du tertiaire. L’intégration des énergies renouvelables — pompes à chaleur aérothermiques et géothermiques, photovoltaïque, récupération de chaleur — fait partie de l’approche standard de dimensionnement.
         </p>
-        <p class="mono-data text-slate mt-6">
+        <p class="mono-data text-pivot mt-6">
           Labels &amp; certifications — CERQUAL · Qualitel · Habitat &amp; Environnement · BBC · Effinergie · HQE
         </p>
       </div>
 
-      <div class="mt-12 flex flex-wrap gap-4" data-reveal>
+      <div class="mt-12 flex flex-wrap gap-4">
         <Bouton href="/expertises" variante="ghost">Nos expertises</Bouton>
         <Bouton href="/contact" variante="primary">Parlons de votre projet</Bouton>
       </div>

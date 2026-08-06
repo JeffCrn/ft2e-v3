@@ -5,13 +5,13 @@ import CarteExpertise from './CarteExpertise.astro';
 const expertises = (await getCollection('expertises')).sort((a, b) => a.data.ordre - b.data.ordre);
 ---
 
-<section class="py-16 md:py-20 bg-cool-white">
+<section class="py-16 md:py-20 bg-papier">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-    <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
-      <h2 class="type-h2 text-marine text-[22px]">Six expertises</h2>
-      <p class="mono-label font-normal text-slate">de l’audit au DOE numérique — un interlocuteur unique</p>
+    <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
+      <h2 class="type-h2 text-encre text-[22px]">Six expertises</h2>
+      <p class="mono-label font-normal text-pivot">de l’audit au DOE numérique — un interlocuteur unique</p>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line" data-reveal-stagger>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line">
       {expertises.map((expertise) => (
         <CarteExpertise expertise={expertise} />
       ))}

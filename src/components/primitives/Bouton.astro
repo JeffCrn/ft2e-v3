@@ -1,10 +1,12 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-// Boutons blueprint : rectangulaires, mono uppercase, 1 px de bordure.
-// primary   → plein encre sur fond clair (hover fond cuivre)
-// secondary → plein clair sur fond encre (hover fond cuivre)
-// ghost     → filaire (hover bordure + texte cuivre) — fonds clair et sombre
+// Boutons : rectangulaires, mono uppercase, filaires — aucun bouton plein
+// sans nécessité (charte v2, interdit 04). Le survol épaissit le filet
+// d'un cran, sans changement de teinte ni déplacement.
+// primary   → filet fort 2 px à l'encre (fond clair)
+// secondary → filet clair 2 px (réserve profonde ou aplat encre)
+// ghost     → filet d'indication 1 px (fond clair)
 interface Props extends HTMLAttributes<'a'> {
   variante?: 'primary' | 'secondary' | 'ghost';
   href: string;
@@ -16,7 +18,7 @@ const { variante = 'primary', href, externe = false, class: className, ...rest }
 const classes: Record<string, string> = {
   primary: 'btn-blueprint-dark',
   secondary: 'btn-blueprint-solid',
-  ghost: 'btn-blueprint text-slate hover:text-bright-copper',
+  ghost: 'btn-blueprint',
 };
 
 const externeAttrs = externe

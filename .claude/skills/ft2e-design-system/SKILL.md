@@ -1,60 +1,54 @@
 ---
 name: ft2e-design-system
-description: Source de vérité du design system « Ingénierie de l'invisible » FT2E v2 — tokens de couleur (encre/marine/cuivre), typographie Archivo + IBM Plex Mono, cartouches, filets, duotone, boutons blueprint. À consulter à chaque création de composant ou de page pour garantir la cohérence visuelle. Déclenche-toi sur toute mention de couleur, typo, espacement, hero, CTA, bouton, lien, cartouche, duotone.
+description: Source de vérité du design system FT2E v2 — charte « Ingénierie de l'invisible » v2 monochrome 197° (papier/encre/pivot, aucun accent), typographie Archivo (wdth 125/118/112/100/72) + IBM Plex Mono, cartouches à barre de rang, filets 4/2/1 px, duotone, nomenclature, monogramme. À consulter à chaque création de composant ou de page pour garantir la cohérence visuelle. Déclenche-toi sur toute mention de couleur, typo, espacement, hero, CTA, bouton, lien, cartouche, duotone, nomenclature, monogramme.
 ---
 
-# Skill : FT2E Design System — « Ingénierie de l'invisible »
+# Skill : FT2E Design System — charte v2 « Ingénierie de l'invisible » (monochrome 197°)
 
 ## Philosophie
 
-Le site ressemble à un **document d'ingénierie** : cartouches bordées, filets 1 px, annotations mono uppercase, chiffres tabulaires, coins cuivre sur les médias, images duotone. La technique invisible dans le bâtiment devient visible dans le design. Référence : bundle Claude Design `FT2E Démo V2.dc.html` (2026-08-04) et spec `docs/superpowers/specs/2026-08-04-ft2e-v2-ingenierie-invisible-design.md`.
+Un bureau d'études ne signale pas : il cote, il hiérarchise, il archive. **Une teinte unique (197°), cinq valeurs teintées, deux neutres, aucune couleur d'accent.** La hiérarchie passe par les trois moyens du dessin technique : la valeur, l'épaisseur de trait (4/2/1 px) et la largeur de caractère (Archivo wdth). Référence : « FT2E Charte » v1.0 (août 2026, bundle `branding-v2/`) et `docs/superpowers/specs/2026-08-06-ft2e-charte-v2-monochrome-197.md` — remplace le système cuivre/marine antérieur.
 
 ## Tokens — source de vérité : `src/styles/global.css` (@theme)
 
-### Couleurs
-
 | Token | Hex | Usage |
 |---|---|---|
-| `encre` / `marine-deep` | `#08131f` | nav, hero, footer, CTA final |
-| `marine` | `#16324f` | titres sur clair, texte fort, données de cartouche |
-| `cool-white` | `#edf0f2` | fond clair principal, texte sur encre |
-| `paper` | `#f7f9fa` | surface claire secondaire, hover, encarts |
-| `slate` | `#4a6076` | corps de texte et labels sur fond clair |
-| `mist` | `#8fa2b4` | labels et texte secondaire sur encre UNIQUEMENT (2,3:1 sur clair) |
-| `copper` | `#c46a38` | filets, bordures, équerres ; texte sur encre (4,9:1) |
-| `bright-copper` | `#e08a50` | hover liens / annotations sur encre (7,1:1) |
-| `copper-text` | `#a04e20` | petit texte cuivre sur fond clair (≥ 5:1) |
-| `line` / `line-strong` | `rgba(74,96,118,.35)` / `#4a6076` | filet standard / contour de cartouche |
+| `profond` | `#001718` | réserve — 1/5 max, UNE apparition/écran (relevés, duotone, couverture) ; texte vedette sur papier |
+| `encre` | `#00393a` | toute la lecture : titres, filets porteurs, cadres, barres de rang |
+| `pivot` | `#336667` | données, dates, corps de texte sur clair (6,1:1), filets 2ᵉ rang, focus |
+| `clair` | `#99cccd` | étiquettes/texte sur fond profond ou encre UNIQUEMENT |
+| `voile` | `#e1f4f4` | pôle clair du duotone ; texte/équerres sur réserve profonde UNIQUEMENT |
+| `papier` | `#f7f9fa` | **fond par défaut de toute page** |
+| `calcaire` | `#edf0f2` | surface secondaire, hover de surface — jamais sous le voile (iso-clairs) |
+| `line` / `line-strong` | `rgba(0,57,58,.18)` / `.3` | filet d'indication / contour de cartouche |
 
-**Pas de bleu.** Le cuivre porte identité + interaction (hover, focus `2px solid copper`). Aliases legacy (`apple-blue`, `link-blue`, `bright-blue`, `near-black`, `light-gray`, `dark-surface-*`) repointés — ne plus les utiliser.
+**Le cuivre n'existe plus** (aliases repointés). Règles : 2 valeurs par composition (3 max) ; jamais deux valeurs voisines en contact (sauter un palier) ; aucun dégradé ni opacité de teinte ; alerte = filet doublé + mention, pas une couleur.
 
-### Typographie
+## Typographie — rangs
 
-- **Archivo Variable** — titres condensés-larges uppercase via `font-stretch` (112 % sections, 118 % wordmark, 125 % display), corps `font-light` (300) 15–17 px, `line-height` 1.55–1.6.
-- **IBM Plex Mono** 400/500 — labels 11 px `tracking .14em` uppercase, données 13 px `tabular-nums`, nav, boutons, breadcrumbs.
-
-### Classes recettes (global.css, @layer components)
-
-`type-display` (hero), `type-h2` (sections/cartes), `mono-label`, `mono-data`, `filet-top` (filet cuivre au-dessus des h2 éditoriaux), `btn-blueprint` (filaire), `btn-blueprint-solid` (plein clair sur encre), `btn-blueprint-dark` (plein encre sur clair), `chip-blueprint` (filtres), `duotone-media` (placeholder hachuré), `duotone-photo` (photo duotone). Composant `CoinsCuivre.astro` pour les équerres.
+`type-display` = Vedette (125/700, une par page, `text-profond`) · `type-h2` = Titre (118/600) · `type-intitule` = Intitulé (112/600, cartes et nomenclature) · corps Courant (100/400, 15–17 px, lh 1,6 — plus de `font-light`) · `type-annexe` (72/600) · `mono-label` (11 px/500/0,14 em) · `mono-data` (13 px tabulaire). Tout nombre mesuré en mono ; vedettes chiffrées de stats en Archivo 118/600 tabulaire.
 
 ## Grammaire des blocs
 
-- **Section claire** : `bg-cool-white`, titre `type-h2 text-marine text-[22px]` en baseline avec un `mono-label text-slate`.
-- **Section encre** : `bg-encre border-t border-copper text-cool-white` (CTA final, bandeaux).
-- **Cartouche** : `border border-line-strong` + grille `gap-px bg-line`, cellules `bg-cool-white p-5`, label mono + valeur mono marine.
-- **Carte** : `border border-line bg-paper hover:border-copper`, média duotone 3:2 avec référence `FT2E—{année}` en bas à gauche, titre `type-h2 text-base`, méta `mono-data`.
-- **Liste secteurs** : lignes `border-b border-line` avec n° cuivre tabulaire, hover `border-b-copper bg-paper`.
-- **Média** : parent `relative` + `duotone-media`/`duotone-photo` + `CoinsCuivre` + annotation `mono-label text-cool-white` en bas à gauche.
-- **Prose éditoriale** : `max-w-[840px]`, h2 `filet-top`, corps `text-slate font-light text-[17px]`, listes à `border-l border-copper`, liens soulignés marine hover `copper-text`.
+- **Section claire** : `bg-papier`, titre `type-h2 text-encre text-[22px]` en baseline avec `mono-label text-pivot`.
+- **Bande secondaire** : `bg-calcaire border-t-2 border-encre` (partenaires, méthode) ; CTA final : `bg-calcaire border-t-4 border-encre`.
+- **Hero** : clair, vedette `type-display text-profond` + **barre de rang 4 px encre** (110 px) + sous-titre pivot. Accueil : 2 colonnes, média duotone annoté + cartouche compact à droite — l'image ne porte pas le titre.
+- **Cartouche** : `grid-cols-[4px_1fr]` barre encre + `border border-line-strong`, cases mono ; ordre constant intitulé → référence → date. Jamais centré, jamais d'ombre.
+- **Nomenclature** (`/references`) : liste tabulaire, en-tête `border-b-2 border-encre`, rang du filet gauche 4/2/1 px = livré/en cours/archive (champ `statut`), largeur Archivo 118/100/72 assortie. Pas de pagination.
+- **Relevés** : `bg-profond` + label `mono-label text-clair` + chiffres Archivo 118/600 `text-voile` — la seule réserve profonde de l'écran.
+- **Média** : duotone 197° (`duotone-photo` : sandwich lighten/darken #001718→#E1F4F4 ; `duotone-media` : hachure placeholder) + `CoinsCuivre` (équerres voile 1 px, 18/16/14 px, DANS les angles) + annotation mono voile (2 max, verticale d'appui à 1/8).
+- **Monogramme** (`Logo.astro`) : `version` principal/inverse/valeur-unique, `forme` complet/cadre (sous 180 px le mot tombe). Le débord du flux ne se recadre jamais.
+- **Prose** : `max-w-[840px]`, h2 `filet-top` (2 px encre), corps pivot, listes `border-l border-line-strong`, liens soulignés encre hover pivot.
 
 ## Interdits
 
-- Rayons (`rounded-lg`, pill `rounded-[980px]`) — seuls les inputs ont `rounded-[2px]`.
-- Ombres (`shadow-*`).
-- Bleu d'action, glass/blur, tilt 3D.
-- Texte `copper` standard ou `mist` sur fond clair (contraste insuffisant → `copper-text` / `slate`).
-- Couleur forcée sur `h1`–`h6` en CSS global (Tailwind v4 : utilitaires d'abord).
+- Aplat sombre décoratif (`bg-encre`/`bg-profond` hors relevés) — le papier gouverne.
+- Rayons (2 px max inputs), ombres, dégradés, boutons pleins sans nécessité.
+- Couleur hors rampe 197° + 2 neutres ; `voile`/`clair` sur fond clair ; encre sur pivot (1,97:1).
+- Compteurs animés, apparitions au défilement, parallax, hover lift (aucun déplacement).
+- Icônes illustratifs, pictogrammes décoratifs, emojis.
+- Images en couleurs natives ou gris neutre ; cadre d'image fermé ; 3ᵉ rapport d'image (3:2 et 16:9 seulement).
 
 ## Motion
 
-Easing unique `--ease-blueprint: cubic-bezier(0.16, 1, 0.3, 1)` (alias `--ease-apple` conservé). Hero reveal mot à mot, scroll reveal 12 px, compteurs, transitions de bordure 400 ms. `prefers-reduced-motion` respecté partout.
+**Un seul tracé animé sur tout le site** : `TraceFlux.astro`, 900 ms, une fois par chargement. États : survol = filet épaissi d'un cran (`box-shadow inset`) + intitulé à l'encre, 200 ms ; focus = 2 px pivot décalé 2 px. Easing unique `--ease-blueprint`. `prefers-reduced-motion` partout.

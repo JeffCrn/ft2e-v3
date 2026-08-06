@@ -1,4 +1,7 @@
 ---
+import { getCollection } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/blocs/Hero.astro';
 import ChiffresCles from '../components/blocs/ChiffresCles.astro';
@@ -9,7 +12,18 @@ import ReferencesRecentes from '../components/blocs/ReferencesRecentes.astro';
 import EquipePreview from '../components/blocs/EquipePreview.astro';
 import BandeauPartenaires from '../components/blocs/BandeauPartenaires.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
+import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
 import TraceFlux from '../components/primitives/TraceFlux.astro';
+
+// Média du hero (écran 1 de la charte) : l'image recule dans sa colonne,
+// elle ne porte pas le titre. Projet mis en avant le plus récent.
+const enAvant = (await getCollection('projets'))
+  .filter((p) => p.data.en_avant)
+  .sort((a, b) => b.data.annee - a.data.annee)[0];
+
+const heroImageExiste = enAvant
+  ? fs.existsSync(path.join(process.cwd(), 'public', enAvant.data.image_principale))
+  : false;
 ---
 
 <PageLayout
@@ -23,10 +37,41 @@ import TraceFlux from '../components/primitives/TraceFlux.astro';
     sousTitre="Bureau d’études pluridisciplinaire à La Rochelle. Fluides, thermique, électricité, sécurité incendie, BIM. Au service des architectes, maîtres d’ouvrage publics et promoteurs depuis 2008."
     ctaPrincipal={{ label: 'Parlons de votre projet', href: '/contact' }}
     ctaSecondaire={{ label: 'Nos références', href: '/references' }}
-  />
+  >
+    {enAvant && (
+      <Fragment slot="media">
+        <div class:list={['relative aspect-[3/2]', heroImageExiste ? 'duotone-photo' : 'duotone-media']}>
+          {heroImageExiste && (
+            <img
+              src={enAvant.data.image_principale}
+              alt={enAvant.data.image_principale_alt}
+              class="w-full h-full object-cover"
+            />
+          )}
+          <CoinsCuivre taille={18} />
+          <div class="absolute left-[12.5%] top-8 flex items-center gap-2.5 z-10" aria-hidden="true">
+            <span class="block w-14 h-px bg-voile"></span>
+            <span class="mono-label font-normal text-[10px] text-voile">
+              {enAvant.data.demo ? '[démo] ' : ''}{enAvant.data.mission_ft2e.slice(0, 2).join(' · ').toLowerCase()}
+            </span>
+          </div>
+        </div>
+        <a
+          href={`/references/${enAvant.id}`}
+          class="grid grid-cols-[4px_1fr] border-x border-b border-line-strong hover:bg-calcaire transition-colors duration-200 ease-[var(--ease-blueprint)]"
+        >
+          <span class="bg-encre" aria-hidden="true"></span>
+          <span class="px-4 py-3 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <span class="type-intitule text-profond text-[15px]">{enAvant.data.titre}</span>
+            <span class="mono-data text-[11px] text-pivot ml-auto">FT2E—{enAvant.data.annee} · {enAvant.data.lieu}</span>
+          </span>
+        </a>
+      </Fragment>
+    )}
+  </Hero>
 
-  {/* Zone claire « câblée » : le tracé de flux cuivre longe la colonne de
-      contenu et se dessine au défilement (marges larges uniquement). */}
+  {/* Zone « câblée » : le tracé de flux longe la colonne de contenu et se
+      dessine une fois au chargement (900 ms) — le seul mouvement du site. */}
   <div class="relative">
     <div
       class="hidden min-[1360px]:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] pointer-events-none"

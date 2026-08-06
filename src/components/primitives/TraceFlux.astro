@@ -1,7 +1,7 @@
 ---
-// Tracé de flux cuivre — signature motion de la planche système (section 02) :
-// une polyligne verticale qui « câble » les grandes sections entre elles et se
-// dessine au fil du défilement, avec un effet de rattrapage (~0,7 s).
+// Tracé de flux — le seul mouvement du site (charte v2, planche 08) :
+// une polyligne verticale qui « câble » les grandes sections entre elles et
+// se dessine UNE FOIS au chargement, en 900 ms. Aucun suivi de défilement.
 //
 // Les nœuds carrés 7 px sont posés EXACTEMENT sur les frontières entre les
 // sections marquées `data-trace-jalon` (mesurées dans le DOM au chargement),
@@ -9,8 +9,7 @@
 // géométrie quand la hauteur de la zone change (images, polices, responsive).
 //
 // Géométrie générée en pixels réels (viewBox = hauteur mesurée) : dasharray,
-// dashoffset et getTotalLength partagent la même unité — pas d'étirement SVG,
-// pas de vector-effect (qui fragmenterait le tracé en tronçons).
+// dashoffset et getTotalLength partagent la même unité — pas d'étirement SVG.
 //
 // Purement décoratif (aria-hidden). À placer dans un parent `relative`
 // dimensionné qui contient (ou côtoie) les sections jalons.
@@ -30,7 +29,7 @@ const { class: className, jalons = '[data-trace-jalon]' } = Astro.props;
   aria-hidden="true"
 >
   <svg viewBox="0 0 40 1000" preserveAspectRatio="none" class="block w-full h-full">
-    <polyline points="20,0 20,1000" fill="none" stroke="#c46a38" stroke-width="1" />
+    <polyline points="20,0 20,1000" fill="none" stroke="#00393a" stroke-width="1" />
   </svg>
 </div>
 
@@ -38,6 +37,7 @@ const { class: className, jalons = '[data-trace-jalon]' } = Astro.props;
   const X_GAUCHE = 20;
   const X_DROITE = 32;
   const DEMI_COUDE = 8; // le coude s'étend sur ±8 px autour du nœud
+  const DUREE = 900; // ms — un seul tracé, une fois par chargement
 
   function initTraceFlux() {
     document.querySelectorAll<HTMLElement>('[data-trace-flux]').forEach((el) => {
@@ -69,7 +69,7 @@ const { class: className, jalons = '[data-trace-jalon]' } = Astro.props;
       };
 
       // Régénère polyligne + nœuds en pixels réels : un coude par frontière,
-      // le nœud centré sur l'amorce du coude (planche système).
+      // le nœud centré sur l'amorce du coude.
       const layout = () => {
         const h = Math.max(el.clientHeight, 1);
         svg.setAttribute('viewBox', `0 0 40 ${h}`);
@@ -91,9 +91,9 @@ const { class: className, jalons = '[data-trace-jalon]' } = Astro.props;
         noeudEls.forEach((n) => n.remove());
         noeudEls = noeuds.map(({ x: nx, y: ny }) => {
           const s = document.createElement('span');
-          s.className = 'trace-noeud absolute w-[7px] h-[7px] bg-copper';
+          s.className = 'trace-noeud absolute w-[7px] h-[7px] bg-encre';
           s.style.cssText = `top:${ny}px;left:${nx}px;transform:translate(-50%,-50%);`;
-          s.dataset.noeudAt = String((ny / h) * 100);
+          s.dataset.noeudAt = String(ny / h);
           el.appendChild(s);
           return s;
         });
@@ -110,58 +110,40 @@ const { class: className, jalons = '[data-trace-jalon]' } = Astro.props;
         return;
       }
 
-      line.style.strokeDashoffset = String(len);
-
-      // Cible : fraction du tracé « traversée » par le bas du viewport.
-      // Courant : position réelle de la pointe, qui rattrape la cible par
-      // lissage exponentiel — ce retard contrôlé rend le tracé visible.
-      let cible = 0;
-      let courant = 0;
-      let raf = 0;
-
-      const mesure = () => {
-        const r = el.getBoundingClientRect();
-        const vh = window.innerHeight || 800;
-        cible = Math.min(1, Math.max(0, (vh - r.top) / r.height));
-      };
-
-      const rend = () => {
-        raf = 0;
-        courant += (cible - courant) * 0.07;
-        if (Math.abs(cible - courant) < 0.001) courant = cible;
-        line.style.strokeDashoffset = String(len * (1 - courant));
+      // Dessin unique : dashoffset len → 0 en 900 ms ; chaque nœud se pose
+      // au moment où la pointe le franchit.
+      const dessine = () => {
+        line.style.transition = `stroke-dashoffset ${DUREE}ms var(--ease-apple)`;
+        line.style.strokeDashoffset = '0';
+        el.dataset.dessine = '1';
         noeudEls.forEach((n) => {
-          if (courant * 100 >= Number(n.dataset.noeudAt ?? 0)) n.classList.add('revealed');
+          const t = Number(n.dataset.noeudAt ?? 0) * DUREE;
+          setTimeout(() => n.classList.add('revealed'), t);
         });
-        if (courant !== cible) raf = requestAnimationFrame(rend);
       };
 
-      const onScroll = () => {
-        if (!el.isConnected) {
-          window.removeEventListener('scroll', onScroll);
-          if (raf) cancelAnimationFrame(raf);
-          return;
-        }
-        mesure();
-        if (!raf) raf = requestAnimationFrame(rend);
-      };
+      line.style.strokeDashoffset = String(len);
+      requestAnimationFrame(() => requestAnimationFrame(dessine));
 
+      // Recalage silencieux : une fois dessiné, le tracé reste posé.
       if ('ResizeObserver' in window) {
         const ro = new ResizeObserver(() => {
           if (!el.isConnected) {
             ro.disconnect();
             return;
           }
+          const dessineDeja = el.dataset.dessine === '1';
           layout();
-          mesure();
-          if (!raf) raf = requestAnimationFrame(rend);
+          if (dessineDeja) {
+            line.style.transition = 'none';
+            line.style.strokeDashoffset = '0';
+            noeudEls.forEach((n) => n.classList.add('revealed'));
+          } else {
+            line.style.strokeDashoffset = String(len);
+          }
         });
         ro.observe(el);
       }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      mesure();
-      raf = requestAnimationFrame(rend);
     });
   }
 

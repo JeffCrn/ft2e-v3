@@ -1,17 +1,22 @@
 ---
-// Équerres cuivre 16 px aux angles d'un média — signature « ingénierie de
-// l'invisible ». À placer dans un parent `relative` ; purement décoratif.
+// Équerres d'image — charte v2 (planche 06) : quatre équerres d'un pixel
+// au voile (#E1F4F4), posées DANS les angles, qui cadrent la vue sans
+// l'enfermer. C'est le repère de tirage, pas un encadrement décoratif.
+// À placer dans un parent `relative` (média duotone) ; purement décoratif.
 // `coins="deux"` n'affiche que haut-gauche / bas-droite (variante mobile).
+// Tailles : 18 px (standard), 16 px (fiche), 14 px (vignette).
 interface Props {
   coins?: 'quatre' | 'deux';
+  taille?: 18 | 16 | 14;
 }
 
-const { coins = 'quatre' } = Astro.props;
+const { coins = 'quatre', taille = 18 } = Astro.props;
+const dim = `width:${taille}px;height:${taille}px;`;
 ---
 
 <div aria-hidden="true">
-  <div class="absolute -left-2 -top-2 w-4 h-4 border-l border-t border-copper"></div>
-  {coins === 'quatre' && <div class="absolute -right-2 -top-2 w-4 h-4 border-r border-t border-copper"></div>}
-  {coins === 'quatre' && <div class="absolute -left-2 -bottom-2 w-4 h-4 border-l border-b border-copper"></div>}
-  <div class="absolute -right-2 -bottom-2 w-4 h-4 border-r border-b border-copper"></div>
+  <div class="absolute left-0 top-0 border-l border-t border-voile" style={dim}></div>
+  {coins === 'quatre' && <div class="absolute right-0 top-0 border-r border-t border-voile" style={dim}></div>}
+  {coins === 'quatre' && <div class="absolute left-0 bottom-0 border-l border-b border-voile" style={dim}></div>}
+  <div class="absolute right-0 bottom-0 border-r border-b border-voile" style={dim}></div>
 </div>

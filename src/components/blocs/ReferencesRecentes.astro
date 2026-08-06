@@ -8,15 +8,15 @@ const projets = (await getCollection('projets'))
   .slice(0, 4);
 ---
 
-<section class="py-16 md:py-20 bg-cool-white">
+<section class="py-16 md:py-20 bg-papier">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-    <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
-      <h2 class="type-h2 text-marine text-[22px]">Références récentes</h2>
-      <a href="/references" class="mono-label font-normal text-slate hover:text-copper-text motion-safe:transition-colors motion-safe:duration-[400ms] motion-safe:ease-[var(--ease-blueprint)]">
-        voir toutes les références <span class="chevron-arrow">→</span>
+    <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
+      <h2 class="type-h2 text-encre text-[22px]">Références récentes</h2>
+      <a href="/references" class="mono-label font-normal text-pivot hover:text-encre motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-[var(--ease-blueprint)]">
+        voir toutes les références →
       </a>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-reveal-stagger>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {projets.map((projet) => (
         <CarteProjet projet={projet} />
       ))}

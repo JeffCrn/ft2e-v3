@@ -2,42 +2,49 @@
 import type { CollectionEntry } from 'astro:content';
 import BadgeDemo from '../primitives/BadgeDemo.astro';
 
+// Cartouche de fiche d'affaire — charte v2 (planche 07) : le bloc-titre du
+// plan. Filet de rang 4 px à gauche de l'en-tête, données en cases de mono,
+// ordre de lecture constant : intitulé, référence, date.
 interface Props {
   projet: CollectionEntry<'projets'>;
 }
 
 const { projet } = Astro.props;
-const { secteur, typologie, moa, architecte, lieu, surface_m2, annee, performance, mission_ft2e, demo } = projet.data;
+const { secteur, typologie, moa, architecte, lieu, surface_m2, annee, mission_ft2e, demo } = projet.data;
 
 const lignes = [
-  { label: "maître d’ouvrage", valeur: moa },
-  { label: 'architecte', valeur: architecte },
-  { label: 'lieu', valeur: lieu },
-  { label: 'surface', valeur: surface_m2 ? `${surface_m2.toLocaleString('fr-FR')} m²` : undefined },
-  { label: 'année', valeur: String(annee) },
-  { label: 'typologie', valeur: typologie },
-  { label: 'secteur', valeur: secteur },
-  { label: 'performance', valeur: performance },
+  { label: 'référence', valeur: `FT2E—${annee}`, rang: 'encre' },
+  { label: 'année', valeur: String(annee), rang: 'encre' },
+  { label: 'lieu', valeur: lieu, rang: 'encre' },
+  { label: "maître d’ouvrage", valeur: moa, rang: 'pivot' },
+  { label: 'architecte', valeur: architecte, rang: 'pivot' },
+  { label: 'surface', valeur: surface_m2 ? `${surface_m2.toLocaleString('fr-FR')} m²` : undefined, rang: 'pivot' },
+  { label: 'typologie', valeur: typologie, rang: 'pivot' },
 ].filter((l) => l.valeur && l.valeur !== '—');
 ---
 
 <aside class="border border-line-strong">
-  <div class="flex items-center gap-3 px-5 py-4 border-b border-line">
-    <h2 class="mono-label text-slate font-medium">fiche technique</h2>
-    {demo && <BadgeDemo />}
+  <div class="grid grid-cols-[4px_1fr]">
+    <div class="bg-encre" aria-hidden="true"></div>
+    <div class="px-5 py-4 border-b border-line flex items-center gap-3">
+      <h2 class="mono-label text-pivot font-medium">{secteur.toLowerCase()} — {typologie.toLowerCase()}</h2>
+      {demo && <BadgeDemo />}
+    </div>
   </div>
 
-  <dl>
+  <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
     {lignes.map((ligne) => (
-      <div class="grid grid-cols-[1fr_auto] gap-4 px-5 py-3 border-b border-line/60">
-        <dt class="mono-label font-normal text-slate tracking-[0.1em]">{ligne.label}</dt>
-        <dd class="mono-data text-marine text-right leading-[1.4]">{ligne.valeur}</dd>
+      <div class="px-5 py-3 border-b border-line">
+        <dt class="mono-label font-normal text-[10px] text-pivot">{ligne.label}</dt>
+        <dd class:list={['mono-data mt-1.5 leading-[1.4]', ligne.rang === 'encre' ? 'text-encre' : 'text-pivot']}>
+          {ligne.valeur}
+        </dd>
       </div>
     ))}
   </dl>
 
-  <div class="px-5 py-4 bg-paper">
-    <p class="mono-label font-normal text-slate mb-2">mission FT2E</p>
-    <p class="mono-data text-marine">{mission_ft2e.join(' · ')}</p>
+  <div class="px-5 py-4 bg-calcaire">
+    <p class="mono-label font-normal text-pivot mb-2">mission FT2E</p>
+    <p class="mono-data text-encre">{mission_ft2e.join(' · ')}</p>
   </div>
 </aside>

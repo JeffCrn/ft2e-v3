@@ -33,10 +33,10 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
     sousTitre="FT2E s’appuie sur une équipe de sept personnes qui a su développer une réelle expertise dans les multiples secteurs de la construction."
   />
 
-  <section class="bg-cool-white py-16 md:py-20">
+  <section class="bg-papier py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div class="relative" data-reveal>
+        <div class="relative">
           <div class:list={['w-full aspect-[3/2]', collectifExiste ? 'duotone-photo' : 'duotone-media']}>
             {collectifExiste && (
               <img
@@ -46,12 +46,12 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
                 loading="lazy"
               />
             )}
-            <span class="absolute left-4 bottom-3 mono-label font-normal text-cool-white z-10" aria-hidden="true">l’équipe ft2e, la rochelle</span>
+            <span class="absolute left-4 bottom-3 mono-label font-normal text-voile z-10" aria-hidden="true">l’équipe ft2e, la rochelle</span>
           </div>
           <CoinsCuivre />
         </div>
 
-        <div class="space-y-4 text-[15px] font-light text-slate leading-[1.6]" data-reveal>
+        <div class="space-y-4 text-[15px] font-normal text-pivot leading-[1.6]">
           <p>
             Chacun pilote ses projets de bout en bout, de la phase d’études au suivi de chantier. Cette organisation à taille humaine garantit une réactivité directe pour nos clients et nos collaborateurs partenaires.
           </p>
@@ -66,16 +66,16 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
     </div>
   </section>
 
-  <section class="bg-cool-white py-16 md:py-20">
+  <section class="bg-papier py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5" data-reveal>
-        <h2 class="type-h2 text-marine text-[22px]">Les sept profils</h2>
-        <p class="mono-label font-normal text-slate">une équipe pluridisciplinaire, ancrée à la rochelle</p>
+      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mb-5">
+        <h2 class="type-h2 text-encre text-[22px]">Les sept profils</h2>
+        <p class="mono-label font-normal text-pivot">une équipe pluridisciplinaire, ancrée à la rochelle</p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-px bg-line border border-line" data-reveal-stagger>
+      <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-px bg-line border border-line">
         {membres.map((membre) => (
-          <div class="bg-cool-white">
+          <div class="bg-papier">
             <div class:list={['aspect-[3/2]', membre.hasPhoto ? 'duotone-photo' : 'duotone-media']}>
               {membre.hasPhoto && (
                 <img
@@ -87,13 +87,13 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
               )}
             </div>
             <div class="px-3.5 py-3">
-              <h3 class="type-h2 text-marine text-base">
+              <h3 class="type-h2 text-encre text-base">
                 {membre.prenom}
               </h3>
-              <p class="mono-label font-normal text-copper-text mt-1.5">
+              <p class="mono-label font-normal text-pivot mt-1.5">
                 {membre.role}
               </p>
-              <p class="mono-label font-normal text-slate tracking-[0.06em] mt-2 leading-[1.5]">
+              <p class="mono-label font-normal text-pivot tracking-[0.06em] mt-2 leading-[1.5]">
                 {membre.fonction}
               </p>
             </div>
@@ -103,17 +103,17 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
     </div>
   </section>
 
-  <section class="bg-encre border-t border-copper py-16 md:py-20">
+  <section class="bg-papier border-t-2 border-encre py-16 md:py-20">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
       <div class="max-w-[70ch]">
-        <h2 class="type-h2 text-cool-white text-[22px] mb-4" data-reveal>
+        <h2 class="type-h2 text-encre text-[22px] mb-4">
           Vous voulez rejoindre l’équipe&nbsp;?
         </h2>
-        <p class="text-[15px] font-light text-mist leading-[1.6] mb-8" data-reveal>
+        <p class="text-[15px] text-pivot leading-[1.6] mb-8">
           FT2E recrute occasionnellement des profils techniques&nbsp;: thermiciens, électriciens, coordinateurs SSI, projeteurs. Si vous cherchez un bureau d’études à taille humaine, ancré sur le littoral atlantique, avec une vraie autonomie sur vos projets — parlons-en.
         </p>
-        <div data-reveal>
-          <Bouton href="/contact" variante="secondary">
+        <div>
+          <Bouton href="/contact" variante="primary">
             Candidature spontanée
           </Bouton>
         </div>

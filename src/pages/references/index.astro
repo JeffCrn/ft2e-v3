@@ -1,13 +1,31 @@
 ---
 import { getCollection } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
-import CarteProjet from '../../components/blocs/CarteProjet.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 
+// Index des affaires — charte v2 (planche 08, écran 2) : une nomenclature,
+// pas une grille de cartes. Le rang est porté par le filet gauche
+// (4 px livré · 2 px en cours · 1 px archive), la largeur d'Archivo suit.
+// Toutes les lignes sont sur une seule page ; le filtre réduit la liste,
+// il ne pagine pas.
 const projets = (await getCollection('projets')).sort((a, b) => b.data.annee - a.data.annee);
 
 const secteurs = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Patrimoine'];
+
+const rangs = {
+  livré: { barre: 'w-1', titre: 'text-profond', stretch: '118%' },
+  'en cours': { barre: 'w-[2px]', titre: 'text-encre', stretch: '100%' },
+  archive: { barre: 'w-px', titre: 'text-pivot', stretch: '72%' },
+} as const;
+
+const lignes = projets.map((projet) => ({
+  projet,
+  rang: rangs[projet.data.statut],
+  imageExiste: fs.existsSync(path.join(process.cwd(), 'public', projet.data.image_principale)),
+}));
 ---
 
 <PageLayout
@@ -19,18 +37,18 @@ const secteurs = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Pat
       { label: 'Accueil', href: '/' },
       { label: 'Références', href: '/references' },
     ]}
-    eyebrow="projets livrés — index filtrable"
+    eyebrow="index des affaires — nomenclature filtrable"
     titre="Nos références"
     sousTitre="Une sélection de projets représentatifs de notre activité en Charente-Maritime, Vendée et Deux-Sèvres."
   />
 
-  <section class="bg-cool-white py-14 md:py-16">
+  <section class="bg-papier py-14 md:py-16">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <div class="border-t border-line border-b py-3.5 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:items-center mb-4">
-        <p class="mono-label font-normal text-slate">secteur</p>
+      <div class="border-t border-line border-b py-3.5 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:items-center mb-6">
+        <p class="mono-label font-normal text-pivot">secteur</p>
         <div class="flex flex-wrap" role="group" aria-label="Filtres par secteur">
           <button
-            class="chip-blueprint -ml-px -mt-px cursor-pointer border-copper bg-paper text-marine"
+            class="chip-blueprint -ml-px -mt-px cursor-pointer"
             data-filtre="tous"
             aria-pressed="true"
           >
@@ -40,7 +58,7 @@ const secteurs = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Pat
             const count = projets.filter((p) => p.data.secteur === s).length;
             return count > 0 ? (
               <button
-                class="chip-blueprint -ml-px -mt-px cursor-pointer hover:border-copper hover:text-marine"
+                class="chip-blueprint -ml-px -mt-px cursor-pointer"
                 data-filtre={s}
                 aria-pressed="false"
               >
@@ -51,16 +69,62 @@ const secteurs = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Pat
         </div>
       </div>
 
-      <p class="mono-data text-slate mb-6" data-compteur data-total={projets.length} aria-live="polite">
-        {projets.length} projets — sur {projets.length} publiés
-      </p>
+      {/* En-tête de nomenclature */}
+      <div
+        class="hidden md:grid grid-cols-[4px_56px_1fr_140px_110px_84px] gap-4 items-center pb-3 border-b-2 border-encre"
+        aria-hidden="true"
+      >
+        <div></div>
+        <p class="mono-label font-normal text-[10px] text-pivot">vue</p>
+        <p class="mono-label font-normal text-[10px] text-pivot">affaire</p>
+        <p class="mono-label font-normal text-[10px] text-pivot">secteur</p>
+        <p class="mono-label font-normal text-[10px] text-pivot">référence</p>
+        <p class="mono-label font-normal text-[10px] text-pivot text-right">année</p>
+      </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-grille>
-        {projets.map((projet) => (
-          <div data-secteur={projet.data.secteur}>
-            <CarteProjet projet={projet} />
-          </div>
+      <ul role="list" data-grille>
+        {lignes.map(({ projet, rang, imageExiste }) => (
+          <li data-secteur={projet.data.secteur}>
+            <a
+              href={`/references/${projet.id}`}
+              class="grid grid-cols-[4px_1fr_auto] md:grid-cols-[4px_56px_1fr_140px_110px_84px] gap-x-4 gap-y-1 items-center py-3.5 border-b border-line hover:bg-calcaire transition-colors duration-200 ease-[var(--ease-blueprint)]"
+            >
+              <span class="h-full justify-self-start flex items-stretch" aria-hidden="true">
+                <span class:list={['block', rang.barre, 'bg-encre']}></span>
+              </span>
+              <span class:list={['hidden md:block aspect-[3/2] overflow-hidden', imageExiste ? 'duotone-photo' : 'duotone-media']} aria-hidden="true">
+                {imageExiste && (
+                  <img src={projet.data.image_principale} alt="" class="w-full h-full object-cover" loading="lazy" />
+                )}
+              </span>
+              <span class="min-w-0">
+                <span
+                  class:list={['type-intitule block text-[16px] md:text-[17px] truncate', rang.titre]}
+                  style={`font-stretch: ${rang.stretch};`}
+                >
+                  {projet.data.titre}
+                </span>
+                <span class="md:hidden mono-data text-[11px] text-pivot block mt-0.5">
+                  {projet.data.secteur} · FT2E—{projet.data.annee}
+                  {projet.data.demo && <span class="mono-label font-normal text-[10px]"> [démo]</span>}
+                </span>
+              </span>
+              <span class="hidden md:block text-sm text-pivot">
+                {projet.data.secteur}
+                {projet.data.demo && <span class="mono-label font-normal text-[10px] block">[démo]</span>}
+              </span>
+              <span class="hidden md:block mono-data text-[12px] text-encre">FT2E—{projet.data.annee}</span>
+              <span class="mono-data text-[12px] text-pivot md:text-right row-start-1 col-start-3 md:row-auto md:col-auto">{projet.data.annee}</span>
+            </a>
+          </li>
         ))}
+      </ul>
+
+      <div class="flex flex-col md:flex-row md:justify-between gap-2 mt-5">
+        <p class="mono-label font-normal text-pivot">rang du filet : 4 px livré · 2 px en cours · 1 px archive</p>
+        <p class="mono-data text-pivot" data-compteur data-total={projets.length} aria-live="polite">
+          {projets.length} lignes sur {projets.length}
+        </p>
       </div>
     </div>
   </section>
@@ -76,51 +140,26 @@ const secteurs = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Pat
     grille.dataset.filtresBound = '1';
 
     const filtres = document.querySelectorAll<HTMLButtonElement>('[data-filtre]');
-    const cartes = document.querySelectorAll<HTMLElement>('[data-secteur]');
+    const rangees = document.querySelectorAll<HTMLElement>('[data-secteur]');
     const compteur = document.querySelector<HTMLElement>('[data-compteur]');
-    const total = compteur?.dataset.total ?? String(cartes.length);
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const total = compteur?.dataset.total ?? String(rangees.length);
 
-    const classesActives = ['border-copper', 'bg-paper', 'text-marine'];
-    const classesInactives = ['hover:border-copper', 'hover:text-marine'];
-
+    // Le filtre réduit la liste, sans transition d'apparition (charte v2).
     const appliquer = (secteur: string | null) => {
       let visible = 0;
-      cartes.forEach((carte) => {
-        const match = secteur === 'tous' || carte.getAttribute('data-secteur') === secteur;
-        carte.style.display = match ? '' : 'none';
+      rangees.forEach((ligne) => {
+        const match = secteur === 'tous' || ligne.getAttribute('data-secteur') === secteur;
+        ligne.style.display = match ? '' : 'none';
         if (match) visible++;
       });
-      if (compteur) compteur.textContent = `${visible} projet${visible > 1 ? 's' : ''} — sur ${total} publiés`;
+      if (compteur) compteur.textContent = `${visible} ligne${visible > 1 ? 's' : ''} sur ${total}`;
     };
 
     filtres.forEach((btn) => {
       btn.addEventListener('click', () => {
-        const secteur = btn.getAttribute('data-filtre');
-
-        filtres.forEach((b) => {
-          b.setAttribute('aria-pressed', 'false');
-          b.classList.remove(...classesActives);
-          b.classList.add(...classesInactives);
-        });
+        filtres.forEach((b) => b.setAttribute('aria-pressed', 'false'));
         btn.setAttribute('aria-pressed', 'true');
-        btn.classList.remove(...classesInactives);
-        btn.classList.add(...classesActives);
-
-        if (reduced) {
-          appliquer(secteur);
-          return;
-        }
-
-        grille.style.opacity = '0';
-        grille.style.transform = 'scale(0.98)';
-        setTimeout(() => {
-          appliquer(secteur);
-          requestAnimationFrame(() => {
-            grille.style.opacity = '1';
-            grille.style.transform = 'scale(1)';
-          });
-        }, 200);
+        appliquer(btn.getAttribute('data-filtre'));
       });
     });
   }

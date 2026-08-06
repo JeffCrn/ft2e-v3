@@ -33,37 +33,37 @@ const titleSize = {
 };
 ---
 
-<section class:list={['bg-encre', paddingClasses[size]]} data-hero-dark>
-  <div class="border-b border-mist/25">
-    <Breadcrumbs theme="dark" items={breadcrumbs} />
+{/* Hero clair — le papier gouverne (charte v2). La vedette est la seule
+    ouverture de la page ; la barre de rang 4 px marque l'entrée principale. */}
+<section class:list={['bg-papier', paddingClasses[size]]}>
+  <div class="border-b border-line">
+    <Breadcrumbs items={breadcrumbs} />
   </div>
 
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 mt-10 md:mt-14">
     {eyebrow && (
-      <p class="mono-label text-copper mb-5" data-reveal>
+      <p class="mono-label text-pivot mb-5">
         {eyebrow}
       </p>
     )}
 
     <h1
-      class="type-display text-cool-white max-w-[24ch]"
+      class="type-display text-profond max-w-[24ch] text-balance"
       style={titleSize[size]}
-      data-reveal
     >
       {titre}
     </h1>
 
+    <div class="w-[110px] h-1 bg-encre mt-7" aria-hidden="true"></div>
+
     {sousTitre && (
-      <p
-        class="mt-6 text-[17px] font-light text-mist max-w-[60ch] leading-[1.6]"
-        data-reveal
-      >
+      <p class="mt-6 text-base leading-[1.6] text-pivot max-w-[60ch] text-pretty">
         {sousTitre}
       </p>
     )}
 
     {Astro.slots.has('metadata') && (
-      <div class="mt-8" data-reveal>
+      <div class="mt-8">
         <slot name="metadata" />
       </div>
     )}

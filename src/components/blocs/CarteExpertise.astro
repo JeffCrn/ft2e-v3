@@ -18,28 +18,28 @@ const livrablesReste = detaillee ? livrables.length - livrablesExtrait.length : 
 
 <a
   href={`/expertises/${expertise.id}`}
-  class="group block bg-cool-white p-6 transition-colors duration-[400ms] ease-[var(--ease-blueprint)] hover:bg-paper"
+  class="group block bg-papier p-6 transition-colors duration-200 ease-[var(--ease-blueprint)] hover:bg-calcaire"
 >
   <div class="flex justify-between items-baseline gap-4">
-    <span class="mono-label font-normal text-copper-text tabular-nums">{numero}</span>
-    {missions && <span class="mono-label font-normal text-slate normal-case tracking-[0.1em]">{missions}</span>}
+    <span class="mono-label font-normal text-pivot tabular-nums">{numero}</span>
+    {missions && <span class="mono-label font-normal text-pivot normal-case tracking-[0.1em]">{missions}</span>}
   </div>
-  <h3 class="type-h2 text-marine text-[19px] leading-[1.1] mt-4 group-hover:text-copper-text transition-colors duration-[400ms] ease-[var(--ease-blueprint)]">
+  <h3 class="type-intitule text-encre text-[19px] mt-4 group-hover:text-profond transition-colors duration-200 ease-[var(--ease-blueprint)]">
     {titre}
   </h3>
-  <p class:list={['mt-3 text-[15px] font-light text-slate leading-[1.55]', !detaillee && 'line-clamp-3']}>
+  <p class:list={['mt-3 text-[15px] text-pivot leading-[1.55]', !detaillee && 'line-clamp-3']}>
     {accroche}
   </p>
 
   {detaillee && (
     <Fragment>
-      <ul class="mt-5 space-y-2 border-l border-copper pl-4" role="list">
+      <ul class="mt-5 space-y-2 border-l border-line-strong pl-4" role="list">
         {livrablesExtrait.map((livrable) => (
-          <li class="mono-data text-marine">{livrable}</li>
+          <li class="mono-data text-encre">{livrable}</li>
         ))}
       </ul>
-      <p class="mono-label font-normal text-slate mt-5">
-        {livrablesReste > 0 ? `+ ${livrablesReste} livrables — ` : ''}méthode, FAQ et projets <span class="chevron-arrow">→</span>
+      <p class="mono-label font-normal text-pivot mt-5">
+        {livrablesReste > 0 ? `+ ${livrablesReste} livrables — ` : ''}méthode, FAQ et projets →
       </p>
     </Fragment>
   )}

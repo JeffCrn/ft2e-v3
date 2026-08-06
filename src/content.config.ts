@@ -16,6 +16,8 @@ const projets = defineCollection({
     lieu: z.string().min(2),
     surface_m2: z.number().int().positive().optional(),
     annee: z.number().int().min(2008).max(new Date().getFullYear() + 1),
+    /** Rang de nomenclature (charte v2) : filet 4 px livré / 2 px en cours / 1 px archive. */
+    statut: z.enum(['livré', 'en cours', 'archive']).default('livré'),
     performance: z.string().optional(),
     mission_ft2e: z.array(z.enum(MISSIONS)).min(1),
     image_principale: z.string(),
