@@ -30,4 +30,4 @@ Les 48 modules monocristallins (365 Wc chacun, 17,5 kWc au total) sont posés en
 
 ## Le résultat : conforme RT2012, avec 29 % de marge
 
-Le calcul réglementaire conclut à la conformité avec une marge nette : consommation d'énergie primaire de 69,3 kWhep/m²/an pour une exigence à 98,2, soit 29 % de mieux ; besoin bioclimatique Bbio de 99,40 pour un maximum de 100 ; température intérieure conventionnelle d'été de 32,2 °C pour une limite à 35,5 °C. Des valeurs issues de la synthèse RT2012 de juin 2024, qui serviront de référence aux constats de fin de chantier.
+Le calcul réglementaire conclut à la conformité avec une marge nette : consommation d'énergie primaire de 69,3 kWhep/m²/an pour une exigence à 98,2, soit 29 % de mieux ; besoin bioclimatique Bbio de 99,40 pour un maximum de 100 ; température intérieure conventionnelle d’été de 32,2 °C pour une limite à 35,5 °C. L’extension est livrée et en service ; ces valeurs, issues de la synthèse RT2012 de juin 2024, servent de référence pour l’exploitation du bâtiment.

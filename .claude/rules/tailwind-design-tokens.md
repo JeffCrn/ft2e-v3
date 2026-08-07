@@ -91,7 +91,7 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
 - **Relevé clair** (`ChiffresCles`) : colonnes séparées par filets 1 px `filet-2`, bord haut `filet-1` ; par colonne : commentaire (Archivo 300, 14 px, pivot — **le commentaire précède le chiffre**) → étiquette mono « — libellé » → chiffre `.releve-chiffre`. **Un seul chiffre en encre pleine par relevé** (celui que la page défend), les autres en `.releve-retrait` (encre 13 %).
 - **Relevé encré** (fiche projet) : `.plan-encre`, chiffres `.releve-chiffre text-voile`, étiquettes `mono-label text-clair` — la réserve profonde de l'écran.
 - **Monogramme** (`Logo.astro`) : dessin inchangé (cadre ouvert + flux débordant) ; **hauteur minimale 28 px** à l'écran ; sous 180 px de place : `forme="cadre"`. Ne se déforme pas, ne reçoit ni ombre ni contour ; le débord ne se recadre jamais.
-- **Équerres** (`CoinsCuivre.astro`) : 4 équerres 1 px au voile, **18 px de côté**, dans les angles du média. Repère de tirage, pas un encadrement — jamais de cadre autour d'une image.
+- **Équerres** (`CoinsCuivre.astro`) : 4 équerres 1 px au voile, **18 px de côté**, en retrait de 5 px dans les angles du média. Repère de tirage, pas un encadrement — jamais de cadre autour d'une image.
 - **Images** : tout passe au duotone 197° (point noir `#001718`, point blanc `#E1F4F4`, gamma neutre) via `duotone-photo` / `duotone-media` (hachure placeholder). Jamais de couleurs natives, max 2 annotations mono par image.
 
 ## Interactions & motion

@@ -1,9 +1,10 @@
 ---
 // Équerres d'image — charte v3 (§ 12) : quatre équerres d'un pixel au
-// voile (#E1F4F4), 18 px de côté UNIFORMES, posées DANS les angles.
-// Repère de tirage, pas un encadrement décoratif. Parent `relative`
-// requis (média duotone) ; purement décoratif. Nom de fichier conservé
-// pour l'historique (le cuivre n'existe plus).
+// voile (#E1F4F4), 18 px de côté UNIFORMES, posées DANS les angles avec
+// un retrait de 5 px — collées au bord, elles se confondaient avec le
+// cadre du média. Repère de tirage, pas un encadrement décoratif.
+// Parent `relative` requis (média duotone) ; purement décoratif. Nom de
+// fichier conservé pour l'historique (le cuivre n'existe plus).
 // `coins="deux"` n'affiche que haut-gauche / bas-droite (variante mobile).
 interface Props {
   coins?: 'quatre' | 'deux';
@@ -16,8 +17,8 @@ const dim = 'w-[18px] h-[18px]';
 ---
 
 <div aria-hidden="true">
-  <div class:list={['absolute left-0 top-0 border-l border-t border-voile', dim]}></div>
-  {coins === 'quatre' && <div class:list={['absolute right-0 top-0 border-r border-t border-voile', dim]}></div>}
-  {coins === 'quatre' && <div class:list={['absolute left-0 bottom-0 border-l border-b border-voile', dim]}></div>}
-  <div class:list={['absolute right-0 bottom-0 border-r border-b border-voile', dim]}></div>
+  <div class:list={['absolute left-[5px] top-[5px] border-l border-t border-voile', dim]}></div>
+  {coins === 'quatre' && <div class:list={['absolute right-[5px] top-[5px] border-r border-t border-voile', dim]}></div>}
+  {coins === 'quatre' && <div class:list={['absolute left-[5px] bottom-[5px] border-l border-b border-voile', dim]}></div>}
+  <div class:list={['absolute right-[5px] bottom-[5px] border-r border-b border-voile', dim]}></div>
 </div>
