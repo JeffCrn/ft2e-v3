@@ -11,7 +11,7 @@ Tout contenu textuel ou structuré du site vit comme un fichier Markdown dans `s
 | Collection | Fichier exemple | Cardinalité cible V1 |
 |---|---|---|
 | `projets` | `src/content/projets/maison-pierre-loti.md` | ~30 |
-| `services` | `src/content/services/audit-diagnostic.md` | 6 (fixe) |
+| `expertises` | `src/content/expertises/audit-diagnostic.md` | 4 (fixe) |
 | `equipe` | `src/content/equipe/mathieu.md` | 7 |
 | `actualites` | `src/content/actualites/2026-09-lancement-site.md` | 1 → ∞ |
 | `secteurs` | `src/content/secteurs/logements.md` | 7 (fixe) |

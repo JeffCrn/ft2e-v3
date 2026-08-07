@@ -50,6 +50,6 @@ Au lancement, le site doit :
 
 1. Présenter clairement FT2E (identité, équipe pluridisciplinaire, ancrage).
 2. Démontrer l'expertise via **≥ 30 fiches projets** structurées et filtrables.
-3. Détailler **6 expertises** (Audit & diagnostic, Étude thermique RT/RE, CVC, Électricité CFO/CFA, Coordination SSI, Études d'exécution & BIM).
+3. Détailler **4 expertises** (Audit & diagnostic, Étude thermique RT/RE, CVC, Électricité CFO/CFA) — la coordination SSI et les études d'exécution / BIM sont portées comme **secteurs d'activité** depuis le message client du 2026-08-07.
 4. Permettre une **prise de contact qualifiée** (formulaire à branches : architecte / MOA / candidat / autre).
 5. Tenir les standards de performance, accessibilité et SEO local définis dans ce dossier.

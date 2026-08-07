@@ -17,7 +17,7 @@ const deroulesMission = [
 
 <PageLayout
   title="Expertises — FT2E"
-  description="Audit, thermique, CVC, électricité, SSI, BIM. Six domaines d’expertise technique pour vos projets de bâtiment en Charente-Maritime."
+  description="Audit et diagnostic, étude thermique, CVC, électricité CFO/CFA. Quatre métiers d’ingénierie pour vos projets de bâtiment en Charente-Maritime."
 >
   <HeroPage
     breadcrumbs={[
@@ -26,7 +26,7 @@ const deroulesMission = [
     ]}
     eyebrow="Domaines techniques"
     titre="Nos expertises"
-    sousTitre="FT2E couvre l’ensemble de la chaîne technique du bâtiment : de l’audit initial aux études d’exécution BIM, en passant par la thermique, le CVC, l’électricité et la coordination SSI."
+    sousTitre="Quatre métiers d’ingénierie — l’audit et le diagnostic, la thermique réglementaire, le CVC, l’électricité CFO/CFA — mobilisés de l’étude de faisabilité à la réception des installations."
   />
 
   {/* ── 01 · L'approche : continuité conception-chantier + encart monotechnique ── */}
@@ -53,18 +53,21 @@ const deroulesMission = [
           </div>
 
           <aside class="border border-filet-1 bg-calcaire p-6">
-            <h3 class="mono-label text-pivot">interventions monotechniques</h3>
+            <h3 class="mono-label text-pivot">au-delà des quatre métiers</h3>
             <p class="mt-4 text-[15px] text-pivot leading-[1.55]">
-              Une seule spécialité technique, dont le bureau prend en charge l’ensemble des études et le suivi de réalisation. Des missions courtes, cadrées, menées avec la même rigueur que les grandes opérations.
+              Trois segments d’activité prolongent ces expertises et sont menés comme des missions à part entière — livrables, méthode et références sur leurs pages dédiées.
             </p>
             <ul class="mt-5 space-y-2.5 border-l border-filet-1 pl-4" role="list">
               {[
-                'Remplacement d’une chaufferie',
-                'Diagnostic légionnelle',
-                'Dévoiement d’un réseau gaz',
-                'Installation de vidéosurveillance',
-              ].map((mission) => (
-                <li class="mono-data text-encre">{mission}</li>
+                { label: 'Monotechnique', href: '/secteurs/monotechnique' },
+                { label: 'Coordination SSI', href: '/secteurs/coordination-ssi' },
+                { label: 'Études d’exécution / BIM', href: '/secteurs/etudes-execution-bim' },
+              ].map((segment) => (
+                <li>
+                  <a href={segment.href} class="mono-data text-encre underline underline-offset-2 hover:text-pivot transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">
+                    {segment.label}
+                  </a>
+                </li>
               ))}
             </ul>
           </aside>
@@ -81,12 +84,12 @@ const deroulesMission = [
         <p class="mono-label text-pivot">02 — expertises</p>
       </div>
       <h2 class="type-section text-[24px] md:text-[26px] mt-4">
-        <span class="text-encre">Six</span>
+        <span class="text-encre">Quatre</span>
         <span class="text-clair" aria-hidden="true">/expertises</span>
       </h2>
       <p class="mono-label font-normal text-pivot mt-3">livrables, méthode et projets — le détail par domaine</p>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-8">
         {expertises.map((expertise) => {
           const numero = String(expertise.data.ordre).padStart(2, '0');
           return (

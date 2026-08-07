@@ -37,4 +37,4 @@ La gestion technique du bâtiment (GTB) est devenue un levier majeur de performa
 
 ## Une présence de la conception à la réception
 
-En mission complète, FT2E analyse les offres des entreprises électriques, vise les plans d’exécution et assure le suivi de chantier jusqu’à la mise sous tension et aux essais fonctionnels. Cette continuité entre conception et réalisation est particulièrement précieuse sur les lots électriques, où les interfaces entre CFO, CFA, [SSI](/expertises/coordination-ssi) et GTB sont nombreuses et exigent une coordination rigoureuse.
+En mission complète, FT2E analyse les offres des entreprises électriques, vise les plans d’exécution et assure le suivi de chantier jusqu’à la mise sous tension et aux essais fonctionnels. Cette continuité entre conception et réalisation est particulièrement précieuse sur les lots électriques, où les interfaces entre CFO, CFA, [SSI](/secteurs/coordination-ssi) et GTB sont nombreuses et exigent une coordination rigoureuse.

@@ -177,7 +177,7 @@ collections:
     label: "Expertises"
     label_singular: "Expertise"
     folder: "src/content/expertises"
-    create: false   # 6 expertises fixes — on édite, on ne crée pas
+    create: false   # 4 expertises fixes — on édite, on ne crée pas
     delete: false
     slug: "{{slug}}"
     identifier_field: titre
@@ -220,6 +220,15 @@ collections:
       - { label: "Image", name: "image", widget: "image", required: true }
       - { label: "Alt image", name: "image_alt", widget: "string", required: true }
       - { label: "Ordre", name: "ordre", widget: "number", required: true, value_type: "int" }
+      # Segments de type mission (Coordination SSI, EXE/BIM) uniquement :
+      - { label: "Livrables", name: "livrables", widget: "list", required: false, field: { label: "Livrable", name: "livrable", widget: "string" } }
+      - label: "FAQ"
+        name: "faq"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Question", name: "question", widget: "string" }
+          - { label: "Réponse", name: "reponse", widget: "text" }
 ```
 
 ## Workflow éditorial

@@ -1,5 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/expertises/coordination-ssi", "destination": "/secteurs/coordination-ssi", "permanent": true },
+    { "source": "/expertises/etudes-execution-bim", "destination": "/secteurs/etudes-execution-bim", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

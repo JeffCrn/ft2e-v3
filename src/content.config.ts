@@ -105,6 +105,12 @@ const secteurs = defineCollection({
     image: z.string(),
     image_alt: z.string().min(5),
     ordre: z.number().int(),
+    /** Segments de type mission (Coordination SSI, EXE/BIM) : livrables et FAQ hérités des anciennes pages expertise. */
+    livrables: z.array(z.string()).optional(),
+    faq: z.array(z.object({
+      question: z.string(),
+      reponse: z.string(),
+    })).optional(),
   }),
 });
 

@@ -4,10 +4,33 @@ accroche: "La coordination des systèmes de sécurité incendie portée comme un
 image: "/images/secteurs/coordination-ssi.jpg"
 image_alt: "[DÉMO] Centrale de mise en sécurité incendie en cours de contrôle"
 ordre: 6
+livrables:
+  - "Concept SSI et zonage"
+  - "CCTP lot SSI"
+  - "Coordination avec le bureau de contrôle"
+  - "Dossier d’identité SSI"
+  - "Mise en service et PV de réception"
+faq:
+  - question: "Quand faut-il un coordinateur SSI ?"
+    reponse: "Dès que le bâtiment est classé ERP (établissement recevant du public) ou IGH (immeuble de grande hauteur). Le coordinateur SSI garantit la cohérence entre les lots techniques (détection, désenfumage, alarme, compartimentage) et le respect de la réglementation."
+  - question: "FT2E peut-il intervenir sur un SSI existant ?"
+    reponse: "Oui. En réhabilitation, FT2E réalise le diagnostic du SSI existant, identifie les non-conformités et propose un plan de mise aux normes compatible avec l’exploitation du bâtiment."
 ---
 
-La coordination SSI n’est pas seulement une compétence mobilisée sur les opérations pluridisciplinaires du bureau : c’est un segment d’activité à part entière, que FT2E contracte régulièrement comme mission autonome. La mission est rendue obligatoire par la norme NF S 61-931 dès qu’un bâtiment est classé ERP (établissement recevant du public) ou IGH (immeuble de grande hauteur) ; le bureau s’appuie sur plus de vingt ans de pratique dans le domaine.
+La coordination SSI n’est pas seulement une compétence mobilisée sur les opérations pluridisciplinaires du bureau : c’est un segment d’activité à part entière, que FT2E contracte régulièrement comme mission autonome. Rendue obligatoire par la norme NF S 61-931 (juillet 2000) dès qu’un bâtiment est classé ERP ou IGH, la mission garantit que détection, alarme, désenfumage et compartimentage sont conçus comme un système cohérent — et non comme des lots indépendants. Le bureau s’appuie sur plus de vingt ans de pratique du métier.
 
-Le coordinateur SSI garantit la cohérence de la sécurité incendie à travers tous les lots — détection, alarme, désenfumage, compartimentage — depuis le concept et le zonage jusqu’à la réception. FT2E a notamment assuré la coordination SSI de la construction d’un EHPAD de 102 lits à Coulonges-sur-l’Autize, et mené aux Cabanes Urbaines de La Rochelle (2022) une réception avec essais de foyers de contrôle d’efficacité. En fin de mission, le bureau constitue le dossier d’identité SSI au format numérique et participe à la commission de sécurité.
+## Du concept à la mise en service
 
-Le déroulé complet de la mission — du concept SSI au cahier des charges fonctionnel, du tableau de corrélation à la réception — est détaillé sur la page [Coordination SSI](/expertises/coordination-ssi) de nos expertises.
+La mission commence par l’établissement du concept SSI : classement du bâtiment (type et catégorie d’ERP, ou IGH), définition des zones de détection et de mise en sécurité, choix du type de SSI (catégorie A, B, C, D ou E). Ce document fondateur conditionne toute la suite : le scénario de mise en sécurité, le cahier des charges fonctionnel du SSI et son tableau de corrélation, la rédaction du CCTP et la coordination avec les entreprises et le bureau de contrôle. En fin de mission, la réception donne lieu aux essais de fonctions et, lorsque le bâtiment l’exige, à des essais de foyers de contrôle d’efficacité — comme aux Cabanes Urbaines de La Rochelle en 2022. FT2E constitue le dossier d’identité SSI au format numérique, document réglementaire qui accompagne le bâtiment pendant toute sa durée d’exploitation, et participe à la commission de sécurité.
+
+## Détection, alarme, désenfumage : trois fonctions indissociables
+
+Un SSI efficace repose sur l’enchaînement fiable de trois fonctions : détecter l’incendie le plus tôt possible (détecteurs automatiques, déclencheurs manuels), alerter les occupants (diffusion sonore, BAAS, report vers le poste de sécurité) et mettre en sécurité le bâtiment (fermeture des portes coupe-feu, ouverture des exutoires de désenfumage, arrêt de la [ventilation mécanique](/expertises/cvc)). La coordination SSI garantit la cohérence de ces trois fonctions à travers tous les lots — architecturaux, structurels et techniques.
+
+## Réhabilitation : diagnostiquer avant de rénover
+
+Sur les bâtiments existants, le SSI présente souvent des non-conformités accumulées au fil des modifications d’usage et des travaux partiels. [DÉMO] Sur un [EHPAD de 3 450 m² à Saintes](/references/ehpad-doux-refuge), le diagnostic SSI a révélé un zonage de détection obsolète et un désenfumage mécanique sous-dimensionné par rapport au programme actuel. FT2E a proposé un plan de mise aux normes en deux phases, compatible avec le maintien de l’activité pendant les travaux. Ce type d’intervention requiert une connaissance fine de la réglementation ERP de type J et de ses implications sur le SSI.
+
+## Une pratique historique du bureau
+
+La coordination SSI est pratiquée sans interruption depuis la création du bureau en 2008, sur les ERP de toutes catégories et de tous types, les IGH et les mises en conformité en site exploité — jusqu’à la coordination SSI de la construction d’un EHPAD de 102 lits à Coulonges-sur-l’Autize. Cette continuité est un gage de fiabilité pour les maîtres d’ouvrage qui confient à FT2E la sécurité incendie de leurs programmes.

@@ -19,7 +19,7 @@ Première impression. Donner en moins de 30 secondes une lecture juste de FT2E :
    - CTA secondaire → `/references`.
 2. **Chiffres clés** — 4 chiffres animés au scroll : *Années d'expertise* / *Ingénieurs associés* / *Projets livrés* / *Logements conçus*. **Valeurs à fournir par FT2E.**
 3. **L'acronyme déployé** (`AcronymeFT2E`) — F/T/E/E, quatre champs d'ingénierie + phrase de continuité conception → réception + lien `/expertises`. Bloc d'identité déplacé depuis Société (2026-08-06).
-4. **Six expertises en cartes** — Audit · Thermique · CVC · Électricité · SSI · Exécution-BIM. Cartes compactes (accroche tronquée) ; le détail vit sur `/expertises`.
+4. **Quatre expertises en cartes** — Audit · Thermique · CVC · Électricité. Cartes compactes (accroche tronquée) ; le détail vit sur `/expertises`. Coordination SSI et Études d'exécution / BIM relèvent des secteurs d'activité (bloc 5).
 5. **Sept secteurs d'activité** — liste blueprint numérotée, chaque ligne liant vers `/secteurs/[slug]`.
 6. **Références récentes** — 4 projets en grille (depuis `projets` avec `en_avant: true`, triés par `annee` desc.).
 7. **L'équipe** — Photo collective, accroche humaine sur la pluridisciplinarité du bureau, lien vers `/equipe`.
@@ -89,8 +89,8 @@ Vitrine de l'expertise pluridisciplinaire. Une page index + 6 sous-pages dédié
 ### Page index (`/expertises`) — page pilier (réorganisation 2026-08-06)
 
 1. Hero éditorial (composant `HeroPage`).
-2. **L'approche** — prose continuité conception-chantier + encart « interventions monotechniques » (déplacés depuis Société).
-3. Grille des 6 expertises en **cartes enrichies** (`CarteExpertise` variante `detaillee` : accroche complète + 3 premiers livrables).
+2. **L'approche** — prose continuité conception-chantier + encart « au-delà des quatre métiers » (liens vers les segments Monotechnique, Coordination SSI, Études d'exécution / BIM).
+3. Grille des 4 expertises en **cartes enrichies** (`CarteExpertise` variante `detaillee` : accroche complète + 3 premiers livrables).
 4. **Le déroulé d'une mission** — 4 temps : accompagnement / analyse / conception / suivi (déplacé depuis Société).
 5. CTA contact (« Quelle expertise pour votre projet ? »).
 
@@ -164,7 +164,7 @@ Hors sitemap V1 du PDF — **ajout à faire valider par FT2E**. Aucune entrée d
 
 ### Blocs
 
-1. `HeroPage` — breadcrumb Accueil / secteur, eyebrow `secteur NN — sur 6`, sous-titre = accroche.
+1. `HeroPage` — breadcrumb Accueil / secteur, eyebrow `secteur NN — sur 7`, sous-titre = accroche.
 2. **Récit du secteur** — corps Markdown de la fiche + image duotone (`fs.existsSync` + placeholder) avec coins cuivre.
 3. **Références du secteur** — jusqu'à 4 cartes projet filtrées par `secteur` + lien `/references`.
 4. CTA final standard.
