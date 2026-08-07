@@ -1,0 +1,148 @@
+# Chantier références réelles — programme des 22 sessions
+
+> **Pour les exécutants agentiques :** ce plan s'exécute **une session de travail par référence**, dans l'ordre du tableau § Ordre des sessions. Chaque session suit intégralement le § Protocole de session et se termine **obligatoirement** par la rédaction du prompt de lancement de la session suivante (`references/sessions/session-NN-prompt.md`) — c'est la règle de continuité du chantier. Ne pas exécuter plusieurs sessions d'affilée sans validation utilisateur.
+
+**Objectif :** publier 22 fiches références réelles dans `src/content/projets/`, une par session, à partir des 22 dossiers d'affaires extraits dans `C:\ft2e-arch\`, conformément au gabarit, à la voix éditoriale et à la stratégie SEO/GEO du site.
+
+**Architecture :** chaque session = dépouillement d'un dossier d'affaires → croisement avec les documents commerciaux → fiche de collecte préremplie (livrable client) → fiche projet Markdown conforme au schéma Zod → contrôles qualité → commit + déploiement → prompt de la session suivante.
+
+**Stack :** Astro 6 Content Collections (`src/content.config.ts`), fiches Markdown + frontmatter YAML, lecture PDF (outil Read), pandoc pour les docx, build `npm run build` (validation Zod bloquante).
+
+## Contraintes globales (s'appliquent à chaque session)
+
+- **Jamais de donnée inventée.** Toute valeur métier provient d'un document du dossier d'affaires, d'un docx sectoriel ou de `docs/20-source-plaquette-2024.md`. Info manquante = `TODO:` explicite ou omission — jamais d'à-peu-près.
+- **Le tag `[DÉMO]` ne s'applique qu'aux données non vérifiées.** Une fiche réelle sourcée n'en porte aucun (`demo: false`, valeur par défaut).
+- **Secteurs autorisés** (enum Zod) : `Logements | Tertiaire / ERP | Industriel et commercial | Patrimoine | Monotechnique | Coordination SSI | Études d'exécution / BIM`.
+- **Récit en 4 sections** (`## L'enjeu`, `## Solution` ou variantes rédactionnelles, `## Particularités`, `## Résultat`) — gabarit `content-templates/projet-modele.md`, étalon `src/content/projets/creche-oranger-perigny.md`.
+- **Voix FT2E** : sobre, technique, chaleureuse — `.claude/rules/french-editorial.md` (typographie française stricte : espaces insécables, guillemets « », apostrophe typographique, `m²`, RT2012/RE2020 sans espace).
+- **GEO** (fiche de collecte, p. 1) : des chiffres précis et vérifiables, des lieux nommés (commune, agglomération, département), un récit unique, une phrase = un fait citable.
+- **Titre ≤ 80 caractères** (Zod), `<title>` et `description` uniques sur tout le site.
+- **Images** : `public/images/projets/<slug>/`, alt descriptif obligatoire, rapports 21:8 / 16:10 / 3:2 uniquement, duotone appliqué par les composants. Pas d'image → le pattern `fs.existsSync` affiche « [Photo à venir] » ; ne jamais référencer un fichier au mauvais format.
+- **Avant commit : `npm run build`** (échec = blocage). Après commit + push : `npx vercel deploy --prod --yes`.
+- **Commits** : `content(references): ajoute la fiche réelle <nom court>` (impératif présent, ≤ 72 car.).
+- **Autorisations MOA** (section E de la fiche de collecte) : tant qu'elles ne sont pas obtenues, le site reste en démo noindex — les fiches se publient, la levée d'indexation reste soumise à validation FT2E (`docs/19-migration-production.md`).
+
+## État initial (2026-08-07)
+
+- **Corpus** : 22 dossiers d'affaires dans `C:\ft2e-arch\` (3 550 fichiers ; inventaire filtrable : `references/inventaire-archives-2026.csv`, séparateur `;`).
+- **Sources croisées** : 11 docx sectoriels dans `references/docs_references/` (~200 références commerciales avec MOA, montants, surfaces, années) ; faits vérifiés plaquette : `docs/20-source-plaquette-2024.md`.
+- **Fiche de collecte** : `references/Fiche-collecte-reference-projet-FT2E.pdf` — sections A et A+ préremplies par nous depuis le DCE ; sections B (résultat), C (enjeu raconté), D (visuels), E (autorisations) à compléter par FT2E.
+- **Fiches en ligne** : 1 réelle (`creche-oranger-perigny.md`, ref_001) + 10 `[DÉMO]` (`demo: true`). Deux DÉMO seront **remplacées** par leur version réelle en cours de chantier (voir tableau) ; le sort des huit autres se décidera en fin de chantier avec FT2E.
+- **Précédent de session** : `references/ref_001/` (pièces sources de l'Oranger) — le modèle du dossier de travail par référence.
+
+## Protocole de session (déroulé complet, ~une référence)
+
+1. **Ouverture.** Lire ce plan (§ Contraintes, § Suivi), puis le prompt de session dans `references/sessions/session-NN-prompt.md`. Vérifier dans le tableau de suivi que la référence est bien « à faire ».
+2. **Dépouillement du dossier d'affaires.** Explorer `C:\ft2e-arch\<dossier>` (filtrer `references/inventaire-archives-2026.csv` sur la colonne `dossier_affaire` pour cibler). Pièces prioritaires, dans l'ordre : synthèse RT / étude thermique (version la plus récente), CCTP des lots FT2E, DPGF ou estimation, perspectives et photos, pièces marché (montants, calendrier). Lire les PDF avec l'outil Read (param `pages`).
+3. **Constitution du dossier de travail.** Copier les 3 à 8 pièces sources décisives dans `references/ref_NNN/` (numérotation continue : ref_002, ref_003…). C'est la traçabilité de chaque affirmation de la fiche.
+4. **Croisement commercial.** Retrouver le projet dans les docx de `references/docs_references/` (pandoc `-t markdown` si besoin) et dans `docs/20-source-plaquette-2024.md` : MOA, architecte, montant, surfaces, année, référence environnementale. En cas de conflit entre sources, la pièce du dossier d'affaires fait foi ; noter le conflit.
+5. **Fiche de collecte préremplie** (livrable client). Créer `references/ref_NNN/fiche-collecte-<slug>.md` calquée sur le PDF : section A complète, section A+ (données techniques extraites, chiffrées, sourcées pièce par pièce), sections B / C / D / E laissées en questions pour l'équipe FT2E.
+6. **Visuels.** Chercher dans l'ordre : photos du dossier d'affaires → images du docx sectoriel (`unzip -j <docx> 'word/media/*'`) → rien. Si visuel exploitable : recadrer aux rapports autorisés, déposer dans `public/images/projets/<slug>/`, alt descriptif, crédit architecte à tracer (section E). Sinon : laisser le chemin conventionnel dans le frontmatter (placeholder « [Photo à venir] » géré par `fs.existsSync`).
+7. **Rédaction de la fiche.** Créer `src/content/projets/<slug>.md` (slug kebab-case sans accents ; vérifier qu'il n'écrase rien) : frontmatter complet conforme à `src/content.config.ts`, récit 4 sections nourri des données extraites, aucune invention, sections B/C manquantes compensées par la matière technique en attendant le retour FT2E.
+8. **Remplacement DÉMO le cas échéant.** Si le tableau indique une fiche DÉMO équivalente : la supprimer dans le même commit (le site est noindex, aucune redirection nécessaire).
+9. **Contrôles qualité.** (a) `npm run build` vert ; (b) relecture éditoriale par l'agent `editorial-reviewer` (voix + typographie française) ; (c) unicité du titre et de la description ; (d) alt text présents ; (e) cohérence des chiffres fiche ↔ pièces sources.
+10. **Livraison.** Commit (`content(references): …`) + push + `npx vercel deploy --prod --yes`. Contrôle visuel de la fiche sur le déploiement.
+11. **Suivi.** Mettre à jour le tableau § Suivi ci-dessous (statut, visuels, collecte, particularités découvertes).
+12. **Prompt de la session suivante** (OBLIGATOIRE, clôture de session). Rédiger `references/sessions/session-NN+1-prompt.md` selon le gabarit ci-dessous, avec les données déjà connues de la prochaine référence, et le reproduire intégralement dans le message final à l'utilisateur.
+
+## Gabarit du prompt de session (à instancier à chaque clôture)
+
+```markdown
+# Session NN — <n° affaire> · <nom du projet>
+
+Chantier références réelles FT2E v3 — session NN/22.
+Lire d'abord : docs/superpowers/plans/2026-08-07-chantier-references-reelles.md
+(§ Contraintes globales + § Protocole de session + § Suivi), puis dérouler le
+protocole intégralement pour la référence ci-dessous.
+
+## Référence du jour
+- Affaire : <n°> — <intitulé complet>
+- Dossier d'affaires : C:\ft2e-arch\<nom exact du dossier>
+- Dossier de travail à créer : references/ref_NNN/
+- Slug cible : <slug> (vérifier la disponibilité)
+- Secteur pressenti : <secteur enum> · Typologie : <typologie> · Statut : <livré|en cours>
+- Fiche DÉMO à remplacer : <chemin | aucune>
+
+## Ce qu'on sait déjà (sources commerciales — à confirmer par les pièces)
+<données du docx sectoriel et de la plaquette : MOA, architecte, montant,
+surfaces, année, référence environnementale, missions>
+
+## Points de vigilance
+<spécificités : versions multiples de synthèses RT, absence de photos,
+doublons entre docx, conflits de données repérés…>
+
+## Livrables de la session
+1. references/ref_NNN/ — pièces sources sélectionnées
+2. references/ref_NNN/fiche-collecte-<slug>.md — sections A/A+ préremplies
+3. src/content/projets/<slug>.md — fiche conforme gabarit, build vert
+4. Commit + déploiement Vercel
+5. Tableau de suivi du plan mis à jour
+6. references/sessions/session-NN+1-prompt.md — prompt complet de la session suivante
+```
+
+## Ordre des sessions
+
+L'ordre privilégie : (1) les dossiers les mieux documentés d'abord — rodage du protocole ; (2) la couverture rapide des sept secteurs par des fiches réelles ; (3) les dossiers minces (audits, faisabilité) en fin de chantier.
+
+| S | Affaire | Dossier `C:\ft2e-arch\` | Secteur pressenti | Typologie | Source docx principale | Notes |
+|---|---|---|---|---|---|---|
+| 01 | 20-014 | `20-014-54 logements CVL Pellereau` | Logements | Neuf | `REF FOUGEROU A3.docx` | 48+6 logts Sainte-Marie-de-Ré ; photos dans le docx ; synthèses RT multi-révisions |
+| 02 | 21-061 | `21-061- EHPAD Coulonge sur Autize - ABP +Diese` | Tertiaire / ERP | Neuf | `FT2E -  Références SSI.docx`, `Réf. médico-social.docx` | **Remplace `ehpad-coulonges-coordination-ssi.md` (DÉMO)** ; ERP J, 102 lits |
+| 03 | 24-003 | `24-003 - Bureaux et ateliers RESE Aigrefeuille - BTB` | Tertiaire / ERP | Réhabilitation | `Réf. DIAGNOSTIC.docx` | Diagnostic 2025 + restructuration siège |
+| 04 | 25-097 | `25-097 - EXE HORIZON MEDIATIM - EUSTACHES` | Études d'exécution / BIM | Études d'exécution | — (absente des docx) | 1 Go de production EXE ; seul dossier du secteur |
+| 05 | 22-042 | `22-042- Abbaye Sablonceaux` | Patrimoine | Réhabilitation | `Réf. Réhabilitation Patrimoine.docx`, SSI | Coordination SSI en site patrimonial ; présent dans 3 docx |
+| 06 | 22-006 | `22-006 - INNOVIA Labo Pilotes CAPSULAE - Cab SOURD` | Industriel et commercial | Neuf | — | Laboratoire industriel ; vocabulaire process à soigner |
+| 07 | 21-098 | `21-098 -Maison Relais SOLIHA St Jean d'Angely- ASP` | Logements | Réhabilitation | `Réf. DIAGNOSTIC.docx` + 2 autres | 21 logts dans immeuble existant, 2 068 000 €, RT existant |
+| 08 | 22-033 | `22-033 - 21 Logts St Agnant - ASP` | Logements | Neuf | `Références logements collectifs…` | Résidence intergénérationnelle, 747 m² |
+| 09 | 23-079 | `23-079- Pôle commercial St Rogatien -BTB` | Industriel et commercial | Neuf | — | DCE VRD/désimperméabilisation dans le dossier |
+| 10 | 24-006 | `24-006 - Etude Notariale Bd Joffre  - UBIK` | Tertiaire / ERP | Neuf | `Réf. Social et Tertiaire.docx` | |
+| 11 | 20-021 | `20-021- 40 logts Projet NEREA - PITCH Promotion - SMART` | Logements | Neuf | `Références logements collectifs…` (à confirmer : 40 logts quartier Job, Royan) | Plus gros dossier (1,15 Go) |
+| 12 | 22-003 | `22-003- 13 Logts Chagnolet OPH - BTB` | Logements | Neuf | `Références logements collectifs…` (« Maubec ») | |
+| 13 | 22-066 | `22-066- 10 Logts BOIS PLAGE Habitat 17 - ASP` | Logements | Neuf | `Références logements collectifs…` (« Le Pas du Bœuf ») | |
+| 14 | 19-033 | `19-033 -10 Logts St GEORGES DE DIDONNE - SMART` | Logements | Neuf | à retrouver dans les tableaux logements | |
+| 15 | 23-095 | `23-095- ADMR Salignac - CASE Architectes` | Logements | Neuf | `Références logements collectifs…` (habitat inclusif 14 T1) | |
+| 16 | 25-024 | `25-024 - Réhabilitation d'un ancien LIDL en centre de formation - CCI` | Tertiaire / ERP | Réhabilitation | — (affaire récente) | Fiche inédite |
+| 17 | 24-044 | `24-044 - Hotel Yachtman La Rochelle - DET` | Tertiaire / ERP | Réhabilitation | — | Phase DET |
+| 18 | 23-054 | `23-054 - CDC Marennes - Cab Sourd` | Tertiaire / ERP | à déterminer | — | Nature exacte à établir au dépouillement |
+| 19 | 25-084 | `25-084 - Ecole des Douanes - HERVE THERMIQUE` | Études d'exécution / BIM (à confirmer) | à déterminer | — | Client installateur → probable EXE |
+| 20 | 24-034 | `24-034 - Passerelle Marans - Impact Urbanisme` | Monotechnique (à confirmer) | à déterminer | — | Ouvrage d'art — périmètre FT2E à établir |
+| 21 | 25-010 | `25-010 - Bat Cuisine VILLEDOUX  - Audit` | Monotechnique | à déterminer | — | Audit ; fiche seulement si matière suffisante |
+| 22 | 25-080 | `25-080 - Etude de faisabilité - DUFOUR` | Monotechnique | à déterminer | — | Faisabilité ; fiche seulement si matière suffisante |
+
+**Règle des dossiers minces (S21–S22)** : si le dépouillement révèle une matière insuffisante pour une fiche honnête (pas de chiffres vérifiables, mission trop ponctuelle), la session produit à la place la fiche de collecte seule + une note au tableau de suivi, et propose à FT2E une référence de substitution issue des ~200 références des docx.
+
+## Suivi (mettre à jour à chaque session)
+
+| S | Affaire | Slug | Fiche | Collecte | Visuels | Autorisation MOA | Notes |
+|---|---|---|---|---|---|---|---|
+| — | 23-075 | `creche-oranger-perigny` | ✅ en ligne | ✅ (exemple du PDF) | ✅ 1 photo | à demander | fiche étalon, ref_001 |
+| 01 | 20-014 | `fougerou-sainte-marie-de-re` | ✅ en ligne | ✅ A/A+ (ref_002) | ✅ 1 photo (docx A3, 3:2, 608 px) | à demander | MOA = « Coopérative » Vendéenne du Logement (la plaquette écrit « Compagnie ») ; BQE élucidé = bordereaux quantitatifs tous lots (contrat MOE) ; synthèse RT 2022 tronquée dans l'archive → études par îlots utilisées ; 3 tranches livrées 2024 / févr. 2025 / mars 2026 ; îlots A-B étiquetés « Habitat 17 » dans Typologies-Surfaces.xlsx (bailleur des 6 locatifs ? à clarifier) ; `en_avant` laissé à false (l'image 608 px deviendrait le hero de l'accueil — à décider) |
+| 02 | 21-061 | — | à faire | à faire | à chercher | à demander | remplacer DÉMO |
+| 03 | 24-003 | — | à faire | à faire | à chercher | à demander | — |
+| 04 | 25-097 | — | à faire | à faire | à chercher | à demander | — |
+| 05 | 22-042 | — | à faire | à faire | à chercher | à demander | — |
+| 06 | 22-006 | — | à faire | à faire | à chercher | à demander | — |
+| 07 | 21-098 | — | à faire | à faire | à chercher | à demander | — |
+| 08 | 22-033 | — | à faire | à faire | à chercher | à demander | — |
+| 09 | 23-079 | — | à faire | à faire | à chercher | à demander | — |
+| 10 | 24-006 | — | à faire | à faire | à chercher | à demander | — |
+| 11 | 20-021 | — | à faire | à faire | à chercher | à demander | — |
+| 12 | 22-003 | — | à faire | à faire | à chercher | à demander | — |
+| 13 | 22-066 | — | à faire | à faire | à chercher | à demander | — |
+| 14 | 19-033 | — | à faire | à faire | à chercher | à demander | — |
+| 15 | 23-095 | — | à faire | à faire | à chercher | à demander | — |
+| 16 | 25-024 | — | à faire | à faire | à chercher | à demander | — |
+| 17 | 24-044 | — | à faire | à faire | à chercher | à demander | — |
+| 18 | 23-054 | — | à faire | à faire | à chercher | à demander | — |
+| 19 | 25-084 | — | à faire | à faire | à chercher | à demander | — |
+| 20 | 24-034 | — | à faire | à faire | à chercher | à demander | — |
+| 21 | 25-010 | — | à faire | à faire | à chercher | à demander | dossier mince ? |
+| 22 | 25-080 | — | à faire | à faire | à chercher | à demander | dossier mince ? |
+
+## Fin de chantier (après S22)
+
+1. Bilan des 8 fiches DÉMO restantes avec FT2E : suppression, ou conversion en réelles si les données arrivent (Maison Pierre Loti figure dans les docx patrimoine/SSI — bonne candidate).
+2. Envoi groupé des 22 fiches de collecte à FT2E pour les sections B–E ; intégration des retours (résultats constatés, récits d'équipe, photos, autorisations).
+3. Passe SEO/GEO transversale : maillage interne fiches ↔ pages secteurs/expertises (≥ 5 liens internes contextuels par fiche), unicité des métadonnées, JSON-LD `CreativeWork`.
+4. Audit RGAA + Lighthouse sur 3 fiches échantillon.
+5. Reportage photo professionnel (production) → remplacement des visuels d'archive.
