@@ -31,4 +31,7 @@ assets/
 # CV de l'équipe — données personnelles, jamais commitées
 cv/
 
+# Fonds documentaire client (archives de références) — volumineux, jamais commité
+references/
+
 .vercel
