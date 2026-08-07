@@ -17,7 +17,7 @@ const SECTEURS = [
   "Études d'exécution / BIM",
 ] as const;
 const TYPOLOGIES = ['Neuf', 'Réhabilitation', 'Extension', "Études d'exécution"] as const;
-const MISSIONS = ['CVC', 'Thermique', 'Électricité CFO', 'Électricité CFA', 'SSI', 'BIM', "Études d'exécution", 'Audit & diagnostic'] as const;
+const MISSIONS = ['CVC', 'Thermique', 'Électricité CFO', 'Électricité CFA', 'Photovoltaïque', 'SSI', 'BIM', "Études d'exécution", 'Audit & diagnostic'] as const;
 
 const projets = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projets' }),

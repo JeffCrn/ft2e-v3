@@ -11,7 +11,7 @@ performance: "RE2020 niveau 1 · NF Habitat HQE"
 mission_ft2e: [CVC, Thermique, "Électricité CFO", "Électricité CFA", BIM, "Études d'exécution"]
 image_principale: "/images/projets/residence-quais-domidylle/01.jpg"
 image_principale_alt: "[DÉMO] Résidence Les Quais, programme de 48 logements collectifs à La Rochelle"
-en_avant: true
+en_avant: false
 demo: true
 demo_reason: "Projet de démonstration représentatif du secteur Logement neuf."
 ---
