@@ -20,8 +20,8 @@ const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_princ
 const reference = `FT2E—${annee}`;
 ---
 
-<a href={`/references/${projet.id}`} class="group block plan-pose">
-  <div class:list={['aspect-[3/2] relative', imageExiste ? 'duotone-photo' : 'duotone-media']}>
+<a href={`/references/${projet.id}`} class="group flex flex-col h-full plan-pose">
+  <div class:list={['aspect-[3/2] relative shrink-0', imageExiste ? 'duotone-photo' : 'duotone-media']}>
     {imageExiste && (
       <img
         src={image_principale}
@@ -35,7 +35,7 @@ const reference = `FT2E—${annee}`;
       <span class:list={['absolute right-3 top-2.5 mono-label font-normal z-10', imageExiste ? 'text-voile' : 'text-pivot']}>[démo]</span>
     )}
   </div>
-  <div class="bg-calcaire border-t border-filet-2 px-4 py-3.5 transition-colors duration-300 ease-[var(--ease-blueprint)] group-hover:bg-papier">
+  <div class="flex-1 bg-calcaire border-t border-filet-2 px-4 py-3.5 transition-colors duration-300 ease-[var(--ease-blueprint)] group-hover:bg-papier">
     <h3 class="type-intitule text-encre text-[15px]">
       {titre}
     </h3>

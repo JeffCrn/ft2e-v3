@@ -9,7 +9,6 @@ import CarteProjet from '../components/blocs/CarteProjet.astro';
 import Bouton from '../components/primitives/Bouton.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
 import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
-import TraceFlux from '../components/primitives/TraceFlux.astro';
 import { CHIFFRES_CLES } from '../lib/constants';
 
 // Média du hero (écran 1 de la charte) : l'image recule dans sa colonne,
@@ -22,18 +21,11 @@ const heroImageExiste = enAvant
   ? fs.existsSync(path.join(process.cwd(), 'public', enAvant.data.image_principale))
   : false;
 
-// Relevé clair (charte v3 § 10) : le commentaire précède le chiffre, un seul
-// chiffre plein par relevé — celui que la page défend (17 ans, depuis 2008).
-const commentaires = [
-  'Le bureau est créé en 2008 à La Rochelle.',
-  'Une direction portée collectivement.',
-  'Chiffre arrêté à la plaquette 2024.',
-  'Chiffre arrêté à la plaquette 2024.',
-];
+// Relevé clair : étiquette mono + chiffre, un seul chiffre plein par
+// relevé — celui que la page défend (17 ans, depuis 2008).
 const releves = CHIFFRES_CLES.map((c, i) => ({
   chiffre: `${'prefixe' in c ? c.prefixe : ''}${c.valeur.toLocaleString('fr-FR')}`,
   etiquette: [c.suffixe, c.label].filter(Boolean).join(' '),
-  commentaire: commentaires[i],
   plein: i === 0,
   demo: c.demo,
 }));
@@ -119,21 +111,9 @@ const partenaires = [
     )}
   </Hero>
 
-  {/* Zone « câblée » : le tracé de flux longe la colonne de contenu et se
-      dessine une fois au chargement (900 ms). */}
   <div class="relative">
-    <div
-      class="hidden min-[1360px]:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] pointer-events-none"
-      aria-hidden="true"
-    >
-      <TraceFlux class="absolute top-10 bottom-10 -left-14 w-10" />
-    </div>
-
-    {/* Chaque grande section est un jalon : les nœuds du tracé se posent
-        exactement sur les frontières entre jalons consécutifs. */}
-
     {/* ── 01 · Relevé clair (charte v3 § 10) : un seul chiffre plein ── */}
-    <div data-trace-jalon>
+    <div>
       <section class="py-12 md:py-[76px]">
         <div class="max-w-[1200px] mx-auto px-4 md:px-6">
           <div class="flex items-center gap-3">
@@ -142,15 +122,14 @@ const partenaires = [
           </div>
           <h2 class="type-section text-[26px] mt-4">
             <span class="text-encre">Le bureau en chiffres</span>
-            <span class="text-clair" aria-hidden="true">/relevé 2024</span>
+            <span class="text-clair" aria-hidden="true">/dernier relevé</span>
           </h2>
 
           <div class="plan-pose mt-8" data-plan>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-filet-2">
               {releves.map((r) => (
                 <div class="bg-papier p-6 flex flex-col">
-                  <p class="text-[14px] text-pivot leading-[1.5]">{r.commentaire}</p>
-                  <p class="mono-label text-pivot mt-4">— {r.etiquette}</p>
+                  <p class="mono-label text-pivot">— {r.etiquette}</p>
                   <p
                     class:list={[
                       'releve-chiffre mt-3 text-[clamp(2.5rem,4.5vw,3.75rem)]',
@@ -169,7 +148,7 @@ const partenaires = [
     </div>
 
     {/* ── 02 · L'acronyme déployé + énoncé de méthode en plan qui déborde ── */}
-    <div data-trace-jalon>
+    <div>
       <section class="py-12 md:py-[76px]">
         <div class="max-w-[1200px] mx-auto px-4 md:px-6">
           <div class="flex items-center gap-3">
@@ -177,8 +156,8 @@ const partenaires = [
             <span class="mono-label text-pivot">02 — identité</span>
           </div>
           <h2 class="type-section text-[26px] mt-4">
-            <span class="text-encre">Ce que le nom contient</span>
-            <span class="text-clair" aria-hidden="true">/quatre lettres, quatre champs d’ingénierie</span>
+            <span class="text-encre">Quatre lettres</span>
+            <span class="text-clair" aria-hidden="true">/quatre champs d’ingénierie</span>
           </h2>
 
           <div class="plan-pose mt-8" data-plan>
@@ -193,20 +172,12 @@ const partenaires = [
             </div>
           </div>
 
-          {/* Énoncé de méthode — LE plan qui déborde de l'écran (charte v3 § 09) :
-              chevauche la planche de l'acronyme de 40 px, se retire de 92 px
-              sur son flanc gauche. Une fois par écran. */}
-          <div class="plan-deborde relative -mt-10 md:ml-[92px] max-w-[840px] px-6 py-8 md:px-10 md:py-9" data-plan>
-            <p class="type-section text-[22px] md:text-[26px] leading-[1.2] text-encre">
-              Quatre champs, une seule chaîne&nbsp;: le bureau suit ses projets de la conception à la réception, <span class="text-profond">sans passage de relais</span>.
-            </p>
-          </div>
         </div>
       </section>
     </div>
 
     {/* ── 03 · Quatre expertises ── */}
-    <div data-trace-jalon>
+    <div>
       <section class="py-12 md:py-[76px]">
         <div class="max-w-[1200px] mx-auto px-4 md:px-6">
           <div class="flex items-center gap-3">
@@ -214,8 +185,8 @@ const partenaires = [
             <span class="mono-label text-pivot">03 — expertises</span>
           </div>
           <h2 class="type-section text-[26px] mt-4">
-            <span class="text-encre">Quatre expertises</span>
-            <span class="text-clair" aria-hidden="true">/de l’audit à la réception — un interlocuteur unique</span>
+            <span class="text-encre">De l’audit à la réception</span>
+            <span class="text-clair" aria-hidden="true">/un interlocuteur unique</span>
           </h2>
 
           <div class="plan-pose mt-8" data-plan>
@@ -230,7 +201,7 @@ const partenaires = [
     </div>
 
     {/* ── 04 · Sept secteurs d'activité — liste tabulaire sur la trame ── */}
-    <div data-trace-jalon>
+    <div>
       <section class="py-12 md:py-[76px]">
         <div class="max-w-[1200px] mx-auto px-4 md:px-6">
           <div class="flex items-center gap-3">
@@ -239,7 +210,7 @@ const partenaires = [
           </div>
           <h2 class="type-section text-[26px] mt-4">
             <span class="text-encre">Sept secteurs d’activité</span>
-            <span class="text-clair" aria-hidden="true">/charente-maritime, vendée, deux-sèvres</span>
+            <span class="text-clair" aria-hidden="true">/centre ouest atlantique</span>
           </h2>
 
           <ul class="border-t border-filet-1 mt-8" role="list">
@@ -261,7 +232,7 @@ const partenaires = [
     </div>
 
     {/* ── 05 · Références récentes ── */}
-    <div data-trace-jalon>
+    <div>
       <section class="py-12 md:py-[76px]">
         <div class="max-w-[1200px] mx-auto px-4 md:px-6">
           <div class="flex items-center gap-3">
@@ -271,7 +242,7 @@ const partenaires = [
           <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 mt-4">
             <h2 class="type-section text-[26px]">
               <span class="text-encre">Références récentes</span>
-              <span class="text-clair" aria-hidden="true">/quatre affaires mises en avant</span>
+              <span class="text-clair" aria-hidden="true">/quelques exemples</span>
             </h2>
             <a href="/references" class="mono-label font-normal text-pivot hover:text-encre transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">
               voir toutes les références →
@@ -288,7 +259,7 @@ const partenaires = [
     </div>
 
     {/* ── 06 · L'équipe en aperçu ── */}
-    <div data-trace-jalon>
+    <div>
       <section class="py-12 md:py-[76px]">
         <div class="max-w-[1200px] mx-auto px-4 md:px-6">
           <div class="flex items-center gap-3">
