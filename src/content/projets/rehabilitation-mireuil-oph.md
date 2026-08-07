@@ -1,6 +1,6 @@
 ---
 titre: "[DÉMO] Réhabilitation thermique — 84 logements quartier Mireuil"
-secteur: Logement
+secteur: Logements
 typologie: Réhabilitation
 moa: "OPH La Rochelle"
 architecte: "[DÉMO] Atelier Maritime"

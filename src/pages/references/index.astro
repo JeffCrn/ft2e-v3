@@ -14,7 +14,17 @@ import CtaFinal from '../../components/blocs/CtaFinal.astro';
 // le filtre réduit la liste, il ne pagine pas.
 const projets = (await getCollection('projets')).sort((a, b) => b.data.annee - a.data.annee);
 
-const secteurs = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Patrimoine'];
+// Les sept secteurs d'activité (message client 2026-08-07) — même ordre
+// que l'enum SECTEURS de src/content.config.ts.
+const secteurs = [
+  'Logements',
+  'Tertiaire / ERP',
+  'Industriel et commercial',
+  'Patrimoine',
+  'Monotechnique',
+  'Coordination SSI',
+  "Études d'exécution / BIM",
+];
 
 const rangs = {
   livré: { filet: 'border-l-filet-1', graisse: 'font-bold', statut: 'livré' },
@@ -31,7 +41,7 @@ const lignes = projets.map((projet) => ({
 
 <PageLayout
   title="Références — FT2E"
-  description="Plus de 150 projets livrés en Charente-Maritime, Vendée et Deux-Sèvres. Logement, tertiaire, santé, sport, patrimoine."
+  description="Plus de 150 projets livrés en Charente-Maritime, Vendée et Deux-Sèvres. Logements, tertiaire et ERP, industriel, patrimoine, missions monotechniques."
 >
   <HeroPage
     breadcrumbs={[
@@ -74,7 +84,7 @@ const lignes = projets.map((projet) => ({
 
         {/* En-tête de nomenclature */}
         <div
-          class="hidden md:grid grid-cols-[56px_1fr_120px_88px_104px_56px] gap-4 items-center pb-3 pl-4 border-b border-filet-1"
+          class="hidden md:grid grid-cols-[56px_1fr_150px_88px_104px_56px] gap-4 items-center pb-3 pl-4 border-b border-filet-1"
           aria-hidden="true"
         >
           <p class="mono-label font-normal text-[10px] text-pivot">vue</p>
@@ -91,7 +101,7 @@ const lignes = projets.map((projet) => ({
               <a
                 href={`/references/${projet.id}`}
                 class:list={[
-                  'grid grid-cols-[1fr_auto] md:grid-cols-[56px_1fr_120px_88px_104px_56px] gap-x-4 gap-y-1 items-center',
+                  'grid grid-cols-[1fr_auto] md:grid-cols-[56px_1fr_150px_88px_104px_56px] gap-x-4 gap-y-1 items-center',
                   'py-3.5 pl-4 pr-2 border-b border-l border-b-filet-2',
                   rang.filet,
                   'hover:bg-calcaire transition-colors duration-300 ease-[var(--ease-blueprint)]',

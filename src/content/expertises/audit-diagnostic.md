@@ -9,7 +9,7 @@ livrables:
   - "Préconisations de travaux chiffrées"
   - "Scénarios de rénovation (coût / gain / temps de retour)"
   - "Conformité décret tertiaire"
-typique_pour: [Logement, Tertiaire, Santé, Patrimoine]
+typique_pour: [Logements, "Tertiaire / ERP", Patrimoine, Monotechnique]
 missions_liees: ["Audit & diagnostic"]
 faq:
   - question: "Quelle est la différence entre un DPE et un audit énergétique ?"

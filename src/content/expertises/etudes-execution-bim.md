@@ -9,7 +9,7 @@ livrables:
   - "Synthèse technique fédérée (détection de clashs)"
   - "DOE numérique au format IFC"
   - "Réservations et percements"
-typique_pour: [Logement, Tertiaire, Santé, Sport, Industriel]
+typique_pour: [Logements, "Tertiaire / ERP", "Industriel et commercial"]
 missions_liees: ["Études d'exécution", BIM]
 faq:
   - question: "Quelle est la différence entre études de conception et études d’exécution ?"

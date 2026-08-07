@@ -1,6 +1,6 @@
 ---
 titre: "[DÉMO] EHPAD Le Doux-Refuge"
-secteur: Santé
+secteur: Tertiaire / ERP
 typologie: Réhabilitation
 moa: "[DÉMO] Centre Communal d’Action Sociale de Saintes"
 architecte: "[DÉMO] Atelier 17 Architectes"

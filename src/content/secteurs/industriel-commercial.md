@@ -1,15 +1,15 @@
 ---
-titre: "Industriel"
-accroche: "Ateliers, entrepôts, process industriels. Ventilation spécifique, traitement des ambiances, conformité ICPE."
+titre: "Industriel et commercial"
+accroche: "Ateliers, entrepôts, process industriels, surfaces commerciales. Ventilation spécifique, conformité ICPE, puissances électriques élevées."
 image: "/images/secteurs/industriel.jpg"
 image_alt: "[DÉMO] Bâtiment industriel moderne"
-ordre: 5
+ordre: 3
 ---
 
 Le secteur industriel impose des contraintes techniques distinctes de celles du bâtiment tertiaire ou résidentiel. Les ambiances de travail — température, hygrométrie, qualité d’air — doivent être maintenues dans des conditions compatibles avec les processus de fabrication et le confort des opérateurs. La ventilation spécifique (captation à la source, renouvellement d’air réglementaire, extraction de polluants) occupe une place centrale dans la conception des installations. Les puissances électriques sont souvent élevées, avec des contraintes de disponibilité et de qualité de l’alimentation.
 
 FT2E participe aux études et à la réalisation de projets industriels depuis sa création, pour des industriels du territoire comme Fountaine Pajot, Dufour, Catana Group, Carl Zeiss Meditec, Airbus, Sooruz, Elixir ou Innovia. Le périmètre couvre la conception générale technique et les fluides spécifiques (air comprimé, gaz, RIA), le dimensionnement HTA/BT, la protection foudre à partir de l’analyse du risque foudre (ARF) et le traitement d’air spécifique, en intégrant les exigences de la réglementation ICPE (installations classées pour la protection de l’environnement) et les recommandations des organismes d’assurance et de contrôle — CARSAT, APSAD, FM Global. Le dimensionnement de la ventilation tient compte des débits d’extraction imposés par le Code du travail et par les fiches de données de sécurité des produits utilisés&nbsp;; l’installation électrique respecte la norme NF C 15-100 et les contraintes propres au site.
 
-Les opérations récentes illustrent cette pratique&nbsp;: extension du bâtiment Fountaine Pajot à Aigrefeuille-d’Aunis (2024), fonderie NDC Foundry à Rochefort (2024), atelier AP Yacht pour Catana Group à Marans (2023), bâtiment VoltAero sur l’aérodrome de Saint-Agnant. Les pré-études 3D et la modélisation BIM permettent de fiabiliser l’implantation des réseaux dans des volumes de production contraints.
+Les bâtiments commerciaux complètent ce segment : locaux de vente, moyennes surfaces, enseignes spécialisées — comme le magasin Gamm Vert de Saint-Pierre-d’Oléron. Ces programmes combinent des exigences d’exploitation continues (froid commercial, éclairage, encaissement), une réglementation ERP de type M et des arbitrages serrés entre coût d’investissement et coût d’exploitation. FT2E y applique la même méthode que sur les sites industriels : partir de l’usage réel, dimensionner juste, documenter chaque choix.
 
-Les entrepôts logistiques et les ateliers de maintenance présentent des volumes importants et des hauteurs sous charpente qui rendent le chauffage traditionnel peu efficace. FT2E dimensionne des solutions adaptées — aérothermes, panneaux rayonnants, rideaux d’air aux portes de quai — en arbitrant entre confort, consommation et investissement selon l’usage réel du bâtiment.
+Les opérations récentes illustrent cette pratique&nbsp;: extension du bâtiment Fountaine Pajot à Aigrefeuille-d’Aunis (2024), fonderie NDC Foundry à Rochefort (2024), atelier AP Yacht pour Catana Group à Marans (2023), bâtiment VoltAero sur l’aérodrome de Saint-Agnant. Les pré-études 3D et la modélisation BIM permettent de fiabiliser l’implantation des réseaux dans des volumes de production contraints. Pour les entrepôts et ateliers de grande hauteur, FT2E dimensionne des solutions de chauffage adaptées — aérothermes, panneaux rayonnants, rideaux d’air aux portes de quai — en arbitrant entre confort, consommation et investissement selon l’usage réel du bâtiment.

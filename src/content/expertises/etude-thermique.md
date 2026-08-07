@@ -9,7 +9,7 @@ livrables:
   - "Attestation de fin de travaux"
   - "Simulation thermique dynamique (STD)"
   - "Étude ACV (analyse du cycle de vie)"
-typique_pour: [Logement, Tertiaire, Sport, Santé]
+typique_pour: [Logements, "Tertiaire / ERP", Patrimoine]
 missions_liees: [Thermique]
 faq:
   - question: "Faut-il une STD pour tous les projets RE2020 ?"

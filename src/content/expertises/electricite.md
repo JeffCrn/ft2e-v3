@@ -10,7 +10,7 @@ livrables:
   - "Dimensionnement IRVE (bornes de recharge)"
   - "Cahier GTB (gestion technique du bâtiment)"
   - "Analyse des offres et visa d’exécution"
-typique_pour: [Logement, Tertiaire, Santé, Sport, Industriel]
+typique_pour: [Logements, "Tertiaire / ERP", "Industriel et commercial", Monotechnique]
 missions_liees: ["Électricité CFO", "Électricité CFA"]
 faq:
   - question: "Qu’est-ce que la GTB et pourquoi la prévoir dès la conception ?"

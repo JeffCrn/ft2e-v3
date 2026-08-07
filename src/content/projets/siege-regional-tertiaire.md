@@ -1,6 +1,6 @@
 ---
 titre: "[DÉMO] Siège régional — 2 200 m² de bureaux tertiaires"
-secteur: Tertiaire
+secteur: Tertiaire / ERP
 typologie: Neuf
 moa: "[DÉMO] Groupe régional (anonymisé)"
 architecte: "[DÉMO] Studio d’architecture nantais"

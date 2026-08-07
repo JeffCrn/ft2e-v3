@@ -1,6 +1,6 @@
 ---
 titre: "[DÉMO] EXE fluides — 120 logements PSLA"
-secteur: Logement
+secteur: Études d'exécution / BIM
 typologie: "Études d'exécution"
 moa: "Bouygues Immobilier"
 architecte: "—"

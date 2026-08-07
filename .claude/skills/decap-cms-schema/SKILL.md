@@ -45,7 +45,7 @@ collections:
     fields:
       - { label: "Titre", name: "titre", widget: "string", required: true }
       - { label: "Secteur", name: "secteur", widget: "select",
-          options: ["Logement", "Tertiaire", "Santé", "Sport", "Industriel", "Patrimoine"],
+          options: ["Logements", "Tertiaire / ERP", "Industriel et commercial", "Patrimoine", "Monotechnique", "Coordination SSI", "Études d'exécution / BIM"],
           required: true }
       - { label: "Typologie", name: "typologie", widget: "select",
           options: ["Neuf", "Réhabilitation", "Extension", "Études d'exécution"],

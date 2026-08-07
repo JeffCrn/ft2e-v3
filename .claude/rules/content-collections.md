@@ -14,7 +14,7 @@ Tout contenu textuel ou structuré du site vit comme un fichier Markdown dans `s
 | `services` | `src/content/services/audit-diagnostic.md` | 6 (fixe) |
 | `equipe` | `src/content/equipe/mathieu.md` | 7 |
 | `actualites` | `src/content/actualites/2026-09-lancement-site.md` | 1 → ∞ |
-| `secteurs` | `src/content/secteurs/logement.md` | 5 (fixe) |
+| `secteurs` | `src/content/secteurs/logements.md` | 7 (fixe) |
 
 ## Conventions de slug
 
@@ -35,7 +35,7 @@ Le schéma Zod doit **refuser** :
 
 - Un titre vide ou > 80 caractères.
 - Un slug contenant majuscules, accents ou espaces.
-- Un `secteur` en dehors de l'énumération (`Logement | Tertiaire | Santé | Sport | Industriel | Patrimoine`).
+- Un `secteur` en dehors de l'énumération (`Logements | Tertiaire / ERP | Industriel et commercial | Patrimoine | Monotechnique | Coordination SSI | Études d'exécution / BIM`).
 - Une `mission_ft2e` vide.
 - Une date dans le futur pour un projet livré.
 

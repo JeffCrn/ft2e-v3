@@ -10,7 +10,7 @@ description: Construit une fiche projet complète à partir d'informations brute
 ```markdown
 ---
 titre: "<Titre du projet, 80 c. max>"
-secteur: "<Logement|Tertiaire|Santé|Sport|Industriel|Patrimoine>"
+secteur: "<Logements|Tertiaire / ERP|Industriel et commercial|Patrimoine|Monotechnique|Coordination SSI|Études d'exécution / BIM>"
 typologie: "<Neuf|Réhabilitation|Extension|Études d'exécution>"
 moa: "<Maître d'ouvrage>"
 architecte: "<Architecte mandataire ou TODO>"

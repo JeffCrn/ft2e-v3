@@ -20,7 +20,7 @@ Première impression. Donner en moins de 30 secondes une lecture juste de FT2E :
 2. **Chiffres clés** — 4 chiffres animés au scroll : *Années d'expertise* / *Ingénieurs associés* / *Projets livrés* / *Logements conçus*. **Valeurs à fournir par FT2E.**
 3. **L'acronyme déployé** (`AcronymeFT2E`) — F/T/E/E, quatre champs d'ingénierie + phrase de continuité conception → réception + lien `/expertises`. Bloc d'identité déplacé depuis Société (2026-08-06).
 4. **Six expertises en cartes** — Audit · Thermique · CVC · Électricité · SSI · Exécution-BIM. Cartes compactes (accroche tronquée) ; le détail vit sur `/expertises`.
-5. **Six secteurs** — liste blueprint numérotée, chaque ligne liant vers `/secteurs/[slug]`.
+5. **Sept secteurs d'activité** — liste blueprint numérotée, chaque ligne liant vers `/secteurs/[slug]`.
 6. **Références récentes** — 4 projets en grille (depuis `projets` avec `en_avant: true`, triés par `annee` desc.).
 7. **L'équipe** — Photo collective, accroche humaine sur la pluridisciplinarité du bureau, lien vers `/equipe`.
 8. **Bandeau partenaires** — Logos discrets des MOA et architectes (avec accord écrit obligatoire, voir `docs/13-glossaire-bet.md` § « Droits image »).
@@ -123,7 +123,7 @@ Démontrer le volume et la diversité du portefeuille. Filtrabilité indispensab
 Filtres prévus par le PDF (p. 9) : **« Vue filtrable : par secteur (logement, tertiaire, santé, sportif, industriel) · par MOA · par année · par performance énergétique · par taille »**.
 
 - **Filtres multiples** (côté client, *island* dédiée Preact) :
-  - **Secteur** (chips multi-sélection : Logement · Tertiaire · Santé · Sport · Industriel · Patrimoine)
+  - **Secteur** (chips multi-sélection : Logements · Tertiaire / ERP · Industriel et commercial · Patrimoine · Monotechnique · Coordination SSI · Études d'exécution / BIM)
   - **MOA** (autocomplete sur les valeurs présentes dans la collection)
   - **Année** (slider d'intervalle ou range select 2008 → année courante)
   - **Performance énergétique** (chips multi-sélection : RT2012, RE2020, Effinergie+, NF Habitat HQE, BBC Rénovation, autre)

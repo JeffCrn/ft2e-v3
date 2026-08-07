@@ -1,0 +1,17 @@
+---
+titre: "Tertiaire / ERP"
+accroche: "Bureaux, enseignement, santé, sport, équipements publics — tous les établissements recevant du public. Décret tertiaire, GTB, réglementation ERP."
+image: "/images/secteurs/tertiaire.jpg"
+image_alt: "[DÉMO] Bâtiment tertiaire contemporain"
+ordre: 2
+---
+
+Le tertiaire est une activité majeure de FT2E — 98 projets menés entre 2019 et 2024 — qui regroupe des typologies de bâtiments très diverses : immeubles de bureaux, groupes scolaires, médiathèques, mairies, centres techniques municipaux. Chacun présente des contraintes d’usage et de confort spécifiques — densité d’occupation variable, exigences de qualité d’air, plages horaires de fonctionnement étendues ou fractionnées. FT2E conçoit les installations techniques en partant de l’usage réel du bâtiment, pour un dimensionnement juste et des consommations maîtrisées. En ERP comme en bâtiment soumis au code du travail, le bureau est garant du respect de la réglementation applicable selon le classement — ERP du 1ᵉʳ ou du 2ᵉ groupe, instructions techniques, règlement sanitaire — et les estimations financières s’appuient sur une base de prix actualisée (OPTIMA).
+
+Les établissements de santé et médico-sociaux — ERP de type J ou U — imposent des exigences sans équivalent : confort thermique garanti en permanence pour des occupants qui ne peuvent pas le compenser, qualité de l’air intérieur traitée comme un enjeu sanitaire direct, sécurité incendie particulièrement encadrée. FT2E intervient sur ces programmes de la conception CVC à l’électricité CFO/CFA, comme pour les études de la maison de santé de Pérignac. [DÉMO] Sur l’EHPAD Le Doux-Refuge à Saintes (3 450 m², réhabilitation), le bureau a mené la conception CVC, l’électricité et la coordination SSI en maintenant l’exploitation de l’établissement pendant toute la durée des travaux — la réhabilitation en site occupé est une constante du secteur.
+
+Les équipements sportifs relèvent de la même famille réglementaire avec leurs problématiques propres : une piscine couverte génère une hygrométrie qu’il faut évacuer sans refroidir le hall de bassin ni condenser sur la charpente ; un gymnase alterne pics d’occupation brefs et longues périodes de vide. FT2E dimensionne les centrales de traitement d’air, la déshumidification et la récupération de chaleur adaptées à chaque programme — comme lors de la réhabilitation du gymnase de Saint-Agnant.
+
+Le décret tertiaire impose depuis 2019 une réduction progressive des consommations des bâtiments de plus de 1 000 m². Pour les collectivités et les gestionnaires de patrimoine, cette obligation accélère les programmes de rénovation et renforce l’intérêt de la GTB (gestion technique du bâtiment). FT2E accompagne ces acteurs de l’audit initial à la conception des travaux, en passant par le dimensionnement des systèmes de régulation.
+
+Les équipements publics du territoire constituent une part significative de l’activité du bureau. La maîtrise d’ouvrage publique exige une rigueur particulière dans la rédaction des pièces de marché (CCTP, DQE) et dans le respect des procédures de consultation. FT2E pratique ces missions depuis sa création, en lien direct avec les services techniques des communes de Charente-Maritime, Vendée et Deux-Sèvres — rénovation et extension de la mairie d’Angoulins (2021), Cabanes Urbaines (2022) et édicules du Port de Plaisance (2024) à La Rochelle, bâtiment Altarea à La Rochelle (2021).

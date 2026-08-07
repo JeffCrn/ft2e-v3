@@ -1,5 +1,5 @@
 ---
-titre: "Logement"
+titre: "Logements"
 accroche: "Du logement social à la résidence de standing, en neuf comme en réhabilitation. RE2020, NF Habitat HQE, performance énergétique maîtrisée."
 image: "/images/secteurs/logement.jpg"
 image_alt: "[DÉMO] Résidence de logements collectifs récente"

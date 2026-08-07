@@ -9,7 +9,7 @@ Toutes les Content Collections sont définies dans `src/content/config.ts` via Z
 ```ts
 import { defineCollection, z } from 'astro:content';
 
-const SECTEURS = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Patrimoine'] as const;
+const SECTEURS = ['Logements', 'Tertiaire / ERP', 'Industriel et commercial', 'Patrimoine', 'Monotechnique', 'Coordination SSI', "Études d'exécution / BIM"] as const;
 const TYPOLOGIES = ['Neuf', 'Réhabilitation', 'Extension', "Études d'exécution"] as const;
 const MISSIONS = ['CVC', 'Thermique', 'Électricité CFO', 'Électricité CFA', 'SSI', 'BIM', "Études d'exécution", 'Audit & diagnostic'] as const;
 

@@ -9,7 +9,7 @@ livrables:
   - "Coordination avec le bureau de contrôle"
   - "Dossier d’identité SSI"
   - "Mise en service et PV de réception"
-typique_pour: [Santé, Tertiaire, Sport, Logement]
+typique_pour: ["Tertiaire / ERP", Logements, "Industriel et commercial"]
 missions_liees: [SSI]
 faq:
   - question: "Quand faut-il un coordinateur SSI ?"

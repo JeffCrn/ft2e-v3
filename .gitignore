@@ -30,3 +30,5 @@ assets/
 
 # CV de l'équipe — données personnelles, jamais commitées
 cv/
+
+.vercel

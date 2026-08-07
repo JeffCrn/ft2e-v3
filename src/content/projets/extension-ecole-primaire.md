@@ -1,6 +1,6 @@
 ---
 titre: "[DÉMO] Extension d’une école primaire — 6 classes"
-secteur: Tertiaire
+secteur: Tertiaire / ERP
 typologie: Extension
 moa: "[DÉMO] Commune de Royan"
 architecte: "[DÉMO] Atelier du littoral"

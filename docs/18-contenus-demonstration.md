@@ -283,7 +283,7 @@ Vous êtes ?
 
 → Si Architecte :
   • Phase du projet (ESQ, APS, APD, PRO, DCE, EXE, autre)
-  • Typologie (Logement, Tertiaire, Santé, Sport, Patrimoine, autre)
+  • Typologie (Logements, Tertiaire / ERP, Industriel et commercial, Patrimoine, Monotechnique, autre)
   • Surface approximative
   • Lots souhaités (CVC, Thermique, Électricité, SSI, BIM, EXE)
 

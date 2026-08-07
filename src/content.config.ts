@@ -1,7 +1,21 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const SECTEURS = ['Logement', 'Tertiaire', 'Santé', 'Sport', 'Industriel', 'Patrimoine'] as const;
+/**
+ * Les sept secteurs d'activité de FT2E (message client du 2026-08-07,
+ * cohérent avec la plaquette 2024) : quatre marchés du bâtiment, puis
+ * trois modes d'intervention que le bureau porte comme segments à part
+ * entière — monotechnique, coordination SSI, études d'exécution / BIM.
+ */
+const SECTEURS = [
+  'Logements',
+  'Tertiaire / ERP',
+  'Industriel et commercial',
+  'Patrimoine',
+  'Monotechnique',
+  'Coordination SSI',
+  "Études d'exécution / BIM",
+] as const;
 const TYPOLOGIES = ['Neuf', 'Réhabilitation', 'Extension', "Études d'exécution"] as const;
 const MISSIONS = ['CVC', 'Thermique', 'Électricité CFO', 'Électricité CFA', 'SSI', 'BIM', "Études d'exécution", 'Audit & diagnostic'] as const;
 

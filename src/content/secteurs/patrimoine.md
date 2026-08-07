@@ -3,7 +3,7 @@ titre: "Patrimoine"
 accroche: "Monuments historiques, bâtiments classés, réhabilitations patrimoniales. Intégration discrète des réseaux, respect des décors d’origine."
 image: "/images/secteurs/patrimoine.jpg"
 image_alt: "[DÉMO] Bâtiment patrimonial en cours de réhabilitation"
-ordre: 6
+ordre: 4
 ---
 
 Intervenir sur un bâtiment patrimonial, c’est accepter une contrainte supplémentaire que les projets neufs ignorent : l’existant a une valeur qui dépasse sa fonction. Les décors, les volumes, les matériaux d’origine ne sont pas des obstacles techniques — ce sont la raison d’être du projet. FT2E conçoit les installations techniques de ces bâtiments avec un impératif de discrétion : aucune gaine apparente dans un espace classé, aucun percement non validé par l’architecte des Bâtiments de France, aucun équipement qui altère la lecture du lieu.

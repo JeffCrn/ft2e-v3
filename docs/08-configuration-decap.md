@@ -79,7 +79,7 @@ collections:
     fields:
       - { label: "Titre", name: "titre", widget: "string", required: true, pattern: ['.{2,80}', '2 à 80 caractères'] }
       - { label: "Secteur", name: "secteur", widget: "select", required: true,
-          options: ["Logement", "Tertiaire", "Santé", "Sport", "Industriel", "Patrimoine"] }
+          options: ["Logements", "Tertiaire / ERP", "Industriel et commercial", "Patrimoine", "Monotechnique", "Coordination SSI", "Études d'exécution / BIM"] }
       - { label: "Typologie", name: "typologie", widget: "select", required: true,
           options: ["Neuf", "Réhabilitation", "Extension", "Études d'exécution"] }
       - { label: "Maître d'ouvrage", name: "moa", widget: "string", required: true }
@@ -194,7 +194,7 @@ collections:
         name: "typique_pour"
         widget: "select"
         multiple: true
-        options: ["Logement", "Tertiaire", "Santé", "Sport", "Industriel", "Patrimoine"]
+        options: ["Logements", "Tertiaire / ERP", "Industriel et commercial", "Patrimoine", "Monotechnique", "Coordination SSI", "Études d'exécution / BIM"]
       - label: "FAQ"
         name: "faq"
         widget: "list"

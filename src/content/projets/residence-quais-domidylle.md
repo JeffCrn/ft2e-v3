@@ -1,6 +1,6 @@
 ---
 titre: "[DÉMO] Résidence Les Quais — 48 logements collectifs"
-secteur: Logement
+secteur: Logements
 typologie: Neuf
 moa: "Domidylle"
 architecte: "[DÉMO] Pierre & Associés Architectes"

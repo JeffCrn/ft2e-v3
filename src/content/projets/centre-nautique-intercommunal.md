@@ -1,7 +1,7 @@
 ---
 demo_reason: Projet de démonstration représentatif du secteur Sport.
 titre: "[DÉMO] Centre nautique intercommunal"
-secteur: Sport
+secteur: Tertiaire / ERP
 typologie: Neuf
 moa: "[DÉMO] Communauté de communes (anonymisée)"
 architecte: "[DÉMO] Atelier piscines & équipements"

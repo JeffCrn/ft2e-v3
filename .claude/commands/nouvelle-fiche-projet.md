@@ -11,7 +11,7 @@ Tu vas créer une nouvelle fiche projet pour le site FT2E.
 
 1. **Lis** `content-templates/projet-modele.md` et `.claude/rules/content-collections.md`.
 2. **Pose à l'utilisateur** les questions strictement nécessaires (et seulement celles dont la réponse n'est pas déjà dans son message) :
-   - Secteur (Logement | Tertiaire | Santé | Sport | Industriel | Patrimoine)
+   - Secteur (Logements | Tertiaire / ERP | Industriel et commercial | Patrimoine | Monotechnique | Coordination SSI | Études d'exécution / BIM)
    - Typologie (Neuf | Réhabilitation | Extension | Études d'exécution)
    - MOA, architecte
    - Lieu, surface (m²), année de livraison
