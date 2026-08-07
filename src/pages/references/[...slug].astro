@@ -73,6 +73,13 @@ const jsonLd = {
             </span>
           </div>
 
+          {/* Sur petit écran, le cadre de synthèse s'intercale entre l'image
+              et le récit ; la colonne de droite prend le relais dès lg.
+              display:none retire l'instance inactive de l'arbre d'accessibilité. */}
+          <div class="lg:hidden mb-8">
+            <FicheTechnique projet={projet} />
+          </div>
+
           <p class="mono-label font-normal text-pivot pb-2.5 border-b border-filet-1">mission</p>
 
           <div class="flex flex-wrap gap-2 mt-4">
@@ -97,7 +104,9 @@ const jsonLd = {
         </div>
 
         <div class="lg:col-span-5">
-          <FicheTechnique projet={projet} />
+          <div class="hidden lg:block">
+            <FicheTechnique projet={projet} />
+          </div>
 
           {/* La seule réserve profonde de l'écran : la ligne encrée des relevés
               (charte v3 — plan rang 3, filet 3 px clair à gauche, ombre rang 3).
