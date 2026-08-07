@@ -14,17 +14,12 @@ import CtaFinal from '../../components/blocs/CtaFinal.astro';
 // le filtre réduit la liste, il ne pagine pas.
 const projets = (await getCollection('projets')).sort((a, b) => b.data.annee - a.data.annee);
 
-// Les sept secteurs d'activité (message client 2026-08-07) — même ordre
-// que l'enum SECTEURS de src/content.config.ts.
-const secteurs = [
-  'Logements',
-  'Tertiaire / ERP',
-  'Industriel et commercial',
-  'Patrimoine',
-  'Monotechnique',
-  'Coordination SSI',
-  "Études d'exécution / BIM",
-];
+// Les sept secteurs d'activité, lus dans la collection `secteurs` (triée
+// par ordre) — la même source que la section « secteurs » de l'accueil :
+// le filtre reste aligné quel que soit le contenu.
+const secteurs = (await getCollection('secteurs'))
+  .sort((a, b) => a.data.ordre - b.data.ordre)
+  .map((s) => s.data.titre);
 
 const rangs = {
   livré: { filet: 'border-l-filet-1', graisse: 'font-bold', statut: 'livré' },
@@ -69,7 +64,7 @@ const lignes = projets.map((projet) => ({
             </button>
             {secteurs.map((s) => {
               const count = projets.filter((p) => p.data.secteur === s).length;
-              return count > 0 ? (
+              return (
                 <button
                   class="chip-blueprint -ml-px -mt-px cursor-pointer"
                   data-filtre={s}
@@ -77,7 +72,7 @@ const lignes = projets.map((projet) => ({
                 >
                   {s} ({count})
                 </button>
-              ) : null;
+              );
             })}
           </div>
         </div>
