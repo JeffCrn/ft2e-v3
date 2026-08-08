@@ -65,6 +65,10 @@ const lignes = projets.map((projet) => ({
             </button>
             {secteurs.map((s) => {
               const count = projets.filter((p) => p.data.secteur === s).length;
+              // Un secteur sans référence publiée n'apparaît pas au filtre :
+              // une puce « (0) » qui ne filtre rien annonce une lacune au lieu
+              // de servir. Le secteur reste présent sur /secteurs et à l'accueil.
+              if (count === 0) return null;
               return (
                 <button
                   class="chip-blueprint -ml-px -mt-px cursor-pointer"

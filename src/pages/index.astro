@@ -48,10 +48,16 @@ const secteurs = (await getCollection('secteurs'))
     numero: String(s.data.ordre).padStart(2, '0'),
   }));
 
-const projetsRecents = (await getCollection('projets'))
-  .filter((p) => p.data.en_avant)
-  .sort(parAffaireDecroissante)
-  .slice(0, 4);
+// Grille « références récentes » : les fiches mises en avant d'abord, puis
+// les plus récentes pour atteindre quatre. `en_avant` reste maître du média
+// du hero (ci-dessus) mais ne conditionne plus le remplissage de la grille :
+// une grille à quatre colonnes ne doit pas tomber à une carte parce que le
+// corpus mis en avant a maigri.
+const tousProjets = (await getCollection('projets')).sort(parAffaireDecroissante);
+const projetsRecents = [
+  ...tousProjets.filter((p) => p.data.en_avant),
+  ...tousProjets.filter((p) => !p.data.en_avant),
+].slice(0, 4);
 
 const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/images/equipe/collectif.jpg'));
 
