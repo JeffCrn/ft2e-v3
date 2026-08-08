@@ -48,7 +48,7 @@ const projets = defineCollection({
     annee: z.number().int().min(2008).max(new Date().getFullYear() + 1),
     /** Millésime de réception/livraison, renseigné seulement une fois la réception prononcée. */
     annee_livraison: z.number().int().min(2008).max(new Date().getFullYear() + 2).optional(),
-    /** Rang de nomenclature (charte v2) : filet 4 px livré / 2 px en cours / 1 px archive. */
+    /** Rang de nomenclature (charte v3) : opacité du filet gauche 1 px — livré 22 % / en cours 16 % / archive 12 %. */
     statut: z.enum(['livré', 'en cours', 'archive']).default('livré'),
     performance: z.string().optional(),
     mission_ft2e: z.array(z.enum(MISSIONS)).min(1),

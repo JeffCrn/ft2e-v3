@@ -87,7 +87,13 @@ collections:
       - { label: "Lieu", name: "lieu", widget: "string", required: true,
           hint: "Commune (code postal). Ex: La Rochelle (17000)" }
       - { label: "Surface (m²)", name: "surface_m2", widget: "number", required: false, value_type: "int", min: 1 }
-      - { label: "Année de livraison", name: "annee", widget: "number", required: true, value_type: "int", min: 2008, max: 2030 }
+      - { label: "Référence d'affaire FT2E", name: "reference", widget: "string", required: false,
+          pattern: ['^\d{2}-\d{3}$', "Format attendu : NN-NNN (ex. 22-042)"],
+          hint: "Relevée sur une pièce FT2E. Obligatoire pour une référence réelle, à laisser vide sur une fiche de démonstration." }
+      - { label: "Année d'ouverture de l'affaire", name: "annee", widget: "number", required: true, value_type: "int", min: 2008, max: 2030,
+          hint: "Le millésime qu'encode la référence : 22-042 → 2022. Ni le DCE, ni la réception." }
+      - { label: "Année de livraison (réception prononcée)", name: "annee_livraison", widget: "number", required: false, value_type: "int", min: 2008, max: 2030,
+          hint: "Seulement si la réception est actée sur pièce. Interdit si le statut est « en cours »." }
       - { label: "Performance énergétique", name: "performance", widget: "string", required: false,
           hint: "Ex: RE2020 · Effinergie+" }
       - label: "Mission FT2E"
@@ -248,7 +254,7 @@ Rôles recommandés :
 
 ## Cohérence Zod ↔ Decap — golden rule
 
-Toute modification d'un schéma Zod (`src/content/config.ts`) **doit** être répercutée dans `public/admin/config.yml` au sein du même commit. Le sous-agent `content-modeller` (`.claude/agents/content-modeller.md`) est responsable de cette synchronisation.
+Toute modification d'un schéma Zod (`src/content.config.ts`) **doit** être répercutée dans `public/admin/config.yml` au sein du même commit. Le sous-agent `content-modeller` (`.claude/agents/content-modeller.md`) est responsable de cette synchronisation.
 
 ## Tests d'intégration
 

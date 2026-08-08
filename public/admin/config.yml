@@ -101,13 +101,30 @@ collections:
         value_type: "int"
         min: 1
 
-      - label: "Année de livraison"
+      - label: "Référence d'affaire FT2E"
+        name: "reference"
+        widget: "string"
+        required: false
+        pattern: ['^\d{2}-\d{3}$', "Format attendu : NN-NNN (ex. 22-042)"]
+        hint: "Numéro d'affaire relevé sur une pièce FT2E (« Affaire n° : 22-033 », cartouche de plan). Obligatoire pour une référence réelle ; à laisser vide sur une fiche de démonstration."
+
+      - label: "Année d'ouverture de l'affaire"
         name: "annee"
         widget: "number"
         required: true
         value_type: "int"
         min: 2008
         max: 2030
+        hint: "Le millésime qu'encode la référence : 22-042 → 2022. Ce n'est ni l'année de DCE ni celle de la réception. Le build refuse toute contradiction avec la référence."
+
+      - label: "Année de livraison (réception prononcée)"
+        name: "annee_livraison"
+        widget: "number"
+        required: false
+        value_type: "int"
+        min: 2008
+        max: 2030
+        hint: "À ne renseigner qu'une fois la réception actée sur pièce (PV, avis favorable). Interdit si le statut est « en cours »."
 
       - label: "Performance énergétique"
         name: "performance"

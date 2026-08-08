@@ -1,42 +1,42 @@
 ---
-description: Prépare et déclenche un déploiement de preview (recette OVH)
+description: Prépare et déclenche un déploiement Vercel
 ---
 
-# Deploy preview — recette OVH
+# Deploy — Vercel
 
-Procédure de déploiement d'une **preview de recette** sur l'URL technique OVH (de type `ft2e-recette.ovh.net`). Voir `docs/09-deploiement-ovh.md` pour le détail complet.
+Le projet est hébergé sur **Vercel** (`ft2e-v3.vercel.app`), en déploiement continu depuis la branche **`master`** du dépôt GitHub `JeffCrn/ft2e-v3`. La migration vers `ft2e.fr` n'est pas faite : voir `docs/19-migration-production.md`.
+
+> `docs/09-deploiement-ovh.md` décrit l'hébergement OVH **envisagé au cadrage puis abandonné** — document d'historique, à ne pas suivre. Aucun `.htaccess`, aucune URL de recette OVH.
 
 ## Pré-requis
 
-1. La branche courante n'est **pas** `main`.
-2. Tous les checks `/pre-commit-check` sont au vert.
-3. Le tag de version (si applicable) est défini.
+1. Les contrôles de `/pre-commit-check` sont au vert, **contrôle du rendu inclus**.
+2. Les modifications sont commitées selon `.claude/rules/git-commit.md`.
 
-## Étapes
+## Déploiement
+
+Un `git push origin master` suffit : Vercel construit et promeut en production automatiquement. C'est la voie normale.
 
 ```bash
-# 1. Build local
-npm run build
+git push origin master
+```
 
-# 2. Vérifier la taille du bundle
-du -sh dist/
-ls -la dist/_astro/ | head -20
+Déploiement manuel (utile seulement si la chaîne GitHub est indisponible) — nécessite le CLI, absent par défaut de l'environnement :
 
-# 3. Vérifier les redirections (.htaccess)
-cat dist/.htaccess 2>/dev/null || echo "Pas de .htaccess (à générer en phase de migration)"
-
-# 4. Déclencher le déploiement via le workflow Git
-git push origin <branche-courante>
+```bash
+npm i -g vercel      # si besoin
+npx vercel deploy --prod --yes
 ```
 
 ## Vérifications post-déploiement
 
-- Charger l'URL de recette dans un navigateur privé.
-- Vérifier le certificat SSL (Let's Encrypt actif).
-- Lancer Lighthouse mobile sur la home : `npx lighthouse <url-recette>`.
+- Relever le hash du CSS servi et confirmer qu'il a changé si le style a été touché :
+  `curl -s https://ft2e-v3.vercel.app/ | grep -o 'href="/_astro/[^"]*\.css"'`
+- **Charger la page réellement modifiée** et la regarder (capture Playwright ou navigateur) — pas seulement l'accueil. Un déploiement `READY` ne garantit que la compilation.
+- Lighthouse mobile sur la home : `npx lighthouse https://ft2e-v3.vercel.app --only-categories=performance,accessibility,best-practices,seo`.
 - Vérifier qu'aucun lien interne ne renvoie en 404.
 
 ## Rappel
 
-- **Aucune donnée de production** sur la recette (formulaire de contact pointe vers une boîte de test si possible).
-- Le déploiement vers `ft2e.fr` ne se fait **qu'après validation finale** par l'équipe associée de FT2E (voir `docs/12-cadrage-jalons.md`).
+- L'indexation reste bloquée (robots.txt, meta `noindex`, header `X-Robots-Tag`) tant que FT2E n'a pas validé la mise en production — `docs/19-migration-production.md`.
+- La mise en ligne sur `ft2e.fr` ne se fait **qu'après validation finale** par l'équipe associée de FT2E (`docs/12-cadrage-jalons.md`).

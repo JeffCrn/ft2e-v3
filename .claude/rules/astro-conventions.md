@@ -47,9 +47,11 @@ Tout `<script>` d'un composant `.astro` qui appelle `addEventListener` doit :
 
 ### Exemples dans le codebase
 
-- `src/layouts/BaseLayout.astro` lignes 200-208 (motion design : `initMotion`).
-- `src/components/primitives/Chiffre.astro` ligne 73 (compteurs : `initChiffres`).
-- `src/components/layout/Header.astro` lignes 68-83 (menu mobile : `initMenu`).
+- `src/layouts/BaseLayout.astro` — `initPlans` (révélation de plan, `data-plan`).
+- `src/components/layout/Header.astro` — `initMenu` (menu mobile).
+- `src/pages/references/index.astro` — filtres de nomenclature (guard `dataset.filtresBound`).
+
+Citer les fonctions par **nom**, jamais par numéro de ligne : les lignes bougent à chaque refonte et la règle devient fausse sans que rien ne le signale. `Chiffre.astro` n'a plus de script — la v3 interdit les compteurs qui s'incrémentent (`.claude/rules/tailwind-design-tokens.md` § Interactions).
 
 ### Anti-pattern interdit
 
@@ -86,8 +88,8 @@ const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_princ
     loading="lazy"
   />
 ) : (
-  <div class="bg-dark-surface-1 flex items-center justify-center ...">
-    <p class="text-white/40 text-sm">[Photo à venir]</p>
+  <div class="duotone-media flex items-center justify-center">
+    <p class="mono-label text-pivot">[Photo à venir]</p>
   </div>
 )}
 ```
@@ -106,22 +108,29 @@ const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_princ
 
 ```
 src/
+├── content.config.ts             # Zod schemas de toutes les collections (À LA RACINE de src/,
+│                                 #   PAS src/content/config.ts)
 ├── content/
-│   ├── config.ts                 # Zod schemas de toutes les collections
 │   ├── projets/*.md
 │   ├── actualites/*.md
 │   ├── equipe/*.md
-│   └── services/*.md
+│   ├── expertises/*.md
+│   └── secteurs/*.md
+├── lib/
+│   ├── constants.ts              # constantes de site (nav, chiffres clés, JSON-LD)
+│   └── projets.ts                # tri de nomenclature, libellé de référence
 ├── layouts/
-│   ├── BaseLayout.astro          # html/head/body, meta, fonts, analytics
+│   ├── BaseLayout.astro          # html/head/body, meta, fonts, révélation de plan
 │   └── PageLayout.astro          # header + footer wrapper
 ├── pages/
 │   ├── index.astro               # accueil
 │   ├── societe.astro
 │   ├── equipe.astro
-│   ├── services/
+│   ├── expertises/               # les quatre métiers
 │   │   ├── index.astro
-│   │   └── [slug].astro
+│   │   └── [...slug].astro
+│   ├── secteurs/                 # les sept secteurs d'activité
+│   │   └── [...slug].astro
 │   ├── references/
 │   │   ├── index.astro           # liste filtrable
 │   │   └── [slug].astro          # fiche projet (getStaticPaths)
@@ -137,20 +146,43 @@ src/
 
 ## Conventions de nommage
 
-- Composants : **PascalCase** (`FicheProjet.astro`).
+- Composants : **PascalCase** (`FicheTechnique.astro`).
 - Variables et fonctions : **camelCase**.
-- Fichiers de contenu (slugs) : **kebab-case sans accents** (`maison-pierre-loti.md`).
+- Fichiers de contenu (slugs) : **kebab-case sans accents** (`abbaye-sablonceaux-ssi.md`).
 - Classes Tailwind : **regrouper logiquement** (layout → spacing → typo → couleur → état).
 
-## Design system Apple-style — conventions CSS
+## Design system — où est la source de vérité
 
-- **Source de vérité** : `src/styles/global.css` (bloc `@theme`), pas de `tailwind.config.ts`.
-- **Conteneur** : `max-w-[980px] mx-auto px-4 md:px-6` (pas `max-w-screen-xl`).
-- **Navigation** : `position: fixed`, glass effect, hauteur 48px, spacer `h-12` après.
-- **Headings** : ne pas forcer de couleur dans le CSS global — utiliser les classes Tailwind `text-near-black` ou `text-white` explicitement. Raison : en Tailwind v4, les règles hors `@layer` battent les utilitaires.
-- **Sections** : alterner `bg-pure-black`, `bg-white`, `bg-light-gray` pour le rythme cinématique.
-- **CTA** : `rounded-[980px]` (pill shape), jamais `rounded` ou `rounded-lg` pour les boutons.
-- **Cartes** : `bg-light-gray rounded-lg`, pas de `border`. Hover : `hover:shadow-soft`.
+**Source de vérité unique : `.claude/rules/tailwind-design-tokens.md` (charte v3 « plans et profondeur »)**, appuyée sur `src/styles/global.css` (bloc `@theme` + `@layer components`). Pas de `tailwind.config.ts`.
+
+Ne rien déduire d'un autre fichier. En particulier, `docs/02-design-system.md` décrit la **v1 Apple-style** (conteneur 980 px, boutons pilule `rounded-[980px]`, sections noir/blanc alternées, cartes `rounded-lg` + `shadow-soft`) : c'est de l'**historique**, entièrement contredit par la v3 (rayon 0 partout, conteneur 1200 px sur planche 1440 px, aplat encre, trois rangs d'ombre). Les tokens `pure-black`, `light-gray`, `near-black`, `shadow-soft` ne subsistent dans `global.css` que comme **alias repointés** — aucun composant ne les emploie, et le nouveau code ne doit pas les employer.
+
+## Tailwind v4 — détection de sources et `.gitignore`
+
+**La détection automatique de sources de Tailwind v4 lit le `.gitignore` du dépôt et élague les répertoires qui y correspondent.** Elle n'a aucune notion de « fichier suivi par git ».
+
+Conséquence : **tout motif `.gitignore` non ancré désactive silencieusement la génération des classes d'un répertoire source homonyme.** `references/` (sans barre oblique initiale) s'applique à tous les niveaux — donc aussi à `src/pages/references/`, dont les classes cessent d'être émises. Le build reste vert : Tailwind ne signale jamais une classe qu'il n'a pas vue ; seul le rendu le montre.
+
+### Règles
+
+1. **Ancrer tout motif** ajouté au `.gitignore` : `/references/`, `/cv/`, `/assets/` — jamais `references/`.
+2. Après toute modification du `.gitignore`, vérifier : `git check-ignore -v src/pages/<dossier>/index.astro` doit **ne rien renvoyer**.
+3. **Ne jamais conclure sur un build vert seul** après un changement de `.gitignore` ou de mise en page : contrôler le rendu (voir § Vérification du rendu).
+4. Diagnostic d'une classe manquante : comparer les sélecteurs de `dist/_astro/*.css` au source. Une classe en valeur arbitraire présente au source et absente du CSS = répertoire non scanné.
+
+Incident du 2026-08-08 (commits `0cb0d35` → `f8bf542`) : `references/` non ancré a supprimé `grid-cols-[56px_1fr_150px_88px_104px_56px]`, `grid-cols-[1fr_auto]` et `min-w-0` du CSS ; la nomenclature de `/references` s'est dépliée en blocs pleine largeur pendant quatre déploiements.
+
+**Piège annexe** : les répertoires non suivis présents en local (`branding-v2/`, `branding-v3/`, `plaquette/`) **sont** scannés par Tailwind et gonflent le CSS local de classes absentes en production. Comparer la taille du CSS local à celle de Vercel n'a donc aucun sens tel quel — comparer les **sélecteurs**, pas les octets.
+
+## Vérification du rendu — obligatoire avant de conclure
+
+Un build vert prouve que le projet compile, **pas que la page s'affiche**. Avant d'annoncer qu'un changement fonctionne, et systématiquement après une modification de mise en page, de `global.css` ou du `.gitignore` :
+
+```bash
+npm run build && npm run preview   # puis capture de la page touchée
+```
+
+Contrôler la page réellement modifiée (Playwright ou navigateur), pas seulement la page d'accueil. Les deux incidents du 2026-08-08 ont franchi un build vert.
 
 ## Performances — critères de blocage
 
@@ -165,7 +197,7 @@ Si l'un de ces critères n'est pas tenu, **ne pas merger** :
 ## Tests à exécuter
 
 ```bash
-npm run lint        # ESLint + astro check
-npm run typecheck   # tsc --noEmit
+npm run typecheck   # astro check (`npm run lint` en est un alias — inutile de lancer les deux)
 npm run build       # build prod (échec = blocage)
+npm run preview     # + capture de la page modifiée (§ Vérification du rendu)
 ```

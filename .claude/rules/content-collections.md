@@ -1,6 +1,6 @@
 # Content Collections
 
-**Scope** : `src/content/` et `src/content/config.ts`.
+**Scope** : `src/content/` et `src/content.config.ts`.
 
 ## Principe
 

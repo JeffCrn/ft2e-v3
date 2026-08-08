@@ -16,7 +16,10 @@ moa: "<Maître d'ouvrage>"
 architecte: "<Architecte mandataire ou TODO>"
 lieu: "<Commune (code postal)>"
 surface_m2: <nombre>
-annee: <année 4 chiffres>
+reference: "<NN-NNN>"          # numéro d'affaire FT2E — obligatoire si demo: false, INTERDIT si demo: true
+annee: <20NN>                  # millésime d'OUVERTURE de l'affaire, celui qu'encode la référence
+annee_livraison: <20NN>        # facultatif — réception PRONONCÉE seulement ; interdit si statut: en cours
+statut: "<livré|en cours|archive>"
 performance: "<RT2012|RE2020|Effinergie+|NF Habitat HQE|… ou null>"
 mission_ft2e: [<liste : CVC, Thermique, Électricité CFO, Électricité CFA, SSI, BIM, Études d'exécution>]
 image_principale: "/images/projets/<slug>/01.jpg"
@@ -51,8 +54,23 @@ Avant d'écrire le fichier :
 - [ ] **Slug** généré en kebab-case sans accents (Maison Pierre Loti → `maison-pierre-loti`).
 - [ ] Le fichier n'existe pas déjà.
 - [ ] Tous les champs obligatoires sont remplis (titre, secteur, typologie, moa, lieu, annee, mission_ft2e, image_principale, image_principale_alt).
+- [ ] **`reference` relevée sur une pièce FT2E** — « Affaire n° : 22-033 » en page de garde d'une synthèse ou d'un CCTP, « N° 21 061 » sur un devis, cartouche d'un plan. Le nom du dossier d'archives confirme, il ne fait pas foi seul. Se méfier des numéros d'affaire **des cotraitants** présents dans les mêmes pièces (architecte, économiste, MOA).
+- [ ] **`annee` == 2000 + les deux premiers chiffres de `reference`** (`22-042` → `2022`). Le build refuse toute autre valeur.
+- [ ] `annee_livraison` renseignée **uniquement** si une pièce acte la réception ; absente si `statut: en cours`.
 - [ ] L'année n'est pas dans le futur.
 - [ ] Les valeurs énumérées sont strictement dans la liste autorisée.
+
+## Les trois millésimes — ne jamais les confondre
+
+Une affaire a trois dates distinctes, et **une seule tient dans `annee`** :
+
+| Date | Où elle va | Exemple (abbaye de Sablonceaux) |
+|---|---|---|
+| Ouverture de l'affaire | **`annee`** — encodée dans `reference` | devis établi le 14/06/2022 → `22-042`, `annee: 2022` |
+| Phase d'études (DCE, PRO…) | **nulle part au frontmatter** — dans le récit | DCE 2023, avenant 2025 |
+| Réception prononcée | **`annee_livraison`** | avis favorable du 30/06/2026 → `annee_livraison: 2026` |
+
+Avant le 2026-08-08, `annee` n'était défini nulle part : trois sessions y ont mis trois choses différentes (réception, DCE, livraison), et le cartouche affichait une pseudo-référence `FT2E—{annee}` identique sur huit fiches. Ne jamais dériver un identifiant d'un millésime.
 
 ## Si une information manque
 

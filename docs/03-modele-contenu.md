@@ -1,6 +1,8 @@
 # 03 · Modèle de contenu
 
-Toutes les Content Collections sont définies dans `src/content/config.ts` via Zod. Ce document est la **spécification de référence** : tout désalignement entre ce document et le code est un bug.
+Toutes les Content Collections sont définies dans `src/content.config.ts` via Zod.
+
+> **Source de vérité : le code (`src/content.config.ts`), pas ce document.** Ce fichier en est une lecture commentée, tenue à jour au mieux ; en cas d'écart, c'est le schéma Zod qui fait foi — lui seul bloque le build. Les extraits ci-dessous peuvent être abrégés. Règles d'emploi des champs : `.claude/rules/content-collections.md`.
 
 ## Schémas
 
@@ -14,7 +16,7 @@ const TYPOLOGIES = ['Neuf', 'Réhabilitation', 'Extension', "Études d'exécutio
 const MISSIONS = ['CVC', 'Thermique', 'Électricité CFO', 'Électricité CFA', 'SSI', 'BIM', "Études d'exécution", 'Audit & diagnostic'] as const;
 
 const projets = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/projets' }),
   schema: z.object({
     titre: z.string().min(2).max(80),
     secteur: z.enum(SECTEURS),
@@ -23,7 +25,13 @@ const projets = defineCollection({
     architecte: z.string().optional(),
     lieu: z.string().min(2),
     surface_m2: z.number().int().positive().optional(),
+    // Numéro d'affaire FT2E NN-NNN — requis si !demo, interdit si demo (superRefine)
+    reference: z.string().regex(/^\d{2}-\d{3}$/).optional(),
+    // Millésime d'OUVERTURE de l'affaire — doit valoir 2000 + les 2 chiffres de `reference`
     annee: z.number().int().min(2008).max(new Date().getFullYear() + 1),
+    // Réception PRONONCÉE — interdit si statut === 'en cours' (superRefine)
+    annee_livraison: z.number().int().min(2008).max(new Date().getFullYear() + 2).optional(),
+    statut: z.enum(['livré', 'en cours', 'archive']).default('livré'),
     performance: z.string().optional(),       // ex: "RE2020 · Effinergie+"
     mission_ft2e: z.array(z.enum(MISSIONS)).min(1),
     image_principale: z.string().regex(/^\/images\/projets\/[a-z0-9-]+\/.+\.(jpg|jpeg|png|avif|webp)$/),

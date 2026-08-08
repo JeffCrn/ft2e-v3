@@ -25,4 +25,4 @@ Tu es spécialisé dans la **création de pages Astro** pour le site FT2E.
 ## Limites
 
 - Ne crée pas de contenu de remplissage (lorem ipsum). Si le contenu manque, laisse des `TODO:` explicites dans le frontmatter ou en commentaire HTML.
-- Ne touche jamais à `tailwind.config.ts` ni à `src/content/config.ts` sans escalader.
+- Ne touche jamais à `src/styles/global.css` (bloc `@theme` — il n'y a pas de `tailwind.config.ts`) ni à `src/content.config.ts` sans escalader.

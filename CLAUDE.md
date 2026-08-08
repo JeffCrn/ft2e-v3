@@ -14,7 +14,7 @@ Une **build Astro statique** fonctionnelle, déployée sur Vercel, qui :
 
 Ce qui n'est pas encore en place :
 
-- Pas de Decap CMS configuré (juste les Content Collections Astro + Zod, prêtes à recevoir Decap).
+- **Decap CMS est configuré** (`public/admin/config.yml`, cinq collections, backend GitHub via le proxy OAuth `api/auth.js` + `api/callback.js` sur Vercel) — il reste à le faire valider et prendre en main par FT2E. Toute modification d'un schéma Zod se répercute dans `config.yml` **au sein du même commit** (sous-agent `content-modeller`).
 - Pas de formulaire Contact branché (UI uniquement, sans backend).
 - Pas encore migré sur `ft2e.fr` (déploiement Vercel sur `ft2e-v3.vercel.app`).
 - **Indexation moteurs bloquée par triple sécurité** (robots.txt `Disallow: /`, meta `noindex` global, header HTTP `X-Robots-Tag`) tant que le site est en démo client. Procédure de revert exacte : `docs/19-migration-production.md`.
@@ -30,7 +30,7 @@ La spécification initiale (positionnement, sitemap, modèle de contenu, filtres
 |---|---|---|
 | Framework | Astro (génération statique) | 6.x |
 | Styling | Tailwind CSS | 4.x |
-| Langage | TypeScript strict | 5.x |
+| Langage | TypeScript strict | 6.x |
 | Polices | `@fontsource-variable/archivo` (axe wdth) + `@fontsource/ibm-plex-mono` | dernière |
 | Runtime build | Node.js | 20+ |
 | Hébergement | **Vercel** (déploiement continu via GitHub) | n/a |
@@ -113,7 +113,9 @@ Règles : 2 valeurs par composition (3 max) · une seule réserve profonde par �
 7. **Tout contenu = un `.md` dans `src/content/`.** Aucune donnée en dur.
 8. **Toute nouvelle page interne** utilise le composant `HeroPage` pour son hero — garantit la cohérence visuelle (hero clair, breadcrumb mono, titre d'écran en casse normale).
 9. **Tout `<script>` de composant Astro** qui appelle `addEventListener` doit s'initialiser via `document.addEventListener('astro:page-load', initX)` avec guard `dataset.bound`. Sinon le composant devient inerte après la première navigation View Transitions. Règle détaillée : `.claude/rules/astro-conventions.md` § « Scripts client & View Transitions ».
-10. **Indexation moteurs bloquée** tant que le site est en démo Vercel (`ft2e-v3.vercel.app`). Trois fichiers verrouillent le SEO : `public/robots.txt`, `vercel.json`, valeur par défaut de `noindex` dans `BaseLayout.astro`. **Ne PAS débloquer sans validation FT2E**. Procédure de revert détaillée : `docs/19-migration-production.md`.
+10. **Une fiche projet réelle porte son numéro d'affaire FT2E** (`reference`, graphie `NN-NNN`, relevé sur une pièce FT2E) ; `annee` est le millésime d'**ouverture** qu'encode ce numéro, `annee_livraison` la réception prononcée. **Ne jamais fabriquer un identifiant à partir d'un autre champ.** Détail : `.claude/rules/content-collections.md`.
+11. **Un build vert ne prouve pas que la page s'affiche.** Après toute modification de mise en page, de `global.css` ou du `.gitignore`, contrôler le **rendu** de la page touchée (`npm run preview` + capture). Tailwind v4 lit le `.gitignore` : un motif non ancré supprime silencieusement les classes d'un répertoire source. Détail : `.claude/rules/astro-conventions.md`.
+12. **Indexation moteurs bloquée** tant que le site est en démo Vercel (`ft2e-v3.vercel.app`). Trois fichiers verrouillent le SEO : `public/robots.txt`, `vercel.json`, valeur par défaut de `noindex` dans `BaseLayout.astro`. **Ne PAS débloquer sans validation FT2E**. Procédure de revert détaillée : `docs/19-migration-production.md`.
 
 ## Workflow
 
@@ -147,6 +149,10 @@ Règles : 2 valeurs par composition (3 max) · une seule réserve profonde par �
 | Glossaire BET | `docs/13-glossaire-bet.md` |
 | **Migration vers `ft2e.fr` (revert SEO inclus)** | **`docs/19-migration-production.md`** |
 | Faits vérifiés issus de la plaquette 2024 (références réelles, chiffres, qualifications) | `docs/20-source-plaquette-2024.md` |
+| **Chantier des 22 fiches références réelles** (programme, protocole, suivi) | **`docs/superpowers/plans/2026-08-07-chantier-references-reelles.md`** |
+| Version liminaire (historique de la première livraison) | `docs/14-version-liminaire.md` |
+| Pistes de production CMS | `docs/20-pistes-production-cms.md` (⚠ numéro 20 partagé avec la source plaquette) |
+| Script de la démonstration client du 2 juillet | `docs/21-script-demo-2-juillet.md` |
 
 ## Commandes disponibles
 

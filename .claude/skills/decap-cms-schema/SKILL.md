@@ -1,6 +1,6 @@
 ---
 name: decap-cms-schema
-description: Génère ou modifie la configuration Decap CMS (public/admin/config.yml) en cohérence stricte avec les schémas Zod de src/content/config.ts. À déclencher pour tout ajout/modification de collection ou de widget Decap.
+description: Génère ou modifie la configuration Decap CMS (public/admin/config.yml) en cohérence stricte avec les schémas Zod de src/content.config.ts. À déclencher pour tout ajout/modification de collection ou de widget Decap.
 ---
 
 # Skill : Decap CMS — schéma & config
