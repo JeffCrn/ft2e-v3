@@ -567,16 +567,21 @@ body {
      choses à la fois : la légende « en bas à gauche », et les équerres
      intactes — « repère de tirage, jamais un encadrement ». Elles ne
      peuvent donc pas se disputer l'angle.
-     La géométrie tranche : l'équerre occupe `--equerre-cote` à
-     `--equerre-retrait` du bord, la légende démarre donc une gouttière
-     plus loin et s'arrête à une gouttière du bord opposé. Elle partage la
-     ligne de pied des équerres sans jamais empiéter dessus, quelle que
-     soit sa longueur — le débordement se fait vers le haut, où aucune
-     équerre ne l'attend. */
+     La géométrie tranche, et elle est DÉRIVÉE des mesures de l'équerre,
+     jamais réglée à l'œil :
+     — horizontalement, la légende démarre une gouttière après le bord et
+       s'arrête une gouttière avant le bord opposé, dégageant les deux
+       équerres basses quelle que soit sa longueur (elle déborde vers le
+       haut, où aucune équerre ne l'attend) ;
+     — verticalement, sa base s'aligne sur le MILIEU de la barre verticale
+       des équerres basses : celle-ci court du haut de l'équerre jusqu'au
+       retrait, son centre est donc à `retrait + côté / 2` du bord bas.
+       La légende se pose ainsi dans l'équerre plutôt que sur sa ligne de
+       pied — l'angle reste lisible comme un repère de tirage. */
   .legende-media {
     position: absolute;
     left: var(--equerre-gouttiere);
-    bottom: var(--equerre-retrait);
+    bottom: calc(var(--equerre-retrait) + var(--equerre-cote) / 2);
     max-width: calc(100% - var(--equerre-gouttiere) * 2);
   }
 
