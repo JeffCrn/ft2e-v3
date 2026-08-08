@@ -31,7 +31,10 @@ assets/
 # CV de l'équipe — données personnelles, jamais commitées
 cv/
 
-# Fonds documentaire client (archives de références) — volumineux, jamais commité
-references/
+# Fonds documentaire client (archives de références) — volumineux, jamais commité.
+# Motif ANCRÉ à la racine (`/`) : sans la barre initiale, git — et surtout la
+# détection automatique de sources de Tailwind v4, qui lit ce fichier — ignore
+# AUSSI `src/pages/references/`, dont les classes cessent alors d'être générées.
+/references/
 
 .vercel
