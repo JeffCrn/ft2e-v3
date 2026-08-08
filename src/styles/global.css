@@ -69,6 +69,15 @@
 :root {
   /* Courbe unique du système (§ 14) */
   --ease-blueprint: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Géométrie des équerres d'image (§ 13) — mesures uniques du système,
+     employées à la fois par `CoinsCuivre` et par l'implantation de la
+     légende, pour que les deux ne puissent pas diverger. */
+  --equerre-cote: 18px;
+  --equerre-retrait: 5px;
+  /* Gouttière d'angle : la largeur qu'une légende doit laisser à l'équerre
+     pour ne pas l'avaler — retrait + côté + un retrait de respiration. */
+  --equerre-gouttiere: calc(var(--equerre-retrait) * 2 + var(--equerre-cote));
 }
 
 html {
@@ -554,6 +563,23 @@ body {
     text-transform: uppercase;
   }
 
+  /* Implantation de la légende sur un média (§ 13). La charte veut deux
+     choses à la fois : la légende « en bas à gauche », et les équerres
+     intactes — « repère de tirage, jamais un encadrement ». Elles ne
+     peuvent donc pas se disputer l'angle.
+     La géométrie tranche : l'équerre occupe `--equerre-cote` à
+     `--equerre-retrait` du bord, la légende démarre donc une gouttière
+     plus loin et s'arrête à une gouttière du bord opposé. Elle partage la
+     ligne de pied des équerres sans jamais empiéter dessus, quelle que
+     soit sa longueur — le débordement se fait vers le haut, où aucune
+     équerre ne l'attend. */
+  .legende-media {
+    position: absolute;
+    left: var(--equerre-gouttiere);
+    bottom: var(--equerre-retrait);
+    max-width: calc(100% - var(--equerre-gouttiere) * 2);
+  }
+
   /* Duotone réel appliqué à une photo : sandwich lighten/darken.
      Les ombres remontent au profond, les hautes lumières plafonnent au voile. */
   .duotone-photo {
@@ -562,7 +588,12 @@ body {
     isolation: isolate;
     background: var(--color-profond);
   }
-  .duotone-photo > img {
+  /* Le sandwich s'applique aussi à une carte embarquée : la charte ne
+     tolère « aucune image en couleurs d'origine, aucune image en gris
+     neutres » — le gris neutre est hors axe, donc hors système. Le voile
+     en `darken` est en `pointer-events: none`, la carte reste manipulable. */
+  .duotone-photo > img,
+  .duotone-photo > iframe {
     filter: grayscale(100%) contrast(1.05);
     mix-blend-mode: lighten;
   }

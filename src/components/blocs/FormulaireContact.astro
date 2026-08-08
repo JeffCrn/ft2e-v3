@@ -1,4 +1,6 @@
 ---
+import CoinsCuivre from '../primitives/CoinsCuivre.astro';
+
 const isLiminaire = import.meta.env.PUBLIC_MODE === 'liminaire';
 
 // Champs — charte v3 révision 2.1 (§ 11, amendement A5). Les états ne
@@ -170,12 +172,16 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
         </div>
 
         <div>
-          <iframe
-            title="Carte de localisation de FT2E — 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-1.2149345%2C46.1594398%2C-1.2029345%2C46.1654398&amp;layer=mapnik&amp;marker=46.1624398%2C-1.2089345"
-            class="w-full h-64 border border-filet-2"
-            loading="lazy"
-          ></iframe>
+          <div class="duotone-photo relative w-full h-64 border border-filet-2">
+            <iframe
+              title="Carte de localisation de FT2E — 35 Rue Nicolas Denys de Fronsac, 17000 La Rochelle"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-1.2149345%2C46.1594398%2C-1.2029345%2C46.1654398&amp;layer=mapnik&amp;marker=46.1624398%2C-1.2089345"
+              class="w-full h-full"
+              loading="lazy"
+            ></iframe>
+            <CoinsCuivre />
+            <span class="cartouche-legende legende-media z-10" aria-hidden="true">la rochelle — 35 rue nicolas denys de fronsac</span>
+          </div>
           <p class="mt-3 mono-data text-pivot">
             <a
               href="https://www.openstreetmap.org/?mlat=46.1624398&amp;mlon=-1.2089345#map=17/46.1624398/-1.2089345"
