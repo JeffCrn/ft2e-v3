@@ -5,7 +5,9 @@ typologie: Réhabilitation
 moa: "Congrégation de la Communauté du Chemin Neuf"
 lieu: "Sablonceaux (17600)"
 surface_m2: 3370
-annee: 2026
+reference: "22-042"
+annee: 2022
+annee_livraison: 2026
 performance: "SSI de catégorie A · alarme de type 1 · avis favorable à la réception (juin 2026)"
 mission_ft2e: [SSI]
 image_principale: "/images/projets/abbaye-sablonceaux-ssi/01.jpg"

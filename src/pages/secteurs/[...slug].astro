@@ -9,6 +9,7 @@ import CoinsCuivre from '../../components/primitives/CoinsCuivre.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 import FAQ from '../../components/blocs/FAQ.astro';
 import JsonLd from '../../components/seo/JsonLd.astro';
+import { parAffaireDecroissante } from '../../lib/projets';
 
 export async function getStaticPaths() {
   const secteurs = await getCollection('secteurs');
@@ -27,7 +28,7 @@ const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image));
 
 const projetsSecteur = (await getCollection('projets'))
   .filter((p) => p.data.secteur === titre)
-  .sort((a, b) => b.data.annee - a.data.annee);
+  .sort(parAffaireDecroissante);
 ---
 
 <PageLayout

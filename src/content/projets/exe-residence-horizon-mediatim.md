@@ -6,7 +6,8 @@ moa: "MP Rhapsody (groupe Mediatim) — mission FT2E pour Eustache Frères"
 architecte: "Lionel Coutier Architecte (La Rochelle)"
 lieu: "La Rochelle (17000)"
 surface_m2: 864
-annee: 2026
+reference: "25-097"
+annee: 2025
 statut: "en cours"
 performance: "RE2020"
 mission_ft2e: ["Études d'exécution", Thermique, CVC]

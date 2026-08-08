@@ -19,16 +19,22 @@ export async function getStaticPaths() {
 }
 
 const { projet } = Astro.props;
-const { titre, secteur, lieu, annee, performance, image_principale, image_principale_alt, demo } = projet.data;
+const { titre, secteur, lieu, annee, annee_livraison, reference, performance, image_principale, image_principale_alt, demo } = projet.data;
 const { Content } = await render(projet);
 
 const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_principale));
+
+// Jalons de l'affaire : ouverture (encodée dans le numéro d'affaire) et,
+// quand la réception est prononcée, livraison.
+const jalons = annee_livraison ? `affaire ${annee} · livraison ${annee_livraison}` : `affaire ${annee}`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CreativeWork',
   name: titre,
+  ...(reference ? { identifier: reference } : {}),
   dateCreated: String(annee),
+  ...(annee_livraison ? { temporalCoverage: `${annee}/${annee_livraison}` } : {}),
   locationCreated: {
     '@type': 'Place',
     name: lieu,
@@ -48,9 +54,9 @@ const jsonLd = {
       { label: 'Références', href: '/references' },
       { label: titre, href: `/references/${projet.id}` },
     ]}
-    eyebrow={`fiche d’affaire — ${secteur.toLowerCase()} — FT2E—${annee}`}
+    eyebrow={[`fiche d’affaire`, secteur.toLowerCase(), reference].filter(Boolean).join(' — ')}
     titre={titre}
-    sousTitre={`${lieu} · ${annee}`}
+    sousTitre={`${lieu} · ${jalons}`}
   />
 
   <section class="py-14 md:py-16">

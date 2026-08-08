@@ -6,7 +6,8 @@ moa: "Capsulae — groupe Innov’ia (La Rochelle)"
 architecte: "SD Architectes (Rochefort), mandataire du groupement de maîtrise d’œuvre"
 lieu: "La Rochelle (17000), zone Agrocéan"
 surface_m2: 476
-annee: 2026
+reference: "22-006"
+annee: 2022
 statut: en cours
 mission_ft2e: [CVC, "Électricité CFO", "Électricité CFA"]
 image_principale: "/images/projets/ateliers-pilotes-capsulae/01.jpg"

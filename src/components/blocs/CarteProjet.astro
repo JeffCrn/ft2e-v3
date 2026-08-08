@@ -13,11 +13,13 @@ interface Props {
 }
 
 const { projet } = Astro.props;
-const { titre, lieu, annee, demo, image_principale, image_principale_alt } = projet.data;
+const { titre, lieu, annee, reference, demo, image_principale, image_principale_alt } = projet.data;
 
 const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_principale));
 
-const reference = `FT2E—${annee}`;
+// Pied de vignette : numéro d'affaire quand il existe (fiches réelles),
+// millésime seul pour les fiches de démonstration.
+const cartouche = [reference ?? String(annee), lieu].join(' · ');
 ---
 
 <a href={`/references/${projet.id}`} class="group flex flex-col h-full plan-pose">
@@ -39,6 +41,6 @@ const reference = `FT2E—${annee}`;
     <h3 class="type-intitule text-encre text-[15px]">
       {titre}
     </h3>
-    <p class="mono-data text-pivot mt-1.5">{reference} · {lieu}</p>
+    <p class="mono-data text-pivot mt-1.5">{cartouche}</p>
   </div>
 </a>

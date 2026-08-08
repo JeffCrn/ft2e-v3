@@ -12,6 +12,11 @@
 
 - **Jamais de donnée inventée.** Toute valeur métier provient d'un document du dossier d'affaires, d'un docx sectoriel ou de `docs/20-source-plaquette-2024.md`. Info manquante = `TODO:` explicite ou omission — jamais d'à-peu-près.
 - **Le tag `[DÉMO]` ne s'applique qu'aux données non vérifiées.** Une fiche réelle sourcée n'en porte aucun (`demo: false`, valeur par défaut).
+- **Référence et millésimes** (règle instaurée le 2026-08-08 après audit — voir § Correction du 2026-08-08) :
+  - `reference` = **le numéro d'affaire FT2E**, graphie `NN-NNN`, obligatoire sur toute fiche réelle. `NN` = millésime d'ouverture, `NNN` = rang dans l'année. Il se relève **sur une pièce produite par FT2E** (« Affaire n° : 22-033 » en page de garde des synthèses et CCTP, « N° 21 061 » sur les devis, cartouche des plans) — le nom du dossier `C:\ft2e-arch\` le confirme mais ne fait pas foi seul. Se méfier des numéros d'affaire **des cotraitants** présents dans les mêmes pièces (ex. `22.03` = Cabinet Sourd sur l'affaire 22-006, `D-24050` = Diese sur 25-097).
+  - `annee` = **millésime d'ouverture de l'affaire**, celui qu'encode `reference`. Le build le vérifie (`superRefine` dans `src/content.config.ts`) : `22-042` impose `annee: 2022`. Ce n'est ni l'année de DCE, ni celle de la réception.
+  - `annee_livraison` = millésime de **réception prononcée**, optionnel, à ne renseigner **que si la réception est actée sur pièce** (PV, avis favorable). Interdit par le schéma quand `statut: en cours` — une livraison prévisionnelle ne s'affiche pas.
+  - Les fiches `demo: true` **ne portent jamais de `reference`** : un numéro fabriqué entrerait en collision avec une affaire réelle. La nomenclature affiche `—`.
 - **Secteurs autorisés** (enum Zod) : `Logements | Tertiaire / ERP | Industriel et commercial | Patrimoine | Monotechnique | Coordination SSI | Études d'exécution / BIM`.
 - **Récit en 4 sections** (`## L'enjeu`, `## Solution` ou variantes rédactionnelles, `## Particularités`, `## Résultat`) — gabarit `content-templates/projet-modele.md`, étalon `src/content/projets/creche-oranger-perigny.md`.
 - **Voix FT2E** : sobre, technique, chaleureuse — `.claude/rules/french-editorial.md` (typographie française stricte : espaces insécables, guillemets « », apostrophe typographique, `m²`, RT2012/RE2020 sans espace).
@@ -30,10 +35,35 @@
 - **Fiches en ligne** : 1 réelle (`creche-oranger-perigny.md`, ref_001) + 10 `[DÉMO]` (`demo: true`). Deux DÉMO seront **remplacées** par leur version réelle en cours de chantier (voir tableau) ; le sort des huit autres se décidera en fin de chantier avec FT2E.
 - **Précédent de session** : `references/ref_001/` (pièces sources de l'Oranger) — le modèle du dossier de travail par référence.
 
+## Correction du 2026-08-08 — référence d'affaire et millésimes
+
+Audit demandé par l'utilisateur après constat d'un biais systématique : les fiches affichaient toutes « FT2E—2026 ».
+
+**Cause.** Aucun champ de référence n'existait au schéma ; `FicheTechnique.astro` et `CarteProjet.astro` fabriquaient la chaîne `` `FT2E—${annee}` ``. Comme `annee` portait l'année de réception (2026 pour 8 des 9 fiches réelles), la « référence » était à la fois fausse et non discriminante. Effet de bord : les tris par `annee` (`/references`, `/secteurs/[slug]`, `ReferencesRecentes`, choix du projet `en_avant` de l'accueil) étaient indéterminés, et `dateCreated` du JSON-LD annonçait 2026 pour des affaires ouvertes dès 2020.
+
+**Vérification du système de numérotation** (hypothèse utilisateur confirmée sur pièce) : `NN-NNN` est le numéro d'affaire FT2E, `NN` = millésime d'ouverture. Preuves : « N° 21 061 » sur le devis de sous-traitance SSI du 11/10/2021 (dossier `21-061`), « Affaire n° : 22-033 » sur la synthèse RE2020 DCE (dossier `22-033`), « Affaire n° : 23-075 » sur les CCTP et la synthèse RT de la crèche de l'Oranger. Recoupement sur l'inventaire des 3 550 fichiers : pour les 22 dossiers, le corps des pièces démarre l'année du préfixe ; les rares antériorités sont des pièces reçues du MOA ou des fonds de plan réutilisés.
+
+**Correctifs appliqués** : champs `reference` et `annee_livraison` ajoutés au schéma avec garde-fous `superRefine` ; `annee` redéfini comme millésime d'ouverture ; les 6 occurrences de `FT2E—{annee}` remplacées par la référence réelle ; tri partagé et déterministe dans `src/lib/projets.ts` ; JSON-LD `identifier` + `temporalCoverage`. Reprise des 9 fiches réelles :
+
+| Fiche | `reference` | `annee` (était) | `annee_livraison` |
+|---|---|---|---|
+| `fougerou-sainte-marie-de-re` | 20-014 | 2020 (2026) | 2026 |
+| `ehpad-coulonges-sur-autize-ssi` | 21-061 | 2021 (2026) | 2026 |
+| `maison-relais-saint-jean-d-angely` | 21-098 | 2021 (2026) | — (en cours) |
+| `ateliers-pilotes-capsulae` | 22-006 | 2022 (2026) | — (en cours) |
+| `residence-intergenerationnelle-saint-agnant` | 22-033 | 2022 (2026) | — (en cours) |
+| `abbaye-sablonceaux-ssi` | 22-042 | 2022 (2026) | 2026 |
+| `creche-oranger-perigny` | 23-075 | 2023 (2024) | — (à confirmer, cf. ci-dessous) |
+| `siege-rese-aigrefeuille` | 24-003 | 2024 (2026) | — (en cours) |
+| `exe-residence-horizon-mediatim` | 25-097 | 2025 (2026) | — (en cours) |
+
+**Question ouverte (à porter en section B de la fiche de collecte ref_001)** : l'année de livraison de la crèche de l'Oranger. Son `annee: 2024` d'origine ne désignait ni l'ouverture (2023) ni la réception, mais **l'année du DCE** (« de juin à novembre 2024 » dans le récit) — troisième acception du même champ, symptôme de son absence de définition. Le champ est laissé vide en attendant la réponse FT2E ; le récit dit « livrée et en service » sans millésime.
+
 ## Protocole de session (déroulé complet, ~une référence)
 
 1. **Ouverture.** Lire ce plan (§ Contraintes, § Suivi), puis le prompt de session dans `references/sessions/session-NN-prompt.md`. Vérifier dans le tableau de suivi que la référence est bien « à faire ».
 2. **Dépouillement du dossier d'affaires.** Explorer `C:\ft2e-arch\<dossier>` (filtrer `references/inventaire-archives-2026.csv` sur la colonne `dossier_affaire` pour cibler). Pièces prioritaires, dans l'ordre : synthèse RT / étude thermique (version la plus récente), CCTP des lots FT2E, DPGF ou estimation, perspectives et photos, pièces marché (montants, calendrier). Lire les PDF avec l'outil Read (param `pages`).
+2 bis. **Relevé du numéro d'affaire.** Confirmer `NN-NNN` sur une pièce FT2E (page de garde d'une synthèse thermique ou d'un CCTP : « Affaire n° : … » ; devis : « N° … » ; cartouche de plan) et noter la pièce dans la fiche de collecte. En déduire `annee`. Si le numéro relevé contredit le nom du dossier, **le signaler** et trancher sur la pièce.
 3. **Constitution du dossier de travail.** Copier les 3 à 8 pièces sources décisives dans `references/ref_NNN/` (numérotation continue : ref_002, ref_003…). C'est la traçabilité de chaque affirmation de la fiche.
 4. **Croisement commercial.** Retrouver le projet dans les docx de `references/docs_references/` (pandoc `-t markdown` si besoin) et dans `docs/20-source-plaquette-2024.md` : MOA, architecte, montant, surfaces, année, référence environnementale. En cas de conflit entre sources, la pièce du dossier d'affaires fait foi ; noter le conflit.
 5. **Fiche de collecte préremplie** (livrable client). Créer `references/ref_NNN/fiche-collecte-<slug>.md` calquée sur le PDF : section A complète, section A+ (données techniques extraites, chiffrées, sourcées pièce par pièce), sections B / C / D / E laissées en questions pour l'équipe FT2E.
@@ -61,6 +91,9 @@ protocole intégralement pour la référence ci-dessous.
 - Dossier de travail à créer : references/ref_NNN/
 - Slug cible : <slug> (vérifier la disponibilité)
 - Secteur pressenti : <secteur enum> · Typologie : <typologie> · Statut : <livré|en cours>
+- Frontmatter imposé : `reference: "<NN-NNN>"` · `annee: <20NN>` (millésime d'ouverture,
+  vérifié au build contre la référence) · `annee_livraison` seulement si réception
+  prononcée sur pièce — à relever à l'étape 2 bis sur un document FT2E
 - Fiche DÉMO à remplacer : <chemin | aucune>
 
 ## Ce qu'on sait déjà (sources commerciales — à confirmer par les pièces)

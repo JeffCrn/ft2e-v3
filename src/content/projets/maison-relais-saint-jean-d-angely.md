@@ -6,7 +6,8 @@ moa: "SOLIHA Bâtisseur de Logement d’Insertion Nouvelle-Aquitaine"
 architecte: "Agence Sébastien Pellereau (La Rochelle)"
 lieu: "Saint-Jean-d’Angély (17400)"
 surface_m2: 1050
-annee: 2026
+reference: "21-098"
+annee: 2021
 statut: en cours
 performance: "RT existant « globale » · consommation projetée −38 % par rapport à l’existant"
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", "Études d'exécution"]

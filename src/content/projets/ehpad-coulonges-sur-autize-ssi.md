@@ -6,7 +6,9 @@ moa: "3F Résidences — Groupe Action Logement"
 architecte: "ABP Architectes (La Rochelle)"
 lieu: "Coulonges-sur-l’Autize (79160)"
 surface_m2: 5250
-annee: 2026
+reference: "21-061"
+annee: 2021
+annee_livraison: 2026
 performance: "SSI de catégorie A · alarme de type 1 · avis favorable à la réception (2026)"
 mission_ft2e: [SSI]
 image_principale: "/images/projets/ehpad-coulonges-sur-autize-ssi/01.jpg"

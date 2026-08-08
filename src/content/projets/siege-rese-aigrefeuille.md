@@ -6,7 +6,8 @@ moa: "RESE — régie d’exploitation des services d’Eau 17"
 architecte: "Agence BTB — Blanchard Tetaud Blanchet (La Rochelle)"
 lieu: "Aigrefeuille-d’Aunis (17290)"
 surface_m2: 600
-annee: 2026
+reference: "24-003"
+annee: 2024
 statut: en cours
 performance: "RT existant, élément par élément · ITE murs et toiture"
 mission_ft2e: ["Audit & diagnostic", CVC, "Électricité CFO", "Électricité CFA", SSI]

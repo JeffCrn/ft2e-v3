@@ -12,11 +12,14 @@ interface Props {
 }
 
 const { projet } = Astro.props;
-const { secteur, typologie, moa, architecte, lieu, surface_m2, annee, mission_ft2e, demo } = projet.data;
+const { secteur, typologie, moa, architecte, lieu, surface_m2, annee, annee_livraison, reference, mission_ft2e, demo } = projet.data;
 
 const lignes = [
-  { label: 'référence', valeur: `FT2E—${annee}`, rang: 'encre' },
+  // La référence est le numéro d'affaire FT2E (NN-NNN) ; « année » en est le
+  // millésime d'ouverture, la réception se lit sur la ligne « livraison ».
+  { label: 'référence', valeur: reference, rang: 'encre' },
   { label: 'année', valeur: String(annee), rang: 'encre' },
+  { label: 'livraison', valeur: annee_livraison ? String(annee_livraison) : undefined, rang: 'encre' },
   { label: 'lieu', valeur: lieu, rang: 'encre' },
   { label: "maître d’ouvrage", valeur: moa, rang: 'pivot' },
   { label: 'architecte', valeur: architecte, rang: 'pivot' },

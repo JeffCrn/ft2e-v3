@@ -27,6 +27,7 @@ Tout contenu textuel ou structuré du site vit comme un fichier Markdown dans `s
 - **YAML** uniquement, jamais TOML.
 - Champs **obligatoires** vs **optionnels** clairement marqués dans le Zod schema (`z.string()` vs `z.string().optional()`).
 - **Dates en ISO 8601** (`2024-06-15`).
+- **Fiches projet — référence et millésimes.** `reference` porte le **numéro d'affaire FT2E** en graphie `NN-NNN` (`NN` = millésime d'ouverture, `NNN` = rang dans l'année) : c'est le seul identifiant publiable, relevé sur une pièce FT2E (« Affaire n° : 22-033 », cartouche de plan) et jamais sur le seul nom de dossier. Il est **obligatoire dès que `demo: false`** et **interdit sur une fiche de démonstration** (un numéro fabriqué entrerait en collision avec une affaire réelle). `annee` est le millésime d'ouverture qu'encode la référence — le build refuse toute contradiction ; l'année de réception va dans `annee_livraison`, à ne renseigner qu'une fois la réception prononcée sur pièce (le schéma l'interdit quand `statut: en cours`). Ne **jamais** dériver un identifiant d'affichage depuis `annee` : c'est le défaut corrigé le 2026-08-08.
 - Listes en YAML inline `[CVC, Électricité, BIM]` quand courtes, sinon en bloc `-`.
 
 ## Validation stricte

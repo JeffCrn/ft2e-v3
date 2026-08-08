@@ -6,7 +6,8 @@ moa: "SCA Foncière d’Habitat et Humanisme"
 architecte: "Agence Sébastien Pellereau (La Rochelle)"
 lieu: "Saint-Agnant (17620)"
 surface_m2: 870
-annee: 2026
+reference: "22-033"
+annee: 2022
 statut: en cours
 performance: "RE2020 · Cep 84,8 kWhep/m²/an · 18 % sous l’exigence"
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", Photovoltaïque]

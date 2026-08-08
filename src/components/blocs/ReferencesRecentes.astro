@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import CarteProjet from './CarteProjet.astro';
+import { parAffaireDecroissante } from '../../lib/projets';
 
 // Section des références récentes — charte v3 : titre de section à puce
 // profonde, plans posés (CarteProjet) en grille sur la trame.
@@ -13,7 +14,7 @@ const { numero } = Astro.props;
 
 const projets = (await getCollection('projets'))
   .filter((p) => p.data.en_avant)
-  .sort((a, b) => b.data.annee - a.data.annee)
+  .sort(parAffaireDecroissante)
   .slice(0, 4);
 ---
 

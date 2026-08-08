@@ -6,7 +6,8 @@ moa: "UDAF de la Charente-Maritime"
 architecte: "Agence Sébastien Pellereau (La Rochelle)"
 lieu: "Périgny (17180)"
 surface_m2: 157
-annee: 2024
+reference: "23-075"
+annee: 2023
 performance: "RT2012 · Cep 69,3 kWhep/m²/an · 29 % sous l’exigence"
 mission_ft2e: [Thermique, "Électricité CFO", "Électricité CFA", Photovoltaïque, CVC]
 image_principale: "/images/projets/creche-oranger-perigny/01.jpg"

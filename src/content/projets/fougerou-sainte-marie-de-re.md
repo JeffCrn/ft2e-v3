@@ -6,7 +6,9 @@ moa: "Coopérative Vendéenne du Logement"
 architecte: "Agence Sébastien Pellereau (La Rochelle)"
 lieu: "Sainte-Marie-de-Ré (17740)"
 surface_m2: 4590
-annee: 2026
+reference: "20-014"
+annee: 2020
+annee_livraison: 2026
 performance: "RT2012 · NF Habitat HQE 1 point · Cep de 14 à 36 % sous l’exigence"
 mission_ft2e: [CVC, Thermique, "Électricité CFO", "Électricité CFA", "Études d'exécution"]
 image_principale: "/images/projets/fougerou-sainte-marie-de-re/01.jpg"

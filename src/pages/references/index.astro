@@ -5,6 +5,7 @@ import path from 'node:path';
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
+import { parAffaireDecroissante, libelleReference } from '../../lib/projets';
 
 // Index des affaires — charte v3 : une nomenclature, pas une grille de cartes.
 // Le rang de statut est porté par l'OPACITÉ du filet gauche 1 px
@@ -12,7 +13,7 @@ import CtaFinal from '../../components/blocs/CtaFinal.astro';
 // l'intitulé (700 / 600 / 300), à chasse constante 112. Le statut est
 // affiché en mono-label. Toutes les lignes sont sur une seule page ;
 // le filtre réduit la liste, il ne pagine pas.
-const projets = (await getCollection('projets')).sort((a, b) => b.data.annee - a.data.annee);
+const projets = (await getCollection('projets')).sort(parAffaireDecroissante);
 
 // Les sept secteurs d'activité, lus dans la collection `secteurs` (triée
 // par ordre) — la même source que la section « secteurs » de l'accueil :
@@ -112,7 +113,7 @@ const lignes = projets.map((projet) => ({
                     {projet.data.titre}
                   </span>
                   <span class="md:hidden mono-data text-[11px] text-pivot block mt-0.5">
-                    {projet.data.secteur} · {rang.statut} · FT2E—{projet.data.annee}
+                    {projet.data.secteur} · {rang.statut} · {libelleReference(projet)}
                     {projet.data.demo && <span class="mono-label font-normal text-[10px]"> [démo]</span>}
                   </span>
                 </span>
@@ -121,7 +122,7 @@ const lignes = projets.map((projet) => ({
                   {projet.data.demo && <span class="mono-label font-normal text-[10px] block">[démo]</span>}
                 </span>
                 <span class="hidden md:block mono-label font-normal text-[10px] text-pivot">{rang.statut}</span>
-                <span class="hidden md:block mono-data text-[12px] text-encre">FT2E—{projet.data.annee}</span>
+                <span class="hidden md:block mono-data text-[12px] text-encre">{libelleReference(projet)}</span>
                 <span class="mono-data text-[12px] text-pivot md:text-right row-start-1 col-start-2 md:row-auto md:col-auto">{projet.data.annee}</span>
               </a>
             </li>
