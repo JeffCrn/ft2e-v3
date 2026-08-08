@@ -2,7 +2,9 @@
 
 **Scope** : tout fichier utilisant Tailwind (`.astro`, `.tsx`, `.html`).
 
-**Référence** : « FT2E Charte graphique » document 10 · révision 2 (août 2026), bundle `branding-v3/` — remplace la révision 1 (charte v2 monochrome, `branding-v2/`). Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
+**Référence** : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026), bundle `branding-v3-bis/` — remplace la révision 2 (`branding-v3/`) et la révision 1 (`branding-v2/`). La 2.1 conserve la structure de la 2 et corrige **huit prescriptions** consignées à son § 16 (registre des amendements) : elles sont reportées ci-dessous sous les repères A1 à A8. Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
+
+**Autorité** : en cas de contradiction entre la charte et un support existant, la charte prévaut. En cas de contradiction interne à la charte, **la mesure prévaut sur la règle**.
 
 ## Principe directeur
 
@@ -16,8 +18,8 @@
 |---|---|---|---|
 | `profond` | `#001718` | Profond | **réserve — 1/5 max, une apparition par écran** : ligne encrée (relevés), duotone des images, couverture, puce de section ; texte vedette sur papier (17,5:1) |
 | `encre` | `#00393a` | Encre | toute la lecture : titres, corps, aplat du bouton principal, chip actif — et l'encre translucide des filets et des ombres |
-| `pivot` | `#336667` | Vert FT2E (valeur client) | données, dates, mentions, corps secondaire sur clair (6,1:1), focus ring — **jamais en texte sur profond** (3,67:1, toléré en filet/aplat seulement) |
-| `clair` | `#99cccd` | Clair (valeur client) | texte sur fond profond/encre (10,4:1 / 7,2:1) ; **sur papier : filets, aplats et complément des titres de section uniquement** (1,62:1 — décor, jamais porteur de sens) |
+| `pivot` | `#336667` | Pivot | données, dates, mentions, chapô, chiffres de relevé en retrait (A1), anneau de focus en polarité claire — **jamais en texte NI en filet porteur sur profond** (2,85:1, A3 : aplat décoratif seulement). *La révision 2 nommait cette valeur « vert FT2E » ; le nom laissait entendre un accent de marque, que la décision 2 refuse.* |
+| `clair` | `#99cccd` | Clair | corps, étiquettes et **anneau de focus** sur fond profond (10,45:1) ; **sur papier : filets, aplats et complément des titres de section uniquement** (1,67:1 — décor `aria-hidden` obligatoire, A2) |
 | `voile` | `#e1f4f4` | Voile | pôle clair du duotone ; titres, chiffres et équerres **sur réserve profonde uniquement** — jamais sur papier ni calcaire |
 | `papier` | `#f7f9fa` | Papier (neutre) | la planche de page (max 1440 px) et les plans posés ; fond des cellules au survol |
 | `calcaire` | `#edf0f2` | Calcaire (neutre) | le fond sous la planche de page ; cellules de liste au repos, blocs de rappel, en-têtes de tableau — **jamais le voile sur le calcaire** (iso-clairs) |
@@ -26,16 +28,18 @@
 
 | Token | Valeur | Emploi |
 |---|---|---|
-| `filet-1` | `rgba(0,57,58,.22)` | rang 1 : porteur, contour appuyé, bordure de cellule, statut livré |
-| `filet-2` | `rgba(0,57,58,.16)` | rang 2 : bordure de plan, séparateur de colonnes, statut en cours |
-| `filet-3` | `rgba(0,57,58,.12)` | rang 3 : indication, note, statut archive |
-| `filet-chip` | `rgba(0,57,58,.28)` | étiquette de mission, chip de filtre, bouton filaire |
+| `filet-1` | `#00393a38` | rang 1 : porteur, contour appuyé, bordure de cellule, statut livré — encre 22 % |
+| `filet-2` | `#00393a29` | rang 2 : bordure de plan, séparateur de colonnes, statut en cours — encre 16 % |
+| `filet-3` | `#00393a1f` | rang 3 : indication, note, statut archive — encre 12 % |
+| `filet-chip` | `#00393a47` | étiquette de mission, chip de filtre, bouton filaire — encre 28 % |
+| `filet-clair-1` | `#99cccd59` | filet porteur **en polarité profonde** — clair 35 % (le pivot y est interdit) |
+| `filet-clair-2` | `#99cccd2e` | filet de séparation en polarité profonde — clair 18 % |
 
-**L'épaisseur ne porte plus le rang : tous les filets font 1 px.** Trois exceptions dessinées, à valeur pleine : le filet clair 3 px du bouton principal et de la ligne encrée, et le filet bas 1 px encre plein de la page courante en navigation. `line`/`line-strong` sont des aliases repointés (16 / 22 %) — valides au build, interdits dans le nouveau code.
+**L'épaisseur ne porte pas le rang : tous les filets font 1 px.** Elle ne sert qu'aux **états** (§ 11 : erreur = 2 px). Trois exceptions dessinées, à valeur pleine : le filet clair 3 px du bouton principal, de la ligne encrée et du bandeau de succès, et le filet bas 1 px encre plein de la page courante en navigation. `line`/`line-strong` ont été **supprimés** (§ 17, hygiène du dépôt).
 
 ### Les cinq règles
 
-1. **Une seule teinte** : aucune valeur hors rampe 197° (chroma ≤ 0,055), y compris héritée — le cuivre n'existe plus, tous les anciens tokens (`copper`, `marine`, `slate`, `mist`, `apple-blue`…) sont des aliases repointés, interdits dans le nouveau code.
+1. **Une seule teinte** : aucune valeur hors rampe 197° (chroma ≤ 0,055), y compris héritée. **Hygiène du dépôt (§ 17)** : les anciens jetons (`copper`, `marine`, `slate`, `mist`, `apple-blue`, `line`…) ont été **supprimés de `global.css`**, pas repointés — un jeton nommé d'après une identité antérieure survivrait à la charte. Aucune valeur hexadécimale ne s'écrit en dur dans un composant : elle passe par un jeton, ou elle n'existe pas. *Exception mesurée : `papier` et `calcaire`, à chroma 0,003 et 0,004, ne se régénèrent pas depuis l'axe — ils se saisissent en dur dans le bloc `@theme`.*
 2. **Aucune couleur d'accent** : chaque valeur du système se lit ; deux valeurs par composition, trois au maximum.
 3. **L'état par défaut est clair** : une seule réserve profonde par écran (`bg-profond` / `.plan-encre`), 1/5 de la surface max — une page encrée sur quarante.
 4. **La profondeur remplace l'ornement** : trois rangs d'ombre à l'encre translucide (`--shadow-plan-1/2/3`) plus l'ombre de page (`--shadow-page`) — aucun autre effet, aucun dégradé coloré, aucune lueur, aucune ombre teintée hors encre.
@@ -43,20 +47,41 @@
 
 Garde-fous de contraste : jamais de vert FT2E en texte sur profond ; jamais de voile sur calcaire ni de calcaire sur voile ; le clair sur papier n'est jamais porteur de sens.
 
-## Échelle de titrage — sept rangs
+## Échelle de titrage — sept rangs (révision 2.1)
 
-| Rang | Classe | Corps | wdth | Graisse | Casse — emploi |
-|---|---|---|---|---|---|
-| Vedette | `.type-display` | clamp(3rem, 7.5vw, 6.5rem), lh 0,92 | 125 | 700 | capitales — **accueil uniquement, une par page** |
-| Titre d'écran | `.type-ecran` | clamp(2.25rem, 5vw, 3.875rem), lh 1,02 | 100 | 600 | **casse normale, jamais capitales** — h1 des pages internes (`HeroPage`) |
-| Section | `.type-section` (= `.type-h2`) | 22–26 px | 118 | 700 | capitales — puce 7 px + mot porteur encre + « /complément » clair |
-| Intitulé | `.type-intitule` | 17–20 px | 112 | 600 | capitales — carte, cellule, ligne de tableau |
-| Corps | (défaut body) | 15–17 px, lh 1,6, 52–68 signes | 100 | **300** | paragraphes — trois graisses Archivo seulement : 300/600/700 |
-| Étiquette | `.mono-label` | 11/10 px, 0,14 em | mono | 500 | capitales — jamais plus grand, jamais en texte courant |
-| Relevé | `.releve-chiffre` | clamp(3.5rem, 7vw, 5.75rem), lh 1, ls −0,04 em | 118 | 700 | chiffres tabulaires |
+Sept rangs, pas huit. Chacun se distingue du précédent par **au moins deux paramètres** (corps et chasse, ou chasse et graisse), de sorte qu'aucune confusion ne soit possible à la lecture rapide.
 
-- **IBM Plex Mono** (400/**500/600**) : tout ce qui est mesuré, référencé ou daté — `.mono-data` 13 px tabulaire pour les données. Le mono jamais en texte courant ; l'Archivo jamais en cote ni référence d'affaire.
-- `.type-annexe` (72/600) est un legacy v2 conservé pour l'existant : la v3 hiérarchise par la graisse et l'opacité, plus par la chasse réduite.
+| Rang | Classe | Corps | Chasse | Graisse | Interl. | Casse — emploi |
+|---|---|---|---|---|---|---|
+| Vedette | `.type-display` | 104 (clamp 3–6,5 rem) | 125 | 700 | 0,92 | capitales — **accueil uniquement, une par page** |
+| Titre d'écran | `.type-ecran` | 62 (clamp 2,25–3,875 rem) | 100 | 600 | 1,02 | **casse normale, jamais capitales** — h1 des pages internes (`HeroPage`) |
+| Section | `.type-section` (= `.type-h2`) | 26 | 118 | 700 | 1,10 | capitales — puce 7 px + mot porteur encre + « /complément » clair `aria-hidden` |
+| Intitulé | `.type-intitule` | 17–20 | 112 | 600 | 1,15 | capitales — carte, cellule, ligne de tableau |
+| Corps | (défaut `body`) | 15–17 | 100 | **400** | 1,60 | 52 à 68 signes par ligne — **amendement A7** |
+| Chapô | `.type-chapo` | 19–22 | 100 | **300** | 1,50 | casse normale, **en pivot**, trois lignes au plus — rang nouveau de la 2.1, seul emploi de la graisse 300 |
+| Étiquette | `.mono-label` | 10–11 | mono | 500 | 1,20 | capitales, 0,14 em — jamais plus grand, jamais en texte courant |
+| Relevé | `.releve-chiffre` | 96 (clamp 3,5–5,75 rem) | 118 | 700 | 1,00 | chiffres tabulaires obligatoires |
+
+**Quatre graisses, pas trois** (amendement A7) : 300 (chapô), 400 (corps), 600 (titre d'écran, intitulé), 700 (vedette, section, relevé). La révision 2 composait le corps en 300 ; la 2.1 le porte à 400 et réserve la 300 au chapô.
+
+- **IBM Plex Mono** (400/500/600) : tout ce qui se **mesure**, se **référence**, se **signale** — étiquettes, cotes, surfaces, dates, numéros d'affaire, légendes d'image, navigation. Toujours en capitales, 0,14 em sous 12 px. **Jamais en texte courant** ; l'Archivo jamais en cote ni référence d'affaire.
+- **Substitution** (gabarit imposé, courrier bureautique) : **Arial** en normale ou grasse, sans variation de chasse ; **Consolas** ou **Menlo** pour le mono. Aucune autre, et **aucun serif**.
+- `.type-annexe` (chasse 72) a été **supprimé** : la 2.1 ne compte que sept rangs, et la hiérarchie passe par la graisse et l'opacité.
+
+## Les huit amendements de la révision 2.1 (§ 16)
+
+| № | Objet | Révision 2 | Révision 2.1 — ce qui s'applique |
+|---|---|---|---|
+| A1 | Retrait des chiffres | chiffres secondaires en encre 13 % | **au pivot** (`.releve-retrait`) — l'encre 13 % donne `#D7E0E1`, soit 1,27 sur papier |
+| A2 | Complément de titre | second mot en clair | **`aria-hidden="true"` obligatoire**, aucune information exclusive (1,67) |
+| A3 | Pivot sur profond | 3,67, toléré en filet | **2,85** — interdit en texte **et en filet porteur**, aplat décoratif seulement |
+| A4 | Focus visible | non traité | **pivot en polarité claire, clair en polarité profonde** |
+| A5 | États de formulaire | non traité | épaisseur du filet + marque de forme + mot (`.champ`, `.message-erreur`, `.bandeau-succes`) |
+| A6 | Liens en texte | non traité | **encre + soulignement 1 px, 2 px au survol, aucun changement de couleur** (`.lien-texte`) |
+| A7 | Graisse du corps | corps en 300, trois graisses | **corps en 400, chapô en 300, quatre graisses** |
+| A8 | Légende sur image | « dans la valeur opposée au fond » | **cartouche de réserve** (`.cartouche-legende`, voile sur profond, 16,24) — inapplicable sur photographie. Équerres toujours en voile |
+
+**Lecture retenue sur le comptage des réserves** : le cartouche de légende et le fond profond du duotone **ne comptent pas** dans la règle « une seule réserve profonde par écran ». Cette règle borne une **surface** (un cinquième d'écran au maximum : couverture, relevé, panneau, bandeau de section) ; or la charte range le duotone parmi les emplois du profond tout en autorisant un relevé encré sur le même écran, et l'amendement A8 **impose** le cartouche. Une fiche projet porte donc légitimement, ensemble : un duotone, un cartouche de légende et une ligne encrée. Ne pas « corriger » cette coexistence.
 
 ## Plans et profondeur — trois rangs d'ombre
 
@@ -81,18 +106,18 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
 
 ## Composants signature
 
-- **Bouton principal** `.btn-principal` (alias `.btn-blueprint-dark`) : **aplat encre**, texte papier mono 11/500, **filet clair 3 px à gauche**, padding 15/20, hover → profond 260 ms, flèche `→` admise. **Le filet ne bouge pas.**
-- **Bouton filaire** `.btn-filaire` (alias `.btn-blueprint`) : 1 px à 28 % d'encre, texte pivot, hover → encre. Sur réserve profonde : `.btn-blueprint-solid` (filaire clair — le vert FT2E est interdit en texte sur profond).
+- **Bouton principal** `.btn-principal` : **aplat encre**, texte papier mono 11/500, **filet clair 3 px à gauche**, padding 15/20, hover → profond 260 ms, flèche `→` admise. **Le filet ne bouge pas.**
+- **Bouton filaire** `.btn-filaire` : 1 px à 28 % d'encre, texte pivot, hover → encre. Sur réserve profonde : `.btn-profond` (filaire clair — le pivot est interdit en texte et en filet porteur sur profond, 2,85).
 - **Étiquette de mission** `.etiquette-mission` : mono 10 px, 0,12 em, filet 1 px 28 %, **jamais d'aplat, six max par bloc**. **Chip de filtre** `.chip-blueprint` : même dessin ; actif = aplat encre / texte papier (`aria-pressed`).
 - **Cellule de liste** `.cellule-liste` : calcaire, bordure 1 px `filet-1`, min-h 112 px, **numéro mono en tête, intitulé (112/600) en pied aligné à droite**, hover → papier 300 ms.
 - **Titre de section** : puce profonde 7 px + numéro `mono-label` pivot, puis `type-section` — mot porteur encre + complément clair précédé d'une barre oblique. Le mot porteur doit suffire au sens (le complément clair est toujours redondant ou accessoire — dérogation décorative documentée dans `accessibility-rgaa.md`).
 - **Cartouche** (`FicheTechnique.astro`) : plan posé (bordure 1 px, ombre rang 1), en-tête calcaire, filets internes 1 px par rangs d'opacité, données mono. **La barre de rang 4 px n'existe plus.** Calé à gauche, jamais centré.
 - **Nomenclature** (`/references`) : liste tabulaire, pas une grille de cartes. Rang par **opacité du filet gauche 1 px** (livré 22 % · en cours 16 % · archive 12 %) et **graisse de l'intitulé** (700/600/300). Plus de 4/2/1 px. Tout sur une page, la recherche filtre les lignes.
-- **Relevé clair** (`ChiffresCles`) : colonnes séparées par filets 1 px `filet-2`, bord haut `filet-1` ; par colonne : commentaire (Archivo 300, 14 px, pivot — **le commentaire précède le chiffre**) → étiquette mono « — libellé » → chiffre `.releve-chiffre`. **Un seul chiffre en encre pleine par relevé** (celui que la page défend), les autres en `.releve-retrait` (encre 13 %).
+- **Relevé clair** (`ChiffresCles`) : colonnes séparées par filets 1 px `filet-2`, bord haut `filet-1` ; par colonne : commentaire (Archivo 400, 14 px, pivot — **le commentaire précède le chiffre**) → étiquette mono « — libellé » → chiffre `.releve-chiffre`. **Un seul chiffre en encre pleine par relevé** (celui que la page défend), les autres en `.releve-retrait` — **au pivot** (amendement A1), jamais en encre 13 % (1,27 sur papier).
 - **Relevé encré** (fiche projet) : `.plan-encre`, chiffres `.releve-chiffre text-voile`, étiquettes `mono-label text-clair` — la réserve profonde de l'écran.
 - **Monogramme** (`Logo.astro`) : dessin inchangé (cadre ouvert + flux débordant) ; **hauteur minimale 28 px** à l'écran ; sous 180 px de place : `forme="cadre"`. Ne se déforme pas, ne reçoit ni ombre ni contour ; le débord ne se recadre jamais.
 - **Équerres** (`CoinsCuivre.astro`) : 4 équerres 1 px au voile, **18 px de côté**, en retrait de 5 px dans les angles du média. Repère de tirage, pas un encadrement — jamais de cadre autour d'une image.
-- **Images** : tout passe au duotone 197° (point noir `#001718`, point blanc `#E1F4F4`, gamma neutre) via `duotone-photo` / `duotone-media` (hachure placeholder). Jamais de couleurs natives, max 2 annotations mono par image.
+- **Images** : tout passe au duotone 197° (point noir `#001718`, point blanc `#E1F4F4`, gamma neutre) via `duotone-photo` / `duotone-media` (hachure placeholder). Jamais de couleurs natives, **deux annotations mono au maximum par image**. Toute **légende** se pose dans un cartouche de réserve `.cartouche-legende` (voile sur profond, 16,24) et jamais à même le cliché (amendement A8) ; les équerres restent en voile sur l'image.
 
 ## Interactions & motion
 
@@ -130,7 +155,7 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
   </div>
   <div class="px-6 py-5 border-l border-filet-2">
     …
-    <p class="releve-chiffre releve-retrait mt-2">7</p>    <!-- les autres, en retrait (encre 13 %) -->
+    <p class="releve-chiffre releve-retrait mt-2">7</p>    <!-- les autres, en retrait AU PIVOT (A1) -->
   </div>
 </div>
 
@@ -144,7 +169,7 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
 <div class="shadow-lg">…</div>                        <!-- ombre hors des trois rangs (+ planche de page) -->
 <div class="rounded-lg">…</div>                       <!-- rayon 0 partout, sauf .puce-section -->
 <div class="border-l-4 border-encre">…</div>          <!-- le rang ne passe plus par l'épaisseur -->
-<p class="text-clair">Texte porteur sur papier</p>    <!-- clair jamais porteur sur fond clair (1,62:1) -->
+<p class="text-clair">Texte porteur sur papier</p>    <!-- clair jamais porteur sur fond clair (1,67:1), et toujours aria-hidden -->
 <div class="bg-profond"><p class="text-pivot">…</p></div> <!-- vert FT2E interdit en texte sur profond -->
 <section class="bg-profond">…</section> <!-- ×2 sur un même écran : une seule réserve profonde -->
 <div style="transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1)">…</div> <!-- ancienne courbe v2 -->

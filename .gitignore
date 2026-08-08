@@ -25,8 +25,17 @@ Thumbs.db
 
 # Local screenshots & working artifacts (never commit)
 /*.png
-.playwright-mcp/
-assets/
+/.playwright-mcp/
+/assets/
+
+# Bundles de charte graphique reçus du studio (volumineux, non versionnés).
+# Motifs ANCRÉS : sans la barre initiale, Tailwind cesserait de scanner un
+# répertoire source homonyme (cf. .claude/rules/astro-conventions.md).
+/branding-v2/
+/branding-v3/
+/branding-v3-bis/
+/brandig-systyem-test/
+/plaquette/
 
 # CV de l'équipe — données personnelles, jamais commitées
 cv/

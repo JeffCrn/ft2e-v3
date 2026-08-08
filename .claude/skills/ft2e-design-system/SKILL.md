@@ -1,6 +1,6 @@
 ---
 name: ft2e-design-system
-description: Source de vérité du design system FT2E v3 — charte « Ingénierie de l'invisible » révision 2 « plans et profondeur » (monochrome 197°, aucun accent, relief par trois rangs d'ombre à l'encre translucide), typographie Archivo (graisses 300/600/700, wdth 62–125) + IBM Plex Mono, trame 28 px, filets 1 px par opacité, titre d'écran en casse normale, bouton plein encre, relevés à un seul chiffre plein, courbe unique cubic-bezier(0.2, 0.7, 0.2, 1), rapports 21:8/16:10/3:2. À consulter à chaque création de composant ou de page pour garantir la cohérence visuelle. Déclenche-toi sur toute mention de couleur, typo, espacement, hero, CTA, bouton, lien, cartouche, duotone, nomenclature, monogramme, plan, ombre, trame, cellule, relevé.
+description: Source de vérité du design system FT2E v3 — charte « Ingénierie de l'invisible » révision 2.1 « plans et profondeur » (monochrome 197°, aucun accent, relief par trois rangs d'ombre à l'encre translucide, huit amendements A1–A8), typographie Archivo (graisses 300/400/600/700, wdth 62–125) + IBM Plex Mono, trame 28 px, filets 1 px par opacité, titre d'écran en casse normale, chapô en pivot, bouton plein encre, relevés à un seul chiffre plein au pivot, focus par polarité, états de formulaire sans couleur, courbe unique cubic-bezier(0.2, 0.7, 0.2, 1), rapports 21:8/16:10/3:2. À consulter à chaque création de composant ou de page pour garantir la cohérence visuelle. Déclenche-toi sur toute mention de couleur, typo, espacement, hero, CTA, bouton, lien, cartouche, duotone, nomenclature, monogramme, plan, ombre, trame, cellule, relevé.
 ---
 
 # Skill : FT2E Design System — charte v3 « plans et profondeur » (monochrome 197°)
@@ -11,11 +11,11 @@ description: Source de vérité du design system FT2E v3 — charte « Ingénier
 2. `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md` — spec d'application, avec la table de traduction v2 → v3.
 3. `src/styles/global.css` (`@theme` + `@layer components`) — les recettes réelles.
 
-Référence charte : « FT2E Charte graphique » document 10 · révision 2 (août 2026, bundle `branding-v3/`) — remplace la charte v2 monochrome (`branding-v2/`).
+Référence charte : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026, bundle `branding-v3-bis/`) — remplace la révision 2 (`branding-v3/`) et la v2 monochrome (`branding-v2/`). Les huit amendements de la 2.1 sont tabulés dans `.claude/rules/tailwind-design-tokens.md` § « Les huit amendements ». **Autorité : la charte prévaut sur tout support ; en interne, la mesure prévaut sur la règle.**
 
 ## Philosophie
 
-Un bureau d'études ne signale pas : il cote, il hiérarchise, il archive. Les trois premières décisions ne changent pas — **une teinte unique (197°), aucune couleur d'accent, l'état par défaut est clair** (une réserve profonde par écran, 1/5 de la surface max). La quatrième est nouvelle : **la profondeur remplace l'ornement**. Le relief vient des plans — une planche posée, une planche qui déborde, une ligne encrée — portés par trois rangs d'ombre à l'encre translucide. La hiérarchie passe par la valeur, la **graisse** (300/600/700) et le **plan**, plus jamais par l'épaisseur de filet.
+Un bureau d'études ne signale pas : il cote, il hiérarchise, il archive. Les trois premières décisions ne changent pas — **une teinte unique (197°), aucune couleur d'accent, l'état par défaut est clair** (une réserve profonde par écran, 1/5 de la surface max). La quatrième est nouvelle : **la profondeur remplace l'ornement**. Le relief vient des plans — une planche posée, une planche qui déborde, une ligne encrée — portés par trois rangs d'ombre à l'encre translucide. La hiérarchie passe par la valeur, la **graisse** (300/400/600/700) et le **plan** ; l'épaisseur de filet ne sert qu'aux **états** (erreur = 2 px).
 
 ## Tokens — source de vérité : `src/styles/global.css` (@theme)
 
@@ -23,8 +23,8 @@ Un bureau d'études ne signale pas : il cote, il hiérarchise, il archive. Les t
 |---|---|---|
 | `profond` | `#001718` | réserve — 1/5 max, UNE apparition/écran (`.plan-encre`, duotone, couverture) ; vedette et puce de section sur papier |
 | `encre` | `#00393a` | toute la lecture : titres, paragraphes, aplat du bouton principal, chiffre plein d'un relevé |
-| `pivot` | `#336667` | données, dates, commentaires, corps secondaire (6,14:1 papier), focus ring — ⛔ jamais en texte sur profond (3,67:1) |
-| `clair` | `#99cccd` | texte sur profond uniquement (10,55:1) ; sur clair : filet, aplat et complément « / » des titres de section seulement (1,62:1, jamais porteur de sens) |
+| `pivot` | `#336667` | données, dates, chapô, chiffres de relevé en retrait (6,14:1 papier), anneau de focus en polarité claire — ⛔ jamais en texte **ni en filet porteur** sur profond (2,85:1) |
+| `clair` | `#99cccd` | corps, étiquettes et **anneau de focus** sur profond (10,45:1) ; sur clair : filet, aplat et complément « / » des titres de section seulement (1,67:1, `aria-hidden` obligatoire) |
 | `voile` | `#e1f4f4` | pôle clair du duotone ; chiffres/titres sur `.plan-encre` (16,04:1) ; équerres d'image |
 | `papier` | `#f7f9fa` | fond des plans et de la planche de page |
 | `calcaire` | `#edf0f2` | fond du body (visible au-delà de 1440 px), cellules de liste, en-têtes de cartouche — jamais au contact du voile (iso-clairs) |
@@ -41,9 +41,9 @@ Un bureau d'études ne signale pas : il cote, il hiérarchise, il archive. Les t
 - **Filets par opacité** : tous à 1 px ; rang = 22 % / 16 % / 12 % (+ 28 % pour chips). Plus de 4/2/1 px.
 - **Titre d'écran** : h1 des pages internes en `.type-ecran` — wdth 100, 600, **casse normale, jamais capitales**, interligne 1,02. La vedette capitales (`.type-display`, 125/700) est réservée à l'accueil.
 - **Titre de section** : `.type-section` 118/**700** capitales, précédé de la **puce profonde 7 px** (`.puce-section`, seule exception au rayon 0) + numéro mono ; mot porteur encre + complément `text-clair` précédé d'une barre oblique (dérogation : le mot en encre suffit au sens).
-- **Corps Archivo 300** : trois graisses seulement (300/600/700) ; mono 400/500/600.
-- **Bouton principal plein** : `.btn-principal` (alias `.btn-blueprint-dark`) — aplat encre, texte papier mono 11/500, **filet clair 3 px à gauche**, hover → profond 260 ms, flèche `→` admise ; le filet ne bouge pas. Secondaire : `.btn-filaire` (1 px à 28 %). Sur profond : `.btn-blueprint-solid` (filaire clair).
-- **Relevé clair** : le commentaire (Archivo 300, 14 px, pivot) **précède** le chiffre ; **un seul chiffre plein encre par relevé** (celui que la page défend), les autres en `.releve-retrait` (encre 13 %) ; chiffres `.releve-chiffre` (118/700, ls −0,04 em, tabulaire). Relevé encré : `.plan-encre`, chiffres `text-voile`, étiquettes `mono-label text-clair`.
+- **Corps Archivo 400** (amendement A7) : quatre graisses — 300 (chapô `.type-chapo`, en pivot, 3 lignes max), 400 (corps), 600 (titre d'écran, intitulé), 700 (vedette, section, relevé) ; mono 400/500/600.
+- **Bouton principal plein** : `.btn-principal` — aplat encre, texte papier mono 11/500, **filet clair 3 px à gauche**, hover → profond 260 ms, flèche `→` admise ; le filet ne bouge pas. Secondaire : `.btn-filaire` (1 px à 28 %). Sur profond : `.btn-profond` (filaire clair).
+- **Relevé clair** : le commentaire (Archivo 400, 14 px, pivot) **précède** le chiffre ; **un seul chiffre plein encre par relevé** (celui que la page défend), les autres en `.releve-retrait` — **au pivot** (A1, l'encre 13 % donnait 1,27 sur papier) ; chiffres `.releve-chiffre` (118/700, ls −0,04 em, tabulaire). Relevé encré : `.plan-encre`, chiffres `text-voile`, étiquettes `mono-label text-clair`.
 - **Courbe unique** : `cubic-bezier(0.2, 0.7, 0.2, 1)` (`--ease-blueprint`) — remplace `cubic-bezier(0.16, 1, 0.3, 1)`.
 - **Module 28 px** (pas de trame) ; marge de page 60 px (44 px < 1200, 24 px à 390) ; 76 px entre sections ; gouttière 24 px ; conteneur planche 1440 px.
 - **Rapports d'image** : **21:8** (bandeau), **16:10** (appui de titre), **3:2** (fiche, index) — le 16:9 n'existe plus.
@@ -85,3 +85,16 @@ Le mono jamais en texte courant ; l'Archivo jamais en cote ni référence d'affa
 ## Motion (§ 13)
 
 **Quatre mouvements, une seule courbe** (`--ease-blueprint`) : tracé de flux 900 ms (1×/chargement, `TraceFlux.astro`) · révélation de plan 760 ms / 22 px (1×/élément `data-plan`, à l'entrée dans la vue, via `BaseLayout`) · survol de cellule 300 ms · survol de bouton 260 ms. Rien d'autre ne bouge. Focus : 2 px pivot décalé 2 px. `prefers-reduced-motion` supprime tout ; sans JS, rien n'est masqué (`html.js-plans`).
+
+## Les huit amendements de la révision 2.1 — à appliquer sans exception
+
+| № | Ce qui s'applique | Recette |
+|---|---|---|
+| A1 | Chiffres de relevé en retrait **au pivot**, jamais en encre 13 % | `.releve-retrait` |
+| A2 | Complément de titre clair **toujours `aria-hidden="true"`**, jamais porteur d'information | `<span class="text-clair" aria-hidden="true">/…</span>` |
+| A3 | Pivot sur profond = **2,85** : interdit en texte **et en filet porteur** | filets profonds → `filet-clair-1/2` |
+| A4 | Focus **pivot en polarité claire, clair en polarité profonde** | `:focus-visible`, `.plan-encre :focus-visible` |
+| A5 | États de formulaire par **épaisseur + marque + mot**, succès par **déplacement** | `.champ`, `.message-erreur`, `.bandeau-succes` |
+| A6 | Lien en paragraphe : encre + soulignement 1 px (3 px d'offset), 2 px au survol, **aucun changement de couleur** | `.lien-texte` |
+| A7 | **Corps en 400**, chapô en 300, quatre graisses | `body`, `.type-chapo` |
+| A8 | Légende d'image en **cartouche de réserve** (voile sur profond), jamais à même le cliché ; équerres en voile ; **2 annotations max** | `.cartouche-legende` |

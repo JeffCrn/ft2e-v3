@@ -74,7 +74,7 @@ const jsonLd = {
               />
             )}
             <CoinsCuivre taille={16} />
-            <span class:list={['absolute left-[12.5%] bottom-4 mono-label font-normal z-10', imageExiste ? 'text-voile' : 'text-pivot']} aria-hidden="true">
+            <span class="absolute left-[12.5%] bottom-4 cartouche-legende z-10" aria-hidden="true">
               {demo ? '[démo] ' : ''}{titre.toLowerCase()} — {lieu.toLowerCase()}
             </span>
           </div>
@@ -102,7 +102,7 @@ const jsonLd = {
                    [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:font-semibold [&>h3]:[font-stretch:112%] [&>h3]:mt-8 [&>h3]:mb-3
                    [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
                    [&>ul>li]:border-l [&>ul>li]:border-filet-1 [&>ul>li]:pl-4
-                   [&_a]:text-encre [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-pivot
+                   [&_a]:text-encre [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-[3px] [&_a:hover]:decoration-2
                    [&_strong]:text-encre [&_strong]:font-semibold"
           >
             <Content />

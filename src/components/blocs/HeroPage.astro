@@ -58,8 +58,10 @@ const titleSize = {
       {titre}
     </h1>
 
+    {/* Chapô (§ 06, révision 2.1) : ouverture de page en graisse 300, au
+        pivot, trois lignes au plus — d'où la largeur bornée à 60 signes. */}
     {sousTitre && (
-      <p class="mt-6 text-base leading-[1.6] text-pivot max-w-[60ch] text-pretty">
+      <p class="type-chapo mt-6 max-w-[60ch] text-pretty">
         {sousTitre}
       </p>
     )}

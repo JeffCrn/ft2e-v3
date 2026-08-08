@@ -1,6 +1,6 @@
 # FT2E v3 — Site internet
 
-> Site institutionnel de FT2E, société d'ingénierie pluridisciplinaire créée en 2008 et basée à La Rochelle. **v3 = fork de `ft2e-v2`** : contenus, collections et CMS identiques, design system : charte v3 « plans et profondeur » (révision 2, août 2026, bundle `branding-v3/`) — rampe monochrome 197° inchangée, relief par trois rangs d'ombre à l'encre translucide, filets 1 px hiérarchisés par l'opacité, trame 28 px, planche de page 1440 px posée sur calcaire, bouton principal en aplat encre. Build Astro statique, à déployer sur Vercel (`ft2e-v3.vercel.app`), destinée à migrer vers `ft2e.fr`.
+> Site institutionnel de FT2E, société d'ingénierie pluridisciplinaire créée en 2008 et basée à La Rochelle. **v3 = fork de `ft2e-v2`** : contenus, collections et CMS identiques, design system : charte v3 « plans et profondeur » **révision 2.1** (08.2026, bundle `branding-v3-bis/`) — rampe monochrome 197° inchangée, relief par trois rangs d'ombre à l'encre translucide, filets 1 px hiérarchisés par l'opacité, trame 28 px, planche de page 1440 px posée sur calcaire, bouton principal en aplat encre. Build Astro statique, à déployer sur Vercel (`ft2e-v3.vercel.app`), destinée à migrer vers `ft2e.fr`.
 
 ## Quoi, exactement
 
@@ -22,7 +22,7 @@ Ce qui n'est pas encore en place :
 
 ## Référentiel : le PDF de proposition stratégique + informations FT2E
 
-La spécification initiale (positionnement, sitemap, modèle de contenu, filtres, gabarit fiche projet) **provient du PDF de proposition** (mai 2026). Les informations sur l'équipe et la société ont été précisées par FT2E le 2026-05-28 (voir `docs/00-vision-produit.md` et la mémoire `project-team-info`). Le design system provient de la charte v3 « FT2E Charte graphique » document 10 · révision 2 (`branding-v3/`, août 2026 — remplace la révision 1) ; en cas de conflit sur le design, **`.claude/rules/tailwind-design-tokens.md` (v3) et `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md` font foi** (`docs/superpowers/specs/2026-08-06-ft2e-charte-v2-monochrome-197.md` décrit la révision 1 monochrome, `docs/superpowers/specs/2026-08-04-ft2e-v2-ingenierie-invisible-design.md` le système cuivre intermédiaire, `docs/02-design-system.md` l'Apple-style v1 — conservés pour l'historique).
+La spécification initiale (positionnement, sitemap, modèle de contenu, filtres, gabarit fiche projet) **provient du PDF de proposition** (mai 2026). Les informations sur l'équipe et la société ont été précisées par FT2E le 2026-05-28 (voir `docs/00-vision-produit.md` et la mémoire `project-team-info`). Le design system provient de la charte v3 « FT2E Charte graphique » document 10 · **révision 2.1** (`branding-v3-bis/`, 08.2026 — remplace la révision 2 `branding-v3/`, elle-même successeur de la révision 1 `branding-v2/`). La 2.1 garde la structure de la 2 et corrige **huit prescriptions** (registre des amendements A1–A8, § 16 de la charte, reporté dans `.claude/rules/tailwind-design-tokens.md`) ; en cas de conflit sur le design, **`.claude/rules/tailwind-design-tokens.md` (v3) et `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md` font foi** (`docs/superpowers/specs/2026-08-06-ft2e-charte-v2-monochrome-197.md` décrit la révision 1 monochrome, `docs/superpowers/specs/2026-08-04-ft2e-v2-ingenierie-invisible-design.md` le système cuivre intermédiaire, `docs/02-design-system.md` l'Apple-style v1 — conservés pour l'historique).
 
 ## Stack — versions en production
 
@@ -36,9 +36,9 @@ La spécification initiale (positionnement, sitemap, modèle de contenu, filtres
 | Hébergement | **Vercel** (déploiement continu via GitHub) | n/a |
 | View Transitions | `astro:transitions/ClientRouter` | natif |
 
-## Design system — charte v3 « Plans et profondeur » (rampe 197°)
+## Design system — charte v3 « Plans et profondeur » · révision 2.1 (rampe 197°)
 
-Depuis 2026-08-06, le site applique la charte v3 (« FT2E Charte graphique » document 10 · révision 2, bundle `branding-v3/`) : la rampe 197° et le duotone sont inchangés — **une teinte unique, aucune couleur d'accent, l'état par défaut est clair** — mais **la profondeur remplace l'ornement** : le relief vient des plans (une planche posée, une planche qui déborde, une ligne encrée), portés par trois rangs d'ombre à l'encre translucide. Le rang d'un filet passe désormais par son **opacité** (1 px à 22/16/12 %), plus par son épaisseur ; la hiérarchie typographique par la graisse (Archivo 300/600/700) et la chasse. Source de vérité : `.claude/rules/tailwind-design-tokens.md` et `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
+Depuis 2026-08-08, le site applique la charte v3 **révision 2.1** (« FT2E Charte graphique » document 10, bundle `branding-v3-bis/`) : la rampe 197° et le duotone sont inchangés — **une teinte unique, aucune couleur d'accent, l'état par défaut est clair** — mais **la profondeur remplace l'ornement** : le relief vient des plans (une planche posée, une planche qui déborde, une ligne encrée), portés par trois rangs d'ombre à l'encre translucide. Le rang d'un filet passe désormais par son **opacité** (1 px à 22/16/12 %), plus par son épaisseur ; la hiérarchie typographique par la graisse (Archivo **300/400/600/700** — quatre graisses depuis l'amendement A7) et la chasse. Source de vérité : `.claude/rules/tailwind-design-tokens.md` et `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
 
 ### Palette (rampe 197° inchangée)
 
@@ -46,19 +46,20 @@ Depuis 2026-08-06, le site applique la charte v3 (« FT2E Charte graphique » do
 |---|---|---|
 | `profond` | `#001718` | **réserve — 1/5 max, 1×/écran** : ligne encrée (relevés), duotone, puce de section ; texte vedette sur papier |
 | `encre` | `#00393a` | toute la lecture : titres, corps, aplat du bouton principal — et l'encre translucide des filets et ombres |
-| `pivot` | `#336667` | données, dates, corps secondaire, focus ring (valeur client) — jamais en texte sur profond (3,67:1) |
+| `pivot` | `#336667` | données, dates, chapô, chiffres de relevé en retrait, anneau de focus en polarité claire — **jamais en texte ni en filet porteur sur profond** (2,85:1) |
 | `clair` | `#99cccd` | texte **sur fonds sombres** ; sur papier : filets, aplats et complément des titres de section (décor, jamais porteur) |
 | `voile` | `#e1f4f4` | pôle clair du duotone ; texte/équerres **sur réserve profonde uniquement** |
 | `papier` | `#f7f9fa` | la planche de page (max 1440 px) et les plans posés (neutre) |
 | `calcaire` | `#edf0f2` | fond sous la planche, cellules au repos, en-têtes (neutre) — jamais sous le voile |
-| `filet-1/2/3` | `rgba(0,57,58,.22/.16/.12)` | trois rangs de filet 1 px — le rang est porté par l'opacité |
-| `filet-chip` | `rgba(0,57,58,.28)` | étiquettes de mission, chips, bouton filaire |
+| `filet-1/2/3` | `#00393a38/29/1f` | trois rangs de filet 1 px — le rang est porté par l'opacité (22/16/12 %) |
+| `filet-clair-1/2` | `#99cccd59/2e` | filets en polarité profonde (35/18 %) — le pivot y est interdit |
+| `filet-chip` | `#00393a47` | étiquettes de mission, chips, bouton filaire (28 %) |
 
-Règles : 2 valeurs par composition (3 max) · une seule réserve profonde par écran (`bg-profond` / `.plan-encre`) · aucune teinte hors rampe, aucun dégradé · ombre = encre translucide, jamais du noir · alerte = filet doublé + mention, pas une couleur. Tous les anciens tokens (cuivre, marine, slate, mist, bleus, `line`/`line-strong`) sont des aliases repointés, interdits dans le nouveau code.
+Règles : 2 valeurs par composition (3 max) · une seule réserve profonde par écran (`bg-profond` / `.plan-encre`) · aucune teinte hors rampe, aucun dégradé · ombre = encre translucide, jamais du noir · alerte = filet doublé + mention, pas une couleur. **Hygiène du dépôt (rév. 2.1 § 17) : tous les anciens tokens (cuivre, marine, slate, mist, bleus, `line`/`line-strong`) ont été SUPPRIMÉS de `global.css` — un jeton nommé d'après une identité antérieure ne se redirige pas.**
 
 ### Typographie — échelle v3
 
-- **Archivo Variable** (`wdth` 62–125, graisses **300/600/700**) : Vedette `type-display` (125/700 capitales — **accueil uniquement**, une par page) ; **Titre d'écran** `type-ecran` (100/600, **casse normale, jamais capitales**, interligne 1,02 — h1 des pages internes) ; Section `type-section` (118/700 capitales, précédée de la puce 7 px, mot porteur encre + complément clair « /… ») ; Intitulé `type-intitule` (112/600) ; Corps 100/**300** interligne 1,6 ; Relevé `releve-chiffre` (118/700 tabulaire).
+- **Archivo Variable** (`wdth` 62–125, graisses **300/400/600/700**) : Vedette `type-display` (125/700 capitales — **accueil uniquement**, une par page) ; **Titre d'écran** `type-ecran` (100/600, **casse normale, jamais capitales**, interligne 1,02 — h1 des pages internes) ; Section `type-section` (118/700 capitales, puce 7 px, mot porteur encre + complément clair « /… » **`aria-hidden`**) ; Intitulé `type-intitule` (112/600) ; **Corps 100/400 interligne 1,6** (amendement A7) ; **Chapô `type-chapo`** (100/**300**, 19–22 px, interligne 1,5, **en pivot**, trois lignes au plus — le seul emploi de la 300) ; Relevé `releve-chiffre` (118/700 tabulaire).
 - **IBM Plex Mono** (400/**500/600**) : `mono-label` 11 px 0,14 em uppercase, `mono-data` 13 px tabulaire — tout ce qui est mesuré, référencé ou daté.
 - Chargement fontsource, `font-display: swap`, pas de CDN Google.
 
@@ -106,7 +107,7 @@ Règles : 2 valeurs par composition (3 max) · une seule réserve profonde par �
 
 1. **Toute donnée métier de démo** (titre projet, MOA, surface, performance, chiffre) doit être **plausible** mais clairement signalée par le tag `[DÉMO]` dans le contenu Markdown ET par un badge visuel sur la page.
 2. **L'équipe de sept personnes** (Mathieu, Géraldine, Sandrine, Vincent, Tanguy, Emma, Carole) est désignée uniformément par prénom dans toute la narration. Aucun membre n'est distingué individuellement — le bureau est porté collectivement. Les rôles (co-gérants associés, associés, collaborateurs) ne s'affichent que dans la grille structurée de la page Équipe, avec un traitement visuel identique pour tous les profils.
-3. **Design system charte v3 « Plans et profondeur » (rampe 197°, trois rangs d'ombre, filets par opacité)** — voir `.claude/rules/tailwind-design-tokens.md` et la spec `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
+3. **Design system charte v3 « Plans et profondeur » — révision 2.1** (rampe 197°, trois rangs d'ombre, filets par opacité, **huit amendements A1–A8**) — voir `.claude/rules/tailwind-design-tokens.md` (§ Les huit amendements) et la spec `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`. La charte prévaut sur tout support existant ; **en cas de contradiction interne à la charte, la mesure prévaut sur la règle**.
 4. **Audit RGAA AA** dès le premier composant.
 5. **Performance** : Lighthouse mobile ≥ 90 sur la home, 100/100/100 sur A11y / BP / SEO.
 6. **Aucun lorem ipsum.** Tout texte est en français, conforme à la voix FT2E, et marqué `[DÉMO]` si non vérifié.

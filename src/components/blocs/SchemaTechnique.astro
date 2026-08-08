@@ -7,10 +7,11 @@
 import CoinsCuivre from '../primitives/CoinsCuivre.astro';
 
 // Espaces fines insécables (U+202F) dans les nombres et unités.
+// Deux annotations au maximum par image (§ 13) — la troisième
+// (« désenfumage cage C ») a été retirée à l'application de la révision 2.1.
 const annotations = [
   { texte: 'CTA double flux — 4 200 m³/h', style: 'left: 16.5%; top: 8%; max-width: 44%;' },
   { texte: 'TGBT 630 kVA', style: 'left: 41%; top: 54%; max-width: 30%;' },
-  { texte: 'désenfumage cage C', style: 'right: 3%; top: 70%; text-align: right; max-width: 34%;' },
 ];
 ---
 
@@ -44,8 +45,10 @@ const annotations = [
         {a.texte}
       </span>
     ))}
-    <span class="absolute left-4 bottom-3 right-4 mono-label font-normal text-encre z-[2] truncate">
-      schéma de principe — lots techniques [démo]
+    {/* Légende en cartouche de réserve (§ 13, amendement A8) : voile sur
+        profond, 16,24 — une légende posée à même l'image ne se mesure pas. */}
+    <span class="absolute left-4 bottom-3 max-w-[calc(100%-2rem)] cartouche-legende z-[2]">
+      <span class="truncate">schéma de principe — lots techniques [démo]</span>
     </span>
   </div>
   <CoinsCuivre />

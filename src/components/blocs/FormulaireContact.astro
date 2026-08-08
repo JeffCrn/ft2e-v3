@@ -1,9 +1,13 @@
 ---
 const isLiminaire = import.meta.env.PUBLIC_MODE === 'liminaire';
 
-// Inputs — charte v3 (§ 10) : fond calcaire, filet 1 px de rang 1,
-// rayon 0. Le focus est porté par le cadre global 2 px pivot (:focus-visible).
-const inputClasses = 'w-full px-4 py-3 bg-calcaire border border-filet-1 mono-data text-encre';
+// Champs — charte v3 révision 2.1 (§ 11, amendement A5). Les états ne
+// passent par aucune couleur : repos filet 16 %, actif 22 %, erreur 2 px
+// à 100 % + marque ▲ + mot « Erreur — », désactivé 12 %. Le succès quitte
+// le champ pour un bandeau séparé. La recette vit dans global.css (.champ).
+// Le bouton d'envoi du mode liminaire porte l'état désactivé de A5 : filet
+// à 12 %, texte pivot, fond calcaire, curseur interdit — sans couleur.
+const inputClasses = 'champ';
 const labelClasses = 'mono-label block text-pivot mb-1.5';
 ---
 
@@ -18,6 +22,12 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
         <h2 class="type-section text-encre text-[22px] md:text-[26px] mt-4 mb-6">
           Parlons de votre projet
         </h2>
+
+        {/* Bandeau de succès (§ 11, A5) : le succès se signale par un
+            DÉPLACEMENT — il quitte le champ pour un bandeau séparé. */}
+        <div id="succes-contact" class="bandeau-succes mb-6 hidden" role="status">
+          Message reçu — réponse sous 48&nbsp;h ouvrées.
+        </div>
 
         <form id="form-contact" class="space-y-6" novalidate>
           {/* Honeypot anti-spam : champ invisible, hors tabulation, à laisser vide */}
@@ -53,10 +63,12 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
                 type="text"
                 id="nom"
                 name="nom"
+                aria-describedby="erreur-nom"
                 required
                 aria-required="true"
                 class={inputClasses}
               />
+              <p id="erreur-nom" class="message-erreur hidden"></p>
             </div>
 
             <div>
@@ -67,10 +79,12 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
                 type="email"
                 id="email"
                 name="email"
+                aria-describedby="erreur-email"
                 required
                 aria-required="true"
                 class={inputClasses}
               />
+              <p id="erreur-email" class="message-erreur hidden"></p>
             </div>
 
             <div>
@@ -92,11 +106,13 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
               <textarea
                 id="message"
                 name="message"
+                aria-describedby="erreur-message"
                 rows={5}
                 required
                 aria-required="true"
                 class:list={[inputClasses, 'resize-y']}
               ></textarea>
+              <p id="erreur-message" class="message-erreur hidden"></p>
             </div>
 
             <div>
@@ -109,7 +125,7 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
                   class="mt-1 accent-encre"
                 />
                 <span class="text-[15px] text-pivot leading-[1.55]">
-                  J’accepte que mes données soient traitées par FT2E dans le cadre de ma demande, conformément à la <a href="/politique-confidentialite" class="text-encre underline underline-offset-2 hover:text-pivot transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">politique de confidentialité</a>.
+                  J’accepte que mes données soient traitées par FT2E dans le cadre de ma demande, conformément à la <a href="/politique-confidentialite" class="lien-texte">politique de confidentialité</a>.
                 </span>
               </label>
             </div>
@@ -119,7 +135,7 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
             <button
               type="button"
               disabled
-              class="btn-filaire text-pivot cursor-not-allowed hover:border-filet-chip hover:text-pivot"
+              class="btn-filaire border-filet-3 bg-calcaire text-pivot cursor-not-allowed hover:border-filet-3 hover:text-pivot"
             >
               Envoyer (désactivé en version liminaire)
             </button>
@@ -165,7 +181,7 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
               href="https://www.openstreetmap.org/?mlat=46.1624398&amp;mlon=-1.2089345#map=17/46.1624398/-1.2089345"
               target="_blank"
               rel="noopener noreferrer"
-              class="underline underline-offset-2 hover:text-encre transition-colors duration-[260ms] ease-[var(--ease-blueprint)]"
+              class="lien-texte"
             >Ouvrir dans OpenStreetMap (nouvel onglet)</a>
             <span aria-hidden="true"> · </span>© OpenStreetMap
           </p>
@@ -174,3 +190,74 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
     </div>
   </div>
 </section>
+
+<script>
+  // États de formulaire — charte v3 révision 2.1, § 11 (amendement A5).
+  // Aucun état ne passe par la couleur : l'erreur se dit par l'épaisseur du
+  // filet (via aria-invalid → .champ[aria-invalid]), la marque ▲ et le mot ;
+  // le succès se dit par un déplacement (bandeau séparé du champ).
+  function initFormulaireContact() {
+    const form = document.querySelector<HTMLFormElement>('#form-contact');
+    if (!form || form.dataset.bound) return;
+    form.dataset.bound = '1';
+
+    const succes = document.querySelector<HTMLElement>('#succes-contact');
+    const requis = ['nom', 'email', 'message'] as const;
+
+    const messagePour = (champ: HTMLInputElement | HTMLTextAreaElement) => {
+      if (champ.validity.valueMissing) return 'Erreur — ce champ est requis.';
+      if (champ.validity.typeMismatch) return 'Erreur — adresse électronique incomplète.';
+      return 'Erreur — saisie invalide.';
+    };
+
+    const afficher = (champ: HTMLInputElement | HTMLTextAreaElement, enErreur: boolean) => {
+      const zone = document.querySelector<HTMLElement>(`#erreur-${champ.id}`);
+      champ.setAttribute('aria-invalid', String(enErreur));
+      if (!zone) return;
+      zone.textContent = enErreur ? messagePour(champ) : '';
+      zone.classList.toggle('hidden', !enErreur);
+      // role="alert" n'est posé qu'à l'apparition : un role permanent ferait
+      // annoncer la zone vide à chaque passage du lecteur d'écran.
+      if (enErreur) zone.setAttribute('role', 'alert');
+      else zone.removeAttribute('role');
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let premierFautif: HTMLElement | null = null;
+
+      for (const id of requis) {
+        const champ = form.querySelector<HTMLInputElement>(`#${id}`);
+        if (!champ) continue;
+        const enErreur = !champ.checkValidity();
+        afficher(champ, enErreur);
+        if (enErreur && !premierFautif) premierFautif = champ;
+
+        // Une fois signalé, le champ se corrige en direct : l'erreur
+        // disparaît dès que la saisie devient valide.
+        if (!champ.dataset.liveBound) {
+          champ.dataset.liveBound = '1';
+          champ.addEventListener('input', () => {
+            if (champ.getAttribute('aria-invalid') === 'true' && champ.checkValidity()) {
+              afficher(champ, false);
+            }
+          });
+        }
+      }
+
+      if (premierFautif) {
+        premierFautif.focus();
+        succes?.classList.add('hidden');
+        return;
+      }
+
+      // Pas de backend à ce stade (site en démo) : le succès se matérialise
+      // par le bandeau, conformément à A5. Le branchement d'envoi viendra ici.
+      succes?.classList.remove('hidden');
+      form.reset();
+      succes?.focus?.();
+    });
+  }
+
+  document.addEventListener('astro:page-load', initFormulaireContact);
+</script>

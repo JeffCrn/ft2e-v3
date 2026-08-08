@@ -20,7 +20,7 @@ const dateFormatee = new Intl.DateTimeFormat('fr-FR', {
 
 <a href={`/actualites/${article.id}`} class="group block plan-pose">
   <div class="aspect-[3/2] duotone-media">
-    <span class="absolute left-3 bottom-2.5 mono-label font-normal text-pivot z-10" aria-hidden="true">{categories[0]?.toLowerCase()}</span>
+    <span class="absolute left-3 bottom-2.5 cartouche-legende z-10" aria-hidden="true">{categories[0]?.toLowerCase()}</span>
     {demo && <span class="absolute right-3 top-2.5 mono-label font-normal text-pivot z-10">[démo]</span>}
   </div>
   <div class="bg-calcaire border-t border-filet-2 p-4 transition-colors duration-300 ease-[var(--ease-blueprint)] group-hover:bg-papier">
