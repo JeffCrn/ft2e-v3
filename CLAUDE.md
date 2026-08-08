@@ -7,7 +7,7 @@
 Une **build Astro statique** fonctionnelle, déployée sur Vercel, qui :
 
 1. Implémente intégralement le sitemap (Accueil, Société, Équipe, Expertises, Références, Fiche projet, Actualités, Article, Contact, pages légales).
-2. Présente **neuf fiches projets réelles**, sourcées pièce par pièce sur les dossiers d'affaires FT2E (chantier des 22 références en cours). **Plus aucune fiche de démonstration : les huit `demo: true` ont été supprimées le 2026-08-08 à la demande de FT2E.**
+2. Présente **treize fiches projets réelles**, sourcées pièce par pièce sur les dossiers d'affaires FT2E (chantier des 22 références en cours). **Plus aucune fiche de démonstration : les huit `demo: true` ont été supprimées le 2026-08-08 à la demande de FT2E.**
 3. Donne à voir le design system complet (rampe monochrome 197°, plans et ombres à l'encre, trame 28 px, typo Archivo + IBM Plex Mono, cartouches, nomenclature, monogramme).
 4. Démontre les filtres de la page Références, le gabarit de fiche projet, le composant `HeroPage` unifié, la signature éditoriale, le JSON-LD, les performances.
 5. Anime le tout via quatre mouvements vanilla (filet de flux 900 ms, révélation de plan 760 ms / 22 px, survols 300/260 ms) + View Transitions Astro, courbe unique `cubic-bezier(0.2, 0.7, 0.2, 1)`.
@@ -18,7 +18,7 @@ Ce qui n'est pas encore en place :
 - Pas de formulaire Contact branché (UI uniquement, sans backend).
 - Pas encore migré sur `ft2e.fr` (déploiement Vercel sur `ft2e-v3.vercel.app`).
 - **Indexation moteurs bloquée par triple sécurité** (robots.txt `Disallow: /`, meta `noindex` global, header HTTP `X-Robots-Tag`) tant que le site est en démo client. Procédure de revert exacte : `docs/19-migration-production.md`.
-- Photos équipe (collective + 7 portraits individuels) et visuels de secteurs sont des **images de démonstration générées par IA** marquées `DÉMO` ; reportage photographique professionnel prévu en phase de production. Les visuels des neuf fiches réelles, eux, sont authentiques (perspectives d'architecte, vues de dossier, extraits de nos propres plans).
+- Photos équipe (collective + 7 portraits individuels) et visuels de secteurs sont des **images de démonstration générées par IA** marquées `DÉMO` ; reportage photographique professionnel prévu en phase de production. Les visuels des treize fiches réelles, eux, sont authentiques (perspectives d'architecte, vues de dossier, extraits de nos propres plans).
 - **Marqueurs `[DÉMO]` restants hors fiches projet**, à traiter avec FT2E : 11 dans `src/content/secteurs/`, 6 dans `src/content/expertises/`, 1 dans l'unique actualité (alt d'image). Ce sont des affirmations non vérifiées dans de la prose, pas des fiches — leur levée demande des chiffres validés par FT2E, pas une suppression.
 - **Secteur `Monotechnique` sans référence publiée** depuis la suppression des démos : sa seule fiche était `chaufferie-pac-ecole-la-flotte` (`demo: true`). Le secteur reste présent sur `/secteurs` mais disparaît du filtre de `/references` tant qu'il est vide ; les sessions 20 à 22 du chantier doivent le peupler (Passerelle de Marans, cuisine de Villedoux, faisabilité Dufour).
 

@@ -1,0 +1,51 @@
+---
+titre: "Maubec, 13 logements locatifs sociaux à Chagnolet"
+secteur: Logements
+typologie: Neuf
+moa: "Office public de l’habitat de l’agglomération de La Rochelle"
+architecte: "Agence Blanchard Tétaud Blanchet (La Rochelle)"
+lieu: "Chagnolet, Dompierre-sur-Mer (17139)"
+surface_m2: 767
+reference: "22-003"
+annee: 2022
+statut: en cours
+performance: "RE2020 · labellisation visée Bbio, Cep et Cep,nr −10 % · Cep −27,3 % à −34,8 %"
+mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", "Études d'exécution"]
+image_principale: "/images/projets/logements-maubec-chagnolet/01.jpg"
+image_principale_alt: "Extrait du plan de principe chauffage-ventilation-plomberie FT2E au 1/50 : les trois bâtiments de l’opération, les réseaux gaz, eau froide, eau chaude et chauffage tracés logement par logement, et la légende des réseaux en marge"
+en_avant: false
+---
+
+À Chagnolet, hameau de Dompierre-sur-Mer dans l’agglomération de La Rochelle, l’office public de l’habitat construit 13 logements locatifs sociaux sur un terrain issu du lotissement « À Fleur de Ville ». Trois bâtiments, deux typologies réglementaires, et un même dossier qui doit tenir la RE2020 tout en visant une labellisation dix pour cent sous les exigences réglementaires. FT2E porte les fluides au sein de la maîtrise d’œuvre réunie autour de l’agence Blanchard Tétaud Blanchet : l’étude thermique réglementaire, le diagnostic des performances énergétiques et deux lots techniques, électricité et chauffage-ventilation-plomberie, de l’esquisse à l’assistance aux opérations de réception. Le chantier, ouvert en septembre 2023, a passé ses opérations préalables à la réception le 31 octobre 2025.
+
+## L’enjeu : treize logements dans une surface dessinée pour douze
+
+L’office consulte en décembre 2021 pour une mission de maîtrise d’œuvre complète, sur un terrain que le lotisseur Promoterre vient de viabiliser au bourg de Chagnolet. Le programme tient en une ligne du cahier des charges : « une douzaine de logements locatifs collectifs ou individuels », et un objectif de performance, « la certification NF Habitat label Effinergie+, ou son équivalent RE2020 ». La consultation est chiffrée à 1 350 € HT par mètre carré de surface utile et 10 000 € de voirie et réseaux par logement, pour 764,5 m² habitables.
+
+Entre cette consultation et l’avant-projet définitif, le programme gagne un logement sans gagner un mètre carré. L’avenant au marché de maîtrise d’œuvre en fait le constat : treize logements pour 764,4 m² habitables, contre douze pour 764,5 m². La surface utile, elle, diminue de 806,5 à 773,75 m². Le treizième logement ne vient pas d’une extension mais d’un redécoupage — et il pèse sur les lots techniques, puisqu’il faut désormais treize générateurs, treize ventilations, quatorze branchements d’eau là où le chiffrage initial en prévoyait un de moins.
+
+Le projet se répartit en trois bâtiments qui ne relèvent pas du même régime réglementaire. Les bâtiments A et B, en rez-de-chaussée plus un étage, sont calculés en logements collectifs : quatre T3 pour 261,1 m² d’une part, quatre T2 et deux T3 pour 323,4 m² de l’autre. Le bâtiment C, trois maisons accolées de 182,8 m², relève des maisons individuelles ou accolées au sens de la RE2020. Un T1 de 31,3 m² et deux T4 de 75 et 76,5 m² s’y logent. Cette frontière, invisible sur le plan de masse, commande deux jeux de seuils réglementaires distincts.
+
+## La solution : trois générateurs pour treize logements
+
+Le choix des systèmes suit cette partition. Les dix logements collectifs des bâtiments A et B reçoivent chacun une chaudière gaz à condensation murale individuelle, de 3,4 à 18,5 kW en chauffage et jusqu’à 25 kW en eau chaude sanitaire, à micro-accumulation — un rendement sur pouvoir calorifique inférieur de 95,9 % à pleine charge et de 108,1 % à 30 % de charge, une évacuation par ventouse individuelle, un régime d’eau à 60/45. Les deux maisons T4 sont équipées d’une pompe à chaleur air-eau double service au R32, dont le coefficient de performance certifié atteint 4,74 à 7 °C extérieurs et 2,76 à −7 °C, associée à un ballon d’eau chaude de 190 litres produisant en heures creuses et à un régime d’eau à 50/45. Le T1, enfin, est traité en tout-électrique : panneaux rayonnants et sèche-serviettes au lot électricité, ballon thermodynamique sur air extérieur de 100 litres au lot chauffage-ventilation-plomberie.
+
+Ce que cette partition doit à la réglementation se lit dans un seul indicateur. La RE2020 plafonne l’impact carbone de l’énergie consommée sur cinquante ans — l’Ic énergie, en kilogrammes d’équivalent CO₂ par mètre carré — et ce plafond n’est pas le même selon la typologie : sur cette opération, après modulation, il vaut 632,6 pour le bâtiment A et 650,3 pour le bâtiment B, mais 206,5 pour les maisons accolées du bâtiment C, soit trois fois plus sévère. Les résultats obtenus suivent la même ligne de partage : 474,2 et 519,2 avec le gaz, 76,4 avec la pompe à chaleur.
+
+Le reste des installations est tenu par une logique unique. La ventilation est une simple flux hygroréglable individuelle, un groupe par logement, avec 35 entrées d’air sur menuiserie atténuées à 37 dB et des bouches d’extraction temporisées, à détection de présence dans les pièces d’eau. L’étanchéité des réseaux de ventilation est exigée en classe A, avec autocontrôle selon le protocole PROMEVENT. Le lot électricité couvre les courants forts et les courants faibles jusqu’à la fibre — trois conduits par logement pour le raccordement ultérieur, un câblage informatique en étoile de grade 3 TV, deux prises réseau au séjour et une par chambre — et porte les alimentations spécialisées destinées aux équipements des autres corps d’état, pompes à chaleur et ventilations comprises. FT2E y a également porté le pré-équipement de la recharge des véhicules électriques, arrêté dès l’avant-projet définitif à 20 % des places, et dont le tracé des fourreaux a fait l’objet d’un plan et d’un devis modificatif en cours de chantier.
+
+## Les particularités : la part non renouvelable décide de la labellisation
+
+La labellisation visée demande dix pour cent de mieux que la réglementation sur trois indicateurs : le besoin bioclimatique (Bbio), la consommation d’énergie primaire (Cep) et sa part non renouvelable (Cep,nr). Les deux premiers sont acquis avec de la marge — les trois bâtiments dégagent 23,2 à 26,6 % sur le besoin bioclimatique et 27,3 à 34,8 % sur la consommation. Le troisième, lui, se joue de justesse : la part non renouvelable ressort à 14,7 % sous l’exigence sur le bâtiment A, 11,7 % sur le B et 11,1 % sur le C. C’est donc ce seul indicateur qui borne l’opération, avec 1,1 point de marge sur les maisons accolées. Le carbone de construction y est tout aussi tendu, à 2,8 % sous son plafond.
+
+L’étanchéité à l’air se règle bâtiment par bâtiment, avec trois exigences sur un même site : 0,80 m³/(h·m²) sous 4 Pa sur le bâtiment A, 0,60 sur le bâtiment B, 0,40 sur les maisons accolées. Les régimes de vérification diffèrent aussi — mesure par échantillonnage sur A et C, mesure sur l’ensemble des logements sur B.
+
+L’acoustique est prescrite en résultat, pas seulement en produit : le cahier des clauses techniques du lot chauffage-ventilation-plomberie impose que le choix des équipements et leurs réglages garantissent un niveau de bruit reçu inférieur à 35 dB(A) en pièce principale de tout logement. Cela descend jusque dans le détail de pose — support mural de plus de 200 kg/m², résilient acoustique systématique sous la platine de la chaudière, ossature métallique désolidarisée lorsqu’une chaudière est adossée à une cloison légère mitoyenne d’une pièce principale.
+
+Le calendrier, enfin, porte la marque du sol. Le chantier a connu deux interruptions : un ajournement pour durée indéterminée à compter du 20 octobre 2023, après la découverte de la fondation d’un poteau électrique sur l’emprise de la parcelle, puis un arrêt du 29 février au 28 août 2024, les fouilles se remplissant d’eau et le pompage se révélant sans effet. L’étude de sol préalable signalait ce risque et recommandait la pose de piézomètres et l’intervention d’un hydrogéologue : elle mesurait une perméabilité de 3,33 × 10⁻⁷ m/s, un sol très faiblement perméable, et prescrivait de gérer ces venues d’eau en phase travaux comme en phase définitive. Extérieures aux lots techniques, ces interruptions expliquent une partie de l’écart entre l’ouverture de l’affaire en 2022 et les opérations préalables à la réception de l’automne 2025.
+
+## Le résultat : trois bâtiments conformes, une marge qui tient à un point
+
+Les calculs concluent bâtiment par bâtiment, et les trois sont déclarés conformes et aptes à la labellisation. Le bâtiment A ressort à 67,5 kWhep/m²/an de consommation d’énergie primaire pour un maximum de 96,0, soit 29,7 % sous l’exigence, avec un besoin bioclimatique de 62,3 pour un maximum de 81,1. Le bâtiment B affiche 71,8 kWhep/m²/an pour un maximum de 98,7, à 27,3 % sous l’exigence, avec un besoin bioclimatique de 58,0 pour 79,0. Les maisons accolées du bâtiment C descendent à 63,1 kWhep/m²/an pour un maximum de 96,8, soit la meilleure marge en consommation — 34,8 % — mais la plus étroite sur la part non renouvelable. Le confort d’été est tenu partout, avec des degrés-heures d’inconfort de 725,1 à 921,4 °C.h pour un maximum réglementaire de 1 250.
+
+L’opération totalise 767,3 m² habitables au relevé final, contre 764,4 à l’avenant, en treize logements — un T1, quatre T2, six T3 et deux T4 — pour une estimation de travaux validée à l’avant-projet définitif de 1 460 509 € HT, voirie et réseaux compris. Le chantier a été suivi par le bureau en réunion hebdomadaire de septembre 2023 à novembre 2025, sur 66 comptes rendus ; la mise en eau des logements a eu lieu fin octobre 2025 et les opérations préalables à la réception le 31 octobre. Les données de réception, les mesures de perméabilité à l’air et la délivrance du label compléteront cette fiche.
