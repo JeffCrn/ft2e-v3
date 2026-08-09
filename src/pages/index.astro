@@ -10,7 +10,7 @@ import Bouton from '../components/primitives/Bouton.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
 import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
 import { CHIFFRES_CLES } from '../lib/constants';
-import { parAffaireDecroissante } from '../lib/projets';
+import { parAffaireDecroissante, libelleChronologie } from '../lib/projets';
 
 // Média du hero (écran 1 de la charte) : l'image recule dans sa colonne,
 // elle ne porte pas le titre. Projet mis en avant le plus récent.
@@ -112,7 +112,7 @@ const partenaires = [
           class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier"
         >
           <span class="type-intitule text-encre text-[15px]">{enAvant.data.titre}</span>
-          <span class="mono-data text-[11px] text-pivot ml-auto">{enAvant.data.reference ?? enAvant.data.annee} · {enAvant.data.lieu}</span>
+          <span class="mono-data text-[11px] text-pivot ml-auto">{enAvant.data.lieu} · {libelleChronologie(enAvant)}</span>
         </a>
       </Fragment>
     )}

@@ -92,8 +92,14 @@ collections:
           hint: "Relevée sur une pièce FT2E. Obligatoire pour une référence réelle, à laisser vide sur une fiche de démonstration." }
       - { label: "Année d'ouverture de l'affaire", name: "annee", widget: "number", required: true, value_type: "int", min: 2008, max: 2030,
           hint: "Le millésime qu'encode la référence : 22-042 → 2022. Ni le DCE, ni la réception." }
+      - { label: "Statut de l'affaire", name: "statut", widget: "select", required: true, default: "livré",
+          options: ["livré", "en cours", "archive"],
+          hint: "passer à « livré » avant de renseigner l'année de livraison — sinon le build échoue sans message dans Decap. Porte le rang de la nomenclature et s'affiche sur la fiche tant que la réception n'est pas prononcée." }
       - { label: "Année de livraison (réception prononcée)", name: "annee_livraison", widget: "number", required: false, value_type: "int", min: 2008, max: 2030,
           hint: "Seulement si la réception est actée sur pièce. Interdit si le statut est « en cours »." }
+      - { label: "Chapô", name: "chapo", widget: "text", required: false,
+          pattern: ['^[\s\S]{480,780}$', "480 à 780 signes"],
+          hint: "480 à 780 signes, espaces comprises. Synthèse autonome. Une fiche qui ne peut pas atteindre 480 signes honnêtement reste SANS chapô." }
       - { label: "Performance énergétique", name: "performance", widget: "string", required: false,
           hint: "Ex: RE2020 · Effinergie+" }
       - label: "Mission FT2E"

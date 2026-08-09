@@ -9,6 +9,8 @@ surface_m2: 230
 reference: "24-044"
 annee: 2024
 annee_livraison: 2026
+chapo: >-
+  Sur le quai Valin, au sud du Vieux Port, l’hôtel Le Yachtman occupe deux bâtiments accolés et compte 46 chambres : un établissement recevant du public de type O, avec une activité de restauration de type N, classé en quatrième catégorie. FT2E y a mené deux missions d’étendue inégale. La première est bornée à 230 m² : les lots chauffage-ventilation, plomberie et électricité des quatre chambres créées au premier étage et des services généraux du rez-de-chaussée. La seconde ne connaît pas cette limite — la coordination du système de sécurité incendie porte sur les sept niveaux de l’établissement, qui fonctionne sous deux dérogations. L’hôtel n’a pas fermé pendant les travaux ; le système a été réceptionné sans réserve le 16 juin 2026.
 statut: livré
 performance: "RT existant (arrêté du 3 mai 2007 modifié) · pompe à chaleur à détente directe COP 3,83 · centrale double flux à échangeur de rendement supérieur à 90 %"
 mission_ft2e: ["CVC", "Électricité CFO", "Électricité CFA", "SSI"]

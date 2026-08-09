@@ -1,25 +1,27 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BadgeDemo from '../primitives/BadgeDemo.astro';
+import { chronologie } from '../../lib/projets';
 
 // Cartouche de fiche d'affaire — charte v3 (§ 10) : un plan posé (bordure
 // 1 px, ombre de rang 1), en-tête sur calcaire, lignes séparées par des
 // filets 1 px par rang d'opacité. Données en cases de mono, ordre de
-// lecture constant : intitulé, référence, date. La barre de rang 4 px
+// lecture constant : intitulé, chronologie, lieu. La barre de rang 4 px
 // n'existe plus.
 interface Props {
   projet: CollectionEntry<'projets'>;
 }
 
 const { projet } = Astro.props;
-const { secteur, typologie, moa, architecte, lieu, surface_m2, annee, annee_livraison, reference, mission_ft2e, demo } = projet.data;
+const { secteur, typologie, moa, architecte, lieu, surface_m2, mission_ft2e, demo } = projet.data;
+
+// Chronologie publique (ADR-003) : « livraison 2024 » quand la réception est
+// prononcée, « statut · en cours » sinon. Le numéro d'affaire et le millésime
+// d'ouverture restent au frontmatter et au JSON-LD, jamais à l'écran.
+const chrono = chronologie(projet);
 
 const lignes = [
-  // La référence est le numéro d'affaire FT2E (NN-NNN) ; « année » en est le
-  // millésime d'ouverture, la réception se lit sur la ligne « livraison ».
-  { label: 'référence', valeur: reference, rang: 'encre' },
-  { label: 'année', valeur: String(annee), rang: 'encre' },
-  { label: 'livraison', valeur: annee_livraison ? String(annee_livraison) : undefined, rang: 'encre' },
+  { label: chrono.label, valeur: chrono.valeur, rang: 'encre' },
   { label: 'lieu', valeur: lieu, rang: 'encre' },
   { label: "maître d’ouvrage", valeur: moa, rang: 'pivot' },
   { label: 'architecte', valeur: architecte, rang: 'pivot' },

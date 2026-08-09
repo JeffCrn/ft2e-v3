@@ -12,7 +12,7 @@ statut: "en cours"
 performance: "RE2020"
 mission_ft2e: ["Études d'exécution", Thermique, CVC]
 image_principale: "/images/projets/exe-residence-horizon-mediatim/01.jpg"
-image_principale_alt: "Extrait du plan de réservations FT2E du niveau R+2 de la résidence Horizon à La Rochelle — bâtiment B, légende des engravures de plancher et cartouche de l’affaire 25-097"
+image_principale_alt: "Extrait du plan d’exécution FT2E des réservations de plancher du R+2 de la résidence Horizon à La Rochelle : tracé des logements des bâtiments A et B, repères d’engravures pour bondes de douche et receveurs, et légende des trois hauteurs d’engravure"
 en_avant: false
 ---
 

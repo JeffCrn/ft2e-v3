@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import fs from 'node:fs';
 import path from 'node:path';
 import CoinsCuivre from '../primitives/CoinsCuivre.astro';
+import { libelleChronologie } from '../../lib/projets';
 
 // Vignette de projet — charte v3 (§ 09/10) : un plan posé (bordure 1 px
 // filet-2, ombre de rang 1), média duotone 3:2 à équerres, pied cartouche
@@ -13,13 +14,14 @@ interface Props {
 }
 
 const { projet } = Astro.props;
-const { titre, lieu, annee, reference, demo, image_principale, image_principale_alt } = projet.data;
+const { titre, lieu, demo, image_principale, image_principale_alt } = projet.data;
 
 const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_principale));
 
-// Pied de vignette : numéro d'affaire quand il existe (fiches réelles),
-// millésime seul pour les fiches de démonstration.
-const cartouche = [reference ?? String(annee), lieu].join(' · ');
+// Pied de vignette : lieu, puis chronologie publique (ADR-003). La vignette
+// est rendue au pied de chaque fiche projet (ProjetsSimilaires) — c'est par
+// elle que le numéro d'affaire fuyait dans le HTML des fiches.
+const cartouche = `${lieu} · ${libelleChronologie(projet)}`;
 ---
 
 <a href={`/references/${projet.id}`} class="group flex flex-col h-full plan-pose">

@@ -117,6 +117,17 @@ collections:
         max: 2030
         hint: "Le millésime qu'encode la référence : 22-042 → 2022. Ce n'est ni l'année de DCE ni celle de la réception. Le build refuse toute contradiction avec la référence."
 
+      - label: "Statut de l'affaire"
+        name: "statut"
+        widget: "select"
+        required: true
+        default: "livré"
+        options:
+          - "livré"
+          - "en cours"
+          - "archive"
+        hint: "passer à « livré » avant de renseigner l'année de livraison — sinon le build échoue sans message dans Decap. Le statut porte le rang de la nomenclature (opacité du filet) et s'affiche sur la fiche tant que la réception n'est pas prononcée."
+
       - label: "Année de livraison (réception prononcée)"
         name: "annee_livraison"
         widget: "number"
@@ -125,6 +136,13 @@ collections:
         min: 2008
         max: 2030
         hint: "À ne renseigner qu'une fois la réception actée sur pièce (PV, avis favorable). Interdit si le statut est « en cours »."
+
+      - label: "Chapô"
+        name: "chapo"
+        widget: "text"
+        required: false
+        pattern: ['^[\s\S]{480,780}$', '480 à 780 signes']
+        hint: "480 à 780 signes, espaces comprises. Synthèse autonome : elle doit se lire seule, sans le récit ni le cadre technique. Une fiche qui ne peut pas atteindre 480 signes honnêtement reste SANS chapô — le plancher n'autorise aucun remplissage, et le champ est facultatif pour cette raison."
 
       - label: "Performance énergétique"
         name: "performance"

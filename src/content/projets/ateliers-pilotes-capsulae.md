@@ -11,7 +11,7 @@ annee: 2022
 statut: en cours
 mission_ft2e: [CVC, "Électricité CFO", "Électricité CFA"]
 image_principale: "/images/projets/ateliers-pilotes-capsulae/01.jpg"
-image_principale_alt: "Extrait du plan FT2E des réseaux du rez-de-chaussée des ateliers Capsulae à La Rochelle : groupe froid, ballon d’eau chaude sanitaire et colonnes de distribution vers les zones de production, cartouche de l’affaire 22-006"
+image_principale_alt: "Extrait du plan FT2E des réseaux du rez-de-chaussée des ateliers Capsulae à La Rochelle : groupe froid et ballon d’eau chaude sanitaire à gauche, colonnes de distribution colorées desservant les zones de production et leurs siphons de sol"
 en_avant: false
 ---
 

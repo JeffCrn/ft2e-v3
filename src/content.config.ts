@@ -50,6 +50,24 @@ const projets = defineCollection({
     annee_livraison: z.number().int().min(2008).max(new Date().getFullYear() + 2).optional(),
     /** Rang de nomenclature (charte v3) : opacité du filet gauche 1 px — livré 22 % / en cours 16 % / archive 12 %. */
     statut: z.enum(['livré', 'en cours', 'archive']).default('livré'),
+    /**
+     * Chapô de fiche : une synthèse autonome, qui se lit sans le récit et
+     * sans le cartouche. Calibre 480–780 signes — plus long que le chapô
+     * d'actualité (40–280), parce que l'objet est plus long : une affaire,
+     * pas une brève. Contrainte portée par le schéma et non par le seul
+     * `hint` Decap, pour que le build refuse un chapô hors calibre au lieu
+     * de le laisser passer en production.
+     *
+     * Le plafond était à 680 : rédaction faite, il coupait dans la
+     * substance (une classification ERP, une localisation, la précision
+     * d'un niveau) et contredisait son propre libellé. Porté à 780 le
+     * 2026-08-09.
+     *
+     * **Le plancher n'autorise aucun remplissage** : une fiche qui ne peut
+     * pas atteindre 480 signes honnêtement reste sans chapô. Le champ est
+     * optionnel pour cette raison.
+     */
+    chapo: z.string().min(480).max(780).optional(),
     performance: z.string().optional(),
     mission_ft2e: z.array(z.enum(MISSIONS)).min(1),
     image_principale: z.string(),

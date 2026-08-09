@@ -9,6 +9,7 @@ import ProjetsSimilaires from '../../components/blocs/ProjetsSimilaires.astro';
 import CoinsCuivre from '../../components/primitives/CoinsCuivre.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 import JsonLd from '../../components/seo/JsonLd.astro';
+import { libelleChronologie } from '../../lib/projets';
 
 export async function getStaticPaths() {
   const projets = await getCollection('projets');
@@ -19,14 +20,14 @@ export async function getStaticPaths() {
 }
 
 const { projet } = Astro.props;
-const { titre, secteur, lieu, annee, annee_livraison, reference, performance, image_principale, image_principale_alt, demo } = projet.data;
+const { titre, secteur, lieu, annee, annee_livraison, reference, chapo, performance, image_principale, image_principale_alt, demo } = projet.data;
 const { Content } = await render(projet);
 
 const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_principale));
 
-// Jalons de l'affaire : ouverture (encodée dans le numéro d'affaire) et,
-// quand la réception est prononcée, livraison.
-const jalons = annee_livraison ? `affaire ${annee} · livraison ${annee_livraison}` : `affaire ${annee}`;
+// Chronologie publique (ADR-003) — `annee` et `reference` ne servent plus
+// qu'au tri et au JSON-LD ci-dessous : ils ne sont plus affichés.
+const jalons = libelleChronologie(projet);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -54,7 +55,7 @@ const jsonLd = {
       { label: 'Références', href: '/references' },
       { label: titre, href: `/references/${projet.id}` },
     ]}
-    eyebrow={[`fiche d’affaire`, secteur.toLowerCase(), reference].filter(Boolean).join(' — ')}
+    eyebrow={`fiche d’affaire — ${secteur.toLowerCase()}`}
     titre={titre}
     sousTitre={`${lieu} · ${jalons}`}
   />
@@ -74,7 +75,12 @@ const jsonLd = {
               />
             )}
             <CoinsCuivre taille={16} />
-            <span class="cartouche-legende legende-media z-10" aria-hidden="true">
+            {/* Sous lg, le cartouche redirait le h1 à quelques centimètres de
+                lui : on le retire du petit écran. Au-delà, l'image s'éloigne
+                du titre et la légende reprend son rôle de repère de planche.
+                `inline-flex` et non `block` : c'est le display de la recette
+                `.cartouche-legende` (gap 8 px, alignement centré). */}
+            <span class="cartouche-legende legende-media z-10 hidden lg:inline-flex" aria-hidden="true">
               {demo ? '[démo] ' : ''}{titre.toLowerCase()} — {lieu.toLowerCase()}
             </span>
           </div>
@@ -86,16 +92,30 @@ const jsonLd = {
             <FicheTechnique projet={projet} />
           </div>
 
-          <p class="mono-label font-normal text-pivot pb-2.5 border-b border-filet-1">mission</p>
+          {/* Copie mobile du relevé encré. Sur petit écran la colonne de
+              droite bascule sous le récit, et la performance — ce que la fiche
+              défend — se retrouvait après plusieurs écrans de texte. Même
+              motif que la FicheTechnique ci-dessus : une seule des deux
+              instances est rendue à la fois, `display:none` retirant l'autre
+              de l'arbre d'accessibilité. La règle « une seule réserve profonde
+              par écran » reste donc tenue. */}
+          {performance && (
+            <div class="plan-encre lg:hidden mb-8 px-6 py-7" data-plan>
+              <p class="mono-label font-normal text-[10px] text-clair mb-4">performance{demo ? ' — [démo]' : ''}</p>
+              <p class="releve-chiffre text-voile text-[24px] md:text-[28px] leading-[1.2] tracking-[-0.02em]">
+                {performance}
+              </p>
+            </div>
+          )}
 
-          <div class="flex flex-wrap gap-2 mt-4">
-            {projet.data.mission_ft2e.map((mission) => (
-              <span class="etiquette-mission">{mission}</span>
-            ))}
-          </div>
+          {/* Chapô : synthèse autonome, en pivot et graisse 300 (recette
+              `.type-chapo`) — le seul emploi de la 300, le corps du récit
+              restant en 400. Absent du frontmatter, rien ne s'affiche et les
+              marges des blocs voisins gouvernent seules. */}
+          {chapo && <p class="type-chapo max-w-[840px] mb-8">{chapo}</p>}
 
           <div
-            class="mt-6 max-w-[840px] text-[15px] text-pivot leading-[1.65] space-y-6
+            class="max-w-[840px] text-[15px] text-pivot leading-[1.65] space-y-6
                    [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:border-t [&>h2]:border-filet-1 [&>h2]:pt-3.5
                    [&>h2]:mt-9 [&>h2]:mb-3.5
                    [&>h2:first-child]:mt-0
@@ -118,7 +138,7 @@ const jsonLd = {
               (charte v3 — plan rang 3, filet 3 px clair à gauche, ombre rang 3).
               Jamais de vert FT2E en texte sur ce fond. */}
           {performance && (
-            <div class="plan-encre mt-6 px-6 py-7" data-plan>
+            <div class="plan-encre hidden lg:block mt-6 px-6 py-7" data-plan>
               <p class="mono-label font-normal text-[10px] text-clair mb-4">performance{demo ? ' — [démo]' : ''}</p>
               <p class="releve-chiffre text-voile text-[24px] md:text-[28px] leading-[1.2] tracking-[-0.02em]">
                 {performance}

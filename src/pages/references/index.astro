@@ -5,13 +5,15 @@ import path from 'node:path';
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
-import { parAffaireDecroissante, libelleReference } from '../../lib/projets';
+import { parAffaireDecroissante } from '../../lib/projets';
 
 // Index des affaires — charte v3 : une nomenclature, pas une grille de cartes.
 // Le rang de statut est porté par l'OPACITÉ du filet gauche 1 px
 // (livré 22 % · en cours 16 % · archive 12 %) et par la graisse de
 // l'intitulé (700 / 600 / 300), à chasse constante 112. Le statut est
-// affiché en mono-label. Toutes les lignes sont sur une seule page ;
+// affiché en mono-label. Ni numéro d'affaire ni millésime d'ouverture
+// (ADR-003) ; une colonne de chronologie a été essayée puis ajournée, la
+// raison est consignée à l'ADR. Toutes les lignes sont sur une seule page ;
 // le filtre réduit la liste, il ne pagine pas.
 const projets = (await getCollection('projets')).sort(parAffaireDecroissante);
 
@@ -84,15 +86,13 @@ const lignes = projets.map((projet) => ({
 
         {/* En-tête de nomenclature */}
         <div
-          class="hidden md:grid grid-cols-[56px_1fr_150px_88px_104px_56px] gap-4 items-center pb-3 pl-4 border-b border-filet-1"
+          class="hidden md:grid grid-cols-[56px_1fr_150px_88px] gap-4 items-center pb-3 pl-4 border-b border-filet-1"
           aria-hidden="true"
         >
           <p class="mono-label font-normal text-[10px] text-pivot">vue</p>
           <p class="mono-label font-normal text-[10px] text-pivot">affaire</p>
           <p class="mono-label font-normal text-[10px] text-pivot">secteur</p>
           <p class="mono-label font-normal text-[10px] text-pivot">statut</p>
-          <p class="mono-label font-normal text-[10px] text-pivot">référence</p>
-          <p class="mono-label font-normal text-[10px] text-pivot text-right">année</p>
         </div>
 
         <ul role="list" data-grille>
@@ -101,7 +101,7 @@ const lignes = projets.map((projet) => ({
               <a
                 href={`/references/${projet.id}`}
                 class:list={[
-                  'grid grid-cols-[1fr_auto] md:grid-cols-[56px_1fr_150px_88px_104px_56px] gap-x-4 gap-y-1 items-center',
+                  'grid grid-cols-1 md:grid-cols-[56px_1fr_150px_88px] gap-x-4 gap-y-1 items-center',
                   'py-3.5 pl-4 pr-2 border-b border-l border-b-filet-2',
                   rang.filet,
                   'hover:bg-calcaire transition-colors duration-300 ease-[var(--ease-blueprint)]',
@@ -117,7 +117,7 @@ const lignes = projets.map((projet) => ({
                     {projet.data.titre}
                   </span>
                   <span class="md:hidden mono-data text-[11px] text-pivot block mt-0.5">
-                    {projet.data.secteur} · {rang.statut} · {libelleReference(projet)}
+                    {projet.data.secteur} · {rang.statut}
                     {projet.data.demo && <span class="mono-label font-normal text-[10px]"> [démo]</span>}
                   </span>
                 </span>
@@ -126,8 +126,6 @@ const lignes = projets.map((projet) => ({
                   {projet.data.demo && <span class="mono-label font-normal text-[10px] block">[démo]</span>}
                 </span>
                 <span class="hidden md:block mono-label font-normal text-[10px] text-pivot">{rang.statut}</span>
-                <span class="hidden md:block mono-data text-[12px] text-encre">{libelleReference(projet)}</span>
-                <span class="mono-data text-[12px] text-pivot md:text-right row-start-1 col-start-2 md:row-auto md:col-auto">{projet.data.annee}</span>
               </a>
             </li>
           ))}
