@@ -48,8 +48,8 @@
 
 | Cas | Graphie | Exemple |
 |---|---|---|
-| **Quantité sous dix** | en **lettres** | « deux bâtiments », « quatre chambres », « sept niveaux », « neuf semaines » |
-| **Quantité à partir de dix** | en **chiffres** | « 46 chambres », « 102 lits », « 13 logements », « 11 zones » |
+| **Quantité dont le nom s'écrit en un seul mot** | en **lettres** | « deux bâtiments », « quatre chambres », « sept niveaux », « **treize logements** », « **seize lots** », « **trente places** », « cent réunions » |
+| **Quantité dont le nom est composé** | en **chiffres** | « 21 logements », « 26 locaux », « 46 chambres », « 102 lits » |
 | **Unité, mesure, échelle** | toujours en **chiffres**, quelle que soit la valeur | « 230 m² », « 3 lots techniques » → non : *trois* lots ; mais « 1/50 », « 7 °C », « 4,65 de COP », « 840 m³/h » |
 | **Date, millésime, montant** | toujours en **chiffres** | « 16 juin 2026 », « 3 mai 2007 », « 58 255,70 € HT » |
 | **Ordinal de classement** | en **lettres** — exception explicite | « quatrième catégorie », « cinquième étage », « 5ᵉ catégorie » n'est admis qu'en citation d'un texte réglementaire |
@@ -68,13 +68,20 @@ La même logique couvre déjà l'ordinal réglementaire de la dernière ligne du
 
 Le relevé **se rejoue** : `scripts/releve-numeral.py` (sans argument pour mesurer le disque, `--head` pour mesurer le dernier commit). Ne sont comptés que les nombres qui qualifient **directement** un nom dénombrable d'une liste close — `logement`, `chambre`, `lit`, `niveau`, `place`, `zone`, `lot`, `bâtiment`, `étage`, `mission`, `semaine`, `réunion`, `réserve`, `cotraitant`, `poste`, `maison`, `appartement`, singulier et pluriel. `un` et `une` sont exclus : ils sont article aussi souvent que numéral. Frontmatter exclu, corps de récit seul.
 
-État des **vingt** récits, remesuré le 2026-08-09 après la session 19 :
+État des **vingt-trois** récits, remesuré le 2026-08-09 à la clôture du chantier (session 22) :
 
 | Bande | En lettres | En chiffres |
 |---|---|---|
-| de deux à neuf | **71** — conforme | **1** — la citation Yachtman |
-| de dix à trente | **27** | **13** |
-| au-delà de trente | **3** | **12** |
+| de deux à neuf | **93** — conforme | **1** — la citation Yachtman |
+| de dix à trente | **27** | **18** |
+| au-delà de trente | **3** | **14** |
+
+Les chiffres ci-dessus remplacent le relevé « 71 / 27 / 13 / 3 / 12 » de la session 19, mesuré
+sur vingt récits et avec un lexique plus étroit. Trois causes à l'écart, aucune éditoriale : le
+corpus a gagné trois fiches, le lexique de noms a reçu **22 entrées** en session 21, et sa
+fonction de flexion a été corrigée deux fois (`local` donnait *locals*, `repas` donnait
+*repass*). **Un relevé n'est comparable qu'à périmètre et à lexique constants** : republier la
+méthode avec les chiffres n'est pas une précaution de style.
 
 ⚠ **Le 62 de la mesure précédente était faux, et le script en était la cause.** Il engendrait ses pluriels par `nom + 's'`, ce qui donne *niveaus* : **aucune occurrence de « trois niveaux » ou « sept niveaux » n'a jamais été comptée**, alors que le tableau des cas ci-dessus cite « sept niveaux » comme exemple conforme. La flexion est désormais engendrée elle aussi — `-eau`, `-au` et `-eu` prennent `x`. Le passage de 62 à 71 se décompose en **sept occurrences jusque-là invisibles** dans les dix-neuf récits antérieurs (dont « sept niveaux » et « quatre niveaux » chez Yachtman) et **deux apportées** par la fiche de l'École des douanes. Les deux autres bandes ne bougent pas : aucun « niveaux » n'y figure.
 
@@ -82,7 +89,22 @@ C'est le troisième piège du même genre sur ce script, après la borne du lexi
 
 - **Sous dix, plus aucun écart.** Le seul « 6 maisons » (`fougerou-sainte-marie-de-re.md`) a été corrigé le 2026-08-09 ; la seule occurrence chiffrée restante est la citation du contrat Yachtman, couverte par l'exception ci-dessus. Le relevé antérieur annonçait **2** écarts : il en comptait un de trop.
 - **Au-delà de trente, le chiffre domine sans régner** : douze occurrences en chiffres (« 42 lits », « 54 maisons », « 152 réunions ») contre trois en lettres (« quarante-six chambres », « quarante-trois postes », « trente-deux réunions »).
-- ⚠ **Entre dix et trente, l'usage contredit la règle du tableau** : **27** occurrences en lettres (« treize logements », « seize lots », « trente places ») contre **13** en chiffres (« 12 chambres », « 11 zones », « 21 logements »). La consigne « à partir de dix, en chiffres » décrit donc la minorité du corpus, dans une bande où celui-ci n'est de toute façon pas cohérent avec lui-même. **Point ouvert, à trancher avant la prochaine passe rédactionnelle** — soit le seuil monte (les nombres qui s'écrivent en un mot restent en lettres jusqu'à trente, les composés passent en chiffres), soit 27 occurrences se réécrivent. Ne rien décider laisse en place une règle que le corpus désobéit deux fois sur trois.
+- ✅ **Entre dix et trente : le point est tranché le 2026-08-09, et c'est la mesure qui l'a tranché.**
+  L'ancienne règle — « à partir de dix, en chiffres » — décrivait **40 %** du corpus dans cette
+  bande : 27 occurrences en lettres contre 18 en chiffres. Ce n'était pas un usage flottant, c'était
+  une **règle fausse**. La ventilation des 18 occurrences chiffrées montre pourquoi : **dix sont des
+  nombres composés** (21 salles, 26 locaux, 21 logements, 18 ballons, 19 lots) et **huit seulement
+  des nombres d'un seul mot** (12 locaux, 12 chambres, 11 zones, 10 zones, 14 lits, 13 logements,
+  13 lots, 11 places) ; or les 27 occurrences en lettres sont **toutes** d'un seul mot.
+  **La frontière que suit le corpus n'est pas la valeur du nombre, c'est la longueur de son nom** —
+  d'où la formulation retenue au tableau ci-dessus. Elle porte la conformité de 40 % à **82 %** et
+  tranche du même coup les trois fiches qui se contredisaient d'un champ à l'autre :
+  `fougerou` « vingt-sept » → **27**, `hotel-yachtman` « quarante-six chambres » → **46 chambres**,
+  `exe-residence-horizon-mediatim` « 15 diffusions » → **quinze diffusions**.
+  ⚠ **La règle est à jour, le corpus ne l'est pas encore : 11 réécritures restent dues** — les
+  8 occurrences d'un seul mot écrites en chiffres, et les 3 composées écrites en lettres de la
+  bande haute (« quarante-six chambres », « quarante-trois postes », « trente-deux réunions »).
+  Voir § Fin de chantier · état d'ouverture du plan de chantier.
 - ⚠ **Trois fiches se contredisent d'un champ à l'autre** — même nombre, deux graphies dans le même fichier, donc lisibles d'un seul écran puisque la synthèse surmonte le récit : `fougerou` (« 27 calculs » en `synthese`, « vingt-sept » au récit), `exe-residence-horizon-mediatim` (« 15 diffusions » / « quinze envois »), `hotel-yachtman-quai-valin-la-rochelle` (« 46 chambres » / « quarante-six chambres »). L'arbitrage du seuil les tranchera toutes les trois d'un coup ; les corriger avant serait les corriger deux fois.
 
 **Le lexique du script est engendré, jamais tapé.** Sa première version s'arrêtait à « trente » et concluait « au-delà de trente, jamais de lettres » : ce zéro n'était pas une mesure mais la forme du dictionnaire renvoyée en écho — les « quarante-six chambres » du corpus n'y avaient pas d'entrée. Pire, « quarante-trois postes » était compté dans la bande basse, l'entrée « trois » s'accrochant après le trait d'union. Toute extension du relevé doit engendrer ses formes, pas les énumérer.

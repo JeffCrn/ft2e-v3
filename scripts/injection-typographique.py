@@ -13,9 +13,14 @@ UNITES = [
     # S21 : un audit énergétique apporte ses propres unités composées. Elles
     # passent AVANT « kWhep » et « kWh », l'alternance étant ordonnée.
     'kWhef/an', 'kWhep/an', 'kWh/an',
+    # S22 : une étude de chaleur fatale compare des ordres de grandeur (MWh, GWh)
+    # et compte en heures et en mois. « heures » passe avant « h », « mois » avant
+    # « m » — le lookahead les départagerait, mais l'ordre le dit.
+    'MWh/an', 'GWh/an', 'MWh', 'GWh', 'heures', 'mois',
     'kWhep/m²/an', 'kWh/m²/an', 'm³/\\(h·m²\\)', 'W/\\(m²·K\\)', 'W/m²·K', 'kg/m³', 'm³/h',
     'kWhep', 'kWh', 'kVA', 'kWc', 'Wc', 'kW', 'mbar', 'lumens', 'litres', 'lux', 'ans', 'L',
     'm²', 'm³', 'mm', 'cm', 'km', '°C', 'Pa', 'kg', 'lm', 'VA', 'dB', 'm', 'W', 'V', '%', '€',
+    'h',
 ]
 RE_UNITE = re.compile(r'(\d)[ ](' + '|'.join(UNITES) + r')(?![A-Za-zÀ-ÿ0-9])')
 RE_MILLE = re.compile(r'(\d)[ ](\d{3})(?!\d)')
