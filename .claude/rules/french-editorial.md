@@ -42,6 +42,30 @@
 - **Points de suspension** `…` (jamais `...`).
 - **Espace fine insécable** (`U+202F`) idéalement entre nombres et unités : `17 ans`, `1 240 m²`.
 
+## Nombres et quantités
+
+**Cette règle a été relevée, pas décrétée.** Elle décrit l'usage déjà en vigueur dans les dix-neuf récits de `src/content/projets/`, constaté au 2026-08-09 : les récits l'appliquaient avant qu'elle soit écrite. Elle est consignée ici pour que les chapôs et les textes à venir s'y conforment sans avoir à la redécouvrir.
+
+| Cas | Graphie | Exemple |
+|---|---|---|
+| **Quantité sous dix** | en **lettres** | « deux bâtiments », « quatre chambres », « sept niveaux », « neuf semaines » |
+| **Quantité à partir de dix** | en **chiffres** | « 46 chambres », « 102 lits », « 13 logements », « 11 zones » |
+| **Unité, mesure, échelle** | toujours en **chiffres**, quelle que soit la valeur | « 230 m² », « 3 lots techniques » → non : *trois* lots ; mais « 1/50 », « 7 °C », « 4,65 de COP », « 840 m³/h » |
+| **Date, millésime, montant** | toujours en **chiffres** | « 16 juin 2026 », « 3 mai 2007 », « 58 255,70 € HT » |
+| **Ordinal de classement** | en **lettres** — exception explicite | « quatrième catégorie », « cinquième étage », « 5ᵉ catégorie » n'est admis qu'en citation d'un texte réglementaire |
+
+La frontière porte sur la **nature** du nombre, pas sur sa taille : une quantité se compte, une mesure se lit sur un instrument. « Quatre chambres » et « 230 m² » cohabitent dans la même phrase sans contradiction.
+
+### Relevé de référence
+
+Mesure reproductible sur les dix-neuf récits, en ne comptant que les nombres qui qualifient directement un nom dénombrable (`logement`, `chambre`, `lit`, `niveau`, `place`, `zone`, `lot`, `bâtiment`, `étage`, `mission`, `semaine`, `réunion`, `réserve`, `cotraitant`, `poste`, `maison`, `appartement`) :
+
+- **74** quantités sous dix, en lettres ;
+- **37** quantités à partir de dix, en chiffres ;
+- **2** écarts à la règle, à corriger à la prochaine passe rédactionnelle : « 6 maisons » (`fougerou-sainte-marie-de-re.md`) et « 4 chambres » (`hotel-yachtman-quai-valin-la-rochelle.md`).
+
+Le chiffrage dépend entièrement du périmètre de noms retenu — l'élargir à tout substantif le multiplie par trois, en happant des fragments de mesures. Toute reprise de ce relevé doit republier sa méthode avec ses chiffres, faute de quoi ils ne veulent rien dire.
+
 ## Formes longues vs abréviations
 
 - **Première occurrence** d'un acronyme dans une page : forme longue suivie de l'acronyme entre parenthèses. « Coordination SSI (sécurité incendie) ». Ensuite, l'acronyme suffit.
