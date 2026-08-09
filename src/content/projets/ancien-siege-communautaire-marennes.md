@@ -20,7 +20,7 @@ image_principale_alt: "Extrait du plan photovoltaïque FT2E au 1/50 : la toitur
 en_avant: false
 ---
 
-L’ancien siège de la Communauté de communes du Bassin de Marennes est un bâtiment de bureaux de 1970, rue du Maréchal Foch, que la collectivité a choisi de réhabiliter plutôt que de quitter. Le groupement de maîtrise d’œuvre ne compte que deux cotraitants : SD Architectes, mandataire, pour l’architecture et l’économie ; FT2E pour l’ensemble des lots techniques. Marché public attribué par le conseil communautaire le 5 mars 2024 et notifié le 2 avril, il trouve son origine dans l’étude de faisabilité que les deux mêmes cotraitants avaient proposée le 26 mai 2023 et que la collectivité a commandée le 13 juin — celle qui a ouvert l’affaire 23-054.
+L’ancien siège de la Communauté de communes du Bassin de Marennes est un bâtiment de bureaux de 1970, rue du Maréchal Foch, que la collectivité a choisi de réhabiliter plutôt que de quitter. Le groupement de maîtrise d’œuvre ne compte que deux cotraitants : SD Architectes, mandataire, pour l’architecture et l’économie ; FT2E pour l’ensemble des lots techniques. Marché public attribué par le conseil communautaire le 5 mars 2024 et notifié le 2 avril, il trouve son origine dans l’étude de faisabilité que les deux mêmes cotraitants avaient proposée le 26 mai 2023 et que la collectivité a commandée le 13 juin — celle par laquelle le dossier s’est ouvert chez FT2E.
 
 ## L’enjeu : un bâtiment de 1970 sous le régime des travaux par éléments
 

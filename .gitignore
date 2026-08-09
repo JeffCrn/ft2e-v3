@@ -37,8 +37,11 @@ Thumbs.db
 /brandig-systyem-test/
 /plaquette/
 
-# CV de l'équipe — données personnelles, jamais commitées
-cv/
+# CV de l'équipe — données personnelles, jamais commitées.
+# Motif ANCRÉ, comme tous les autres : sans la barre initiale, ce motif
+# s'appliquerait à tout niveau — et la détection de sources de Tailwind v4,
+# qui lit ce fichier, cesserait de scanner un futur `src/pages/cv/`.
+/cv/
 
 # Fonds documentaire client (archives de références) — volumineux, jamais commité.
 # Motif ANCRÉ à la racine (`/`) : sans la barre initiale, git — et surtout la
@@ -47,3 +50,6 @@ cv/
 /references/
 
 .vercel
+
+# Caches Python des outils de `scripts/` — motif ANCRÉ, comme tous les autres.
+/scripts/__pycache__/

@@ -56,15 +56,34 @@
 
 La frontière porte sur la **nature** du nombre, pas sur sa taille : une quantité se compte, une mesure se lit sur un instrument. « Quatre chambres » et « 230 m² » cohabitent dans la même phrase sans contradiction.
 
-### Relevé de référence
+### L'exception de citation
 
-Mesure reproductible sur les dix-neuf récits, en ne comptant que les nombres qui qualifient directement un nom dénombrable (`logement`, `chambre`, `lit`, `niveau`, `place`, `zone`, `lot`, `bâtiment`, `étage`, `mission`, `semaine`, `réunion`, `réserve`, `cotraitant`, `poste`, `maison`, `appartement`) :
+**Un nombre cité entre guillemets se transcrit tel qu'il figure dans la pièce.** La fidélité au texte cité prime sur la convention du site : corriger un chiffre à l'intérieur d'une citation, c'est falsifier la pièce.
 
-- **74** quantités sous dix, en lettres ;
-- **37** quantités à partir de dix, en chiffres ;
-- **2** écarts à la règle, à corriger à la prochaine passe rédactionnelle : « 6 maisons » (`fougerou-sainte-marie-de-re.md`) et « 4 chambres » (`hotel-yachtman-quai-valin-la-rochelle.md`).
+Occurrence en corpus — `hotel-yachtman-quai-valin-la-rochelle.md` cite l'article premier du contrat : « notre mission sera limitée à la création des **4 chambres** au R+1 et au réaménagement du RDC ». Le « 4 » reste. Ce n'est pas un écart, et le relevé ci-dessous ne le compte pas comme tel.
 
-Le chiffrage dépend entièrement du périmètre de noms retenu — l'élargir à tout substantif le multiplie par trois, en happant des fragments de mesures. Toute reprise de ce relevé doit republier sa méthode avec ses chiffres, faute de quoi ils ne veulent rien dire.
+La même logique couvre déjà l'ordinal réglementaire de la dernière ligne du tableau (« 5ᵉ catégorie » admis en citation).
+
+### Relevé de référence — mesuré le 2026-08-09
+
+Le relevé **se rejoue** : `scripts/releve-numeral.py` (sans argument pour mesurer le disque, `--head` pour mesurer le dernier commit). Ne sont comptés que les nombres qui qualifient **directement** un nom dénombrable d'une liste close — `logement`, `chambre`, `lit`, `niveau`, `place`, `zone`, `lot`, `bâtiment`, `étage`, `mission`, `semaine`, `réunion`, `réserve`, `cotraitant`, `poste`, `maison`, `appartement`, singulier et pluriel. `un` et `une` sont exclus : ils sont article aussi souvent que numéral. Frontmatter exclu, corps de récit seul.
+
+État des dix-neuf récits après la passe du 2026-08-09 :
+
+| Bande | En lettres | En chiffres |
+|---|---|---|
+| de deux à neuf | **62** — conforme | **1** — la citation Yachtman |
+| de dix à trente | **27** | **13** |
+| au-delà de trente | **3** | **12** |
+
+- **Sous dix, plus aucun écart.** Le seul « 6 maisons » (`fougerou-sainte-marie-de-re.md`) a été corrigé le 2026-08-09 ; la seule occurrence chiffrée restante est la citation du contrat Yachtman, couverte par l'exception ci-dessus. Le relevé antérieur annonçait **2** écarts : il en comptait un de trop.
+- **Au-delà de trente, le chiffre domine sans régner** : douze occurrences en chiffres (« 42 lits », « 54 maisons », « 152 réunions ») contre trois en lettres (« quarante-six chambres », « quarante-trois postes », « trente-deux réunions »).
+- ⚠ **Entre dix et trente, l'usage contredit la règle du tableau** : **27** occurrences en lettres (« treize logements », « seize lots », « trente places ») contre **13** en chiffres (« 12 chambres », « 11 zones », « 21 logements »). La consigne « à partir de dix, en chiffres » décrit donc la minorité du corpus, dans une bande où celui-ci n'est de toute façon pas cohérent avec lui-même. **Point ouvert, à trancher avant la prochaine passe rédactionnelle** — soit le seuil monte (les nombres qui s'écrivent en un mot restent en lettres jusqu'à trente, les composés passent en chiffres), soit 27 occurrences se réécrivent. Ne rien décider laisse en place une règle que le corpus désobéit deux fois sur trois.
+- ⚠ **Trois fiches se contredisent d'un champ à l'autre** — même nombre, deux graphies dans le même fichier, donc lisibles d'un seul écran puisque la synthèse surmonte le récit : `fougerou` (« 27 calculs » en `synthese`, « vingt-sept » au récit), `exe-residence-horizon-mediatim` (« 15 diffusions » / « quinze envois »), `hotel-yachtman-quai-valin-la-rochelle` (« 46 chambres » / « quarante-six chambres »). L'arbitrage du seuil les tranchera toutes les trois d'un coup ; les corriger avant serait les corriger deux fois.
+
+**Le lexique du script est engendré, jamais tapé.** Sa première version s'arrêtait à « trente » et concluait « au-delà de trente, jamais de lettres » : ce zéro n'était pas une mesure mais la forme du dictionnaire renvoyée en écho — les « quarante-six chambres » du corpus n'y avaient pas d'entrée. Pire, « quarante-trois postes » était compté dans la bande basse, l'entrée « trois » s'accrochant après le trait d'union. Toute extension du relevé doit engendrer ses formes, pas les énumérer.
+
+Le chiffrage dépend entièrement du périmètre de noms retenu — l'élargir à tout substantif le multiplie par trois, en happant des fragments de mesures. Toute reprise de ce relevé doit republier sa méthode avec ses chiffres, faute de quoi ils ne veulent rien dire. **Les chiffres ci-dessus remplacent le relevé « 74 / 37 / 2 » de la première rédaction, dont la méthode n'a pas pu être reproduite** — seul son décompte d'écarts l'a été. C'est la raison d'être du script : un relevé qu'on ne peut pas rejouer n'est pas une mesure.
 
 ## Formes longues vs abréviations
 

@@ -19,7 +19,7 @@ image_principale_alt: "Extrait du plan d’exécution FT2E des réservations de 
 en_avant: false
 ---
 
-À l’angle de la rue de la Désirée et de la rue Cardinal, à La Rochelle, la résidence Horizon réunit deux bâtiments en R+4 de quatre logements superposés — huit appartements, 864&#8239;m² habitables, conformes à la RE2020. FT2E y tient un rôle particulier&nbsp;: le bureau n’est pas missionné par le promoteur, mais par l’installateur. Pour Eustache Frères, titulaire du lot chauffage-ventilation-plomberie, l’affaire 25-097 couvre les déperditions, les plans de réservations et les plans d’exécution avec leurs notes de calcul — quinze envois de janvier à avril 2026.
+À l’angle de la rue de la Désirée et de la rue Cardinal, à La Rochelle, la résidence Horizon réunit deux bâtiments en R+4 de quatre logements superposés — huit appartements, 864&#8239;m² habitables, conformes à la RE2020. FT2E y tient un rôle particulier&nbsp;: le bureau n’est pas missionné par le promoteur, mais par l’installateur. Pour Eustache Frères, titulaire du lot chauffage-ventilation-plomberie, la mission couvre les déperditions, les plans de réservations et les plans d’exécution avec leurs notes de calcul — quinze envois de janvier à avril 2026.
 
 ## L’enjeu&nbsp;: équiper l’entreprise qui pose
 
