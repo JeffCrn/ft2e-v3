@@ -90,11 +90,23 @@ const jsonLd = {
               />
             )}
             <CoinsCuivre taille={16} />
-            {/* Cartouche de réserve (A8), visible aux deux breakpoints : la
-                légende est corrigée, pas masquée. Le géométrie de pose vient
-                de `.legende-media`, dérivée des équerres — ne pas la déplacer
-                par des retraits en dur. */}
-            <span class="cartouche-legende legende-media z-10" aria-hidden="true">
+            {/* Cartouche de réserve (A8) : la légende porte « ouvrage · ville
+                · surface », et non plus le h1 entier.
+
+                Elle reste masquée sous lg, mesure à l'appui : à 390 px la
+                largeur utile est de 262 px, soit 32 signes de Plex Mono 11 px
+                à 0,14 em — et la composition ne tient sur une ligne que pour
+                1 fiche sur 19 (médiane 76 signes). La cause est dans la
+                donnée : `titre` est une phrase descriptive, pas un nom
+                d'ouvrage. Le masquage se lèvera quand un champ `ouvrage`
+                court existera, pas avant : démasquer maintenant aggraverait
+                le défaut même que le client a signalé.
+
+                La géométrie de pose vient de `.legende-media`, dérivée des
+                équerres — ne pas la déplacer par des retraits en dur.
+                `inline-flex` et non `block` : c'est le display de la recette
+                `.cartouche-legende` (gap 8 px, alignement centré). */}
+            <span class="cartouche-legende legende-media z-10 hidden lg:inline-flex" aria-hidden="true">
               {demo ? '[démo] ' : ''}{legendeMedia}
             </span>
           </div>

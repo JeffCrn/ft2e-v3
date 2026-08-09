@@ -68,7 +68,14 @@ const prose = `max-w-[840px] text-[15px] text-pivot leading-[1.65] space-y-6
              border-y border-filet-2 bg-calcaire hover:bg-papier
              motion-safe:transition-colors motion-safe:duration-300 motion-safe:ease-[var(--ease-blueprint)]"
     >
-      <span class="type-intitule text-[17px] text-encre">
+      {/* `normal-case` surcharge la recette : `.type-intitule` (global.css)
+          pose `text-transform: uppercase`, alors que le § 06 range l'intitulé
+          en casse normale — « vedette et section en capitales ; titre
+          d'écran, intitulé, corps et chapô en casse normale ». La recette est
+          donc non conforme sur ce point. C'est PRÉEXISTANT et hors de cette
+          passe : elle sert toutes les cartes et cellules du site, la corriger
+          ici les changerait toutes. Signalé, pas corrigé. */}
+      <span class="type-intitule normal-case text-[17px] text-encre">
         <span class="group-open:hidden">Lire le détail de l’affaire</span>
         <span class="hidden group-open:inline">Replier</span>
       </span>
