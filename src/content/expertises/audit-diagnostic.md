@@ -15,7 +15,7 @@ faq:
   - question: "Quelle est la différence entre un DPE et un audit énergétique ?"
     reponse: "Le DPE (diagnostic de performance énergétique) donne une étiquette simplifiée. L’audit énergétique va plus loin : il modélise le bâtiment, simule plusieurs scénarios de travaux et chiffre les gains attendus en kWh/m²/an et en euros."
   - question: "Mon bâtiment tertiaire est-il soumis au décret tertiaire ?"
-    reponse: "Oui, si sa surface d’activité tertiaire dépasse 1 000 m². Le décret impose une réduction de 40 % des consommations d’ici 2030, 50 % d’ici 2040, 60 % d’ici 2050, par rapport à une année de référence."
+    reponse: "Oui, si sa surface d’activité tertiaire dépasse 1 000 m². Le décret impose une réduction de 40 % des consommations d’ici 2030, 50 % d’ici 2040, 60 % d’ici 2050, par rapport à une année de référence."
 ---
 
 ## Une lecture technique avant toute décision
@@ -28,11 +28,11 @@ Le diagnostic commence par un relevé in situ : composition des parois, état d
 
 ## Décret tertiaire : un cadre réglementaire qui accélère
 
-Depuis 2019, le décret tertiaire impose aux bâtiments de plus de 1 000 m² une réduction progressive de leurs consommations. L’audit constitue la première étape de la mise en conformité : il établit l’année de référence, identifie les leviers d’économie et hiérarchise les actions. FT2E accompagne les gestionnaires de patrimoine tertiaire dans cette démarche, de la déclaration sur OPERAT à la définition du plan d’actions pluriannuel. L’audit sert aussi de socle aux dossiers d’aides et de labels — CEE, Fonds vert, aides Ademe, CERQUAL, HQE, Effinergie — dont les exigences sont intégrées dès la définition des scénarios.
+Depuis 2019, le décret tertiaire impose aux bâtiments de plus de 1 000 m² une réduction progressive de leurs consommations. L’audit constitue la première étape de la mise en conformité : il établit l’année de référence, identifie les leviers d’économie et hiérarchise les actions. FT2E accompagne les gestionnaires de patrimoine tertiaire dans cette démarche, de la déclaration sur OPERAT à la définition du plan d’actions pluriannuel. L’audit sert aussi de socle aux dossiers d’aides et de labels — CEE, Fonds vert, aides Ademe, CERQUAL, HQE, Effinergie — dont les exigences sont intégrées dès la définition des scénarios.
 
 ## Deux exemples récents
 
-[DÉMO] Sur un [EHPAD de 3 450 m² à Saintes](/references/ehpad-doux-refuge), l’audit a révélé une consommation de 187 kWh/m²/an, dont 62 % imputables à une chaufferie fioul vieillissante. Le scénario retenu — pompe à chaleur air-eau couplée à une isolation des combles — ramène la consommation prévisionnelle à 71 kWh/m²/an, soit un gain de 62 % pour un temps de retour de neuf ans. Sur un ensemble de bureaux tertiaires de [DÉMO] 2 800 m² à La Rochelle, l’audit a mis en évidence un potentiel de réduction de 45 % par le seul remplacement de la GTB et l’optimisation des plages horaires de chauffage.
+Sur la [maison relais de Saint-Jean-d’Angély](/references/maison-relais-saint-jean-d-angely), un foyer de 1960 dont la réhabilitation relève de la réglementation thermique dite « globale », l’étude énergétique réglementaire mesure le chemin parcouru par le bâti : de 160,49 kWhep/m²/an sur l’existant à 98,84 en projet, soit 38 % de consommation en moins, sous le plafond de 109,29 imposé par la méthode. Sur l’[ancien siège communautaire de Marennes](/references/ancien-siege-communautaire-marennes), 530 m² de bureaux de 1970, le diagnostic part de 187,7 kWhep/m²/an pour une valeur à respecter de 145,7 ; le scénario retenu associe la reprise des lots techniques et 184 m² de modules en toiture, dont la production entre au calcul réglementaire en déduction des consommations.
 
 ## Un outil d’aide à la décision, pas un rapport de plus
 

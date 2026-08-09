@@ -32,7 +32,7 @@ La RE2020 impose également une évaluation de l’empreinte carbone du bâtimen
 
 ## Optimiser sans surdimensionner
 
-L’enjeu d’une étude thermique bien conduite n’est pas de viser le seuil réglementaire au plus juste, ni de surdimensionner par précaution. Il s’agit de trouver l’équilibre entre performance, coût de construction et confort d’usage. [DÉMO] Sur une [résidence de 48 logements collectifs à La Rochelle](/references/residence-quais-domidylle), l’optimisation du Bbio par le travail sur l’orientation et les masques solaires a permis de réduire la puissance de chauffage installée de 18 %, tout en maintenant un indicateur DH confortable. Ce type de résultat ne s’obtient que par un dialogue continu entre thermicien, architecte et économiste.
+L’enjeu d’une étude thermique bien conduite n’est pas de viser le seuil réglementaire au plus juste, ni de surdimensionner par précaution. Il s’agit de trouver l’équilibre entre performance, coût de construction et confort d’usage. Sur [Maubec, 13 logements locatifs sociaux à Chagnolet](/references/logements-maubec-chagnolet), la labellisation visée demande dix pour cent de mieux que la réglementation sur trois indicateurs à la fois : le besoin bioclimatique, la consommation d’énergie primaire et la part non renouvelable de celle-ci. C’est ce dernier indicateur qui borne l’opération, avec 1,1 point de marge sur les maisons accolées. Ce type de résultat ne s’obtient que par un dialogue continu entre thermicien, architecte et économiste.
 
 ## Un accompagnement de bout en bout
 
