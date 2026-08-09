@@ -1,5 +1,6 @@
 ---
 titre: "Maison relais de 21 logements dans un ancien foyer à Saint-Jean-d’Angély"
+ouvrage: "Maison relais Pasteur"
 secteur: Logements
 typologie: Réhabilitation
 moa: "SOLIHA Bâtisseur de Logement d’Insertion Nouvelle-Aquitaine"
@@ -10,6 +11,8 @@ reference: "21-098"
 annee: 2021
 statut: en cours
 performance: "RT existant « globale » · consommation projetée −38 % par rapport à l’existant"
+synthese: >-
+  À Saint-Jean-d’Angély, SOLIHA transforme un ancien foyer de jeunes travailleurs de 1960 en maison relais de 21 logements, destinée à l’UDAF. Le bâtiment dépasse 1 000 m² et le coût des travaux excède le quart de la valeur du bâti : la rénovation relève de la réglementation thermique dite globale, qui compare la consommation calculée avant et après travaux. FT2E porte la mission complète, du diagnostic à la réception, augmentée des études d’exécution des lots techniques. Chaque logement compte sa chaleur, son eau froide et son eau chaude par module thermique d’appartement. Le calcul passe de 160,49 à 98,84 kWhep/m²/an, soit 38 % de consommation en moins.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", "Études d'exécution"]
 image_principale: "/images/projets/maison-relais-saint-jean-d-angely/01.jpg"
 image_principale_alt: "Extrait du plan de principe CVC du rez-de-chaussée dessiné par FT2E : espace d’animation, logements et réseaux de ventilation et de chauffage de la maison relais"

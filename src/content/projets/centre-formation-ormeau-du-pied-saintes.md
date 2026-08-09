@@ -1,5 +1,6 @@
 ---
 titre: "Réhabilitation d’un local commercial en centre de formation à Saintes"
+ouvrage: "Centre de formation CCI"
 secteur: Tertiaire / ERP
 typologie: Réhabilitation
 moa: "SCI Fleming (La Rochelle), société immobilière de la Chambre de commerce et d’industrie de la Charente-Maritime"
@@ -10,6 +11,8 @@ reference: "25-024"
 annee: 2025
 statut: en cours
 performance: "RT existant « globale » (arrêté du 13 juin 2008) · Cep 58,72 kWhep/m²/an · 62,24 % sous l’exigence"
+synthese: >-
+  Rue de l’Ormeau du Pied, à Saintes, un magasin d’alimentation construit en 2009 devient un centre de formation : neuf salles de cours, un amphithéâtre à gradins et une halle, dans 1 123 m². FT2E porte le chauffage, la ventilation, la plomberie, l’électricité, les études réglementaires et la coordination SSI. L’opération relève de la réglementation thermique dite globale, la plus exigeante des deux, et sans point de comparaison : le changement d’usage interdit de calculer l’état initial. Une chaudière gaz à condensation est retenue non pour sa consommation, mais pour sa réversibilité — le maître d’ouvrage vise le raccordement au réseau de chaleur à venir. Le calcul conclut à 58,72 kWhep/m²/an, soit 62 % sous l’exigence.
 mission_ft2e: ["Thermique", "CVC", "Électricité CFO", "Électricité CFA", "SSI", "Audit & diagnostic"]
 image_principale: "/images/projets/centre-formation-ormeau-du-pied-saintes/01.jpg"
 image_principale_alt: "Extrait du plan de principe chauffage-ventilation-plomberie FT2E au 1/50 : l’amphithéâtre à gradins, la halle de 323 m², la rangée de salles de cours et leurs réseaux de soufflage et de reprise d’air"

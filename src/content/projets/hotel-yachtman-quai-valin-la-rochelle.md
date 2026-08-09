@@ -1,5 +1,6 @@
 ---
 titre: "Hôtel Le Yachtman : services généraux et quatre chambres, La Rochelle"
+ouvrage: "Hôtel Le Yachtman"
 secteur: Tertiaire / ERP
 typologie: Réhabilitation
 moa: "SCI Valin Saint-Nicolas (La Rochelle)"

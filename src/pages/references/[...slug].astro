@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 const { projet } = Astro.props;
-const { titre, secteur, lieu, surface_m2, annee, annee_livraison, reference, synthese, performance, image_principale, image_principale_alt, demo } = projet.data;
+const { titre, ouvrage, secteur, lieu, surface_m2, annee, annee_livraison, reference, synthese, performance, image_principale, image_principale_alt, demo } = projet.data;
 const { Content } = await render(projet);
 
 const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_principale));
@@ -34,12 +34,17 @@ const jalons = libelleChronologie(projet);
 // Légende de média (amendement A8) : le cartouche de réserve porte
 // « ouvrage · ville · surface », et non le titre entier — reprendre le h1
 // n'était pas la spécification, et c'est ce qui le faisait déborder.
-// `titre` est une phrase descriptive : l'ouvrage est son premier segment.
+//
+// Le nom d'ouvrage vient du champ `ouvrage` quand la fiche le porte. À
+// défaut, on retombe sur le premier segment du `titre` : ça dépanne quand
+// le titre s'ouvre sur un nom propre, ça ne donne rien quand il n'en a pas
+// — d'où le champ. Une fiche sans nom court reste publiable.
+//
 // `lieu` va de la commune seule à l'adresse complète : la ville est le
 // segment qui porte le code postal, que la légende n'affiche pas.
-const ouvrage = titre.split(/\s*[:—]\s*|,\s/)[0].replace(/^[«»\s]+|[«»\s]+$/g, '');
+const nomOuvrage = ouvrage ?? titre.split(/\s*[:—]\s*|,\s/)[0].replace(/^[«»\s]+|[«»\s]+$/g, '');
 const ville = (lieu.match(/([^,]+?)\s*\(\d{5}\)/)?.[1] ?? lieu).trim();
-const legendeMedia = [ouvrage, ville, surface_m2 ? `${surface_m2} m²` : null]
+const legendeMedia = [nomOuvrage, ville, surface_m2 ? `${surface_m2} m²` : null]
   .filter(Boolean)
   .join(' · ')
   .toLowerCase();
@@ -151,10 +156,18 @@ const jsonLd = {
           {/* 3. La synthèse rédactionnelle, après les données. */}
           {synthese && <SyntheseAffaire texte={synthese} />}
 
-          {/* 4. La barre de dépliement se pose juste avant le récit, et non
-              soudée à la synthèse : soudée, elle repousserait le relevé de
-              performance hors de l'écran mobile à chaque dépliement. Sans
-              synthèse, `depliable={false}` rend le récit tel qu'avant. */}
+          {/* 4. La barre de dépliement marque la frontière entre les deux
+              textes : la synthèse se lit toujours, le récit se demande. Elle
+              se pose donc entre eux, et non au-dessus de la synthèse — sans
+              quoi elle masquerait par défaut le seul texte que la fiche
+              donne à lire d'emblée.
+
+              (Son ancienne justification — éviter de repousser le relevé de
+              performance au dépliement — est caduque depuis que le relevé
+              est remonté au-dessus de la synthèse. Le placement, lui, ne
+              change pas.)
+
+              Sans synthèse, `depliable={false}` rend le récit tel qu'avant. */}
           <RecitAffaire depliable={Boolean(synthese)}>
             <Content />
           </RecitAffaire>

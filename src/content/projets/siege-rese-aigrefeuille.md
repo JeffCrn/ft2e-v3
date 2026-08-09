@@ -1,5 +1,6 @@
 ---
 titre: "Restructuration du siège de la RESE à Aigrefeuille-d’Aunis"
+ouvrage: "Siège de la RESE"
 secteur: Tertiaire / ERP
 typologie: Réhabilitation
 moa: "RESE — régie d’exploitation des services d’Eau 17"
@@ -10,6 +11,8 @@ reference: "24-003"
 annee: 2024
 statut: en cours
 performance: "RT existant, élément par élément · ITE murs et toiture"
+synthese: >-
+  À Aigrefeuille-d’Aunis, la RESE — régie d’exploitation des services d’Eau 17 — restructure quelque 600 m² de bureaux et d’ateliers sur son site du Fief Girard. Le bâtiment a été étendu par strates depuis les années 1990 : l’organisation intérieure est devenue illisible, et les flux de piétons, de camions et de visiteurs se croisent. FT2E porte un diagnostic, puis la mission complète jusqu’à la réception, avec deux lots techniques et la coordination SSI. Le chantier se déroule en site exploité, sans interruption d’activité : les canalisations continuent d’arriver par camion, et le personnel est relogé en bungalows sur la parcelle.
 mission_ft2e: ["Audit & diagnostic", CVC, "Électricité CFO", "Électricité CFA", SSI]
 image_principale: "/images/projets/siege-rese-aigrefeuille/01.jpg"
 image_principale_alt: "Perspective aérienne du siège restructuré de la RESE à Aigrefeuille-d’Aunis : bureaux en façade sur la rue du Fief Girard, hangar de stockage à l’arrière de la parcelle"

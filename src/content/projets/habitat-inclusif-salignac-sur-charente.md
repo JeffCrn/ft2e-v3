@@ -1,5 +1,6 @@
 ---
 titre: "Habitat inclusif de quatorze logements à Salignac-sur-Charente"
+ouvrage: "Habitat inclusif ADMR"
 secteur: Logements
 typologie: Neuf
 moa: "H Property (Rochefort) — habitat inclusif destiné à la Fédération ADMR de la Charente-Maritime"
@@ -10,6 +11,8 @@ reference: "23-095"
 annee: 2023
 statut: en cours
 performance: "RE2020 (logements) et RT2012 (espace commun) · Cep,nr −4,8 % · Bbio −50,3 % et −5,2 %"
+synthese: >-
+  Route du Tourniquet, à Salignac-sur-Charente, H Property fait construire un habitat inclusif destiné à la Fédération ADMR de la Charente-Maritime : 14 studios de plain-pied, en deux rangées de part et d’autre d’une circulation, autour d’un espace commun. Une seule enveloppe, mais deux régimes thermiques — les logements relèvent de la RE2020, l’espace commun reste sous la RT2012, faute d’usage correspondant. Le partage se lit jusque dans l’étanchéité à l’air, tenue à 0,8 m³/(h·m²) côté logements et laissée à la valeur par défaut côté commun. FT2E a porté les trois domaines techniques et les études réglementaires, en contrat direct avec le maître d’ouvrage.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA"]
 image_principale: "/images/projets/habitat-inclusif-salignac-sur-charente/01.jpg"
 image_principale_alt: "Extrait du plan de principe plomberie-chauffage-ventilation FT2E au 1/50 : les quatorze studios en deux rangées de sept, leurs réseaux d’eau froide, d’eau chaude et de ventilation, et les cercles de giration de 1,50 m tracés dans chaque pièce"

@@ -82,6 +82,9 @@ collections:
           options: ["Logements", "Tertiaire / ERP", "Industriel et commercial", "Patrimoine", "Monotechnique", "Coordination SSI", "Études d'exécution / BIM"] }
       - { label: "Typologie", name: "typologie", widget: "select", required: true,
           options: ["Neuf", "Réhabilitation", "Extension", "Études d'exécution"] }
+      - { label: "Nom court de l'ouvrage", name: "ouvrage", widget: "string", required: false,
+          pattern: ['^.{2,40}$', "2 à 40 caractères"],
+          hint: "Deux à quatre mots, le nom par lequel on désigne l'affaire. Compose la légende de l'image, qui ne dispose que d'une ligne. Ce n'est pas un raccourci du titre." }
       - { label: "Maître d'ouvrage", name: "moa", widget: "string", required: true }
       - { label: "Architecte", name: "architecte", widget: "string", required: false }
       - { label: "Lieu", name: "lieu", widget: "string", required: true,

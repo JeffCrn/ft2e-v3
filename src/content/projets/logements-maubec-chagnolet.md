@@ -1,5 +1,6 @@
 ---
 titre: "Maubec, 13 logements locatifs sociaux à Chagnolet"
+ouvrage: "Maubec"
 secteur: Logements
 typologie: Neuf
 moa: "Office public de l’habitat de l’agglomération de La Rochelle"
@@ -10,6 +11,8 @@ reference: "22-003"
 annee: 2022
 statut: en cours
 performance: "RE2020 · labellisation visée Bbio, Cep et Cep,nr −10 % · Cep −27,3 % à −34,8 %"
+synthese: >-
+  À Chagnolet, hameau de Dompierre-sur-Mer, l’office public de l’habitat construit 13 logements locatifs sociaux répartis en trois bâtiments. Entre la consultation et l’avant-projet, le programme a gagné un logement sans gagner un mètre carré : le treizième vient d’un redécoupage, et il pèse sur les lots techniques. Les trois bâtiments ne relèvent pas du même régime réglementaire — deux en collectif, un en maisons accolées —, ce qui commande deux jeux de seuils et trois systèmes de chauffage distincts. FT2E porte l’étude thermique et deux lots techniques. La labellisation visée se joue sur la part non renouvelable, avec 1,1 point de marge sur les maisons accolées.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", "Études d'exécution"]
 image_principale: "/images/projets/logements-maubec-chagnolet/01.jpg"
 image_principale_alt: "Extrait du plan de principe chauffage-ventilation-plomberie FT2E au 1/50 : les trois bâtiments de l’opération, les réseaux gaz, eau froide, eau chaude et chauffage tracés logement par logement, et la légende des réseaux en marge"

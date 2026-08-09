@@ -1,5 +1,6 @@
 ---
 titre: "Dix logements individuels locatifs sociaux au Bois-Plage-en-Ré"
+ouvrage: "Pas des Bœufs"
 secteur: Logements
 typologie: Neuf
 moa: "Habitat 17 — office public de l’habitat de la Charente-Maritime"
@@ -10,6 +11,8 @@ reference: "22-066"
 annee: 2022
 statut: en cours
 performance: "RE2020 · labellisation BPEC Prestaterre visée, Bbio, Cep et Cep,nr −10 % · Cep −36,7 % à −44,1 %"
+synthese: >-
+  Au Bois-Plage-en-Ré, Habitat 17 construit 10 logements locatifs sociaux sur un terrain communal, en quatre îlots de maisons accolées. Le programme de l’office résume l’enjeu : soutenir la vie à l’année sur la commune et sur l’île. Le foncier est rare, le site inscrit, et l’office demande à la fois une performance supérieure à la réglementation et une maîtrise stricte du coût. FT2E porte l’étude thermique avec son analyse du cycle de vie, et deux lots techniques. Les quatre calculs concluent à la conformité ; c’est le carbone de construction qui se joue le plus serré, à moins de 3 % du plafond sur trois îlots.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", "Études d'exécution"]
 image_principale: "/images/projets/logements-pas-des-boeufs-bois-plage/01.jpg"
 image_principale_alt: "Extrait du plan de principe plomberie-chauffage-ventilation FT2E au 1/50 : les quatre îlots de maisons accolées et leur stationnement, les réseaux d’eau et de ventilation tracés logement par logement"

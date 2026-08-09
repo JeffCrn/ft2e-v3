@@ -1,5 +1,6 @@
 ---
 titre: "Extension de la crèche multi-accueil de l’Oranger"
+ouvrage: "Crèche de l’Oranger"
 secteur: Tertiaire / ERP
 typologie: Extension
 moa: "UDAF de la Charente-Maritime"
@@ -9,6 +10,8 @@ surface_m2: 157
 reference: "23-075"
 annee: 2023
 performance: "RT2012 · Cep 69,3 kWhep/m²/an · 29 % sous l’exigence"
+synthese: >-
+  À Périgny, l’extension de la crèche multi-accueil de l’Oranger ajoute 157 m² aux espaces d’accueil de l’UDAF de la Charente-Maritime, sans interrompre le service. Le chantier est phasé en site occupé, dans un établissement recevant du public de type petite enfance, et l’ambiance saline du littoral conditionne le choix de chaque matériel exposé. FT2E a porté l’étude thermique réglementaire et les cahiers des charges de trois lots techniques. En toiture, 48 modules totalisant 17,5 kWc alimentent le bâtiment en autoconsommation ; au sol, un plancher chauffant à très basse température est alimenté par une pompe à chaleur. La consommation calculée s’établit à 69,3 kWhep/m²/an, 29 % sous l’exigence.
 mission_ft2e: [Thermique, "Électricité CFO", "Électricité CFA", Photovoltaïque, CVC]
 image_principale: "/images/projets/creche-oranger-perigny/01.jpg"
 image_principale_alt: "Façade de l’extension de la crèche de l’Oranger à Périgny, claire-voie en bois devant les espaces d’accueil"

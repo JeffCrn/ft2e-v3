@@ -1,5 +1,6 @@
 ---
 titre: "Abbaye de Sablonceaux — modification du système de sécurité incendie"
+ouvrage: "Abbaye de Sablonceaux"
 secteur: Patrimoine
 typologie: Réhabilitation
 moa: "Congrégation de la Communauté du Chemin Neuf"
@@ -9,6 +10,8 @@ reference: "22-042"
 annee: 2022
 annee_livraison: 2026
 performance: "SSI de catégorie A · alarme de type 1 · avis favorable à la réception (juin 2026)"
+synthese: >-
+  L’abbaye de Sablonceaux n’est pas un bâtiment mais un ensemble : le bâtiment des Moines, le Logis et le grenier d’abondance forment un établissement recevant du public de troisième catégorie avec hébergement ; l’aile Jonas relève de la cinquième catégorie, deux autres abritent des logements hors classement. L’installation d’origine ne formait qu’une seule zone d’alarme, et le moindre déclenchement sonnait l’évacuation des 3 370 m². FT2E a conduit la modification du système de sécurité incendie, du diagnostic à la réception, ainsi que la coordination SSI. Le nouveau système est de catégorie A, adressable point par point, découpé en trois zones d’alarme. Les travaux ont duré neuf semaines dans un site habité ; avis favorable le 30 juin 2026.
 mission_ft2e: [SSI]
 image_principale: "/images/projets/abbaye-sablonceaux-ssi/01.jpg"
 image_principale_alt: "Vue aérienne de l’abbaye de Sablonceaux : le clocher de l’église abbatiale, le cloître et les ailes conventuelles en pierre autour d’une cour engazonnée"

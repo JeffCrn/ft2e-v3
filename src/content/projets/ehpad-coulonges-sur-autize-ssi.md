@@ -1,5 +1,6 @@
 ---
 titre: "EHPAD Aliénor d’Aquitaine de 102 lits — coordination SSI"
+ouvrage: "EHPAD Aliénor d’Aquitaine"
 secteur: Coordination SSI
 typologie: Neuf
 moa: "3F Résidences — Groupe Action Logement"
@@ -10,6 +11,8 @@ reference: "21-061"
 annee: 2021
 annee_livraison: 2026
 performance: "SSI de catégorie A · alarme de type 1 · avis favorable à la réception (2026)"
+synthese: >-
+  Un EHPAD ne s’évacue pas : ses résidents sont mis à l’abri derrière des parois coupe-feu, au niveau même où ils se trouvent. C’est cette contrainte qui commande la sécurité incendie de l’établissement neuf de Coulonges-sur-l’Autize, qui compte 102 lits répartis sur quatre ailes en R+1, pour 5 250 m². FT2E a porté la coordination du système de sécurité incendie, de l’avant-projet à la réception : notice de sécurité, cahier des charges fonctionnel, zonages, corrélation, essais. Le système est de catégorie A, adressable point par point, avec 11 zones de compartimentage et 10 zones de désenfumage. L’alarme est sélective, audible du seul personnel. Avis favorable à la réception le 15 janvier 2026.
 mission_ft2e: [SSI]
 image_principale: "/images/projets/ehpad-coulonges-sur-autize-ssi/01.jpg"
 image_principale_alt: "Perspective aérienne de l’EHPAD Aliénor d’Aquitaine à Coulonges-sur-l’Autize : quatre ailes d’hébergement en R+1 autour de toitures-terrasses végétalisées et de jardins"

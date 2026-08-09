@@ -56,6 +56,13 @@ collections:
         required: true
         pattern: ['.{2,80}', '2 à 80 caractères']
 
+      - label: "Nom court de l'ouvrage"
+        name: "ouvrage"
+        widget: "string"
+        required: false
+        pattern: ['^.{2,40}$', "2 à 40 caractères"]
+        hint: "Deux à quatre mots : le nom par lequel on désigne l'affaire (« Néréa », « Hôtel Le Yachtman », « Le Fougerou »). Ce n'est pas un raccourci du titre, c'est un nom. Il compose la légende de l'image principale, qui ne dispose que d'une ligne."
+
       - label: "Secteur"
         name: "secteur"
         widget: "select"

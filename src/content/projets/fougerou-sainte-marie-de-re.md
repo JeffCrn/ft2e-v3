@@ -1,5 +1,6 @@
 ---
 titre: "« Le Fougerou » — 48 logements en accession sociale et 6 locatifs sociaux"
+ouvrage: "Le Fougerou"
 secteur: Logements
 typologie: Neuf
 moa: "Coopérative Vendéenne du Logement"
@@ -10,6 +11,8 @@ reference: "20-014"
 annee: 2020
 annee_livraison: 2026
 performance: "RT2012 · NF Habitat HQE 1 point · Cep de 14 à 36 % sous l’exigence"
+synthese: >-
+  À Sainte-Marie-de-Ré, sur l’île de Ré, l’opération « Le Fougerou » compte 54 maisons individuelles — 48 en accession sociale à la propriété, le reste en locatif social — sur un terrain de 22 149 m². Le site est inscrit depuis 1979 et couvert par un site patrimonial remarquable : le permis est assorti des prescriptions de l’architecte des Bâtiments de France, et le chantier compose avec l’île, où seuls les travaux sans nuisance sonore sont admis l’été. FT2E a suivi l’affaire de l’esquisse à la livraison de la dernière tranche : lots fluides et électricité, études d’exécution, et 27 calculs thermiques qui concluent tous à la conformité.
 mission_ft2e: [CVC, Thermique, "Électricité CFO", "Électricité CFA", "Études d'exécution"]
 image_principale: "/images/projets/fougerou-sainte-marie-de-re/01.jpg"
 image_principale_alt: "Rue livrée du Fougerou à Sainte-Marie-de-Ré, maisons blanches à volets battants, clocher du village en arrière-plan"

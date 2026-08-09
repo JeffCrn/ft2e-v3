@@ -23,6 +23,21 @@ const projets = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projets' }),
   schema: z.object({
     titre: z.string().min(2).max(80),
+    /**
+     * Nom court de l'ouvrage — deux à quatre mots, celui par lequel on
+     * désigne l'affaire. Il n'est PAS un raccourci du titre : `titre` est
+     * une phrase descriptive faite pour le `<h1>` et les moteurs, `ouvrage`
+     * est un nom.
+     *
+     * Il alimente le cartouche de légende du média (amendement A8 :
+     * « ouvrage · ville · surface »), qui dispose de 32 signes sur une ligne
+     * à 390 px. Découper le titre au premier séparateur ne suffisait pas :
+     * la légende ainsi composée ne tenait que sur 1 fiche sur 19.
+     *
+     * Facultatif, et le rendu se replie sur le découpage du titre en son
+     * absence — une fiche sans nom court reste publiable.
+     */
+    ouvrage: z.string().min(2).max(40).optional(),
     secteur: z.enum(SECTEURS),
     typologie: z.enum(TYPOLOGIES),
     moa: z.string().min(2),

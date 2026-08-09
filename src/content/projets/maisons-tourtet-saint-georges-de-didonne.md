@@ -1,5 +1,6 @@
 ---
 titre: "Dix maisons individuelles locatives sociales à Saint-Georges-de-Didonne"
+ouvrage: "Maisons Tourtet"
 secteur: Logements
 typologie: Neuf
 moa: "Clairsienne — société anonyme d’HLM"
@@ -10,6 +11,8 @@ reference: "19-033"
 annee: 2019
 statut: en cours
 performance: "RT2012 · labellisation NF Habitat et Effinergie+ RT2012−20 % visée · Cep −43,0 %, Bbio −21,6 %"
+synthese: >-
+  Avenue du Lieutenant-Colonel Tourtet, à Saint-Georges-de-Didonne, Clairsienne construit 10 maisons individuelles accolées, toutes locatives sociales, sur une parcelle en pente douce vers la Gironde. C’est la plus ancienne affaire de notre corpus de références, et celle dont le calendrier est le plus étiré : permis accordé en septembre 2019, première réunion de chantier en mars 2024. Le projet traverse ainsi l’entrée en vigueur de la RE2020 sans changer de régime. L’enveloppe est arrêtée dès 2020 ; ce sont les systèmes qui progressent ensuite, la consommation descendant de 37,2 à 33,0 kWhep/m²/an, soit 43 % sous l’exigence.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", Photovoltaïque]
 image_principale: "/images/projets/maisons-tourtet-saint-georges-de-didonne/01.jpg"
 image_principale_alt: "Extrait du plan de principe plomberie-chauffage-ventilation FT2E au 1/50 : l’étage de deux maisons accolées, avec les réseaux d’eau, de chauffage et de ventilation tracés pièce par pièce"
