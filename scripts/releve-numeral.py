@@ -20,7 +20,15 @@ import sys
 NOMS = ['logement', 'chambre', 'lit', 'niveau', 'place', 'zone', 'lot',
         'bâtiment', 'étage', 'mission', 'semaine', 'réunion', 'réserve',
         'cotraitant', 'poste', 'maison', 'appartement']
-NOMS = sorted(NOMS + [n + 's' for n in NOMS], key=len, reverse=True)
+def pluriel(nom):
+    """Le pluriel s'engendre aussi. `niveau` + 's' donnait `niveaus` : le mot
+    n'existait pas, la regex ne le trouvait jamais, et le relevé publiait un
+    zéro qui ressemblait à une mesure — alors que `french-editorial.md` cite
+    « sept niveaux » comme exemple conforme. Défaut relevé en session 19."""
+    return nom + ('x' if nom.endswith(('eau', 'au', 'eu')) else 's')
+
+
+NOMS = sorted(NOMS + [pluriel(n) for n in NOMS], key=len, reverse=True)
 NOM = r'(?:' + '|'.join(NOMS) + r')\b'
 
 # Le lexique est ENGENDRÉ, jamais tapé. Une liste écrite à la main s'arrête là

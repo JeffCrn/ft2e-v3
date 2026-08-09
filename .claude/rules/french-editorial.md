@@ -44,7 +44,7 @@
 
 ## Nombres et quantités
 
-**Cette règle a été relevée, pas décrétée.** Elle décrit l'usage déjà en vigueur dans les dix-neuf récits de `src/content/projets/`, constaté au 2026-08-09 : les récits l'appliquaient avant qu'elle soit écrite. Elle est consignée ici pour que les chapôs et les textes à venir s'y conforment sans avoir à la redécouvrir.
+**Cette règle a été relevée, pas décrétée.** Elle décrit l'usage déjà en vigueur dans les vingt récits de `src/content/projets/`, constaté au 2026-08-09 : les récits l'appliquaient avant qu'elle soit écrite. Elle est consignée ici pour que les chapôs et les textes à venir s'y conforment sans avoir à la redécouvrir.
 
 | Cas | Graphie | Exemple |
 |---|---|---|
@@ -68,13 +68,17 @@ La même logique couvre déjà l'ordinal réglementaire de la dernière ligne du
 
 Le relevé **se rejoue** : `scripts/releve-numeral.py` (sans argument pour mesurer le disque, `--head` pour mesurer le dernier commit). Ne sont comptés que les nombres qui qualifient **directement** un nom dénombrable d'une liste close — `logement`, `chambre`, `lit`, `niveau`, `place`, `zone`, `lot`, `bâtiment`, `étage`, `mission`, `semaine`, `réunion`, `réserve`, `cotraitant`, `poste`, `maison`, `appartement`, singulier et pluriel. `un` et `une` sont exclus : ils sont article aussi souvent que numéral. Frontmatter exclu, corps de récit seul.
 
-État des dix-neuf récits après la passe du 2026-08-09 :
+État des **vingt** récits, remesuré le 2026-08-09 après la session 19 :
 
 | Bande | En lettres | En chiffres |
 |---|---|---|
-| de deux à neuf | **62** — conforme | **1** — la citation Yachtman |
+| de deux à neuf | **71** — conforme | **1** — la citation Yachtman |
 | de dix à trente | **27** | **13** |
 | au-delà de trente | **3** | **12** |
+
+⚠ **Le 62 de la mesure précédente était faux, et le script en était la cause.** Il engendrait ses pluriels par `nom + 's'`, ce qui donne *niveaus* : **aucune occurrence de « trois niveaux » ou « sept niveaux » n'a jamais été comptée**, alors que le tableau des cas ci-dessus cite « sept niveaux » comme exemple conforme. La flexion est désormais engendrée elle aussi — `-eau`, `-au` et `-eu` prennent `x`. Le passage de 62 à 71 se décompose en **sept occurrences jusque-là invisibles** dans les dix-neuf récits antérieurs (dont « sept niveaux » et « quatre niveaux » chez Yachtman) et **deux apportées** par la fiche de l'École des douanes. Les deux autres bandes ne bougent pas : aucun « niveaux » n'y figure.
+
+C'est le troisième piège du même genre sur ce script, après la borne du lexique arrêtée à « trente » et le « trois » qui s'accrochait dans « quarante-trois ». Tous trois ont produit un zéro ou un sous-compte qui ressemblait à une mesure. **Un lexique engendré ne suffit pas : ses règles de flexion doivent l'être aussi.**
 
 - **Sous dix, plus aucun écart.** Le seul « 6 maisons » (`fougerou-sainte-marie-de-re.md`) a été corrigé le 2026-08-09 ; la seule occurrence chiffrée restante est la citation du contrat Yachtman, couverte par l'exception ci-dessus. Le relevé antérieur annonçait **2** écarts : il en comptait un de trop.
 - **Au-delà de trente, le chiffre domine sans régner** : douze occurrences en chiffres (« 42 lits », « 54 maisons », « 152 réunions ») contre trois en lettres (« quarante-six chambres », « quarante-trois postes », « trente-deux réunions »).
