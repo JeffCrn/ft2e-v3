@@ -16,14 +16,23 @@
   - `reference` = **le numéro d'affaire FT2E**, graphie `NN-NNN`, obligatoire sur toute fiche réelle. `NN` = millésime d'ouverture, `NNN` = rang dans l'année. Il se relève **sur une pièce produite par FT2E** (« Affaire n° : 22-033 » en page de garde des synthèses et CCTP, « N° 21 061 » sur les devis, cartouche des plans) — le nom du dossier `C:\ft2e-arch\` le confirme mais ne fait pas foi seul. Se méfier des numéros d'affaire **des cotraitants** présents dans les mêmes pièces (ex. `22.03` = Cabinet Sourd sur l'affaire 22-006, `D-24050` = Diese sur 25-097).
   - `annee` = **millésime d'ouverture de l'affaire**, celui qu'encode `reference`. Le build le vérifie (`superRefine` dans `src/content.config.ts`) : `22-042` impose `annee: 2022`. Ce n'est ni l'année de DCE, ni celle de la réception.
   - `annee_livraison` = millésime de **réception prononcée**, optionnel, à ne renseigner **que si la réception est actée sur pièce** (PV, avis favorable). Interdit par le schéma quand `statut: en cours` — une livraison prévisionnelle ne s'affiche pas.
-  - Les fiches `demo: true` **ne portent jamais de `reference`** : un numéro fabriqué entrerait en collision avec une affaire réelle. La nomenclature affiche `—`.
+  - Les fiches `demo: true` **ne portent jamais de `reference`** : un numéro fabriqué entrerait en collision avec une affaire réelle.
+- **Depuis ADR-003 (2026-08-09), `reference` et `annee` ne s'affichent plus nulle part.** Les champs restent obligatoires — ils portent la traçabilité vers le dossier papier, le tri de la nomenclature et le contrôle croisé du build — mais la fiche publie une **chronologie publique** : « livraison AAAA » quand `annee_livraison` est renseignée, le `statut` sinon. Règle implémentée une seule fois, dans `src/lib/projets.ts` (`chronologie` / `libelleChronologie`) : **ne pas réécrire le test `annee_livraison ? … : …` ailleurs**. Le numéro d'affaire ne survit que dans `identifier` du JSON-LD.
+  - ⚠️ **Corollaire rédactionnel : ne jamais citer le numéro d'affaire dans le récit.** Sept fiches antérieures le font encore (« l'affaire 22-042 a été ouverte… ») — c'est une dette à résorber, pas un usage à reproduire.
+- **Deux champs de texte à ne pas confondre**, tous deux facultatifs au schéma mais attendus sur une fiche réelle :
+  - **`ouvrage`** (2–40 signes) — le **nom court** par lequel on désigne l'affaire, deux à quatre mots. Ce n'est pas un raccourci du titre : `titre` est une phrase descriptive faite pour le `<h1>` et les moteurs, `ouvrage` est un **nom**. Il compose la légende du média — « ouvrage · ville · surface », amendement A8 — qui ne dispose que d'une ligne. À défaut, le rendu retombe sur le premier segment du titre, ce qui ne donne rien quand le titre n'ouvre pas sur un nom propre. **Si le dossier ne porte aucun nom propre, composer une désignation courte et le signaler** : cinq des dix-neuf fiches sont dans ce cas, à faire confirmer par FT2E.
+  - **`synthese`** (**480–780 signes**, calibre vérifié par Zod *et* par le motif ancré `^[\s\S]{480,780}$` de Decap) — un texte **autonome**, qui se lit sans le récit ni le cartouche : l'enjeu posé, la mission FT2E, le chiffre que la fiche défend. Rendu au rang **Corps** (17 px, graisse 400, encre) dans un plan posé, avant le récit. **Ce n'est pas un chapô** — le rang Chapô est plafonné à trois lignes et posé en graisse 300 ; le champ ne s'appelle pas `chapo` pour cette raison. **Le plancher n'autorise aucun remplissage** : une fiche qui ne peut pas atteindre 480 signes honnêtement reste sans synthèse.
+  - ⚠️ **Sans `synthese`, le récit n'est pas repliable** : la barre « Lire le détail de l'affaire » n'apparaît pas et la fiche rend le récit d'un bloc. Rédiger la synthèse fait donc partie du livrable, au même titre que le récit.
+- **Convention numérale** — relevée sur les récits, consignée dans `.claude/rules/french-editorial.md` § Nombres et quantités : quantités **en lettres sous dix**, **en chiffres à partir de dix** ; unités, mesures, échelles, dates et montants toujours en chiffres ; ordinaux de classement en lettres (« quatrième catégorie »). Elle s'applique à la synthèse comme au récit.
 - **Secteurs autorisés** (enum Zod) : `Logements | Tertiaire / ERP | Industriel et commercial | Patrimoine | Monotechnique | Coordination SSI | Études d'exécution / BIM`.
 - **Récit en 4 sections** (`## L'enjeu`, `## Solution` ou variantes rédactionnelles, `## Particularités`, `## Résultat`) — gabarit `content-templates/projet-modele.md`, étalon `src/content/projets/creche-oranger-perigny.md`.
 - **Voix FT2E** : sobre, technique, chaleureuse — `.claude/rules/french-editorial.md` (typographie française stricte : espaces insécables, guillemets « », apostrophe typographique, `m²`, RT2012/RE2020 sans espace).
 - **GEO** (fiche de collecte, p. 1) : des chiffres précis et vérifiables, des lieux nommés (commune, agglomération, département), un récit unique, une phrase = un fait citable.
 - **Titre ≤ 80 caractères** (Zod), `<title>` et `description` uniques sur tout le site.
 - **Images** : `public/images/projets/<slug>/`, alt descriptif obligatoire, rapports 21:8 / 16:10 / 3:2 uniquement, duotone appliqué par les composants. Pas d'image → le pattern `fs.existsSync` affiche « [Photo à venir] » ; ne jamais référencer un fichier au mauvais format.
-- **Avant commit : `npm run build`** (échec = blocage). Après commit + push : `npx vercel deploy --prod --yes`.
+  - ⚠️ **Contrôler ce que le visuel donne à lire, pas seulement ce qu'il montre.** L'inventaire du 2026-08-09 a établi que **trois des dix-neuf images principales laissent lire un cartouche de plan complet** : numéro d'affaire, nom et adresse du maître d'ouvrage, nom de l'architecte, logo d'un installateur tiers, et l'adresse électronique de FT2E. Aucun contrôle textuel ne détecte cela — c'est dans les pixels. Un extrait de plan **se recadre hors cartouche** ; à défaut, le signaler en section E.
+  - ⚠️ **L'alt décrit l'image, pas la pièce dont elle est tirée.** Deux alts citaient un numéro d'affaire, dont un décrivait un cartouche absent du recadrage.
+- **Avant commit : `npm run build`** (échec = blocage). **Le déploiement se déclenche par le `git push`** : la CLI `vercel` n'est pas installée dans cet environnement et répond « Not authorized » — ne pas tenter `npx vercel deploy`. Vérifier la mise en ligne par `curl` sur l'URL de la fiche (**barre oblique finale obligatoire**), et attendre : le premier appel sert parfois encore la version précédente.
 - **Commits** : `content(references): ajoute la fiche réelle <nom court>` (impératif présent, ≤ 72 car.).
 - **Autorisations MOA** (section E de la fiche de collecte) : tant qu'elles ne sont pas obtenues, le site reste en démo noindex — les fiches se publient, la levée d'indexation reste soumise à validation FT2E (`docs/19-migration-production.md`).
 
@@ -70,9 +79,12 @@ Audit demandé par l'utilisateur après constat d'un biais systématique : les f
 5. **Fiche de collecte préremplie** (livrable client). Créer `references/ref_NNN/fiche-collecte-<slug>.md` calquée sur le PDF : section A complète, section A+ (données techniques extraites, chiffrées, sourcées pièce par pièce), sections B / C / D / E laissées en questions pour l'équipe FT2E.
 6. **Visuels.** Chercher dans l'ordre : photos du dossier d'affaires → images du docx sectoriel (`unzip -j <docx> 'word/media/*'`) → rien. Si visuel exploitable : recadrer aux rapports autorisés, déposer dans `public/images/projets/<slug>/`, alt descriptif, crédit architecte à tracer (section E). Sinon : laisser le chemin conventionnel dans le frontmatter (placeholder « [Photo à venir] » géré par `fs.existsSync`).
 7. **Rédaction de la fiche.** Créer `src/content/projets/<slug>.md` (slug kebab-case sans accents ; vérifier qu'il n'écrase rien) : frontmatter complet conforme à `src/content.config.ts`, récit 4 sections nourri des données extraites, aucune invention, sections B/C manquantes compensées par la matière technique en attendant le retour FT2E.
+   - **`ouvrage`** : relever le nom court dans les pièces ; à défaut en composer un et le signaler.
+   - **`synthese`** : 480–780 signes, écrite **après** le récit et **à partir de lui**, sans citer le numéro d'affaire. Le calibre est étroit — compter trois passes de resserrage plutôt qu'une.
+   - ⚠️ **Écrire ces deux champs par script Python**, jamais avec `Edit` : l'outil d'écriture normalise `U+00A0` et `U+202F`, et une synthèse sans insécables est un défaut typographique. `references/sessions/injection-typographique.py` repose les insécables après coup.
 8. **Remplacement DÉMO le cas échéant.** Si le tableau indique une fiche DÉMO équivalente : la supprimer dans le même commit (le site est noindex, aucune redirection nécessaire).
-9. **Contrôles qualité.** (a) `npm run build` vert ; (b) relecture éditoriale par l'agent `editorial-reviewer` (voix + typographie française) ; (c) unicité du titre et de la description ; (d) alt text présents ; (e) cohérence des chiffres fiche ↔ pièces sources.
-10. **Livraison.** Commit (`content(references): …`) + push + `npx vercel deploy --prod --yes`. Contrôle visuel de la fiche sur le déploiement.
+9. **Contrôles qualité.** (a) `npm run build` vert — c'est lui qui refuse un calibre de synthèse hors bornes ou une contradiction `reference` ↔ `annee` ; (b) relecture éditoriale par l'agent `editorial-reviewer` (voix + typographie française) ; (c) unicité du titre et de la description ; (d) alt text présents, et **sans numéro d'affaire** ; (e) cohérence des chiffres fiche ↔ pièces sources ; (f) **aucun `NN-NNN` dans la synthèse ni dans le récit** — le vérifier sur `dist/` hors bloc JSON-LD, en comparant à la liste des vrais numéros (le motif `\d{2}-\d{3}` attrape aussi les normes `NF S 61-931`) ; (g) **convention numérale** respectée ; (h) le visuel ne laisse lire aucun cartouche.
+10. **Livraison.** Commit (`content(references): …`) puis **push — c'est le push qui déploie**. Contrôler la mise en ligne par `curl` sur l'URL de la fiche, jamais en la supposant : présence du bloc de synthèse (`plan-pose p-7 mb-7`), de la barre de dépliement, et du récit **intégralement servi replié** (le `<details>` ne doit porter aucun attribut `open`).
 11. **Suivi.** Mettre à jour le tableau § Suivi ci-dessous (statut, visuels, collecte, particularités découvertes).
 12. **Prompt de la session suivante** (OBLIGATOIRE, clôture de session). Rédiger `references/sessions/session-NN+1-prompt.md` selon le gabarit ci-dessous, avec les données déjà connues de la prochaine référence, et le reproduire intégralement dans le message final à l'utilisateur.
 
@@ -94,8 +106,22 @@ protocole intégralement pour la référence ci-dessous.
 - Secteur pressenti : <secteur enum> · Typologie : <typologie> · Statut : <livré|en cours>
 - Frontmatter imposé : `reference: "<NN-NNN>"` · `annee: <20NN>` (millésime d'ouverture,
   vérifié au build contre la référence) · `annee_livraison` seulement si réception
-  prononcée sur pièce — à relever à l'étape 2 bis sur un document FT2E
-- Fiche DÉMO à remplacer : <chemin | aucune>
+  prononcée sur pièce — à relever à l'étape 2 bis sur un document FT2E.
+  Ni `reference` ni `annee` ne s'affichent (ADR-003) : la fiche publie
+  « livraison AAAA » ou son `statut`.
+- `ouvrage` : <nom court pressenti, ou « à relever »> — deux à quatre mots, il
+  compose la légende du média
+- `synthese` : à rédiger, 480–780 signes, sans numéro d'affaire
+
+## Ce que la fiche doit porter (rappel du modèle courant)
+
+| Champ | Contrainte |
+|---|---|
+| `titre` | ≤ 80 signes, phrase descriptive (h1 + moteurs) |
+| `ouvrage` | 2–40 signes, un **nom**, pas un raccourci du titre |
+| `synthese` | **480–780 signes**, autonome, sans numéro d'affaire |
+| `statut` | `livré` / `en cours` / `archive` — s'affiche tant que la réception n'est pas prononcée |
+| récit | 4 sections, sans citer le numéro d'affaire |
 
 ## Ce qu'on sait déjà (sources commerciales — à confirmer par les pièces)
 <données du docx sectoriel et de la plaquette : MOA, architecte, montant,
@@ -175,7 +201,8 @@ L'ordre privilégie : (1) les dossiers les mieux documentés d'abord — rodage 
 
 ## Fin de chantier (après S22)
 
-1. Bilan des 8 fiches DÉMO restantes avec FT2E : suppression, ou conversion en réelles si les données arrivent (Maison Pierre Loti figure dans les docx patrimoine/SSI — bonne candidate).
+1. ~~Bilan des 8 fiches DÉMO restantes~~ — **sans objet depuis le 2026-08-08** : FT2E a demandé leur suppression, elle est faite. Reste à traiter avec eux les marqueurs `[DÉMO]` **hors fiches projet** : 11 dans `src/content/secteurs/`, 6 dans `src/content/expertises/`, 1 dans l'unique actualité. Ce sont des affirmations non vérifiées dans de la prose — leur levée demande des chiffres validés, pas une suppression.
+1 bis. **Dette rédactionnelle du chantier**, à résorber en fin de parcours : (a) sept récits citent encore leur numéro d'affaire, contre ADR-003 — réécriture, pas suppression ; (b) deux écarts à la convention numérale (« 6 maisons » dans `fougerou-sainte-marie-de-re`, « 4 chambres » dans `hotel-yachtman-quai-valin-la-rochelle`) ; (c) cinq noms d'`ouvrage` composés faute de nom propre au dossier, à faire confirmer par FT2E ; (d) la légende de média reste masquée sous `lg` — le champ `ouvrage` a ramené sa longueur médiane de 76 à 45 signes, mais le budget d'une ligne est de 32 et les noms de communes le dépassent encore.
 2. Envoi groupé des 22 fiches de collecte à FT2E pour les sections B–E ; intégration des retours (résultats constatés, récits d'équipe, photos, autorisations).
 3. Passe SEO/GEO transversale : maillage interne fiches ↔ pages secteurs/expertises (≥ 5 liens internes contextuels par fiche), unicité des métadonnées, JSON-LD `CreativeWork`.
 4. Audit RGAA + Lighthouse sur 3 fiches échantillon.
