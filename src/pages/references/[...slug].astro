@@ -111,14 +111,22 @@ const jsonLd = {
             </span>
           </div>
 
-          {/* La synthèse précède le cartouche technique (variante retenue le
-              2026-08-09) : sur mobile, le lecteur reçoit d'abord le texte qui
-              dit de quoi il s'agit, puis les cotes. Sur desktop rien ne bouge,
-              la FicheTechnique étant dans la colonne de droite. */}
-          {synthese && <SyntheseAffaire texte={synthese} />}
+          {/* Ordre de lecture verticale sur petit écran, arrêté le 2026-08-09
+              après comparaison sur téléphone :
+                1. le cartouche de données      (ci-dessous, lg:hidden)
+                2. le relevé de performance     (ci-dessous, lg:hidden)
+                3. la synthèse rédactionnelle
+                4. le récit détaillé, replié
+              Les données et le chiffre que la fiche défend arrivent d'abord ;
+              la prose vient ensuite, d'un seul tenant — synthèse puis récit,
+              sans cartouche intercalé entre les deux.
 
-          {/* Sur petit écran, le cartouche technique s'intercale entre la
-              synthèse et le récit ; la colonne de droite prend le relais dès lg.
+              Sur desktop cet ordre est sans effet : le cartouche et le relevé
+              sont dans la colonne de droite, et la colonne de gauche lit
+              image → synthèse → barre → récit dans les deux cas. */}
+
+          {/* Sur petit écran, le cartouche technique ouvre la colonne ; la
+              colonne de droite prend le relais dès lg.
               display:none retire l'instance inactive de l'arbre d'accessibilité. */}
           <div class="lg:hidden mb-8">
             <FicheTechnique projet={projet} />
@@ -140,9 +148,12 @@ const jsonLd = {
             </div>
           )}
 
-          {/* La barre de dépliement se pose juste avant le récit, et non
-              soudée à la synthèse : sur mobile, soudée, elle repousserait le
-              relevé de performance hors de l'écran à chaque dépliement. Sans
+          {/* 3. La synthèse rédactionnelle, après les données. */}
+          {synthese && <SyntheseAffaire texte={synthese} />}
+
+          {/* 4. La barre de dépliement se pose juste avant le récit, et non
+              soudée à la synthèse : soudée, elle repousserait le relevé de
+              performance hors de l'écran mobile à chaque dépliement. Sans
               synthèse, `depliable={false}` rend le récit tel qu'avant. */}
           <RecitAffaire depliable={Boolean(synthese)}>
             <Content />
