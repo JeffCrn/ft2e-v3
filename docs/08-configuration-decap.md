@@ -97,9 +97,9 @@ collections:
           hint: "passer à « livré » avant de renseigner l'année de livraison — sinon le build échoue sans message dans Decap. Porte le rang de la nomenclature et s'affiche sur la fiche tant que la réception n'est pas prononcée." }
       - { label: "Année de livraison (réception prononcée)", name: "annee_livraison", widget: "number", required: false, value_type: "int", min: 2008, max: 2030,
           hint: "Seulement si la réception est actée sur pièce. Interdit si le statut est « en cours »." }
-      - { label: "Chapô", name: "chapo", widget: "text", required: false,
+      - { label: "Synthèse", name: "synthese", widget: "text", required: false,
           pattern: ['^[\s\S]{480,780}$', "480 à 780 signes"],
-          hint: "480 à 780 signes, espaces comprises. Synthèse autonome. Une fiche qui ne peut pas atteindre 480 signes honnêtement reste SANS chapô." }
+          hint: "480 à 780 signes, espaces comprises. Texte autonome, rendu au rang Corps (17 px) — ce n'est pas un chapô. Une fiche qui ne peut pas atteindre 480 signes honnêtement reste SANS synthèse." }
       - { label: "Performance énergétique", name: "performance", widget: "string", required: false,
           hint: "Ex: RE2020 · Effinergie+" }
       - label: "Mission FT2E"

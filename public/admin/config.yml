@@ -137,12 +137,12 @@ collections:
         max: 2030
         hint: "À ne renseigner qu'une fois la réception actée sur pièce (PV, avis favorable). Interdit si le statut est « en cours »."
 
-      - label: "Chapô"
-        name: "chapo"
+      - label: "Synthèse"
+        name: "synthese"
         widget: "text"
         required: false
         pattern: ['^[\s\S]{480,780}$', '480 à 780 signes']
-        hint: "480 à 780 signes, espaces comprises. Synthèse autonome : elle doit se lire seule, sans le récit ni le cadre technique. Une fiche qui ne peut pas atteindre 480 signes honnêtement reste SANS chapô — le plancher n'autorise aucun remplissage, et le champ est facultatif pour cette raison."
+        hint: "480 à 780 signes, espaces comprises. Texte autonome : il doit se lire seul, sans le récit ni le cadre technique. Une fiche qui ne peut pas atteindre 480 signes honnêtement reste SANS synthèse — le plancher n'autorise aucun remplissage, et le champ est facultatif pour cette raison."
 
       - label: "Performance énergétique"
         name: "performance"

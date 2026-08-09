@@ -1,0 +1,46 @@
+---
+// Synthèse d'affaire — un plan posé de rang 1 (§ 09).
+//
+// ── Pourquoi « synthèse » et non « chapô » ──
+// Le rang Chapô (§ 06) est plafonné à trois lignes et composé en graisse 300.
+// Ce bloc fait 480 à 780 signes : ce n'est pas un chapô, et le nommer ainsi
+// garantirait qu'on le recompose un jour dans un rang qui ne peut pas le
+// porter. Le champ, le composant et le schéma disent donc `synthese`.
+//
+// ── Le cadre est un plan posé, pas une couleur ──
+// Recette `.plan-pose` telle quelle : fond `--color-papier`, bordure 1 px
+// `--color-filet-2`, ombre `--shadow-plan-1`. La bordure de 1 px est
+// l'attribut du rang 1 et ne vaut qu'avec son ombre — les deux vont
+// ensemble, on n'en garde pas une sans l'autre.
+//
+// Ni aplat de voile, ni filet en pivot : le voile n'existe pas sur papier
+// (§ 04) et le pivot n'est pas un jeton de filet — `--color-filet-2` est le
+// filet de plan. Aucune valeur hexadécimale ici : elle passe par un jeton,
+// ou elle n'existe pas (§ 17). C'est aussi pourquoi ce fichier n'écrit
+// aucune couleur : `.plan-pose` les porte toutes.
+//
+// (Les noms de classes proscrites ne sont pas écrits littéralement dans ce
+// commentaire : Tailwind scanne les commentaires et régénérerait la classe
+// que ce bloc bannit.)
+//
+// ── Le texte est au rang Corps ──
+// 17 px (haut de la fourchette 15–17), chasse 100, graisse 400, interligne
+// 1,60, en `--color-encre`. Le récit reste à 15 px : c'est la seule
+// distinction typographique admise entre les deux, et elle est intra-rang.
+//
+// `.type-chapo` (global.css) n'est PAS touchée : ce rang reste juste pour
+// `HeroPage`, qui l'emploie en ouverture de section sur trois lignes. Ce
+// bloc cesse simplement de l'utiliser.
+//
+// Retraits sur le pas de 28 px (p-7, mb-7). Rayon 0. Pas de `data-plan` :
+// la révélation de plan n'entre pas dans cette passe.
+interface Props {
+  texte: string;
+}
+
+const { texte } = Astro.props;
+---
+
+<div class="plan-pose p-7 mb-7 max-w-[840px]">
+  <p class="text-[17px] font-normal leading-[1.6] text-encre [font-stretch:100%]">{texte}</p>
+</div>

@@ -46,15 +46,29 @@ const prose = `max-w-[840px] text-[15px] text-pivot leading-[1.65] space-y-6
 
 {depliable ? (
   <details class="group">
-    {/* Barre pleine largeur : cellule calcaire → papier au survol (300 ms,
-        courbe unique), aucun déplacement. Hauteur minimale 44 px = cible
-        tactile. Le focus est porté par le cadre global 2 px pivot. */}
+    {/* ── Pourquoi cette barre a le droit d'exister (§ 11) ──
+        Toute pièce nouvelle doit d'abord se justifier de n'être aucune des
+        quatre pièces du système. Celle-ci n'est pas un bouton principal :
+        le bouton principal est unique par écran et porte un filet clair de
+        3 px qui lui est réservé — deux attributs que cette barre n'a pas et
+        ne doit pas prendre. Elle n'est pas non plus une étiquette de
+        mission, ni un chip de filtre, ni une cellule de nomenclature.
+
+        Elle n'est pas une pièce nouvelle : elle est la COMPOSITION de deux
+        pièces existantes — un Intitulé (17–20 · chasse 112 · graisse 600,
+        recette `.type-intitule`) posé sur le survol de cellule sanctionné
+        au § 14 (calcaire → papier, 300 ms, courbe unique, aucun
+        déplacement). Rien à amender : le système la produit déjà.
+
+        Hauteur minimale 44 px : c'est la cible tactile du § 11, pas une
+        dérogation au pas de 28. Le focus est porté par le cadre global
+        2 px pivot. */}
     <summary
       class="flex items-center justify-between gap-4 min-h-11 py-3.5 px-4 cursor-pointer list-none
              border-y border-filet-2 bg-calcaire hover:bg-papier
              motion-safe:transition-colors motion-safe:duration-300 motion-safe:ease-[var(--ease-blueprint)]"
     >
-      <span class="mono-label text-pivot">
+      <span class="type-intitule text-[17px] text-encre">
         <span class="group-open:hidden">Lire le détail de l’affaire</span>
         <span class="hidden group-open:inline">Replier</span>
       </span>
