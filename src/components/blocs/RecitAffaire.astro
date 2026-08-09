@@ -1,0 +1,86 @@
+---
+// Récit d'affaire — repliable derrière une barre, ou déroulé d'emblée.
+//
+// ─────────────────────────────────────────────────────────────────────────
+// RÈGLE : le récit est rendu AU BUILD et seulement replié VISUELLEMENT.
+//
+// `<details>` masque son contenu par CSS ; le texte reste intégralement
+// présent dans le HTML servi, et c'est la condition de son indexabilité et
+// de son extractibilité. Un moteur, un agent conversationnel ou un lecteur
+// d'écran voient la totalité du récit, replié ou non.
+//
+// Ne JAMAIS convertir ce dépliement en chargement au clic (fetch, island
+// hydratée, `client:*`, injection JS) : la fiche perdrait la totalité de sa
+// substance rédactionnelle pour tout ce qui ne clique pas — c'est-à-dire
+// pour l'indexation et pour la citation par les moteurs génératifs, qui
+// sont l'objet même de ces fiches.
+// ─────────────────────────────────────────────────────────────────────────
+//
+// Le dépliement n'est proposé que si la fiche porte un chapô : sans lui,
+// replier le récit ne laisserait rien à lire. `depliable: false` rend donc
+// exactement le balisage d'avant l'introduction du chapô.
+//
+// Motif repris de `FAQ.astro` : `<details class="group">`, summary en
+// `list-none`, filet de rang 2, chevron sobre. La bascule d'état est
+// INSTANTANÉE — aucune classe de transition sur la rotation : les quatre
+// mouvements du système (§ 13) n'incluent pas de rotation animée. Le
+// libellé bascule en CSS par `group-open`, sans une ligne de JavaScript.
+interface Props {
+  depliable: boolean;
+}
+
+const { depliable } = Astro.props;
+
+// Une seule définition des styles de prose, partagée par les deux chemins :
+// dupliquer cette chaîne, c'est garantir qu'un jour les deux divergent.
+const prose = `max-w-[840px] text-[15px] text-pivot leading-[1.65] space-y-6
+  [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:border-t [&>h2]:border-filet-1 [&>h2]:pt-3.5
+  [&>h2]:mt-9 [&>h2]:mb-3.5
+  [&>h2:first-child]:mt-0
+  [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:font-semibold [&>h3]:[font-stretch:112%] [&>h3]:mt-8 [&>h3]:mb-3
+  [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
+  [&>ul>li]:border-l [&>ul>li]:border-filet-1 [&>ul>li]:pl-4
+  [&_a]:text-encre [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-[3px] [&_a:hover]:decoration-2
+  [&_strong]:text-encre [&_strong]:font-semibold`;
+---
+
+{depliable ? (
+  <details class="group">
+    {/* Barre pleine largeur : cellule calcaire → papier au survol (300 ms,
+        courbe unique), aucun déplacement. Hauteur minimale 44 px = cible
+        tactile. Le focus est porté par le cadre global 2 px pivot. */}
+    <summary
+      class="flex items-center justify-between gap-4 min-h-11 py-3.5 px-4 cursor-pointer list-none
+             border-y border-filet-2 bg-calcaire hover:bg-papier
+             motion-safe:transition-colors motion-safe:duration-300 motion-safe:ease-[var(--ease-blueprint)]"
+    >
+      <span class="mono-label text-pivot">
+        <span class="group-open:hidden">Lire le détail de l’affaire</span>
+        <span class="hidden group-open:inline">Replier</span>
+      </span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="square"
+        class="shrink-0 text-pivot group-open:rotate-180"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </summary>
+
+    <div class:list={['mt-7', prose]}>
+      <slot />
+    </div>
+  </details>
+) : (
+  <div class:list={[prose]}>
+    <slot />
+  </div>
+)}

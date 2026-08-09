@@ -5,6 +5,8 @@ import path from 'node:path';
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
 import FicheTechnique from '../../components/blocs/FicheTechnique.astro';
+import ChapoCadre from '../../components/blocs/ChapoCadre.astro';
+import RecitAffaire from '../../components/blocs/RecitAffaire.astro';
 import ProjetsSimilaires from '../../components/blocs/ProjetsSimilaires.astro';
 import CoinsCuivre from '../../components/primitives/CoinsCuivre.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
@@ -85,7 +87,13 @@ const jsonLd = {
             </span>
           </div>
 
-          {/* Sur petit écran, le cadre de synthèse s'intercale entre l'image
+          {/* Le chapô cadré précède le cadre de synthèse (variante retenue le
+              2026-08-09) : sur mobile, le lecteur reçoit d'abord la phrase qui
+              dit de quoi il s'agit, puis les cotes. Sur desktop rien ne bouge,
+              la FicheTechnique étant dans la colonne de droite. */}
+          {chapo && <ChapoCadre texte={chapo} />}
+
+          {/* Sur petit écran, le cadre de synthèse s'intercale entre le chapô
               et le récit ; la colonne de droite prend le relais dès lg.
               display:none retire l'instance inactive de l'arbre d'accessibilité. */}
           <div class="lg:hidden mb-8">
@@ -108,25 +116,13 @@ const jsonLd = {
             </div>
           )}
 
-          {/* Chapô : synthèse autonome, en pivot et graisse 300 (recette
-              `.type-chapo`) — le seul emploi de la 300, le corps du récit
-              restant en 400. Absent du frontmatter, rien ne s'affiche et les
-              marges des blocs voisins gouvernent seules. */}
-          {chapo && <p class="type-chapo max-w-[840px] mb-8">{chapo}</p>}
-
-          <div
-            class="max-w-[840px] text-[15px] text-pivot leading-[1.65] space-y-6
-                   [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:border-t [&>h2]:border-filet-1 [&>h2]:pt-3.5
-                   [&>h2]:mt-9 [&>h2]:mb-3.5
-                   [&>h2:first-child]:mt-0
-                   [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:font-semibold [&>h3]:[font-stretch:112%] [&>h3]:mt-8 [&>h3]:mb-3
-                   [&>ul]:list-none [&>ul]:pl-0 [&>ul]:space-y-2
-                   [&>ul>li]:border-l [&>ul>li]:border-filet-1 [&>ul>li]:pl-4
-                   [&_a]:text-encre [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-[3px] [&_a:hover]:decoration-2
-                   [&_strong]:text-encre [&_strong]:font-semibold"
-          >
+          {/* La barre de dépliement se pose juste avant le récit, et non
+              soudée au chapô : sur mobile, soudée, elle repousserait le relevé
+              de performance hors de l'écran à chaque dépliement. Sans chapô,
+              `depliable={false}` rend le récit tel qu'avant. */}
+          <RecitAffaire depliable={Boolean(chapo)}>
             <Content />
-          </div>
+          </RecitAffaire>
         </div>
 
         <div class="lg:col-span-5">
