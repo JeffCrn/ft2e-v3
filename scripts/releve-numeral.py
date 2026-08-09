@@ -19,13 +19,37 @@ import sys
 
 NOMS = ['logement', 'chambre', 'lit', 'niveau', 'place', 'zone', 'lot',
         'bâtiment', 'étage', 'mission', 'semaine', 'réunion', 'réserve',
-        'cotraitant', 'poste', 'maison', 'appartement']
+        'cotraitant', 'poste', 'maison', 'appartement',
+        # Élargissement de la session 21 — point (b ter) du § Fin de chantier.
+        # Le lexique était clos et taillé sur les fiches de logements : les
+        # affaires tertiaires et les audits (S16, S19, S20) n'y versaient
+        # presque aucune occurrence, si bien que la bande dix-trente se
+        # décidait sur 40 relevés quand le corpus en portait bien davantage.
+        'salle', 'local', 'occupant', 'type', 'phase', 'compte rendu',
+        'marché', 'facture', 'équipement', 'repas', 'objectif', 'scénario',
+        'préconisation', 'panneau', 'caisson', 'ballon', 'radiateur',
+        'luminaire', 'lot technique', 'commune', 'document', 'pièce', 'page']
 def pluriel(nom):
-    """Le pluriel s'engendre aussi. `niveau` + 's' donnait `niveaus` : le mot
-    n'existait pas, la regex ne le trouvait jamais, et le relevé publiait un
-    zéro qui ressemblait à une mesure — alors que `french-editorial.md` cite
-    « sept niveaux » comme exemple conforme. Défaut relevé en session 19."""
-    return nom + ('x' if nom.endswith(('eau', 'au', 'eu')) else 's')
+    """Le pluriel s'engendre aussi — et pas seulement en `-x`.
+
+    `niveau` + 's' donnait `niveaus` : le mot n'existait pas, la regex ne le
+    trouvait jamais, et le relevé publiait un zéro qui ressemblait à une
+    mesure — alors que `french-editorial.md` cite « sept niveaux » comme
+    exemple conforme. Défaut relevé en session 19.
+
+    La session 21 rencontre **le même défaut sur deux autres classes** en
+    élargissant le lexique : `local` + 's' donne `locals`, `repas` + 's`
+    donne `repass`. Trois classes de flexion valent mieux qu'une liste
+    d'exceptions tapées à la main."""
+    if nom.endswith(('s', 'x', 'z')):
+        return nom                                   # repas, puits : invariables
+    if nom.endswith('ail'):
+        return nom[:-3] + 'aux'                      # travail → travaux
+    if nom.endswith('al'):
+        return nom[:-2] + 'aux'                      # local → locaux
+    if nom.endswith(('eau', 'au', 'eu')):
+        return nom + 'x'                             # niveau → niveaux
+    return nom + 's'
 
 
 NOMS = sorted(NOMS + [pluriel(n) for n in NOMS], key=len, reverse=True)

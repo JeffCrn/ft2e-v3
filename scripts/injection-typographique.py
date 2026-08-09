@@ -10,8 +10,11 @@ NBSP, NNBSP, APO = ' ', ' ', '’'
 
 # Unités, les plus longues d'abord (l'alternance regex est ordonnée).
 UNITES = [
-    'kWhep/m²/an', 'kWh/m²/an', 'm³/\\(h·m²\\)', 'W/\\(m²·K\\)', 'kg/m³', 'm³/h',
-    'kWhep', 'kWh', 'kVA', 'kWc', 'Wc', 'kW', 'mbar', 'lumens', 'litres', 'lux', 'ans',
+    # S21 : un audit énergétique apporte ses propres unités composées. Elles
+    # passent AVANT « kWhep » et « kWh », l'alternance étant ordonnée.
+    'kWhef/an', 'kWhep/an', 'kWh/an',
+    'kWhep/m²/an', 'kWh/m²/an', 'm³/\\(h·m²\\)', 'W/\\(m²·K\\)', 'W/m²·K', 'kg/m³', 'm³/h',
+    'kWhep', 'kWh', 'kVA', 'kWc', 'Wc', 'kW', 'mbar', 'lumens', 'litres', 'lux', 'ans', 'L',
     'm²', 'm³', 'mm', 'cm', 'km', '°C', 'Pa', 'kg', 'lm', 'VA', 'dB', 'm', 'W', 'V', '%', '€',
 ]
 RE_UNITE = re.compile(r'(\d)[ ](' + '|'.join(UNITES) + r')(?![A-Za-zÀ-ÿ0-9])')
