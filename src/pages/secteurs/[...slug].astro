@@ -49,19 +49,19 @@ const projetsSecteur = (await getCollection('projets'))
   <section class="py-14 md:py-16">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
       <div class="plan-pose p-5 md:p-10" data-plan>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <div
-            class="lg:col-span-7 max-w-[840px] text-[17px] text-pivot leading-[1.6] space-y-6
-                   [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:border-t [&>h2]:border-filet-1 [&>h2]:pt-3.5
-                   [&>h2]:mt-9 [&>h2]:mb-3.5
-                   [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:font-semibold [&>h3]:[font-stretch:112%] [&>h3]:mt-8 [&>h3]:mb-3
-                   [&_a]:text-encre [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-[3px] [&_a:hover]:decoration-2
-                   [&_strong]:text-encre [&_strong]:font-semibold"
-          >
-            <Content />
-          </div>
+        {/* Trois éléments de grille, et non deux colonnes imbriquées : c'est ce
+            qui permet à l'image de passer EN TÊTE sur petit écran sans être
+            dupliquée dans le DOM, et de rester en haut de la colonne de droite
+            sur grand écran. L'ordre du DOM est l'ordre mobile — image, récit,
+            livrables et FAQ ; le placement explicite (`lg:col-start`,
+            `lg:row-start`) recompose les deux colonnes au-delà de `lg`.
 
-          <div class="lg:col-span-5">
+            `lg:gap-y-8` reproduit exactement l'écart de 32 px que portait le
+            `mt-8` du premier titre quand image et livrables vivaient dans le
+            même conteneur — d'où le `first:mt-0` sur les titres ci-dessous,
+            sans quoi l'écart serait compté deux fois. */}
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-x-16 lg:gap-y-8 items-start">
+          <div class="lg:col-start-8 lg:col-span-5 lg:row-start-1">
             <div class="relative">
               <div class:list={['w-full aspect-[3/2]', imageExiste ? 'duotone-photo' : 'duotone-media']}>
                 {imageExiste && (
@@ -78,10 +78,23 @@ const projetsSecteur = (await getCollection('projets'))
               </div>
               <CoinsCuivre />
             </div>
+          </div>
 
+          <div
+            class="lg:col-start-1 lg:col-span-7 lg:row-start-1 lg:row-span-2 max-w-[840px] text-[17px] text-pivot leading-[1.6] space-y-6
+                   [&>h2]:text-encre [&>h2]:text-[20px] [&>h2]:border-t [&>h2]:border-filet-1 [&>h2]:pt-3.5
+                   [&>h2]:mt-9 [&>h2]:mb-3.5
+                   [&>h3]:text-encre [&>h3]:text-[17px] [&>h3]:font-semibold [&>h3]:[font-stretch:112%] [&>h3]:mt-8 [&>h3]:mb-3
+                   [&_a]:text-encre [&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-[3px] [&_a:hover]:decoration-2
+                   [&_strong]:text-encre [&_strong]:font-semibold"
+          >
+            <Content />
+          </div>
+
+          <div class="lg:col-start-8 lg:col-span-5 lg:row-start-2">
             {livrables && livrables.length > 0 && (
               <Fragment>
-                <h2 class="mono-label text-pivot mt-8 mb-3.5">livrables</h2>
+                <h2 class="mono-label text-pivot mt-8 first:mt-0 mb-3.5">livrables</h2>
                 <ul class="border border-filet-1 bg-calcaire list-none" role="list">
                   {livrables.map((l) => (
                     <li class="mono-data text-encre px-4 py-3 border-b border-filet-3 last:border-b-0">{l}</li>
@@ -92,7 +105,7 @@ const projetsSecteur = (await getCollection('projets'))
 
             {faq && faq.length > 0 && (
               <Fragment>
-                <h2 class="mono-label text-pivot mt-8 mb-3.5">questions fréquentes</h2>
+                <h2 class="mono-label text-pivot mt-8 first:mt-0 mb-3.5">questions fréquentes</h2>
                 <FAQ items={faq} />
               </Fragment>
             )}
