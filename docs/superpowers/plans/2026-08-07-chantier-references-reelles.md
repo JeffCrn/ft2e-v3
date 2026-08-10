@@ -419,9 +419,104 @@ au sein du même commit, avec un `hint` qui la distingue d'`Études d'exécution
 `ecole-des-douanes-rue-du-jura-la-rochelle` et `cuisine-groupe-scolaire-villedoux` sont
 reclassées : elles n'annoncent plus une réhabilitation qui n'a pas eu lieu.
 
+### ✅ 4 — Audit Lighthouse : trois fiches, trois gabarits
+
+Mesuré au `preview` local sur `ecole-des-douanes…` (photographie),
+`passerelle-…-marans` (extrait de plan) et `atelier-dufour-yachts-perigny` (schéma) — résultats
+**identiques sur les trois** : **performance 95 · accessibilité 100 · bonnes pratiques 100 ·
+SEO 69**.
+
+⚠ **Le 69 en SEO n'est pas un défaut, et il ne peut pas être corrigé aujourd'hui** : l'audit en
+échec est **`is-crawlable`**, et lui seul — c'est le `noindex` de la démo, exigé par la règle 12.
+La cible « 100 en SEO » est **inatteignable par construction** tant que la triple sécurité tient ;
+elle se vérifiera à la levée du `noindex` (`docs/19-migration-production.md`). Ne pas la traiter
+comme une régression à chaque audit.
+
+⚠ **Chrome est installé sur ce poste et Lighthouse tourne** — la note de session « pas de
+navigateur ici » était fausse et a coûté des captures à plusieurs sessions. Le binaire est à
+`C:\Program Files\Google\Chrome\Application\chrome.exe` ; `CHROME_PATH=… npx lighthouse <url>
+--chrome-flags="--headless=new --no-sandbox"` suffit. Le port du `preview` varie : le lire dans
+sa sortie.
+
+**Constat de performance, chiffré mais non traité** : `image-delivery-insight` relève **755 Kio**
+d'économies possibles, et `public/images/projets/` pèse **6,2 Mo** en JPEG bruts (450 à 500 Kio
+par fiche), sans AVIF/WebP ni variante responsive. Les fiches rendent `<img src>` et non
+`<Image>` d'`astro:assets`, parce que les chemins viennent de `public/`. Le traiter demande de
+déplacer les visuels vers `src/assets/` et de reprendre les trois composants qui les rendent —
+un chantier en soi, pour une performance déjà à 95 contre une cible de 90. **Mesuré, documenté,
+laissé.** ⚠ Le LCP local de 2,8 s dépasse le budget de 1,8 s de `astro-conventions.md`, mais la
+mesure est prise sans compression ni CDN : à refaire sur Vercel avant d'en conclure quoi que ce soit.
+
+### ✅ 5 — Le classeur de collecte est produit (voie i)
+
+L'utilisateur a tranché le 2026-08-10 pour la **voie (i)** : un document relié, déposé hors
+dépôt. Produit à `c:\claude_code_dev_projects\ft2e-livrables-collecte\` — `.docx` de 260 Kio
+(annotable) et `.pdf` de 5,7 Mo, **240 pages**, sommaire paginé sur deux niveaux, une affaire par
+saut de page.
+
+⚠ **Vingt-deux fiches, non vingt-trois** : `ref_001` (crèche de l'Oranger) est antérieure au
+chantier et n'a jamais eu de fiche de collecte. Le § 2.1 annonçait 23, c'était une erreur.
+
+⚠ **Hors dépôt n'est pas une commodité de rangement** : `livrables/` **n'est pas gitignoré**. Un
+classeur écrit là partirait sur GitHub au premier `git add -A`, avec les noms de maîtres
+d'ouvrage, les honoraires et les montants de marché de vingt-deux affaires. Aucune pièce source
+n'est emportée, conformément à l'avertissement du § 2.1.
+
+Le liminaire porte les **sept questions transversales T1–T7**, posées une fois pour toutes, et
+dit ce que les sections A/A+ (déjà remplies, sourcées) attendent de FT2E — un démenti, pas une
+réécriture.
+
+### ✅ Hors programme — la configuration Decap était cassée, et personne ne l'avait ouverte
+
+L'ajout de la typologie a fait ouvrir `public/admin/config.yml`, qui n'avait pas suivi le
+schéma. **Le CMS était inutilisable, et silencieusement destructeur** :
+
+| Défaut | Conséquence |
+|---|---|
+| `repo: JeffCrn/ft2e-v2` et `base_url` de la v2 | **le CMS committait dans le dépôt de la v2** — vestige du fork |
+| `secteur` : 6 libellés, **1 seul commun** avec le Zod | aucune fiche créable depuis le CMS |
+| `mission_ft2e` : `Photovoltaïque` absent | la mission **effacée** à l'enregistrement de l'une des 5 fiches qui la portent |
+| collection `secteurs` : **aucun widget de corps** | éditer un secteur **effaçait le texte de sa page** |
+| `expertises.missions_liees` absent | idem, sur les 4 expertises |
+| `annee_livraison` acceptée jusqu'à 2030 | build en échec après coup, sans que le CMS l'ait dit |
+| `pattern` non ancrés (`.{2,80}`) | le plafond n'était jamais appliqué (`RegExp.test`) |
+
+Tout est corrigé, `docs/03` et `docs/08` alignés — ce dernier **reproduit `config.yml` mot pour
+mot**, si bien que quiconque y recopiait le bloc réintroduisait le défaut.
+⚠ **Action hors dépôt encore due** : la callback de l'OAuth App GitHub et les variables
+`OAUTH_GITHUB_CLIENT_*` doivent être portées sur le projet Vercel `ft2e-v3`. Le fichier est juste,
+l'infrastructure ne l'est pas encore — **le CMS ne se connectera pas tant que ce n'est pas fait**.
+
+**Trois incohérences internes au Zod, signalées et non touchées** : `reference` interdite sur une
+fiche de démonstration n'est pas contrôlée (le `superRefine` ne vérifie que le sens inverse) ;
+`demo_reason` est orphelin, employé par aucun contenu ni composant ; `actualites.image_alt` est
+optionnel alors que `image` l'est aussi — une actualité peut donc porter une illustration sans
+alternative textuelle, ce que le RGAA AA interdit.
+
 ### ✅ 2.2 (f) — Les trois millésimes d'ouverture sont retirés
 
 Maubec, Salignac et Saintes ne datent plus l'ouverture d'affaire en prose. ⚠ Le cas de Maubec
 demandait de **distinguer deux dates voisines** : « le chantier, ouvert en septembre 2023 » est
 un fait daté légitime et reste ; c'est « l'écart entre l'ouverture de l'affaire en 2022 et les
 opérations préalables » qui portait le millésime, à trente lignes de là.
+
+### Ce qui reste ouvert au 2026-08-10
+
+**Ne dépend que de FT2E** — les sept questions T1–T7 du § 2.1, désormais portées par le liminaire
+du classeur ; les huit marqueurs `[DÉMO]` (tous des `image_alt`), qui se lèvent au reportage
+photographique et non par une validation ; la levée du `noindex`
+(`docs/19-migration-production.md`), sans laquelle le SEO Lighthouse reste plafonné à 69.
+
+**Ne dépend de personne d'autre que nous, et reste à faire :**
+
+- **(d) Légende de média masquée sous `lg`** — inchangé, décision utilisateur en attente. Le
+  champ `ouvrage`, dont l'absence justifiait le masquage, existe maintenant sur les 23 fiches et
+  sert déjà au `<title>` : **la raison du masquage est peut-être caduque**, à remesurer.
+- **Optimisation des images** — 6,2 Mo en JPEG bruts, 755 Kio d'économies mesurées, `<img src>`
+  au lieu d'`astro:assets`. Chiffré ci-dessus, non entrepris.
+- **Callback OAuth GitHub → `ft2e-v3`** — sans quoi le CMS ne se connecte pas.
+- **Trois incohérences du schéma Zod** signalées au § Decap, dont l'`image_alt` optionnel des
+  actualités, qui est un défaut RGAA.
+
+**Huitième secteur** — inchangé : la question ne repose toujours que sur un seul ouvrage d'art.
+Trois sessions de suite ont évité l'atterrissage par défaut.
