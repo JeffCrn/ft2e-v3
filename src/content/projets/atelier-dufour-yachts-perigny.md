@@ -28,7 +28,7 @@ image_principale_alt: "Schéma de principe de la centrale de traitement d’air 
 en_avant: false
 ---
 
-Le chantier naval Dufour Yachts fait construire, dans la zone industrielle de Périgny, un atelier neuf destiné à la fabrication des coques et des ponts en composite, sur un projet conduit par l’agence Sébastien Pellereau. En octobre 2025, l’entreprise nous a commandé en contrat direct une étude de faisabilité sur un point précis : la chaleur que ce bâtiment s’apprête à rejeter, et ce qu’il serait possible d’en reprendre.
+Le chantier naval Dufour Yachts fait construire, dans la zone industrielle de Périgny, [un atelier neuf destiné à la fabrication des coques et des ponts en composite](/secteurs/industriel-commercial), sur un projet conduit par l’agence Sébastien Pellereau. En octobre 2025, l’entreprise nous a commandé en contrat direct [une étude de faisabilité](/expertises/audit-diagnostic) sur un point précis : la chaleur que ce bâtiment s’apprête à rejeter, et ce qu’il serait possible d’en reprendre.
 
 ## L’enjeu : une chaleur perdue par obligation
 
@@ -40,7 +40,7 @@ Notre mission portait sur la seule zone du process, en deux temps : calculer d�
 
 ## Le calcul : 4 500 heures de chauffe
 
-Un bâtiment neuf n’a pas d’historique de consommation. Il n’y a rien à relever, tout est à calculer. Nous avons posé le régime d’exploitation avec le maître d’ouvrage — travail de 6 h à 21 h à une consigne de 19 °C, inoccupation de 22 h à 5 h à 15 °C, ventilation du process à plein débit pendant les heures ouvrées — puis conduit un calcul horaire sur fichier météo, couvrant les 4 500 heures de la période de chauffe.
+Un bâtiment neuf n’a pas d’historique de consommation. Il n’y a rien à relever, tout est à calculer — l’inverse du [calcul de charges de l’École des douanes](/references/ecole-des-douanes-rue-du-jura-la-rochelle), où le dimensionnement partait d’un relevé de parois sur site. Nous avons posé le régime d’exploitation avec le maître d’ouvrage — travail de 6 h à 21 h à une consigne de 19 °C, inoccupation de 22 h à 5 h à 15 °C, ventilation du process à plein débit pendant les heures ouvrées — puis conduit [un calcul horaire sur fichier météo](/expertises/etude-thermique), couvrant les 4 500 heures de la période de chauffe.
 
 Le besoin ressort à 603 401 kWh par an. Ce chiffre porte une réserve, que le rapport énonce lui-même : faute de retour du fabricant de centrales pendant l’étude, les températures de soufflage ont été posées en hypothèse, de 29 °C par −5 °C extérieurs à 19 °C par temps doux. Le cahier des charges de l’ADEME demandait en outre une monotone de puissance, remise avec le rendu de janvier : elle montre pendant combien d’heures par an chaque niveau de puissance est atteint, ce qu’une consommation annuelle ne dit pas.
 
@@ -48,7 +48,7 @@ Le besoin ressort à 603 401 kWh par an. Ce chiffre porte une réserve, que 
 
 La solution de référence est celle qui se construit d’ordinaire : un make-up gaz, une centrale de traitement d’air dont la batterie chaude est un ensemble de brûleurs de 520 kW, doublée d’une centrale de reprise qui rejette l’air dehors. Elle consomme 603 401 kWh de gaz, soit la totalité du besoin.
 
-La solution thermodynamique remplace ces brûleurs par une pompe à chaleur à appoint gaz. La pompe produit 460 522 kWh de chaleur pour un coefficient de performance annoncé de 4,1 ; l’appoint gaz en apporte 142 878, dont une part sert à relever l’air à +8 °C pour éviter le givrage des échangeurs. À eux deux, ils couvrent le besoin. Côté consommation, la pompe absorbe 112 323 kWh d’électricité, et le total recule de 348 200 kWh. Mais l’électricité du site se paie près de cinq fois le prix du gaz, et la facture, elle, augmente de 5 909 € HT par an.
+La solution thermodynamique remplace ces brûleurs par [une pompe à chaleur à appoint gaz](/expertises/cvc). La pompe produit 460 522 kWh de chaleur pour un coefficient de performance annoncé de 4,1 ; l’appoint gaz en apporte 142 878, dont une part sert à relever l’air à +8 °C pour éviter le givrage des échangeurs. À eux deux, ils couvrent le besoin. Côté consommation, la pompe absorbe 112 323 kWh d’électricité, et le total recule de 348 200 kWh. Mais l’électricité du site se paie près de cinq fois le prix du gaz, et la facture, elle, augmente de 5 909 € HT par an.
 
 La solution avec récupération reprend cette centrale thermodynamique et lui ajoute ce que l’étude devait évaluer : des batteries à eau glycolée, l’une posée dans le flux d’air extrait, l’autre dans le flux d’air neuf, reliées par un circuit avec circulateur, régulation, vase d’expansion et compteurs d’énergie communicants. Les calories passent d’un flux à l’autre sans que les deux airs se rencontrent — c’est ce contact que la CARSAT interdit, pas l’échange thermique. La batterie de 158 kW reprend 146 045 kWh par an sur l’air extrait, le quart du besoin de chauffage. Le gaz tombe à 58 285 kWh, l’électricité à 97 334 kWh : 74 % de consommation d’énergie finale en moins que la solution de référence, et cette fois la facture baisse aussi, de 5 206 € HT par an.
 
@@ -64,6 +64,6 @@ De cette règle découle le dernier chapitre du rapport, intitulé « Analyse d
 
 L’étude conclut que la récupération est réalisable : un quart du besoin de chauffage repris sur un air que les prescriptions sanitaires obligent à jeter, 74 % de consommation en moins, et une facture allégée. Elle établit aussi qu’un surcoût de 136 464 € à 26 ans de retour ne se décide pas sans aide, et elle en chiffre le plafond.
 
-Notre mission s’arrête là. Honoraires : 4 500 € HT pour les deux temps, en contrat direct avec l’industriel, sans maîtrise d’œuvre ni suivi de travaux. Une mission de suivi énergétique — un relevé par mois pendant deux ans sur le système de récupération — a été proposée en même temps ; elle n’a pas été commandée à ce jour.
+Notre mission s’arrête là. Honoraires : 4 500 € HT pour les deux temps, en contrat direct avec l’industriel, sans maîtrise d’œuvre ni suivi de travaux — le même cadre que l’[audit énergétique du restaurant scolaire de Villedoux](/references/cuisine-groupe-scolaire-villedoux), dont le contrat excluait aussi la maîtrise d’œuvre. Une mission de suivi énergétique — un relevé par mois pendant deux ans sur le système de récupération — a été proposée en même temps ; elle n’a pas été commandée à ce jour.
 
 La décision du maître d’ouvrage et le dispositif d’aide finalement retenu compléteront cette fiche.

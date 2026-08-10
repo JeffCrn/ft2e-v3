@@ -126,6 +126,32 @@ def bande(valeur):
     return None
 
 
+# Un nombre composé écrit en lettres — « cent huit modules », « vingt-quatre
+# points » — est un écart à la règle QUEL QUE SOIT le nom qu'il qualifie. Ce
+# contrôle-ci ne dépend donc PAS du lexique de noms, et c'est tout son intérêt :
+# les trois écarts trouvés le 2026-08-10 (`cent huit modules`, `vingt-huit
+# brise-soleil`, `vingt-quatre points`, `vingt-cinq centimètres`) portaient tous
+# sur des noms absents du lexique, et aucune des cinq corrections successives de
+# `pluriel()` n'aurait pu les faire apparaître. Un lexique clos ne mesure que ce
+# qu'on a pensé à y mettre ; ce motif-ci mesure la forme du nombre lui-même.
+#
+# Le mot qui suit doit être alphabétique : sans cette condition, « quatre-vingt
+# pour cent » et les fragments de dates seraient happés.
+RE_COMPOSE = re.compile(
+    r'\b((?:dix|vingt|trente|quarante|cinquante|soixante|quatre-vingt|cent)'
+    r'[- ](?:et[- ])?(?:un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|'
+    r'onze|douze|treize|quatorze|quinze|seize)'
+    + ESPACE + r'[a-zà-ÿ][a-zà-ÿ-]+)', re.I)
+
+
+def composes_en_lettres(lire, fichiers):
+    trouves = []
+    for chemin in fichiers:
+        for m in RE_COMPOSE.finditer(corps(lire(chemin))):
+            trouves.append((os.path.basename(chemin), m.group(1)))
+    return trouves
+
+
 def releve(lire, fichiers):
     compte = {(n, forme): [] for n, _, _ in BANDES for forme in ('lettres', 'chiffres')}
     for chemin in fichiers:
@@ -167,6 +193,11 @@ def main():
         print('\n%s — %d occurrence(s)' % (titre, len(occurrences)))
         for fichier, extrait in occurrences:
             print('    %-45s %s' % (fichier, extrait))
+
+    ecarts = composes_en_lettres(lire, fichiers)
+    print('\nNombres COMPOSÉS écrits en lettres — %d occurrence(s)' % len(ecarts))
+    for fichier, extrait in ecarts:
+        print('    %-45s %s' % (fichier, extrait))
 
 
 if __name__ == '__main__':

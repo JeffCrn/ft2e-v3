@@ -12,6 +12,7 @@ import CoinsCuivre from '../../components/primitives/CoinsCuivre.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 import JsonLd from '../../components/seo/JsonLd.astro';
 import { libelleChronologie } from '../../lib/projets';
+import { SITE_NAME, SITE_URL } from '../../lib/constants';
 
 export async function getStaticPaths() {
   const projets = await getCollection('projets');
@@ -73,13 +74,24 @@ for (const mission of projet.data.mission_ft2e) {
 if (missionsRetenues.length === 0) missionsRetenues.push(projet.data.mission_ft2e[0]);
 const descriptionPage = `${debutDescription}${missionsRetenues.join(', ')}.`;
 
+// `creator` rattache l'affaire au bureau par la même URL que le
+// `ProfessionalService` de l'accueil : c'est ce qui fait de ces 23 fiches un
+// portefeuille attribué, et non 23 œuvres sans auteur. `url` et `abstract`
+// donnent aux moteurs génératifs de quoi citer la fiche sans la deviner.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CreativeWork',
   name: titre,
   ...(reference ? { identifier: reference } : {}),
+  url: `${SITE_URL}/references/${projet.id}`,
+  ...(synthese ? { abstract: synthese } : {}),
   dateCreated: String(annee),
   ...(annee_livraison ? { temporalCoverage: `${annee}/${annee_livraison}` } : {}),
+  creator: {
+    '@type': 'ProfessionalService',
+    name: SITE_NAME,
+    url: SITE_URL,
+  },
   locationCreated: {
     '@type': 'Place',
     name: lieu,

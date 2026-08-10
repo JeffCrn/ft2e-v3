@@ -5,18 +5,32 @@
 # (le client_secret reste côté serveur). Variables d'env requises sur Vercel :
 #   OAUTH_GITHUB_CLIENT_ID, OAUTH_GITHUB_CLIENT_SECRET
 # OAuth App GitHub — Authorization callback URL :
-#   https://ft2e-v2.vercel.app/api/callback
-# ⚠ ft2e-v2 : au premier déploiement Vercel, reporter ces deux variables
-# d'env sur le nouveau projet et mettre à jour la callback de l'OAuth App
-# GitHub (ou créer une seconde OAuth App dédiée à la v2).
+#   https://ft2e-v3.vercel.app/api/callback
+#
+# ⚠ `repo` et `base_url` ont porté `ft2e-v2` jusqu'au 2026-08-10 — vestige du
+# fork, corrigé ce jour. Le CMS aurait committé dans le dépôt de la v2 : à
+# vérifier en premier sur toute reprise de ce fichier après un fork.
+# ⚠ ACTION HORS DÉPÔT, ENCORE DUE : la callback de l'OAuth App GitHub doit
+# être passée à l'URL ci-dessus, et OAUTH_GITHUB_CLIENT_ID / _SECRET reportés
+# sur le projet Vercel `ft2e-v3`. Tant que ce n'est pas fait, la connexion au
+# CMS échoue — le fichier est juste, l'infrastructure ne l'est pas encore.
 # À refaire au passage en production (OVH/souverain). Voir docs/20.
+# ──────────────────────────────────────────────────────────────
+#
+# ⚠ SYNCHRONISATION Zod ↔ Decap — la source de vérité est
+# `src/content.config.ts`. Toute énumération ci-dessous (`options`,
+# `view_filters`) doit recopier à l'identique le `z.enum()` correspondant :
+# Decap n'a aucun moyen de valider une valeur hors liste, mais le build
+# Astro, lui, refusera la fiche. Une divergence d'une seule chaîne suffit
+# à rendre impossible toute création de fiche depuis le CMS.
+# Voir `.claude/rules/content-collections.md` et `docs/03-modele-contenu.md`.
 # ──────────────────────────────────────────────────────────────
 
 backend:
   name: github
-  repo: JeffCrn/ft2e-v2
+  repo: JeffCrn/ft2e-v3
   branch: master
-  base_url: https://ft2e-v2.vercel.app
+  base_url: https://ft2e-v3.vercel.app
   auth_endpoint: api/auth
 
 media_folder: "public/images"
@@ -41,39 +55,45 @@ collections:
     identifier_field: titre
     summary: "{{titre}} — {{lieu}} ({{annee}})"
     sortable_fields: [annee, titre, secteur]
+    # Les sept secteurs recopient le tableau SECTEURS de src/content.config.ts.
     view_filters:
       - { label: "Mis en avant", field: en_avant, pattern: true }
-      - { label: "Logement", field: secteur, pattern: "Logement" }
-      - { label: "Tertiaire", field: secteur, pattern: "Tertiaire" }
-      - { label: "Santé", field: secteur, pattern: "Santé" }
-      - { label: "Sport", field: secteur, pattern: "Sport" }
-      - { label: "Industriel", field: secteur, pattern: "Industriel" }
+      - { label: "Logements", field: secteur, pattern: "Logements" }
+      - { label: "Tertiaire / ERP", field: secteur, pattern: "Tertiaire / ERP" }
+      - { label: "Industriel et commercial", field: secteur, pattern: "Industriel et commercial" }
       - { label: "Patrimoine", field: secteur, pattern: "Patrimoine" }
+      - { label: "Monotechnique", field: secteur, pattern: "Monotechnique" }
+      - { label: "Coordination SSI", field: secteur, pattern: "Coordination SSI" }
+      - { label: "Études d'exécution / BIM", field: secteur, pattern: "Études d'exécution / BIM" }
+      - { label: "Affaires en cours", field: statut, pattern: "en cours" }
     fields:
       - label: "Titre"
         name: "titre"
         widget: "string"
         required: true
-        pattern: ['.{2,80}', '2 à 80 caractères']
+        pattern: ['^.{2,80}$', '2 à 80 caractères']
+        hint: "Phrase descriptive, faite pour le titre de page et les moteurs. Le nom court de l'ouvrage se saisit dans le champ suivant."
 
       - label: "Nom court de l'ouvrage"
         name: "ouvrage"
         widget: "string"
         required: false
         pattern: ['^.{2,40}$', "2 à 40 caractères"]
-        hint: "Deux à quatre mots : le nom par lequel on désigne l'affaire (« Néréa », « Hôtel Le Yachtman », « Le Fougerou »). Ce n'est pas un raccourci du titre, c'est un nom. Il compose la légende de l'image principale, qui ne dispose que d'une ligne."
+        hint: "Deux à quatre mots : le nom par lequel on désigne l'affaire (« Néréa », « Hôtel Le Yachtman », « Le Fougerou »). Ce n'est pas un raccourci du titre, c'est un nom. Il compose la légende de l'image principale, qui ne dispose que d'une ligne (32 signes sur mobile). Laissé vide, la légende se replie sur le découpage du titre."
 
       - label: "Secteur"
         name: "secteur"
         widget: "select"
         required: true
         options:
-          - "Logement"
-          - "Tertiaire"
-          - "Santé"
-          - "Sport"
-          - "Industriel"
+          - "Logements"
+          - "Tertiaire / ERP"
+          - "Industriel et commercial"
           - "Patrimoine"
+          - "Monotechnique"
+          - "Coordination SSI"
+          - "Études d'exécution / BIM"
+        hint: "Les sept secteurs d'activité de FT2E : quatre marchés du bâtiment, puis trois modes d'intervention portés comme segments à part entière. Cette liste est close — elle alimente les filtres de la page Références et le build refuse toute autre valeur."
 
       - label: "Typologie"
         name: "typologie"
@@ -83,12 +103,15 @@ collections:
           - "Neuf"
           - "Réhabilitation"
           - "Extension"
+          - "Étude"
           - "Études d'exécution"
+        hint: "« Étude » = mission d'ingénierie sur un existant sans marché de travaux (audit, calcul de charges, faisabilité) : elle n'annonce aucun chantier. « Études d'exécution » = phase EXE d'une opération de travaux. Le mot s'affiche en chip de filtre sur /references."
 
       - label: "Maître d'ouvrage"
         name: "moa"
         widget: "string"
         required: true
+        pattern: ['^.{2,}$', 'Deux caractères au minimum']
 
       - label: "Architecte"
         name: "architecte"
@@ -99,6 +122,7 @@ collections:
         name: "lieu"
         widget: "string"
         required: true
+        pattern: ['^.{2,}$', 'Deux caractères au minimum']
         hint: "Commune (code postal). Ex : La Rochelle (17000)"
 
       - label: "Surface (m²)"
@@ -107,13 +131,14 @@ collections:
         required: false
         value_type: "int"
         min: 1
+        hint: "Nombre entier, sans unité ni séparateur de milliers — l'affichage ajoute « m² »."
 
       - label: "Référence d'affaire FT2E"
         name: "reference"
         widget: "string"
         required: false
         pattern: ['^\d{2}-\d{3}$', "Format attendu : NN-NNN (ex. 22-042)"]
-        hint: "Numéro d'affaire relevé sur une pièce FT2E (« Affaire n° : 22-033 », cartouche de plan). Obligatoire pour une référence réelle ; à laisser vide sur une fiche de démonstration."
+        hint: "Numéro d'affaire relevé sur une pièce FT2E (« Affaire n° : 22-033 », cartouche de plan), jamais déduit du nom de dossier ni d'un autre champ. OBLIGATOIRE dès que « Contenu de démonstration » est décoché : sans lui, le build échoue. INTERDIT sur une fiche de démonstration — un numéro fabriqué entrerait en collision avec une affaire véritable."
 
       - label: "Année d'ouverture de l'affaire"
         name: "annee"
@@ -121,8 +146,9 @@ collections:
         required: true
         value_type: "int"
         min: 2008
-        max: 2030
-        hint: "Le millésime qu'encode la référence : 22-042 → 2022. Ce n'est ni l'année de DCE ni celle de la réception. Le build refuse toute contradiction avec la référence."
+        # Plafond = année en cours + 1 côté Zod : à relever chaque janvier.
+        max: 2027
+        hint: "Le millésime qu'encode la référence : 22-042 → 2022. Ce n'est ni l'année de DCE ni celle de la réception (voir « Année de livraison »). Le build refuse toute contradiction avec la référence."
 
       - label: "Statut de l'affaire"
         name: "statut"
@@ -141,8 +167,9 @@ collections:
         required: false
         value_type: "int"
         min: 2008
-        max: 2030
-        hint: "À ne renseigner qu'une fois la réception actée sur pièce (PV, avis favorable). Interdit si le statut est « en cours »."
+        # Plafond = année en cours + 2 côté Zod : à relever chaque janvier.
+        max: 2028
+        hint: "À ne renseigner qu'une fois la réception actée sur pièce (PV, avis favorable). INTERDIT si le statut est « en cours », et ne peut pas précéder l'année d'ouverture."
 
       - label: "Synthèse"
         name: "synthese"
@@ -168,21 +195,25 @@ collections:
           - "Thermique"
           - "Électricité CFO"
           - "Électricité CFA"
+          - "Photovoltaïque"
           - "SSI"
           - "BIM"
           - "Études d'exécution"
           - "Audit & diagnostic"
+        hint: "Une mission au minimum. Liste close : le build refuse toute autre valeur. Six au maximum s'affichent proprement en étiquettes sur la fiche."
 
       - label: "Image principale"
         name: "image_principale"
         widget: "image"
         required: true
+        hint: "Ranger le fichier dans public/images/projets/<slug-de-la-fiche>/ après téléversement."
 
       - label: "Texte alternatif image"
         name: "image_principale_alt"
         widget: "string"
         required: true
-        hint: "Description du visuel, lue par les lecteurs d'écran"
+        pattern: ['^.{5,}$', 'Cinq caractères au minimum']
+        hint: "Description du visuel, lue par les lecteurs d'écran. Cinq caractères au minimum."
 
       - label: "Galerie"
         name: "galerie"
@@ -190,8 +221,8 @@ collections:
         required: false
         summary: "{{fields.alt}}"
         fields:
-          - { label: "Image", name: "src", widget: "image" }
-          - { label: "Légende / alt", name: "alt", widget: "string" }
+          - { label: "Image", name: "src", widget: "image", required: true }
+          - { label: "Légende / alt", name: "alt", widget: "string", required: true, pattern: ['^.{3,}$', 'Trois caractères au minimum'] }
 
       - label: "Mis en avant en accueil"
         name: "en_avant"
@@ -203,12 +234,18 @@ collections:
         name: "demo"
         widget: "boolean"
         default: false
-        hint: "Cocher si les données ne sont pas encore confirmées par FT2E"
+        hint: "Cocher si les données ne sont pas encore confirmées par FT2E. Une fiche cochée doit avoir sa référence d'affaire VIDE ; une fiche décochée doit l'avoir renseignée."
+
+      - label: "Motif de la démonstration"
+        name: "demo_reason"
+        widget: "string"
+        required: false
+        hint: "Ce qui reste à confirmer sur cette fiche (chiffres, MOA, performance). N'a de sens que si « Contenu de démonstration » est coché."
 
       - label: "Récit projet"
         name: "body"
         widget: "markdown"
-        hint: "Structure : Enjeu → Solution → Particularités → Résultat (3 à 6 paragraphes)"
+        hint: "Structure : Enjeu → Solution → Particularités → Résultat (3 à 6 paragraphes). Sous-titres en ## uniquement, jamais en #."
 
   # ───────────────── ACTUALITÉS ─────────────────
   - name: "actualites"
@@ -226,13 +263,14 @@ collections:
         name: "titre"
         widget: "string"
         required: true
-        pattern: ['.{5,80}', '5 à 80 caractères']
+        pattern: ['^.{5,80}$', '5 à 80 caractères']
 
       - label: "Chapô"
         name: "chapo"
         widget: "text"
         required: true
-        hint: "2 à 3 phrases annonçant le contenu (40 à 280 caractères)"
+        pattern: ['^[\s\S]{40,280}$', '40 à 280 signes']
+        hint: "2 à 3 phrases annonçant le contenu sans le résumer entièrement (40 à 280 signes, espaces comprises)."
 
       - label: "Date de publication"
         name: "date"
@@ -257,6 +295,7 @@ collections:
         name: "image_alt"
         widget: "string"
         required: false
+        hint: "Facultatif seulement en l'absence d'image : dès qu'une illustration est choisie, ce texte devient obligatoire (accessibilité)."
 
       - label: "Catégories"
         name: "categories"
@@ -270,6 +309,7 @@ collections:
           - "Événement"
           - "Article technique"
           - "Vie du cabinet"
+        hint: "Liste close : le build refuse toute autre valeur."
 
       - label: "Mis en avant"
         name: "en_avant"
@@ -280,6 +320,7 @@ collections:
         name: "demo"
         widget: "boolean"
         default: false
+        hint: "Cocher si les données ne sont pas encore confirmées par FT2E"
 
       - label: "Corps de l'article"
         name: "body"
@@ -323,7 +364,8 @@ collections:
       - label: "Spécialités"
         name: "specialites"
         widget: "list"
-        required: false
+        required: true
+        hint: "Une spécialité par ligne. Le champ est obligatoire : une fiche sans spécialité bloque le build."
 
       - label: "Formation"
         name: "formation"
@@ -339,7 +381,8 @@ collections:
         name: "photo_alt"
         widget: "string"
         required: true
-        hint: "Description de la photo, lue par les lecteurs d'écran"
+        pattern: ['^.{5,}$', 'Cinq caractères au minimum']
+        hint: "Description de la photo, lue par les lecteurs d'écran. Cinq caractères au minimum."
 
       - label: "Ordre d'affichage"
         name: "ordre"
@@ -357,7 +400,7 @@ collections:
         name: "contact_email"
         widget: "string"
         required: false
-        pattern: ['^[^@]+@[^@]+\.[^@]+$', 'Adresse email valide']
+        pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', 'Adresse email valide']
 
   # ───────────────── EXPERTISES (édition seule) ─────────────────
   - name: "expertises"
@@ -375,11 +418,14 @@ collections:
         name: "titre"
         widget: "string"
         required: true
+        pattern: ['^.{3,60}$', '3 à 60 caractères']
 
       - label: "Accroche"
         name: "accroche"
         widget: "text"
         required: true
+        pattern: ['^[\s\S]{20,200}$', '20 à 200 signes']
+        hint: "Une à deux phrases (20 à 200 signes, espaces comprises)."
 
       - label: "Icône"
         name: "icone"
@@ -392,6 +438,8 @@ collections:
         widget: "number"
         required: true
         value_type: "int"
+        min: 1
+        max: 99
 
       - label: "Livrables"
         name: "livrables"
@@ -402,13 +450,33 @@ collections:
         name: "typique_pour"
         widget: "select"
         multiple: true
+        required: true
         options:
-          - "Logement"
-          - "Tertiaire"
-          - "Santé"
-          - "Sport"
-          - "Industriel"
+          - "Logements"
+          - "Tertiaire / ERP"
+          - "Industriel et commercial"
           - "Patrimoine"
+          - "Monotechnique"
+          - "Coordination SSI"
+          - "Études d'exécution / BIM"
+        hint: "Mêmes sept secteurs que les fiches projets — liste close, recopiée du schéma."
+
+      - label: "Missions liées"
+        name: "missions_liees"
+        widget: "select"
+        multiple: true
+        required: false
+        options:
+          - "CVC"
+          - "Thermique"
+          - "Électricité CFO"
+          - "Électricité CFA"
+          - "Photovoltaïque"
+          - "SSI"
+          - "BIM"
+          - "Études d'exécution"
+          - "Audit & diagnostic"
+        hint: "Mêmes missions que les fiches projets — sert à rattacher l'expertise aux références qui la mobilisent."
 
       - label: "FAQ"
         name: "faq"
@@ -416,8 +484,8 @@ collections:
         required: false
         summary: "{{fields.question}}"
         fields:
-          - { label: "Question", name: "question", widget: "string" }
-          - { label: "Réponse", name: "reponse", widget: "text" }
+          - { label: "Question", name: "question", widget: "string", required: true }
+          - { label: "Réponse", name: "reponse", widget: "text", required: true }
 
       - label: "Corps de page"
         name: "body"
@@ -432,6 +500,8 @@ collections:
     delete: false
     slug: "{{slug}}"
     identifier_field: titre
+    summary: "{{titre}}"
+    sortable_fields: [ordre, titre]
     fields:
       - label: "Titre"
         name: "titre"
@@ -442,6 +512,8 @@ collections:
         name: "accroche"
         widget: "text"
         required: true
+        pattern: ['^[\s\S]{40,240}$', '40 à 240 signes']
+        hint: "40 à 240 signes, espaces comprises."
 
       - label: "Image"
         name: "image"
@@ -452,9 +524,31 @@ collections:
         name: "image_alt"
         widget: "string"
         required: true
+        pattern: ['^.{5,}$', 'Cinq caractères au minimum']
+        hint: "Description du visuel, lue par les lecteurs d'écran. Cinq caractères au minimum."
 
       - label: "Ordre"
         name: "ordre"
         widget: "number"
         required: true
         value_type: "int"
+
+      - label: "Livrables"
+        name: "livrables"
+        widget: "list"
+        required: false
+        hint: "Segments de type mission (Coordination SSI, Études d'exécution / BIM) uniquement — laisser vide sur un marché du bâtiment."
+
+      - label: "FAQ"
+        name: "faq"
+        widget: "list"
+        required: false
+        summary: "{{fields.question}}"
+        fields:
+          - { label: "Question", name: "question", widget: "string", required: true }
+          - { label: "Réponse", name: "reponse", widget: "text", required: true }
+
+      - label: "Corps de page"
+        name: "body"
+        widget: "markdown"
+        hint: "Le texte de la page du secteur. ⚠ Sans ce champ, une édition depuis le CMS effacerait le corps existant."

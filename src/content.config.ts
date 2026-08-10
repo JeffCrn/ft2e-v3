@@ -16,7 +16,17 @@ const SECTEURS = [
   'Coordination SSI',
   "Études d'exécution / BIM",
 ] as const;
-const TYPOLOGIES = ['Neuf', 'Réhabilitation', 'Extension', "Études d'exécution"] as const;
+/**
+ * Typologies d'intervention. Les trois premières décrivent des travaux sur
+ * l'ouvrage ; les deux dernières, une mission d'étude sans marché de travaux.
+ *
+ * `Étude` couvre l'intervention d'ingénierie sur un existant qui ne débouche
+ * sur aucun chantier — audit énergétique, calcul de charges, faisabilité.
+ * Sans elle, ces affaires étaient contraintes de s'annoncer en
+ * `Réhabilitation`, ce qui annonçait des travaux qui n'ont pas eu lieu — et
+ * le mot s'affiche en chip de filtre sur `/references`.
+ */
+const TYPOLOGIES = ['Neuf', 'Réhabilitation', 'Extension', 'Étude', "Études d'exécution"] as const;
 const MISSIONS = ['CVC', 'Thermique', 'Électricité CFO', 'Électricité CFA', 'Photovoltaïque', 'SSI', 'BIM', "Études d'exécution", 'Audit & diagnostic'] as const;
 
 const projets = defineCollection({

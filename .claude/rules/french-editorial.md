@@ -56,6 +56,8 @@
 
 La frontière porte sur la **nature** du nombre, pas sur sa taille : une quantité se compte, une mesure se lit sur un instrument. « Quatre chambres » et « 230 m² » cohabitent dans la même phrase sans contradiction.
 
+**Et « se lit sur un instrument » est à prendre au pied de la lettre** — c'est ce qui sépare les deux emplois d'une même unité. Le relevé piézométrique de `maisons-tourtet` (« l'eau à 60 cm sous le terrain naturel ») est une mesure et s'écrit en chiffres, d'autant que le même paragraphe porte « 3,99 mètres NGF » ; « dix pour cent sous les exigences » et « à trois kilomètres du centre » n'en sont pas — ce sont un objectif de programme et une distance d'orientation, que le corpus écrit en lettres dans huit cas sur huit. Ne pas convertir mécaniquement tout nombre suivi d'une unité.
+
 ### L'exception de citation
 
 **Un nombre cité entre guillemets se transcrit tel qu'il figure dans la pièce.** La fidélité au texte cité prime sur la convention du site : corriger un chiffre à l'intérieur d'une citation, c'est falsifier la pièce.

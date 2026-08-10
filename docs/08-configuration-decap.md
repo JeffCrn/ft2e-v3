@@ -69,19 +69,23 @@ collections:
     summary: "{{titre}} — {{lieu}} ({{annee}})"
     sortable_fields: [annee, titre, secteur]
     view_filters:
+      # Les sept secteurs recopient le tableau SECTEURS de src/content.config.ts
       - { label: "Mis en avant", field: en_avant, pattern: true }
-      - { label: "Logement", field: secteur, pattern: "Logement" }
-      - { label: "Tertiaire", field: secteur, pattern: "Tertiaire" }
-      - { label: "Santé", field: secteur, pattern: "Santé" }
-      - { label: "Sport", field: secteur, pattern: "Sport" }
-      - { label: "Industriel", field: secteur, pattern: "Industriel" }
+      - { label: "Logements", field: secteur, pattern: "Logements" }
+      - { label: "Tertiaire / ERP", field: secteur, pattern: "Tertiaire / ERP" }
+      - { label: "Industriel et commercial", field: secteur, pattern: "Industriel et commercial" }
       - { label: "Patrimoine", field: secteur, pattern: "Patrimoine" }
+      - { label: "Monotechnique", field: secteur, pattern: "Monotechnique" }
+      - { label: "Coordination SSI", field: secteur, pattern: "Coordination SSI" }
+      - { label: "Études d'exécution / BIM", field: secteur, pattern: "Études d'exécution / BIM" }
+      - { label: "Affaires en cours", field: statut, pattern: "en cours" }
     fields:
       - { label: "Titre", name: "titre", widget: "string", required: true, pattern: ['.{2,80}', '2 à 80 caractères'] }
       - { label: "Secteur", name: "secteur", widget: "select", required: true,
           options: ["Logements", "Tertiaire / ERP", "Industriel et commercial", "Patrimoine", "Monotechnique", "Coordination SSI", "Études d'exécution / BIM"] }
       - { label: "Typologie", name: "typologie", widget: "select", required: true,
-          options: ["Neuf", "Réhabilitation", "Extension", "Études d'exécution"] }
+          options: ["Neuf", "Réhabilitation", "Extension", "Étude", "Études d'exécution"],
+          hint: "« Étude » = mission d'ingénierie sur un existant sans marché de travaux. « Études d'exécution » = phase EXE d'une opération de travaux." }
       - { label: "Nom court de l'ouvrage", name: "ouvrage", widget: "string", required: false,
           pattern: ['^.{2,40}$', "2 à 40 caractères"],
           hint: "Deux à quatre mots, le nom par lequel on désigne l'affaire. Compose la légende de l'image, qui ne dispose que d'une ligne. Ce n'est pas un raccourci du titre." }
@@ -111,7 +115,7 @@ collections:
         multiple: true
         required: true
         min: 1
-        options: ["CVC", "Thermique", "Électricité CFO", "Électricité CFA", "SSI", "BIM", "Études d'exécution", "Audit & diagnostic"]
+        options: ["CVC", "Thermique", "Électricité CFO", "Électricité CFA", "Photovoltaïque", "SSI", "BIM", "Études d'exécution", "Audit & diagnostic"]
       - { label: "Image principale", name: "image_principale", widget: "image", required: true,
           media_library: { config: { multiple: false } } }
       - { label: "Texte alternatif image principale", name: "image_principale_alt", widget: "string", required: true,

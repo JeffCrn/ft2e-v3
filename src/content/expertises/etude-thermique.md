@@ -20,7 +20,7 @@ faq:
 
 ## RE2020 : trois indicateurs, une approche globale
 
-Depuis le 1ᵉʳ janvier 2022, la réglementation environnementale RE2020 remplace la RT2012 pour les bâtiments neufs. Elle introduit trois familles d’exigences : le besoin bioclimatique (Bbio), la consommation d’énergie primaire (Cep) et le confort d’été (DH, degrés-heures d’inconfort). FT2E intègre ces trois dimensions dès l’esquisse, en collaboration avec l’architecte et le maître d’ouvrage, pour orienter les choix constructifs — orientation, compacité, inertie, protections solaires — avant même le dimensionnement des équipements.
+Depuis le 1ᵉʳ janvier 2022, la réglementation environnementale RE2020 remplace la RT2012 pour les bâtiments neufs. Elle introduit trois familles d’exigences : le besoin bioclimatique (Bbio), la consommation d’énergie primaire (Cep) et le confort d’été (DH, degrés-heures d’inconfort). FT2E intègre ces trois dimensions dès l’esquisse, en collaboration avec l’architecte et le maître d’ouvrage, pour orienter les choix constructifs — orientation, compacité, inertie, protections solaires — avant même le dimensionnement des équipements. Aux bureaux de l’[étude notariale du boulevard Joffre, à La Rochelle](/references/etude-notariale-boulevard-joffre), le besoin bioclimatique ressort à un dixième de point du plafond — la conformité s’y joue sur la seule enveloppe.
 
 ## Du calcul réglementaire à la simulation thermique dynamique
 
@@ -28,7 +28,7 @@ Le calcul réglementaire — mené sous Perrenoud, outil de référence du méti
 
 ## L’analyse du cycle de vie : le carbone entre en jeu
 
-La RE2020 impose également une évaluation de l’empreinte carbone du bâtiment sur cinquante ans, de la fabrication des matériaux à la fin de vie. L’étude ACV (analyse du cycle de vie) quantifie les émissions de gaz à effet de serre de chaque composant — structure, enveloppe, équipements techniques — et identifie les leviers de réduction. FT2E réalise cette analyse en parallèle des études thermiques pour garantir la cohérence entre performance énergétique et sobriété carbone.
+La RE2020 impose également une évaluation de l’empreinte carbone du bâtiment sur cinquante ans, de la fabrication des matériaux à la fin de vie. L’étude ACV (analyse du cycle de vie) quantifie les émissions de gaz à effet de serre de chaque composant — structure, enveloppe, équipements techniques — et identifie les leviers de réduction. FT2E réalise cette analyse en parallèle des études thermiques pour garantir la cohérence entre performance énergétique et sobriété carbone. Sur les dix logements du [Pas des Bœufs, au Bois-Plage-en-Ré](/references/logements-pas-des-boeufs-bois-plage), l’impact carbone de la construction passe à moins de 3 % de son plafond sur trois des quatre îlots.
 
 ## Optimiser sans surdimensionner
 
@@ -36,4 +36,4 @@ L’enjeu d’une étude thermique bien conduite n’est pas de viser le seuil r
 
 ## Un accompagnement de bout en bout
 
-FT2E assure l’étude thermique de la phase esquisse jusqu’à l’attestation de fin de travaux, et intègre les référentiels des labels et certifications de l’habitat lorsque le programme les vise&nbsp;: CERQUAL, Qualitel, Habitat &amp; Environnement, BBC Effinergie. L’attestation Bbio accompagne le dépôt de permis de construire ; l’attestation de conformité RE2020 est remise à la livraison. Entre les deux, le suivi des choix constructifs en phase projet et la vérification des mises en œuvre en phase chantier garantissent que la performance calculée se retrouve dans le bâtiment construit.
+FT2E assure l’étude thermique de la phase esquisse jusqu’à l’attestation de fin de travaux, et intègre les référentiels des labels et certifications de l’habitat lorsque le programme les vise&nbsp;: CERQUAL, Qualitel, Habitat &amp; Environnement, BBC Effinergie. L’attestation Bbio accompagne le dépôt de permis de construire ; l’attestation de conformité RE2020 est remise à la livraison. Entre les deux, le suivi des choix constructifs en phase projet et la vérification des mises en œuvre en phase chantier garantissent que la performance calculée se retrouve dans le bâtiment construit. Aux [maisons Tourtet, à Saint-Georges-de-Didonne](/references/maisons-tourtet-saint-georges-de-didonne), une distribution posée sous dallage en tube pré-gainé au lieu de pré-isolé a ainsi conduit à reprendre le calcul réglementaire.

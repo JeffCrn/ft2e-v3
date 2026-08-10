@@ -2,7 +2,7 @@
 titre: "Calcul des charges de climatisation de l’École des douanes"
 ouvrage: "École des douanes"
 secteur: Monotechnique
-typologie: Réhabilitation
+typologie: Étude
 moa: "Ministère de l’Économie et des Finances (SAFI)"
 lieu: "Rue du Jura, La Rochelle (17000), Charente-Maritime"
 surface_m2: 1657
@@ -19,11 +19,11 @@ image_principale_alt: "Façade du bâtiment d’enseignement de l’École des d
 en_avant: false
 ---
 
-Le bâtiment d’enseignement de l’École nationale des douanes occupe, rue du Jura à La Rochelle, une barre de trois niveaux à façade de béton. Ses 21 salles de cours ne disposent pas d’une climatisation d’ensemble. Hervé Thermique est titulaire de l’accord-cadre de petits travaux de chauffage, ventilation et climatisation (CVC) passé par la plateforme régionale des achats de Nouvelle-Aquitaine pour le lot Charente-Maritime. L’entreprise nous a confié en sous-traitance le calcul qui devait précéder toute décision : combien faut-il installer, et dans quels locaux.
+Le bâtiment d’enseignement de l’École nationale des douanes occupe, rue du Jura à La Rochelle, une barre de trois niveaux à façade de béton. Ses 21 salles de cours ne disposent pas d’une climatisation d’ensemble. Hervé Thermique est titulaire de l’accord-cadre de petits travaux de chauffage, ventilation et climatisation (CVC) passé par la plateforme régionale des achats de Nouvelle-Aquitaine pour le lot Charente-Maritime. L’entreprise nous a confié en sous-traitance, sur cette [seule technique](/secteurs/monotechnique), le calcul qui devait précéder toute décision : combien faut-il installer, et dans quels locaux.
 
 ## L’enjeu : mesurer avant de dimensionner
 
-Dimensionner une climatisation dans un bâtiment existant sans relevé revient à choisir entre deux erreurs. Sous-dimensionner condamne les salles aux journées de juin. Surdimensionner fait payer deux fois : à l’achat, puis à chaque heure de fonctionnement d’un groupe qui ne travaille jamais à sa puissance nominale.
+[Dimensionner une climatisation](/expertises/cvc) dans un bâtiment existant sans relevé revient à choisir entre deux erreurs. Sous-dimensionner condamne les salles aux journées de juin. Surdimensionner fait payer deux fois : à l’achat, puis à chaque heure de fonctionnement d’un groupe qui ne travaille jamais à sa puissance nominale.
 
 Le bâtiment ne partait pourtant pas de rien. Réaménagé en 2014-2015 lors de la fusion des écoles nationales des douanes de Rouen et de La Rochelle, il conserve les plans d’exécution des lots techniques de cette opération, que le donneur d’ordres nous a transmis avant le démarrage. Des climatiseurs y ont été ajoutés depuis : les unités extérieures relevées en pied de façade sont des groupes multisplit de 6,8 kW en froid, fabriqués en 2018, prévus pour desservir trois pièces au plus. Aucune de ces machines ne renseigne sur ce que demanderait le bâtiment entier.
 
@@ -31,15 +31,15 @@ Le bâtiment ne partait pourtant pas de rien. Réaménagé en 2014-2015 lors de 
 
 Les deux propositions d’honoraires sont établies le 17 novembre 2025. Le contrat de sous-traitance est signé le 13 mars 2026 et fixe un délai de 25 jours courant du 16. Le premier relevé a lieu le lendemain du départ de ce délai, mardi 17 mars au matin, dans un bâtiment en activité ; une seconde visite suit le 2 avril.
 
-La mission tient en trois phases — relever, calculer, rapporter — et la première est la plus déterminante : relever la nature exacte des parois et des vitrages. Les murs sont en voile béton doublé de 8,5 cm de laine de verre, pour un coefficient de transmission de 0,354 W/(m²·K). Les planchers hauts, isolés de 10 cm de polyuréthane sous dalle, tiennent à 0,218. Le plancher bas, lui, est une dalle de 18 cm posée sur terre-plein sans isolant : 3,166 W/(m²·K). Les liaisons suivent le même partage — 0,02 W/(m·K) pour un angle de murs extérieurs, 1,10 pour la jonction du mur et du plancher intermédiaire.
+La mission tient en trois phases — relever, calculer, rapporter — et la première est la plus déterminante : [relever la nature exacte des parois et des vitrages](/expertises/audit-diagnostic). Les murs sont en voile béton doublé de 8,5 cm de laine de verre, pour un coefficient de transmission de 0,354 W/(m²·K). Les planchers hauts, isolés de 10 cm de polyuréthane sous dalle, tiennent à 0,218. Le plancher bas, lui, est une dalle de 18 cm posée sur terre-plein sans isolant : 3,166 W/(m²·K). Les liaisons suivent le même partage — 0,02 W/(m·K) pour un angle de murs extérieurs, 1,10 pour la jonction du mur et du plancher intermédiaire.
 
-Les menuiseries n’ont pas été estimées. Le dossier des ouvrages exécutés du lot menuiserie aluminium-miroiterie était conservé sur place : il donne les profilés, leur avis technique, les teintes et les stores. Les quatre types de baies du calcul en sortent avec leurs valeurs réelles — double vitrage à lame de 15 mm, Ug de 1,40, coefficient global de 1,40 à 2,00 selon le type, facteur solaire d’été ramené de 0,50 à 0,17 store baissé. C’est la différence entre un relevé et une hypothèse.
+Les menuiseries n’ont pas été estimées. Le dossier des ouvrages exécutés du lot menuiserie aluminium-miroiterie était conservé sur place : il donne les profilés, leur avis technique, les teintes et les stores. Les quatre types de baies du calcul en sortent avec leurs valeurs réelles — double vitrage à lame de 15 mm, Ug de 1,40, coefficient global de 1,40 à 2,00 selon le type, facteur solaire d’été ramené de 0,50 à 0,17 store baissé. C’est la différence entre un relevé et une hypothèse. Au [restaurant scolaire de Villedoux](/references/cuisine-groupe-scolaire-villedoux), c’est un relevé qui a fait apparaître une centrale sans débit sous un voyant de marche.
 
 Le calcul suit. Ses caractéristiques de base sont posées conformément à la norme EN 12831, celle des déperditions : température extérieure de base de −5 °C au niveau de la mer, ramenée à −4 °C après correction. Les apports, eux, se calculent sur les données d’été du site — zone climatique H2b, 31 °C de température sèche, 10,4 °C d’écart diurne moyen, consigne intérieure à 26 °C. L’ensemble porte sur 26 locaux, soit 21 salles de cours, trois secrétariats, un bureau et une salle de lecture, répartis sur les trois niveaux, pour 1 656,75 m².
 
 ## La particularité : la charge ne vient pas de l’enveloppe
 
-Le résultat n’a rien d’intuitif. Sur les 26 fiches de calcul, l’ensoleillement et l’écart de température cumulent 10,6 kW — moins de 7 % de la charge. Tout le reste vient de l’intérieur.
+Le résultat n’a rien d’intuitif. Sur les 26 fiches de calcul, l’ensoleillement et l’écart de température cumulent 10,6 kW — moins de 7 % de la charge. Tout le reste vient de l’intérieur — le même constat qu’au [centre de formation de Saintes](/references/centre-formation-ormeau-du-pied-saintes), où la dépense suit l’occupation et non les déperditions de l’enveloppe.
 
 Une salle de cours du rez-de-chaussée suffit à le montrer. À 63 m², un matin de juillet, son mur et sa baie lui apportent 217 W. Ses usages lui en apportent 8 414 : 5 519 W pour 42 occupants, dont plus de la moitié en chaleur latente, 1 260 W d’ordinateurs, 992 W d’éclairage fluorescent en faux plafond, 445 W pour le renouvellement d’air à 720 m³/h et 200 W de vidéoprojecteur et de baie de brassage, un poste de débit complémentaire en retranchant deux.
 
@@ -55,4 +55,4 @@ La somme brute des maximums de chaque local s’établit, elle, à 154 959 W
 
 La prestation, arrêtée à 2 800 € HT, a été constatée achevée le 30 avril 2026. Le procès-verbal signé à Rochefort porte six évaluations, toutes à 5/5, du respect du planning à la qualité du suivi administratif.
 
-Une seconde proposition d’honoraires accompagnait la première, pour la maîtrise d’œuvre de l’installation elle-même — avant-projet définitif, projet, cahier des charges et dossier de consultation des entreprises. Elle attend sa suite.
+Une seconde proposition d’honoraires accompagnait la première, pour la maîtrise d’œuvre de l’installation elle-même — avant-projet définitif, projet, cahier des charges et dossier de consultation des entreprises. Elle attend sa suite, comme la mission de suivi énergétique proposée à l’[atelier Dufour Yachts, à Périgny](/references/atelier-dufour-yachts-perigny).

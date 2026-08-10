@@ -2,7 +2,7 @@
 titre: "Audit énergétique du restaurant scolaire de Villedoux"
 ouvrage: "Restaurant scolaire"
 secteur: Tertiaire / ERP
-typologie: Réhabilitation
+typologie: Étude
 moa: "Commune de Villedoux"
 lieu: "3 bis rue du Marais Guyot, Villedoux (17230), Charente-Maritime"
 surface_m2: 468
@@ -28,19 +28,19 @@ image_principale_alt: "Armoire de commande de la ventilation du restaurant scola
 en_avant: false
 ---
 
-Le restaurant scolaire de Villedoux sert 270 repas par jour en période scolaire. Construit en 2007 au 3 bis rue du Marais Guyot, il réunit sous un seul rez-de-chaussée de 468 m² la cuisine collective et deux salles de restauration, l’une pour les maternelles, l’autre pour les élémentaires ; il fonctionne aussi pendant les vacances, pour l’accueil de loisirs. En février 2025, la commune nous a commandé un audit énergétique. Mais c’est l’humidité qui ouvre le diagnostic : les pieds des murs, à l’extérieur comme à l’intérieur, se dégradaient.
+Le restaurant scolaire de Villedoux sert 270 repas par jour en période scolaire. Construit en 2007 au 3 bis rue du Marais Guyot, il réunit sous un seul rez-de-chaussée de 468 m² la cuisine collective et deux salles de restauration, l’une pour les maternelles, l’autre pour les élémentaires ; il fonctionne aussi pendant les vacances, pour l’accueil de loisirs. En février 2025, la commune nous a commandé un [audit énergétique](/expertises/audit-diagnostic). Mais c’est l’humidité qui ouvre le diagnostic : les pieds des murs, à l’extérieur comme à l’intérieur, se dégradaient.
 
 ## L’enjeu : deux questions dans une seule commande
 
 La proposition d’honoraires énumère sept objectifs, de l’état des lieux énergétique à la hiérarchisation des actions sur plusieurs années. Derrière cette liste, la commune posait deux questions distinctes. La première était immédiate : d’où vient cette humidité, et comment l’arrêter ? La seconde était patrimoniale : que faut-il engager, et dans quel ordre, pour qu’un bâtiment de 18 ans cesse de se dégrader et coûte moins cher à faire fonctionner ?
 
-Notre mission s’arrêtait au rapport. Le contrat exclut par écrit la maîtrise d’œuvre des travaux et la gestion des aides financières : il fallait relever, calculer, chiffrer des scénarios, et rien de plus. Honoraires : 5 100 € HT pour l’ensemble, en contrat direct avec la commune.
+Notre mission s’arrêtait au rapport, comme sur l’[étude de faisabilité de l’atelier Dufour Yachts](/references/atelier-dufour-yachts-perigny). Le contrat exclut par écrit la maîtrise d’œuvre des travaux et la gestion des aides financières : il fallait relever, calculer, chiffrer des scénarios, et rien de plus. Honoraires : 5 100 € HT pour l’ensemble, en contrat direct avec la commune.
 
 ## La visite : un voyant qui affiche la marche, une machine qui ne souffle pas
 
-La visite a eu lieu le 29 avril 2025, pendant les vacances scolaires — la cuisine tournait pour l’accueil de loisirs, avec un effectif réduit. Tous les locaux ont pu être vus.
+La visite a eu lieu le 29 avril 2025, pendant les vacances scolaires — la cuisine tournait pour l’accueil de loisirs, avec un effectif réduit. Tous les locaux ont pu être vus — le relevé sur site précède le calcul, ici comme à l’[École des douanes de La Rochelle](/references/ecole-des-douanes-rue-du-jura-la-rochelle).
 
-La centrale de traitement d’air qui ventile les deux salles de restauration date de la construction : une double flux de 2 340 m³/h posée en toiture. Sur le tableau de commande, le voyant vert de marche était allumé. En toiture, aucun débit ne sortait de la machine. Sur le plastron voisin, celui de la cuisine, un autre voyant signalait la batterie électrique en surchauffe. Aucun contrat d’entretien n’a été souscrit pour cette centrale.
+La [centrale de traitement d’air](/expertises/cvc) qui ventile les deux salles de restauration date de la construction : une double flux de 2 340 m³/h posée en toiture. Sur le tableau de commande, le voyant vert de marche était allumé. En toiture, aucun débit ne sortait de la machine. Sur le plastron voisin, celui de la cuisine, un autre voyant signalait la batterie électrique en surchauffe. Aucun contrat d’entretien n’a été souscrit pour cette centrale.
 
 Le reste du relevé décrit un bâtiment entretenu par à-coups, et dont personne ne surveille l’air. Deux caissons simple flux desservent, l’un les blocs sanitaires, l’autre les vestiaires, la lingerie et les locaux de préparation, de lavage et de stockage ; ceux-là tournaient. Les réseaux de toiture sont très dégradés, réparés par endroits, et les percements d’étanchéité laissent entrer l’eau. La production d’eau chaude sanitaire — un ballon de 750 L et quatre panneaux solaires en toiture — n’a ni suivi de fonctionnement ni contrat d’entretien ; le rapport demande de vérifier que la résistance électrique d’appoint n’assure pas seule la totalité de la production.
 
@@ -54,7 +54,7 @@ Le bâti, lui, prend l’eau par l’extérieur, et son traitement revenait à d
 
 ## Le modèle : un bâtiment sans gisement d’économies
 
-Le bâtiment a été modélisé sous le logiciel Perrenoud, module U48, en usage restaurant scolaire à un repas par jour, cinq jours sur sept. Sa surface, inférieure au seuil de 1 000 m², écarte la réglementation dite « globale » : les travaux qui y seraient engagés relèveraient de la réglementation thermique des bâtiments existants par éléments, celle qui impose une performance minimale à chaque équipement remplacé.
+Le bâtiment a été modélisé sous le logiciel Perrenoud, module U48, en usage restaurant scolaire à un repas par jour, cinq jours sur sept. Sa surface, inférieure au seuil de 1 000 m², écarte la réglementation dite « globale » : les travaux qui y seraient engagés relèveraient de la [réglementation thermique des bâtiments existants par éléments](/expertises/etude-thermique), celle qui impose une performance minimale à chaque équipement remplacé.
 
 L’état initial ressort à 37 116 kWh d’énergie finale par an. Le chauffage en représente 61 %, l’eau chaude sanitaire 22 %, la ventilation 9 %, l’éclairage 7 % et les autres usages 1 %. L’enveloppe, dont trois composants sur quatre restent sous les exigences applicables aux bâtiments existants, donne malgré tout un Ubat — le coefficient moyen de déperdition — de 0,484 W/m²·K, que l’échelle du rapport classe « Bonne ».
 
@@ -68,7 +68,7 @@ Les six préconisations chiffrées le montrent. Isoler la toiture-terrasse deman
 
 Le rapport final conclut que le bâtiment étant relativement récent, les propositions d’amélioration, « même si elles sont pertinentes, n’apportent pas des effets d’économies d’énergie et financières probantes ». Et il désigne le point à traiter : la ventilation.
 
-Le motif n’est d’ailleurs pas d’abord économique. À la construction, le débit d’air neuf retenu était de 18 m³/h par occupant ; notre rapport situe à 30 m³/h le niveau qu’appelleraient aujourd’hui les écoles. Remplacer la centrale, c’est revenir aux débits attendus, et rendre possible une gestion par sonde de dioxyde de carbone — ce qui suppose aussi de reprendre les réseaux, ceux de la toiture étant très dégradés et percés d’infiltrations. La préconisation les inclut.
+Le motif n’est d’ailleurs pas d’abord économique. À la construction, le débit d’air neuf retenu était de 18 m³/h par occupant ; notre rapport situe à 30 m³/h le niveau qu’appelleraient aujourd’hui [les écoles](/secteurs/tertiaire-erp). Remplacer la centrale, c’est revenir aux débits attendus, et rendre possible une gestion par sonde de dioxyde de carbone — ce qui suppose aussi de reprendre les réseaux, ceux de la toiture étant très dégradés et percés d’infiltrations. La préconisation les inclut.
 
 C’est le sens de cet audit : montrer qu’il n’y a pas d’économie à aller chercher dans les murs, et que ce qui reste à traiter tient dans les gaines. La mission s’est déroulée en deux temps — un diagnostic technique remis en mai 2025, puis l’audit énergétique complet en mars 2026, qui reprend le diagnostic et y ajoute la simulation, les scénarios chiffrés et leur valorisation en certificats d’économies d’énergie.
 

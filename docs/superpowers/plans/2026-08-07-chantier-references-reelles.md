@@ -331,3 +331,97 @@ de la S22, `dist/admin/` excepté, qui n'a pas de description et n'en a pas beso
 zéro). L'objectif de cinq liens contextuels par fiche est donc à créer intégralement, et non à
 compléter. Le faire fiche par fiche au fil des sessions aurait produit un maillage hétérogène ;
 le faire en une passe est le bon choix, mais il reste entier.
+
+---
+
+## Passe de fin de chantier — exécutée le 2026-08-10
+
+Cette section solde ce que la précédente ouvrait. Ce qui reste ouvert est dit à la fin.
+
+### ✅ 2.3 — Le gabarit de métadonnées est repris
+
+`src/pages/references/[...slug].astro` compose désormais le `<title>` sur le **nom court
+d'ouvrage** et la ville (`ouvrage` du frontmatter, à défaut le premier segment du titre), et non
+plus sur le `titre` — que Zod admet jusqu'à 80 signes, ce à quoi aucun calibre de `<title>` ne
+résiste. La ville s'omet quand le nom la porte déjà (« Abbaye de Sablonceaux »), l'article de la
+commune ne comptant pas dans ce rapprochement (« au Bois-Plage-en-Ré »).
+La `description` s'arrête à la ville et **tronque la liste des missions** au calibre, en gardant
+toujours la première : les premières du frontmatter sont les principales.
+
+**Mesuré sur le build** : `<title>` de **29 à 67** signes (contre 89), `description` de **89 à
+160**, aucune au-dessus. Unicité toujours vraie sur les 45 pages.
+⚠ **Mesurer sur le HTML sans désencoder les entités fausse la mesure** : deux descriptions
+paraissaient à 161 et 164 signes, c'était `&amp;` dans « Audit & diagnostic ».
+
+### ✅ 2.2 (a) — L'arbitrage numéral est exécuté, et l'instrument avait un cinquième défaut
+
+**Seize réécritures, non onze.** Les 11 prévues, plus cinq qu'a révélées la correction de
+l'instrument. Le corpus applique désormais la règle du tableau des cas.
+
+⚠ **Cinquième occurrence du piège de flexion de `scripts/releve-numeral.py`** — et la plus
+instructive, parce qu'elle survit à une correction précédente. Les noms **composés** n'étaient
+fléchis que sur leur dernier mot : `compte rendu` + `s` donnait *compte rendus*. Les
+« 13 comptes rendus » de Marans, que la S20 signalait comme invisibles, **le sont restés après
+que la S21 eut ajouté l'entrée au lexique** — l'entrée existait, sa flexion non. Chaque mot du
+composé se fléchit maintenant.
+
+**Et le lexique clos n'était pas le seul angle mort.** Trois classes d'écart se distinguent :
+
+| Classe | Détection | Dépend du lexique de noms ? |
+|---|---|---|
+| A — nombre **composé** écrit en lettres | la forme du nombre suffit | **non** |
+| B — nombre d'**un seul mot** écrit en chiffres | il faut savoir qu'il qualifie un dénombrable | oui |
+| C — **mesure** écrite en lettres | il faut la liste des unités | non, mais → jugement |
+
+**La classe A est désormais dans le script** (`composes_en_lettres`, motif `RE_COMPOSE`) : elle a
+trouvé quatre écarts — `cent huit modules`, `vingt-huit brise-soleil`, `vingt-quatre points`,
+`vingt-cinq centimètres` — qui portaient **tous sur des noms absents du lexique**, et qu'aucune
+des cinq corrections de `pluriel()` n'aurait pu faire apparaître. Le premier était une
+**contradiction interne** : la fiche de Marennes écrivait « 108 modules » en synthèse et « Cent
+huit modules » au récit.
+La **classe C** a été balayée à la main (8 occurrences) et **n'est pas outillée à dessein** : elle
+demande un jugement que la règle porte désormais explicitement — « se lit sur un instrument » au
+pied de la lettre. Le relevé piézométrique de Tourtet passe en chiffres, « dix pour cent sous les
+exigences » et « à trois kilomètres » restent en lettres.
+
+**Relevé final, 23 récits** : de deux à neuf **95 / 1** · de dix à trente **40 / 8** · au-delà de
+trente **1 / 22** · composés en lettres **0**. Le seul écart de classe B restant est la citation
+littérale du contrat Yachtman, couverte par l'exception documentée.
+⚠ Les bandes ont bougé après le maillage : les incises de rapprochement apportent de la prose,
+donc des occurrences. **Un relevé se rejoue après la dernière écriture, pas avant.**
+
+### ✅ 3 — La passe SEO/GEO : le maillage est créé, et il est outillé
+
+**211 liens internes** dans le contenu, contre 18 avant la passe. **23 fiches sur 23** atteignent
+le minimum de cinq ; **aucun lien mort**.
+
+`scripts/controle-liens-internes.py` est l'instrument qui manquait — celui dont l'absence avait
+laissé six liens pointer quatre mois durant vers des fiches supprimées. Il valide les cibles
+contre les **routes réellement engendrées dans `dist/`**, et non contre la liste des fichiers de
+`src/content/` : c'est ce qui est rendu qui répond en 200. Il vérifie du même mouvement le
+plancher de cinq liens par fiche, et sort en échec sur l'un ou l'autre.
+
+Le JSON-LD `CreativeWork` reçoit `url`, `abstract` (la synthèse) et `creator` — ce dernier
+rattachant l'affaire au `ProfessionalService` de l'accueil par la même URL. Vingt-trois fiches
+deviennent un portefeuille attribué, et non vingt-trois œuvres sans auteur.
+
+⚠ **Les liens de prose étaient déjà conformes à l'amendement A6** avant la passe :
+`RecitAffaire.astro` applique `underline` + épaisseur 1 px + offset 3 px + `hover:decoration-2`
+aux `<a>` descendants, sans changement de couleur, et le sélecteur est bien émis dans le CSS
+livré. Aucune classe à poser sur les liens Markdown. **Vérifié avant d'écrire les 211 liens, pas
+après.**
+
+### ✅ 2.2 (g) — La typologie `Étude` existe
+
+Cinquième valeur de `TYPOLOGIES`, insérée en 4ᵉ position pour que le bloc « travaux » reste
+groupé et que les deux typologies d'étude se suivent. Répercutée dans `public/admin/config.yml`
+au sein du même commit, avec un `hint` qui la distingue d'`Études d'exécution`.
+`ecole-des-douanes-rue-du-jura-la-rochelle` et `cuisine-groupe-scolaire-villedoux` sont
+reclassées : elles n'annoncent plus une réhabilitation qui n'a pas eu lieu.
+
+### ✅ 2.2 (f) — Les trois millésimes d'ouverture sont retirés
+
+Maubec, Salignac et Saintes ne datent plus l'ouverture d'affaire en prose. ⚠ Le cas de Maubec
+demandait de **distinguer deux dates voisines** : « le chantier, ouvert en septembre 2023 » est
+un fait daté légitime et reste ; c'est « l'écart entre l'ouverture de l'affaire en 2022 et les
+opérations préalables » qui portait le millésime, à trente lignes de là.
