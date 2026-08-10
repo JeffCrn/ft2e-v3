@@ -49,6 +49,30 @@ const legendeMedia = [nomOuvrage, ville, surface_m2 ? `${surface_m2} m²` : nu
   .join(' · ')
   .toLowerCase();
 
+// Métadonnées SEO (fin de chantier § 2.3) : composées sur le nom court
+// d'ouvrage et la ville, jamais sur le `titre` descriptif — Zod l'admet
+// jusqu'à 80 signes, aucun calibre de <title> n'y résiste. La ville s'omet
+// quand le nom la porte déjà (« Abbaye de Sablonceaux ») ; l'article de la
+// commune ne compte pas dans ce rapprochement (« au Bois-Plage-en-Ré »).
+const villeNue = ville.replace(/^(le|la|les|l’|l')\s*/i, '');
+const titrePage = `${
+  nomOuvrage.toLowerCase().includes(villeNue.toLowerCase()) ? nomOuvrage : `${nomOuvrage}, ${ville}`
+} — référence FT2E`;
+
+// La description vise 160 signes au plus : titre, ville si le titre ne la
+// porte pas, puis autant de missions que le calibre en accepte — au moins
+// une, les premières du frontmatter étant les principales.
+const villeDansTitre = titre.toLowerCase().includes(villeNue.toLowerCase());
+const debutDescription = `${titre}${villeDansTitre ? '' : ` (${ville})`}. Mission FT2E : `;
+const missionsRetenues: string[] = [];
+for (const mission of projet.data.mission_ft2e) {
+  const essai = [...missionsRetenues, mission].join(', ');
+  if (debutDescription.length + essai.length + 1 > 160) break;
+  missionsRetenues.push(mission);
+}
+if (missionsRetenues.length === 0) missionsRetenues.push(projet.data.mission_ft2e[0]);
+const descriptionPage = `${debutDescription}${missionsRetenues.join(', ')}.`;
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CreativeWork',
@@ -66,8 +90,8 @@ const jsonLd = {
 ---
 
 <PageLayout
-  title={`${titre} — Référence FT2E`}
-  description={`${titre} — ${projet.data.secteur}, ${lieu}. Mission FT2E : ${projet.data.mission_ft2e.join(', ')}.`}
+  title={titrePage}
+  description={descriptionPage}
 >
   <HeroPage
     breadcrumbs={[
