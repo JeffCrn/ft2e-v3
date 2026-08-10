@@ -483,6 +483,7 @@ collections:
         widget: "list"
         required: false
         summary: "{{fields.question}}"
+        hint: "Deux à trois questions posées du point de vue du client (« Faut-il… », « À partir de quand… »), réponses de deux à quatre phrases. Ce champ engendre le JSON-LD FAQPage de la page : la laisser vide prive la page de cet enrichissement pour les moteurs et les assistants."
         fields:
           - { label: "Question", name: "question", widget: "string", required: true }
           - { label: "Réponse", name: "reponse", widget: "text", required: true }
@@ -537,13 +538,14 @@ collections:
         name: "livrables"
         widget: "list"
         required: false
-        hint: "Segments de type mission (Coordination SSI, Études d'exécution / BIM) uniquement — laisser vide sur un marché du bâtiment."
+        hint: "Cinq pièces remises au client sur ce type d'opération, en groupes nominaux courts. Les sept secteurs en portent depuis le 2026-08-10 : ce qui distingue un marché du bâtiment d'un segment de mission (Coordination SSI, EXE/BIM), c'est la nature des pièces, pas leur absence."
 
       - label: "FAQ"
         name: "faq"
         widget: "list"
         required: false
         summary: "{{fields.question}}"
+        hint: "Deux à trois questions posées du point de vue du client (« Faut-il… », « À partir de quand… »), réponses de deux à quatre phrases. Ce champ engendre le JSON-LD FAQPage de la page : la laisser vide prive la page de cet enrichissement pour les moteurs et les assistants."
         fields:
           - { label: "Question", name: "question", widget: "string", required: true }
           - { label: "Réponse", name: "reponse", widget: "text", required: true }

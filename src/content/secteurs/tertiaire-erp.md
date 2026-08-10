@@ -2,8 +2,21 @@
 titre: "Tertiaire / ERP"
 accroche: "Bureaux, enseignement, santé, sport, équipements publics — tous les établissements recevant du public. Décret tertiaire, GTB, réglementation ERP."
 image: "/images/secteurs/tertiaire-erp.jpg"
-image_alt: "[DÉMO] Plateau de bureaux à structure apparente : gaines de ventilation, chemins de câbles et éclairage linéaire sous dalle béton"
+image_alt: "[DÉMO] Plateau de bureaux à structure apparente : gaines de ventilation, chemins de câbles et éclairage linéaire sous dalle béton"
 ordre: 2
+livrables:
+  - "Régime de RT existant : par éléments ou globale"
+  - "Audit du décret tertiaire au-delà de 1 000 m²"
+  - "Régulation par sondes de dioxyde de carbone"
+  - "Traitement d’air des locaux à occupation intermittente"
+  - "Programmation horaire et comptage par occupant"
+faq:
+  - question: "Faut-il fermer l’établissement pendant les travaux ?"
+    reponse: "Le plus souvent, non : c’est une constante du secteur. L’hôtel Le Yachtman, quai Valin à La Rochelle, n’a pas fermé pendant que ses étages étaient repris par tranches ; au siège de la RESE à Aigrefeuille-d’Aunis, les canalisations ont continué d’arriver par camion et le personnel a été relogé en bungalows sur la parcelle. Le phasage se règle opération par opération : à l’ancien siège communautaire de Marennes, les travaux bruyants ont été concentrés le vendredi et les locaux rendus un à un."
+  - question: "À partir de quelle surface les obligations changent-elles ?"
+    reponse: "Le seuil de 1 000 m² commande deux textes distincts. En deçà, une rénovation relève de la RT existant par éléments, qui impose une performance à chaque équipement remplacé : c’est le régime des 530 m² de l’ancien siège communautaire de Marennes. Au-delà, et selon l’année de construction et le coût des travaux rapporté à la valeur du bâtiment, elle bascule sous la réglementation dite « globale », qui demande un calcul avant travaux et un calcul après ; le bâtiment entre par ailleurs dans le champ du décret Éco Énergie Tertiaire du 23 juillet 2019. Au centre de formation de Saintes, 1 123 m², l’audit de ce décret a été commandé à côté de la maîtrise d’œuvre."
+  - question: "Que change le classement ERP pour mon bâtiment ?"
+    reponse: "Le type et la catégorie fixent le niveau d’exigence, à commencer par la sécurité incendie : l’hôtel Le Yachtman, de type O et classé en quatrième catégorie pour un effectif de public de 126 personnes, n’appelle pas le même équipement d’alarme que le centre de formation de Saintes, de type R et de cinquième catégorie. Un même bâtiment peut relever de deux régimes à la fois : au siège de la RESE, seul le secteur d’accueil des abonnés est un établissement recevant du public, le reste étant régi par le code du travail. Le classement commande enfin la remise en service : quai Valin, l’ouverture au public a été autorisée par arrêté du maire du 3 juin 2026, sous réserve des prescriptions de la commission communale de sécurité réunie le 11 mai."
 ---
 
 Le tertiaire est une activité majeure de FT2E — 98 projets menés entre 2019 et 2024 — qui regroupe des typologies de bâtiments très diverses : immeubles de bureaux, groupes scolaires, médiathèques, mairies, centres techniques municipaux. Chacun présente des contraintes d’usage et de confort spécifiques — densité d’occupation variable, exigences de qualité d’air, plages horaires de fonctionnement étendues ou fractionnées. FT2E conçoit les installations techniques en partant de l’usage réel du bâtiment, pour un dimensionnement juste et des consommations maîtrisées. En ERP comme en bâtiment soumis au code du travail, le bureau est garant du respect de la réglementation applicable selon le classement — ERP du 1ᵉʳ ou du 2ᵉ groupe, instructions techniques, règlement sanitaire — et les estimations financières s’appuient sur une base de prix actualisée (OPTIMA). Au [siège de la RESE à Aigrefeuille-d’Aunis](/references/siege-rese-aigrefeuille), les deux régimes cohabitent dans un même bâtiment — seul l’accueil des abonnés relève des établissements recevant du public.
