@@ -40,7 +40,16 @@ def pluriel(nom):
     La session 21 rencontre **le même défaut sur deux autres classes** en
     élargissant le lexique : `local` + 's' donne `locals`, `repas` + 's`
     donne `repass`. Trois classes de flexion valent mieux qu'une liste
-    d'exceptions tapées à la main."""
+    d'exceptions tapées à la main.
+
+    Cinquième occurrence du piège, trouvée en fin de chantier : les noms
+    COMPOSÉS du lexique n'étaient fléchis que sur leur dernier mot —
+    `compte rendu` + 's' donne `compte rendus`, jamais écrit, et les
+    « 13 comptes rendus » de la fiche de Marans restaient invisibles deux
+    sessions après que la S20 l'avait pressenti. Chaque mot du composé se
+    fléchit désormais (`comptes rendus`, `lots techniques`)."""
+    if ' ' in nom:
+        return ' '.join(pluriel(mot) for mot in nom.split(' '))
     if nom.endswith(('s', 'x', 'z')):
         return nom                                   # repas, puits : invariables
     if nom.endswith('ail'):

@@ -68,13 +68,15 @@ La même logique couvre déjà l'ordinal réglementaire de la dernière ligne du
 
 Le relevé **se rejoue** : `scripts/releve-numeral.py` (sans argument pour mesurer le disque, `--head` pour mesurer le dernier commit). Ne sont comptés que les nombres qui qualifient **directement** un nom dénombrable d'une liste close — `logement`, `chambre`, `lit`, `niveau`, `place`, `zone`, `lot`, `bâtiment`, `étage`, `mission`, `semaine`, `réunion`, `réserve`, `cotraitant`, `poste`, `maison`, `appartement`, singulier et pluriel. `un` et `une` sont exclus : ils sont article aussi souvent que numéral. Frontmatter exclu, corps de récit seul.
 
-État des **vingt-trois** récits, remesuré le 2026-08-09 à la clôture du chantier (session 22) :
+État des **vingt-trois** récits, remesuré le 2026-08-10 **après exécution de l'arbitrage** (passe de fin de chantier — le corpus applique désormais la règle du tableau des cas) :
 
 | Bande | En lettres | En chiffres |
 |---|---|---|
 | de deux à neuf | **93** — conforme | **1** — la citation Yachtman |
-| de dix à trente | **27** | **18** |
-| au-delà de trente | **3** | **14** |
+| de dix à trente | **37** — tous d'un seul mot | **10** — tous composés |
+| au-delà de trente | **1** — « soixante lits », un seul mot | **21** — tous composés |
+
+**Zéro écart hors la citation Yachtman**, contrôlé par balayage des deux classes d'écart (nom d'un seul mot en chiffres, nom composé en lettres) sur le lexique du script. L'état antérieur à l'exécution — « 93 / 1 · 27 / 18 · 3 / 14 », publié le 2026-08-09 — se rejoue encore avec `--head` sur le commit d'avant la passe, à ceci près que la flexion des composés y était fausse (voir le cinquième piège ci-dessous).
 
 Les chiffres ci-dessus remplacent le relevé « 71 / 27 / 13 / 3 / 12 » de la session 19, mesuré
 sur vingt récits et avec un lexique plus étroit. Trois causes à l'écart, aucune éditoriale : le
@@ -87,8 +89,10 @@ méthode avec les chiffres n'est pas une précaution de style.
 
 C'est le troisième piège du même genre sur ce script, après la borne du lexique arrêtée à « trente » et le « trois » qui s'accrochait dans « quarante-trois ». Tous trois ont produit un zéro ou un sous-compte qui ressemblait à une mesure. **Un lexique engendré ne suffit pas : ses règles de flexion doivent l'être aussi.**
 
+⚠ **Cinquième occurrence du piège, trouvée à l'exécution de l'arbitrage (2026-08-10)** : les noms **composés** du lexique n'étaient fléchis que sur leur dernier mot — `compte rendu` + `s` donnait *compte rendus*, jamais écrit. Les « 13 comptes rendus » de la fiche de Marans, que la S20 signalait comme invisibles, le sont restés **après** l'ajout de « compte rendu » au lexique en S21 : l'entrée existait, sa flexion non. La correction (chaque mot du composé se fléchit désormais) a révélé quatre occurrences de plus, dont deux composés en lettres — « quarante-cinq comptes rendus », « cinquante et un comptes rendus » — réécrits en chiffres dans la même passe.
+
 - **Sous dix, plus aucun écart.** Le seul « 6 maisons » (`fougerou-sainte-marie-de-re.md`) a été corrigé le 2026-08-09 ; la seule occurrence chiffrée restante est la citation du contrat Yachtman, couverte par l'exception ci-dessus. Le relevé antérieur annonçait **2** écarts : il en comptait un de trop.
-- **Au-delà de trente, le chiffre domine sans régner** : douze occurrences en chiffres (« 42 lits », « 54 maisons », « 152 réunions ») contre trois en lettres (« quarante-six chambres », « quarante-trois postes », « trente-deux réunions »).
+- **Au-delà de trente, conforme depuis le 2026-08-10** : 21 occurrences en chiffres, toutes composées (« 42 lits », « 54 maisons », « 152 réunions ») ; une seule en lettres, « soixante lits », d'un seul mot. Les trois composées en lettres (« quarante-six chambres », « quarante-trois postes », « trente-deux réunions ») ont été passées en chiffres, et « 60 lits » en lettres — soixante s'écrit en un mot, la règle ne connaît pas de bande.
 - ✅ **Entre dix et trente : le point est tranché le 2026-08-09, et c'est la mesure qui l'a tranché.**
   L'ancienne règle — « à partir de dix, en chiffres » — décrivait **40 %** du corpus dans cette
   bande : 27 occurrences en lettres contre 18 en chiffres. Ce n'était pas un usage flottant, c'était
@@ -101,11 +105,13 @@ C'est le troisième piège du même genre sur ce script, après la borne du lexi
   tranche du même coup les trois fiches qui se contredisaient d'un champ à l'autre :
   `fougerou` « vingt-sept » → **27**, `hotel-yachtman` « quarante-six chambres » → **46 chambres**,
   `exe-residence-horizon-mediatim` « 15 diffusions » → **quinze diffusions**.
-  ⚠ **La règle est à jour, le corpus ne l'est pas encore : 11 réécritures restent dues** — les
-  8 occurrences d'un seul mot écrites en chiffres, et les 3 composées écrites en lettres de la
-  bande haute (« quarante-six chambres », « quarante-trois postes », « trente-deux réunions »).
-  Voir § Fin de chantier · état d'ouverture du plan de chantier.
-- ⚠ **Trois fiches se contredisent d'un champ à l'autre** — même nombre, deux graphies dans le même fichier, donc lisibles d'un seul écran puisque la synthèse surmonte le récit : `fougerou` (« 27 calculs » en `synthese`, « vingt-sept » au récit), `exe-residence-horizon-mediatim` (« 15 diffusions » / « quinze envois »), `hotel-yachtman-quai-valin-la-rochelle` (« 46 chambres » / « quarante-six chambres »). L'arbitrage du seuil les tranchera toutes les trois d'un coup ; les corriger avant serait les corriger deux fois.
+  ✅ **Exécuté le 2026-08-10** : les 11 réécritures prévues, plus les cinq que l'instrument
+  corrigé a révélées (« 13 comptes rendus » ×2, « quarante-cinq comptes rendus »,
+  « cinquante et un comptes rendus », « 60 lits »). La réécriture d'une occurrence de récit
+  s'est propagée aux champs `titre` et `synthese` qui portaient la même graphie
+  (Maubec « treize logements », EHPAD « onze zones » / « dix zones ») : une fiche ne se
+  contredit pas d'un champ à l'autre.
+- ✅ **Les trois fiches qui se contredisaient d'un champ à l'autre sont alignées le 2026-08-10** : `fougerou` a « 27 calculs » aux deux champs, `exe-residence-horizon-mediatim` est tout en lettres (« Quinze diffusions » en synthèse, « quinze diffusions » et « quinze envois » au récit), `hotel-yachtman-quai-valin-la-rochelle` « 46 chambres » aux deux champs — la citation du contrat, « 4 chambres », reste intacte au titre de l'exception ci-dessus.
 
 **Le lexique du script est engendré, jamais tapé.** Sa première version s'arrêtait à « trente » et concluait « au-delà de trente, jamais de lettres » : ce zéro n'était pas une mesure mais la forme du dictionnaire renvoyée en écho — les « quarante-six chambres » du corpus n'y avaient pas d'entrée. Pire, « quarante-trois postes » était compté dans la bande basse, l'entrée « trois » s'accrochant après le trait d'union. Toute extension du relevé doit engendrer ses formes, pas les énumérer.
 

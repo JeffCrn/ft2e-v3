@@ -19,7 +19,7 @@ image_principale_alt: "Rue livrée du Fougerou à Sainte-Marie-de-Ré, maisons b
 en_avant: false
 ---
 
-À Sainte-Marie-de-Ré, sur l’île de Ré, l’opération « Le Fougerou » compte 54 maisons individuelles — 48 en accession sociale à la propriété, six en locatif social — sur un terrain de 22 149 m². Bureau d’études fluides de la maîtrise d’œuvre, FT2E a suivi l’affaire de l’esquisse (2020) à la livraison de la dernière tranche (mars 2026) : lots chauffage-plomberie-ventilation et électricité, études thermiques RT2012 des 54 logements, études d’exécution et suivi de chantier. Chaque maison reçoit une pompe à chaleur double service et une ventilation hygroréglable ; les vingt-sept calculs réglementaires concluent tous à la conformité, de 14 à 36 % sous l’exigence de consommation.
+À Sainte-Marie-de-Ré, sur l’île de Ré, l’opération « Le Fougerou » compte 54 maisons individuelles — 48 en accession sociale à la propriété, six en locatif social — sur un terrain de 22 149 m². Bureau d’études fluides de la maîtrise d’œuvre, FT2E a suivi l’affaire de l’esquisse (2020) à la livraison de la dernière tranche (mars 2026) : lots chauffage-plomberie-ventilation et électricité, études thermiques RT2012 des 54 logements, études d’exécution et suivi de chantier. Chaque maison reçoit une pompe à chaleur double service et une ventilation hygroréglable ; les 27 calculs réglementaires concluent tous à la conformité, de 14 à 36 % sous l’exigence de consommation.
 
 ## L’enjeu : 54 maisons à l’année dans un site patrimonial
 
@@ -31,8 +31,8 @@ Au sein de la maîtrise d’œuvre réunie autour de l’agence Sébastien Pelle
 
 ## Les particularités : un chantier au rythme de l’île
 
-Le chantier compose avec son territoire : en période estivale, seuls les travaux sans nuisance sonore sont admis — ni gros œuvre, ni charpente, ni circulation d’engins dans la commune. La livraison s’échelonne en trois tranches, emménagements compris : 2024, février 2025, puis mars 2026. Côté calcul, l’opération n’est pas un bâtiment mais vingt-sept : chaque maison ou groupe de maisons accolées fait l’objet de son propre calcul RT2012, sur une enveloppe où les murs descendent à 0,19–0,22 W/m²·°C et les toitures à 0,10, avec menuiseries bois à double vitrage et volets battants. En dernière tranche, l’option plancher chauffant, chiffrée dès la consultation, remplace les radiateurs.
+Le chantier compose avec son territoire : en période estivale, seuls les travaux sans nuisance sonore sont admis — ni gros œuvre, ni charpente, ni circulation d’engins dans la commune. La livraison s’échelonne en trois tranches, emménagements compris : 2024, février 2025, puis mars 2026. Côté calcul, l’opération n’est pas un bâtiment mais 27 : chaque maison ou groupe de maisons accolées fait l’objet de son propre calcul RT2012, sur une enveloppe où les murs descendent à 0,19–0,22 W/m²·°C et les toitures à 0,10, avec menuiseries bois à double vitrage et volets battants. En dernière tranche, l’option plancher chauffant, chiffrée dès la consultation, remplace les radiateurs.
 
 ## Le résultat : la conformité RT2012 sur toute l’opération
 
-Les études thermiques de janvier 2022 concluent à la conformité des vingt-sept calculs couvrant les 54 maisons : consommations d’énergie primaire de 36,4 à 45,1 kWhep/m²/an, soit de 14 à 36 % sous l’exigence selon les bâtiments. La dernière tranche est livrée en mars 2026, au terme de 152 réunions de chantier suivies par le bureau ; le montant des travaux s’établit à 8 455 000 € HT.
+Les études thermiques de janvier 2022 concluent à la conformité des 27 calculs couvrant les 54 maisons : consommations d’énergie primaire de 36,4 à 45,1 kWhep/m²/an, soit de 14 à 36 % sous l’exigence selon les bâtiments. La dernière tranche est livrée en mars 2026, au terme de 152 réunions de chantier suivies par le bureau ; le montant des travaux s’établit à 8 455 000 € HT.

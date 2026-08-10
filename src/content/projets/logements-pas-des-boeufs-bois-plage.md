@@ -12,7 +12,7 @@ annee: 2022
 statut: en cours
 performance: "RE2020 · labellisation BPEC Prestaterre visée, Bbio, Cep et Cep,nr −10 % · Cep −36,7 % à −44,1 %"
 synthese: >-
-  Au Bois-Plage-en-Ré, Habitat 17 construit 10 logements locatifs sociaux sur un terrain communal, en quatre îlots de maisons accolées. Le programme de l’office résume l’enjeu : soutenir la vie à l’année sur la commune et sur l’île. Le foncier est rare, le site inscrit, et l’office demande à la fois une performance supérieure à la réglementation et une maîtrise stricte du coût. FT2E porte l’étude thermique avec son analyse du cycle de vie, et deux lots techniques. Les quatre calculs concluent à la conformité ; c’est le carbone de construction qui se joue le plus serré, à moins de 3 % du plafond sur trois îlots.
+  Au Bois-Plage-en-Ré, Habitat 17 construit 10 logements locatifs sociaux sur un terrain communal, en quatre îlots de maisons accolées. Le programme de l’office résume l’enjeu : soutenir la vie à l’année sur la commune et sur l’île. Le foncier est rare, le site inscrit, et l’office demande à la fois une performance supérieure à la réglementation et une maîtrise stricte du coût. FT2E porte l’étude thermique avec son analyse du cycle de vie, et deux lots techniques. Les quatre calculs concluent à la conformité ; c’est le carbone de construction qui se joue le plus serré, à moins de 3 % du plafond sur trois îlots.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", "Études d'exécution"]
 image_principale: "/images/projets/logements-pas-des-boeufs-bois-plage/01.jpg"
 image_principale_alt: "Extrait du plan de principe plomberie-chauffage-ventilation FT2E au 1/50 : les quatre îlots de maisons accolées et leur stationnement, les réseaux d’eau et de ventilation tracés logement par logement"
@@ -55,7 +55,7 @@ Le confort d’été, enfin, est tenu sans recours à la climatisation : les de
 
 ## Le résultat : quatre bâtiments conformes, quatre marges étroites
 
-L’opération totalise dix logements pour 548,44 m² habitables, en quatre îlots de maisons accolées, 13 lots de travaux et 11 places de stationnement dont une accessible. La labellisation visée est le Bâtiment performance énergétique et carbone (BPEC) de Prestaterre, aux niveaux Bbio, Cep et Cep,nr inférieurs de dix pour cent aux exigences RE2020 : les quatre calculs le permettent.
+L’opération totalise dix logements pour 548,44 m² habitables, en quatre îlots de maisons accolées, treize lots de travaux et onze places de stationnement dont une accessible. La labellisation visée est le Bâtiment performance énergétique et carbone (BPEC) de Prestaterre, aux niveaux Bbio, Cep et Cep,nr inférieurs de dix pour cent aux exigences RE2020 : les quatre calculs le permettent.
 
 Le chantier a été suivi en réunion par le bureau à partir de juillet 2024, sur 48 comptes rendus au dossier numérotés jusqu’au cinquantième. Il a connu ses aléas de sol — les essais de portance des plateformes, non conformes début octobre 2024, ont décalé le démarrage du gros œuvre, et l’implantation n’a été faite que le 18 novembre 2024. Le dernier compte rendu au dossier, daté du 4 novembre 2025, fixe les opérations préalables à la réception des logements au 18 novembre suivant.
 

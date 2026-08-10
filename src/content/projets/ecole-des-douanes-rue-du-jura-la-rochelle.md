@@ -45,7 +45,7 @@ Une salle de cours du rez-de-chaussée suffit à le montrer. À 63 m², un mat
 
 Une seule exception : la salle de lecture et ses 179 m² sont le seul endroit du bâtiment où l’ensoleillement dépasse 2 kW. Partout ailleurs, la climatisation ne combat pas le climat — elle évacue ce que produisent les occupants et leurs équipements, 663 personnes au total dans les hypothèses de calcul.
 
-Cette hiérarchie a une conséquence directe sur le projet à venir. Une charge d’origine interne suit l’emploi du temps, pas la course du soleil : elle culmine à 9 h dans huit salles, à 10 h dans quatre autres, à 16 h dans 12 locaux, et retombe dès qu’une salle se vide. C’est un argument pour une production capable de descendre bas en charge partielle et pour une régulation par local, plutôt que pour une centrale unique dimensionnée sur la somme des pointes.
+Cette hiérarchie a une conséquence directe sur le projet à venir. Une charge d’origine interne suit l’emploi du temps, pas la course du soleil : elle culmine à 9 h dans huit salles, à 10 h dans quatre autres, à 16 h dans douze locaux, et retombe dès qu’une salle se vide. C’est un argument pour une production capable de descendre bas en charge partielle et pour une régulation par local, plutôt que pour une centrale unique dimensionnée sur la somme des pointes.
 
 ## Le résultat : 152,9 kW, foisonnement compris
 
