@@ -1,8 +1,8 @@
 ---
 titre: "Industriel et commercial"
 accroche: "Ateliers, entrepôts, process industriels, surfaces commerciales. Ventilation spécifique, conformité ICPE, puissances électriques élevées."
-image: "/images/secteurs/industriel.jpg"
-image_alt: "[DÉMO] Bâtiment industriel moderne"
+image: "/images/secteurs/industriel-commercial.jpg"
+image_alt: "[DÉMO] Atelier de construction navale : moule de coque en composite, bras d’extraction des poussières et pont roulant"
 ordre: 3
 ---
 

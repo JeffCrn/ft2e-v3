@@ -2,7 +2,7 @@
 titre: "Coordination SSI"
 accroche: "La coordination des systèmes de sécurité incendie portée comme une mission à part entière, en ERP comme en IGH. Plus de vingt ans de pratique."
 image: "/images/secteurs/coordination-ssi.jpg"
-image_alt: "[DÉMO] Centrale de mise en sécurité incendie en cours de contrôle"
+image_alt: "[DÉMO] Essai d’un détecteur de fumée au générateur d’aérosol, mené depuis une nacelle dans le hall d’un bâtiment en service"
 ordre: 6
 livrables:
   - "Concept SSI et zonage"

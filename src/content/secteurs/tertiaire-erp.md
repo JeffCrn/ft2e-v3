@@ -1,8 +1,8 @@
 ---
 titre: "Tertiaire / ERP"
 accroche: "Bureaux, enseignement, santé, sport, équipements publics — tous les établissements recevant du public. Décret tertiaire, GTB, réglementation ERP."
-image: "/images/secteurs/tertiaire.jpg"
-image_alt: "[DÉMO] Bâtiment tertiaire contemporain"
+image: "/images/secteurs/tertiaire-erp.jpg"
+image_alt: "[DÉMO] Plateau de bureaux à structure apparente : gaines de ventilation, chemins de câbles et éclairage linéaire sous dalle béton"
 ordre: 2
 ---
 

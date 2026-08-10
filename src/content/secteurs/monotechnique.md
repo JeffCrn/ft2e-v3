@@ -2,7 +2,7 @@
 titre: "Monotechnique"
 accroche: "Une seule spécialité technique, un seul intervenant : FT2E assure seul la maîtrise d’œuvre d’opérations ciblées, du diagnostic à la réception."
 image: "/images/secteurs/monotechnique.jpg"
-image_alt: "[DÉMO] Local technique d’une chaufferie collective"
+image_alt: "[DÉMO] Réglage d’une caméra de vidéosurveillance en plafond, dans le couloir d’un établissement de santé"
 ordre: 5
 ---
 

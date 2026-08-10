@@ -2,7 +2,7 @@
 titre: "Patrimoine"
 accroche: "Monuments historiques, bâtiments classés, réhabilitations patrimoniales. Intégration discrète des réseaux, respect des décors d’origine."
 image: "/images/secteurs/patrimoine.jpg"
-image_alt: "[DÉMO] Bâtiment patrimonial en cours de réhabilitation"
+image_alt: "[DÉMO] Coupe technique d’une salle voûtée : passage des réseaux de chauffage, de ventilation et de câblage dans les joints de maçonnerie et sous le dallage"
 ordre: 4
 ---
 

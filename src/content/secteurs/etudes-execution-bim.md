@@ -2,7 +2,7 @@
 titre: "Études d'exécution / BIM"
 accroche: "Les études d’exécution des lots techniques menées pour les entreprises et les promoteurs, sur maquette Revit MEP, jusqu’au DOE numérique."
 image: "/images/secteurs/etudes-execution-bim.jpg"
-image_alt: "[DÉMO] Maquette numérique des réseaux techniques d’un bâtiment"
+image_alt: "[DÉMO] Réseaux techniques posés en sous-face de dalle : gaines de ventilation, antennes cuivre, chemins de câbles et réseau sprinkler"
 ordre: 7
 livrables:
   - "Maquette Revit MEP (CVC, plomberie, électricité)"
