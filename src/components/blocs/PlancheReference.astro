@@ -164,40 +164,163 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
     </figcaption>
   </figure>
 
-  <dialog id={`${id}-dialogue`} class="planche-dialogue" aria-label={`Planche agrandie — ${extraction.titre}`}>
-    <div class="flex items-center justify-between gap-4 border-b border-filet-2 bg-calcaire px-5 py-3">
-      <span class="mono-label text-pivot">Planche FT2E — {extraction.archetype.replace('-', ' ')}</span>
-      <button type="button" class="btn-filaire cible-44" data-planche-fermer>Fermer</button>
+  {/* Boîte d'agrandissement — un plan éclairé dans une pièce sombre.
+
+      Le parti : aucune chrome autour du dessin. Le `<dialog>` occupe tout
+      l'écran et reste transparent ; ce qu'on voit est le voile, la barre qui
+      flotte dessus, et la feuille. Une barre d'outils encadrant la planche
+      entrerait en concurrence avec son propre bloc de titre — la planche porte
+      déjà son surtitre, son titre et son cartouche. */}
+  <dialog
+    id={`${id}-dialogue`}
+    class="planche-boite"
+    aria-label={`Planche agrandie — ${extraction.titre}`}
+  >
+    <div class="planche-scene">
+      <div class="planche-barre">
+        <span class="mono-label planche-enseigne">
+          Planche FT2E — {extraction.archetype.replace('-', ' ')}
+        </span>
+        <button type="button" class="planche-fermer cible-44" data-planche-fermer>
+          <span class="planche-touche" aria-hidden="true">Échap</span>
+          <span>Fermer</span>
+          {/* La croix est tracée à 1 px, comme tous les filets du système :
+              aucune bibliothèque d'icônes n'entre dans la charte. */}
+          <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false">
+            <path d="M1 1 L11 11 M11 1 L1 11" fill="none" stroke="currentColor" stroke-width="1" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Cliquer à côté de la feuille ferme la boîte : la zone est la cible, le
+          plan ne l'est pas. */}
+      <div class="planche-zone" data-planche-zone>
+        <div class="planche-plan" data-planche-cible></div>
+      </div>
     </div>
-    <div class="overflow-auto bg-papier" data-planche-cible></div>
   </dialog>
   </Fragment>
 )}
 
 <style>
-  /* La boîte d'agrandissement est un plan posé plein écran : rayon 0, filet 1 px,
-     ombre de rang 2. Le fond de scène est de l'encre translucide — la charte
-     n'admet aucune ombre ni aucun voile qui ne soit de l'encre. */
-  .planche-dialogue {
-    width: min(96vw, 1440px);
-    max-width: 96vw;
-    max-height: 92vh;
+  /* ── La boîte : transparente et plein écran ─────────────────────────────
+     Le voile est porté par `::backdrop`, la mise en page par `.planche-scene`.
+     Un `<dialog>` dimensionné et opaque obligeait à lui poser une barre
+     d'outils ; celui-ci n'a pas de bord, donc pas de chrome à dessiner. */
+  .planche-boite {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
     padding: 0;
-    border: 1px solid var(--color-filet-1);
+    border: 0;
     border-radius: 0;
+    background-color: transparent;
+    overflow: hidden;
+    color: var(--color-clair);
+  }
+
+  /* Le voile. La charte proscrit le noir — « ombre = encre translucide, jamais
+     du noir » : c'est le PROFOND qui fait la nuit, à 90 %. À cette opacité
+     l'écart avec un noir pur ne dépasse pas 23 niveaux sur 255, sur un seul
+     canal : invisible. */
+  .planche-boite::backdrop {
+    background-color: color-mix(in srgb, var(--color-profond) 90%, transparent);
+  }
+
+  .planche-scene {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* ── La barre flottante ── */
+  .planche-barre {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-shrink: 0;
+    padding: 20px 28px;
+  }
+  .planche-enseigne {
+    color: var(--color-clair);   /* 10,45:1 sur profond — le pivot y est interdit */
+  }
+
+  .planche-fermer {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 2px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-clair);
+    transition: color 260ms var(--ease-blueprint);
+  }
+  .planche-fermer:hover { color: var(--color-voile); }
+  /* Focus par polarité (amendement A4) : clair sur réserve profonde, le pivot
+     y tombe à 2,85. */
+  .planche-fermer:focus-visible {
+    outline: 2px solid var(--color-clair);
+    outline-offset: 4px;
+  }
+  .planche-touche {
+    padding: 3px 7px;
+    border: 1px solid var(--color-filet-clair-2);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+  @media (max-width: 520px) { .planche-touche { display: none; } }
+
+  /* ── La feuille ── */
+  .planche-zone {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    overflow: auto;
+    padding: 0 28px 36px;
+  }
+  /* `margin: auto` et non `justify-content: center` : un enfant centré par le
+     conteneur voit son bord gauche coupé dès qu'il déborde, et devient
+     inatteignable au défilement. */
+  .planche-plan {
+    margin: auto;
+    width: min(1200px, 100%);
+    min-width: 860px;
     background-color: var(--color-papier);
-    box-shadow: var(--shadow-plan-2);
+    /* Un filet clair, pas une ombre : sur un fond à 90 % de profond, aucune
+       ombre ne se voit. C'est le filet qui détache la feuille de la nuit. */
+    outline: 1px solid var(--color-filet-clair-1);
   }
-  .planche-dialogue::backdrop {
-    background-color: color-mix(in srgb, var(--color-profond) 62%, transparent);
+
+  /* ── Entrée : la révélation de plan de la charte, au tempo d'une interaction.
+     Même geste (22 px, montée + apparition) et même courbe unique que
+     `[data-plan]`, mais à 300 ms : une boîte qui répond à un clic ne se révèle
+     pas au rythme d'un bloc qui entre dans la vue. */
+  .planche-boite[open] .planche-scene {
+    animation: planche-parait 300ms var(--ease-blueprint) both;
   }
-  .planche-dialogue [data-planche-cible] {
-    max-height: calc(92vh - 58px);
+  .planche-boite[open]::backdrop {
+    animation: planche-voile 300ms var(--ease-blueprint) both;
   }
-  /* Sous 1200 px la planche cesse d'être à son échelle : on lui rend sa largeur
-     nominale et on laisse défiler, plutôt que de la réduire encore. */
-  .planche-dialogue [data-planche-cible] > :global(svg) {
-    min-width: 1200px;
+  @keyframes planche-parait {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes planche-voile {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .planche-boite[open] .planche-scene,
+    .planche-boite[open]::backdrop { animation: none; }
   }
 </style>
 
@@ -215,8 +338,9 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
       if (!dialogue) return;
 
       const cible = dialogue.querySelector<HTMLElement>('[data-planche-cible]');
+      const zone = dialogue.querySelector<HTMLElement>('[data-planche-zone]');
       const dessin = bouton.closest('figure')?.querySelector<HTMLElement>('[data-planche-dessin] svg');
-      if (!cible || !dessin) return;
+      if (!cible || !zone || !dessin) return;
 
       bouton.addEventListener('click', () => {
         // Le dessin est CLONÉ à l'ouverture plutôt que dupliqué dans le HTML :
@@ -224,14 +348,25 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
         // `aria-label`. Il est remplacé à chaque ouverture, jamais accumulé.
         cible.replaceChildren(dessin.cloneNode(true));
         dialogue.showModal();
+        // `showModal()` n'immobilise pas la page derrière la boîte dans tous
+        // les navigateurs : on la verrouille explicitement.
+        document.documentElement.style.overflow = 'hidden';
       });
 
       dialogue.querySelector('[data-planche-fermer]')?.addEventListener('click', () => dialogue.close());
-      // Un clic hors du plan ferme la boîte — `<dialog>` gère déjà Échap.
-      dialogue.addEventListener('click', (e) => {
-        if (e.target === dialogue) dialogue.close();
+
+      // Un clic à côté de la feuille ferme la boîte. La cible est la ZONE : le
+      // `<dialog>` occupant tout l'écran, il n'est jamais lui-même la cible d'un
+      // clic, et le test habituel `e.target === dialogue` ne se déclencherait
+      // jamais. Échap reste géré nativement par `<dialog>`.
+      zone.addEventListener('click', (e) => {
+        if (e.target === zone) dialogue.close();
       });
-      dialogue.addEventListener('close', () => cible.replaceChildren());
+
+      dialogue.addEventListener('close', () => {
+        cible.replaceChildren();
+        document.documentElement.style.overflow = '';
+      });
     });
   }
 
