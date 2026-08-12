@@ -44,15 +44,26 @@ const extraction = JSON.parse(
   fs.readFileSync(path.join(racine, src.replace(/\.svg$/, '.json')), 'utf-8'),
 );
 
-// La vignette est un recadrage COMPOSÉ : l'extraction écrit le rectangle 3:2 à
-// montrer, le site ne rogne rien de lui-même. Le `role="img"` et l'`aria-label`
-// sautent avec lui — un fragment de dessin n'est pas le dessin, et la vignette
-// est toujours doublée du titre de la fiche.
-const c = extraction.cadrage_vignette;
-const svgVignette = svgBrut
-  .replace('viewBox="0 0 1200 800"', `viewBox="${c.x} ${c.y} ${c.w} ${c.h}"`)
-  .replace(/ role="img"/, ' aria-hidden="true" focusable="false"')
-  .replace(/ aria-label="[^"]*"/, '');
+// La vignette est un FICHIER PROPRE, pas un recadrage.
+//
+// Elle a d'abord été un rectangle découpé dans la planche. Trois cadrages
+// successifs ont été nécessaires pour qu'elle ne coupe ni un mot, ni le filet
+// séparateur, ni la colonne des valeurs — et le troisième restait un compromis :
+// un dessin composé pour 1200 px et donné à lire à 290 tombe à l'échelle 0,24,
+// quel que soit l'endroit où on le découpe.
+//
+// `vignette.svg` est composé dans un repère de 300 × 200, soit l'échelle 0,91 à
+// 0,99 des cartes de projet mesurées (274 à 296 px). Elle garde de la planche
+// ce qui porte la thèse — la géométrie des flux et les deux nœuds chiffrés — et
+// laisse le titre (la carte l'affiche juste dessous), le relevé, la phrase de
+// principe et les libellés de poste.
+//
+// Elle est décorative : `aria-hidden` posé à la source. Une vignette est
+// toujours doublée du titre de la fiche, qu'elle ne fait qu'illustrer.
+const svgVignette = fs.readFileSync(
+  path.join(racine, src.replace(/planche\.svg$/, 'vignette.svg')),
+  'utf-8',
+);
 
 const sk = extraction.sankey;
 

@@ -154,13 +154,7 @@
     }
   ],
   "phrase_principe": "La climatisation ne combat pas le climat — elle évacue ce que produisent les occupants et leurs équipements.",
-  "cadrage_vignette": {
-    "x": 324,
-    "y": 352,
-    "w": 360,
-    "h": 240,
-    "motif": "La moitié basse du flux : la convergence des postes internes vers le nœud, puis le filet sombre de l'enveloppe et son étiquette. Le premier cadrage essayé (320/332/390/260) coupait le mot « Enveloppe », le second (300/380/360/240) laissait entrer la colonne des valeurs par la gauche et coupait le nœud « Intérieur » par le haut. Le cadrage retenu s'arrête à 324 — la colonne des valeurs finit à 317,1 mesuré — et à 684, avant le filet séparateur posé à 686. Ni titre, ni relevé, ni cartouche, ni détail en mono 10."
-  },
+  "vignette_surtitre": "RÉPARTITION DES APPORTS DE CHALEUR",
   "a_valider_ft2e": [
     {
       "objet": "Échelle du diagramme",
@@ -233,7 +227,12 @@
     "part_enveloppe_dans_la_hauteur": "217 / 8633 = 2.514 %",
     "bas_du_dessin": "bandes jusqu'à 574.00 px, libellés jusqu'à 602.17 px — note de pied à 638.17, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
     "reserve_profonde": "cartouche 263 x 30 px = 7890 px², soit 0.82 % de la planche",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
-    "cadrage_vignette_rapport": "360 / 240 = 1.5000"
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "bas_du_dessin": "168.00 px, marge basse 32.00 px"
   }
 }

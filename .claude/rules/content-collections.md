@@ -40,6 +40,26 @@ Le schéma Zod doit **refuser** :
 - Une `mission_ft2e` vide.
 - Une date dans le futur pour un projet livré.
 
+## Le visuel d'une fiche projet — planche ou photographie
+
+Depuis le 2026-08-12, `image_principale` et `image_principale_alt` sont **optionnels**, et
+un champ `planche` les remplace sur les fiches traitées.
+
+- `planche` porte le chemin du SVG depuis `public/`, en graphie stricte
+  `/images/projets/<slug>/planche.svg`. Trois fichiers frères l'accompagnent dans le même
+  répertoire — `planche.json`, `vignette.svg`, `planche.png` — et **ils ne se séparent
+  pas** : le composant les charge par convention de nom, un manquant fait échouer le build.
+- **Le frontmatter ne porte ni l'alternative textuelle de la planche ni son surtitre de
+  vignette** : ils vivent dans le `planche.json`, que le composant lit au build. Les
+  recopier créerait deux vérités pour la même donnée, et c'est la copie — jamais
+  l'original — qui se désynchronise. Le `.md` dit *qu'il y a* une planche ; la planche dit
+  ce qu'elle montre.
+- `superRefine` refuse **une fiche sans planche ET sans visuel**, ainsi qu'**un visuel sans
+  son alternative textuelle** (RGAA 1.1). L'optionnalité d'un champ ne doit jamais
+  dégénérer en fiche muette.
+- Le champ `galerie` a été **supprimé** du schéma et de Decap le 2026-08-12 : il n'était
+  consommé nulle part dans `src/`.
+
 ## Référence vers les images
 
 - Tous les visuels d'un projet dans `public/images/projets/{slug}/`.

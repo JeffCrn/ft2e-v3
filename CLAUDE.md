@@ -7,7 +7,8 @@
 Une **build Astro statique** fonctionnelle, déployée sur Vercel, qui :
 
 1. Implémente intégralement le sitemap (Accueil, Société, Équipe, Expertises, Références, Fiche projet, Actualités, Article, Contact, pages légales).
-2. Présente **treize fiches projets réelles**, sourcées pièce par pièce sur les dossiers d'affaires FT2E (chantier des 22 références en cours). **Plus aucune fiche de démonstration : les huit `demo: true` ont été supprimées le 2026-08-08 à la demande de FT2E.**
+2. Présente **vingt-trois fiches projets réelles**, sourcées pièce par pièce sur les dossiers d'affaires FT2E. **Plus aucune fiche de démonstration : les huit `demo: true` ont été supprimées le 2026-08-08 à la demande de FT2E.**
+2 bis. **Illustre chaque fiche par une planche de schéma de principe** — un dessin FT2E composé à partir de sa propre matière technique, sans aucune géométrie d'ouvrage ni œuvre de tiers. **Chantier ouvert le 2026-08-12, 1 planche sur 23** : `docs/superpowers/plans/2026-08-12-chantier-planches-references.md`.
 3. Donne à voir le design system complet (rampe monochrome 197°, plans et ombres à l'encre, trame 28 px, typo Archivo + IBM Plex Mono, cartouches, nomenclature, monogramme).
 4. Démontre les filtres de la page Références, le gabarit de fiche projet, le composant `HeroPage` unifié, la signature éditoriale, le JSON-LD, les performances.
 5. Anime le tout via quatre mouvements vanilla (filet de flux 900 ms, révélation de plan 760 ms / 22 px, survols 300/260 ms) + View Transitions Astro, courbe unique `cubic-bezier(0.2, 0.7, 0.2, 1)`.
@@ -105,6 +106,52 @@ Règles : 2 valeurs par composition (3 max) · une seule réserve profonde par �
 - View Transitions Astro pour cross-fade entre pages ; `prefers-reduced-motion` respecté partout (tout posé d'emblée, fallback complet sans JS).
 - Implémenté dans `src/styles/motion.css` + script `initPlans` de `BaseLayout.astro` + script du composant `TraceFlux.astro`.
 
+## Les planches de références — le dispositif visuel des fiches
+
+Depuis le 2026-08-12, une fiche de référence n'est plus illustrée par une photographie mais
+par une **planche de schéma de principe** : un dessin FT2E tiré de la matière technique de
+la fiche — topologie, flux, chiffres — qui ne reproduit **aucune géométrie d'ouvrage**, ne
+nomme **aucun tiers** et ne porte **aucune donnée commerciale**.
+
+Deux motifs, l'un juridique et l'autre éditorial. Les visuels précédents exposaient le
+bureau au droit d'auteur des architectes — neuf perspectives publiées sans qu'aucun crédit
+ait jamais été obtenu, douze extraits reproduisant leur fond de plan. Et un extrait de plan
+au 1/50 réduit à 581 px puis passé au duotone ne démontre rien : le code en portait l'aveu,
+la miniature de `/references` était à la fois `hidden md:block` et `aria-hidden`.
+
+**Quatre pièces par fiche**, dans `public/images/projets/<slug>/` :
+
+| Fichier | Rôle |
+|---|---|
+| `planche.json` | l'extraction — la pièce que FT2E relit, **et** la source du repli de lecture sous 1024 px |
+| `planche.svg` | la planche, `viewBox 0 0 1200 800`, lue à 1152 px (échelle 0,96) |
+| `vignette.svg` | la vignette de carte, `viewBox 0 0 300 200`, lue à 274-296 px |
+| `planche.png` | 2400 × 1600 — contrôle, impression, et `og:image` de la fiche |
+
+**Trois principes de rendu, chacun mesuré :**
+
+1. **Le SVG est inliné, jamais appelé en `<img src>`** — un SVG en `src` est un document
+   isolé qui ne reçoit ni les polices ni les jetons de la page.
+2. **La planche occupe la largeur du conteneur, sans padding de plan** : elle porte ses
+   propres marges de 56 et *est* le plan posé. Dans la colonne de 581 px de l'ancien visuel,
+   son mono de 10 px tomberait à 3,9.
+3. **Sous `lg`, le dessin cède la place à sa lecture**, composée depuis le `planche.json` —
+   à 358 px l'échelle vaut 0,30, aucun schéma ne s'y lit.
+
+**Ni duotone ni équerres** : les deux appartiennent à la photographie, et la planche est
+déjà composée dans les jetons.
+
+**La vignette est une composition, pas un recadrage.** Trois cadrages successifs de la
+planche ont été essayés et rejetés : un dessin composé pour 1200 px et lu à 290 tombe à
+l'échelle 0,24, quel que soit l'endroit où on le découpe.
+
+| Besoin | Fichier |
+|---|---|
+| Protocole de production (à coller en session neuve) | `docs/superpowers/specs/2026-08-12-planches-references-protocole.md` |
+| Compositeurs, un par archétype | `scripts/planches/<archetype>.py` |
+| Programme et suivi du chantier | `docs/superpowers/plans/2026-08-12-chantier-planches-references.md` |
+| Rendu | `src/components/blocs/PlancheReference.astro` |
+
 ## Règles non négociables
 
 1. **Toute donnée métier de démo** (titre projet, MOA, surface, performance, chiffre) doit être **plausible** mais clairement signalée par le tag `[DÉMO]` dans le contenu Markdown ET par un badge visuel sur la page.
@@ -119,6 +166,7 @@ Règles : 2 valeurs par composition (3 max) · une seule réserve profonde par �
 10. **Une fiche projet réelle porte son numéro d'affaire FT2E** (`reference`, graphie `NN-NNN`, relevé sur une pièce FT2E) ; `annee` est le millésime d'**ouverture** qu'encode ce numéro, `annee_livraison` la réception prononcée. **Ne jamais fabriquer un identifiant à partir d'un autre champ.** Détail : `.claude/rules/content-collections.md`.
 11. **Un build vert ne prouve pas que la page s'affiche.** Après toute modification de mise en page, de `global.css` ou du `.gitignore`, contrôler le **rendu** de la page touchée (`npm run preview` + capture). Tailwind v4 lit le `.gitignore` : un motif non ancré supprime silencieusement les classes d'un répertoire source. Détail : `.claude/rules/astro-conventions.md`.
 12. **Indexation moteurs bloquée** tant que le site est en démo Vercel (`ft2e-v3.vercel.app`). Trois fichiers verrouillent le SEO : `public/robots.txt`, `vercel.json`, valeur par défaut de `noindex` dans `BaseLayout.astro`. **Ne PAS débloquer sans validation FT2E**. Procédure de revert détaillée : `docs/19-migration-production.md`.
+13. **Une planche ne se recadre pas, ne se duotone pas, ne s'illustre pas.** Elle se compose à la taille où elle est lue — 1200 px pour la planche, 300 px pour la vignette — et se contrôle **à cette taille**, jamais en pleine page. Toute valeur qu'elle porte est citable dans la fiche ; tout ce que le dessin a dû trancher va dans `a_valider_ft2e`. Protocole : `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`.
 
 ## Workflow
 
@@ -153,6 +201,8 @@ Règles : 2 valeurs par composition (3 max) · une seule réserve profonde par �
 | **Migration vers `ft2e.fr` (revert SEO inclus)** | **`docs/19-migration-production.md`** |
 | Faits vérifiés issus de la plaquette 2024 (références réelles, chiffres, qualifications) | `docs/20-source-plaquette-2024.md` |
 | **Chantier des 22 fiches références réelles** (programme, protocole, suivi) | **`docs/superpowers/plans/2026-08-07-chantier-references-reelles.md`** |
+| **Planches de références — protocole de production** | **`docs/superpowers/specs/2026-08-12-planches-references-protocole.md`** |
+| **Planches de références — programme et suivi** | **`docs/superpowers/plans/2026-08-12-chantier-planches-references.md`** |
 | Version liminaire (historique de la première livraison) | `docs/14-version-liminaire.md` |
 | Pistes de production CMS | `docs/20-pistes-production-cms.md` (⚠ numéro 20 partagé avec la source plaquette) |
 | Script de la démonstration client du 2 juillet | `docs/21-script-demo-2-juillet.md` |
