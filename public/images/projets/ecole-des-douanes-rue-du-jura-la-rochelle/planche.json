@@ -1,0 +1,239 @@
+{
+  "fiche": "ecole-des-douanes-rue-du-jura-la-rochelle",
+  "archetype": "sankey-energie",
+  "archetype_motif": "La thèse de la fiche est une proportion : « Dans une école, la charge de climatisation ne vient pas des murs : elle vient des occupants, des ordinateurs et de l'éclairage. » Un Sankey est le seul archétype de la liste qui démontre une proportion au lieu de l'affirmer. La fiche fournit par ailleurs une décomposition complète, littérale et arithmétiquement close pour un local — la salle de cours du rez-de-chaussée — ce qui donne au diagramme une matière entièrement citable.",
+  "surtitre": "SCHÉMA DE PRINCIPE · RÉPARTITION DES APPORTS DE CHALEUR",
+  "titre": "École des douanes",
+  "sous_titre": "La charge ne vient pas de l'enveloppe",
+  "cartouche_legende": "LA ROCHELLE · 1 657 m² · 2026",
+  "aria_label": "Diagramme de flux des apports de chaleur d'une salle de cours en été : cinq postes d'origine interne — occupants, ordinateurs, éclairage, renouvellement d'air, vidéoprojecteur et baie de brassage — convergent vers un flux large de 8 414 watts ; un sixième poste, les apports de l'enveloppe par le mur et la baie, forme à côté un filet de 217 watts. Le rapport des deux est la démonstration de la planche.",
+  "releve_entete": "BÂTIMENT ENTIER · 26 LOCAUX · POINTE DE JUILLET À 16 h",
+  "sankey": {
+    "unite": "W",
+    "entete": "UNE SALLE DE COURS DU REZ-DE-CHAUSSÉE · 63 m² · MATIN DE JUILLET",
+    "perimetre": "une salle de cours du rez-de-chaussée, 63 m²",
+    "moment": "un matin de juillet",
+    "note_pied": "CINQ POSTES D'ORIGINE INTERNE : 8 416 W · POSTE DE DÉBIT COMPLÉMENTAIRE : −2 W",
+    "flux_dessines_total": 8633,
+    "sources": [
+      {
+        "ordre": 1,
+        "cle": "occupants",
+        "libelle": "Occupants",
+        "valeur": 5519,
+        "unite": "W",
+        "valeur_affichee": "5 519",
+        "detail": [
+          "42 PERSONNES",
+          "PLUS DE LA MOITIÉ",
+          "EN CHALEUR LATENTE"
+        ],
+        "origine": "interieur"
+      },
+      {
+        "ordre": 2,
+        "cle": "ordinateurs",
+        "libelle": "Ordinateurs",
+        "valeur": 1260,
+        "unite": "W",
+        "valeur_affichee": "1 260",
+        "detail": [],
+        "origine": "interieur"
+      },
+      {
+        "ordre": 3,
+        "cle": "eclairage",
+        "libelle": "Éclairage",
+        "valeur": 992,
+        "unite": "W",
+        "valeur_affichee": "992",
+        "detail": [
+          "FLUORESCENT EN FAUX PLAFOND"
+        ],
+        "origine": "interieur"
+      },
+      {
+        "ordre": 4,
+        "cle": "air-neuf",
+        "libelle": "Renouvellement d'air",
+        "valeur": 445,
+        "unite": "W",
+        "valeur_affichee": "445",
+        "detail": [
+          "720 m³/h"
+        ],
+        "origine": "interieur"
+      },
+      {
+        "ordre": 5,
+        "cle": "equipements",
+        "libelle": "Vidéoprojecteur, baie de brassage",
+        "valeur": 200,
+        "unite": "W",
+        "valeur_affichee": "200",
+        "detail": [],
+        "origine": "interieur"
+      },
+      {
+        "ordre": 6,
+        "cle": "enveloppe",
+        "libelle": "Mur et baie",
+        "valeur": 217,
+        "unite": "W",
+        "valeur_affichee": "217",
+        "detail": [
+          "MUR : 0,354 W/(m²·K)"
+        ],
+        "origine": "enveloppe"
+      }
+    ],
+    "correction_non_dessinee": {
+      "libelle": "Poste de débit complémentaire",
+      "valeur": -2,
+      "unite": "W",
+      "origine": "interieur",
+      "traitement": "porté en note de pied de la zone de dessin, non représenté en bande : −2 W valent 0,06 px à l'échelle retenue"
+    },
+    "noeuds": [
+      {
+        "cle": "interieur",
+        "libelle": "Intérieur",
+        "valeur_affichee": "8 414",
+        "somme_des_bandes": 8416
+      },
+      {
+        "cle": "enveloppe",
+        "libelle": "Enveloppe",
+        "valeur_affichee": "217",
+        "somme_des_bandes": 217
+      }
+    ]
+  },
+  "releve": [
+    {
+      "valeur": "152 947",
+      "unite": "W",
+      "legende": [
+        "APPORTS À ÉVACUER EN POINTE — JUILLET, 16 h"
+      ]
+    },
+    {
+      "valeur": "92",
+      "unite": "W/m²",
+      "legende": [
+        "SUR 1 656,75 m² TRAITÉS",
+        "26 LOCAUX SUR TROIS NIVEAUX"
+      ]
+    },
+    {
+      "prefixe": "moins de",
+      "valeur": "7",
+      "unite": "%",
+      "legende": [
+        "VENUS DE L'ENSOLEILLEMENT ET DE L'ÉCART DE TEMPÉRATURE",
+        "SOIT 10,6 kW CUMULÉS SUR LES 26 FICHES DE CALCUL"
+      ]
+    }
+  ],
+  "releve_secondaire": [
+    {
+      "intitule": "Part latente",
+      "valeur": "48 291 W",
+      "appui": [
+        "104 656 W SENSIBLES",
+        "LA PART LATENTE VIENT PRESQUE ENTIÈREMENT DE L'OCCUPATION"
+      ]
+    },
+    {
+      "intitule": "Foisonnement",
+      "valeur": "2 012 W",
+      "appui": [
+        "ÉCART À LA SOMME BRUTE DES MAXIMUMS, 154 959 W",
+        "LES SALLES NE CULMINENT PAS À LA MÊME HEURE"
+      ]
+    }
+  ],
+  "phrase_principe": "La climatisation ne combat pas le climat — elle évacue ce que produisent les occupants et leurs équipements.",
+  "cadrage_vignette": {
+    "x": 324,
+    "y": 352,
+    "w": 360,
+    "h": 240,
+    "motif": "La moitié basse du flux : la convergence des postes internes vers le nœud, puis le filet sombre de l'enveloppe et son étiquette. Le premier cadrage essayé (320/332/390/260) coupait le mot « Enveloppe », le second (300/380/360/240) laissait entrer la colonne des valeurs par la gauche et coupait le nœud « Intérieur » par le haut. Le cadrage retenu s'arrête à 324 — la colonne des valeurs finit à 317,1 mesuré — et à 684, avant le filet séparateur posé à 686. Ni titre, ni relevé, ni cartouche, ni détail en mono 10."
+  },
+  "a_valider_ft2e": [
+    {
+      "objet": "Échelle du diagramme",
+      "la_source_affirme": "Le total du bâtiment (152 947 W), sa répartition sensible/latent et la part de l'enveloppe (10,6 kW, moins de 7 %). La décomposition poste par poste n'est donnée que pour un local : « Une salle de cours du rez-de-chaussée suffit à le montrer. »",
+      "le_dessin_suppose": "Que ce local est représentatif de la hiérarchie du bâtiment. Le diagramme porte donc sur la salle de cours, le relevé sur le bâtiment, et deux en-têtes distincts nomment explicitement chaque périmètre."
+    },
+    {
+      "objet": "Deux moments différents sur une même planche",
+      "la_source_affirme": "La salle de cours est calculée « un matin de juillet ». Le bâtiment culmine « en pointe de juillet à 16 h ».",
+      "le_dessin_suppose": "Que les deux moments peuvent cohabiter sur une même feuille dès lors qu'ils sont nommés. Aucun rapprochement chiffré n'est fait entre les deux."
+    },
+    {
+      "objet": "Bouclage à 2 W près de la salle de cours",
+      "la_source_affirme": "8 414 W d'usages, détaillés en 5 519 + 1 260 + 992 + 445 + 200 = 8 416, « un poste de débit complémentaire en retranchant deux ».",
+      "le_dessin_suppose": "Que les cinq postes cités se dessinent à leur valeur littérale (8 416 W) et que le poste de −2 W se porte en note plutôt qu'en bande. Le nœud reste étiqueté 8 414 W, valeur de la fiche. La formulation du poste complémentaire est à confirmer."
+    },
+    {
+      "objet": "Rattachement du renouvellement d'air",
+      "la_source_affirme": "Les 445 W du renouvellement d'air à 720 m³/h sont comptés parmi « ses usages », donc dans les 8 414 W d'origine interne.",
+      "le_dessin_suppose": "Que FT2E maintient ce rattachement, alors qu'un apport d'air neuf est une charge de climat autant que d'usage. Basculer ce poste du côté enveloppe changerait la lecture du schéma."
+    },
+    {
+      "objet": "Part latente des occupants",
+      "la_source_affirme": "« 5 519 W pour 42 occupants, dont plus de la moitié en chaleur latente. »",
+      "le_dessin_suppose": "Que « plus de la moitié » n'est pas une valeur dessinable : la bande des occupants n'est pas subdivisée. Le partage sensible/latent n'apparaît qu'à l'échelle du bâtiment, au relevé secondaire (104 656 / 48 291 W)."
+    },
+    {
+      "objet": "Coefficient porté au poste « Mur et baie »",
+      "la_source_affirme": "0,354 W/(m²·K) est le coefficient du mur du bâtiment. Les baies relèvent de quatre types, de coefficient global 1,40 à 2,00.",
+      "le_dessin_suppose": "Que ce coefficient peut être porté en appui du poste, explicitement étiqueté « MUR ». Aucun coefficient de baie n'est affiché : la fiche ne dit pas lequel des quatre types équipe cette salle."
+    },
+    {
+      "objet": "Absence de tout pourcentage sur le dessin",
+      "la_source_affirme": "« Moins de 7 % » qualifie la part enveloppe à l'échelle du bâtiment, à 16 h.",
+      "le_dessin_suppose": "Qu'aucun pourcentage ne doit figurer sur le diagramme de la salle, sous peine d'être lu contre le chiffre du bâtiment. La proportion y est portée par la seule géométrie des bandes."
+    },
+    {
+      "objet": "Millésime porté au cartouche",
+      "la_source_affirme": "Affaire ouverte en 2025 (champ annee), rapport remis le 13 avril 2026, achèvement constaté le 30 avril 2026 (champ annee_livraison, 2026).",
+      "le_dessin_suppose": "Que le cartouche porte le millésime de remise et non celui d'ouverture — c'est la date que le lecteur associe au résultat affiché. Arbitrage nouveau : la révision 2 du gabarit a retiré le nom d'ouvrage du cartouche, qui faisait doublon avec le titre, et l'a remplacé par le millésime."
+    },
+    {
+      "objet": "Surface au cartouche",
+      "la_source_affirme": "1 657 m² au frontmatter (surface_m2), 1 656,75 m² au corps et au champ performance.",
+      "le_dessin_suppose": "Que le cartouche porte la valeur arrondie du champ de surface et le relevé la valeur exacte du calcul. À trancher si l'écart doit disparaître."
+    },
+    {
+      "objet": "Ordre des postes",
+      "la_source_affirme": "L'ordre d'énumération de la fiche : occupants, ordinateurs, éclairage, renouvellement d'air, vidéoprojecteur et baie de brassage.",
+      "le_dessin_suppose": "Que cet ordre d'énumération vaut ordre de haut en bas, l'enveloppe venant en dernier et séparée par un écart plus large — l'écart porte le changement d'origine. Rien dans la fiche ne fixe un ordre de représentation."
+    },
+    {
+      "objet": "Distribution horaire non portée",
+      "la_source_affirme": "La charge culmine à 9 h dans huit salles, à 10 h dans quatre autres, à 16 h dans douze locaux — soit 24 des 26.",
+      "le_dessin_suppose": "Que cette distribution ne figure pas sur la planche. Si FT2E la veut, il faut d'abord dire ce qu'il advient des deux locaux non comptés."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 25-084 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Montant de la prestation, 2 800 € HT, et celui de la seconde proposition d'honoraires.",
+    "Noms de tiers : maîtrise d'ouvrage et son service acheteur, entreprise titulaire de l'accord-cadre, plateforme régionale des achats.",
+    "Procès-verbal d'achèvement : lieu de signature et six évaluations — donnée commerciale.",
+    "Matériel existant du client : groupes multisplit de 6,8 kW en froid, millésime 2018, trois pièces desservies au plus.",
+    "Toute géométrie d'ouvrage : aucune façade, aucun plan, aucune distribution de locaux, aucune implantation. La salle de cours n'est présente que par la répartition de sa charge."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "partition": "zone de dessin 602 px / colonne de relevé 430 px = 1.4000 — partition 7/5 de la charte",
+    "bouclage_bandes": "5519 + 1260 + 992 + 445 + 200 + 217 = 8633 W ; hauteur totale 232.00 px (échelle 0.026874 px/W)",
+    "part_enveloppe_dans_la_hauteur": "217 / 8633 = 2.514 %",
+    "bas_du_dessin": "bandes jusqu'à 574.00 px, libellés jusqu'à 602.17 px — note de pied à 638.17, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 263 x 30 px = 7890 px², soit 0.82 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "cadrage_vignette_rapport": "360 / 240 = 1.5000"
+  }
+}

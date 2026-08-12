@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Diagramme de flux des apports de chaleur d'une salle de cours en été : cinq postes d'origine interne — occupants, ordinateurs, éclairage, renouvellement d'air, vidéoprojecteur et baie de brassage — convergent vers un flux large de 8 414 watts ; un sixième poste, les apports de l'enveloppe par le mur et la baie, forme à côté un filet de 217 watts. Le rapport des deux est la démonstration de la planche.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet1 { stroke: var(--color-filet-1, #00393A38); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · RÉPARTITION DES APPORTS DE CHALEUR</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">École des douanes</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">La charge ne vient pas de l'enveloppe</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UNE SALLE DE COURS DU REZ-DE-CHAUSSÉE · 63 m² · MATIN DE JUILLET</text>
+  <text x="714.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">BÂTIMENT ENTIER · 26 LOCAUX · POINTE DE JUILLET À 16 h</text>
+  <rect x="686.00" y="172.00" width="1.00" height="488.00" class="c-filet-3" fill="#00393A1F"/>
+  <path d="M 336.00 206.00 C 432.00 206.00, 432.00 254.00, 528.00 254.00 L 528.00 402.32 C 432.00 402.32, 432.00 354.32, 336.00 354.32 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 336.00 378.32 C 432.00 378.32, 432.00 402.32, 528.00 402.32 L 528.00 436.18 C 432.00 436.18, 432.00 412.18, 336.00 412.18 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 336.00 436.18 C 432.00 436.18, 432.00 436.18, 528.00 436.18 L 528.00 462.83 C 432.00 462.83, 432.00 462.83, 336.00 462.83 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 336.00 486.83 C 432.00 486.83, 432.00 462.83, 528.00 462.83 L 528.00 474.79 C 432.00 474.79, 432.00 498.79, 336.00 498.79 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 336.00 522.79 C 432.00 522.79, 432.00 474.79, 528.00 474.79 L 528.00 480.17 C 432.00 480.17, 432.00 528.17, 336.00 528.17 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 336.00 568.17 C 432.00 568.17, 432.00 568.17, 528.00 568.17 L 528.00 574.00 C 432.00 574.00, 432.00 574.00, 336.00 574.00 Z" class="c-pivot s-filet1" fill="#336667" stroke="#00393A38" stroke-width="1"/>
+  <text x="56.00" y="218.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Occupants</text>
+  <text x="316.00" y="218.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">5 519 W</text>
+  <text x="56.00" y="235.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">42 PERSONNES</text>
+  <text x="56.00" y="248.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PLUS DE LA MOITIÉ</text>
+  <text x="56.00" y="261.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EN CHALEUR LATENTE</text>
+  <text x="56.00" y="390.32" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Ordinateurs</text>
+  <text x="316.00" y="390.32" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">1 260 W</text>
+  <text x="56.00" y="448.18" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Éclairage</text>
+  <text x="316.00" y="448.18" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">992 W</text>
+  <text x="56.00" y="465.18" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">FLUORESCENT EN FAUX PLAFOND</text>
+  <text x="56.00" y="498.83" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Renouvellement d'air</text>
+  <text x="316.00" y="498.83" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">445 W</text>
+  <text x="56.00" y="515.83" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">720 m³/h</text>
+  <text x="56.00" y="534.79" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Vidéoprojecteur, baie de</text>
+  <text x="56.00" y="551.79" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">brassage</text>
+  <text x="316.00" y="534.79" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">200 W</text>
+  <text x="56.00" y="580.17" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Mur et baie</text>
+  <text x="316.00" y="580.17" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">217 W</text>
+  <text x="56.00" y="597.17" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MUR : 0,354 W/(m²·K)</text>
+  <rect x="528.00" y="254.00" width="9.00" height="226.17" class="c-encre" fill="#00393A"/>
+  <text x="547.00" y="365.08" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Intérieur</text>
+  <text x="547.00" y="383.08" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" font-variant-numeric="tabular-nums">8 414 W</text>
+  <rect x="528.00" y="568.17" width="9.00" height="5.83" class="c-encre" fill="#00393A"/>
+  <text x="547.00" y="569.08" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Enveloppe</text>
+  <text x="547.00" y="587.08" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" font-variant-numeric="tabular-nums">217 W</text>
+  <rect x="56.00" y="620.17" width="602.00" height="1.00" class="c-filet-3" fill="#00393A1F"/>
+  <text x="56.00" y="638.17" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CINQ POSTES D'ORIGINE INTERNE : 8 416 W · POSTE DE DÉBIT COMPLÉMENTAIRE : −2 W</text>
+  <text x="714.00" y="244.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="40" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" font-variant-numeric="tabular-nums">152 947</text>
+  <text x="872.88" y="244.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">W</text>
+  <text x="714.00" y="268.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">APPORTS À ÉVACUER EN POINTE — JUILLET, 16 h</text>
+  <text x="714.00" y="340.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="40" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" font-variant-numeric="tabular-nums">92</text>
+  <text x="769.68" y="340.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">W/m²</text>
+  <text x="714.00" y="364.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SUR 1 656,75 m² TRAITÉS</text>
+  <text x="714.00" y="378.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">26 LOCAUX SUR TROIS NIVEAUX</text>
+  <text x="714.00" y="436.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="22" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">moins de</text>
+  <text x="816.00" y="436.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="40" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" font-variant-numeric="tabular-nums">7</text>
+  <text x="847.84" y="436.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">%</text>
+  <text x="714.00" y="460.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">VENUS DE L'ENSOLEILLEMENT ET DE L'ÉCART DE TEMPÉRATURE</text>
+  <text x="714.00" y="474.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SOIT 10,6 kW CUMULÉS SUR LES 26 FICHES DE CALCUL</text>
+  <rect x="714.00" y="488.00" width="430.00" height="1.00" class="c-filet-3" fill="#00393A1F"/>
+  <text x="714.00" y="524.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Part latente</text>
+  <text x="1144.00" y="524.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="22" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" text-anchor="end" font-variant-numeric="tabular-nums">48 291 W</text>
+  <text x="714.00" y="546.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">104 656 W SENSIBLES</text>
+  <text x="714.00" y="560.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA PART LATENTE VIENT PRESQUE ENTIÈREMENT DE L'OCCUPATION</text>
+  <text x="714.00" y="600.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Foisonnement</text>
+  <text x="1144.00" y="600.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="22" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" text-anchor="end" font-variant-numeric="tabular-nums">2 012 W</text>
+  <text x="714.00" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ÉCART À LA SOMME BRUTE DES MAXIMUMS, 154 959 W</text>
+  <text x="714.00" y="636.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES SALLES NE CULMINENT PAS À LA MÊME HEURE</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">La climatisation ne combat pas le climat — elle évacue ce que produisent les occupants et leurs équipements.</text>
+  <rect x="56.00" y="714.00" width="263.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LA ROCHELLE · 1 657 m² · 2026</text>
+</svg>

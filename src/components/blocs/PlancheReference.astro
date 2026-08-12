@@ -1,0 +1,239 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+/**
+ * Planche de schéma de principe — le dispositif visuel des fiches de référence.
+ *
+ * Une planche est un dessin FT2E composé à partir de la matière technique de la
+ * fiche : aucune géométrie d'ouvrage, aucun nom de tiers, aucune donnée
+ * commerciale. Elle remplace le visuel photographique, qui exposait le bureau au
+ * droit d'auteur des architectes et ne démontrait rien à la taille où il était vu.
+ *
+ * Trois principes de rendu, chacun mesuré plutôt que supposé :
+ *
+ * 1. **Le SVG est INLINÉ, jamais appelé en `<img src>`.** Un SVG appelé en `src`
+ *    est un document isolé : il ne reçoit ni les polices de la page ni ses
+ *    variables CSS. Inliné, il hérite d'« Archivo Variable » et des jetons.
+ *
+ * 2. **La planche occupe la largeur du conteneur, sans padding de plan.** Elle est
+ *    composée dans un repère de 1200 et porte ses propres marges de 56 : elle EST
+ *    le plan posé, on ne la pose pas dans un autre. À 1152 px l'échelle vaut 0,96,
+ *    et le mono de 10 px du dessin se rend à 9,6 px. Dans la colonne de 581 px où
+ *    logeait l'ancien visuel, il tomberait à 3,9 px.
+ *
+ * 3. **Sous `lg`, le dessin cède la place à sa lecture.** À 358 px l'échelle vaut
+ *    0,30 : aucun schéma ne s'y lit. Le repli n'est pas un pis-aller, c'est la
+ *    même information composée pour la largeur disponible — et il est bâti sur le
+ *    `planche.json`, ce qui interdit qu'il diverge du dessin.
+ */
+interface Props {
+  /** Chemin du SVG depuis `public/` — champ `planche` du frontmatter. */
+  src: string;
+  /** `pleine` : la planche entière. `vignette` : le cadrage 3:2 écrit par l'extraction. */
+  variante?: 'pleine' | 'vignette';
+  /** Identifiant de la boîte d'agrandissement — unique par page. */
+  id?: string;
+}
+
+const { src, variante = 'pleine', id = 'planche' } = Astro.props;
+
+const racine = path.join(process.cwd(), 'public');
+const svgBrut = fs.readFileSync(path.join(racine, src), 'utf-8');
+const extraction = JSON.parse(
+  fs.readFileSync(path.join(racine, src.replace(/\.svg$/, '.json')), 'utf-8'),
+);
+
+// La vignette est un recadrage COMPOSÉ : l'extraction écrit le rectangle 3:2 à
+// montrer, le site ne rogne rien de lui-même. Le `role="img"` et l'`aria-label`
+// sautent avec lui — un fragment de dessin n'est pas le dessin, et la vignette
+// est toujours doublée du titre de la fiche.
+const c = extraction.cadrage_vignette;
+const svgVignette = svgBrut
+  .replace('viewBox="0 0 1200 800"', `viewBox="${c.x} ${c.y} ${c.w} ${c.h}"`)
+  .replace(/ role="img"/, ' aria-hidden="true" focusable="false"')
+  .replace(/ aria-label="[^"]*"/, '');
+
+const sk = extraction.sankey;
+
+// Espaces insécables : la fine (U+202F) pour le texte courant et le mono, la
+// normale (U+00A0) pour les chiffres en grand corps. La mesure au rendu donne
+// 3,93 px contre 7,85 à 40 px — sous la fine, « 152 947 » se lit « 152947 ».
+// Elles s'écrivent en séquence d'échappement : plusieurs outils d'écriture les
+// normalisent silencieusement en espace ordinaire.
+const FINE = '\u202f';
+const INSEC = '\u00a0';
+
+// `{valeur} {unite}` en JSX voit son espace littéral avalé au rendu : la chaîne
+// se compose donc explicitement.
+const cote = (valeur: string, unite: string) => `${valeur}${FINE}${unite}`;
+const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
+---
+
+{variante === 'vignette' ? (
+  <span class="block w-full overflow-hidden" set:html={svgVignette} />
+) : (
+  <Fragment>
+  <figure class="plan-pose" data-plan>
+    {/* Le dessin — au-dessus de lg seulement. `display:none` le retire aussi de
+        l'arbre d'accessibilité, de sorte que le repli ci-dessous est la seule
+        version annoncée sur petit écran. */}
+    <div class="hidden lg:block" data-planche-dessin set:html={svgBrut} />
+
+    {/* Le repli de lecture — sous lg. Même matière, autre composition. */}
+    <div class="lg:hidden px-5 py-6">
+      <p class="mono-label normal-case text-pivot">{extraction.surtitre}</p>
+      {/* `normal-case` n'est pas décoratif : `@layer base` de `global.css` pose
+          `text-transform: uppercase` sur TOUS les titres h1–h6. Sans lui, le
+          repli affichait « ÉCOLE DES DOUANES » quand le dessin, lui, compose
+          « École des douanes » — deux casses pour le même nom, sur le même
+          écran. Les utilitaires Tailwind gagnent sur la couche de base. */}
+      <h2 class="text-[21px] font-semibold normal-case text-encre mt-3 leading-[1.15]">{extraction.titre}</h2>
+      <p class="text-[15px] text-pivot mt-1">{extraction.sous_titre}</p>
+
+      {/* Bloc propre à l'archétype `sankey-energie`. Les six autres archétypes
+          du protocole porteront chacun le leur ; le relevé et la phrase de
+          principe ci-dessous, eux, sont communs à toutes les planches. */}
+      {sk && (
+      <Fragment>
+      <p class="mono-label normal-case text-[10px] text-pivot mt-6">{sk.entete}</p>
+      <dl class="mt-3 border-t border-filet-2">
+        {sk.sources.map((s: any) => (
+          <div class="flex items-baseline justify-between gap-4 border-b border-filet-3 py-2.5">
+            <dt class="text-[15px] text-encre min-w-0">
+              {s.libelle}
+              {(s.detail ?? []).length > 0 && (
+                <span class="mono-label normal-case font-normal text-[10px] text-pivot block mt-1">
+                  {s.detail.join(' · ')}
+                </span>
+              )}
+            </dt>
+            <dd class="mono-data text-encre shrink-0">{cote(s.valeur_affichee, sk.unite)}</dd>
+          </div>
+        ))}
+        {sk.noeuds.map((n: any) => (
+          <div class="flex items-baseline justify-between gap-4 border-b border-filet-1 py-2.5">
+            <dt class="text-[15px] font-semibold text-encre">{n.libelle}</dt>
+            <dd class="mono-data text-encre shrink-0">{cote(n.valeur_affichee, sk.unite)}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">{sk.note_pied}</p>
+      </Fragment>
+      )}
+
+      <p class="mono-label normal-case text-[10px] text-pivot mt-8">{extraction.releve_entete}</p>
+      <dl class="mt-3">
+        {extraction.releve.map((r: any, i: number) => (
+          <div class="border-t border-filet-2 py-3">
+            <dd class:list={['releve-chiffre text-[30px] leading-[1.1]', i === 0 ? 'text-encre' : 'releve-retrait']}>
+              {r.prefixe && <span class="text-[17px] font-normal">{`${r.prefixe}\u00a0`}</span>}
+              {chiffre(r.valeur, '')}<span class="text-[15px] font-normal">{`\u00a0${r.unite}`}</span>
+            </dd>
+            <dt class="mono-label normal-case font-normal text-[10px] text-pivot mt-1.5">
+              {r.legende.join(' · ')}
+            </dt>
+          </div>
+        ))}
+      </dl>
+
+      <p class="text-[16px] text-encre leading-[1.5] mt-6">{extraction.phrase_principe}</p>
+    </div>
+
+    <figcaption class="flex items-center justify-between gap-4 border-t border-filet-2 bg-calcaire px-5 py-3">
+      {/* Le libellé ne s'affiche QUE sous lg. Au-dessus, le dessin porte déjà son
+          cartouche de réserve, et le répéter ici donnait le même texte deux fois
+          à dix pixels d'intervalle — précisément le doublon que la révision 2 du
+          gabarit avait chassé de l'intérieur de la planche. */}
+      <span class="mono-label normal-case text-pivot lg:hidden">{extraction.cartouche_legende}</span>
+      <span class="hidden lg:block mono-label text-pivot">
+        Planche FT2E — {extraction.archetype.replace('-', ' ')}
+      </span>
+      {/* L'agrandissement n'est pas un agrément : au-delà de 1152 px la planche
+          ne grandit plus, et son mono de 10 px reste à 9,6. Le bouton n'apparaît
+          que là où le dessin est rendu. */}
+      <button
+        type="button"
+        class="btn-filaire cible-44 hidden lg:inline-flex shrink-0"
+        data-planche-agrandir
+        aria-haspopup="dialog"
+        aria-controls={`${id}-dialogue`}
+      >
+        Agrandir
+      </button>
+    </figcaption>
+  </figure>
+
+  <dialog id={`${id}-dialogue`} class="planche-dialogue" aria-label={`Planche agrandie — ${extraction.titre}`}>
+    <div class="flex items-center justify-between gap-4 border-b border-filet-2 bg-calcaire px-5 py-3">
+      <span class="mono-label text-pivot">Planche FT2E — {extraction.archetype.replace('-', ' ')}</span>
+      <button type="button" class="btn-filaire cible-44" data-planche-fermer>Fermer</button>
+    </div>
+    <div class="overflow-auto bg-papier" data-planche-cible></div>
+  </dialog>
+  </Fragment>
+)}
+
+<style>
+  /* La boîte d'agrandissement est un plan posé plein écran : rayon 0, filet 1 px,
+     ombre de rang 2. Le fond de scène est de l'encre translucide — la charte
+     n'admet aucune ombre ni aucun voile qui ne soit de l'encre. */
+  .planche-dialogue {
+    width: min(96vw, 1440px);
+    max-width: 96vw;
+    max-height: 92vh;
+    padding: 0;
+    border: 1px solid var(--color-filet-1);
+    border-radius: 0;
+    background-color: var(--color-papier);
+    box-shadow: var(--shadow-plan-2);
+  }
+  .planche-dialogue::backdrop {
+    background-color: color-mix(in srgb, var(--color-profond) 62%, transparent);
+  }
+  .planche-dialogue [data-planche-cible] {
+    max-height: calc(92vh - 58px);
+  }
+  /* Sous 1200 px la planche cesse d'être à son échelle : on lui rend sa largeur
+     nominale et on laisse défiler, plutôt que de la réduire encore. */
+  .planche-dialogue [data-planche-cible] > :global(svg) {
+    min-width: 1200px;
+  }
+</style>
+
+<script>
+  // Règle 9 du projet : tout script de composant se relie sur `astro:page-load`,
+  // sans quoi il devient inerte après la première navigation View Transitions.
+  function initPlanche() {
+    document.querySelectorAll<HTMLButtonElement>('[data-planche-agrandir]').forEach((bouton) => {
+      if (bouton.dataset.bound) return;
+      bouton.dataset.bound = '1';
+
+      const dialogue = document.getElementById(
+        bouton.getAttribute('aria-controls') ?? '',
+      ) as HTMLDialogElement | null;
+      if (!dialogue) return;
+
+      const cible = dialogue.querySelector<HTMLElement>('[data-planche-cible]');
+      const dessin = bouton.closest('figure')?.querySelector<HTMLElement>('[data-planche-dessin] svg');
+      if (!cible || !dessin) return;
+
+      bouton.addEventListener('click', () => {
+        // Le dessin est CLONÉ à l'ouverture plutôt que dupliqué dans le HTML :
+        // une seule copie du SVG est transmise, et le clone porte déjà son
+        // `aria-label`. Il est remplacé à chaque ouverture, jamais accumulé.
+        cible.replaceChildren(dessin.cloneNode(true));
+        dialogue.showModal();
+      });
+
+      dialogue.querySelector('[data-planche-fermer]')?.addEventListener('click', () => dialogue.close());
+      // Un clic hors du plan ferme la boîte — `<dialog>` gère déjà Échap.
+      dialogue.addEventListener('click', (e) => {
+        if (e.target === dialogue) dialogue.close();
+      });
+      dialogue.addEventListener('close', () => cible.replaceChildren());
+    });
+  }
+
+  document.addEventListener('astro:page-load', initPlanche);
+</script>

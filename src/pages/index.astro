@@ -18,9 +18,8 @@ const enAvant = (await getCollection('projets'))
   .filter((p) => p.data.en_avant)
   .sort(parAffaireDecroissante)[0];
 
-const heroImageExiste = enAvant
-  ? fs.existsSync(path.join(process.cwd(), 'public', enAvant.data.image_principale))
-  : false;
+const heroImageExiste = Boolean(enAvant?.data.image_principale)
+  && fs.existsSync(path.join(process.cwd(), 'public', enAvant!.data.image_principale!));
 
 // Relevé clair : étiquette mono + chiffre, un seul chiffre plein par
 // relevé — celui que la page défend (17 ans, depuis 2008).

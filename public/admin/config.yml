@@ -202,27 +202,25 @@ collections:
           - "Audit & diagnostic"
         hint: "Une mission au minimum. Liste close : le build refuse toute autre valeur. Six au maximum s'affichent proprement en étiquettes sur la fiche."
 
+      - label: "Planche de schéma de principe"
+        name: "planche"
+        widget: "string"
+        required: false
+        pattern: ['^/images/projets/[a-z0-9-]+/planche\.svg$', 'Chemin attendu : /images/projets/<slug>/planche.svg']
+        hint: "Le dispositif visuel des fiches réelles : un dessin FT2E, sans géométrie d'ouvrage ni droit de tiers. Les trois pièces (planche.svg, planche.png, planche.json) sont produites ensemble et déposées telles quelles — elles ne se modifient pas ici. Quand ce champ est rempli, le visuel photographique ci-dessous ne s'affiche plus."
+
       - label: "Image principale"
         name: "image_principale"
         widget: "image"
-        required: true
-        hint: "Ranger le fichier dans public/images/projets/<slug-de-la-fiche>/ après téléversement."
+        required: false
+        hint: "Repli, en l'absence de planche. Ranger le fichier dans public/images/projets/<slug-de-la-fiche>/ après téléversement. Une fiche doit porter l'un ou l'autre : le build refuse une fiche sans planche ET sans visuel."
 
       - label: "Texte alternatif image"
         name: "image_principale_alt"
         widget: "string"
-        required: true
-        pattern: ['^.{5,}$', 'Cinq caractères au minimum']
-        hint: "Description du visuel, lue par les lecteurs d'écran. Cinq caractères au minimum."
-
-      - label: "Galerie"
-        name: "galerie"
-        widget: "list"
         required: false
-        summary: "{{fields.alt}}"
-        fields:
-          - { label: "Image", name: "src", widget: "image", required: true }
-          - { label: "Légende / alt", name: "alt", widget: "string", required: true, pattern: ['^.{3,}$', 'Trois caractères au minimum'] }
+        pattern: ['^.{5,}$', 'Cinq caractères au minimum']
+        hint: "Obligatoire dès qu'un visuel est renseigné, sans exception (RGAA 1.1). Cinq caractères au minimum."
 
       - label: "Mis en avant en accueil"
         name: "en_avant"

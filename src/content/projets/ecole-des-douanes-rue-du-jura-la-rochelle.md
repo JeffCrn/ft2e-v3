@@ -14,8 +14,7 @@ performance: "152 947 W d’apports pour 1 656,75 m² traités — 104�
 synthese: >-
   Le bâtiment d’enseignement de l’École nationale des douanes, rue du Jura à La Rochelle, devait recevoir une climatisation. Avant de dimensionner quoi que ce soit, il fallait mesurer. Sous-traitante de l’installateur titulaire de l’accord-cadre de l’État, FT2E a relevé sur place la nature des parois et des vitrages, puis calculé les déperditions et les apports des 26 locaux. Le bâtiment demande 152,9 kW de froid pour 1 656,75 m², dont moins de 7 % viennent de l’ensoleillement et de l’écart de température. Dans une école, la charge de climatisation ne vient pas des murs : elle vient des occupants, des ordinateurs et de l’éclairage.
 mission_ft2e: ["Audit & diagnostic", "Thermique", "CVC"]
-image_principale: "/images/projets/ecole-des-douanes-rue-du-jura-la-rochelle/01.jpg"
-image_principale_alt: "Façade du bâtiment d’enseignement de l’École des douanes : trois niveaux de béton clair rythmés par des refends verticaux, bandeaux de fenêtres en menuiserie aluminium, édicule technique en toiture-terrasse, deux arbres nus sur la pelouse au premier plan"
+planche: "/images/projets/ecole-des-douanes-rue-du-jura-la-rochelle/planche.svg"
 en_avant: false
 ---
 
