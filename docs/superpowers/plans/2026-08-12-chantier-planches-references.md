@@ -79,6 +79,63 @@ sépare est ce que chacune démontre.
 
 ---
 
+## Prompt de lancement d'une session neuve
+
+À coller tel quel, en remplaçant `<slug>` et en actualisant la ligne des archétypes déjà
+employés depuis le registre ci-dessus. Le protocole étant versionné dans un dépôt public,
+le prompt n'a plus à le recopier — **et c'est ce qui garantit qu'une session travaille
+toujours sur sa dernière révision**, ce qu'un prompt recopié ne peut pas promettre.
+
+```text
+Tu produis une planche de schéma de principe pour une fiche de références FT2E.
+
+AVANT TOUTE AUTRE CHOSE, cloner le dépôt et lire le protocole. Il fait autorité sur
+tout ce qui suit, y compris sur ce message :
+
+    git clone --depth 1 https://github.com/JeffCrn/ft2e-v3
+    docs/superpowers/specs/2026-08-12-planches-references-protocole.md
+
+Fiche à traiter :  <slug>
+    src/content/projets/<slug>.md   — frontmatter ET corps, jamais un résumé
+
+Archétypes déjà employés, à ne pas répéter sans raison explicite :
+    sankey-energie — ecole-des-douanes-rue-du-jura-la-rochelle
+
+Exemple achevé, à consulter comme référence de niveau attendu :
+    public/images/projets/ecole-des-douanes-rue-du-jura-la-rochelle/planche.json
+    scripts/planches/sankey-energie.py
+
+CE QUE TU REMETS — un dossier <slug>/ contenant les quatre fichiers du protocole.
+
+  · Si l'archétype retenu a déjà son compositeur dans scripts/planches/, tu ne produis
+    QUE planche.json, puis tu lances :
+        python scripts/planches/<archetype>.py <dossier>
+    qui écrit planche.svg et vignette.svg. N'écris pas de SVG à la main dans ce cas.
+
+  · Sinon, tu écris aussi les deux SVG selon les gabarits du protocole (1200 × 800 et
+    300 × 200), et tu me dis explicitement qu'un compositeur reste à écrire.
+
+  · Le PNG 2400 × 1600 dans les deux cas.
+
+DEUX CHOSES QUE JE REFUSERAI :
+  · une planche que tu n'as pas regardée À SA TAILLE DE LECTURE — 1152 px pour la
+    planche, une carte de 296 px pour la vignette. Le rendu en pleine page ne prouve
+    rien : les sept défauts de la première planche y étaient tous invisibles ;
+  · une extraction dont `a_valider_ft2e` est vide. Un dessin tranche toujours ce qu'un
+    texte laisse ouvert ; une liste vide signifie que tu ne l'as pas vu, pas qu'il n'y
+    avait rien à trancher.
+
+Réponds par les fichiers, puis en prose brève : l'archétype retenu et son motif, les
+arbitrages laissés à FT2E, ce que tu as dû exclure, et ce que le contrôle à la taille de
+lecture t'a fait corriger. Ne me raconte pas ta méthode.
+```
+
+**Ce que la session ne fait pas** : elle ne touche ni au frontmatter de la fiche, ni au
+site. La bascule `image_principale` → `planche` et le contrôle de rendu se font ici, dans
+une session de dépôt, une fois les quatre fichiers reçus.
+
+---
+
 ## Ce que fait une session
 
 1. **Lire la fiche entière** — frontmatter et corps. Jamais un résumé, jamais la page rendue.
