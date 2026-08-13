@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 4 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12. 5 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,7 +32,7 @@ façade l'affirme.
 
 ---
 
-## État — 4 / 23
+## État — 5 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -40,7 +40,7 @@ façade l'affirme.
 | 02 | `abbaye-sablonceaux-ssi` | Patrimoine | `zonage-ssi` | ✅ **publiée** |
 | 03 | `ancien-siege-communautaire-marennes` | Tertiaire / ERP | `coupe-traversee` | ✅ **publiée** (versée le 2026-08-13) |
 | 04 | `atelier-dufour-yachts-perigny` | Industriel et commercial | `boucle-fluide` | ✅ **publiée** (versée le 2026-08-13) |
-| — | `ateliers-pilotes-capsulae` | Industriel et commercial | | à faire |
+| 05 | `ateliers-pilotes-capsulae` | Industriel et commercial | `boucle-fluide` (mécanisme `utilites`) | ✅ **publiée** (versée le 2026-08-13) |
 | — | `centre-formation-ormeau-du-pied-saintes` | Tertiaire / ERP | | à faire |
 | — | `creche-oranger-perigny` | Tertiaire / ERP | | à faire |
 | — | `cuisine-groupe-scolaire-villedoux` | Tertiaire / ERP | | à faire |
@@ -66,7 +66,7 @@ façade l'affirme.
 |---|---|---|
 | `sankey-energie` | 1 (École des douanes) | ✅ `scripts/planches/sankey-energie.py` |
 | `zonage-ssi` | 1 (Abbaye de Sablonceaux) | ✅ `scripts/planches/zonage-ssi.py` |
-| `boucle-fluide` | 1 (Atelier Dufour Yachts, Périgny) | ✅ `scripts/planches/boucle-fluide.py` |
+| `boucle-fluide` | 2 — deux mécanismes : `boucle` (récupération, Atelier Dufour) et `utilites` (réseau de livraison, Ateliers Capsulae) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
 | `coupe-traversee` | 1 (Ancien siège communautaire, Marennes) | ✅ `scripts/planches/coupe-traversee.py` |
 | `tableau-electrique` | 0 | à écrire |
 | `chronologie-affaire` | 0 | à écrire |

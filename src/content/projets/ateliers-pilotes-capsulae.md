@@ -13,8 +13,7 @@ statut: en cours
 synthese: >-
   Dans la zone Agrocéan de La Rochelle, Capsulae construit un bâtiment neuf pour trois ateliers pilotes de micro-production agroalimentaire : lit d’air fluidisé, séchage par atomisation et pilote de recherche. FT2E est le bureau d’études fluides du groupement de maîtrise d’œuvre, en charge des lots électricité et chauffage-ventilation-plomberie-air comprimé. La difficulté tient à une interface : le bâtiment livre aux procédés leurs utilités — froid glycolé, air comprimé sec, eau chaude de nettoyage, électricité de procédé — tandis que les équipements de production sont installés par un intégrateur extérieur, hors marché bâtiment. Le chantier se déroule sur un site industriel en exploitation, avec un accès unique. La réception est attendue au printemps 2026.
 mission_ft2e: [CVC, "Électricité CFO", "Électricité CFA"]
-image_principale: "/images/projets/ateliers-pilotes-capsulae/01.jpg"
-image_principale_alt: "Extrait du plan FT2E des réseaux du rez-de-chaussée des ateliers Capsulae à La Rochelle : groupe froid et ballon d’eau chaude sanitaire à gauche, colonnes de distribution colorées desservant les zones de production et leurs siphons de sol"
+planche: "/images/projets/ateliers-pilotes-capsulae/planche.svg"
 en_avant: false
 ---
 

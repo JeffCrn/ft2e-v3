@@ -1,0 +1,180 @@
+{
+  "fiche": "ateliers-pilotes-capsulae",
+  "archetype": "boucle-fluide",
+  "archetype_motif": "La thèse de la fiche est une interface de livraison : le bâtiment produit et distribue les quatre utilités du procédé — froid glycolé, air comprimé sec, eau chaude du nettoyage en place, électricité de procédé — jusqu'à des attentes en limite de chaque atelier, et l'intégrateur raccorde au-delà, hors marché bâtiment. C'est le mécanisme production → distribution → terminaux de la clé boucle-fluide. La clé est reprise après l'atelier Dufour parce qu'aucune autre de la liste fermée ne décrit un réseau d'utilités — mais le mécanisme dessiné est un autre : quatre chaînes qui s'arrêtent toutes sur une même limite de marché, quand Dufour montrait une boucle de récupération entre deux flux. La géométrie porte la démonstration : tout s'interrompt sur la limite, les trois ateliers se tiennent au-delà.",
+  "surtitre": "SCHÉMA DE PRINCIPE · LES UTILITÉS DU PROCÉDÉ",
+  "titre": "Ateliers Capsulae",
+  "sous_titre": "Le bâtiment livre ses utilités jusqu'aux attentes, l'intégrateur raccorde au-delà",
+  "cartouche_legende": "LA ROCHELLE · 476 m² · 2026",
+  "aria_label": "Schéma de principe des utilités de procédé : quatre chaînes partent des productions centralisées du bâtiment — groupe froid à eau glycolée de 261 kW au régime 2/6 °C, air comprimé sec, eau chaude sanitaire avec adoucisseur pour le nettoyage en place, tableau général basse tension — et s'arrêtent toutes sur la limite du marché bâtiment, où des attentes sont laissées en limite de chaque atelier. Au-delà de cette limite se tiennent les trois ateliers pilotes — lit d'air fluidisé, spray drying, pilote R&D — dont les équipements de production sont installés par un intégrateur extérieur, hors marché bâtiment.",
+  "utilites": {
+    "entete": "TROIS ATELIERS PILOTES À ALIMENTER · QUATRE UTILITÉS DIMENSIONNÉES SUR LE BILAN ÉTABLI ATELIER PAR ATELIER",
+    "registres": {
+      "gauche": "LE BÂTIMENT · PRODUCTIONS CENTRALISÉES",
+      "droite": "LES PROCÉDÉS · HORS MARCHÉ BÂTIMENT"
+    },
+    "limite": {
+      "libelle": "LA LIMITE DU MARCHÉ BÂTIMENT",
+      "mention": "LES ATTENTES · EN LIMITE DE CHAQUE ATELIER · RACCORDEMENT PAR L'INTÉGRATEUR"
+    },
+    "mention_separation": [
+      "LE MARCHÉ BÂTIMENT S'ARRÊTE AUX ATTENTES, EN LIMITE DE CHAQUE ATELIER",
+      "AU-DELÀ, L'INTÉGRATEUR RACCORDE LES ÉQUIPEMENTS DE PRODUCTION"
+    ],
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "froid",
+        "libelle": "Groupe froid à eau glycolée",
+        "valeur": "261",
+        "unite": "kW",
+        "etiquette": "FROID GLYCOLÉ",
+        "legende": "AU PLAN DE MARCHÉ",
+        "detail": [
+          "RÉGIME 2/6 °C"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "air-comprime",
+        "libelle": "Air comprimé",
+        "etiquette": "AIR COMPRIMÉ SEC",
+        "detail": [
+          "DESCENTES EN INOX"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "ecs",
+        "libelle": "Eau chaude sanitaire",
+        "etiquette": "EAU CHAUDE NEP",
+        "detail": [
+          "NETTOYAGE EN PLACE",
+          "AVEC ADOUCISSEUR"
+        ]
+      },
+      {
+        "ordre": 4,
+        "cle": "tgbt",
+        "libelle": "Tableau général basse tension",
+        "etiquette": "ÉLECTRICITÉ DE PROCÉDÉ",
+        "detail": [
+          "ALIMENTATIONS DÉDIÉES",
+          "DE CHAQUE ATELIER"
+        ]
+      },
+      {
+        "ordre": 5,
+        "cle": "distributions",
+        "libelle": "Distributions en inox",
+        "detail": [
+          "EXTÉRIEURES ET DESCENTES EN INOX",
+          "CALORIFUGE À FINITION INOX EN PRODUCTION"
+        ]
+      },
+      {
+        "ordre": 6,
+        "cle": "attentes",
+        "libelle": "Les attentes",
+        "detail": [
+          "EN LIMITE DE CHAQUE ATELIER",
+          "RACCORDEMENT PAR L'INTÉGRATEUR, HORS MARCHÉ"
+        ]
+      },
+      {
+        "ordre": 7,
+        "cle": "atelier-lit",
+        "libelle": "Lit d'air fluidisé",
+        "detail": [
+          "ATELIER PILOTE"
+        ]
+      },
+      {
+        "ordre": 8,
+        "cle": "atelier-spray",
+        "libelle": "Spray drying",
+        "detail": [
+          "SÉCHAGE PAR ATOMISATION"
+        ]
+      },
+      {
+        "ordre": 9,
+        "cle": "atelier-rd",
+        "libelle": "Pilote R&D",
+        "detail": [
+          "ATELIER PILOTE"
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Le bâtiment livre aux procédés leurs utilités ; les équipements de production sont installés hors marché bâtiment.",
+  "vignette_surtitre": "UTILITÉS DE PROCÉDÉ",
+  "a_valider_ft2e": [
+    {
+      "objet": "La répartition des utilités par atelier",
+      "la_source_affirme": "Le bilan des utilités a été établi « atelier par atelier » et des attentes sont laissées « en limite de chaque atelier » — aucune correspondance utilité × atelier n'est publiée.",
+      "le_dessin_suppose": "Quatre chaînes menées jusqu'à la limite, sans distribution par atelier. Dire si une utilité ne dessert pas l'un des trois ateliers."
+    },
+    {
+      "objet": "Le nombre d'attentes sur la limite",
+      "la_source_affirme": "« Attentes en limite de chaque atelier pour le raccordement des équipements » — sans les compter.",
+      "le_dessin_suppose": "Un nœud d'attente par utilité (quatre), posé sur la limite — pas un par croisement utilité × atelier (douze). C'est un choix de lisibilité, pas un relevé."
+    },
+    {
+      "objet": "La pompe à chaleur laissée au texte",
+      "la_source_affirme": "Le lot CVC comprend « une pompe à chaleur pour le chaud » ; les utilités livrées aux procédés sont énumérées sans elle (froid glycolé, air comprimé sec, eau chaude NEP, électricité de procédé).",
+      "le_dessin_suppose": "Que le chaud de la PAC sert le bâtiment et non le procédé : elle ne figure pas parmi les quatre chaînes. Confirmer."
+    },
+    {
+      "objet": "261 kW et régime 2/6 °C figés « au plan de marché »",
+      "la_source_affirme": "« Un groupe froid à eau glycolée — régime 2/6 °C, 261 kW froid au plan de marché » — l'affaire est en cours, la réception attendue au printemps 2026.",
+      "le_dessin_suppose": "La valeur du plan de marché posée comme valeur de l'affaire, avec sa légende « au plan de marché ». À réviser à la réception si l'installation retenue diffère."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2022 (millésime d'ouverture), statut en cours, réception attendue au début mars 2026.",
+      "le_dessin_suppose": "2026, millésime de la réception attendue — à confirmer une fois la réception prononcée, comme la fiche elle-même l'annonce."
+    },
+    {
+      "objet": "L'ordre d'empilement des productions et des ateliers",
+      "la_source_affirme": "Aucun ordre — la fiche énumère sans hiérarchie.",
+      "le_dessin_suppose": "L'ordre d'énumération de la fiche, pour les quatre productions comme pour les trois ateliers. Aucune implantation réelle n'est reprise."
+    },
+    {
+      "objet": "La graphie « Spray drying » en tête d'atelier",
+      "la_source_affirme": "La fiche écrit « spray drying (séchage par atomisation) », la traduction en apposition.",
+      "le_dessin_suppose": "Le nom court en tête de bloc, la traduction en détail mono. Dire si la graphie française doit primer sur la planche (règle éditoriale sur les anglicismes)."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 22-006 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Tout montant : 425 000 € HT de marchés FT2E, opération de douze lots à 1 380 000 € HT, 182 000 € et 243 000 € HT à la commande des deux lots.",
+    "Noms de tiers : l'architecte mandataire, le BET structures, l'ordonnancement, les deux entreprises titulaires, le bâtiment existant adossé et le groupe propriétaire — l'intégrateur reste désigné par son rôle, comme dans la fiche. Le maître d'ouvrage ne subsiste que dans le nom de l'ouvrage, que le titre porte.",
+    "La chronologie de l'affaire : avant-projet de juillet 2022, appel d'offres de février 2024 non poursuivi, reprise de l'automne 2024, marchés de janvier 2025, 45ᵉ réunion, opérations préalables du 18 février 2026 — matière d'une chronologie-affaire, pas d'un réseau d'utilités.",
+    "Les évolutions de programme : zone technique agrandie de 30 m², sas rehaussé de 2,50 à 3,50 m, trémies ajoutées — récit, pas mécanisme.",
+    "L'organisation hygiénique : zones d'hygiène élevée / moyenne / de base, sas d'opérateurs et de matières, vestiaires — c'est le programme des locaux, pas la chaîne des utilités.",
+    "Le lot électricité du bâtiment lui-même : éclairage, éclairage de sécurité, VDI, alarme incendie, contrôle d'accès, anti-intrusion — seule l'électricité de procédé entre dans le mécanisme dessiné.",
+    "Le chantier en site occupé et l'accès unique — récit.",
+    "Aucune géométrie d'ouvrage : les ateliers sont des blocs topologiques d'égale hauteur, les productions des rectangles — ni les deux niveaux, ni l'adossement à l'existant ne sont figurés."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "quatre chaînes partent des productions et s'arrêtent TOUTES sur la limite (x 800, trait interrompu) où chacune porte son nœud d'attente ; les trois blocs d'atelier se tiennent au-delà, sans aucun trait qui les relie — la géométrie porte la thèse « livrer jusqu'aux attentes, pas au-delà »",
+    "topologie": "productions (x 56–320, quatre boîtes de 72 px) → chaînes (x 320–793) → limite (x 800, y 240–648) → ateliers (x 830–1144, trois blocs) — l'ordre est celui de l'énumération de la fiche",
+    "bas_du_dessin": "dernière production à 636, dernier atelier à 640, mention des attentes à 664, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 253 x 30 px = 7590 px², soit 0.79 % de la planche",
+    "chiffre_unique": "un seul chiffre en encre pleine — 68 px mesurés à 22 px (261 kW, au plan de marché) ; le régime 2/6 °C reste au mono 10 pivot",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "114 signes — 969 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "quatre chaînes arrêtées sur la limite interrompue, leurs nœuds d'attente, trois blocs au-delà — libellés de production et noms d'atelier laissés à la planche",
+    "bas_du_dessin": "nœud du froid glycolé à y 180, marge basse 20 px"
+  }
+}

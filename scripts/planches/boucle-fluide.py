@@ -31,6 +31,16 @@ Quatrième module du chantier après `sankey-energie.py`, `zonage-ssi.py` et
 double écriture des couleurs, routine d'exécution) vit dans `_tronc.py` depuis
 le 2026-08-13 — extraction contrôlée par régénération octet à octet des quatre
 planches publiées.
+
+Le module compose DEUX mécanismes de l'archétype, choisis par le bloc que porte
+l'extraction :
+
+- `boucle` — la boucle de récupération (atelier Dufour) : deux conduits qui ne
+  se rencontrent jamais, une boucle seule à traverser ;
+- `utilites` — le réseau de livraison (ateliers Capsulae) : des productions
+  centralisées, des chaînes de distribution, et une LIMITE DE MARCHÉ sur
+  laquelle tout s'arrête — les attentes — quand les consommateurs se tiennent
+  au-delà.
 """
 
 from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, mesurer,
@@ -73,7 +83,7 @@ def batterie(A, x0, x1, y0, y1):
     A(ligne(x0, y1, x1, y0, "encre", 1.5))
 
 
-def composer(donnees):
+def composer_recuperation(donnees):
     b = donnees["boucle"]
     elems = {e["cle"]: e for e in b["elements"]}
     out = []
@@ -304,7 +314,7 @@ def composer(donnees):
     return "\n".join(out) + "\n", controles
 
 
-def composer_vignette(donnees):
+def composer_vignette_recuperation(donnees):
     """La vignette : le motif de l'archétype, sans son appareil.
 
     Ce qu'elle garde : les deux conduits à contre-courant, les deux batteries,
@@ -371,6 +381,240 @@ def composer_vignette(donnees):
         "bas_du_dessin": "nœud de l'air neuf à y 180, marge basse 20 px",
     }
     return "\n".join(out) + "\n", controles
+
+
+# ═══ Mécanisme `utilites` — production → distribution → limite de marché ═════
+
+U_BX0, U_BX1 = 56, 320        # les boîtes de production
+U_BH = 72                     # leur hauteur
+U_Y0S = (252, 356, 460, 564)  # leurs ordonnées — quatre chaînes
+U_XLIM = 800                  # la limite du marché bâtiment
+U_AX0, U_AX1 = 830, 1144      # les blocs d'atelier
+U_AY = ((252, 372), (386, 506), (520, 640))
+
+
+def ligne_pointillee(x0, y0, x1, y1, cle, epaisseur=1.5, motif="6 6"):
+    """La limite de marché : un trait interrompu — c'est une frontière, pas
+    une paroi."""
+    from _tronc import JETON
+    return (f'  <path d="M {x0:.2f} {y0:.2f} L {x1:.2f} {y1:.2f}" fill="none" '
+            f'class="s-{cle}" stroke="{JETON[cle]}" '
+            f'stroke-width="{epaisseur}" stroke-dasharray="{motif}"/>')
+
+
+def composer_utilites(donnees):
+    u = donnees["utilites"]
+    elems = {e["cle"]: e for e in u["elements"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête et registres ─────────────────────────────────────────────────
+    controler("en-tête schéma", u["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, u["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(MARGE, Y_REGISTRES, u["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_REGISTRES, u["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Les quatre productions et leurs chaînes ──────────────────────────────
+    cles_prod = ("froid", "air-comprime", "ecs", "tgbt")
+    for cle, y0 in zip(cles_prod, U_Y0S):
+        e = elems[cle]
+        cy = y0 + U_BH / 2
+        A(rect_bord(U_BX0, y0, U_BX1 - U_BX0, U_BH, "papier", "filet-1"))
+        controler(f"libellé {cle}", e["libelle"], 15, "sans-600",
+                  U_BX1 - U_BX0 - 32)
+        A(texte(U_BX0 + 16, y0 + 28, e["libelle"], "sans", 15, 600, "encre",
+                wdth=112))
+        for k, l in enumerate(e.get("detail", [])):
+            controler(f"détail {cle} {k + 1}", l, 10, "mono",
+                      U_BX1 - U_BX0 - 32, 10 * 0.14)
+            A(texte(U_BX0 + 16, y0 + 46 + k * 14, l, "mono", 10, 500, "pivot",
+                    tracking=10 * 0.14))
+        # La chaîne : du flanc de la boîte à la limite — pas au-delà.
+        A(ligne(U_BX1, cy, U_XLIM - 7, cy, "encre", 1.5))
+        for xf in (430, 700):
+            A(fleche(xf, cy, "encre", "droite", 9))
+        controler(f"étiquette {cle}", e["etiquette"], 10, "mono",
+                  U_XLIM - U_BX1 - 40, 10 * 0.14)
+        A(texte((U_BX1 + U_XLIM) / 2, cy - 9, e["etiquette"], "mono", 10, 500,
+                "pivot", ancre="middle", tracking=10 * 0.14))
+        # L'attente : le nœud sur la limite, où la chaîne s'arrête.
+        A(cercle(U_XLIM, cy, 5, "papier", "encre"))
+
+    # ── Le chiffre que la planche défend — le seul en encre pleine ───────────
+    ef = elems["froid"]
+    val = f'{ef["valeur"]}{NN}{ef["unite"]}'
+    cy_froid = U_Y0S[0] + U_BH / 2
+    x_val = 340
+    l_val = controler("chiffre du froid", val, 22, "sans-700", 200)
+    A(texte(x_val, cy_froid + 36, val, "sans", 22, 700, "encre", wdth=118,
+            tabulaire=True))
+    legende = f'{ef["etiquette"]} · {ef["legende"]}'
+    controler("légende du chiffre", legende, 10, "mono", 330, 10 * 0.14)
+    A(texte(x_val, cy_froid + 54, legende, "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── La limite du marché bâtiment ─────────────────────────────────────────
+    A(ligne_pointillee(U_XLIM, 240, U_XLIM, 648, "encre", 1.5))
+    lim = u["limite"]
+    controler("libellé limite", lim["libelle"], 10, "mono", 400, 10 * 0.14)
+    A(texte(U_XLIM, 232, lim["libelle"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+    controler("mention limite", lim["mention"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(U_XLIM, 664, lim["mention"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+
+    # ── Les trois ateliers, au-delà — des blocs topologiques ─────────────────
+    cles_ateliers = ("atelier-lit", "atelier-spray", "atelier-rd")
+    for cle, (y0, y1) in zip(cles_ateliers, U_AY):
+        e = elems[cle]
+        A(rect(U_AX0, y0, U_AX1 - U_AX0, y1 - y0, "calcaire"))
+        controler(f"libellé {cle}", e["libelle"], 15, "sans-600",
+                  U_AX1 - U_AX0 - 40)
+        A(texte(U_AX0 + 20, y0 + 34, e["libelle"], "sans", 15, 600, "encre",
+                wdth=112))
+        for k, l in enumerate(e.get("detail", [])):
+            controler(f"détail {cle} {k + 1}", l, 10, "mono",
+                      U_AX1 - U_AX0 - 40, 10 * 0.14)
+            A(texte(U_AX0 + 20, y0 + 54 + k * 14, l, "mono", 10, 500, "pivot",
+                    tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur ajustée, jamais codée ────────────────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "quatre chaînes partent des productions et s'arrêtent "
+                         f"TOUTES sur la limite (x {U_XLIM}, trait interrompu) "
+                         "où chacune porte son nœud d'attente ; les trois blocs "
+                         "d'atelier se tiennent au-delà, sans aucun trait qui "
+                         "les relie — la géométrie porte la thèse « livrer "
+                         "jusqu'aux attentes, pas au-delà »",
+        "topologie": f"productions (x {U_BX0}–{U_BX1}, quatre boîtes de "
+                     f"{U_BH} px) → chaînes (x {U_BX1}–{U_XLIM - 7}) → limite "
+                     f"(x {U_XLIM}, y 240–648) → ateliers (x {U_AX0}–{U_AX1}, "
+                     "trois blocs) — l'ordre est celui de l'énumération de la "
+                     "fiche",
+        "bas_du_dessin": f"dernière production à {U_Y0S[-1] + U_BH}, dernier "
+                         f"atelier à {U_AY[-1][1]}, mention des attentes à 664, "
+                         f"phrase de principe à {Y_PHRASE}, cartouche "
+                         f"{Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, marge "
+                         f"basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": f"un seul chiffre en encre pleine — {l_val:.0f} px "
+                          "mesurés à 22 px (261 kW, au plan de marché) ; le "
+                          "régime 2/6 °C reste au mono 10 pivot",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_utilites(donnees):
+    """La vignette du mécanisme `utilites` : quatre chaînes, la limite
+    interrompue et ses nœuds, trois blocs au-delà — avec le nœud chiffré du
+    froid glycolé. Les libellés de production, la mention des attentes et les
+    noms d'atelier sont laissés à la planche."""
+    u = donnees["utilites"]
+    elems = {e["cle"]: e for e in u["elements"]}
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    ys = (58, 88, 118, 148)
+    xlim = 196
+    for y in ys:
+        A(rect_bord(22, y - 9, 34, 18, "papier", "filet-1"))
+        A(ligne(56, y, xlim - 4, y, "encre", 1.2))
+        A(fleche(120, y, "encre", "droite", 6))
+        A(cercle(xlim, y, 3.5, "papier", "encre", 1.2))
+    A(ligne_pointillee(xlim, 46, xlim, 160, "encre", 1.2, "4 4"))
+    for (y0, y1) in ((46, 80), (86, 120), (126, 160)):
+        A(rect(210, y0, 76, y1 - y0, "calcaire"))
+
+    ef = elems["froid"]
+    A(texte(22, 180, "Froid glycolé", "sans", 12, 600, "encre", wdth=112))
+    A(texte(110, 180, f'{ef["valeur"]}{NN}{ef["unite"]}', "mono", 10, 500,
+            "pivot", tabulaire=True))
+    A(texte(210, 40, "3 ATELIERS", "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "quatre chaînes arrêtées sur la limite interrompue, leurs "
+                 "nœuds d'attente, trois blocs au-delà — libellés de "
+                 "production et noms d'atelier laissés à la planche",
+        "bas_du_dessin": "nœud du froid glycolé à y 180, marge basse 20 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
+
+def composer(donnees):
+    if "utilites" in donnees:
+        return composer_utilites(donnees)
+    return composer_recuperation(donnees)
+
+
+def composer_vignette(donnees):
+    if "utilites" in donnees:
+        return composer_vignette_utilites(donnees)
+    return composer_vignette_recuperation(donnees)
 
 
 if __name__ == "__main__":
