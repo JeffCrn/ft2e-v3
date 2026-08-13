@@ -1,6 +1,6 @@
 # Protocole — planche de schéma de principe pour une fiche référence FT2E
 
-*Révision 3 (2026-08-12). Le corps de ce document se colle tel quel en début de session
+*Révision 4 (2026-08-13). Le corps de ce document se colle tel quel en début de session
 neuve : rien d'autre n'y est supposé connu. Il est versionné ici parce qu'il pilote la
 production de vingt-deux planches restantes, et qu'un protocole qui vit hors du dépôt ne
 survit pas à un nettoyage de répertoire de travail.*
@@ -49,6 +49,30 @@ retomber sept défauts de géométrie sur un raisonnement par ailleurs juste.
 > planche (École des douanes), toutes trouvées au temps 4 et aucune au temps 3 :
 > la casse des unités, le choix d'insécable selon le corps, la pleine largeur de
 > la phrase de principe, et ce qui peut entrer dans un cadrage de vignette.
+
+---
+
+## La planche est un DESSIN — ce qui a changé en révision 4
+
+La deuxième planche (Abbaye de Sablonceaux) a d'abord été livrée comme une pile de blocs
+étiquetés flanquée d'une colonne de relevé. FT2E l'a refusée en posant le principe qui
+manquait au protocole : **la planche schématise la solution apportée par le bureau —
+c'est un dessin, pas un tableau de synthèse.** La page porte déjà les données de la
+fiche ; les répéter alourdit sans rien démontrer. Trois règles en découlent, opposables
+à toutes les planches :
+
+1. **Le dessin montre un mécanisme.** Un événement qui traverse un système, un flux qui
+   se partage, une traversée, un découpage : quelque chose *se passe* sur la planche.
+   Planche 02 : un même déclenchement suivi avant et après travaux — l'alarme se diffuse
+   partout, puis dans la seule zone concernée.
+2. **La géométrie porte la démonstration.** Test avant remise : masque mentalement tout
+   le texte du dessin. Si ce qui reste — formes, liaisons, proportions — ne montre plus
+   rien, c'est un inventaire habillé : recompose. Tout signe graphique porteur reste
+   doublé d'un texte ou d'une flèche (la couleur seule ne porte jamais — RGAA).
+3. **Aucune donnée que la fiche porte déjà ne monte sur la planche.** La colonne de
+   relevé de la révision 3 est **supprimée du gabarit** ; les champs `releve` du JSON
+   restent admis mais **vides par défaut**, et le site n'en rend la lecture mobile que
+   s'ils sont peuplés.
 
 ---
 
@@ -165,8 +189,8 @@ Produis ensuite l'objet :
   "sous_titre": "<la thèse, une ligne littérale, 90 signes max>",
   "cartouche_legende": "Ville · 000 m² · 0000",
   "<bloc propre à l'archétype>": { },
-  "releve": [ { "valeur": "", "unite": "", "legende": "" } ],
-  "releve_secondaire": [ { "intitule": "", "valeur": "", "appui": "" } ],
+  "releve": [],
+  "releve_secondaire": [],
   "phrase_principe": "<une phrase de la fiche, 120 signes max>",
   "vignette_surtitre": "<TROIS MOTS AU PLUS, CASSE D'AFFICHAGE>",
   "a_valider_ft2e": [ ],
@@ -175,7 +199,12 @@ Produis ensuite l'objet :
 }
 ```
 
-`releve` : trois entrées maximum. `releve_secondaire` : deux maximum.
+`releve` et `releve_secondaire` restent **vides par défaut** (révision 4) : les chiffres
+de la fiche ne montent pas sur la planche. Ne les peuple — trois entrées maximum, deux
+pour le secondaire — que si la démonstration est elle-même chiffrée **et** que la page ne
+porte pas déjà ces chiffres. Le **bloc propre à l'archétype** décrit un *mécanisme*
+(événement, système, conséquence — ou flux, traversée, découpage), jamais un simple
+inventaire d'organes.
 
 ### Temps 3 — Composer, rendre, regarder
 
@@ -344,8 +373,9 @@ pour laquelle il ne se change pas.
   la planche de se dimensionner dans la page. `preserveAspectRatio="xMidYMid meet"`.
 - Marges de **56** (deux modules). Pas de grille : **28**.
 - Largeur utile : 1200 − 112 = **1088**.
-- Partition : gouttière de **56**, puis 7/5 sur le reste → **zone de dessin 602**,
-  **colonne de relevé 430** (602 / 430 = 1,4000 exactement). Sépare-les d'un filet rang 3.
+- **Le schéma occupe la largeur utile entière** (révision 4) : la partition 7/5 avec
+  colonne de relevé est supprimée — un relevé qui répète la fiche n'est pas un dessin.
+  La largeur s'organise selon le mécanisme (planche 02 : événement → système → site).
 
 ### Corps — ce sont ceux de la charte, écris-les tels quels
 
@@ -367,22 +397,20 @@ pour laquelle il ne se change pas.
 absent. S'il ne tient pas, il ne va pas sur la planche — il va dans `a_valider_ft2e` ou
 dans le JSON.
 
-**Un seul chiffre en encre pleine par relevé** — celui que la fiche défend. Les autres au
-`pivot`. C'est la règle du relevé clair de la charte, et elle vaut ici.
+*Les quatre rangs de relevé du tableau ne subsistent que pour l'exception chiffrée admise
+au Temps 2 — par défaut, une planche n'a pas de relevé (révision 4). S'il y en a un :
+un seul chiffre en encre pleine, les autres au `pivot`.*
 
 ### Blocs
 
 - **Bloc de titre** en haut à gauche : surtitre, titre, sous-titre, puis un filet rang 1
   pleine largeur.
-- **Zone de dessin** à gauche, sous un en-tête mono qui nomme son périmètre.
-  **Colonne de relevé** à droite, sous un en-tête mono qui nomme le sien. Quand les deux
-  périmètres diffèrent — un local d'un côté, le bâtiment de l'autre — ces deux en-têtes
-  sont ce qui empêche la planche de mentir.
-- **Relevé** : jusqu'à trois chiffres, puis un filet rang 3, puis le relevé secondaire.
-- **Phrase de principe** en bas de planche, **sur toute la largeur utile** (1088)
-  et non dans la seule zone de dessin. Mesure : une phrase de 107 signes en
-  Archivo 17 fait 817 px — elle tient sur une ligne à 1088, il lui en faut deux à
-  602, et ces deux lignes ne rentrent plus entre la note de pied et le cartouche.
+- **Zone de schéma** sous un en-tête mono qui nomme son périmètre — et, quand le dessin
+  confronte deux états ou deux périmètres (AVANT/APRÈS, un local contre un bâtiment), un
+  en-tête mono par registre : ces en-têtes sont ce qui empêche la planche de mentir.
+- **Phrase de principe** en bas de planche, **sur toute la largeur utile** (1088).
+  Mesure : une phrase de 107 signes en Archivo 17 fait 817 px — elle tient sur une
+  ligne à 1088.
 - **Cartouche de légende** en bas à gauche : rectangle `profond`, hauteur **30**, largeur
   ajustée au texte plus 20 de part et d'autre, plafonnée à la largeur de la zone de dessin.
   **Ne code pas une largeur en dur** : elle change à chaque fiche.
@@ -476,6 +504,16 @@ as oublié de les mettre.
 
 ## Contrôle avant remise
 
+**Dessin — le contrôle qui prime sur tous les autres (révision 4)**
+- [ ] La planche montre un **mécanisme** — quelque chose s'y passe. Ce n'est ni une
+      liste, ni une pile de blocs étiquetés, ni un tableau de synthèse.
+- [ ] Texte masqué, la géométrie seule — formes, liaisons, proportions — porte encore
+      la thèse.
+- [ ] Aucune donnée que la fiche porte déjà n'est répétée : pas de colonne de relevé,
+      pas de classements, pas de listes de prestations.
+- [ ] Tout signe graphique porteur (aplat, barre, flèche) est doublé d'un texte ou
+      d'une mention — jamais la couleur seule.
+
 **Fidélité**
 - [ ] Chaque valeur du dessin est citable dans la fiche.
 - [ ] `a_valider_ft2e` n'est pas vide.
@@ -513,8 +551,15 @@ as oublié de les mettre.
 
 ## Format de ta réponse
 
-Les trois fichiers. Puis, en prose brève : l'archétype retenu et son motif, la liste des
+Les quatre fichiers. Puis, en prose brève : l'archétype retenu et son motif, la liste des
 arbitrages laissés à FT2E, ce que tu as dû exclure, et ce que le rendu à 1152 px t'a fait
 corriger.
+
+Termine **systématiquement** par le prompt de lancement de la session suivante — **une
+fiche = une session**. Il se génère depuis le gabarit du suivi
+(`docs/superpowers/plans/2026-08-12-chantier-planches-references.md`, § Prompt de
+lancement) : y porter la première fiche « à faire » du programme, et actualiser la ligne
+des archétypes déjà employés depuis le registre. Une session qui rend ses fichiers sans
+le prompt suivant laisse le chantier sans relève.
 
 Ne me raconte pas ta méthode. Montre le résultat et ce qui reste ouvert.

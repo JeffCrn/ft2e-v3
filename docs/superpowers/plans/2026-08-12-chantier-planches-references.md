@@ -89,23 +89,31 @@ toujours sur sa dernière révision**, ce qu'un prompt recopié ne peut pas prom
 ```text
 Tu produis une planche de schéma de principe pour une fiche de références FT2E.
 
-AVANT TOUTE AUTRE CHOSE, cloner le dépôt et lire le protocole. Il fait autorité sur
-tout ce qui suit, y compris sur ce message :
+AVANT TOUTE AUTRE CHOSE, cloner le dépôt et lire le protocole (révision 4). Il fait
+autorité sur tout ce qui suit, y compris sur ce message :
 
     git clone --depth 1 https://github.com/JeffCrn/ft2e-v3
     docs/superpowers/specs/2026-08-12-planches-references-protocole.md
+
+LA PLANCHE EST UN DESSIN. Elle schématise la solution apportée par FT2E — un mécanisme
+dont la géométrie porte la démonstration. Elle ne répète AUCUNE donnée que la fiche
+porte déjà : pas de colonne de relevé, pas de classements, pas de listes.
 
 Fiche à traiter :  <slug>
     src/content/projets/<slug>.md   — frontmatter ET corps, jamais un résumé
 
 Archétypes déjà employés, à ne pas répéter sans raison explicite :
     sankey-energie — ecole-des-douanes-rue-du-jura-la-rochelle
+    zonage-ssi — abbaye-sablonceaux-ssi
 
 Exemple achevé, à consulter comme référence de niveau attendu :
-    public/images/projets/ecole-des-douanes-rue-du-jura-la-rochelle/planche.json
-    scripts/planches/sankey-energie.py
+    public/images/projets/abbaye-sablonceaux-ssi/planche.json
+    scripts/planches/zonage-ssi.py
+    (la planche 01, École des douanes, garde une colonne de relevé antérieure à la
+    révision 4 — ne pas l'imiter sur ce point)
 
-CE QUE TU REMETS — un dossier <slug>/ contenant les quatre fichiers du protocole.
+CE QUE TU REMETS — un dossier <slug>/ contenant les quatre fichiers du protocole,
+puis le prompt de lancement de la session suivante (une fiche = une session).
 
   · Si l'archétype retenu a déjà son compositeur dans scripts/planches/, tu ne produis
     QUE planche.json, puis tu lances :
@@ -117,7 +125,13 @@ CE QUE TU REMETS — un dossier <slug>/ contenant les quatre fichiers du protoco
 
   · Le PNG 2400 × 1600 dans les deux cas.
 
-DEUX CHOSES QUE JE REFUSERAI :
+  · Le prompt de la session suivante : ce gabarit, avec la première fiche « à faire »
+    du programme du suivi et la ligne des archétypes actualisée depuis le registre.
+
+TROIS CHOSES QUE JE REFUSERAI :
+  · un tableau de synthèse habillé — masque mentalement le texte du dessin : si la
+    géométrie seule ne démontre plus rien, ce n'est pas une planche. La première
+    version de la planche 02 a été refusée pour ce motif exact ;
   · une planche que tu n'as pas regardée À SA TAILLE DE LECTURE — 1152 px pour la
     planche, une carte de 296 px pour la vignette. Le rendu en pleine page ne prouve
     rien : les sept défauts de la première planche y étaient tous invisibles ;
@@ -127,7 +141,8 @@ DEUX CHOSES QUE JE REFUSERAI :
 
 Réponds par les fichiers, puis en prose brève : l'archétype retenu et son motif, les
 arbitrages laissés à FT2E, ce que tu as dû exclure, et ce que le contrôle à la taille de
-lecture t'a fait corriger. Ne me raconte pas ta méthode.
+lecture t'a fait corriger. Termine par le prompt de la session suivante. Ne me raconte
+pas ta méthode.
 ```
 
 **Ce que la session ne fait pas** : elle ne touche ni au frontmatter de la fiche, ni au
@@ -151,6 +166,10 @@ une session de dépôt, une fois les quatre fichiers reçus.
 7. **Contrôler** : `npm run typecheck`, `npm run build`, `npm run preview` + capture de la
    fiche, de la carte de secteur et du téléphone.
 8. **Consigner** ici : numéro, archétype, arbitrages ouverts.
+9. **Produire le prompt de lancement de la session suivante** depuis le gabarit
+   ci-dessus — première fiche « à faire » du programme, registre des archétypes
+   actualisé. **Une fiche = une session** : une session qui rend ses fichiers sans le
+   prompt suivant laisse le chantier sans relève.
 
 ---
 
