@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe électrique de l’extension : en toiture, 48 modules photovoltaïques totalisant 17,5 kilowatts-crête alimentent la distribution du bâtiment en autoconsommation, le surplus étant revendu au réseau et l’appoint soutiré au même point ; parmi les départs, une pompe à chaleur air/eau de 7,5 kilowatts porte chaque kilowattheure électrique à 4,6 kilowattheures de chaleur (COP 4,60), le complément étant pris à l’air extérieur, et cette chaleur est diffusée au sol par un plancher chauffant à très basse température, au régime 30/35 degrés.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · AUTOCONSOMMATION ET PLANCHER CHAUFFANT</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Crèche de l’Oranger</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">L’électricité produite en toiture, la chaleur diffusée par le sol</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L’ÉNERGIE DU BÂTIMENT · PRODUITE EN TOITURE, ÉCHANGÉE AU RÉSEAU, DIFFUSÉE PAR LE SOL</text>
+  <text x="56.00" y="226.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EN TOITURE · LA PRODUCTION</text>
+  <rect x="380.00" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="395.92" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="411.83" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="427.75" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="443.67" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="459.58" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="475.50" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="491.42" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="507.33" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="523.25" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="539.17" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="555.08" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="571.00" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="586.92" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="602.83" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="618.75" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="634.67" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="650.58" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="666.50" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="682.42" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="698.33" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="714.25" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="730.17" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="746.08" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="762.00" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="777.92" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="793.83" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="809.75" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="825.67" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="841.58" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="857.50" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="873.42" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="889.33" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="905.25" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="921.17" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="937.08" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="953.00" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="968.92" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="984.83" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="1000.75" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="1016.67" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="1032.58" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="1048.50" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="1064.42" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="1080.33" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="1096.25" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="1112.17" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="1128.08" y="240.00" width="11.92" height="28.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 380.00 272.00 L 1144.00 272.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="56.00" y="252.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Production en toiture</text>
+  <text x="56.00" y="280.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="22" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" font-variant-numeric="tabular-nums">17,5 kWc</text>
+  <text x="56.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">48 MODULES · 365 Wc CHACUN</text>
+  <text x="56.00" y="314.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">POSÉS SUR PLOTS, SANS PERFORATION</text>
+  <text x="56.00" y="328.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ANCRÉS POUR DES VENTS DE 180 km/h</text>
+  <path d="M 762.00 272.00 L 762.00 370.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 762.00 374.00 L 757.50 365.00 L 766.50 365.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="774.00" y="330.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AUTOCONSOMMATION</text>
+  <path d="M 420.00 376.00 L 1050.00 376.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3"/>
+  <text x="420.00" y="360.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">La distribution</text>
+  <rect x="56.00" y="348.00" width="174.00" height="68.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="388.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Réseau public</text>
+  <path d="M 240.00 366.00 L 420.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 240.00 366.00 L 249.00 361.50 L 249.00 370.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="325.00" y="356.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">SURPLUS REVENDU</text>
+  <path d="M 230.00 392.00 L 410.00 392.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 410.00 392.00 L 401.00 387.50 L 401.00 396.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="325.00" y="410.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">APPOINT DU RÉSEAU</text>
+  <rect x="558.00" y="377.50" width="4.00" height="70.50" class="c-encre" fill="#00393A"/>
+  <text x="546.00" y="416.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">1 kWh ÉLECTRIQUE</text>
+  <rect x="480.00" y="448.00" width="220.00" height="76.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="496.00" y="478.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Pompe à chaleur air/eau</text>
+  <text x="496.00" y="498.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">7,5 kW · COP 4,60</text>
+  <rect x="56.00" y="476.00" width="414.00" height="14.40" class="c-clair" fill="#99CCCD"/>
+  <path d="M 478.00 483.20 L 468.00 478.20 L 468.00 488.20 Z" class="c-encre" fill="#00393A"/>
+  <text x="56.00" y="466.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHALEUR PRISE À L’AIR EXTÉRIEUR</text>
+  <rect x="578.00" y="524.00" width="18.40" height="48.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 587.20 576.00 L 581.70 565.00 L 592.70 565.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="609.20" y="556.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">4,6 kWh DE CHALEUR</text>
+  <path d="M 920.00 377.50 L 920.00 442.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 920.00 446.00 L 916.00 438.00 L 924.00 438.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="800.00" y="448.00" width="344.00" height="76.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="820.00" y="478.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Les autres départs</text>
+  <text x="820.00" y="498.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ÉCLAIRAGE · PRÉCÂBLAGE VDI</text>
+  <text x="820.00" y="512.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ALARME INCENDIE · CONTRÔLE D’ACCÈS</text>
+  <text x="56.00" y="560.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AU SOL · L’ÉMISSION</text>
+  <text x="56.00" y="584.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Plancher chauffant très basse température</text>
+  <text x="56.00" y="608.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RÉGIME 30/35 °C</text>
+  <text x="56.00" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">INCORPORÉ DANS UNE DALLE FLOTTANTE ISOLÉE</text>
+  <text x="56.00" y="636.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SANS ÉMETTEUR EN PAROI DANS LES ESPACES DE VIE</text>
+  <rect x="420.00" y="580.00" width="724.00" height="40.00" class="c-calcaire" fill="#EDF0F2"/>
+  <path d="M 436.00 612.00 L 436.00 588.00 L 480.00 588.00 L 480.00 612.00 L 524.00 612.00 L 524.00 588.00 L 568.00 588.00 L 568.00 612.00 L 612.00 612.00 L 612.00 588.00 L 656.00 588.00 L 656.00 612.00 L 700.00 612.00 L 700.00 588.00 L 744.00 588.00 L 744.00 612.00 L 788.00 612.00 L 788.00 588.00 L 832.00 588.00 L 832.00 612.00 L 876.00 612.00 L 876.00 588.00 L 920.00 588.00 L 920.00 612.00 L 964.00 612.00 L 964.00 588.00 L 1008.00 588.00 L 1008.00 612.00 L 1052.00 612.00 L 1052.00 588.00 L 1096.00 588.00 L 1096.00 612.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">En toiture, 48 modules alimentent le bâtiment en autoconsommation ; au sol, une chaleur douce à très basse température.</text>
+  <rect x="56.00" y="714.00" width="220.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">PÉRIGNY · 157 m² · 2024</text>
+</svg>

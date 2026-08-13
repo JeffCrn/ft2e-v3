@@ -1,0 +1,159 @@
+{
+  "fiche": "creche-oranger-perigny",
+  "archetype": "tableau-electrique",
+  "archetype_motif": "La thèse de la fiche est son propre balancement, répété deux fois : « En toiture, 48 modules alimentent le bâtiment en autoconsommation ; au sol, un plancher chauffant à très basse température. » C’est un mécanisme électrique — la toiture est la seconde arrivée du tableau, le surplus repart au réseau par le même point, et le départ que la planche suit finit au sol, où chaque kilowattheure devient 4,6 (COP 4,60). Le Sankey a été écarté faute d’une décomposition littérale close dans une même unité (la fiche mêle kWc, kW, % et kWhep), et une quatrième boucle-fluide aurait été une redite.",
+  "surtitre": "SCHÉMA DE PRINCIPE · AUTOCONSOMMATION ET PLANCHER CHAUFFANT",
+  "titre": "Crèche de l’Oranger",
+  "sous_titre": "L’électricité produite en toiture, la chaleur diffusée par le sol",
+  "cartouche_legende": "PÉRIGNY · 157 m² · 2024",
+  "aria_label": "Schéma de principe électrique de l’extension : en toiture, 48 modules photovoltaïques totalisant 17,5 kilowatts-crête alimentent la distribution du bâtiment en autoconsommation, le surplus étant revendu au réseau et l’appoint soutiré au même point ; parmi les départs, une pompe à chaleur air/eau de 7,5 kilowatts porte chaque kilowattheure électrique à 4,6 kilowattheures de chaleur (COP 4,60), le complément étant pris à l’air extérieur, et cette chaleur est diffusée au sol par un plancher chauffant à très basse température, au régime 30/35 degrés.",
+  "tableau": {
+    "entete": "L’ÉNERGIE DU BÂTIMENT · PRODUITE EN TOITURE, ÉCHANGÉE AU RÉSEAU, DIFFUSÉE PAR LE SOL",
+    "tag_toiture": "EN TOITURE · LA PRODUCTION",
+    "tag_sol": "AU SOL · L’ÉMISSION",
+    "liaison_autoconsommation": "AUTOCONSOMMATION",
+    "echange": {
+      "vers_reseau": "SURPLUS REVENDU",
+      "du_reseau": "APPOINT DU RÉSEAU"
+    },
+    "cop": {
+      "entree": "1 kWh ÉLECTRIQUE",
+      "air": "CHALEUR PRISE À L’AIR EXTÉRIEUR",
+      "sortie": "4,6 kWh DE CHALEUR",
+      "rapport": 4.6,
+      "part_air": 3.6
+    },
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "toiture",
+        "libelle": "Production en toiture",
+        "valeur": "17,5",
+        "unite": "kWc",
+        "detail": [
+          "48 MODULES · 365 Wc CHACUN",
+          "POSÉS SUR PLOTS, SANS PERFORATION",
+          "ANCRÉS POUR DES VENTS DE 180 km/h"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "reseau",
+        "libelle": "Réseau public",
+        "detail": [
+          "SURPLUS REVENDU · APPOINT DU RÉSEAU"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "distribution",
+        "libelle": "La distribution",
+        "detail": []
+      },
+      {
+        "ordre": 4,
+        "cle": "departs",
+        "libelle": "Les autres départs",
+        "detail": [
+          "ÉCLAIRAGE · PRÉCÂBLAGE VDI",
+          "ALARME INCENDIE · CONTRÔLE D’ACCÈS"
+        ]
+      },
+      {
+        "ordre": 5,
+        "cle": "pac",
+        "libelle": "Pompe à chaleur air/eau",
+        "valeur": "7,5",
+        "unite": "kW",
+        "detail": [
+          "COP 4,60 · 1 kWh ÉLECTRIQUE DEVIENT 4,6 kWh DE CHALEUR",
+          "LE COMPLÉMENT EST PRIS À L’AIR EXTÉRIEUR"
+        ]
+      },
+      {
+        "ordre": 6,
+        "cle": "plancher",
+        "libelle": "Plancher chauffant très basse température",
+        "valeur": "30/35",
+        "unite": "°C",
+        "detail": [
+          "INCORPORÉ DANS UNE DALLE FLOTTANTE ISOLÉE",
+          "SANS ÉMETTEUR EN PAROI DANS LES ESPACES DE VIE"
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "En toiture, 48 modules alimentent le bâtiment en autoconsommation ; au sol, une chaleur douce à très basse température.",
+  "vignette_surtitre": "DE LA TOITURE AU SOL",
+  "a_valider_ft2e": [
+    {
+      "objet": "Le soutirage au réseau",
+      "la_source_affirme": "« La production est autoconsommée, le surplus revendu au réseau. » Rien n’est dit d’un soutirage en sens inverse.",
+      "le_dessin_suppose": "Une flèche « APPOINT DU RÉSEAU » en regard du surplus : sans elle, le schéma affirmerait une autonomie que la fiche ne revendique pas. Confirmer le principe et le libellé."
+    },
+    {
+      "objet": "La lecture du COP en flux",
+      "la_source_affirme": "« Une pompe à chaleur air/eau de 7,5 kW (COP 4,60). » Ni conditions de mesure, ni bilan annuel.",
+      "le_dessin_suppose": "Que le COP nominal se lit comme un rapport de flux — trois bandes aux largeurs 1 / 3,6 / 4,6, et la mention « 1 kWh électrique devient 4,6 kWh de chaleur ». La part prise à l’air (3,6) est la différence arithmétique, pas une valeur citée."
+    },
+    {
+      "objet": "Le raccordement de la pompe à chaleur",
+      "la_source_affirme": "Le lot électricité « couvre la distribution, l’éclairage, le précâblage VDI, l’alarme incendie et le contrôle d’accès » — la pompe à chaleur n’est pas nommée parmi les départs.",
+      "le_dessin_suppose": "Que la pompe à chaleur est alimentée par la même distribution que les autres départs. C’est le raccordement ordinaire, mais la fiche ne l’écrit pas."
+    },
+    {
+      "objet": "Le périmètre desservi",
+      "la_source_affirme": "Les modules « alimentent le bâtiment en autoconsommation » — le bâtiment, dont l’existant fait 662,5 m² chauffés ; l’extension en ajoute 157.",
+      "le_dessin_suppose": "Un seul tableau et un seul bloc d’usages, sans distinguer l’extension de l’existant. Dire si la distribution dessinée dessert l’ensemble ou la seule extension."
+    },
+    {
+      "objet": "Le regroupement des quatre départs",
+      "la_source_affirme": "L’énumération du lot : éclairage, précâblage VDI, alarme incendie, contrôle d’accès — sans schéma unifilaire ni nombre de départs.",
+      "le_dessin_suppose": "Un bloc unique « Les autres départs » qui les rassemble : le dessin code l’existence des départs, jamais leur nombre réel ni leur hiérarchie."
+    },
+    {
+      "objet": "La ventilation absente du dessin",
+      "la_source_affirme": "La centrale double flux récupère plus de 80 % de la chaleur extraite et le renouvellement d’air est modulé pièce par pièce par sondes CO₂ — c’est la moitié « air » de la particularité de la fiche.",
+      "le_dessin_suppose": "Que la planche peut suivre le seul mécanisme électrique, de la toiture au sol, et laisser la ventilation au récit. Un dessin qui porterait les deux mécanismes ne démontrerait ni l’un ni l’autre."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2023 (champ annee), études DCE de juin à novembre 2024, synthèse RT2012 de juin 2024 ; « l’extension est livrée et en service », sans date.",
+      "le_dessin_suppose": "Que le cartouche porte 2024, l’année des études dont la planche tire toutes ses valeurs — même arbitrage que les planches précédentes (le millésime que le lecteur associe au résultat)."
+    },
+    {
+      "objet": "La surface du cartouche",
+      "la_source_affirme": "157 m² d’extension (frontmatter) ; 662,5 m² chauffés pour le bâtiment existant.",
+      "le_dessin_suppose": "Que le cartouche porte 157 m², l’objet de l’affaire — alors même que le dessin, lui, parle du bâtiment entier (voir « Le périmètre desservi »)."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 23-075 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Noms de tiers : l’UDAF de la Charente-Maritime (maîtrise d’ouvrage) et l’agence Sébastien Pellereau (architecte).",
+    "Toute géométrie d’ouvrage : ni façade à claire-voie, ni implantation, ni calepinage — la toiture et le plancher sont des bandes topologiques, les 48 modules un comptage, pas un plan de pose.",
+    "La ventilation double flux et la modulation par sondes CO₂ : second mécanisme de la fiche, non dessiné — il reste au récit (arbitrage consigné dans a_valider_ft2e).",
+    "L’enveloppe et son contrôle : ossature bois 145 + 60 mm, toiture 160 mm, perméabilité visée 1,20 m³/(h.m²) et test d’étanchéité à réception — matière du récit, pas du mécanisme électrique.",
+    "Les résultats réglementaires (69,3 kWhep/m²/an pour une exigence à 98,2, 29 % de marge, Bbio 99,40, Tic 32,2 °C) : la fiche les porte au champ performance et au récit — révision 4, aucune donnée répétée.",
+    "Le phasage en site occupé et l’ambiance saline (hors l’ancrage des modules, cité au dessin) : contraintes de conduite d’opération, pas des organes du schéma."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "la production descend du bandeau (48 rectangles dessinés = 48 modules de la fiche) vers la barre de distribution ; l'échange réseau se lit par deux flèches opposées (y 366 et 392) ; le départ suivi s'élargit en traversant la pompe à chaleur — trois bandes de 4, 14.4 et 18.4 px, soit 1 / 3.6 / 4.6, proportionnelles au COP — avant de se répandre dans la dalle ; la géométrie porte la thèse « de la toiture au sol »",
+    "topologie": "toiture (y 240–272, x 380–1144) → descente (x 762) → barre (y 376, x 420–1050) ; réseau x 56–230 à gauche ; pompe à chaleur x 480–700 et départs groupés x 800–1144 dessous ; dalle y 580–620, x 420–1144",
+    "bas_du_dessin": "dalle jusqu'à 620, dernier détail du sol à 636, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 220 x 30 px = 6600 px², soit 0.69 % de la planche",
+    "chiffre_unique": "un seul chiffre en encre pleine — 96 px mesurés à 22 px (17,5 kWc, la production que la planche défend) ; 7,5 kW, COP 4,60 et le régime 30/35 °C restent au mono 10 pivot",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "119 signes — 1005 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "le bandeau des 48 modules, la descente, la barre, l'échange réseau à deux flèches, les trois bandes du COP (2 / 7,2 / 9,2 px) et la dalle — libellés d'organes, étiquettes d'échange et bloc des autres départs laissés à la planche",
+    "bas_du_dessin": "dalle jusqu'à y 178, marge basse 22 px"
+  }
+}

@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 6 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12. 7 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,7 +32,7 @@ façade l'affirme.
 
 ---
 
-## État — 6 / 23
+## État — 7 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -42,7 +42,7 @@ façade l'affirme.
 | 04 | `atelier-dufour-yachts-perigny` | Industriel et commercial | `boucle-fluide` | ✅ **publiée** (versée le 2026-08-13) |
 | 05 | `ateliers-pilotes-capsulae` | Industriel et commercial | `boucle-fluide` (mécanisme `utilites`) | ✅ **publiée** (versée le 2026-08-13) |
 | 06 | `centre-formation-ormeau-du-pied-saintes` | Tertiaire / ERP | `boucle-fluide` (mécanisme `substitution`) | ✅ **publiée** (versée le 2026-08-13) |
-| — | `creche-oranger-perigny` | Tertiaire / ERP | | à faire |
+| 07 | `creche-oranger-perigny` | Tertiaire / ERP | `tableau-electrique` (mécanisme `autoconsommation`) | ✅ **publiée** (versée le 2026-08-13) |
 | — | `cuisine-groupe-scolaire-villedoux` | Tertiaire / ERP | | à faire |
 | — | `ehpad-coulonges-sur-autize-ssi` | Coordination SSI | | à faire |
 | — | `etude-notariale-boulevard-joffre` | Tertiaire / ERP | | à faire |
@@ -68,7 +68,7 @@ façade l'affirme.
 | `zonage-ssi` | 1 (Abbaye de Sablonceaux) | ✅ `scripts/planches/zonage-ssi.py` |
 | `boucle-fluide` | 3 — trois mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae) et `substitution` (production réversible, centre de formation de Saintes) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
 | `coupe-traversee` | 1 (Ancien siège communautaire, Marennes) | ✅ `scripts/planches/coupe-traversee.py` |
-| `tableau-electrique` | 0 | à écrire |
+| `tableau-electrique` | 1 — mécanisme `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) | ✅ `scripts/planches/tableau-electrique.py` |
 | `chronologie-affaire` | 0 | à écrire |
 | `planche-chiffree` | 0 | à écrire — c'est le repli, il servira |
 
@@ -245,8 +245,8 @@ suppose pas.
   forme, gardent leur rendeur propre. Une extraction sans aucune forme de repli fait
   **échouer le build** — la fiche ne peut plus perdre son dessin sur téléphone en
   silence.
-- **Trois modules de composition restent à écrire** (`tableau-electrique`,
-  `chronologie-affaire`, `planche-chiffree`). Le **tronc commun** vit dans
+- **Deux modules de composition restent à écrire** (`chronologie-affaire`,
+  `planche-chiffree`). Le **tronc commun** vit dans
   `scripts/planches/_tronc.py` depuis le 2026-08-13 : jetons, gabarits, avances
   calibrées, insécables, primitives à double écriture des couleurs, routine
   d'exécution. L'extraction a été contrôlée par **régénération octet à octet** des
@@ -255,3 +255,9 @@ suppose pas.
 - **Le `grep -c` de Git Bash sous Windows ne sait pas chercher U+202F** (`grep -c $' '`
   rend 0 sur un fichier qui en porte 9) : le contrôle des insécables du protocole se rejoue
   en Python (`collections.Counter`) sur cette machine, pas en grep.
+- **Chrome sous Windows refuse une fenêtre sous 500 px** : une capture headless à
+  `--window-size=390` met la page en page à 500 px puis recadre l'image à 390 — toutes
+  les lignes paraissent coupées au bord droit, et une page saine passe pour cassée
+  (constaté en S23 sur trois pages témoins, `innerWidth = 500` mesuré). Le contrôle
+  « largeur téléphone » se fait par une **iframe de 390 px** dans une fenêtre de 500,
+  jamais par la taille de fenêtre.

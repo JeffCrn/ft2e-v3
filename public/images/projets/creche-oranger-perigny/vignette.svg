@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">DE LA TOITURE AU SOL</text>
+  <rect x="88.00" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="92.12" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="96.25" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="100.38" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="104.50" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="108.62" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="112.75" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="116.88" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="121.00" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="125.12" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="129.25" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="133.38" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="137.50" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="141.62" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="145.75" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="149.88" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="154.00" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="158.12" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="162.25" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="166.38" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="170.50" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="174.62" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="178.75" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="182.88" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="187.00" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="191.12" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="195.25" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="199.38" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="203.50" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="207.62" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="211.75" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="215.88" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="220.00" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="224.12" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="228.25" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="232.38" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="236.50" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="240.62" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="244.75" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="248.88" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="253.00" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="257.12" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="261.25" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="265.38" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="269.50" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="273.62" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="277.75" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="281.88" y="34.00" width="2.92" height="12.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 88.00 48.00 L 286.00 48.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <text x="14.00" y="42.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Toiture</text>
+  <text x="14.00" y="56.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" font-variant-numeric="tabular-nums">17,5 kWc</text>
+  <path d="M 190.00 48.00 L 190.00 88.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 190.00 92.00 L 187.00 86.00 L 193.00 86.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 88.00 93.00 L 266.00 93.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <rect x="14.00" y="82.00" width="46.00" height="22.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 66.00 88.00 L 88.00 88.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 66.00 88.00 L 72.00 85.00 L 72.00 91.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 60.00 98.00 L 82.00 98.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 84.00 98.00 L 78.00 95.00 L 78.00 101.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="129.00" y="94.00" width="2.00" height="24.00" class="c-encre" fill="#00393A"/>
+  <rect x="106.00" y="118.00" width="64.00" height="30.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <rect x="14.00" y="128.00" width="86.00" height="7.20" class="c-clair" fill="#99CCCD"/>
+  <path d="M 104.00 131.60 L 97.00 128.10 L 97.00 135.10 Z" class="c-encre" fill="#00393A"/>
+  <rect x="133.40" y="148.00" width="9.20" height="10.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 138.00 160.00 L 134.50 153.00 L 141.50 153.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="14.00" y="152.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" font-variant-numeric="tabular-nums">COP 4,60</text>
+  <path d="M 230.00 94.00 L 230.00 118.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="200.00" y="118.00" width="86.00" height="30.00" class="c-calcaire" fill="#EDF0F2"/>
+  <rect x="88.00" y="162.00" width="198.00" height="16.00" class="c-calcaire" fill="#EDF0F2"/>
+  <path d="M 96.00 174.00 L 96.00 166.00 L 114.00 166.00 L 114.00 174.00 L 132.00 174.00 L 132.00 166.00 L 150.00 166.00 L 150.00 174.00 L 168.00 174.00 L 168.00 166.00 L 186.00 166.00 L 186.00 174.00 L 204.00 174.00 L 204.00 166.00 L 222.00 166.00 L 222.00 174.00 L 240.00 174.00 L 240.00 166.00 L 258.00 166.00 L 258.00 174.00 L 276.00 174.00 L 276.00 166.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+</svg>
