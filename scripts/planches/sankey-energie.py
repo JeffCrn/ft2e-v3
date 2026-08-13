@@ -35,17 +35,15 @@ from pathlib import Path
 NN = " "   # espace fine insécable — texte courant et mono
 INS = " "  # espace insécable normale — relevés en grand corps (cf. § Mesures)
 
-# ── Gabarit (protocole rév. 2) ────────────────────────────────────────────────
+# ── Gabarit (protocole rév. 4) ────────────────────────────────────────────────
+# La révision 4 supprime la partition 7/5 et la colonne de relevé : la planche
+# schématise la solution — le flux occupe la largeur utile entière, et les
+# chiffres que la fiche porte déjà ne montent pas sur le dessin.
 W, H = 1200, 800
 MARGE = 56
 MODULE = 28
 UTILE = W - 2 * MARGE                      # 1088
-GOUTTIERE = 56
-DESSIN_W = round((UTILE - GOUTTIERE) * 7 / 12)   # 602
-RELEVE_W = UTILE - GOUTTIERE - DESSIN_W          # 430
-DESSIN_X0, DESSIN_X1 = MARGE, MARGE + DESSIN_W
-RELEVE_X0, RELEVE_X1 = DESSIN_X1 + GOUTTIERE, W - MARGE
-SEPARATEUR_X = DESSIN_X1 + GOUTTIERE / 2
+DESSIN_X0 = MARGE
 
 # ── Gabarit de la VIGNETTE (protocole rév. 2.2) ───────────────────────────────
 # Une vignette n'est pas un recadrage de la planche : c'est une COMPOSITION
@@ -73,13 +71,13 @@ JETON = {
 SANS = '"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif'
 MONO = '"IBM Plex Mono", ui-monospace, monospace'
 
-# ── Colonnes de la zone de dessin ─────────────────────────────────────────────
+# ── Colonnes de la zone de schéma — pleine largeur depuis la révision 4 ──────
 LIB_X = DESSIN_X0                 # libellés + détails
-VAL_X = DESSIN_X0 + 260           # valeurs mono, alignées à droite
-BANDE_X0 = DESSIN_X0 + 280        # départ des bandes
-BANDE_X1 = DESSIN_X0 + 472        # arrivée des bandes
+VAL_X = DESSIN_X0 + 280           # valeurs mono, alignées à droite
+BANDE_X0 = DESSIN_X0 + 310        # départ des bandes (366)
+BANDE_X1 = DESSIN_X0 + 850        # arrivée des bandes (906) — le flux porte la planche
 NOEUD_W = 9
-NOEUD_LIB_X = BANDE_X1 + NOEUD_W + 10
+NOEUD_LIB_X = BANDE_X1 + NOEUD_W + 10   # 925 — étiquettes de nœud jusqu'à 1144
 
 # ── Rythme vertical ───────────────────────────────────────────────────────────
 Y_SURTITRE = 76
@@ -233,12 +231,11 @@ def composer(donnees, slug):
             "pivot", wdth=100))
     A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
 
-    # ── En-têtes de périmètre — ils empêchent la planche de mentir ───────────
+    # ── En-tête de périmètre — il empêche la planche de mentir ───────────────
+    # (Depuis la révision 4, la planche ne porte qu'un périmètre : celui du
+    # schéma. Le relevé du bâtiment et son en-tête ont quitté le dessin.)
     A(texte(DESSIN_X0, Y_ENTETE, sk["entete"], "mono", 10, 500,
             "pivot", tracking=10 * 0.14))
-    A(texte(RELEVE_X0, Y_ENTETE, donnees["releve_entete"], "mono", 10, 500,
-            "pivot", tracking=10 * 0.14))
-    A(rect(SEPARATEUR_X, Y_FILET_TITRE + 12, 1, 488, "filet-3"))
 
     # ── Bandes ───────────────────────────────────────────────────────────────
     curseur = {c: n["y0"] for c, n in noeuds.items()}
@@ -281,38 +278,16 @@ def composer(donnees, slug):
         A(texte(NOEUD_LIB_X, yl + 16, f'{nd["n"]["valeur_affichee"]}{NN}{sk["unite"]}',
                 "mono", 12, 500, "pivot", tabulaire=True))
 
-    # ── Note de pied de la zone de dessin ────────────────────────────────────
+    # ── Note de pied de la zone de schéma ────────────────────────────────────
     y_note = max(bas_bandes, bas_libelles) + 36
-    A(rect(DESSIN_X0, y_note - 18, DESSIN_W, 1, "filet-3"))
+    A(rect(DESSIN_X0, y_note - 18, UTILE, 1, "filet-3"))
     A(texte(DESSIN_X0, y_note, sk["note_pied"], "mono", 10, 500,
             "pivot", tracking=10 * 0.14))
 
-    # ── Colonne de relevé ────────────────────────────────────────────────────
-    y = 244.0
-    for i, r in enumerate(donnees["releve"]):
-        couleur = "encre" if i == 0 else "pivot"
-        x = RELEVE_X0
-        if r.get("prefixe"):
-            A(texte(x, y, r["prefixe"], "sans", 22, 400, "pivot", wdth=100))
-            x += mesurer(r["prefixe"], 22, "sans-400") + 14
-        A(texte(x, y, r["valeur"], "sans", 40, 700, couleur, wdth=118,
-                tabulaire=True))
-        x += mesurer(r["valeur"], 40, "sans-700") + 8
-        A(texte(x, y, r["unite"], "sans", 15, 400, couleur, wdth=100))
-        for k, ligne in enumerate(r["legende"]):
-            A(texte(RELEVE_X0, y + 24 + k * 14, ligne, "mono", 10, 500,
-                    "pivot", tracking=10 * 0.14))
-        y += 96
-    A(rect(RELEVE_X0, y - 44, RELEVE_W, 1, "filet-3"))
-    y -= 8
-    for r in donnees["releve_secondaire"]:
-        A(texte(RELEVE_X0, y, r["intitule"], "sans", 16, 600, "encre", wdth=112))
-        A(texte(RELEVE_X1, y, r["valeur"], "sans", 22, 700, "pivot",
-                wdth=118, ancre="end", tabulaire=True))
-        for k, ligne in enumerate(r["appui"]):
-            A(texte(RELEVE_X0, y + 22 + k * 14, ligne, "mono", 10, 500,
-                    "pivot", tracking=10 * 0.14))
-        y += 76
+    # La colonne de relevé de la révision 3 a été SUPPRIMÉE (révision 4) : les
+    # chiffres du bâtiment vivent dans la fiche, pas sur la planche. Si une
+    # planche future relève de l'exception chiffrée du Temps 2, ce module sera
+    # révisé à ce moment-là — pas de code mort en attendant.
 
     # ── Phrase de principe, pleine largeur ───────────────────────────────────
     A(texte(MARGE, 688, donnees["phrase_principe"], "sans", 17, 400,
@@ -320,7 +295,7 @@ def composer(donnees, slug):
 
     # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
     libelle = donnees["cartouche_legende"]
-    largeur = min(DESSIN_W,
+    largeur = min(600,
                   round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
     A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
     A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
@@ -330,8 +305,9 @@ def composer(donnees, slug):
 
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "partition": f"zone de dessin {DESSIN_W} px / colonne de relevé {RELEVE_W} px "
-                     f"= {DESSIN_W/RELEVE_W:.4f} — partition 7/5 de la charte",
+        "gabarit_schema": f"flux de {BANDE_X0} à {BANDE_X1} px, nœuds étiquetés "
+                          f"jusqu'à {W - MARGE} px — schéma pleine largeur, colonne "
+                          f"de relevé supprimée (révision 4)",
         "bouclage_bandes": " + ".join(str(s["valeur"]) for s in sources)
                            + f" = {total}{NN}{sk['unite']} ; "
                            f"hauteur totale {sum(p['h'] for p in poses):.2f} px "

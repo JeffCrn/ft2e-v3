@@ -109,8 +109,6 @@ Archétypes déjà employés, à ne pas répéter sans raison explicite :
 Exemple achevé, à consulter comme référence de niveau attendu :
     public/images/projets/abbaye-sablonceaux-ssi/planche.json
     scripts/planches/zonage-ssi.py
-    (la planche 01, École des douanes, garde une colonne de relevé antérieure à la
-    révision 4 — ne pas l'imiter sur ce point)
 
 CE QUE TU REMETS — un dossier <slug>/ contenant les quatre fichiers du protocole,
 puis le prompt de lancement de la session suivante (une fiche = une session).
@@ -207,9 +205,11 @@ Conséquences, appliquées à la planche 02 et opposables aux suivantes :
 - **Le relevé chiffré ne monte plus sur la planche.** Le champ `releve` du JSON peut
   être vide ; `PlancheReference.astro` ne rend la section du repli mobile que s'il est
   peuplé. Les classements ERP, essais et durées restent au texte de la fiche.
-- **À répercuter** : le protocole (révision 4 à écrire — le gabarit prescrit encore la
-  partition 7/5 avec colonne de relevé) et la **planche 01** (sa colonne de relevé
-  répète la fiche de l'École des douanes — réalignement à trancher avec FT2E).
+- **Répercuté le 2026-08-13** : le protocole est porté en **révision 4** (principe en
+  tête, gabarit pleine largeur, groupe « Dessin » au contrôle, prompt de session
+  suivante obligatoire — une fiche = une session) et la **planche 01 est réalignée** :
+  colonne de relevé retirée, Sankey étendu à la largeur utile (flux de 366 à 906 px),
+  extraction amendée. Les deux planches publiées appliquent le principe.
 
 ---
 
