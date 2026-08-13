@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 2 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12. 4 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,14 +32,14 @@ façade l'affirme.
 
 ---
 
-## État — 2 / 23
+## État — 4 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
 | 01 | `ecole-des-douanes-rue-du-jura-la-rochelle` | Monotechnique | `sankey-energie` | ✅ **publiée** |
 | 02 | `abbaye-sablonceaux-ssi` | Patrimoine | `zonage-ssi` | ✅ **publiée** |
-| 03 | `ancien-siege-communautaire-marennes` | Tertiaire / ERP | `coupe-traversee` | 🗂 **produite le 2026-08-13** — bascule du frontmatter et repli mobile `PlancheReference.astro` à faire en session de dépôt |
-| 04 | `atelier-dufour-yachts-perigny` | Industriel et commercial | `boucle-fluide` | 🗂 **produite le 2026-08-13** — bascule du frontmatter et repli mobile `PlancheReference.astro` à faire en session de dépôt |
+| 03 | `ancien-siege-communautaire-marennes` | Tertiaire / ERP | `coupe-traversee` | ✅ **publiée** (versée le 2026-08-13) |
+| 04 | `atelier-dufour-yachts-perigny` | Industriel et commercial | `boucle-fluide` | ✅ **publiée** (versée le 2026-08-13) |
 | — | `ateliers-pilotes-capsulae` | Industriel et commercial | | à faire |
 | — | `centre-formation-ormeau-du-pied-saintes` | Tertiaire / ERP | | à faire |
 | — | `creche-oranger-perigny` | Tertiaire / ERP | | à faire |
@@ -123,6 +123,10 @@ puis le prompt de lancement de la session suivante (une fiche = une session).
 
   · Le PNG 2400 × 1600 dans les deux cas.
 
+  · Le versement : python scripts/planches/verser.py <slug>, puis npm run build et
+    contrôle du RENDU des pages touchées (fiche à 1152 px, largeur téléphone, carte
+    de secteur) — un build vert ne prouve pas que la page s'affiche.
+
   · Le prompt de la session suivante : ce gabarit, avec la première fiche « à faire »
     du programme du suivi et la ligne des archétypes actualisée depuis le registre.
 
@@ -143,9 +147,15 @@ lecture t'a fait corriger. Termine par le prompt de la session suivante. Ne me r
 pas ta méthode.
 ```
 
-**Ce que la session ne fait pas** : elle ne touche ni au frontmatter de la fiche, ni au
-site. La bascule `image_principale` → `planche` et le contrôle de rendu se font ici, dans
-une session de dépôt, une fois les quatre fichiers reçus.
+**Le versement fait partie de la session depuis le 2026-08-13.** Une fois les quatre
+fichiers en place, `python scripts/planches/verser.py <slug>` contrôle le dossier et
+l'extraction (quatre fichiers, `a_valider_ft2e` non vide, forme de repli mobile, racine
+SVG conforme) puis bascule le frontmatter — et le repli mobile est rendu **par la forme**
+de l'extraction : tout bloc d'archétype qui expose un tableau `elements` ordonné
+(règle 7 du protocole) est servi par `PlancheReference.astro` sans une ligne de code
+nouvelle ; une extraction sans aucune forme de repli fait échouer le build. Il ne reste
+à la session que `npm run build` et le contrôle du rendu (règle 11), le commit de fin de
+session emportant le tout — le push déclenche le déploiement Vercel.
 
 ---
 
@@ -159,8 +169,9 @@ une session de dépôt, une fois les quatre fichiers reçus.
 4. **Regarder à la taille réelle** : la planche à **1152 px**, la vignette **dans une carte
    de 296 px**. Pas isolées, pas en pleine page.
 5. **Rendre le PNG** 2400 × 1600.
-6. **Basculer la fiche** : remplacer `image_principale` / `image_principale_alt` par
-   `planche:` dans le frontmatter.
+6. **Verser** : `python scripts/planches/verser.py <slug>` — contrôle les quatre
+   fichiers et l'extraction, puis bascule le frontmatter (`image_principale` →
+   `planche:`).
 7. **Contrôler** : `npm run typecheck`, `npm run build`, `npm run preview` + capture de la
    fiche, de la carte de secteur et du téléphone.
 8. **Consigner** ici : numéro, archétype, arbitrages ouverts.
@@ -227,16 +238,20 @@ suppose pas.
 - **Le champ `performance`** compose ses milliers en fine insécable sur les 23 fiches :
   « 152 947 W » se lit « 152947 W » dans le relevé encré, à 28 px. Même mesure que pour les
   planches, même correction — U+00A0 au-delà de 22 px. Passe mécanique, à faire d'un bloc.
-- **Le repli de lecture sous 1024 px** a ses blocs pour `sankey-energie` et `zonage-ssi`.
-  Chaque nouvel archétype doit ajouter le sien dans `PlancheReference.astro`, faute de quoi
-  la fiche perd son dessin sur téléphone sans rien mettre à la place.
+- **Le repli de lecture sous 1024 px** est acquis par la **forme** de l'extraction
+  depuis le 2026-08-13 : tout bloc d'archétype à tableau `elements` ordonné est rendu
+  par le bloc générique de `PlancheReference.astro` (`coupe-traversee` et
+  `boucle-fluide` l'utilisent) ; `sankey-energie` et `zonage-ssi`, antérieurs à cette
+  forme, gardent leur rendeur propre. Une extraction sans aucune forme de repli fait
+  **échouer le build** — la fiche ne peut plus perdre son dessin sur téléphone en
+  silence.
 - **Trois modules de composition restent à écrire** (`tableau-electrique`,
-  `chronologie-affaire`, `planche-chiffree`). Le troisième (`coupe-traversee.py`,
-  planche 03) puis le quatrième (`boucle-fluide.py`, planche 04) ont été écrits en
-  session de planche sans attendre la factorisation : le **tronc commun** — jetons,
-  mesure des chasses, insécables, double écriture des couleurs — a maintenant
-  **quatre occurrences** et sa remontée dans un module partagé, déjà due avant le
-  quatrième, est **en retard d'un module**. Décision de dépôt, pas de session.
+  `chronologie-affaire`, `planche-chiffree`). Le **tronc commun** vit dans
+  `scripts/planches/_tronc.py` depuis le 2026-08-13 : jetons, gabarits, avances
+  calibrées, insécables, primitives à double écriture des couleurs, routine
+  d'exécution. L'extraction a été contrôlée par **régénération octet à octet** des
+  quatre planches publiées. Un nouveau module importe le tronc et n'écrit que la
+  géométrie de son archétype.
 - **Le `grep -c` de Git Bash sous Windows ne sait pas chercher U+202F** (`grep -c $' '`
   rend 0 sur un fichier qui en porte 9) : le contrôle des insécables du protocole se rejoue
   en Python (`collections.Counter`) sur cette machine, pas en grep.
