@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">ENVELOPPE ET PRODUCTION</text>
+  <path d="M 24.00 172.00 L 190.00 172.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.5"/>
+  <rect x="40.00" y="120.00" width="3.00" height="52.00" class="c-encre" fill="#00393A"/>
+  <rect x="157.00" y="120.00" width="3.00" height="52.00" class="c-encre" fill="#00393A"/>
+  <rect x="43.00" y="144.00" width="114.00" height="4.00" class="c-encre" fill="#00393A"/>
+  <path d="M 40.00 120.00 L 100.00 88.00 L 160.00 120.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <rect x="32.00" y="117.00" width="5.00" height="55.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="163.00" y="117.00" width="5.00" height="55.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 32.00 117.47 L 100.00 81.20 L 168.00 117.47" fill="none" class="s-clair" stroke="#99CCCD" stroke-width="4"/>
+  <path d="M 48.00 99.87 L 67.00 89.73" fill="none" class="s-encre" stroke="#00393A" stroke-width="4"/>
+  <path d="M 73.00 86.53 L 92.00 76.40" fill="none" class="s-encre" stroke="#00393A" stroke-width="4"/>
+  <path d="M 108.00 76.40 L 127.00 86.53" fill="none" class="s-encre" stroke="#00393A" stroke-width="4"/>
+  <path d="M 133.00 89.73 L 152.00 99.87" fill="none" class="s-encre" stroke="#00393A" stroke-width="4"/>
+  <path d="M 108.00 76.40 L 108.00 56.00 L 248.00 56.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 254.00 56.00 L 247.00 52.50 L 247.00 59.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="190.00" y="76.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">108 modules PV</text>
+  <text x="190.00" y="90.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" font-variant-numeric="tabular-nums">33,48 kWc</text>
+  <text x="190.00" y="126.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Isolation</text>
+  <text x="190.00" y="140.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" font-variant-numeric="tabular-nums">R ≥ 4,15</text>
+  <path d="M 186.00 122.00 L 170.00 130.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+</svg>

@@ -1,0 +1,204 @@
+{
+  "fiche": "ancien-siege-communautaire-marennes",
+  "archetype": "coupe-traversee",
+  "archetype_motif": "La thèse de la fiche est son propre intertitre — « l'enveloppe d'abord, la production ensuite » — et c'est un mécanisme de traversée : une enveloppe isolante continue referme le bâtiment de 1970 (et enveloppe au passage le pont thermique du plancher intermédiaire) ; tout ce qui la traverse est traité — baies à performance imposée, air neuf et rejet échangés à plus de 80 % par le double flux — et au-dessus, la toiture produit et exporte en revente totale. La coupe de principe suit cette ligne continue et ses franchissements ; ni sankey (la fiche ne donne pas de bilan par poste à largeurs comparables) ni zonage (rien n'y est découpé), et la géométrie — une ligne qui ne s'interrompt qu'aux traversées marquées — porte seule la démonstration.",
+  "surtitre": "SCHÉMA DE PRINCIPE · ENVELOPPE, TRAVERSÉES, PRODUCTION",
+  "titre": "Ancien siège communautaire",
+  "sous_titre": "L'enveloppe d'abord, la production ensuite, dans un bâtiment de 1970 resté en activité",
+  "cartouche_legende": "MARENNES-HIERS-BROUAGE · 530 m² · 2026",
+  "aria_label": "Coupe de principe de la rénovation thermique par éléments : une enveloppe isolante continue referme le bâtiment — isolation par l'extérieur à R ≥ 4,15 m²·K/W qui enveloppe le pont thermique du plancher intermédiaire, toiture en deux couches de 220 et 280 mm sous 0,073 W/(m²·K), menuiseries aluminium à 1,30 W/(m²·K) au plus avec 28 brise-soleil orientables. La seule traversée d'air est maîtrisée : une centrale double flux en combles échange 2 550 m³/h à plus de 80 % d'efficacité. Au-dessus, 108 modules photovoltaïques de 33,48 kWc en surimposition sur les deux pans alimentent deux onduleurs de 15 kVA et repartent au réseau en revente totale sur un comptage triphasé de 36 kVA.",
+  "coupe": {
+    "entete": "UNE ENVELOPPE CONTINUE, DES TRAVERSÉES TRAITÉES, UNE TOITURE QUI PRODUIT",
+    "registres": {
+      "gauche": "L'ENVELOPPE ET SES TRAVERSÉES",
+      "droite": "LA PRODUCTION"
+    },
+    "niveaux": [
+      "RDC",
+      "ÉTAGE",
+      "COMBLES"
+    ],
+    "traversee_air": "AIR NEUF · REJET",
+    "interieur_air": "SOUFFLAGE · REPRISE",
+    "equipement_combles": "Double flux",
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "murs",
+        "registre": "enveloppe",
+        "libelle": "Isolation par l'extérieur",
+        "valeur": "≥ 4,15",
+        "unite": "m²·K/W",
+        "detail": [
+          "R ≥ 4,15 m²·K/W"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "plancher",
+        "registre": "enveloppe",
+        "libelle": "Plancher intermédiaire",
+        "valeur": "",
+        "unite": "",
+        "detail": [
+          "PONT THERMIQUE ENVELOPPÉ",
+          "PAR L'ISOLANT EXTÉRIEUR"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "baies",
+        "registre": "enveloppe",
+        "libelle": "Menuiseries aluminium",
+        "valeur": "≤ 1,30",
+        "unite": "W/(m²·K)",
+        "detail": [
+          "1,30 W/(m²·K) AU PLUS",
+          "DOUBLE VITRAGE ARGON · A3",
+          "28 BRISE-SOLEIL ORIENTABLES"
+        ]
+      },
+      {
+        "ordre": 4,
+        "cle": "toiture",
+        "registre": "enveloppe",
+        "libelle": "Toiture, deux couches",
+        "valeur": "220 + 280",
+        "unite": "mm",
+        "detail": [
+          "220 mm ENTRE PANNES",
+          "+ 280 mm EN COMBLES",
+          "U < 0,073 W/(m²·K)"
+        ]
+      },
+      {
+        "ordre": 5,
+        "cle": "double-flux",
+        "registre": "enveloppe",
+        "libelle": "Ventilation double flux",
+        "valeur": "2 550",
+        "unite": "m³/h",
+        "detail": [
+          "ÉCHANGEUR ROTATIF > 80 %",
+          "BY-PASS MODULANT À 100 %",
+          "FILTRATION F7 / M5"
+        ]
+      },
+      {
+        "ordre": 6,
+        "cle": "modules",
+        "registre": "production",
+        "libelle": "108 modules en surimposition",
+        "valeur": "33,48",
+        "unite": "kWc",
+        "detail": [
+          "310 Wc PAR MODULE · SUR LES DEUX PANS"
+        ]
+      },
+      {
+        "ordre": 7,
+        "cle": "onduleurs",
+        "registre": "production",
+        "libelle": "Deux onduleurs",
+        "valeur": "2 × 15",
+        "unite": "kVA",
+        "detail": [
+          "UN PAR ORIENTATION",
+          "2 × 15 kVA"
+        ]
+      },
+      {
+        "ordre": 8,
+        "cle": "reseau",
+        "registre": "production",
+        "libelle": "Revente totale au réseau",
+        "valeur": "36",
+        "unite": "kVA",
+        "detail": [
+          "RÉSEAU · REVENTE TOTALE",
+          "COMPTAGE TRIPHASÉ 36 kVA"
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Appuis et suspentes sont à rupture de pont thermique, en matériaux composites, comme tout ce qui traverse une couche isolante.",
+  "vignette_surtitre": "ENVELOPPE ET PRODUCTION",
+  "a_valider_ft2e": [
+    {
+      "objet": "Où l'air neuf et le rejet traversent l'enveloppe",
+      "la_source_affirme": "La centrale est « installée en combles » et le réseau est calorifugé « rejet et prise d'air neuf compris » — la fiche ne localise pas les deux traversées.",
+      "le_dessin_suppose": "Deux traversées verticales en toiture, près du faîtage, entre les deux champs de modules. À corriger si la prise et le rejet se font en pignon ou en façade."
+    },
+    {
+      "objet": "La position des deux couches de toiture",
+      "la_source_affirme": "« 220 mm entre pannes et 280 mm en combles », pour des résistances d'au moins 6,25 et 8,0 et un coefficient sous 0,073 W/(m²·K) — le cumul suppose les deux couches en série dans la même paroi.",
+      "le_dessin_suppose": "Les deux couches superposées le long des pans, les combles restant dans le volume isolé (la centrale y est installée). Si la couche de 280 est horizontale en plancher de combles, la ligne d'enveloppe passe sous la centrale et le dessin change."
+    },
+    {
+      "objet": "La répartition des 108 modules par pan",
+      "la_source_affirme": "Les modules « se répartissent sur les deux pans de la toiture », d'où deux onduleurs, « un par orientation » — sans donner la répartition.",
+      "le_dessin_suppose": "Deux champs d'étendue égale, un par pan. La répartition réelle est au plan photovoltaïque du dossier."
+    },
+    {
+      "objet": "Une baie représentative par niveau",
+      "la_source_affirme": "Les menuiseries sont demandées à 1,30 W/(m²·K) au plus et 28 brise-soleil orientables sont commandés — ni nombre de baies ni élévation.",
+      "le_dessin_suppose": "Une seule baie dessinée par niveau, représentative du traitement de toutes — aucune élévation réelle n'est reproduite, et c'est voulu (règle 4)."
+    },
+    {
+      "objet": "La liaison du plancher intermédiaire au mur",
+      "la_source_affirme": "L'isolation par l'extérieur « règle en même temps le pont thermique du plancher intermédiaire, que l'isolant enveloppe » — sans décrire la liaison.",
+      "le_dessin_suppose": "Une dalle posée au nu intérieur des murs, l'isolant passant en continu à l'extérieur. C'est le principe, pas un détail d'exécution."
+    },
+    {
+      "objet": "L'ordre de la chaîne électrique photovoltaïque",
+      "la_source_affirme": "La fiche donne les organes — deux onduleurs de 15 kVA, un comptage triphasé limité à 36 kVA, la revente totale — sans schéma unifilaire.",
+      "le_dessin_suppose": "L'ordre standard modules → onduleurs → comptage → réseau, chaque champ raccordé à son onduleur."
+    },
+    {
+      "objet": "Une coupe à deux pans symétriques et deux niveaux",
+      "la_source_affirme": "Le programme porte sur « le rez-de-chaussée et l'étage », les modules sur « les deux pans de la couverture », la centrale « en combles ».",
+      "le_dessin_suppose": "Un gabarit de principe à deux niveaux, combles et deux pans symétriques — aucune proportion réelle de l'ouvrage n'est reprise."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2023 (champ annee), réception globale prononcée le 18 février 2026 (annee_livraison 2026).",
+      "le_dessin_suppose": "Que le cartouche porte 2026, millésime de la réception — même arbitrage que les planches 01 et 02."
+    },
+    {
+      "objet": "La phrase de principe dépasse le gabarit de six signes",
+      "la_source_affirme": "Le protocole plafonne la phrase à 120 signes ; la citation exacte — « Appuis et suspentes sont à rupture de pont thermique, en matériaux composites, comme tout ce qui traverse une couche isolante. » — en fait 126.",
+      "le_dessin_suppose": "Que la citation ne se tronque pas (l'élision fausserait la pièce) et que la mesure prévaut sur la règle : 1071 px mesurés pour 1088 disponibles, la phrase tient sur sa ligne. Dire si une autre phrase de la fiche est préférée."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 23-054 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Tous les montants : 132 943,94 € HT des trois lots (65 807,61 / 43 617,13 / 23 519,20), estimation prévisionnelle de 642 550 € HT, marché de maîtrise d'œuvre de 46 906,15 € HT et taux de 7,3 %, part FT2E de 10 727,44 € HT, étude de faisabilité de 3 139,01 € HT.",
+    "Noms de tiers : la Communauté de communes du Bassin de Marennes (MOA) et SD Architectes (mandataire et économiste).",
+    "La performance réglementaire — 187,7 → 7,2 kWhep/m²/an pour 145,7 à respecter, gain de 96,15 % — : le champ performance de la fiche la porte déjà, elle ne monte pas sur la planche (révision 4).",
+    "Le régime réglementaire lui-même (arrêtés du 22 mars 2017 et du 3 mai 2007, seuil des 1 000 m², surfaces de 530,46 et 461,88 m²) — matière du récit, pas d'un dessin.",
+    "L'électricité intérieure : 43 postes de travail, soixante prises 6A, un kilomètre de câble, DALI, détection de présence, blocs de 45 lumens, alarme de type 4 — distribution intérieure, aucune traversée d'enveloppe.",
+    "La plomberie sanitaire, la régulation des groupes existants (comptage par occupant, programmation local par local) et les trois sondes de CO₂ — régulation intérieure.",
+    "La chronologie de l'affaire : faisabilité 2023, marché 2024, lot 12 devenu 11b, 32 réunions, parking neutralisé, réception du 18 février 2026 — matière d'une chronologie-affaire, pas d'une coupe.",
+    "Toute géométrie d'ouvrage : la coupe est un gabarit à deux pans symétriques, sans proportion, élévation ni implantation réelles."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "la ligne d'enveloppe (bandes claires) est continue du sol au faîtage et ne s'interrompt qu'aux traversées marquées : 2 baies vitrées, 2 conduits d'air fléchés en sens opposés — les champs de modules sont posés AU-DESSUS des couches (surimposition) et la chaîne sort du cadre à droite : la géométrie porte la thèse « l'enveloppe d'abord, la production ensuite »",
+    "topologie": "appels (x 56–256) → coupe (x 286–714, sol 640, faîtage 320) → production (onduleurs x 770–950, export y 280 jusqu'à x 1134)",
+    "pans": "pente 0.55 — couches à 8 et 17 px des pans, modules à 30 px (surimposition lisible)",
+    "bas_du_dessin": "sol à 640 (hachures jusqu'à 650), dernier appel à 636, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 342 x 30 px = 10260 px², soit 1.07 % de la planche",
+    "phrase_principe": "126 signes — 1071 px mesurés pour 1088 disponibles : la citation exacte tient sur sa ligne (la mesure prévaut sur la règle des 120 signes ; arbitrage consigné dans a_valider_ft2e)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la coupe fermée par sa bande continue, les champs en surimposition et la flèche d'export — baies, centrale, conduits et appels sont laissés à la planche",
+    "bas_du_dessin": "sol à 172 px, marge basse 28 px"
+  }
+}
