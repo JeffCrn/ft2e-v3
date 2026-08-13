@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 1 planche publiée sur 23.**
+> actuels. **Ouvert le 2026-08-12. 2 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,12 +32,12 @@ façade l'affirme.
 
 ---
 
-## État — 1 / 23
+## État — 2 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
 | 01 | `ecole-des-douanes-rue-du-jura-la-rochelle` | Monotechnique | `sankey-energie` | ✅ **publiée** |
-| — | `abbaye-sablonceaux-ssi` | Patrimoine | | à faire |
+| 02 | `abbaye-sablonceaux-ssi` | Patrimoine | `zonage-ssi` | ✅ **publiée** |
 | — | `ancien-siege-communautaire-marennes` | Tertiaire / ERP | | à faire |
 | — | `atelier-dufour-yachts-perigny` | Industriel et commercial | | à faire |
 | — | `ateliers-pilotes-capsulae` | Industriel et commercial | | à faire |
@@ -65,10 +65,10 @@ façade l'affirme.
 | Archétype | Employé | Module |
 |---|---|---|
 | `sankey-energie` | 1 (École des douanes) | ✅ `scripts/planches/sankey-energie.py` |
+| `zonage-ssi` | 1 (Abbaye de Sablonceaux) | ✅ `scripts/planches/zonage-ssi.py` |
 | `boucle-fluide` | 0 | à écrire |
 | `coupe-traversee` | 0 | à écrire |
 | `tableau-electrique` | 0 | à écrire |
-| `zonage-ssi` | 0 | à écrire |
 | `chronologie-affaire` | 0 | à écrire |
 | `planche-chiffree` | 0 | à écrire — c'est le repli, il servira |
 
@@ -183,11 +183,13 @@ suppose pas.
 - **Le champ `performance`** compose ses milliers en fine insécable sur les 23 fiches :
   « 152 947 W » se lit « 152947 W » dans le relevé encré, à 28 px. Même mesure que pour les
   planches, même correction — U+00A0 au-delà de 22 px. Passe mécanique, à faire d'un bloc.
-- **Le repli de lecture sous 1024 px** n'a de bloc composé que pour `sankey-energie`. Chaque
-  nouvel archétype doit ajouter le sien dans `PlancheReference.astro`, faute de quoi la
-  fiche perd son dessin sur téléphone sans rien mettre à la place.
-- **Les six autres modules de composition** sont à écrire. Ce que `sankey-energie.py`
-  contient de commun — jetons, mesure des chasses, échappement des insécables, double
-  écriture des couleurs — a vocation à remonter dans un module partagé **le jour où le
-  deuxième existera**, pas avant : factoriser sur un seul cas revient à généraliser un
-  accident.
+- **Le repli de lecture sous 1024 px** a ses blocs pour `sankey-energie` et `zonage-ssi`.
+  Chaque nouvel archétype doit ajouter le sien dans `PlancheReference.astro`, faute de quoi
+  la fiche perd son dessin sur téléphone sans rien mettre à la place.
+- **Les cinq autres modules de composition** sont à écrire. Le deuxième module existe
+  depuis la planche 02 : la **factorisation du tronc commun** de `sankey-energie.py` et
+  `zonage-ssi.py` — jetons, mesure des chasses, insécables, double écriture des couleurs,
+  repli de libellé — est désormais légitime, à faire avant d'écrire le troisième.
+- **Le `grep -c` de Git Bash sous Windows ne sait pas chercher U+202F** (`grep -c $' '`
+  rend 0 sur un fichier qui en porte 9) : le contrôle des insécables du protocole se rejoue
+  en Python (`collections.Counter`) sur cette machine, pas en grep.
