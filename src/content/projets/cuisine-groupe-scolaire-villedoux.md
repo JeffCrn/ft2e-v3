@@ -23,8 +23,7 @@ synthese: >-
   compensation que le rapport suppose coupée parce qu’elle soufflait froid, et
   une laverie qui ruisselle.
 mission_ft2e: ["Audit & diagnostic", "Thermique", "CVC", "Électricité CFO"]
-image_principale: "/images/projets/cuisine-groupe-scolaire-villedoux/01.jpg"
-image_principale_alt: "Armoire de commande de la ventilation du restaurant scolaire : deux plastrons de signalisation, l’un intitulé CUISINE avec ses voyants d’insufflation, d’extraction, de défaut de débit et de surchauffe de batterie, l’autre intitulé RESTAURANT dont le voyant vert de marche de la centrale est allumé, et au-dessous un commutateur été-hiver de batterie électrique"
+planche: "/images/projets/cuisine-groupe-scolaire-villedoux/planche.svg"
 en_avant: false
 ---
 

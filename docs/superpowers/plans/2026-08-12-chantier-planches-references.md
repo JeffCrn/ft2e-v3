@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 7 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12. 8 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,7 +32,7 @@ façade l'affirme.
 
 ---
 
-## État — 7 / 23
+## État — 8 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -43,7 +43,7 @@ façade l'affirme.
 | 05 | `ateliers-pilotes-capsulae` | Industriel et commercial | `boucle-fluide` (mécanisme `utilites`) | ✅ **publiée** (versée le 2026-08-13) |
 | 06 | `centre-formation-ormeau-du-pied-saintes` | Tertiaire / ERP | `boucle-fluide` (mécanisme `substitution`) | ✅ **publiée** (versée le 2026-08-13) |
 | 07 | `creche-oranger-perigny` | Tertiaire / ERP | `tableau-electrique` (mécanisme `autoconsommation`) | ✅ **publiée** (versée le 2026-08-13) |
-| — | `cuisine-groupe-scolaire-villedoux` | Tertiaire / ERP | | à faire |
+| 08 | `cuisine-groupe-scolaire-villedoux` | Tertiaire / ERP | `coupe-traversee` (mécanisme `equilibre`) | ✅ **publiée** (versée le 2026-08-13) |
 | — | `ehpad-coulonges-sur-autize-ssi` | Coordination SSI | | à faire |
 | — | `etude-notariale-boulevard-joffre` | Tertiaire / ERP | | à faire |
 | — | `exe-residence-horizon-mediatim` | Études d'exécution / BIM | | à faire |
@@ -67,7 +67,7 @@ façade l'affirme.
 | `sankey-energie` | 1 (École des douanes) | ✅ `scripts/planches/sankey-energie.py` |
 | `zonage-ssi` | 1 (Abbaye de Sablonceaux) | ✅ `scripts/planches/zonage-ssi.py` |
 | `boucle-fluide` | 3 — trois mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae) et `substitution` (production réversible, centre de formation de Saintes) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
-| `coupe-traversee` | 1 (Ancien siège communautaire, Marennes) | ✅ `scripts/planches/coupe-traversee.py` |
+| `coupe-traversee` | 2 — deux mécanismes : `coupe` (l'enveloppe traversée, Marennes) et `equilibre` (l'air extrait, l'air compensé — restaurant scolaire de Villedoux) | ✅ `scripts/planches/coupe-traversee.py` (dispatch sur le bloc de l'extraction) |
 | `tableau-electrique` | 1 — mécanisme `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) | ✅ `scripts/planches/tableau-electrique.py` |
 | `chronologie-affaire` | 0 | à écrire |
 | `planche-chiffree` | 0 | à écrire — c'est le repli, il servira |

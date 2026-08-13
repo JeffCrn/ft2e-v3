@@ -29,13 +29,26 @@ réelle de l'ouvrage n'est reprise (règle 4).
 
 Troisième module du chantier après `sankey-energie.py` et `zonage-ssi.py`.
 Le tronc commun vit dans `_tronc.py` depuis le 2026-08-13.
+
+Le module compose DEUX mécanismes de l'archétype, choisis par le bloc que porte
+l'extraction :
+
+- `coupe` — l'enveloppe traversée (ancien siège communautaire de Marennes) :
+  une ligne isolante continue, des traversées traitées, une toiture qui
+  produit ;
+- `equilibre` — l'air extrait, l'air compensé (restaurant scolaire de
+  Villedoux) : trois locaux sous une même ligne de toiture, l'air extrait
+  fléché vers le haut en trait plein, l'air de compensation en trait
+  interrompu là où le relevé ne l'a pas constaté — partout l'air monte,
+  nulle part il ne redescend.
 """
 
 import math
+import re as _re
 
 from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, mesurer,
                     echapper, texte, rect, rect_bord, ligne, polyligne,
-                    fleche, entete_style, executer)
+                    fleche, cercle, entete_style, executer)
 
 
 # ── Rythme vertical de la planche ────────────────────────────────────────────
@@ -441,5 +454,382 @@ def composer_vignette(donnees):
     return "\n".join(out) + "\n", controles
 
 
+# ═══ Mécanisme `equilibre` — l'air extrait, l'air compensé (Villedoux) ═══════
+#
+# Trois locaux sous une même ligne de toiture ; chaque conduit la traverse par
+# un percement qui interrompt la ligne. La grammaire des traits est légendée en
+# tête de dessin : trait plein = l'air qui passe, trait interrompu = l'air qui
+# devrait passer. La largeur d'un conduit est PROPORTIONNELLE à son débit — la
+# géométrie seule montre que le plus gros débit du bâtiment n'est plus compensé.
+
+E_Y_LEGENDE = 220             # la légende des traits, sous l'en-tête
+E_Y_TOIT = 348                # la ligne de toiture
+E_MACH0, E_MACH1 = 262, 336   # la bande des machines, au-dessus
+E_ROOM0, E_ROOM1 = 392, 588   # la bande des locaux, au-dessous
+E_Y_ABSENCE = 376             # les mentions d'absence, dans la traversée
+E_Y_PIED = 624                # la ligne de pied (les caissons qui tournaient)
+E_COLS = ((56, 392), (424, 752), (784, 1144))   # salles · laverie · cuisson
+E_K = 48 / 7500               # px par m³/h — 7 500 m³/h font 48 px de conduit
+
+
+def _debit(valeur):
+    """« 7 500 » → 7500 — la largeur du conduit se calcule, jamais ne se tape."""
+    return int(_re.sub(r"\D", "", valeur))
+
+
+def rect_interrompu(A, x, y0, y1, w, epaisseur=1.5, motif="6 6"):
+    """Un conduit prescrit mais sans débit constaté : contour interrompu,
+    aucun remplissage, aucune flèche."""
+    from _tronc import JETON
+    A(f'  <rect x="{x - w / 2:.2f}" y="{y0:.2f}" width="{w:.2f}" '
+      f'height="{y1 - y0:.2f}" fill="none" class="s-encre" '
+      f'stroke="{JETON["encre"]}" stroke-width="{epaisseur}" '
+      f'stroke-dasharray="{motif}"/>')
+
+
+def conduit_plein(A, x, y0, y1, w):
+    """Un conduit où l'air passe : bande claire à contour encré — le flux est
+    toujours doublé de flèches encrées et d'une cote."""
+    from _tronc import JETON
+    A(f'  <rect x="{x - w / 2:.2f}" y="{y0:.2f}" width="{w:.2f}" '
+      f'height="{y1 - y0:.2f}" class="c-clair s-encre" '
+      f'fill="{JETON["clair"]}" stroke="{JETON["encre"]}" stroke-width="1"/>')
+
+
+def composer_equilibre(donnees):
+    q = donnees["equilibre"]
+    elems = {e["cle"]: e for e in q["elements"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête, légende des traits, registre ────────────────────────────────
+    controler("en-tête schéma", q["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, q["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("légende des traits", q["legende_traits"], 10, "mono",
+              680, 10 * 0.14)
+    A(texte(MARGE, E_Y_LEGENDE, q["legende_traits"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("registre droite", q["registre_droite"], 10, "mono",
+              380, 10 * 0.14)
+    A(texte(W - MARGE, E_Y_LEGENDE, q["registre_droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    sal = elems["salles"]
+    lav = elems["laverie"]
+    hot = elems["cuisson-hotte"]
+    cmp_ = elems["cuisson-compensation"]
+
+    # Les largeurs de conduit, proportionnelles aux débits de la fiche.
+    # Une double flux de 2 340 m³/h souffle ET reprend ce débit : chacun de
+    # ses deux conduits se cote au débit plein, jamais à sa moitié.
+    w_sal = _debit(sal["valeur"]) * E_K
+    w_lav = _debit(lav["valeur"]) * E_K
+    w_hot = _debit(hot["valeur"]) * E_K
+    w_cmp = _debit(cmp_["valeur"]) * E_K
+
+    (SX0, SX1), (LX0, LX1), (CX0, CX1) = E_COLS
+    CX_SOUF, CX_REPR = 170, 290                  # les deux conduits de la CTA
+    CX_LAV = 660                                 # l'extraction de la laverie
+    CX_CMP, CX_HOT = 880, 1040                   # compensation · hotte du piano
+
+    # ── La ligne de toiture, interrompue à chaque percement ──────────────────
+    traversees = sorted((cx, w) for cx, w in
+                        ((CX_SOUF, w_sal), (CX_REPR, w_sal), (CX_LAV, w_lav),
+                         (CX_CMP, w_cmp), (CX_HOT, w_hot)))
+    x = MARGE
+    for cx, w in traversees:
+        A(ligne(x, E_Y_TOIT, cx - w / 2 - 4, E_Y_TOIT, "encre", 2))
+        x = cx + w / 2 + 4
+    A(ligne(x, E_Y_TOIT, W - MARGE, E_Y_TOIT, "encre", 2))
+    A(texte(MARGE, E_Y_TOIT - 8, q["toiture"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Les trois locaux — blocs topologiques d'égale hauteur ────────────────
+    for (x0, x1), e in zip(E_COLS, (sal, lav, hot)):
+        A(rect(x0, E_ROOM0, x1 - x0, E_ROOM1 - E_ROOM0, "calcaire"))
+        lib = e.get("libelle_dessin", e["libelle"])
+        controler(f"libellé {e['cle']}", lib, 15, "sans-600", x1 - x0 - 32)
+        A(texte(x0 + 16, E_ROOM0 + 28, lib, "sans", 15, 600,
+                "encre", wdth=112))
+        for k, l in enumerate(e.get("detail", [])):
+            controler(f"détail {e['cle']} {k + 1}", l, 10, "mono",
+                      x1 - x0 - 32, 10 * 0.14)
+            A(texte(x0 + 16, E_ROOM0 + 50 + k * 14, l, "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+    # Les notes de constat, en pied de chaque local.
+    for (x0, x1), e in zip(E_COLS, (sal, lav, hot)):
+        notes = e.get("notes", [])
+        for k, l in enumerate(notes):
+            y = E_ROOM1 - 16 - (len(notes) - 1 - k) * 16
+            controler(f"note {e['cle']} {k + 1}", l, 10, "mono",
+                      x1 - x0 - 32, 10 * 0.14)
+            A(texte(x0 + 16, y, l, "mono", 10, 500, "pivot",
+                    tracking=10 * 0.14))
+
+    # ── Salles : la CTA double flux, deux conduits prescrits, aucun débit ────
+    BX0, BY0, BW, BH = 110, E_MACH0, 240, E_MACH1 - E_MACH0
+    A(rect_bord(BX0, BY0, BW, BH, "papier", "filet-1"))
+    controler("libellé CTA", sal["machine"], 15, "sans-600", BW - 32)
+    A(texte(BX0 + 16, BY0 + 26, sal["machine"], "sans", 15, 600, "encre",
+            wdth=112))
+    for k, l in enumerate(sal["machine_detail"]):
+        controler(f"détail CTA {k + 1}", l, 10, "mono", BW - 32, 10 * 0.14)
+        A(texte(BX0 + 16, BY0 + 44 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    # Le voyant : un point clair, toujours doublé de sa mention.
+    A(cercle(BX0 + 14, BY0 - 13.5, 4.5, "clair", "encre", 1))
+    controler("mention voyant", sal["voyant"], 10, "mono", 340, 10 * 0.14)
+    A(texte(BX0 + 26, BY0 - 10, sal["voyant"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    for cx in (CX_SOUF, CX_REPR):
+        rect_interrompu(A, cx, E_MACH1, E_ROOM0, w_sal)
+    # Le constat, posé ENTRE les deux conduits morts — deux lignes courtes,
+    # pour qu'aucun trait interrompu ne traverse le texte.
+    x_constat = (CX_SOUF + CX_REPR) / 2
+    dispo_constat = CX_REPR - CX_SOUF - w_sal - 10
+    for k, l in enumerate(sal["constat"]):
+        controler(f"constat CTA {k + 1}", l, 10, "mono", dispo_constat,
+                  10 * 0.14)
+        A(texte(x_constat, 368 + k * 16, l, "mono", 10, 500, "pivot",
+                ancre="middle", tracking=10 * 0.14))
+
+    # ── Laverie : une extraction qui tire, aucun apport en face ──────────────
+    conduit_plein(A, CX_LAV, 300, E_ROOM0, w_lav)
+    A(fleche(CX_LAV, 296, "encre", "haut", 10))
+    A(fleche(CX_LAV, 362, "encre", "haut", 10))
+    controler("sortie laverie", lav["sortie"], 10, "mono", 300, 10 * 0.14)
+    A(texte(CX_LAV, 278, lav["sortie"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+    for k, l in enumerate(lav["cotes"]):
+        controler(f"cote laverie {k + 1}", l, 10, "mono", 216, 10 * 0.14)
+        A(texte(CX_LAV - w_lav / 2 - 12, 316 + k * 14, l, "mono", 10, 500,
+                "pivot", ancre="end", tracking=10 * 0.14))
+    controler("absence laverie", lav["absence"], 10, "mono", 260, 10 * 0.14)
+    A(texte((LX0 + CX_LAV - w_lav / 2) / 2, E_Y_ABSENCE, lav["absence"],
+            "mono", 10, 500, "pivot", ancre="middle", tracking=10 * 0.14))
+
+    # ── Cuisson : le plus gros débit, sa compensation coupée ─────────────────
+    conduit_plein(A, CX_HOT, 300, E_ROOM0, w_hot)
+    A(fleche(CX_HOT, 296, "encre", "haut", 14))
+    A(fleche(CX_HOT, 362, "encre", "haut", 14))
+    controler("cote hotte piano", hot["cote"], 10, "mono", 300, 10 * 0.14)
+    A(texte(CX_HOT, 278, hot["cote"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+    # La batterie de compensation : le symbole CVC (rectangle barré), signalée
+    # en surchauffe, et le conduit interrompu qui s'arrête avant le local.
+    BAX0, BAX1 = CX_CMP - 35, CX_CMP + 35
+    A(rect_bord(BAX0, E_MACH0 + 6, BAX1 - BAX0, E_MACH1 - E_MACH0 - 6,
+                "papier", "filet-1"))
+    A(ligne(BAX0, E_MACH1, BAX1, E_MACH0 + 6, "encre", 1.5))
+    controler("mention batterie", cmp_["batterie"], 10, "mono",
+              420, 10 * 0.14)
+    A(texte(CX_CMP, E_MACH0 - 10, cmp_["batterie"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+    controler("cote compensation", cmp_["cote"], 10, "mono", 190, 10 * 0.14)
+    A(texte(BAX0 - 8, 306, cmp_["cote"], "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    rect_interrompu(A, CX_CMP, E_MACH1, 360, w_cmp)
+    # La coupure : deux traits de rupture en travers du conduit, doublés du mot.
+    for dy in (0, 8):
+        A(ligne(CX_CMP - w_cmp / 2 - 3, 374 + dy, CX_CMP + w_cmp / 2 + 3,
+                366 + dy, "encre", 1.5))
+    controler("mot de la coupure", cmp_["coupure"], 10, "mono",
+              150, 10 * 0.14)
+    A(texte(CX_CMP - w_cmp / 2 - 12, E_Y_ABSENCE, cmp_["coupure"], "mono",
+            10, 500, "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── La ligne de pied : ce qui tournait ───────────────────────────────────
+    controler("ligne de pied", q["mention_pied"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, E_Y_PIED, q["mention_pied"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "cinq conduits traversent la ligne de toiture (chacun "
+                         "par son percement) : deux pleins fléchés vers le "
+                         "haut, trois interrompus sans flèche — et AUCUN "
+                         "conduit plein ne descend : la géométrie seule montre "
+                         "que l'air sort sans être compensé ; les largeurs "
+                         f"sont proportionnelles aux débits ({E_K * 1000:.1f} "
+                         "px pour 1 000 m³/h), le conduit le plus large du "
+                         "dessin étant celui dont la compensation est coupée",
+        "topologie": f"machines (y {E_MACH0}–{E_MACH1}) → toiture "
+                     f"(y {E_Y_TOIT}) → locaux (y {E_ROOM0}–{E_ROOM1}) ; "
+                     f"salles x {SX0}–{SX1} (conduits à {CX_SOUF} et "
+                     f"{CX_REPR}), laverie x {LX0}–{LX1} (extraction à "
+                     f"{CX_LAV}), cuisson x {CX0}–{CX1} (compensation à "
+                     f"{CX_CMP}, hotte à {CX_HOT}) — l'ordre est celui du "
+                     "récit de la visite",
+        "conduits": f"soufflage/reprise CTA {w_sal:.1f} px chacun — une "
+                    f"double flux souffle ET reprend son débit nominal "
+                    f"(2 340 m³/h), laverie {w_lav:.1f} px (1 800), "
+                    f"compensation {w_cmp:.1f} px (6 000), hotte du piano "
+                    f"{w_hot:.1f} px (7 500) — largeur = débit x {E_K:.5f}",
+        "bas_du_dessin": f"locaux jusqu'à {E_ROOM1}, ligne de pied à "
+                         f"{E_Y_PIED}, phrase de principe à {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
+                         f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+                          "pas chiffrée (révision 4) ; les quatre débits "
+                          "restent au mono 10 pivot, en cote de leur conduit",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_equilibre(donnees):
+    """La vignette : le motif de l'archétype, sans son appareil.
+
+    Ce qu'elle garde : la ligne de toiture percée, les trois locaux, les cinq
+    conduits — deux pleins qui montent, trois interrompus — et le nœud chiffré
+    de la hotte du piano (7 500 m³/h). Ce qu'elle laisse : la CTA, la
+    batterie, le voyant, les cotes, les mentions d'absence et la ligne de
+    pied — dix annotations dans 300 px ne se liraient pas."""
+    q = donnees["equilibre"]
+    elems = {e["cle"]: e for e in q["elements"]}
+    hot = elems["cuisson-hotte"]
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # Le motif miniature — mêmes proportions de principe, repère propre.
+    y_toit, y_room0, y_room1 = 96, 110, 160
+    k = 13 / 7500                                # 7 500 m³/h font 13 px
+    cols = ((20, 100), (114, 184), (198, 284))
+    cx_souf, cx_repr, cx_lav, cx_cmp, cx_hot = 44, 72, 158, 218, 254
+    w_sal, w_lav = 2340 * k, 1800 * k
+    w_cmp, w_hot = 6000 * k, 7500 * k
+
+    # La ligne de toiture, percée à chaque conduit.
+    x = 20
+    for cx, w in sorted((c, w) for c, w in
+                        ((cx_souf, w_sal), (cx_repr, w_sal), (cx_lav, w_lav),
+                         (cx_cmp, w_cmp), (cx_hot, w_hot))):
+        A(ligne(x, y_toit, cx - w / 2 - 3, y_toit, "encre", 1.5))
+        x = cx + w / 2 + 3
+    A(ligne(x, y_toit, 284, y_toit, "encre", 1.5))
+
+    # Les trois locaux.
+    for (x0, x1) in cols:
+        A(rect(x0, y_room0, x1 - x0, y_room1 - y_room0, "calcaire"))
+
+    # Salles : la machine et ses deux conduits interrompus, sans flèche.
+    A(rect_bord(30, 52, 60, 20, "papier", "filet-1"))
+    for cx in (cx_souf, cx_repr):
+        A(f'  <rect x="{cx - w_sal / 2:.2f}" y="72" width="{w_sal:.2f}" '
+          f'height="{y_room0 - 72}" fill="none" class="s-encre" '
+          f'stroke="#00393A" stroke-width="1" stroke-dasharray="4 4"/>')
+
+    # Laverie : la seule extraction qui tire — rien en face.
+    A(f'  <rect x="{cx_lav - w_lav / 2:.2f}" y="62" width="{w_lav:.2f}" '
+      f'height="{y_room0 - 62}" class="c-clair s-encre" fill="#99CCCD" '
+      f'stroke="#00393A" stroke-width="1"/>')
+    A(fleche(cx_lav, 58, "encre", "haut", 7))
+
+    # Cuisson : la plus large monte, la compensation s'interrompt.
+    A(f'  <rect x="{cx_hot - w_hot / 2:.2f}" y="54" width="{w_hot:.2f}" '
+      f'height="{y_room0 - 54}" class="c-clair s-encre" fill="#99CCCD" '
+      f'stroke="#00393A" stroke-width="1"/>')
+    A(fleche(cx_hot, 50, "encre", "haut", 8))
+    A(rect_bord(cx_cmp - 10, 44, 20, 16, "papier", "filet-1"))
+    A(ligne(cx_cmp - 10, 60, cx_cmp + 10, 44, "encre", 1))
+    A(f'  <rect x="{cx_cmp - w_cmp / 2:.2f}" y="60" width="{w_cmp:.2f}" '
+      f'height="24" fill="none" class="s-encre" stroke="#00393A" '
+      f'stroke-width="1" stroke-dasharray="4 4"/>')
+    for dy in (0, 5):
+        A(ligne(cx_cmp - w_cmp / 2 - 2, 90 + dy, cx_cmp + w_cmp / 2 + 2,
+                86 + dy, "encre", 1))
+
+    # Le nœud chiffré.
+    A(texte(V_MARGE, 182, "Hotte du piano", "sans", 12, 600, "encre",
+            wdth=112))
+    l_hot = mesurer("Hotte du piano", 12, "sans-600")
+    A(texte(V_MARGE + l_hot + 8, 182, f'{hot["valeur"]}{NN}{hot["unite"]}',
+            "mono", 10, 500, "pivot", tabulaire=True))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "la ligne de toiture percée, trois locaux, cinq conduits — "
+                 "deux pleins qui montent, trois interrompus — et le nœud "
+                 "chiffré de la hotte ; CTA, batterie, cotes et mentions "
+                 "sont laissés à la planche",
+        "bas_du_dessin": "nœud de la hotte à y 182, marge basse 18 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
+
+def _composer(donnees):
+    if "equilibre" in donnees:
+        return composer_equilibre(donnees)
+    return composer(donnees)
+
+
+def _composer_vignette(donnees):
+    if "equilibre" in donnees:
+        return composer_vignette_equilibre(donnees)
+    return composer_vignette(donnees)
+
+
 if __name__ == "__main__":
-    executer(composer, composer_vignette)
+    executer(_composer, _composer_vignette)

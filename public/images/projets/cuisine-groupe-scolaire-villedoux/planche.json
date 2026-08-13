@@ -1,0 +1,179 @@
+{
+  "fiche": "cuisine-groupe-scolaire-villedoux",
+  "archetype": "coupe-traversee",
+  "archetype_motif": "La thèse de la fiche est aéraulique et tout s'y joue à la traversée de la toiture : une CTA posée en toiture dont aucun débit ne sort, une sortie de toiture qui n'est pas aéraulique, une compensation qui devrait descendre du toit et ne descend pas. La coupe suit l'air à travers ce plan : trois locaux sous une même ligne de toiture, l'air extrait fléché vers le haut, l'air de compensation en trait interrompu là où le relevé ne l'a pas constaté. La géométrie porte la démonstration — partout l'air monte, nulle part il ne redescend — sans répéter le modèle énergétique que la fiche porte déjà. `boucle-fluide`, déjà employé trois fois, aurait masqué que le mécanisme ici n'est pas une boucle : c'est un déséquilibre.",
+  "surtitre": "COUPE DE PRINCIPE · L'AIR EXTRAIT, L'AIR COMPENSÉ",
+  "titre": "Restaurant scolaire de Villedoux",
+  "sous_titre": "Ce qui reste à traiter n'est pas une consommation, c'est de l'air",
+  "cartouche_legende": "VILLEDOUX · 468 m² · 2026",
+  "aria_label": "Coupe de principe de l'équilibre aéraulique du restaurant scolaire : trois locaux sous une même ligne de toiture, l'air extrait fléché vers le haut, l'air de compensation en trait interrompu là où le relevé ne l'a pas constaté. Salles de restauration : centrale double flux de 2 340 m³/h, voyant de marche allumé mais aucun débit en toiture. Laverie : hotte de 1 800 m³/h sans aucune compensation d'air neuf — le local passe en dépression et l'humidité ruisselle. Zone cuisson : hotte du piano à 7 500 m³/h, dont la compensation de 6 000 m³/h préchauffés par une batterie électrique signalée en surchauffe est supposée coupée. Seuls deux caissons simple flux tournaient au relevé.",
+  "equilibre": {
+    "entete": "LE RELEVÉ DU 29 AVRIL 2025 · TROIS EXTRACTIONS, TROIS COMPENSATIONS EN DÉFAUT",
+    "legende_traits": "TRAIT PLEIN · L'AIR QUI PASSE — TRAIT INTERROMPU · L'AIR QUI DEVRAIT PASSER",
+    "registre_droite": "LES MACHINES EN TOITURE · LES LOCAUX DESSOUS",
+    "toiture": "TOITURE",
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "salles",
+        "libelle": "Salles de restauration",
+        "valeur": "2 340",
+        "unite": "m³/h",
+        "detail": [
+          "DEUX SALLES · 270 REPAS PAR JOUR"
+        ],
+        "machine": "CTA double flux",
+        "machine_detail": [
+          "2 340 m³/h · 2007",
+          "AUCUN CONTRAT D'ENTRETIEN"
+        ],
+        "voyant": "VOYANT VERT DE MARCHE ALLUMÉ",
+        "constat": [
+          "AUCUN DÉBIT",
+          "EN TOITURE"
+        ],
+        "mention": "VOYANT DE MARCHE ALLUMÉ — AUCUN DÉBIT CONSTATÉ EN TOITURE",
+        "notes": [
+          "18 m³/h PAR OCCUPANT À LA CONSTRUCTION",
+          "30 m³/h ATTENDUS AUJOURD'HUI"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "laverie",
+        "libelle": "Laverie",
+        "valeur": "1 800",
+        "unite": "m³/h",
+        "detail": [
+          "CONVOYEUR DE LAVAGE"
+        ],
+        "sortie": "SORTIE DE TOITURE NON AÉRAULIQUE",
+        "cotes": [
+          "HOTTE · 1 800 m³/h AU DOSSIER",
+          "≈ 2 000 m³/h NÉCESSAIRES"
+        ],
+        "absence": "AUCUNE COMPENSATION",
+        "mention": "AUCUNE COMPENSATION D'AIR NEUF — LE LOCAL PASSE EN DÉPRESSION",
+        "notes": [
+          "LE DÉBIT N'EST JAMAIS ATTEINT",
+          "L'HUMIDITÉ DU LAVAGE RESTE SUR PLACE",
+          "LES MURS RUISSELLENT, HOTTE EN MARCHE"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "cuisson-hotte",
+        "libelle": "Zone cuisson — hotte du piano",
+        "libelle_dessin": "Zone cuisson",
+        "valeur": "7 500",
+        "unite": "m³/h",
+        "detail": [],
+        "cote": "HOTTE DU PIANO · 7 500 m³/h",
+        "notes": [
+          "HYPOTHÈSE DU RAPPORT : COMPENSATION COUPÉE",
+          "PARCE QU'ELLE SOUFFLAIT FROID EN HIVER"
+        ]
+      },
+      {
+        "ordre": 4,
+        "cle": "cuisson-compensation",
+        "libelle": "Compensation de la cuisson",
+        "valeur": "6 000",
+        "unite": "m³/h",
+        "detail": [
+          "AIR NEUF PRÉCHAUFFÉ PAR BATTERIE ÉLECTRIQUE"
+        ],
+        "batterie": "BATTERIE ÉLECTRIQUE — SIGNALÉE EN SURCHAUFFE",
+        "cote": "6 000 m³/h PRÉCHAUFFÉS",
+        "coupure": "SUPPOSÉE COUPÉE",
+        "mention": "BATTERIE SIGNALÉE EN SURCHAUFFE — SUPPOSÉE COUPÉE, ELLE SOUFFLAIT FROID EN HIVER"
+      },
+      {
+        "ordre": 5,
+        "cle": "caissons",
+        "libelle": "Deux caissons simple flux",
+        "detail": [
+          "SANITAIRES · VESTIAIRES, LINGERIE, PRÉPARATION, LAVAGE, STOCKAGE"
+        ],
+        "mention": "ILS TOURNAIENT AU RELEVÉ"
+      }
+    ],
+    "mention_pied": "TOURNAIENT AU RELEVÉ · DEUX CAISSONS SIMPLE FLUX — SANITAIRES · VESTIAIRES, LINGERIE, PRÉPARATION, LAVAGE, STOCKAGE"
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Privée d'apport, l'extraction met le local en dépression et n'atteint jamais son débit.",
+  "vignette_surtitre": "ÉQUILIBRE AÉRAULIQUE",
+  "a_valider_ft2e": [
+    {
+      "objet": "L'arrêt complet de la CTA",
+      "la_source_affirme": "« Sur le tableau de commande, le voyant vert de marche était allumé. En toiture, aucun débit ne sortait de la machine. »",
+      "le_dessin_suppose": "Que soufflage et reprise sont tous deux à l'arrêt : les deux conduits des salles sont en trait interrompu. Dire si la reprise, elle, restait mesurable."
+    },
+    {
+      "objet": "Le débit dessiné pour la hotte de laverie",
+      "la_source_affirme": "1 800 m³/h au dossier des ouvrages exécutés, ≈ 2 000 m³/h nécessaires au convoyeur, et un débit « jamais atteint » faute d'apport.",
+      "le_dessin_suppose": "Que le conduit se cote à la valeur d'installation (1 800), le constat étant porté par la mention — coter le débit réellement mesuré, s'il existe, serait plus juste."
+    },
+    {
+      "objet": "La coupure de la compensation de cuisson",
+      "la_source_affirme": "« L'hypothèse du rapport est que les utilisateurs ont coupé la compensation, parce qu'en hiver elle soufflait de l'air froid. »",
+      "le_dessin_suppose": "Le conduit est dessiné interrompu et marqué « supposée coupée » — c'est une hypothèse, pas un constat. Dire si la coupure a été confirmée depuis."
+    },
+    {
+      "objet": "La position des machines en toiture",
+      "la_source_affirme": "La CTA est « posée en toiture » et la sortie de la hotte de laverie est une « sortie de toiture » ; la position de la batterie de compensation et du rejet du piano n'est pas écrite.",
+      "le_dessin_suppose": "Que toutes les traversées d'air passent par la toiture — la batterie et la hotte du piano y sont posées par analogie. Confirmer cette topologie."
+    },
+    {
+      "objet": "Trois locaux d'égale largeur",
+      "la_source_affirme": "Un rez-de-chaussée de 468 m² réunissant cuisine et deux salles — aucune surface par local.",
+      "le_dessin_suppose": "Que les locaux se dessinent à taille comparable : la géométrie code les débits (largeur des conduits), jamais les surfaces. Une lecture proportionnelle des blocs serait fausse."
+    },
+    {
+      "objet": "L'ordre de lecture salles → laverie → cuisson",
+      "la_source_affirme": "La fiche décrit la visite dans cet ordre, sans le fixer.",
+      "le_dessin_suppose": "Le même ordre, de gauche à droite. Un autre serait aussi vrai."
+    },
+    {
+      "objet": "Les deux caissons simple flux en ligne de pied",
+      "la_source_affirme": "« Ceux-là tournaient » — aucun débit n'est donné.",
+      "le_dessin_suppose": "Qu'ils se disent en une ligne sous le dessin, sans conduit dessiné : les dessiner sans débit aurait rompu la règle des largeurs proportionnelles."
+    },
+    {
+      "objet": "Millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2025 (champ annee), diagnostic remis en mai 2025, audit énergétique complet remis en mars 2026 (annee_livraison 2026).",
+      "le_dessin_suppose": "Que le cartouche porte 2026, millésime de la remise de l'audit — même arbitrage que les planches précédentes."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 25-010 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Montants : honoraires de 5 100 € HT, facture d'électricité de 24 425 € HT, et les six préconisations chiffrées (70 000 € / 68 € par an pour la toiture, 43 600 / 128 pour les murs, 44 800 / 542 pour la ventilation, 11 000 / 402 pour l'éclairage).",
+    "Noms de tiers : la maîtrise d'ouvrage communale et l'éditeur du logiciel de simulation — le dessin ne nomme personne.",
+    "Le modèle énergétique entier — 37 116 kWhef/an, 61 % de chauffage, Ubat 0,484 W/m²·K « Bonne », 102 474 kWh facturés, répartition des usages : la fiche le porte déjà, et la thèse du dessin est aéraulique, pas thermique.",
+    "La chaufferie bois collective : premier poste de consommation, mais le rapport n'y porte aucune préconisation — elle n'entre pas dans le mécanisme dessiné.",
+    "La production d'ECS solaire (ballon de 750 L, quatre panneaux) et l'éclairage : sans incidence sur l'équilibre d'air.",
+    "L'humidité des pieds de murs venue de l'extérieur — son traitement revenait à d'autres intervenants ; le dessin ne montre que l'humidité fabriquée à l'intérieur.",
+    "Les réseaux de toiture très dégradés et les percements d'étanchéité : cités par la préconisation mais non dessinés — les figurer suggérerait une implantation réelle (règle 4).",
+    "Toute géométrie d'ouvrage : les trois locaux sont des blocs topologiques d'égale hauteur sous une ligne de toiture de principe."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "cinq conduits traversent la ligne de toiture (chacun par son percement) : deux pleins fléchés vers le haut, trois interrompus sans flèche — et AUCUN conduit plein ne descend : la géométrie seule montre que l'air sort sans être compensé ; les largeurs sont proportionnelles aux débits (6.4 px pour 1 000 m³/h), le conduit le plus large du dessin étant celui dont la compensation est coupée",
+    "topologie": "machines (y 262–336) → toiture (y 348) → locaux (y 392–588) ; salles x 56–392 (conduits à 170 et 290), laverie x 424–752 (extraction à 660), cuisson x 784–1144 (compensation à 880, hotte à 1040) — l'ordre est celui du récit de la visite",
+    "conduits": "soufflage/reprise CTA 15.0 px chacun — une double flux souffle ET reprend son débit nominal (2 340 m³/h), laverie 11.5 px (1 800), compensation 38.4 px (6 000), hotte du piano 48.0 px (7 500) — largeur = débit x 0.00640",
+    "bas_du_dessin": "locaux jusqu'à 588, ligne de pied à 624, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 236 x 30 px = 7080 px², soit 0.74 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas chiffrée (révision 4) ; les quatre débits restent au mono 10 pivot, en cote de leur conduit",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "87 signes — 740 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la ligne de toiture percée, trois locaux, cinq conduits — deux pleins qui montent, trois interrompus — et le nœud chiffré de la hotte ; CTA, batterie, cotes et mentions sont laissés à la planche",
+    "bas_du_dessin": "nœud de la hotte à y 182, marge basse 18 px"
+  }
+}
