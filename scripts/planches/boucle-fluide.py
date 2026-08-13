@@ -32,7 +32,7 @@ double écriture des couleurs, routine d'exécution) vit dans `_tronc.py` depuis
 le 2026-08-13 — extraction contrôlée par régénération octet à octet des quatre
 planches publiées.
 
-Le module compose DEUX mécanismes de l'archétype, choisis par le bloc que porte
+Le module compose TROIS mécanismes de l'archétype, choisis par le bloc que porte
 l'extraction :
 
 - `boucle` — la boucle de récupération (atelier Dufour) : deux conduits qui ne
@@ -40,7 +40,12 @@ l'extraction :
 - `utilites` — le réseau de livraison (ateliers Capsulae) : des productions
   centralisées, des chaînes de distribution, et une LIMITE DE MARCHÉ sur
   laquelle tout s'arrête — les attentes — quand les consommateurs se tiennent
-  au-delà.
+  au-delà ;
+- `substitution` — la production réversible (centre de formation de Saintes) :
+  deux productions convergent sur un même POINT DE SUBSTITUTION qui alimente
+  le réseau d'émission — tout ce qui est à droite du point demeure. En regard,
+  le parti écarté : des liaisons qui filent de la machine au bâtiment sans
+  aucun point, et figent le mode de production.
 """
 
 from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, mesurer,
@@ -603,15 +608,356 @@ def composer_vignette_utilites(donnees):
     return "\n".join(out) + "\n", controles
 
 
+# ═══ Mécanisme `substitution` — deux productions, un point, un réseau ════════
+
+S_BX0, S_BX1 = 56, 330        # les boîtes de production, à gauche
+S_AX0, S_AX1 = 880, 1144      # le bloc bâtiment, à droite
+S_CH_Y0, S_CH_Y1 = 264, 348   # la chaudière en service
+S_RC_Y0, S_RC_Y1 = 396, 472   # le réseau de chaleur à venir
+S_NX, S_NY, S_NR = 470, 368, 10   # le point de substitution
+S_YP1, S_YP2 = 360, 376       # les deux conduites du réseau d'émission
+S_YSEP = 500                  # le filet qui sépare les deux partis
+S_PAC_Y0, S_PAC_Y1 = 536, 620     # le parti écarté
+
+
+def rect_pointille(x, y, w, h, filet, epaisseur=1.5, motif="6 6"):
+    """La production à venir : un contour interrompu — elle n'est pas encore là."""
+    from _tronc import JETON
+    return (f'  <rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" '
+            f'fill="none" class="s-{filet}" stroke="{JETON[filet]}" '
+            f'stroke-width="{epaisseur}" stroke-dasharray="{motif}"/>')
+
+
+def emetteur(A, x0, y0, w, h):
+    """Le symbole générique de l'émetteur : un rectangle à trois éléments —
+    aucun modèle réel, un motif topologique."""
+    A(rect_bord(x0, y0, w, h, "papier", "filet-1"))
+    for k in (1, 2, 3):
+        xt = x0 + w * k / 4
+        A(ligne(xt, y0 + 5, xt, y0 + h - 5, "filet-1", 1))
+
+
+def composer_substitution(donnees):
+    s = donnees["substitution"]
+    elems = {e["cle"]: e for e in s["elements"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête et registres ─────────────────────────────────────────────────
+    controler("en-tête schéma", s["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, s["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(MARGE, Y_REGISTRES, s["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_REGISTRES, s["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Le parti retenu — deux productions, un point, un réseau ─────────────
+    ch = elems["chaudiere"]
+    rc = elems["reseau-chaleur"]
+    pt = elems["point-substitution"]
+    em = elems["emission"]
+    et = elems["emetteurs"]
+
+    # La chaudière en service — contour plein.
+    controler("tag chaudière", ch["tag"], 10, "mono", 500, 10 * 0.14)
+    A(texte(S_BX0, S_CH_Y0 - 8, ch["tag"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(W - MARGE, S_CH_Y0 - 8, s["tag_retenu"], "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    A(rect_bord(S_BX0, S_CH_Y0, S_BX1 - S_BX0, S_CH_Y1 - S_CH_Y0,
+                "papier", "filet-1"))
+    controler("libellé chaudière", ch["libelle"], 15, "sans-600",
+              S_BX1 - S_BX0 - 32)
+    A(texte(S_BX0 + 16, S_CH_Y0 + 28, ch["libelle"], "sans", 15, 600, "encre",
+            wdth=112))
+    det_ch = f'{ch["valeur"]}{NN}{ch["unite"]} · {ch["detail"][0]}'
+    controler("détail chaudière 1", det_ch, 10, "mono",
+              S_BX1 - S_BX0 - 32, 10 * 0.14)
+    A(texte(S_BX0 + 16, S_CH_Y0 + 48, det_ch, "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    controler("détail chaudière 2", ch["detail"][1], 10, "mono",
+              S_BX1 - S_BX0 - 32, 10 * 0.14)
+    A(texte(S_BX0 + 16, S_CH_Y0 + 64, ch["detail"][1], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # Le réseau de chaleur à venir — contour interrompu.
+    controler("tag réseau de chaleur", rc["tag"], 10, "mono", 500, 10 * 0.14)
+    A(texte(S_BX0, S_RC_Y0 - 8, rc["tag"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(rect_pointille(S_BX0, S_RC_Y0, S_BX1 - S_BX0, S_RC_Y1 - S_RC_Y0,
+                     "filet-1"))
+    controler("libellé réseau de chaleur", rc["libelle"], 15, "sans-600",
+              S_BX1 - S_BX0 - 32)
+    A(texte(S_BX0 + 16, S_RC_Y0 + 28, rc["libelle"], "sans", 15, 600, "encre",
+            wdth=112))
+    controler("détail réseau de chaleur", rc["detail"][0], 10, "mono",
+              S_BX1 - S_BX0 - 32, 10 * 0.14)
+    A(texte(S_BX0 + 16, S_RC_Y0 + 48, rc["detail"][0], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # Les deux raccordements convergent sur le POINT — plein pour la chaudière,
+    # interrompu pour le réseau à venir, qui arrive par-dessous.
+    cy_ch = (S_CH_Y0 + S_CH_Y1) / 2                       # 306
+    cy_rc = (S_RC_Y0 + S_RC_Y1) / 2                       # 434
+    A(polyligne([(S_BX1, cy_ch), (400, cy_ch), (400, S_NY), (S_NX - 24, S_NY)],
+                "encre", 1.5))
+    A(fleche(S_NX - S_NR - 4, S_NY, "encre", "droite", 9))
+    A(ligne_pointillee(S_BX1, cy_rc, S_NX, cy_rc, "encre", 1.5))
+    A(ligne_pointillee(S_NX, cy_rc, S_NX, S_NY + S_NR + 12, "encre", 1.5))
+    A(fleche(S_NX, S_NY + S_NR + 2, "encre", "haut", 8))
+    A(cercle(S_NX, S_NY, S_NR, "papier", "encre"))
+    # L'appel du point : un tiret qui attache l'étiquette au cercle.
+    A(ligne(S_NX, S_NY - S_NR, S_NX, S_NY - S_NR - 12, "filet-1", 1))
+    controler("étiquette du point", pt["etiquette"], 10, "mono",
+              S_AX0 - (S_NX + 20), 10 * 0.14)
+    A(texte(S_NX + 20, S_NY - 28, pt["etiquette"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # Le réseau d'émission : deux conduites, aller et retour, du point au
+    # bâtiment — rien d'autre ne les touche.
+    A(ligne(S_NX + S_NR - 2, S_YP1, 898, S_YP1, "encre", 1.5))
+    A(ligne(S_NX + S_NR - 2, S_YP2, 898, S_YP2, "encre", 1.5))
+    for x in (600, 780):
+        A(fleche(x, S_YP1, "encre", "droite", 9))
+    for x in (620, 800):
+        A(fleche(x, S_YP2, "encre", "gauche", 9))
+    x_mi = (S_NX + S_AX0) / 2                             # 675
+    controler("étiquette du réseau", em["etiquette"], 10, "mono",
+              S_AX0 - S_NX - 24, 10 * 0.14)
+    A(texte(x_mi, S_YP2 + 22, em["etiquette"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+    controler("mention du parti retenu", s["mention_retenu"], 10, "mono",
+              S_AX0 - S_NX - 24, 10 * 0.14)
+    A(texte(x_mi, S_YP2 + 40, s["mention_retenu"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+
+    # Le bâtiment et ses émetteurs — des blocs topologiques.
+    A(rect(S_AX0, S_CH_Y0, S_AX1 - S_AX0, S_RC_Y1 - S_CH_Y0, "calcaire"))
+    controler("libellé émetteurs", et["libelle"], 15, "sans-600",
+              S_AX1 - S_AX0 - 40)
+    A(texte(S_AX0 + 20, S_CH_Y0 + 28, et["libelle"], "sans", 15, 600, "encre",
+            wdth=112))
+    Y_EMET = (308, 352, 396)
+    A(ligne(898, Y_EMET[0] + 12, 898, Y_EMET[2] + 12, "encre", 1.2))
+    for y0 in Y_EMET:
+        emetteur(A, 940, y0, 168, 24)
+        A(ligne(898, y0 + 12, 940, y0 + 12, "encre", 1.2))
+    controler("détail émetteurs", et["detail"][0], 10, "mono",
+              S_AX1 - S_AX0 - 40, 10 * 0.14)
+    A(texte(S_AX0 + 20, 448, et["detail"][0], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Le parti écarté — des liaisons sans point ────────────────────────────
+    A(rect(MARGE, S_YSEP, UTILE, 1, "filet-2"))
+    controler("tag du parti écarté", s["tag_ecarte"], 10, "mono",
+              UTILE, 10 * 0.14)
+    A(texte(MARGE, S_YSEP + 24, s["tag_ecarte"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    pac = elems["pac-ecartee"]
+    A(rect_bord(S_BX0, S_PAC_Y0, S_BX1 - S_BX0, S_PAC_Y1 - S_PAC_Y0,
+                "papier", "filet-1"))
+    lib_pac = pac.get("libelle_dessin", pac["libelle"])
+    controler("libellé pac", lib_pac, 15, "sans-600", S_BX1 - S_BX0 - 32)
+    A(texte(S_BX0 + 16, S_PAC_Y0 + 28, lib_pac, "sans", 15, 600, "encre",
+            wdth=112))
+    for k, l in enumerate(pac["detail"]):
+        controler(f"détail pac {k + 1}", l, 10, "mono",
+                  S_BX1 - S_BX0 - 32, 10 * 0.14)
+        A(texte(S_BX0 + 16, S_PAC_Y0 + 46 + k * 14, l, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    bf = s["batiment_fige"]
+    A(rect(S_AX0, S_PAC_Y0, S_AX1 - S_AX0, S_PAC_Y1 - S_PAC_Y0, "calcaire"))
+    controler("libellé bâtiment figé", bf["libelle"], 15, "sans-600",
+              S_AX1 - S_AX0 - 40)
+    A(texte(S_AX0 + 20, S_PAC_Y0 + 28, bf["libelle"], "sans", 15, 600, "encre",
+            wdth=112))
+    for k, l in enumerate(bf["detail"]):
+        controler(f"détail bâtiment figé {k + 1}", l, 10, "mono",
+                  S_AX1 - S_AX0 - 40, 10 * 0.14)
+        A(texte(S_AX0 + 20, S_PAC_Y0 + 46 + k * 14, l, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # Les liaisons : trois traits qui filent d'un bloc à l'autre SANS s'arrêter
+    # nulle part — c'est l'absence de nœud qui porte la démonstration.
+    Y_LIAISONS = (552, 578, 604)
+    for y in Y_LIAISONS:
+        A(ligne(S_BX1, y, S_AX0, y, "encre", 1))
+        A(fleche(590, y, "encre", "droite", 8))
+    x_me = (S_BX1 + S_AX0) / 2                            # 605
+    controler("étiquette des liaisons", s["etiquette_liaisons"], 10, "mono",
+              S_AX0 - S_BX1 - 24, 10 * 0.14)
+    A(texte(x_me, Y_LIAISONS[0] - 10, s["etiquette_liaisons"], "mono", 10, 500,
+            "pivot", ancre="middle", tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur ajustée, jamais codée ────────────────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "en haut, les deux raccordements (plein pour la "
+                         f"chaudière, interrompu pour le réseau à venir) "
+                         f"convergent sur l'UNIQUE cercle du point de "
+                         f"substitution (x {S_NX}, y {S_NY}) d'où partent les "
+                         f"deux conduites du réseau d'émission ; en bas, les "
+                         f"trois liaisons du parti écarté filent de la machine "
+                         f"au bâtiment sans rencontrer AUCUN nœud — la "
+                         "géométrie seule oppose « un raccord se change » à "
+                         "« tout est figé »",
+        "topologie": f"productions (x {S_BX0}–{S_BX1} : chaudière y {S_CH_Y0}–"
+                     f"{S_CH_Y1} pleine, réseau de chaleur y {S_RC_Y0}–"
+                     f"{S_RC_Y1} interrompu) → point (x {S_NX}, r {S_NR}) → "
+                     f"conduites y {S_YP1}/{S_YP2} → bâtiment (x {S_AX0}–"
+                     f"{S_AX1}, trois émetteurs génériques) ; parti écarté "
+                     f"sous le filet y {S_YSEP}, liaisons y "
+                     f"{'/'.join(str(y) for y in Y_LIAISONS)}",
+        "bas_du_dessin": f"liaisons jusqu'à {Y_LIAISONS[-1]}, blocs écartés "
+                         f"jusqu'à {S_PAC_Y1}, phrase de principe à {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
+                         f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+                          "pas chiffrée (révision 4) ; 40 kW reste au mono 10 "
+                          "pivot dans la boîte de la chaudière",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_substitution(donnees):
+    """La vignette : le motif de la substitution, sans son appareil.
+
+    Ce qu'elle garde : les deux productions (pleine et interrompue), le point,
+    les deux conduites, le bâtiment et ses émetteurs — avec le nœud chiffré de
+    la chaudière (40 kW). Ce qu'elle laisse : le parti écarté tout entier, les
+    tags, l'étiquette du réseau — un second registre dans 300 px ne se lirait
+    pas."""
+    s = donnees["substitution"]
+    elems = {e["cle"]: e for e in s["elements"]}
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # Les deux productions — la pleine en service, l'interrompue à venir.
+    A(rect_bord(22, 48, 64, 36, "papier", "filet-1"))
+    A(rect_pointille(22, 108, 64, 36, "filet-1", 1.2, "4 4"))
+    A(texte(54, 130, "À VENIR", "mono", 9, 500, "pivot",
+            ancre="middle", tracking=9 * 0.14))
+
+    # Le point, et les deux raccordements qui y convergent.
+    nx, ny, nr = 140, 96, 6
+    A(polyligne([(86, 66), (nx, 66), (nx, ny - nr - 8)], "encre", 1.2))
+    A(fleche(nx, ny - nr - 2, "encre", "bas", 6))
+    A(ligne_pointillee(86, 126, nx, 126, "encre", 1.2, "4 4"))
+    A(ligne_pointillee(nx, 126, nx, ny + nr + 8, "encre", 1.2, "4 4"))
+    A(fleche(nx, ny + nr + 2, "encre", "haut", 6))
+    A(cercle(nx, ny, nr, "papier", "encre"))
+
+    # Les deux conduites, vers le bâtiment et ses émetteurs.
+    A(ligne(nx + nr, 92, 210, 92, "encre", 1.2))
+    A(ligne(nx + nr, 100, 210, 100, "encre", 1.2))
+    A(fleche(180, 92, "encre", "droite", 6))
+    A(fleche(184, 100, "encre", "gauche", 6))
+    A(rect(210, 48, 76, 96, "calcaire"))
+    A(ligne(217, 66, 217, 130, "encre", 1))
+    for y0 in (58, 90, 122):
+        A(rect_bord(224, y0, 48, 16, "papier", "filet-1"))
+        A(ligne(217, y0 + 8, 224, y0 + 8, "encre", 1))
+        for k in (1, 2, 3):
+            A(ligne(224 + 48 * k / 4, y0 + 3, 224 + 48 * k / 4, y0 + 13,
+                    "filet-1", 1))
+
+    # Les deux nœuds nommés.
+    ch = elems["chaudiere"]
+    et = elems["emetteurs"]
+    A(texte(22, 170, ch["libelle"], "sans", 12, 600, "encre", wdth=112))
+    l_ch = mesurer(ch["libelle"], 12, "sans-600")
+    A(texte(22 + l_ch + 8, 170, f'{ch["valeur"]}{NN}{ch["unite"]}',
+            "mono", 10, 500, "pivot", tabulaire=True))
+    A(texte(22, 186, et["libelle"], "sans", 12, 600, "encre", wdth=112))
+    l_et = mesurer(et["libelle"], 12, "sans-600")
+    A(texte(22 + l_et + 8, 186, et["detail"][0], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "deux productions (pleine, interrompue) convergeant sur le "
+                 "point, deux conduites, le bâtiment et ses trois émetteurs — "
+                 "le parti écarté, les tags et l'étiquette du réseau sont "
+                 "laissés à la planche",
+        "bas_du_dessin": "nœud des émetteurs à y 186, marge basse 14 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "substitution" in donnees:
+        return composer_substitution(donnees)
     if "utilites" in donnees:
         return composer_utilites(donnees)
     return composer_recuperation(donnees)
 
 
 def composer_vignette(donnees):
+    if "substitution" in donnees:
+        return composer_vignette_substitution(donnees)
     if "utilites" in donnees:
         return composer_vignette_utilites(donnees)
     return composer_vignette_recuperation(donnees)

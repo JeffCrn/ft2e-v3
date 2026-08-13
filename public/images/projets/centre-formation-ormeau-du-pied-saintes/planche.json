@@ -1,0 +1,153 @@
+{
+  "fiche": "centre-formation-ormeau-du-pied-saintes",
+  "archetype": "boucle-fluide",
+  "archetype_motif": "La thèse de la fiche est la réversibilité du choix de production : la chaudière gaz est retenue non pour sa consommation mais parce qu'elle alimente un réseau d'émission hydraulique — le jour où le réseau de chaleur arrivera, il suffira de changer la production sans toucher aux émetteurs. C'est un troisième mécanisme de l'archétype boucle-fluide, la SUBSTITUTION : deux productions convergent sur un même point de raccordement, tout ce qui est à droite du point demeure. La reprise de l'archétype (déjà employé sur Dufour et Capsulae) est assumée : aucun autre ne porte la substituabilité — un sankey aurait montré des consommations, ce que le choix récuse précisément ; le contre-motif de la détente directe, des liaisons qui filent sans point de substitution, complète la démonstration par la géométrie seule.",
+  "surtitre": "SCHÉMA DE PRINCIPE · RÉVERSIBILITÉ DE LA PRODUCTION DE CHALEUR",
+  "titre": "Centre de formation CCI",
+  "sous_titre": "Une chaudière choisie pour ce qui la remplacera",
+  "cartouche_legende": "SAINTES · 1 123 m² · 2026",
+  "aria_label": "Schéma de principe de la réversibilité de la production de chaleur : la chaudière gaz à condensation de 40 kW, en service aujourd'hui, et le réseau de chaleur annoncé, à raccorder demain, convergent sur un même point de substitution qui alimente le réseau d'émission hydraulique du bâtiment — la production se remplace, les émetteurs ne bougent pas. En regard, le parti écarté : une pompe à chaleur à détente directe, dont les liaisons frigorigènes filent de la machine au bâtiment sans point de substitution et auraient figé le mode de production pour la durée de vie des machines.",
+  "substitution": {
+    "entete": "LE CHAUFFAGE DU CENTRE · UNE PRODUCTION QUI SE REMPLACE, UN RÉSEAU D'ÉMISSION QUI DEMEURE",
+    "registres": {
+      "gauche": "LA PRODUCTION",
+      "droite": "LE BÂTIMENT · LES ÉMETTEURS"
+    },
+    "tag_retenu": "LE PARTI RETENU",
+    "tag_ecarte": "LE PARTI ÉCARTÉ · LA POMPE À CHALEUR À DÉBIT DE RÉFRIGÉRANT VARIABLE",
+    "mention_retenu": "LA PRODUCTION CHANGE — LES ÉMETTEURS NE BOUGENT PAS",
+    "etiquette_liaisons": "LIAISONS FRIGORIGÈNES — AUCUN POINT DE SUBSTITUTION",
+    "batiment_fige": {
+      "libelle": "Le bâtiment",
+      "detail": [
+        "MODE DE PRODUCTION FIGÉ POUR",
+        "LA DURÉE DE VIE DES MACHINES"
+      ]
+    },
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "chaudiere",
+        "libelle": "Chaudière gaz à condensation",
+        "tag": "AUJOURD'HUI · EN SERVICE",
+        "valeur": "40",
+        "unite": "kW",
+        "detail": [
+          "MODULE JUSQU'À 20 %",
+          "PILOTÉE EN 0-10 V PAR LA GTB"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "reseau-chaleur",
+        "libelle": "Réseau de chaleur",
+        "tag": "DEMAIN · LE RACCORDEMENT VISÉ",
+        "detail": [
+          "« SERA CRÉÉ PROCHAINEMENT »"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "point-substitution",
+        "libelle": "Le point de substitution",
+        "etiquette": "LE POINT DE SUBSTITUTION",
+        "mention": "LA PRODUCTION CHANGE — LES ÉMETTEURS NE BOUGENT PAS"
+      },
+      {
+        "ordre": 4,
+        "cle": "emission",
+        "libelle": "Réseau d'émission hydraulique",
+        "etiquette": "LE RÉSEAU D'ÉMISSION HYDRAULIQUE"
+      },
+      {
+        "ordre": 5,
+        "cle": "emetteurs",
+        "libelle": "Les émetteurs",
+        "detail": [
+          "INCHANGÉS AU RACCORDEMENT"
+        ]
+      },
+      {
+        "ordre": 6,
+        "cle": "pac-ecartee",
+        "libelle": "Pompe à chaleur à détente directe, écartée",
+        "libelle_dessin": "Pompe à chaleur air/air",
+        "detail": [
+          "PLUS SOBRE ET MOINS CHÈRE",
+          "DANS LE PÉRIMÈTRE DE L'ÉTUDE"
+        ],
+        "mention": "MODE DE PRODUCTION FIGÉ POUR LA DURÉE DE VIE DES MACHINES"
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Le jour où le réseau de chaleur arrivera, il suffira de changer la production sans toucher aux émetteurs.",
+  "vignette_surtitre": "PRODUCTION RÉVERSIBLE",
+  "a_valider_ft2e": [
+    {
+      "objet": "L'organe du point de substitution",
+      "la_source_affirme": "« Une chaudière alimente un réseau d'émission hydraulique ; le jour où le réseau de chaleur arrivera, il suffira de changer la production sans toucher aux émetteurs » — aucun organe de raccordement n'est nommé.",
+      "le_dessin_suppose": "Un nœud unique où les deux productions convergent, sans le nommer (collecteur, bouteille de découplage, échangeur de sous-station ?). Dire quel organe matérialisera le raccordement."
+    },
+    {
+      "objet": "Substitution ou addition",
+      "la_source_affirme": "Le maître d'ouvrage veut « se raccorder au réseau de chaleur qui sera créé prochainement » — la fiche ne dit pas si la chaudière sera déposée ou conservée en appoint.",
+      "le_dessin_suppose": "Une substitution : les deux productions convergent sur le même point et la lecture naturelle est « l'une remplace l'autre ». Dire si la chaudière restera en appoint ou en secours."
+    },
+    {
+      "objet": "La nature des émetteurs",
+      "la_source_affirme": "« Un réseau d'émission hydraulique », sans dire s'il s'agit de radiateurs, de la batterie chaude de la centrale double flux, ou des deux.",
+      "le_dessin_suppose": "Trois émetteurs génériques desservis par une distribution unique — un motif topologique, pas un comptage. Dire ce que le réseau dessert réellement."
+    },
+    {
+      "objet": "Le nombre de liaisons frigorigènes du parti écarté",
+      "la_source_affirme": "« Des liaisons frigorigènes que le maître d'ouvrage ne souhaitait pas » — sans nombre ni tracé.",
+      "le_dessin_suppose": "Trois traits parallèles de la machine au bâtiment : un motif topologique qui dit « plusieurs, sans point de substitution », pas un comptage."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2025 (référence 25-024), chantier ouvert le 8 janvier 2026, réception programmée le 6 août 2026 mais non prononcée (statut en cours).",
+      "le_dessin_suppose": "2026, l'année du chantier. Dire si le millésime d'ouverture (2025) est préférable pour une affaire en cours."
+    },
+    {
+      "objet": "Le sigle CCI au titre",
+      "la_source_affirme": "Le champ ouvrage de la fiche est « Centre de formation CCI » ; la maîtrise d'ouvrage est la SCI Fleming, dont la CCI est l'associée.",
+      "le_dessin_suppose": "Que le nom d'ouvrage passe au titre, comme sur la planche Dufour (le tiers ne subsiste que dans le nom de l'ouvrage). Dire si le sigle doit être retiré du dessin."
+    },
+    {
+      "objet": "Le périmètre « production » du dessin",
+      "la_source_affirme": "Deux locaux reçoivent un froid propre — le local serveur et l'amphithéâtre, desservi par un groupe à eau glacée de 14,93 kW — et la centrale double flux porte une batterie froide.",
+      "le_dessin_suppose": "Leur exclusion : ce sont des productions de froid qui ne passent pas par la boucle de chauffage substituable. Dire si l'une doit figurer."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 25-024 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Tout montant : l'estimation du lot CVC (280 325 € HT) et sa répartition (115 249, 105 148, 108 115 €), les coûts et surcoûts de l'étude de faisabilité (15 987, 6 118, 19 618, 27 945, 32 270 €), les honoraires (18 649 € HT et leur détail).",
+    "Noms de tiers : la SCI Fleming, Pillet Architectes Associés, l'économiste et ordonnanceur — la CCI ne subsiste que dans le nom de l'ouvrage, que le titre porte (champ ouvrage, précédent de la planche Dufour, soumis à validation).",
+    "La comparaison chiffrée des quatre approvisionnements (60,89 / 47,32 / −72,57 / 58,29 kWhep/m²/an, chaudière bois, photovoltaïque) : la page la raconte ; seule la pompe à chaleur écartée monte au dessin, sans ses chiffres, parce que son écartement porte la thèse de la réversibilité.",
+    "La ventilation à la demande (centrale double flux de 7 950 m³/h, sondes de dioxyde de carbone, registres 0-10 V, débits de 285 à 330 m³/h par salle) — l'autre mécanisme de la fiche, matière d'une autre planche, non retenu.",
+    "Le calcul réglementaire (58,72 contre 155,5 kWhep/m²/an, 62,24 %), l'enveloppe (coefficients, résistances, perméabilité), l'électricité (49 kVA, l'amphithéâtre) : la page les porte déjà.",
+    "Les caractéristiques de la chaudière que le dessin n'exige pas : rendements de 97,2 et 108,4 %, pertes à l'arrêt de 52 W, auxiliaires de 67 et 4 W, oxydes d'azote de classe 6 — seuls 40 kW, la modulation à 20 % et le pilotage 0-10 V par la GTB disent le mécanisme.",
+    "Le froid des deux locaux traités (local serveur, amphithéâtre — 14,93 kW frigorifiques, 4,825 kW absorbés) : production hors de la boucle de chauffage substituable.",
+    "Aucune géométrie d'ouvrage : ni plan, ni implantation, ni salle — le bâtiment est un bloc topologique, les émetteurs des symboles génériques."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "en haut, les deux raccordements (plein pour la chaudière, interrompu pour le réseau à venir) convergent sur l'UNIQUE cercle du point de substitution (x 470, y 368) d'où partent les deux conduites du réseau d'émission ; en bas, les trois liaisons du parti écarté filent de la machine au bâtiment sans rencontrer AUCUN nœud — la géométrie seule oppose « un raccord se change » à « tout est figé »",
+    "topologie": "productions (x 56–330 : chaudière y 264–348 pleine, réseau de chaleur y 396–472 interrompu) → point (x 470, r 10) → conduites y 360/376 → bâtiment (x 880–1144, trois émetteurs génériques) ; parti écarté sous le filet y 500, liaisons y 552/578/604",
+    "bas_du_dessin": "liaisons jusqu'à 604, blocs écartés jusqu'à 620, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 231 x 30 px = 6930 px², soit 0.72 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas chiffrée (révision 4) ; 40 kW reste au mono 10 pivot dans la boîte de la chaudière",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "105 signes — 892 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "deux productions (pleine, interrompue) convergeant sur le point, deux conduites, le bâtiment et ses trois émetteurs — le parti écarté, les tags et l'étiquette du réseau sont laissés à la planche",
+    "bas_du_dessin": "nœud des émetteurs à y 186, marge basse 14 px"
+  }
+}
