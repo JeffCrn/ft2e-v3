@@ -27,47 +27,16 @@ qui exportent vers la droite — jamais par une colonne de chiffres que la page
 porte déjà. La coupe est un gabarit à deux pans symétriques : aucune proportion
 réelle de l'ouvrage n'est reprise (règle 4).
 
-Troisième module du chantier après `sankey-energie.py` et `zonage-ssi.py` : le
-tronc commun (jetons, mesure des chasses, insécables, double écriture des
-couleurs) a maintenant trois occurrences — sa factorisation est actée au suivi,
-décision de dépôt, pas de session.
+Troisième module du chantier après `sankey-energie.py` et `zonage-ssi.py`.
+Le tronc commun vit dans `_tronc.py` depuis le 2026-08-13.
 """
 
-import io
-import json
 import math
-import sys
-from pathlib import Path
 
-NN = " "   # espace fine insécable — texte courant et mono
-INS = " "  # espace insécable normale — relevés en grand corps
+from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, mesurer,
+                    echapper, texte, rect, rect_bord, ligne, polyligne,
+                    fleche, entete_style, executer)
 
-# ── Gabarit (protocole rév. 4) ────────────────────────────────────────────────
-W, H = 1200, 800
-MARGE = 56
-MODULE = 28
-UTILE = W - 2 * MARGE                      # 1088
-
-# ── Gabarit de la VIGNETTE ────────────────────────────────────────────────────
-VW, VH = 300, 200
-V_MARGE = 14
-
-# ── Jetons ────────────────────────────────────────────────────────────────────
-JETON = {
-    "profond": "#001718",
-    "encre": "#00393A",
-    "pivot": "#336667",
-    "clair": "#99CCCD",
-    "voile": "#E1F4F4",
-    "papier": "#F7F9FA",
-    "calcaire": "#EDF0F2",
-    "filet-1": "#00393A38",
-    "filet-2": "#00393A29",
-    "filet-3": "#00393A1F",
-}
-
-SANS = '"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif'
-MONO = '"IBM Plex Mono", ui-monospace, monospace'
 
 # ── Rythme vertical de la planche ────────────────────────────────────────────
 Y_SURTITRE = 76
@@ -114,103 +83,6 @@ X_EXPORT_FIN = 1126
 
 CALL_X = MARGE                # colonne d'appels, à gauche
 CALL_L = 200                  # sa largeur
-
-# Avances CALIBRÉES au rendu navigateur (getBBox) sur la première planche.
-AVANCE = {
-    "sans-400": 0.500,
-    "sans-600": 0.480,
-    "sans-700": 0.596,
-    "mono": 0.600,
-}
-FINE = 0.098               # U+202F dans Archivo — mesuré 3,93 px à 40 px
-INSEC = 0.196              # U+00A0 — mesuré 7,85 px à 40 px
-
-
-def mesurer(t, corps, profil="sans-400", tracking=0.0):
-    """Largeur d'une chaîne, aux avances calibrées ci-dessus."""
-    a = AVANCE[profil]
-    l = 0.0
-    for c in t:
-        if c == NN:
-            l += FINE
-        elif c == INS:
-            l += INSEC
-        else:
-            l += a
-    return l * corps + tracking * max(len(t) - 1, 0)
-
-
-def echapper(t):
-    return (t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
-
-
-def texte(x, y, contenu, police, corps, graisse, couleur,
-          wdth=None, ancre=None, tracking=None, tabulaire=False):
-    """Un nœud de texte. La couleur est écrite DEUX FOIS : classe `var()` pour le
-    navigateur, attribut hexadécimal pour le moteur de rendu de contrôle."""
-    fam = MONO if police == "mono" else SANS
-    cls = f"t-{'mono' if police == 'mono' else 'sans'} c-{couleur}"
-    a = [f'x="{x:.2f}"', f'y="{y:.2f}"', f'class="{cls}"',
-         f'fill="{JETON[couleur]}"', f'font-family=\'{fam}\'',
-         f'font-size="{corps}"', f'font-weight="{graisse}"']
-    if wdth is not None:
-        a.append(f"font-variation-settings=\"'wdth' {wdth}, 'wght' {graisse}\"")
-    if tracking:
-        a.append(f'letter-spacing="{tracking:.2f}"')
-    if ancre:
-        a.append(f'text-anchor="{ancre}"')
-    if tabulaire:
-        a.append('font-variant-numeric="tabular-nums"')
-    return f'  <text {" ".join(a)}>{echapper(contenu)}</text>'
-
-
-def rect(x, y, w, h, couleur):
-    return (f'  <rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" '
-            f'class="c-{couleur}" fill="{JETON[couleur]}"/>')
-
-
-def rect_bord(x, y, w, h, fond, filet):
-    return (f'  <rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" '
-            f'class="c-{fond} s-{filet}" fill="{JETON[fond]}" '
-            f'stroke="{JETON[filet]}" stroke-width="1"/>')
-
-
-def ligne(x0, y0, x1, y1, cle, epaisseur=1.0):
-    return (f'  <path d="M {x0:.2f} {y0:.2f} L {x1:.2f} {y1:.2f}" fill="none" '
-            f'class="s-{cle}" stroke="{JETON[cle]}" '
-            f'stroke-width="{epaisseur}"/>')
-
-
-def polyligne(points, cle, epaisseur=1.0):
-    d = "M " + " L ".join(f"{x:.2f} {y:.2f}" for x, y in points)
-    return (f'  <path d="{d}" fill="none" class="s-{cle}" '
-            f'stroke="{JETON[cle]}" stroke-width="{epaisseur}"/>')
-
-
-def fleche(x, y, cle, direction="droite", taille=9.0):
-    """Pointe de flèche, l'apex en (x, y)."""
-    t, d = taille, taille / 2
-    if direction == "droite":
-        pts = [(x, y), (x - t, y - d), (x - t, y + d)]
-    elif direction == "gauche":
-        pts = [(x, y), (x + t, y - d), (x + t, y + d)]
-    elif direction == "haut":
-        pts = [(x, y), (x - d, y + t), (x + d, y + t)]
-    else:  # bas
-        pts = [(x, y), (x - d, y - t), (x + d, y - t)]
-    d_attr = "M " + " L ".join(f"{px:.2f} {py:.2f}" for px, py in pts) + " Z"
-    return f'  <path d="{d_attr}" class="c-{cle}" fill="{JETON[cle]}"/>'
-
-
-def entete_style(A):
-    A("<style>")
-    for cle, hexa in JETON.items():
-        A(f"  .c-{cle} {{ fill: var(--color-{cle}, {hexa}); }}")
-    for cle in ("filet-1", "filet-2", "filet-3", "encre", "clair"):
-        A(f"  .s-{cle} {{ stroke: var(--color-{cle}, {JETON[cle]}); }}")
-    A(f"  .t-sans {{ font-family: {SANS}; }}")
-    A(f"  .t-mono {{ font-family: {MONO}; }}")
-    A("</style>")
 
 
 def pan_y(x):
@@ -569,30 +441,5 @@ def composer_vignette(donnees):
     return "\n".join(out) + "\n", controles
 
 
-def main():
-    dossier = Path(sys.argv[1])
-    donnees = json.loads((dossier / "planche.json").read_text(encoding="utf-8"))
-    svg, controles = composer(donnees)
-
-    io.open(dossier / "planche.svg", "w", encoding="utf-8", newline="\n").write(svg)
-
-    vignette, controles_vignette = composer_vignette(donnees)
-    io.open(dossier / "vignette.svg", "w", encoding="utf-8", newline="\n").write(vignette)
-
-    donnees["controles"] = controles
-    donnees["controles_vignette"] = controles_vignette
-    io.open(dossier / "planche.json", "w", encoding="utf-8", newline="\n").write(
-        json.dumps(donnees, ensure_ascii=False, indent=2) + "\n")
-
-    print(f"planche.svg  — {len(svg.encode('utf-8'))} octets, "
-          f"{svg.count('<text')} nœuds de texte")
-    print(f"vignette.svg — {len(vignette.encode('utf-8'))} octets, "
-          f"{vignette.count('<text')} nœuds de texte")
-    for k, v in controles_vignette.items():
-        print(f"  · vignette · {k} : {v}")
-    for k, v in controles.items():
-        print(f"  · {k} : {v}")
-
-
 if __name__ == "__main__":
-    main()
+    executer(composer, composer_vignette)
