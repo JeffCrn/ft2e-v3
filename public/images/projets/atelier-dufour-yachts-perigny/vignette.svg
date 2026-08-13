@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">CHALEUR FATALE RÉCUPÉRÉE</text>
+  <rect x="252.00" y="42.00" width="34.00" height="122.00" class="c-calcaire" fill="#EDF0F2"/>
+  <path d="M 22.00 48.00 L 252.00 48.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 22.00 76.00 L 252.00 76.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 22.00 130.00 L 252.00 130.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 22.00 158.00 L 252.00 158.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="104.00" y="42.00" width="36.00" height="40.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 104.00 82.00 L 140.00 42.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="104.00" y="124.00" width="36.00" height="40.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 104.00 164.00 L 140.00 124.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 114.00 82.00 L 114.00 124.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 130.00 82.00 L 130.00 124.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 114.00 106.00 L 111.00 100.00 L 117.00 100.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 130.00 98.00 L 127.00 104.00 L 133.00 104.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 58.00 62.00 L 65.00 58.50 L 65.00 65.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 200.00 62.00 L 207.00 58.50 L 207.00 65.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 58.00 144.00 L 51.00 140.50 L 51.00 147.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 200.00 144.00 L 193.00 140.50 L 193.00 147.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="150.00" y="100.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Boucle glycolée</text>
+  <text x="150.00" y="114.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" font-variant-numeric="tabular-nums">146 045 kWh/an</text>
+  <text x="22.00" y="180.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">L'air neuf</text>
+  <text x="80.00" y="180.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" font-variant-numeric="tabular-nums">38 000 m³/h</text>
+</svg>

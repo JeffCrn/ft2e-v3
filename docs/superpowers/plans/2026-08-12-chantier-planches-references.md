@@ -39,7 +39,7 @@ façade l'affirme.
 | 01 | `ecole-des-douanes-rue-du-jura-la-rochelle` | Monotechnique | `sankey-energie` | ✅ **publiée** |
 | 02 | `abbaye-sablonceaux-ssi` | Patrimoine | `zonage-ssi` | ✅ **publiée** |
 | 03 | `ancien-siege-communautaire-marennes` | Tertiaire / ERP | `coupe-traversee` | 🗂 **produite le 2026-08-13** — bascule du frontmatter et repli mobile `PlancheReference.astro` à faire en session de dépôt |
-| — | `atelier-dufour-yachts-perigny` | Industriel et commercial | | à faire |
+| 04 | `atelier-dufour-yachts-perigny` | Industriel et commercial | `boucle-fluide` | 🗂 **produite le 2026-08-13** — bascule du frontmatter et repli mobile `PlancheReference.astro` à faire en session de dépôt |
 | — | `ateliers-pilotes-capsulae` | Industriel et commercial | | à faire |
 | — | `centre-formation-ormeau-du-pied-saintes` | Tertiaire / ERP | | à faire |
 | — | `creche-oranger-perigny` | Tertiaire / ERP | | à faire |
@@ -66,7 +66,7 @@ façade l'affirme.
 |---|---|---|
 | `sankey-energie` | 1 (École des douanes) | ✅ `scripts/planches/sankey-energie.py` |
 | `zonage-ssi` | 1 (Abbaye de Sablonceaux) | ✅ `scripts/planches/zonage-ssi.py` |
-| `boucle-fluide` | 0 | à écrire |
+| `boucle-fluide` | 1 (Atelier Dufour Yachts, Périgny) | ✅ `scripts/planches/boucle-fluide.py` |
 | `coupe-traversee` | 1 (Ancien siège communautaire, Marennes) | ✅ `scripts/planches/coupe-traversee.py` |
 | `tableau-electrique` | 0 | à écrire |
 | `chronologie-affaire` | 0 | à écrire |
@@ -230,11 +230,13 @@ suppose pas.
 - **Le repli de lecture sous 1024 px** a ses blocs pour `sankey-energie` et `zonage-ssi`.
   Chaque nouvel archétype doit ajouter le sien dans `PlancheReference.astro`, faute de quoi
   la fiche perd son dessin sur téléphone sans rien mettre à la place.
-- **Les quatre autres modules de composition** sont à écrire. Le troisième
-  (`coupe-traversee.py`, planche 03) a été écrit en session de planche sans attendre la
-  factorisation : le **tronc commun** — jetons, mesure des chasses, insécables, double
-  écriture des couleurs — a maintenant **trois occurrences** et sa remontée dans un module
-  partagé est due avant le quatrième. Décision de dépôt, pas de session.
+- **Trois modules de composition restent à écrire** (`tableau-electrique`,
+  `chronologie-affaire`, `planche-chiffree`). Le troisième (`coupe-traversee.py`,
+  planche 03) puis le quatrième (`boucle-fluide.py`, planche 04) ont été écrits en
+  session de planche sans attendre la factorisation : le **tronc commun** — jetons,
+  mesure des chasses, insécables, double écriture des couleurs — a maintenant
+  **quatre occurrences** et sa remontée dans un module partagé, déjà due avant le
+  quatrième, est **en retard d'un module**. Décision de dépôt, pas de session.
 - **Le `grep -c` de Git Bash sous Windows ne sait pas chercher U+202F** (`grep -c $' '`
   rend 0 sur un fichier qui en porte 9) : le contrôle des insécables du protocole se rejoue
   en Python (`collections.Counter`) sur cette machine, pas en grep.
