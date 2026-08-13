@@ -15,8 +15,7 @@ performance: "RT existant par éléments (arrêté du 22 mars 2017) · consommat
 synthese: >-
   Un bâtiment de bureaux de 1970 que la Communauté de communes du Bassin de Marennes a choisi de réhabiliter plutôt que de quitter. Le groupement de maîtrise d’œuvre ne compte que deux cotraitants : SD Architectes pour l’architecture et l’économie, FT2E pour l’ensemble des lots techniques. Avec 530 m², l’opération reste sous le seuil de 1 000 m² et relève de la réglementation thermique par éléments. L’isolation se fait par l’extérieur, la ventilation passe en double flux, et 108 modules photovoltaïques totalisant 33,48 kWc sont posés en surimposition. La consommation conventionnelle tombe de 187,7 à 7,2 kWhep/m²/an, production déduite. Le chantier s’est tenu dans un bâtiment en activité ; la réception a été prononcée le 18 février 2026.
 mission_ft2e: ["Audit & diagnostic", "Thermique", "CVC", "Électricité CFO", "Électricité CFA", "Photovoltaïque"]
-image_principale: "/images/projets/ancien-siege-communautaire-marennes/01.jpg"
-image_principale_alt: "Extrait du plan photovoltaïque FT2E au 1/50 : la toiture de l’ancien siège communautaire vue de dessus, avec les deux champs de modules en surimposition sur les deux pans de couverture, les coffrets alternatif et continu en tête de faîtage et le coffret de branchement à l’angle de l’accès"
+planche: "/images/projets/ancien-siege-communautaire-marennes/planche.svg"
 en_avant: false
 ---
 

@@ -68,6 +68,14 @@ const svgVignette = fs.readFileSync(
 const sk = extraction.sankey;
 const zo = extraction.zonage;
 
+// `coupe-traversee` et `boucle-fluide` partagent la même forme d'extraction :
+// une liste d'éléments ordonnée (règle 7 du protocole — libellé, valeur, unité,
+// détail, dans l'ordre de lecture voulu). Un seul rendeur les sert tous deux ;
+// les archétypes suivants qui adoptent cette forme n'auront rien à ajouter ici.
+const co = extraction.coupe;
+const bo = extraction.boucle;
+const mecanisme = co ?? bo;
+
 // Espaces insécables : la fine (U+202F) pour le texte courant et le mono, la
 // normale (U+00A0) pour les chiffres en grand corps. La mesure au rendu donne
 // 3,93 px contre 7,85 à 40 px — sous la fine, « 152 947 » se lit « 152947 ».
@@ -172,6 +180,48 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
       </dl>
       <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">{zo.apres.consequence}</p>
       <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">{zo.hors_zonage}</p>
+      </Fragment>
+      )}
+
+      {/* Bloc commun aux archétypes à liste d'éléments (`coupe-traversee`,
+          `boucle-fluide`) : les organes dans l'ordre de lecture de
+          l'extraction, chacun avec sa cote. Le groupement de milliers repasse
+          en fine : l'U+00A0 du JSON sert le chiffre de relevé à 22 px, pas le
+          mono de 13. */}
+      {mecanisme && (
+      <Fragment>
+      <p class="mono-label normal-case text-[10px] text-pivot mt-6">{mecanisme.entete}</p>
+      <dl class="mt-3 border-t border-filet-2">
+        {[...mecanisme.elements].sort((a: any, b: any) => a.ordre - b.ordre).map((e: any) => (
+          <div class="flex items-baseline justify-between gap-4 border-b border-filet-3 py-2.5">
+            <dt class="text-[15px] text-encre min-w-0">
+              {e.libelle}
+              {(e.detail ?? []).length > 0 && (
+                <span class="mono-label normal-case font-normal text-[10px] text-pivot block mt-1">
+                  {e.detail.join(' · ')}
+                </span>
+              )}
+              {(e.legende || e.mention) && (
+                <span class="mono-label normal-case font-normal text-[10px] text-pivot block mt-1">
+                  {[e.legende, e.mention].filter(Boolean).join(' — ')}
+                </span>
+              )}
+            </dt>
+            {e.valeur && (
+              <dd class="mono-data text-encre shrink-0">
+                {e.unite
+                  ? cote(e.valeur.replace(/\s/g, FINE), e.unite)
+                  : e.valeur.replace(/\s/g, FINE)}
+              </dd>
+            )}
+          </div>
+        ))}
+      </dl>
+      {bo?.mention_separation && (
+        <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">
+          {bo.mention_separation.join(' — ')}
+        </p>
+      )}
       </Fragment>
       )}
 

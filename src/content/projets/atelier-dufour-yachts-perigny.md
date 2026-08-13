@@ -23,8 +23,7 @@ synthese: >-
   réduit de 74 % la consommation d’énergie finale. L’économie est de
   5 206 € HT par an ; le temps de retour brut est de 26 ans.
 mission_ft2e: ["Audit & diagnostic", "Thermique", "CVC"]
-image_principale: "/images/projets/atelier-dufour-yachts-perigny/01.jpg"
-image_principale_alt: "Schéma de principe de la récupération de chaleur : en haut, la centrale de reprise — filtres, batterie de récupération, filtres — où l’air repris entre par la droite et l’air rejeté sort par la gauche ; en bas, la centrale de soufflage — filtres, batterie de récupération, module gaz, module thermodynamique, filtres — où l’air extérieur entre par la gauche et l’air soufflé sort par la droite ; entre les deux, une boucle d’eau glycolée à deux conduites, munie d’un circulateur, de vannes d’isolement et d’un vase d’expansion, qui relie les deux batteries sans mettre les flux d’air en contact"
+planche: "/images/projets/atelier-dufour-yachts-perigny/planche.svg"
 en_avant: false
 ---
 
