@@ -134,59 +134,52 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
       </Fragment>
       )}
 
-      {/* Bloc propre à l'archétype `zonage-ssi` : la bande AVANT (une seule
-          zone), puis la pile des zones APRÈS, puis les blocs hors zonage.
-          Même matière que le dessin — le JSON —, composée en liste. */}
+      {/* Bloc propre à l'archétype `zonage-ssi` : un même déclenchement suivi
+          à travers les deux systèmes — avant, l'alarme se diffuse partout ;
+          après, seule la zone concernée évacue. Même matière que le dessin —
+          le JSON —, composée en liste. */}
       {zo && (
       <Fragment>
       <p class="mono-label normal-case text-[10px] text-pivot mt-6">{zo.entete}</p>
-      <div class="mt-3 border-t border-filet-2 border-b border-filet-3 py-2.5">
-        <p class="mono-label normal-case font-normal text-[10px] text-pivot">{zo.avant.tag}</p>
-        <div class="flex items-baseline justify-between gap-4 mt-1">
-          <p class="text-[15px] text-encre min-w-0">{zo.avant.libelle}</p>
-          <p class="mono-data text-encre shrink-0">{cote(zo.avant.valeur, zo.avant.unite)}</p>
+      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-4">{zo.avant.tag}</p>
+      <div class="mt-2 border-t border-filet-2 border-b border-filet-3 py-2.5">
+        <p class="text-[15px] text-encre">
+          {zo.avant.systeme.libelle}
+          <span class="mono-label normal-case font-normal text-[10px] text-pivot block mt-1">
+            {zo.avant.systeme.detail.join(' · ')}
+          </span>
+        </p>
+        <div class="flex items-baseline justify-between gap-4 mt-2">
+          <p class="text-[15px] font-semibold text-encre min-w-0">{zo.avant.diffusion.libelle}</p>
+          <p class="mono-data text-encre shrink-0">{cote(zo.avant.diffusion.valeur, zo.avant.diffusion.unite)}</p>
         </div>
-        {(zo.avant.detail ?? []).length > 0 && (
-          <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-1">
-            {zo.avant.detail.join(' · ')}
-          </p>
-        )}
       </div>
-      <p class="mono-label normal-case text-[10px] text-pivot mt-5">{zo.apres_tag}</p>
-      <dl class="mt-3 border-t border-filet-2">
-        {zo.zones.map((z: any) => (
-          <div class="border-b border-filet-3 py-2.5">
-            <dt class="text-[15px] font-semibold text-encre">
+      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-5">{zo.apres.tag}</p>
+      <dl class="mt-2 border-t border-filet-2">
+        {zo.apres.zones.map((z: any) => (
+          <div class="flex items-baseline justify-between gap-4 border-b border-filet-3 py-2.5">
+            <dt class="text-[15px] font-semibold text-encre min-w-0">
               <span class="mono-label normal-case font-normal text-[10px] text-pivot block mb-1">{z.tag}</span>
               {z.libelle}
             </dt>
-            {(z.detail ?? []).length > 0 && (
-              <dd class="mono-label normal-case font-normal text-[10px] text-pivot mt-1">
-                {z.detail.join(' · ')}
-              </dd>
-            )}
-          </div>
-        ))}
-        {(zo.hors_zonage ?? []).map((hz: any) => (
-          <div class="border-b border-filet-1 py-2.5">
-            <dt class="text-[15px] text-encre">
-              <span class="mono-label normal-case font-normal text-[10px] text-pivot block mb-1">{hz.tag}</span>
-              {hz.libelle}
-            </dt>
-            {(hz.detail ?? []).length > 0 && (
-              <dd class="mono-label normal-case font-normal text-[10px] text-pivot mt-1">
-                {hz.detail.join(' · ')}
+            {z.mention && (
+              <dd class="mono-label normal-case font-normal text-[10px] text-pivot shrink-0 text-right">
+                {z.mention}
               </dd>
             )}
           </div>
         ))}
       </dl>
-      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">
-        {zo.note_pied.join(' · ')}
-      </p>
+      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">{zo.apres.consequence}</p>
+      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">{zo.hors_zonage}</p>
       </Fragment>
       )}
 
+      {/* Le relevé chiffré est optionnel depuis le 2026-08-13 : la planche
+          schématise la solution, elle ne récapitule pas les chiffres que la
+          fiche porte déjà (principe arrêté par FT2E sur la planche 02). */}
+      {(extraction.releve ?? []).length > 0 && (
+      <Fragment>
       <p class="mono-label normal-case text-[10px] text-pivot mt-8">{extraction.releve_entete}</p>
       <dl class="mt-3">
         {extraction.releve.map((r: any, i: number) => (
@@ -201,6 +194,8 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
           </div>
         ))}
       </dl>
+      </Fragment>
+      )}
 
       <p class="text-[16px] text-encre leading-[1.5] mt-6">{extraction.phrase_principe}</p>
     </div>

@@ -18,12 +18,14 @@ Usage :
 La géométrie est CALCULÉE : aucune coordonnée n'est tapée à la main, et le bloc
 `controles` du JSON est recalculé à chaque exécution.
 
-Le motif de l'archétype : un contraste de découpage. La bande AVANT — une seule
-zone d'alarme — s'oppose à la pile des zones APRÈS ; les blocs sont d'ÉGALE
-hauteur parce qu'aucune surface par zone n'est donnée : la géométrie code le
-nombre de zones, jamais leur taille. Un bloc `provisionnee` se distingue par
-deux signes redondants (fond papier + mention dans son étiquette), jamais par
-une couleur — le système n'en a pas.
+Le motif de l'archétype — arrêté avec FT2E le 2026-08-13 : **la planche
+schématise la solution, elle ne récapitule pas la fiche.** Un même déclenchement
+est suivi à travers les deux systèmes : avant, le SDI à zone unique diffuse
+l'alarme partout ; après, la centrale adressable ne la diffuse que dans la zone
+concernée. La démonstration est portée par la géométrie — une barre d'alarme
+(aplat clair) sur tout le site contre une barre sur un seul bloc — jamais par
+une colonne de chiffres que la page porte déjà. Les blocs sont d'égale hauteur :
+aucune surface par zone n'étant donnée, la géométrie ne code que le nombre.
 
 Deuxième module du chantier après `sankey-energie.py` : ce qu'ils partagent
 (jetons, mesure des chasses, insécables, double écriture des couleurs) a
@@ -44,12 +46,6 @@ W, H = 1200, 800
 MARGE = 56
 MODULE = 28
 UTILE = W - 2 * MARGE                      # 1088
-GOUTTIERE = 56
-DESSIN_W = round((UTILE - GOUTTIERE) * 7 / 12)   # 602
-RELEVE_W = UTILE - GOUTTIERE - DESSIN_W          # 430
-DESSIN_X0, DESSIN_X1 = MARGE, MARGE + DESSIN_W
-RELEVE_X0, RELEVE_X1 = DESSIN_X1 + GOUTTIERE, W - MARGE
-SEPARATEUR_X = DESSIN_X1 + GOUTTIERE / 2
 
 # ── Gabarit de la VIGNETTE ────────────────────────────────────────────────────
 VW, VH = 300, 200
@@ -78,19 +74,27 @@ Y_TITRE = 112
 Y_SOUSTITRE = 138
 Y_FILET_TITRE = 160
 Y_ENTETE = 190
-Y_AVANT_TAG = 214
-Y_AVANT = 222
-H_AVANT = 48
-ECART_APRES = 26          # entre la bande AVANT et l'étiquette APRÈS
-DECAL_TAG = 8             # entre l'étiquette APRÈS et le premier bloc
-H_ZONE = 52
-ECART_ZONE = 10
-ECART_HORS = 14
-H_HORS = 44
-PAD = 16                  # retrait interne des blocs
+Y_AVANT_TAG = 226
+Y_AVANT = 240
+H_AVANT = 64
+Y_APRES_TAG = 354
+Y_ZONES = 368
+H_ZONE = 58
+ECART_ZONE = 12
+Y_HORS = 660
 Y_PHRASE = 688
 Y_CARTOUCHE = 714
 H_CARTOUCHE = 30
+
+# ── Partition horizontale : événement → système → diffusion ──────────────────
+EVT_X = MARGE                 # libellé de l'événement
+BOITE_X0, BOITE_W = 270, 226  # boîte du système (SDI, puis centrale)
+BLOC_X0 = 520                 # les blocs du site
+BLOC_X1 = W - MARGE           # 1144
+BLOC_W = BLOC_X1 - BLOC_X0    # 624
+TRONC_X = 508                 # tronc vertical de la distribution APRÈS
+H_BARRE = 8                   # la barre d'alarme — aplat clair en tête de bloc
+PAD = 16
 
 # Avances CALIBRÉES au rendu navigateur (getBBox) sur la première planche.
 AVANCE = {
@@ -164,11 +168,24 @@ def rect(x, y, w, h, couleur):
 
 
 def rect_bord(x, y, w, h, fond, filet):
-    """Bloc de zone : fond opaque + filet 1 px. Le rang du filet est porté par
+    """Bloc à fond opaque + filet 1 px. Le rang du filet est porté par
     l'opacité (filet-1 porteur, filet-2 provisionné, filet-3 indication)."""
     return (f'  <rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" '
             f'class="c-{fond} s-{filet}" fill="{JETON[fond]}" '
             f'stroke="{JETON[filet]}" stroke-width="1"/>')
+
+
+def ligne(x0, y0, x1, y1, cle, epaisseur=1.0):
+    return (f'  <path d="M {x0:.2f} {y0:.2f} L {x1:.2f} {y1:.2f}" fill="none" '
+            f'class="s-{cle}" stroke="{JETON[cle]}" '
+            f'stroke-width="{epaisseur}"/>')
+
+
+def fleche(x, y, cle):
+    """Pointe de flèche vers la droite, l'apex en (x, y)."""
+    return (f'  <path d="M {x:.2f} {y:.2f} L {x - 9:.2f} {y - 4.5:.2f} '
+            f'L {x - 9:.2f} {y + 4.5:.2f} Z" class="c-{cle}" '
+            f'fill="{JETON[cle]}"/>')
 
 
 def entete_style(A):
@@ -180,6 +197,33 @@ def entete_style(A):
     A(f"  .t-sans {{ font-family: {SANS}; }}")
     A(f"  .t-mono {{ font-family: {MONO}; }}")
     A("</style>")
+
+
+def barre_alarme(A, x, y, w):
+    """La barre d'alarme : un aplat clair en tête de bloc — le seul signe.
+    Le clair n'est jamais surface de lecture : aucun texte ne s'y pose."""
+    A(rect(x + 1, y + 1, w - 2, H_BARRE, "clair"))
+
+
+def evenement(A, cy, libelle):
+    """Le déclencheur : libellé mono, marque carrée (rayon 0 — la charte ne
+    connaît qu'un seul cercle, la puce de section), trait vers le système."""
+    A(texte(EVT_X, cy + 3, libelle, "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(rect(BOITE_X0 - 18, cy - 3.5, 7, 7, "encre"))
+    A(ligne(BOITE_X0 - 11, cy, BOITE_X0, cy, "encre", 1.0))
+
+
+def boite_systeme(A, y, h, systeme):
+    """La boîte du système : nom en Archivo, propriétés en mono."""
+    A(rect_bord(BOITE_X0, y, BOITE_W, h, "papier", "filet-1"))
+    n = len(systeme["detail"])
+    base = y + h / 2 - (n * 13 + 4) / 2 + 8
+    A(texte(BOITE_X0 + PAD, base, systeme["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    for k, l in enumerate(systeme["detail"]):
+        A(texte(BOITE_X0 + PAD, base + 18 + k * 13, l, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
 
 
 def composer(donnees):
@@ -210,120 +254,89 @@ def composer(donnees):
             "pivot", wdth=100))
     A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
 
-    # ── En-têtes de périmètre ────────────────────────────────────────────────
-    controler("en-tête dessin", z["entete"], 10, "mono", DESSIN_W, 10 * 0.14)
-    A(texte(DESSIN_X0, Y_ENTETE, z["entete"], "mono", 10, 500,
+    # ── En-tête du schéma + légende de la barre d'alarme ─────────────────────
+    controler("en-tête schéma", z["entete"], 10, "mono", 700, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, z["entete"], "mono", 10, 500,
             "pivot", tracking=10 * 0.14))
-    controler("en-tête relevé", donnees["releve_entete"], 10, "mono",
-              RELEVE_W, 10 * 0.14)
-    A(texte(RELEVE_X0, Y_ENTETE, donnees["releve_entete"], "mono", 10, 500,
-            "pivot", tracking=10 * 0.14))
-    A(rect(SEPARATEUR_X, Y_FILET_TITRE + 12, 1, 488, "filet-3"))
+    l_legende = mesurer(z["legende_alarme"], 10, "mono", 10 * 0.14)
+    A(rect(BLOC_X1 - l_legende - 22, Y_ENTETE - 7, 14, H_BARRE, "clair"))
+    A(texte(BLOC_X1, Y_ENTETE, z["legende_alarme"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
 
-    # ── AVANT : la zone unique d'origine ─────────────────────────────────────
+    # ── AVANT : une seule zone, l'alarme se diffuse partout ──────────────────
     avant = z["avant"]
-    A(texte(DESSIN_X0, Y_AVANT_TAG, avant["tag"], "mono", 10, 500,
+    controler("tag AVANT", avant["tag"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_AVANT_TAG, avant["tag"], "mono", 10, 500,
             "pivot", tracking=10 * 0.14))
-    A(rect_bord(DESSIN_X0, Y_AVANT, DESSIN_W, H_AVANT, "calcaire", "filet-1"))
-    valeur_avant = f'{avant["valeur"]}{NN}{avant["unite"]}'
-    largeur_valeur = mesurer(valeur_avant, 12, "mono")
-    controler("libellé AVANT", avant["libelle"], 15, "sans-400",
-              DESSIN_W - 2 * PAD - largeur_valeur - 16)
-    A(texte(DESSIN_X0 + PAD, Y_AVANT + 21, avant["libelle"], "sans", 15, 400,
-            "encre", wdth=100))
-    A(texte(DESSIN_X1 - PAD, Y_AVANT + 21, valeur_avant, "mono", 12, 500,
+    cy = Y_AVANT + H_AVANT / 2
+    controler("événement", z["evenement"], 10, "mono",
+              BOITE_X0 - 18 - 10 - EVT_X, 10 * 0.14)
+    evenement(A, cy, z["evenement"])
+    boite_systeme(A, Y_AVANT, H_AVANT, avant["systeme"])
+    A(ligne(BOITE_X0 + BOITE_W, cy, BLOC_X0 - 9, cy, "encre", 1.5))
+    A(fleche(BLOC_X0, cy, "encre"))
+    diff = avant["diffusion"]
+    A(rect_bord(BLOC_X0, Y_AVANT, BLOC_W, H_AVANT, "calcaire", "filet-1"))
+    if diff.get("alarme"):
+        barre_alarme(A, BLOC_X0, Y_AVANT, BLOC_W)
+    A(texte(BLOC_X0 + PAD, Y_AVANT + 41, diff["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    A(texte(BLOC_X1 - PAD, Y_AVANT + 41,
+            f'{diff["valeur"]}{NN}{diff["unite"]}', "mono", 12, 500,
             "encre", ancre="end", tabulaire=True))
-    for k, ligne in enumerate(avant["detail"]):
-        controler(f"détail AVANT {k+1}", ligne, 10, "mono",
-                  DESSIN_W - 2 * PAD, 10 * 0.14)
-        A(texte(DESSIN_X0 + PAD, Y_AVANT + 38 + k * 13, ligne, "mono", 10, 500,
-                "pivot", tracking=10 * 0.14))
 
-    # ── APRÈS : la pile des zones ────────────────────────────────────────────
-    y_apres_tag = Y_AVANT + H_AVANT + ECART_APRES
-    A(texte(DESSIN_X0, y_apres_tag, z["apres_tag"], "mono", 10, 500,
+    # ── APRÈS : la centrale adressable ne diffuse que dans la zone concernée ─
+    apres = z["apres"]
+    controler("tag APRÈS", apres["tag"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_APRES_TAG, apres["tag"], "mono", 10, 500,
             "pivot", tracking=10 * 0.14))
-    y = y_apres_tag + DECAL_TAG
-    for zone in z["zones"]:
+
+    zones = apres["zones"]
+    centres = []
+    y = Y_ZONES
+    for zone in zones:
         prov = zone.get("etat") == "provisionnee"
-        fond = "papier" if prov else "calcaire"
         filet = "filet-2" if prov else "filet-1"
-        A(rect_bord(DESSIN_X0, y, DESSIN_W, H_ZONE, fond, filet))
-        A(texte(DESSIN_X0 + PAD, y + 19, zone["tag"], "mono", 10, 500,
+        A(rect_bord(BLOC_X0, y, BLOC_W, H_ZONE, "calcaire" if not prov else "papier", filet))
+        if zone.get("alarme"):
+            barre_alarme(A, BLOC_X0, y, BLOC_W)
+        A(texte(BLOC_X0 + PAD, y + 24, zone["tag"], "mono", 10, 500,
                 "pivot", tracking=10 * 0.14))
-        largeur_nom = mesurer(zone["libelle"], 15, "sans-600")
-        A(texte(DESSIN_X0 + PAD, y + 40, zone["libelle"], "sans", 15, 600,
+        A(texte(BLOC_X0 + PAD, y + 45, zone["libelle"], "sans", 15, 600,
                 "encre", wdth=112))
-        details = zone.get("detail", []) or []
-        base = y + H_ZONE / 2 + 3.5 - (len(details) - 1) * 7
-        for k, ligne in enumerate(details):
-            controler(f'détail {zone["cle"]} {k+1}', ligne, 10, "mono",
-                      DESSIN_W - 2 * PAD - largeur_nom - 16, 10 * 0.14)
-            A(texte(DESSIN_X1 - PAD, base + k * 14, ligne, "mono", 10, 500,
+        if zone.get("mention"):
+            controler(f'mention {zone["cle"]}', zone["mention"], 10, "mono",
+                      BLOC_W - 2 * PAD - mesurer(zone["libelle"], 15, "sans-600") - 16,
+                      10 * 0.14)
+            A(texte(BLOC_X1 - PAD, y + 45, zone["mention"], "mono", 10, 500,
                     "pivot", ancre="end", tracking=10 * 0.14))
+        centres.append((y + H_ZONE / 2, bool(zone.get("alarme"))))
         y += H_ZONE + ECART_ZONE
     bas_zones = y - ECART_ZONE
 
-    # ── Hors zonage ──────────────────────────────────────────────────────────
-    y_hors = bas_zones + ECART_HORS
-    for hz in z["hors_zonage"]:
-        A(rect_bord(DESSIN_X0, y_hors, DESSIN_W, H_HORS, "papier", "filet-3"))
-        A(texte(DESSIN_X0 + PAD, y_hors + 17, hz["tag"], "mono", 10, 500,
-                "pivot", tracking=10 * 0.14))
-        largeur_nom = mesurer(hz["libelle"], 15, "sans-400")
-        A(texte(DESSIN_X0 + PAD, y_hors + 36, hz["libelle"], "sans", 15, 400,
-                "encre", wdth=100))
-        details = hz.get("detail", []) or []
-        base = y_hors + H_HORS / 2 + 3.5 - (len(details) - 1) * 7
-        for k, ligne in enumerate(details):
-            controler(f'détail {hz["cle"]} {k+1}', ligne, 10, "mono",
-                      DESSIN_W - 2 * PAD - largeur_nom - 16, 10 * 0.14)
-            A(texte(DESSIN_X1 - PAD, base + k * 14, ligne,
-                    "mono", 10, 500, "pivot", ancre="end", tracking=10 * 0.14))
-        y_hors += H_HORS
-    bas_dessin = y_hors
+    # La centrale, centrée sur la pile, et sa distribution orthogonale : un
+    # tronc, quatre départs — seul le départ en alarme est encré et fléché.
+    H_BOITE = 72
+    centre_pile = (Y_ZONES + bas_zones) / 2
+    y_boite = centre_pile - H_BOITE / 2
+    cy = centre_pile
+    controler("événement", z["evenement"], 10, "mono",
+              BOITE_X0 - 18 - 10 - EVT_X, 10 * 0.14)
+    evenement(A, cy, z["evenement"])
+    boite_systeme(A, y_boite, H_BOITE, apres["systeme"])
+    A(ligne(BOITE_X0 + BOITE_W, cy, TRONC_X, cy, "filet-1", 1.0))
+    A(ligne(TRONC_X, centres[0][0], TRONC_X, centres[-1][0], "filet-1", 1.0))
+    for c, alarme in centres:
+        if alarme:
+            A(ligne(TRONC_X, c, BLOC_X0 - 9, c, "encre", 1.5))
+            A(fleche(BLOC_X0, c, "encre"))
+        else:
+            A(ligne(TRONC_X, c, BLOC_X0, c, "filet-2", 1.0))
 
-    # ── Note de pied de la zone de dessin ────────────────────────────────────
-    y_filet_note = bas_dessin + 14
-    A(rect(DESSIN_X0, y_filet_note, DESSIN_W, 1, "filet-3"))
-    y_note = y_filet_note + 16
-    for k, ligne in enumerate(z["note_pied"]):
-        controler(f"note de pied {k+1}", ligne, 10, "mono", DESSIN_W, 10 * 0.14)
-        A(texte(DESSIN_X0, y_note + k * 13, ligne, "mono", 10, 500,
-                "pivot", tracking=10 * 0.14))
-    bas_notes = y_note + (len(z["note_pied"]) - 1) * 13
-
-    # ── Colonne de relevé ────────────────────────────────────────────────────
-    y = 244.0
-    for i, r in enumerate(donnees["releve"]):
-        couleur = "encre" if i == 0 else "pivot"
-        x = RELEVE_X0
-        if r.get("prefixe"):
-            A(texte(x, y, r["prefixe"], "sans", 22, 400, "pivot", wdth=100))
-            x += mesurer(r["prefixe"], 22, "sans-400") + 14
-        A(texte(x, y, r["valeur"], "sans", 40, 700, couleur, wdth=118,
-                tabulaire=True))
-        x += mesurer(r["valeur"], 40, "sans-700") + 8
-        A(texte(x, y, r["unite"], "sans", 15, 400, couleur, wdth=100))
-        for k, ligne in enumerate(r["legende"]):
-            controler(f"légende relevé {i+1}.{k+1}", ligne, 10, "mono",
-                      RELEVE_W, 10 * 0.14)
-            A(texte(RELEVE_X0, y + 24 + k * 14, ligne, "mono", 10, 500,
-                    "pivot", tracking=10 * 0.14))
-        y += 96
-    A(rect(RELEVE_X0, y - 44, RELEVE_W, 1, "filet-3"))
-    y -= 8
-    for j, r in enumerate(donnees["releve_secondaire"]):
-        A(texte(RELEVE_X0, y, r["intitule"], "sans", 16, 600, "encre", wdth=112))
-        A(texte(RELEVE_X1, y, r["valeur"], "sans", 22, 700, "pivot",
-                wdth=118, ancre="end", tabulaire=True))
-        for k, ligne in enumerate(r["appui"]):
-            controler(f"appui secondaire {j+1}.{k+1}", ligne, 10, "mono",
-                      RELEVE_W, 10 * 0.14)
-            A(texte(RELEVE_X0, y + 22 + k * 14, ligne, "mono", 10, 500,
-                    "pivot", tracking=10 * 0.14))
-        y += 76
-    bas_releve = y - 76 + 22 + 14
+    # ── Hors zonage : une ligne, pas un bloc ─────────────────────────────────
+    controler("hors zonage", z["hors_zonage"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_HORS, z["hors_zonage"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
 
     # ── Phrase de principe, pleine largeur ───────────────────────────────────
     controler("phrase de principe", donnees["phrase_principe"], 17,
@@ -333,7 +346,7 @@ def composer(donnees):
 
     # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
     libelle = donnees["cartouche_legende"]
-    largeur = min(DESSIN_W,
+    largeur = min(600,
                   round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
     A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
     A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
@@ -341,23 +354,24 @@ def composer(donnees):
 
     A("</svg>")
 
-    actives = sum(1 for zz in z["zones"] if zz.get("etat") != "provisionnee")
-    prov = len(z["zones"]) - actives
+    barres_avant = 1 if z["avant"]["diffusion"].get("alarme") else 0
+    barres_apres = sum(1 for zz in zones if zz.get("alarme"))
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "partition": f"zone de dessin {DESSIN_W} px / colonne de relevé {RELEVE_W} px "
-                     f"= {DESSIN_W/RELEVE_W:.4f} — partition 7/5 de la charte",
-        "comptage_zones": f"1 bande AVANT + {actives} zones actives + {prov} provisionnée "
-                          f"+ {len(z['hors_zonage'])} bloc hors zonage — blocs d'égale "
-                          f"hauteur, la géométrie ne code que le nombre",
-        "bas_du_dessin": f"blocs jusqu'à {bas_dessin:.0f} px, note de pied "
-                         f"{y_note:.0f}–{bas_notes:.0f} px — phrase de principe à "
-                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE+H_CARTOUCHE}, "
+        "demonstration": f"barres d'alarme : {barres_avant} sur 1 bloc AVANT "
+                         f"(tout le site) contre {barres_apres} sur {len(zones)} "
+                         f"blocs APRÈS — la géométrie porte la thèse, aucun "
+                         f"chiffre de la fiche n'est répété",
+        "topologie": f"événement (x {EVT_X}) → système (x {BOITE_X0}–"
+                     f"{BOITE_X0 + BOITE_W}) → site (x {BLOC_X0}–{BLOC_X1}) ; "
+                     f"tronc de distribution à x {TRONC_X}",
+        "bas_du_dessin": f"pile de zones jusqu'à {bas_zones:.0f} px, ligne hors "
+                         f"zonage à {Y_HORS}, phrase de principe à {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
                          f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
-        "bas_du_releve": f"relevé secondaire jusqu'à {bas_releve:.0f} px",
         "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
-                            f"{largeur*H_CARTOUCHE} px², soit "
-                            f"{largeur*H_CARTOUCHE/(W*H)*100:.2f} % de la planche",
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % de la planche",
         "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 "
                          f"(1152 / {W})",
         "depassements": depassements if depassements
@@ -369,14 +383,14 @@ def composer(donnees):
 def composer_vignette(donnees):
     """La vignette : le motif de l'archétype, sans son appareil.
 
-    Ce qu'elle garde : le contraste une zone / trois zones — la bande unique
-    d'origine à gauche, la pile des trois zones actives à droite, et la surface
-    évacuée comme valeur du nœud AVANT. Ce qu'elle laisse : la zone
-    provisionnée, le bloc hors zonage, les classements, le relevé, la phrase
-    de principe et le cartouche. Trois blocs nommés dans 300 px se lisent ;
-    six blocs annotés ne se liraient pas."""
+    Ce qu'elle garde : le contraste une zone / trois zones — le bloc unique
+    d'origine à gauche, la pile des trois zones actives à droite, et la
+    surface évacuée comme valeur du nœud AVANT. Ce qu'elle laisse : la zone
+    provisionnée, le hors zonage, l'événement et les systèmes. Trois blocs
+    nommés dans 300 px se lisent ; six blocs annotés ne se liraient pas."""
     z = donnees["zonage"]
-    zones = [zz for zz in z["zones"] if zz.get("etat") != "provisionnee"]
+    zones = [zz for zz in z["apres"]["zones"] if zz.get("etat") != "provisionnee"]
+    avant = z["avant"]["diffusion"]
 
     out = []
     A = out.append
@@ -399,13 +413,12 @@ def composer_vignette(donnees):
 
     # Bloc AVANT : la zone unique, avec sa valeur.
     A(rect_bord(bloc_g_x, y0, bloc_g_w, h_pile, "calcaire", "filet-1"))
-    avant = z["avant"]
     lignes = replier(avant.get("libelle_vignette", avant["libelle"]), 12,
                      bloc_g_w - 20, "sans-600")
     centre = y0 + h_pile / 2
     base = centre - 8 - (len(lignes) - 1) * 8
-    for k, ligne in enumerate(lignes):
-        A(texte(bloc_g_x + 10, base + k * 16, ligne, "sans", 12, 600,
+    for k, l in enumerate(lignes):
+        A(texte(bloc_g_x + 10, base + k * 16, l, "sans", 12, 600,
                 "encre", wdth=112))
     A(texte(bloc_g_x + 10, base + (len(lignes) - 1) * 16 + 20,
             f'{avant["valeur"]}{NN}{avant["unite"]}', "mono", 10, 500,
@@ -438,8 +451,8 @@ def composer_vignette(donnees):
         "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
-        "motif": f"1 bande AVANT contre {len(zones)} zones actives — la zone "
-                 f"provisionnée et le bloc hors zonage sont laissés à la planche",
+        "motif": f"1 bloc AVANT contre {len(zones)} zones actives — la zone "
+                 f"provisionnée et le hors zonage sont laissés à la planche",
         "bas_du_dessin": f"{VH - 24} px, marge basse 24 px",
     }
     return "\n".join(out) + "\n", controles

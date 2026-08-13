@@ -169,6 +169,31 @@ page. Ils sont consignés au protocole ; en voici la leçon commune.
 | `.mono-label` et `@layer base` recapitalisent | la même faute commise deux fois, par deux couches différentes |
 | Vignette par recadrage — **3 essais, tous mauvais** | un dessin de 1200 lu à 290 tombe à 0,24 où qu'on le coupe |
 
+## Ce que la deuxième planche a arrêté — 2026-08-13
+
+**La planche schématise la solution, elle ne récapitule pas la fiche.** La première
+version de la planche 02 alignait des blocs étiquetés (classements ERP, détails de
+détection) et une colonne de relevé chiffré : un tableau de synthèse habillé, pas un
+schéma. FT2E l'a refusée en posant le principe : le composant installe une dimension
+**visuelle et synthétique** de l'affaire — pas une photo, pas une pièce de dossier,
+et pas davantage une répétition des données que la page porte déjà dix lignes plus bas.
+
+Conséquences, appliquées à la planche 02 et opposables aux suivantes :
+
+- **Le dessin suit un mécanisme.** Pour `zonage-ssi` : un même déclenchement traverse
+  les deux systèmes — avant, le SDI à zone unique diffuse l'alarme partout ; après, la
+  centrale adressable ne la diffuse que dans la zone concernée. La démonstration est
+  portée par la géométrie (une barre d'alarme sur tout le site contre une barre sur un
+  seul bloc), le signe étant toujours doublé d'une flèche encrée et d'une mention.
+- **Le relevé chiffré ne monte plus sur la planche.** Le champ `releve` du JSON peut
+  être vide ; `PlancheReference.astro` ne rend la section du repli mobile que s'il est
+  peuplé. Les classements ERP, essais et durées restent au texte de la fiche.
+- **À répercuter** : le protocole (révision 4 à écrire — le gabarit prescrit encore la
+  partition 7/5 avec colonne de relevé) et la **planche 01** (sa colonne de relevé
+  répète la fiche de l'École des douanes — réalignement à trancher avec FT2E).
+
+---
+
 **Le fil commun : mesurer plutôt qu'estimer.** L'estimation des chasses posait l'unité du
 relevé 22 px trop loin ; le `getBBox()` du navigateur a donné 0,596 em pour le chiffre
 d'Archivo 700, et le décalage a disparu. Toute cote de ce chantier se relève, elle ne se
