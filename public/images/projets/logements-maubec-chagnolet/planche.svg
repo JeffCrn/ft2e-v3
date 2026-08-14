@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la partition réglementaire du chauffage : treize logements en trois bâtiments sur un même site, séparés par une frontière réglementaire invisible sur le plan de masse. Côté logements collectifs, les bâtiments A et B reçoivent dix chaudières gaz à condensation individuelles sous des plafonds d’Ic énergie de 632,6 et 650,3 kilogrammes d’équivalent CO₂ par mètre carré ; côté maisons individuelles ou accolées, le bâtiment C passe en pompe à chaleur air-eau et en tout-électrique sous un plafond trois fois plus sévère, 206,5. Les trois pistes, dessinées à la même échelle, montrent chaque résultat sous son plafond — 474,2, 519,2 et 76,4 — et les résultats du gaz au-delà du plafond des maisons accolées.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · DEUX RÉGIMES RE2020, TROIS GÉNÉRATEURS</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Maubec, treize logements</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Le plafond carbone, trois fois plus sévère côté maisons, commande les générateurs</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TREIZE LOGEMENTS, TROIS BÂTIMENTS, UN MÊME DOSSIER · L’IC ÉNERGIE DE LA RE2020, EN kg éq. CO2/m², PLAFONNE CINQUANTE ANS D’ÉNERGIE</text>
+  <rect x="56.00" y="206.00" width="18.00" height="10.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="82.00" y="215.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RÉSULTAT OBTENU</text>
+  <rect x="221.60" y="206.00" width="18.00" height="10.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="247.60" y="215.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PLAFOND APRÈS MODULATION</text>
+  <rect x="453.80" y="205.00" width="12.00" height="12.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="473.80" y="215.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN LOGEMENT</text>
+  <text x="56.00" y="246.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LOGEMENTS COLLECTIFS · BÂTIMENTS A ET B</text>
+  <text x="56.00" y="276.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bâtiment A</text>
+  <rect x="146.00" y="263.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="168.00" y="263.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="190.00" y="263.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="212.00" y="263.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="56.00" y="298.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">QUATRE T3 · 261,1 m² · COLLECTIF · R+1</text>
+  <text x="56.00" y="322.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Chaudière gaz à condensation individuelle</text>
+  <text x="56.00" y="340.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UNE PAR LOGEMENT · 3,4 À 18,5 kW · VENTOUSE</text>
+  <rect x="470.00" y="268.00" width="632.60" height="30.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <rect x="470.00" y="268.00" width="474.20" height="30.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="1094.60" y="262.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">PLAFOND 632,6</text>
+  <text x="954.20" y="287.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" font-variant-numeric="tabular-nums">474,2</text>
+  <text x="56.00" y="384.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bâtiment B</text>
+  <rect x="146.00" y="371.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="168.00" y="371.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="190.00" y="371.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="212.00" y="371.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="234.00" y="371.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="256.00" y="371.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="56.00" y="406.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">QUATRE T2 ET DEUX T3 · 323,4 m² · COLLECTIF · R+1</text>
+  <text x="56.00" y="430.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Chaudière gaz à condensation individuelle</text>
+  <text x="56.00" y="448.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UNE PAR LOGEMENT · 3,4 À 18,5 kW · VENTOUSE</text>
+  <rect x="470.00" y="376.00" width="650.30" height="30.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <rect x="470.00" y="376.00" width="519.20" height="30.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="1112.30" y="370.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">PLAFOND 650,3</text>
+  <text x="999.20" y="395.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" font-variant-numeric="tabular-nums">519,2</text>
+  <text x="56.00" y="478.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA FRONTIÈRE RÉGLEMENTAIRE — INVISIBLE SUR LE PLAN DE MASSE</text>
+  <path d="M 56.00 488.00 L 1144.00 488.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 56.00 492.00 L 1144.00 492.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="56.00" y="512.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MAISONS INDIVIDUELLES OU ACCOLÉES AU SENS DE LA RE2020 · BÂTIMENT C</text>
+  <text x="1144.00" y="512.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LE PLAFOND TROIS FOIS PLUS SÉVÈRE AU-DELÀ</text>
+  <text x="56.00" y="538.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bâtiment C</text>
+  <rect x="146.00" y="525.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="168.00" y="525.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="190.00" y="525.00" width="16.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="56.00" y="560.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TROIS MAISONS ACCOLÉES · UN T1 ET DEUX T4 · 182,8 m²</text>
+  <text x="56.00" y="584.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Pompe à chaleur air-eau double service</text>
+  <text x="56.00" y="602.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES DEUX T4 · R32 · COP 4,74 À 7 °C · BALLON 190 L</text>
+  <text x="56.00" y="628.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Tout-électrique</text>
+  <text x="56.00" y="646.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE T1 · BALLON THERMODYNAMIQUE 100 L</text>
+  <rect x="470.00" y="530.00" width="206.50" height="30.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <rect x="470.00" y="530.00" width="76.40" height="30.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="668.50" y="524.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">PLAFOND 206,5</text>
+  <text x="556.40" y="549.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" font-variant-numeric="tabular-nums">76,4</text>
+  <path d="M 676.50 252.00 L 676.50 574.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="684.50" y="246.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">206,5 — LE PLAFOND DES ACCOLÉES, PROLONGÉ SUR LES COLLECTIFS</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Cette frontière, invisible sur le plan de masse, commande deux jeux de seuils réglementaires distincts.</text>
+  <rect x="56.00" y="714.00" width="236.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">CHAGNOLET · 767 m² · 2022</text>
+</svg>

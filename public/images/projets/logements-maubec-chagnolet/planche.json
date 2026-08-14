@@ -1,0 +1,197 @@
+{
+  "fiche": "logements-maubec-chagnolet",
+  "archetype": "sankey-energie",
+  "archetype_motif": "La thèse de la fiche est une partition proportionnelle : une frontière réglementaire invisible sur le plan de masse sépare les logements collectifs des maisons accolées, et le plafond carbone de la RE2020 — l’Ic énergie, l’indicateur que la fiche désigne elle-même comme la clé de la partition — y tombe de 650,3 à 206,5, « soit trois fois plus sévère ». C’est une démonstration de grandeurs, le domaine de sankey-energie, sous un mécanisme nouveau, `plafonds` : trois pistes à la même origine et à la même échelle, le plafond qui s’effondre au passage de la frontière, le générateur qui répond — le gaz garde les collectifs, la pompe à chaleur prend les maisons. Ni boucle-fluide (le parti maison par maison est la planche du Fougerou, et la boucle n’explique pas le pourquoi), ni zonage-ssi (rien d’incendie), ni chronologie (le calendrier de chantier est une autre histoire).",
+  "surtitre": "SCHÉMA DE PRINCIPE · DEUX RÉGIMES RE2020, TROIS GÉNÉRATEURS",
+  "titre": "Maubec, treize logements",
+  "sous_titre": "Le plafond carbone, trois fois plus sévère côté maisons, commande les générateurs",
+  "cartouche_legende": "CHAGNOLET · 767 m² · 2022",
+  "aria_label": "Schéma de principe de la partition réglementaire du chauffage : treize logements en trois bâtiments sur un même site, séparés par une frontière réglementaire invisible sur le plan de masse. Côté logements collectifs, les bâtiments A et B reçoivent dix chaudières gaz à condensation individuelles sous des plafonds d’Ic énergie de 632,6 et 650,3 kilogrammes d’équivalent CO₂ par mètre carré ; côté maisons individuelles ou accolées, le bâtiment C passe en pompe à chaleur air-eau et en tout-électrique sous un plafond trois fois plus sévère, 206,5. Les trois pistes, dessinées à la même échelle, montrent chaque résultat sous son plafond — 474,2, 519,2 et 76,4 — et les résultats du gaz au-delà du plafond des maisons accolées.",
+  "plafonds": {
+    "entete": "TREIZE LOGEMENTS, TROIS BÂTIMENTS, UN MÊME DOSSIER · L’IC ÉNERGIE DE LA RE2020, EN kg éq. CO2/m², PLAFONNE CINQUANTE ANS D’ÉNERGIE",
+    "unite": "kg éq. CO2/m²",
+    "legende_resultat": "RÉSULTAT OBTENU",
+    "legende_plafond": "PLAFOND APRÈS MODULATION",
+    "legende_logement": "UN LOGEMENT",
+    "regime_collectif": "LOGEMENTS COLLECTIFS · BÂTIMENTS A ET B",
+    "regime_accole": "MAISONS INDIVIDUELLES OU ACCOLÉES AU SENS DE LA RE2020 · BÂTIMENT C",
+    "frontiere_mention": "LA FRONTIÈRE RÉGLEMENTAIRE — INVISIBLE SUR LE PLAN DE MASSE",
+    "guide_mention": "206,5 — LE PLAFOND DES ACCOLÉES, PROLONGÉ SUR LES COLLECTIFS",
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "batiment-a",
+        "type": "batiment",
+        "regime": "collectif",
+        "nom": "Bâtiment A",
+        "generateur_court": "chaudières gaz",
+        "cellules": 4,
+        "composition": "QUATRE T3 · 261,1 m² · COLLECTIF · R+1",
+        "generateurs": [
+          {
+            "libelle": "Chaudière gaz à condensation individuelle",
+            "detail": "UNE PAR LOGEMENT · 3,4 À 18,5 kW · VENTOUSE"
+          }
+        ],
+        "plafond": 632.6,
+        "plafond_affiche": "632,6",
+        "resultat": 474.2,
+        "resultat_affiche": "474,2",
+        "libelle": "Bâtiment A — chaudière gaz à condensation individuelle",
+        "valeur": "474,2 / 632,6",
+        "detail": [
+          "QUATRE T3 · 261,1 m² · COLLECTIF · R+1",
+          "UNE CHAUDIÈRE PAR LOGEMENT · 3,4 À 18,5 kW · VENTOUSE",
+          "IC ÉNERGIE · RÉSULTAT / PLAFOND MODULÉ"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "batiment-b",
+        "type": "batiment",
+        "regime": "collectif",
+        "nom": "Bâtiment B",
+        "generateur_court": "chaudières gaz",
+        "cellules": 6,
+        "composition": "QUATRE T2 ET DEUX T3 · 323,4 m² · COLLECTIF · R+1",
+        "generateurs": [
+          {
+            "libelle": "Chaudière gaz à condensation individuelle",
+            "detail": "UNE PAR LOGEMENT · 3,4 À 18,5 kW · VENTOUSE"
+          }
+        ],
+        "plafond": 650.3,
+        "plafond_affiche": "650,3",
+        "resultat": 519.2,
+        "resultat_affiche": "519,2",
+        "libelle": "Bâtiment B — chaudière gaz à condensation individuelle",
+        "valeur": "519,2 / 650,3",
+        "detail": [
+          "QUATRE T2 ET DEUX T3 · 323,4 m² · COLLECTIF · R+1",
+          "UNE CHAUDIÈRE PAR LOGEMENT · 3,4 À 18,5 kW · VENTOUSE",
+          "IC ÉNERGIE · RÉSULTAT / PLAFOND MODULÉ"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "frontiere",
+        "type": "frontiere",
+        "libelle": "La frontière réglementaire — invisible sur le plan de masse",
+        "detail": [
+          "DEUX JEUX DE SEUILS · COLLECTIF, PUIS MAISONS INDIVIDUELLES OU ACCOLÉES",
+          "LE PLAFOND TROIS FOIS PLUS SÉVÈRE AU-DELÀ"
+        ]
+      },
+      {
+        "ordre": 4,
+        "cle": "batiment-c",
+        "type": "batiment",
+        "regime": "accole",
+        "nom": "Bâtiment C",
+        "generateur_court": "pompe à chaleur",
+        "cellules": 3,
+        "composition": "TROIS MAISONS ACCOLÉES · UN T1 ET DEUX T4 · 182,8 m²",
+        "generateurs": [
+          {
+            "libelle": "Pompe à chaleur air-eau double service",
+            "detail": "LES DEUX T4 · R32 · COP 4,74 À 7 °C · BALLON 190 L"
+          },
+          {
+            "libelle": "Tout-électrique",
+            "detail": "LE T1 · BALLON THERMODYNAMIQUE 100 L"
+          }
+        ],
+        "plafond": 206.5,
+        "plafond_affiche": "206,5",
+        "resultat": 76.4,
+        "resultat_affiche": "76,4",
+        "libelle": "Bâtiment C — pompe à chaleur air-eau et tout-électrique",
+        "valeur": "76,4 / 206,5",
+        "detail": [
+          "TROIS MAISONS ACCOLÉES · UN T1 ET DEUX T4 · 182,8 m²",
+          "PAC AIR-EAU DOUBLE SERVICE · LES DEUX T4 · R32 · COP 4,74 À 7 °C",
+          "TOUT-ÉLECTRIQUE · LE T1 · BALLON THERMODYNAMIQUE 100 L",
+          "IC ÉNERGIE · RÉSULTAT / PLAFOND MODULÉ"
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Cette frontière, invisible sur le plan de masse, commande deux jeux de seuils réglementaires distincts.",
+  "vignette_surtitre": "PLAFONDS CARBONE RE2020",
+  "a_valider_ft2e": [
+    {
+      "objet": "L’appariement des chiffres aux bâtiments A et B",
+      "la_source_affirme": "« Quatre T3 pour 261,1 m² d’une part, quatre T2 et deux T3 pour 323,4 m² de l’autre », puis « les résultats suivent la même ligne de partage : 474,2 et 519,2 avec le gaz » — les plafonds seuls sont nommés bâtiment par bâtiment (632,6 pour A, 650,3 pour B).",
+      "le_dessin_suppose": "Que l’ordre d’énumération vaut appariement : au bâtiment A les quatre T3 et le résultat 474,2, au bâtiment B les quatre T2 et deux T3 et le 519,2. Dire si l’appariement réel est inverse."
+    },
+    {
+      "objet": "Le 76,4 porté au bâtiment C entier",
+      "la_source_affirme": "« 76,4 avec la pompe à chaleur » — or le bâtiment C compte aussi le T1 tout-électrique, au ballon thermodynamique.",
+      "le_dessin_suppose": "Que 76,4 est l’Ic énergie du bâtiment C entier, T1 compris, la RE2020 concluant par bâtiment. À corriger si ce chiffre ne couvre que les deux T4."
+    },
+    {
+      "objet": "Le prolongement du plafond des accolées sur les rangs collectifs",
+      "la_source_affirme": "« 206,5 pour les maisons accolées du bâtiment C, soit trois fois plus sévère » — la fiche ne compare jamais les résultats du gaz au plafond des accolées.",
+      "le_dessin_suppose": "Un trait qui prolonge le seuil 206,5 sur les trois pistes : à échelle commune, les résultats du gaz (474,2 et 519,2) le dépassent visiblement — c’est le dessin qui rend cette comparaison, la fiche ne l’énonce pas. Dire si elle est de trop."
+    },
+    {
+      "objet": "Des cellules d’égale taille",
+      "la_source_affirme": "Les surfaces par logement vont de 31,3 m² (le T1) à 76,5 m² (un T4) ; les autres ne sont pas détaillées.",
+      "le_dessin_suppose": "Treize cellules identiques : la géométrie code le nombre de logements par bâtiment (4, 6, 3), jamais leur taille. Une lecture proportionnelle des cellules serait fausse."
+    },
+    {
+      "objet": "Le R+1 non dessiné",
+      "la_source_affirme": "Les bâtiments A et B sont « en rez-de-chaussée plus un étage » ; le bâtiment C est de plain-pied ou non — la fiche ne le dit pas.",
+      "le_dessin_suppose": "Une seule rangée de cellules par bâtiment : le dessin compte les logements, il n’empile pas les niveaux. La mention « R+1 » reste en toutes lettres sous les bâtiments A et B."
+    },
+    {
+      "objet": "Millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2022 (champ annee), opérations préalables à la réception le 31 octobre 2025, réception non prononcée (statut en cours, pas d’annee_livraison).",
+      "le_dessin_suppose": "Que le cartouche porte 2022, seul millésime que le frontmatter garantit tant que la réception n’est pas prononcée. Dire si 2025 est préférable une fois le label délivré."
+    },
+    {
+      "objet": "La graphie de l’unité",
+      "la_source_affirme": "« En kilogrammes d’équivalent CO₂ par mètre carré » — la fiche écrit l’unité en toutes lettres.",
+      "le_dessin_suppose": "L’abréviation « kg éq. CO₂/m² », graphie des synthèses d’étude thermique. À confirmer si FT2E abrège autrement sur ses pièces."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 22-003 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tout montant : la consultation à 1 350 € HT par mètre carré de surface utile et 10 000 € de voirie et réseaux par logement, l’estimation de travaux validée à l’APD (1 460 509 € HT).",
+    "Noms de tiers : l’office public de l’habitat maître d’ouvrage, l’agence d’architecture, le lotisseur et le nom du lotissement.",
+    "Le redécoupage de douze à treize logements (764,5 / 764,4 m² habitables, surface utile de 806,5 à 773,75 m², l’avenant, le quatorzième branchement d’eau) — c’est le second mécanisme de la fiche, matière d’une chronologie d’affaire ; le dessin fixe l’état construit, treize logements.",
+    "Les marges de labellisation Bbio, Cep et Cep,nr (23,2–26,6 %, 27,3–34,8 %, 14,7 / 11,7 / 11,1 %, le 1,1 point des accolées), les consommations (67,5 / 71,8 / 63,1 kWhep/m²/an), le confort d’été (725,1–921,4 °C.h) — la fiche les porte déjà ; le dessin retient le seul indicateur qu’elle désigne comme la clé de la partition des systèmes, l’Ic énergie.",
+    "Détails d’équipement sans effet sur la partition : rendements de chaudière (95,9 et 108,1 %), micro-accumulation, 25 kW en eau chaude, régimes d’eau 60/45 et 50/45, COP à −7 °C (2,76), production en heures creuses, panneaux rayonnants et sèche-serviettes.",
+    "La logique unique hors chauffage : ventilation hygroréglable (35 entrées d’air à 37 dB, PROMEVENT, classe A), électricité (fibre, grade 3 TV, prises réseau, pré-équipement de recharge à 20 % des places), acoustique (35 dB(A), 200 kg/m², résilients), étanchéité à l’air (0,80 / 0,60 / 0,40 m³/(h·m²)) — elle ne suit pas la frontière, elle reste au texte.",
+    "Le calendrier de chantier : l’ajournement d’octobre 2023, l’arrêt de février à août 2024, la perméabilité de 3,33 × 10⁻⁷ m/s, les piézomètres, les 66 comptes rendus — matière d’une chronologie d’affaire.",
+    "Toute géométrie d’ouvrage : les bâtiments sont des rangées de cellules comptées, la frontière un trait topologique — aucune implantation, aucune façade, aucun plan de masse repris."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "trois pistes à la même origine et à l'échelle commune de 1 px par kg éq. CO₂/m² : plafonds de 633, 650 et 206 px, remplissages de 474, 519 et 76 px — texte masqué, la chute du plafond au double trait et le seuil prolongé que les remplissages du gaz dépassent portent la thèse",
+    "topologie": "colonne bâtiment (x 56–454) → pistes (x 470–1120) ; frontière à double trait y 488–492, seuil prolongé à x 676.5",
+    "cellules": "4 + 6 + 3 = 13 logements — la géométrie code le nombre, jamais la surface",
+    "bas_du_dessin": "rangs A/B/C jusqu'à 344, 452 et 650 px, seuil prolongé jusqu'à 574, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 236 x 30 px = 7080 px², soit 0.74 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — les six valeurs des pistes sont des cotes mono 10 et 12 (révision 4)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "103 signes — 876 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "trois pistes à échelle commune, le double trait de la frontière, le seuil prolongé et les couples résultat / plafond — cellules, compositions et légende laissées à la planche",
+    "bas_du_dessin": "piste C jusqu'à 158 px, marge basse 42 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les trois pistes à l'échelle 1, la frontière à double trait et sa mention, le seuil prolongé, les couples résultat / plafond et la légende des deux signes — cellules, compositions et détails de générateur laissés à la planche",
+    "bas_du_dessin": "légende jusqu'à 296 px, marge basse 72 px"
+  }
+}
