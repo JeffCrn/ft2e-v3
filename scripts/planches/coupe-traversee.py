@@ -30,8 +30,8 @@ réelle de l'ouvrage n'est reprise (règle 4).
 Troisième module du chantier après `sankey-energie.py` et `zonage-ssi.py`.
 Le tronc commun vit dans `_tronc.py` depuis le 2026-08-13.
 
-Le module compose DEUX mécanismes de l'archétype, choisis par le bloc que porte
-l'extraction :
+Le module compose TROIS mécanismes de l'archétype, choisis par le bloc que
+porte l'extraction :
 
 - `coupe` — l'enveloppe traversée (ancien siège communautaire de Marennes) :
   une ligne isolante continue, des traversées traitées, une toiture qui
@@ -40,7 +40,12 @@ l'extraction :
   Villedoux) : trois locaux sous une même ligne de toiture, l'air extrait
   fléché vers le haut en trait plein, l'air de compensation en trait
   interrompu là où le relevé ne l'a pas constaté — partout l'air monte,
-  nulle part il ne redescend.
+  nulle part il ne redescend ;
+- `enjambement` — l'enveloppe d'une parcelle enjambée (étude notariale
+  Joffre) : trois niveaux empilés dont le premier plancher passe au-dessus
+  d'un passage voiture — la ligne isolante ferme des faces qu'un bâtiment
+  ordinaire n'a pas : le dessous du plancher au-dessus du vide, la fosse
+  d'ascenseur sous le sol, chaque about de dalle marqué d'un rupteur.
 """
 
 import math
@@ -983,23 +988,467 @@ def composer_appui_equilibre(donnees):
         bas=f"locaux jusqu'à 300 px, marge basse {AH - 300} px")
 
 
+# ═══ Mécanisme `enjambement` — l'enveloppe d'une parcelle enjambée (Joffre) ══
+#
+# Trois niveaux empilés sur une parcelle étroite que le bâtiment enjambe : le
+# plancher du premier étage passe au-dessus d'un passage voiture et se traite
+# comme un plancher sur l'extérieur. La démonstration est portée par la
+# géométrie : une ligne isolante (bandes claires) qui ferme TOUTES les faces —
+# elle passe SOUS le plancher au-dessus du vide, descend SOUS le sol autour de
+# la fosse d'ascenseur, et chaque about de dalle qui l'interrompt est ponté
+# d'un rupteur. L'extérieur est fléché sur trois faces, dessous compris ; la
+# coupe est un gabarit de principe, aucune proportion d'ouvrage n'est reprise
+# (règle 4). Les épaisseurs d'isolant de la fiche gouvernent l'épaisseur des
+# bandes (N_K_ISOL) — la face dont la fiche ne fixe pas l'épaisseur est au
+# trait minimal, jamais à une épaisseur inventée.
+
+N_MUR_G = 430                 # nu extérieur du mur gauche
+N_MUR_M = 674                 # mur droit du RDC — le passage s'ouvre à 680
+N_MUR_D = 804                 # nu droit : le mur du R+1, au-dessus du passage
+N_EP = 6                      # épaisseur de la structure
+N_Y_SOL = 640
+N_Y_R1 = 530                  # dessus de la dalle du R+1 (celle qui enjambe)
+N_Y_R2 = 420                  # dessus de la dalle du R+2 et de la terrasse
+N_Y_PLAF = 316                # plafond du dernier étage
+N_Y_TOIT = 265                # toit des combles
+N_EP_DALLE = 10
+
+N_K_ISOL = 7.0 / 180          # px par mm d'isolant — 180 mm font 7 px
+N_EP_MIN = 5.0                # trait minimal : épaisseur non fixée par la fiche
+
+N_ASC_X0, N_ASC_X1 = 600, 640   # cage d'ascenseur, dans le RDC
+N_FOSSE_Y = 660                 # fond de la fosse, sous le sol — la bande
+                                # basse s'arrête à 670, la phrase de principe
+                                # commence à 675 (688 − ascendante de 13)
+
+N_CALL_L = 250                # colonne d'appels de gauche (x MARGE)
+N_CALL_XD = 852               # colonne d'appels de droite
+
+
+def _rupteur(A, x, y, w):
+    """Un about de dalle ponté : réserve papier à filet porteur dans la dalle —
+    la dalle ne touche pas la paroi, et c'est ce que le signe montre."""
+    A(rect_bord(x, y, w, N_EP_DALLE, "papier", "filet-1"))
+
+
+def composer_enjambement(donnees):
+    q = donnees["enjambement"]
+    elems = {e["cle"]: e for e in q["elements"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    # Les épaisseurs de bande, dérivées des épaisseurs d'isolant de la fiche.
+    w_mur = 180 * N_K_ISOL      # 7,0
+    w_pu = 140 * N_K_ISOL       # 5,4
+    w_ldv = 480 * N_K_ISOL      # 18,7
+    w_ter = 200 * N_K_ISOL      # 7,8
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête du schéma et les deux registres ──────────────────────────────
+    controler("en-tête schéma", q["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, q["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(MARGE, Y_TAGS, q["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_TAGS, q["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Le sol — interrompu par la fosse d'ascenseur ─────────────────────────
+    A(ligne(356, N_Y_SOL, 591, N_Y_SOL, "filet-1", 2))
+    A(ligne(649, N_Y_SOL, 880, N_Y_SOL, "filet-1", 2))
+    for x in (380, 470, 560, 700, 790, 866):
+        A(ligne(x, N_Y_SOL + 2, x - 9, N_Y_SOL + 10, "filet-2", 1))
+
+    # ── La structure : murs, dalles à abouts pontés, toit ────────────────────
+    A(rect(N_MUR_G, N_Y_TOIT, N_EP, N_Y_SOL - N_Y_TOIT, "encre"))          # mur gauche
+    A(rect(N_MUR_M, N_Y_TOIT, N_EP, N_Y_R2 - N_Y_TOIT, "encre"))           # mur droit du R+2
+    A(rect(N_MUR_M, N_Y_R1 + N_EP_DALLE, N_EP,
+           N_Y_SOL - N_Y_R1 - N_EP_DALLE, "encre"))                        # mur droit du RDC
+    A(rect(N_MUR_D, 398, N_EP, N_Y_R1 - 398, "encre"))                     # mur droit du R+1 + garde-corps
+    A(rect(N_MUR_G, N_Y_TOIT - 4, N_MUR_M + N_EP - N_MUR_G, 4, "encre"))   # toit des combles
+
+    # La dalle du R+2, prolongée en terrasse — trois segments, deux rupteurs.
+    A(rect(448, N_Y_R2, 663 - 448, N_EP_DALLE, "encre"))
+    A(rect(679, N_Y_R2, N_MUR_D - 679, N_EP_DALLE, "encre"))
+    # La dalle du R+1 — celle qui enjambe le passage.
+    A(rect(448, N_Y_R1, 794 - 448, N_EP_DALLE, "encre"))
+    # Le plafond du dernier étage.
+    A(rect(436, N_Y_PLAF, N_MUR_M - 436, 4, "encre"))
+
+    # ── Les rupteurs : quatre abouts de dalle pontés ─────────────────────────
+    _rupteur(A, 433, N_Y_R2, 15)
+    _rupteur(A, 433, N_Y_R1, 15)
+    _rupteur(A, 663, N_Y_R2, 16)
+    _rupteur(A, 794, N_Y_R1, 10)
+
+    # ── L'enveloppe : la ligne isolante qui ferme chaque face ────────────────
+    # Le plafond du dernier étage porte les deux couches superposées :
+    # polyuréthane dessous, laine de verre dessus (position à valider).
+    y_pu = N_Y_PLAF - w_pu
+    y_ldv = y_pu - 2.5 - w_ldv
+    A(rect(436, y_pu, N_MUR_M - 436, w_pu, "clair"))
+    A(rect(436, y_ldv, N_MUR_M - 436, w_ldv, "clair"))
+    # Murs par l'intérieur — la bande s'interrompt aux dalles, le rupteur ponte.
+    for (y0, y1) in ((y_pu, N_Y_R2), (N_Y_R2 + N_EP_DALLE, N_Y_R1),
+                     (N_Y_R1 + N_EP_DALLE, N_Y_SOL)):
+        A(rect(N_MUR_G + N_EP + 1, y0, w_mur, y1 - y0, "clair"))
+    A(rect(N_MUR_M - 1 - w_mur, y_pu, w_mur, N_Y_R2 - y_pu, "clair"))      # mur droit du R+2
+    A(rect(679, N_Y_R2 - w_ter, N_MUR_D - 679, w_ter, "clair"))            # toiture-terrasse
+    A(rect(N_MUR_D - 1 - w_mur, N_Y_R2 + N_EP_DALLE, w_mur,
+           N_Y_R1 - N_Y_R2 - N_EP_DALLE, "clair"))                         # mur du R+1 sur le passage
+    A(rect(679, N_Y_R1 + N_EP_DALLE, N_MUR_D - 679, N_EP_MIN, "clair"))    # SOUS le plancher enjambant
+    A(rect(N_MUR_M - 1 - w_mur, N_Y_R1 + N_EP_DALLE + N_EP_MIN, w_mur,
+           N_Y_SOL - N_Y_R1 - N_EP_DALLE - N_EP_MIN, "clair"))             # mur du RDC sur le passage
+
+    # ── La cage d'ascenseur et sa fosse, sous le sol ─────────────────────────
+    A(ligne(N_ASC_X0, 320, N_ASC_X0, N_Y_SOL, "filet-2", 1))
+    A(ligne(N_ASC_X1, 320, N_ASC_X1, N_Y_SOL, "filet-2", 1))
+    A(polyligne([(N_ASC_X0, N_Y_SOL), (N_ASC_X0, N_FOSSE_Y - 2),
+                 (N_ASC_X1, N_FOSSE_Y - 2), (N_ASC_X1, N_Y_SOL)], "encre", 2))
+    A(rect(N_ASC_X0 - 7, N_Y_SOL, N_EP_MIN, N_FOSSE_Y - N_Y_SOL + 5, "clair"))
+    A(rect(N_ASC_X1 + 2, N_Y_SOL, N_EP_MIN, N_FOSSE_Y - N_Y_SOL + 5, "clair"))
+    A(rect(N_ASC_X0 - 7, N_FOSSE_Y + 5, N_ASC_X1 - N_ASC_X0 + 14,
+           N_EP_MIN, "clair"))
+
+    # ── Les niveaux, nommés ──────────────────────────────────────────────────
+    A(texte(452, 570, q["niveaux"][0], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(452, 460, q["niveaux"][1], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(452, 350, q["niveaux"][2], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(452, 283, q["combles_libelle"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── L'extérieur, fléché sur trois faces — dessous compris ────────────────
+    lab_ext = q["exterieur_libelle"]
+    A(texte(555, 214, lab_ext, "mono", 10, 500, "pivot", ancre="middle",
+            tracking=10 * 0.14))
+    A(ligne(555, 222, 555, 246, "encre", 1))
+    A(fleche(555, 255, "encre", "bas", 8))
+    A(texte(386, 484, lab_ext, "mono", 10, 500, "pivot", ancre="end",
+            tracking=10 * 0.14))
+    A(ligne(394, 480, 416, 480, "encre", 1))
+    A(fleche(424, 480, "encre", "droite", 8))
+    # Dans le vide du passage : l'extérieur pointe le dessous du plancher.
+    A(texte(742, 594, lab_ext, "mono", 10, 500, "pivot", ancre="middle",
+            tracking=10 * 0.14))
+    A(ligne(742, 578, 742, 558, "encre", 1))
+    A(fleche(742, 551, "encre", "haut", 8))
+    # Le passage voiture : la flèche traverse le vide et SORT du dessin par
+    # l'ouverture réelle du passage, sous le mur du R+1 — le côté droit est
+    # ouvert sur la rue, et c'est ce que la flèche montre.
+    A(ligne(690, 610, 1050, 610, "encre", 1.5))
+    A(fleche(1058, 610, "encre", "droite", 9))
+    controler("passage voiture", q["passage_libelle"], 10, "mono",
+              240, 10 * 0.14)
+    A(texte(880, 628, q["passage_libelle"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+
+    # ── La colonne d'appels de gauche ────────────────────────────────────────
+    appels_g = [
+        ("combles", 296, (500, y_ldv + w_ldv / 2)),
+        ("dernier-etage", 368, (490, y_pu + w_pu / 2)),
+        ("murs", 440, (N_MUR_G + N_EP + 1 + w_mur / 2, 470)),
+        ("rupteurs", 512, (440, N_Y_R1 + 5)),
+        ("ascenseur", 584, (N_ASC_X0 - 5, 648)),
+    ]
+    for cle, base, cible in appels_g:
+        e = elems[cle]
+        appel(A, MARGE, base, e["libelle"], e["detail"], N_CALL_L, cible,
+              controler, cle)
+
+    # ── La colonne d'appels de droite — attache à gauche du libellé ──────────
+    appels_d = [
+        ("toiture-terrasse", 348, (770, N_Y_R2 - w_ter / 2)),
+        ("plancher-passage", 436, (752, N_Y_R1 + N_EP_DALLE + N_EP_MIN / 2)),
+    ]
+    for cle, base, cible in appels_d:
+        e = elems[cle]
+        controler(f"appel {cle} — libellé", e["libelle"], 15, "sans-400",
+                  W - MARGE - N_CALL_XD)
+        A(texte(N_CALL_XD, base, e["libelle"], "sans", 15, 400, "encre",
+                wdth=100))
+        for k, l in enumerate(e["detail"]):
+            controler(f"appel {cle} — détail {k + 1}", l, 10, "mono",
+                      W - MARGE - N_CALL_XD, 10 * 0.14)
+            A(texte(N_CALL_XD, base + 18 + k * 14, l, "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+        A(polyligne([(N_CALL_XD - 8, base - 4), cible], "filet-1", 1))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "la ligne isolante (bandes claires) ferme chaque face "
+                         "de l'empilement, y compris trois faces qu'un bâtiment "
+                         "ordinaire n'a pas : SOUS la dalle du R+1 au-dessus du "
+                         "vide du passage (l'extérieur y est fléché vers le "
+                         "haut), autour de la fosse d'ascenseur SOUS le sol, et "
+                         "à chaque about de dalle, ponté d'un rupteur — texte "
+                         "masqué, la bande continue et le vide traversé par la "
+                         "flèche suffisent à lire l'enjambement",
+        "topologie": f"appels gauche (x {MARGE}–{MARGE + N_CALL_L}) → coupe "
+                     f"(x {N_MUR_G}–{N_MUR_D + N_EP}, sol {N_Y_SOL}, toit "
+                     f"{N_Y_TOIT - 4}, passage x 680–{N_MUR_D} sous la dalle "
+                     f"{N_Y_R1}) → appels droite (x {N_CALL_XD}–{W - MARGE}) ; "
+                     f"fosse y {N_Y_SOL}–{N_FOSSE_Y + 10}",
+        "bandes": f"épaisseur = épaisseur d'isolant x {N_K_ISOL:.4f} px/mm : "
+                  f"murs {w_mur:.1f} px (180 mm), polyuréthane {w_pu:.1f} px "
+                  f"(140 mm), laine de verre {w_ldv:.1f} px (480 mm), "
+                  f"toiture-terrasse {w_ter:.1f} px (200 mm) — le plancher sur "
+                  f"le passage et la fosse, dont la fiche ne fixe pas "
+                  f"l'épaisseur, sont au trait minimal de {N_EP_MIN:.0f} px",
+        "bas_du_dessin": f"sol à {N_Y_SOL}, fosse jusqu'à {N_FOSSE_Y + 10}, "
+                         f"dernier appel à 602, phrase de principe à "
+                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
+                         f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — les résultats RE2020 "
+                          "restent à la page (révision 4) ; les épaisseurs "
+                          "d'isolant sont des cotes mono 10 pivot dans les "
+                          "appels",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_enjambement(donnees):
+    """La vignette : le motif de l'archétype, sans son appareil.
+
+    Deux traits seulement, pour que le motif se lise à 274 px : la SILHOUETTE
+    encrée du bâtiment — avec l'encoche du passage sous le flanc droit — et la
+    LIGNE ISOLANTE claire qui la double à l'intérieur, continue de face en
+    face, dessous du plancher et fosse compris ; une flèche traverse l'encoche
+    et en sort. Ce qu'elle laisse : les dalles, les rupteurs, les niveaux
+    nommés, les flèches d'extérieur, les appels — sept organes annotés dans
+    300 px ne se liraient pas."""
+    elems = {e["cle"]: e for e in donnees["enjambement"]["elements"]}
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # Le sol, interrompu par la fosse.
+    y_sol = 168
+    A(ligne(26, y_sol, 88, y_sol, "filet-1", 1.5))
+    A(ligne(124, y_sol, 258, y_sol, "filet-1", 1.5))
+
+    # La silhouette : l'encoche du passage est le profil même de l'enjambement.
+    A(polyligne([(44, y_sol), (44, 52), (160, 52), (160, 94), (228, 94),
+                 (228, 140), (164, 140), (164, y_sol)], "encre", 2.5))
+    # La ligne isolante, continue à l'intérieur de la silhouette.
+    A(polyligne([(49, y_sol), (49, 58), (154, 58), (154, 97), (222, 97),
+                 (222, 134), (166, 134), (166, y_sol)], "clair", 4))
+    # La fosse d'ascenseur, sous le sol — la ligne descend plus bas que le sol.
+    A(polyligne([(96, y_sol), (96, 182), (114, 182), (114, y_sol)],
+                "encre", 1.5))
+    A(polyligne([(92, y_sol), (92, 187), (118, 187), (118, y_sol)],
+                "clair", 3))
+    # La flèche qui traverse l'encoche et en sort.
+    A(ligne(172, 156, 240, 156, "encre", 1.2))
+    A(fleche(247, 156, "encre", "droite", 6))
+
+    # Les deux nœuds chiffrés.
+    A(texte(240, 64, "Combles", "sans", 12, 600, "encre", wdth=112))
+    A(texte(240, 78, f'{elems["combles"]["valeur"]}{NN}{elems["combles"]["unite"]}',
+            "mono", 10, 500, "pivot", tabulaire=True))
+    A(polyligne([(237, 60), (157, 59)], "filet-1", 1))
+    A(texte(240, 110, elems["murs"]["libelle"].split(",")[0], "sans", 12, 600,
+            "encre", wdth=112))
+    A(texte(240, 124, f'{elems["murs"]["valeur"]}{NN}{elems["murs"]["unite"]}',
+            "mono", 10, 500, "pivot", tabulaire=True))
+    A(polyligne([(237, 106), (224, 112)], "filet-1", 1))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "deux traits : la silhouette encrée à encoche de passage, la "
+                 "ligne isolante claire qui la double — dessous du plancher et "
+                 "fosse compris — une flèche qui sort par l'encoche, deux "
+                 "nœuds chiffrés ; dalles, rupteurs, niveaux et appels sont "
+                 "laissés à la planche",
+        "bas_du_dessin": "fosse jusqu'à 189 px, marge basse 11 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_enjambement(donnees):
+    """L'appui du hero : le motif à l'échelle 1.
+
+    Ce qu'il garde : l'empilement aux niveaux nommés, le passage voiture
+    fléché sous la dalle, la ligne isolante complète — dessous, terrasse et
+    fosse compris, rupteurs aux abouts — et trois nœuds chiffrés (combles,
+    toiture-terrasse, murs). Ce qu'il laisse : les flèches d'extérieur, les
+    détails d'appel, la phrase et le cartouche."""
+    q = donnees["enjambement"]
+    elems = {e["cle"]: e for e in q["elements"]}
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    ag, am, ad = 60, 246, 352          # murs gauche, médian, droit
+    y_sol, y_r1, y_r2 = 322, 240, 158
+    y_plaf, y_pu, y_ldv = 116, 111, 96
+    fx0, fx1, fy = 196, 228, 340       # la fosse
+
+    # Le sol, interrompu par la fosse.
+    A(ligne(40, y_sol, fx0 - 8, y_sol, "filet-1", 2))
+    A(ligne(fx1 + 8, y_sol, 500, y_sol, "filet-1", 2))
+    for x in (64, 130, 262, 330, 388):
+        A(ligne(x, y_sol + 2, x - 7, y_sol + 8, "filet-2", 1))
+
+    # La structure.
+    A(rect(ag, 76, 4, y_sol - 76, "encre"))
+    A(rect(am, 76, 4, y_r2 - 76, "encre"))
+    A(rect(am, y_r1 + 7, 4, y_sol - y_r1 - 7, "encre"))
+    A(rect(ad, 144, 4, y_r1 - 144, "encre"))
+    A(rect(ag, 73, am + 4 - ag, 3, "encre"))
+    A(rect(ag + 4, y_plaf, am - ag - 4, 3, "encre"))
+    # Dalles à abouts pontés.
+    A(rect(76, y_r2, 240 - 76 + 4, 7, "encre"))
+    A(rect(254, y_r2, ad - 254, 7, "encre"))
+    A(rect(76, y_r1, 338 - 76, 7, "encre"))
+    for (x, y, w) in ((64, y_r2, 12), (64, y_r1, 12), (240, y_r2, 14),
+                      (338, y_r1, 14)):
+        A(rect_bord(x, y, w, 7, "papier", "filet-1"))
+
+    # La ligne isolante.
+    A(rect(64, y_ldv, am - 64, 14, "clair"))
+    A(rect(64, y_pu, am - 64, 4, "clair"))
+    for (y0, y1) in ((115, y_r2), (y_r2 + 7, y_r1), (y_r1 + 7, y_sol)):
+        A(rect(65, y0, 4, y1 - y0, "clair"))
+    A(rect(241, 115, 4, y_r2 - 115, "clair"))
+    A(rect(254, y_r2 - 6, ad - 254, 6, "clair"))               # toiture-terrasse
+    A(rect(347, y_r2 + 7, 4, y_r1 - y_r2 - 7, "clair"))
+    A(rect(254, y_r1 + 7, ad - 254, 4, "clair"))               # SOUS le plancher
+    A(rect(241, y_r1 + 11, 4, y_sol - y_r1 - 11, "clair"))
+    # La cage et sa fosse.
+    A(ligne(fx0, y_plaf + 3, fx0, y_sol, "filet-2", 1))
+    A(ligne(fx1, y_plaf + 3, fx1, y_sol, "filet-2", 1))
+    A(polyligne([(fx0, y_sol), (fx0, fy - 2), (fx1, fy - 2), (fx1, y_sol)],
+                "encre", 1.5))
+    A(rect(fx0 - 6, y_sol, 4, fy - y_sol + 4, "clair"))
+    A(rect(fx1 + 2, y_sol, 4, fy - y_sol + 4, "clair"))
+    A(rect(fx0 - 6, fy + 4, fx1 - fx0 + 12, 4, "clair"))
+
+    # Les niveaux, en tête de bande.
+    for lib, y in ((q["niveaux"][0], 300), (q["niveaux"][1], 214),
+                   (q["niveaux"][2], 150)):
+        A(texte(74, y, lib.split(" · ")[0], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    A(texte(74, 90, q["combles_libelle"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # Le passage voiture : la flèche traverse le vide et sort par l'ouverture
+    # réelle du passage, sous le mur du R+1 — le libellé la suit, dehors.
+    A(ligne(262, 296, 470, 296, "encre", 1.2))
+    A(fleche(478, 296, "encre", "droite", 8))
+    A(texte(368, 314, q["passage_libelle"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+
+    # Les trois nœuds chiffrés, à droite.
+    com, ter, mur = elems["combles"], elems["toiture-terrasse"], elems["murs"]
+    A(texte(380, 100, com["libelle"], "sans", 14, 600, "encre", wdth=112))
+    A(texte(380, 117, f'{com["valeur"]}{NN}{com["unite"]}', "mono", 11, 500,
+            "pivot", tabulaire=True))
+    A(polyligne([(376, 96), (250, 103)], "filet-1", 1))
+    A(texte(380, 160, ter["libelle"], "sans", 14, 600, "encre", wdth=112))
+    A(texte(380, 177, f'{ter["valeur"]}{NN}{ter["unite"]}', "mono", 11, 500,
+            "pivot", tabulaire=True))
+    A(polyligne([(376, 156), (354, 155)], "filet-1", 1))
+    A(texte(380, 215, mur["libelle"].split(",")[0], "sans", 14, 600, "encre",
+            wdth=112))
+    A(texte(380, 232, f'{mur["valeur"]}{NN}{mur["unite"]}', "mono", 11, 500,
+            "pivot", tabulaire=True))
+    A(polyligne([(376, 211), (353, 214)], "filet-1", 1))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="l'empilement aux niveaux nommés, le passage voiture fléché "
+              "sous la dalle isolée, la ligne isolante complète — dessous, "
+              "terrasse et fosse compris, quatre abouts pontés — et trois "
+              "nœuds chiffrés à l'échelle 1 ; flèches d'extérieur, appels, "
+              "phrase et cartouche laissés à la planche",
+        bas=f"fosse jusqu'à 344 px, marge basse {AH - 344} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def _composer(donnees):
     if "equilibre" in donnees:
         return composer_equilibre(donnees)
+    if "enjambement" in donnees:
+        return composer_enjambement(donnees)
     return composer(donnees)
 
 
 def _composer_vignette(donnees):
     if "equilibre" in donnees:
         return composer_vignette_equilibre(donnees)
+    if "enjambement" in donnees:
+        return composer_vignette_enjambement(donnees)
     return composer_vignette(donnees)
 
 
 def _composer_appui(donnees):
     if "equilibre" in donnees:
         return composer_appui_equilibre(donnees)
+    if "enjambement" in donnees:
+        return composer_appui_enjambement(donnees)
     return composer_appui(donnees)
 
 

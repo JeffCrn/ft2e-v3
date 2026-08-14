@@ -14,8 +14,7 @@ performance: "RE2020 · Cep −20,3 % · Bbio conforme à un dixième de point
 synthese: >-
   Boulevard Joffre, à La Rochelle, une étude notariale a fait construire ses propres bureaux : trois niveaux, un ascenseur, 381 m² pour l’accueil du public, les collaborateurs et les associés. FT2E intervient en contrat direct avec le maître d’ouvrage, sans groupement de maîtrise d’œuvre — l’étude thermique et les trois lots techniques, de la faisabilité énergétique jusqu’à la réception. La parcelle urbaine est étroite et le bâtiment doit l’enjamber : le plancher du premier étage passe au-dessus d’un passage voiture, et se traite comme un plancher sur l’extérieur. Le besoin bioclimatique ressort à 95,9 points pour un maximum de 96, soit un dixième de point de marge : la conformité s’est jouée sur la seule enveloppe.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA"]
-image_principale: "/images/projets/etude-notariale-boulevard-joffre/01.jpg"
-image_principale_alt: "Perspective d’architecte depuis le boulevard : trois niveaux en brique claire et enduit blanc, bureaux vitrés, terrasse plantée au dernier étage"
+planche: "/images/projets/etude-notariale-boulevard-joffre/planche.svg"
 en_avant: false
 ---
 
