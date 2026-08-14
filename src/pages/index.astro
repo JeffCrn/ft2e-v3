@@ -107,25 +107,16 @@ const partenaires = [
   >
     {enAvant && (
       <Fragment slot="media">
+        {/* Sous `sm`, seul un média qui se LIT s'affiche : la photographie.
+            L'appui (composé pour ~552 px) y tomberait à l'échelle 0,62 — mono
+            de 10 rendu à 6,2 px — et la hachure de repli est un décor
+            `aria-hidden` qui coûte un écran de défilement sans rien montrer.
+            L'un et l'autre disparaissent donc du téléphone ; la carte-lien de
+            la vedette, elle, reste — c'est elle qui informe. */}
         {heroAppui ? (
-          <Fragment>
-            {/* L'appui est composé pour ~552 px ; sous `sm` la colonne tombe
-                vers 342 px (échelle 0,62 — mono de 10 rendu à 6,2 px) : le
-                dessin cède alors la place au média de repli, comme la planche
-                cède la place à sa lecture sur la fiche. */}
-            <div class="plan-pose hidden sm:block" set:html={heroAppui} />
-            <div class="relative aspect-[3/2] duotone-media sm:hidden">
-              <CoinsCuivre taille={18} />
-              <div class="absolute left-[12.5%] top-8 flex items-center gap-2.5 z-10" aria-hidden="true">
-                <span class="block w-14 h-px bg-pivot"></span>
-                <span class="mono-label font-normal text-[10px] text-pivot">
-                  {enAvant.data.mission_ft2e.slice(0, 2).join(' · ').toLowerCase()}
-                </span>
-              </div>
-            </div>
-          </Fragment>
+          <div class="plan-pose hidden sm:block" set:html={heroAppui} />
         ) : (
-        <div class:list={['relative aspect-[3/2]', heroImageExiste ? 'duotone-photo' : 'duotone-media']}>
+        <div class:list={['relative aspect-[3/2]', heroImageExiste ? 'duotone-photo' : 'duotone-media hidden sm:block']}>
           {heroImageExiste && (
             <img
               src={enAvant.data.image_principale}
