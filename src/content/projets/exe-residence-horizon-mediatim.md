@@ -14,8 +14,7 @@ performance: "RE2020"
 synthese: >-
   À l’angle de la rue de la Désirée et de la rue Cardinal, à La Rochelle, la résidence Horizon réunit deux bâtiments en R+4 de quatre logements superposés — huit appartements, 864 m² habitables, conformes à la RE2020. FT2E y tient un rôle particulier : le bureau n’est pas missionné par le promoteur, mais par l’installateur. Pour Eustache Frères, titulaire du lot chauffage-ventilation-plomberie, la mission couvre les déperditions, les plans de réservations et les plans d’exécution avec leurs notes de calcul. Les étages portent sur des planchers bois : rien ne se perce après coup, tout se réserve au dessin. Quinze diffusions jalonnent la mission, de janvier à avril 2026.
 mission_ft2e: ["Études d'exécution", Thermique, CVC]
-image_principale: "/images/projets/exe-residence-horizon-mediatim/01.jpg"
-image_principale_alt: "Plan d’exécution FT2E des réservations de plancher du R+2 de la résidence Horizon à La Rochelle : tracé des logements sur une trame d’axes repérés, réservations de fourreaux cotées par rapport à la dalle, et zones d’engravure hachurées aux abords des salles d’eau"
+planche: "/images/projets/exe-residence-horizon-mediatim/planche.svg"
 en_avant: false
 ---
 

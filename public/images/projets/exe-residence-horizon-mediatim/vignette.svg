@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">RÉSERVER AVANT D'EXÉCUTER</text>
+  <path d="M 84.86 40.00 L 84.86 172.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 148.86 40.00 L 148.86 172.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 219.71 40.00 L 219.71 172.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 14.00 159.50 L 48.29 159.50" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="48.29" y="150.00" width="237.71" height="19.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 14.00 137.50 L 96.29 137.50" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="96.29" y="128.00" width="189.71" height="19.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 14.00 115.50 L 112.29 115.50" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="112.29" y="106.00" width="173.71" height="19.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 14.00 93.50 L 128.29 93.50" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="128.29" y="84.00" width="157.71" height="19.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 14.00 71.50 L 144.29 71.50" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="144.29" y="62.00" width="141.71" height="19.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 14.00 49.50 L 158.00 49.50" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="158.00" y="40.00" width="128.00" height="19.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <rect x="45.79" y="157.00" width="5.00" height="5.00" class="c-encre" fill="#00393A"/>
+  <rect x="93.79" y="135.00" width="5.00" height="5.00" class="c-encre" fill="#00393A"/>
+  <rect x="109.79" y="113.00" width="5.00" height="5.00" class="c-encre" fill="#00393A"/>
+  <rect x="125.79" y="91.00" width="5.00" height="5.00" class="c-encre" fill="#00393A"/>
+  <rect x="141.79" y="69.00" width="5.00" height="5.00" class="c-encre" fill="#00393A"/>
+  <rect x="155.50" y="47.00" width="5.00" height="5.00" class="c-encre" fill="#00393A"/>
+  <path d="M 48.29 159.50 L 48.29 137.50 L 96.29 137.50 L 96.29 115.50 L 112.29 115.50 L 112.29 93.50 L 128.29 93.50 L 128.29 71.50 L 144.29 71.50 L 144.29 49.50 L 158.00 49.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <text x="56.29" y="163.50" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">RDC</text>
+  <text x="90.75" y="163.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">16 JANV</text>
+  <text x="166.00" y="53.50" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Toiture</text>
+  <path d="M 14.00 172.00 L 286.00 172.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+</svg>

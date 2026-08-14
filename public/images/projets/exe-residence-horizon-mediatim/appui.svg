@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Chronologie de principe des études d'exécution : de janvier à avril 2026, les réservations montent le bâtiment niveau par niveau — attentes au sol du rez-de-chaussée le 16 janvier, planchers bois du R+1 au R+4 en février, toiture début mars —, chaque diffusion figeant son niveau avant exécution, car rien ne se perce dans un plancher bois après coup ; suivent les plans d'exécution plomberie et chauffage-rafraîchissement, repris en trois versions jusqu'à la version 3 complète du 20 avril.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">RÉSERVER AVANT D'EXÉCUTER</text>
+  <rect x="405.80" y="27.00" width="14.00" height="8.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="528.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">FIGÉ AU DESSIN</text>
+  <rect x="307.60" y="27.50" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <text x="385.80" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">DIFFUSION</text>
+  <path d="M 199.66 68.00 L 199.66 318.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 304.13 68.00 L 304.13 318.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 419.80 68.00 L 419.80 318.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <text x="24.00" y="224.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">RDC</text>
+  <path d="M 84.00 220.00 L 139.97 220.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="139.97" y="208.00" width="388.03" height="24.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <text x="149.97" y="223.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">16 JANV</text>
+  <text x="24.00" y="196.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">R+1</text>
+  <path d="M 84.00 192.00 L 218.32 192.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="218.32" y="180.00" width="309.68" height="24.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <text x="24.00" y="168.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">R+2</text>
+  <path d="M 84.00 164.00 L 244.44 164.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="244.44" y="152.00" width="283.56" height="24.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <text x="24.00" y="140.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">R+3</text>
+  <path d="M 84.00 136.00 L 270.55 136.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="270.55" y="124.00" width="257.45" height="24.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <text x="24.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">R+4</text>
+  <path d="M 84.00 108.00 L 296.67 108.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="296.67" y="96.00" width="231.33" height="24.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <text x="24.00" y="84.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Toiture</text>
+  <path d="M 84.00 80.00 L 319.06 80.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <rect x="319.06" y="68.00" width="208.94" height="24.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <text x="329.06" y="83.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DÉBUT MARS</text>
+  <rect x="136.97" y="217.00" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="215.32" y="189.00" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="241.44" y="161.00" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="267.55" y="133.00" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="293.67" y="105.00" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="316.06" y="77.00" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <path d="M 139.97 220.00 L 139.97 192.00 L 218.32 192.00 L 218.32 164.00 L 244.44 164.00 L 244.44 136.00 L 270.55 136.00 L 270.55 108.00 L 296.67 108.00 L 296.67 80.00 L 319.06 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <rect x="192.20" y="252.00" width="298.49" height="32.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="204.20" y="272.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Plans d'exécution</text>
+  <path d="M 192.20 246.00 L 192.20 290.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="192.20" y="304.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">V1</text>
+  <path d="M 337.71 246.00 L 337.71 290.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="337.71" y="304.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">V2</text>
+  <path d="M 490.69 246.00 L 490.69 290.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="528.00" y="304.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">V3 · 20 AVR</text>
+  <path d="M 84.00 318.00 L 528.00 318.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 84.00 318.00 L 84.00 323.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 199.66 318.00 L 199.66 323.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 304.13 318.00 L 304.13 323.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 419.80 318.00 L 419.80 323.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 528.00 318.00 L 528.00 323.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="141.83" y="334.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">JANVIER</text>
+  <text x="251.90" y="334.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">FÉVRIER</text>
+  <text x="361.97" y="334.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">MARS</text>
+  <text x="473.90" y="334.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">AVRIL</text>
+</svg>

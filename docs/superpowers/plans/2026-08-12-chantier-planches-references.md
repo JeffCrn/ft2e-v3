@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 10 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12. 11 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,7 +32,7 @@ façade l'affirme.
 
 ---
 
-## État — 10 / 23
+## État — 11 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -46,7 +46,7 @@ façade l'affirme.
 | 08 | `cuisine-groupe-scolaire-villedoux` | Tertiaire / ERP | `coupe-traversee` (mécanisme `equilibre`) | ✅ **publiée** (versée le 2026-08-13) |
 | 09 | `ehpad-coulonges-sur-autize-ssi` | Coordination SSI | `zonage-ssi` (mécanisme `transfert`) | ✅ **publiée** (versée le 2026-08-14) |
 | 10 | `etude-notariale-boulevard-joffre` | Tertiaire / ERP | `coupe-traversee` (mécanisme `enjambement`) | ✅ **publiée** (versée le 2026-08-14) |
-| — | `exe-residence-horizon-mediatim` | Études d'exécution / BIM | | à faire |
+| 11 | `exe-residence-horizon-mediatim` | Études d'exécution / BIM | `chronologie-affaire` (mécanisme `precedence`) | ✅ **publiée** (versée le 2026-08-14) |
 | — | `fougerou-sainte-marie-de-re` | Logements | | à faire |
 | — | `habitat-inclusif-salignac-sur-charente` | Logements | | à faire |
 | — | `hotel-yachtman-quai-valin-la-rochelle` | Tertiaire / ERP | | à faire |
@@ -69,7 +69,7 @@ façade l'affirme.
 | `boucle-fluide` | 3 — trois mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae) et `substitution` (production réversible, centre de formation de Saintes) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
 | `coupe-traversee` | 3 — trois mécanismes : `coupe` (l'enveloppe traversée, Marennes), `equilibre` (l'air extrait, l'air compensé — restaurant scolaire de Villedoux) et `enjambement` (l'enveloppe qui ferme les faces qu'un bâtiment ordinaire n'a pas — dessous du plancher sur le passage, fosse d'ascenseur, abouts pontés — étude notariale Joffre) | ✅ `scripts/planches/coupe-traversee.py` (dispatch sur le bloc de l'extraction) |
 | `tableau-electrique` | 1 — mécanisme `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) | ✅ `scripts/planches/tableau-electrique.py` |
-| `chronologie-affaire` | 0 | à écrire |
+| `chronologie-affaire` | 1 — mécanisme `precedence` (le dessin précède le gros œuvre : l'escalier des réservations gravit les niveaux d'avance sur l'exécution, résidence Horizon) | ✅ `scripts/planches/chronologie-affaire.py` |
 | `planche-chiffree` | 0 | à écrire — c'est le repli, il servira |
 
 ⚠️ **L'archétype se choisit sur la thèse de la fiche, jamais sur son secteur ni sur sa liste

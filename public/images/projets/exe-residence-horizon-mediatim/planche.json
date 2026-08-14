@@ -1,0 +1,211 @@
+{
+  "fiche": "exe-residence-horizon-mediatim",
+  "archetype": "chronologie-affaire",
+  "archetype_motif": "La thèse de la fiche est un calendrier de précédence : les étages portent sur des planchers bois, rien ne se perce après coup — chaque niveau doit donc être réservé au dessin avant d'être exécuté. Le schéma suit la mission dans le temps : les diffusions de réservations montent le bâtiment niveau par niveau (rez-de-chaussée le 16 janvier, planchers du R+1 au R+4 en février, toiture début mars), chacune figeant son niveau, puis les plans d'exécution reprennent en trois versions jusqu'au 20 avril. La démonstration est portée par la géométrie — un escalier de marques qui gravit les niveaux d'avance sur le gros œuvre — et non par un décompte de diffusions que la fiche porte déjà. Premier emploi de l'archétype ; tout autre archétype du registre aurait répété un mécanisme déjà dessiné pour une fiche dont la matière propre est justement le calendrier.",
+  "surtitre": "SCHÉMA DE PRINCIPE · CALENDRIER DES ÉTUDES D'EXÉCUTION",
+  "titre": "Résidence Horizon",
+  "sous_titre": "Missionné par l'installateur : les réservations d'abord, les plans ensuite",
+  "cartouche_legende": "LA ROCHELLE · 864 m² · 2026",
+  "aria_label": "Chronologie de principe des études d'exécution : de janvier à avril 2026, les réservations montent le bâtiment niveau par niveau — attentes au sol du rez-de-chaussée le 16 janvier, planchers bois du R+1 au R+4 en février, toiture début mars —, chaque diffusion figeant son niveau avant exécution, car rien ne se perce dans un plancher bois après coup ; suivent les plans d'exécution plomberie et chauffage-rafraîchissement, repris en trois versions jusqu'à la version 3 complète du 20 avril.",
+  "chronologie": {
+    "entete": "LE DESSIN PRÉCÈDE LE GROS ŒUVRE · JANVIER → AVRIL 2026",
+    "entete_reservations": "LES RÉSERVATIONS · CHAQUE NIVEAU SE FIGE AVANT SON EXÉCUTION",
+    "entete_plans": "LES PLANS D'EXÉCUTION · TROIS VERSIONS",
+    "legende_diffusion": "DIFFUSION À L'INSTALLATEUR",
+    "legende_diffusion_court": "DIFFUSION",
+    "legende_fige": "NIVEAU FIGÉ AU DESSIN",
+    "legende_fige_court": "FIGÉ AU DESSIN",
+    "axe": {
+      "debut": "2026-01-01",
+      "fin": "2026-04-30",
+      "mois": [
+        "JANVIER",
+        "FÉVRIER",
+        "MARS",
+        "AVRIL"
+      ],
+      "derniere": {
+        "date": "2026-04-24",
+        "libelle": "DERNIÈRE DIFFUSION · 24 AVR"
+      }
+    },
+    "niveaux": [
+      {
+        "ordre": 1,
+        "cle": "rdc",
+        "libelle": "RDC",
+        "date": "2026-01-16",
+        "mention": "16 JANV · ATTENTES AU SOL · JOUR DE L'ÉCHÉANCE",
+        "ancre": "marque"
+      },
+      {
+        "ordre": 2,
+        "cle": "r1",
+        "libelle": "R+1",
+        "date": "2026-02-06"
+      },
+      {
+        "ordre": 3,
+        "cle": "r2",
+        "libelle": "R+2",
+        "date": "2026-02-13"
+      },
+      {
+        "ordre": 4,
+        "cle": "r3",
+        "libelle": "R+3",
+        "date": "2026-02-20",
+        "mention": "PLANCHERS BOIS · FÉVRIER · AU RYTHME DES INDICES ET DU GROS ŒUVRE",
+        "ancre": "fin"
+      },
+      {
+        "ordre": 5,
+        "cle": "r4",
+        "libelle": "R+4",
+        "date": "2026-02-27"
+      },
+      {
+        "ordre": 6,
+        "cle": "toiture",
+        "libelle": "Toiture",
+        "date": "2026-03-05",
+        "mention": "DÉBUT MARS",
+        "ancre": "marque"
+      }
+    ],
+    "plans": {
+      "libelle": "Plans d'exécution — plomberie, chauffage-rafraîchissement",
+      "detail": "AVEC LEURS NOTES DE CALCUL · TOUS NIVEAUX",
+      "debut": "2026-01-30",
+      "fin": "2026-04-20",
+      "versions": [
+        {
+          "libelle": "V1",
+          "date": "2026-01-30"
+        },
+        {
+          "libelle": "V2",
+          "date": "2026-03-10"
+        },
+        {
+          "libelle": "V3 · 20 AVR · COMPLÈTE",
+          "date": "2026-04-20"
+        }
+      ]
+    },
+    "elements": [
+      {
+        "ordre": 1,
+        "libelle": "Réservations du rez-de-chaussée",
+        "valeur": "16 JANV",
+        "detail": [
+          "ATTENTES AU SOL · JOUR DE L'ÉCHÉANCE"
+        ]
+      },
+      {
+        "ordre": 2,
+        "libelle": "Réservations des planchers bois, du R+1 au R+4",
+        "valeur": "FÉVRIER",
+        "detail": [
+          "AU RYTHME DES INDICES ET DU GROS ŒUVRE"
+        ]
+      },
+      {
+        "ordre": 3,
+        "libelle": "Réservations de toiture",
+        "valeur": "DÉBUT MARS"
+      },
+      {
+        "ordre": 4,
+        "libelle": "Plans d'exécution plomberie et chauffage-rafraîchissement",
+        "valeur": "TROIS VERSIONS",
+        "detail": [
+          "AVEC LEURS NOTES DE CALCUL · TOUS NIVEAUX"
+        ]
+      },
+      {
+        "ordre": 5,
+        "libelle": "Version 3 complète",
+        "valeur": "20 AVR",
+        "detail": [
+          "PLANS DE TOUS LES NIVEAUX · NOTES DE CALCUL · SÉLECTION MATÉRIEL"
+        ]
+      }
+    ],
+    "mention_separation": [
+      "DU 16 JANVIER AU 24 AVRIL 2026",
+      "CHAQUE NIVEAU EST FIGÉ AU DESSIN AVANT SON EXÉCUTION"
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Les étages portent sur des planchers bois : rien ne se perce après coup, tout se réserve au dessin.",
+  "vignette_surtitre": "RÉSERVER AVANT D'EXÉCUTER",
+  "a_valider_ft2e": [
+    {
+      "objet": "L'échelonnement des réservations du R+1 au R+4",
+      "la_source_affirme": "« Les réservations des planchers bois du R+1 au R+4 en février, au rythme des indices de l'architecte et du gros œuvre » — ni dates, ni ordre, ni nombre d'envois.",
+      "le_dessin_suppose": "Quatre diffusions distinctes, échelonnées de bas en haut sur février (les 6, 13, 20 et 27) — l'ordre du gros œuvre. Dire si les niveaux sont partis séparément et dans cet ordre : une diffusion groupée ferait une autre géométrie, une marche unique au lieu de quatre."
+    },
+    {
+      "objet": "La toiture « début mars »",
+      "la_source_affirme": "« La toiture début mars » — sans date.",
+      "le_dessin_suppose": "Une position au 5 mars sur l'axe. La date réelle est au bordereau de diffusion."
+    },
+    {
+      "objet": "Les jalons V1 et V2 des plans",
+      "la_source_affirme": "L'échéance contractuelle des plans est au 30 janvier ; les plans sont « repris en trois versions successives jusqu'en avril » ; seule la version 3 complète est datée, du 20 avril.",
+      "le_dessin_suppose": "V1 posé au 30 janvier (l'échéance) et V2 à la mi-mars. Les dates réelles des deux premières versions sont au bordereau."
+    },
+    {
+      "objet": "La dernière diffusion, le 24 avril",
+      "la_source_affirme": "« Du 16 janvier au 24 avril 2026, quinze diffusions jalonnent la mission » — et la version 3 complète est du 20 avril.",
+      "le_dessin_suppose": "Une coche d'axe au 24 avril, sans l'attribuer à un registre : la fiche ne dit pas ce que porte cet envoi postérieur à la version complète."
+    },
+    {
+      "objet": "Une seule pile de niveaux pour deux bâtiments",
+      "la_source_affirme": "« Deux bâtiments en R+4 de quatre logements superposés », une ventilation couplée à la production d'eau chaude « des deux bâtiments ».",
+      "le_dessin_suppose": "Une pile unique : chaque diffusion de réservations est supposée couvrir le niveau des deux bâtiments à la fois. Si les bâtiments ont été diffusés séparément, la géométrie double."
+    },
+    {
+      "objet": "L'échéance du 30 janvier, non dessinée",
+      "la_source_affirme": "« Le solde des réservations et les plans d'exécution avant le 30 » — et le calendrier réel des planchers court sur février, « au rythme des indices de l'architecte et du gros œuvre ».",
+      "le_dessin_suppose": "Que le dessin suit le calendrier réel et tait la ligne d'échéance : la porter ferait paraître les diffusions de février en retard, ce que la fiche ne dit pas. Dire si l'échéance contractuelle doit figurer."
+    },
+    {
+      "objet": "Millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2025 (champ annee), mission conduite de janvier à avril 2026, chantier en cours — pas d'année de réception.",
+      "le_dessin_suppose": "Que le cartouche porte 2026, millésime de la mission que la planche dessine — même logique que la planche 02 (le millésime de ce que montre le dessin)."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 25-097 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Montants : le lot chauffage-ventilation-plomberie à 199 000 € HT, la mission à 2 860 € HT — cités par la fiche, jamais au dessin.",
+    "Noms de tiers : le promoteur et son groupe (maîtrise d'ouvrage), l'installateur titulaire du lot, le bureau d'études de conception du dossier de consultation, l'architecte — le dessin dit « l'installateur » et « les indices », sans nommer personne.",
+    "Données que la fiche porte déjà : le décompte des quinze diffusions, les trois profondeurs d'engravures (30, 40 et 90 mm), la note de déperditions EN 12831 (101 pages, −4 °C), les consommations RE2020 (62,7 et 70,5 kWhep/m²/an), les équipements (gainables multizones appairés, chauffe-eau thermodynamique de 185 litres) — matière du texte de la fiche ou d'autres archétypes, pas de la chronologie.",
+    "Toute géométrie d'ouvrage : les niveaux sont des bandes topologiques d'égale hauteur — ni façade, ni plan, ni l'angle des deux rues ; l'empilement code l'ordre des niveaux, jamais leur forme."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "escalier de 6 marques strictement montantes (x 298 → 688), chaque niveau figé de sa marque au bout de l'axe, bande des plans 412 → 1063 sous la pile — la géométrie porte la précédence, aucun chiffre de la fiche n'est répété",
+    "topologie": "libellés (x 56) → axe des temps (x 176–1144) ; pile de 6 niveaux 214–460, bande des plans 512–556, axe à y 600",
+    "bas_du_dessin": "axe à 600, mois à 620, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 253 x 30 px = 7590 px², soit 0.79 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "l'escalier seul : 6 niveaux, marques montantes de x 48 à 158, deux étiquettes (pied et tête) — plans, mentions et mois laissés à la planche",
+    "bas_du_dessin": "172 px, marge basse 28 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier : pile de 6 niveaux, escalier de marques montantes, bandes figées, bande des plans à trois versions, axe des mois — trois nœuds datés (16 JANV, DÉBUT MARS, V3 · 20 AVR), double légende en tête ; phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "axe à 318 px, mois à 334 px, marge basse 34 px"
+  }
+}
