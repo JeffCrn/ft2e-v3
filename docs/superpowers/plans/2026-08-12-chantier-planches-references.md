@@ -200,8 +200,9 @@ taille) ; `verser.py` exige les cinq fichiers ; `index.astro` inline l'appui en
 `plan-pose`, sans duotone ni équerres. **Sous 640 px, le hero n'affiche plus aucun
 média de vedette** (décision FT2E du 2026-08-14) : l'appui ne s'y lit pas (échelle
 0,62) et la hachure de repli était un décor `aria-hidden` qui coûtait un écran de
-défilement — seule la carte-lien de la vedette reste ; une photographie, elle,
-resterait affichée. Les huit planches publiées ont été régénérées — planches et vignettes
+défilement — et la carte-lien, seule sous le titre, se lisait comme un bloc
+orphelin — la vedette s'efface donc entièrement du téléphone, où « Nos références »
+la dessert ; une photographie, elle, resterait affichée avec sa carte. Les huit planches publiées ont été régénérées — planches et vignettes
 contrôlées octet à octet inchangées.
 
 ---

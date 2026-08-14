@@ -133,9 +133,18 @@ const partenaires = [
           </div>
         </div>
         )}
+        {/* La carte-lien SUIT son visuel : seule sous le titre, sans le dessin
+            qu'elle légende, elle se lit comme un bloc orphelin — on se demande
+            ce qu'elle fait là (retour FT2E du 2026-08-14). Quand le visuel est
+            masqué sous `sm`, elle l'est aussi ; la vedette reste accessible
+            par « Nos références ». Seule une photographie garde carte et
+            visuel à toute taille. */}
         <a
           href={`/references/${enAvant.id}`}
-          class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier"
+          class:list={[
+            heroAppui || !heroImageExiste ? 'hidden sm:flex' : 'flex',
+            'flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier',
+          ]}
         >
           <span class="type-intitule text-encre text-[15px]">{enAvant.data.titre}</span>
           <span class="mono-data text-[11px] text-pivot ml-auto">{enAvant.data.lieu} · {libelleChronologie(enAvant)}</span>
