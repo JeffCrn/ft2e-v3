@@ -116,16 +116,16 @@ puis le prompt de lancement de la session suivante (une fiche = une session).
   · Si l'archétype retenu a déjà son compositeur dans scripts/planches/, tu ne produis
     QUE planche.json, puis tu lances :
         python scripts/planches/<archetype>.py <dossier>
-    qui écrit planche.svg et vignette.svg. N'écris pas de SVG à la main dans ce cas.
+    qui écrit planche.svg, vignette.svg et appui.svg. N'écris pas de SVG à la main dans ce cas.
 
-  · Sinon, tu écris aussi les deux SVG selon les gabarits du protocole (1200 × 800 et
-    300 × 200), et tu me dis explicitement qu'un compositeur reste à écrire.
+  · Sinon, tu écris aussi les trois SVG selon les gabarits du protocole (1200 × 800,
+    300 × 200 et 552 × 368), et tu me dis explicitement qu'un compositeur reste à écrire.
 
   · Le PNG 2400 × 1600 dans les deux cas.
 
   · Le versement : python scripts/planches/verser.py <slug>, puis npm run build et
     contrôle du RENDU des pages touchées (fiche à 1152 px, largeur téléphone, carte
-    de secteur) — un build vert ne prouve pas que la page s'affiche.
+    de secteur — et le hero de l’accueil si la fiche est en_avant) — un build vert ne prouve pas que la page s'affiche.
 
   · Le prompt de la session suivante : ce gabarit, avec la première fiche « à faire »
     du programme du suivi et la ligne des archétypes actualisée depuis le registre.
@@ -135,7 +135,7 @@ TROIS CHOSES QUE JE REFUSERAI :
     géométrie seule ne démontre plus rien, ce n'est pas une planche. La première
     version de la planche 02 a été refusée pour ce motif exact ;
   · une planche que tu n'as pas regardée À SA TAILLE DE LECTURE — 1152 px pour la
-    planche, une carte de 296 px pour la vignette. Le rendu en pleine page ne prouve
+    planche, une carte de 296 px pour la vignette, 552 px pour l’appui. Le rendu en pleine page ne prouve
     rien : les sept défauts de la première planche y étaient tous invisibles ;
   · une extraction dont `a_valider_ft2e` est vide. Un dessin tranche toujours ce qu'un
     texte laisse ouvert ; une liste vide signifie que tu ne l'as pas vu, pas qu'il n'y
