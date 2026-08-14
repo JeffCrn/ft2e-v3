@@ -1426,6 +1426,436 @@ def composer_appui_enjambement(donnees):
         bas=f"fosse jusqu'à 344 px, marge basse {AH - 344} px")
 
 
+# ═══ Mécanisme `portee` — la mission bornée, le système entier (Yachtman) ════
+#
+# Deux bâtiments accolés en piles topologiques — trois étages sur sous-sol
+# côté quai, cinq côté rue Saint-Nicolas — sur une même grille de niveaux.
+# La démonstration est portée par la géométrie : deux bandes de travaux
+# (calcaire, largeurs proportionnelles aux 140 et 90 m² de la fiche, cernées
+# d'un périmètre encré en L) tiennent dans le coin bas-gauche de la coupe,
+# quand l'enceinte de la zone d'alarme (bande claire continue) enclot les
+# deux piles entières — sous-sol et combles compris — et que la détection
+# (points clairs cerclés d'encre) occupe chaque niveau. Aucune proportion
+# d'ouvrage : hauteurs de niveau égales, largeurs de pile égales (règle 4) ;
+# seules les deux emprises de travaux sont proportionnelles ENTRE ELLES.
+
+P_H_NIV = 50                  # hauteur d'un niveau — jamais une cote réelle
+P_Y_GRADE = 610               # la ligne de sol (le quai)
+P_Y_FOND = 660                # fond du sous-sol
+P_QX0, P_QX1 = 380, 590       # pile côté quai
+P_SX0, P_SX1 = 590, 800       # pile côté rue Saint-Nicolas
+P_Y_TOIT_Q = 410              # toit du quai — dessus du R+3
+P_Y_TOIT_S = 310              # dessus du R+5 — plancher des combles
+P_Y_COMBLES = 292             # dessus des combles Saint-Nicolas
+P_K_M2 = 1.3                  # px par m² d'emprise de travaux
+P_ENV = 8                     # retrait de l'enceinte de zone d'alarme
+P_X_RISER = 610               # colonne montante de la détection adressable
+P_X_DOT_Q, P_X_DOT_S = 470, 700
+P_X_ARROW = 420               # la salle qui redescend
+P_CALL_L = 250                # colonne d'appels de gauche
+P_CALL_XD = 830               # colonne d'appels de droite
+P_Y_LEGENDE = 262             # la légende des signes
+
+
+def _boitier(A, x, y, c, ep=1.5, interne=False):
+    """Un boîtier SSI : carré papier à contour encré. La centrale est le grand
+    (22, trait 1,5) ; le répétiteur le petit (12, trait 1) barré d'une ligne —
+    la taille seule ne porte jamais la distinction, la légende la double."""
+    from _tronc import JETON
+    A(f'  <rect x="{x:.2f}" y="{y:.2f}" width="{c:.2f}" height="{c:.2f}" '
+      f'class="c-papier s-encre" fill="{JETON["papier"]}" '
+      f'stroke="{JETON["encre"]}" stroke-width="{ep}"/>')
+    if interne:
+        A(ligne(x + 2.5, y + c / 2, x + c - 2.5, y + c / 2, "encre", 1))
+
+
+def _pointille(A, x0, y0, x1, y1, ep=1.2, motif="6 6"):
+    """La mitoyenneté : les deux bâtiments sont accolés et NON isolés l'un de
+    l'autre — le trait interrompu dit la limite qui ne sépare pas."""
+    from _tronc import JETON
+    A(f'  <path d="M {x0:.2f} {y0:.2f} L {x1:.2f} {y1:.2f}" fill="none" '
+      f'class="s-encre" stroke="{JETON["encre"]}" stroke-width="{ep}" '
+      f'stroke-dasharray="{motif}"/>')
+
+
+def composer_portee(donnees):
+    q = donnees["portee"]
+    elems = {e["cle"]: e for e in q["elements"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    w_rdc = 140 * P_K_M2      # 182 — l'emprise du rez-de-chaussée
+    w_r1 = 90 * P_K_M2        # 117 — l'emprise de l'étage
+    bx = P_QX0 + 3            # les bandes s'appuient sur la façade du quai
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête, registres, légende des signes ───────────────────────────────
+    controler("en-tête schéma", q["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, q["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("registre gauche", q["registres"]["gauche"], 10, "mono",
+              520, 10 * 0.14)
+    A(texte(MARGE, Y_TAGS, q["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("registre droite", q["registres"]["droite"], 10, "mono",
+              520, 10 * 0.14)
+    A(texte(W - MARGE, Y_TAGS, q["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+    # La légende : un signe n'est jamais porté par sa seule forme.
+    x_leg = MARGE + 4
+    A(cercle(x_leg, P_Y_LEGENDE - 3.5, 3.5, "clair", "encre", 1))
+    x_leg += 12
+    for k, lib in enumerate(q["legende"]):
+        controler(f"légende {k + 1}", lib, 10, "mono", 300, 10 * 0.14)
+        A(texte(x_leg, P_Y_LEGENDE, lib, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        x_leg += mesurer(lib, 10, "mono", 10 * 0.14) + 24
+        if k == 0:
+            _boitier(A, x_leg, P_Y_LEGENDE - 10, 11, 1.5)
+            x_leg += 19
+        elif k == 1:
+            _boitier(A, x_leg, P_Y_LEGENDE - 9, 9, 1, interne=True)
+            x_leg += 17
+
+    # ── Les bandes de travaux — posées sous les traits de structure ──────────
+    A(rect(bx, 512, w_r1, 48, "calcaire"))
+    A(rect(bx, 560, w_rdc, 48, "calcaire"))
+
+    # ── Les planchers, la trame des niveaux ──────────────────────────────────
+    for y in (460, 510, 560, P_Y_GRADE):
+        A(ligne(P_QX0 + 2, y, P_QX1 - 2, y, "filet-2", 1))
+    for y in (P_Y_TOIT_S, 360, 410, 460, 510, 560, P_Y_GRADE):
+        A(ligne(P_SX0 + 2, y, P_SX1 - 2, y, "filet-2", 1))
+
+    # ── Les contours des deux piles ──────────────────────────────────────────
+    A(polyligne([(P_QX0, P_Y_FOND), (P_QX0, P_Y_TOIT_Q), (P_QX1, P_Y_TOIT_Q)],
+                "encre", 2))
+    A(polyligne([(P_SX0, P_Y_TOIT_Q), (P_SX0, P_Y_COMBLES),
+                 (P_SX1, P_Y_COMBLES), (P_SX1, P_Y_FOND)], "encre", 2))
+    A(ligne(P_QX0, P_Y_FOND, P_SX1, P_Y_FOND, "encre", 2))
+    _pointille(A, P_SX0, P_Y_TOIT_Q, P_SX0, P_Y_FOND)
+
+    # La ligne de sol — à gauche seulement : à droite, l'enceinte de zone
+    # d'alarme (x 808) puis la colonne d'appels (x 830) ne lui laissent
+    # aucune place, et le talon atterrissait sous le texte de l'appel.
+    A(ligne(324, P_Y_GRADE, 364, P_Y_GRADE, "filet-1", 2))
+    for x in (336, 354):
+        A(ligne(x, P_Y_GRADE + 2, x - 8, P_Y_GRADE + 9, "filet-2", 1))
+
+    # ── Le périmètre de la mission — le L encré sur les deux bandes ──────────
+    A(polyligne([(bx, 512), (bx + w_r1, 512), (bx + w_r1, 560),
+                 (bx + w_rdc, 560), (bx + w_rdc, 608), (bx, 608), (bx, 512)],
+                "encre", 2))
+    controler("périmètre mission", q["perimetre_mission"], 10, "mono",
+              200, 10 * 0.14)
+    A(texte(bx, 505, q["perimetre_mission"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # La salle qui redescend : l'étage devient de l'hébergement.
+    A(ligne(P_X_ARROW, 528, P_X_ARROW, 583, "encre", 1.5))
+    A(fleche(P_X_ARROW, 591, "encre", "bas", 9))
+
+    # ── L'enceinte de la zone d'alarme — elle enclot TOUT ────────────────────
+    env = [(P_QX0 - P_ENV, P_Y_FOND + P_ENV), (P_QX0 - P_ENV, P_Y_TOIT_Q - P_ENV),
+           (P_SX0 - P_ENV, P_Y_TOIT_Q - P_ENV), (P_SX0 - P_ENV, P_Y_COMBLES - P_ENV),
+           (P_SX1 + P_ENV, P_Y_COMBLES - P_ENV), (P_SX1 + P_ENV, P_Y_FOND + P_ENV)]
+    A(polyligne(env + [env[0]], "clair", 4))
+
+    # ── La détection : la colonne montante et un point par niveau ────────────
+    _boitier(A, 566, 580, 22, 1.5)                       # la centrale, au RDC
+    A(ligne(588, 591, P_X_RISER, 591, "encre", 1))  # traverse la mitoyenneté
+    A(ligne(P_X_RISER, 301, P_X_RISER, 635, "encre", 1.5))
+    for y in (635, 585, 535, 485, 435):
+        A(cercle(P_X_DOT_Q, y, 3.5, "clair", "encre", 1))
+    for y in (635, 585, 535, 485, 435, 385, 335, 301):
+        A(cercle(P_X_DOT_S, y, 3.5, "clair", "encre", 1))
+    _boitier(A, 505, 578, 12, 1, interne=True)           # répétiteur du bar
+    _boitier(A, 734, 372, 12, 1, interne=True)           # répétiteur du R+4
+
+    # L'escalier neuf de la seconde dérogation, du R+3 au R+4.
+    pas = [(640, 434)]
+    for k in range(4):
+        x0, y0 = pas[-1]
+        pas += [(x0 + 8, y0), (x0 + 8, y0 - 12)]
+    A(polyligne(pas, "encre", 1.5))
+    controler("mention escalier", q["mention_escalier"], 10, "mono",
+              120, 10 * 0.14)
+    A(texte(656, 380, q["mention_escalier"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+
+    # ── Les niveaux et les deux bâtiments, nommés ────────────────────────────
+    niv = q["niveaux"]
+    for lib, y in zip(niv[:5], (638, 588, 538, 488, 438)):
+        A(texte(362, y, lib, "mono", 10, 500, "pivot", ancre="end",
+                tracking=10 * 0.14))
+    for lib, y in zip(niv[5:], (388, 338, 304)):
+        A(texte(574, y, lib, "mono", 10, 500, "pivot", ancre="end",
+                tracking=10 * 0.14))
+    A(texte((P_QX0 + P_QX1) / 2, 394, q["tag_quai"], "mono", 10, 500,
+            "pivot", ancre="middle", tracking=10 * 0.14))
+    A(texte((P_SX0 + P_SX1) / 2, 278, q["tag_saint_nicolas"], "mono", 10, 500,
+            "pivot", ancre="middle", tracking=10 * 0.14))
+
+    # ── La colonne d'appels de gauche — la mission ───────────────────────────
+    appels_g = [
+        ("redescend", 440, (P_X_ARROW, 530)),
+        ("chambres", 520, (bx, 522)),
+        ("services", 596, (bx, 604)),
+    ]
+    for cle, base, cible in appels_g:
+        e = elems[cle]
+        appel(A, MARGE, base, e["libelle"], e["detail"], P_CALL_L, cible,
+              controler, cle)
+
+    # ── La colonne d'appels de droite — le système ───────────────────────────
+    appels_d = [
+        ("systeme", 320, (P_X_RISER + 2, 314)),
+        ("derogations", 412, (676, 392)),
+        ("detection", 500, (P_X_DOT_S + 4.5, 487)),
+        ("zone", 588, (P_SX1 + P_ENV + 2, 560)),
+    ]
+    for cle, base, cible in appels_d:
+        e = elems[cle]
+        controler(f"appel {cle} — libellé", e["libelle"], 15, "sans-400",
+                  W - MARGE - P_CALL_XD)
+        A(texte(P_CALL_XD, base, e["libelle"], "sans", 15, 400, "encre",
+                wdth=100))
+        for k, l in enumerate(e["detail"]):
+            controler(f"appel {cle} — détail {k + 1}", l, 10, "mono",
+                      W - MARGE - P_CALL_XD, 10 * 0.14)
+            A(texte(P_CALL_XD, base + 18 + k * 14, l, "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+        A(polyligne([(P_CALL_XD - 8, base - 4), cible], "filet-1", 1))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "deux bandes de travaux calcaire cernées d'un L encré "
+                         f"({w_rdc:.0f} et {w_r1:.0f} px, proportionnelles aux "
+                         "140 et 90 m² de la fiche) tiennent dans le coin "
+                         "bas-gauche de la coupe ; l'enceinte claire de la "
+                         "zone d'alarme enclot les deux piles entières "
+                         f"(x {P_QX0 - P_ENV}–{P_SX1 + P_ENV}, "
+                         f"y {P_Y_COMBLES - P_ENV}–{P_Y_FOND + P_ENV}) et "
+                         "13 points de détection occupent chaque niveau, "
+                         "sous-sol et combles compris — texte masqué, la "
+                         "disproportion des deux périmètres porte la thèse",
+        "topologie": f"appels mission (x {MARGE}–{MARGE + P_CALL_L}) → piles "
+                     f"(quai x {P_QX0}–{P_QX1} sur 5 niveaux, Saint-Nicolas "
+                     f"x {P_SX0}–{P_SX1} sur 7 + combles, mitoyenneté "
+                     f"pointillée à {P_SX0}) → appels système "
+                     f"(x {P_CALL_XD}–{W - MARGE}) ; colonne montante à "
+                     f"{P_X_RISER}, centrale 566–588 au RDC",
+        "emprises": f"largeur = surface x {P_K_M2} px/m² : RDC 140 m² → "
+                    f"{w_rdc:.0f} px, R+1 90 m² → {w_r1:.0f} px — aucune "
+                    "autre proportion d'ouvrage n'est reprise",
+        "bas_du_dessin": f"fond du sous-sol à {P_Y_FOND}, enceinte jusqu'à "
+                         f"{P_Y_FOND + P_ENV + 2}, dernier appel à 634, "
+                         f"phrase de principe à {Y_PHRASE}, cartouche "
+                         f"{Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, marge "
+                         f"basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+                          "pas chiffrée (révision 4) ; les surfaces restent "
+                          "au mono 10 pivot, dans les appels",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_portee(donnees):
+    """La vignette : le motif de l'archétype, sans son appareil.
+
+    Ce qu'elle garde : les deux piles inégales, les deux bandes de travaux
+    cernées de leur L, l'enceinte claire qui enclot tout, la colonne montante
+    et ses points de détection, et les deux nœuds chiffrés (230 m² contre
+    sept niveaux). Ce qu'elle laisse : la centrale, les répétiteurs,
+    l'escalier, les niveaux nommés, la légende — huit signes annotés dans
+    300 px ne se liraient pas."""
+    q = donnees["portee"]
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # Les deux piles — même grille de niveaux, repère propre.
+    qx0, qx1, sx1 = 36, 104, 172
+    y_fond, y_toit_q, y_toit_s, y_combles = 172, 102, 74, 66
+    A(rect(38, 130.5, 23, 13.5, "calcaire"))
+    A(rect(38, 144.5, 36, 13, "calcaire"))
+    for y in (116, 130, 144, 158):
+        A(ligne(qx0 + 1, y, qx1 - 1, y, "filet-2", 0.8))
+    for y in (74, 88, 102, 116, 130, 144, 158):
+        A(ligne(qx0 + 69, y, sx1 - 1, y, "filet-2", 0.8))
+    A(polyligne([(qx0, y_fond), (qx0, y_toit_q), (qx1, y_toit_q)], "encre", 1.5))
+    A(polyligne([(qx1, y_toit_q), (qx1, y_combles), (sx1, y_combles),
+                 (sx1, y_fond)], "encre", 1.5))
+    A(ligne(qx0, y_fond, sx1, y_fond, "encre", 1.5))
+    _pointille(A, qx1, y_toit_q, qx1, y_fond, 0.8, "3 3")
+
+    # Le L de la mission.
+    A(polyligne([(38, 130.5), (61, 130.5), (61, 144.5), (74, 144.5),
+                 (74, 157.5), (38, 157.5), (38, 130.5)], "encre", 1.2))
+
+    # L'enceinte de la zone d'alarme.
+    env = [(31, 177), (31, 97), (99, 97), (99, 61), (177, 61), (177, 177)]
+    A(polyligne(env + [env[0]], "clair", 3))
+
+    # La colonne montante et les points de détection.
+    A(ligne(108, 70, 108, 165, "encre", 1))
+    for y in (165, 151, 137, 123, 109):
+        A(cercle(70, y, 2, "clair", "encre", 0.8))
+    for y in (165, 151, 137, 123, 109, 95, 81, 70):
+        A(cercle(138, y, 2, "clair", "encre", 0.8))
+
+    # Les deux nœuds chiffrés.
+    A(texte(192, 62, "Coordination SSI", "sans", 12, 600, "encre", wdth=112))
+    A(texte(192, 76, "SEPT NIVEAUX", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(polyligne([(189, 58), (179, 62)], "filet-1", 1))
+    A(texte(192, 130, "Lots techniques", "sans", 12, 600, "encre", wdth=112))
+    A(texte(192, 144, f"230{NN}m²", "mono", 10, 500, "pivot", tabulaire=True))
+    A(polyligne([(189, 126), (76, 146)], "filet-1", 1))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "deux piles inégales, le L de la mission au coin bas-gauche, "
+                 "l'enceinte claire qui enclot tout, la colonne montante et "
+                 "13 points de détection, deux nœuds chiffrés — centrale, "
+                 "répétiteurs, escalier et niveaux nommés sont laissés à la "
+                 "planche",
+        "bas_du_dessin": "enceinte jusqu'à 178,5 px, marge basse 21,5 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_portee(donnees):
+    """L'appui du hero : le motif à l'échelle 1.
+
+    Ce qu'il garde : les deux piles, les bandes de travaux et leur L, la
+    flèche de la salle qui redescend, la centrale, la colonne montante et ses
+    points, l'enceinte de la zone d'alarme, et trois nœuds chiffrés
+    (lots techniques, coordination SSI, établissement). Ce qu'il laisse :
+    les répétiteurs, l'escalier, la légende, les niveaux nommés."""
+    q = donnees["portee"]
+    elems = {e["cle"]: e for e in q["elements"]}
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    qx0, qx1, sx1 = 96, 236, 376
+    y_fond, y_toit_q, y_combles = 332, 182, 108
+    w_rdc, w_r1 = 77, 50
+
+    A(rect(100, 244, w_r1, 28, "calcaire"))
+    A(rect(100, 274, w_rdc, 26, "calcaire"))
+    for y in (212, 242, 272, 302):
+        A(ligne(qx0 + 1, y, qx1 - 1, y, "filet-2", 1))
+    for y in (122, 152, 182, 212, 242, 272, 302):
+        A(ligne(qx0 + 141, y, sx1 - 1, y, "filet-2", 1))
+    A(polyligne([(qx0, y_fond), (qx0, y_toit_q), (qx1, y_toit_q)], "encre", 2))
+    A(polyligne([(qx1, y_toit_q), (qx1, y_combles), (sx1, y_combles),
+                 (sx1, y_fond)], "encre", 2))
+    A(ligne(qx0, y_fond, sx1, y_fond, "encre", 2))
+    _pointille(A, qx1, y_toit_q, qx1, y_fond, 1, "5 5")
+
+    # Le L de la mission, et la salle qui redescend.
+    A(polyligne([(100, 244), (150, 244), (150, 274), (177, 274), (177, 300),
+                 (100, 300), (100, 244)], "encre", 1.5))
+    A(ligne(118, 252, 118, 288, "encre", 1.2))
+    A(fleche(118, 295, "encre", "bas", 8))
+
+    # L'enceinte de la zone d'alarme.
+    env = [(90, 338), (90, 176), (230, 176), (230, 102), (382, 102),
+           (382, 338)]
+    A(polyligne(env + [env[0]], "clair", 4))
+
+    # La centrale, la colonne montante, les points de détection.
+    _boitier(A, 206, 278, 18, 1.5)
+    A(ligne(224, 287, 242, 287, "encre", 1))
+    A(ligne(242, 115, 242, 317, "encre", 1.2))
+    for y in (317, 287, 257, 227, 197):
+        A(cercle(190, y, 3, "clair", "encre", 1))
+    for y in (317, 287, 257, 227, 197, 167, 137, 115):
+        A(cercle(306, y, 3, "clair", "encre", 1))
+
+    # Les trois nœuds chiffrés, à droite.
+    A(texte(400, 140, "Coordination SSI", "sans", 14, 600, "encre", wdth=112))
+    A(texte(400, 157, "SEPT NIVEAUX", "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(polyligne([(397, 136), (386, 132)], "filet-1", 1))
+    A(texte(400, 220, "Lots techniques", "sans", 14, 600, "encre", wdth=112))
+    A(texte(400, 237, f"230{NN}m²", "mono", 11, 500, "pivot", tabulaire=True))
+    A(polyligne([(397, 216), (179, 274)], "filet-1", 1))
+    A(texte(400, 300, "L'établissement", "sans", 14, 600, "encre", wdth=112))
+    A(texte(400, 317, f'{elems["etablissement"]["valeur"]} CHAMBRES', "mono",
+            11, 500, "pivot", tracking=11 * 0.14))
+    A(polyligne([(397, 296), (384, 298)], "filet-1", 1))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="les deux piles inégales, le L de la mission et sa flèche, "
+              "l'enceinte claire de la zone d'alarme, la centrale, la "
+              "colonne montante et 13 points de détection, trois nœuds "
+              "chiffrés à l'échelle 1 — répétiteurs, escalier, légende et "
+              "niveaux nommés laissés à la planche",
+        bas=f"enceinte jusqu'à 340 px, marge basse {AH - 340} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def _composer(donnees):
@@ -1433,6 +1863,8 @@ def _composer(donnees):
         return composer_equilibre(donnees)
     if "enjambement" in donnees:
         return composer_enjambement(donnees)
+    if "portee" in donnees:
+        return composer_portee(donnees)
     return composer(donnees)
 
 
@@ -1441,6 +1873,8 @@ def _composer_vignette(donnees):
         return composer_vignette_equilibre(donnees)
     if "enjambement" in donnees:
         return composer_vignette_enjambement(donnees)
+    if "portee" in donnees:
+        return composer_vignette_portee(donnees)
     return composer_vignette(donnees)
 
 
@@ -1449,6 +1883,8 @@ def _composer_appui(donnees):
         return composer_appui_equilibre(donnees)
     if "enjambement" in donnees:
         return composer_appui_enjambement(donnees)
+    if "portee" in donnees:
+        return composer_appui_portee(donnees)
     return composer_appui(donnees)
 
 

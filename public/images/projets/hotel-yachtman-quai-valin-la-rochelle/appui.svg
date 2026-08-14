@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la portée des deux missions : une coupe de sept niveaux à travers deux bâtiments accolés. La mission lots techniques est bornée à 230 m² — les services généraux du rez-de-chaussée et quatre chambres créées au premier étage — quand la coordination du système de sécurité incendie couvre l'établissement entier : un système unique de catégorie A, adressable, une détection généralisée jusqu'aux combles, une seule zone d'alarme sans temporisation.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">MISSIONS D'ÉTENDUE INÉGALE</text>
+  <rect x="100.00" y="244.00" width="50.00" height="28.00" class="c-calcaire" fill="#EDF0F2"/>
+  <rect x="100.00" y="274.00" width="77.00" height="26.00" class="c-calcaire" fill="#EDF0F2"/>
+  <path d="M 97.00 212.00 L 235.00 212.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 97.00 242.00 L 235.00 242.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 97.00 272.00 L 235.00 272.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 97.00 302.00 L 235.00 302.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 237.00 122.00 L 375.00 122.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 237.00 152.00 L 375.00 152.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 237.00 182.00 L 375.00 182.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 237.00 212.00 L 375.00 212.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 237.00 242.00 L 375.00 242.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 237.00 272.00 L 375.00 272.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 237.00 302.00 L 375.00 302.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 96.00 332.00 L 96.00 182.00 L 236.00 182.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 236.00 182.00 L 236.00 108.00 L 376.00 108.00 L 376.00 332.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 96.00 332.00 L 376.00 332.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 236.00 182.00 L 236.00 332.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1" stroke-dasharray="5 5"/>
+  <path d="M 100.00 244.00 L 150.00 244.00 L 150.00 274.00 L 177.00 274.00 L 177.00 300.00 L 100.00 300.00 L 100.00 244.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 118.00 252.00 L 118.00 288.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 118.00 295.00 L 114.00 287.00 L 122.00 287.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 90.00 338.00 L 90.00 176.00 L 230.00 176.00 L 230.00 102.00 L 382.00 102.00 L 382.00 338.00 L 90.00 338.00" fill="none" class="s-clair" stroke="#99CCCD" stroke-width="4"/>
+  <rect x="206.00" y="278.00" width="18.00" height="18.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 224.00 287.00 L 242.00 287.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 242.00 115.00 L 242.00 317.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <circle cx="190.00" cy="317.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="190.00" cy="287.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="190.00" cy="257.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="190.00" cy="227.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="190.00" cy="197.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="306.00" cy="317.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="306.00" cy="287.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="306.00" cy="257.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="306.00" cy="227.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="306.00" cy="197.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="306.00" cy="167.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="306.00" cy="137.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <circle cx="306.00" cy="115.00" r="3.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <text x="400.00" y="140.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Coordination SSI</text>
+  <text x="400.00" y="157.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SEPT NIVEAUX</text>
+  <path d="M 397.00 136.00 L 386.00 132.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="400.00" y="220.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Lots techniques</text>
+  <text x="400.00" y="237.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" font-variant-numeric="tabular-nums">230 m²</text>
+  <path d="M 397.00 216.00 L 179.00 274.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="400.00" y="300.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">L'établissement</text>
+  <text x="400.00" y="317.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">46 CHAMBRES</text>
+  <path d="M 397.00 296.00 L 384.00 298.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+</svg>

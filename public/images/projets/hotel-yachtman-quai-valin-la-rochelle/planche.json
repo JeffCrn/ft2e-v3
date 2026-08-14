@@ -1,0 +1,191 @@
+{
+  "fiche": "hotel-yachtman-quai-valin-la-rochelle",
+  "archetype": "coupe-traversee",
+  "archetype_motif": "La thèse de la fiche est une inégalité de portée : « une mission bornée, un système à l'échelle du bâtiment ». Les lots techniques s'arrêtent à 230 m² — les services généraux du rez-de-chaussée et quatre chambres créées au premier étage — quand la coordination SSI porte sur les sept niveaux des deux bâtiments accolés. C'est une démonstration verticale, qui se lit sur un empilement de niveaux : le domaine de coupe-traversee, sous un mécanisme nouveau, `portee` — deux petites bandes de travaux en bas de coupe, une enceinte d'alarme qui enclot tout. Ni zonage-ssi (le bâtiment forme une seule zone d'alarme : rien à découper), ni chronologie (le calendrier de chantier est une autre histoire).",
+  "surtitre": "SCHÉMA DE PRINCIPE · LA PORTÉE DES DEUX MISSIONS",
+  "titre": "Hôtel Le Yachtman",
+  "sous_titre": "Une mission bornée à 230 m², un système de sécurité à l'échelle des sept niveaux",
+  "cartouche_legende": "LA ROCHELLE · 230 m² · 2026",
+  "aria_label": "Schéma de principe de la portée des deux missions : une coupe de sept niveaux à travers deux bâtiments accolés. La mission lots techniques est bornée à 230 m² — les services généraux du rez-de-chaussée et quatre chambres créées au premier étage — quand la coordination du système de sécurité incendie couvre l'établissement entier : un système unique de catégorie A, adressable, une détection généralisée jusqu'aux combles, une seule zone d'alarme sans temporisation.",
+  "portee": {
+    "entete": "DEUX BÂTIMENTS ACCOLÉS, NON ISOLÉS L'UN DE L'AUTRE · 46 CHAMBRES · SEPT NIVEAUX, DU SOUS-SOL AU CINQUIÈME ÉTAGE",
+    "registres": {
+      "gauche": "LA MISSION LOTS TECHNIQUES · CVC · PLOMBERIE · CFO / CFA",
+      "droite": "LA COORDINATION SSI · NF S 61-931 · L'ÉTABLISSEMENT ENTIER"
+    },
+    "legende": [
+      "DÉTECTION AUTOMATIQUE",
+      "CENTRALE ADRESSABLE",
+      "TABLEAU RÉPÉTITEUR"
+    ],
+    "tag_quai": "CÔTÉ QUAI",
+    "tag_saint_nicolas": "CÔTÉ RUE SAINT-NICOLAS",
+    "niveaux": [
+      "SOUS-SOL",
+      "RDC",
+      "R+1",
+      "R+2",
+      "R+3",
+      "R+4",
+      "R+5",
+      "COMBLES"
+    ],
+    "perimetre_mission": "LA MISSION · 230 m²",
+    "mention_escalier": "ESCALIER NEUF",
+    "mention_zone": "UNE SEULE ZONE D'ALARME",
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "etablissement",
+        "libelle": "Deux bâtiments accolés, non isolés",
+        "valeur": "46",
+        "unite": "chambres",
+        "detail": [
+          "SEPT NIVEAUX, DU SOUS-SOL AU CINQUIÈME ÉTAGE"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "services",
+        "libelle": "Services généraux rénovés",
+        "detail": [
+          "RDC · 140 m²",
+          "CTA DOUBLE FLUX 840 m³/h",
+          "BAGAGERIE ET SALLE CRÉÉES"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "chambres",
+        "libelle": "Quatre chambres créées",
+        "detail": [
+          "R+1 · 90 m² · PAC COP 3,83",
+          "VENTILATION SIMPLE FLUX"
+        ]
+      },
+      {
+        "ordre": 4,
+        "cle": "redescend",
+        "libelle": "L'étage devient de l'hébergement",
+        "detail": [
+          "L'ANCIENNE SALLE REDESCEND AU RDC"
+        ]
+      },
+      {
+        "ordre": 5,
+        "cle": "systeme",
+        "libelle": "Un système remplace les deux",
+        "detail": [
+          "CATÉGORIE A · TYPE 1 · ADRESSABLE",
+          "CENTRALE AU RDC, VISIBLE DE L'ACCUEIL",
+          "RÉPÉTITEURS AU BAR ET AU R+4"
+        ]
+      },
+      {
+        "ordre": 6,
+        "cle": "detection",
+        "libelle": "Détection généralisée",
+        "detail": [
+          "TOUS LOCAUX HORS SANITAIRES ET ESCALIERS",
+          "COMBLES COMPRIS · DÉCLENCHEURS PAR NIVEAU"
+        ]
+      },
+      {
+        "ordre": 7,
+        "cle": "zone",
+        "libelle": "Une seule zone d'alarme",
+        "detail": [
+          "SANS TEMPORISATION",
+          "COMPARTIMENTAGE : FERMETURE DES PORTES",
+          "NON-ARRÊT DE L'ASCENSEUR"
+        ]
+      },
+      {
+        "ordre": 8,
+        "cle": "derogations",
+        "libelle": "Deux dérogations compensées",
+        "detail": [
+          "CIRCULATIONS NON RECOUPÉES · 13.12.2022",
+          "CHAMBRE DU R+4, ESCALIER NEUF · 04.11.2025"
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Un hôtel se réaménage par morceaux ; sa sécurité incendie, non.",
+  "vignette_surtitre": "MISSIONS D'ÉTENDUE INÉGALE",
+  "a_valider_ft2e": [
+    {
+      "objet": "Le bâtiment des quatre chambres",
+      "la_source_affirme": "« La création des 4 chambres au R+1 », à l'emplacement de l'ancienne salle de petit-déjeuner — la fiche ne dit pas dans lequel des deux bâtiments.",
+      "le_dessin_suppose": "Que les chambres sont côté quai, au droit des services généraux du rez-de-chaussée (le plan de principe du RDC montre le quai Valin). Dire si l'emprise est côté rue Saint-Nicolas, ou à cheval."
+    },
+    {
+      "objet": "Un sous-sol sous chaque bâtiment",
+      "la_source_affirme": "« Trois étages sur sous-sol côté quai, cinq côté rue Saint-Nicolas » et « sept niveaux, du sous-sol au cinquième étage » — la fiche ne dit pas si le sous-sol s'étend sous les deux bâtiments.",
+      "le_dessin_suppose": "Un sous-sol continu sous les deux piles. À corriger si le bâtiment Saint-Nicolas n'en a pas."
+    },
+    {
+      "objet": "La position de la centrale et des combles",
+      "la_source_affirme": "La centrale est « logée dans un placard dédié au rez-de-chaussée, visible depuis l'accueil » ; la détection s'étend aux combles — sans localiser l'accueil ni les combles par bâtiment.",
+      "le_dessin_suppose": "La centrale côté quai (l'accueil y est, d'après le plan du RDC) et des combles au seul bâtiment Saint-Nicolas, le plus haut. Deux positions à confirmer."
+    },
+    {
+      "objet": "Le répétiteur du quatrième étage posé côté Saint-Nicolas",
+      "la_source_affirme": "« Des tableaux répétiteurs au bar et au quatrième étage » — sans nommer le bâtiment.",
+      "le_dessin_suppose": "Que le quatrième étage n'existe que côté rue Saint-Nicolas, puisque le bâtiment du quai s'arrête au troisième. C'est une déduction, pas une citation."
+    },
+    {
+      "objet": "Les emprises dessinées au prorata des surfaces",
+      "la_source_affirme": "230 m² — « 90 à l'étage, 140 au rez-de-chaussée » ; la fiche ne donne pas la surface des plateaux.",
+      "le_dessin_suppose": "Deux bandes proportionnelles entre elles (1,3 px par m²), posées contre la façade du quai ; le reste du plateau est laissé sans échelle. Aucune proportion réelle de l'ouvrage n'est reprise."
+    },
+    {
+      "objet": "Des niveaux d'égale hauteur",
+      "la_source_affirme": "Aucune hauteur d'étage n'est donnée.",
+      "le_dessin_suppose": "Sept niveaux à hauteur égale : la géométrie code le nombre de niveaux, jamais leur hauteur — une lecture dimensionnelle de la coupe serait fausse."
+    },
+    {
+      "objet": "Millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2024 (champ annee), système réceptionné sans réserve le 16 juin 2026 (annee_livraison 2026).",
+      "le_dessin_suppose": "Que le cartouche porte 2026, millésime de la réception — même arbitrage que les planches précédentes. Sa surface est celle de la mission lots techniques (230 m²), pas celle de l'établissement, que la fiche ne donne pas."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 24-044 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Tout montant : estimations d'APD (107 228, 60 574 et 167 802 € HT) et leur ventilation, option de climatisation du lounge (15 098 € HT), honoraires (13 030 € HT dont 3 200 pour la coordination SSI).",
+    "Noms de tiers : la SCI maître d'ouvrage, DET Ingénierie (maîtrise d'œuvre générale), Option d'Intérieur (conception intérieure et économie), l'installateur des essais.",
+    "Le calendrier de chantier par tranches (semaines 49, 51, 2, 6 et 7, privatisations, congés scolaires) et les découvertes (colonnes amiantées, adduction corrodée) — matière d'une chronologie d'affaire, pas d'une coupe de portée.",
+    "L'arbitrage écrit du lounge non ventilé (10 mars 2025) et les trois réserves des essais — la page les raconte déjà.",
+    "Détails d'équipement sans effet sur la portée des missions : R410A, DC Inverter, unités de 1,9 et 2,5 kW, 22 dB(A), filtration F7 / M5, 305 W, by-pass, entrées d'air 45 m³/h et 39 dB, bouclage ECS classe 4, rideau de cantonnement, alarmes lumineuses, serrures — la détection et la zone unique suffisent à la démonstration.",
+    "Les classements ERP (type O, type N, quatrième catégorie, 126 personnes) — la fiche les porte, et un classement n'est pas un mécanisme.",
+    "Toute géométrie d'ouvrage : ni plan, ni façade, ni distribution — les deux bâtiments sont des piles topologiques de largeur égale et de hauteurs comptées en niveaux ; seules les deux emprises de travaux sont proportionnelles entre elles."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "deux bandes de travaux calcaire cernées d'un L encré (182 et 117 px, proportionnelles aux 140 et 90 m² de la fiche) tiennent dans le coin bas-gauche de la coupe ; l'enceinte claire de la zone d'alarme enclot les deux piles entières (x 372–808, y 284–668) et 13 points de détection occupent chaque niveau, sous-sol et combles compris — texte masqué, la disproportion des deux périmètres porte la thèse",
+    "topologie": "appels mission (x 56–306) → piles (quai x 380–590 sur 5 niveaux, Saint-Nicolas x 590–800 sur 7 + combles, mitoyenneté pointillée à 590) → appels système (x 830–1144) ; colonne montante à 610, centrale 566–588 au RDC",
+    "emprises": "largeur = surface x 1.3 px/m² : RDC 140 m² → 182 px, R+1 90 m² → 117 px — aucune autre proportion d'ouvrage n'est reprise",
+    "bas_du_dessin": "fond du sous-sol à 660, enceinte jusqu'à 670, dernier appel à 634, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 253 x 30 px = 7590 px², soit 0.79 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas chiffrée (révision 4) ; les surfaces restent au mono 10 pivot, dans les appels",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "63 signes — 529 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "deux piles inégales, le L de la mission au coin bas-gauche, l'enceinte claire qui enclot tout, la colonne montante et 13 points de détection, deux nœuds chiffrés — centrale, répétiteurs, escalier et niveaux nommés sont laissés à la planche",
+    "bas_du_dessin": "enceinte jusqu'à 178,5 px, marge basse 21,5 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les deux piles inégales, le L de la mission et sa flèche, l'enceinte claire de la zone d'alarme, la centrale, la colonne montante et 13 points de détection, trois nœuds chiffrés à l'échelle 1 — répétiteurs, escalier, légende et niveaux nommés laissés à la planche",
+    "bas_du_dessin": "enceinte jusqu'à 340 px, marge basse 28 px"
+  }
+}

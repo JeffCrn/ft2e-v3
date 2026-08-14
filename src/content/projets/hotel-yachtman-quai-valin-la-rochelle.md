@@ -15,8 +15,7 @@ synthese: >-
 statut: livré
 performance: "RT existant (arrêté du 3 mai 2007 modifié) · pompe à chaleur à détente directe COP 3,83 · centrale double flux à échangeur de rendement supérieur à 90 %"
 mission_ft2e: ["CVC", "Électricité CFO", "Électricité CFA", "SSI"]
-image_principale: "/images/projets/hotel-yachtman-quai-valin-la-rochelle/01.jpg"
-image_principale_alt: "Extrait du plan de principe chauffage-ventilation-plomberie FT2E au 1/50 : le rez-de-chaussée de l’hôtel côté quai Valin, avec le sas d’entrée, les deux lounges, la réception, le bar, la bagagerie, la salle de petit-déjeuner de vingt places et la terrasse d’été bordant la piscine"
+planche: "/images/projets/hotel-yachtman-quai-valin-la-rochelle/planche.svg"
 en_avant: false
 ---
 

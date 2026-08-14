@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 13 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12. 14 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,7 +32,7 @@ façade l'affirme.
 
 ---
 
-## État — 13 / 23
+## État — 14 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -49,7 +49,7 @@ façade l'affirme.
 | 11 | `exe-residence-horizon-mediatim` | Études d'exécution / BIM | `chronologie-affaire` (mécanisme `precedence`) | ✅ **publiée** (versée le 2026-08-14) |
 | 12 | `fougerou-sainte-marie-de-re` | Logements | `boucle-fluide` (mécanisme `declinaison`) | ✅ **publiée** (versée le 2026-08-14) |
 | 13 | `habitat-inclusif-salignac-sur-charente` | Logements | `zonage-ssi` (mécanisme `partage`) | ✅ **publiée** (versée le 2026-08-14) |
-| — | `hotel-yachtman-quai-valin-la-rochelle` | Tertiaire / ERP | | à faire |
+| 14 | `hotel-yachtman-quai-valin-la-rochelle` | Tertiaire / ERP | `coupe-traversee` (mécanisme `portee`) | ✅ **publiée** (versée le 2026-08-14) |
 | — | `logements-maubec-chagnolet` | Logements | | à faire |
 | — | `logements-nerea-aytre` | Logements | | à faire |
 | — | `logements-pas-des-boeufs-bois-plage` | Logements | | à faire |
@@ -67,7 +67,7 @@ façade l'affirme.
 | `sankey-energie` | 1 (École des douanes) | ✅ `scripts/planches/sankey-energie.py` |
 | `zonage-ssi` | 3 — trois mécanismes : `zonage` (un même déclenchement, l'alarme avant/après — Abbaye de Sablonceaux), `transfert` (la mise à l'abri au même niveau, la descente barrée — EHPAD de Coulonges-sur-l'Autize) et `partage` (le découpage réglementaire d'une enveloppe montée d'un seul tenant — la limite sans mur qui commande l'étanchéité, les machines et l'incendie, habitat inclusif de Salignac-sur-Charente) | ✅ `scripts/planches/zonage-ssi.py` (dispatch sur le bloc de l'extraction) |
 | `boucle-fluide` | 4 — quatre mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae), `substitution` (production réversible, centre de formation de Saintes) et `declinaison` (le parti répété — une maison dessinée une fois, 54 cellules identiques en `<defs>`/`<use>`, Le Fougerou) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
-| `coupe-traversee` | 3 — trois mécanismes : `coupe` (l'enveloppe traversée, Marennes), `equilibre` (l'air extrait, l'air compensé — restaurant scolaire de Villedoux) et `enjambement` (l'enveloppe qui ferme les faces qu'un bâtiment ordinaire n'a pas — dessous du plancher sur le passage, fosse d'ascenseur, abouts pontés — étude notariale Joffre) | ✅ `scripts/planches/coupe-traversee.py` (dispatch sur le bloc de l'extraction) |
+| `coupe-traversee` | 4 — quatre mécanismes : `coupe` (l'enveloppe traversée, Marennes), `equilibre` (l'air extrait, l'air compensé — restaurant scolaire de Villedoux), `enjambement` (l'enveloppe qui ferme les faces qu'un bâtiment ordinaire n'a pas — dessous du plancher sur le passage, fosse d'ascenseur, abouts pontés — étude notariale Joffre) et `portee` (deux périmètres inégaux sur une même coupe de niveaux — la mission bornée au coin bas-gauche, l'enceinte de la zone d'alarme qui enclot tout, hôtel Le Yachtman) | ✅ `scripts/planches/coupe-traversee.py` (dispatch sur le bloc de l'extraction) |
 | `tableau-electrique` | 1 — mécanisme `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) | ✅ `scripts/planches/tableau-electrique.py` |
 | `chronologie-affaire` | 1 — mécanisme `precedence` (le dessin précède le gros œuvre : l'escalier des réservations gravit les niveaux d'avance sur l'exécution, résidence Horizon) | ✅ `scripts/planches/chronologie-affaire.py` |
 | `planche-chiffree` | 0 | à écrire — c'est le repli, il servira |

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">MISSIONS D'ÉTENDUE INÉGALE</text>
+  <rect x="38.00" y="130.50" width="23.00" height="13.50" class="c-calcaire" fill="#EDF0F2"/>
+  <rect x="38.00" y="144.50" width="36.00" height="13.00" class="c-calcaire" fill="#EDF0F2"/>
+  <path d="M 37.00 116.00 L 103.00 116.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 37.00 130.00 L 103.00 130.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 37.00 144.00 L 103.00 144.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 37.00 158.00 L 103.00 158.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 105.00 74.00 L 171.00 74.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 105.00 88.00 L 171.00 88.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 105.00 102.00 L 171.00 102.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 105.00 116.00 L 171.00 116.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 105.00 130.00 L 171.00 130.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 105.00 144.00 L 171.00 144.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 105.00 158.00 L 171.00 158.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>
+  <path d="M 36.00 172.00 L 36.00 102.00 L 104.00 102.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 104.00 102.00 L 104.00 66.00 L 172.00 66.00 L 172.00 172.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 36.00 172.00 L 172.00 172.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 104.00 102.00 L 104.00 172.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <path d="M 38.00 130.50 L 61.00 130.50 L 61.00 144.50 L 74.00 144.50 L 74.00 157.50 L 38.00 157.50 L 38.00 130.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 31.00 177.00 L 31.00 97.00 L 99.00 97.00 L 99.00 61.00 L 177.00 61.00 L 177.00 177.00 L 31.00 177.00" fill="none" class="s-clair" stroke="#99CCCD" stroke-width="3"/>
+  <path d="M 108.00 70.00 L 108.00 165.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <circle cx="70.00" cy="165.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="70.00" cy="151.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="70.00" cy="137.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="70.00" cy="123.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="70.00" cy="109.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="138.00" cy="165.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="138.00" cy="151.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="138.00" cy="137.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="138.00" cy="123.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="138.00" cy="109.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="138.00" cy="95.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="138.00" cy="81.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <circle cx="138.00" cy="70.00" r="2.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="0.8"/>
+  <text x="192.00" y="62.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Coordination SSI</text>
+  <text x="192.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SEPT NIVEAUX</text>
+  <path d="M 189.00 58.00 L 179.00 62.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="192.00" y="130.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Lots techniques</text>
+  <text x="192.00" y="144.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" font-variant-numeric="tabular-nums">230 m²</text>
+  <path d="M 189.00 126.00 L 76.00 146.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+</svg>
