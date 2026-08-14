@@ -32,8 +32,8 @@ double écriture des couleurs, routine d'exécution) vit dans `_tronc.py` depuis
 le 2026-08-13 — extraction contrôlée par régénération octet à octet des quatre
 planches publiées.
 
-Le module compose TROIS mécanismes de l'archétype, choisis par le bloc que porte
-l'extraction :
+Le module compose QUATRE mécanismes de l'archétype, choisis par le bloc que
+porte l'extraction :
 
 - `boucle` — la boucle de récupération (atelier Dufour) : deux conduits qui ne
   se rencontrent jamais, une boucle seule à traverser ;
@@ -45,7 +45,10 @@ l'extraction :
   deux productions convergent sur un même POINT DE SUBSTITUTION qui alimente
   le réseau d'émission — tout ce qui est à droite du point demeure. En regard,
   le parti écarté : des liaisons qui filent de la machine au bâtiment sans
-  aucun point, et figent le mode de production.
+  aucun point, et figent le mode de production ;
+- `declinaison` — le parti répété (Le Fougerou) : UNE maison dessinée en
+  détail contre 54 cellules strictement identiques portant le même glyphe —
+  c'est la répétition qui démontre, l'accolade des 27 calculs la prouve.
 """
 
 from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
@@ -1122,9 +1125,400 @@ def composer_appui_substitution(donnees):
         bas=f"bâtiment jusqu'à 264 px, marge basse {AH - 264} px")
 
 
+# ═══ Mécanisme `declinaison` — un parti dessiné une fois, 54 cellules ════════
+#
+# Le Fougerou (Sainte-Marie-de-Ré) : la thèse de la fiche n'est pas un organe,
+# c'est une répétition — « un schéma technique sobre, décliné 54 fois ». La
+# géométrie oppose UNE maison dessinée en détail (PAC double service → deux
+# usages, VMC, échanges avec le dehors) à une matrice de 54 cellules
+# strictement identiques, chacune portant le même glyphe du parti. C'est la
+# répétition qui démontre ; l'accolade des 27 calculs la prouve.
+
+D_MX0, D_MX1 = 158, 560       # le bloc de la maison-type
+D_MY0, D_MY1 = 252, 632
+D_PX0, D_PX1 = 176, 356       # la PAC double service
+D_PY0, D_PY1 = 300, 440
+D_BALLON = 36                 # le compartiment du ballon, intégré à la PAC
+D_VX0, D_VX1 = 176, 420       # la VMC hygroréglable
+D_VY0, D_VH = 496, 104
+D_EX0, D_EX1 = 442, 546       # les radiateurs
+D_COLL = 430                  # le collecteur des émetteurs
+D_GX0 = 634                   # la grille des 54 maisons
+D_GC, D_GG = 50, 7            # cellule et gouttière
+D_COLS, D_LIGNES = 9, 6
+D_GY0 = 256
+
+
+def glyphe_parti(A, x, y, c, ep=1.0, bord=True):
+    """Le parti en miniature : une production, deux départs — le même signe
+    dans chacune des 54 cellules. Doublé partout d'un registre nommé (la
+    forme seule ne porte pas)."""
+    bx0 = x + 0.14 * c
+    bw, bh = 0.26 * c, 0.22 * c
+    cy = y + c / 2
+    if bord:
+        A(rect_bord(bx0, cy - bh / 2, bw, bh, "papier", "filet-1"))
+    else:
+        # Sous ~30 px de cellule, une boîte papier bordée n'est plus visible :
+        # la production devient un point d'encre plein — mesuré à la vignette,
+        # où les cellules se lisaient « < » au lieu de « production → départs ».
+        A(rect(bx0, cy - bh / 2, bw, bh, "encre"))
+    xf1 = x + 0.52 * c
+    xf2 = x + 0.82 * c
+    A(ligne(bx0 + bw, cy, xf1, cy, "encre", ep))
+    A(ligne(xf1, cy, xf2, cy - 0.20 * c, "encre", ep))
+    A(ligne(xf1, cy, xf2, cy + 0.20 * c, "encre", ep))
+
+
+def matrice_cellules(A, id_cellule, x0, y0, c, g, lignes=6, colonnes=9,
+                     ep=1.0, bord=True):
+    """La matrice des 54 : la cellule est DÉFINIE une fois (`<defs>`,
+    identifiant préfixé par le slug — protocole, § Intégration) et employée 54
+    fois par `<use>`. La stricte identité des cellules est ainsi garantie par
+    la structure du fichier même — et le SVG reste sous 40 Ko."""
+    A(f'  <defs><g id="{id_cellule}">')
+    A(rect(0, 0, c, c, "calcaire"))
+    glyphe_parti(A, 0, 0, c, ep=ep, bord=bord)
+    A('  </g></defs>')
+    for i in range(lignes):
+        for j in range(colonnes):
+            x = x0 + j * (c + g)
+            y = y0 + i * (c + g)
+            A(f'  <use href="#{id_cellule}" xlink:href="#{id_cellule}" '
+              f'x="{x:.2f}" y="{y:.2f}"/>')
+
+
+def composer_declinaison(donnees):
+    d = donnees["declinaison"]
+    elems = {e["cle"]: e for e in d["elements"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" '
+      f'xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête et registres ─────────────────────────────────────────────────
+    controler("en-tête schéma", d["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, d["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(MARGE, Y_REGISTRES, d["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_REGISTRES, d["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Le dehors, à gauche — les deux échanges d'air de la maison ───────────
+    controler("étiquette air extérieur", d["dehors"]["entree"], 10, "mono",
+              D_MX0 - MARGE - 6, 10 * 0.14)
+    A(texte(MARGE, 340, d["dehors"]["entree"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(ligne(MARGE, 356, D_PX0 - 6, 356, "encre", 1.5))
+    A(fleche(D_PX0 - 2, 356, "encre", "droite", 9))
+    controler("étiquette air extrait", d["dehors"]["sortie"], 10, "mono",
+              D_MX0 - MARGE - 6, 10 * 0.14)
+    A(texte(MARGE, 538, d["dehors"]["sortie"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(ligne(100, 554, D_VX0, 554, "encre", 1.5))
+    A(fleche(100, 554, "encre", "gauche", 9))
+
+    # ── La maison-type — un bloc topologique, pas un plan ────────────────────
+    A(rect(D_MX0, D_MY0, D_MX1 - D_MX0, D_MY1 - D_MY0, "calcaire"))
+
+    # La PAC double service, et le ballon qui lui est INTÉGRÉ : le compartiment
+    # dans la boîte dit l'intégration — la géométrie porte le mot.
+    pac = elems["pac"]
+    A(rect_bord(D_PX0, D_PY0, D_PX1 - D_PX0, D_PY1 - D_PY0, "papier", "filet-1"))
+    lib_pac = pac.get("libelle_dessin", pac["libelle"])
+    controler("libellé pac", lib_pac, 15, "sans-600", D_PX1 - D_PX0 - 28)
+    A(texte(D_PX0 + 14, D_PY0 + 26, lib_pac, "sans", 15, 600, "encre", wdth=112))
+    for k, l in enumerate(pac["detail"]):
+        controler(f"détail pac {k + 1}", l, 10, "mono",
+                  D_PX1 - D_PX0 - 28, 10 * 0.14)
+        A(texte(D_PX0 + 14, D_PY0 + 46 + k * 16, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    ecs = elems["ecs"]
+    A(ligne(D_PX0, D_PY1 - D_BALLON, D_PX1, D_PY1 - D_BALLON, "filet-1", 1))
+    controler("compartiment ballon", ecs["detail_dessin"][0], 10, "mono",
+              D_PX1 - D_PX0 - 28, 10 * 0.14)
+    A(texte(D_PX0 + 14, D_PY1 - 14, ecs["detail_dessin"][0], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # Le départ chauffage : aller et retour vers le collecteur des radiateurs.
+    rad = elems["radiateurs"]
+    y_all, y_ret = 336, 348
+    A(ligne(D_PX1, y_all, D_COLL, y_all, "encre", 1.5))
+    A(fleche(400, y_all, "encre", "droite", 9))
+    A(ligne(D_PX1, y_ret, D_COLL, y_ret, "encre", 1.5))
+    A(fleche(388, y_ret, "encre", "gauche", 9))
+    A(ligne(D_COLL, 329, D_COLL, 375, "encre", 1.2))
+    for y_em in (318, 364):
+        emetteur(A, D_EX0, y_em, D_EX1 - D_EX0, 22)
+        A(ligne(D_COLL, y_em + 11, D_EX0, y_em + 11, "encre", 1.2))
+    controler("libellé radiateurs", rad["libelle"], 15, "sans-400",
+              D_EX1 - 370)
+    A(texte(D_EX1, 306, rad["libelle"], "sans", 15, 400, "encre",
+            wdth=100, ancre="end"))
+    controler("détail radiateurs", rad["detail_dessin"][0], 10, "mono",
+              D_EX1 - 366, 10 * 0.14)
+    A(texte(D_EX1, 404, rad["detail_dessin"][0], "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+
+    # Le départ eau chaude sanitaire, depuis le compartiment du ballon.
+    y_ecs = 422
+    A(ligne(D_PX1, y_ecs, D_COLL, y_ecs, "encre", 1.5))
+    A(fleche(404, y_ecs, "encre", "droite", 9))
+    A(cercle(D_COLL + 8, y_ecs, 6, "papier", "encre"))
+    controler("libellé ecs", ecs["libelle"], 15, "sans-400", D_EX1 - 370)
+    A(texte(D_EX1, 448, ecs["libelle"], "sans", 15, 400, "encre",
+            wdth=100, ancre="end"))
+
+    # La VMC hygroréglable — le second réseau de la maison, vers le dehors.
+    vmc = elems["vmc"]
+    lignes_vmc = [seg for dt in vmc["detail"] for seg in dt.split(" · ")]
+    A(rect_bord(D_VX0, D_VY0, D_VX1 - D_VX0, D_VH, "papier", "filet-1"))
+    lib_vmc = vmc.get("libelle_dessin", vmc["libelle"])
+    controler("libellé vmc", lib_vmc, 15, "sans-600", D_VX1 - D_VX0 - 28)
+    A(texte(D_VX0 + 14, D_VY0 + 26, lib_vmc, "sans", 15, 600, "encre",
+            wdth=112))
+    for k, l in enumerate(lignes_vmc):
+        controler(f"détail vmc {k + 1}", l, 10, "mono",
+                  D_VX1 - D_VX0 - 28, 10 * 0.14)
+        A(texte(D_VX0 + 14, D_VY0 + 48 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    # ── La déclinaison : une flèche, puis 54 cellules identiques ─────────────
+    gx1 = D_GX0 + D_COLS * D_GC + (D_COLS - 1) * D_GG
+    gy1 = D_GY0 + D_LIGNES * D_GC + (D_LIGNES - 1) * D_GG
+    y_mi = (D_GY0 + gy1) / 2
+    A(ligne(D_MX1 + 8, y_mi, D_GX0 - 10, y_mi, "encre", 1.5))
+    A(fleche(D_GX0 - 6, y_mi, "encre", "droite", 9))
+    matrice_cellules(A, "fougerou-cellule-fiche", D_GX0, D_GY0, D_GC, D_GG,
+                     lignes=D_LIGNES, colonnes=D_COLS)
+
+    # L'accolade des 27 calculs — une ligne de cote sous la grille entière.
+    yb = gy1 + 18
+    A(ligne(D_GX0, yb - 5, D_GX0, yb + 5, "encre", 1))
+    A(ligne(gx1, yb - 5, gx1, yb + 5, "encre", 1))
+    A(ligne(D_GX0, yb, gx1, yb, "encre", 1))
+    x_mi = (D_GX0 + gx1) / 2
+    for k, l in enumerate(d["mention_calculs"]):
+        controler(f"mention calculs {k + 1}", l, 10, "mono",
+                  gx1 - D_GX0, 10 * 0.14)
+        A(texte(x_mi, yb + 21 + k * 16, l, "mono", 10, 500, "pivot",
+                ancre="middle", tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur ajustée, jamais codée ────────────────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "UNE maison dessinée en détail (PAC à compartiment "
+                         "ballon, deux départs, VMC, deux échanges d'air avec "
+                         f"le dehors) contre {D_COLS * D_LIGNES} cellules "
+                         "STRICTEMENT identiques portant le même glyphe "
+                         "(production → deux départs) ; l'accolade de cote "
+                         "les prend toutes — la géométrie porte la thèse "
+                         "« un parti, décliné », aucun chiffre de la fiche "
+                         "n'est répété en colonne",
+        "topologie": f"dehors (x < {D_MX0}) → maison-type (x {D_MX0}–{D_MX1} : "
+                     f"PAC x {D_PX0}–{D_PX1} avec ballon intégré, radiateurs "
+                     f"x {D_EX0}–{D_EX1}, ECS, VMC y {D_VY0}–{D_VY0 + D_VH}) "
+                     f"→ flèche → grille {D_COLS} × {D_LIGNES} "
+                     f"(x {D_GX0}–{gx1}, y {D_GY0}–{gy1}, cellule {D_GC}, "
+                     f"gouttière {D_GG}) — matrice topologique, ni îlots ni "
+                     "implantation",
+        "bas_du_dessin": f"maison jusqu'à {D_MY1}, grille jusqu'à {gy1}, "
+                         f"accolade à {yb}, mention des calculs jusqu'à "
+                         f"{yb + 21 + 16}, phrase de principe à {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
+                         f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+                          "pas chiffrée (révision 4) ; COP 4,65, 50/45 °C, "
+                          "190 L et la mention des 27 calculs restent au "
+                          "mono 10 pivot",
+        "grille": f"{D_COLS * D_LIGNES} cellules — le compte est celui de la "
+                  "fiche (54 maisons), vérifié par construction "
+                  f"{D_COLS} × {D_LIGNES}",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_declinaison(donnees):
+    """La vignette : une cellule dessinée, 54 cellules identiques.
+
+    Ce qu'elle garde : le motif entier — la maison-type (le glyphe en grand),
+    la flèche, la matrice complète des 54 cellules — et les deux totaux (54
+    maisons, 27 calculs). Ce qu'elle laisse : les organes nommés de la
+    maison-type, la mention de conformité, l'accolade — six libellés dans
+    300 px ne se liraient pas."""
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" '
+      f'xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # La maison-type : une cellule en grand, même glyphe que la matrice.
+    A(rect(16, 52, 62, 62, "calcaire"))
+    glyphe_parti(A, 16, 52, 62, ep=1.2)
+    A(ligne(84, 83, 96, 83, "encre", 1.2))
+    A(fleche(100, 83, "encre", "droite", 6))
+
+    # La matrice des 54 — 9 x 6, complète.
+    vc, vg = 17, 3
+    vx0, vy0 = 104, 34
+    matrice_cellules(A, "fougerou-cellule-carte", vx0, vy0, vc, vg,
+                     ep=0.9, bord=False)
+    vx1 = vx0 + 9 * vc + 8 * vg
+    vy1 = vy0 + 6 * vc + 5 * vg
+
+    # Les deux totaux.
+    A(texte(16, 172, "La maison-type", "sans", 12, 600, "encre", wdth=112))
+    A(texte(16, 186, f"54{NN}MAISONS · 27{NN}CALCULS RT2012", "mono", 10, 500,
+            "pivot", tracking=10 * 0.14, tabulaire=True))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "une cellule en grand (le glyphe du parti), la flèche, la "
+                 f"matrice complète des 54 (x {vx0}–{vx1}, y {vy0}–{vy1}) — "
+                 "organes nommés, accolade et mention de conformité laissés "
+                 "à la planche",
+        "bas_du_dessin": "totaux à y 186, marge basse 14 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_declinaison(donnees):
+    """L'appui du hero (mécanisme `declinaison`) : le motif à l'échelle 1.
+
+    Ce qu'il garde : la maison-type nommée avec la PAC double service et ses
+    deux départs chiffrés (chauffage 50/45 °C, ECS 190 L, COP 4,65), la
+    flèche, la matrice complète des 54, la mention des 27 calculs. Ce qu'il
+    laisse : la VMC, les échanges d'air, les radiateurs dessinés — ils vivent
+    sur la planche."""
+    d = donnees["declinaison"]
+    elems = {e["cle"]: e for e in d["elements"]}
+    pac = elems["pac"]
+    out = []
+    A = out.append
+    # La racine est écrite ici plutôt que par `racine_appui` : la matrice en
+    # `<use>` réclame l'espace de noms xlink, que le tronc ne déclare pas.
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" '
+      f'xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {AW} {AH}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, AW, AH, "papier"))
+    A(texte(A_MARGE, 34, donnees["vignette_surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+
+    # La maison-type, nommée.
+    A(texte(A_MARGE, 66, "La maison-type", "sans", 13, 600, "encre", wdth=112))
+    A(rect(A_MARGE, 74, 190, 190, "calcaire"))
+    # Les deux départs, au-dessus de la PAC.
+    A(texte(32, 106, f"CHAUFFAGE 50/45{NN}°C", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(206, 128, f"ECS 190{NN}L", "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    A(ligne(119, 168, 119, 148, "encre", 1.4))
+    A(ligne(119, 148, 72, 126, "encre", 1.4))
+    A(fleche(70, 125, "encre", "haut", 7))
+    A(ligne(119, 148, 166, 126, "encre", 1.4))
+    A(fleche(168, 125, "encre", "haut", 7))
+    # La PAC et son compartiment ballon.
+    A(rect_bord(40, 168, 158, 84, "papier", "filet-1"))
+    lib_pac = pac.get("libelle_dessin", pac["libelle"])
+    A(texte(52, 192, lib_pac, "sans", 13, 600, "encre", wdth=112))
+    A(texte(52, 212, pac["detail"][1], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(ligne(40, 228, 198, 228, "filet-1", 1))
+    A(texte(52, 244, "BALLON INTÉGRÉ", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # La flèche de déclinaison, puis la matrice complète.
+    A(ligne(222, 197, 246, 197, "encre", 1.4))
+    A(fleche(250, 197, "encre", "droite", 8))
+    A(texte(258, 66, "Les 54 maisons", "sans", 13, 600, "encre", wdth=112))
+    ac, ag = 26, 4
+    ax0, ay0 = 258, 74
+    matrice_cellules(A, "fougerou-cellule-appui", ax0, ay0, ac, ag,
+                     ep=1.0, bord=False)
+    ax1 = ax0 + 9 * ac + 8 * ag
+    ay1 = ay0 + 6 * ac + 5 * ag
+
+    # La mention des 27 calculs, sous la matrice.
+    x_mi = (ax0 + ax1) / 2
+    A(texte(x_mi, ay1 + 24, "27 CALCULS RT2012 · TOUS CONFORMES", "mono", 10,
+            500, "pivot", ancre="middle", tracking=10 * 0.14))
+    A(texte(x_mi, ay1 + 42, f"DE 14 À 36{NN}% SOUS L'EXIGENCE", "mono", 10,
+            500, "pivot", ancre="middle", tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="la maison-type nommée (PAC double service, ballon intégré, "
+              "départs chauffage 50/45 °C et ECS 190 L, COP 4,65), la flèche, "
+              "la matrice complète des 54 cellules, la mention des 27 calculs "
+              "— VMC, échanges d'air et radiateurs dessinés laissés à la "
+              "planche",
+        bas=f"mention des calculs à {250 + 42}, marge basse {AH - 292} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "declinaison" in donnees:
+        return composer_declinaison(donnees)
     if "substitution" in donnees:
         return composer_substitution(donnees)
     if "utilites" in donnees:
@@ -1133,6 +1527,8 @@ def composer(donnees):
 
 
 def composer_vignette(donnees):
+    if "declinaison" in donnees:
+        return composer_vignette_declinaison(donnees)
     if "substitution" in donnees:
         return composer_vignette_substitution(donnees)
     if "utilites" in donnees:
@@ -1141,6 +1537,8 @@ def composer_vignette(donnees):
 
 
 def composer_appui(donnees):
+    if "declinaison" in donnees:
+        return composer_appui_declinaison(donnees)
     if "substitution" in donnees:
         return composer_appui_substitution(donnees)
     if "utilites" in donnees:

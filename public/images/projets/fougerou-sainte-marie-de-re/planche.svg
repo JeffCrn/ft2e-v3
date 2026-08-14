@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe d'un parti technique décliné : dans la maison-type, une pompe à chaleur air/eau double service — fluide R32, COP de 4,65 à +7 °C — alimente des radiateurs à eau chaude en régime 50/45 °C et un ballon d'eau chaude sanitaire de 190 litres intégré ; une ventilation hygroréglable de type B à caisson individuel extrait l'air. Le même équipement se répète, à l'identique, dans les 54 maisons de l'opération, et les 27 calculs réglementaires RT2012 qui les couvrent concluent tous à la conformité, de 14 à 36 % sous l'exigence.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · UN PARTI TECHNIQUE DÉCLINÉ 54 FOIS</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Le Fougerou</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Un schéma technique sobre, décliné dans chacune des 54 maisons</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN SEUL SCHÉMA TECHNIQUE, RÉPÉTÉ DANS CHACUNE DES 54 MAISONS</text>
+  <text x="56.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA MAISON-TYPE · LE PARTI, DESSINÉ UNE FOIS</text>
+  <text x="1144.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">L'OPÉRATION · 54 MAISONS INDIVIDUELLES</text>
+  <text x="56.00" y="340.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AIR EXTÉRIEUR</text>
+  <path d="M 56.00 356.00 L 170.00 356.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 174.00 356.00 L 165.00 351.50 L 165.00 360.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="56.00" y="538.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AIR EXTRAIT</text>
+  <path d="M 100.00 554.00 L 176.00 554.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 100.00 554.00 L 109.00 549.50 L 109.00 558.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="158.00" y="252.00" width="402.00" height="380.00" class="c-calcaire" fill="#EDF0F2"/>
+  <rect x="176.00" y="300.00" width="180.00" height="140.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="190.00" y="326.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">PAC double service</text>
+  <text x="190.00" y="346.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AIR/EAU · FLUIDE R32</text>
+  <text x="190.00" y="362.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">COP 4,65 À +7 °C</text>
+  <path d="M 176.00 404.00 L 356.00 404.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="190.00" y="426.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">BALLON ECS 190 L</text>
+  <path d="M 356.00 336.00 L 430.00 336.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 400.00 336.00 L 391.00 331.50 L 391.00 340.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 356.00 348.00 L 430.00 348.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 388.00 348.00 L 397.00 343.50 L 397.00 352.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 430.00 329.00 L 430.00 375.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="442.00" y="318.00" width="104.00" height="22.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 468.00 323.00 L 468.00 335.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 494.00 323.00 L 494.00 335.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 520.00 323.00 L 520.00 335.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 430.00 329.00 L 442.00 329.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="442.00" y="364.00" width="104.00" height="22.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 468.00 369.00 L 468.00 381.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 494.00 369.00 L 494.00 381.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 520.00 369.00 L 520.00 381.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 430.00 375.00 L 442.00 375.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <text x="546.00" y="306.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400" text-anchor="end">Radiateurs à eau chaude</text>
+  <text x="546.00" y="404.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">50/45 °C · LOI D'EAU</text>
+  <path d="M 356.00 422.00 L 430.00 422.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 404.00 422.00 L 395.00 417.50 L 395.00 426.50 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="438.00" cy="422.00" r="6.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="546.00" y="448.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400" text-anchor="end">Eau chaude sanitaire</text>
+  <rect x="176.00" y="496.00" width="244.00" height="104.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="190.00" y="522.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">VMC hygroréglable type B</text>
+  <text x="190.00" y="544.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">BASSE CONSOMMATION</text>
+  <text x="190.00" y="558.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CAISSON INDIVIDUEL</text>
+  <text x="190.00" y="572.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ÉTANCHÉITÉ VISÉE CLASSE B</text>
+  <text x="190.00" y="586.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PROTOCOLE PROMEVENT</text>
+  <path d="M 568.00 423.50 L 624.00 423.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 628.00 423.50 L 619.00 419.00 L 619.00 428.00 Z" class="c-encre" fill="#00393A"/>
+  <defs><g id="fougerou-cellule-fiche">
+  <rect x="0.00" y="0.00" width="50.00" height="50.00" class="c-calcaire" fill="#EDF0F2"/>
+  <rect x="7.00" y="19.50" width="13.00" height="11.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 20.00 25.00 L 26.00 25.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 26.00 25.00 L 41.00 15.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 26.00 25.00 L 41.00 35.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  </g></defs>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="634.00" y="256.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="691.00" y="256.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="748.00" y="256.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="805.00" y="256.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="862.00" y="256.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="919.00" y="256.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="976.00" y="256.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1033.00" y="256.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1090.00" y="256.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="634.00" y="313.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="691.00" y="313.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="748.00" y="313.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="805.00" y="313.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="862.00" y="313.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="919.00" y="313.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="976.00" y="313.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1033.00" y="313.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1090.00" y="313.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="634.00" y="370.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="691.00" y="370.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="748.00" y="370.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="805.00" y="370.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="862.00" y="370.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="919.00" y="370.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="976.00" y="370.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1033.00" y="370.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1090.00" y="370.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="634.00" y="427.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="691.00" y="427.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="748.00" y="427.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="805.00" y="427.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="862.00" y="427.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="919.00" y="427.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="976.00" y="427.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1033.00" y="427.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1090.00" y="427.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="634.00" y="484.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="691.00" y="484.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="748.00" y="484.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="805.00" y="484.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="862.00" y="484.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="919.00" y="484.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="976.00" y="484.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1033.00" y="484.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1090.00" y="484.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="634.00" y="541.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="691.00" y="541.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="748.00" y="541.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="805.00" y="541.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="862.00" y="541.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="919.00" y="541.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="976.00" y="541.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1033.00" y="541.00"/>
+  <use href="#fougerou-cellule-fiche" xlink:href="#fougerou-cellule-fiche" x="1090.00" y="541.00"/>
+  <path d="M 634.00 604.00 L 634.00 614.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 1140.00 604.00 L 1140.00 614.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 634.00 609.00 L 1140.00 609.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="887.00" y="630.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">27 CALCULS RT2012 · UN PAR MAISON OU GROUPE DE MAISONS ACCOLÉES</text>
+  <text x="887.00" y="646.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">TOUS CONFORMES · DE 14 À 36 % SOUS L'EXIGENCE DE CONSOMMATION</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Le parti se répète dans chaque maison, et les 27 calculs réglementaires concluent tous à la conformité.</text>
+  <rect x="56.00" y="714.00" width="320.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SAINTE-MARIE-DE-RÉ · 4 590 m² · 2026</text>
+</svg>

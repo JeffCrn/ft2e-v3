@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe d'un parti technique décliné : dans la maison-type, une pompe à chaleur air/eau double service — fluide R32, COP de 4,65 à +7 °C — alimente des radiateurs à eau chaude en régime 50/45 °C et un ballon d'eau chaude sanitaire de 190 litres intégré ; une ventilation hygroréglable de type B à caisson individuel extrait l'air. Le même équipement se répète, à l'identique, dans les 54 maisons de l'opération, et les 27 calculs réglementaires RT2012 qui les couvrent concluent tous à la conformité, de 14 à 36 % sous l'exigence.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">PARTI DÉCLINÉ ×54</text>
+  <text x="24.00" y="66.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">La maison-type</text>
+  <rect x="24.00" y="74.00" width="190.00" height="190.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="32.00" y="106.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHAUFFAGE 50/45 °C</text>
+  <text x="206.00" y="128.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">ECS 190 L</text>
+  <path d="M 119.00 168.00 L 119.00 148.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 119.00 148.00 L 72.00 126.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 70.00 125.00 L 66.50 132.00 L 73.50 132.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 119.00 148.00 L 166.00 126.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 168.00 125.00 L 164.50 132.00 L 171.50 132.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="40.00" y="168.00" width="158.00" height="84.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="52.00" y="192.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">PAC double service</text>
+  <text x="52.00" y="212.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">COP 4,65 À +7 °C</text>
+  <path d="M 40.00 228.00 L 198.00 228.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="52.00" y="244.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">BALLON INTÉGRÉ</text>
+  <path d="M 222.00 197.00 L 246.00 197.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 250.00 197.00 L 242.00 193.00 L 242.00 201.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="258.00" y="66.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Les 54 maisons</text>
+  <defs><g id="fougerou-cellule-appui">
+  <rect x="0.00" y="0.00" width="26.00" height="26.00" class="c-calcaire" fill="#EDF0F2"/>
+  <rect x="3.64" y="10.14" width="6.76" height="5.72" class="c-encre" fill="#00393A"/>
+  <path d="M 10.40 13.00 L 13.52 13.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 13.52 13.00 L 21.32 7.80" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 13.52 13.00 L 21.32 18.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  </g></defs>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="258.00" y="74.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="288.00" y="74.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="318.00" y="74.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="348.00" y="74.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="378.00" y="74.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="408.00" y="74.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="438.00" y="74.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="468.00" y="74.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="498.00" y="74.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="258.00" y="104.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="288.00" y="104.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="318.00" y="104.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="348.00" y="104.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="378.00" y="104.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="408.00" y="104.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="438.00" y="104.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="468.00" y="104.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="498.00" y="104.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="258.00" y="134.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="288.00" y="134.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="318.00" y="134.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="348.00" y="134.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="378.00" y="134.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="408.00" y="134.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="438.00" y="134.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="468.00" y="134.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="498.00" y="134.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="258.00" y="164.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="288.00" y="164.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="318.00" y="164.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="348.00" y="164.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="378.00" y="164.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="408.00" y="164.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="438.00" y="164.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="468.00" y="164.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="498.00" y="164.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="258.00" y="194.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="288.00" y="194.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="318.00" y="194.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="348.00" y="194.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="378.00" y="194.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="408.00" y="194.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="438.00" y="194.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="468.00" y="194.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="498.00" y="194.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="258.00" y="224.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="288.00" y="224.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="318.00" y="224.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="348.00" y="224.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="378.00" y="224.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="408.00" y="224.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="438.00" y="224.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="468.00" y="224.00"/>
+  <use href="#fougerou-cellule-appui" xlink:href="#fougerou-cellule-appui" x="498.00" y="224.00"/>
+  <text x="391.00" y="274.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">27 CALCULS RT2012 · TOUS CONFORMES</text>
+  <text x="391.00" y="292.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">DE 14 À 36 % SOUS L'EXIGENCE</text>
+</svg>
