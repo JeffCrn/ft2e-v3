@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la récupération de chaleur fatale : deux conduits d'air superposés ne se rencontrent jamais — en haut, l'air extrait du process passe sur une batterie de récupération avant d'être rejeté dehors ; en bas, les 38 000 m³/h d'air neuf imposés passent sur la seconde batterie, puis sur l'appoint gaz et la pompe à chaleur, avant d'être soufflés dans l'atelier. Une boucle d'eau glycolée, seule à traverser entre les deux conduits, reprend 146 045 kWh par an sur l'air extrait — le quart du besoin de chauffage.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">CHALEUR FATALE RÉCUPÉRÉE</text>
+  <rect x="462.00" y="78.00" width="66.00" height="224.00" class="c-calcaire" fill="#EDF0F2"/>
+  <path d="M 40.00 88.00 L 462.00 88.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 40.00 140.00 L 462.00 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 40.00 240.00 L 462.00 240.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 40.00 292.00 L 462.00 292.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <rect x="190.00" y="78.00" width="68.00" height="72.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 190.00 150.00 L 258.00 78.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <rect x="190.00" y="230.00" width="68.00" height="72.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 190.00 302.00 L 258.00 230.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 210.00 150.00 L 210.00 230.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 238.00 150.00 L 238.00 230.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 210.00 198.00 L 206.50 191.00 L 213.50 191.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 238.00 186.00 L 234.50 193.00 L 241.50 193.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 100.00 114.00 L 108.00 110.00 L 108.00 118.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 380.00 114.00 L 388.00 110.00 L 388.00 118.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 100.00 266.00 L 92.00 262.00 L 92.00 270.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 380.00 266.00 L 372.00 262.00 L 372.00 270.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="40.00" y="68.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AIR EXTRAIT</text>
+  <text x="40.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AIR NEUF · 38 000 m³/h</text>
+  <text x="276.00" y="178.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Boucle d'eau glycolée</text>
+  <text x="276.00" y="195.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" font-variant-numeric="tabular-nums">146 045 kWh/an</text>
+  <path d="M 272.00 186.00 L 242.00 192.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+</svg>

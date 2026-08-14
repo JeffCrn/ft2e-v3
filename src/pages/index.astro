@@ -21,6 +21,23 @@ const enAvant = (await getCollection('projets'))
 const heroImageExiste = Boolean(enAvant?.data.image_principale)
   && fs.existsSync(path.join(process.cwd(), 'public', enAvant!.data.image_principale!));
 
+// Fiche vedette illustrée par une planche : le hero rend son APPUI —
+// une troisième composition (552 x 368), dessinée pour la largeur où la
+// colonne média la lit. La planche entière (1200) y tomberait à l'échelle
+// 0,48 (mono de 10 px rendu à 4,8) et la vignette (300) grossie à 1,84
+// épaissirait tous les filets de 1 px : ni l'une ni l'autre ne se transpose —
+// même arithmétique que le protocole des planches, appliquée au hero.
+// L'appui est inliné (il hérite des polices et des jetons de la page) et ne
+// reçoit NI duotone NI équerres : ces deux traitements appartiennent à la
+// photographie, et l'appui porte déjà son surtitre.
+const heroAppui = enAvant?.data.planche
+  ? fs.readFileSync(
+      path.join(process.cwd(), 'public',
+        enAvant.data.planche.replace(/planche\.svg$/, 'appui.svg')),
+      'utf-8',
+    )
+  : null;
+
 // Relevé clair : étiquette mono + chiffre, un seul chiffre plein par
 // relevé — celui que la page défend (17 ans, depuis 2008).
 const releves = CHIFFRES_CLES.map((c, i) => ({
@@ -90,6 +107,24 @@ const partenaires = [
   >
     {enAvant && (
       <Fragment slot="media">
+        {heroAppui ? (
+          <Fragment>
+            {/* L'appui est composé pour ~552 px ; sous `sm` la colonne tombe
+                vers 342 px (échelle 0,62 — mono de 10 rendu à 6,2 px) : le
+                dessin cède alors la place au média de repli, comme la planche
+                cède la place à sa lecture sur la fiche. */}
+            <div class="plan-pose hidden sm:block" set:html={heroAppui} />
+            <div class="relative aspect-[3/2] duotone-media sm:hidden">
+              <CoinsCuivre taille={18} />
+              <div class="absolute left-[12.5%] top-8 flex items-center gap-2.5 z-10" aria-hidden="true">
+                <span class="block w-14 h-px bg-pivot"></span>
+                <span class="mono-label font-normal text-[10px] text-pivot">
+                  {enAvant.data.mission_ft2e.slice(0, 2).join(' · ').toLowerCase()}
+                </span>
+              </div>
+            </div>
+          </Fragment>
+        ) : (
         <div class:list={['relative aspect-[3/2]', heroImageExiste ? 'duotone-photo' : 'duotone-media']}>
           {heroImageExiste && (
             <img
@@ -106,6 +141,7 @@ const partenaires = [
             </span>
           </div>
         </div>
+        )}
         <a
           href={`/references/${enAvant.id}`}
           class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier"

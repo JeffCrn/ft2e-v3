@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Diagramme de flux des apports de chaleur d'une salle de cours en été : cinq postes d'origine interne — occupants, ordinateurs, éclairage, renouvellement d'air, vidéoprojecteur et baie de brassage — convergent vers un flux large de 8 414 watts ; un sixième poste, les apports de l'enveloppe par le mur et la baie, forme à côté un filet de 217 watts. Le rapport des deux est la démonstration de la planche.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">RÉPARTITION DES APPORTS DE CHALEUR</text>
+  <path d="M 200.00 62.00 C 298.00 62.00, 298.00 78.00, 396.00 78.00 L 396.00 212.25 C 298.00 212.25, 298.00 196.25, 200.00 196.25 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 200.00 204.25 C 298.00 204.25, 298.00 212.25, 396.00 212.25 L 396.00 242.90 C 298.00 242.90, 298.00 234.90, 200.00 234.90 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 200.00 242.90 C 298.00 242.90, 298.00 242.90, 396.00 242.90 L 396.00 267.03 C 298.00 267.03, 298.00 267.03, 200.00 267.03 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 200.00 275.03 C 298.00 275.03, 298.00 267.03, 396.00 267.03 L 396.00 277.86 C 298.00 277.86, 298.00 285.86, 200.00 285.86 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 200.00 293.86 C 298.00 293.86, 298.00 277.86, 396.00 277.86 L 396.00 282.72 C 298.00 282.72, 298.00 298.72, 200.00 298.72 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 200.00 322.72 C 298.00 322.72, 298.00 322.72, 396.00 322.72 L 396.00 328.00 C 298.00 328.00, 298.00 328.00, 200.00 328.00 Z" class="c-pivot s-filet1" fill="#336667" stroke="#00393A38" stroke-width="1"/>
+  <text x="188.00" y="133.13" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="end">Occupants</text>
+  <text x="188.00" y="223.58" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="end">Ordinateurs</text>
+  <text x="188.00" y="258.97" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="end">Éclairage</text>
+  <text x="188.00" y="329.36" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="end">Mur et baie</text>
+  <rect x="396.00" y="78.00" width="8.00" height="204.72" class="c-encre" fill="#00393A"/>
+  <text x="412.00" y="178.36" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Intérieur</text>
+  <text x="412.00" y="195.36" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" font-variant-numeric="tabular-nums">8 414 W</text>
+  <rect x="396.00" y="322.72" width="8.00" height="5.28" class="c-encre" fill="#00393A"/>
+  <text x="412.00" y="323.36" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Enveloppe</text>
+  <text x="412.00" y="340.36" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" font-variant-numeric="tabular-nums">217 W</text>
+</svg>

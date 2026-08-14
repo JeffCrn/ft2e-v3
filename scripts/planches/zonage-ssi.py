@@ -33,9 +33,10 @@ désormais deux occurrences et peut remonter dans un module commun — décision
 de dépôt, pas de session.
 """
 
-from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, JETON,
-                    mesurer, echapper, texte, rect, rect_bord, ligne,
-                    fleche, cercle, entete_style, replier, executer)
+from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH, A_MARGE,
+                    JETON, mesurer, echapper, texte, rect, rect_bord, ligne,
+                    fleche, cercle, entete_style, replier, racine_appui,
+                    controles_appui, executer)
 
 
 # ── Rythme vertical de la planche ────────────────────────────────────────────
@@ -326,5 +327,86 @@ def composer_vignette(donnees):
     return "\n".join(out) + "\n", controles
 
 
+def composer_appui(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, densité intermédiaire.
+
+    Ce qu'il garde : le bloc unique AVANT (barre d'alarme, surface évacuée)
+    contre les QUATRE zones APRÈS — provisionnée comprise —, la barre sur la
+    seule zone en alarme, sa mention, et la légende de la barre. Ce qu'il
+    laisse : l'événement, les systèmes et le hors zonage — ils vivent sur la
+    planche."""
+    z = donnees["zonage"]
+    zones = z["apres"]["zones"]
+    avant = z["avant"]["diffusion"]
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1", "filet-2", "filet-3", "encre"))
+
+    # La légende de la barre d'alarme, en haut à droite.
+    l_leg = mesurer(z["legende_alarme"], 10, "mono", 10 * 0.14)
+    A(rect(AW - A_MARGE - l_leg - 22, 27, 14, 7, "clair"))
+    A(texte(AW - A_MARGE, 34, z["legende_alarme"], "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+
+    g_x0, g_x1 = A_MARGE, 216
+    d_x0, d_x1 = 300, AW - A_MARGE
+    y0, y1 = 76, 336
+    A(texte(g_x0, 64, "AVANT", "mono", 10, 500, "pivot", tracking=10 * 0.14))
+    A(texte(d_x0, 64, "APRÈS", "mono", 10, 500, "pivot", tracking=10 * 0.14))
+
+    # Le bloc AVANT : une seule zone, l'alarme partout, la surface évacuée.
+    A(rect_bord(g_x0, y0, g_x1 - g_x0, y1 - y0, "calcaire", "filet-1"))
+    if avant.get("alarme"):
+        A(rect(g_x0 + 1, y0 + 1, g_x1 - g_x0 - 2, 7, "clair"))
+    centre = (y0 + y1) / 2
+    A(texte(g_x0 + 14, centre - 6, avant["libelle"], "sans", 14, 600,
+            "encre", wdth=112))
+    A(texte(g_x0 + 14, centre + 12, f'{avant["valeur"]}{NN}{avant["unite"]}',
+            "mono", 11, 500, "pivot", tabulaire=True))
+
+    # La flèche du principe : une zone devient quatre.
+    A(ligne(g_x1 + 12, centre, d_x0 - 16, centre, "encre", 1.5))
+    A(fleche(d_x0 - 8, centre, "encre", "droite", 8))
+
+    # La pile APRÈS : les quatre zones, d'égale hauteur.
+    n = len(zones)
+    ecart = 8
+    h_bloc = (y1 - y0 - (n - 1) * ecart) / n
+    for i, zone in enumerate(zones):
+        yz = y0 + i * (h_bloc + ecart)
+        prov = zone.get("etat") == "provisionnee"
+        A(rect_bord(d_x0, yz, d_x1 - d_x0, h_bloc,
+                    "papier" if prov else "calcaire",
+                    "filet-2" if prov else "filet-1"))
+        if zone.get("alarme"):
+            A(rect(d_x0 + 1, yz + 1, d_x1 - d_x0 - 2, 7, "clair"))
+        # Un tag long (« · PROVISIONNÉE ») se partage : la base à gauche, le
+        # complément à droite — mesuré, il ne tient pas sur la colonne.
+        tag = zone["tag"]
+        if " · " in tag:
+            base, complement = tag.split(" · ", 1)
+            A(texte(d_x0 + 12, yz + 19, base, "mono", 10, 500, "pivot",
+                    tracking=10 * 0.14))
+            A(texte(d_x1 - 12, yz + 19, complement, "mono", 10, 500, "pivot",
+                    ancre="end", tracking=10 * 0.14))
+        else:
+            A(texte(d_x0 + 12, yz + 19, tag, "mono", 10, 500, "pivot",
+                    tracking=10 * 0.14))
+        A(texte(d_x0 + 12, yz + 39, zone["libelle"], "sans", 13, 600,
+                "encre", wdth=112))
+        if zone.get("mention") and zone.get("alarme"):
+            A(texte(d_x0 + 12, yz + 54, zone["mention"], "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"1 bloc AVANT (barre d'alarme sur tout, {avant['valeur']} m² "
+              f"évacués) contre {len(zones)} zones APRÈS dont la provisionnée, "
+              "barre et mention sur la seule zone en alarme, légende en tête — "
+              "événement, systèmes et hors zonage laissés à la planche",
+        bas=f"pile de zones jusqu'à {y1} px, marge basse {AH - y1} px")
+
+
 if __name__ == "__main__":
-    executer(composer, composer_vignette)
+    executer(composer, composer_vignette, composer_appui)

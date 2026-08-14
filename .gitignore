@@ -53,3 +53,5 @@ Thumbs.db
 
 # Caches Python des outils de `scripts/` — motif ANCRÉ, comme tous les autres.
 /scripts/__pycache__/
+
+/scripts/planches/__pycache__/

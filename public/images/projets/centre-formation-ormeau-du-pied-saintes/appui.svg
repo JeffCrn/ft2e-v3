@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la réversibilité de la production de chaleur : la chaudière gaz à condensation de 40 kW, en service aujourd'hui, et le réseau de chaleur annoncé, à raccorder demain, convergent sur un même point de substitution qui alimente le réseau d'émission hydraulique du bâtiment — la production se remplace, les émetteurs ne bougent pas. En regard, le parti écarté : une pompe à chaleur à détente directe, dont les liaisons frigorigènes filent de la machine au bâtiment sans point de substitution et auraient figé le mode de production pour la durée de vie des machines.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">PRODUCTION RÉVERSIBLE</text>
+  <text x="24.00" y="80.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaudière gaz à condensation</text>
+  <rect x="24.00" y="88.00" width="126.00" height="52.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="36.00" y="118.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" font-variant-numeric="tabular-nums">40 kW</text>
+  <text x="24.00" y="188.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Réseau de chaleur</text>
+  <rect x="24.00" y="196.00" width="126.00" height="52.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.4" stroke-dasharray="5 5"/>
+  <text x="87.00" y="226.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">À VENIR</text>
+  <path d="M 150.00 114.00 L 258.00 114.00 L 258.00 145.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 258.00 153.00 L 254.50 146.00 L 261.50 146.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 150.00 222.00 L 258.00 222.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4" stroke-dasharray="6 6"/>
+  <path d="M 258.00 222.00 L 258.00 183.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4" stroke-dasharray="6 6"/>
+  <path d="M 258.00 175.00 L 254.50 182.00 L 261.50 182.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="258.00" cy="164.00" r="9.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 258.00 155.00 L 258.00 147.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="244.00" y="146.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LE POINT DE SUBSTITUTION</text>
+  <path d="M 267.00 158.00 L 410.00 158.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 267.00 170.00 L 410.00 170.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 330.00 158.00 L 323.00 154.50 L 323.00 161.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 336.00 170.00 L 343.00 166.50 L 343.00 173.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="396.00" y="80.00" width="132.00" height="184.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="410.00" y="104.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Les émetteurs</text>
+  <path d="M 410.00 122.00 L 410.00 232.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="424.00" y="111.00" width="100.00" height="22.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 449.00 116.00 L 449.00 128.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 474.00 116.00 L 474.00 128.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 499.00 116.00 L 499.00 128.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 410.00 122.00 L 424.00 122.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="424.00" y="165.00" width="100.00" height="22.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 449.00 170.00 L 449.00 182.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 474.00 170.00 L 474.00 182.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 499.00 170.00 L 499.00 182.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 410.00 176.00 L 424.00 176.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="424.00" y="219.00" width="100.00" height="22.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 449.00 224.00 L 449.00 236.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 474.00 224.00 L 474.00 236.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 499.00 224.00 L 499.00 236.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 410.00 230.00 L 424.00 230.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+</svg>

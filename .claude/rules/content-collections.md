@@ -46,8 +46,8 @@ Depuis le 2026-08-12, `image_principale` et `image_principale_alt` sont **option
 un champ `planche` les remplace sur les fiches traitées.
 
 - `planche` porte le chemin du SVG depuis `public/`, en graphie stricte
-  `/images/projets/<slug>/planche.svg`. Trois fichiers frères l'accompagnent dans le même
-  répertoire — `planche.json`, `vignette.svg`, `planche.png` — et **ils ne se séparent
+  `/images/projets/<slug>/planche.svg`. Quatre fichiers frères l'accompagnent dans le même
+  répertoire — `planche.json`, `vignette.svg`, `appui.svg`, `planche.png` — et **ils ne se séparent
   pas** : le composant les charge par convention de nom, un manquant fait échouer le build.
 - **Le frontmatter ne porte ni l'alternative textuelle de la planche ni son surtitre de
   vignette** : ils vivent dans le `planche.json`, que le composant lit au build. Les

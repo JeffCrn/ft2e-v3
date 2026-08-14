@@ -155,5 +155,12 @@
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
     "motif": "le bandeau des 48 modules, la descente, la barre, l'échange réseau à deux flèches, les trois bandes du COP (2 / 7,2 / 9,2 px) et la dalle — libellés d'organes, étiquettes d'échange et bloc des autres départs laissés à la planche",
     "bas_du_dessin": "dalle jusqu'à y 178, marge basse 22 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier à l'échelle 1 : bandeau des 48 modules, descente, barre, échange réseau à deux flèches légendées, trois bandes du COP (4 / 14,4 / 18,4 px) et dalle — trois nœuds chiffrés (17,5 kWc, COP 4,60, régime 30/35 °C) ; détails de pose, contenu des départs, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "dalle jusqu'à 334, régime à 331 — marge basse 34 px"
   }
 }

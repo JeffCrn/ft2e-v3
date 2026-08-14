@@ -119,13 +119,14 @@ ait jamais été obtenu, douze extraits reproduisant leur fond de plan. Et un ex
 au 1/50 réduit à 581 px puis passé au duotone ne démontre rien : le code en portait l'aveu,
 la miniature de `/references` était à la fois `hidden md:block` et `aria-hidden`.
 
-**Quatre pièces par fiche**, dans `public/images/projets/<slug>/` :
+**Cinq pièces par fiche**, dans `public/images/projets/<slug>/` :
 
 | Fichier | Rôle |
 |---|---|
 | `planche.json` | l'extraction — la pièce que FT2E relit, **et** la source du repli de lecture sous 1024 px |
 | `planche.svg` | la planche, `viewBox 0 0 1200 800`, lue à 1152 px (échelle 0,96) |
 | `vignette.svg` | la vignette de carte, `viewBox 0 0 300 200`, lue à 274-296 px |
+| `appui.svg` | l'appui du hero de l'accueil, `viewBox 0 0 552 368`, lu à ~552 px (fiche `en_avant`) |
 | `planche.png` | 2400 × 1600 — contrôle, impression, et `og:image` de la fiche |
 
 **Trois principes de rendu, chacun mesuré :**

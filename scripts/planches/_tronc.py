@@ -37,6 +37,18 @@ UTILE = W - 2 * MARGE                      # 1088
 VW, VH = 300, 200
 V_MARGE = 14
 
+# ── Gabarit de l'APPUI (hero de l'accueil) ───────────────────────────────────
+# La colonne média du hero (lg:col-span-6 d'une grille de 1200) lit le dessin à
+# ~552 px : le repère fait 552 x 368 (3:2 exact) pour que l'échelle de rendu
+# vaille 1,0 — les corps écrits ici sont les corps lus, comme pour la planche.
+# Ni la planche (0,48 : mono à 4,8 px) ni la vignette agrandie (1,84 : traits
+# épaissis) ne se transposent — l'appui est une TROISIÈME composition, tirée de
+# la même extraction, de densité intermédiaire : le motif entier, deux ou trois
+# nœuds chiffrés, un surtitre. Sans phrase de principe ni cartouche : le hero
+# porte déjà sa légende de carte sous le dessin.
+AW, AH = 552, 368
+A_MARGE = 24
+
 # ── Jetons ────────────────────────────────────────────────────────────────────
 JETON = {
     "profond": "#001718",
@@ -179,9 +191,39 @@ def entete_style(A, strokes=("filet-1", "filet-2", "filet-3", "encre", "clair"))
     A("</style>")
 
 
-def executer(composer, composer_vignette):
+def racine_appui(A, donnees, strokes=("filet-1", "filet-2", "filet-3",
+                                      "encre", "clair")):
+    """L'ouverture commune d'un appui : racine `role="img"` (le hero l'affiche
+    seul, sa légende de carte ne décrit pas le principe), fond papier, et le
+    surtitre court de l'extraction (`vignette_surtitre` — le surtitre complet
+    de la planche ne tient pas toujours dans 504 px)."""
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {AW} {AH}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, strokes)
+    A(rect(0, 0, AW, AH, "papier"))
+    A(texte(A_MARGE, 34, donnees["vignette_surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+
+
+def controles_appui(motif, bas, **extra):
+    """Le bloc de contrôle commun des appuis — gabarit, échelle, corps minimal."""
+    base = {
+        "gabarit": f"{AW} x {AH} — rapport {AW/AH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — "
+                            f"échelle {552/AW:.2f} : les corps écrits sont les corps lus",
+        "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+        "motif": motif,
+        "bas_du_dessin": bas,
+    }
+    base.update(extra)
+    return base
+
+
+def executer(composer, composer_vignette, composer_appui=None):
     """Routine d'exécution commune : lit `planche.json` dans le dossier passé
-    en argument, écrit les deux SVG, recalcule le bloc `controles`."""
+    en argument, écrit les deux (ou trois) SVG, recalcule le bloc `controles`."""
     dossier = Path(sys.argv[1])
     donnees = json.loads((dossier / "planche.json").read_text(encoding="utf-8"))
     svg, controles = composer(donnees)
@@ -193,6 +235,12 @@ def executer(composer, composer_vignette):
 
     donnees["controles"] = controles
     donnees["controles_vignette"] = controles_vignette
+
+    if composer_appui is not None:
+        appui, controles_appui = composer_appui(donnees)
+        io.open(dossier / "appui.svg", "w", encoding="utf-8", newline="\n").write(appui)
+        donnees["controles_appui"] = controles_appui
+
     io.open(dossier / "planche.json", "w", encoding="utf-8", newline="\n").write(
         json.dumps(donnees, ensure_ascii=False, indent=2) + "\n")
 
@@ -200,6 +248,11 @@ def executer(composer, composer_vignette):
           f"{svg.count('<text')} nœuds de texte")
     print(f"vignette.svg — {len(vignette.encode('utf-8'))} octets, "
           f"{vignette.count('<text')} nœuds de texte")
+    if composer_appui is not None:
+        print(f"appui.svg    — {len(appui.encode('utf-8'))} octets, "
+              f"{appui.count('<text')} nœuds de texte")
+        for k, v in controles_appui.items():
+            print(f"  · appui · {k} : {v}")
     for k, v in controles_vignette.items():
         print(f"  · vignette · {k} : {v}")
     for k, v in controles.items():

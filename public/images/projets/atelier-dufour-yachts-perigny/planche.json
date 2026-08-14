@@ -170,5 +170,12 @@
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
     "motif": "deux conduits à contre-courant, deux batteries, la boucle seule à traverser, le bloc atelier — gaz, pac, circulateur, vase et étiquettes d'air sont laissés à la planche",
     "bas_du_dessin": "nœud de l'air neuf à y 180, marge basse 20 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les deux conduits à contre-courant nommés, les deux batteries, la boucle seule à traverser avec son chiffre (146 045 kWh/an), le bloc atelier et la cote de l'air neuf — gaz, pompe à chaleur, circulateur et vase laissés à la planche",
+    "bas_du_dessin": "conduit bas jusqu'à 302 px, marge basse 56 px"
   }
 }

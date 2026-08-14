@@ -27,9 +27,9 @@ commun le jour où le deuxième existera ; le factoriser maintenant reviendrait 
 généraliser sur un seul cas.
 """
 
-from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, JETON, SANS,
-                    MONO, mesurer, echapper, texte, rect, ligne, replier,
-                    executer)
+from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH, A_MARGE,
+                    JETON, SANS, MONO, mesurer, echapper, texte, rect, ligne,
+                    replier, racine_appui, controles_appui, executer)
 
 
 # La révision 4 supprime la partition 7/5 et la colonne de relevé : la planche
@@ -315,6 +315,82 @@ def composer_vignette(donnees):
     return "\n".join(out) + "\n", controles
 
 
+def composer_appui(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, densité intermédiaire.
+
+    Ce qu'il garde : les six bandes aux hauteurs proportionnelles, les deux
+    nœuds avec leur valeur, et les libellés des postes dont la bande est assez
+    haute pour les porter (plus l'enveloppe, que son écart d'origine isole).
+    Ce qu'il laisse : les valeurs par poste, les détails, la note de pied —
+    ils vivent sur la planche."""
+    sk = donnees["sankey"]
+    sources = sk["sources"]
+    total = sum(s["valeur"] for s in sources)
+
+    x0, x1 = 200, 396
+    noeud_w, lib_node_x = 8, 412
+    hauteur, ecart, ecart_origine = 210.0, 8.0, 24.0
+    echelle = hauteur / total
+
+    y = 62.0
+    poses = []
+    for i, src in enumerate(sources):
+        if i > 0:
+            y += ecart_origine if src["origine"] != sources[i - 1]["origine"] else ecart
+        h = src["valeur"] * echelle
+        poses.append({"src": src, "y0": y, "y1": y + h, "h": h})
+        y += h
+
+    noeuds = {}
+    for n in sk["noeuds"]:
+        membres = [p for p in poses if p["src"]["origine"] == n["cle"]]
+        ht = sum(p["h"] for p in membres)
+        centre = (membres[0]["y0"] + membres[-1]["y1"]) / 2
+        noeuds[n["cle"]] = {"n": n, "y0": centre - ht / 2, "h": ht, "centre": centre}
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1",))
+
+    xm = (x0 + x1) / 2
+    curseur = {c: n["y0"] for c, n in noeuds.items()}
+    for p in poses:
+        cle = p["src"]["origine"]
+        d0 = curseur[cle]
+        d1 = d0 + p["h"]
+        curseur[cle] = d1
+        couleur = "pivot" if cle == "enveloppe" else "clair"
+        d = (f'M {x0:.2f} {p["y0"]:.2f} C {xm:.2f} {p["y0"]:.2f}, {xm:.2f} {d0:.2f}, '
+             f'{x1:.2f} {d0:.2f} L {x1:.2f} {d1:.2f} '
+             f'C {xm:.2f} {d1:.2f}, {xm:.2f} {p["y1"]:.2f}, {x0:.2f} {p["y1"]:.2f} Z')
+        A(f'  <path d="{d}" class="c-{couleur} s-filet1" fill="{JETON[couleur]}" '
+          f'stroke="{JETON["filet-1"]}" stroke-width="1"/>')
+
+    # Les libellés de poste — seulement là où la bande peut les porter.
+    for p in poses:
+        if p["h"] >= 14 or p["src"]["origine"] == "enveloppe":
+            lib = p["src"]["libelle"]
+            A(texte(x0 - 12, (p["y0"] + p["y1"]) / 2 + 4, lib, "sans", 13, 600,
+                    "encre", wdth=112, ancre="end"))
+
+    for nd in noeuds.values():
+        A(rect(x1, nd["y0"], noeud_w, nd["h"], "encre"))
+        A(texte(lib_node_x, nd["centre"] - 2, nd["n"]["libelle"], "sans", 14,
+                600, "encre", wdth=112))
+        A(texte(lib_node_x, nd["centre"] + 15,
+                f'{nd["n"]["valeur_affichee"]}{NN}{sk["unite"]}',
+                "mono", 11, 500, "pivot", tabulaire=True))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="les six bandes proportionnelles et les deux nœuds chiffrés à "
+              "l'échelle 1 ; libellés portés par les bandes assez hautes "
+              "(plus l'enveloppe) — valeurs par poste, détails et note de "
+              "pied laissés à la planche",
+        bas=f"bandes jusqu'à {poses[-1]['y1']:.0f} px, marge basse "
+            f"{AH - poses[-1]['y1']:.0f} px")
+
+
 if __name__ == "__main__":
     executer(lambda donnees: composer(donnees, donnees["fiche"]),
-             composer_vignette)
+             composer_vignette, composer_appui)

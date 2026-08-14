@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Coupe de principe de l'équilibre aéraulique du restaurant scolaire : trois locaux sous une même ligne de toiture, l'air extrait fléché vers le haut, l'air de compensation en trait interrompu là où le relevé ne l'a pas constaté. Salles de restauration : centrale double flux de 2 340 m³/h, voyant de marche allumé mais aucun débit en toiture. Laverie : hotte de 1 800 m³/h sans aucune compensation d'air neuf — le local passe en dépression et l'humidité ruisselle. Zone cuisson : hotte du piano à 7 500 m³/h, dont la compensation de 6 000 m³/h préchauffés par une batterie électrique signalée en surchauffe est supposée coupée. Seuls deux caissons simple flux tournaient au relevé.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">ÉQUILIBRE AÉRAULIQUE</text>
+  <path d="M 24.00 178.00 L 60.26 178.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 75.74 178.00 L 116.26 178.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 131.74 178.00 L 283.12 178.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 296.88 178.00 L 386.40 178.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 413.60 178.00 L 454.00 178.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 486.00 178.00 L 528.00 178.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <text x="340.00" y="170.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">TOITURE</text>
+  <rect x="24.00" y="202.00" width="152.00" height="98.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="36.00" y="226.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Salles de restauration</text>
+  <rect x="200.00" y="202.00" width="130.00" height="98.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="212.00" y="226.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Laverie</text>
+  <rect x="354.00" y="202.00" width="174.00" height="98.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="366.00" y="226.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Zone cuisson</text>
+  <rect x="44.00" y="96.00" width="104.00" height="32.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="56.00" y="116.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">CTA double flux</text>
+  <rect x="64.26" y="128" width="7.49" height="74" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <rect x="120.26" y="128" width="7.49" height="74" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <text x="36.00" y="246.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AUCUN DÉBIT</text>
+  <text x="36.00" y="260.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EN TOITURE</text>
+  <rect x="287.12" y="112" width="5.76" height="90" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <path d="M 290.00 108.00 L 285.50 117.00 L 294.50 117.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="290.00" y="96.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">1 800 m³/h</text>
+  <rect x="458.00" y="100" width="24.00" height="102" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <path d="M 470.00 96.00 L 465.00 106.00 L 475.00 106.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="470.00" y="84.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">7 500 m³/h</text>
+  <rect x="382.00" y="92.00" width="36.00" height="26.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 382.00 118.00 L 418.00 92.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="390.40" y="118" width="19.20" height="36" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <path d="M 387.40 164.00 L 412.60 158.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 387.40 171.00 L 412.60 165.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <text x="400.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">SUPPOSÉE COUPÉE</text>
+</svg>

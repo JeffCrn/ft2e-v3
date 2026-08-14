@@ -46,9 +46,10 @@ l'extraction :
 import math
 import re as _re
 
-from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, mesurer,
-                    echapper, texte, rect, rect_bord, ligne, polyligne,
-                    fleche, cercle, entete_style, executer)
+from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH, A_MARGE,
+                    mesurer, echapper, texte, rect, rect_bord, ligne,
+                    polyligne, fleche, cercle, entete_style, racine_appui,
+                    controles_appui, executer)
 
 
 # ── Rythme vertical de la planche ────────────────────────────────────────────
@@ -817,6 +818,171 @@ def composer_vignette_equilibre(donnees):
     return "\n".join(out) + "\n", controles
 
 
+def composer_appui(donnees):
+    """L'appui du hero (mécanisme `coupe`) : le motif à l'échelle 1.
+
+    Ce qu'il garde : la coupe fermée par sa bande continue, les champs en
+    surimposition, la flèche d'export, et trois nœuds — modules, isolation,
+    revente. Ce qu'il laisse : les baies, la centrale, les conduits, la dalle
+    annotée et la colonne d'appels — ils vivent sur la planche."""
+    elems = {e["cle"]: e for e in donnees["coupe"]["elements"]}
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    # La coupe — mêmes proportions de principe que la vignette, repère propre.
+    mg, md = 74, 296
+    y_sol, y_eaves, y_apex = 318, 222, 163
+    x_apex = (mg + md) / 2
+    pente = (y_eaves - y_apex) / (x_apex - mg)
+    v = math.sqrt(1 + pente * pente)
+
+    def apan_y(x):
+        return y_apex + abs(x - x_apex) * pente
+
+    def apan_off(x, d):
+        return (x, apan_y(x) - d * v)
+
+    A(ligne(46, y_sol, 330, y_sol, "filet-1", 2))
+    for k in range(5):
+        x = 70 + k * 56
+        A(ligne(x, y_sol + 2, x - 8, y_sol + 9, "filet-2", 1))
+    A(rect(mg, y_eaves, 4, y_sol - y_eaves, "encre"))
+    A(rect(md - 4, y_eaves, 4, y_sol - y_eaves, "encre"))
+    A(rect(mg + 4, 266, md - mg - 8, 5, "encre"))
+    A(polyligne([(mg, y_eaves), (x_apex, y_apex), (md, y_eaves)], "encre", 2.5))
+    # La bande d'enveloppe continue : murs et pans.
+    A(rect(60, 216, 8, y_sol - 216, "clair"))
+    A(rect(302, 216, 8, y_sol - 216, "clair"))
+    A(polyligne([apan_off(60, 10), apan_off(x_apex, 10), apan_off(310, 10)],
+                "clair", 7))
+    # Les champs, en surimposition, et l'export.
+    for (x0, x1) in ((88, 168), (202, 282)):
+        milieu = (x0 + x1) / 2
+        A(polyligne([apan_off(x0, 24), apan_off(milieu - 4, 24)], "encre", 7))
+        A(polyligne([apan_off(milieu + 4, 24), apan_off(x1, 24)], "encre", 7))
+    dep = apan_off(202, 24)
+    A(polyligne([dep, (dep[0], 96), (452, 96)], "encre", 1.5))
+    A(fleche(460, 96, "encre", "droite", 8))
+
+    # Les trois nœuds chiffrés, à droite.
+    mod = elems["modules"]
+    res = elems["reseau"]
+    mur = elems["murs"]
+    A(texte(340, 122, mod["libelle"].split(" en ")[0] + " PV", "sans", 14, 600,
+            "encre", wdth=112))
+    A(texte(340, 139, f'{mod["valeur"]}{NN}{mod["unite"]}', "mono", 11, 500,
+            "pivot", tabulaire=True))
+    A(texte(340, 76, res["libelle"], "sans", 14, 600, "encre", wdth=112))
+    A(polyligne([(452, 82), (440, 92)], "filet-1", 1))
+    A(texte(340, 246, mur["libelle"].split(" par ")[0], "sans", 14, 600,
+            "encre", wdth=112))
+    A(texte(340, 263, f'R{NN}{mur["valeur"]}', "mono", 11, 500, "pivot",
+            tabulaire=True))
+    A(polyligne([(336, 252), (312, 262)], "filet-1", 1))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="la coupe fermée par sa bande continue, les champs en "
+              "surimposition, la flèche d'export et trois nœuds (modules, "
+              "isolation, revente) à l'échelle 1 — baies, centrale, conduits "
+              "et appels laissés à la planche",
+        bas=f"sol à 318 px (hachures à 327), marge basse {AH - 327} px")
+
+
+def composer_appui_equilibre(donnees):
+    """L'appui du hero (mécanisme `equilibre`) : le motif à l'échelle 1.
+
+    Ce qu'il garde : la ligne de toiture percée, les trois locaux nommés, les
+    cinq conduits aux largeurs proportionnelles — deux pleins qui montent,
+    trois interrompus — et les cotes des deux extractions. Ce qu'il laisse :
+    la CTA détaillée, le voyant, les mentions d'absence, la ligne de pied."""
+    q = donnees["equilibre"]
+    elems = {e["cle"]: e for e in q["elements"]}
+    sal, lav = elems["salles"], elems["laverie"]
+    hot, cmp_ = elems["cuisson-hotte"], elems["cuisson-compensation"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    y_toit, y_room0, y_room1 = 178, 202, 300
+    k = 24.0 / 7500
+    cols = ((A_MARGE, 176), (200, 330), (354, AW - A_MARGE))
+    cx_souf, cx_repr, cx_lav, cx_cmp, cx_hot = 68, 124, 290, 400, 470
+    w_sal, w_lav = _debit(sal["valeur"]) * k, _debit(lav["valeur"]) * k
+    w_cmp, w_hot = _debit(cmp_["valeur"]) * k, _debit(hot["valeur"]) * k
+
+    # La ligne de toiture, percée à chaque conduit.
+    x = A_MARGE
+    for cx, w in sorted((c, w) for c, w in
+                        ((cx_souf, w_sal), (cx_repr, w_sal), (cx_lav, w_lav),
+                         (cx_cmp, w_cmp), (cx_hot, w_hot))):
+        A(ligne(x, y_toit, cx - w / 2 - 4, y_toit, "encre", 2))
+        x = cx + w / 2 + 4
+    A(ligne(x, y_toit, AW - A_MARGE, y_toit, "encre", 2))
+    # Le libellé de la toiture, dans la seule plage sans conduit (entre la
+    # laverie et la batterie) — à la marge il était percé par les conduits
+    # de la CTA, mesuré au premier rendu à 552.
+    A(texte(340, y_toit - 8, q["toiture"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+
+    # Les trois locaux, nommés.
+    for (x0, x1), e in zip(cols, (sal, lav, hot)):
+        A(rect(x0, y_room0, x1 - x0, y_room1 - y_room0, "calcaire"))
+        A(texte(x0 + 12, y_room0 + 24, e.get("libelle_dessin", e["libelle"]),
+                "sans", 13, 600, "encre", wdth=112))
+
+    # Salles : la CTA et ses deux conduits interrompus — aucun débit constaté.
+    A(rect_bord(44, 96, 104, 32, "papier", "filet-1"))
+    A(texte(56, 116, sal["machine"], "sans", 13, 600, "encre", wdth=112))
+    for cx in (cx_souf, cx_repr):
+        A(f'  <rect x="{cx - w_sal / 2:.2f}" y="128" width="{w_sal:.2f}" '
+          f'height="{y_room0 - 128}" fill="none" class="s-encre" '
+          f'stroke="#00393A" stroke-width="1.2" stroke-dasharray="5 5"/>')
+    # Le constat, posé DANS le bloc des salles sous son libellé — entre les
+    # conduits il était percé par leurs traits interrompus (rendu à 552).
+    for k, l in enumerate(sal["constat"]):
+        A(texte(36, y_room0 + 44 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    # Laverie : une extraction qui tire, rien en face.
+    A(f'  <rect x="{cx_lav - w_lav / 2:.2f}" y="112" width="{w_lav:.2f}" '
+      f'height="{y_room0 - 112}" class="c-clair s-encre" fill="#99CCCD" '
+      f'stroke="#00393A" stroke-width="1"/>')
+    A(fleche(cx_lav, 108, "encre", "haut", 9))
+    A(texte(cx_lav, 96, f'{lav["valeur"]}{NN}{lav["unite"]}', "mono", 10, 500,
+            "pivot", ancre="middle", tracking=10 * 0.14))
+
+    # Cuisson : la plus large monte, la compensation s'interrompt.
+    A(f'  <rect x="{cx_hot - w_hot / 2:.2f}" y="100" width="{w_hot:.2f}" '
+      f'height="{y_room0 - 100}" class="c-clair s-encre" fill="#99CCCD" '
+      f'stroke="#00393A" stroke-width="1"/>')
+    A(fleche(cx_hot, 96, "encre", "haut", 10))
+    A(texte(cx_hot, 84, f'{hot["valeur"]}{NN}{hot["unite"]}', "mono", 10, 500,
+            "pivot", ancre="middle", tracking=10 * 0.14))
+    A(rect_bord(cx_cmp - 18, 92, 36, 26, "papier", "filet-1"))
+    A(ligne(cx_cmp - 18, 118, cx_cmp + 18, 92, "encre", 1.2))
+    A(f'  <rect x="{cx_cmp - w_cmp / 2:.2f}" y="118" width="{w_cmp:.2f}" '
+      f'height="36" fill="none" class="s-encre" stroke="#00393A" '
+      f'stroke-width="1.2" stroke-dasharray="5 5"/>')
+    for dy in (0, 7):
+        A(ligne(cx_cmp - w_cmp / 2 - 3, 164 + dy, cx_cmp + w_cmp / 2 + 3,
+                158 + dy, "encre", 1.2))
+    # Le mot de la coupure, centré sous ses traits — à gauche du conduit il
+    # traversait l'extraction de la laverie.
+    A(texte(cx_cmp, 190, cmp_["coupure"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="la ligne de toiture percée, trois locaux nommés, cinq conduits "
+              "proportionnels (24 px pour 7 500 m³/h) — deux pleins cotés qui "
+              "montent, trois interrompus dont la compensation supposée "
+              "coupée — CTA, voyant, mentions d'absence et ligne de pied "
+              "laissés à la planche",
+        bas=f"locaux jusqu'à 300 px, marge basse {AH - 300} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def _composer(donnees):
@@ -831,5 +997,11 @@ def _composer_vignette(donnees):
     return composer_vignette(donnees)
 
 
+def _composer_appui(donnees):
+    if "equilibre" in donnees:
+        return composer_appui_equilibre(donnees)
+    return composer_appui(donnees)
+
+
 if __name__ == "__main__":
-    executer(_composer, _composer_vignette)
+    executer(_composer, _composer_vignette, _composer_appui)

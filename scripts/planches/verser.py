@@ -7,9 +7,9 @@ Versement d'une planche sur le site — la bascule en une commande.
 
 Ce que fait le script, dans l'ordre, en s'arrêtant à la première faute :
 
-1. vérifie que le dossier `public/images/projets/<slug>/` porte les QUATRE
+1. vérifie que le dossier `public/images/projets/<slug>/` porte les CINQ
    fichiers du protocole (`planche.json`, `planche.svg`, `vignette.svg`,
-   `planche.png`) — ils ne se séparent pas ;
+   `appui.svg`, `planche.png`) — ils ne se séparent pas ;
 2. vérifie l'extraction : archétype nommé, `a_valider_ft2e` non vide (une liste
    vide signifie que la session n'a pas vu ce qu'elle tranchait, pas qu'il n'y
    avait rien à trancher), et une forme de repli mobile que le site sait rendre
@@ -44,12 +44,13 @@ def main():
     dossier = racine / "public" / "images" / "projets" / slug
     fiche = racine / "src" / "content" / "projets" / f"{slug}.md"
 
-    # 1 — les quatre fichiers, ensemble
+    # 1 — les cinq fichiers, ensemble (l'appui du hero depuis le 2026-08-14)
     if not dossier.is_dir():
         faute(f"pas de dossier {dossier}")
     if not fiche.is_file():
         faute(f"pas de fiche {fiche}")
-    manquants = [f for f in ("planche.json", "planche.svg", "vignette.svg", "planche.png")
+    manquants = [f for f in ("planche.json", "planche.svg", "vignette.svg",
+                             "appui.svg", "planche.png")
                  if not (dossier / f).is_file()]
     if manquants:
         faute(f"fichiers manquants dans {dossier.name}/ : {', '.join(manquants)}")

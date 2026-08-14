@@ -89,7 +89,7 @@ toujours sur sa dernière révision**, ce qu'un prompt recopié ne peut pas prom
 ```text
 Tu produis une planche de schéma de principe pour une fiche de références FT2E.
 
-AVANT TOUTE AUTRE CHOSE, cloner le dépôt et lire le protocole (révision 4). Il fait
+AVANT TOUTE AUTRE CHOSE, cloner le dépôt et lire le protocole (révision 5). Il fait
 autorité sur tout ce qui suit, y compris sur ce message :
 
     git clone --depth 1 https://github.com/JeffCrn/ft2e-v3
@@ -110,7 +110,7 @@ Exemple achevé, à consulter comme référence de niveau attendu :
     public/images/projets/abbaye-sablonceaux-ssi/planche.json
     scripts/planches/zonage-ssi.py
 
-CE QUE TU REMETS — un dossier <slug>/ contenant les quatre fichiers du protocole,
+CE QUE TU REMETS — un dossier <slug>/ contenant les cinq fichiers du protocole,
 puis le prompt de lancement de la session suivante (une fiche = une session).
 
   · Si l'archétype retenu a déjà son compositeur dans scripts/planches/, tu ne produis
@@ -149,7 +149,7 @@ pas ta méthode.
 
 **Le versement fait partie de la session depuis le 2026-08-13.** Une fois les quatre
 fichiers en place, `python scripts/planches/verser.py <slug>` contrôle le dossier et
-l'extraction (quatre fichiers, `a_valider_ft2e` non vide, forme de repli mobile, racine
+l'extraction (cinq fichiers, `a_valider_ft2e` non vide, forme de repli mobile, racine
 SVG conforme) puis bascule le frontmatter — et le repli mobile est rendu **par la forme**
 de l'extraction : tout bloc d'archétype qui expose un tableau `elements` ordonné
 (règle 7 du protocole) est servi par `PlancheReference.astro` sans une ligne de code
@@ -179,6 +179,27 @@ session emportant le tout — le push déclenche le déploiement Vercel.
    ci-dessus — première fiche « à faire » du programme, registre des archétypes
    actualisé. **Une fiche = une session** : une session qui rend ses fichiers sans le
    prompt suivant laisse le chantier sans relève.
+
+---
+
+## Ce que la vedette de l'accueil a ajouté — 2026-08-14 : l'appui
+
+Le hero de l'accueil illustre la fiche `en_avant` la plus récente par son
+`image_principale` ; le versement de la planche 07 (crèche de l'Oranger, seule fiche
+`en_avant`) a supprimé ce champ et le hero est retombé sur sa hachure de repli. Ni la
+planche (échelle 0,48 dans la colonne de ~552 px : mono rendu à 4,8 px) ni la vignette
+agrandie (1,84 : filets de 1 px épaissis) ne se transposaient — même arithmétique que la
+vignette-jamais-recadrée, appliquée dans l'autre sens.
+
+Réponse, portée au protocole en **révision 5** : un **cinquième fichier `appui.svg`**
+(552 × 368, échelle de rendu 1,0), troisième composition tirée de la même extraction —
+motif entier, deux ou trois nœuds chiffrés, surtitre court, sans phrase ni cartouche.
+Le tronc (`racine_appui`, `controles_appui`) et les **cinq compositeurs** le produisent
+(huit appuis composés, contrôlés à 552 px, trois défauts de collision corrigés à cette
+taille) ; `verser.py` exige les cinq fichiers ; `index.astro` inline l'appui en
+`plan-pose`, sans duotone ni équerres, et le remplace sous 640 px par la hachure de
+repli. Les huit planches publiées ont été régénérées — planches et vignettes
+contrôlées octet à octet inchangées.
 
 ---
 

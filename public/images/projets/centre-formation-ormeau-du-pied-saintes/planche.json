@@ -149,5 +149,12 @@
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
     "motif": "deux productions (pleine, interrompue) convergeant sur le point, deux conduites, le bâtiment et ses trois émetteurs — le parti écarté, les tags et l'étiquette du réseau sont laissés à la planche",
     "bas_du_dessin": "nœud des émetteurs à y 186, marge basse 14 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "deux productions nommées (pleine, interrompue « à venir ») convergeant sur le point de substitution nommé, deux conduites, le bâtiment et ses trois émetteurs — le parti écarté et l'étiquette du réseau laissés à la planche",
+    "bas_du_dessin": "bâtiment jusqu'à 264 px, marge basse 104 px"
   }
 }

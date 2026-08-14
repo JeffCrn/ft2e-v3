@@ -48,9 +48,10 @@ l'extraction :
   aucun point, et figent le mode de production.
 """
 
-from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, mesurer,
-                    echapper, texte, rect, rect_bord, ligne, polyligne,
-                    fleche, cercle, entete_style, executer)
+from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
+                    A_MARGE, mesurer, echapper, texte, rect, rect_bord, ligne,
+                    polyligne, fleche, cercle, entete_style, racine_appui,
+                    controles_appui, executer)
 
 
 # ── Rythme vertical de la planche ────────────────────────────────────────────
@@ -945,6 +946,182 @@ def composer_vignette_substitution(donnees):
     return "\n".join(out) + "\n", controles
 
 
+def composer_appui_recuperation(donnees):
+    """L'appui du hero (mécanisme `boucle`) : le motif à l'échelle 1.
+
+    Ce qu'il garde : les deux conduits à contre-courant nommés, les deux
+    batteries, la boucle seule à traverser (avec son chiffre), le bloc atelier
+    et la cote de l'air neuf. Ce qu'il laisse : gaz, pompe à chaleur,
+    circulateur, vase et mention de séparation — ils vivent sur la planche."""
+    b = donnees["boucle"]
+    elems = {e["cle"]: e for e in b["elements"]}
+    et_ext = elems["conduit-extrait"]
+    et_neuf = elems["conduit-neuf"]
+    bg = elems["boucle-glycol"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    # Les deux conduits et le bloc atelier.
+    yt0, yt1, yb0, yb1 = 88, 140, 240, 292
+    x0, xa = 40, 462
+    A(rect(xa, yt0 - 10, AW - A_MARGE - xa, yb1 - yt0 + 20, "calcaire"))
+    for y in (yt0, yt1, yb0, yb1):
+        A(ligne(x0, y, xa, y, "encre", 1.4))
+    # Batteries et boucle — le seul trait qui franchit la séparation.
+    bx0, bx1 = 190, 258
+    for (y0, y1) in ((yt0 - 10, yt1 + 10), (yb0 - 10, yb1 + 10)):
+        A(rect_bord(bx0, y0, bx1 - bx0, y1 - y0, "papier", "filet-1"))
+        A(ligne(bx0, y1, bx1, y0, "encre", 1.4))
+    xp1, xp2 = 210, 238
+    A(ligne(xp1, yt1 + 10, xp1, yb0 - 10, "encre", 2))
+    A(ligne(xp2, yt1 + 10, xp2, yb0 - 10, "encre", 2))
+    A(fleche(xp1, 198, "encre", "bas", 7))
+    A(fleche(xp2, 186, "encre", "haut", 7))
+    # Flux à contre-courant.
+    yme, ymn = (yt0 + yt1) / 2, (yb0 + yb1) / 2
+    for x in (100, 380):
+        A(fleche(x, yme, "encre", "gauche", 8))
+    for x in (100, 380):
+        A(fleche(x, ymn, "encre", "droite", 8))
+
+    # Les étiquettes d'air et les nœuds chiffrés.
+    A(texte(x0, yt0 - 20, et_ext["etiquette_amont"].split(" · ")[0], "mono",
+            10, 500, "pivot", tracking=10 * 0.14))
+    A(texte(x0, yb0 - 20, et_neuf["etiquette_amont"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(276, 178, bg["libelle"], "sans", 14, 600, "encre", wdth=112))
+    val = f'{bg["valeur"]}{NN}{bg["unite"]}'.replace(INS, NN)
+    A(texte(276, 195, val, "mono", 11, 500, "pivot", tabulaire=True))
+    A(polyligne([(272, 186), (xp2 + 4, 192)], "filet-1", 1))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="les deux conduits à contre-courant nommés, les deux batteries, "
+              "la boucle seule à traverser avec son chiffre (146 045 kWh/an), "
+              "le bloc atelier et la cote de l'air neuf — gaz, pompe à "
+              "chaleur, circulateur et vase laissés à la planche",
+        bas=f"conduit bas jusqu'à 302 px, marge basse {AH - 312} px")
+
+
+def composer_appui_utilites(donnees):
+    """L'appui du hero (mécanisme `utilites`) : le motif à l'échelle 1.
+
+    Ce qu'il garde : les quatre productions nommées, leurs chaînes arrêtées
+    sur la limite interrompue et ses nœuds d'attente, les trois ateliers
+    nommés, et le nœud chiffré du froid. Ce qu'il laisse : les étiquettes de
+    chaîne, la mention des attentes, les détails — ils vivent sur la planche."""
+    u = donnees["utilites"]
+    elems = {e["cle"]: e for e in u["elements"]}
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    xlim = 360
+    ax0, ax1 = 386, AW - A_MARGE
+    ys_boites = (92, 150, 208, 266)
+    h_boite = 34
+    cles_prod = ("froid", "air-comprime", "ecs", "tgbt")
+    for cle, y0 in zip(cles_prod, ys_boites):
+        e = elems[cle]
+        cy = y0 + h_boite / 2
+        A(texte(A_MARGE, y0 - 8, e["libelle"], "sans", 13, 600, "encre",
+                wdth=112))
+        A(rect_bord(A_MARGE, y0, 126, h_boite, "papier", "filet-1"))
+        A(ligne(A_MARGE + 126, cy, xlim - 6, cy, "encre", 1.4))
+        A(fleche(260, cy, "encre", "droite", 8))
+        A(cercle(xlim, cy, 4.5, "papier", "encre"))
+    # Le nœud chiffré du froid, dans sa boîte.
+    ef = elems["froid"]
+    A(texte(A_MARGE + 12, ys_boites[0] + 22,
+            f'{ef["valeur"]}{NN}{ef["unite"]}', "mono", 11, 500, "pivot",
+            tabulaire=True))
+
+    # La limite du marché — un trait interrompu, nommé.
+    A(ligne_pointillee(xlim, 78, xlim, 312, "encre", 1.4, "5 5"))
+    A(texte(xlim, 66, u["limite"]["libelle"], "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+
+    # Les trois ateliers, au-delà, nommés.
+    cles_ateliers = ("atelier-lit", "atelier-spray", "atelier-rd")
+    for cle, (y0, y1) in zip(cles_ateliers, ((78, 150), (160, 232), (242, 314))):
+        e = elems[cle]
+        A(rect(ax0, y0, ax1 - ax0, y1 - y0, "calcaire"))
+        A(texte(ax0 + 12, y0 + 26, e["libelle"], "sans", 13, 600, "encre",
+                wdth=112))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="quatre productions nommées, chaînes arrêtées sur la limite "
+              "interrompue (nommée) et ses nœuds d'attente, trois ateliers "
+              "nommés au-delà, nœud chiffré du froid (261 kW) — étiquettes de "
+              "chaîne et mention des attentes laissées à la planche",
+        bas=f"ateliers jusqu'à 314 px, marge basse {AH - 314} px")
+
+
+def composer_appui_substitution(donnees):
+    """L'appui du hero (mécanisme `substitution`) : le motif à l'échelle 1.
+
+    Ce qu'il garde : les deux productions (pleine et interrompue) nommées, le
+    point de substitution nommé, les deux conduites, le bâtiment et ses trois
+    émetteurs nommés, le chiffre de la chaudière. Ce qu'il laisse : le parti
+    écarté, les tags de registre, l'étiquette du réseau d'émission."""
+    s = donnees["substitution"]
+    elems = {e["cle"]: e for e in s["elements"]}
+    ch = elems["chaudiere"]
+    rc = elems["reseau-chaleur"]
+    pt = elems["point-substitution"]
+    et = elems["emetteurs"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    # Les deux productions — la pleine en service, l'interrompue à venir.
+    A(texte(A_MARGE, 80, ch["libelle"], "sans", 13, 600, "encre", wdth=112))
+    A(rect_bord(A_MARGE, 88, 126, 52, "papier", "filet-1"))
+    A(texte(A_MARGE + 12, 118, f'{ch["valeur"]}{NN}{ch["unite"]}', "mono",
+            11, 500, "pivot", tabulaire=True))
+    A(texte(A_MARGE, 188, rc["libelle"], "sans", 13, 600, "encre", wdth=112))
+    A(rect_pointille(A_MARGE, 196, 126, 52, "filet-1", 1.4, "5 5"))
+    A(texte(A_MARGE + 63, 226, "À VENIR", "mono", 10, 500, "pivot",
+            ancre="middle", tracking=10 * 0.14))
+
+    # Le point, et les deux raccordements qui y convergent.
+    nx, ny, nr = 258, 164, 9
+    A(polyligne([(150, 114), (nx, 114), (nx, ny - nr - 10)], "encre", 1.4))
+    A(fleche(nx, ny - nr - 2, "encre", "bas", 7))
+    A(ligne_pointillee(150, 222, nx, 222, "encre", 1.4))
+    A(ligne_pointillee(nx, 222, nx, ny + nr + 10, "encre", 1.4))
+    A(fleche(nx, ny + nr + 2, "encre", "haut", 7))
+    A(cercle(nx, ny, nr, "papier", "encre"))
+    A(ligne(nx, ny - nr, nx, ny - nr - 8, "filet-1", 1))
+    # L'étiquette du point, à GAUCHE du cercle — à droite, le bloc bâtiment
+    # peint après elle la recouvrait (mesuré au premier rendu à 552).
+    A(texte(nx - 14, 146, pt["etiquette"], "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+
+    # Les deux conduites, vers le bâtiment et ses émetteurs.
+    bx0, bx1 = 396, AW - A_MARGE
+    A(ligne(nx + nr, 158, bx0 + 14, 158, "encre", 1.4))
+    A(ligne(nx + nr, 170, bx0 + 14, 170, "encre", 1.4))
+    A(fleche(330, 158, "encre", "droite", 7))
+    A(fleche(336, 170, "encre", "gauche", 7))
+    A(rect(bx0, 80, bx1 - bx0, 184, "calcaire"))
+    A(texte(bx0 + 14, 104, et["libelle"], "sans", 13, 600, "encre", wdth=112))
+    A(ligne(bx0 + 14, 122, bx0 + 14, 232, "encre", 1.2))
+    for y0 in (122, 176, 230):
+        emetteur(A, bx0 + 28, y0 - 11, 100, 22)
+        A(ligne(bx0 + 14, y0, bx0 + 28, y0, "encre", 1.2))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="deux productions nommées (pleine, interrompue « à venir ») "
+              "convergeant sur le point de substitution nommé, deux "
+              "conduites, le bâtiment et ses trois émetteurs — le parti "
+              "écarté et l'étiquette du réseau laissés à la planche",
+        bas=f"bâtiment jusqu'à 264 px, marge basse {AH - 264} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
@@ -963,5 +1140,13 @@ def composer_vignette(donnees):
     return composer_vignette_recuperation(donnees)
 
 
+def composer_appui(donnees):
+    if "substitution" in donnees:
+        return composer_appui_substitution(donnees)
+    if "utilites" in donnees:
+        return composer_appui_utilites(donnees)
+    return composer_appui_recuperation(donnees)
+
+
 if __name__ == "__main__":
-    executer(composer, composer_vignette)
+    executer(composer, composer_vignette, composer_appui)

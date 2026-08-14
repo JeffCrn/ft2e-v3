@@ -192,5 +192,12 @@
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
     "bas_du_dessin": "168.00 px, marge basse 32.00 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les six bandes proportionnelles et les deux nœuds chiffrés à l'échelle 1 ; libellés portés par les bandes assez hautes (plus l'enveloppe) — valeurs par poste, détails et note de pied laissés à la planche",
+    "bas_du_dessin": "bandes jusqu'à 328 px, marge basse 40 px"
   }
 }

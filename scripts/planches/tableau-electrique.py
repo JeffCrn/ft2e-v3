@@ -36,9 +36,10 @@ chasses, insécables, double écriture des couleurs, routine d'exécution) vit d
 `_tronc.py`.
 """
 
-from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, mesurer,
-                    replier, echapper, texte, rect, rect_bord, ligne,
-                    polyligne, fleche, entete_style, executer)
+from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
+                    A_MARGE, mesurer, replier, echapper, texte, rect,
+                    rect_bord, ligne, polyligne, fleche, entete_style,
+                    racine_appui, controles_appui, executer)
 
 
 # ── Rythme vertical de la planche ────────────────────────────────────────────
@@ -408,5 +409,125 @@ def composer_vignette(donnees):
     return "\n".join(out) + "\n", controles
 
 
+def composer_appui(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, trois nœuds chiffrés.
+
+    Ce qu'il garde : le bandeau des 48 modules, la descente, la barre,
+    l'échange réseau (deux flèches, légendées sous le bloc), les trois bandes
+    du COP et la dalle — avec 17,5 kWc, COP 4,60 et le régime 30/35 °C. Ce
+    qu'il laisse : les détails de pose des modules, le contenu des autres
+    départs, la phrase de principe et le cartouche (le hero porte sa légende
+    de carte sous le dessin)."""
+    t = donnees["tableau"]
+    elems = {e["cle"]: e for e in t["elements"]}
+    cop = t["cop"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    # ── Le bandeau des 48 modules et son nœud chiffré ────────────────────────
+    at0, at1 = 150, AW - A_MARGE
+    pas = (at1 - at0) / N_MODULES
+    for k in range(N_MODULES):
+        A(rect(at0 + k * pas, 52, pas - 1.8, 20, "clair"))
+    A(ligne(at0, 74, at1, 74, "encre", 1.2))
+    to = elems["toiture"]
+    A(texte(A_MARGE, 62, "Toiture", "sans", 14, 600, "encre", wdth=112))
+    A(texte(A_MARGE, 79, f'{to["valeur"]}{NN}{to["unite"]}', "mono", 11, 500,
+            "pivot", tabulaire=True))
+
+    # ── La descente d'autoconsommation et la barre ───────────────────────────
+    x_cond = (at0 + at1) / 2
+    A(ligne(x_cond, 74, x_cond, 144, "encre", 2))
+    A(fleche(x_cond, 148, "encre", "bas", 8))
+    A(texte(x_cond + 12, 116, t["liaison_autoconsommation"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    xb0, xb1 = 190, 510
+    A(ligne(xb0, 150, xb1, 150, "encre", 2.5))
+    A(texte(356, 172, elems["distribution"]["libelle"], "sans", 14, 600,
+            "encre", wdth=112))
+
+    # ── L'échange réseau : deux flèches, légendées sous le bloc ──────────────
+    A(rect_bord(A_MARGE, 126, 100, 40, "papier", "filet-1"))
+    A(texte(A_MARGE + 10, 142, "Réseau", "sans", 14, 600, "encre", wdth=112))
+    A(texte(A_MARGE + 10, 158, "public", "sans", 14, 600, "encre", wdth=112))
+    A(ligne(A_MARGE + 108, 136, xb0, 136, "encre", 1.2))
+    A(fleche(A_MARGE + 106, 136, "encre", "gauche", 7))
+    A(ligne(A_MARGE + 100, 158, xb0 - 6, 158, "encre", 1.2))
+    A(fleche(xb0 - 4, 158, "encre", "droite", 7))
+    A(fleche(34, 179, "encre", "gauche", 6))
+    A(texte(46, 183, t["echange"]["vers_reseau"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(fleche(40, 195, "encre", "droite", 6))
+    A(texte(46, 199, t["echange"]["du_reseau"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Le départ suivi : les trois bandes du COP, à l'échelle 1 ─────────────
+    u = UCOP                          # 1 kWh = 4 px, comme sur la planche
+    x_elec = 300
+    A(rect(x_elec - u / 2, 151.5, u, 188 - 151.5, "encre"))
+    A(texte(x_elec - 12, 180, cop["entree"], "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    px0, px1, py0, py1 = 240, 400, 188, 248
+    A(rect_bord(px0, py0, px1 - px0, py1 - py0, "papier", "filet-1"))
+    pa = elems["pac"]
+    A(texte(px0 + 14, py0 + 20, "Pompe à chaleur", "sans", 14, 600, "encre",
+            wdth=112))
+    A(texte(px0 + 14, py0 + 38, f'AIR/EAU · {pa["valeur"]}{NN}{pa["unite"]}',
+            "mono", 10, 500, "pivot", tracking=10 * 0.14))
+    A(texte(px0 + 14, py0 + 53, "COP 4,60", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    h_air = cop["part_air"] * u
+    A(rect(A_MARGE, 210, px0 - A_MARGE - 8, h_air, "clair"))
+    A(fleche(px0 - 2, 210 + h_air / 2, "encre", "droite", 9))
+    # Le libellé court — la version longue de l'extraction touchait « COP 4,60 »
+    # dans la boîte voisine, mesuré au premier rendu à 552.
+    A(texte(A_MARGE, 242, "CHALEUR PRISE À L’AIR", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    l_chal = cop["rapport"] * u
+    x_chal = 321
+    A(rect(x_chal - l_chal / 2, py1, l_chal, 296 - py1, "clair"))
+    A(fleche(x_chal, 298, "encre", "bas", 10))
+    A(texte(x_chal + 20, 276, cop["sortie"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── L'autre départ, muet — un bloc calcaire légendé dessous ──────────────
+    A(ligne(470, 151.5, 470, 184, "encre", 1.2))
+    A(fleche(470, 188, "encre", "bas", 7))
+    A(rect(424, 188, AW - A_MARGE - 424, 60, "calcaire"))
+    A(texte(424, 262, "AUTRES DÉPARTS", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── La dalle, sa serpentine, son nœud chiffré ────────────────────────────
+    s_x0, s_x1, s_y0, s_y1 = 190, AW - A_MARGE, 302, 334
+    A(rect(s_x0, s_y0, s_x1 - s_x0, s_y1 - s_y0, "calcaire"))
+    y_h, y_b = s_y0 + 8, s_y1 - 8
+    xs, pas_s = s_x0 + 12, 26
+    pts = [(xs, y_b)]
+    monte = True
+    while xs + pas_s <= s_x1 - 12:
+        pts.append((xs, y_h if monte else y_b))
+        xs += pas_s
+        pts.append((xs, y_h if monte else y_b))
+        monte = not monte
+    pts.append((xs, y_h if monte else y_b))
+    A(polyligne(pts, "encre", 1))
+    pl = elems["plancher"]
+    A(texte(A_MARGE, 314, "Plancher chauffant", "sans", 14, 600, "encre",
+            wdth=112))
+    A(texte(A_MARGE, 331, f'RÉGIME{NN}{pl["valeur"]}{NN}{pl["unite"]}',
+            "mono", 10, 500, "pivot", tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"le motif entier à l'échelle 1 : bandeau des {N_MODULES} "
+              "modules, descente, barre, échange réseau à deux flèches "
+              "légendées, trois bandes du COP (4 / 14,4 / 18,4 px) et dalle — "
+              "trois nœuds chiffrés (17,5 kWc, COP 4,60, régime 30/35 °C) ; "
+              "détails de pose, contenu des départs, phrase et cartouche "
+              "laissés à la planche",
+        bas=f"dalle jusqu'à 334, régime à 331 — marge basse {AH - 334} px")
+
+
 if __name__ == "__main__":
-    executer(composer, composer_vignette)
+    executer(composer, composer_vignette, composer_appui)

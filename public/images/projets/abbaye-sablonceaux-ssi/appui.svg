@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe du zonage de l'alarme incendie : un même déclenchement de détecteur est suivi avant et après travaux. Avant : le SDI d'origine, une seule zone d'alarme sans temporisation, sonne l'évacuation générale des 3 370 m². Après : la centrale de catégorie A, adressable point par point, ne diffuse l'alarme que dans la zone concernée — quatre zones d'alarme dont une provisionnée pour le bâtiment Figuier ; l'aile François-Xavier, hors zonage, passe en détecteurs avertisseurs autonomes de fumée.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">ZONAGE D'ALARME</text>
+  <rect x="396.40" y="27.00" width="14.00" height="7.00" class="c-clair" fill="#99CCCD"/>
+  <text x="528.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">ALARME DIFFUSÉE</text>
+  <text x="24.00" y="64.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AVANT</text>
+  <text x="300.00" y="64.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">APRÈS</text>
+  <rect x="24.00" y="76.00" width="192.00" height="260.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="25.00" y="77.00" width="190.00" height="7.00" class="c-clair" fill="#99CCCD"/>
+  <text x="38.00" y="200.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Évacuation générale</text>
+  <text x="38.00" y="218.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" font-variant-numeric="tabular-nums">3 370 m²</text>
+  <path d="M 228.00 206.00 L 284.00 206.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 292.00 206.00 L 284.00 202.00 L 284.00 210.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="300.00" y="76.00" width="228.00" height="59.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="301.00" y="77.00" width="226.00" height="7.00" class="c-clair" fill="#99CCCD"/>
+  <text x="312.00" y="95.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZONE D'ALARME 1</text>
+  <text x="312.00" y="115.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Moines-Logis</text>
+  <text x="312.00" y="130.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EN ALARME — ÉVACUE</text>
+  <rect x="300.00" y="143.00" width="228.00" height="59.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="312.00" y="162.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZONE D'ALARME 2</text>
+  <text x="312.00" y="182.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Aile Jonas</text>
+  <rect x="300.00" y="210.00" width="228.00" height="59.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="312.00" y="229.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZONE D'ALARME 3</text>
+  <text x="312.00" y="249.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bâtiment communautaire</text>
+  <rect x="300.00" y="277.00" width="228.00" height="59.00" class="c-papier s-filet-2" fill="#F7F9FA" stroke="#00393A29" stroke-width="1"/>
+  <text x="312.00" y="296.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZONE D'ALARME 4</text>
+  <text x="516.00" y="296.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">PROVISIONNÉE</text>
+  <text x="312.00" y="316.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bâtiment Figuier</text>
+</svg>

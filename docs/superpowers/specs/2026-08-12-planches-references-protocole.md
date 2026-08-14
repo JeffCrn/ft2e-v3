@@ -1,6 +1,6 @@
 # Protocole — planche de schéma de principe pour une fiche référence FT2E
 
-*Révision 4 (2026-08-13). Le corps de ce document se colle tel quel en début de session
+*Révision 5 (2026-08-14). Le corps de ce document se colle tel quel en début de session
 neuve : rien d'autre n'y est supposé connu. Il est versionné ici parce qu'il pilote la
 production de vingt-deux planches restantes, et qu'un protocole qui vit hors du dépôt ne
 survit pas à un nettoyage de répertoire de travail.*
@@ -29,7 +29,8 @@ retomber sept défauts de géométrie sur un raisonnement par ailleurs juste.
   chaque arbitrage dans `a_valider_ft2e`. C'est la pièce que FT2E relit, et c'est aussi
   la source du repli de lecture que le site sert sous 1024 px.
 - **Le dépôt compose les dessins**, par `scripts/planches/<archetype>.py` : géométrie
-  calculée, jamais tapée, et bloc `controles` recalculé à chaque exécution.
+  calculée, jamais tapée, et bloc `controles` recalculé à chaque exécution. Depuis la
+  révision 5, chaque compositeur écrit les TROIS dessins — planche, vignette, appui.
 - **Si l'archétype n'a pas encore son module**, la session écrit aussi le SVG en suivant
   le gabarit ci-dessous ; sa géométrie est ensuite portée dans un module, et la planche
   régénérée pour vérifier qu'elle est reproductible.
@@ -76,6 +77,31 @@ fiche ; les répéter alourdit sans rien démontrer. Trois règles en découlent
 
 ---
 
+## L'appui du hero — ce qui a changé en révision 5
+
+Le hero de l'accueil met en vedette la fiche `en_avant` la plus récente. Quand cette
+fiche porte une planche, ni la planche ni la vignette ne se transposent dans sa colonne
+média de ~552 px — et pour la même raison arithmétique qui gouverne tout ce protocole :
+la planche (composée pour 1152) y tombe à l'échelle 0,48 (mono de 10 px rendu à 4,8), la
+vignette (composée pour 274-296) grossie à 1,84 épaissit tous les filets de 1 px. Un
+dessin ne se recadre pas et ne s'agrandit pas : il se compose à la taille où il est lu.
+
+D'où un **cinquième fichier, `appui.svg`** : une troisième composition, tirée de la même
+extraction par le même compositeur, dans un repère de **552 × 368** (3:2 exact, échelle
+de rendu 1,0). Densité intermédiaire : le motif de l'archétype entier, deux ou trois
+nœuds chiffrés, le surtitre court (`vignette_surtitre`) — **sans phrase de principe ni
+cartouche**, le hero portant déjà sa légende de carte sous le dessin. Racine `role="img"`
++ `aria-label` (le principe, jamais l'ouvrage). Corps de la charte tels quels, rien sous
+10. Le site l'inline sans duotone ni équerres, et le remplace sous 640 px par le média de
+repli du hero — à 342 px aucun appui ne se lit.
+
+Le tronc (`_tronc.py` : `racine_appui`, `controles_appui`, gabarit `AW × AH`) et les cinq
+compositeurs le produisent déjà ; `verser.py` refuse un dossier qui ne le porte pas.
+**L'appui se contrôle à 552 px**, dans une carte de la largeur de la colonne du hero —
+jamais en pleine page.
+
+---
+
 ## Contexte
 
 FT2E est un bureau d'études techniques de La Rochelle (CVC, électricité CFO/CFA, SSI,
@@ -98,13 +124,14 @@ Ta tâche : produire cette planche pour la fiche que je vais te désigner.
 
 ## Ce que tu produis
 
-Un dossier nommé d'après le slug de la fiche, contenant **exactement quatre fichiers** :
+Un dossier nommé d'après le slug de la fiche, contenant **exactement cinq fichiers** :
 
 ```
 <slug>/
 ├── planche.json     l'extraction — la pièce que FT2E relit, et la source du repli de lecture
 ├── planche.svg      la planche de fiche, viewBox 0 0 1200 800
 ├── vignette.svg     la vignette de carte, viewBox 0 0 300 200
+├── appui.svg        l'appui du hero de l'accueil, viewBox 0 0 552 368 (révision 5)
 └── planche.png      rendu de contrôle et source de l'og:image, 2400 × 1600
 ```
 
@@ -540,12 +567,14 @@ as oublié de les mettre.
 - [ ] `vignette_surtitre` rempli, trois mots au plus, dans sa casse d'affichage.
 - [ ] `vignette.svg` composée à 300 × 200, `aria-hidden` à la source, rien sous 9 px, rien qui touche un bord.
 - [ ] Le bloc d'archétype du JSON porte libellé, valeur, unité et ordre pour chaque élément dessiné.
-- [ ] Quatre fichiers — `planche.json`, `planche.svg`, `vignette.svg`, `planche.png` — dans un dossier `<slug>/`.
+- [ ] Cinq fichiers — `planche.json`, `planche.svg`, `vignette.svg`, `appui.svg`, `planche.png` — dans un dossier `<slug>/`.
+- [ ] `appui.svg` composé à 552 × 368 (3:2 exact), surtitre court, sans phrase de principe ni cartouche, rien sous 10 px.
 
 **Rendu**
 - [ ] Le PNG 2400 × 1600 a été rendu **et regardé**.
 - [ ] Le rendu à **1152 × 768** a été regardé, et toute étiquette illisible à cette taille a été traitée.
 - [ ] La vignette a été regardée **dans une carte de 296 px et de 274 px**, pas isolée.
+- [ ] L'appui a été regardé **à 552 px** — la largeur de la colonne média du hero.
 
 ---
 

@@ -148,5 +148,12 @@
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
     "motif": "1 bloc AVANT contre 3 zones actives — la zone provisionnée et le hors zonage sont laissés à la planche",
     "bas_du_dessin": "176 px, marge basse 24 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "1 bloc AVANT (barre d'alarme sur tout, 3 370 m² évacués) contre 4 zones APRÈS dont la provisionnée, barre et mention sur la seule zone en alarme, légende en tête — événement, systèmes et hors zonage laissés à la planche",
+    "bas_du_dessin": "pile de zones jusqu'à 336 px, marge basse 32 px"
   }
 }

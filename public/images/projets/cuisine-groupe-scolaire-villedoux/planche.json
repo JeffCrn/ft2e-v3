@@ -175,5 +175,12 @@
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
     "motif": "la ligne de toiture percée, trois locaux, cinq conduits — deux pleins qui montent, trois interrompus — et le nœud chiffré de la hotte ; CTA, batterie, cotes et mentions sont laissés à la planche",
     "bas_du_dessin": "nœud de la hotte à y 182, marge basse 18 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "la ligne de toiture percée, trois locaux nommés, cinq conduits proportionnels (24 px pour 7 500 m³/h) — deux pleins cotés qui montent, trois interrompus dont la compensation supposée coupée — CTA, voyant, mentions d'absence et ligne de pied laissés à la planche",
+    "bas_du_dessin": "locaux jusqu'à 300 px, marge basse 68 px"
   }
 }

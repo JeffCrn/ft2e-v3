@@ -176,5 +176,12 @@
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
     "motif": "quatre chaînes arrêtées sur la limite interrompue, leurs nœuds d'attente, trois blocs au-delà — libellés de production et noms d'atelier laissés à la planche",
     "bas_du_dessin": "nœud du froid glycolé à y 180, marge basse 20 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "quatre productions nommées, chaînes arrêtées sur la limite interrompue (nommée) et ses nœuds d'attente, trois ateliers nommés au-delà, nœud chiffré du froid (261 kW) — étiquettes de chaîne et mention des attentes laissées à la planche",
+    "bas_du_dessin": "ateliers jusqu'à 314 px, marge basse 54 px"
   }
 }
