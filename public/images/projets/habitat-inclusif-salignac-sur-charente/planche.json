@@ -1,0 +1,171 @@
+{
+  "fiche": "habitat-inclusif-salignac-sur-charente",
+  "archetype": "zonage-ssi",
+  "archetype_motif": "La thèse de la fiche est un découpage : une enveloppe continue, montée d'un seul tenant, que le permis partage en deux régimes réglementaires — les quatorze logements sous RE2020, l'espace commun resté sous RT2012. Le mécanisme `partage` suit cette limite : elle ne correspond à aucun mur, et elle commande pourtant le niveau d'exigence de la même paroi (0,8 mesuré d'un côté, 1,7 par défaut de l'autre) et le parti des machines (quatorze productions individuelles contre une production collective). C'est la famille du zonage — un découpage qui commande les exigences de part et d'autre d'une limite — avec un troisième mécanisme, distinct de la diffusion d'alarme (Sablonceaux) et du transfert horizontal (Coulonges) ; aucun autre archétype de la liste fermée ne dessine un découpage.",
+  "surtitre": "SCHÉMA DE PRINCIPE · PARTAGE RÉGLEMENTAIRE DE L'ENVELOPPE",
+  "titre": "Habitat inclusif",
+  "sous_titre": "Une seule enveloppe, deux régimes thermiques",
+  "cartouche_legende": "SALIGNAC-SUR-CHARENTE · 641 m² · 2023",
+  "aria_label": "Schéma de principe du partage réglementaire : quatorze studios de plain-pied et un espace commun sous une même enveloppe, montée d'un seul tenant. La limite des deux calculs ne correspond à aucun mur ; elle commande pourtant l'étanchéité à l'air de la même paroi — tenue à 0,8 m³/(h·m²) sous 4 Pa et prouvée par une mesure côté logements (RE2020), laissée à la valeur par défaut de 1,7 sans test côté espace commun (RT2012) — et le parti des machines : quatorze productions individuelles de chauffage et d'eau chaude d'un côté, une production collective de l'autre. La même limite commande l'incendie : détecteurs avertisseurs autonomes de fumée aux logements, équipement d'alarme de type 4 à l'espace commun classé établissement recevant du public.",
+  "partage": {
+    "entete": "QUATORZE STUDIOS DE PLAIN-PIED ET UN ESPACE COMMUN SOUS UNE MÊME ENVELOPPE",
+    "limite_libelle": "LA LIMITE DES DEUX CALCULS — DANS UNE MAÇONNERIE MONTÉE D'UN SEUL TENANT",
+    "tag_gauche": "LES QUATORZE LOGEMENTS · RE2020",
+    "tag_gauche_detail": "SIX INDICATEURS, DONT DEUX DE CARBONE",
+    "tag_droite": "L'ESPACE COMMUN · RT2012",
+    "tag_droite_detail": [
+      "USAGE « HÉBERGEMENT »",
+      "TROIS EXIGENCES"
+    ],
+    "rangees": 2,
+    "par_rangee": 7,
+    "etancheite_gauche": "ÉTANCHÉITÉ TENUE À 0,8 m³/(h·m²) SOUS 4 Pa — MESURE EN FIN DE CHANTIER",
+    "etancheite_droite": "VALEUR PAR DÉFAUT 1,7 — SANS TEST",
+    "production_droite_lignes": [
+      "POMPE À CHALEUR",
+      "À DÉTENTE DIRECTE",
+      "BLOQUÉE EN CHAUD SEUL",
+      "POUR LA CONFORMITÉ RT2012",
+      "CASSETTES EN FAUX PLAFOND"
+    ],
+    "mention_separation": [
+      "UNE TROISIÈME RÈGLE SUIT LA MÊME LIMITE — AUX LOGEMENTS, LE DÉTECTEUR AVERTISSEUR AUTONOME DE FUMÉE (DAAF)",
+      "À L'ESPACE COMMUN, CLASSÉ ERP DE TYPE L EN CINQUIÈME CATÉGORIE, L'ÉQUIPEMENT D'ALARME DE TYPE 4"
+    ],
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "logements",
+        "libelle": "Les quatorze logements",
+        "valeur": "488,81",
+        "unite": "m²",
+        "mention": "SURFACE HABITABLE",
+        "detail": [
+          "RE2020 · SIX INDICATEURS, DONT DEUX DE CARBONE"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "logements-etancheite",
+        "libelle": "Une étanchéité tenue et prouvée",
+        "valeur": "0,8",
+        "unite": "m³/(h·m²)",
+        "detail": [
+          "SOUS 4 Pa · MESURE EN FIN DE CHANTIER"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "logements-production",
+        "libelle": "Quatorze productions individuelles",
+        "detail": [
+          "PANNEAU RAYONNANT · CHAUFFE-EAU THERMODYNAMIQUE DE 100 L PAR STUDIO"
+        ]
+      },
+      {
+        "ordre": 4,
+        "cle": "commun",
+        "libelle": "L'espace commun",
+        "valeur": "152,16",
+        "unite": "m²",
+        "mention": "SURFACE UTILE",
+        "detail": [
+          "RT2012, USAGE « HÉBERGEMENT » · TROIS EXIGENCES"
+        ]
+      },
+      {
+        "ordre": 5,
+        "cle": "commun-etancheite",
+        "libelle": "Une étanchéité à la valeur par défaut",
+        "valeur": "1,7",
+        "unite": "m³/(h·m²)",
+        "detail": [
+          "SANS TEST"
+        ]
+      },
+      {
+        "ordre": 6,
+        "cle": "commun-production",
+        "libelle": "Une production collective",
+        "detail": [
+          "POMPE À CHALEUR À DÉTENTE DIRECTE, BLOQUÉE EN CHAUD · CASSETTES EN FAUX PLAFOND"
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Une enveloppe continue, deux calculs, deux jeux d'indicateurs qui ne se recouvrent pas.",
+  "vignette_surtitre": "DEUX RÉGIMES THERMIQUES",
+  "a_valider_ft2e": [
+    {
+      "objet": "La position de la limite, proportionnée aux surfaces",
+      "la_source_affirme": "488,81 m² habitables côté logements, 152,16 m² utiles côté espace commun ; le frontmatter les additionne en 641 m².",
+      "le_dessin_suppose": "Que les deux surfaces, relevées dans deux référentiels différents (habitable / utile), peuvent se proportionner sur une même droite — la limite est posée à 76,3 % de la largeur. Dire si ce rapprochement est admissible ou si la limite doit rester non cotée."
+    },
+    {
+      "objet": "Le compte des cellules par rangée",
+      "la_source_affirme": "« Deux rangées de sept logements de part et d'autre d'une circulation » — une phrase du récit, pas un plan.",
+      "le_dessin_suppose": "Deux rangées de sept cellules identiques, sans circulation dessinée : le dessin reprend le compte, jamais l'implantation. Dire si même ce compte par rangée doit s'abstraire (quatorze cellules en grille neutre) au titre de la règle 4."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2023 (champ annee), chantier ouvert le 14 novembre 2024, aucune réception prononcée (statut en cours).",
+      "le_dessin_suppose": "Que le cartouche porte 2023, millésime d'ouverture de l'affaire — le seul acquis sur pièce tant que la réception n'est pas prononcée. Dire si le millésime du chantier (2024) est préférable."
+    },
+    {
+      "objet": "La phrase de principe, coupée",
+      "la_source_affirme": "« Une enveloppe continue, deux calculs, deux jeux d'indicateurs qui ne se recouvrent pas : six indicateurs, dont deux de carbone, d'un côté ; trois exigences de l'autre. »",
+      "le_dessin_suppose": "Que la première proposition suffit (88 signes) — le décompte des indicateurs est repris dans les étiquettes de zone. Dire si la coupe est admise."
+    },
+    {
+      "objet": "La graisse du trait d'enveloppe",
+      "la_source_affirme": "Deux niveaux d'exigence d'étanchéité sur une même maçonnerie : 0,8 tenu et mesuré côté logements, 1,7 par défaut sans test côté commun — sans hiérarchie visuelle prescrite.",
+      "le_dessin_suppose": "Que l'exigence se code par la graisse du trait d'enveloppe (fort côté mesuré, fin côté par défaut), doublée des deux mentions sous le dessin. Valider cette grammaire — elle resservira si d'autres planches opposent une exigence prouvée à une exigence réputée."
+    },
+    {
+      "objet": "L'espace commun dessiné d'un seul bloc",
+      "la_source_affirme": "L'espace commun réunit une salle commune, une buanderie, une lingerie et un bureau ; seule la salle commune reçoit la centrale double flux, le reste est en simple flux.",
+      "le_dessin_suppose": "Un bloc unique, sans sous-découpage ni centrale de traitement d'air — le dessin oppose les deux modes de production de chauffage, pas les ventilations. Dire si la centrale double flux de la salle commune doit y figurer."
+    },
+    {
+      "objet": "Le rattachement réglementaire affiché de l'espace commun",
+      "la_source_affirme": "L'espace commun est à la fois sous RT2012 (usage « hébergement ») et classé ERP de type L, cinquième catégorie — deux rattachements distincts, thermique et incendie.",
+      "le_dessin_suppose": "Que l'étiquette de zone porte le rattachement thermique (RT2012 « hébergement ») et que le classement ERP descend dans la ligne d'incendie en pied de dessin. Dire si cette hiérarchie convient."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 23-095 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Montants : les quatre postes chiffrés à 272 000 € HT et l'opération portée à 1 200 000 € HT.",
+    "Noms de tiers : la maîtrise d'ouvrage, la fédération destinataire — jusque dans le nom d'ouvrage « Habitat inclusif ADMR », le titre s'arrête à « Habitat inclusif » —, l'architecte et l'architecte des Bâtiments de France avec son avis.",
+    "Toute géométrie d'ouvrage : ni implantation, ni circulation, ni orientation — les cellules codent le nombre de studios, jamais leur position ; la limite du dessin est topologique.",
+    "Les indicateurs et marges que la fiche porte déjà : Cep,nr 84,0 pour 88,2, Bbio −50,3 % et −5,2 %, degrés-heures, Tic 28,6 °C pour 33,7, COP 2,66 et 4,29, 405 m³/h, bilans électriques (119 kVA, 42 kW, 36 kVA, IRVE) — matière du texte, pas du dessin.",
+    "Le confort d'été — troisième lecture du partage (degrés-heures d'un côté, température intérieure conventionnelle de l'autre) : deux unités sans géométrie commune, laissée au texte.",
+    "Les jalons d'affaire et de chantier (permis du 15 mai 2024 et son modificatif, ouverture du 14 novembre 2024, Consuel, essais de décembre 2025, mises en service de janvier 2026) — matière d'une chronologie d'affaire.",
+    "Les arbitrages d'usage inclusif (barres de relèvement, cercles de giration de 1,50 m, hauteurs d'usage…) — un inventaire de conception, pas un mécanisme dessinable."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "une seule enveloppe fermée d'un trait continu qui change de graisse à la limite (3.5 côté mesuré, 1.25 côté par défaut) ; la limite en trait interrompu — aucun mur ne la porte ; 14 cellules marquées chacune de sa production contre 1 boîte collective — la géométrie porte le partage, aucun chiffre de la fiche n'est répété",
+    "partage": "limite à x 885.7 = 56 + 1088 x 488.81 / (488.81 + 152.16) — 76.3 % / 23.7 % : la position code les deux surfaces de la fiche",
+    "cellules": "2 rangées de 7 cellules de 104.2 x 64 px — le compte de la fiche, jamais l'implantation (règle 4)",
+    "bas_du_dessin": "enveloppe jusqu'à 556, mentions d'étanchéité à 588, incendie à 624–640, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 334 x 30 px = 10020 px², soit 1.04 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "l'enveloppe au trait double, la limite interrompue au partage des surfaces (76 %), 14 cellules contre 1 boîte, les deux régimes nommés et les deux niveaux d'étanchéité — étiquettes, productions et incendie sont laissés à la planche",
+    "bas_du_dessin": "nœuds d'étanchéité à y 184, marge basse 16 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "l'enveloppe au trait double fermant les deux zones, la limite interrompue étiquetée au partage des surfaces (76 %), 14 cellules marquées et leur légende contre la zone commune nommée, les deux niveaux d'étanchéité en pied — exigences, cotes de surface, boîte machine et incendie laissés à la planche",
+    "bas_du_dessin": "mentions d'étanchéité à y 322, marge basse 46 px"
+  }
+}

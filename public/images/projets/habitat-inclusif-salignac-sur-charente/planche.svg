@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe du partage réglementaire : quatorze studios de plain-pied et un espace commun sous une même enveloppe, montée d'un seul tenant. La limite des deux calculs ne correspond à aucun mur ; elle commande pourtant l'étanchéité à l'air de la même paroi — tenue à 0,8 m³/(h·m²) sous 4 Pa et prouvée par une mesure côté logements (RE2020), laissée à la valeur par défaut de 1,7 sans test côté espace commun (RT2012) — et le parti des machines : quatorze productions individuelles de chauffage et d'eau chaude d'un côté, une production collective de l'autre. La même limite commande l'incendie : détecteurs avertisseurs autonomes de fumée aux logements, équipement d'alarme de type 4 à l'espace commun classé établissement recevant du public.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · PARTAGE RÉGLEMENTAIRE DE L'ENVELOPPE</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Habitat inclusif</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Une seule enveloppe, deux régimes thermiques</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">QUATORZE STUDIOS DE PLAIN-PIED ET UN ESPACE COMMUN SOUS UNE MÊME ENVELOPPE</text>
+  <text x="875.72" y="232.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LA LIMITE DES DEUX CALCULS — DANS UNE MAÇONNERIE MONTÉE D'UN SEUL TENANT</text>
+  <path d="M 885.72 238.00 L 885.72 250.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 885.72 258.00 L 885.72 550.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.0" stroke-dasharray="8 6"/>
+  <path d="M 885.72 252.00 L 56.00 252.00 L 56.00 556.00 L 885.72 556.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3.5"/>
+  <path d="M 885.72 252.00 L 1144.00 252.00 L 1144.00 556.00 L 885.72 556.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.25"/>
+  <text x="76.00" y="278.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES QUATORZE LOGEMENTS · RE2020</text>
+  <text x="76.00" y="294.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SIX INDICATEURS, DONT DEUX DE CARBONE</text>
+  <rect x="76.00" y="312.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="86.00" y="359.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="190.25" y="312.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="200.25" y="359.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="304.49" y="312.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="314.49" y="359.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="418.74" y="312.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="428.74" y="359.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="532.98" y="312.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="542.98" y="359.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="647.23" y="312.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="657.23" y="359.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="761.47" y="312.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="771.47" y="359.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="76.00" y="388.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="86.00" y="435.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="190.25" y="388.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="200.25" y="435.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="304.49" y="388.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="314.49" y="435.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="418.74" y="388.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="428.74" y="435.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="532.98" y="388.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="542.98" y="435.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="647.23" y="388.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="657.23" y="435.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="761.47" y="388.00" width="104.25" height="64.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="771.47" y="435.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="76.00" y="480.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <text x="91.00" y="488.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Quatorze productions individuelles</text>
+  <text x="76.00" y="506.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PANNEAU RAYONNANT · CHAUFFE-EAU THERMODYNAMIQUE DE 100 L PAR STUDIO</text>
+  <text x="76.00" y="536.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">488,81 m² · SURFACE HABITABLE</text>
+  <text x="899.72" y="278.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L'ESPACE COMMUN · RT2012</text>
+  <text x="899.72" y="294.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">USAGE « HÉBERGEMENT »</text>
+  <text x="899.72" y="310.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TROIS EXIGENCES</text>
+  <rect x="898.00" y="330.00" width="238.00" height="114.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="912.00" y="356.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Une production collective</text>
+  <text x="912.00" y="374.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">POMPE À CHALEUR</text>
+  <text x="912.00" y="388.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">À DÉTENTE DIRECTE</text>
+  <text x="912.00" y="402.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">BLOQUÉE EN CHAUD SEUL</text>
+  <text x="912.00" y="416.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">POUR LA CONFORMITÉ RT2012</text>
+  <text x="912.00" y="430.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CASSETTES EN FAUX PLAFOND</text>
+  <text x="1130.00" y="536.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end" font-variant-numeric="tabular-nums">152,16 m² · SURFACE UTILE</text>
+  <path d="M 60.00 561.00 L 60.00 576.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="56.00" y="588.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ÉTANCHÉITÉ TENUE À 0,8 m³/(h·m²) SOUS 4 Pa — MESURE EN FIN DE CHANTIER</text>
+  <path d="M 1140.00 561.00 L 1140.00 576.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="1144.00" y="588.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">VALEUR PAR DÉFAUT 1,7 — SANS TEST</text>
+  <text x="56.00" y="624.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UNE TROISIÈME RÈGLE SUIT LA MÊME LIMITE — AUX LOGEMENTS, LE DÉTECTEUR AVERTISSEUR AUTONOME DE FUMÉE (DAAF)</text>
+  <text x="56.00" y="640.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">À L'ESPACE COMMUN, CLASSÉ ERP DE TYPE L EN CINQUIÈME CATÉGORIE, L'ÉQUIPEMENT D'ALARME DE TYPE 4</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Une enveloppe continue, deux calculs, deux jeux d'indicateurs qui ne se recouvrent pas.</text>
+  <rect x="56.00" y="714.00" width="334.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SALIGNAC-SUR-CHARENTE · 641 m² · 2023</text>
+</svg>

@@ -35,8 +35,8 @@ de dépôt, pas de session.
 
 from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH, A_MARGE,
                     JETON, mesurer, echapper, texte, rect, rect_bord, ligne,
-                    fleche, cercle, entete_style, replier, racine_appui,
-                    controles_appui, executer)
+                    polyligne, fleche, cercle, entete_style, replier,
+                    racine_appui, controles_appui, executer)
 
 
 # ── Rythme vertical de la planche ────────────────────────────────────────────
@@ -801,6 +801,398 @@ def composer_appui_transfert(donnees):
             f"marge basse {AH - 332} px")
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+# Mécanisme `partage` — habitat inclusif de Salignac-sur-Charente (2026-08-14)
+#
+# Même archétype (un découpage commande les exigences), troisième démonstration :
+# à Sablonceaux la géométrie montrait où l'alarme se diffuse, à Coulonges où vont
+# les personnes ; ici elle montre ce qu'une limite purement réglementaire impose
+# à une enveloppe montée d'un seul tenant. Une seule enveloppe fermée d'un trait
+# continu, qui change de graisse à la limite (l'étanchéité tenue et mesurée d'un
+# côté, la valeur par défaut de l'autre) ; la limite en trait interrompu — aucun
+# mur ne la porte ; quatorze cellules marquées chacune de sa production contre
+# une seule boîte collective. La position de la limite est CALCULÉE depuis les
+# deux surfaces de l'extraction — la géométrie code le partage, jamais un plan.
+# Le dispatch se fait sur le bloc de l'extraction (`partage`), comme `transfert`.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── Rythme vertical de la planche `partage` ──────────────────────────────────
+P_Y_ENTETE = 190
+P_Y_LIMITE = 232               # étiquette de la limite, au-dessus de l'enveloppe
+P_E_Y0, P_E_Y1 = 252, 556      # l'enveloppe
+P_E_X0, P_E_X1 = 56, 1144
+P_TRAIT_FORT, P_TRAIT_FIN = 3.5, 1.25
+P_PAD = 20
+P_Y_TAG = 278                  # étiquettes de zone, à l'intérieur
+P_Y_CELL = 312                 # première rangée de cellules
+P_H_CELL, P_ECART_CELL = 64, 12
+P_Y_PROD = 488                 # légende des productions individuelles
+P_Y_COTE = 536                 # cotes de surface, en pied de zone
+P_BOX = (898, 330, 238)        # boîte de la production collective (x, y, w)
+P_Y_ETANCH = 588               # mentions d'étanchéité, sous l'enveloppe
+P_Y_NOTES = (624, 640)         # la ligne d'incendie
+P_Y_PHRASE = 688
+P_Y_CARTOUCHE = 714
+P_H_CARTOUCHE = 30
+P_MARQUE = 7                   # la marque carrée d'une production individuelle
+
+
+def _surfaces_partage(elems):
+    """Le partage se calcule depuis les deux surfaces littérales de
+    l'extraction — « 488,81 » → 488.81. Jamais une position tapée."""
+    def _f(v):
+        return float(v.replace(" ", "").replace(" ", "")
+                     .replace(" ", "").replace(",", "."))
+    g = _f(elems["logements"]["valeur"])
+    d = _f(elems["commun"]["valeur"])
+    return g, d, g / (g + d)
+
+
+def _limite(A, x, y0, y1, epaisseur=2.0, motif="8 6"):
+    """La limite réglementaire : un trait interrompu — aucun mur ne la porte."""
+    A(f'  <path d="M {x:.2f} {y0:.2f} L {x:.2f} {y1:.2f}" fill="none" '
+      f'class="s-encre" stroke="{JETON["encre"]}" '
+      f'stroke-width="{epaisseur}" stroke-dasharray="{motif}"/>')
+
+
+def _enveloppe(A, x0, x1, x_lim, y0, y1, fort, fin):
+    """L'enveloppe : un contour unique dont le trait change de graisse à la
+    limite — même paroi, deux niveaux d'exigence. Toujours doublée des deux
+    mentions d'étanchéité (la graisse seule ne porte jamais)."""
+    A(polyligne([(x_lim, y0), (x0, y0), (x0, y1), (x_lim, y1)], "encre", fort))
+    A(polyligne([(x_lim, y0), (x1, y0), (x1, y1), (x_lim, y1)], "encre", fin))
+
+
+def composer_partage(donnees):
+    p = donnees["partage"]
+    elems = {e["cle"]: e for e in p["elements"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    s_g, s_d, frac = _surfaces_partage(elems)
+    x_lim = P_E_X0 + (P_E_X1 - P_E_X0) * frac
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête du schéma ────────────────────────────────────────────────────
+    controler("en-tête schéma", p["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, P_Y_ENTETE, p["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── La limite : son étiquette, son tick, son trait interrompu ────────────
+    controler("étiquette de la limite", p["limite_libelle"], 10, "mono",
+              x_lim - 10 - MARGE, 10 * 0.14)
+    A(texte(x_lim - 10, P_Y_LIMITE, p["limite_libelle"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+    A(ligne(x_lim, P_Y_LIMITE + 6, x_lim, P_E_Y0 - 2, "encre", 1.0))
+    _limite(A, x_lim, P_E_Y0 + 6, P_E_Y1 - 6)
+
+    # ── L'enveloppe : un trait, deux graisses ────────────────────────────────
+    _enveloppe(A, P_E_X0, P_E_X1, x_lim, P_E_Y0, P_E_Y1,
+               P_TRAIT_FORT, P_TRAIT_FIN)
+
+    # ── Zone gauche : les quatorze logements ─────────────────────────────────
+    gx = P_E_X0 + P_PAD
+    controler("tag gauche", p["tag_gauche"], 10, "mono",
+              x_lim - P_PAD - gx, 10 * 0.14)
+    A(texte(gx, P_Y_TAG, p["tag_gauche"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    controler("tag gauche détail", p["tag_gauche_detail"], 10, "mono",
+              x_lim - P_PAD - gx, 10 * 0.14)
+    A(texte(gx, P_Y_TAG + 16, p["tag_gauche_detail"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # Les cellules : le compte de la fiche (2 x 7), jamais l'implantation.
+    par_rangee, rangees = p["par_rangee"], p["rangees"]
+    span = (x_lim - P_PAD) - gx
+    ecart = 10
+    w_cell = (span - (par_rangee - 1) * ecart) / par_rangee
+    for r in range(rangees):
+        y = P_Y_CELL + r * (P_H_CELL + P_ECART_CELL)
+        for c in range(par_rangee):
+            x = gx + c * (w_cell + ecart)
+            A(rect_bord(x, y, w_cell, P_H_CELL, "calcaire", "filet-1"))
+            A(rect(x + 10, y + P_H_CELL - 17, P_MARQUE, P_MARQUE, "encre"))
+
+    # La légende des productions : la marque carrée reprise devant le libellé.
+    prod_g = elems["logements-production"]
+    A(rect(gx, P_Y_PROD - P_MARQUE - 1, P_MARQUE, P_MARQUE, "encre"))
+    controler("production gauche", prod_g["libelle"], 15, "sans-600",
+              span - 16)
+    A(texte(gx + P_MARQUE + 8, P_Y_PROD, prod_g["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    controler("production gauche détail", prod_g["detail"][0], 10, "mono",
+              span, 10 * 0.14)
+    A(texte(gx, P_Y_PROD + 18, prod_g["detail"][0], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # La cote de surface, en pied de zone.
+    cote_g = (f'{elems["logements"]["valeur"]}{NN}{elems["logements"]["unite"]}'
+              f' · {elems["logements"]["mention"]}')
+    controler("cote gauche", cote_g, 10, "mono", 400, 10 * 0.14)
+    A(texte(gx, P_Y_COTE, cote_g, "mono", 10, 500, "pivot",
+            tracking=10 * 0.14, tabulaire=True))
+
+    # ── Zone droite : l'espace commun ────────────────────────────────────────
+    dx = x_lim + 14
+    controler("tag droite", p["tag_droite"], 10, "mono",
+              P_E_X1 - 14 - dx, 10 * 0.14)
+    A(texte(dx, P_Y_TAG, p["tag_droite"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    for k, l in enumerate(p["tag_droite_detail"]):
+        controler(f"tag droite détail {k + 1}", l, 10, "mono",
+                  P_E_X1 - 14 - dx, 10 * 0.14)
+        A(texte(dx, P_Y_TAG + 16 + k * 16, l, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # La production collective : une seule boîte — contre quatorze marques.
+    prod_d = elems["commun-production"]
+    bx, by, bw = P_BOX
+    lignes_prod = p["production_droite_lignes"]
+    bh = 26 + 18 + len(lignes_prod) * 14
+    A(rect_bord(bx, by, bw, bh, "papier", "filet-1"))
+    controler("production droite", prod_d["libelle"], 15, "sans-600", bw - 28)
+    A(texte(bx + 14, by + 26, prod_d["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    for k, l in enumerate(lignes_prod):
+        controler(f"production droite l.{k + 1}", l, 10, "mono", bw - 28,
+                  10 * 0.14)
+        A(texte(bx + 14, by + 44 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    cote_d = (f'{elems["commun"]["valeur"]}{NN}{elems["commun"]["unite"]}'
+              f' · {elems["commun"]["mention"]}')
+    controler("cote droite", cote_d, 10, "mono", P_E_X1 - 14 - dx, 10 * 0.14)
+    A(texte(P_E_X1 - 14, P_Y_COTE, cote_d, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14, tabulaire=True))
+
+    # ── Les deux mentions d'étanchéité, sous leur segment d'enveloppe ────────
+    A(ligne(P_E_X0 + 4, P_E_Y1 + 5, P_E_X0 + 4, P_Y_ETANCH - 12, "encre", 1.0))
+    controler("étanchéité gauche", p["etancheite_gauche"], 10, "mono",
+              x_lim - MARGE, 10 * 0.14)
+    A(texte(P_E_X0, P_Y_ETANCH, p["etancheite_gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(ligne(P_E_X1 - 4, P_E_Y1 + 5, P_E_X1 - 4, P_Y_ETANCH - 12, "encre", 1.0))
+    controler("étanchéité droite", p["etancheite_droite"], 10, "mono",
+              P_E_X1 - x_lim, 10 * 0.14)
+    A(texte(P_E_X1, P_Y_ETANCH, p["etancheite_droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── La ligne d'incendie : la même limite, une troisième fois ─────────────
+    for l, y in zip(p["mention_separation"], P_Y_NOTES):
+        controler("ligne d'incendie", l, 10, "mono", UTILE, 10 * 0.14)
+        A(texte(MARGE, y, l, "mono", 10, 500, "pivot", tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    controler("phrase de principe", donnees["phrase_principe"], 17,
+              "sans-400", UTILE)
+    A(texte(MARGE, P_Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, P_Y_CARTOUCHE, largeur, P_H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, P_Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "une seule enveloppe fermée d'un trait continu qui "
+                         f"change de graisse à la limite ({P_TRAIT_FORT} côté "
+                         f"mesuré, {P_TRAIT_FIN} côté par défaut) ; la limite "
+                         "en trait interrompu — aucun mur ne la porte ; "
+                         f"{rangees * par_rangee} cellules marquées chacune de "
+                         "sa production contre 1 boîte collective — la "
+                         "géométrie porte le partage, aucun chiffre de la "
+                         "fiche n'est répété",
+        "partage": f"limite à x {x_lim:.1f} = {P_E_X0} + {P_E_X1 - P_E_X0} x "
+                   f"{s_g:.2f} / ({s_g:.2f} + {s_d:.2f}) — {frac * 100:.1f} % "
+                   f"/ {(1 - frac) * 100:.1f} % : la position code les deux "
+                   "surfaces de la fiche",
+        "cellules": f"{rangees} rangées de {par_rangee} cellules de "
+                    f"{w_cell:.1f} x {P_H_CELL} px — le compte de la fiche, "
+                    "jamais l'implantation (règle 4)",
+        "bas_du_dessin": f"enveloppe jusqu'à {P_E_Y1}, mentions d'étanchéité à "
+                         f"{P_Y_ETANCH}, incendie à {P_Y_NOTES[0]}–"
+                         f"{P_Y_NOTES[1]}, phrase de principe à {P_Y_PHRASE}, "
+                         f"cartouche {P_Y_CARTOUCHE}–"
+                         f"{P_Y_CARTOUCHE + P_H_CARTOUCHE}, marge basse "
+                         f"{H - (P_Y_CARTOUCHE + P_H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {P_H_CARTOUCHE} px = "
+                            f"{largeur * P_H_CARTOUCHE} px², soit "
+                            f"{largeur * P_H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            "de la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_partage(donnees):
+    """La vignette : le motif de l'archétype, sans son appareil.
+
+    Ce qu'elle garde : l'enveloppe au trait double, la limite interrompue posée
+    au partage des surfaces, les quatorze cellules contre la boîte unique, les
+    deux régimes nommés et les deux niveaux d'étanchéité. Ce qu'elle laisse :
+    les étiquettes de zone, les productions, les cotes de surface et la ligne
+    d'incendie — six mentions dans 300 px ne se liraient pas."""
+    p = donnees["partage"]
+    elems = {e["cle"]: e for e in p["elements"]}
+    _, _, frac = _surfaces_partage(elems)
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre"))
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    e_x0, e_x1 = V_MARGE, VW - V_MARGE
+    e_y0, e_y1 = 44, 164
+    x_lim = e_x0 + (e_x1 - e_x0) * frac
+    _enveloppe(A, e_x0, e_x1, x_lim, e_y0, e_y1, 2.2, 1.0)
+    _limite(A, x_lim, e_y0 + 4, e_y1 - 4, 1.3, "5 4")
+
+    A(texte(e_x0 + 10, 62, "RE2020", "sans", 12, 600, "encre", wdth=112))
+    A(texte(x_lim + 8, 62, "RT2012", "sans", 12, 600, "encre", wdth=112))
+
+    # Les cellules — le compte, à l'échelle de la carte.
+    gx = e_x0 + 10
+    span = (x_lim - 10) - gx
+    ecart = 4
+    w_cell = (span - (p["par_rangee"] - 1) * ecart) / p["par_rangee"]
+    for r in range(p["rangees"]):
+        y = 74 + r * (28 + 6)
+        for c in range(p["par_rangee"]):
+            A(rect_bord(gx + c * (w_cell + ecart), y, w_cell, 28,
+                        "calcaire", "filet-1"))
+    # La boîte de la production collective, seule dans sa zone.
+    A(rect_bord(x_lim + 8, 74, e_x1 - 10 - (x_lim + 8), 30,
+                "papier", "filet-1"))
+
+    # Les deux niveaux d'étanchéité — les nœuds chiffrés de la vignette.
+    A(texte(e_x0, 184, f'0,8{NN}· MESURÉ', "mono", 10, 500, "pivot",
+            tracking=10 * 0.14, tabulaire=True))
+    A(texte(e_x1, 184, f'1,7{NN}· PAR DÉFAUT', "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14, tabulaire=True))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "l'enveloppe au trait double, la limite interrompue au "
+                 f"partage des surfaces ({frac * 100:.0f} %), 14 cellules "
+                 "contre 1 boîte, les deux régimes nommés et les deux niveaux "
+                 "d'étanchéité — étiquettes, productions et incendie sont "
+                 "laissés à la planche",
+        "bas_du_dessin": "nœuds d'étanchéité à y 184, marge basse 16 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_partage(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, densité intermédiaire.
+
+    Ce qu'il garde : l'enveloppe au trait double, la limite étiquetée, les
+    quatorze cellules marquées et leur légende de production, la zone commune
+    nommée avec sa production collective, les deux niveaux d'étanchéité. Ce
+    qu'il laisse : les étiquettes d'exigences, les cotes de surface, la boîte
+    machine détaillée et la ligne d'incendie — ils vivent sur la planche."""
+    p = donnees["partage"]
+    elems = {e["cle"]: e for e in p["elements"]}
+    _, _, frac = _surfaces_partage(elems)
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1", "filet-2", "filet-3", "encre"))
+
+    e_x0, e_x1 = A_MARGE, AW - A_MARGE
+    e_y0, e_y1 = 76, 298
+    x_lim = e_x0 + (e_x1 - e_x0) * frac
+    A(texte(x_lim - 8, 68, "LA LIMITE DES DEUX CALCULS", "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+    _enveloppe(A, e_x0, e_x1, x_lim, e_y0, e_y1, 3.0, 1.2)
+    _limite(A, x_lim, e_y0 + 5, e_y1 - 5, 1.6, "7 5")
+
+    gx = e_x0 + 12
+    A(texte(gx, 96, p["tag_gauche"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # Les cellules, marquées chacune de sa production.
+    span = (x_lim - 12) - gx
+    ecart = 6
+    w_cell = (span - (p["par_rangee"] - 1) * ecart) / p["par_rangee"]
+    for r in range(p["rangees"]):
+        y = 108 + r * (40 + 8)
+        for c in range(p["par_rangee"]):
+            x = gx + c * (w_cell + ecart)
+            A(rect_bord(x, y, w_cell, 40, "calcaire", "filet-1"))
+            A(rect(x + 6, y + 40 - 11, 5, 5, "encre"))
+
+    A(rect(gx, 214, 5, 5, "encre"))
+    A(texte(gx + 11, 222, "QUATORZE PRODUCTIONS INDIVIDUELLES", "mono", 10,
+            500, "pivot", tracking=10 * 0.14))
+    A(texte(gx, 240, "PANNEAU RAYONNANT · CHAUFFE-EAU DE 100 L", "mono",
+            10, 500, "pivot", tracking=10 * 0.14))
+
+    # La zone commune : trois lignes courtes, la colonne fait 110 px.
+    dx = x_lim + 10
+    for k, l in enumerate(("L'ESPACE", "COMMUN", "RT2012")):
+        A(texte(dx, 96 + k * 16, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    for k, l in enumerate(("UNE", "PRODUCTION", "COLLECTIVE")):
+        A(texte(dx, 198 + k * 16, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    # Les deux niveaux d'étanchéité, sous leur segment d'enveloppe.
+    A(texte(e_x0, 322, "ÉTANCHÉITÉ TENUE À 0,8 · MESURÉE", "mono", 10, 500,
+            "pivot", tracking=10 * 0.14, tabulaire=True))
+    A(texte(e_x1, 322, "1,7 PAR DÉFAUT · SANS TEST", "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14, tabulaire=True))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="l'enveloppe au trait double fermant les deux zones, la limite "
+              f"interrompue étiquetée au partage des surfaces ({frac * 100:.0f}"
+              " %), 14 cellules marquées et leur légende contre la zone "
+              "commune nommée, les deux niveaux d'étanchéité en pied — "
+              "exigences, cotes de surface, boîte machine et incendie laissés "
+              "à la planche",
+        bas="mentions d'étanchéité à y 322, marge basse 46 px")
+
+
 if __name__ == "__main__":
     import json as _json
     import sys
@@ -810,5 +1202,8 @@ if __name__ == "__main__":
     if "transfert" in _d:
         executer(composer_transfert, composer_vignette_transfert,
                  composer_appui_transfert)
+    elif "partage" in _d:
+        executer(composer_partage, composer_vignette_partage,
+                 composer_appui_partage)
     else:
         executer(composer, composer_vignette, composer_appui)
