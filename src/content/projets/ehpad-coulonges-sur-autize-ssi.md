@@ -14,8 +14,7 @@ performance: "SSI de catégorie A · alarme de type 1 · avis favorable à la r�
 synthese: >-
   Un EHPAD ne s’évacue pas : ses résidents sont mis à l’abri derrière des parois coupe-feu, au niveau même où ils se trouvent. C’est cette contrainte qui commande la sécurité incendie de l’établissement neuf de Coulonges-sur-l’Autize, qui compte 102 lits répartis sur quatre ailes en R+1, pour 5 250 m². FT2E a porté la coordination du système de sécurité incendie, de l’avant-projet à la réception : notice de sécurité, cahier des charges fonctionnel, zonages, corrélation, essais. Le système est de catégorie A, adressable point par point, avec onze zones de compartimentage et dix zones de désenfumage. L’alarme est sélective, audible du seul personnel. Avis favorable à la réception le 15 janvier 2026.
 mission_ft2e: [SSI]
-image_principale: "/images/projets/ehpad-coulonges-sur-autize-ssi/01.jpg"
-image_principale_alt: "Perspective aérienne de l’EHPAD Aliénor d’Aquitaine à Coulonges-sur-l’Autize : quatre ailes d’hébergement en R+1 autour de toitures-terrasses végétalisées et de jardins"
+planche: "/images/projets/ehpad-coulonges-sur-autize-ssi/planche.svg"
 en_avant: false
 ---
 

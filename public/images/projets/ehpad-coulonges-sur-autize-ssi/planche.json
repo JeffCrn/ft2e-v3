@@ -1,0 +1,234 @@
+{
+  "fiche": "ehpad-coulonges-sur-autize-ssi",
+  "archetype": "zonage-ssi",
+  "mecanisme": "transfert",
+  "archetype_motif": "La thèse de la fiche est un mouvement, pas un découpage : un EHPAD ne s’évacue pas, ses résidents sont mis à l’abri derrière des parois coupe-feu, au niveau même où ils se trouvent. L’archétype zonage-ssi (catégorie, zones de mise en sécurité) est repris — c’est le seul archétype SSI de la liste fermée et la fiche est une coordination SSI pure — mais avec un mécanisme distinct, `transfert`, sur le précédent des mécanismes multiples de boucle-fluide et de coupe-traversee : à Sablonceaux la géométrie montrait où l’alarme se diffuse ; ici elle montre où vont les personnes. Une flèche traverse la paroi coupe-feu au même niveau, la descente est barrée, et les secours montent par l’escalier extérieur — la démonstration est portée par le sens des flèches, jamais par un récapitulatif de données.",
+  "surtitre": "SCHÉMA DE PRINCIPE · MISE EN SÉCURITÉ PAR TRANSFERT HORIZONTAL",
+  "titre": "EHPAD Aliénor d’Aquitaine",
+  "sous_titre": "La sécurité incendie d’un établissement qui ne s’évacue pas",
+  "cartouche_legende": "COULONGES-SUR-L’AUTIZE · 5 250 m² · 2026",
+  "aria_label": "Schéma de principe de la mise en sécurité par transfert horizontal en type J : un foyer détecté dans une chambre déclenche l’alarme sélective — audible du seul personnel, sans alarme sonore chez les résidents — et les asservissements de compartimentage, de désenfumage, de non-stop ascenseur et de déverrouillage. Les résidents passent derrière la paroi coupe-feu, au niveau même où ils se trouvent, plutôt que d’être évacués : l’étage est partagé en deux zones coupe-feu de façade à façade, desservies chacune par un ascenseur, avec deux chambres en espaces d’attente sécurisés ; au rez-de-chaussée, une unité protégée de douze chambres ; un escalier extérieur en bout d’aile donne aux secours un accès direct à l’étage.",
+  "transfert": {
+    "entete": "UN FOYER SE DÉCLARE À L’ÉTAGE · DE L’ALERTE À LA MISE À L’ABRI",
+    "entete_alerte": "L’ALERTE · L’ALARME EST SÉLECTIVE, AUDIBLE DU SEUL PERSONNEL",
+    "entete_batiment": "LA MISE À L’ABRI · L’ÉTAGE, SOIXANTE LITS, EN DEUX ZONES COUPE-FEU DE FAÇADE À FAÇADE",
+    "evenement": [
+      "UN FOYER SE DÉCLARE",
+      "DANS UNE CHAMBRE"
+    ],
+    "systeme": {
+      "libelle": "Centrale catégorie A",
+      "detail": [
+        "ADRESSABLE POINT PAR POINT",
+        "ALARME DE TYPE 1",
+        "SANS TEMPORISATION"
+      ]
+    },
+    "departs": [
+      {
+        "cle": "personnel",
+        "libelle": "Le personnel",
+        "detail": "ALARME SÉLECTIVE · REPORTS À L’ACCUEIL, AUX SALONS, EN SALLE À MANGER",
+        "alerte": true
+      },
+      {
+        "cle": "residents",
+        "libelle": "Les résidents",
+        "detail": "AUCUNE ALARME SONORE · DIFFUSEURS LUMINEUX DANS LES SANITAIRES COMMUNS",
+        "alerte": false
+      },
+      {
+        "cle": "asservissements",
+        "libelle": "Les asservissements",
+        "detail": "COMPARTIMENTAGE · DÉSENFUMAGE · NON-STOP ASCENSEUR · DÉVERROUILLAGE",
+        "alerte": true
+      }
+    ],
+    "etage": {
+      "zone_foyer_tag": "ZONE COUPE-FEU 1 · LE FOYER",
+      "zone_abri_tag": "ZONE COUPE-FEU 2 · À L’ABRI",
+      "zone_foyer_tag_court": "ZONE 1 · LE FOYER",
+      "zone_abri_tag_court": "ZONE 2 · À L’ABRI",
+      "zone_foyer_vignette": "Le foyer",
+      "zone_abri_vignette": "À l’abri",
+      "paroi": "PAROI COUPE-FEU",
+      "lits": "SOIXANTE LITS",
+      "transfert_libelle": "Transfert horizontal des résidents",
+      "transfert_libelle_court": "Transfert horizontal",
+      "transfert_detail": "AU NIVEAU MÊME OÙ ILS SE TROUVENT",
+      "transfert_detail_court": "AU MÊME NIVEAU",
+      "abri_details": [
+        "DEUX CHAMBRES EN ESPACES D’ATTENTE SÉCURISÉS",
+        "CHAQUE ZONE EST DESSERVIE PAR SON ASCENSEUR"
+      ]
+    },
+    "rdc": {
+      "tag": "REZ-DE-CHAUSSÉE · 42 LITS",
+      "unite_protegee": "UNITÉ PROTÉGÉE · DOUZE CHAMBRES",
+      "unite_protegee_lignes": [
+        "UNITÉ PROTÉGÉE",
+        "DOUZE CHAMBRES"
+      ]
+    },
+    "descente": "PLUTÔT QUE DE LES FAIRE SORTIR",
+    "descente_court": "SANS LES FAIRE SORTIR",
+    "secours_escalier": "ESCALIER EXTÉRIEUR EN BOUT D’AILE",
+    "secours_acces": "ACCÈS DIRECT DES SECOURS À L’ÉTAGE",
+    "recoupement": "AILES RECOUPÉES EN ZONES DE MOINS DE 600 m² ET DE QUATORZE LITS",
+    "elements": [
+      {
+        "ordre": 1,
+        "libelle": "Un foyer se déclare dans une chambre de l’étage",
+        "detail": [
+          "DÉTECTION ADRESSABLE POINT PAR POINT"
+        ]
+      },
+      {
+        "ordre": 2,
+        "libelle": "Centrale catégorie A",
+        "detail": [
+          "ALARME DE TYPE 1 · SANS TEMPORISATION"
+        ]
+      },
+      {
+        "ordre": 3,
+        "libelle": "Le personnel",
+        "detail": [
+          "ALARME SÉLECTIVE · REPORTS À L’ACCUEIL, AUX SALONS, EN SALLE À MANGER"
+        ]
+      },
+      {
+        "ordre": 4,
+        "libelle": "Les résidents",
+        "detail": [
+          "AUCUNE ALARME SONORE · DIFFUSEURS LUMINEUX DANS LES SANITAIRES COMMUNS"
+        ]
+      },
+      {
+        "ordre": 5,
+        "libelle": "Les asservissements",
+        "detail": [
+          "COMPARTIMENTAGE · DÉSENFUMAGE · NON-STOP ASCENSEUR · DÉVERROUILLAGE"
+        ]
+      },
+      {
+        "ordre": 6,
+        "libelle": "Transfert horizontal des résidents",
+        "detail": [
+          "AU NIVEAU MÊME OÙ ILS SE TROUVENT"
+        ],
+        "mention": "PLUTÔT QUE DE LES FAIRE SORTIR"
+      },
+      {
+        "ordre": 7,
+        "libelle": "L’étage — deux zones coupe-feu de façade à façade",
+        "valeur": "soixante",
+        "unite": "lits",
+        "detail": [
+          "DEUX CHAMBRES EN ESPACES D’ATTENTE SÉCURISÉS",
+          "CHAQUE ZONE EST DESSERVIE PAR SON ASCENSEUR"
+        ]
+      },
+      {
+        "ordre": 8,
+        "libelle": "Le rez-de-chaussée",
+        "valeur": "42",
+        "unite": "lits",
+        "detail": [
+          "UNE UNITÉ PROTÉGÉE DE DOUZE CHAMBRES"
+        ]
+      },
+      {
+        "ordre": 9,
+        "libelle": "L’escalier extérieur en bout d’aile",
+        "detail": [
+          "ACCÈS DIRECT DES SECOURS À L’ÉTAGE"
+        ]
+      }
+    ],
+    "mention_separation": [
+      "AILES RECOUPÉES EN ZONES DE MOINS DE 600 m² ET DE QUATORZE LITS"
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Un EHPAD ne s’évacue pas : la mise à l’abri se fait derrière les parois coupe-feu, au niveau même où l’on se trouve.",
+  "vignette_surtitre": "TRANSFERT HORIZONTAL",
+  "a_valider_ft2e": [
+    {
+      "objet": "Le niveau du foyer du scénario",
+      "la_source_affirme": "Les essais du 4 décembre 2025 ont porté deux foyers types, « l’un dans le forum, l’autre dans une chambre » — sans dire à quel niveau se trouve cette chambre.",
+      "le_dessin_suppose": "Un foyer dans une chambre de l’étage : c’est le niveau où le transfert horizontal se démontre (deux zones, un ascenseur chacune). Un foyer au rez-de-chaussée ferait la même démonstration de plain-pied — dire si ce choix convient."
+    },
+    {
+      "objet": "Le sens du transfert et la numérotation des deux zones",
+      "la_source_affirme": "« L’étage est partagé en deux zones coupe-feu de façade à façade » — la fiche ne les numérote pas et ne dit pas laquelle serait sinistrée.",
+      "le_dessin_suppose": "Un scénario illustratif : le foyer en « zone coupe-feu 1 », le transfert vers la « zone coupe-feu 2 ». Les numéros sont de composition ; les désignations réelles sont au dossier d’identité SSI."
+    },
+    {
+      "objet": "Le franchissement de la paroi",
+      "la_source_affirme": "Les résidents sont « mis à l’abri derrière des parois coupe-feu » ; la fiche ne décrit pas le passage d’une zone à l’autre (portes de recoupement, largeur, asservissement).",
+      "le_dessin_suppose": "Une ouverture dans la paroi centrale, par où passe la flèche de transfert — une porte de recoupement existe nécessairement, mais elle n’est pas décrite dans la fiche."
+    },
+    {
+      "objet": "La position des espaces d’attente sécurisés",
+      "la_source_affirme": "« Deux chambres proches des escaliers servent d’espaces d’attente sécurisés » — sans dire dans quelle(s) zone(s) coupe-feu elles se trouvent.",
+      "le_dessin_suppose": "La mention est posée dans la zone à l’abri, côté refuge du scénario. Si les deux chambres se répartissent une par zone, la mention reste vraie mais l’attache est à préciser."
+    },
+    {
+      "objet": "Deux moitiés d’égale largeur",
+      "la_source_affirme": "Aucune surface par zone coupe-feu n’est donnée — seuls les 5 250 m² totaux et le seuil de recoupement de 600 m² figurent à la fiche.",
+      "le_dessin_suppose": "Que les deux zones de l’étage se dessinent d’égale largeur : la géométrie code leur nombre et leur adjacence, jamais leur taille. Une lecture proportionnelle serait fausse."
+    },
+    {
+      "objet": "Le rapport entre les deux découpages",
+      "la_source_affirme": "« Les ailes d’hébergement sont recoupées en zones de moins de 600 m² et de quatorze lits » ET « l’étage est partagé en deux zones coupe-feu de façade à façade » — deux découpages distincts (soixante lits à l’étage : les deux zones dépassent quatorze lits chacune).",
+      "le_dessin_suppose": "Que le recoupement fin des ailes se dise en note sous la coupe, sans être dessiné : le dessiner exigerait un nombre de zones par aile que la fiche ne donne pas."
+    },
+    {
+      "objet": "Un seul escalier extérieur dessiné",
+      "la_source_affirme": "« Chaque aile se termine par un escalier extérieur » — quatre ailes, donc plusieurs escaliers.",
+      "le_dessin_suppose": "Un seul escalier, en bout de la coupe, qui vaut pour tous : la coupe est topologique, pas une implantation."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2021 (champ annee), avis favorable à la réception le 15 janvier 2026 (annee_livraison 2026).",
+      "le_dessin_suppose": "Que le cartouche porte 2026, millésime de la réception — même arbitrage que les planches précédentes."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 21-061 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Noms de tiers : la maîtrise d’ouvrage et son groupe, l’architecte et sa ville — le dessin ne nomme personne.",
+    "Les chiffres que la page porte déjà : 102 lits, onze zones de compartimentage, dix zones de désenfumage, la 4ᵉ catégorie et le type J en toutes lettres — matière du texte et du relevé encré de la fiche, pas du dessin (les 5 250 m² ne restent qu’au cartouche, comme sur toutes les planches).",
+    "Les essais du 4 décembre 2025 : centrale sur batteries, essais par sondage, foyers de bois de hêtre, détections en 3 minutes et 1 minute 50 — matière d’une chronologie, pas du mécanisme de mise à l’abri.",
+    "La détection généralisée hors sanitaires et escaliers — l’implantation des détecteurs ne modifie pas le mécanisme dessiné ; elle reste au texte.",
+    "Le groupe électrogène, source de remplacement et source de sécurité — il relève de l’alimentation, pas du transfert.",
+    "Les portes de bout d’aile à double fonction asservie (désenfumage et déverrouillage) — résumées dans le départ « asservissements ».",
+    "Les consignes dédiées aux résidents malentendants — réduites à la ligne « diffuseurs lumineux dans les sanitaires communs » du départ « les résidents ».",
+    "Les jalons d’affaire : avis de la sous-commission d’août 2022, phases APD/PRO/DCE, visa des études d’exécution, réunions de chantier, tableau de corrélation, dossier d’identité SSI, vérification triennale.",
+    "Toute géométrie d’ouvrage : ni les quatre ailes, ni les toitures-terrasses, ni aucune implantation — la coupe est topologique, deux niveaux abstraits et une paroi de principe."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "trois flèches, trois sens : le transfert traverse la paroi à l'horizontale (encre 2,5), la descente est barrée d'une croix, l'escalier extérieur monte vers l'étage — la géométrie porte la thèse, aucun chiffre de la fiche n'est répété",
+    "topologie": "alerte : événement (x 56) → centrale (x 270–500) → départs (x 574) ; coupe : étage 390–502, rez-de-chaussée 502–570, paroi à x 533, sol à y 570",
+    "bas_du_dessin": "sol à 570, notes de pied à 590, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 353 x 30 px = 10590 px², soit 1.10 % de la planche (la paroi et les marques sont de l'encre, pas de la réserve)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la coupe seule : deux zones, la paroi ouverte, la flèche qui la traverse, la descente barrée — l'alerte, l'escalier des secours et l'unité protégée sont laissés à la planche",
+    "bas_du_dessin": "168 px, marge basse 32 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "la coupe entière : deux zones coupe-feu, la flèche de transfert à travers la paroi, la descente barrée, l'unité protégée du rez-de-chaussée, l'escalier des secours — l'alerte (centrale et départs) reste à la planche",
+    "bas_du_dessin": "sol à 292 px, notes de pied empilées à 316–332, marge basse 36 px"
+  }
+}

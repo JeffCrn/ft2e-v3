@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la mise en sécurité par transfert horizontal en type J : un foyer détecté dans une chambre déclenche l’alarme sélective — audible du seul personnel, sans alarme sonore chez les résidents — et les asservissements de compartimentage, de désenfumage, de non-stop ascenseur et de déverrouillage. Les résidents passent derrière la paroi coupe-feu, au niveau même où ils se trouvent, plutôt que d’être évacués : l’étage est partagé en deux zones coupe-feu de façade à façade, desservies chacune par un ascenseur, avec deux chambres en espaces d’attente sécurisés ; au rez-de-chaussée, une unité protégée de douze chambres ; un escalier extérieur en bout d’aile donne aux secours un accès direct à l’étage.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">TRANSFERT HORIZONTAL</text>
+  <rect x="24.00" y="74.00" width="210.00" height="138.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="234.00" y="74.00" width="210.00" height="138.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="231.00" y="75.00" width="6.00" height="57.00" class="c-encre" fill="#00393A"/>
+  <rect x="231.00" y="164.00" width="6.00" height="47.00" class="c-encre" fill="#00393A"/>
+  <text x="36.00" y="92.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZONE 1 · LE FOYER</text>
+  <text x="249.00" y="92.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZONE 2 · À L’ABRI</text>
+  <text x="36.00" y="128.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Transfert horizontal</text>
+  <rect x="38.00" y="144.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <path d="M 50.00 148.00 L 404.00 148.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.0"/>
+  <path d="M 414.00 148.00 L 405.00 143.50 L 405.00 152.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="249.00" y="176.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AU MÊME NIVEAU</text>
+  <text x="36.00" y="196.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SOIXANTE LITS</text>
+  <rect x="24.00" y="212.00" width="420.00" height="80.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="36.00" y="232.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">REZ-DE-CHAUSSÉE · 42 LITS</text>
+  <rect x="306.00" y="222.00" width="130.00" height="60.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="318.00" y="246.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UNITÉ PROTÉGÉE</text>
+  <text x="318.00" y="260.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DOUZE CHAMBRES</text>
+  <path d="M 270.00 212.00 L 270.00 282.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 270.00 286.00 L 266.50 279.00 L 273.50 279.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 264.00 244.00 L 276.00 256.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 264.00 256.00 L 276.00 244.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="256.00" y="254.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">SANS LES FAIRE SORTIR</text>
+  <path d="M 24.00 292.00 L 528.00 292.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 512.00 292.00 L 512.00 260.00 L 496.00 260.00 L 496.00 228.00 L 480.00 228.00 L 480.00 196.00 L 464.00 196.00 L 464.00 164.00 L 448.00 164.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 446.00 164.00 L 453.00 160.50 L 453.00 167.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="528.00" y="316.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">ESCALIER EXTÉRIEUR EN BOUT D’AILE</text>
+  <text x="528.00" y="332.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">ACCÈS DIRECT DES SECOURS À L’ÉTAGE</text>
+</svg>
