@@ -87,7 +87,7 @@ const lignes = projets.map((projet) => ({
 
         {/* En-tête de nomenclature */}
         <div
-          class="hidden md:grid grid-cols-[56px_1fr_150px_88px] gap-4 items-center pb-3 pl-4 border-b border-filet-1"
+          class="hidden lg:grid lg:grid-cols-[160px_1fr_150px_88px] xl:grid-cols-[220px_1fr_150px_88px] gap-4 items-end pb-3 pl-4 border-b border-filet-1"
           aria-hidden="true"
         >
           <p class="mono-label font-normal text-[10px] text-pivot">vue</p>
@@ -102,7 +102,7 @@ const lignes = projets.map((projet) => ({
               <a
                 href={`/references/${projet.id}`}
                 class:list={[
-                  'grid grid-cols-1 md:grid-cols-[56px_1fr_150px_88px] gap-x-4 gap-y-1 items-center',
+                  'grid grid-cols-1 md:grid-cols-[160px_1fr] lg:grid-cols-[160px_1fr_150px_88px] xl:grid-cols-[220px_1fr_150px_88px] gap-x-4 gap-y-1 items-center',
                   'py-3.5 pl-4 pr-2 border-b border-l border-b-filet-2',
                   rang.filet,
                   'hover:bg-calcaire transition-colors duration-300 ease-[var(--ease-blueprint)]',
@@ -110,32 +110,50 @@ const lignes = projets.map((projet) => ({
               >
                 {/* La miniature de nomenclature est décorative — `aria-hidden`,
                     masquée sous md : la charte veut ici une liste tabulaire, pas
-                    une grille de cartes. ⚠ Elle est servie dans la colonne de
-                    tête de 56 px, soit l'échelle 0,18 : le dessin y est une
-                    texture, pas un schéma (mesuré au navigateur, point ouvert du
-                    suivi du chantier des planches). */}
+                    une grille de cartes, et sous 768 px la vignette occuperait la
+                    largeur entière en repoussant les titres hors de l'écran.
+
+                    Sa colonne CROÎT avec le palier (2026-08-15), la place ayant
+                    été libérée par le passage au titre court : 96 px à md, 160 à
+                    lg, 220 à xl. Deux mesures bornent ces valeurs, l'une en
+                    largeur, l'autre en hauteur.
+
+                    En LARGEUR, le titre le plus long réclame 381 px : la colonne
+                    de titre ne descend pas sous cette cote là où elle peut la
+                    tenir (622 px restants à xl, 506 à lg). À md elle tombe à
+                    314 et le `md:truncate` reprend son office — c'était déjà le
+                    cas avant, à 354.
+
+                    En HAUTEUR, une vignette 3:2 convertit toute largeur gagnée
+                    en défilement : 220 px font une ligne de 176 et une liste de
+                    4 040 px, contre 1 528 à l'origine. C'est ce qui a écarté la
+                    taille de CONCEPTION (280 px, mono à 8,4) : elle porte la
+                    ligne à 216 px et la liste à 4 960 pour un gain de lecture
+                    marginal — à 220 le mono se rend à 6,6 px et les valeurs du
+                    dessin (« 146 845 kWh/an », « 38 000 m³/h ») se lisent déjà.
+                    Comparé au rendu, pas supposé. */}
                 <span class="hidden md:block aspect-[3/2] overflow-hidden bg-papier border border-filet-3" aria-hidden="true">
                   <PlancheReference src={projet.data.planche} variante="vignette" />
                 </span>
                 <span class="min-w-0">
-                  {/* `md:truncate`, pas `truncate` : la coupe à l'ellipse sert la LIGNE DE
-                      TABLEAU du bureau, où le titre partage sa ligne avec le secteur
-                      et le statut. Sous md la nomenclature est empilée en une colonne
-                      de 276 px, rien n'y impose une ligne unique — et cinq titres
-                      courts y étaient encore coupés, jusqu'à 82 px (mesuré à 390 px). */}
-                  <span class:list={['type-intitule block text-[16px] md:text-[17px] md:truncate text-encre', rang.graisse]}>
+                  {/* `lg:truncate` : la coupe à l'ellipse ne sert que la LIGNE DE
+                      TABLEAU, où le titre partage sa ligne avec le secteur et le
+                      statut — donc à partir de lg seulement. En deçà, la ligne n'a
+                      que deux colonnes (ou une), rien n'y impose une ligne unique,
+                      et le titre s'y déplie sur deux lignes au besoin. */}
+                  <span class:list={['type-intitule block text-[16px] md:text-[17px] lg:truncate text-encre', rang.graisse]}>
                     {titre}
                   </span>
-                  <span class="md:hidden mono-data text-[11px] text-pivot block mt-0.5">
+                  <span class="lg:hidden mono-data text-[11px] text-pivot block mt-0.5">
                     {projet.data.secteur} · {rang.statut}
                     {projet.data.demo && <span class="mono-label font-normal text-[10px]"> [démo]</span>}
                   </span>
                 </span>
-                <span class="hidden md:block text-sm text-pivot">
+                <span class="hidden lg:block text-sm text-pivot">
                   {projet.data.secteur}
                   {projet.data.demo && <span class="mono-label font-normal text-[10px] block">[démo]</span>}
                 </span>
-                <span class="hidden md:block mono-label font-normal text-[10px] text-pivot">{rang.statut}</span>
+                <span class="hidden lg:block mono-label font-normal text-[10px] text-pivot">{rang.statut}</span>
               </a>
             </li>
           ))}
