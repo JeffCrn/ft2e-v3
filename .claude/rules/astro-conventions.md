@@ -65,7 +65,16 @@ Citer les fonctions par **nom**, jamais par numéro de ligne : les lignes bougen
 
 ## Images optionnelles & fs.existsSync
 
-Certaines fiches projet ont un champ `image_principale` rempli côté Zod (obligatoire) sans que le fichier physique soit déjà présent dans `public/`. Pour éviter les icônes d'image cassée visibles, les composants qui rendent ces images **doivent vérifier la présence du fichier au build via `fs.existsSync`** et basculer sur un placeholder en l'absence.
+**Portée réduite depuis le 2026-08-15.** Ce motif servait d'abord les visuels de fiches
+projet ; ces fiches n'ont plus de visuel photographique — leur champ `image_principale` a
+été retiré du modèle à la clôture du chantier des planches, et `planche` est devenu
+obligatoire. Le motif ne concerne plus que les **photographies d'équipe**, dont les
+fichiers arriveront au reportage professionnel et manquent aujourd'hui.
+
+La règle, elle, ne change pas : un chemin d'image déclaré côté contenu sans que le fichier
+soit présent dans `public/` produit une icône d'image cassée. Les composants qui rendent
+ces images **vérifient la présence du fichier au build via `fs.existsSync`** et basculent
+sur un placeholder en l'absence.
 
 ### Pattern de référence
 
@@ -74,19 +83,13 @@ Certaines fiches projet ont un champ `image_principale` rempli côté Zod (oblig
 import fs from 'node:fs';
 import path from 'node:path';
 
-const { projet } = Astro.props;
-const { image_principale, image_principale_alt } = projet.data;
-
-const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_principale));
+const { membre } = Astro.props;
+const photoExiste = fs.existsSync(path.join(process.cwd(), 'public', membre.data.photo));
 ---
 
-{imageExiste ? (
-  <img
-    src={image_principale}
-    alt={image_principale_alt}
-    class="w-full h-full object-cover"
-    loading="lazy"
-  />
+{photoExiste ? (
+  <img src={membre.data.photo} alt={membre.data.photo_alt}
+       class="w-full h-full object-cover" loading="lazy" />
 ) : (
   <div class="duotone-media flex items-center justify-center">
     <p class="mono-label text-pivot">[Photo à venir]</p>
@@ -96,13 +99,21 @@ const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image_princ
 
 ### Pourquoi ça marche
 
-`fs.existsSync` s'exécute en **Node au moment de `astro build`**, puisque le projet est en `output: 'static'`. Pas de fs côté client, pas de SSR. Si la stack bascule un jour en SSR/edge runtime, il faudra refactorer vers `astro:assets` (`<Image>` qui gère sa propre résolution build-time).
+`fs.existsSync` s'exécute en **Node au moment de `astro build`**, puisque le projet est en
+`output: 'static'`. Pas de fs côté client, pas de SSR. Si la stack bascule un jour en
+SSR/edge runtime, il faudra refactorer vers `astro:assets` (`<Image>` qui gère sa propre
+résolution build-time).
 
 ### Exemples dans le codebase
 
-- `src/components/blocs/CarteProjet.astro:14-17` — cartes projet de grille
-- `src/pages/references/[...slug].astro:23` — fiche projet détaillée
-- `src/pages/equipe.astro:18-22` — avatars individuels (pré-calcul via champ `hasPhoto`)
+Citer par **nom de constante**, jamais par numéro de ligne — les lignes bougent.
+
+- `src/pages/equipe.astro` — `collectifExiste`, et le pré-calcul `hasPhoto` des avatars.
+- `src/pages/index.astro` — `collectifExiste` pour la photographie collective.
+
+`src/pages/index.astro` emploie aussi `fs.readFileSync` pour **inliner l'appui de la fiche
+vedette** : ce n'est pas le même motif — l'appui est produit par le protocole des planches
+et sa présence est garantie par `verser.py`, il n'y a donc rien à tester.
 
 ## Structure attendue
 
@@ -139,8 +150,8 @@ src/
 │   │   └── [slug].astro
 │   └── contact.astro
 └── components/
-    ├── primitives/               # Bouton, Lien, Capsule, etc.
-    ├── blocs/                    # blocs de page (Hero, ChiffresCles, etc.)
+    ├── primitives/               # Bouton, Chiffre, CoinsCuivre, TraceFlux, BadgeDemo
+    ├── blocs/                    # blocs de page (Hero, HeroPage, PlancheReference, etc.)
     └── layout/                   # Header, Footer, Navigation
 ```
 

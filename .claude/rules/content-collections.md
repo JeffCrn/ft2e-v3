@@ -40,31 +40,38 @@ Le schéma Zod doit **refuser** :
 - Une `mission_ft2e` vide.
 - Une date dans le futur pour un projet livré.
 
-## Le visuel d'une fiche projet — planche ou photographie
+## Le visuel d'une fiche projet — la planche, et rien d'autre
 
-Depuis le 2026-08-12, `image_principale` et `image_principale_alt` sont **optionnels**, et
-un champ `planche` les remplace sur les fiches traitées.
+Depuis la clôture du chantier des planches (2026-08-15), `planche` est **obligatoire** et
+les champs `image_principale` / `image_principale_alt` ont été **supprimés** du schéma, de
+Decap et des quatre points de rendu qui branchaient dessus. Une fiche projet n'a plus
+qu'un dispositif visuel. Le motif est celui du chantier : le visuel photographique
+reproduisait l'ouvrage, donc l'œuvre de l'architecte.
 
 - `planche` porte le chemin du SVG depuis `public/`, en graphie stricte
   `/images/projets/<slug>/planche.svg`. Quatre fichiers frères l'accompagnent dans le même
-  répertoire — `planche.json`, `vignette.svg`, `appui.svg`, `planche.png` — et **ils ne se séparent
-  pas** : le composant les charge par convention de nom, un manquant fait échouer le build.
+  répertoire — `planche.json`, `vignette.svg`, `appui.svg`, `planche.png` — et **ils ne se
+  séparent pas** : le composant les charge par convention de nom, un manquant fait échouer
+  le build.
 - **Le frontmatter ne porte ni l'alternative textuelle de la planche ni son surtitre de
   vignette** : ils vivent dans le `planche.json`, que le composant lit au build. Les
   recopier créerait deux vérités pour la même donnée, et c'est la copie — jamais
   l'original — qui se désynchronise. Le `.md` dit *qu'il y a* une planche ; la planche dit
   ce qu'elle montre.
-- `superRefine` refuse **une fiche sans planche ET sans visuel**, ainsi qu'**un visuel sans
-  son alternative textuelle** (RGAA 1.1). L'optionnalité d'un champ ne doit jamais
-  dégénérer en fiche muette.
-- Le champ `galerie` a été **supprimé** du schéma et de Decap le 2026-08-12 : il n'était
-  consommé nulle part dans `src/`.
+- **Le `superRefine` qui arbitrait « planche OU visuel » a disparu avec l'alternative.**
+  Une règle qui n'a plus rien à départager n'est pas un garde-fou : c'est un contrôle qui
+  ment sur ce qu'il contrôle. L'obligation est portée par le champ lui-même.
+- Champs supprimés du schéma et de Decap, pour mémoire : `galerie` (2026-08-12, consommé
+  nulle part), `image_principale` / `image_principale_alt` (2026-08-15, remplacés par la
+  planche), `demo_reason` et `contact_email` (2026-08-15, renseignés dans zéro fichier et
+  lus nulle part).
 
 ## Référence vers les images
 
-- Tous les visuels d'un projet dans `public/images/projets/{slug}/`.
-- Frontmatter référence par chemin relatif depuis `public/` : `image_principale: /images/projets/maison-loti/01.jpg`.
-- **Alt text obligatoire** pour chaque image (champ Zod requis).
+- Les cinq pièces d'une planche dans `public/images/projets/{slug}/`, jamais ailleurs.
+- Les photographies d'**équipe** (`public/images/equipe/`) restent référencées par chemin
+  relatif depuis `public/` dans le frontmatter, avec **alt text obligatoire** (champ Zod
+  requis) — c'est le seul endroit du site où une photographie est encore attendue.
 
 ## Récit projet (corps Markdown)
 

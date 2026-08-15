@@ -1,57 +1,49 @@
-# Dependencies
-node_modules/
+# TOUS les motifs de ce fichier sont ANCRÉS par une barre initiale, sans
+# exception. Ce n'est pas une convention de style : la détection automatique de
+# sources de Tailwind v4 LIT ce fichier et élague les répertoires qui y
+# correspondent, à tous les niveaux. Un motif non ancré — `references/` au lieu
+# de `/references/` — supprime silencieusement les classes de `src/pages/references/`
+# du CSS produit, et le build reste vert (incident du 2026-08-08, quatre
+# déploiements). Voir `.claude/rules/astro-conventions.md`.
+#
+# Contrôle après toute modification :
+#     git check-ignore -v src/pages/<dossier>/index.astro   → doit ne RIEN rendre
 
-# Build output
-dist/
+# Dépendances et sorties de build
+/node_modules/
+/dist/
+/.astro/
+/.vercel/
 
-# Environment
-.env
-.env.local
+# Environnement
+/.env
+/.env.local
 
-# Astro
-.astro/
-
-# OS
+# Système et éditeurs
 .DS_Store
 Thumbs.db
-
-# IDE
-.vscode/
-.idea/
+/.vscode/
+/.idea/
 *.swp
 *.swo
 
-.vercel
-
-# Local screenshots & working artifacts (never commit)
+# Captures et artefacts de travail locaux — jamais commités
 /*.png
 /.playwright-mcp/
 /assets/
 
 # Bundles de charte graphique reçus du studio (volumineux, non versionnés).
-# Motifs ANCRÉS : sans la barre initiale, Tailwind cesserait de scanner un
-# répertoire source homonyme (cf. .claude/rules/astro-conventions.md).
 /branding-v2/
 /branding-v3/
 /branding-v3-bis/
-/brandig-systyem-test/
 /plaquette/
 
 # CV de l'équipe — données personnelles, jamais commitées.
-# Motif ANCRÉ, comme tous les autres : sans la barre initiale, ce motif
-# s'appliquerait à tout niveau — et la détection de sources de Tailwind v4,
-# qui lit ce fichier, cesserait de scanner un futur `src/pages/cv/`.
 /cv/
 
 # Fonds documentaire client (archives de références) — volumineux, jamais commité.
-# Motif ANCRÉ à la racine (`/`) : sans la barre initiale, git — et surtout la
-# détection automatique de sources de Tailwind v4, qui lit ce fichier — ignore
-# AUSSI `src/pages/references/`, dont les classes cessent alors d'être générées.
 /references/
 
-.vercel
-
-# Caches Python des outils de `scripts/` — motif ANCRÉ, comme tous les autres.
+# Caches Python des outils de `scripts/`
 /scripts/__pycache__/
-
 /scripts/planches/__pycache__/

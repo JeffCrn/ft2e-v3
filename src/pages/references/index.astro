@@ -1,7 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import fs from 'node:fs';
-import path from 'node:path';
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
@@ -34,8 +32,6 @@ const rangs = {
 const lignes = projets.map((projet) => ({
   projet,
   rang: rangs[projet.data.statut],
-  imageExiste: Boolean(projet.data.image_principale)
-    && fs.existsSync(path.join(process.cwd(), 'public', projet.data.image_principale!)),
 }));
 ---
 
@@ -98,7 +94,7 @@ const lignes = projets.map((projet) => ({
         </div>
 
         <ul role="list" data-grille>
-          {lignes.map(({ projet, rang, imageExiste }) => (
+          {lignes.map(({ projet, rang }) => (
             <li data-secteur={projet.data.secteur}>
               <a
                 href={`/references/${projet.id}`}
@@ -111,19 +107,13 @@ const lignes = projets.map((projet) => ({
               >
                 {/* La miniature de nomenclature est décorative — `aria-hidden`,
                     masquée sous md : la charte veut ici une liste tabulaire, pas
-                    une grille de cartes. Quand la fiche porte une planche, c'est
-                    son cadrage qui s'y affiche, sans duotone. */}
-                {projet.data.planche ? (
-                  <span class="hidden md:block aspect-[3/2] overflow-hidden bg-papier border border-filet-3" aria-hidden="true">
-                    <PlancheReference src={projet.data.planche} variante="vignette" />
-                  </span>
-                ) : (
-                <span class:list={['hidden md:block aspect-[3/2] overflow-hidden', imageExiste ? 'duotone-photo' : 'duotone-media']} aria-hidden="true">
-                  {imageExiste && (
-                    <img src={projet.data.image_principale} alt="" class="w-full h-full object-cover" loading="lazy" />
-                  )}
+                    une grille de cartes. ⚠ Elle est servie dans la colonne de
+                    tête de 56 px, soit l'échelle 0,18 : le dessin y est une
+                    texture, pas un schéma (mesuré au navigateur, point ouvert du
+                    suivi du chantier des planches). */}
+                <span class="hidden md:block aspect-[3/2] overflow-hidden bg-papier border border-filet-3" aria-hidden="true">
+                  <PlancheReference src={projet.data.planche} variante="vignette" />
                 </span>
-                )}
                 <span class="min-w-0">
                   <span class:list={['type-intitule block text-[16px] md:text-[17px] truncate text-encre', rang.graisse]}>
                     {projet.data.titre}

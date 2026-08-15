@@ -205,22 +205,9 @@ collections:
       - label: "Planche de schéma de principe"
         name: "planche"
         widget: "string"
-        required: false
+        required: true
         pattern: ['^/images/projets/[a-z0-9-]+/planche\.svg$', 'Chemin attendu : /images/projets/<slug>/planche.svg']
-        hint: "Le dispositif visuel des fiches réelles : un dessin FT2E, sans géométrie d'ouvrage ni droit de tiers. Les trois pièces (planche.svg, planche.png, planche.json) sont produites ensemble et déposées telles quelles — elles ne se modifient pas ici. Quand ce champ est rempli, le visuel photographique ci-dessous ne s'affiche plus."
-
-      - label: "Image principale"
-        name: "image_principale"
-        widget: "image"
-        required: false
-        hint: "Repli, en l'absence de planche. Ranger le fichier dans public/images/projets/<slug-de-la-fiche>/ après téléversement. Une fiche doit porter l'un ou l'autre : le build refuse une fiche sans planche ET sans visuel."
-
-      - label: "Texte alternatif image"
-        name: "image_principale_alt"
-        widget: "string"
-        required: false
-        pattern: ['^.{5,}$', 'Cinq caractères au minimum']
-        hint: "Obligatoire dès qu'un visuel est renseigné, sans exception (RGAA 1.1). Cinq caractères au minimum."
+        hint: "L'UNIQUE dispositif visuel d'une fiche : un dessin FT2E, sans géométrie d'ouvrage ni droit de tiers. Les cinq pièces (planche.svg, vignette.svg, appui.svg, planche.png, planche.json) sont produites ensemble et déposées telles quelles — elles ne se modifient pas ici. Le visuel photographique a été retiré du modèle le 2026-08-15 : il exposait le bureau au droit d'auteur des architectes."
 
       - label: "Mis en avant en accueil"
         name: "en_avant"
@@ -233,12 +220,6 @@ collections:
         widget: "boolean"
         default: false
         hint: "Cocher si les données ne sont pas encore confirmées par FT2E. Une fiche cochée doit avoir sa référence d'affaire VIDE ; une fiche décochée doit l'avoir renseignée."
-
-      - label: "Motif de la démonstration"
-        name: "demo_reason"
-        widget: "string"
-        required: false
-        hint: "Ce qui reste à confirmer sur cette fiche (chiffres, MOA, performance). N'a de sens que si « Contenu de démonstration » est coché."
 
       - label: "Récit projet"
         name: "body"
@@ -393,12 +374,6 @@ collections:
         widget: "boolean"
         default: true
         hint: "Distingue associés / collaborateurs (n'affecte pas l'affichage)"
-
-      - label: "Email contact"
-        name: "contact_email"
-        widget: "string"
-        required: false
-        pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', 'Adresse email valide']
 
   # ───────────────── EXPERTISES (édition seule) ─────────────────
   - name: "expertises"

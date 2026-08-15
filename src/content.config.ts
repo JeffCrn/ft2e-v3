@@ -115,40 +115,21 @@ const projets = defineCollection({
      * Une planche remplace le visuel photographique : elle est dessinée par
      * FT2E à partir de sa propre matière technique, ne reproduit aucune
      * géométrie d'ouvrage, et ne passe donc ni au duotone ni aux équerres.
+     *
+     * OBLIGATOIRE depuis la clôture du chantier des planches (2026-08-15). Les
+     * champs `image_principale` / `image_principale_alt` ont été retirés : les
+     * vingt-trois fiches portent leur planche, et le visuel photographique
+     * exposait le bureau au droit d'auteur des architectes — c'est la raison
+     * d'être du chantier. Une fiche projet n'a donc plus qu'un dispositif
+     * visuel, et le champ le dit en étant requis plutôt qu'en étant arbitré
+     * par un `superRefine` : une règle qui n'a plus d'alternative à départager
+     * est un contrôle qui ment sur ce qu'il contrôle.
      */
     planche: z.string().regex(/^\/images\/projets\/[a-z0-9-]+\/planche\.svg$/,
-      'Chemin attendu : /images/projets/<slug>/planche.svg').optional(),
-    /**
-     * Visuel photographique — optionnel depuis l'introduction des planches.
-     * Une fiche porte l'un ou l'autre ; le build refuse qu'elle n'ait ni l'un
-     * ni l'autre (voir `superRefine`).
-     */
-    image_principale: z.string().optional(),
-    image_principale_alt: z.string().min(5).optional(),
+      'Chemin attendu : /images/projets/<slug>/planche.svg'),
     en_avant: z.boolean().default(false),
     demo: z.boolean().default(false),
-    demo_reason: z.string().optional(),
   }).superRefine((data, ctx) => {
-    // Une fiche montre quelque chose : une planche, ou un visuel, ou les deux —
-    // jamais rien. Le champ visuel était obligatoire avant les planches ; il est
-    // devenu optionnel, et c'est cette règle qui empêche l'optionnalité de
-    // dégénérer en fiche muette.
-    if (!data.planche && !data.image_principale) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ['planche'],
-        message: 'Une fiche doit porter une planche (« planche ») ou un visuel (« image_principale »).',
-      });
-    }
-    // Un visuel sans alternative textuelle est un défaut RGAA bloquant : le
-    // champ d'alternative suit l'optionnalité du visuel, il ne s'en affranchit pas.
-    if (data.image_principale && !data.image_principale_alt) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ['image_principale_alt'],
-        message: 'Un visuel exige son alternative textuelle (RGAA 1.1).',
-      });
-    }
     if (!data.demo && !data.reference) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -215,7 +196,6 @@ const equipe = defineCollection({
     photo_alt: z.string().min(5),
     ordre: z.number().int(),
     associe: z.boolean().default(true),
-    contact_email: z.string().email().optional(),
   }),
 });
 

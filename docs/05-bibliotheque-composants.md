@@ -1,5 +1,17 @@
 # 05 · Bibliothèque de composants
 
+> ⚠️ **DOCUMENT HISTORIQUE — v1 « Apple-style » (2026-05).** Il décrit des jetons
+> (`apple-blue`, `light-gray`, `near-black`), des formes (`rounded-lg`, pilules
+> `rounded-[980px]`) et des composants qui **n'existent plus** : la charte v3 « plans et
+> profondeur » les a tous remplacés, et neuf des composants listés ici ont été supprimés
+> le 2026-08-15 faute d'être importés nulle part (`AcronymeFT2E`, `BandeauPartenaires`,
+> `CartesExpertises`, `ChiffresCles`, `EquipePreview`, `ReferencesRecentes`,
+> `SchemaTechnique`, `SecteursPhares`, `Capsule`).
+>
+> **Source de vérité du design system :** `.claude/rules/tailwind-design-tokens.md`.
+> **Inventaire réel des composants :** `src/components/` — il fait foi, pas ce tableau.
+> Conservé pour l'historique du projet, comme `docs/02-design-system.md`.
+
 Inventaire de tous les composants Astro du site. **Ce document est vivant** : toute création de composant impose une mise à jour de cette liste, dans la même PR.
 
 ## Conventions

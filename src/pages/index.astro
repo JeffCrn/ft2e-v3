@@ -18,9 +18,6 @@ const enAvant = (await getCollection('projets'))
   .filter((p) => p.data.en_avant)
   .sort(parAffaireDecroissante)[0];
 
-const heroImageExiste = Boolean(enAvant?.data.image_principale)
-  && fs.existsSync(path.join(process.cwd(), 'public', enAvant!.data.image_principale!));
-
 // Fiche vedette illustrée par une planche : le hero rend son APPUI —
 // une troisième composition (552 x 368), dessinée pour la largeur où la
 // colonne média la lit. La planche entière (1200) y tomberait à l'échelle
@@ -107,42 +104,22 @@ const partenaires = [
   >
     {enAvant && (
       <Fragment slot="media">
-        {/* Sous `sm`, seul un média qui se LIT s'affiche : la photographie.
-            L'appui (composé pour ~552 px) y tomberait à l'échelle 0,62 — mono
-            de 10 rendu à 6,2 px — et la hachure de repli est un décor
-            `aria-hidden` qui coûte un écran de défilement sans rien montrer.
-            L'un et l'autre disparaissent donc du téléphone ; la carte-lien de
-            la vedette, elle, reste — c'est elle qui informe. */}
-        {heroAppui ? (
-          <div class="plan-pose hidden sm:block" set:html={heroAppui} />
-        ) : (
-        <div class:list={['relative aspect-[3/2]', heroImageExiste ? 'duotone-photo' : 'duotone-media hidden sm:block']}>
-          {heroImageExiste && (
-            <img
-              src={enAvant.data.image_principale}
-              alt={enAvant.data.image_principale_alt}
-              class="w-full h-full object-cover"
-            />
-          )}
-          <CoinsCuivre taille={18} />
-          <div class="absolute left-[12.5%] top-8 flex items-center gap-2.5 z-10" aria-hidden="true">
-            <span class:list={['block w-14 h-px', heroImageExiste ? 'bg-voile' : 'bg-pivot']}></span>
-            <span class:list={['mono-label font-normal text-[10px]', heroImageExiste ? 'text-voile' : 'text-pivot']}>
-              {enAvant.data.demo ? '[démo] ' : ''}{enAvant.data.mission_ft2e.slice(0, 2).join(' · ').toLowerCase()}
-            </span>
-          </div>
-        </div>
-        )}
+        {/* Sous `sm`, la vedette n'affiche AUCUN média : l'appui (composé pour
+            ~552 px) y tomberait à l'échelle 0,62 — mono de 10 rendu à 6,2 px.
+            Seule la carte-lien reste, c'est elle qui informe (décision FT2E du
+            2026-08-14). La branche photographique a été retirée à la clôture
+            du chantier des planches : `planche` est obligatoire au schéma,
+            donc une fiche vedette a toujours son appui. */}
+        <div class="plan-pose hidden sm:block" set:html={heroAppui} />
         {/* La carte-lien SUIT son visuel : seule sous le titre, sans le dessin
             qu'elle légende, elle se lit comme un bloc orphelin — on se demande
-            ce qu'elle fait là (retour FT2E du 2026-08-14). Quand le visuel est
-            masqué sous `sm`, elle l'est aussi ; la vedette reste accessible
-            par « Nos références ». Seule une photographie garde carte et
-            visuel à toute taille. */}
+            ce qu'elle fait là (retour FT2E du 2026-08-14). L'appui étant masqué
+            sous `sm`, la carte l'est aussi ; la vedette reste accessible par
+            « Nos références ». */}
         <a
           href={`/references/${enAvant.id}`}
           class:list={[
-            heroAppui || !heroImageExiste ? 'hidden sm:flex' : 'flex',
+            'hidden sm:flex',
             'flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier',
           ]}
         >

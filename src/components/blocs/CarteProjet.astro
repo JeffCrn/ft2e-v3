@@ -1,24 +1,23 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import fs from 'node:fs';
-import path from 'node:path';
-import CoinsCuivre from '../primitives/CoinsCuivre.astro';
 import PlancheReference from './PlancheReference.astro';
 import { libelleChronologie } from '../../lib/projets';
 
 // Vignette de projet — charte v3 (§ 09/10) : un plan posé (bordure 1 px
-// filet-2, ombre de rang 1), média duotone 3:2 à équerres, pied cartouche
+// filet-2, ombre de rang 1), vignette de planche 3:2, pied cartouche
 // calcaire avec intitulé et données mono. Le survol bascule le pied du
 // calcaire au papier (300 ms) — aucun déplacement, le plan ne bouge pas.
+//
+// La branche photographique a été retirée à la clôture du chantier des
+// planches (2026-08-15) : `planche` est devenu obligatoire au schéma, et un
+// `fs.existsSync` sur un champ qui n'existe plus n'était plus un garde-fou
+// mais un chemin mort.
 interface Props {
   projet: CollectionEntry<'projets'>;
 }
 
 const { projet } = Astro.props;
-const { titre, lieu, demo, planche, image_principale, image_principale_alt } = projet.data;
-
-const imageExiste = Boolean(image_principale)
-  && fs.existsSync(path.join(process.cwd(), 'public', image_principale!));
+const { titre, lieu, demo, planche } = projet.data;
 
 // Pied de vignette : lieu, puis chronologie publique (ADR-003). La vignette
 // est rendue au pied de chaque fiche projet (ProjetsSimilaires) — c'est par
@@ -32,26 +31,12 @@ const cartouche = `${lieu} · ${libelleChronologie(projet)}`;
       — le recadrage est composé pour que le motif du dessin reste lisible.
       Ni duotone ni équerres : la planche est déjà dans les jetons, et les
       équerres sont un repère de tirage photographique. */}
-  {planche ? (
-    <div class="aspect-[3/2] relative shrink-0 border-b border-filet-3 bg-papier overflow-hidden">
-      <PlancheReference src={planche} variante="vignette" />
-    </div>
-  ) : (
-  <div class:list={['aspect-[3/2] relative shrink-0', imageExiste ? 'duotone-photo' : 'duotone-media']}>
-    {imageExiste && (
-      <img
-        src={image_principale}
-        alt={image_principale_alt}
-        class="w-full h-full object-cover"
-        loading="lazy"
-      />
-    )}
-    <CoinsCuivre />
+  <div class="aspect-[3/2] relative shrink-0 border-b border-filet-3 bg-papier overflow-hidden">
+    <PlancheReference src={planche} variante="vignette" />
     {demo && (
-      <span class:list={['absolute right-3 top-2.5 mono-label font-normal z-10', imageExiste ? 'text-voile' : 'text-pivot']}>[démo]</span>
+      <span class="absolute right-3 top-2.5 mono-label font-normal text-pivot z-10">[démo]</span>
     )}
   </div>
-  )}
   <div class="flex-1 bg-calcaire border-t border-filet-2 px-4 py-3.5 transition-colors duration-300 ease-[var(--ease-blueprint)] group-hover:bg-papier">
     <h3 class="type-intitule text-encre text-[15px]">
       {titre}

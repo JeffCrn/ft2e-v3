@@ -135,6 +135,43 @@ silencieuse du tronc.
 
 ---
 
+## Le nettoyage de clôture — 2026-08-15
+
+Le chantier laissait derrière lui du code que rien n'appelait plus. Relevé par mesure, pas
+par impression, et retiré dans le même mouvement que la clôture.
+
+| Retiré | Volume | Motif |
+|---|---|---|
+| Les 25 visuels d'origine des fiches (`01.jpg`, `01-recadre.jpg`) | 6,1 Mo | plus référencés nulle part depuis la 23ᵉ planche — ce sont les perspectives d'architecte et les extraits de plan qui ont motivé le chantier |
+| `image_principale` / `image_principale_alt` | schéma Zod, Decap, 4 branches de rendu | zéro fiche les portait ; `planche` devient **obligatoire** |
+| Le `superRefine` « planche OU visuel » | 14 lignes | une règle qui n'a plus d'alternative à départager ment sur ce qu'elle contrôle |
+| Neuf composants sans aucun import | 406 lignes | `AcronymeFT2E`, `BandeauPartenaires`, `CartesExpertises`, `ChiffresCles`, `EquipePreview`, `ReferencesRecentes`, `SchemaTechnique`, `SecteursPhares`, `Capsule` |
+| `demo_reason`, `contact_email` | schéma Zod + Decap | renseignés dans zéro fichier de contenu, lus nulle part |
+| `@fontsource-variable/inter` | une dépendance | la charte v3 ne charge qu'Archivo et IBM Plex Mono |
+| Deux SVG de logo orphelins | 2 Ko | aucun appel dans `src/` |
+
+**Ce qui a été gardé alors qu'il paraissait mort**, et pourquoi :
+
+- **`.bg-profond :focus-visible` et `.polarite-profonde :focus-visible`** (`global.css`) :
+  aucun composant n'emploie ces deux classes aujourd'hui. Ce ne sont pas des règles mortes,
+  ce sont les **garde-fous de l'amendement A4** — le pivot est invisible sur réserve
+  profonde (2,85), et ces sélecteurs garantissent l'anneau clair au premier bloc sombre
+  qui apparaîtra. Une règle défensive ne se mesure pas à son taux d'emploi.
+- **`associe`, `formation`, `icone`** : renseignés dans 7, 6 et 4 fichiers de contenu,
+  affichés nulle part. Ce n'est pas un champ mort, c'est **du contenu sans affichage** —
+  la page Équipe pourrait montrer la formation. Décision reportée aux optimisations.
+- **`fs.existsSync`** : le motif ne sert plus les fiches projet, mais toujours les
+  photographies d'équipe, qui manquent jusqu'au reportage. La règle
+  `.claude/rules/astro-conventions.md` a été **réécrite** en conséquence : elle décrivait
+  un code qui n'existait plus, ce qui est pire qu'une règle absente.
+
+⚠️ **La suppression des 25 visuels ne les efface pas du dépôt public.** Ils restent dans
+l'historique git, donc dans tout clone. Le site publié ne les sert plus — c'était l'objet
+du chantier — mais si l'exposition au droit d'auteur doit être effacée du dépôt lui-même,
+il faut une réécriture d'historique, qui invalide tous les SHA. Point ouvert, décision FT2E.
+
+---
+
 ## Ce que fait une session
 
 1. **Lire la fiche entière** — frontmatter et corps. Jamais un résumé, jamais la page rendue.
