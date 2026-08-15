@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de l’individualisation des fluides : une chaufferie gaz à condensation en cascade et une distribution d’eau froide alimentent une colonne collective qui dessert 21 modules thermiques d’appartement — un par logement, sept T1, huit T1 bis et six T2. Le détail d’un logement montre les deux arrivées collectives et les trois services comptés au module — la chaleur vers les radiateurs et sèche-serviettes, l’eau chaude produite au module, l’eau froide — vers la salle d’eau, la kitchenette et la machine à laver.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">COMPTER PAR LOGEMENT</text>
+  <rect x="24.00" y="64.00" width="126.00" height="60.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="34.00" y="90.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaufferie gaz</text>
+  <text x="34.00" y="110.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EN CASCADE</text>
+  <rect x="24.00" y="148.00" width="126.00" height="48.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="34.00" y="176.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Eau froide</text>
+  <path d="M 150.00 84.00 L 210.00 84.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 150.00 98.00 L 210.00 98.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 185.00 84.00 L 178.00 80.50 L 178.00 87.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 168.00 98.00 L 175.00 94.50 L 175.00 101.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 150.00 172.00 L 210.00 172.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 185.00 172.00 L 178.00 168.50 L 178.00 175.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="210.00" y="74.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">21 MODULES — UN PAR LOGEMENT</text>
+  <path d="M 210.00 88.00 L 210.00 303.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 210.00 88.00 L 222.00 88.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="84.00" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 98.40 L 222.00 98.40" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="94.40" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 108.80 L 222.00 108.80" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="104.80" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 119.20 L 222.00 119.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="115.20" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 129.60 L 222.00 129.60" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="125.60" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 140.00 L 222.00 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="136.00" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 150.40 L 222.00 150.40" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="146.40" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 164.40 L 222.00 164.40" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="160.40" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 174.80 L 222.00 174.80" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="170.80" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 185.20 L 222.00 185.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="181.20" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 195.60 L 222.00 195.60" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="191.60" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 206.00 L 222.00 206.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="202.00" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 216.40 L 222.00 216.40" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="212.40" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 226.80 L 222.00 226.80" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="222.80" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 237.20 L 222.00 237.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="233.20" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 251.20 L 222.00 251.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="247.20" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 261.60 L 222.00 261.60" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="257.60" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 272.00 L 222.00 272.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="268.00" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 282.40 L 222.00 282.40" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="278.40" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 292.80 L 222.00 292.80" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="288.80" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 210.00 303.20 L 222.00 303.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="222.00" y="299.20" width="12.00" height="8.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="246.00" y="122.20" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">7 T1</text>
+  <text x="246.00" y="203.80" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">8 T1 BIS</text>
+  <text x="246.00" y="280.20" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">6 T2</text>
+  <path d="M 234.00 191.60 L 320.00 96.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 234.00 199.60 L 320.00 300.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <rect x="320.00" y="96.00" width="108.00" height="204.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="332.00" y="126.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Module</text>
+  <text x="332.00" y="144.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">thermique</text>
+  <text x="332.00" y="162.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">d’appartement</text>
+  <text x="434.00" y="126.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHALEUR</text>
+  <path d="M 428.00 140.00 L 504.00 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <circle cx="458.00" cy="140.00" r="7.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 512.00 140.00 L 504.00 136.00 L 504.00 144.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="434.00" y="191.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EAU CHAUDE</text>
+  <path d="M 428.00 205.00 L 504.00 205.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <circle cx="458.00" cy="205.00" r="7.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 512.00 205.00 L 504.00 201.00 L 504.00 209.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="434.00" y="256.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EAU FROIDE</text>
+  <path d="M 428.00 270.00 L 504.00 270.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <circle cx="458.00" cy="270.00" r="7.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 512.00 270.00 L 504.00 266.00 L 504.00 274.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="24.00" y="340.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TROIS SERVICES COMPTÉS AU MODULE</text>
+</svg>

@@ -1905,9 +1905,446 @@ def composer_appui_appariement(donnees):
         bas=f"boîtes basses à 340, marge basse {AH - 340} px")
 
 
+# ═══ Mécanisme `individualisation` — le collectif produit, chaque logement compte ═══
+#
+# Maison relais de Saint-Jean-d'Angély : une chaufferie gaz à condensation en
+# cascade et une distribution d'eau froide alimentent une colonne collective qui
+# dessert 21 modules thermiques d'appartement — un par logement (7 T1, 8 T1 bis,
+# 6 T2). Le détail d'UN logement montre le mécanisme : deux arrivées collectives,
+# trois départs comptés (chaleur, eau chaude produite au module, eau froide).
+# La démonstration est géométrique : le collectif entre d'un côté de la pile,
+# l'individuel comptés sort de l'autre — deux traits deviennent soixante-trois.
+
+I_PX0, I_PX1 = 56, 310          # les boîtes de production, à gauche
+I_CH_Y0, I_CH_Y1 = 264, 352     # la chaufferie
+I_EF_Y0, I_EF_Y1 = 420, 480     # l'eau froide
+I_XCOL = 500                    # la colonne collective (trait vertical)
+I_MX0, I_MX1 = 516, 530         # la pile des 21 modules (petits carrés)
+I_M_H, I_M_G, I_M_GG = 14, 4, 10    # module, écart, écart de groupe
+I_MY0 = 258                     # haut du premier module
+I_BX0, I_BX1 = 640, 1144        # le bloc du logement détaillé
+I_BY0, I_BY1 = 320, 616
+I_DX0, I_DX1 = 720, 880         # le module agrandi
+I_Y_ARR = (420, 436)            # arrivée chaleur (aller / retour)
+I_Y_EF = 520                    # arrivée eau froide
+I_Y_DEP = (400, 470, 540)       # départs comptés : chaleur, eau chaude, eau froide
+I_XCPT, I_XFLECHE, I_XTERM = 928, 1008, 1020
+
+
+def _piles_modules(y0, h, g, gg, groupes):
+    """Les ordonnées (haut) des modules, groupés par typologie ; renvoie les
+    tops groupe par groupe et l'étendue (haut, bas) de chaque groupe."""
+    tops, etendues = [], []
+    y = y0
+    for n in groupes:
+        rang = []
+        for _ in range(n):
+            rang.append(y)
+            y += h + g
+        tops.append(rang)
+        etendues.append((rang[0], rang[-1] + h))
+        y += gg - g
+    return tops, etendues
+
+
+def composer_individualisation(donnees):
+    ind = donnees["individualisation"]
+    elems = {e["cle"]: e for e in ind["elements"]}
+    det = ind["detail"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête et registres ─────────────────────────────────────────────────
+    controler("en-tête schéma", ind["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, ind["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(MARGE, Y_REGISTRES, ind["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_REGISTRES, ind["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Les deux productions collectives, à gauche ───────────────────────────
+    ch = elems["chaufferie"]
+    A(rect_bord(I_PX0, I_CH_Y0, I_PX1 - I_PX0, I_CH_Y1 - I_CH_Y0,
+                "papier", "filet-1"))
+    lib_ch = ch.get("libelle_dessin", ch["libelle"])
+    controler("libellé chaufferie", lib_ch, 15, "sans-600", I_PX1 - I_PX0 - 32)
+    A(texte(I_PX0 + 16, I_CH_Y0 + 28, lib_ch, "sans", 15, 600, "encre",
+            wdth=112))
+    for k, l in enumerate(ch["detail"]):
+        controler(f"détail chaufferie {k + 1}", l, 10, "mono",
+                  I_PX1 - I_PX0 - 32, 10 * 0.14)
+        A(texte(I_PX0 + 16, I_CH_Y0 + 48 + k * 16, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    ef = elems["eau-froide"]
+    A(rect_bord(I_PX0, I_EF_Y0, I_PX1 - I_PX0, I_EF_Y1 - I_EF_Y0,
+                "papier", "filet-1"))
+    controler("libellé eau froide", ef["libelle"], 15, "sans-600",
+              I_PX1 - I_PX0 - 32)
+    A(texte(I_PX0 + 16, I_EF_Y0 + 26, ef["libelle"], "sans", 15, 600, "encre",
+            wdth=112))
+    controler("détail eau froide", ef["detail"][0], 10, "mono",
+              I_PX1 - I_PX0 - 32, 10 * 0.14)
+    A(texte(I_PX0 + 16, I_EF_Y0 + 46, ef["detail"][0], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Les flux collectifs vers la colonne ──────────────────────────────────
+    y_al, y_re = 296, 312          # chaleur : aller et retour
+    arr_ch, arr_ef = det["arrivees"][0], det["arrivees"][1]
+    controler("étiquette chaleur", arr_ch["etiquette"], 10, "mono",
+              I_XCOL - I_PX1 - 20, 10 * 0.14)
+    A(texte(I_PX1 + 12, y_al - 12, arr_ch["etiquette"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(ligne(I_PX1, y_al, I_XCOL, y_al, "encre", 1.5))
+    A(ligne(I_PX1, y_re, I_XCOL, y_re, "encre", 1.5))
+    for x in (400, 480):
+        A(fleche(x, y_al, "encre", "droite", 9))
+    for x in (340, 420):
+        A(fleche(x, y_re, "encre", "gauche", 9))
+
+    y_ef = 450
+    controler("étiquette eau froide", arr_ef["etiquette"], 10, "mono",
+              I_XCOL - I_PX1 - 20, 10 * 0.14)
+    A(texte(I_PX1 + 12, y_ef - 12, arr_ef["etiquette"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(ligne(I_PX1, y_ef, I_XCOL, y_ef, "encre", 1.5))
+    for x in (400, 480):
+        A(fleche(x, y_ef, "encre", "droite", 9))
+
+    # ── La colonne collective et la pile des 21 modules ──────────────────────
+    groupes = [t["nombre"] for t in ind["typologies"]]
+    tops, etendues = _piles_modules(I_MY0, I_M_H, I_M_G, I_M_GG, groupes)
+    dernier_centre = tops[-1][-1] + I_M_H / 2
+    A(ligne(I_XCOL, tops[0][0] + I_M_H / 2, I_XCOL, dernier_centre,
+            "encre", 1.5))
+    for rang in tops:
+        for t in rang:
+            cy = t + I_M_H / 2
+            A(ligne(I_XCOL, cy, I_MX0, cy, "encre", 1))
+            A(rect_bord(I_MX0, t, I_MX1 - I_MX0, I_M_H, "papier", "filet-1"))
+
+    controler("étiquette de la colonne", ind["colonne"]["etiquette"], 10,
+              "mono", I_BX1 - I_XCOL, 10 * 0.14)
+    A(texte(I_XCOL, I_MY0 - 8, ind["colonne"]["etiquette"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    for t_typ, (g0, g1) in zip(ind["typologies"], etendues):
+        controler(f"tag {t_typ['tag']}", t_typ["tag"], 10, "mono",
+                  90, 10 * 0.14)
+        A(texte(I_MX1 + 14, (g0 + g1) / 2 + 3, t_typ["tag"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # ── Le rappel d'agrandissement : un module tiré vers le détail ───────────
+    tire = tops[1][3]              # au sein des T1 bis — le groupe médian
+    A(ligne(I_MX1, tire, I_BX0, I_BY0, "filet-1", 1))
+    A(ligne(I_MX1, tire + I_M_H, I_BX0, I_BY1, "filet-1", 1))
+
+    # ── Le logement détaillé — un bloc topologique, pas un plan ──────────────
+    controler("tag du détail", det["tag"], 10, "mono",
+              I_BX1 - I_BX0, 10 * 0.14)
+    A(texte(I_BX0, I_BY0 - 12, det["tag"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(rect(I_BX0, I_BY0, I_BX1 - I_BX0, I_BY1 - I_BY0, "calcaire"))
+
+    # Les deux arrivées collectives, reprises à l'échelle du logement.
+    controler("arrivée chaleur (détail)", arr_ch["etiquette"], 10, "mono",
+              I_DX0 - I_BX0 - 4, 10 * 0.14)
+    A(texte(I_BX0, I_Y_ARR[0] - 12, arr_ch["etiquette"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(ligne(I_BX0, I_Y_ARR[0], I_DX0, I_Y_ARR[0], "encre", 1.5))
+    A(ligne(I_BX0, I_Y_ARR[1], I_DX0, I_Y_ARR[1], "encre", 1.5))
+    A(fleche(I_DX0 - 8, I_Y_ARR[0], "encre", "droite", 8))
+    A(fleche(I_BX0 + 16, I_Y_ARR[1], "encre", "gauche", 8))
+    # L'étiquette passe SOUS sa ligne : au-dessus, elle se lisait en enfilade
+    # avec « EAU CHAUDE PRODUITE AU MODULE » de l'autre côté de la paroi.
+    controler("arrivée eau froide (détail)", arr_ef["etiquette"], 10, "mono",
+              I_DX0 - I_BX0 - 4, 10 * 0.14)
+    A(texte(I_BX0, I_Y_EF + 16, arr_ef["etiquette"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(ligne(I_BX0, I_Y_EF, I_DX0, I_Y_EF, "encre", 1.5))
+    A(fleche(I_DX0 - 8, I_Y_EF, "encre", "droite", 8))
+
+    # Le module agrandi : deux arrivées, trois départs, un échangeur.
+    A(rect_bord(I_DX0, 348, I_DX1 - I_DX0, 572 - 348, "papier", "filet-1"))
+    # (les étiquettes de départ acceptent une ou deux lignes — voir plus bas)
+    for k, l in enumerate(det["module"]["libelle"]):
+        controler(f"libellé module {k + 1}", l, 15, "sans-600",
+                  I_DX1 - I_DX0 - 24)
+        A(texte(I_DX0 + 12, 376 + k * 18, l, "sans", 15, 600, "encre",
+                wdth=112))
+    controler("détail module", det["module"]["detail"][0], 10, "mono",
+              I_DX1 - I_DX0 - 24, 10 * 0.14)
+    A(texte(I_DX0 + 12, 414, det["module"]["detail"][0], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    batterie(A, 824, 860, 446, 482)      # l'échangeur — l'eau chaude naît ici
+    for k, l in enumerate(det["production"]):
+        controler(f"production {k + 1}", l, 10, "mono",
+                  I_DX1 - I_DX0 - 24, 10 * 0.14)
+        A(texte(I_DX0 + 12, 500 + k * 16, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    # Les trois départs comptés — un compteur sur chacun.
+    for (y, dep) in zip(I_Y_DEP, det["departs"]):
+        A(ligne(I_DX1, y, I_XFLECHE - 8, y, "encre", 1.5))
+        A(fleche(I_XFLECHE, y, "encre", "droite", 9))
+        A(cercle(I_XCPT, y, 8, "papier", "encre"))
+        et = dep["etiquette"]
+        lignes_et = et if isinstance(et, list) else [et]
+        for k, l in enumerate(lignes_et):
+            controler(f"étiquette {dep['cle']} {k + 1}", l, 10, "mono",
+                      I_XFLECHE - (I_DX1 + 12), 10 * 0.14)
+            A(texte(I_DX1 + 12, y - 12 - (len(lignes_et) - 1 - k) * 14, l,
+                    "mono", 10, 500, "pivot", tracking=10 * 0.14))
+
+    # Les terminaux : le chauffage a les siens, les deux eaux les partagent.
+    term_ch = det["departs"][0]["terminal"]
+    for k, l in enumerate(term_ch):
+        controler(f"terminal chauffage {k + 1}", l, 15, "sans-400",
+                  I_BX1 - I_XTERM - 4)
+        A(texte(I_XTERM, I_Y_DEP[0] - 6 + k * 18, l, "sans", 15, 400,
+                "encre", wdth=100))
+    for k, l in enumerate(det["terminal_eau"]):
+        controler(f"terminal eau {k + 1}", l, 15, "sans-400",
+                  I_BX1 - I_XTERM - 4)
+        A(texte(I_XTERM, 490 + k * 18, l, "sans", 15, 400, "encre", wdth=100))
+
+    controler("mention du détail", det["mention"], 10, "mono",
+              I_BX1 - (I_BX0 + 20) - 10, 10 * 0.14)
+    A(texte(I_BX0 + 20, I_BY1 - 16, det["mention"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur ajustée, jamais codée ────────────────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "deux flux collectifs (la paire de chaleur, l'eau "
+                         f"froide) entrent dans la colonne x {I_XCOL} qui "
+                         f"dessert une pile de 21 modules identiques "
+                         f"(x {I_MX0}–{I_MX1}, trois groupes 7/8/6) ; UN module "
+                         "est tiré au détail par deux filets d'agrandissement : "
+                         "deux arrivées y entrent, TROIS départs en sortent, "
+                         "chacun barré d'un compteur — texte masqué, la "
+                         "multiplication (2 traits → 21 modules → 3 comptages) "
+                         "porte seule la thèse",
+        "topologie": f"productions (x {I_PX0}–{I_PX1} : chaufferie y "
+                     f"{I_CH_Y0}–{I_CH_Y1}, eau froide y {I_EF_Y0}–{I_EF_Y1}) "
+                     f"→ colonne (x {I_XCOL}) → pile des modules "
+                     f"(y {tops[0][0]}–{etendues[-1][1]}, groupes "
+                     f"{'/'.join(str(n) for n in groupes)}) ; détail "
+                     f"(x {I_BX0}–{I_BX1}, y {I_BY0}–{I_BY1}) : module agrandi "
+                     f"x {I_DX0}–{I_DX1}, départs y "
+                     f"{'/'.join(str(y) for y in I_Y_DEP)}, compteurs "
+                     f"x {I_XCPT} — l'ordre des typologies est celui de "
+                     "l'énumération de la fiche",
+        "bas_du_dessin": f"pile des modules jusqu'à {etendues[-1][1]}, bloc du "
+                         f"détail jusqu'à {I_BY1}, phrase de principe à "
+                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
+                         f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+                          "pas chiffrée (révision 4) ; le seul nombre du "
+                          "dessin est le décompte 21 (7 T1 · 8 T1 BIS · 6 T2), "
+                          "au mono 10 pivot le long de la pile",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_individualisation(donnees):
+    """La vignette : le motif entier — deux flux collectifs, la colonne, la
+    pile des 21 modules, un module tiré au détail avec ses trois compteurs —
+    et le nœud chiffré 21. Ce qu'elle laisse : les libellés de production,
+    les typologies, les terminaux — dix libellés dans 300 px ne se liraient
+    pas."""
+    ind = donnees["individualisation"]
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # Les flux collectifs et la colonne.
+    A(texte(V_MARGE, 50, "CHALEUR", "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+    A(ligne(V_MARGE, 58, 100, 58, "encre", 1.2))
+    A(ligne(V_MARGE, 66, 100, 66, "encre", 1.2))
+    A(fleche(62, 58, "encre", "droite", 6))
+    A(fleche(50, 66, "encre", "gauche", 6))
+    A(texte(V_MARGE, 96, "EAU FROIDE", "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+    A(ligne(V_MARGE, 104, 100, 104, "encre", 1.2))
+    A(fleche(62, 104, "encre", "droite", 6))
+
+    # La pile des 21 modules, en trois groupes.
+    groupes = [t["nombre"] for t in ind["typologies"]]
+    tops, etendues = _piles_modules(48, 4.2, 1.3, 4.0, groupes)
+    A(ligne(100, tops[0][0] + 2.1, 100, tops[-1][-1] + 2.1, "encre", 1.2))
+    for rang in tops:
+        for t in rang:
+            A(ligne(100, t + 2.1, 108, t + 2.1, "encre", 0.8))
+            A(rect_bord(108, t, 9, 4.2, "papier", "filet-1"))
+
+    # Un module tiré au détail : trois départs, trois compteurs.
+    tire = tops[1][3]
+    A(ligne(117, tire, 150, 54, "filet-1", 1))
+    A(ligne(117, tire + 4.2, 150, 170, "filet-1", 1))
+    A(rect_bord(150, 54, 72, 116, "papier", "filet-1"))
+    A(texte(158, 78, "Module", "sans", 12, 600, "encre", wdth=112))
+    A(texte(158, 92, "thermique", "sans", 12, 600, "encre", wdth=112))
+    for y in (80, 112, 144):
+        A(ligne(222, y, 254, y, "encre", 1.2))
+        A(cercle(236, y, 3.5, "papier", "encre", 1.2))
+        A(fleche(262, y, "encre", "droite", 6))
+
+    # Le nœud chiffré.
+    A(texte(V_MARGE, 186, "21 modules", "sans", 12, 600, "encre", wdth=112))
+    A(texte(96, 186, "UN PAR LOGEMENT", "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "deux flux collectifs, la colonne, la pile des 21 modules en "
+                 "trois groupes, un module tiré au détail avec ses trois "
+                 "compteurs — libellés de production, typologies et terminaux "
+                 "laissés à la planche",
+        "bas_du_dessin": f"pile jusqu'à {etendues[-1][1]:.0f}, nœuds chiffrés "
+                         "à y 186, marge basse 14 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_individualisation(donnees):
+    """L'appui du hero (mécanisme `individualisation`) : le motif à l'échelle
+    1 — les deux productions nommées, la colonne, la pile des 21 modules avec
+    ses trois typologies, le module agrandi et ses trois départs comptés. Ce
+    qu'il laisse : les terminaux, la mention, la phrase — ils vivent sur la
+    planche."""
+    ind = donnees["individualisation"]
+    elems = {e["cle"]: e for e in ind["elements"]}
+    det = ind["detail"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    # Les deux productions.
+    A(rect_bord(A_MARGE, 64, 126, 60, "papier", "filet-1"))
+    A(texte(A_MARGE + 10, 90, "Chaufferie gaz", "sans", 13, 600, "encre",
+            wdth=112))
+    A(texte(A_MARGE + 10, 110, "EN CASCADE", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(rect_bord(A_MARGE, 148, 126, 48, "papier", "filet-1"))
+    A(texte(A_MARGE + 10, 176, "Eau froide", "sans", 13, 600, "encre",
+            wdth=112))
+
+    # Les flux vers la colonne.
+    A(ligne(150, 84, 210, 84, "encre", 1.4))
+    A(ligne(150, 98, 210, 98, "encre", 1.4))
+    A(fleche(185, 84, "encre", "droite", 7))
+    A(fleche(168, 98, "encre", "gauche", 7))
+    A(ligne(150, 172, 210, 172, "encre", 1.4))
+    A(fleche(185, 172, "encre", "droite", 7))
+
+    # La colonne et la pile des 21 modules.
+    groupes = [t["nombre"] for t in ind["typologies"]]
+    tops, etendues = _piles_modules(84, 8, 2.4, 6.0, groupes)
+    A(texte(210, 74, "21 MODULES — UN PAR LOGEMENT", "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(ligne(210, tops[0][0] + 4, 210, tops[-1][-1] + 4, "encre", 1.4))
+    for rang in tops:
+        for t in rang:
+            A(ligne(210, t + 4, 222, t + 4, "encre", 1))
+            A(rect_bord(222, t, 12, 8, "papier", "filet-1"))
+    for t_typ, (g0, g1) in zip(ind["typologies"], etendues):
+        A(texte(246, (g0 + g1) / 2 + 3, t_typ["tag"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # Le module agrandi et ses trois départs comptés.
+    tire = tops[1][3]
+    A(ligne(234, tire, 320, 96, "filet-1", 1))
+    A(ligne(234, tire + 8, 320, 300, "filet-1", 1))
+    A(rect_bord(320, 96, 108, 204, "papier", "filet-1"))
+    A(texte(332, 126, "Module", "sans", 13, 600, "encre", wdth=112))
+    A(texte(332, 144, "thermique", "sans", 13, 600, "encre", wdth=112))
+    A(texte(332, 162, "d’appartement", "sans", 13, 600, "encre", wdth=112))
+    for y, lib in zip((140, 205, 270), ("CHALEUR", "EAU CHAUDE", "EAU FROIDE")):
+        A(texte(434, y - 14, lib, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        A(ligne(428, y, 504, y, "encre", 1.4))
+        A(cercle(458, y, 7, "papier", "encre"))
+        A(fleche(512, y, "encre", "droite", 8))
+
+    A(texte(A_MARGE, 340, "TROIS SERVICES COMPTÉS AU MODULE", "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="deux productions nommées, la colonne, la pile des 21 modules "
+              "en trois typologies (7 T1 · 8 T1 BIS · 6 T2), le module "
+              "agrandi et ses trois départs comptés — terminaux et mention "
+              "laissés à la planche",
+        bas=f"pile jusqu'à {etendues[-1][1]:.0f}, mention basse à 340, marge "
+            f"basse {AH - 340} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "individualisation" in donnees:
+        return composer_individualisation(donnees)
     if "appariement" in donnees:
         return composer_appariement(donnees)
     if "declinaison" in donnees:
@@ -1920,6 +2357,8 @@ def composer(donnees):
 
 
 def composer_vignette(donnees):
+    if "individualisation" in donnees:
+        return composer_vignette_individualisation(donnees)
     if "appariement" in donnees:
         return composer_vignette_appariement(donnees)
     if "declinaison" in donnees:
@@ -1932,6 +2371,8 @@ def composer_vignette(donnees):
 
 
 def composer_appui(donnees):
+    if "individualisation" in donnees:
+        return composer_appui_individualisation(donnees)
     if "appariement" in donnees:
         return composer_appui_appariement(donnees)
     if "declinaison" in donnees:

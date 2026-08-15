@@ -1,0 +1,219 @@
+{
+  "fiche": "maison-relais-saint-jean-d-angely",
+  "archetype": "boucle-fluide",
+  "archetype_motif": "La fiche porte deux mécanismes. Le premier — la RT existant globale, le calcul avant/après sous plafond — est celui que la planche de Maubec dessine déjà (sankey, mécanisme plafonds), la fiche s’y réfère elle-même par contraste avec Marennes, et ses trois chiffres (160,49, 98,84, 109,29) sont déjà portés par la page : le reprendre serait à la fois la redite que le registre proscrit et la répétition que la révision 4 interdit. La planche retient l’autre, que la fiche énonce littéralement : « chaque logement compte sa chaleur, son eau froide et son eau chaude par module thermique d’appartement ». Une chaufferie collective en cascade, une distribution d’eau froide, et 21 modules — un par logement — où le collectif devient individuel. La démonstration est géométrique : deux flux collectifs entrent dans une colonne qui dessert une pile de 21 modules identiques, et le détail d’un seul logement montre deux arrivées, trois départs, trois compteurs.",
+  "surtitre": "SCHÉMA DE PRINCIPE · LE COLLECTIF PRODUIT, CHAQUE LOGEMENT COMPTE",
+  "titre": "Maison relais Pasteur",
+  "sous_titre": "Une chaufferie collective, trois services comptés dans chaque logement",
+  "cartouche_legende": "SAINT-JEAN-D’ANGÉLY · 1 050 m² · 2021",
+  "aria_label": "Schéma de principe de l’individualisation des fluides : une chaufferie gaz à condensation en cascade et une distribution d’eau froide alimentent une colonne collective qui dessert 21 modules thermiques d’appartement — un par logement, sept T1, huit T1 bis et six T2. Le détail d’un logement montre les deux arrivées collectives et les trois services comptés au module — la chaleur vers les radiateurs et sèche-serviettes, l’eau chaude produite au module, l’eau froide — vers la salle d’eau, la kitchenette et la machine à laver.",
+  "individualisation": {
+    "entete": "UNE PRODUCTION COLLECTIVE · 21 MODULES THERMIQUES D’APPARTEMENT · TROIS SERVICES COMPTÉS PAR LOGEMENT",
+    "registres": {
+      "gauche": "LE COLLECTIF PRODUIT",
+      "droite": "CHAQUE LOGEMENT COMPTE"
+    },
+    "colonne": {
+      "etiquette": "21 MODULES THERMIQUES D’APPARTEMENT"
+    },
+    "typologies": [
+      {
+        "tag": "7 T1",
+        "nombre": 7
+      },
+      {
+        "tag": "8 T1 BIS",
+        "nombre": 8
+      },
+      {
+        "tag": "6 T2",
+        "nombre": 6
+      }
+    ],
+    "detail": {
+      "tag": "UN LOGEMENT PARMI 21 — SON MODULE EN DÉTAIL",
+      "module": {
+        "libelle": [
+          "Module thermique",
+          "d’appartement"
+        ],
+        "detail": [
+          "UN PAR LOGEMENT"
+        ]
+      },
+      "production": [
+        "EAU CHAUDE",
+        "PRODUITE AU MODULE"
+      ],
+      "arrivees": [
+        {
+          "cle": "chaleur",
+          "etiquette": "CHALEUR"
+        },
+        {
+          "cle": "eau-froide",
+          "etiquette": "EAU FROIDE"
+        }
+      ],
+      "departs": [
+        {
+          "cle": "chaleur",
+          "etiquette": [
+            "CHALEUR",
+            "COMPTÉE"
+          ],
+          "terminal": [
+            "Radiateurs et",
+            "sèche-serviettes"
+          ]
+        },
+        {
+          "cle": "eau-chaude",
+          "etiquette": [
+            "EAU CHAUDE",
+            "COMPTÉE"
+          ]
+        },
+        {
+          "cle": "eau-froide",
+          "etiquette": [
+            "EAU FROIDE",
+            "COMPTÉE"
+          ]
+        }
+      ],
+      "terminal_eau": [
+        "Salle d’eau,",
+        "kitchenette,",
+        "machine à laver"
+      ],
+      "mention": "L’INDIVIDUALISATION DES CHARGES, LOGEMENT PAR LOGEMENT"
+    },
+    "elements": [
+      {
+        "cle": "chaufferie",
+        "ordre": 1,
+        "libelle": "Chaufferie gaz à condensation en cascade",
+        "libelle_dessin": "Chaufferie gaz à condensation",
+        "detail": [
+          "EN CASCADE · PILOTÉE PAR GTC",
+          "RACCORDÉE AU COFFRET EXISTANT"
+        ]
+      },
+      {
+        "cle": "eau-froide",
+        "ordre": 2,
+        "libelle": "Eau froide",
+        "detail": [
+          "DISTRIBUTION COLLECTIVE"
+        ]
+      },
+      {
+        "cle": "modules",
+        "ordre": 3,
+        "libelle": "Modules thermiques d’appartement",
+        "valeur": "21",
+        "detail": [
+          "UN PAR LOGEMENT · 7 T1 · 8 T1 BIS · 6 T2"
+        ]
+      },
+      {
+        "cle": "comptage",
+        "ordre": 4,
+        "libelle": "Trois services comptés au module",
+        "detail": [
+          "CHALEUR · EAU CHAUDE · EAU FROIDE"
+        ],
+        "mention": "L’INDIVIDUALISATION DES CHARGES"
+      },
+      {
+        "cle": "chauffage",
+        "ordre": 5,
+        "libelle": "Radiateurs et sèche-serviettes",
+        "detail": [
+          "ALIMENTÉS À TRAVERS LE MODULE"
+        ]
+      },
+      {
+        "cle": "points-eau",
+        "ordre": 6,
+        "libelle": "Salle d’eau, kitchenette, machine à laver",
+        "detail": [
+          "EAU CHAUDE PRODUITE AU MODULE · EAU FROIDE COMPTÉE"
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Chaque logement compte sa chaleur, son eau froide et son eau chaude par module thermique d’appartement.",
+  "vignette_surtitre": "COMPTER PAR LOGEMENT",
+  "a_valider_ft2e": [
+    {
+      "objet": "L’eau chaude produite au module",
+      "la_source_affirme": "« Chaque logement compte sa chaleur, son eau froide et son eau chaude par module thermique d’appartement » — la fiche dit ce que le module COMPTE, jamais où l’eau chaude est PRODUITE.",
+      "le_dessin_suppose": "Que le module la produit sur place, depuis la boucle de chaufferie et l’eau froide : deux arrivées collectives, trois départs comptés, un échangeur dessiné dans le module. Si l’eau chaude est produite en chaufferie et distribuée collectivement, il manque une troisième arrivée et l’échangeur est faux."
+    },
+    {
+      "objet": "Le trajet de l’eau froide par le module",
+      "la_source_affirme": "Le logement « compte son eau froide » par module thermique d’appartement.",
+      "le_dessin_suppose": "Que la distribution d’eau froide passe physiquement dans le module, qui intègre son comptage. Si l’eau froide est comptée par un compteur divisionnaire distinct du module, le trait doit se séparer."
+    },
+    {
+      "objet": "L’ordre des typologies le long de la colonne",
+      "la_source_affirme": "« 21 logements autonomes (7 T1, 8 T1 bis, 6 T2) » — un décompte, sans aucune distribution spatiale.",
+      "le_dessin_suppose": "Une pile ordonnée T1 / T1 bis / T2 du haut vers le bas, dans l’ordre de l’énumération de la fiche. La colonne est topologique : elle ne code ni niveau ni position réelle des logements."
+    },
+    {
+      "objet": "Le logement détaillé pris parmi les huit T1 bis",
+      "la_source_affirme": "La fiche décrit un équipement identique pour les 21 logements — salle d’eau, kitchenette, poste de machine à laver — sans distinguer les modules entre eux.",
+      "le_dessin_suppose": "Que le module agrandi vaut pour les trois typologies : celui dessiné est pris dans le groupe médian, mais rien ne le distingue des vingt autres. Dire si une typologie fait exception."
+    },
+    {
+      "objet": "L’affectation des points d’eau aux deux services",
+      "la_source_affirme": "Chaque logement a « sa salle d’eau, sa kitchenette et son poste de machine à laver » ; la fiche ne dit pas quels points reçoivent l’eau chaude et lesquels la seule eau froide.",
+      "le_dessin_suppose": "Que les départs d’eau chaude et d’eau froide convergent vers les trois points sans les répartir : les distinguer service par service aurait été une invention."
+    },
+    {
+      "objet": "Le millésime 2021 du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2021 (champ annee), chantier démarré le 14 avril 2025, levée des réserves attendue fin août 2026 — pas d’annee_livraison au frontmatter, statut « en cours ».",
+      "le_dessin_suppose": "Que le cartouche porte 2021, le millésime d’ouverture — seul millésime arrêté sur pièce. À basculer sur l’année de réception une fois celle-ci prononcée."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 21-098 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tout montant : 2 068 000 € HT de travaux au dossier commercial, opération estimée à 1,85 M€ HT fin 2021.",
+    "Noms de tiers : la maîtrise d’ouvrage, le destinataire de l’ouvrage, l’agence d’architecture, les entreprises des seize lots.",
+    "Le volet réglementaire chiffré — 160,49 → 98,84 kWhep/m²/an, plafond de 109,29, −38 %, seuils des 1 000 m² et du quart de la valeur du bâti : la page les porte déjà, et le mécanisme du calcul sous plafond est celui de la planche de Maubec (sankey, mécanisme plafonds) — reprendre un mécanisme déjà dessiné est la redite que le registre proscrit.",
+    "L’enveloppe : ITE en laine de roche de 140 mm, toitures terrasse et bac acier, menuiseries à Uw ≤ 1,40 W/m²·K, perméabilité visée à 1,7 m³/(h·m²) — des organes d’enveloppe, pas le comptage dessiné.",
+    "La ventilation (hygroréglable dans les logements, double flux sur l’espace d’animation, dédiée aux bureaux) : elle ne passe pas par le module et ne s’y compte pas — un autre mécanisme, non retenu.",
+    "Le lot électricité : TGBT de 85 kVA, les 21 tableaux d’abonnés, VDI, télédistribution, alarme incendie, vidéophonie avec contrôle d’accès — la même individualisation par un autre lot, qui aurait doublé le dessin.",
+    "Toute géométrie d’ouvrage : le bâtiment de 1960 et ses strates, les 1 430 m² de SHON, l’espace d’animation de 89 m², l’implantation avenue Pasteur — la colonne et le logement détaillé sont topologiques.",
+    "Les jalons de chantier : désamiantage d’avril à juin 2025, démolition intérieure, seize lots, 51 comptes rendus, réception en cours de solde à l’été 2026 — matière d’une chronologie, pas d’un comptage."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "deux flux collectifs (la paire de chaleur, l'eau froide) entrent dans la colonne x 500 qui dessert une pile de 21 modules identiques (x 516–530, trois groupes 7/8/6) ; UN module est tiré au détail par deux filets d'agrandissement : deux arrivées y entrent, TROIS départs en sortent, chacun barré d'un compteur — texte masqué, la multiplication (2 traits → 21 modules → 3 comptages) porte seule la thèse",
+    "topologie": "productions (x 56–310 : chaufferie y 264–352, eau froide y 420–480) → colonne (x 500) → pile des modules (y 258–644, groupes 7/8/6) ; détail (x 640–1144, y 320–616) : module agrandi x 720–880, départs y 400/470/540, compteurs x 928 — l'ordre des typologies est celui de l'énumération de la fiche",
+    "bas_du_dessin": "pile des modules jusqu'à 644, bloc du détail jusqu'à 616, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 329 x 30 px = 9870 px², soit 1.03 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas chiffrée (révision 4) ; le seul nombre du dessin est le décompte 21 (7 T1 · 8 T1 BIS · 6 T2), au mono 10 pivot le long de la pile",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "103 signes — 876 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "deux flux collectifs, la colonne, la pile des 21 modules en trois groupes, un module tiré au détail avec ses trois compteurs — libellés de production, typologies et terminaux laissés à la planche",
+    "bas_du_dessin": "pile jusqu'à 168, nœuds chiffrés à y 186, marge basse 14 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "deux productions nommées, la colonne, la pile des 21 modules en trois typologies (7 T1 · 8 T1 BIS · 6 T2), le module agrandi et ses trois départs comptés — terminaux et mention laissés à la planche",
+    "bas_du_dessin": "pile jusqu'à 307, mention basse à 340, marge basse 28 px"
+  }
+}
