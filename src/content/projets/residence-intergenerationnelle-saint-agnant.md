@@ -14,8 +14,7 @@ performance: "RE2020 · Cep 84,8 kWhep/m²/an · 18 % sous l’exigence"
 synthese: >-
   À Saint-Agnant, la Foncière d’Habitat et Humanisme construit une résidence intergénérationnelle de 21 logements sociaux, rue du Collège, en plein centre-bourg. Une telle résidence ne se résume pas à une addition d’appartements : la salle commune et sa cuisine sont placées au cœur du bâtiment, les circulations sont étudiées pour favoriser les croisements entre résidents, et les logements des personnes âgées sont adaptés. FT2E porte l’étude thermique et trois lots techniques, dont le photovoltaïque, traité en lot de travaux autonome — fait peu courant à cette taille. Le calcul conclut à la conformité RE2020 sur les six indicateurs.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", Photovoltaïque]
-image_principale: "/images/projets/residence-intergenerationnelle-saint-agnant/01.jpg"
-image_principale_alt: "Perspective de la résidence intergénérationnelle de Saint-Agnant : un bâtiment en rez-de-chaussée plus un étage, enduit blanc et bardage bois vertical, balcons des logements côté jardin"
+planche: "/images/projets/residence-intergenerationnelle-saint-agnant/planche.svg"
 en_avant: false
 ---
 

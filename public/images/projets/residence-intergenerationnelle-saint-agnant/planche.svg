@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe du bilan d'énergie primaire d'une zone de calcul. Une opération de logements est partagée en deux zones : les logements d'un côté, l'espace commun de l'autre, un dixième de la surface. La production d'un lot photovoltaïque autonome alimente les services généraux de la seule zone commune. Le plafond réglementaire de cette zone autorise une consommation de 90 kWhep/m²/an ; son bilan s'établit à −221,8 kWhep/m²/an, au-dessous du zéro, soit deux fois et demie la profondeur de la bande autorisée — la production dépasse les besoins de la zone.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · UNE ZONE DE CALCUL SOUS LE ZÉRO</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Résidence intergénérationnelle</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Un lot photovoltaïque autonome porte une zone de calcul sous le zéro</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L'OPÉRATION EN DEUX ZONES DE CALCUL · LE BILAN D'ÉNERGIE PRIMAIRE DE LA SECONDE</text>
+  <rect x="56.00" y="208.00" width="404.00" height="72.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="70.00" y="232.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Photovoltaïque, lot de travaux autonome</text>
+  <text x="70.00" y="252.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CCTP, DÉCOMPOSITION DU PRIX ET PLANS PROPRES</text>
+  <text x="70.00" y="268.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PANNEAUX · ONDULEUR · PROTECTIONS · ARRÊT D'URGENCE</text>
+  <path d="M 460.00 244.00 L 1081.45 244.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 1081.45 244.00 L 1081.45 300.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 1081.45 310.00 L 1076.45 300.00 L 1086.45 300.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="652.43" y="232.00" width="236.60" height="18.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="770.73" y="244.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">ALIMENTE LES SERVICES GÉNÉRAUX</text>
+  <text x="56.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZONE DE CALCUL 1 · LES 21 LOGEMENTS · 769,74 m² HABITABLES</text>
+  <rect x="56.00" y="310.00" width="962.91" height="48.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <rect x="1018.91" y="310.00" width="125.09" height="48.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="70.00" y="328.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">8 T1 DE 25 m² · 10 T2 DE 37,5 m² · 3 T3 DE 50 m²</text>
+  <text x="70.00" y="346.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHARGES COMPTÉES LOGEMENT PAR LOGEMENT</text>
+  <text x="1144.00" y="374.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">ZONE DE CALCUL 2 · L'ESPACE COMMUN · 100 m² ENVIRON</text>
+  <text x="56.00" y="374.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ÉNERGIE PRIMAIRE DE LA ZONE 2 · kWhep/m²/an</text>
+  <path d="M 1018.91 358.00 L 1018.91 392.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 1144.00 358.00 L 1144.00 392.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 56.00 392.00 L 1144.00 392.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="1018.91" y="392.00" width="125.09" height="73.89" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="1002.91" y="418.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">PLAFOND DE LA ZONE — 90 kWhep/m²/an</text>
+  <text x="1002.91" y="438.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LA BANDE AUTORISÉE : TOUT CE QUE LE PLAFOND LAISSE CONSOMMER À LA ZONE</text>
+  <path d="M 56.00 465.89 L 1144.00 465.89" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="56.00" y="485.89" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZÉRO — AU-DESSOUS, LA ZONE PRODUIT PLUS D'ÉNERGIE PRIMAIRE QU'ELLE N'EN CONSOMME</text>
+  <rect x="1018.91" y="465.89" width="125.09" height="182.11" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 1018.91 539.79 L 1144.00 539.79" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 1018.91 613.68 L 1144.00 613.68" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="56.00" y="559.79" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TRAITS AU PAS DU PLAFOND — LA COLONNE EN DESCEND DEUX ET DEMIE SOUS LE ZÉRO</text>
+  <path d="M 56.00 648.00 L 1144.00 648.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="1002.91" y="520.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">BILAN D'ÉNERGIE PRIMAIRE DE LA ZONE 2 — LA PRODUCTION DÉPASSE LES BESOINS</text>
+  <text x="767.37" y="600.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="40" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" font-variant-numeric="tabular-nums">−221,8</text>
+  <text x="920.41" y="600.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">kWhep/m²/an</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Traité en lot de travaux autonome, le photovoltaïque porte la zone de l'espace commun sous le zéro d'énergie primaire.</text>
+  <rect x="56.00" y="714.00" width="266.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SAINT-AGNANT · 870 m² · 2022</text>
+</svg>

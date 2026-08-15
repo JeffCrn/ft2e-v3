@@ -30,7 +30,7 @@ généraliser sur un seul cas.
 from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH, A_MARGE,
                     JETON, SANS, MONO, mesurer, echapper, texte, rect, rect_bord,
                     ligne, replier, racine_appui, controles_appui, executer,
-                    entete_style)
+                    entete_style, fleche)
 
 
 # La révision 4 supprime la partition 7/5 et la colonne de relevé : la planche
@@ -1032,7 +1032,416 @@ def composer_appui_dedoublement(donnees):
         bas="ligne de résumé à 330 px, marge basse 38 px")
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# Mécanisme `bascule` — la grandeur qui change de signe (résidence
+# intergénérationnelle, Saint-Agnant). Même famille que le Sankey : une
+# proportion portée par la géométrie, sur une échelle qui EST la donnée. Mais
+# aucun des trois mécanismes précédents ne connaît le passage sous zéro.
+#
+# Ce qui se passe : une production entre dans UNE zone de calcul — un dixième de
+# la surface de l'opération, et la largeur des deux bandes le dit —, et le bilan
+# d'énergie primaire de cette zone tombe de l'autre côté du zéro.
+#
+# Trois lignes pleine largeur ordonnent la planche : le plafond, le zéro, le
+# bilan. Entre les deux premières, la BANDE AUTORISÉE en calcaire — tout ce que
+# le plafond laisse consommer à la zone. Entre les deux dernières, la profondeur
+# atteinte, où pend la seule colonne de la zone concernée. Les deux hauteurs
+# sont à la même échelle : c'est leur rapport qui démontre, et il se mesure à la
+# règle sur la planche.
+#
+# L'ORIGINE DE L'ÉCHELLE EST LE ZÉRO, PAS LE PLAFOND — leçon de la planche 19 :
+# l'origine se choisit à la question que le dessin pose. Ici « de combien la
+# production dépasse-t-elle le besoin ? ». Graduée depuis le plafond, la bande
+# autorisée tomberait à 24 % de la hauteur du cadre.
+#
+# Texte masqué : un bloc en haut à gauche, une flèche qui traverse la planche et
+# plonge dans le dixième droit d'une bande large, une mince bande claire, et une
+# colonne qui pend deux fois et demie plus bas.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+BC_SRC_Y0, BC_SRC_H = 208.0, 72.0     # le bloc de la source
+BC_SRC_PAD = 14.0
+BC_ROUTE_Y = 244.0                    # la route de la production
+BC_TAG_Z1_Y = 300.0                   # tag de la zone 1, au-dessus de la bande
+BC_BANDE_Y0, BC_BANDE_H = 310.0, 48.0 # la bande de l'opération, deux zones
+BC_TAG_AXE_Y = 374.0                  # tag d'axe (g.) et tag de la zone 2 (d.)
+BC_SEUIL_Y = 392.0                    # la ligne du plafond
+BC_BILAN_Y = 648.0                    # la ligne du bilan
+BC_PHRASE_Y = 688.0
+BC_CARTOUCHE_Y, BC_CARTOUCHE_H = 714.0, 30.0
+
+
+def _bc_elements(donnees, type_):
+    return [e for e in donnees["bascule"]["elements"] if e.get("type") == type_]
+
+
+def _bc_echelle(donnees, y_seuil, y_bilan):
+    """L'échelle est DÉRIVÉE des deux niveaux de l'extraction, jamais choisie :
+    px par kWhep/m²/an, origine au zéro."""
+    seuil = _bc_elements(donnees, "seuil")[0]["niveau"]
+    bilan = _bc_elements(donnees, "bilan")[0]["niveau"]
+    k = (y_bilan - y_seuil) / (seuil - bilan)
+    return seuil, bilan, k, y_seuil + seuil * k
+
+
+def _bc_zones(donnees, x0, largeur):
+    """Les deux zones, à largeur PROPORTIONNELLE À LEUR SURFACE. La géométrie
+    code la surface en largeur ; la hauteur, elle, n'appartient qu'à l'axe."""
+    zones = _bc_elements(donnees, "zone")
+    total = sum(z["surface"] for z in zones)
+    x = float(x0)
+    poses = []
+    for z in zones:
+        w = largeur * z["surface"] / total
+        poses.append({"z": z, "x0": x, "x1": x + w, "w": w, "part": z["surface"] / total})
+        x += w
+    return poses, total
+
+
+def composer_bascule(donnees):
+    bc = donnees["bascule"]
+    seuil, bilan, k, y_zero = _bc_echelle(donnees, BC_SEUIL_Y, BC_BILAN_Y)
+    poses, surface_totale = _bc_zones(donnees, MARGE, UTILE)
+    pose_bilan = next(p for p in poses if p["z"]["cle"] == bc["zone_du_bilan"])
+    x_route = (pose_bilan["x0"] + pose_bilan["x1"]) / 2
+    src = _bc_elements(donnees, "source")[0]
+    seuil_e = _bc_elements(donnees, "seuil")[0]
+    bilan_e = _bc_elements(donnees, "bilan")[0]
+
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        l = mesurer(chaine, corps, profil, tracking)
+        if l > dispo:
+            depassements.append(f"{nom} : {l:.0f} px pour {dispo:.0f} disponibles")
+        return l
+
+    def mono(x, y, chaine, dispo=None, nom=None, ancre=None, couleur="pivot",
+             corps=10):
+        if dispo is not None:
+            controler(nom or chaine, chaine, corps, "mono", dispo, corps * 0.14)
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14))
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, strokes=("filet-1", "filet-3", "encre"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, 76, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(texte(MARGE, 112, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, 138, donnees["sous_titre"], "sans", 16, 400, "pivot", wdth=100))
+    A(rect(MARGE, 160, UTILE, 1, "filet-1"))
+
+    # ── En-tête de périmètre — il empêche la planche de mentir ───────────────
+    mono(MARGE, 190, bc["entete"], UTILE, "entête")
+
+    # ── La source : le lot détaché, un seul bloc — sa topologie interne n'est
+    #    pas à la fiche, et un bloc sans détail vaut mieux qu'un détail inventé.
+    src_w = max(mesurer(src["libelle"], 15, "sans-400"),
+                max(mesurer(d, 10, "mono", 1.4) for d in src["detail"])) + 2 * BC_SRC_PAD
+    src_x1 = MARGE + src_w
+    A(rect_bord(MARGE, BC_SRC_Y0, src_w, BC_SRC_H, "papier", "filet-1"))
+    A(texte(MARGE + BC_SRC_PAD, BC_SRC_Y0 + 24, src["libelle"], "sans", 15, 400,
+            "encre", wdth=100))
+    for i, d in enumerate(src["detail"]):
+        mono(MARGE + BC_SRC_PAD, BC_SRC_Y0 + 44 + i * 16, d)
+
+    # ── La route de la production — elle n'entre que dans UNE zone ───────────
+    A(ligne(src_x1, BC_ROUTE_Y, x_route, BC_ROUTE_Y, "encre", 1.5))
+    A(ligne(x_route, BC_ROUTE_Y, x_route, BC_BANDE_Y0 - 10, "encre", 1.5))
+    A(fleche(x_route, BC_BANDE_Y0, "encre", "bas", 10))
+    # L'étiquette INTERROMPT la route qu'elle annote (procédé du dessin coté) :
+    # posée à côté, elle serait partout au mauvais endroit ; posée dessus sans
+    # fond, la ligne la raye. Elle vient donc APRÈS le trait.
+    l_route = mesurer(bc["etiquette_route"], 10, "mono", 1.4)
+    cx_route = (src_x1 + x_route) / 2
+    A(rect(cx_route - l_route / 2 - 8, BC_ROUTE_Y - 12, l_route + 16, 18, "papier"))
+    mono(cx_route, BC_ROUTE_Y, bc["etiquette_route"], x_route - src_x1 - 20,
+         "étiquette de route", ancre="middle")
+
+    # ── La bande de l'opération : deux zones à largeur proportionnelle ───────
+    z1 = poses[0]
+    mono(MARGE, BC_TAG_Z1_Y, z1["z"]["tag"], z1["w"], "tag zone 1")
+    for p in poses:
+        porte = p is pose_bilan
+        A(rect_bord(p["x0"], BC_BANDE_Y0, p["w"], BC_BANDE_H,
+                    "clair" if porte else "papier", "filet-1"))
+    for i, d in enumerate(z1["z"]["detail"]):
+        mono(z1["x0"] + BC_SRC_PAD, BC_BANDE_Y0 + 18 + i * 18, d,
+             z1["w"] - 2 * BC_SRC_PAD, f"détail zone 1 {i}")
+    mono(W - MARGE, BC_TAG_AXE_Y, pose_bilan["z"]["tag"], 420, "tag zone 2",
+         ancre="end")
+    mono(MARGE, BC_TAG_AXE_Y, bc["tag_axe"], 420, "tag d'axe")
+
+    # ── Les filets de projection : la colonne de la zone descend sur l'axe ───
+    for x in (pose_bilan["x0"], pose_bilan["x1"]):
+        A(ligne(x, BC_BANDE_Y0 + BC_BANDE_H, x, BC_SEUIL_Y, "filet-1", 1))
+
+    # ── Les trois lignes de l'axe, en PLEINE LARGEUR — plafond, zéro, bilan.
+    #    Les deux HAUTEURS, elles, sont confinées à la colonne de la zone : une
+    #    bande pleine largeur et une colonne étroite ne se comparent pas à l'œil,
+    #    et c'est leur rapport qui démontre. Défaut relevé au rendu à 1152 px.
+    x_lib = pose_bilan["x0"] - 16          # les légendes butent contre la colonne
+    h_bande = y_zero - BC_SEUIL_Y
+    A(ligne(MARGE, BC_SEUIL_Y, W - MARGE, BC_SEUIL_Y, "encre", 1))
+
+    # La bande autorisée : du plafond au zéro, dans la colonne de la zone.
+    # Bordée : calcaire sur papier vaut 1,05 — une bande non bordée n'existe pas.
+    A(rect_bord(pose_bilan["x0"], BC_SEUIL_Y, pose_bilan["w"], h_bande,
+                "calcaire", "filet-1"))
+    # Les deux légendes de la bande se lisent CONTRE elle, à sa hauteur : posées
+    # à gauche sous le tag d'axe, elles se chevauchaient à dix pixels près.
+    for i, l in enumerate(bc["legende_bande"]):
+        mono(x_lib, BC_SEUIL_Y + 26 + i * 20, l, x_lib - MARGE,
+             f"légende de bande {i}", ancre="end")
+
+    # ── Le zéro : le datum de la planche ─────────────────────────────────────
+    A(ligne(MARGE, y_zero, W - MARGE, y_zero, "encre", 1.5))
+    mono(MARGE, y_zero + 20, bc["mention_zero"], UTILE, "mention du zéro")
+
+    # ── La colonne du bilan : elle pend du zéro à la ligne du bilan ──────────
+    A(rect_bord(pose_bilan["x0"], y_zero, pose_bilan["w"], BC_BILAN_Y - y_zero,
+                "clair", "filet-1"))
+    # Traits au pas du plafond : la profondeur atteinte se COMPTE en bandes
+    # autorisées, elle ne se suppose pas. Le signe est doublé de sa mention.
+    n_pas = int((BC_BILAN_Y - y_zero) / h_bande)
+    for i in range(1, n_pas + 1):
+        A(ligne(pose_bilan["x0"], y_zero + i * h_bande,
+                pose_bilan["x1"], y_zero + i * h_bande, "filet-1", 1))
+    mono(MARGE, y_zero + h_bande + 20, bc["mention_pas"], x_lib - MARGE,
+         "mention du pas")
+    A(ligne(MARGE, BC_BILAN_Y, W - MARGE, BC_BILAN_Y, "encre", 1))
+
+    # ── Le chiffre du bilan, contre sa colonne — le seul de la planche ───────
+    mono(x_lib, BC_BILAN_Y - 128, bc["legende_bilan"], x_lib - MARGE,
+         "légende du bilan", ancre="end")
+    l_chiffre = mesurer(bilan_e["valeur"], 40, "sans-700")
+    l_unite = mesurer(bilan_e["unite"], 15, "sans-400")
+    x_chiffre = x_lib - l_chiffre - 10 - l_unite
+    A(texte(x_chiffre, BC_BILAN_Y - 48, bilan_e["valeur"], "sans", 40, 700,
+            "encre", wdth=118, tabulaire=True))
+    A(texte(x_chiffre + l_chiffre + 10, BC_BILAN_Y - 48, bilan_e["unite"],
+            "sans", 15, 400, "encre", wdth=100))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, BC_PHRASE_Y, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur ajustée au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600, round(mesurer(libelle, 11, "mono", 11 * 0.14) + 40))
+    A(rect(MARGE, BC_CARTOUCHE_Y, largeur, BC_CARTOUCHE_H, "profond"))
+    A(texte(MARGE + 20, BC_CARTOUCHE_Y + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    h_bande = y_zero - BC_SEUIL_Y
+    h_colonne = BC_BILAN_Y - y_zero
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"bande autorisée {h_bande:.1f} px ({seuil:.0f} unités) "
+                         f"contre colonne du bilan {h_colonne:.1f} px "
+                         f"({-bilan:.1f} unités) — rapport {h_colonne/h_bande:.2f}, "
+                         f"soit celui des deux valeurs ({-bilan/seuil:.2f}). Texte "
+                         "masqué : une flèche qui plonge dans le dixième droit "
+                         "d'une bande large, une mince bande claire, une colonne "
+                         "qui pend deux fois et demie plus bas",
+        "echelle": f"{k:.5f} px par {bc['unite']} — origine AU ZÉRO "
+                   f"(y {y_zero:.2f}), plafond +{seuil:.0f} à y {BC_SEUIL_Y:.0f}, "
+                   f"bilan {bilan:.1f} à y {BC_BILAN_Y:.0f} ; graduée depuis le "
+                   f"plafond, la bande autorisée tomberait à "
+                   f"{seuil/(seuil-bilan)*100:.0f} % de la hauteur (leçon de la "
+                   "planche 19)",
+        "proportion_des_zones": " + ".join(
+            f'{p["z"]["cle"]} {p["z"]["surface"]:.2f} m² = {p["w"]:.1f} px '
+            f'({p["part"]*100:.1f} %)' for p in poses)
+            + f" = {surface_totale:.2f} m² sur {UTILE} px",
+        "topologie": f"source (x {MARGE}–{src_x1:.0f}) → route (y {BC_ROUTE_Y:.0f}) "
+                     f"→ descente à x {x_route:.1f} → zone 2 "
+                     f"(x {pose_bilan['x0']:.1f}–{pose_bilan['x1']:.1f}) → axe ; "
+                     f"trois lignes pleine largeur à y {BC_SEUIL_Y:.0f}, "
+                     f"{y_zero:.2f} et {BC_BILAN_Y:.0f}",
+        "bas_du_dessin": f"ligne du bilan à {BC_BILAN_Y:.0f} px, phrase de principe "
+                         f"à {BC_PHRASE_Y:.0f}, cartouche {BC_CARTOUCHE_Y:.0f}–"
+                         f"{BC_CARTOUCHE_Y + BC_CARTOUCHE_H:.0f}, marge basse "
+                         f"{H - (BC_CARTOUCHE_Y + BC_CARTOUCHE_H):.0f} px",
+        "reserve_profonde": f"cartouche {largeur} x {BC_CARTOUCHE_H:.0f} px = "
+                            f"{largeur * BC_CARTOUCHE_H:.0f} px², soit "
+                            f"{largeur * BC_CARTOUCHE_H / (W * H) * 100:.2f} % "
+                            "de la planche",
+        "chiffre_unique": f"un seul chiffre de relevé — {bilan_e['valeur']} en "
+                          "encre pleine (Archivo 40) ; le plafond "
+                          f"{seuil_e['valeur']} est une cote mono 10",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 "
+                         f"(1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": " ; ".join(depassements) if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_bascule(donnees):
+    """La vignette : les trois lignes, la bande autorisée et la colonne.
+
+    Ce qu'elle garde : la partition des deux zones en largeur, la mince bande
+    autorisée, le zéro et la colonne qui pend — c'est-à-dire le rapport, qui
+    est la thèse. Ce qu'elle laisse : la source et sa route, les détails de
+    zone, la mention du zéro, la phrase et le cartouche. Six libellés dans
+    300 px ne se lisent pas ; les taire est une décision."""
+    bc = donnees["bascule"]
+    y_seuil, y_bilan = 78.0, 176.0
+    seuil, bilan, k, y_zero = _bc_echelle(donnees, y_seuil, y_bilan)
+    largeur = VW - 2 * V_MARGE
+    poses, _ = _bc_zones(donnees, V_MARGE, largeur)
+    pose_bilan = next(p for p in poses if p["z"]["cle"] == bc["zone_du_bilan"])
+    bilan_e = _bc_elements(donnees, "bilan")[0]
+    seuil_e = _bc_elements(donnees, "seuil")[0]
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, strokes=("filet-1", "filet-3", "encre"))
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    for p in poses:
+        A(rect_bord(p["x0"], 42, p["w"], 18,
+                    "clair" if p is pose_bilan else "papier", "filet-1"))
+
+    A(texte(V_MARGE, 74, f'PLAFOND {seuil_e["valeur"]}', "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+    # Les deux hauteurs se comparent dans la MÊME colonne — pleine largeur
+    # contre colonne étroite, l'œil ne les rapporte pas l'une à l'autre.
+    A(rect_bord(pose_bilan["x0"], y_seuil, pose_bilan["w"], y_zero - y_seuil,
+                "calcaire", "filet-1"))
+    A(ligne(V_MARGE, y_seuil, VW - V_MARGE, y_seuil, "encre", 1))
+    A(ligne(V_MARGE, y_zero, VW - V_MARGE, y_zero, "encre", 1.5))
+    A(texte(V_MARGE, y_zero - 4, "ZÉRO", "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+    A(rect_bord(pose_bilan["x0"], y_zero, pose_bilan["w"], y_bilan - y_zero,
+                "clair", "filet-1"))
+    A(ligne(V_MARGE, y_bilan, VW - V_MARGE, y_bilan, "encre", 1))
+    A(texte(V_MARGE, y_bilan - 22, "Bilan de la zone", "sans", 12, 600, "encre",
+            wdth=112))
+    A(texte(V_MARGE, y_bilan - 6, f'{bilan_e["valeur"]}{NN}{bilan_e["unite"]}',
+            "mono", 10, 500, "pivot", tabulaire=True))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": f"bande autorisée {y_zero - y_seuil:.1f} px contre colonne "
+                 f"{y_bilan - y_zero:.1f} px — rapport "
+                 f"{(y_bilan - y_zero)/(y_zero - y_seuil):.2f} ; partition des "
+                 f"zones {poses[0]['w']:.0f} + {pose_bilan['w']:.0f} px — source, "
+                 "route, détails de zone et mention du zéro laissés à la planche",
+        "bas_du_dessin": f"ligne du bilan à {y_bilan:.0f} px, marge basse "
+                         f"{VH - y_bilan:.0f} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_bascule(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, densité intermédiaire.
+
+    Ce qu'il garde : la route de la production, la partition des deux zones, les
+    trois lignes, la bande autorisée nommée, la mention du zéro et le chiffre du
+    bilan. Ce qu'il laisse : le bloc de la source et ses détails, les détails de
+    zone — ils vivent sur la planche."""
+    bc = donnees["bascule"]
+    y_seuil, y_bilan = 160.0, 330.0
+    seuil, bilan, k, y_zero = _bc_echelle(donnees, y_seuil, y_bilan)
+    largeur = AW - 2 * A_MARGE
+    poses, _ = _bc_zones(donnees, A_MARGE, largeur)
+    pose_bilan = next(p for p in poses if p["z"]["cle"] == bc["zone_du_bilan"])
+    bilan_e = _bc_elements(donnees, "bilan")[0]
+    x_route = (pose_bilan["x0"] + pose_bilan["x1"]) / 2
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1", "filet-3", "encre"))
+
+    A(texte(A_MARGE, 62, bc["appui_source"], "mono", 10, 500, "pivot",
+            tracking=1.4))
+    x_depart = A_MARGE + mesurer(bc["appui_source"], 10, "mono", 1.4) + 14
+    A(ligne(x_depart, 76, x_route, 76, "encre", 1.5))
+    A(ligne(x_route, 76, x_route, 86, "encre", 1.5))
+    A(fleche(x_route, 96, "encre", "bas", 9))
+
+    for p in poses:
+        A(rect_bord(p["x0"], 96, p["w"], 28,
+                    "clair" if p is pose_bilan else "papier", "filet-1"))
+    A(texte(poses[0]["x0"] + 10, 114, bc["appui_zone1"], "mono", 10, 500,
+            "pivot", tracking=1.4))
+    A(texte(AW - A_MARGE, 140, bc["appui_zone2"], "mono", 10, 500, "pivot",
+            ancre="end", tracking=1.4))
+
+    # Les deux légendes de la bande se lisent CONTRE elle, à sa hauteur : posée
+    # au-dessus de la ligne du plafond, la première se collait au tag de zone 2.
+    x_lib = pose_bilan["x0"] - 12
+    A(rect_bord(pose_bilan["x0"], y_seuil, pose_bilan["w"], y_zero - y_seuil,
+                "calcaire", "filet-1"))
+    A(ligne(A_MARGE, y_seuil, AW - A_MARGE, y_seuil, "encre", 1))
+    A(texte(x_lib, y_seuil + 20, bc["legende_bande"][0], "mono", 10, 500,
+            "pivot", ancre="end", tracking=1.4))
+    A(texte(x_lib, y_seuil + 38, bc["appui_bande"], "mono", 10, 500, "pivot",
+            ancre="end", tracking=1.4))
+    A(ligne(A_MARGE, y_zero, AW - A_MARGE, y_zero, "encre", 1.5))
+    A(texte(A_MARGE, y_zero + 20, bc["appui_zero"], "mono", 10, 500, "pivot",
+            tracking=1.4))
+
+    for x in (pose_bilan["x0"], pose_bilan["x1"]):
+        A(ligne(x, 124, x, y_seuil, "filet-1", 1))
+    A(rect_bord(pose_bilan["x0"], y_zero, pose_bilan["w"], y_bilan - y_zero,
+                "clair", "filet-1"))
+    # Traits au pas du plafond — la profondeur se compte, ici comme sur la planche.
+    h_bande = y_zero - y_seuil
+    for i in range(1, int((y_bilan - y_zero) / h_bande) + 1):
+        A(ligne(pose_bilan["x0"], y_zero + i * h_bande,
+                pose_bilan["x1"], y_zero + i * h_bande, "filet-1", 1))
+    A(ligne(A_MARGE, y_bilan, AW - A_MARGE, y_bilan, "encre", 1))
+
+    A(texte(A_MARGE, y_bilan - 44, bc["appui_bilan"], "mono", 10, 500, "pivot",
+            tracking=1.4))
+    l_chiffre = mesurer(bilan_e["valeur"], 30, "sans-700")
+    A(texte(A_MARGE, y_bilan - 10, bilan_e["valeur"], "sans", 30, 700, "encre",
+            wdth=118, tabulaire=True))
+    A(texte(A_MARGE + l_chiffre + 8, y_bilan - 10, bilan_e["unite"], "sans", 14,
+            400, "encre", wdth=100))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"la route de la production, les deux zones à largeur "
+              f"proportionnelle ({poses[0]['w']:.0f} + {pose_bilan['w']:.0f} px), "
+              f"les trois lignes, la bande autorisée {y_zero - y_seuil:.1f} px "
+              f"contre la colonne {y_bilan - y_zero:.1f} px (rapport "
+              f"{(y_bilan - y_zero)/(y_zero - y_seuil):.2f}) et le chiffre du "
+              "bilan — bloc de la source et détails de zone laissés à la planche",
+        bas=f"ligne du bilan à {y_bilan:.0f} px, marge basse {AH - y_bilan:.0f} px",
+        echelle_derivee=f"{k:.5f} px par {bc['unite']}, origine au zéro "
+                        f"(y {y_zero:.2f})")
+
+
 def _composer(donnees):
+    if "bascule" in donnees:
+        return composer_bascule(donnees)
     if "dedoublement" in donnees:
         return composer_dedoublement(donnees)
     if "plafonds" in donnees:
@@ -1041,6 +1450,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "bascule" in donnees:
+        return composer_vignette_bascule(donnees)
     if "dedoublement" in donnees:
         return composer_vignette_dedoublement(donnees)
     if "plafonds" in donnees:
@@ -1049,6 +1460,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "bascule" in donnees:
+        return composer_appui_bascule(donnees)
     if "dedoublement" in donnees:
         return composer_appui_dedoublement(donnees)
     if "plafonds" in donnees:

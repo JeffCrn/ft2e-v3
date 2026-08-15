@@ -1,0 +1,181 @@
+{
+  "fiche": "residence-intergenerationnelle-saint-agnant",
+  "archetype": "sankey-energie",
+  "archetype_motif": "La thèse de la fiche est une grandeur énergétique qui change de signe : le photovoltaïque, détaché en lot de travaux autonome au lieu d'être accroché au lot électricité, alimente les services généraux, et le calcul réglementaire en mesure l'effet — la zone « espace commun » affiche −221,8 kWhep/m²/an pour un plafond de 90, c'est-à-dire que la production dépasse les besoins de la zone. C'est la famille du Sankey — une proportion portée par la géométrie, sur une échelle qui EST la donnée — mais aucun des trois mécanismes déjà écrits ne connaît le passage sous zéro : le mécanisme `bascule` gradue depuis le zéro, pose la bande autorisée (de 90 à 0) en pleine largeur, et fait pendre le bilan de la seule zone concernée 2,46 fois plus bas. La zone qui bascule est un dixième de la surface : la largeur des deux zones le dit.",
+  "surtitre": "SCHÉMA DE PRINCIPE · UNE ZONE DE CALCUL SOUS LE ZÉRO",
+  "titre": "Résidence intergénérationnelle",
+  "sous_titre": "Un lot photovoltaïque autonome porte une zone de calcul sous le zéro",
+  "cartouche_legende": "SAINT-AGNANT · 870 m² · 2022",
+  "aria_label": "Schéma de principe du bilan d'énergie primaire d'une zone de calcul. Une opération de logements est partagée en deux zones : les logements d'un côté, l'espace commun de l'autre, un dixième de la surface. La production d'un lot photovoltaïque autonome alimente les services généraux de la seule zone commune. Le plafond réglementaire de cette zone autorise une consommation de 90 kWhep/m²/an ; son bilan s'établit à −221,8 kWhep/m²/an, au-dessous du zéro, soit deux fois et demie la profondeur de la bande autorisée — la production dépasse les besoins de la zone.",
+  "bascule": {
+    "entete": "L'OPÉRATION EN DEUX ZONES DE CALCUL · LE BILAN D'ÉNERGIE PRIMAIRE DE LA SECONDE",
+    "unite": "kWhep/m²/an",
+    "zone_du_bilan": "commun",
+    "etiquette_route": "ALIMENTE LES SERVICES GÉNÉRAUX",
+    "tag_axe": "ÉNERGIE PRIMAIRE DE LA ZONE 2 · kWhep/m²/an",
+    "legende_bande": [
+      "PLAFOND DE LA ZONE — 90 kWhep/m²/an",
+      "LA BANDE AUTORISÉE : TOUT CE QUE LE PLAFOND LAISSE CONSOMMER À LA ZONE"
+    ],
+    "mention_zero": "ZÉRO — AU-DESSOUS, LA ZONE PRODUIT PLUS D'ÉNERGIE PRIMAIRE QU'ELLE N'EN CONSOMME",
+    "legende_bilan": "BILAN D'ÉNERGIE PRIMAIRE DE LA ZONE 2 — LA PRODUCTION DÉPASSE LES BESOINS",
+    "appui_source": "PRODUCTION PHOTOVOLTAÏQUE",
+    "appui_zone1": "ZONE 1 · 21 LOGEMENTS · 769,74 m² HABITABLES",
+    "appui_zone2": "ZONE 2 · ESPACE COMMUN · 100 m²",
+    "appui_bande": "LA BANDE AUTORISÉE : DE 90 À 0",
+    "appui_zero": "SOUS LE ZÉRO — LA ZONE PRODUIT PLUS QU'ELLE NE CONSOMME",
+    "appui_bilan": "BILAN D'ÉNERGIE PRIMAIRE DE LA ZONE 2",
+    "elements": [
+      {
+        "ordre": 1,
+        "type": "source",
+        "cle": "pv",
+        "libelle": "Photovoltaïque, lot de travaux autonome",
+        "detail": [
+          "CCTP, DÉCOMPOSITION DU PRIX ET PLANS PROPRES",
+          "PANNEAUX · ONDULEUR · PROTECTIONS · ARRÊT D'URGENCE"
+        ],
+        "mention": "ALIMENTE LES SERVICES GÉNÉRAUX"
+      },
+      {
+        "ordre": 2,
+        "type": "zone",
+        "cle": "logements",
+        "libelle": "Zone de calcul 1 — les 21 logements",
+        "valeur": "769,74",
+        "unite": "m² habitables",
+        "surface": 769.74,
+        "tag": "ZONE DE CALCUL 1 · LES 21 LOGEMENTS · 769,74 m² HABITABLES",
+        "detail": [
+          "8 T1 DE 25 m² · 10 T2 DE 37,5 m² · 3 T3 DE 50 m²",
+          "CHARGES COMPTÉES LOGEMENT PAR LOGEMENT"
+        ]
+      },
+      {
+        "ordre": 3,
+        "type": "zone",
+        "cle": "commun",
+        "libelle": "Zone de calcul 2 — l'espace commun",
+        "valeur": "100",
+        "unite": "m² environ",
+        "surface": 100.0,
+        "tag": "ZONE DE CALCUL 2 · L'ESPACE COMMUN · 100 m² ENVIRON",
+        "detail": [
+          "SALLE COMMUNE ET CUISINE, EN REZ-DE-CHAUSSÉE",
+          "SERVICES GÉNÉRAUX ALIMENTÉS PAR LA PRODUCTION"
+        ]
+      },
+      {
+        "ordre": 4,
+        "type": "seuil",
+        "cle": "plafond",
+        "libelle": "Plafond réglementaire de la zone 2",
+        "valeur": "90",
+        "unite": "kWhep/m²/an",
+        "niveau": 90.0,
+        "detail": [
+          "LA BANDE AUTORISÉE VA DE 90 À 0"
+        ]
+      },
+      {
+        "ordre": 5,
+        "type": "bilan",
+        "cle": "bilan",
+        "libelle": "Bilan d'énergie primaire de la zone 2",
+        "valeur": "−221,8",
+        "unite": "kWhep/m²/an",
+        "niveau": -221.8,
+        "legende": "LA PRODUCTION DÉPASSE LES BESOINS DE LA ZONE"
+      }
+    ],
+    "mention_separation": [
+      "LA GÉOMÉTRIE CODE LA SURFACE EN LARGEUR ET L'ÉNERGIE PRIMAIRE EN HAUTEUR",
+      "L'ORIGINE DE L'ÉCHELLE EST LE ZÉRO, PAS LE PLAFOND"
+    ],
+    "mention_pas": "TRAITS AU PAS DU PLAFOND — LA COLONNE EN DESCEND DEUX ET DEMIE SOUS LE ZÉRO"
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Traité en lot de travaux autonome, le photovoltaïque porte la zone de l'espace commun sous le zéro d'énergie primaire.",
+  "vignette_surtitre": "SOUS LE ZÉRO",
+  "a_valider_ft2e": [
+    {
+      "objet": "La surface de la zone « espace commun »",
+      "la_source_affirme": "« Un espace commun d'une centaine de mètres carrés en rez-de-chaussée », pour 769,74 m² habitables au calcul réglementaire ; le frontmatter porte 870 m² de surface d'opération.",
+      "le_dessin_suppose": "100 m², nombre exigé par la largeur proportionnelle des deux zones (870 − 769,74 = 100,26 corrobore). Donner la surface exacte de la zone telle qu'elle entre au calcul, et dire de quelle surface il s'agit (SHAB, surface de référence RE2020)."
+    },
+    {
+      "objet": "L'identité entre « les services généraux » et la zone de calcul « espace commun »",
+      "la_source_affirme": "« Panneaux, onduleur, protections et arrêt d'urgence alimentent les services généraux de la résidence, et le calcul réglementaire en mesure l'effet : l'espace commun affiche une consommation d'énergie primaire de −221,8 kWhep/m²/an pour un plafond de 90. »",
+      "le_dessin_suppose": "Que la production entre tout entière dans la zone « espace commun » : la flèche n'arrive que là. Confirmer que la totalité de la production est affectée à cette zone au calcul."
+    },
+    {
+      "objet": "Le devenir du surplus",
+      "la_source_affirme": "Rien : la fiche ne dit pas ce qu'il advient de la production qui dépasse les besoins de la zone.",
+      "le_dessin_suppose": "Aucune liaison vers la zone des logements, ni vers le réseau. Dire si le surplus est injecté, revendu, ou réaffecté — et, le cas échéant, quelle flèche manque au dessin."
+    },
+    {
+      "objet": "Le nombre de zones de calcul",
+      "la_source_affirme": "La fiche nomme « l'espace commun » comme une zone au sens du calcul, et donne 769,74 m² habitables pour les logements.",
+      "le_dessin_suppose": "Exactement deux zones, dont la somme des largeurs fait l'opération. Dire s'il en existe une troisième (circulations chauffées, locaux techniques, buanderie) et à laquelle des deux bandes la rattacher."
+    },
+    {
+      "objet": "L'origine de l'échelle",
+      "la_source_affirme": "Un plafond de 90 et un résultat de −221,8 kWhep/m²/an ; aucune origine n'est prescrite.",
+      "le_dessin_suppose": "Le zéro pour datum, et la bande autorisée dessinée de 90 à 0. La question posée par le dessin est « de combien la production dépasse-t-elle le besoin ? » et non « où en est-on du plafond ? » — graduer depuis le plafond écraserait la bande autorisée à 29 % de la hauteur. Confirmer que c'est bien la lecture attendue."
+    },
+    {
+      "objet": "La largeur des zones, jamais leur hauteur",
+      "la_source_affirme": "Aucune consommation n'est donnée pour la zone des logements : la fiche ne chiffre que la zone commune.",
+      "le_dessin_suppose": "Que la bande des logements ne descend sur aucune échelle — elle n'est là que pour la proportion de surface (88,5 % contre 11,5 %). Si la zone 1 a elle aussi son plafond et son résultat, les fournir : le dessin les porterait."
+    },
+    {
+      "objet": "Le lot autonome dessiné comme une source unique",
+      "la_source_affirme": "« CCTP, décomposition du prix et plans propres » ; « panneaux, onduleur, protections et arrêt d'urgence » ; panneaux posés depuis juin 2025.",
+      "le_dessin_suppose": "Les quatre organes réunis en un seul bloc, sans topologie interne : ni nombre de panneaux, ni puissance crête, ni position de l'onduleur ne figurent à la fiche. Les fournir si le bloc doit être détaillé."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2022 (champ annee), chantier ouvert le 10 octobre 2024, livraison attendue en 2026, statut « en cours » — aucune réception prononcée.",
+      "le_dessin_suppose": "Que le cartouche porte 2022, millésime d'ouverture, comme les autres fiches en cours déjà versées. À rebasculer sur le millésime de réception quand elle sera prononcée."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 22-033 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Tous les montants : 41 264 € HT au dossier de consultation pour le lot photovoltaïque, 2 073 930 € HT de travaux au dossier commercial, 1 603 700 € HT à la signature de la maîtrise d'œuvre.",
+    "Noms de tiers : maîtrise d'ouvrage, agence d'architecture, BET structure, économiste, entreprise de gros œuvre — le dessin ne nomme que des organes et des zones.",
+    "Les quatre indicateurs du résultat réglementaire (besoin bioclimatique 54,4 pour 70,5 ; énergie primaire 84,8 pour 103,6 ; impact carbone 758,6 pour 777,4 ; confort d'été 790,4 pour 1 250) : la fiche les porte déjà, dont le Cep de l'opération dans son champ `performance`, affiché au relevé encré dix lignes plus bas. La planche ne chiffre que la zone, qui n'est chiffrée nulle part ailleurs.",
+    "L'inventaire des équipements : 18 ballons thermodynamiques de 100 litres et 3 de 200 litres, panneaux rayonnants, ventilation hygroréglable collective, centrale double flux de l'espace commun, précâblage voix-données-images, contrôle d'accès, détecteurs de fumée, alarme incendie, borne de recharge. Aucun ne modifie le bilan dessiné, et les aligner ferait de la planche l'inventaire que la révision 4 proscrit.",
+    "La composition de l'enveloppe (blocs rectifiés, ossature bois bardée, 145 + 60 mm d'isolant, combles à 595 mm en deux couches) et la variante de ponts thermiques de février 2025 — matière d'une coupe, pas d'un bilan de zone.",
+    "Les jalons de la mission (dossier photovoltaïque de juillet 2024, dossier marché d'octobre 2024, reprise du calcul de février 2025, contrôle des entrées d'air de septembre 2025, 19 lots, 95 % d'avancement en février 2026) — matière d'une chronologie d'affaire.",
+    "Toute géométrie d'ouvrage : ni plan, ni façade, ni implantation, ni distribution de pièces. Les deux zones sont deux rectangles de même hauteur dont seule la largeur porte du sens — la surface, jamais la forme."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "bande autorisée 73.9 px (90 unités) contre colonne du bilan 182.1 px (221.8 unités) — rapport 2.46, soit celui des deux valeurs (2.46). Texte masqué : une flèche qui plonge dans le dixième droit d'une bande large, une mince bande claire, une colonne qui pend deux fois et demie plus bas",
+    "echelle": "0.82104 px par kWhep/m²/an — origine AU ZÉRO (y 465.89), plafond +90 à y 392, bilan -221.8 à y 648 ; graduée depuis le plafond, la bande autorisée tomberait à 29 % de la hauteur (leçon de la planche 19)",
+    "proportion_des_zones": "logements 769.74 m² = 962.9 px (88.5 %) + commun 100.00 m² = 125.1 px (11.5 %) = 869.74 m² sur 1088 px",
+    "topologie": "source (x 56–460) → route (y 244) → descente à x 1081.5 → zone 2 (x 1018.9–1144.0) → axe ; trois lignes pleine largeur à y 392, 465.89 et 648",
+    "bas_du_dessin": "ligne du bilan à 648 px, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 266 x 30 px = 7980 px², soit 0.83 % de la planche",
+    "chiffre_unique": "un seul chiffre de relevé — −221,8 en encre pleine (Archivo 40) ; le plafond 90 est une cote mono 10",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "118 signes — 1003 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "bande autorisée 28.3 px contre colonne 69.7 px — rapport 2.46 ; partition des zones 241 + 31 px — source, route, détails de zone et mention du zéro laissés à la planche",
+    "bas_du_dessin": "ligne du bilan à 176 px, marge basse 24 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "la route de la production, les deux zones à largeur proportionnelle (446 + 58 px), les trois lignes, la bande autorisée 49.1 px contre la colonne 120.9 px (rapport 2.46) et le chiffre du bilan — bloc de la source et détails de zone laissés à la planche",
+    "bas_du_dessin": "ligne du bilan à 330 px, marge basse 38 px",
+    "echelle_derivee": "0.54522 px par kWhep/m²/an, origine au zéro (y 209.07)"
+  }
+}
