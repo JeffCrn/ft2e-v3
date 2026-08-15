@@ -36,12 +36,20 @@ const secteurs = (await getCollection('secteurs'))
   title="Références — FT2E"
   description="Plus de 150 projets livrés en Charente-Maritime, Vendée et Deux-Sèvres. Logements, tertiaire et ERP, industriel, patrimoine, missions monotechniques."
 >
+  {/* Le repère du hero porte un chiffre, comme partout ailleurs sur le site
+      — « l'équipe — 7 personnes », « expertise 2 — sur 4 », « secteur 3 — sur
+      7 ». Il est DÉRIVÉ du corpus, jamais écrit en dur : une vingt-quatrième
+      fiche le mettra à jour toute seule.
+
+      En chiffres et non en lettres, contrairement à la règle des quantités de
+      `french-editorial.md` : les quatre repères existants s'écrivent ainsi, et
+      la puce est en mono — la fonte de tout ce qui se mesure. */}
   <HeroPage
     breadcrumbs={[
       { label: 'Accueil', href: '/' },
       { label: 'Références', href: '/references' },
     ]}
-    eyebrow="index des affaires"
+    eyebrow={`index des affaires — ${projets.length} fiches`}
     titre="Nos références récentes"
     sousTitre="Une sélection de projets représentatifs de notre activité en Charente-Maritime, Vendée et Deux-Sèvres."
   />
@@ -57,14 +65,19 @@ const secteurs = (await getCollection('secteurs'))
           qu'elles restent conformes. */}
       <div class="flex items-center gap-3">
         <span class="puce-section" aria-hidden="true"></span>
-        <p class="mono-label text-pivot">index complet</p>
+        <p class="mono-label text-pivot">filtrer par secteur</p>
       </div>
       <h2 class="type-section text-[22px] md:text-[24px] mt-4 mb-6">
         {/* « Les affaires », pas « Toutes les affaires » : le `<h1>` annonce
-            désormais des références RÉCENTES, et un titre de section qui
-            promettrait l'exhaustivité le contredirait à trois lignes d'écart. */}
+            des références RÉCENTES, et un titre de section qui promettrait
+            l'exhaustivité le contredirait à trois lignes d'écart.
+
+            Le repère au-dessus dit la FONCTION du bloc (filtrer), le
+            complément dit son PÉRIMÈTRE (ce qui est publié à ce jour) : deux
+            informations, là où « index complet » redisait le mot « index »
+            de la puce du hero sans rien ajouter. */}
         <span class="text-encre">Les affaires</span>
-        <span class="text-clair" aria-hidden="true">/filtrables par secteur</span>
+        <span class="text-clair" aria-hidden="true">/publiées à ce jour</span>
       </h2>
 
       {/* La grille de cartes se pose à même le papier, comme les quatre autres
