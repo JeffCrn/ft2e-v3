@@ -4,7 +4,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 import PlancheReference from '../../components/blocs/PlancheReference.astro';
-import { parAffaireDecroissante } from '../../lib/projets';
+import { parAffaireDecroissante, titreCourt } from '../../lib/projets';
 
 // Index des affaires — charte v3 : une nomenclature, pas une grille de cartes.
 // Le rang de statut est porté par l'OPACITÉ du filet gauche 1 px
@@ -32,6 +32,9 @@ const rangs = {
 const lignes = projets.map((projet) => ({
   projet,
   rang: rangs[projet.data.statut],
+  // Titre COURT : la colonne est en `md:truncate`, et la mesure au navigateur
+  // donnait 14 titres longs coupés sur 23 — jusqu'à 103 px escamotés.
+  titre: titreCourt(projet),
 }));
 ---
 
@@ -94,7 +97,7 @@ const lignes = projets.map((projet) => ({
         </div>
 
         <ul role="list" data-grille>
-          {lignes.map(({ projet, rang }) => (
+          {lignes.map(({ projet, rang, titre }) => (
             <li data-secteur={projet.data.secteur}>
               <a
                 href={`/references/${projet.id}`}
@@ -115,8 +118,13 @@ const lignes = projets.map((projet) => ({
                   <PlancheReference src={projet.data.planche} variante="vignette" />
                 </span>
                 <span class="min-w-0">
-                  <span class:list={['type-intitule block text-[16px] md:text-[17px] truncate text-encre', rang.graisse]}>
-                    {projet.data.titre}
+                  {/* `md:truncate`, pas `truncate` : la coupe à l'ellipse sert la LIGNE DE
+                      TABLEAU du bureau, où le titre partage sa ligne avec le secteur
+                      et le statut. Sous md la nomenclature est empilée en une colonne
+                      de 276 px, rien n'y impose une ligne unique — et cinq titres
+                      courts y étaient encore coupés, jusqu'à 82 px (mesuré à 390 px). */}
+                  <span class:list={['type-intitule block text-[16px] md:text-[17px] md:truncate text-encre', rang.graisse]}>
+                    {titre}
                   </span>
                   <span class="md:hidden mono-data text-[11px] text-pivot block mt-0.5">
                     {projet.data.secteur} · {rang.statut}

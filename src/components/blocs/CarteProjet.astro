@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import PlancheReference from './PlancheReference.astro';
-import { libelleChronologie } from '../../lib/projets';
+import { libelleChronologie, titreCourt } from '../../lib/projets';
 
 // Vignette de projet — charte v3 (§ 09/10) : un plan posé (bordure 1 px
 // filet-2, ombre de rang 1), vignette de planche 3:2, pied cartouche
@@ -17,7 +17,12 @@ interface Props {
 }
 
 const { projet } = Astro.props;
-const { titre, lieu, demo, planche } = projet.data;
+const { lieu, demo, planche } = projet.data;
+
+// Le titre de carte est le titre COURT — celui de la planche. Le titre long
+// du frontmatter répète ici le lieu que le pied affiche juste dessous, et
+// monte à quatre lignes de capitales dans une carte de 276 px.
+const titre = titreCourt(projet);
 
 // Pied de vignette : lieu, puis chronologie publique (ADR-003). La vignette
 // est rendue au pied de chaque fiche projet (ProjetsSimilaires) — c'est par

@@ -1,6 +1,46 @@
 import type { CollectionEntry } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
 
 type Projet = CollectionEntry<'projets'>;
+
+/**
+ * Titre court d'une fiche — celui que porte sa PLANCHE, pas une seconde
+ * rédaction.
+ *
+ * Le `titre` du frontmatter est une phrase descriptive calibrée pour le
+ * référencement : « Néréa, 90 logements et un commerce à Aytré ». Elle tient
+ * sur le `<h1>` de la fiche, où elle est à sa place. Partout ailleurs — carte
+ * de projet, nomenclature, carte-lien de la vedette — elle nuit : le lieu y
+ * est répété sur la ligne suivante, la carte monte à quatre lignes de
+ * capitales, et la nomenclature TRONQUE (mesuré au navigateur : 14 titres
+ * coupés sur 23, jusqu'à 103 px escamotés).
+ *
+ * Le titre court n'est pas à écrire : il existe depuis le chantier des
+ * planches. C'est le champ `titre` du `planche.json`, deux à quatre mots,
+ * relu par FT2E et déjà composé à 30 px sur chaque planche — « Néréa,
+ * 90 logements ». Le lire ici plutôt que le recopier au frontmatter applique
+ * la règle du modèle de contenu : *le `.md` dit qu'il y a une planche, la
+ * planche dit ce qu'elle montre*. Une copie se désynchronise ; un original,
+ * non.
+ *
+ * Lecture au BUILD (`output: 'static'`) : pas de fs côté client. Le fichier
+ * est garanti présent — `planche` est obligatoire au schéma et `verser.py`
+ * refuse un dossier incomplet. Une absence doit donc échouer bruyamment
+ * plutôt que retomber sur le titre long, qui masquerait la rupture.
+ */
+export function titreCourt(projet: Projet): string {
+  const json = path.join(process.cwd(), 'public',
+    projet.data.planche.replace(/planche\.svg$/, 'planche.json'));
+  const { titre } = JSON.parse(fs.readFileSync(json, 'utf-8'));
+  if (!titre) {
+    throw new Error(
+      `titreCourt : « ${projet.id} » — le planche.json ne porte pas de `
+      + `\`titre\`. C'est lui qui sert de titre court aux cartes et à la `
+      + `nomenclature (voir .claude/rules/content-collections.md).`);
+  }
+  return titre;
+}
 
 /**
  * Ordre de nomenclature : affaire la plus récente d'abord.

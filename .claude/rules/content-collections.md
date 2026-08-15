@@ -53,11 +53,28 @@ reproduisait l'ouvrage, donc l'œuvre de l'architecte.
   répertoire — `planche.json`, `vignette.svg`, `appui.svg`, `planche.png` — et **ils ne se
   séparent pas** : le composant les charge par convention de nom, un manquant fait échouer
   le build.
-- **Le frontmatter ne porte ni l'alternative textuelle de la planche ni son surtitre de
-  vignette** : ils vivent dans le `planche.json`, que le composant lit au build. Les
-  recopier créerait deux vérités pour la même donnée, et c'est la copie — jamais
-  l'original — qui se désynchronise. Le `.md` dit *qu'il y a* une planche ; la planche dit
-  ce qu'elle montre.
+- **Le frontmatter ne porte ni l'alternative textuelle de la planche, ni son surtitre de
+  vignette, ni le TITRE COURT** : ils vivent dans le `planche.json`, que le site lit au
+  build. Les recopier créerait deux vérités pour la même donnée, et c'est la copie —
+  jamais l'original — qui se désynchronise. Le `.md` dit *qu'il y a* une planche ; la
+  planche dit ce qu'elle montre.
+- **Deux titres, deux emplois, aucune redondance** (2026-08-15) :
+  - le `titre` du **frontmatter** est long et descriptif — « Néréa, 90 logements et un
+    commerce à Aytré ». Il sert le `<h1>` de la fiche, la balise `<title>`, la description
+    et le JSON-LD : c'est la forme que le référencement indexe, et elle ne bouge pas ;
+  - le `titre` du **`planche.json`** est court — « Néréa, 90 logements », deux à quatre
+    mots, relu par FT2E et déjà composé à 30 px sur la planche. Il sert partout où le
+    titre n'est pas le sujet de la page : carte de projet, nomenclature, carte-lien de
+    la vedette.
+
+  L'unique lecture passe par **`titreCourt()`** (`src/lib/projets.ts`) : aucun composant
+  ne relit le JSON pour son compte. La fonction **échoue bruyamment** si le champ manque,
+  plutôt que de retomber sur le titre long — un repli silencieux réintroduirait dans une
+  carte le titre de quatre lignes qu'on venait d'en chasser.
+
+  Mesure qui a motivé la règle : sur `/references`, le titre est en `md:truncate` ; avec
+  les titres longs, **14 lignes sur 23 étaient coupées à l'ellipse**, jusqu'à 103 px
+  escamotés. Avec les titres courts, zéro — au bureau comme à 390 px.
 - **Le `superRefine` qui arbitrait « planche OU visuel » a disparu avec l'alternative.**
   Une règle qui n'a plus rien à départager n'est pas un garde-fou : c'est un contrôle qui
   ment sur ce qu'il contrôle. L'obligation est portée par le champ lui-même.
