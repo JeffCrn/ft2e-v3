@@ -32,7 +32,7 @@ façade l'affirme.
 
 ---
 
-## État — 18 / 23
+## État — 19 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -54,7 +54,7 @@ façade l'affirme.
 | 16 | `logements-nerea-aytre` | Logements | `sankey-energie` (mécanisme `dedoublement`) | ✅ **publiée** (versée le 2026-08-15) |
 | 17 | `logements-pas-des-boeufs-bois-plage` | Logements | `boucle-fluide` (mécanisme `appariement`) | ✅ **publiée** (versée le 2026-08-15) |
 | 18 | `maison-relais-saint-jean-d-angely` | Logements | `boucle-fluide` (mécanisme `individualisation`) | ✅ **publiée** (versée le 2026-08-15) |
-| — | `maisons-tourtet-saint-georges-de-didonne` | Logements | | à faire |
+| 19 | `maisons-tourtet-saint-georges-de-didonne` | Logements | `chronologie-affaire` (mécanisme `divergence`) | ✅ **publiée** (versée le 2026-08-15) |
 | — | `passerelle-ecluse-carreau-d-or-marans` | Monotechnique | | à faire |
 | — | `place-des-chenes-verts-saint-rogatien` | Industriel et commercial | | à faire |
 | — | `residence-intergenerationnelle-saint-agnant` | Logements | | à faire |
@@ -69,7 +69,7 @@ façade l'affirme.
 | `boucle-fluide` | 6 — six mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae), `substitution` (production réversible, centre de formation de Saintes), `declinaison` (le parti répété — une maison dessinée une fois, 54 cellules identiques en `<defs>`/`<use>`, Le Fougerou), `appariement` (la partition des services — trois bandes de service, deux colonnes de machines, et dans chaque colonne UNE boîte qui enjambe une frontière de bande, jamais la même : l'eau chaude porte la ventilation chez les T2, le chauffage porte l'eau chaude chez les T3 ; contour d'encre dominant la frontière filet-1, logements du Pas des Bœufs au Bois-Plage) et `individualisation` (le collectif produit, chaque logement compte — deux flux collectifs entrent dans une colonne qui dessert une pile de 21 modules identiques en trois groupes typologiques ; UN module tiré au détail par deux filets d'agrandissement montre deux arrivées, trois départs, trois compteurs, maison relais de Saint-Jean-d'Angély) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
 | `coupe-traversee` | 4 — quatre mécanismes : `coupe` (l'enveloppe traversée, Marennes), `equilibre` (l'air extrait, l'air compensé — restaurant scolaire de Villedoux), `enjambement` (l'enveloppe qui ferme les faces qu'un bâtiment ordinaire n'a pas — dessous du plancher sur le passage, fosse d'ascenseur, abouts pontés — étude notariale Joffre) et `portee` (deux périmètres inégaux sur une même coupe de niveaux — la mission bornée au coin bas-gauche, l'enceinte de la zone d'alarme qui enclot tout, hôtel Le Yachtman) | ✅ `scripts/planches/coupe-traversee.py` (dispatch sur le bloc de l'extraction) |
 | `tableau-electrique` | 1 — mécanisme `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) | ✅ `scripts/planches/tableau-electrique.py` |
-| `chronologie-affaire` | 1 — mécanisme `precedence` (le dessin précède le gros œuvre : l'escalier des réservations gravit les niveaux d'avance sur l'exécution, résidence Horizon) | ✅ `scripts/planches/chronologie-affaire.py` |
+| `chronologie-affaire` | 2 — deux mécanismes : `precedence` (le dessin précède le gros œuvre : l'escalier des réservations gravit les niveaux d'avance sur l'exécution, résidence Horizon) et `divergence` (l'écart qui se creuse — une ordonnée d'écart au seuil du label, deux tracés en marches sur le même axe des temps : le besoin bioclimatique plat et collé au seuil, la consommation qui décroche marche après marche ; deux cotes verticales dans le rapport exact que la fiche énonce, 1,58 point contre 23,01, maisons Tourtet à Saint-Georges-de-Didonne) | ✅ `scripts/planches/chronologie-affaire.py` (dispatch sur le bloc de l'extraction) |
 | `planche-chiffree` | 0 | à écrire — c'est le repli, il servira |
 
 ⚠️ **L'archétype se choisit sur la thèse de la fiche, jamais sur son secteur ni sur sa liste
@@ -103,8 +103,8 @@ Fiche à traiter :  <slug>
     src/content/projets/<slug>.md   — frontmatter ET corps, jamais un résumé
 
 Archétypes déjà employés, à ne pas répéter sans raison explicite :
-    sankey-energie — ecole-des-douanes-rue-du-jura-la-rochelle
-    zonage-ssi — abbaye-sablonceaux-ssi
+    <la ligne se régénère depuis le registre des archétypes ci-dessus, un
+     mécanisme par fiche, à chaque session>
 
 Exemple achevé, à consulter comme référence de niveau attendu :
     public/images/projets/abbaye-sablonceaux-ssi/planche.json
@@ -222,6 +222,31 @@ page. Ils sont consignés au protocole ; en voici la leçon commune.
 | `.mono-label` et `@layer base` recapitalisent | la même faute commise deux fois, par deux couches différentes |
 | Vignette par recadrage — **3 essais, tous mauvais** | un dessin de 1200 lu à 290 tombe à 0,24 où qu'on le coupe |
 
+## Ce que la dix-neuvième planche a appris — 2026-08-15 : l'origine d'une ordonnée
+
+La planche des maisons Tourtet est la première à porter une **ordonnée** — un écart
+réglementaire en points de pourcentage — et non un simple rang topologique. Sa première
+version graduait cet axe **depuis l'exigence RT2012** (0 en haut, 45 points en bas), ce qui
+était la lecture la plus littérale de la fiche. Au contrôle à 1152 px, deux défauts liés :
+
+- les vingt points qui séparent l'exigence du seuil du label **ne sont occupés par aucun des
+  deux tracés** — 44 % de la hauteur du cadre en aplat vide, la « zone vide » que le
+  protocole proscrit ;
+- écrasée dans les 56 % restants, la cote de **1,58 point** tombait à onze pixels : la moitié
+  de la démonstration devenait invisible, alors que c'est précisément elle qui dit que
+  l'enveloppe *frôle* le seuil.
+
+Correction : **l'origine de l'ordonnée est le seuil, pas l'exigence.** L'axe n'est pas
+tronqué pour autant — le seuil est nommé, coté, et le demi-plan qui le surplombe est dessiné
+en bande d'un module, comme la marge d'une ligne de limite sur un dessin coté. La cote passe
+à 18,8 px, la dernière marche de 33 à 58 px, et le rapport des deux cotes (14,58) reste celui
+que la fiche énonce (14,56).
+
+**La leçon : sur une planche qui porte une grandeur, l'origine de l'échelle est un choix de
+composition, pas une donnée.** Elle se choisit à la question que le dessin pose — ici « de
+combien dépasse-t-on le seuil ? », pas « où en est-on de l'exigence ? » — et elle se contrôle
+à la taille de lecture, où seule apparaît la cote qu'elle écrase.
+
 ## Ce que la deuxième planche a arrêté — 2026-08-13
 
 **La planche schématise la solution, elle ne récapitule pas la fiche.** La première
@@ -270,8 +295,8 @@ suppose pas.
   forme, gardent leur rendeur propre. Une extraction sans aucune forme de repli fait
   **échouer le build** — la fiche ne peut plus perdre son dessin sur téléphone en
   silence.
-- **Deux modules de composition restent à écrire** (`chronologie-affaire`,
-  `planche-chiffree`). Le **tronc commun** vit dans
+- **Un module de composition reste à écrire** (`planche-chiffree`, le repli) —
+  `chronologie-affaire` a été écrit en S25 et reçu son second mécanisme en S26. Le **tronc commun** vit dans
   `scripts/planches/_tronc.py` depuis le 2026-08-13 : jetons, gabarits, avances
   calibrées, insécables, primitives à double écriture des couleurs, routine
   d'exécution. L'extraction a été contrôlée par **régénération octet à octet** des

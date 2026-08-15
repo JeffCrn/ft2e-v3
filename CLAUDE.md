@@ -8,7 +8,7 @@ Une **build Astro statique** fonctionnelle, déployée sur Vercel, qui :
 
 1. Implémente intégralement le sitemap (Accueil, Société, Équipe, Expertises, Références, Fiche projet, Actualités, Article, Contact, pages légales).
 2. Présente **vingt-trois fiches projets réelles**, sourcées pièce par pièce sur les dossiers d'affaires FT2E. **Plus aucune fiche de démonstration : les huit `demo: true` ont été supprimées le 2026-08-08 à la demande de FT2E.**
-2 bis. **Illustre chaque fiche par une planche de schéma de principe** — un dessin FT2E composé à partir de sa propre matière technique, sans aucune géométrie d'ouvrage ni œuvre de tiers. **Chantier ouvert le 2026-08-12, 18 planches publiées sur 23** : `docs/superpowers/plans/2026-08-12-chantier-planches-references.md`.
+2 bis. **Illustre chaque fiche par une planche de schéma de principe** — un dessin FT2E composé à partir de sa propre matière technique, sans aucune géométrie d'ouvrage ni œuvre de tiers. **Chantier ouvert le 2026-08-12, 19 planches publiées sur 23** : `docs/superpowers/plans/2026-08-12-chantier-planches-references.md`.
 3. Donne à voir le design system complet (rampe monochrome 197°, plans et ombres à l'encre, trame 28 px, typo Archivo + IBM Plex Mono, cartouches, nomenclature, monogramme).
 4. Démontre les filtres de la page Références, le gabarit de fiche projet, le composant `HeroPage` unifié, la signature éditoriale, le JSON-LD, les performances.
 5. Anime le tout via quatre mouvements vanilla (filet de flux 900 ms, révélation de plan 760 ms / 22 px, survols 300/260 ms) + View Transitions Astro, courbe unique `cubic-bezier(0.2, 0.7, 0.2, 1)`.

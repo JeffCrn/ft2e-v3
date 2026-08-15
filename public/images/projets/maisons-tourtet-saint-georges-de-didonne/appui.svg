@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la progression réglementaire d'une opération de logements : quatre calculs datés d'avril 2020 à octobre 2023 sont portés sur un même axe, gradué en écart au seuil du label. Le besoin bioclimatique, qui mesure l'enveloppe, reste à 52,7 pour un maximum de 67,2 aux quatre calculs — une ligne plate qui ne dépasse le seuil du label RT2012−20 % que de 1,58 point. La consommation d'énergie primaire, qui mesure les systèmes, descend par marches de 37,2 à 33,0 kWh/m²/an pour un maximum inchangé de 57,9, et s'éloigne du seuil jusqu'à 23,01 points ; la dernière marche, la plus haute, suit une opération arrêtée de mars 2021 à janvier 2023 et tient pour l'essentiel au passage des modules photovoltaïques de 285 à 375 Wc. L'enveloppe fixe la limite, les systèmes font la marge.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">L'ÉCART SE CREUSE</text>
+  <rect x="150.00" y="72.00" width="346.00" height="24.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="496.00" y="88.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LE SEUIL DU LABEL · RT2012−20 %</text>
+  <path d="M 174.88 96.00 L 174.88 304.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 211.14 96.00 L 211.14 304.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 254.04 96.00 L 254.04 304.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 477.75 96.00 L 477.75 304.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 150.00 96.00 L 496.00 96.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <rect x="254.04" y="284.00" width="159.02" height="14.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="333.55" y="294.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">L'OPÉRATION S'ARRÊTE</text>
+  <text x="24.00" y="103.86" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Besoin</text>
+  <text x="24.00" y="118.86" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">bioclimatique</text>
+  <text x="24.00" y="134.86" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L'ENVELOPPE</text>
+  <text x="24.00" y="205.91" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Consommation</text>
+  <text x="24.00" y="220.91" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">d'énergie primaire</text>
+  <text x="24.00" y="236.91" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES SYSTÈMES</text>
+  <path d="M 174.88 107.36 L 211.14 107.36 L 211.14 107.36 L 254.04 107.36 L 254.04 107.36 L 477.75 107.36 L 477.75 107.36" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 174.88 209.41 L 211.14 209.41 L 211.14 216.87 L 254.04 216.87 L 254.04 226.82 L 477.75 226.82 L 477.75 261.64" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <rect x="171.88" y="104.36" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="208.14" y="104.36" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="251.04" y="104.36" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="474.75" y="104.36" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="171.88" y="206.41" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="208.14" y="213.87" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="251.04" y="223.82" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="474.75" y="258.64" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <text x="183.88" y="121.36" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">52,7</text>
+  <text x="183.88" y="200.41" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">37,2</text>
+  <text x="468.75" y="276.64" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">33,0</text>
+  <path d="M 477.75 107.36 L 512.00 107.36" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 508.00 96.00 L 508.00 107.36" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 504.00 96.00 L 512.00 96.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 504.00 107.36 L 512.00 107.36" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="496.00" y="121.36" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">1,58 POINT</text>
+  <path d="M 477.75 261.64 L 528.00 261.64" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 524.00 96.00 L 524.00 261.64" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 520.00 96.00 L 528.00 96.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 520.00 261.64 L 528.00 261.64" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="496.00" y="182.82" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">23,01 POINTS SOUS LE SEUIL</text>
+  <path d="M 150.00 304.00 L 496.00 304.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 150.00 304.00 L 150.00 309.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 236.74 304.00 L 236.74 309.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 323.24 304.00 L 323.24 309.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 409.74 304.00 L 409.74 309.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 496.00 304.00 L 496.00 309.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="193.37" y="322.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2020</text>
+  <text x="279.99" y="322.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2021</text>
+  <text x="366.49" y="322.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2022</text>
+  <text x="452.87" y="322.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2023</text>
+</svg>

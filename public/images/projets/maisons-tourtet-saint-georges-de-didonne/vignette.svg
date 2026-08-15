@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">L'ÉCART SE CREUSE</text>
+  <rect x="14.00" y="32.00" width="268.00" height="20.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="282.00" y="46.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="end">SEUIL DU LABEL</text>
+  <path d="M 14.00 52.00 L 282.00 52.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 33.27 58.69 L 61.36 58.69 L 61.36 58.69 L 94.58 58.69 L 94.58 58.69 L 267.87 58.69 L 267.87 58.69" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 33.27 118.79 L 61.36 118.79 L 61.36 123.18 L 94.58 123.18 L 94.58 129.04 L 267.87 129.04 L 267.87 149.54" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="31.27" y="56.69" width="4.00" height="4.00" class="c-encre" fill="#00393A"/>
+  <rect x="59.36" y="56.69" width="4.00" height="4.00" class="c-encre" fill="#00393A"/>
+  <rect x="92.58" y="56.69" width="4.00" height="4.00" class="c-encre" fill="#00393A"/>
+  <rect x="265.87" y="56.69" width="4.00" height="4.00" class="c-encre" fill="#00393A"/>
+  <rect x="31.27" y="116.79" width="4.00" height="4.00" class="c-encre" fill="#00393A"/>
+  <rect x="59.36" y="121.18" width="4.00" height="4.00" class="c-encre" fill="#00393A"/>
+  <rect x="92.58" y="127.04" width="4.00" height="4.00" class="c-encre" fill="#00393A"/>
+  <rect x="265.87" y="147.54" width="4.00" height="4.00" class="c-encre" fill="#00393A"/>
+  <text x="41.27" y="73.69" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bbio</text>
+  <text x="81.23" y="73.69" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">52,7</text>
+  <text x="41.27" y="110.79" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Cep</text>
+  <text x="73.74" y="110.79" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">37,2</text>
+  <text x="267.87" y="164.54" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">33,0</text>
+  <path d="M 14.00 176.00 L 282.00 176.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+</svg>
