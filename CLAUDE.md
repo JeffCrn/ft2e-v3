@@ -268,6 +268,7 @@ l'échelle 0,24, quel que soit l'endroit où on le découpe.
 | **Chantier des 23 fiches références réelles** (programme, protocole, suivi) | **`docs/superpowers/plans/2026-08-07-chantier-references-reelles.md`** |
 | **Planches de références — protocole de production** | **`docs/superpowers/specs/2026-08-12-planches-references-protocole.md`** |
 | **Planches de références — bilan de clôture et points ouverts** | **`docs/superpowers/plans/2026-08-12-chantier-planches-references.md`** |
+| **Réduction de dette — programmation en 4 sessions + 2 décisions** (ouverte le 2026-08-16, issue du relevé de dette du 2026-08-15) | **`docs/superpowers/plans/2026-08-16-reduction-dette.md`** |
 | **Remasterisation de `/references` en grille de cartes** (spec — **appliquée le 2026-08-15**, amendement A9) | **`docs/superpowers/specs/2026-08-15-remasterisation-nomenclature-references.md`** |
 | **Responsive des planches sur les fiches** (spec — **appliquée le 2026-08-15** : trois compositions, trois bandes, repli supprimé, agrandissement à deux états) | **`docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`** |
 | Version liminaire (historique de la première livraison) | `docs/14-version-liminaire.md` |
