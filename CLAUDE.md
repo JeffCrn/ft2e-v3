@@ -126,7 +126,7 @@ la miniature de `/references` était à la fois `hidden md:block` et `aria-hidde
 | `planche.json` | l'extraction — la pièce que FT2E relit ; le site en tire le **titre court** (`titreCourt()`), le cartouche de pied et l'**alternative textuelle** de la vignette |
 | `planche.svg` | la planche, `viewBox 0 0 1200 800`, lue à 1152 px (échelle 0,96) — **fiche ≥ 880 px** |
 | `appui.svg` | `viewBox 0 0 552 368` — l'appui du hero de l'accueil (fiche `en_avant`) **et la fiche entre 480 et 879 px** |
-| `vignette.svg` | `viewBox 0 0 300 200` — la vignette de carte, lue à 274-296 px, **et la fiche sous 480 px** |
+| `vignette.svg` | `viewBox 0 0 300 200` — la vignette de carte, **plafonnée à 300 px et centrée** (jamais au-dessus de 1,00, quelle que soit la grille), **et la fiche sous 480 px** |
 | `planche.png` | 2400 × 1600 — contrôle, impression, et `og:image` de la fiche |
 
 **Quatre principes de rendu, chacun mesuré :**
