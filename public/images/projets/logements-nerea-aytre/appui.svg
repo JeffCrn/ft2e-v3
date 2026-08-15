@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe du dédoublement contractuel d'une opération de logements : un même permis de construire en co-titularité porte 90 logements et un commerce en cinq bâtiments, et se partage entre deux marchés — 42 logements en accession libre et le commerce vers les bâtiments A et B, côté promoteur ; 30 logements en locatif social et 18 en accession sociale, soit 48, vers les bâtiments C, D et E, côté bailleur social. Une bande unique traverse les deux flux : le même bureau d'études fluides, qui tient pour les deux maîtres d'ouvrage deux jeux complets de pièces, deux calculs réglementaires et treize jalons de rendu alternés. Les exigences diffèrent d'un marché à l'autre : NF Habitat sans exigence thermique côté promoteur ; NF Habitat HQE profil Très Performant, soit la RT2012 moins 20 pour cent, côté bailleur.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">L'OPÉRATION DÉDOUBLÉE</text>
+  <rect x="220.00" y="68.00" width="80.00" height="208.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 72.00 100.00 C 246.00 100.00, 246.00 88.00, 420.00 88.00 L 420.00 155.20 C 246.00 155.20, 246.00 167.20, 72.00 167.20 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 72.00 167.20 C 246.00 167.20, 246.00 179.20, 420.00 179.20 L 420.00 227.20 C 246.00 227.20, 246.00 215.20, 72.00 215.20 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 72.00 215.20 C 246.00 215.20, 246.00 227.20, 420.00 227.20 L 420.00 256.00 C 246.00 256.00, 246.00 244.00, 72.00 244.00 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 220.00 68.00 L 220.00 276.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 300.00 68.00 L 300.00 276.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <rect x="64.00" y="100.00" width="8.00" height="144.00" class="c-encre" fill="#00393A"/>
+  <text x="56.00" y="137.60" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">42</text>
+  <text x="56.00" y="195.20" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">30</text>
+  <text x="56.00" y="233.60" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">18</text>
+  <rect x="420.00" y="88.00" width="9.00" height="32.10" class="c-encre" fill="#00393A"/>
+  <text x="434.00" y="107.65" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500">A</text>
+  <rect x="420.00" y="123.10" width="9.00" height="32.10" class="c-encre" fill="#00393A"/>
+  <text x="434.00" y="142.75" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500">B</text>
+  <rect x="420.00" y="179.20" width="9.00" height="23.60" class="c-encre" fill="#00393A"/>
+  <text x="434.00" y="194.60" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500">C</text>
+  <rect x="420.00" y="205.80" width="9.00" height="23.60" class="c-encre" fill="#00393A"/>
+  <text x="434.00" y="221.20" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500">D</text>
+  <rect x="420.00" y="232.40" width="9.00" height="23.60" class="c-encre" fill="#00393A"/>
+  <text x="434.00" y="247.80" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500">E</text>
+  <text x="24.00" y="258.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN MÊME PERMIS</text>
+  <text x="24.00" y="272.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EN CO-TITULARITÉ</text>
+  <text x="260.00" y="292.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">UN SEUL BET FLUIDES</text>
+  <text x="24.00" y="330.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN PERMIS EN CO-TITULARITÉ · DEUX MARCHÉS · CINQ BÂTIMENTS</text>
+</svg>

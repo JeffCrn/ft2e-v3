@@ -14,8 +14,7 @@ performance: "RT2012 · NF Habitat et NF Habitat HQE profil Très Performant · 
 synthese: >-
   À Aytré, un promoteur et un bailleur social construisent ensemble : sous un même permis en co-titularité, Pitch Immo et Clairsienne portent 90 logements et un commerce, répartis en cinq bâtiments. FT2E est le bureau d’études fluides unique de l’opération, pour les deux maîtres d’ouvrage — ce qui signifie deux jeux complets de pièces tenus en parallèle, deux calculs réglementaires et deux calendriers, le bailleur imposant un cahier des charges que le promoteur n’a pas. L’îlot est occupé et contigu à une usine : le classement en zone de bruit se lit jusque dans le choix des entrées d’air. Les cinq bâtiments sont conformes, de 18,5 à 25,9 % sous l’exigence.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", Photovoltaïque]
-image_principale: "/images/projets/logements-nerea-aytre/01.jpg"
-image_principale_alt: "Perspective de l’opération Néréa sur l’avenue du Commandant Lysiack à Aytré : un angle de quatre niveaux coiffé d’une loggia doublée de bois, des façades blanches plantées de grimpantes et le front de rue qui se prolonge vers la droite"
+planche: "/images/projets/logements-nerea-aytre/planche.svg"
 en_avant: false
 ---
 

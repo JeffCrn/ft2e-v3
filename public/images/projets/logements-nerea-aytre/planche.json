@@ -1,0 +1,210 @@
+{
+  "fiche": "logements-nerea-aytre",
+  "archetype": "sankey-energie",
+  "archetype_motif": "La thèse de la fiche est une partition proportionnelle : un même permis de construire en co-titularité porte 90 logements et un commerce, et se partage entre deux marchés — 42 logements en accession libre côté promoteur, 30 en locatif social et 18 en accession sociale côté bailleur — que le dessin donne à voir par la largeur des flux, traversés par une bande unique, le bureau d'études fluides commun aux deux maîtres d'ouvrage. C'est une démonstration de grandeurs et de topologie, le domaine de sankey-energie, sous un mécanisme nouveau, `dedoublement` : ni flux d'énergie (École des douanes), ni plafonds à échelle commune (Maubec). Ni chronologie-affaire : les treize jalons alternés n'ont pas de dates individuelles publiables, l'alternance reste une mention. Ni zonage (rien d'incendie), ni coupe (rien ne s'empile) : ce qui se partage ici est un programme sous un permis unique.",
+  "surtitre": "SCHÉMA DE PRINCIPE · UNE OPÉRATION, DEUX MAÎTRES D'OUVRAGE",
+  "titre": "Néréa, 90 logements",
+  "sous_titre": "Un permis en co-titularité, deux marchés distincts, un seul bureau d'études fluides",
+  "cartouche_legende": "AYTRÉ · 5 423 m² · 2020",
+  "aria_label": "Schéma de principe du dédoublement contractuel d'une opération de logements : un même permis de construire en co-titularité porte 90 logements et un commerce en cinq bâtiments, et se partage entre deux marchés — 42 logements en accession libre et le commerce vers les bâtiments A et B, côté promoteur ; 30 logements en locatif social et 18 en accession sociale, soit 48, vers les bâtiments C, D et E, côté bailleur social. Une bande unique traverse les deux flux : le même bureau d'études fluides, qui tient pour les deux maîtres d'ouvrage deux jeux complets de pièces, deux calculs réglementaires et treize jalons de rendu alternés. Les exigences diffèrent d'un marché à l'autre : NF Habitat sans exigence thermique côté promoteur ; NF Habitat HQE profil Très Performant, soit la RT2012 moins 20 pour cent, côté bailleur.",
+  "dedoublement": {
+    "entete": "90 LOGEMENTS ET UN COMMERCE EN CINQ BÂTIMENTS · UN PERMIS UNIQUE, DÉPOSÉ LE 22 DÉCEMBRE 2021, PURGÉ DE TOUT RECOURS LE 24 SEPTEMBRE 2022",
+    "permis": {
+      "lignes": [
+        "UN MÊME PERMIS",
+        "EN CO-TITULARITÉ"
+      ],
+      "total": 90
+    },
+    "flux": [
+      {
+        "cle": "accession-libre",
+        "marche": "promoteur",
+        "logements": 42,
+        "libelle": "42 logements en accession libre et le commerce",
+        "marche_mention": "MARCHÉ DU PROMOTEUR"
+      },
+      {
+        "cle": "locatif-social",
+        "marche": "bailleur",
+        "logements": 30,
+        "libelle": "30 logements en locatif social",
+        "marche_mention": "MARCHÉ DU BAILLEUR SOCIAL"
+      },
+      {
+        "cle": "accession-sociale",
+        "marche": "bailleur",
+        "logements": 18,
+        "libelle": "18 logements en accession sociale",
+        "marche_mention": "MARCHÉ DU BAILLEUR SOCIAL"
+      }
+    ],
+    "arrivees": [
+      {
+        "cle": "promoteur",
+        "batiments": [
+          "A",
+          "B"
+        ],
+        "nom": "Bâtiments A et B",
+        "nom_court": "A et B",
+        "valeur_mention": "42 LOGEMENTS ET LE COMMERCE",
+        "total_affiche": "42",
+        "certification": [
+          "NF HABITAT",
+          "AUCUNE EXIGENCE THERMIQUE"
+        ]
+      },
+      {
+        "cle": "bailleur",
+        "batiments": [
+          "C",
+          "D",
+          "E"
+        ],
+        "nom": "Bâtiments C, D et E",
+        "nom_court": "C, D, E",
+        "valeur_mention": "48 LOGEMENTS",
+        "total_affiche": "48",
+        "certification": [
+          "NF HABITAT HQE TRÈS PERFORMANT",
+          "LA RT2012 MOINS 20 % EXIGÉE"
+        ]
+      }
+    ],
+    "bande_bet": {
+      "libelle": "UN SEUL BET FLUIDES POUR LES DEUX MAÎTRES D'OUVRAGE",
+      "libelle_court": "UN SEUL BET FLUIDES",
+      "consequence": "DEUX JEUX DE PIÈCES · DEUX CALCULS RÉGLEMENTAIRES · TREIZE JALONS ALTERNANT D'UN MAÎTRE D'OUVRAGE À L'AUTRE"
+    },
+    "appui_resume": "UN PERMIS EN CO-TITULARITÉ · DEUX MARCHÉS · CINQ BÂTIMENTS",
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "permis",
+        "libelle": "Un même permis de construire, en co-titularité",
+        "valeur": "90",
+        "unite": "logements",
+        "detail": [
+          "ET UN COMMERCE · CINQ BÂTIMENTS",
+          "DÉPOSÉ LE 22 DÉCEMBRE 2021 · PURGÉ LE 24 SEPTEMBRE 2022"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "accession-libre",
+        "libelle": "Marché du promoteur — accession libre et le commerce",
+        "valeur": "42",
+        "unite": "logements",
+        "detail": [
+          "BÂTIMENTS A ET B",
+          "NF HABITAT · AUCUNE EXIGENCE THERMIQUE"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "locatif-social",
+        "libelle": "Marché du bailleur social — locatif social",
+        "valeur": "30",
+        "unite": "logements",
+        "detail": [
+          "BÂTIMENTS C, D ET E",
+          "NF HABITAT HQE TRÈS PERFORMANT · LA RT2012 MOINS 20 % EXIGÉE"
+        ]
+      },
+      {
+        "ordre": 4,
+        "cle": "accession-sociale",
+        "libelle": "Marché du bailleur social — accession sociale",
+        "valeur": "18",
+        "unite": "logements",
+        "detail": [
+          "BÂTIMENTS C, D ET E"
+        ]
+      },
+      {
+        "ordre": 5,
+        "cle": "bet",
+        "libelle": "Un seul bureau d'études fluides pour les deux maîtres d'ouvrage",
+        "detail": [
+          "DEUX JEUX DE PIÈCES · DEUX CALCULS RÉGLEMENTAIRES",
+          "TREIZE JALONS DE RENDU ALTERNANT D'UN MAÎTRE D'OUVRAGE À L'AUTRE"
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Les installations, elles, restent tenues par une même logique.",
+  "vignette_surtitre": "L'OPÉRATION DÉDOUBLÉE",
+  "a_valider_ft2e": [
+    {
+      "objet": "La répartition des logements entre bâtiments d'un même marché",
+      "la_source_affirme": "« 42 logements en accession libre et le commerce dans les bâtiments A et B », « 48 logements dans les bâtiments C, D et E — 30 en locatif social, 18 en accession sociale » — jamais de contenance bâtiment par bâtiment.",
+      "le_dessin_suppose": "Des barres d'arrivée découpées en segments égaux (A/B, puis C/D/E) : la géométrie code le nombre de bâtiments, jamais leur contenance. Dire si une répartition réelle par bâtiment doit être montrée, et laquelle."
+    },
+    {
+      "objet": "Le commerce sans épaisseur de flux",
+      "la_source_affirme": "« 90 logements et un commerce » ; « le commerce du rez-de-chaussée du bâtiment B, livré brut » — aucune surface n'est publiée pour le commerce.",
+      "le_dessin_suppose": "Une échelle de 3 px par logement, le commerce porté en toutes lettres sur le flux du promoteur sans épaisseur propre. Dire si cette absence d'épaisseur convient ou si le commerce doit disparaître du flux."
+    },
+    {
+      "objet": "L'ordre vertical des marchés",
+      "la_source_affirme": "La fiche énumère le promoteur puis le bailleur, sans hiérarchie.",
+      "le_dessin_suppose": "Le marché du promoteur au-dessus, celui du bailleur en dessous — l'ordre d'énumération, rien d'autre. Dire si l'inverse est préférable."
+    },
+    {
+      "objet": "« Aucune exigence thermique » pour NF Habitat",
+      "la_source_affirme": "« NF Habitat, dont la certification, délivrée à l'acquéreur à la livraison, n'impose aucune performance thermique ».",
+      "le_dessin_suppose": "L'abréviation « aucune exigence thermique » sous les bâtiments A et B. Dire si la nuance entre performance et exigence compte, ou si la mention doit disparaître."
+    },
+    {
+      "objet": "La bande unique réduite au BET fluides",
+      "la_source_affirme": "FT2E est « avec l'architecte et le mandataire, l'un des trois seuls cotraitants à travailler pour les deux maîtres d'ouvrage » — les deux autres sont des tiers, innommables au dessin.",
+      "le_dessin_suppose": "Une seule bande transversale, celle du BET fluides : le dessin schématise la mission FT2E, pas le groupement. Dire si une mention doit rappeler que deux autres cotraitants sont transverses."
+    },
+    {
+      "objet": "Millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2020 (référence et champ annee), permis déposé fin 2021, chantier ouvert fin 2023, statut en cours sans annee_livraison.",
+      "le_dessin_suppose": "Que le cartouche porte 2020, seul millésime que le frontmatter garantit tant que la réception n'est pas prononcée. Dire si un autre millésime est préférable."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 20-021 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Noms de tiers : les deux maîtres d'ouvrage et leur groupe, l'agence d'architecture, le mandataire du groupement, l'entreprise industrielle voisine — tous désignés par leur rôle (promoteur, bailleur social) ou tus.",
+    "Les conclusions réglementaires bâtiment par bâtiment (48,1 / 46,5 / 42,3 / 46,1 kWhep/m²/an, marges de 18,5 à 25,9 %, Tic de 28,3 à 29,0 °C, Bbio −14,3 et −26,1 %) et les trois exigences d'étanchéité à l'air (0,80 / 1,0 / 3,0 m³/(h·m²)) — la fiche les porte déjà, et la partition d'exigences chiffrées à échelle commune est le mécanisme de la planche Maubec : la répéter serait une redite.",
+    "Le lot ventilation sous classement de bruit BR3 (entrées d'air à 37 et 52 dB, pièges à son jusqu'au diamètre 400, gaines flexibles insonorisées, tés souches insonorisés) — second mécanisme de la fiche, matière d'une autre planche.",
+    "Les équipements de la logique unique : chaudières gaz de 12 et 14 litres par minute, ventouse et 3CEp+, quatre caissons dont un de 1 888 m³/h, surpresseur à bâche de disconnexion, photovoltaïque de 3 600 Wc en douze modules de 300 Wc — ils ne suivent pas la partition, ils restent au texte.",
+    "Le calendrier de l'affaire : les treize jalons n'ont pas de dates individuelles publiées (seules leurs bornes le sont), le chantier ouvert fin 2023, le témoin réceptionné en novembre 2024, la pré-livraison du 15 septembre 2025, l'assistance aux opérations de réception au premier trimestre 2026 — matière d'une chronologie, pas d'une partition.",
+    "Le contexte d'urbanisme : l'orientation d'aménagement du PLUi et ses quotas (33 % de locatif social, 20 % d'accession abordable), les neuf parcelles et leurs 4 634 m², les démolitions préalables, les 8 821 habitants d'Aytré — l'amont du permis, pas son partage.",
+    "Toute géométrie d'ouvrage : les bâtiments sont des segments comptés sur une barre d'arrivée, les flux des rubans topologiques — aucune implantation, aucune façade, aucun plan de masse repris."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "une barre d'origine contiguë de 270 px (90 logements à 3 px) qui fourche en deux groupes divergents de ±30 px, traversés par une bande calcaire unique (x 560–710) — texte masqué, la fourche inégale, la colonne qui traverse les deux flux et les arrivées en 2 + 3 segments portent la thèse",
+    "bouclage_rubans": "42 + 30 + 18 = 90 logements ; hauteurs 126 + 90 + 54 = 270 px",
+    "topologie": "libellés (x 56–386) → permis (x 398) → rubans (x 407–860) → arrivées segmentées + étiquettes (x 895–1144) ; bande du BET x 560–710, y 206–588",
+    "segments": "2 + 3 = 5 bâtiments — la géométrie code le nombre, jamais la contenance",
+    "bas_du_dessin": "arrivées jusqu'à 562 px, bande nommée à 612 et 628, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 215 x 30 px = 6450 px², soit 0.67 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — les comptes des flux sont des libellés Archivo 15 et des cotes mono 10 (révision 4)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "62 signes — 527 px mesurés pour 1088 disponibles",
+    "etiquette_bande": "376 px centrés sur x 635 — de 447 à 823, conséquence 790 px",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la barre d'origine, les trois rubans proportionnels, la bande unique nommée et les deux arrivées avec leur total — libellés de flux, certifications et permis laissés à la planche",
+    "bas_du_dessin": "bande nommée à 168 px, marge basse 32 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "la fourche complète à l'échelle 1 avec ses trois comptes, la bande unique nommée, les cinq bâtiments en segments lettrés, le permis et la ligne de résumé — libellés de flux et certifications laissés à la planche",
+    "bas_du_dessin": "ligne de résumé à 330 px, marge basse 38 px"
+  }
+}

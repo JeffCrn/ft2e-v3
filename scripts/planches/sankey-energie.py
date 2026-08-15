@@ -29,7 +29,8 @@ généraliser sur un seul cas.
 
 from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH, A_MARGE,
                     JETON, SANS, MONO, mesurer, echapper, texte, rect, rect_bord,
-                    ligne, replier, racine_appui, controles_appui, executer)
+                    ligne, replier, racine_appui, controles_appui, executer,
+                    entete_style)
 
 
 # La révision 4 supprime la partition 7/5 et la colonne de relevé : la planche
@@ -703,19 +704,353 @@ def composer_appui_plafonds(donnees):
         bas="légende jusqu'à 296 px, marge basse 72 px")
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# Mécanisme `dedoublement` — une opération, deux marchés, un seul BET fluides
+# (logements Néréa, Aytré). Même famille que le Sankey : la proportion portée
+# par la géométrie. Un permis unique (une barre d'origine contiguë) se partage
+# en deux marchés (trois rubans à 3 px par logement : 42, puis 30 + 18), qui
+# arrivent sur deux barres segmentées — cinq bâtiments comptés. Une bande
+# calcaire UNIQUE traverse les deux flux : le BET fluides commun aux deux
+# maîtres d'ouvrage. Texte masqué : une pile qui fourche en deux rubans
+# inégaux, une colonne qui les traverse tous les deux, deux arrivées en 2 + 3.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+DD_LIB_W = 330             # largeur de la colonne de libellés
+DD_BAR_X = 398             # barre du permis (9 px)
+DD_X0 = DD_BAR_X + 9       # départ des rubans
+DD_X1 = 860                # barres d'arrivée (9 px)
+DD_LETTRE_X = 877          # lettres de bâtiment
+DD_NLIB_X = 895            # étiquettes d'arrivée — jusqu'à 1144
+DD_PXL = 3.0               # px par logement — l'échelle EST la donnée
+DD_Y0 = 262.0              # haut de la barre d'origine
+DD_ECART = 30.0            # divergence des groupes à l'arrivée
+DD_BANDE = (560.0, 710.0)  # la bande du BET, x0-x1
+DD_BANDE_DEBORD = 26.0     # débord de la bande au-delà des arrivées
+
+
+def _ruban(x0, x1, y0g, y1g, y0d, y1d):
+    """Ruban de flux : mêmes cubiques symétriques que le Sankey de flux."""
+    xm = (x0 + x1) / 2
+    d = (f"M {x0:.2f} {y0g:.2f} "
+         f"C {xm:.2f} {y0g:.2f}, {xm:.2f} {y0d:.2f}, {x1:.2f} {y0d:.2f} "
+         f"L {x1:.2f} {y1d:.2f} "
+         f"C {xm:.2f} {y1d:.2f}, {xm:.2f} {y1g:.2f}, {x0:.2f} {y1g:.2f} Z")
+    return (f'  <path d="{d}" class="c-clair s-filet1" fill="{JETON["clair"]}" '
+            f'stroke="{JETON["filet-1"]}" stroke-width="1"/>')
+
+
+def _dd_geometrie(donnees, pxl, y0, ecart):
+    """Origines contiguës (le permis est UN), arrivées divergentes par marché."""
+    dd = donnees["dedoublement"]
+    y = float(y0)
+    poses = []
+    for f in dd["flux"]:
+        h = f["logements"] * pxl
+        poses.append({"f": f, "o0": y, "o1": y + h, "h": h})
+        y += h
+    groupes = []
+    for a in dd["arrivees"]:
+        membres = [p for p in poses if p["f"]["marche"] == a["cle"]]
+        g0 = membres[0]["o0"] + (-ecart if not groupes else ecart)
+        yg = g0
+        for p in membres:
+            p["a0"], p["a1"] = yg, yg + p["h"]
+            yg += p["h"]
+        groupes.append({"a": a, "y0": g0, "h": yg - g0, "centre": (g0 + yg) / 2})
+    return dd, poses, groupes, y  # y = bas de la barre d'origine
+
+
+def _dd_segments(A, x, y0, h, batiments, lettre_x, lettre_corps=10, gap=3.0):
+    """La barre d'arrivée, découpée en bâtiments COMPTÉS (jamais dimensionnés)."""
+    n = len(batiments)
+    seg = (h - gap * (n - 1)) / n
+    for i, b in enumerate(batiments):
+        ys = y0 + i * (seg + gap)
+        A(rect(x, ys, 9, seg, "encre"))
+        A(texte(lettre_x, ys + seg / 2 + lettre_corps * 0.36, b, "mono",
+                lettre_corps, 500, "pivot"))
+
+
+def composer_dedoublement(donnees):
+    dd, poses, groupes, bas_barre = _dd_geometrie(donnees, DD_PXL, DD_Y0, DD_ECART)
+    bx0, bx1 = DD_BANDE
+    bcx = (bx0 + bx1) / 2
+    haut_arrivees = min(g["y0"] for g in groupes)
+    bas_arrivees = max(g["y0"] + g["h"] for g in groupes)
+    bande_y0 = haut_arrivees - DD_BANDE_DEBORD
+    bande_y1 = bas_arrivees + DD_BANDE_DEBORD
+    depassements = []
+
+    def controler(nom, contenu, corps, profil, dispo, tracking=0.0):
+        l = mesurer(contenu, corps, profil, tracking)
+        if l > dispo:
+            depassements.append(f"{nom} : {l:.0f} px pour {dispo:.0f} disponibles")
+        return l
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, strokes=("filet-1", "filet-2", "encre"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, 76, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(texte(MARGE, 112, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, 138, donnees["sous_titre"], "sans", 16, 400, "pivot", wdth=100))
+    A(rect(MARGE, 160, UTILE, 1, "filet-1"))
+
+    # ── En-tête de périmètre ─────────────────────────────────────────────────
+    controler("entête", dd["entete"], 10, "mono", UTILE, 1.4)
+    A(texte(MARGE, 190, dd["entete"], "mono", 10, 500, "pivot", tracking=1.4))
+
+    # ── La bande du BET — dessinée SOUS les rubans : elle les traverse ───────
+    A(rect_bord(bx0, bande_y0, bx1 - bx0, bande_y1 - bande_y0,
+                "calcaire", "filet-2"))
+
+    # ── Les rubans — un permis contigu qui fourche en deux marchés ───────────
+    for p in poses:
+        A(_ruban(DD_X0, DD_X1, p["o0"], p["o1"], p["a0"], p["a1"]))
+
+    # Les arêtes de la bande, REDESSINÉES par-dessus les rubans : la colonne
+    # doit se lire en train de traverser les flux, pas seulement en déborder.
+    A(ligne(bx0, bande_y0, bx0, bande_y1, "filet-1"))
+    A(ligne(bx1, bande_y0, bx1, bande_y1, "filet-1"))
+
+    # ── La barre du permis — l'origine est UNE ───────────────────────────────
+    A(rect(DD_BAR_X, DD_Y0, 9, bas_barre - DD_Y0, "encre"))
+    for i, ligne_permis in enumerate(dd["permis"]["lignes"]):
+        controler("permis", ligne_permis, 10, "mono", 300, 1.4)
+        A(texte(DD_BAR_X + 4.5, 556 + i * 14, ligne_permis, "mono", 10, 500,
+                "encre" if i == 0 else "pivot", ancre="middle", tracking=1.4))
+
+    # ── Libellés de flux, à gauche — jamais posés sur le clair ───────────────
+    for p in poses:
+        f = p["f"]
+        lignes = replier(f["libelle"], 15, DD_LIB_W)
+        for l in lignes:
+            controler(f'libellé {f["cle"]}', l, 15, "sans-400", DD_LIB_W)
+        total_h = len(lignes) * 17 + 13
+        yl = (p["o0"] + p["o1"]) / 2 - total_h / 2 + 12
+        for k, l in enumerate(lignes):
+            A(texte(MARGE, yl + k * 17, l, "sans", 15, 400, "encre", wdth=100))
+        controler(f'marché {f["cle"]}', f["marche_mention"], 10, "mono",
+                  DD_LIB_W, 1.4)
+        A(texte(MARGE, yl + len(lignes) * 17 + 13 - 4, f["marche_mention"],
+                "mono", 10, 500, "pivot", tracking=1.4))
+
+    # ── Arrivées : barres segmentées (bâtiments comptés) + étiquettes ────────
+    nlib_dispo = W - MARGE - DD_NLIB_X
+    for g in groupes:
+        a = g["a"]
+        _dd_segments(A, DD_X1, g["y0"], g["h"], a["batiments"], DD_LETTRE_X)
+        c = g["centre"]
+        controler(f'nom {a["cle"]}', a["nom"], 15, "sans-600", nlib_dispo)
+        A(texte(DD_NLIB_X, c - 22, a["nom"], "sans", 15, 600, "encre", wdth=112))
+        controler(f'valeur {a["cle"]}', a["valeur_mention"], 10, "mono",
+                  nlib_dispo, 1.4)
+        A(texte(DD_NLIB_X, c - 4, a["valeur_mention"], "mono", 10, 500, "encre",
+                tracking=1.4))
+        for k, lc in enumerate(a["certification"]):
+            controler(f'certification {a["cle"]}', lc, 10, "mono", nlib_dispo, 1.4)
+            A(texte(DD_NLIB_X, c + 14 + k * 14, lc, "mono", 10, 500, "pivot",
+                    tracking=1.4))
+
+    # ── La bande, nommée sous elle — le signe est toujours doublé d'un texte ─
+    A(ligne(bcx, bande_y1, bcx, bande_y1 + 10, "encre"))
+    l_bande = controler("bande", dd["bande_bet"]["libelle"], 10, "mono", 700, 1.4)
+    A(texte(bcx, bande_y1 + 24, dd["bande_bet"]["libelle"], "mono", 10, 500,
+            "encre", ancre="middle", tracking=1.4))
+    l_csq = controler("conséquence", dd["bande_bet"]["consequence"], 10, "mono",
+                      UTILE, 1.4)
+    A(texte(bcx, bande_y1 + 40, dd["bande_bet"]["consequence"], "mono", 10, 500,
+            "pivot", ancre="middle", tracking=1.4))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, 688, donnees["phrase_principe"], "sans", 17, 400, "encre",
+            wdth=100))
+
+    # ── Cartouche — largeur ajustée au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600, round(mesurer(libelle, 11, "mono", 11 * 0.14) + 40))
+    A(rect(MARGE, 714, largeur, 30, "profond"))
+    A(texte(MARGE + 20, 734, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    total = sum(p["f"]["logements"] for p in poses)
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"une barre d'origine contiguë de {bas_barre - DD_Y0:.0f} px "
+                         f"(90 logements à {DD_PXL:.0f} px) qui fourche en deux "
+                         f"groupes divergents de ±{DD_ECART:.0f} px, traversés par "
+                         f"une bande calcaire unique (x {bx0:.0f}–{bx1:.0f}) — "
+                         "texte masqué, la fourche inégale, la colonne qui "
+                         "traverse les deux flux et les arrivées en 2 + 3 "
+                         "segments portent la thèse",
+        "bouclage_rubans": " + ".join(str(p["f"]["logements"]) for p in poses)
+                           + f" = {total} logements ; hauteurs "
+                           + " + ".join(f'{p["h"]:.0f}' for p in poses)
+                           + f" = {sum(p['h'] for p in poses):.0f} px",
+        "topologie": f"libellés (x {MARGE}–{MARGE + DD_LIB_W}) → permis "
+                     f"(x {DD_BAR_X}) → rubans (x {DD_X0}–{DD_X1}) → arrivées "
+                     f"segmentées + étiquettes (x {DD_NLIB_X}–{W - MARGE}) ; "
+                     f"bande du BET x {bx0:.0f}–{bx1:.0f}, y {bande_y0:.0f}–"
+                     f"{bande_y1:.0f}",
+        "segments": " + ".join(str(len(g["a"]["batiments"])) for g in groupes)
+                    + " = 5 bâtiments — la géométrie code le nombre, jamais "
+                      "la contenance",
+        "bas_du_dessin": f"arrivées jusqu'à {bas_arrivees:.0f} px, bande nommée à "
+                         f"{bande_y1 + 24:.0f} et {bande_y1 + 40:.0f}, phrase de "
+                         f"principe à 688, cartouche 714–744, marge basse "
+                         f"{H - 744} px",
+        "reserve_profonde": f"cartouche {largeur} x 30 px = {largeur * 30} px², "
+                            f"soit {largeur * 30 / (W * H) * 100:.2f} % de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — les comptes des flux sont "
+                          "des libellés Archivo 15 et des cotes mono 10 "
+                          "(révision 4)",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "etiquette_bande": f"{l_bande:.0f} px centrés sur x {bcx:.0f} — de "
+                           f"{bcx - l_bande/2:.0f} à {bcx + l_bande/2:.0f}, "
+                           f"conséquence {l_csq:.0f} px",
+        "depassements": " ; ".join(depassements) if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_dedoublement(donnees):
+    """La vignette : la fourche, la bande et les deux totaux, sans l'appareil.
+
+    Ce qu'elle garde : la barre d'origine, les trois rubans proportionnels, la
+    bande unique nommée, les deux arrivées avec leur total. Ce qu'elle laisse :
+    les libellés de flux, les certifications, les lettres de bâtiment, le
+    permis — six libellés dans 300 px ne se lisent pas."""
+    pxl, y0, ecart = 0.9, 48.0, 10.0
+    dd, poses, groupes, bas_barre = _dd_geometrie(donnees, pxl, y0, ecart)
+    x_bar, x0, x1, x_lib = 20.0, 26.0, 218.0, 230.0
+    bx0, bx1 = 103.0, 141.0
+    haut = min(g["y0"] for g in groupes)
+    bas = max(g["y0"] + g["h"] for g in groupes)
+    vb_y0, vb_y1 = haut - 10, bas + 10
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, strokes=("filet-1", "filet-2", "encre"))
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    A(rect_bord(bx0, vb_y0, bx1 - bx0, vb_y1 - vb_y0, "calcaire", "filet-2"))
+    for p in poses:
+        A(_ruban(x0, x1, p["o0"], p["o1"], p["a0"], p["a1"]))
+    A(ligne(bx0, vb_y0, bx0, vb_y1, "filet-1"))
+    A(ligne(bx1, vb_y0, bx1, vb_y1, "filet-1"))
+    A(rect(x_bar, y0, 6, bas_barre - y0, "encre"))
+    for g in groupes:
+        A(rect(x1, g["y0"], 6, g["h"], "encre"))
+        c = g["centre"]
+        A(texte(x_lib, c - 3, g["a"]["nom_court"], "sans", 12, 600, "encre",
+                wdth=112))
+        A(texte(x_lib, c + 11, g["a"]["total_affiche"], "mono", 10, 500, "pivot",
+                tabulaire=True))
+    A(texte((bx0 + bx1) / 2, 168, dd["bande_bet"]["libelle_court"], "mono", 9,
+            500, "encre", ancre="middle", tracking=9 * 0.14))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "la barre d'origine, les trois rubans proportionnels, la bande "
+                 "unique nommée et les deux arrivées avec leur total — libellés "
+                 "de flux, certifications et permis laissés à la planche",
+        "bas_du_dessin": f"bande nommée à 168 px, marge basse {VH - 168} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_dedoublement(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, densité intermédiaire.
+
+    Ce qu'il garde : la fourche complète avec ses trois comptes (42, 30, 18),
+    la bande unique nommée, les cinq bâtiments en segments lettrés, le permis
+    et la ligne de résumé. Ce qu'il laisse : les libellés de flux et les
+    certifications — ils vivent sur la planche."""
+    pxl, y0, ecart = 1.6, 100.0, 12.0
+    dd, poses, groupes, bas_barre = _dd_geometrie(donnees, pxl, y0, ecart)
+    x_bar, x0, x1 = 64.0, 72.0, 420.0
+    bx0, bx1 = 220.0, 300.0
+    bcx = (bx0 + bx1) / 2
+    haut = min(g["y0"] for g in groupes)
+    bas = max(g["y0"] + g["h"] for g in groupes)
+    ab_y0, ab_y1 = haut - 20, bas + 20
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1", "filet-2", "encre"))
+
+    A(rect_bord(bx0, ab_y0, bx1 - bx0, ab_y1 - ab_y0, "calcaire", "filet-2"))
+    for p in poses:
+        A(_ruban(x0, x1, p["o0"], p["o1"], p["a0"], p["a1"]))
+    A(ligne(bx0, ab_y0, bx0, ab_y1, "filet-1"))
+    A(ligne(bx1, ab_y0, bx1, ab_y1, "filet-1"))
+    A(rect(x_bar, y0, 8, bas_barre - y0, "encre"))
+    for p in poses:
+        A(texte(56, (p["o0"] + p["o1"]) / 2 + 4, str(p["f"]["logements"]),
+                "mono", 11, 500, "pivot", ancre="end", tabulaire=True))
+    for g in groupes:
+        _dd_segments(A, x1, g["y0"], g["h"], g["a"]["batiments"], 434,
+                     lettre_corps=10)
+    for i, ligne_permis in enumerate(dd["permis"]["lignes"]):
+        A(texte(A_MARGE, 258 + i * 14, ligne_permis, "mono", 10, 500,
+                "encre" if i == 0 else "pivot", tracking=1.4))
+    A(texte(bcx, 292, dd["bande_bet"]["libelle_court"], "mono", 10, 500,
+            "encre", ancre="middle", tracking=1.4))
+    A(texte(A_MARGE, 330, dd["appui_resume"], "mono", 10, 500, "pivot",
+            tracking=1.4))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="la fourche complète à l'échelle 1 avec ses trois comptes, la "
+              "bande unique nommée, les cinq bâtiments en segments lettrés, "
+              "le permis et la ligne de résumé — libellés de flux et "
+              "certifications laissés à la planche",
+        bas="ligne de résumé à 330 px, marge basse 38 px")
+
+
 def _composer(donnees):
+    if "dedoublement" in donnees:
+        return composer_dedoublement(donnees)
     if "plafonds" in donnees:
         return composer_plafonds(donnees)
     return composer(donnees, donnees["fiche"])
 
 
 def _composer_vignette(donnees):
+    if "dedoublement" in donnees:
+        return composer_vignette_dedoublement(donnees)
     if "plafonds" in donnees:
         return composer_vignette_plafonds(donnees)
     return composer_vignette(donnees)
 
 
 def _composer_appui(donnees):
+    if "dedoublement" in donnees:
+        return composer_appui_dedoublement(donnees)
     if "plafonds" in donnees:
         return composer_appui_plafonds(donnees)
     return composer_appui(donnees)
