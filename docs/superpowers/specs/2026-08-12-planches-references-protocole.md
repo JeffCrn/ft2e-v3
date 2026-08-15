@@ -27,9 +27,13 @@ retomber sept défauts de géométrie sur un raisonnement par ailleurs juste.
 - **La session de génération produit `planche.json`.** C'est le travail irréductible :
   lire la fiche entière, choisir l'archétype, extraire des valeurs littérales, consigner
   chaque arbitrage dans `a_valider_ft2e`. C'est la pièce que FT2E relit, et c'est aussi
-  la source du repli de lecture que le site sert **sous 880 px, désormais SOUS le dessin
-  et non plus à sa place** (chantier du 2026-08-15,
-  `docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`).
+  la source du **titre court** des cartes (`titreCourt()`), du cartouche de pied de figure et
+  de l'**alternative textuelle** de la vignette. ⚠ Le repli de lecture qu'il alimentait sous
+  1024 px **n'existe plus** depuis le 2026-08-15 : le dessin est servi à toutes les largeurs
+  et la figure ne porte plus de bloc textuel
+  (`docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`). Les blocs d'archétype
+  du JSON (`sankey`, `zonage`, listes `elements`) ne servent donc plus qu'aux compositeurs et
+  à la relecture FT2E — plus aucun rendu du site n'en dépend.
 - **Le dépôt compose les dessins**, par `scripts/planches/<archetype>.py` : géométrie
   calculée, jamais tapée, et bloc `controles` recalculé à chaque exécution. Depuis la
   révision 5, chaque compositeur écrit les TROIS dessins — planche, vignette, appui.

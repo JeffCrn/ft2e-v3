@@ -50,19 +50,28 @@ import path from 'node:path';
  *    de sorte qu'un téléphone reçoit toujours la vignette, jamais un appui rétréci
  *    à 6,2 px de mono.
  *
- * 4. **Le repli de lecture ne disparaît pas : il passe SOUS le dessin, réduit.**
- *    Arbitré avec FT2E le 2026-08-15. Sur une fiche de bureau d'études, les valeurs
- *    — « 146 845 kWh/an », « 38 000 m³/h » — sont la démonstration ; la vignette
- *    n'en publie que six et elle est `aria-hidden` à la source, de sorte que la
- *    servir SEULE laisserait un lecteur d'écran mobile sans aucun équivalent
- *    textuel du dessin. Le défaut corrigé ici est un défaut de hiérarchie, pas
- *    d'information : une image, puis sa lecture.
+ * 4. **Le repli de lecture a été SUPPRIMÉ** — la figure est le dessin, son cartouche
+ *    et l'agrandissement, rien d'autre (arbitrage FT2E du 2026-08-15, qui revient
+ *    sur celui du matin même : le repli avait d'abord été placé sous le dessin).
  *
- *    Réduit de deux rangs, chacun republié ailleurs sur le même écran : le
- *    `surtitre` (le dessin porte le sien dans les trois formats) et le `titre`
- *    (le `<h1>` de la fiche le porte, quelques centaines de pixels plus haut).
- *    Le `sous_titre`, le bloc d'archétype et la phrase de principe restent : aucun
- *    format de dessin ne les porte.
+ *    Le motif est l'ordre de la page, pas la figure prise isolément. Sur téléphone
+ *    une fiche se lit : titre → planche → cartouche technique → relevé → synthèse
+ *    → récit. Le repli s'intercalait entre l'illustration et le contenu réel, et il
+ *    mesurait 791 px sur Néréa, 965 sur l'EHPAD, **1 181 sur Marans** : le visiteur
+ *    traversait jusqu'à un écran et demi de valeurs synthétiques avant d'apprendre
+ *    de quoi la fiche parle. Des valeurs qui arrivent avant tout contexte ne
+ *    démontrent rien — elles ne démontrent qu'une fois qu'on sait ce qu'on regarde.
+ *    Le premier arbitrage avait raisonné sur la figure seule et manqué cela.
+ *
+ *    L'objection d'accessibilité qui l'avait fait garder est levée autrement, et
+ *    mieux : `vignette.svg` est `aria-hidden` à la source, donc son conteneur porte
+ *    `role="img"` et l'`aria_label` de l'extraction — les 822 signes que
+ *    `planche.svg` et `appui.svg` exposent nativement. L'équivalent textuel est
+ *    intégral à toutes les largeurs, sans un pixel de bloc visible.
+ *
+ *    Ce qui reste de l'extraction à l'écran : le `cartouche_legende` au pied de la
+ *    figure, et le titre au `<h1>` de la fiche par `titreCourt()`. Le reste du
+ *    `planche.json` sert le dessin, l'alternative textuelle et la relecture FT2E.
  */
 interface Props {
   /** Chemin du SVG depuis `public/` — champ `planche` du frontmatter. */
@@ -112,43 +121,14 @@ const svgAppui = fs.readFileSync(
   'utf-8',
 );
 
-const sk = extraction.sankey;
-const zo = extraction.zonage;
+// Le garde-fou « toute extraction doit porter une forme de repli » a été RETIRÉ
+// avec le repli lui-même (2026-08-15, second arbitrage). Il protégeait d'un
+// risque précis — une fiche muette sur téléphone, faute de dessin ET de lecture —
+// qui n'existe plus : le dessin est servi à toutes les largeurs, et la vignette
+// porte l'`aria_label` de l'extraction. Le maintenir aurait fait échouer le build
+// au nom d'un rendu qui n'a plus lieu. Même principe que l'amendement A9 : un
+// contrôle se retire avec ce qu'il contrôlait, sinon il ment sur son objet.
 
-// `coupe-traversee` et `boucle-fluide` partagent la même forme d'extraction :
-// une liste d'éléments ordonnée (règle 7 du protocole — libellé, valeur, unité,
-// détail, dans l'ordre de lecture voulu). Le bloc est détecté par sa FORME, pas
-// par son nom : tout archétype futur qui expose un tableau `elements` dans son
-// bloc reçoit le repli mobile sans une ligne de code ici. Seuls `sankey` et
-// `zonage`, antérieurs à cette forme, gardent leur rendeur propre.
-const mecanisme = Object.values(extraction).find(
-  (v: any) => v && typeof v === 'object' && !Array.isArray(v) && Array.isArray(v.elements),
-) as any;
-
-// Une planche sans AUCUNE forme de repli perdrait son dessin sous 1024 px sans
-// rien mettre à la place — pour la moitié des visiteurs, la fiche serait muette.
-// Le build échoue plutôt que de laisser passer : même philosophie que le
-// fichier manquant.
-if (!sk && !zo && !mecanisme && !(extraction.releve?.length)) {
-  throw new Error(
-    `PlancheReference : l'extraction de « ${src} » ne porte ni bloc d'archétype `
-    + `connu (sankey, zonage), ni bloc à liste \`elements\`, ni relevé — le repli `
-    + `de lecture mobile serait vide. Voir le protocole, règle 7.`,
-  );
-}
-
-// Espaces insécables : la fine (U+202F) pour le texte courant et le mono, la
-// normale (U+00A0) pour les chiffres en grand corps. La mesure au rendu donne
-// 3,93 px contre 7,85 à 40 px — sous la fine, « 152 947 » se lit « 152947 ».
-// Elles s'écrivent en séquence d'échappement : plusieurs outils d'écriture les
-// normalisent silencieusement en espace ordinaire.
-const FINE = '\u202f';
-const INSEC = '\u00a0';
-
-// `{valeur} {unite}` en JSX voit son espace littéral avalé au rendu : la chaîne
-// se compose donc explicitement.
-const cote = (valeur: string, unite: string) => `${valeur}${FINE}${unite}`;
-const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
 ---
 
 {variante === 'vignette' ? (
@@ -165,156 +145,17 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
         que la vignette n'en publie que six. */}
     <div class="dessin-grand" data-planche-dessin set:html={svgBrut} />
     <div class="dessin-moyen" set:html={svgAppui} />
-    <div class="dessin-petit" set:html={svgVignette} />
-
-    {/* Le repli de lecture — SOUS le dessin, partout où le dessin ne porte pas
-        déjà tout (donc sous 880 px). Même matière, autre composition. */}
-    <div class="repli-lecture px-5 pb-6">
-      {/* Ni surtitre ni titre : le dessin au-dessus porte le sien dans les trois
-          formats, et le titre est au `<h1>` de la fiche. Les republier ici
-          donnait deux surtitres empilés et un second titre pour le même objet.
-          Le sous-titre ouvre donc la lecture — c'est la thèse de la planche, et
-          aucun format de dessin ne la porte. */}
-      <p class="text-[15px] text-pivot">{extraction.sous_titre}</p>
-
-      {/* Un bloc par archétype — `sankey-energie` puis `zonage-ssi` ; les cinq
-          autres du protocole porteront chacun le leur. Le relevé et la phrase
-          de principe ci-dessous, eux, sont communs à toutes les planches. */}
-      {sk && (
-      <Fragment>
-      <p class="mono-label normal-case text-[10px] text-pivot mt-6">{sk.entete}</p>
-      <dl class="mt-3 border-t border-filet-2">
-        {sk.sources.map((s: any) => (
-          <div class="flex items-baseline justify-between gap-4 border-b border-filet-3 py-2.5">
-            <dt class="text-[15px] text-encre min-w-0">
-              {s.libelle}
-              {(s.detail ?? []).length > 0 && (
-                <span class="mono-label normal-case font-normal text-[10px] text-pivot block mt-1">
-                  {s.detail.join(' · ')}
-                </span>
-              )}
-            </dt>
-            <dd class="mono-data text-encre shrink-0">{cote(s.valeur_affichee, sk.unite)}</dd>
-          </div>
-        ))}
-        {sk.noeuds.map((n: any) => (
-          <div class="flex items-baseline justify-between gap-4 border-b border-filet-1 py-2.5">
-            <dt class="text-[15px] font-semibold text-encre">{n.libelle}</dt>
-            <dd class="mono-data text-encre shrink-0">{cote(n.valeur_affichee, sk.unite)}</dd>
-          </div>
-        ))}
-      </dl>
-      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">{sk.note_pied}</p>
-      </Fragment>
-      )}
-
-      {/* Bloc propre à l'archétype `zonage-ssi` : un même déclenchement suivi
-          à travers les deux systèmes — avant, l'alarme se diffuse partout ;
-          après, seule la zone concernée évacue. Même matière que le dessin —
-          le JSON —, composée en liste. */}
-      {zo && (
-      <Fragment>
-      <p class="mono-label normal-case text-[10px] text-pivot mt-6">{zo.entete}</p>
-      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-4">{zo.avant.tag}</p>
-      <div class="mt-2 border-t border-filet-2 border-b border-filet-3 py-2.5">
-        <p class="text-[15px] text-encre">
-          {zo.avant.systeme.libelle}
-          <span class="mono-label normal-case font-normal text-[10px] text-pivot block mt-1">
-            {zo.avant.systeme.detail.join(' · ')}
-          </span>
-        </p>
-        <div class="flex items-baseline justify-between gap-4 mt-2">
-          <p class="text-[15px] font-semibold text-encre min-w-0">{zo.avant.diffusion.libelle}</p>
-          <p class="mono-data text-encre shrink-0">{cote(zo.avant.diffusion.valeur, zo.avant.diffusion.unite)}</p>
-        </div>
-      </div>
-      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-5">{zo.apres.tag}</p>
-      <dl class="mt-2 border-t border-filet-2">
-        {zo.apres.zones.map((z: any) => (
-          <div class="flex items-baseline justify-between gap-4 border-b border-filet-3 py-2.5">
-            <dt class="text-[15px] font-semibold text-encre min-w-0">
-              <span class="mono-label normal-case font-normal text-[10px] text-pivot block mb-1">{z.tag}</span>
-              {z.libelle}
-            </dt>
-            {z.mention && (
-              <dd class="mono-label normal-case font-normal text-[10px] text-pivot shrink-0 text-right">
-                {z.mention}
-              </dd>
-            )}
-          </div>
-        ))}
-      </dl>
-      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">{zo.apres.consequence}</p>
-      <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">{zo.hors_zonage}</p>
-      </Fragment>
-      )}
-
-      {/* Bloc commun aux archétypes à liste d'éléments (`coupe-traversee`,
-          `boucle-fluide`) : les organes dans l'ordre de lecture de
-          l'extraction, chacun avec sa cote. Le groupement de milliers repasse
-          en fine : l'U+00A0 du JSON sert le chiffre de relevé à 22 px, pas le
-          mono de 13. */}
-      {mecanisme && (
-      <Fragment>
-      <p class="mono-label normal-case text-[10px] text-pivot mt-6">{mecanisme.entete}</p>
-      <dl class="mt-3 border-t border-filet-2">
-        {[...mecanisme.elements].sort((a: any, b: any) => a.ordre - b.ordre).map((e: any) => (
-          <div class="flex items-baseline justify-between gap-4 border-b border-filet-3 py-2.5">
-            <dt class="text-[15px] text-encre min-w-0">
-              {e.libelle}
-              {(e.detail ?? []).length > 0 && (
-                <span class="mono-label normal-case font-normal text-[10px] text-pivot block mt-1">
-                  {e.detail.join(' · ')}
-                </span>
-              )}
-              {(e.legende || e.mention) && (
-                <span class="mono-label normal-case font-normal text-[10px] text-pivot block mt-1">
-                  {[e.legende, e.mention].filter(Boolean).join(' — ')}
-                </span>
-              )}
-            </dt>
-            {e.valeur && (
-              <dd class="mono-data text-encre shrink-0">
-                {e.unite
-                  ? cote(e.valeur.replace(/\s/g, FINE), e.unite)
-                  : e.valeur.replace(/\s/g, FINE)}
-              </dd>
-            )}
-          </div>
-        ))}
-      </dl>
-      {mecanisme.mention_separation && (
-        <p class="mono-label normal-case font-normal text-[10px] text-pivot mt-3">
-          {mecanisme.mention_separation.join(' — ')}
-        </p>
-      )}
-      </Fragment>
-      )}
-
-      {/* Le relevé chiffré est optionnel depuis le 2026-08-13 : la planche
-          schématise la solution, elle ne récapitule pas les chiffres que la
-          fiche porte déjà (principe arrêté par FT2E sur la planche 02). */}
-      {(extraction.releve ?? []).length > 0 && (
-      <Fragment>
-      <p class="mono-label normal-case text-[10px] text-pivot mt-8">{extraction.releve_entete}</p>
-      <dl class="mt-3">
-        {extraction.releve.map((r: any, i: number) => (
-          <div class="border-t border-filet-2 py-3">
-            <dd class:list={['releve-chiffre text-[30px] leading-[1.1]', i === 0 ? 'text-encre' : 'releve-retrait']}>
-              {r.prefixe && <span class="text-[17px] font-normal">{`${r.prefixe}\u00a0`}</span>}
-              {chiffre(r.valeur, '')}<span class="text-[15px] font-normal">{`\u00a0${r.unite}`}</span>
-            </dd>
-            <dt class="mono-label normal-case font-normal text-[10px] text-pivot mt-1.5">
-              {r.legende.join(' · ')}
-            </dt>
-          </div>
-        ))}
-      </dl>
-      </Fragment>
-      )}
-
-      <p class="text-[16px] text-encre leading-[1.5] mt-6">{extraction.phrase_principe}</p>
-    </div>
+    {/* La vignette est `aria-hidden` À LA SOURCE — elle a été composée pour les
+        cartes de `/references`, où le titre de la fiche la double toujours. Ici
+        elle est le seul dessin servi, donc son conteneur porte le rôle et
+        l'alternative que le SVG ne porte pas : c'est ce qui a permis de retirer
+        le repli de lecture sans laisser un lecteur d'écran devant rien. */}
+    <div
+      class="dessin-petit"
+      role="img"
+      aria-label={extraction.aria_label}
+      set:html={svgVignette}
+    />
 
     <figcaption class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-t border-filet-2 bg-calcaire px-5 py-3">
       {/* Le cartouche ne s'affiche QUE là où le dessin ne le porte pas — donc
@@ -361,6 +202,22 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
         <span class="mono-label planche-enseigne">
           Planche FT2E — {extraction.archetype.replace('-', ' ')}
         </span>
+        {/* La loupe — deux états, et elle n'existe que là où les deux diffèrent.
+            La feuille veut 860 px pour que son mono de 10 tienne le plancher de
+            6,5 ; sous 931 px de fenêtre (860 + les 56 de marge de zone + la
+            barre de défilement) elle ne peut donc pas être à la fois entière et
+            lisible. La boîte s'ouvre alors AJUSTÉE — on voit la structure d'un
+            coup d'œil, sans basculer le téléphone — et ce bouton la porte à
+            860 px pour lire, en la parcourant du doigt. Au-dessus de 940 px les
+            deux états se confondent : le bouton disparaît. */}
+        <button
+          type="button"
+          class="planche-loupe cible-44"
+          data-planche-loupe
+          aria-pressed="false"
+        >
+          <span data-loupe-libelle>Lire au détail</span>
+        </button>
         <button type="button" class="planche-fermer cible-44" data-planche-fermer>
           <span class="planche-touche" aria-hidden="true">Échap</span>
           <span>Fermer</span>
@@ -435,33 +292,10 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
     }
   }
 
-  /* Le repli de lecture suit le dessin partout où celui-ci ne porte pas tout :
-     la planche publie 30 textes, l'appui 13, la vignette 6.
-
-     Il est plafonné à la largeur de l'appui et centré comme lui, pour deux
-     raisons qui tombent ensemble — et chacune suffirait :
-
-     · l'ALIGNEMENT. Un dessin plafonné à 552 et centré dans un plan de 816
-       commence à 132 px du bord ; le repli, lui, commençait à 20. Mesuré au
-       rendu à 879 px : deux blocs sans aucune arête commune, que l'œil lit
-       comme deux objets sans rapport. Plafonnés de la même façon, leurs
-       colonnes se superposent à 4 px près (24 de marge interne au dessin,
-       20 de padding au repli).
-
-     · la JUSTIFICATION. La charte prescrit 52 à 68 signes par ligne pour le
-       corps. À 879 px le repli composait sur 776 px, soit environ 103 signes.
-       Plafonné, il compose sur 512 px — 68 signes, la borne haute exacte.
-
-     Sous 552 px de conteneur le plafond ne mord pas : le repli reprend toute
-     la largeur, comme le dessin. */
-  .repli-lecture {
-    display: block;
-    max-width: 552px;
-    margin-inline: auto;
-  }
+  /* Le pied de figure : le cartouche de l'extraction là où le dessin ne le
+     compose pas (sous 880), l'enseigne de planche au-dessus. */
   .legende-grande { display: none; }
   @media (min-width: 880px) {
-    .repli-lecture { display: none; }
     .legende-petite { display: none; }
     .legende-grande { display: block; }
   }
@@ -551,6 +385,49 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
     .planche-zone { padding: 0 16px 24px; }
   }
 
+  /* ── La loupe : deux états, sous 940 px seulement ────────────────────────
+     Une planche en 3:2 dans un écran de téléphone en 1:2 ne peut pas être à la
+     fois entière et lisible — il faut choisir ce qu'on sacrifie, et le laisser
+     choisir. La boîte s'ouvre AJUSTÉE (échelle ≈ 0,27 à 390 px : la structure
+     se lit, aucun mot), et la loupe la porte à 860 px, où le mono tient le
+     plancher et où l'on parcourt du doigt.
+
+     Le seuil vaut 860 + 56 de marge de zone + la barre de défilement ≈ 931 ;
+     940 lui laisse la marge. Au-delà, les deux états donnent la même image et
+     le bouton n'a plus d'objet — il disparaît. */
+  .planche-loupe { display: none; }
+
+  @media (max-width: 939.98px) {
+    .planche-loupe {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border: 1px solid var(--color-filet-clair-2);
+      background: none;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-clair);
+      transition: color 260ms var(--ease-blueprint);
+    }
+    .planche-loupe:hover { color: var(--color-voile); }
+    /* Focus par polarité (A4) : clair sur réserve profonde, le pivot y tombe
+       à 2,85. */
+    .planche-loupe:focus-visible {
+      outline: 2px solid var(--color-clair);
+      outline-offset: 4px;
+    }
+  }
+
+  /* Sous 600 px l'enseigne cède la place aux deux commandes : la barre porte
+     trois éléments et le nom de la planche est déjà au pied de la figure. */
+  @media (max-width: 600px) {
+    .planche-enseigne { display: none; }
+  }
+
   /* ── La feuille ── */
   .planche-zone {
     flex: 1;
@@ -562,6 +439,10 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
   /* `margin: auto` et non `justify-content: center` : un enfant centré par le
      conteneur voit son bord gauche coupé dès qu'il déborde, et devient
      inatteignable au défilement. */
+  /* 860 px est la largeur en dessous de laquelle le mono de 10 px de la planche
+     passe sous le plancher de 6,5 (860 → 7,2). C'est une cote de LISIBILITÉ,
+     pas une taille d'affichage : sur un écran plus étroit, la feuille déborde
+     et se parcourt. Voir la loupe ci-dessous pour ce qui se passe alors. */
   .planche-plan {
     margin: auto;
     width: min(1200px, 100%);
@@ -570,6 +451,19 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
     /* Un filet clair, pas une ombre : sur un fond à 90 % de profond, aucune
        ombre ne se voit. C'est le filet qui détache la feuille de la nuit. */
     outline: 1px solid var(--color-filet-clair-1);
+  }
+
+  /* Les deux états de la feuille. Ces deux règles doivent rester APRÈS
+     `.planche-plan` ci-dessus : une `@media` n'ajoute aucune spécificité, c'est
+     l'ordre de la feuille de style qui départage. Placées plus haut — ce qui
+     était le cas à la première écriture — elles sont écrasées par le
+     `min-width: 860px` de la règle de base, et la boîte s'ouvre agrandie sans
+     qu'aucun build ni aucune capture ne le signale. */
+  @media (max-width: 939.98px) {
+    /* ajusté : la feuille entière tient dans l'écran */
+    .planche-plan { min-width: 0; }
+    /* loupe : la cote de lisibilité, et l'on parcourt */
+    .planche-zone[data-loupe] .planche-plan { min-width: 860px; }
   }
 
   /* ── Entrée : la révélation de plan de la charte, au tempo d'une interaction.
@@ -627,6 +521,21 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
 
       dialogue.querySelector('[data-planche-fermer]')?.addEventListener('click', () => dialogue.close());
 
+      // La loupe. L'état vit sur la ZONE (`data-loupe`) et non sur la feuille :
+      // c'est la zone qui porte le défilement, et c'est elle qu'il faut recadrer
+      // au basculement.
+      const loupe = dialogue.querySelector<HTMLButtonElement>('[data-planche-loupe]');
+      const libelle = loupe?.querySelector<HTMLElement>('[data-loupe-libelle]');
+      const poserLoupe = (actif: boolean) => {
+        zone.toggleAttribute('data-loupe', actif);
+        loupe?.setAttribute('aria-pressed', String(actif));
+        if (libelle) libelle.textContent = actif ? 'Ajuster' : 'Lire au détail';
+        // À l'agrandissement, on se pose au MILIEU de la feuille. Le défilement
+        // part sinon du bord gauche, et la planche s'ouvre sur sa marge.
+        if (actif) zone.scrollLeft = (zone.scrollWidth - zone.clientWidth) / 2;
+      };
+      loupe?.addEventListener('click', () => poserLoupe(!zone.hasAttribute('data-loupe')));
+
       // Un clic à côté de la feuille ferme la boîte. La cible est la ZONE : le
       // `<dialog>` occupant tout l'écran, il n'est jamais lui-même la cible d'un
       // clic, et le test habituel `e.target === dialogue` ne se déclencherait
@@ -638,6 +547,10 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
       dialogue.addEventListener('close', () => {
         cible.replaceChildren();
         document.documentElement.style.overflow = '';
+        // La boîte se rouvre toujours ajustée : un état de loupe hérité de la
+        // consultation précédente rouvrirait sur un fragment de feuille, ce que
+        // ce chantier vient précisément de corriger.
+        poserLoupe(false);
       });
     });
   }

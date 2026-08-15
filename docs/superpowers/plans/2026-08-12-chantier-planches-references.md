@@ -439,18 +439,20 @@ suppose pas.
   **échouer le build** — la fiche ne peut plus perdre son dessin sur téléphone en
   silence.
 
-  ⚠ **Le seuil et le rôle du repli ont changé le 2026-08-15** : il ne remplace plus le
-  dessin, il le suit. La fiche sert `planche.svg` au-dessus de 880 px, `appui.svg` de 480
-  à 879, `vignette.svg` en dessous — et sous 880 le repli vient **sous** le dessin, allégé
-  de son surtitre et de son titre. Détail et mesures :
-  `docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`.
+  ⚠ **CADUC depuis le 2026-08-15 : le repli de lecture n'existe plus, et le garde-fou
+  ci-dessus a été retiré avec lui.** La fiche sert `planche.svg` au-dessus de 880 px,
+  `appui.svg` de 480 à 879 et `vignette.svg` en dessous — le dessin est présent partout,
+  donc plus rien ne peut « perdre son dessin sur téléphone », qui était l'objet du
+  contrôle. Les quatre rendeurs d'archétype du composant sont supprimés avec lui.
+  L'alternative textuelle passe par `role="img"` + `aria_label` sur la vignette. Détail et
+  mesures : `docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`.
 
-  À noter au passage, relevé en ouvrant ce chantier : **`extraction.releve` est vide sur
-  les 23 planches** — le bloc `releve` du repli (`releve_entete`, chiffres à 30 px,
-  `releve-retrait`) n'est rendu nulle part depuis la décision FT2E du 2026-08-13. Il est
-  conservé en l'état, parce que le garde-fou de build l'accepte encore comme forme de
-  repli valide : le retirer sans retirer la branche du garde-fou laisserait passer une
-  extraction qui ne rendrait rien.
+  Conséquence pour ce plan : **les blocs d'archétype du `planche.json` ne sont plus lus
+  par aucun rendu du site** ; ils servent les compositeurs et la relecture FT2E. Un
+  archétype futur n'a donc plus rien à « brancher » côté composant.
+
+  Point tranché au passage : **`extraction.releve` était vide sur les 23 planches** depuis
+  la décision FT2E du 2026-08-13 — son rendeur était mort. Il est parti avec les autres.
 - **`planche-chiffree` n'a jamais servi et son module n'est pas écrit** — décision à
   prendre plutôt qu'un reste à faire. La révision 4 interdit de remonter à la planche les
   chiffres que la fiche porte déjà ; un repli typographique ne dessine rien d'autre. Soit

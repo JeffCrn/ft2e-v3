@@ -123,7 +123,7 @@ la miniature de `/references` était à la fois `hidden md:block` et `aria-hidde
 
 | Fichier | Rôle |
 |---|---|
-| `planche.json` | l'extraction — la pièce que FT2E relit, **et** la source du repli de lecture servi sous 880 px |
+| `planche.json` | l'extraction — la pièce que FT2E relit ; le site en tire le **titre court** (`titreCourt()`), le cartouche de pied et l'**alternative textuelle** de la vignette |
 | `planche.svg` | la planche, `viewBox 0 0 1200 800`, lue à 1152 px (échelle 0,96) — **fiche ≥ 880 px** |
 | `appui.svg` | `viewBox 0 0 552 368` — l'appui du hero de l'accueil (fiche `en_avant`) **et la fiche entre 480 et 879 px** |
 | `vignette.svg` | `viewBox 0 0 300 200` — la vignette de carte, lue à 274-296 px, **et la fiche sous 480 px** |
@@ -160,19 +160,43 @@ la miniature de `/references` était à la fois `hidden md:block` et `aria-hidde
    6,2 px de mono. Les bascules sont écrites en `@media` dans le `<style>` du composant, pas
    en variantes Tailwind arbitraires — une règle de composant échappe à l'élagage de sources
    de Tailwind v4 (règle 11).
-4. **Le repli de lecture ne remplace plus le dessin : il le suit, réduit** (arbitré avec FT2E
-   le 2026-08-15). Sous 880 px, le dessin ouvre la figure et sa lecture vient dessous — une
-   image, puis sa lecture. Sur une fiche de bureau d'études les valeurs sont la démonstration,
-   et la vignette n'en publie que six ; elle est de surcroît `aria-hidden` à la source, de
-   sorte que la servir **seule** laisserait un lecteur d'écran mobile sans aucun équivalent
-   textuel. Le repli est allégé de deux rangs, chacun republié ailleurs sur le même écran : le
-   `surtitre` (les trois formats portent le leur) et le `titre` (porté par le `<h1>` de la
-   fiche). Il est **plafonné à 552 px et centré comme le dessin** — ce qui aligne les deux
-   colonnes *et* ramène la ligne de lecture de 103 à 68 signes, la borne haute de la charte.
+4. **Le repli de lecture a été SUPPRIMÉ** (arbitrage FT2E du 2026-08-15, qui revient sur
+   celui du matin même — le repli avait d'abord été placé sous le dessin). Une figure de
+   fiche, c'est le dessin, son cartouche et l'agrandissement, **rien d'autre**.
 
-L'agrandissement (`data-planche-agrandir`) est proposé **à toutes les largeurs** depuis la
-même date, et clone toujours `planche.svg` : sur téléphone, la boîte donne les 30 textes de
-la planche là où la page sert les 6 de la vignette.
+   Le motif est l'**ordre de la page**, pas la figure isolée. Sur téléphone une fiche se lit :
+   titre → planche → cartouche technique → relevé → synthèse → récit. Le repli s'intercalait
+   entre l'illustration et le contenu réel, et il mesurait 791 px sur Néréa, 965 sur l'EHPAD,
+   **1 181 sur Marans** : le visiteur traversait jusqu'à un écran et demi de valeurs
+   synthétiques avant d'apprendre de quoi la fiche parle. Des valeurs qui arrivent avant tout
+   contexte ne démontrent rien. La figure fait désormais **355 px de haut à 390 px** au lieu
+   de 1 145.
+
+   L'objection d'accessibilité qui l'avait fait garder est levée autrement, et mieux :
+   `vignette.svg` est `aria-hidden` à la source, donc **son conteneur porte `role="img"` et
+   l'`aria_label` de l'extraction** — les 822 signes que `planche.svg` et `appui.svg` exposent
+   nativement. L'équivalent textuel est intégral à toutes les largeurs, sans un pixel visible.
+
+   Conséquence : le garde-fou de build « toute extraction doit porter une forme de repli » a
+   été **retiré avec le repli**, ainsi que les quatre rendeurs d'archétype du composant
+   (`sankey`, `zonage`, liste `elements`, `releve`) — soit 149 lignes. Un contrôle se retire
+   avec ce qu'il contrôlait, sinon il ment sur son objet (même principe que l'amendement A9).
+
+5. **L'agrandissement est proposé à toutes les largeurs**, et clone toujours `planche.svg` :
+   sur téléphone, la boîte donne les 30 textes de la planche là où la page sert les 6 de la
+   vignette. C'est elle, et non le repli, qui porte le détail sur petit écran.
+
+   **Deux états sous 940 px**, parce qu'une planche en 3:2 dans un écran en 1:2 ne peut être
+   à la fois entière et lisible : la boîte s'ouvre **ajustée** (334 px à 390 — la structure se
+   lit d'un coup d'œil, sans basculer le téléphone), et le bouton « Lire au détail » la porte
+   à **860 px**, la largeur en dessous de laquelle le mono de 10 px passerait sous le plancher
+   de 6,5 ; on la parcourt alors du doigt, recadrée au centre. Au-delà de 940 px les deux
+   états se confondent et le bouton disparaît. La boîte se rouvre toujours ajustée.
+
+   ⚠ Les deux règles qui portent ces états **doivent rester après `.planche-plan`** dans le
+   `<style>` : une `@media` n'ajoute aucune spécificité, et placées plus haut elles sont
+   écrasées par le `min-width: 860px` de la règle de base — sans qu'aucun build ni aucune
+   capture ne le signale.
 
 **Ni duotone ni équerres** : les deux appartiennent à la photographie, et la planche est
 déjà composée dans les jetons.
@@ -245,7 +269,7 @@ l'échelle 0,24, quel que soit l'endroit où on le découpe.
 | **Planches de références — protocole de production** | **`docs/superpowers/specs/2026-08-12-planches-references-protocole.md`** |
 | **Planches de références — bilan de clôture et points ouverts** | **`docs/superpowers/plans/2026-08-12-chantier-planches-references.md`** |
 | **Remasterisation de `/references` en grille de cartes** (spec — **appliquée le 2026-08-15**, amendement A9) | **`docs/superpowers/specs/2026-08-15-remasterisation-nomenclature-references.md`** |
-| **Responsive des planches sur les fiches** (spec — **appliquée le 2026-08-15** : trois compositions, trois bandes, le repli passe sous le dessin) | **`docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`** |
+| **Responsive des planches sur les fiches** (spec — **appliquée le 2026-08-15** : trois compositions, trois bandes, repli supprimé, agrandissement à deux états) | **`docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`** |
 | Version liminaire (historique de la première livraison) | `docs/14-version-liminaire.md` |
 | Pistes de production CMS | `docs/20-pistes-production-cms.md` (⚠ numéro 20 partagé avec la source plaquette) |
 | Script de la démonstration client du 2 juillet | `docs/21-script-demo-2-juillet.md` |

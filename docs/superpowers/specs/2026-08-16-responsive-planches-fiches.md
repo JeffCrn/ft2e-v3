@@ -8,14 +8,19 @@ supposé connu. Toutes les mesures ci-dessous ont été relevées au navigateur 
 > **✅ APPLIQUÉE le 2026-08-15.** Découpage retenu : `planche.svg` ≥ 880 px, `appui.svg` de
 > 480 à 879, `vignette.svg` en dessous — chacun plafonné à sa taille de conception et centré,
 > aucune échelle au-dessus de 1,00, mono minimal 6,79 px au point le plus défavorable.
-> **La question éditoriale a été tranchée par FT2E : le repli reste, SOUS le dessin, réduit**
-> de son surtitre et de son titre, et plafonné à 552 px comme le dessin. L'agrandissement est
-> proposé à toutes les largeurs et clone toujours la planche entière.
 >
-> Trois écarts par rapport aux hypothèses de ce document, tous imposés par la mesure et
-> détaillés au § « Ce que la mesure a corrigé » en fin de fichier : la borne haute est à 880
-> et non à `lg` ; la borne basse est à 480 et non à 640 ; le repli a dû être plafonné, ce que
-> la spec n'avait pas prévu.
+> **La question éditoriale a été tranchée en deux temps, et la seconde réponse annule la
+> première.** Le repli a d'abord été placé sous le dessin, réduit et plafonné ; à l'examen de
+> la page rendue, FT2E l'a **supprimé** — voir le § « Le second arbitrage » ci-dessous. La
+> figure est le dessin, son cartouche et l'agrandissement, rien d'autre.
+>
+> **L'agrandissement porte désormais le détail sur petit écran**, à deux états sous 940 px :
+> ajusté à l'ouverture, puis 860 px pour lire, avec parcours au doigt.
+>
+> Quatre écarts par rapport aux hypothèses de ce document, tous imposés par le rendu et
+> détaillés au § « Ce que la mesure a corrigé » : la borne haute est à 880 et non à `lg` ; la
+> borne basse est à 480 et non à 640 ; le plafonnement du repli, que la spec n'avait pas
+> prévu ; et enfin sa suppression, qui renverse la réponse que la spec appelait de ses vœux.
 
 ---
 
@@ -297,6 +302,78 @@ padding au repli) et la ligne de lecture tombe à **512 px, soit 68 signes** : l
 exacte de la charte. Que deux défauts indépendants se corrigent par la même mesure est ce
 qui a fait retenir celle-ci plutôt qu'un réglage à l'œil.
 
+### 4. Le second arbitrage — le repli est supprimé, pas déplacé
+
+La première réponse à la question éditoriale (« le dessin précède le repli, qui reste
+dessous, réduit ») a été appliquée, rendue, puis **renversée par FT2E à l'examen de la page**.
+Elle avait raisonné sur la **figure seule** ; le défaut est ailleurs, dans l'**ordre de la
+page**.
+
+Sur téléphone une fiche se lit : titre → planche → cartouche technique → relevé → synthèse →
+récit. Le repli s'intercalait entre l'illustration et le contenu réel :
+
+| Fiche | hauteur du repli à 390 px | hauteur de la figure, avec → sans |
+|---|---|---|
+| `logements-nerea-aytre` | 791 px | 1 145 → **355** |
+| `ehpad-coulonges-sur-autize-ssi` | 965 px | 1 333 → **368** |
+| `passerelle-…-marans` | **1 181 px** | 1 535 → **355** |
+
+Le visiteur traversait jusqu'à un écran et demi de valeurs synthétiques avant d'apprendre de
+quoi la fiche parle. Et l'argument de fond se retourne : des valeurs qui arrivent **avant
+tout contexte** ne démontrent rien — elles ne démontrent qu'une fois qu'on sait ce qu'on
+regarde. Le détail reste accessible, mais par l'agrandissement, qui donne les 30 textes de la
+planche entière et non les 13 ou 6 d'un format réduit.
+
+**L'objection d'accessibilité est levée autrement, et mieux.** C'était le seul argument
+solide pour garder le repli : `vignette.svg` est `aria-hidden` à la source, donc la servir
+seule aurait laissé un lecteur d'écran devant rien. Son conteneur porte désormais
+`role="img"` et l'`aria_label` de l'extraction — 822 signes, les mêmes que `planche.svg` et
+`appui.svg` exposent nativement. Équivalent textuel intégral, zéro pixel visible, Lighthouse
+accessibilité 100.
+
+**Ce qui part avec le repli** : le garde-fou de build « toute extraction doit porter une forme
+de repli », les quatre rendeurs d'archétype (`sankey`, `zonage`, liste `elements`, `releve`)
+et les aides d'espaces insécables — 149 lignes. Le garde-fou protégeait d'un risque devenu
+impossible (une fiche sans dessin ET sans lecture) : le maintenir aurait fait échouer le build
+au nom d'un rendu qui n'a plus lieu. Même principe que l'amendement A9 — un contrôle se retire
+avec ce qu'il contrôlait, sinon il ment sur son objet.
+
+**Conséquence pour le protocole** : les blocs d'archétype du `planche.json` ne sont plus lus
+par aucun rendu du site. Ils servent les compositeurs et la relecture FT2E ; un archétype
+futur n'a plus rien à brancher côté composant.
+
+### 5. L'agrandissement en portrait — deux états sous 940 px
+
+Relevé par FT2E sur téléphone : à l'ouverture, une partie de la feuille est hors champ et le
+réflexe est de basculer en paysage. La cause est géométrique et n'a pas de solution unique :
+**une planche en 3:2 dans un écran en 1:2 ne peut pas être à la fois entière et lisible.**
+
+Le `min-width: 860px` de la feuille est une cote de **lisibilité** — c'est la largeur en
+dessous de laquelle le mono de 10 px de la planche passe sous le plancher de 6,5 (860 → 7,2).
+La boîte était donc réglée pour lire, en acceptant le parcours : à 390 px, 42 % de la feuille
+visible.
+
+Réponse retenue — **deux états explicites**, plutôt qu'un compromis qui ne sert ni l'un ni
+l'autre :
+
+| État | Largeur de la feuille à 390 px | Échelle | Mono | Ce qu'on en fait |
+|---|---|---|---|---|
+| **Ajusté** (ouverture) | 334 × 223 px, entière | 0,278 | 2,78 | on saisit la structure d'un coup d'œil, sans basculer le téléphone |
+| **Loupe** (« Lire au détail ») | 860 × 573 px | 0,717 | 7,17 | on lit, en parcourant du doigt, recadré au centre |
+
+Le bouton vit dans la barre de la boîte, avec `aria-pressed`, et **n'apparaît que sous
+940 px** — soit 860 + les 56 de marge de zone + la barre de défilement ≈ 931, arrondi à 940.
+Au-delà les deux états donnent la même image et le bouton n'a plus d'objet. La boîte se rouvre
+toujours ajustée : un état hérité de la consultation précédente rouvrirait sur un fragment,
+soit exactement le défaut corrigé. Le pincer-pour-zoomer reste disponible par-dessus, la méta
+viewport ne portant ni `maximum-scale` ni `user-scalable=no`.
+
+⚠ **Piège payé à l'écriture** : les deux règles qui portent ces états doivent rester **après**
+`.planche-plan` dans le `<style>`. Une `@media` n'ajoute aucune spécificité ; placées plus
+haut — ce qui fut le cas au premier jet — elles sont écrasées par le `min-width: 860px` de la
+règle de base, et la boîte s'ouvre agrandie. Ni le build, ni le typecheck, ni une capture ne
+le signalent : seule la mesure de la largeur rendue l'a montré.
+
 ### Le relevé de réception
 
 Mesuré sur `logements-nerea-aytre` (sankey), `ehpad-coulonges-sur-autize-ssi` (zonage) et
@@ -318,13 +395,13 @@ identiques sur les trois, les 23 planches partageant leurs trois viewBox.
 | 479 | 432 | vignette | 300 | 1,000 | 9,0 | non | ✓ |
 | 390 | 343 | vignette | 300 | 1,000 | 9,0 | non | ✓ |
 
-Poids de page, relevé avant et après sur les trois fiches :
+Poids de page en gzip, aux trois états du chantier :
 
-| Fiche | brut avant → après | gzip avant → après | Δ gzip |
-|---|---|---|---|
-| `logements-nerea-aytre` | 76 302 → 86 949 | 15 731 → 16 663 | **+932 o (+5,9 %)** |
-| `ehpad-coulonges-sur-autize-ssi` | 71 261 → 82 113 | 14 453 → 15 229 | **+776 o (+5,4 %)** |
-| `passerelle-…-marans` | 81 845 → 99 379 | 17 300 → 19 099 | **+1 799 o (+10,4 %)** |
+| Fiche | avant chantier | avec repli | **état livré** | net |
+|---|---|---|---|---|
+| `logements-nerea-aytre` | 15 731 | 16 663 | **16 326** | +595 o |
+| `ehpad-coulonges-sur-autize-ssi` | 14 453 | 15 229 | **14 791** | +338 o |
+| `passerelle-…-marans` | 17 300 | 19 099 | **18 252** | +952 o |
 
 **+21 % de brut ne coûte que +10 % de transporté** : les trois SVG d'un dossier partagent
 mot pour mot leur bloc `<style>`, leurs noms de classes et la plupart de leurs libellés, et
@@ -344,20 +421,14 @@ navigations View Transitions** (le clone servi est bien la planche, viewBox 1200
 - **Le budget de poids HTML était déjà dépassé avant ce chantier.** `docs/10-budget-performance.md`
   fixe 15 ko gzip pour une page interne ; `logements-nerea-aytre` était à 15,7 et
   `passerelle` à 17,3 **avant** toute modification — le terme dominant est la planche inlinée
-  elle-même, acquise au chantier des planches. Ce chantier ajoute 0,8 à 1,8 ko. Le seuil est
+  elle-même, acquise au chantier des planches. Ce chantier ajoute 338 à 952 o. Le seuil est
   donc à réexaminer pour ce qu'il est : un budget écrit avant que les fiches ne portent un
   dessin vectoriel inliné.
-- **La bascule à 880 px produit un saut de hauteur** de la figure : 617 px au-dessus, contre
-  1 033 (sankey), 1 265 (zonage) ou 1 408 (liste) juste en dessous. Ce n'est pas un défaut de
-  mise en page — c'est l'apparition du repli, qui découle directement de la décision
-  éditoriale. Tout découpage où le repli paraît à une borne produit ce saut ; seul « le
-  dessin remplace le repli » l'aurait évité. Aucun recouvrement ni débordement horizontal à
-  aucun palier, en revanche.
-
-  Corollaire du plafonnement du repli : la ligne de lecture vaut **512 px de 640 à 879 px**
-  (le plafond mord), puis suit le conteneur — 471 à 560 px de fenêtre, 391 à 480, 301 à 390.
-  Sous ≈ 480 px de fenêtre elle passe donc sous les 52 signes de la charte ; c'est la largeur
-  du téléphone qui l'impose, et non un choix de composition.
+- **La bascule à 880 px produit une variation de hauteur de la figure** — 617 px au-dessus,
+  498 juste en dessous —, la planche à l'échelle 0,68 étant plus haute que l'appui à sa cote.
+  L'écart est de 119 px, sans recouvrement ni débordement horizontal à aucun palier. Il était
+  de 346 à 731 px tant que le repli paraissait à cette borne ; sa suppression l'a réduit d'un
+  facteur trois à six, sans que ce fût le but.
 
 ---
 
