@@ -32,13 +32,23 @@
  * clair** — papier, calcaire. Sur la réserve profonde, ces ajours deviendraient
  * sombres et l'encre de la marque disparaîtrait.
  *
- * ── Le numéro de certificat ───────────────────────────────────────────────
+ * ── Le numéro de certificat, et le vrai plancher de lisibilité ────────────
  * Il est INTÉGRÉ à la marque par l'OPQIBI, qui le veut affiché avec elle. Il
  * n'est donc pas recomposé en mono à côté : ce serait publier la même donnée
  * deux fois à quelques pixels d'intervalle. Il est en revanche porté par
- * l'alternative textuelle, et il **cesse d'être lisible sous 200 px** de large
- * — d'où le plancher ci-dessous, qui fait échouer le build plutôt que de
- * laisser passer une marque dont la moitié ne se lit plus.
+ * l'alternative textuelle.
+ *
+ * ⚠ Le plancher a d'abord été posé à 200 px sur une ESTIMATION à l'œil, et il
+ * était faux. Mesuré depuis le fichier livré (640 px de large) :
+ *
+ *     chiffres « 17 06 3486 »  77 px  → 19,2 px de rendu à 160 px d'affichage
+ *     mot « CERTIFICAT »       42 px  → 10,5 px de rendu à 160 px
+ *
+ * Ce ne sont donc pas les chiffres qui contraignent — ils gardent une marge
+ * confortable — mais le mot CERTIFICAT, en capitales espacées. Le plancher
+ * vaut 137 px pour l'amener à 9 px ; il est posé à 140, et fait échouer le
+ * build en dessous plutôt que de laisser passer une marque dont une ligne ne
+ * se lit plus.
  *
  * ⚠ PROVISOIRE, et plus encore depuis le passage à la transparence : le fichier
  * a été RECONSTRUIT depuis une capture JPEG où la transparence était dessinée
@@ -55,8 +65,8 @@
  * l'appelant ne bouge pas.
  */
 interface Props {
-  /** Largeur d'affichage en px. Plancher 200 : en dessous, le numéro de
-      certificat intégré à la marque n'est plus lisible. */
+  /** Largeur d'affichage en px. Plancher 140 : en dessous, le mot CERTIFICAT
+      intégré à la marque passe sous 9 px et cesse d'être lisible. */
   largeur?: number;
   /** Portée de la qualification, sous la marque. Jamais le numéro : il est
       déjà dans la marque. */
@@ -71,11 +81,12 @@ const { largeur = 224, legende, class: classe = '' } = Astro.props;
 // au chargement (budget CLS < 0,05).
 const RATIO = 436 / 640;
 
-if (largeur < 200) {
+if (largeur < 140) {
   throw new Error(
-    `MarqueOpqibi : largeur de ${largeur} px demandée. Sous 200 px le numéro de `
-    + `certificat intégré à la marque tombe sous 10 px et cesse d'être lisible, `
-    + `alors que l'OPQIBI impose de l'afficher avec elle.`,
+    `MarqueOpqibi : largeur de ${largeur} px demandée. Sous 140 px le mot `
+    + `CERTIFICAT intégré à la marque (42 px dans un fichier de 640) tombe sous `
+    + `9 px et cesse d'être lisible, alors que l'OPQIBI impose d'afficher le `
+    + `bloc de certificat avec la marque.`,
   );
 }
 ---

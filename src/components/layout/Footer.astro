@@ -13,7 +13,12 @@ const year = new Date().getFullYear();
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 py-10">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
       <div class="col-span-2 md:col-span-1">
-        <Logo forme="complet" baseline decoratif={false} class="h-[52px] w-auto" />
+        {/* 60 px et non 52 : équilibre de pied arrêté le 2026-08-15 avec la
+            marque OPQIBI ci-dessous. Le monogramme est un tracé, la marque un
+            bloc dense — à surface égale, la seconde écrase le premier. Le
+            monogramme gagne donc 15 % (191 → 220 px de large, le viewBox fait
+            330 × 90) pendant que la marque perd 29 %. */}
+        <Logo forme="complet" baseline decoratif={false} class="h-[60px] w-auto" />
         {/* Texte courant : Archivo 300 — le mono est réservé aux données et coordonnées */}
         <p class="text-sm text-pivot mt-4 leading-relaxed max-w-[42ch]">
           Bureau d’études techniques pluridisciplinaire à La Rochelle. Fluides, thermique, électricité, SSI, BIM. Au service des architectes et maîtres d’ouvrage depuis 2008.
@@ -22,8 +27,13 @@ const year = new Date().getFullYear();
             et la description : c'est la même chose qu'on y dit — qui est ce
             bureau. Elle ne prend donc pas de cellule à part, ce qui laisse la
             grille du pied à quatre colonnes. */}
+        {/* 160 px : la marque descend à 73 % de la largeur du monogramme et à
+            la moitié de sa surface. Son rapport 1,47:1 contre 3,67:1 interdit
+            de les égaliser en hauteur — on ne cherche donc pas la parité, mais
+            à retirer à la marque la dominance qu'elle avait à 224. Le mot
+            CERTIFICAT y rend à 10,5 px, au-dessus du plancher de 9. */}
         <MarqueOpqibi
-          largeur={224}
+          largeur={160}
           legende="Audits énergétiques et études thermiques"
           class="mt-6"
         />
