@@ -1,0 +1,75 @@
+---
+/**
+ * Marque de qualification OPQIBI — « l'ingénierie qualifiée ».
+ *
+ * ── Pourquoi une couleur hors rampe dans un système monochrome ─────────────
+ * La charte v3 interdit toute teinte hors de la rampe 197° et toute couleur
+ * d'accent. Cette marque y échappe, et ce n'est pas une entorse : **une marque
+ * de certification n'est pas un élément de marque, c'est une attestation
+ * délivrée par un tiers**. Sa charte de reproduction interdit de la recolorer —
+ * un logo recoloré cesse d'attester quoi que ce soit. La règle gouverne ce que
+ * FT2E dessine, pas ce que l'OPQIBI lui délivre.
+ *
+ * Elle est donc **bornée, pas affaiblie** : la marque est isolée, posée à sa
+ * zone de protection, et sa couleur n'essaime nulle part — ni filet, ni aplat,
+ * ni survol ne la reprennent. C'est le seul objet coloré du site.
+ *
+ * ── Pourquoi un `<img>` brut et non `astro:assets` ────────────────────────
+ * La convention du dépôt veut `<Image>` « sauf cas explicite ». En voici un :
+ * `astro:assets` ré-encode à la volée, et une marque de certification doit se
+ * reproduire à l'identique. Le fichier est donc préparé UNE fois, hors build —
+ * rogné à sa zone de protection uniforme, réduit à 640 px, WebP qualité 92,
+ * 31 ko — et servi tel quel.
+ *
+ * ── Le numéro de certificat ───────────────────────────────────────────────
+ * Il est INTÉGRÉ à la marque par l'OPQIBI, qui le veut affiché avec elle. Il
+ * n'est donc pas recomposé en mono à côté : ce serait publier la même donnée
+ * deux fois à quelques pixels d'intervalle. Il est en revanche porté par
+ * l'alternative textuelle, et il **cesse d'être lisible sous 200 px** de large
+ * — d'où le plancher ci-dessous, qui fait échouer le build plutôt que de
+ * laisser passer une marque dont la moitié ne se lit plus.
+ *
+ * ⚠ PROVISOIRE : le fichier vient d'un JPEG texturé de 1 200 px, pas du kit
+ * officiel de l'OPQIBI. À remplacer par le vectoriel dès que FT2E le fournit —
+ * seul le fichier change, l'appelant ne bouge pas.
+ */
+interface Props {
+  /** Largeur d'affichage en px. Plancher 200 : en dessous, le numéro de
+      certificat intégré à la marque n'est plus lisible. */
+  largeur?: number;
+  /** Portée de la qualification, sous la marque. Jamais le numéro : il est
+      déjà dans la marque. */
+  legende?: string;
+  class?: string;
+}
+
+const { largeur = 224, legende, class: classe = '' } = Astro.props;
+
+// Rapport du fichier livré (640 × 436), figé ici pour que `width`/`height`
+// soient posés à la source et qu'aucun décalage de mise en page n'apparaisse
+// au chargement (budget CLS < 0,05).
+const RATIO = 436 / 640;
+
+if (largeur < 200) {
+  throw new Error(
+    `MarqueOpqibi : largeur de ${largeur} px demandée. Sous 200 px le numéro de `
+    + `certificat intégré à la marque tombe sous 10 px et cesse d'être lisible, `
+    + `alors que l'OPQIBI impose de l'afficher avec elle.`,
+  );
+}
+---
+
+<figure class:list={['m-0', classe]}>
+  <img
+    src="/images/certifications/opqibi.webp"
+    width={largeur}
+    height={Math.round(largeur * RATIO)}
+    alt="OPQIBI, l’ingénierie qualifiée — certificat n° 17 06 3486"
+    loading="lazy"
+    decoding="async"
+    class="block h-auto max-w-full"
+  />
+  {legende && (
+    <figcaption class="mono-data text-pivot mt-3 leading-relaxed">{legende}</figcaption>
+  )}
+</figure>
