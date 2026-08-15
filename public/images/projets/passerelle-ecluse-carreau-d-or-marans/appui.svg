@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de l’alimentation d’une passerelle mobile : le branchement existant de 12 kVA triphasé est conservé et alimente un coffret unique logé dans le banc, d’où partent cinq départs. Trois frontières sont franchies. La tension : deux départs d’éclairage traversent les blocs d’alimentation et passent en très basse tension 48 volts, 43 mètres de bandeau à leds sur la partie fixe et 28 mètres sur la partie mobile et sous le banc. Le joint mobile : 6,80 mètres de tablier coulissent sur les 25,40 mètres, et l’éclairage de cette partie les franchit par un enrouleur à rappel automatique chargé de 10 mètres de câble — la longueur de câble est cotée plus longue que la course. La limite du réseau public : la caméra de comptage devait être posée à 7 mètres sur un mât d’éclairage public existant et alimentée par le réseau, alimentation refusée ; un mât dédié de 5,00 mètres est repris sur le coffret de la passerelle.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">TROIS FRANCHISSEMENTS</text>
+  <rect x="24.00" y="56.00" width="124.00" height="42.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="36.00" y="78.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Coffret unique</text>
+  <text x="36.00" y="92.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DANS LE BANC</text>
+  <path d="M 86.00 98.00 L 86.00 112.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 86.00 116.00 L 82.00 108.00 L 90.00 108.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 34.00 120.00 L 415.00 120.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.5"/>
+  <path d="M 50.00 121.50 L 50.00 138.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 84.00 121.50 L 84.00 138.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <rect x="38.00" y="138.00" width="62.00" height="26.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 38.00 151.00 L 100.00 151.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="108.00" y="146.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">400/230 V</text>
+  <text x="108.00" y="166.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">48 V</text>
+  <path d="M 50.00 164.00 L 50.00 214.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3"/>
+  <path d="M 50.00 214.00 L 140.00 214.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3"/>
+  <path d="M 148.00 214.00 L 139.00 209.50 L 139.00 218.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 84.00 164.00 L 84.00 276.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3"/>
+  <path d="M 84.00 276.00 L 216.65 276.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3"/>
+  <path d="M 224.65 276.00 L 215.65 271.50 L 215.65 280.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 225.00 121.50 L 225.00 146.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 225.00 150.00 L 221.50 143.00 L 228.50 143.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="179.00" y="150.00" width="92.00" height="22.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="225.00" y="186.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">PRISES</text>
+  <path d="M 330.00 121.50 L 330.00 146.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 330.00 150.00 L 326.50 143.00 L 333.50 143.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="284.00" y="150.00" width="92.00" height="22.00" class="c-calcaire" fill="#EDF0F2"/>
+  <text x="330.00" y="186.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">MOTORISATION</text>
+  <rect x="150.00" y="224.00" width="183.07" height="32.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="339.07" y="224.00" width="60.93" height="32.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 150.00 214.00 L 333.07 214.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3"/>
+  <path d="M 336.07 214.00 L 400.00 214.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3"/>
+  <path d="M 333.07 200.00 L 333.07 330.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.3" stroke-dasharray="4 5"/>
+  <text x="160.00" y="245.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PARTIE FIXE</text>
+  <circle cx="234.65" cy="276.00" r="9.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="234.65" cy="276.00" r="3.80" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 243.65 276.00 L 336.07 276.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3"/>
+  <path d="M 336.07 276.00 L 336.07 222.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="3"/>
+  <path d="M 336.07 215.00 L 331.57 224.00 L 340.57 224.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 333.07 300.00 L 400.00 300.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 333.07 295.00 L 333.07 305.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 400.00 295.00 L 400.00 305.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 333.57 300.00 L 340.57 296.50 L 340.57 303.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 399.50 300.00 L 392.50 296.50 L 392.50 303.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="366.54" y="292.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">6,80 m</text>
+  <path d="M 234.65 322.00 L 333.07 322.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 234.65 317.00 L 234.65 327.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 333.07 317.00 L 333.07 327.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 235.15 322.00 L 242.15 318.50 L 242.15 325.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 332.57 322.00 L 325.57 318.50 L 325.57 325.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="283.86" y="314.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">10 m DE CÂBLE</text>
+  <path d="M 425.00 256.00 L 528.00 256.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 440.00 256.00 L 440.00 187.10" fill="none" class="s-encre" stroke="#00393A" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M 440.00 126.00 L 440.00 175.10" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4" stroke-dasharray="5 5"/>
+  <path d="M 432.00 142.00 L 448.00 158.00 M 448.00 142.00 L 432.00 158.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 415.00 121.50 L 415.00 310.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 415.00 310.00 L 470.00 310.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 470.00 310.00 L 470.00 264.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 470.00 258.00 L 466.00 266.00 L 474.00 266.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 470.00 256.00 L 505.00 256.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 505.00 256.00 L 505.00 206.79" fill="none" class="s-encre" stroke="#00393A" stroke-width="3.5"/>
+  <text x="440.00" y="276.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">7,00 m</text>
+  <text x="440.00" y="290.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">REFUSÉ</text>
+  <text x="505.00" y="276.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">5,00 m</text>
+  <text x="505.00" y="290.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">RETENU</text>
+</svg>

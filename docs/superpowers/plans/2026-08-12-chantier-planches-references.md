@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 18 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12. 20 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,7 +32,7 @@ façade l'affirme.
 
 ---
 
-## État — 19 / 23
+## État — 20 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -55,7 +55,7 @@ façade l'affirme.
 | 17 | `logements-pas-des-boeufs-bois-plage` | Logements | `boucle-fluide` (mécanisme `appariement`) | ✅ **publiée** (versée le 2026-08-15) |
 | 18 | `maison-relais-saint-jean-d-angely` | Logements | `boucle-fluide` (mécanisme `individualisation`) | ✅ **publiée** (versée le 2026-08-15) |
 | 19 | `maisons-tourtet-saint-georges-de-didonne` | Logements | `chronologie-affaire` (mécanisme `divergence`) | ✅ **publiée** (versée le 2026-08-15) |
-| — | `passerelle-ecluse-carreau-d-or-marans` | Monotechnique | | à faire |
+| 20 | `passerelle-ecluse-carreau-d-or-marans` | Monotechnique | `tableau-electrique` (mécanisme `franchissement`) | ✅ **publiée** (versée le 2026-08-15) |
 | — | `place-des-chenes-verts-saint-rogatien` | Industriel et commercial | | à faire |
 | — | `residence-intergenerationnelle-saint-agnant` | Logements | | à faire |
 | — | `siege-rese-aigrefeuille` | Tertiaire / ERP | | à faire |
@@ -68,7 +68,7 @@ façade l'affirme.
 | `zonage-ssi` | 3 — trois mécanismes : `zonage` (un même déclenchement, l'alarme avant/après — Abbaye de Sablonceaux), `transfert` (la mise à l'abri au même niveau, la descente barrée — EHPAD de Coulonges-sur-l'Autize) et `partage` (le découpage réglementaire d'une enveloppe montée d'un seul tenant — la limite sans mur qui commande l'étanchéité, les machines et l'incendie, habitat inclusif de Salignac-sur-Charente) | ✅ `scripts/planches/zonage-ssi.py` (dispatch sur le bloc de l'extraction) |
 | `boucle-fluide` | 6 — six mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae), `substitution` (production réversible, centre de formation de Saintes), `declinaison` (le parti répété — une maison dessinée une fois, 54 cellules identiques en `<defs>`/`<use>`, Le Fougerou), `appariement` (la partition des services — trois bandes de service, deux colonnes de machines, et dans chaque colonne UNE boîte qui enjambe une frontière de bande, jamais la même : l'eau chaude porte la ventilation chez les T2, le chauffage porte l'eau chaude chez les T3 ; contour d'encre dominant la frontière filet-1, logements du Pas des Bœufs au Bois-Plage) et `individualisation` (le collectif produit, chaque logement compte — deux flux collectifs entrent dans une colonne qui dessert une pile de 21 modules identiques en trois groupes typologiques ; UN module tiré au détail par deux filets d'agrandissement montre deux arrivées, trois départs, trois compteurs, maison relais de Saint-Jean-d'Angély) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
 | `coupe-traversee` | 4 — quatre mécanismes : `coupe` (l'enveloppe traversée, Marennes), `equilibre` (l'air extrait, l'air compensé — restaurant scolaire de Villedoux), `enjambement` (l'enveloppe qui ferme les faces qu'un bâtiment ordinaire n'a pas — dessous du plancher sur le passage, fosse d'ascenseur, abouts pontés — étude notariale Joffre) et `portee` (deux périmètres inégaux sur une même coupe de niveaux — la mission bornée au coin bas-gauche, l'enceinte de la zone d'alarme qui enclot tout, hôtel Le Yachtman) | ✅ `scripts/planches/coupe-traversee.py` (dispatch sur le bloc de l'extraction) |
-| `tableau-electrique` | 1 — mécanisme `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) | ✅ `scripts/planches/tableau-electrique.py` |
+| `tableau-electrique` | 2 — deux mécanismes : `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) et `franchissement` (le sujet n'est plus la distribution mais ce que les départs TRAVERSENT — une arrivée, une barre, cinq départs, et trois frontières : la tension, où deux départs d'éclairage changent de poids de trait en sortant des blocs 48 V ; le joint mobile, où deux cotes se rejoignent en sens contraire, 10 m de câble d'un côté contre 6,80 m de course de l'autre, à la même échelle ; la limite du réseau public, où une descente barrée d'une croix vers un mât jamais construit répond à un mât dédié plus court, alimenté depuis la barre par le plus long des départs — passerelle du Carreau d'Or à Marans) | ✅ `scripts/planches/tableau-electrique.py` (dispatch sur le bloc de l'extraction) |
 | `chronologie-affaire` | 2 — deux mécanismes : `precedence` (le dessin précède le gros œuvre : l'escalier des réservations gravit les niveaux d'avance sur l'exécution, résidence Horizon) et `divergence` (l'écart qui se creuse — une ordonnée d'écart au seuil du label, deux tracés en marches sur le même axe des temps : le besoin bioclimatique plat et collé au seuil, la consommation qui décroche marche après marche ; deux cotes verticales dans le rapport exact que la fiche énonce, 1,58 point contre 23,01, maisons Tourtet à Saint-Georges-de-Didonne) | ✅ `scripts/planches/chronologie-affaire.py` (dispatch sur le bloc de l'extraction) |
 | `planche-chiffree` | 0 | à écrire — c'est le repli, il servira |
 
@@ -246,6 +246,34 @@ que la fiche énonce (14,56).
 composition, pas une donnée.** Elle se choisit à la question que le dessin pose — ici « de
 combien dépasse-t-on le seuil ? », pas « où en est-on de l'exigence ? » — et elle se contrôle
 à la taille de lecture, où seule apparaît la cote qu'elle écrase.
+
+## Ce que la vingtième planche a appris — 2026-08-15 : l'étiquette qui interrompt sa ligne
+
+La planche de la passerelle de Marans est la première dont le dessin est un **réseau de
+routes** plutôt qu'une pile de registres : cinq départs quittent une barre et vont chercher
+ce qu'ils desservent. Trois enseignements, tous relevés au rendu à 1152 px.
+
+- **Une étiquette posée sur un trait doit porter son propre fond.** Les tags de frontière
+  nomment des descentes ; posés à côté d'elles, ils étaient partout au mauvais endroit, et
+  posés dessus, ils étaient rayés. La recette `_etiquette` — un rectangle papier à la mesure
+  du texte, puis le texte — est le procédé du dessin coté : le libellé *interrompt* la ligne
+  qu'il annote. **Et l'ordre de tracé en fait partie** : appelée avant les descentes, elle
+  était repeinte par elles ; le défaut ne se voit qu'à la taille de lecture.
+- **Une route qui repart d'où elle vient dessine un rectangle, et un rectangle se lit comme
+  une boîte.** Le départ de l'éclairage mobile descend sous le tablier, franchit le joint et
+  remonte : avec la barre au-dessus, le tracé fermait un cadre. Les pointes de flèche le
+  rouvrent — un contour orienté n'est plus une enceinte. Sur la vignette, où elles ne se
+  lisent plus, le long départ a été **rabattu contre le bord droit** au lieu de traverser.
+- **Calcaire sur papier vaut 1,05 de contraste : une bande non bordée n'existe pas.** Le
+  tablier — le sujet même de la fiche — était invisible dans la carte de 274 px. Les deux
+  parties reçoivent désormais un filet ; c'est le **remplissage** qui distingue la fixe de
+  la mobile, pas la seule présence de la bande.
+
+Corollaire sur la vignette : sa première version gardait la nomenclature entière — coffret,
+boîte 48 V, blocs de prises et de motorisation. Dans 274 px, **quatre rectangles calcaire
+muets occupaient 40 % du dessin**. Ce qui reste est ce qui démontre : la barre et son
+éventail, le tablier coupé, et les deux cotes qui se rejoignent au joint. Une vignette ne se
+dégraisse pas par économie, elle se dégraisse parce qu'un libellé illisible est du bruit.
 
 ## Ce que la deuxième planche a arrêté — 2026-08-13
 

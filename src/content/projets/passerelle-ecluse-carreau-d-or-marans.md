@@ -21,8 +21,7 @@ synthese: >-
   d’électrification a refusé d’alimenter la caméra de comptage des vélos, nous
   l’avons reprise sur le coffret de la passerelle.
 mission_ft2e: ["Électricité CFO", "Électricité CFA"]
-image_principale: "/images/projets/passerelle-ecluse-carreau-d-or-marans/01.jpg"
-image_principale_alt: "Extrait du plan d’électricité de la passerelle : le tablier vu de dessus entre les deux quais de pierre, le tracé du bandeau à leds suivant les deux mains courantes, le coffret de prises logé dans le banc, l’enrouleur de câble en pied de pilier et le cheminement des fourreaux sous l’ouvrage"
+planche: "/images/projets/passerelle-ecluse-carreau-d-or-marans/planche.svg"
 en_avant: false
 ---
 

@@ -30,15 +30,24 @@ géométrie : une source en haut, un aller-retour à gauche, un épaississement 
 centre, une nappe en bas. Toiture et plancher sont des bandes topologiques :
 aucune implantation réelle n'est reprise (règle 4).
 
+Le second mécanisme (`franchissement`, passerelle du Carreau d'Or) garde le même
+motif — une arrivée, une barre, des départs — et lui donne pour sujet ce que les
+départs doivent TRAVERSER pour atteindre ce qu'ils desservent : la tension (deux
+départs passent en 48 V dans les mains courantes), le joint mobile (6,80 m de
+tablier coulissent, franchis par un enrouleur dont le câble est coté plus long
+que la course) et la limite du réseau public (un raccordement refusé, un mât
+rapatrié sur le coffret). Trois longueurs et deux hauteurs sont portées à une
+échelle unique dérivée du tablier ; tout le reste est topologique.
+
 Cinquième module du chantier après `sankey-energie.py`, `zonage-ssi.py`,
 `coupe-traversee.py` et `boucle-fluide.py`. Le tronc commun (jetons, mesure des
 chasses, insécables, double écriture des couleurs, routine d'exécution) vit dans
 `_tronc.py`.
 """
 
-from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
+from _tronc import (NN, INS, JETON, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
                     A_MARGE, mesurer, replier, echapper, texte, rect,
-                    rect_bord, ligne, polyligne, fleche, entete_style,
+                    rect_bord, ligne, polyligne, fleche, cercle, entete_style,
                     racine_appui, controles_appui, executer)
 
 
@@ -529,5 +538,630 @@ def composer_appui(donnees):
         bas=f"dalle jusqu'à 334, régime à 331 — marge basse {AH - 334} px")
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+#  MÉCANISME `franchissement` — une arrivée, cinq départs, trois frontières
+# ═════════════════════════════════════════════════════════════════════════════
+#
+# Le motif de l'archétype est inchangé (arrivée → barre → départs) ; son SUJET
+# change : ce que la planche suit n'est pas la distribution, c'est ce que les
+# départs doivent traverser. Trois frontières, chacune dessinée par un dispositif
+# différent et chacune doublée d'un texte (règle du signe jamais seul) :
+#
+#   1. la TENSION — deux départs d'éclairage traversent la boîte des blocs
+#      d'alimentation et changent de poids de trait (1,5 px → 3 px) ;
+#   2. le JOINT MOBILE — un pointillé vertical coupe le tablier ; le départ de
+#      l'éclairage mobile passe dessous, par un enrouleur, et remonte de l'autre
+#      côté. Deux cotes se rejoignent au joint et s'étendent en sens contraire :
+#      10 m de câble contre 6,80 m de course, à la MÊME échelle ;
+#   3. la LIMITE DU RÉSEAU PUBLIC — la descente vers le mât public existant est
+#      barrée d'une croix, et un long départ venu de la barre alimente à la place
+#      un mât dédié, plus court.
+#
+# Une seule échelle, dérivée du tablier (ECH = largeur dessinée / 25,40 m), porte
+# les trois longueurs et les deux hauteurs de mât. Les linéaires de bandeau, eux,
+# ne sont PAS tracés à l'échelle (43 m de ruban sur une partie fixe plus courte) :
+# ce sont des cumuls, et le dessin le dit en toutes lettres.
+
+# ── Registre haut : l'amont, le coffret, le réseau public ────────────────────
+F_TAG_HAUT = 210
+AM_X0, AM_X1, AM_Y0, AM_Y1 = 56, 268, 224, 302      # branchement existant
+CF_X0, CF_X1, CF_Y0, CF_Y1 = 320, 600, 216, 306     # le coffret du banc
+RS_X0, RS_X1, RS_Y0, RS_Y1 = 940, 1144, 216, 284    # le réseau public
+
+# ── La barre et ses cinq départs ─────────────────────────────────────────────
+Y_BARRE = 348
+XB0, XB1 = 56, 930
+X_DESCENTE = 460                                     # coffret → barre
+TB_X0, TB_X1, TB_Y0, TB_Y1 = 76, 194, 372, 416       # les blocs 48 V
+BL_Y0, BL_Y1 = 372, 430                              # les deux départs à bloc
+PR_X0, PR_X1 = 340, 560                              # coffret de prises
+MO_X0, MO_X1 = 600, 820                              # armoire de motorisation
+X_D1, X_D2 = 100, 170                                # éclairages fixe / mobile
+X_D4, X_D3, X_D5 = 450, 710, 930                     # prises / motorisation / mât
+
+# ── Registre bas : le tablier, la seule chose tracée à l'échelle ─────────────
+# Il occupe presque toute la largeur utile : c'est LUI le sujet de la fiche —
+# un ouvrage qui s'ouvre —, pas la nomenclature des départs.
+X_PONT0, X_PONT1 = 200, 900
+Y_PONT0, Y_PONT1 = 502, 550
+Y_COTE_LONG = 474                                    # la cote de 25,40 m
+Y_LED = 494                                          # le bandeau à leds
+Y_CABLE = 568                                        # la route du câble mobile
+Y_COTE_COURSE = 592
+Y_COTE_CABLE = 614
+Y_MAT_ROUTE = 642                                    # le long départ vers le mât
+Y_NOTE = 664
+JEU_JOINT = 12                                       # le jeu où passe le câble
+
+# ── Le quai et ses deux mâts ─────────────────────────────────────────────────
+QU_X0, QU_X1 = 950, 1144
+X_MAT_REFUSE, X_MAT_RETENU = 1010, 1100
+X_RISER_MAT = 1060                                   # la remontée du long départ
+
+
+def _pointille(x0, y0, x1, y1, cle, epaisseur=1.2, motif="4 5"):
+    """Un trait discontinu — la frontière que le dessin ne franchit pas seul."""
+    return (f'  <path d="M {x0:.2f} {y0:.2f} L {x1:.2f} {y1:.2f}" fill="none" '
+            f'class="s-{cle}" stroke="{JETON[cle]}" '
+            f'stroke-width="{epaisseur}" stroke-dasharray="{motif}"/>')
+
+
+def _croix(x, y, taille, cle="encre", epaisseur=2.0):
+    """La croix qui barre une route abandonnée — doublée d'une mention."""
+    t = taille / 2
+    return (f'  <path d="M {x-t:.2f} {y-t:.2f} L {x+t:.2f} {y+t:.2f} '
+            f'M {x+t:.2f} {y-t:.2f} L {x-t:.2f} {y+t:.2f}" fill="none" '
+            f'class="s-{cle}" stroke="{JETON[cle]}" stroke-width="{epaisseur}"/>')
+
+
+def _cote(A, x0, x1, y, libelle, corps=10, patte=5, ecart=8):
+    """Une ligne de cote : le trait, ses deux pattes, son libellé centré dessus.
+    C'est ce trait — et lui seul — qui engage l'échelle du dessin."""
+    A(ligne(x0, y, x1, y, "encre", 1))
+    A(ligne(x0, y - patte, x0, y + patte, "encre", 1))
+    A(ligne(x1, y - patte, x1, y + patte, "encre", 1))
+    A(fleche(x0 + 0.5, y, "encre", "gauche", 7))
+    A(fleche(x1 - 0.5, y, "encre", "droite", 7))
+    A(texte((x0 + x1) / 2, y - ecart, libelle, "mono", corps, 500, "pivot",
+            ancre="middle", tracking=corps * 0.14))
+
+
+def _etiquette(A, x, y, chaine, corps=10, ancre=None, marge=6):
+    """Une étiquette mono posée SUR un trait : un fond papier à sa mesure, puis
+    le texte. C'est le procédé du dessin coté — le libellé interrompt la ligne
+    qu'il annote au lieu de se laisser rayer par elle. Sans lui, les tags de
+    frontière étaient traversés par les descentes qu'ils nomment."""
+    l = mesurer(chaine, corps, "mono", corps * 0.14)
+    x0 = x if ancre is None else (x - l if ancre == "end" else x - l / 2)
+    A(rect(x0 - marge, y - corps - 2, l + 2 * marge, corps + 8, "papier"))
+    A(texte(x, y, chaine, "mono", corps, 500, "pivot", ancre=ancre,
+            tracking=corps * 0.14))
+    return l
+
+
+def _bobine(A, cx, cy, r):
+    """L'enrouleur : un tambour et son câble enroulé — trois quarts de tour
+    concentriques, tracés, jamais un pictogramme importé."""
+    A(cercle(cx, cy, r, "papier", "encre", 1.5))
+    A(cercle(cx, cy, r * 0.42, "papier", "encre", 1.2))
+
+
+def composer_franchissement(donnees):
+    f = donnees["franchissement"]
+    tab = f["tablier"]
+    mats = f["mats"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    def mono(x, y, chaine, dispo=None, nom=None, ancre=None, corps=10):
+        if dispo is not None:
+            controler(nom or chaine, chaine, corps, "mono", dispo, corps * 0.14)
+        A(texte(x, y, chaine, "mono", corps, 500, "pivot", ancre=ancre,
+                tracking=corps * 0.14))
+
+    # ── L'échelle : dérivée du tablier, jamais choisie ───────────────────────
+    long_m = float(tab["longueur"].replace(",", "."))
+    mob_m = float(tab["mobile"].replace(",", "."))
+    ech = (X_PONT1 - X_PONT0) / long_m
+    x_joint = X_PONT1 - mob_m * ech
+    x_enrouleur = x_joint - 10.0 * ech          # 10 m de câble, même échelle
+    h_refuse = float(mats["abandonne"]["hauteur"].replace(",", ".")) * ech
+    h_retenu = float(mats["retenu"]["hauteur"].replace(",", ".")) * ech
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+    mono(MARGE, Y_ENTETE, f["entete"], UTILE, "en-tête du schéma")
+
+    # ── AMONT — le branchement conservé ──────────────────────────────────────
+    mono(MARGE, F_TAG_HAUT, f["tag_amont"], 600, "tag amont")
+    am = f["amont"]
+    A(rect_bord(AM_X0, AM_Y0, AM_X1 - AM_X0, AM_Y1 - AM_Y0, "papier", "filet-1"))
+    controler("libellé amont", am["libelle"], 15, "sans-400", AM_X1 - AM_X0 - 32)
+    A(texte(AM_X0 + 16, AM_Y0 + 30, am["libelle"], "sans", 15, 400, "encre",
+            wdth=100))
+    for k, l in enumerate(am["detail"]):
+        mono(AM_X0 + 16, AM_Y0 + 52 + k * 16, l, AM_X1 - AM_X0 - 32,
+             f"détail amont {k + 1}")
+    A(ligne(AM_X1, (AM_Y0 + AM_Y1) / 2, CF_X0 - 10, (AM_Y0 + AM_Y1) / 2,
+            "encre", 1.5))
+    A(fleche(CF_X0 - 2, (AM_Y0 + AM_Y1) / 2, "encre", "droite", 9))
+
+    # ── LE COFFRET — la source unique de tout l'ouvrage ──────────────────────
+    co = f["coffret"]
+    A(rect_bord(CF_X0, CF_Y0, CF_X1 - CF_X0, CF_Y1 - CF_Y0, "calcaire", "filet-1"))
+    controler("libellé coffret", co["libelle"], 15, "sans-400", CF_X1 - CF_X0 - 32)
+    A(texte(CF_X0 + 16, CF_Y0 + 36, co["libelle"], "sans", 15, 400, "encre",
+            wdth=100))
+    for k, l in enumerate(co["detail"]):
+        mono(CF_X0 + 16, CF_Y0 + 60 + k * 16, l, CF_X1 - CF_X0 - 32,
+             f"détail coffret {k + 1}")
+
+    # ── LE RÉSEAU PUBLIC — le hors-périmètre, en haut à droite ───────────────
+    re_ = f["reseau"]
+    A(rect_bord(RS_X0, RS_Y0, RS_X1 - RS_X0, RS_Y1 - RS_Y0, "papier", "filet-1"))
+    controler("libellé réseau", re_["libelle"], 15, "sans-400", RS_X1 - RS_X0 - 32)
+    A(texte(RS_X0 + 16, RS_Y0 + 34, re_["libelle"], "sans", 15, 400, "encre",
+            wdth=100))
+    for k, l in enumerate(re_["detail"]):
+        mono(RS_X0 + 16, RS_Y0 + 56 + k * 16, l, RS_X1 - RS_X0 - 32,
+             f"détail réseau {k + 1}")
+
+    # ── LA BARRE ET SES CINQ DÉPARTS ─────────────────────────────────────────
+    A(ligne(X_DESCENTE, CF_Y1, X_DESCENTE, Y_BARRE - 6, "encre", 2))
+    A(fleche(X_DESCENTE, Y_BARRE - 2, "encre", "bas", 9))
+    mono(XB0, Y_BARRE - 14, f["tag_barre"], X_DESCENTE - XB0 - 20, "tag de la barre")
+    A(ligne(XB0, Y_BARRE, XB1, Y_BARRE, "encre", 3))
+
+    # FRONTIÈRE 1 — la tension. Les deux départs d'éclairage traversent la
+    # boîte des blocs d'alimentation et changent de POIDS DE TRAIT en sortant.
+    fr = {b["cle"]: b for b in f["frontieres"]}
+    for x in (X_D1, X_D2):
+        A(ligne(x, Y_BARRE + 1.5, x, TB_Y0, "encre", 1.5))     # 400/230 V
+    A(rect_bord(TB_X0, TB_Y0, TB_X1 - TB_X0, TB_Y1 - TB_Y0, "calcaire", "filet-1"))
+    # Le trait de conversion : au-dessus le 400/230 V, au-dessous le 48 V.
+    A(ligne(TB_X0, (TB_Y0 + TB_Y1) / 2, TB_X1, (TB_Y0 + TB_Y1) / 2, "filet-1", 1))
+    mono(TB_X1 + 10, TB_Y0 + 14, fr["tension"]["amont"], PR_X0 - TB_X1 - 20,
+         "étiquette amont tension")
+    mono(TB_X1 + 10, TB_Y0 + 38, fr["tension"]["aval"], PR_X0 - TB_X1 - 20,
+         "étiquette aval tension")
+
+    # Départ 1 — l'éclairage de la partie fixe : il rejoint le bandeau.
+    A(ligne(X_D1, TB_Y1, X_D1, Y_LED, "encre", 3))
+    A(ligne(X_D1, Y_LED, X_PONT0 - 12, Y_LED, "encre", 3))
+    A(fleche(X_PONT0 - 2, Y_LED, "encre", "droite", 10))
+
+    # Départ 2 — l'éclairage de la partie mobile : il passe SOUS le tablier.
+    A(ligne(X_D2, TB_Y1, X_D2, Y_CABLE, "encre", 3))
+    A(ligne(X_D2, Y_CABLE, x_enrouleur - 24, Y_CABLE, "encre", 3))
+    A(fleche(x_enrouleur - 14, Y_CABLE, "encre", "droite", 10))
+
+    # Le tag se pose SOUS la boîte, SUR les deux descentes qu'il qualifie : son
+    # fond papier les interrompt — d'où l'ordre, après elles et non avant.
+    controler("tag frontière 1", fr["tension"]["tag"], 10, "mono",
+              PR_X0 - MARGE - 28, 1.4)
+    _etiquette(A, MARGE, TB_Y1 + 18, fr["tension"]["tag"])
+
+    # Départs 3 et 4 — deux blocs terminaux, sans appareil.
+    for (x0, x1, xd, cle) in ((PR_X0, PR_X1, X_D4, "prises"),
+                              (MO_X0, MO_X1, X_D3, "motorisation")):
+        el = next(e for e in f["elements"] if e["cle"] == cle)
+        A(ligne(xd, Y_BARRE + 1.5, xd, BL_Y0 - 6, "encre", 1.5))
+        A(fleche(xd, BL_Y0 - 2, "encre", "bas", 8))
+        A(rect(x0, BL_Y0, x1 - x0, BL_Y1 - BL_Y0, "calcaire"))
+        controler(f"libellé {cle}", el["libelle"], 15, "sans-400", x1 - x0 - 24)
+        A(texte(x0 + 12, BL_Y0 + 24, el["libelle"], "sans", 15, 400, "encre",
+                wdth=100))
+        for k, l in enumerate(el["detail"][:2]):
+            mono(x0 + 12, BL_Y0 + 42 + k * 14, l, x1 - x0 - 24,
+                 f"détail {cle} {k + 1}")
+
+    # ── LE TABLIER — la bande cotée, et le joint qui la coupe ────────────────
+    controler("tag de l'ouvrage", f["tag_ouvrage"], 10, "mono",
+              X_PONT1 - X_PONT0, 1.4)
+    _etiquette(A, X_PONT0, Y_COTE_LONG - 18, f["tag_ouvrage"])
+    x_mobile = x_joint + JEU_JOINT              # le jeu où le câble remonte
+    x_riser = x_joint + JEU_JOINT / 2
+    A(rect_bord(X_PONT0, Y_PONT0, x_joint - X_PONT0, Y_PONT1 - Y_PONT0,
+                "calcaire", "filet-1"))
+    A(rect_bord(x_mobile, Y_PONT0, X_PONT1 - x_mobile,
+                Y_PONT1 - Y_PONT0, "papier", "filet-1"))
+    mono(X_PONT0 + 12, (Y_PONT0 + Y_PONT1) / 2 + 4, tab["tag_fixe"],
+         x_joint - X_PONT0 - 24, "tag partie fixe")
+    mono(x_mobile + 10, (Y_PONT0 + Y_PONT1) / 2 + 4, tab["tag_mobile"],
+         X_PONT1 - x_mobile - 20, "tag partie mobile")
+    _cote(A, X_PONT0, X_PONT1, Y_COTE_LONG, tab["cote_longueur"])
+
+    # FRONTIÈRE 2 — le joint mobile.
+    A(_pointille(x_joint, BL_Y1 + 8, x_joint, Y_MAT_ROUTE - 12, "encre", 1.4))
+    controler("tag frontière 2", fr["joint"]["tag"], 10, "mono", 400, 1.4)
+    _etiquette(A, x_joint, Y_MAT_ROUTE + 2, fr["joint"]["tag"], ancre="middle")
+
+    # Le bandeau à leds : deux segments, coupés par le joint.
+    ba = f["bandeaux"]
+    A(ligne(X_PONT0, Y_LED, x_joint, Y_LED, "encre", 3))
+    A(ligne(x_riser, Y_LED, X_PONT1, Y_LED, "encre", 3))
+    mono(X_PONT0 + 6, Y_LED - 8, ba["fixe"], x_joint - X_PONT0 - 12,
+         "étiquette bandeau fixe")
+    mono(X_PONT1, Y_LED - 8, ba["mobile"], X_PONT1 - x_mobile - 8,
+         "étiquette bandeau mobile", ancre="end")
+    mono(MARGE, Y_NOTE, ba["note"], UTILE, "note des linéaires")
+
+    # L'enrouleur, et les DEUX COTES qui se rejoignent au joint : le câble d'un
+    # côté, la course de l'autre — à la même échelle, c'est la démonstration.
+    _bobine(A, x_enrouleur, Y_CABLE, 13)
+    A(ligne(x_enrouleur + 13, Y_CABLE, x_riser, Y_CABLE, "encre", 3))
+    A(ligne(x_riser, Y_CABLE, x_riser, Y_LED + 8, "encre", 3))
+    A(fleche(x_riser, Y_LED + 1, "encre", "haut", 10))
+    _cote(A, x_joint, X_PONT1, Y_COTE_COURSE, tab["cote_mobile"])
+    _cote(A, x_enrouleur, x_joint, Y_COTE_CABLE, tab["cote_cable"])
+
+    # ── FRONTIÈRE 3 — la limite du réseau public, et les deux mâts ───────────
+    mono(X_MAT_REFUSE - 16, RS_Y1 + 40, fr["reseau"]["tag"],
+         X_MAT_REFUSE - CF_X1 - 40, "tag frontière 3", ancre="end")
+    A(ligne(QU_X0, Y_PONT1, QU_X1, Y_PONT1, "encre", 1.5))
+    mono((X_MAT_REFUSE + X_MAT_RETENU) / 2, F_TAG_HAUT + 178, f["tag_quai"],
+         QU_X1 - QU_X0, "tag du quai", ancre="middle")
+
+    # Le mât public existant : jamais construit, donc jamais plein — le trait
+    # discontinu le dit, la croix barre son alimentation, la mention la nomme.
+    ab = mats["abandonne"]
+    y_haut_refuse = Y_PONT1 - h_refuse
+    A(_pointille(X_MAT_REFUSE, RS_Y1, X_MAT_REFUSE, y_haut_refuse - 18,
+                 "encre", 1.6, "5 5"))
+    A(_croix(X_MAT_REFUSE, (RS_Y1 + y_haut_refuse) / 2, 20))
+    A(_pointille(X_MAT_REFUSE, y_haut_refuse, X_MAT_REFUSE, Y_PONT1,
+                 "encre", 2.4, "6 5"))
+    A(rect(X_MAT_REFUSE - 6, y_haut_refuse - 8, 12, 8, "filet-1"))
+    mono(X_MAT_REFUSE, Y_PONT1 + 20, ab["cote"], 66, "cote mât refusé",
+         ancre="middle")
+    mono(X_MAT_REFUSE, Y_PONT1 + 34, ab["mention"], 66, "mention mât refusé",
+         ancre="middle")
+
+    # Le mât dédié : alimenté depuis le banc, par le plus long des départs.
+    rt = mats["retenu"]
+    y_haut_retenu = Y_PONT1 - h_retenu
+    A(ligne(X_D5, Y_BARRE + 1.5, X_D5, Y_MAT_ROUTE, "encre", 1.5))
+    A(ligne(X_D5, Y_MAT_ROUTE, X_RISER_MAT, Y_MAT_ROUTE, "encre", 1.5))
+    A(ligne(X_RISER_MAT, Y_MAT_ROUTE, X_RISER_MAT, Y_PONT1 + 8, "encre", 1.5))
+    A(fleche(X_RISER_MAT, Y_PONT1 + 2, "encre", "haut", 9))
+    A(ligne(X_RISER_MAT, Y_PONT1, X_MAT_RETENU, Y_PONT1, "encre", 1.5))
+    A(ligne(X_MAT_RETENU, Y_PONT1, X_MAT_RETENU, y_haut_retenu, "encre", 3.5))
+    A(rect(X_MAT_RETENU - 6, y_haut_retenu - 8, 12, 8, "encre"))
+    mono(X_MAT_RETENU, Y_PONT1 + 20, rt["cote"], 66, "cote mât retenu",
+         ancre="middle")
+    mono(X_MAT_RETENU, Y_PONT1 + 34, rt["mention"], 66, "mention mât retenu",
+         ancre="middle")
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "echelle": f"{ech:.4f} px/m, dérivée du tablier ({X_PONT1 - X_PONT0} px "
+                   f"pour {tab['longueur']} m) — elle porte les trois longueurs "
+                   f"et les deux hauteurs, rien d'autre",
+        "demonstration": f"une arrivée, une barre, cinq départs, et trois "
+                         f"frontières franchies : la TENSION (deux départs "
+                         f"traversent la boîte des blocs et passent de 1,5 à "
+                         f"3 px de trait), le JOINT MOBILE (pointillé à x "
+                         f"{x_joint:.1f} ; deux cotes s'y rejoignent en sens "
+                         f"contraire — câble {10 * ech:.1f} px contre course "
+                         f"{mob_m * ech:.1f} px, soit 10 m contre "
+                         f"{tab['mobile']} m à la même échelle), le RÉSEAU "
+                         f"PUBLIC (descente barrée d'une croix vers un mât de "
+                         f"{h_refuse:.1f} px, contre un mât de "
+                         f"{h_retenu:.1f} px alimenté depuis la barre par le "
+                         f"plus long départ)",
+        "topologie": f"amont x {AM_X0}–{AM_X1} → coffret x {CF_X0}–{CF_X1} → "
+                     f"descente x {X_DESCENTE} → barre y {Y_BARRE}, x {XB0}–"
+                     f"{XB1} ; départs x {X_D1}, {X_D2}, {X_D4}, {X_D3}, "
+                     f"{X_D5} ; tablier y {Y_PONT0}–{Y_PONT1}, x {X_PONT0}–"
+                     f"{X_PONT1}, joint à {x_joint:.1f} ; enrouleur à "
+                     f"{x_enrouleur:.1f} ; quai x {QU_X0}–{QU_X1}",
+        "cotes_a_l_echelle": f"25,40 m = {X_PONT1 - X_PONT0} px · "
+                             f"{tab['mobile']} m = {mob_m * ech:.1f} px · "
+                             f"10 m de câble = {10 * ech:.1f} px · "
+                             f"{mats['abandonne']['hauteur']} m = "
+                             f"{h_refuse:.1f} px · "
+                             f"{mats['retenu']['hauteur']} m = "
+                             f"{h_retenu:.1f} px — rapport câble/course "
+                             f"{10 / mob_m:.3f}, conforme à 10 ÷ {tab['mobile']}",
+        "linéaires_non_cotés": "les 43 m et 28 m de bandeau sont des CUMULS, "
+                               "portés en étiquette et jamais tracés à "
+                               "l'échelle ; la note du dessin le dit",
+        "bas_du_dessin": f"cote de câble à {Y_COTE_CABLE}, départ du mât à "
+                         f"{Y_MAT_ROUTE}, note à {Y_NOTE}, phrase de principe à "
+                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
+                         f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "releve": "aucun — la démonstration est géométrique, les chiffres de la "
+                  "fiche restent à la fiche (révision 4)",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_franchissement(donnees):
+    """La vignette : la thèse seule, et rien de l'appareil.
+
+    Premier essai gardé la nomenclature entière — coffret, boîte 48 V, blocs de
+    prises et de motorisation : dans la carte de 274 px, quatre rectangles
+    calcaire muets occupaient 40 % du dessin. Ce qui reste ici est ce qui
+    démontre : la barre et son éventail, le tablier coupé par son joint, et les
+    DEUX COTES qui s'y rejoignent en sens contraire — le câble plus long que la
+    course. Plus les deux mâts, dont l'un barré. Le reste est à la planche."""
+    f = donnees["franchissement"]
+    tab = f["tablier"]
+    mats = f["mats"]
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    long_m = float(tab["longueur"].replace(",", "."))
+    mob_m = float(tab["mobile"].replace(",", "."))
+    px0, px1 = 80, 244
+    ech = (px1 - px0) / long_m
+    xj = px1 - mob_m * ech
+    xe = xj - 10.0 * ech
+    y_pont0, y_pont1 = 118, 140
+    y_led, y_cable = 108, 154
+
+    # La source et la barre : cinq départs, dont deux qui changent de tension.
+    A(rect(46, 44, 18, 10, "encre"))
+    A(ligne(55, 54, 55, 62, "encre", 1.5))
+    A(ligne(30, 66, 252, 66, "encre", 2.4))
+    for x in (40, 62, 120, 175, 250):
+        A(ligne(x, 67, x, 78, "encre", 1))
+    # La conversion : un filet en travers des deux départs d'éclairage.
+    A(ligne(32, 86, 74, 86, "filet-1", 1.2))
+    A(texte(V_MARGE, 100, f'48{NN}V', "mono", 10, 500, "pivot", tracking=1.4))
+    A(ligne(40, 86, 40, y_led, "encre", 2.4))
+    A(ligne(40, y_led, px0, y_led, "encre", 2.4))
+    A(ligne(62, 86, 62, y_cable, "encre", 2.4))
+    A(ligne(62, y_cable, xe - 7, y_cable, "encre", 2.4))
+
+    # Le tablier, coupé par son joint.
+    A(rect_bord(px0, y_pont0, xj - px0, y_pont1 - y_pont0,
+                "calcaire", "filet-1"))
+    A(rect_bord(xj + 5, y_pont0, px1 - xj - 5, y_pont1 - y_pont0,
+                "papier", "filet-1"))
+    A(ligne(px0, y_led, xj, y_led, "encre", 2.4))
+    A(ligne(xj + 3, y_led, px1, y_led, "encre", 2.4))
+    A(_pointille(xj, 96, xj, 184, "encre", 1.1, "3 4"))
+
+    # L'enrouleur et les deux cotes — la démonstration, en petit.
+    A(cercle(xe, y_cable, 5.5, "papier", "encre", 1.2))
+    A(ligne(xe + 5.5, y_cable, xj + 3, y_cable, "encre", 2.4))
+    A(ligne(xj + 3, y_cable, xj + 3, y_led, "encre", 2.4))
+    for (a, b, y, lib, ancre, xt) in (
+            (xj, px1, 168, f'{tab["mobile"]}{NN}m', "end", px1),
+            (xe, xj, 186, f'10{NN}m', "middle", (xe + xj) / 2)):
+        A(ligne(a, y, b, y, "encre", 1))
+        A(ligne(a, y - 4, a, y + 4, "encre", 1))
+        A(ligne(b, y - 4, b, y + 4, "encre", 1))
+        A(texte(xt, y - 5, lib, "mono", 9, 500, "pivot", ancre=ancre,
+                tracking=1.26))
+
+    # Les deux mâts : l'un jamais construit et son alimentation barrée, l'autre
+    # alimenté depuis la barre par le plus long des départs.
+    h_ref = float(mats["abandonne"]["hauteur"].replace(",", ".")) * ech
+    h_ret = float(mats["retenu"]["hauteur"].replace(",", ".")) * ech
+    A(ligne(254, y_pont1, 286, y_pont1, "encre", 1.2))
+    A(_pointille(262, y_pont1, 262, y_pont1 - h_ref, "encre", 2, "5 4"))
+    A(_pointille(262, 44, 262, y_pont1 - h_ref - 6, "encre", 1.2, "4 4"))
+    A(_croix(262, 62, 12, "encre", 1.8))
+    # Le long départ longe le bord droit plutôt que de traverser le dessin :
+    # tracé à travers, il fermait un rectangle qui se lisait comme une boîte.
+    A(ligne(250, 78, 250, 178, "encre", 1.2))
+    A(ligne(250, 178, 282, 178, "encre", 1.2))
+    A(ligne(282, 178, 282, y_pont1, "encre", 1.2))
+    A(ligne(282, y_pont1, 282, y_pont1 - h_ret, "encre", 2.8))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": f"la barre et son éventail de cinq départs, le tablier coupé "
+                 f"au joint (x {xj:.1f}), l'enrouleur et les deux cotes qui s'y "
+                 f"rejoignent en sens contraire ({10 * ech:.1f} px de câble "
+                 f"contre {mob_m * ech:.1f} px de course), les deux mâts dont "
+                 f"un barré — un seul nœud chiffré au texte, 48 V. Coffret, "
+                 f"amont, réseau public et blocs de départ laissés à la "
+                 f"planche : quatre rectangles muets mangeaient 40 % du dessin "
+                 f"dans la carte de 274 px",
+        "bas_du_dessin": "cote de câble à 186, route du mât à 184 — marge basse "
+                         "14 px, aucun trait ne touche un bord",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_franchissement(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, trois nœuds chiffrés.
+
+    Ce qu'il garde : le coffret, la barre, les cinq départs, la boîte 48 V
+    légendée, le tablier coté, le joint, l'enrouleur et ses deux cotes, les deux
+    mâts cotés dont l'un barré. Ce qu'il laisse : l'amont, le réseau public, le
+    contenu des blocs de départ, la note des linéaires, la phrase de principe et
+    le cartouche (le hero porte sa légende de carte sous le dessin)."""
+    f = donnees["franchissement"]
+    tab = f["tablier"]
+    mats = f["mats"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    long_m = float(tab["longueur"].replace(",", "."))
+    mob_m = float(tab["mobile"].replace(",", "."))
+    px0, px1 = 150, 400
+    ech = (px1 - px0) / long_m
+    xj = px1 - mob_m * ech
+    xe = xj - 10.0 * ech
+    y_pont0, y_pont1 = 224, 256
+    y_led = 214
+    y_cable = 276
+    x_ref, x_ret, x_riser = 440, 505, 470   # l'écart des mâts EST la largeur
+    #                                          des étiquettes qu'ils portent
+
+    # ── Le coffret et la barre ───────────────────────────────────────────────
+    A(rect_bord(A_MARGE, 56, 124, 42, "calcaire", "filet-1"))
+    A(texte(A_MARGE + 12, 78, "Coffret unique", "sans", 14, 600, "encre",
+            wdth=112))
+    A(texte(A_MARGE + 12, 92, "DANS LE BANC", "mono", 10, 500, "pivot",
+            tracking=1.4))
+    A(ligne(86, 98, 86, 112, "encre", 2))
+    A(fleche(86, 116, "encre", "bas", 8))
+    A(ligne(A_MARGE + 10, 120, 415, 120, "encre", 2.5))
+
+    # ── Frontière 1 — la tension : un filet en travers des deux éclairages ───
+    for x in (50, 84):
+        A(ligne(x, 121.5, x, 138, "encre", 1.5))
+    A(rect_bord(38, 138, 62, 26, "calcaire", "filet-1"))
+    A(ligne(38, 151, 100, 151, "filet-1", 1))
+    A(texte(108, 146, f'400/230{NN}V', "mono", 10, 500, "pivot", tracking=1.4))
+    A(texte(108, 166, f'48{NN}V', "mono", 10, 500, "pivot", tracking=1.4))
+
+    # Départ 1 — le bandeau de la partie fixe.
+    A(ligne(50, 164, 50, y_led, "encre", 3))
+    A(ligne(50, y_led, px0 - 10, y_led, "encre", 3))
+    A(fleche(px0 - 2, y_led, "encre", "droite", 9))
+    # Départ 2 — sous le tablier, jusqu'à l'enrouleur.
+    A(ligne(84, 164, 84, y_cable, "encre", 3))
+    A(ligne(84, y_cable, xe - 18, y_cable, "encre", 3))
+    A(fleche(xe - 10, y_cable, "encre", "droite", 9))
+
+    # ── Départs 3 et 4 — deux blocs muets, nommés dessous ────────────────────
+    for x, l in ((225, "PRISES"), (330, "MOTORISATION")):
+        A(ligne(x, 121.5, x, 146, "encre", 1.2))
+        A(fleche(x, 150, "encre", "bas", 7))
+        A(rect(x - 46, 150, 92, 22, "calcaire"))
+        A(texte(x, 186, l, "mono", 10, 500, "pivot", ancre="middle",
+                tracking=1.4))
+
+    # ── Le tablier, le joint, le bandeau ─────────────────────────────────────
+    A(rect_bord(px0, y_pont0, xj - px0, y_pont1 - y_pont0,
+                "calcaire", "filet-1"))
+    A(rect_bord(xj + 6, y_pont0, px1 - xj - 6, y_pont1 - y_pont0,
+                "papier", "filet-1"))
+    A(ligne(px0, y_led, xj, y_led, "encre", 3))
+    A(ligne(xj + 3, y_led, px1, y_led, "encre", 3))
+    A(_pointille(xj, 200, xj, 330, "encre", 1.3))
+    A(texte(px0 + 10, y_pont1 - 11, tab["tag_fixe"], "mono", 10, 500, "pivot",
+            tracking=1.4))
+
+    # ── L'enrouleur et les deux cotes qui se rejoignent au joint ─────────────
+    A(cercle(xe, y_cable, 9, "papier", "encre", 1.5))
+    A(cercle(xe, y_cable, 3.8, "papier", "encre", 1.2))
+    A(ligne(xe + 9, y_cable, xj + 3, y_cable, "encre", 3))
+    A(ligne(xj + 3, y_cable, xj + 3, y_led + 8, "encre", 3))
+    A(fleche(xj + 3, y_led + 1, "encre", "haut", 9))
+    _cote(A, xj, px1, 300, f'{tab["mobile"]}{NN}m')
+    _cote(A, xe, xj, 322, f'10{NN}m DE CÂBLE')
+
+    # ── Les deux mâts ────────────────────────────────────────────────────────
+    h_ref = float(mats["abandonne"]["hauteur"].replace(",", ".")) * ech
+    h_ret = float(mats["retenu"]["hauteur"].replace(",", ".")) * ech
+    A(ligne(425, y_pont1, AW - A_MARGE, y_pont1, "encre", 1.5))
+    A(_pointille(x_ref, y_pont1, x_ref, y_pont1 - h_ref, "encre", 2, "6 5"))
+    A(_pointille(x_ref, 126, x_ref, y_pont1 - h_ref - 12, "encre", 1.4, "5 5"))
+    A(_croix(x_ref, 150, 16, "encre", 1.8))
+    A(ligne(415, 121.5, 415, 310, "encre", 1.5))
+    A(ligne(415, 310, x_riser, 310, "encre", 1.5))
+    A(ligne(x_riser, 310, x_riser, y_pont1 + 8, "encre", 1.5))
+    A(fleche(x_riser, y_pont1 + 2, "encre", "haut", 8))
+    A(ligne(x_riser, y_pont1, x_ret, y_pont1, "encre", 1.5))
+    A(ligne(x_ret, y_pont1, x_ret, y_pont1 - h_ret, "encre", 3.5))
+    for x, m in ((x_ref, mats["abandonne"]), (x_ret, mats["retenu"])):
+        A(texte(x, y_pont1 + 20, m["cote"], "mono", 10, 500, "pivot",
+                ancre="middle", tracking=1.4))
+        A(texte(x, y_pont1 + 34, m["mention"], "mono", 10, 500, "pivot",
+                ancre="middle", tracking=1.4))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"le motif entier à l'échelle 1 : coffret, barre, cinq départs, "
+              f"le filet de conversion et ses deux tensions, tablier coupé au "
+              f"joint (x {xj:.1f}), enrouleur et les deux cotes qui s'y "
+              f"rejoignent ({10 * ech:.1f} px de câble contre "
+              f"{mob_m * ech:.1f} px de course), deux mâts cotés dont un barré "
+              f"— trois nœuds chiffrés (48 V, 10 m, {tab['mobile']} m) ; amont, "
+              f"réseau public, note des linéaires, phrase et cartouche laissés "
+              f"à la planche",
+        bas=f"cote de câble à 322, route du mât à 336 — marge basse {AH - 336} px",
+        ecart_des_mats=f"mâts à x {x_ref} et {x_ret} : l'écart de "
+                       f"{x_ret - x_ref} px est celui qu'imposent leurs deux "
+                       f"étiquettes centrées (43 px chacune) ; la remontée du "
+                       f"long départ passe à x {x_riser}, dans l'intervalle",
+        echelle=f"{ech:.4f} px/m, dérivée du tablier — même construction que la "
+                f"planche, à son échelle propre")
+
+
+def _composer(donnees):
+    if "franchissement" in donnees:
+        return composer_franchissement(donnees)
+    return composer(donnees)
+
+
+def _composer_vignette(donnees):
+    if "franchissement" in donnees:
+        return composer_vignette_franchissement(donnees)
+    return composer_vignette(donnees)
+
+
+def _composer_appui(donnees):
+    if "franchissement" in donnees:
+        return composer_appui_franchissement(donnees)
+    return composer_appui(donnees)
+
+
 if __name__ == "__main__":
-    executer(composer, composer_vignette, composer_appui)
+    executer(_composer, _composer_vignette, _composer_appui)

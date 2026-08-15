@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">TROIS FRANCHISSEMENTS</text>
+  <rect x="46.00" y="44.00" width="18.00" height="10.00" class="c-encre" fill="#00393A"/>
+  <path d="M 55.00 54.00 L 55.00 62.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 30.00 66.00 L 252.00 66.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.4"/>
+  <path d="M 40.00 67.00 L 40.00 78.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 62.00 67.00 L 62.00 78.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 120.00 67.00 L 120.00 78.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 175.00 67.00 L 175.00 78.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 250.00 67.00 L 250.00 78.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 32.00 86.00 L 74.00 86.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.2"/>
+  <text x="14.00" y="100.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">48 V</text>
+  <path d="M 40.00 86.00 L 40.00 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.4"/>
+  <path d="M 40.00 108.00 L 80.00 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.4"/>
+  <path d="M 62.00 86.00 L 62.00 154.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.4"/>
+  <path d="M 62.00 154.00 L 128.53 154.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.4"/>
+  <rect x="80.00" y="118.00" width="120.09" height="22.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="205.09" y="118.00" width="38.91" height="22.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 80.00 108.00 L 200.09 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.4"/>
+  <path d="M 203.09 108.00 L 244.00 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.4"/>
+  <path d="M 200.09 96.00 L 200.09 184.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="3 4"/>
+  <circle cx="135.53" cy="154.00" r="5.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 141.03 154.00 L 203.09 154.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.4"/>
+  <path d="M 203.09 154.00 L 203.09 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.4"/>
+  <path d="M 200.09 168.00 L 244.00 168.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 200.09 164.00 L 200.09 172.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 244.00 164.00 L 244.00 172.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="244.00" y="163.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="end">6,80 m</text>
+  <path d="M 135.53 186.00 L 200.09 186.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 135.53 182.00 L 135.53 190.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 200.09 182.00 L 200.09 190.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="167.81" y="181.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle">10 m</text>
+  <path d="M 254.00 140.00 L 286.00 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 262.00 140.00 L 262.00 94.80" fill="none" class="s-encre" stroke="#00393A" stroke-width="2" stroke-dasharray="5 4"/>
+  <path d="M 262.00 44.00 L 262.00 88.80" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <path d="M 256.00 56.00 L 268.00 68.00 M 268.00 56.00 L 256.00 68.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 250.00 78.00 L 250.00 178.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 250.00 178.00 L 282.00 178.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 282.00 178.00 L 282.00 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 282.00 140.00 L 282.00 107.72" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.8"/>
+</svg>

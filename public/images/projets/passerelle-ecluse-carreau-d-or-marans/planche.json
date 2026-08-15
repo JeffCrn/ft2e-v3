@@ -1,0 +1,299 @@
+{
+  "fiche": "passerelle-ecluse-carreau-d-or-marans",
+  "archetype": "tableau-electrique",
+  "archetype_motif": "La fiche ne porte qu’un lot technique, l’électricité, et sa thèse est la topologie de ce lot : aucun nouveau branchement, un coffret unique logé dans le banc, et tout l’ouvrage suspendu à ses départs — c’est exactement le motif arrivée → tableau → départs. Le mécanisme composé ici est nouveau : `franchissement`. Le coffret ne distribue pas dans un bâtiment stable, il doit franchir trois frontières pour atteindre ce qu’il dessert — la tension (l’éclairage passe en 48 V dans les mains courantes), le joint mobile (6,80 m de tablier coulissent, franchis par un enrouleur chargé de 10 m de câble) et la limite du réseau public (le raccordement de la caméra de comptage refusé, le mât rapatrié sur le coffret). La géométrie porte la démonstration : une source, cinq départs, et trois passages de frontière dont deux sont cotés à la même échelle.",
+  "surtitre": "SCHÉMA DE PRINCIPE · UN COFFRET, TROIS FRANCHISSEMENTS",
+  "titre": "Passerelle du Carreau d’Or",
+  "sous_titre": "Électrifier un ouvrage qui s’ouvre depuis un seul coffret logé dans le banc",
+  "cartouche_legende": "MARANS · TABLIER DE 25,40 m · 2024",
+  "aria_label": "Schéma de principe de l’alimentation d’une passerelle mobile : le branchement existant de 12 kVA triphasé est conservé et alimente un coffret unique logé dans le banc, d’où partent cinq départs. Trois frontières sont franchies. La tension : deux départs d’éclairage traversent les blocs d’alimentation et passent en très basse tension 48 volts, 43 mètres de bandeau à leds sur la partie fixe et 28 mètres sur la partie mobile et sous le banc. Le joint mobile : 6,80 mètres de tablier coulissent sur les 25,40 mètres, et l’éclairage de cette partie les franchit par un enrouleur à rappel automatique chargé de 10 mètres de câble — la longueur de câble est cotée plus longue que la course. La limite du réseau public : la caméra de comptage devait être posée à 7 mètres sur un mât d’éclairage public existant et alimentée par le réseau, alimentation refusée ; un mât dédié de 5,00 mètres est repris sur le coffret de la passerelle.",
+  "franchissement": {
+    "entete": "UNE SEULE ARRIVÉE, CINQ DÉPARTS — ET LES TROIS FRONTIÈRES QU’ILS FRANCHISSENT",
+    "tag_amont": "AMONT · AUCUN NOUVEAU BRANCHEMENT DEMANDÉ",
+    "tag_barre": "LA BARRE DU COFFRET",
+    "tag_ouvrage": "L’OUVRAGE · DÉVELOPPÉ TOPOLOGIQUE",
+    "tag_quai": "CÔTÉ QUAI",
+    "amont": {
+      "libelle": "Branchement existant",
+      "detail": [
+        "12 kVA · TRIPHASÉ",
+        "COMPTEUR CONSERVÉ"
+      ]
+    },
+    "coffret": {
+      "libelle": "Coffret unique, dans le banc",
+      "detail": [
+        "600 × 400 mm · IP66 · IK10",
+        "INVERSEUR DE SOURCE MANUEL",
+        "HORLOGE ASTRONOMIQUE"
+      ]
+    },
+    "reseau": {
+      "libelle": "Réseau public",
+      "detail": [
+        "PLAGE NOCTURNE RÉDUITE"
+      ]
+    },
+    "frontieres": [
+      {
+        "ordre": 1,
+        "cle": "tension",
+        "tag": "FRONTIÈRE 1 · BLOCS D’ALIMENTATION",
+        "amont": "400/230 V",
+        "aval": "48 V",
+        "libelle": "Blocs d’alimentation"
+      },
+      {
+        "ordre": 2,
+        "cle": "joint",
+        "tag": "FRONTIÈRE 2 · LE JOINT MOBILE",
+        "mention": "L’ÉCLAIRAGE DE LA PARTIE MOBILE FRANCHIT LE JOINT PAR L’ENROULEUR"
+      },
+      {
+        "ordre": 3,
+        "cle": "reseau",
+        "tag": "FRONTIÈRE 3 · LA LIMITE DU RÉSEAU PUBLIC",
+        "mention": "ALIMENTATION REFUSÉE — LE MÂT EST REPRIS SUR LE COFFRET"
+      }
+    ],
+    "tablier": {
+      "longueur": "25,40",
+      "mobile": "6,80",
+      "unite": "m",
+      "tag_fixe": "PARTIE FIXE",
+      "tag_mobile": "PARTIE MOBILE",
+      "cote_longueur": "25,40 m DE TABLIER",
+      "cote_mobile": "6,80 m DE COURSE",
+      "cote_cable": "10 m DE CÂBLE"
+    },
+    "bandeaux": {
+      "fixe": "43 m DE BANDEAU À LEDS",
+      "mobile": "28 m DE BANDEAU",
+      "note": "LES LINÉAIRES DE BANDEAU SONT DES CUMULS — SEULES LES LONGUEURS COTÉES SONT TRACÉES À L’ÉCHELLE"
+    },
+    "mats": {
+      "abandonne": {
+        "hauteur": "7,00",
+        "unite": "m",
+        "cote": "7,00 m",
+        "mention": "REFUSÉ",
+        "libelle": "Mât public existant"
+      },
+      "retenu": {
+        "hauteur": "5,00",
+        "unite": "m",
+        "cote": "5,00 m",
+        "mention": "RETENU",
+        "libelle": "Mât dédié"
+      }
+    },
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "branchement",
+        "libelle": "Branchement existant, conservé",
+        "valeur": "12",
+        "unite": "kVA",
+        "detail": [
+          "TRIPHASÉ",
+          "COMPTEUR ET DISJONCTEUR CONSERVÉS"
+        ],
+        "mention": "AUCUN NOUVEAU BRANCHEMENT DEMANDÉ"
+      },
+      {
+        "ordre": 2,
+        "cle": "coffret",
+        "libelle": "Coffret unique, logé dans le banc",
+        "valeur": "600 × 400",
+        "unite": "mm",
+        "detail": [
+          "ENVELOPPE MÉTALLIQUE · IP66 · IK10",
+          "INVERSEUR DE SOURCE MANUEL",
+          "HORLOGE ASTRONOMIQUE ET ÉCLAIRAGE FORCÉ"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "tbt",
+        "libelle": "Passage en très basse tension",
+        "valeur": "48",
+        "unite": "V",
+        "detail": [
+          "9,6 W/m"
+        ],
+        "mention": "FRONTIÈRE 1 — 400/230 V EN AMONT, 48 V DANS LES MAINS COURANTES"
+      },
+      {
+        "ordre": 4,
+        "cle": "bandeau-fixe",
+        "libelle": "Éclairage de la partie fixe",
+        "valeur": "43",
+        "unite": "m",
+        "detail": [
+          "BANDEAU À LEDS EN ENGRAVURE DE MAIN COURANTE"
+        ]
+      },
+      {
+        "ordre": 5,
+        "cle": "bandeau-mobile",
+        "libelle": "Éclairage de la partie mobile et du banc",
+        "valeur": "28",
+        "unite": "m",
+        "detail": [
+          "SOIT 71 m DE BANDEAU CONTINU AU TOTAL"
+        ]
+      },
+      {
+        "ordre": 6,
+        "cle": "course",
+        "libelle": "Course du tablier coulissant",
+        "valeur": "6,80",
+        "unite": "m",
+        "detail": [
+          "SUR UN TABLIER DE 25,40 m"
+        ]
+      },
+      {
+        "ordre": 7,
+        "cle": "enrouleur",
+        "libelle": "Enrouleur à rappel automatique",
+        "valeur": "10",
+        "unite": "m",
+        "detail": [
+          "TAMBOUR INOX · IP66 · CÂBLE 3G4",
+          "EN PIED DE PILIER"
+        ],
+        "mention": "FRONTIÈRE 2 — LE CÂBLE EST PLUS LONG QUE LA COURSE"
+      },
+      {
+        "ordre": 8,
+        "cle": "motorisation",
+        "libelle": "Armoire de motorisation",
+        "detail": [
+          "UN DÉPART DÉDIÉ",
+          "DEPUIS LE COFFRET"
+        ]
+      },
+      {
+        "ordre": 9,
+        "cle": "prises",
+        "libelle": "Coffret de prises",
+        "detail": [
+          "DANS LE BANC · ÉTANCHES",
+          "MONOPHASÉES ET TRIPHASÉES",
+          "PRISE DE TYPE CAMPING-CAR"
+        ]
+      },
+      {
+        "ordre": 10,
+        "cle": "mat",
+        "libelle": "Mât dédié de la caméra de comptage",
+        "valeur": "5,00",
+        "unite": "m",
+        "detail": [
+          "AU LIEU DE 7 m SUR UN MÂT PUBLIC EXISTANT"
+        ],
+        "mention": "FRONTIÈRE 3 — ALIMENTATION PUBLIQUE REFUSÉE, REPRISE SUR LE COFFRET"
+      }
+    ],
+    "mention_separation": [
+      "TROIS FRONTIÈRES FRANCHIES DEPUIS UN SEUL COFFRET : LA TENSION, LE JOINT MOBILE, LA LIMITE DU RÉSEAU PUBLIC"
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "La lumière sort des mains courantes, en très basse tension — et l’électricité suit le tablier quand il s’ouvre.",
+  "vignette_surtitre": "TROIS FRANCHISSEMENTS",
+  "a_valider_ft2e": [
+    {
+      "objet": "La position du joint mobile sur le tablier",
+      "la_source_affirme": "Un ouvrage de 25,40 m de long dont « une partie mobile de 6,80 m coulisse pour laisser passer les bateaux ». La fiche ne dit pas où se situe cette partie.",
+      "le_dessin_suppose": "Que la partie mobile occupe une extrémité du tablier, le joint tombant donc à 18,60 m de l’autre about — une soustraction, pas une valeur de la fiche. Dire si le coulissement se fait en about ou en travée courante."
+    },
+    {
+      "objet": "Le sens du coulissement",
+      "la_source_affirme": "« 6,80 m coulissent » — aucune rive, aucun sens n’est indiqué.",
+      "le_dessin_suppose": "Que la partie mobile s’efface vers la droite de la planche ; la cote de course s’étend du joint vers cette extrémité. Le dessin serait le même en miroir."
+    },
+    {
+      "objet": "La répartition des 43 m et 28 m sur les mains courantes",
+      "la_source_affirme": "« Il en faut 43 m sur la partie fixe, 28 m sur la partie mobile et sous le banc, soit 71 m d’éclairage continu » — sans dire comment ces cumuls se répartissent entre les deux mains courantes.",
+      "le_dessin_suppose": "Que chaque partie porte UNE ligne de bandeau, étiquetée de son cumul. Ces deux lignes ne sont PAS tracées à l’échelle du tablier (43 m de ruban sur une partie fixe plus courte) : seules les longueurs cotées le sont. Confirmer que la lecture ne prête pas à confusion."
+    },
+    {
+      "objet": "Le rattachement du linéaire du banc",
+      "la_source_affirme": "Les 28 m couvrent « la partie mobile et sous le banc » ; le banc porte par ailleurs le coffret et le coffret de prises, donc se trouve du côté fixe.",
+      "le_dessin_suppose": "Que le linéaire du banc reste rattaché au départ « partie mobile », comme la fiche le compte, sans être localisé sur le dessin. Dire s’il vaut mieux le distinguer."
+    },
+    {
+      "objet": "La comparaison des deux hauteurs, 7 m et 5,00 m",
+      "la_source_affirme": "Le cahier des charges posait la caméra « à 7 m sur un mât d’éclairage public existant » — c’est une hauteur de caméra ; le mât dédié retenu a vu « sa hauteur ramenée à 5,00 m » — c’est une hauteur de mât.",
+      "le_dessin_suppose": "Que les deux valeurs sont comparables et se cotent à la même échelle, en regard l’une de l’autre. Si la caméra se pose plus bas que la tête du mât dédié, la comparaison est fausse et il faut coter la hauteur de caméra dans les deux cas."
+    },
+    {
+      "objet": "De quel côté du joint se trouve l’enrouleur",
+      "la_source_affirme": "« Fixé en pied de pilier », chargé de 10 m de câble 3G4, avec reprise des circuits aval dans une boîte étanche IP67.",
+      "le_dessin_suppose": "Qu’il est posé côté fixe et que le câble se déroule vers la partie mobile — c’est ce qui donne au dessin sa cote de câble d’un côté du joint et sa cote de course de l’autre. Confirmer."
+    },
+    {
+      "objet": "Le rang du mât de comptage parmi les départs",
+      "la_source_affirme": "Le coffret abrite « deux départs d’éclairage distincts pour la partie fixe et la partie mobile, un départ pour l’armoire de motorisation et un dernier pour le coffret de prises » — quatre départs. Le mât dédié est « alimenté depuis le banc — donc depuis le coffret de la passerelle ».",
+      "le_dessin_suppose": "Que ce mât constitue un CINQUIÈME départ du coffret, et non une reprise sur le coffret de prises. La distinction n’est pas écrite ; elle change le schéma unifilaire."
+    },
+    {
+      "objet": "L’inverseur de source, non dessiné en seconde arrivée",
+      "la_source_affirme": "Un « inverseur de source manuel à commande rotative — prévu à l’origine pour basculer sur un groupe électrogène extérieur, dont le chantier a finalement écarté la prise ».",
+      "le_dessin_suppose": "Qu’une seule arrivée se dessine, l’inverseur restant cité au coffret sans seconde ligne d’alimentation. Si la prise de groupe revenait au marché, le dessin devrait porter une seconde arrivée."
+    },
+    {
+      "objet": "Millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2024, groupement retenu en juin 2024, chantier en cours, réception non prononcée (le champ annee_livraison est absent).",
+      "le_dessin_suppose": "Que le cartouche porte 2024, millésime d’ouverture — à reprendre à la réception, comme la fiche l’annonce."
+    },
+    {
+      "objet": "Ce que l’échelle du dessin engage",
+      "la_source_affirme": "Trois longueurs et deux hauteurs sont littérales : 25,40 m, 6,80 m, 10 m de câble, 7 m et 5,00 m.",
+      "le_dessin_suppose": "Qu’une seule échelle les porte toutes — y compris les hauteurs de mât, portées sur l’axe vertical. Un lecteur pourrait y voir une élévation d’ouvrage : ce n’en est pas une, aucune pile, culée, écluse ni garde-corps n’est dessiné."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 24-034 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tous les montants, cités en nombre par la fiche : 715 395 € HT de travaux et leur ventilation en trois lots, 58 800 € HT de maîtrise d’œuvre, 6 762 € HT de part FT2E, 735 000 € HT d’enveloppe, et les taux 11,5 %, 8 % et 6,4 %.",
+    "Noms de tiers : la maîtrise d’ouvrage, l’architecte mandataire, le bureau d’études structure, le gestionnaire des ouvrages d’art, le syndicat départemental d’électrification, le serrurier-métallier et l’électricien. Le dessin dit « le réseau public », jamais qui l’exploite ni qui a refusé.",
+    "Jalons contractuels et pièces de chantier : permis d’aménager, ordre de service de démarrage, ordre de service d’arrêt provisoire, réunion de préparation, réunion du 17 février, treize comptes rendus — matière d’une chronologie d’affaire, pas d’un tableau électrique.",
+    "Contexte de site : le trafic de la route départementale, la largeur de 1,30 m de la passerelle remplacée, l’itinéraire cyclable, l’écluse et le barrage. Rien de cela ne passe par le coffret.",
+    "Caractéristiques photométriques et détails de pose : 2 200 K, IRC d’au moins 90, 750 lm/m, 120 leds/m, 50 000 h, profilé d’aluminium d’angle de 18 × 18 mm, diffuseur en polycarbonate, intégration des rubans en atelier. La fiche les porte ; le dessin ne les répète pas (règle du 2026-08-13).",
+    "Toute géométrie d’ouvrage : ni pile, ni culée, ni écluse, ni barrage, ni rivière, ni garde-corps, ni profil de tablier. Le tablier est une bande topologique cotée en longueur, les mâts deux segments verticaux cotés en hauteur.",
+    "Relevé chiffré : `releve` et `releve_secondaire` restent vides — la démonstration est géométrique, et les valeurs de la fiche restent à la fiche."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "echelle": "27.5591 px/m, dérivée du tablier (700 px pour 25,40 m) — elle porte les trois longueurs et les deux hauteurs, rien d'autre",
+    "demonstration": "une arrivée, une barre, cinq départs, et trois frontières franchies : la TENSION (deux départs traversent la boîte des blocs et passent de 1,5 à 3 px de trait), le JOINT MOBILE (pointillé à x 712.6 ; deux cotes s'y rejoignent en sens contraire — câble 275.6 px contre course 187.4 px, soit 10 m contre 6,80 m à la même échelle), le RÉSEAU PUBLIC (descente barrée d'une croix vers un mât de 192.9 px, contre un mât de 137.8 px alimenté depuis la barre par le plus long départ)",
+    "topologie": "amont x 56–268 → coffret x 320–600 → descente x 460 → barre y 348, x 56–930 ; départs x 100, 170, 450, 710, 930 ; tablier y 502–550, x 200–900, joint à 712.6 ; enrouleur à 437.0 ; quai x 950–1144",
+    "cotes_a_l_echelle": "25,40 m = 700 px · 6,80 m = 187.4 px · 10 m de câble = 275.6 px · 7,00 m = 192.9 px · 5,00 m = 137.8 px — rapport câble/course 1.471, conforme à 10 ÷ 6,80",
+    "linéaires_non_cotés": "les 43 m et 28 m de bandeau sont des CUMULS, portés en étiquette et jamais tracés à l'échelle ; la note du dessin le dit",
+    "bas_du_dessin": "cote de câble à 614, départ du mât à 642, note à 664, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 310 x 30 px = 9300 px², soit 0.97 % de la planche",
+    "releve": "aucun — la démonstration est géométrique, les chiffres de la fiche restent à la fiche (révision 4)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "111 signes — 944 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la barre et son éventail de cinq départs, le tablier coupé au joint (x 200.1), l'enrouleur et les deux cotes qui s'y rejoignent en sens contraire (64.6 px de câble contre 43.9 px de course), les deux mâts dont un barré — un seul nœud chiffré au texte, 48 V. Coffret, amont, réseau public et blocs de départ laissés à la planche : quatre rectangles muets mangeaient 40 % du dessin dans la carte de 274 px",
+    "bas_du_dessin": "cote de câble à 186, route du mât à 184 — marge basse 14 px, aucun trait ne touche un bord"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier à l'échelle 1 : coffret, barre, cinq départs, le filet de conversion et ses deux tensions, tablier coupé au joint (x 333.1), enrouleur et les deux cotes qui s'y rejoignent (98.4 px de câble contre 66.9 px de course), deux mâts cotés dont un barré — trois nœuds chiffrés (48 V, 10 m, 6,80 m) ; amont, réseau public, note des linéaires, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "cote de câble à 322, route du mât à 336 — marge basse 32 px",
+    "ecart_des_mats": "mâts à x 440 et 505 : l'écart de 65 px est celui qu'imposent leurs deux étiquettes centrées (43 px chacune) ; la remontée du long départ passe à x 470, dans l'intervalle",
+    "echelle": "9.8425 px/m, dérivée du tablier — même construction que la planche, à son échelle propre"
+  }
+}
