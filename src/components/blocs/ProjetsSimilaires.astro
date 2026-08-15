@@ -8,7 +8,10 @@ interface Props {
   max?: number;
 }
 
-const { projetActuel, max = 3 } = Astro.props;
+// Quatre projets, pas trois : la grille ci-dessous est celle de `/secteurs` et
+// `/expertises` — deux colonnes puis quatre —, et trois cartes y laisseraient
+// une orpheline sur la dernière ligne.
+const { projetActuel, max = 4 } = Astro.props;
 
 const tous = await getCollection('projets');
 const similaires = tous
@@ -36,7 +39,17 @@ const similaires = tous
         <span class="text-encre">Projets similaires</span>
         <span class="text-clair" aria-hidden="true">/même secteur, même typologie</span>
       </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+      {/* Grille alignée sur `/secteurs` et `/expertises` le 2026-08-15 : deux
+          colonnes puis quatre, gouttière de 16. Elle était en TROIS colonnes à
+          `gap-6`, ce qui servait la vignette à 366 px pour une taille de
+          conception de 300 — une sur-échelle de 1,22, qui épaissit de 22 % tous
+          les filets de 1 px du dessin. C'était la seule grille du site dans ce
+          cas au-dessus de 1024 px, et elle se voyait : la même vignette y
+          paraissait plus généreuse qu'ailleurs, sans que rien ne le justifie.
+          Pas de palier `md:grid-cols-3` ici, contrairement à `/references` :
+          avec quatre cartes il laisserait une orpheline — l'index, lui, en a
+          vingt-trois. */}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
         {similaires.map((projet) => (
           <CarteProjet projet={projet} />
         ))}
