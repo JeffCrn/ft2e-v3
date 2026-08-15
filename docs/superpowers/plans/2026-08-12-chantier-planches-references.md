@@ -1,7 +1,9 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 22 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12, CLOS le 2026-08-15 — 23 planches publiées sur 23.**
+> Le programme est épuisé ; ce document devient le bilan du chantier et le registre
+> de ce qu'il laisse ouvert (§ Bilan de clôture, § Points ouverts).
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,7 +34,7 @@ façade l'affirme.
 
 ---
 
-## État — 22 / 23
+## État — 23 / 23 · programme épuisé
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -58,7 +60,7 @@ façade l'affirme.
 | 20 | `passerelle-ecluse-carreau-d-or-marans` | Monotechnique | `tableau-electrique` (mécanisme `franchissement`) | ✅ **publiée** (versée le 2026-08-15) |
 | 21 | `place-des-chenes-verts-saint-rogatien` | Industriel et commercial | `tableau-electrique` (mécanisme `essaimage`) | ✅ **publiée** (versée le 2026-08-15) |
 | 22 | `residence-intergenerationnelle-saint-agnant` | Logements | `sankey-energie` (mécanisme `bascule`) | ✅ **publiée** (versée le 2026-08-15) |
-| — | `siege-rese-aigrefeuille` | Tertiaire / ERP | | à faire |
+| 23 | `siege-rese-aigrefeuille` | Tertiaire / ERP | `boucle-fluide` (mécanisme `commande`) | ✅ **publiée** (versée le 2026-08-15) |
 
 **Registre des archétypes employés** — à tenir à jour, il conditionne la variété de la série :
 
@@ -66,11 +68,11 @@ façade l'affirme.
 |---|---|---|
 | `sankey-energie` | 4 — quatre mécanismes : le flux à largeur proportionnelle (École des douanes), `plafonds` (la proportion sans flux — trois pistes à échelle commune, le plafond carbone qui tombe au tiers à la frontière réglementaire et commande le générateur, logements Maubec à Chagnolet), `dedoublement` (la partition contractuelle — un permis contigu qui fourche en deux marchés à 3 px par logement, une bande calcaire unique qui traverse les deux flux, le BET fluides commun ; les arrivées en segments comptent les bâtiments, logements Néréa à Aytré) et `bascule` (la grandeur qui change de signe — une opération partagée en deux zones de calcul à largeur proportionnelle à leur surface, une production qui n'entre que dans la seconde, un dixième du bâtiment ; trois lignes pleine largeur, plafond, zéro et bilan, mais deux HAUTEURS confinées à la colonne de cette zone : la bande autorisée de 73,9 px contre une colonne de 182,1 px, subdivisée par des traits au pas du plafond pour que la profondeur se COMPTE — deux bandes et demie sous le zéro, résidence intergénérationnelle de Saint-Agnant) | ✅ `scripts/planches/sankey-energie.py` (dispatch sur le bloc de l'extraction) |
 | `zonage-ssi` | 3 — trois mécanismes : `zonage` (un même déclenchement, l'alarme avant/après — Abbaye de Sablonceaux), `transfert` (la mise à l'abri au même niveau, la descente barrée — EHPAD de Coulonges-sur-l'Autize) et `partage` (le découpage réglementaire d'une enveloppe montée d'un seul tenant — la limite sans mur qui commande l'étanchéité, les machines et l'incendie, habitat inclusif de Salignac-sur-Charente) | ✅ `scripts/planches/zonage-ssi.py` (dispatch sur le bloc de l'extraction) |
-| `boucle-fluide` | 6 — six mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae), `substitution` (production réversible, centre de formation de Saintes), `declinaison` (le parti répété — une maison dessinée une fois, 54 cellules identiques en `<defs>`/`<use>`, Le Fougerou), `appariement` (la partition des services — trois bandes de service, deux colonnes de machines, et dans chaque colonne UNE boîte qui enjambe une frontière de bande, jamais la même : l'eau chaude porte la ventilation chez les T2, le chauffage porte l'eau chaude chez les T3 ; contour d'encre dominant la frontière filet-1, logements du Pas des Bœufs au Bois-Plage) et `individualisation` (le collectif produit, chaque logement compte — deux flux collectifs entrent dans une colonne qui dessert une pile de 21 modules identiques en trois groupes typologiques ; UN module tiré au détail par deux filets d'agrandissement montre deux arrivées, trois départs, trois compteurs, maison relais de Saint-Jean-d'Angély) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
+| `boucle-fluide` | **7 — sept mécanismes** : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae), `substitution` (production réversible, centre de formation de Saintes), `declinaison` (le parti répété — une maison dessinée une fois, 54 cellules identiques en `<defs>`/`<use>`, Le Fougerou), `appariement` (la partition des services — trois bandes de service, deux colonnes de machines, et dans chaque colonne UNE boîte qui enjambe une frontière de bande, jamais la même : l'eau chaude porte la ventilation chez les T2, le chauffage porte l'eau chaude chez les T3 ; contour d'encre dominant la frontière filet-1, logements du Pas des Bœufs au Bois-Plage) et `individualisation` (le collectif produit, chaque logement compte — deux flux collectifs entrent dans une colonne qui dessert une pile de 21 modules identiques en trois groupes typologiques ; UN module tiré au détail par deux filets d'agrandissement montre deux arrivées, trois départs, trois compteurs, maison relais de Saint-Jean-d'Angély) et `commande` (les six premiers disent OÙ va le fluide, celui-ci dit QUI décide qu'il parte — trois circuits d'air indépendants dans une même enveloppe, dont le point de décision REMONTE vers l'occupant : posé sur la machine pour une extraction permanente, dans le réseau pour une régulation à pression constante, dans le local pour une sonde de CO2. Trois lignes de commande de 0, 250 et 532 px, et une seconde grandeur dans la même colonne (x 850–1116) : la bande de chaleur qui part, pleine à 22 px sur deux circuits, effondrée à 2,2 px sur celui qui la rend — siège du Fief Girard à Aigrefeuille-d'Aunis) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
 | `coupe-traversee` | 4 — quatre mécanismes : `coupe` (l'enveloppe traversée, Marennes), `equilibre` (l'air extrait, l'air compensé — restaurant scolaire de Villedoux), `enjambement` (l'enveloppe qui ferme les faces qu'un bâtiment ordinaire n'a pas — dessous du plancher sur le passage, fosse d'ascenseur, abouts pontés — étude notariale Joffre) et `portee` (deux périmètres inégaux sur une même coupe de niveaux — la mission bornée au coin bas-gauche, l'enceinte de la zone d'alarme qui enclot tout, hôtel Le Yachtman) | ✅ `scripts/planches/coupe-traversee.py` (dispatch sur le bloc de l'extraction) |
 | `tableau-electrique` | 3 — trois mécanismes : `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) et `franchissement` (le sujet n'est plus la distribution mais ce que les départs TRAVERSENT — une arrivée, une barre, cinq départs, et trois frontières : la tension, où deux départs d'éclairage changent de poids de trait en sortant des blocs 48 V ; le joint mobile, où deux cotes se rejoignent en sens contraire, 10 m de câble d'un côté contre 6,80 m de course de l'autre, à la même échelle ; la limite du réseau public, où une descente barrée d'une croix vers un mât jamais construit répond à un mât dédié plus court, alimenté depuis la barre par le plus long des départs — passerelle du Carreau d'Or à Marans) et `essaimage` (le tableau qui n'existe pas — le motif est renversé : au lieu d'une arrivée qui se ramifie, cinq comptages descendent séparément du réseau public dans cinq cellules qu'aucune liaison ne relie, et le seul ouvrage commun est la maçonnerie qui les contient. La démonstration se COMPTE — cinq franchissements de la ligne du réseau, zéro des quatre refends — et se rompt à deux endroits distincts : un tronc triple en cellule 3, deux postes de plus en cellule 1 ; les libellés de poste sont nommés une fois, en gouttière, place des Chênes Verts à Saint-Rogatien) | ✅ `scripts/planches/tableau-electrique.py` (dispatch sur le bloc de l'extraction) |
 | `chronologie-affaire` | 2 — deux mécanismes : `precedence` (le dessin précède le gros œuvre : l'escalier des réservations gravit les niveaux d'avance sur l'exécution, résidence Horizon) et `divergence` (l'écart qui se creuse — une ordonnée d'écart au seuil du label, deux tracés en marches sur le même axe des temps : le besoin bioclimatique plat et collé au seuil, la consommation qui décroche marche après marche ; deux cotes verticales dans le rapport exact que la fiche énonce, 1,58 point contre 23,01, maisons Tourtet à Saint-Georges-de-Didonne) | ✅ `scripts/planches/chronologie-affaire.py` (dispatch sur le bloc de l'extraction) |
-| `planche-chiffree` | 0 | à écrire — c'est le repli, il servira |
+| `planche-chiffree` | **0 — jamais employé, et le chantier s'achève sans lui** | non écrit. La règle 5 le réservait aux fiches sans trois organes identifiables ; aucune des vingt-trois n'était dans ce cas. Et la **révision 4 l'a rendu presque inutilisable** : elle interdit de remonter à la planche les chiffres que la fiche porte déjà, or un repli typographique ne dessine rien d'autre. Son maintien au protocole est une décision à prendre, pas un reste (§ Points ouverts) |
 
 ⚠️ **L'archétype se choisit sur la thèse de la fiche, jamais sur son secteur ni sur sa liste
 de missions.** Neuf fiches sur vingt-deux portent la même quadruple mission
@@ -79,83 +81,57 @@ sépare est ce que chacune démontre.
 
 ---
 
-## Prompt de lancement d'une session neuve
+## Bilan de clôture — 2026-08-15
 
-À coller tel quel, en remplaçant `<slug>` et en actualisant la ligne des archétypes déjà
-employés depuis le registre ci-dessus. Le protocole étant versionné dans un dépôt public,
-le prompt n'a plus à le recopier — **et c'est ce qui garantit qu'une session travaille
-toujours sur sa dernière révision**, ce qu'un prompt recopié ne peut pas promettre.
+*Cette section remplace le « prompt de lancement d'une session neuve », qui n'a plus de
+fiche à porter. Le gabarit du prompt reste consultable dans l'historique du dépôt
+(`git log -p` sur ce fichier, révisions antérieures au 2026-08-15) : il resservira si une
+vingt-quatrième fiche entre au catalogue.*
 
-```text
-Tu produis une planche de schéma de principe pour une fiche de références FT2E.
+**Ce qui est fait.** Les vingt-trois fiches de `src/content/projets/` portent un champ
+`planche` et cinq fichiers dans `public/images/projets/<slug>/`. Aucune ne porte plus
+`image_principale`. Les vingt et un visuels litigieux — neuf perspectives d'architecte ou
+vues de drone sans crédit, douze extraits reproduisant un fond de plan — ne sont plus
+référencés nulle part dans `src/`.
 
-AVANT TOUTE AUTRE CHOSE, cloner le dépôt et lire le protocole (révision 5). Il fait
-autorité sur tout ce qui suit, y compris sur ce message :
+**Ce que le chantier a produit, en pièces**
 
-    git clone --depth 1 https://github.com/JeffCrn/ft2e-v3
-    docs/superpowers/specs/2026-08-12-planches-references-protocole.md
+| | |
+|---|---|
+| Planches publiées | 23 — 115 fichiers (`planche.json`, `planche.svg`, `vignette.svg`, `appui.svg`, `planche.png`) |
+| Compositeurs | 6 modules sur 7 archétypes, ~10 000 lignes, tronc commun `_tronc.py` |
+| Mécanismes distincts | **23 — un par fiche, aucun réemployé** |
+| Révisions du protocole | 5 (rév. 4 : « la planche est un dessin » ; rév. 5 : l'appui du hero) |
 
-LA PLANCHE EST UN DESSIN. Elle schématise la solution apportée par FT2E — un mécanisme
-dont la géométrie porte la démonstration. Elle ne répète AUCUNE donnée que la fiche
-porte déjà : pas de colonne de relevé, pas de classements, pas de listes.
+**Ce que le chantier a établi, et qui vaut au-delà de lui.** Chaque leçon est née d'un
+défaut invisible en pleine page et trouvé à la taille de lecture — c'est le fil, et il
+n'a pas varié en vingt-trois planches.
 
-Fiche à traiter :  <slug>
-    src/content/projets/<slug>.md   — frontmatter ET corps, jamais un résumé
+| Planche | Ce qu'elle a établi |
+|---|---|
+| 01 | un gabarit se choisit à la largeur où il sera lu (1500 → 1200 × 800) |
+| 02 | **la planche schématise la solution, elle ne récapitule pas la fiche** — le principe qui gouverne tout le reste |
+| 19 | sur une planche qui porte une grandeur, l'origine de l'échelle est un choix de composition |
+| 20 | une étiquette posée sur un trait porte son propre fond, et l'ordre de tracé en fait partie |
+| 21 | une avance calibrée l'est pour une police, pas pour un dessin — le mono ne connaît pas la fine |
+| 22 | deux hauteurs ne se comparent que dans la même colonne |
+| 23 | **une proportion qu'un format ne peut pas dessiner ne s'y arrondit pas : elle s'y tait** |
 
-Archétypes déjà employés, à ne pas répéter sans raison explicite :
-    <la ligne se régénère depuis le registre des archétypes ci-dessus, un
-     mécanisme par fiche, à chaque session>
+**Ce que le registre des archétypes dit de la série.** `boucle-fluide` 7, `sankey-energie`
+et `coupe-traversee` 4, `tableau-electrique` et `zonage-ssi` 3, `chronologie-affaire` 2,
+`planche-chiffree` 0. La répartition est inégale et ce n'est pas un défaut : **l'archétype
+est une famille géométrique, le mécanisme est la planche.** Neuf fiches sur vingt-trois
+portent la même quadruple mission ; s'être fié à l'archétype aurait produit neuf dessins
+identiques, s'être fié au mécanisme en a produit vingt-trois distincts. Le septième
+`boucle-fluide` ne répète aucun des six autres — il est le seul à dessiner l'ordre de
+marche plutôt que le trajet.
 
-Exemple achevé, à consulter comme référence de niveau attendu :
-    public/images/projets/abbaye-sablonceaux-ssi/planche.json
-    scripts/planches/zonage-ssi.py
-
-CE QUE TU REMETS — un dossier <slug>/ contenant les cinq fichiers du protocole,
-puis le prompt de lancement de la session suivante (une fiche = une session).
-
-  · Si l'archétype retenu a déjà son compositeur dans scripts/planches/, tu ne produis
-    QUE planche.json, puis tu lances :
-        python scripts/planches/<archetype>.py <dossier>
-    qui écrit planche.svg, vignette.svg et appui.svg. N'écris pas de SVG à la main dans ce cas.
-
-  · Sinon, tu écris aussi les trois SVG selon les gabarits du protocole (1200 × 800,
-    300 × 200 et 552 × 368), et tu me dis explicitement qu'un compositeur reste à écrire.
-
-  · Le PNG 2400 × 1600 dans les deux cas.
-
-  · Le versement : python scripts/planches/verser.py <slug>, puis npm run build et
-    contrôle du RENDU des pages touchées (fiche à 1152 px, largeur téléphone, carte
-    de secteur — et le hero de l’accueil si la fiche est en_avant) — un build vert ne prouve pas que la page s'affiche.
-
-  · Le prompt de la session suivante : ce gabarit, avec la première fiche « à faire »
-    du programme du suivi et la ligne des archétypes actualisée depuis le registre.
-
-TROIS CHOSES QUE JE REFUSERAI :
-  · un tableau de synthèse habillé — masque mentalement le texte du dessin : si la
-    géométrie seule ne démontre plus rien, ce n'est pas une planche. La première
-    version de la planche 02 a été refusée pour ce motif exact ;
-  · une planche que tu n'as pas regardée À SA TAILLE DE LECTURE — 1152 px pour la
-    planche, une carte de 296 px pour la vignette, 552 px pour l’appui. Le rendu en pleine page ne prouve
-    rien : les sept défauts de la première planche y étaient tous invisibles ;
-  · une extraction dont `a_valider_ft2e` est vide. Un dessin tranche toujours ce qu'un
-    texte laisse ouvert ; une liste vide signifie que tu ne l'as pas vu, pas qu'il n'y
-    avait rien à trancher.
-
-Réponds par les fichiers, puis en prose brève : l'archétype retenu et son motif, les
-arbitrages laissés à FT2E, ce que tu as dû exclure, et ce que le contrôle à la taille de
-lecture t'a fait corriger. Termine par le prompt de la session suivante. Ne me raconte
-pas ta méthode.
-```
-
-**Le versement fait partie de la session depuis le 2026-08-13.** Une fois les quatre
-fichiers en place, `python scripts/planches/verser.py <slug>` contrôle le dossier et
-l'extraction (cinq fichiers, `a_valider_ft2e` non vide, forme de repli mobile, racine
-SVG conforme) puis bascule le frontmatter — et le repli mobile est rendu **par la forme**
-de l'extraction : tout bloc d'archétype qui expose un tableau `elements` ordonné
-(règle 7 du protocole) est servi par `PlancheReference.astro` sans une ligne de code
-nouvelle ; une extraction sans aucune forme de repli fait échouer le build. Il ne reste
-à la session que `npm run build` et le contrôle du rendu (règle 11), le commit de fin de
-session emportant le tout — le push déclenche le déploiement Vercel.
+**Ce que le chantier laisse ouvert** — le détail est au § Points ouverts ci-dessous. Au
+premier rang : **la régénération des vingt planches antérieures à la 21**, qui élargira
+leur cartouche de 5 à 12 px et demande un contrôle du rendu à 1152 px de chacune. Tant
+qu'elle n'est pas faite, l'invariant « régénération octet à octet » du chantier ne tient
+plus, et c'est le seul contrôle qui protégeait les planches publiées d'une dérive
+silencieuse du tronc.
 
 ---
 
@@ -175,10 +151,11 @@ session emportant le tout — le push déclenche le déploiement Vercel.
 7. **Contrôler** : `npm run typecheck`, `npm run build`, `npm run preview` + capture de la
    fiche, de la carte de secteur et du téléphone.
 8. **Consigner** ici : numéro, archétype, arbitrages ouverts.
-9. **Produire le prompt de lancement de la session suivante** depuis le gabarit
-   ci-dessus — première fiche « à faire » du programme, registre des archétypes
-   actualisé. **Une fiche = une session** : une session qui rend ses fichiers sans le
-   prompt suivant laisse le chantier sans relève.
+9. **Produire le prompt de lancement de la session suivante** — *sans objet depuis le
+   2026-08-15, le programme étant épuisé.* Le gabarit vit dans l'historique du dépôt et
+   resservira si une fiche entre au catalogue. La règle qu'il portait, elle, demeure :
+   **une fiche = une session**, et une session qui rend ses fichiers sans consigner son
+   mécanisme au registre laisse la série sans mémoire.
 
 ---
 
@@ -339,6 +316,43 @@ graduation mais la LARGEUR des objets gradués.** Une échelle commune ne suffit
 deux hauteurs ne partagent pas la même colonne — et le défaut ne se voit qu'à la taille de
 lecture, où l'on cesse de savoir ce qu'on a dessiné pour ne plus voir que ce qui est là.
 
+## Ce que la vingt-troisième planche a appris — 2026-08-15 : une proportion qu'un format ne peut pas dessiner
+
+La planche du siège du Fief Girard porte deux grandeurs. La première — la longueur des
+trois lignes de commande — se transpose partout. La seconde ne se transpose nulle part :
+c'est la **part de chaleur qui part** après la machine, un dixième de ce que l'air a
+emporté du local, dessinée sur la planche par une bande de 2,2 px contre 22.
+
+Trois enseignements, tous relevés à la taille de lecture.
+
+- **Un filet de 2,2 px posé à 7 px sous un conduit de 1,5 px ne se lit pas comme une
+  bande effondrée : il se lit comme un SECOND CONDUIT.** Aucune couleur, aucune épaisseur
+  ne l'en distingue — seule la *place* le peut. L'écart est passé à 14 px et les bords
+  hauts des trois bandes sont alignés : les circuits 1 et 2 enseignent alors la
+  convention (une ligne, puis une bande à cette distance), et le filet du troisième se
+  lit à la place qu'occupe la bande ailleurs. **Une convention graphique s'enseigne dans
+  le cas plein avant de servir dans le cas vide.**
+- **À 274 px et à 552 px, cette proportion vaut 0,73 et 1,6 px : elle n'est pas petite,
+  elle est fausse.** Un sous-pixel n'est pas une proportion, c'est un arrondi — et un
+  arrondi signé par un bureau d'études est une donnée technique inexacte (règle 1). La
+  vignette et l'appui ne la dessinent donc **pas du tout** : ils gardent la chaleur
+  emportée du local et celle qui revient, deux bandes franches, et taisent la troisième.
+  Le champ `proportion_non_dessinee` de leurs contrôles dit ce qui a été tu et pourquoi.
+  **Un format ne rogne pas une proportion, il y renonce** — c'est la règle de la vignette
+  jamais recadrée, appliquée à une grandeur au lieu d'un cadrage.
+- **Le rendu de contrôle a signalé un débordement de cartouche qui n'existait pas.**
+  cairosvg arrondit à l'entier l'avance du mono aux petites échelles : à 0,96, les 291,5 px
+  mesurés se rendaient en ~312 et le millésime semblait tomber hors de sa réserve —
+  exactement le défaut de la planche 21, mais en trompe-l'œil. Le `getBBox()` du navigateur
+  a donné 290,7 px et 22,3 px de marge. **Après la planche 21 qui a appris qu'un instrument
+  peut mesurer la mauvaise police, la 23 apprend qu'il peut aussi mesurer sous les mauvaises
+  conditions** : le juge des chasses est le navigateur, à la largeur de lecture, et rien
+  d'autre.
+
+**La leçon commune aux trois : ce que le dessin ne peut pas porter honnêtement, il ne le
+porte pas — et il le consigne.** Un chantier qui a passé vingt-deux planches à mesurer
+plutôt qu'estimer finit sur le cas où la mesure commande de ne rien tracer.
+
 ## Ce que la deuxième planche a arrêté — 2026-08-13
 
 **La planche schématise la solution, elle ne récapitule pas la fiche.** La première
@@ -387,8 +401,11 @@ suppose pas.
   forme, gardent leur rendeur propre. Une extraction sans aucune forme de repli fait
   **échouer le build** — la fiche ne peut plus perdre son dessin sur téléphone en
   silence.
-- **Un module de composition reste à écrire** (`planche-chiffree`, le repli) —
-  `chronologie-affaire` a été écrit en S25 et reçu son second mécanisme en S26. Le **tronc commun** vit dans
+- **`planche-chiffree` n'a jamais servi et son module n'est pas écrit** — décision à
+  prendre plutôt qu'un reste à faire. La révision 4 interdit de remonter à la planche les
+  chiffres que la fiche porte déjà ; un repli typographique ne dessine rien d'autre. Soit
+  le protocole le retire de sa liste fermée, soit il redéfinit ce qu'il devrait montrer.
+  Le **tronc commun** vit dans
   `scripts/planches/_tronc.py` depuis le 2026-08-13 : jetons, gabarits, avances
   calibrées, insécables, primitives à double écriture des couleurs, routine
   d'exécution. L'extraction a été contrôlée par **régénération octet à octet** des
@@ -400,9 +417,23 @@ suppose pas.
   planches publiées avant la 21 n'ont pas été régénérées ; la passe est à faire d'un bloc,
   chaque planche recontrôlée à 1152 px, et l'invariant « régénération octet à octet » se
   rétablit à ce moment-là et pas avant.
+- **La vignette de `/references` est servie à 54 px** (mesuré au navigateur sur les
+  vingt-trois lignes de la nomenclature : colonne de tête de 56 px, échelle 0,18, mono de
+  9 px rendu à 1,6). Le dessin y est une texture, pas un schéma — il est `aria-hidden` à
+  la source, donc rien n'est perdu pour l'accessibilité, mais c'est la même arithmétique
+  qui a condamné l'ancienne miniature au § « Pourquoi ce chantier ». Trois issues :
+  élargir la colonne, retirer la vignette de la nomenclature, ou l'assumer comme repère
+  de couleur. **Décision FT2E** — elle n'est pas propre à une planche, elle porte sur les
+  vingt-trois.
+- **`planche-chiffree` : voir ci-dessus.** Le seul archétype du protocole que le chantier
+  n'a pas exercé, donc le seul dont rien ne garantit qu'il fonctionne.
 - **Le `grep -c` de Git Bash sous Windows ne sait pas chercher U+202F** (`grep -c $' '`
   rend 0 sur un fichier qui en porte 9) : le contrôle des insécables du protocole se rejoue
   en Python (`collections.Counter`) sur cette machine, pas en grep.
+- **cairosvg arrondit l'avance du mono aux petites échelles** (relevé en S27) : un rendu de
+  contrôle à 1152 gonfle une ligne mono de ~7 % et fait croire à un débordement de cartouche
+  qui n'existe pas dans la page. Toute mesure de chasse se tranche au `getBBox()` du
+  navigateur, à la largeur de lecture — jamais sur le PNG.
 - **cairosvg 2.9 (machine de production) rend BLANC tout SVG dont la racine porte
   `style="width:100%;height:auto;display:block"`** — y compris les planches déjà
   publiées, ce qui fait croire à un fichier cassé. Le fichier de livraison garde

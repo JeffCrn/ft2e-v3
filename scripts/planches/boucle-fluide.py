@@ -56,9 +56,9 @@ porte l'extraction :
 """
 
 from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
-                    A_MARGE, mesurer, echapper, texte, rect, rect_bord, ligne,
-                    polyligne, fleche, cercle, entete_style, racine_appui,
-                    controles_appui, executer)
+                    A_MARGE, mesurer, replier, echapper, texte, rect,
+                    rect_bord, ligne, polyligne, fleche, cercle, entete_style,
+                    racine_appui, controles_appui, executer)
 
 
 # ── Rythme vertical de la planche ────────────────────────────────────────────
@@ -2340,9 +2340,494 @@ def composer_appui_individualisation(donnees):
             f"basse {AH - 340} px")
 
 
+# ── Mécanisme `commande` — où le débit se décide ─────────────────────────────
+#
+# Les six mécanismes précédents disent OÙ va le fluide. Celui-ci dit QUI décide
+# qu'il parte : trois circuits d'air indépendants traversent une même enveloppe,
+# et leur point de commande se déplace — posé sur la machine pour une extraction
+# permanente, dans le réseau pour une régulation à pression constante, dans le
+# local pour une sonde de CO2. La géométrie porte donc DEUX grandeurs, toutes
+# deux mesurables à la règle :
+#
+#   · la LONGUEUR de la ligne de commande — la distance de la machine au point
+#     où le débit se décide. Elle croît d'un circuit à l'autre, et c'est la
+#     démonstration principale ;
+#   · l'ÉPAISSEUR de la bande de chaleur APRÈS la machine — pleine quand l'air
+#     part avec toute sa chaleur, réduite au dixième quand un échangeur la rend.
+#     Les trois épaisseurs se lisent dans LA MÊME COLONNE (x 850–1116), sans
+#     quoi elles ne se compareraient pas : leçon de la planche 22.
+C_XL0, C_XL1 = 56, 280        # le local
+C_XM0, C_XM1 = 620, 850       # la machine
+C_XE0, C_XE1 = 900, 916       # l'enveloppe traversée
+C_XOUT, C_XFIN = 1116, 1124   # fin des bandes de chaleur, fin des conduits
+C_XRISER = 700                # la remontée de la commande dans la machine
+C_Y_ZONES = 224               # la ligne des quatre zones nommées
+C_Y0 = 244                    # haut du premier bloc
+C_H_BLOC = 48                 # hauteur d'un bloc simple flux
+C_ECART_FLUX = 58             # écart des deux conduits du double flux
+C_GAP_CMD = 26                # du bas des blocs à la ligne de commande
+C_GAP_ETIQ = 18               # de la ligne de commande à son étiquette
+C_GAP_BANDE = 22              # d'un circuit au suivant
+C_H_CHALEUR = 22.0            # la chaleur emportée par l'air extrait — 100 %
+# La bande de chaleur se pose sous son conduit, ALIGNÉE PAR SON BORD HAUT — c'est
+# cet alignement qui rend les trois épaisseurs comparables. L'écart valait 7 px à
+# la première composition : au rendu à 1152, le filet de 2,2 px du troisième
+# circuit se lisait alors comme un SECOND CONDUIT et non comme une bande
+# effondrée. À 14 px, les circuits 1 et 2 enseignent la convention (une ligne,
+# puis une bande) et le filet du troisième se lit à la place de la bande.
+C_DECALAGE = 14
+C_INTERLIGNE = 20             # dans les blocs
+C_R_CAPTEUR = 7.0
+C_PROBE_X = {"machine": C_XRISER, "reseau": 450, "local": 168}
+
+
+def _bandes_commande(elements, y0=C_Y0, h=C_H_BLOC, ecart=C_ECART_FLUX,
+                     gap_cmd=C_GAP_CMD, gap_etiq=C_GAP_ETIQ,
+                     gap_bande=C_GAP_BANDE):
+    """Le rythme vertical des circuits — calculé, jamais tapé. Un circuit à
+    double flux occupe deux conduits, donc un bloc plus haut."""
+    bandes, y = [], y0
+    for e in elements:
+        ya = y + h / 2
+        ya2 = ya + ecart if e["double_flux"] else None
+        by1 = (ya2 if ya2 else ya) + h / 2
+        cmd = by1 + gap_cmd
+        etiq = cmd + gap_etiq
+        bandes.append({"by0": y, "by1": by1, "ya": ya, "ya2": ya2,
+                       "cmd": cmd, "etiq": etiq})
+        y = etiq + gap_bande
+    return bandes
+
+
+def _pile_lignes(A, controler, nom, x, by0, hauteur_bloc, lignes, largeur):
+    """Un bloc de libellés centré verticalement. Chaque ligne porte sa police :
+    ('sans', texte) en Archivo 15/600, ('mono', texte) en mono 10 au pivot,
+    ('cote', texte) en mono 11 à l'encre — la cote est une mesure, jamais du
+    texte courant."""
+    total = len(lignes) * C_INTERLIGNE
+    y = by0 + (hauteur_bloc - total) / 2 + 14
+    for k, (police, contenu) in enumerate(lignes):
+        if police == "sans":
+            controler(f"{nom} {k + 1}", contenu, 15, "sans-600", largeur)
+            A(texte(x, y, contenu, "sans", 15, 600, "encre", wdth=112))
+        elif police == "cote":
+            controler(f"{nom} {k + 1}", contenu, 11, "mono", largeur, 11 * 0.14)
+            A(texte(x, y, contenu, "mono", 11, 500, "encre", tracking=11 * 0.14))
+        else:
+            controler(f"{nom} {k + 1}", contenu, 10, "mono", largeur, 10 * 0.14)
+            A(texte(x, y, contenu, "mono", 10, 500, "pivot", tracking=10 * 0.14))
+        y += C_INTERLIGNE
+
+
+def _etiquette_mono(A, x, y, contenu, corps, tracking, largeur, ancre=None):
+    """Un libellé mono posé SUR un trait : il porte son propre fond de papier,
+    à la mesure du texte, et interrompt la ligne qu'il annote. Sans lui, les
+    limites de zone rayaient les trois étiquettes de commande — le défaut relevé
+    à la planche 20, retrouvé ici au rendu à 1152 et invisible en pleine page.
+    Le fond est émis AVANT le texte : appelé après, il l'effacerait."""
+    x0 = x - largeur if ancre == "end" else x
+    A(rect(x0 - 5, y - corps + 1, largeur + 10, corps + 5, "papier"))
+    A(texte(x, y, contenu, "mono", corps, 500, "pivot", ancre=ancre,
+            tracking=tracking))
+
+
+def _cote_debit(e):
+    """« 1 020 m³/h » — la fine insécable devant l'unité, et dans le
+    groupement de milliers que le JSON écrit en espace ordinaire (le site le
+    convertit de son côté ; le dessin le convertit ici)."""
+    if not e.get("valeur"):
+        return None
+    return f"{e['valeur'].replace(' ', NN)}{NN}{e['unite']}"
+
+
+def composer_commande(donnees):
+    c = donnees["commande"]
+    elements = sorted(c["elements"], key=lambda e: e["ordre"])
+    ch = c["chaleur"]
+    part = ch["rendement_dessine"] / 100.0
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête du schéma ────────────────────────────────────────────────────
+    controler("en-tête schéma", c["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, c["entete"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    bandes = _bandes_commande(elements)
+    y_haut, y_bas = C_Y0 - 10, bandes[-1]["etiq"] + 6
+
+    # ── Les quatre zones nommées, et les deux limites qui les séparent ───────
+    # Sans elles, la longueur d'une ligne de commande ne dirait rien : c'est la
+    # zone où le point tombe qui la rend lisible.
+    for x, z in zip((C_XL0, C_XL1 + 16, C_XM0, C_XE0), c["zones"]):
+        controler(f"zone {z['cle']}", z["libelle"], 10, "mono", 220, 10 * 0.14)
+        A(texte(x, C_Y_ZONES, z["libelle"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    for x in (C_XL1, C_XM0):
+        A(ligne(x, y_haut, x, y_bas, "filet-3", 1))
+
+    # ── L'enveloppe — une paroi unique, traversée par les trois circuits ─────
+    A(rect_bord(C_XE0, y_haut, C_XE1 - C_XE0, bandes[-1]["by1"] + 14 - y_haut,
+                "calcaire", "filet-1"))
+
+    # ── Les trois circuits ───────────────────────────────────────────────────
+    for e, b in zip(elements, bandes):
+        by0, by1, ya, ya2 = b["by0"], b["by1"], b["ya"], b["ya2"]
+        h_bloc = by1 - by0
+
+        # Le local, puis la machine — deux blocs topologiques d'égale hauteur.
+        A(rect_bord(C_XL0, by0, C_XL1 - C_XL0, h_bloc, "papier", "filet-1"))
+        lignes_loc = [("sans", l) for l in e["local_lignes"]]
+        if e.get("local_detail"):
+            lignes_loc.append(("mono", e["local_detail"]))
+        _pile_lignes(A, controler, f"local {e['cle']}", C_XL0 + 16, by0,
+                     h_bloc, lignes_loc, C_XL1 - C_XL0 - 32)
+
+        A(rect_bord(C_XM0, by0, C_XM1 - C_XM0, h_bloc, "papier", "filet-1"))
+        lignes_mac = [("sans", l) for l in e["machine_lignes"]]
+        cote = _cote_debit(e)
+        lignes_mac.append(("cote", cote) if cote
+                          else ("mono", e["valeur_mention"]))
+        largeur_mac = (C_XM1 - 76 if e["double_flux"] else C_XM1) - C_XM0 - 32
+        _pile_lignes(A, controler, f"machine {e['cle']}", C_XM0 + 16, by0,
+                     h_bloc, lignes_mac, largeur_mac)
+
+        # L'air extrait : du local à la machine, puis dehors.
+        A(ligne(C_XL1, ya, C_XM0, ya, "encre", 1.5))
+        for x in (430, 545):
+            A(fleche(x, ya, "encre", "droite", 9))
+        A(rect(C_XL1, ya + C_DECALAGE, C_XM0 - C_XL1, C_H_CHALEUR, "encre"))
+        A(ligne(C_XM1, ya, C_XFIN, ya, "encre", 1.5))
+        A(fleche(C_XFIN + 8, ya, "encre", "droite", 9))
+
+        # Ce qui part APRÈS la machine — l'épaisseur est la démonstration.
+        h_sortie = C_H_CHALEUR * (1 - part) if e["double_flux"] else C_H_CHALEUR
+        A(rect(C_XM1, ya + C_DECALAGE, C_XOUT - C_XM1, h_sortie, "encre"))
+        legende = ch["legende_fuite"] if e["double_flux"] else ch["legende_perte"]
+        controler(f"légende sortie {e['cle']}", legende, 10, "mono",
+                  W - MARGE - (C_XE1 + 8), 10 * 0.14)
+        A(texte(C_XE1 + 8, ya - 8, legende, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+        if e["double_flux"]:
+            # L'échangeur à contre-courant : deux diagonales croisées, dans la
+            # machine, à cheval sur les deux conduits.
+            xe0, xe1 = C_XM1 - 56, C_XM1 - 12
+            A(rect_bord(xe0, ya - 14, xe1 - xe0, ya2 - ya + 28, "papier",
+                        "filet-1"))
+            A(ligne(xe0, ya - 14, xe1, ya2 + 14, "encre", 1.5))
+            A(ligne(xe0, ya2 + 14, xe1, ya - 14, "encre", 1.5))
+
+            # L'air neuf : du dehors à la machine, puis au local — et la
+            # chaleur rendue, 90 % de celle que l'air avait emportée.
+            A(ligne(C_XFIN, ya2, C_XM1, ya2, "encre", 1.5))
+            A(fleche(C_XM1 + 8, ya2, "encre", "gauche", 9))
+            A(ligne(C_XM0, ya2, C_XL1, ya2, "encre", 1.5))
+            for x in (400, 515):
+                A(fleche(x, ya2, "encre", "gauche", 9))
+            A(rect(C_XL1, ya2 + C_DECALAGE, C_XM0 - C_XL1,
+                   C_H_CHALEUR * part, "encre"))
+            controler("légende retour", ch["legende_retour"], 10, "mono",
+                      C_XM0 - (C_XL1 + 8), 10 * 0.14)
+            A(texte(C_XL1 + 8, ya2 - 8, ch["legende_retour"], "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+        elif e["ordre"] == 1:
+            controler("légende source", ch["legende_source"], 10, "mono",
+                      C_XM0 - (C_XL1 + 8), 10 * 0.14)
+            A(texte(C_XL1 + 8, ya - 8, ch["legende_source"], "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+
+        # La commande — la ligne dont la LONGUEUR est la thèse.
+        xp = C_PROBE_X[e["commande_zone"]]
+        if xp != C_XRISER:
+            A(ligne(xp, b["cmd"], C_XRISER, b["cmd"], "encre", 2))
+        A(ligne(C_XRISER, b["cmd"], C_XRISER, by1 + 9, "encre", 2))
+        A(fleche(C_XRISER, by1, "encre", "haut", 9))
+        A(cercle(xp, b["cmd"], C_R_CAPTEUR, "papier", "encre", 1.5))
+        a_la_machine = e["commande_zone"] == "machine"
+        dispo = (xp - C_R_CAPTEUR - MARGE) if a_la_machine else (W - MARGE - xp)
+        l_etiq = controler(f"commande {e['cle']}", e["commande_etiquette"], 10,
+                           "mono", dispo, 10 * 0.14)
+        _etiquette_mono(A, xp - C_R_CAPTEUR - (6 if a_la_machine else 0),
+                        b["etiq"], e["commande_etiquette"], 10, 10 * 0.14,
+                        l_etiq, ancre="end" if a_la_machine else None)
+
+    # ── La mention de séparation ─────────────────────────────────────────────
+    y_mention = bandes[-1]["etiq"] + 30
+    mention = " — ".join(c["mention_separation"])
+    controler("mention", mention, 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, y_mention, mention, "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur ajustée, jamais codée ────────────────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    longueurs = [C_XRISER - C_PROBE_X[e["commande_zone"]] for e in elements]
+    aplats = sum((C_XM0 - C_XL1) * C_H_CHALEUR for _ in elements)
+    aplats += sum((C_XOUT - C_XM1) * (C_H_CHALEUR * (1 - part)
+                                      if e["double_flux"] else C_H_CHALEUR)
+                  for e in elements)
+    aplats += (C_XM0 - C_XL1) * C_H_CHALEUR * part
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "deux grandeurs mesurables à la règle, aucune "
+                         "répétition de la fiche — (1) la LONGUEUR des trois "
+                         "lignes de commande, distance de la machine au point "
+                         "où le débit se décide : "
+                         f"{'/'.join(str(l) for l in longueurs)} px, croissante "
+                         "d'un circuit à l'autre ; (2) l'ÉPAISSEUR de la bande "
+                         "de chaleur APRÈS la machine, dans la même colonne "
+                         f"(x {C_XM1}–{C_XOUT}) pour les trois : "
+                         f"{C_H_CHALEUR:.0f}/{C_H_CHALEUR:.0f}/"
+                         f"{C_H_CHALEUR * (1 - part):.1f} px — texte masqué, "
+                         "trois lignes qui s'allongent et un filet qui remplace "
+                         "une bande portent seuls la thèse",
+        "topologie": f"local (x {C_XL0}–{C_XL1}) → réseau → machine "
+                     f"(x {C_XM0}–{C_XM1}) → enveloppe (x {C_XE0}–{C_XE1}) → "
+                     f"dehors ; points de commande x "
+                     f"{'/'.join(str(C_PROBE_X[e['commande_zone']]) for e in elements)}"
+                     f", remontée commune à x {C_XRISER} ; l'ordre des circuits "
+                     "est celui de l'énumération de la fiche",
+        "proportion_chaleur": f"rendement dessiné au plancher de la fiche "
+                              f"({ch['rendement_dessine']} %) : la bande qui "
+                              f"revient vaut {C_H_CHALEUR * part:.1f} px, celle "
+                              f"qui part {C_H_CHALEUR * (1 - part):.1f} px, "
+                              f"pour {C_H_CHALEUR:.0f} px emportés du local",
+        "bas_du_dessin": f"dernier circuit jusqu'à {bandes[-1]['etiq']:.0f}, "
+                         f"mention à {y_mention:.0f}, phrase de principe à "
+                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
+                         f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "aplats_encre": f"bandes de chaleur {aplats:.0f} px², soit "
+                        f"{aplats / (W * H) * 100:.2f} % de la planche — "
+                        "aplats d'encre sur papier (12,08), doublés d'une "
+                        "mention mono chacun",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas "
+                          "chiffrée (révision 4) ; les deux seuls nombres du "
+                          "dessin sont les débits portés par leur machine "
+                          f"({'/'.join(e['valeur'] for e in elements if e.get('valeur'))}"
+                          " m³/h), et le troisième circuit porte à leur place la "
+                          "mention de son absence",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_commande(donnees):
+    """La vignette : le motif entier réduit à ce qui démontre — trois circuits,
+    trois lignes de commande de longueur croissante, et les trois épaisseurs de
+    chaleur dans la même colonne. Ce qu'elle laisse : les libellés de local et
+    de machine, les zones nommées, les étiquettes de commande. Six libellés
+    dans 300 px ne se lisent pas ; leur absence est une décision."""
+    c = donnees["commande"]
+    elements = sorted(c["elements"], key=lambda e: e["ordre"])
+    part = c["chaleur"]["rendement_dessine"] / 100.0
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    xl0, xl1, xm0, xm1 = 14, 56, 152, 208
+    xe0, xoutf = 228, 282
+    xriser = 180
+    h_ch, dec = 8.0, 5.0
+    probes = {"machine": xriser, "reseau": 104, "local": 30}
+    bandes = _bandes_commande(elements, y0=32, h=20, ecart=22, gap_cmd=13,
+                              gap_etiq=0, gap_bande=10)
+
+    A(rect_bord(xe0, 28, 6, bandes[-1]["by1"] + 5 - 28, "calcaire", "filet-1"))
+    for e, b in zip(elements, bandes):
+        by0, by1, ya, ya2 = b["by0"], b["by1"], b["ya"], b["ya2"]
+        A(rect_bord(xl0, by0, xl1 - xl0, by1 - by0, "papier", "filet-1"))
+        A(rect_bord(xm0, by0, xm1 - xm0, by1 - by0, "papier", "filet-1"))
+        A(ligne(xl1, ya, xm0, ya, "encre", 1.2))
+        A(fleche(96, ya, "encre", "droite", 6))
+        A(rect(xl1, ya + dec, xm0 - xl1, h_ch, "encre"))
+        A(ligne(xm1, ya, xoutf + 4, ya, "encre", 1.2))
+        A(fleche(xoutf + 10, ya, "encre", "droite", 6))
+        if not e["double_flux"]:
+            A(rect(xm1, ya + dec, xoutf - xm1, h_ch, "encre"))
+        if e["double_flux"]:
+            A(ligne(xoutf + 4, ya2, xm1, ya2, "encre", 1.2))
+            A(fleche(xm1 + 6, ya2, "encre", "gauche", 6))
+            A(ligne(xm0, ya2, xl1, ya2, "encre", 1.2))
+            A(fleche(xl1 + 6, ya2, "encre", "gauche", 6))
+            A(rect(xl1, ya2 + dec, xm0 - xl1, h_ch * part, "encre"))
+        cote = _cote_debit(e)
+        if cote:
+            A(texte(xl1 + 4, ya - 5, cote, "mono", 9, 500, "encre",
+                    tracking=9 * 0.14))
+        xp = probes[e["commande_zone"]]
+        if xp != xriser:
+            A(ligne(xp, b["cmd"], xriser, b["cmd"], "encre", 1.6))
+        A(ligne(xriser, b["cmd"], xriser, by1 + 4, "encre", 1.6))
+        A(fleche(xriser, by1, "encre", "haut", 5))
+        A(cercle(xp, b["cmd"], 4, "papier", "encre", 1.2))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "trois circuits, trois lignes de commande de longueur "
+                 f"{'/'.join(str(xriser - probes[e['commande_zone']]) for e in elements)}"
+                 f" px, la chaleur emportée du local ({h_ch:.0f} px) et celle "
+                 f"qui revient au troisième ({h_ch * part:.1f} px) ; les deux "
+                 "débits restent, tout libellé part",
+        "proportion_non_dessinee": "la part qui PART après la machine "
+                 f"({100 - c['chaleur']['rendement_dessine']} % de {h_ch:.0f} px "
+                 f"= {h_ch*(1-part):.1f} px, soit {h_ch*(1-part)*274/VW:.2f} px "
+                 "rendus dans une carte de 274) n'est pas dessinée : un "
+                 "sous-pixel n'est pas une proportion, c'est un arrondi. La "
+                 "planche la porte, la vignette la tait — comme elle tait ses "
+                 "libellés",
+        "bas_du_dessin": f"dernière ligne de commande à {bandes[-1]['cmd']:.0f}, "
+                         f"marge basse {VH - bandes[-1]['cmd'] - 4:.0f} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_commande(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1 — les trois circuits
+    nommés par leur local, les deux débits, l'enveloppe traversée et les trois
+    lignes de commande avec la zone où chacune naît. Ce qu'il laisse : les
+    machines nommées, les légendes de chaleur, la mention et la phrase."""
+    c = donnees["commande"]
+    elements = sorted(c["elements"], key=lambda e: e["ordre"])
+    part = c["chaleur"]["rendement_dessine"] / 100.0
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    xl0, xl1, xm0, xm1 = A_MARGE, 152, 300, 388
+    xe0, xoutf, xfin = 420, 500, 508
+    xriser = 344
+    h_ch, dec = 16.0, 9.0
+    probes = {"machine": xriser, "reseau": 220, "local": 60}
+    zones = {"machine": "À LA MACHINE", "reseau": "DANS LE RÉSEAU",
+             "local": "DANS LE LOCAL"}
+    bandes = _bandes_commande(elements, y0=50, h=38, ecart=36, gap_cmd=18,
+                              gap_etiq=18, gap_bande=14)
+
+    A(rect_bord(xe0, 44, 10, bandes[-1]["by1"] + 8 - 44, "calcaire", "filet-1"))
+    for e, b in zip(elements, bandes):
+        by0, by1, ya, ya2 = b["by0"], b["by1"], b["ya"], b["ya2"]
+        A(rect_bord(xl0, by0, xl1 - xl0, by1 - by0, "papier", "filet-1"))
+        lib = e["local_lignes"][0] if len(e["local_lignes"]) == 1 else \
+            " ".join(e["local_lignes"])
+        for k, l in enumerate(replier(lib, 13, xl1 - xl0 - 20, "sans-600")):
+            A(texte(xl0 + 10, by0 + 20 + k * 16, l, "sans", 13, 600, "encre",
+                    wdth=112))
+        A(rect_bord(xm0, by0, xm1 - xm0, by1 - by0, "papier", "filet-1"))
+        A(ligne(xl1, ya, xm0, ya, "encre", 1.4))
+        A(fleche(240, ya, "encre", "droite", 7))
+        A(rect(xl1, ya + dec, xm0 - xl1, h_ch, "encre"))
+        A(ligne(xm1, ya, xfin, ya, "encre", 1.4))
+        A(fleche(xfin + 8, ya, "encre", "droite", 7))
+        if not e["double_flux"]:
+            A(rect(xm1, ya + dec, xoutf - xm1, h_ch, "encre"))
+        cote = _cote_debit(e)
+        if cote:
+            A(texte(xl1 + 6, ya - 6, cote, "mono", 10, 500, "encre",
+                    tracking=10 * 0.14))
+        if e["double_flux"]:
+            xg0, xg1 = xm1 - 30, xm1 - 8
+            A(rect_bord(xg0, ya - 8, xg1 - xg0, ya2 - ya + 16, "papier",
+                        "filet-1"))
+            A(ligne(xg0, ya - 8, xg1, ya2 + 8, "encre", 1.4))
+            A(ligne(xg0, ya2 + 8, xg1, ya - 8, "encre", 1.4))
+            A(ligne(xfin, ya2, xm1, ya2, "encre", 1.4))
+            A(fleche(xm1 + 7, ya2, "encre", "gauche", 7))
+            A(ligne(xm0, ya2, xl1, ya2, "encre", 1.4))
+            A(fleche(xl1 + 7, ya2, "encre", "gauche", 7))
+            A(rect(xl1, ya2 + dec, xm0 - xl1, h_ch * part, "encre"))
+        xp = probes[e["commande_zone"]]
+        if xp != xriser:
+            A(ligne(xp, b["cmd"], xriser, b["cmd"], "encre", 1.8))
+        A(ligne(xriser, b["cmd"], xriser, by1 + 7, "encre", 1.8))
+        A(fleche(xriser, by1, "encre", "haut", 7))
+        A(cercle(xp, b["cmd"], 5.5, "papier", "encre", 1.4))
+        tag = zones[e["commande_zone"]]
+        if e["commande_zone"] == "machine":
+            A(texte(xp - 11.5, b["etiq"], tag, "mono", 10, 500, "pivot",
+                    ancre="end", tracking=10 * 0.14))
+        else:
+            A(texte(xp - 5.5, b["etiq"], tag, "mono", 10, 500, "pivot",
+                    tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="trois circuits nommés par leur local, les deux débits portés, "
+              "l'enveloppe traversée, et les trois lignes de commande avec la "
+              "zone où chacune naît ; la chaleur emportée du local et celle qui "
+              "revient au troisième — machines nommées, légendes, mention et "
+              "phrase laissées à la planche",
+        proportion_non_dessinee="la part qui PART après la machine vaudrait "
+              f"{h_ch * (1 - part):.1f} px à l'échelle 1 : indiscernable du "
+              "conduit de 1,4 px qui la surmonte. Même arbitrage qu'à la "
+              "vignette — seule la planche, à 1152, la dessine",
+        bas=f"dernière étiquette de commande à {bandes[-1]['etiq']:.0f}, marge "
+            f"basse {AH - bandes[-1]['etiq'] - 4:.0f} px",
+        longueurs_de_commande="/".join(
+            str(xriser - probes[e["commande_zone"]]) for e in elements) + " px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "commande" in donnees:
+        return composer_commande(donnees)
     if "individualisation" in donnees:
         return composer_individualisation(donnees)
     if "appariement" in donnees:
@@ -2357,6 +2842,8 @@ def composer(donnees):
 
 
 def composer_vignette(donnees):
+    if "commande" in donnees:
+        return composer_vignette_commande(donnees)
     if "individualisation" in donnees:
         return composer_vignette_individualisation(donnees)
     if "appariement" in donnees:
@@ -2371,6 +2858,8 @@ def composer_vignette(donnees):
 
 
 def composer_appui(donnees):
+    if "commande" in donnees:
+        return composer_appui_commande(donnees)
     if "individualisation" in donnees:
         return composer_appui_individualisation(donnees)
     if "appariement" in donnees:

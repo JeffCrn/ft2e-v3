@@ -1,0 +1,218 @@
+{
+  "fiche": "siege-rese-aigrefeuille",
+  "archetype": "boucle-fluide",
+  "archetype_motif": "La fiche défend une phrase : « chaque usage reçoit son système », et une raison : « ne ventiler qu'à la mesure de l'occupation ». Le mécanisme n'est donc pas la topologie de la distribution — c'est ce qui COMMANDE le débit, et ce point se déplace d'un circuit à l'autre : à la machine pour l'extraction permanente des vestiaires, dans le réseau pour la régulation à pression constante des bureaux, dans le local pour la sonde de CO2 de la salle de réunion. La géométrie porte seule la démonstration — trois lignes de commande de longueur croissante, et une seule des trois traversées d'enveloppe qui rende sa chaleur. Septième mécanisme de `boucle-fluide` et premier de l'archétype à porter non pas le trajet du fluide mais son ordre de marche : les six précédents (boucle, utilites, substitution, declinaison, appariement, individualisation) décrivent tous OÙ va le fluide, aucun QUI décide qu'il parte.",
+  "surtitre": "SCHÉMA DE PRINCIPE · CE QUI COMMANDE LE DÉBIT D'AIR",
+  "titre": "Siège du Fief Girard",
+  "sous_titre": "Trois régimes d'air dans une même enveloppe, chacun commandé par ce qui l'exige",
+  "cartouche_legende": "AIGREFEUILLE-D'AUNIS · 600 m² · 2026",
+  "aria_label": "Schéma de principe de la ventilation d'un bâtiment tertiaire restructuré : trois circuits d'air indépendants traversent une même enveloppe isolée par l'extérieur, et ce qui commande leur débit change d'un local à l'autre. Premier circuit, vestiaires et sanitaires : extraction mécanique permanente, le débit ne se décide nulle part. Deuxième circuit, bureaux : caisson d'extraction de 1 020 m³/h à moteurs à commutation électronique, régulation à pression constante — la commande naît dans le réseau. Troisième circuit, salle de réunion de trente places : centrale double flux de 540 m³/h pilotée par une sonde de CO2 posée dans le local, de sorte que l'occupation décide du débit. Son échangeur à contre-courant rend plus de 90 % de la chaleur à l'air neuf ; les deux autres circuits la laissent partir avec l'air rejeté.",
+  "commande": {
+    "entete": "TROIS CIRCUITS D'AIR DANS UNE MÊME ENVELOPPE — CE QUI COMMANDE LE DÉBIT CHANGE D'UN LOCAL À L'AUTRE",
+    "zones": [
+      {
+        "cle": "local",
+        "libelle": "LE LOCAL"
+      },
+      {
+        "cle": "reseau",
+        "libelle": "LE RÉSEAU"
+      },
+      {
+        "cle": "machine",
+        "libelle": "LA MACHINE"
+      },
+      {
+        "cle": "dehors",
+        "libelle": "L'ENVELOPPE · DEHORS"
+      }
+    ],
+    "chaleur": {
+      "rendement_dessine": 90,
+      "legende_source": "LA CHALEUR QUE L'AIR EMPORTE DU LOCAL",
+      "legende_perte": "LA CHALEUR PART AVEC L'AIR",
+      "legende_fuite": "MOINS DE 10 % PART",
+      "legende_retour": "> 90 % DE LA CHALEUR REVIENT À L'AIR NEUF"
+    },
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "sanitaires",
+        "libelle": "Vestiaires et sanitaires",
+        "local_lignes": [
+          "Vestiaires",
+          "et sanitaires"
+        ],
+        "local_detail": null,
+        "machine_lignes": [
+          "Extraction mécanique"
+        ],
+        "valeur": null,
+        "unite": "m³/h",
+        "valeur_mention": "DÉBIT NON PORTÉ À LA FICHE",
+        "commande_zone": "machine",
+        "commande_etiquette": "MARCHE PERMANENTE · AUCUNE MESURE",
+        "double_flux": false,
+        "detail": [
+          "EXTRACTION MÉCANIQUE PERMANENTE"
+        ],
+        "legende": "LA COMMANDE NAÎT À LA MACHINE · AUCUNE MESURE",
+        "mention": "TOUTE LA CHALEUR PART AVEC L'AIR"
+      },
+      {
+        "ordre": 2,
+        "cle": "bureaux",
+        "libelle": "Bureaux",
+        "local_lignes": [
+          "Bureaux"
+        ],
+        "local_detail": null,
+        "machine_lignes": [
+          "Caisson d'extraction"
+        ],
+        "valeur": "1 020",
+        "unite": "m³/h",
+        "valeur_mention": null,
+        "commande_zone": "reseau",
+        "commande_etiquette": "RÉGULATION À PRESSION CONSTANTE · LE RÉSEAU DÉCIDE",
+        "double_flux": false,
+        "detail": [
+          "CAISSON D'EXTRACTION",
+          "MOTEURS À COMMUTATION ÉLECTRONIQUE"
+        ],
+        "legende": "LA COMMANDE NAÎT DANS LE RÉSEAU · PRESSION CONSTANTE",
+        "mention": "TOUTE LA CHALEUR PART AVEC L'AIR"
+      },
+      {
+        "ordre": 3,
+        "cle": "reunion",
+        "libelle": "Salle de réunion de trente places",
+        "local_lignes": [
+          "Salle de réunion"
+        ],
+        "local_detail": "TRENTE PLACES",
+        "machine_lignes": [
+          "Centrale",
+          "double flux"
+        ],
+        "valeur": "540",
+        "unite": "m³/h",
+        "valeur_mention": null,
+        "commande_zone": "local",
+        "commande_etiquette": "SONDE DE CO2 DANS LE LOCAL · L'OCCUPATION DÉCIDE",
+        "double_flux": true,
+        "detail": [
+          "CENTRALE DOUBLE FLUX",
+          "ÉCHANGEUR À CONTRE-COURANT CERTIFIÉ EUROVENT"
+        ],
+        "legende": "LA COMMANDE NAÎT DANS LE LOCAL · SONDE DE CO2",
+        "mention": "RENDEMENT SUPÉRIEUR À 90 % — LA CHALEUR REVIENT À L'AIR NEUF"
+      }
+    ],
+    "mention_separation": [
+      "L'ENVELOPPE EST ISOLÉE PAR L'EXTÉRIEUR, MURS ET TOITURE",
+      "L'AIR LA TRAVERSE TROIS FOIS, UNE SEULE EN RENDANT SA CHALEUR"
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Chaque usage reçoit son système, et la salle de réunion n'est ventilée qu'à la mesure de son occupation.",
+  "vignette_surtitre": "TROIS RÉGIMES D'AIR",
+  "a_valider_ft2e": [
+    {
+      "objet": "Le débit du circuit des vestiaires et sanitaires",
+      "la_source_affirme": "« ventilation mécanique permanente des vestiaires et sanitaires » — aucun débit n'est donné, alors que les deux autres circuits en portent un.",
+      "le_dessin_suppose": "Que la case du débit reste vide, occupée par la mention « débit non porté à la fiche » plutôt que par un chiffre. Donner la valeur si elle doit figurer — c'est le seul organe muet du dessin."
+    },
+    {
+      "objet": "« Permanente » lu comme « aucune modulation »",
+      "la_source_affirme": "« ventilation mécanique permanente » — la fiche ne dit ni horloge, ni réduit de nuit, ni deux vitesses.",
+      "le_dessin_suppose": "Que ce circuit n'a aucun organe de mesure : sa ligne de commande est de longueur nulle, son point de décision posé sur la machine. Si une horloge ou un régime réduit existe, le point se déplace et la démonstration change de forme."
+    },
+    {
+      "objet": "Les deux premiers circuits dessinés sans récupération",
+      "la_source_affirme": "Seul le troisième système est nommé « centrale double flux » avec échangeur ; les deux autres sont une « ventilation mécanique » et un « caisson d'extraction ».",
+      "le_dessin_suppose": "Qu'ils sont en simple flux et que toute la chaleur de l'air extrait quitte le bâtiment — lecture par définition de l'organe, que la fiche n'écrit pas. Confirmer qu'aucun des deux ne porte de récupérateur."
+    },
+    {
+      "objet": "L'amenée d'air neuf des deux premiers circuits",
+      "la_source_affirme": "Rien : la fiche ne décrit ni entrées d'air, ni transfert, ni compensation pour les vestiaires et les bureaux.",
+      "le_dessin_suppose": "Qu'elle n'est pas dessinée — seul le circuit double flux montre ses deux traversées d'enveloppe. Dire si l'air neuf des deux autres arrive par des entrées d'air en façade ou par transfert depuis les locaux voisins."
+    },
+    {
+      "objet": "Le rendement dessiné à 90 % exactement",
+      "la_source_affirme": "« échangeur à contre-courant certifié Eurovent au rendement supérieur à 90 % » — une borne inférieure, pas une valeur.",
+      "le_dessin_suppose": "Que la proportion se dessine au plancher : la bande qui revient vaut 90 % de la bande qui sort du local, celle qui part 10 %. Le rendement certifié réel n'est pas au dessin, et une valeur nominale le préciserait."
+    },
+    {
+      "objet": "L'ordre des trois circuits",
+      "la_source_affirme": "Ils sont énumérés vestiaires et sanitaires, puis bureaux, puis salle de réunion.",
+      "le_dessin_suppose": "Que cet ordre d'énumération est aussi l'ordre de lecture, de haut en bas — et il coïncide avec l'éloignement croissant du point de commande. La coïncidence est heureuse, elle n'est pas démontrée : dire si un autre ordre est préférable."
+    },
+    {
+      "objet": "Trois circuits strictement séparés",
+      "la_source_affirme": "« chaque usage reçoit son système » ; les trois sont présentés l'un après l'autre.",
+      "le_dessin_suppose": "Qu'aucun réseau n'est partagé — trois circuits sans aucune liaison entre eux. Si le caisson des bureaux reprend aussi des sanitaires, ou si les rejets se regroupent en toiture, le dessin le tait."
+    },
+    {
+      "objet": "Le rapport de 540 m³/h à trente places",
+      "la_source_affirme": "« une centrale double flux dédiée à la salle de réunion de trente places : 540 m³/h ».",
+      "le_dessin_suppose": "Que les deux valeurs restent côte à côte sans être divisées : le dessin n'écrit pas les 18 m³/h par place, que la fiche ne pose pas. Dire si ce ratio doit figurer — c'est lui qui prouve le dimensionnement à l'occupation."
+    },
+    {
+      "objet": "L'enveloppe dessinée d'un seul tenant",
+      "la_source_affirme": "« isolation thermique par l'extérieur (ITE) des murs et de la toiture » ; la RT existant est appliquée « élément par élément ».",
+      "le_dessin_suppose": "Une seule paroi verticale traversée par les trois circuits, sans distinguer le mur de la toiture ni marquer par où chaque rejet sort réellement. Le dessin dit une frontière, pas un ouvrage."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2024 (champ annee), statut « en cours », opérations préalables à la réception le 22 juillet 2026, levée des réserves attendue fin août.",
+      "le_dessin_suppose": "Que le cartouche porte 2026, millésime des opérations préalables — même arbitrage que les fiches en cours déjà versées. Il basculera si la réception définitive porte une autre date."
+    },
+    {
+      "objet": "La surface du cartouche",
+      "la_source_affirme": "600 m² au frontmatter et au chapô (« quelque 600 m² ») ; « le plan du projet arrête 595,6 m² de locaux restructurés ».",
+      "le_dessin_suppose": "Que le cartouche reprend les 600 m² du frontmatter, qui est la valeur publiée par la fiche, et non les 595,6 m² du plan. Dire laquelle fait foi."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d'affaire 24-003 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Montants : environ 600 000 € HT pour les onze lots, un peu plus de 143 000 € HT pour les deux lots techniques suivis par FT2E.",
+    "Noms de tiers : la maîtrise d'ouvrage et sa tutelle, l'agence d'architecture mandataire, le bureau d'études structure, l'économiste-ordonnanceur, l'assistant au maître d'ouvrage — le dessin ne nomme que des organes techniques.",
+    "Jalons contractuels : diagnostic-esquisse de juin 2024, DCE de mars-avril 2025, notification de juillet 2025, préparation de l'automne 2025, onze mois de chantier, opérations préalables du 22 juillet 2026 — matière d'une chronologie d'affaire, pas d'un circuit d'air.",
+    "Le lot électricité et ses neuf réseaux (tableaux, éclairage et éclairage de sécurité, chauffage électrique, précâblage VDI, alarme incendie, contrôle d'accès, anti-intrusion, vidéosurveillance), le désamiantage du bloc sanitaire, le classement ERP de 5ᵉ catégorie du seul secteur d'accueil, la RT existant élément par élément, les strates de construction du bâtiment : tous hors du mécanisme retenu — les porter ferait la liste des prestations, pas un dessin.",
+    "Les circulations de piétons, de camions et de visiteurs, le phasage en site exploité et les bungalows de relogement : ils tiennent à l'implantation de la parcelle, donc à l'ouvrage d'autrui (règle 4).",
+    "Toute géométrie d'ouvrage : ni plan, ni façade, ni implantation, ni distribution de pièces. Les locaux sont des blocs topologiques d'égale hauteur, l'enveloppe une paroi unique — la géométrie code la distance de la commande, jamais une surface ni un débit.",
+    "Les données que la fiche porte déjà : onze lots, onze mois, 595,6 m², les dates. Aucune colonne de relevé (révision 4) — les deux seuls chiffres du dessin, 1 020 et 540 m³/h, sont les organes eux-mêmes."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "deux grandeurs mesurables à la règle, aucune répétition de la fiche — (1) la LONGUEUR des trois lignes de commande, distance de la machine au point où le débit se décide : 0/250/532 px, croissante d'un circuit à l'autre ; (2) l'ÉPAISSEUR de la bande de chaleur APRÈS la machine, dans la même colonne (x 850–1116) pour les trois : 22/22/2.2 px — texte masqué, trois lignes qui s'allongent et un filet qui remplace une bande portent seuls la thèse",
+    "topologie": "local (x 56–280) → réseau → machine (x 620–850) → enveloppe (x 900–916) → dehors ; points de commande x 700/450/168, remontée commune à x 700 ; l'ordre des circuits est celui de l'énumération de la fiche",
+    "proportion_chaleur": "rendement dessiné au plancher de la fiche (90 %) : la bande qui revient vaut 19.8 px, celle qui part 2.2 px, pour 22 px emportés du local",
+    "bas_du_dessin": "dernier circuit jusqu'à 622, mention à 652, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 332 x 30 px = 9960 px², soit 1.04 % de la planche",
+    "aplats_encre": "bandes de chaleur 41461 px², soit 4.32 % de la planche — aplats d'encre sur papier (12,08), doublés d'une mention mono chacun",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas chiffrée (révision 4) ; les deux seuls nombres du dessin sont les débits portés par leur machine (1 020/540 m³/h), et le troisième circuit porte à leur place la mention de son absence",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "104 signes — 884 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "trois circuits, trois lignes de commande de longueur 0/76/150 px, la chaleur emportée du local (8 px) et celle qui revient au troisième (7.2 px) ; les deux débits restent, tout libellé part",
+    "proportion_non_dessinee": "la part qui PART après la machine (10 % de 8 px = 0.8 px, soit 0.73 px rendus dans une carte de 274) n'est pas dessinée : un sous-pixel n'est pas une proportion, c'est un arrondi. La planche la porte, la vignette la tait — comme elle tait ses libellés",
+    "bas_du_dessin": "dernière ligne de commande à 173, marge basse 23 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "trois circuits nommés par leur local, les deux débits portés, l'enveloppe traversée, et les trois lignes de commande avec la zone où chacune naît ; la chaleur emportée du local et celle qui revient au troisième — machines nommées, légendes, mention et phrase laissées à la planche",
+    "bas_du_dessin": "dernière étiquette de commande à 336, marge basse 28 px",
+    "proportion_non_dessinee": "la part qui PART après la machine vaudrait 1.6 px à l'échelle 1 : indiscernable du conduit de 1,4 px qui la surmonte. Même arbitrage qu'à la vignette — seule la planche, à 1152, la dessine",
+    "longueurs_de_commande": "0/124/284 px"
+  }
+}

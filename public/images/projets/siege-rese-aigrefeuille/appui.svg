@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la ventilation d'un bâtiment tertiaire restructuré : trois circuits d'air indépendants traversent une même enveloppe isolée par l'extérieur, et ce qui commande leur débit change d'un local à l'autre. Premier circuit, vestiaires et sanitaires : extraction mécanique permanente, le débit ne se décide nulle part. Deuxième circuit, bureaux : caisson d'extraction de 1 020 m³/h à moteurs à commutation électronique, régulation à pression constante — la commande naît dans le réseau. Troisième circuit, salle de réunion de trente places : centrale double flux de 540 m³/h pilotée par une sonde de CO2 posée dans le local, de sorte que l'occupation décide du débit. Son échangeur à contre-courant rend plus de 90 % de la chaleur à l'air neuf ; les deux autres circuits la laissent partir avec l'air rejeté.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">TROIS RÉGIMES D'AIR</text>
+  <rect x="420.00" y="44.00" width="10.00" height="264.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="24.00" y="50.00" width="128.00" height="38.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="34.00" y="70.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Vestiaires et</text>
+  <text x="34.00" y="86.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">sanitaires</text>
+  <rect x="300.00" y="50.00" width="88.00" height="38.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 152.00 69.00 L 300.00 69.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 240.00 69.00 L 233.00 65.50 L 233.00 72.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="152.00" y="78.00" width="148.00" height="16.00" class="c-encre" fill="#00393A"/>
+  <path d="M 388.00 69.00 L 508.00 69.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 516.00 69.00 L 509.00 65.50 L 509.00 72.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="388.00" y="78.00" width="112.00" height="16.00" class="c-encre" fill="#00393A"/>
+  <path d="M 344.00 106.00 L 344.00 95.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 344.00 88.00 L 340.50 95.00 L 347.50 95.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="344.00" cy="106.00" r="5.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.4"/>
+  <text x="332.50" y="124.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">À LA MACHINE</text>
+  <rect x="24.00" y="138.00" width="128.00" height="38.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="34.00" y="158.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bureaux</text>
+  <rect x="300.00" y="138.00" width="88.00" height="38.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 152.00 157.00 L 300.00 157.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 240.00 157.00 L 233.00 153.50 L 233.00 160.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="152.00" y="166.00" width="148.00" height="16.00" class="c-encre" fill="#00393A"/>
+  <path d="M 388.00 157.00 L 508.00 157.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 516.00 157.00 L 509.00 153.50 L 509.00 160.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="388.00" y="166.00" width="112.00" height="16.00" class="c-encre" fill="#00393A"/>
+  <text x="158.00" y="151.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">1 020 m³/h</text>
+  <path d="M 220.00 194.00 L 344.00 194.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 344.00 194.00 L 344.00 183.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 344.00 176.00 L 340.50 183.00 L 347.50 183.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="220.00" cy="194.00" r="5.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.4"/>
+  <text x="214.50" y="212.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DANS LE RÉSEAU</text>
+  <rect x="24.00" y="226.00" width="128.00" height="74.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="34.00" y="246.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Salle de réunion</text>
+  <rect x="300.00" y="226.00" width="88.00" height="74.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 152.00 245.00 L 300.00 245.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 240.00 245.00 L 233.00 241.50 L 233.00 248.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="152.00" y="254.00" width="148.00" height="16.00" class="c-encre" fill="#00393A"/>
+  <path d="M 388.00 245.00 L 508.00 245.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 516.00 245.00 L 509.00 241.50 L 509.00 248.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="158.00" y="239.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">540 m³/h</text>
+  <rect x="358.00" y="237.00" width="22.00" height="52.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 358.00 237.00 L 380.00 289.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 358.00 289.00 L 380.00 237.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 508.00 281.00 L 388.00 281.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 395.00 281.00 L 402.00 277.50 L 402.00 284.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 300.00 281.00 L 152.00 281.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 159.00 281.00 L 166.00 277.50 L 166.00 284.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="152.00" y="290.00" width="148.00" height="14.40" class="c-encre" fill="#00393A"/>
+  <path d="M 60.00 318.00 L 344.00 318.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 344.00 318.00 L 344.00 307.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 344.00 300.00 L 340.50 307.00 L 347.50 307.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="60.00" cy="318.00" r="5.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.4"/>
+  <text x="54.50" y="336.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DANS LE LOCAL</text>
+</svg>
