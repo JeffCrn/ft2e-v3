@@ -49,7 +49,7 @@ Tout `<script>` d'un composant `.astro` qui appelle `addEventListener` doit :
 
 - `src/layouts/BaseLayout.astro` — `initPlans` (révélation de plan, `data-plan`).
 - `src/components/layout/Header.astro` — `initMenu` (menu mobile).
-- `src/pages/references/index.astro` — filtres de nomenclature (guard `dataset.filtresBound`).
+- `src/pages/references/index.astro` — `initFiltres`, filtres par secteur de la grille de références (guard `dataset.filtresBound`).
 
 Citer les fonctions par **nom**, jamais par numéro de ligne : les lignes bougent à chaque refonte et la règle devient fausse sans que rien ne le signale. `Chiffre.astro` n'a plus de script — la v3 interdit les compteurs qui s'incrémentent (`.claude/rules/tailwind-design-tokens.md` § Interactions).
 
@@ -129,7 +129,7 @@ src/
 │   └── secteurs/*.md
 ├── lib/
 │   ├── constants.ts              # constantes de site (nav, chiffres clés, JSON-LD)
-│   └── projets.ts                # tri de nomenclature, libellé de référence
+│   └── projets.ts                # tri des affaires, titre court, chronologie, rang de statut
 ├── layouts/
 │   ├── BaseLayout.astro          # html/head/body, meta, fonts, révélation de plan
 │   └── PageLayout.astro          # header + footer wrapper

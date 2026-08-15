@@ -2,7 +2,7 @@
 
 **Scope** : tout fichier utilisant Tailwind (`.astro`, `.tsx`, `.html`).
 
-**Référence** : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026), bundle `branding-v3-bis/` — remplace la révision 2 (`branding-v3/`) et la révision 1 (`branding-v2/`). La 2.1 conserve la structure de la 2 et corrige **huit prescriptions** consignées à son § 16 (registre des amendements) : elles sont reportées ci-dessous sous les repères A1 à A8. Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
+**Référence** : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026), bundle `branding-v3-bis/` — remplace la révision 2 (`branding-v3/`) et la révision 1 (`branding-v2/`). La 2.1 conserve la structure de la 2 et corrige **huit prescriptions** consignées à son § 16 (registre des amendements) : elles sont reportées ci-dessous sous les repères A1 à A8. **A9 s'y ajoute, qui ne vient pas du PDF** : c'est un amendement d'application, arbitré ici le 2026-08-15 (index des références en grille de cartes). Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
 
 **Autorité** : en cas de contradiction entre la charte et un support existant, la charte prévaut. En cas de contradiction interne à la charte, **la mesure prévaut sur la règle**.
 
@@ -68,7 +68,7 @@ Sept rangs, pas huit. Chacun se distingue du précédent par **au moins deux par
 - **Substitution** (gabarit imposé, courrier bureautique) : **Arial** en normale ou grasse, sans variation de chasse ; **Consolas** ou **Menlo** pour le mono. Aucune autre, et **aucun serif**.
 - `.type-annexe` (chasse 72) a été **supprimé** : la 2.1 ne compte que sept rangs, et la hiérarchie passe par la graisse et l'opacité.
 
-## Les huit amendements de la révision 2.1 (§ 16)
+## Les amendements — huit de la charte (§ 16), un d'application (A9)
 
 | № | Objet | Révision 2 | Révision 2.1 — ce qui s'applique |
 |---|---|---|---|
@@ -80,6 +80,41 @@ Sept rangs, pas huit. Chacun se distingue du précédent par **au moins deux par
 | A6 | Liens en texte | non traité | **encre + soulignement 1 px, 2 px au survol, aucun changement de couleur** (`.lien-texte`) |
 | A7 | Graisse du corps | corps en 300, trois graisses | **corps en 400, chapô en 300, quatre graisses** |
 | A8 | Légende sur image | « dans la valeur opposée au fond » | **cartouche de réserve** (`.cartouche-legende`, voile sur profond, 16,24) — inapplicable sur photographie. Équerres toujours en voile |
+
+### A9 — l'index des références est une grille de cartes (2026-08-15)
+
+**A9 n'est pas au § 16 de la charte imprimée** : c'est un amendement d'**application**,
+arbitré le 2026-08-15 à la clôture du chantier des planches. Il est consigné ici parce que
+ce fichier fait foi sur le design ; ne pas le chercher dans le PDF de FT2E.
+
+| № | Objet | Révision 2.1 | Ce qui s'applique |
+|---|---|---|---|
+| A9 | Index `/references` | « liste tabulaire, **pas** une grille de cartes » | **grille de cartes** au gabarit commun du site (`CarteProjet`) — la prescription visait un objet disparu |
+
+La règle de la 2.1 réduisait la vignette à une pastille de 56 px **parce que la vignette
+était alors un extrait de plan au 1/50** : illisible à toute taille, autant n'en donner
+qu'une texture. Le chantier des planches a remplacé cet extrait par un **dessin composé
+pour être lu à 274–296 px**, et l'argument est tombé avec son objet. La charte tranche
+elle-même ce genre de conflit — *la mesure prévaut sur la règle* :
+
+| | Ligne de tableau (vignette agrandie) | Grille de cartes |
+|---|---|---|
+| Vignette servie à 1440 px | 220 px — échelle 0,73 | **274 px — échelle 0,91** |
+| Hauteur pour 23 fiches | 4 040 px | **1 904 px** |
+
+Un gain sur les deux axes, pas un compromis. Mesures relevées au navigateur.
+
+**Ce qui ne change pas** : le rang de statut reste encodé plusieurs fois, jamais par la
+seule couleur (RGAA 3.2) — et l'ordre de lecture des signes est désormais explicite,
+parce que la carte l'a inversé.
+
+1. **le mot**, au pied de chaque carte (`libelleChronologie` : « livraison 2026 », « en cours ») — c'est lui le porteur ;
+2. **la graisse de l'intitulé** (700 / 600 / 300), le seul signe *graphique* qui se voie d'une carte à l'autre ;
+3. **l'opacité du filet gauche** (22 / 16 / 12 %), qui subsiste par continuité : mesuré au rendu, 22 % contre 16 % d'encre sur un filet de 1 px ne se départagent pas à l'œil à travers une gouttière. En nomenclature, les lignes étaient contiguës et il portait seul ; en grille, il ne porte plus rien tout seul, et ne doit jamais être le seul signe.
+
+L'implémentation est `rangStatut()` (`src/lib/projets.ts`) + la prop **optionnelle** `rang`
+de `CarteProjet`. Optionnelle parce que le composant sert cinq pages : un changement de
+défaut ferait apparaître un signal de statut sur les quatre qui n'en veulent pas.
 
 **Implantation de la légende et des équerres (§ 13)** — la charte veut la légende **en bas à gauche** *et* les équerres intactes (« repère de tirage, jamais un encadrement ») : les deux ne peuvent pas se disputer l'angle. La géométrie tranche, et elle est **dérivée**, jamais réglée à l'œil. Les jetons `--equerre-cote` (18 px) et `--equerre-retrait` (5 px) donnent `--equerre-gouttiere` (28 px), dont découlent à la fois les quatre équerres de `CoinsCuivre` et la recette `.legende-media` :
 
@@ -121,7 +156,7 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
 - **Cellule de liste** `.cellule-liste` : calcaire, bordure 1 px `filet-1`, min-h 112 px, **numéro mono en tête, intitulé (112/600) en pied aligné à droite**, hover → papier 300 ms.
 - **Titre de section** : puce profonde 7 px + numéro `mono-label` pivot, puis `type-section` — mot porteur encre + complément clair précédé d'une barre oblique. Le mot porteur doit suffire au sens (le complément clair est toujours redondant ou accessoire — dérogation décorative documentée dans `accessibility-rgaa.md`).
 - **Cartouche** (`FicheTechnique.astro`) : plan posé (bordure 1 px, ombre rang 1), en-tête calcaire, filets internes 1 px par rangs d'opacité, données mono. **La barre de rang 4 px n'existe plus.** Calé à gauche, jamais centré.
-- **Nomenclature** (`/references`) : liste tabulaire, pas une grille de cartes. Rang par **opacité du filet gauche 1 px** (livré 22 % · en cours 16 % · archive 12 %) et **graisse de l'intitulé** (700/600/300). Plus de 4/2/1 px. Tout sur une page, la recherche filtre les lignes.
+- **Index des références** (`/references`) : **grille de cartes** `CarteProjet` — `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4`, sans palier `xl` (le conteneur plafonne à 1 200 px, donc (1 152 − 3 × 16) / 4 = 276 px de carte et **274 px de vignette**, la taille de conception exacte ; trois colonnes à `lg` serviraient 373 px à 1 279 px de fenêtre, soit la sur-échelle de 1,24 qui épaissit les filets du dessin de 24 %). Le rang de statut est encodé trois fois — **le mot** au pied, la **graisse de l'intitulé** (700/600/300), l'**opacité du filet gauche** (22/16/12 %) — voir **amendement A9**, qui remplace la prescription « liste tabulaire, pas une grille de cartes » de la révision 2.1. Toutes les fiches sur une page ; le filtre par secteur réduit la grille, il ne pagine pas.
 - **Relevé clair** (composé en clair dans `src/pages/index.astro`, § 01 — le composant `ChiffresCles.astro` a été supprimé le 2026-08-15, il n'était plus importé nulle part) : colonnes séparées par filets 1 px `filet-2`, bord haut `filet-1` ; par colonne : commentaire (Archivo 400, 14 px, pivot — **le commentaire précède le chiffre**) → étiquette mono « — libellé » → chiffre `.releve-chiffre`. **Un seul chiffre en encre pleine par relevé** (celui que la page défend), les autres en `.releve-retrait` — **au pivot** (amendement A1), jamais en encre 13 % (1,27 sur papier).
 - **Relevé encré** (fiche projet) : `.plan-encre`, chiffres `.releve-chiffre text-voile`, étiquettes `mono-label text-clair` — la réserve profonde de l'écran.
 - **Monogramme** (`Logo.astro`) : dessin inchangé (cadre ouvert + flux débordant) ; **hauteur minimale 28 px** à l'écran ; sous 180 px de place : `forme="cadre"`. Ne se déforme pas, ne reçoit ni ombre ni contour ; le débord ne se recadre jamais.

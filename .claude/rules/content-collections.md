@@ -64,8 +64,8 @@ reproduisait l'ouvrage, donc l'œuvre de l'architecte.
     et le JSON-LD : c'est la forme que le référencement indexe, et elle ne bouge pas ;
   - le `titre` du **`planche.json`** est court — « Néréa, 90 logements », deux à quatre
     mots, relu par FT2E et déjà composé à 30 px sur la planche. Il sert partout où le
-    titre n'est pas le sujet de la page : carte de projet, nomenclature, carte-lien de
-    la vedette.
+    titre n'est pas le sujet de la page : carte de projet, index des références,
+    carte-lien de la vedette.
 
   L'unique lecture passe par **`titreCourt()`** (`src/lib/projets.ts`) : aucun composant
   ne relit le JSON pour son compte. La fonction **échoue bruyamment** si le champ manque,

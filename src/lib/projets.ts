@@ -60,6 +60,43 @@ export function parAffaireDecroissante(a: Projet, b: Projet): number {
 }
 
 /**
+ * Rang de statut — l'encodage GRAPHIQUE, redondant par construction.
+ *
+ * La charte porte le rang par l'**opacité** d'un filet 1 px (livré 22 % ·
+ * en cours 16 % · archive 12 %) et par la **graisse** de l'intitulé
+ * (700 / 600 / 300). Deux signes, jamais un : un indicateur qui ne tiendrait
+ * qu'à une nuance de filet reposerait sur la seule couleur (RGAA 3.2), et
+ * 22 % contre 16 % d'encre ne se départagent pas à l'œil sur deux cartes
+ * éloignées d'une gouttière.
+ *
+ * Le troisième signe — le MOT — ne vit pas ici : il est déjà rendu par
+ * `libelleChronologie`, « livraison 2026 » ou « en cours ». Le seul cas qu'il
+ * ne couvre pas est l'archive réceptionnée, que `CarteProjet` mentionne
+ * explicitement. Le corpus n'en compte aucune au 2026-08-15 (9 livrées,
+ * 14 en cours), mais le schéma l'admet.
+ *
+ * Ces classes ne servent qu'à `/references` : ailleurs, le statut n'est pas
+ * l'axe de comparaison et un signal de rang y serait du bruit. D'où la prop
+ * optionnelle de `CarteProjet` plutôt qu'un changement de défaut.
+ */
+export type RangStatut = {
+  /** Bordure gauche du plan posé — le rang par l'opacité d'encre. */
+  filet: string;
+  /** Graisse de l'intitulé — le second signe, celui qui se voit. */
+  graisse: string;
+};
+
+const RANGS: Record<Projet['data']['statut'], RangStatut> = {
+  livré: { filet: 'border-l-filet-1', graisse: 'font-bold' },
+  'en cours': { filet: 'border-l-filet-2', graisse: 'font-semibold' },
+  archive: { filet: 'border-l-filet-3', graisse: 'font-light' },
+};
+
+export function rangStatut(projet: Projet): RangStatut {
+  return RANGS[projet.data.statut];
+}
+
+/**
  * Chronologie publique d'une affaire — l'unique implémentation de la règle
  * (ADR-003). Le numéro d'affaire et le millésime d'ouverture sont une
  * nomenclature interne : ils ne s'affichent plus nulle part. Ce que le
