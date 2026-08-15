@@ -17,9 +17,20 @@
  * ── Pourquoi un `<img>` brut et non `astro:assets` ────────────────────────
  * La convention du dépôt veut `<Image>` « sauf cas explicite ». En voici un :
  * `astro:assets` ré-encode à la volée, et une marque de certification doit se
- * reproduire à l'identique. Le fichier est donc préparé UNE fois, hors build —
- * rogné à sa zone de protection uniforme, réduit à 640 px, WebP qualité 92,
- * 31 ko — et servi tel quel.
+ * reproduire à l'identique. Le fichier est donc préparé UNE fois, hors build,
+ * et servi tel quel : 640 × 436, WebP à couche alpha, qualité 90, 62 ko.
+ *
+ * ── Fond TRANSPARENT, et ce qu'il implique ────────────────────────────────
+ * La marque n'a pas de champ blanc : elle se pose à même la page. Sur le
+ * calcaire du pied comme sur le papier d'un plan, elle cesse de se lire comme
+ * une vignette rapportée. C'est ce qui la fait entrer dans le système sans que
+ * ses couleurs y entrent.
+ *
+ * ⚠ Deux zones de la marque sont AJOURÉES, pas blanches : le mot « CERTIFICAT »
+ * et l'intérieur du cadre du numéro. Elles prennent la couleur du fond sur
+ * lequel la marque est posée. **Elle ne peut donc être posée que sur un fond
+ * clair** — papier, calcaire. Sur la réserve profonde, ces ajours deviendraient
+ * sombres et l'encre de la marque disparaîtrait.
  *
  * ── Le numéro de certificat ───────────────────────────────────────────────
  * Il est INTÉGRÉ à la marque par l'OPQIBI, qui le veut affiché avec elle. Il
@@ -29,9 +40,19 @@
  * — d'où le plancher ci-dessous, qui fait échouer le build plutôt que de
  * laisser passer une marque dont la moitié ne se lit plus.
  *
- * ⚠ PROVISOIRE : le fichier vient d'un JPEG texturé de 1 200 px, pas du kit
- * officiel de l'OPQIBI. À remplacer par le vectoriel dès que FT2E le fournit —
- * seul le fichier change, l'appelant ne bouge pas.
+ * ⚠ PROVISOIRE, et plus encore depuis le passage à la transparence : le fichier
+ * a été RECONSTRUIT depuis une capture JPEG où la transparence était dessinée
+ * en damier. La couche alpha est calculée, pas fournie — α tiré du canal rouge
+ * (les deux couleurs de la marque y sont presque confondues, 24 et 31, ce qui
+ * rend une seule équation valable pour les deux), damier de 20 px reconstruit
+ * par parité pour connaître le fond localement, puis nettoyage morphologique
+ * du moucheté de compression : ne survit que l'alpha partiel adjacent à de la
+ * matière pleine, un bord anticrénelé l'étant toujours, un artefact jamais.
+ * Résidu mesuré après nettoyage : 0,00 % hors de la zone de marque.
+ *
+ * Cela reste une dérivation d'une source avec perte. **À remplacer par le
+ * vectoriel officiel dès que FT2E le fournit** — seul le fichier change,
+ * l'appelant ne bouge pas.
  */
 interface Props {
   /** Largeur d'affichage en px. Plancher 200 : en dessous, le numéro de
