@@ -1,12 +1,12 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
+import { Picture } from 'astro:assets';
 import PageLayout from '../layouts/PageLayout.astro';
 import HeroPage from '../components/blocs/HeroPage.astro';
 import Bouton from '../components/primitives/Bouton.astro';
 import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
 import MarqueOpqibi from '../components/blocs/MarqueOpqibi.astro';
+import { photoEquipe, CHEMIN_COLLECTIF } from '../lib/photos';
 
 // Outils du bureau — relevés sur la plaquette 2024 (docs/20-source-plaquette-2024.md,
 // § Qualifications & outils). Rien n'est ajouté à cette liste : ce sont des
@@ -32,7 +32,7 @@ const ficheIdentite = [
 
 // Bandeau 21:8 (charte v3 : bandeau / 16:10 / 3:2 seulement) — photo
 // collective en duotone 197°, hachure claire en attendant le reportage.
-const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/images/equipe/collectif.jpg'));
+const collectif = photoEquipe(CHEMIN_COLLECTIF);
 ---
 
 <PageLayout
@@ -86,10 +86,13 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
       </div>
 
       {/* Bandeau 21:8 en duotone — repères d'équerres, une seule annotation. */}
-      <div class:list={['relative aspect-[21/8] mt-12 md:mt-16', collectifExiste ? 'duotone-photo' : 'duotone-media']}>
-        {collectifExiste && (
-          <img
-            src="/images/equipe/collectif.jpg"
+      <div class:list={['relative aspect-[21/8] mt-12 md:mt-16', collectif ? 'duotone-photo' : 'duotone-media']}>
+        {collectif && (
+          <Picture
+            src={collectif}
+            formats={['avif', 'webp']}
+            widths={[640, 1024, 1376]}
+            sizes="(min-width: 1200px) 1152px, (min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"
             alt="L’équipe FT2E réunie dans ses locaux à La Rochelle"
             class="w-full h-full object-cover"
             loading="lazy"
@@ -97,8 +100,8 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
         )}
         <CoinsCuivre taille={18} />
         <div class="absolute left-[12.5%] bottom-5 flex items-center gap-2.5 z-10" aria-hidden="true">
-          <span class:list={['block w-14 h-px', collectifExiste ? 'bg-voile' : 'bg-pivot']}></span>
-          <span class:list={['mono-label font-normal text-[10px]', collectifExiste ? 'text-voile' : 'text-pivot']}>ft2e — la rochelle, depuis 2008</span>
+          <span class:list={['block w-14 h-px', collectif ? 'bg-voile' : 'bg-pivot']}></span>
+          <span class:list={['mono-label font-normal text-[10px]', collectif ? 'text-voile' : 'text-pivot']}>ft2e — la rochelle, depuis 2008</span>
         </div>
       </div>
     </div>

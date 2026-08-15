@@ -9,8 +9,10 @@ import CarteProjet from '../components/blocs/CarteProjet.astro';
 import Bouton from '../components/primitives/Bouton.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
 import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
+import { Picture } from 'astro:assets';
 import { CHIFFRES_CLES } from '../lib/constants';
 import { commune, parAffaireDecroissante, libelleChronologie, titreCourt } from '../lib/projets';
+import { photoEquipe, CHEMIN_COLLECTIF } from '../lib/photos';
 
 // Média du hero (écran 1 de la charte) : l'image recule dans sa colonne,
 // elle ne porte pas le titre. Projet mis en avant le plus récent.
@@ -72,7 +74,7 @@ const projetsRecents = [
   ...tousProjets.filter((p) => !p.data.en_avant),
 ].slice(0, 4);
 
-const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/images/equipe/collectif.jpg'));
+const collectif = photoEquipe(CHEMIN_COLLECTIF);
 
 // Maîtres d'ouvrage et clients réels cités dans la plaquette FT2E 2024
 // (docs/20-source-plaquette-2024.md) — données vérifiées, pas de badge démo.
@@ -291,10 +293,13 @@ const partenaires = [
           </h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-8">
-            <div class:list={['relative w-full aspect-[3/2]', collectifExiste ? 'duotone-photo' : 'duotone-media']}>
-              {collectifExiste && (
-                <img
-                  src="/images/equipe/collectif.jpg"
+            <div class:list={['relative w-full aspect-[3/2]', collectif ? 'duotone-photo' : 'duotone-media']}>
+              {collectif && (
+                <Picture
+                  src={collectif}
+                  formats={['avif', 'webp']}
+                  widths={[420, 700, 1024]}
+                  sizes="(min-width: 1200px) 552px, (min-width: 768px) calc(50vw - 48px), calc(100vw - 32px)"
                   alt="L’équipe FT2E réunie dans ses locaux à La Rochelle"
                   class="w-full h-full object-cover"
                   loading="lazy"

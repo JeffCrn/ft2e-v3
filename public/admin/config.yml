@@ -355,6 +355,16 @@ collections:
         name: "photo"
         widget: "image"
         required: true
+        # Depuis le 2026-08-16 les photographies d'équipe vivent dans
+        # `src/assets/equipe/`, pas dans `public/` : `astro:assets` ne traite que
+        # ce qu'il RÉSOUT depuis `src/`, et `public/` est recopié tel quel.
+        # Le chemin ENREGISTRÉ dans le .md reste public (`/images/equipe/…`) —
+        # c'est le rendu qui le résout (src/lib/photos.ts). Sans ces deux lignes,
+        # Decap déposerait le fichier dans `public/images/`, où le site ne le
+        # verrait jamais et où il tomberait sur le repli en hachure.
+        media_folder: "/src/assets/equipe"
+        public_folder: "/images/equipe"
+        hint: "Déposée dans src/assets/equipe/, enregistrée comme /images/equipe/<fichier>. Le site en tire l'AVIF, le WebP et le srcset au build — ne pas pré-compresser."
 
       - label: "Texte alternatif photo"
         name: "photo_alt"

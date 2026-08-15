@@ -63,57 +63,111 @@ Citer les fonctions par **nom**, jamais par numéro de ligne : les lignes bougen
 </script>
 ```
 
-## Images optionnelles & fs.existsSync
+## Photographies optionnelles — le glob remplace `fs.existsSync` (2026-08-16)
 
-**Portée réduite depuis le 2026-08-15.** Ce motif servait d'abord les visuels de fiches
-projet ; ces fiches n'ont plus de visuel photographique — leur champ `image_principale` a
-été retiré du modèle à la clôture du chantier des planches, et `planche` est devenu
-obligatoire. Le motif ne concerne plus que les **photographies d'équipe**, dont les
-fichiers arriveront au reportage professionnel et manquent aujourd'hui.
+**`fs.existsSync` n'est plus le motif des photographies.** Il testait la présence d'un
+fichier dans `public/` ; les huit photographies d'équipe ont quitté `public/` pour
+`src/assets/equipe/`, et un `import.meta.glob` fait désormais **les deux métiers à la
+fois** — résoudre l'image *et* signaler son absence.
 
-La règle, elle, ne change pas : un chemin d'image déclaré côté contenu sans que le fichier
-soit présent dans `public/` produit une icône d'image cassée. Les composants qui rendent
-ces images **vérifient la présence du fichier au build via `fs.existsSync`** et basculent
-sur un placeholder en l'absence.
+### Pourquoi le déplacement, et pas seulement un `<Image>`
+
+`astro:assets` ne traite que ce qu'il **résout au build depuis `src/`**. `public/` est
+recopié tel quel : ce n'est pas un pipeline, c'est un répertoire. Envelopper un
+`<img src="/images/…">` dans `<Image>` n'aurait donc rien produit — ni AVIF, ni WebP,
+ni `srcset`. Mesuré avant migration : `/equipe/` pesait **4 766 Kio** pour huit JPEG
+bruts de 452 à 846 Ko. Après : **243 Kio**.
+
+**Le champ Zod n'a pas bougé.** Le frontmatter continue de nommer
+`/images/equipe/mathieu.jpg` — la graphie que documente
+`content-models/membre-equipe.schema.md`, qu'écrit Decap et que relit FT2E. Elle décrit
+ce que le visiteur verra, pas où le fichier dort dans le dépôt : **c'est au rendu
+d'apprendre à la résoudre**, pas au contenu de connaître l'arborescence des sources.
 
 ### Pattern de référence
 
-```astro
----
-import fs from 'node:fs';
-import path from 'node:path';
+Le résolveur vit une fois pour toutes dans `src/lib/photos.ts` :
 
-const { membre } = Astro.props;
-const photoExiste = fs.existsSync(path.join(process.cwd(), 'public', membre.data.photo));
----
+```ts
+const modules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/equipe/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true },          // sans `eager`, le glob rend des imports asynchrones
+);                          // que <Picture> ne peut pas consommer au build
 
-{photoExiste ? (
-  <img src={membre.data.photo} alt={membre.data.photo_alt}
-       class="w-full h-full object-cover" loading="lazy" />
-) : (
-  <div class="duotone-media flex items-center justify-center">
-    <p class="mono-label text-pivot">[Photo à venir]</p>
-  </div>
-)}
+export function photoEquipe(chemin: string): ImageMetadata | null { … }
 ```
 
-### Pourquoi ça marche
+et la page l'appelle :
 
-`fs.existsSync` s'exécute en **Node au moment de `astro build`**, puisque le projet est en
-`output: 'static'`. Pas de fs côté client, pas de SSR. Si la stack bascule un jour en
-SSR/edge runtime, il faudra refactorer vers `astro:assets` (`<Image>` qui gère sa propre
-résolution build-time).
+```astro
+---
+import { Picture } from 'astro:assets';
+import { photoEquipe } from '../lib/photos';
 
-### Exemples dans le codebase
+const photo = photoEquipe(membre.data.photo);   // null si le fichier manque
+---
 
-Citer par **nom de constante**, jamais par numéro de ligne — les lignes bougent.
+<div class:list={['aspect-[3/2]', photo ? 'duotone-photo' : 'duotone-media']}>
+  {photo && (
+    <Picture src={photo} formats={['avif', 'webp']}
+             widths={[200, 400, 660]}
+             sizes="(min-width: 1280px) 164px, (min-width: 768px) 25vw, 50vw"
+             alt={membre.data.photo_alt}
+             class="w-full h-full object-cover" loading="lazy" />
+  )}
+</div>
+```
 
-- `src/pages/equipe.astro` — `collectifExiste`, et le pré-calcul `hasPhoto` des avatars.
-- `src/pages/index.astro` — `collectifExiste` pour la photographie collective.
+**Un seul mécanisme pour deux métiers** : l'absence d'entrée dans le glob *est* l'absence
+de fichier. Le code précédent en tenait deux en cohérence — `fs.existsSync` pour tester,
+une chaîne pour servir. Il n'y a donc plus de garde-fou à maintenir à côté de ce qu'il
+garde.
 
-`src/pages/index.astro` emploie aussi `fs.readFileSync` pour **inliner l'appui de la fiche
-vedette** : ce n'est pas le même motif — l'appui est produit par le protocole des planches
-et sa présence est garantie par `verser.py`, il n'y a donc rien à tester.
+⚠ **Le repli est la hachure `duotone-media`, PAS un libellé.** La version antérieure de
+cette règle montrait un « [Photo à venir] » qu'**aucune page n'a jamais rendu** : les
+trois emplacements se contentaient d'un plan vide. La règle décrit maintenant le code.
+Ne pas « rétablir » le libellé sans arbitrage — le site est en démonstration client, et
+une hachure se lit comme un placeholder dessiné là où un libellé se lit comme un site
+inachevé.
+
+### `<Picture>` casse le duotone si l'on n'y prend pas garde
+
+`<Picture>` interpose un `<picture>` entre le plan et son image — c'est le prix de
+l'AVIF. Or `global.css` écrit le duotone en **sélecteur d'enfant direct**
+(`.duotone-photo > img`). Deux conséquences, dont **aucune ne se signale au build** :
+
+1. le sélecteur cesse de mordre → le duotone tombe et **les couleurs natives
+   reviennent**, ce que la charte interdit ;
+2. le `h-full` de l'image se résout contre un parent inline de hauteur auto → la mise
+   en page tombe.
+
+Les deux se règlent ensemble dans `global.css` : `.duotone-photo > picture { display:
+contents }` (retire le `<picture>` de la mise en page sans le retirer du DOM) et
+`.duotone-photo > picture > img` ajouté au sélecteur. **Se contrôle en computed style,
+pas à l'œil** — `filter: grayscale(1) contrast(1.05)` et `mix-blend-mode: lighten` sur
+l'image, `display: contents` sur le `<picture>`.
+
+### La photographie collective est rendue à TROIS endroits
+
+`src/pages/index.astro`, `src/pages/equipe.astro` **et** `src/pages/societe.astro`
+(bandeau 21:8). Les trois passent par la constante `CHEMIN_COLLECTIF` de
+`src/lib/photos.ts` : le chemin n'est plus recopié, et c'est par là que la troisième
+occurrence pouvait être manquée.
+
+**Seul `/equipe/` charge sa photographie en `eager` + `fetchpriority="high"`** — c'est
+le seul des trois où elle est au-dessus de la ligne de flottaison, et Lighthouse la
+désigne comme l'élément LCP (audit `lcp-discovery-insight`, dont la checklist nomme
+`eagerlyLoaded` et `priorityHinted`). Ailleurs elle est loin en bas et reste en `lazy`.
+
+### Ce qui reste du motif `fs`
+
+`src/pages/index.astro` emploie encore `fs.readFileSync` pour **inliner l'appui de la
+fiche vedette** : ce n'est pas le même motif — l'appui est produit par le protocole des
+planches et sa présence est garantie par `verser.py`, il n'y a donc rien à tester.
+De même `src/lib/projets.ts` (`titreCourt`) lit un `planche.json` garanti présent, et
+**échoue bruyamment** en son absence. La différence avec les photographies est le
+statut de l'absence : une planche manquante signale une rupture, une photographie
+manquante est un état de production normal jusqu'au reportage.
 
 ## Structure attendue
 

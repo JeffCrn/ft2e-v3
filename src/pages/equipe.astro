@@ -1,22 +1,22 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
 import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
 import PageLayout from '../layouts/PageLayout.astro';
 import HeroPage from '../components/blocs/HeroPage.astro';
 import Bouton from '../components/primitives/Bouton.astro';
 import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
+import { photoEquipe, CHEMIN_COLLECTIF } from '../lib/photos';
 
+// `photoEquipe` résout le chemin du frontmatter vers l'image importée, et
+// rend `null` quand le fichier manque — un seul mécanisme là où il en
+// fallait deux (voir src/lib/photos.ts).
 const membres = (await getCollection('equipe'))
   .sort((a, b) => a.data.ordre - b.data.ordre)
-  .map((m) => ({
-    ...m.data,
-    hasPhoto: fs.existsSync(path.join(process.cwd(), 'public', m.data.photo)),
-  }));
+  .map((m) => ({ ...m.data, photo_src: photoEquipe(m.data.photo) }));
 
-const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/images/equipe/collectif.jpg'));
+const collectif = photoEquipe(CHEMIN_COLLECTIF);
 ---
 
 <PageLayout
@@ -39,14 +39,24 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
       <div class="plan-pose p-6 md:p-10" data-plan>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
+          {/* Seul emplacement des trois où la photographie collective est
+              AU-DESSUS de la ligne de flottaison : `lcp-discovery-insight`
+              la désigne comme l'élément LCP de la page. Elle se charge donc
+              en `eager` + `fetchpriority="high"` — un `lazy` y retarderait
+              la requête jusqu'après la mise en page. Sur `/` et `/societe`,
+              où elle est loin en bas, `lazy` reste le bon réglage. */}
           <div class="relative">
-            <div class:list={['w-full aspect-[3/2]', collectifExiste ? 'duotone-photo' : 'duotone-media']}>
-              {collectifExiste && (
-                <img
-                  src="/images/equipe/collectif.jpg"
+            <div class:list={['w-full aspect-[3/2]', collectif ? 'duotone-photo' : 'duotone-media']}>
+              {collectif && (
+                <Picture
+                  src={collectif}
+                  formats={['avif', 'webp']}
+                  widths={[420, 700, 1024]}
+                  sizes="(min-width: 1200px) 512px, (min-width: 768px) calc(50vw - 88px), calc(100vw - 80px)"
                   alt="L’équipe FT2E réunie dans ses locaux à La Rochelle"
                   class="w-full h-full object-cover"
-                  loading="lazy"
+                  loading="eager"
+                  fetchpriority="high"
                 />
               )}
               <span
@@ -90,10 +100,13 @@ const collectifExiste = fs.existsSync(path.join(process.cwd(), 'public', '/image
         <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-px bg-filet-2">
           {membres.map((membre) => (
             <div class="bg-papier">
-              <div class:list={['aspect-[3/2]', membre.hasPhoto ? 'duotone-photo' : 'duotone-media']}>
-                {membre.hasPhoto && (
-                  <img
-                    src={membre.photo}
+              <div class:list={['aspect-[3/2]', membre.photo_src ? 'duotone-photo' : 'duotone-media']}>
+                {membre.photo_src && (
+                  <Picture
+                    src={membre.photo_src}
+                    formats={['avif', 'webp']}
+                    widths={[200, 400, 660]}
+                    sizes="(min-width: 1280px) 164px, (min-width: 768px) 25vw, 50vw"
                     alt={membre.photo_alt}
                     class="w-full h-full object-cover"
                     loading="lazy"

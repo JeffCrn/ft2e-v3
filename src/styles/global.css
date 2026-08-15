@@ -593,11 +593,24 @@ body {
     isolation: isolate;
     background: var(--color-profond);
   }
+  /* `<Picture>` (astro:assets) interpose un <picture> entre le plan et son
+     image — c'est le prix de l'AVIF et du WebP. Deux conséquences, et aucune
+     ne se signale au build :
+     1. le sélecteur d'enfant direct ci-dessous cesserait de mordre, donc le
+        duotone tomberait et les COULEURS NATIVES reviendraient (interdit) ;
+     2. le `h-full` de l'image se résoudrait contre un parent inline de
+        hauteur auto, donc la mise en page tomberait.
+     `display: contents` retire le <picture> de la mise en page sans le
+     retirer du DOM : l'image redevient l'enfant de mise en page du plan. */
+  .duotone-photo > picture {
+    display: contents;
+  }
   /* Le sandwich s'applique aussi à une carte embarquée : la charte ne
      tolère « aucune image en couleurs d'origine, aucune image en gris
      neutres » — le gris neutre est hors axe, donc hors système. Le voile
      en `darken` est en `pointer-events: none`, la carte reste manipulable. */
   .duotone-photo > img,
+  .duotone-photo > picture > img,
   .duotone-photo > iframe {
     filter: grayscale(100%) contrast(1.05);
     mix-blend-mode: lighten;

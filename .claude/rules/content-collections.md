@@ -106,9 +106,16 @@ Deux conséquences pour qui édite une fiche :
 ## Référence vers les images
 
 - Les cinq pièces d'une planche dans `public/images/projets/{slug}/`, jamais ailleurs.
-- Les photographies d'**équipe** (`public/images/equipe/`) restent référencées par chemin
-  relatif depuis `public/` dans le frontmatter, avec **alt text obligatoire** (champ Zod
-  requis) — c'est le seul endroit du site où une photographie est encore attendue.
+- Les photographies d'**équipe** restent référencées **dans le frontmatter** par leur
+  chemin public — `/images/equipe/<fichier>.jpg` — avec **alt text obligatoire** (champ
+  Zod requis). C'est le seul endroit du site où une photographie est encore attendue.
+  ⚠ **Depuis le 2026-08-16, les fichiers eux-mêmes vivent dans `src/assets/equipe/`**,
+  pas dans `public/` : `astro:assets` ne traite que ce qu'il résout depuis `src/`, et
+  `public/` est recopié tel quel. Le chemin du frontmatter n'a pas changé pour autant —
+  il décrit ce que le visiteur verra, et c'est le rendu qui le résout, par le glob de
+  `src/lib/photos.ts` (voir `.claude/rules/astro-conventions.md` § Photographies
+  optionnelles). **Déposer une photographie dans `public/images/equipe/` ne l'affichera
+  pas.**
 
 ## Récit projet (corps Markdown)
 
