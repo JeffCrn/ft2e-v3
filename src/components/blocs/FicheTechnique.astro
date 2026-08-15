@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BadgeDemo from '../primitives/BadgeDemo.astro';
-import { chronologie } from '../../lib/projets';
+import { chronologie, commune } from '../../lib/projets';
 
 // Cartouche de fiche d'affaire — charte v3 (§ 10) : un plan posé (bordure
 // 1 px, ombre de rang 1), en-tête sur calcaire, lignes séparées par des
@@ -15,14 +15,17 @@ interface Props {
 const { projet } = Astro.props;
 const { secteur, typologie, moa, architecte, lieu, surface_m2, mission_ft2e, demo } = projet.data;
 
-// Chronologie publique (ADR-003) : « livraison 2024 » quand la réception est
-// prononcée, « statut · en cours » sinon. Le numéro d'affaire et le millésime
-// d'ouverture restent au frontmatter et au JSON-LD, jamais à l'écran.
+// Chronologie publique (ADR-003) : toujours « livraison », le millésime de
+// réception quand elle est prononcée, celui annoncé sinon (2026-08-15). Le
+// numéro d'affaire et le millésime d'ouverture restent au frontmatter et au
+// JSON-LD, jamais à l'écran.
 const chrono = chronologie(projet);
 
 const lignes = [
   { label: chrono.label, valeur: chrono.valeur, rang: 'encre' },
-  { label: 'lieu', valeur: lieu, rang: 'encre' },
+  // La commune et son code postal, jamais l'adresse de chantier : le cartouche
+  // est un bloc de lecture rapide, pas une fiche d'acheminement.
+  { label: 'lieu', valeur: commune(lieu).libelle, rang: 'encre' },
   { label: "maître d’ouvrage", valeur: moa, rang: 'pivot' },
   { label: 'architecte', valeur: architecte, rang: 'pivot' },
   { label: 'surface', valeur: surface_m2 ? `${surface_m2.toLocaleString('fr-FR')} m²` : undefined, rang: 'pivot' },

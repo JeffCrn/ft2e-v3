@@ -104,17 +104,25 @@ elle-même ce genre de conflit — *la mesure prévaut sur la règle* :
 
 Un gain sur les deux axes, pas un compromis. Mesures relevées au navigateur.
 
-**Ce qui ne change pas** : le rang de statut reste encodé plusieurs fois, jamais par la
-seule couleur (RGAA 3.2) — et l'ordre de lecture des signes est désormais explicite,
-parce que la carte l'a inversé.
+**Le rang de statut n'existe plus — et ce n'est pas la grille qui l'a supprimé.** Il a
+d'abord été transposé en carte, encodé trois fois (le mot au pied, la graisse de
+l'intitulé, l'opacité du filet gauche). Puis, le même jour, la chronologie a cessé
+d'afficher « en cours » : **le site annonce une livraison sur toutes les fiches**
+(`MILLESIME_LIVRAISON_ANNONCE`, voir la § « La chronologie » de `CLAUDE.md`). Le mot
+portait le sens ; sans lui, la graisse et l'opacité ne renvoyaient plus à aucune
+information publiée.
 
-1. **le mot**, au pied de chaque carte (`libelleChronologie` : « livraison 2026 », « en cours ») — c'est lui le porteur ;
-2. **la graisse de l'intitulé** (700 / 600 / 300), le seul signe *graphique* qui se voie d'une carte à l'autre ;
-3. **l'opacité du filet gauche** (22 / 16 / 12 %), qui subsiste par continuité : mesuré au rendu, 22 % contre 16 % d'encre sur un filet de 1 px ne se départagent pas à l'œil à travers une gouttière. En nomenclature, les lignes étaient contiguës et il portait seul ; en grille, il ne porte plus rien tout seul, et ne doit jamais être le seul signe.
+C'est la règle générale, et elle vaut au-delà de ce cas : **un signe graphique se retire
+avec ce qu'il signifiait.** Le garder « au cas où » laisse une inégalité typographique
+d'une carte à l'autre, que le visiteur lit comme une irrégularité de fabrication et non
+comme un signal. `rangStatut()` a donc été supprimé de `src/lib/projets.ts`, la prop
+`rang` de `CarteProjet` avec lui, et la ligne de légende qui donnait la clé.
 
-L'implémentation est `rangStatut()` (`src/lib/projets.ts`) + la prop **optionnelle** `rang`
-de `CarteProjet`. Optionnelle parce que le composant sert cinq pages : un changement de
-défaut ferait apparaître un signal de statut sur les quatre qui n'en veulent pas.
+Si le statut redevient un jour une information publiée, la règle à réappliquer est celle
+qui a présidé ici : **le mot porte, le reste double** — jamais l'inverse, et jamais la
+seule couleur (RGAA 3.2). Mesuré au rendu, 22 % contre 16 % d'encre sur un filet de 1 px
+ne se départagent pas à l'œil à travers une gouttière ; en nomenclature les lignes étaient
+contiguës et le filet pouvait porter seul, en grille non.
 
 **Implantation de la légende et des équerres (§ 13)** — la charte veut la légende **en bas à gauche** *et* les équerres intactes (« repère de tirage, jamais un encadrement ») : les deux ne peuvent pas se disputer l'angle. La géométrie tranche, et elle est **dérivée**, jamais réglée à l'œil. Les jetons `--equerre-cote` (18 px) et `--equerre-retrait` (5 px) donnent `--equerre-gouttiere` (28 px), dont découlent à la fois les quatre équerres de `CoinsCuivre` et la recette `.legende-media` :
 
@@ -156,7 +164,7 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
 - **Cellule de liste** `.cellule-liste` : calcaire, bordure 1 px `filet-1`, min-h 112 px, **numéro mono en tête, intitulé (112/600) en pied aligné à droite**, hover → papier 300 ms.
 - **Titre de section** : puce profonde 7 px + numéro `mono-label` pivot, puis `type-section` — mot porteur encre + complément clair précédé d'une barre oblique. Le mot porteur doit suffire au sens (le complément clair est toujours redondant ou accessoire — dérogation décorative documentée dans `accessibility-rgaa.md`).
 - **Cartouche** (`FicheTechnique.astro`) : plan posé (bordure 1 px, ombre rang 1), en-tête calcaire, filets internes 1 px par rangs d'opacité, données mono. **La barre de rang 4 px n'existe plus.** Calé à gauche, jamais centré.
-- **Index des références** (`/references`) : **grille de cartes** `CarteProjet` — `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4`, sans palier `xl` (le conteneur plafonne à 1 200 px, donc (1 152 − 3 × 16) / 4 = 276 px de carte et **274 px de vignette**, la taille de conception exacte ; trois colonnes à `lg` serviraient 373 px à 1 279 px de fenêtre, soit la sur-échelle de 1,24 qui épaissit les filets du dessin de 24 %). Le rang de statut est encodé trois fois — **le mot** au pied, la **graisse de l'intitulé** (700/600/300), l'**opacité du filet gauche** (22/16/12 %) — voir **amendement A9**, qui remplace la prescription « liste tabulaire, pas une grille de cartes » de la révision 2.1. Toutes les fiches sur une page ; le filtre par secteur réduit la grille, il ne pagine pas.
+- **Index des références** (`/references`) : **grille de cartes** `CarteProjet` — `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4`, sans palier `xl` (le conteneur plafonne à 1 200 px, donc (1 152 − 3 × 16) / 4 = 276 px de carte et **274 px de vignette**, la taille de conception exacte ; trois colonnes à `lg` serviraient 373 px à 1 279 px de fenêtre, soit la sur-échelle de 1,24 qui épaissit les filets du dessin de 24 %). Cartes **strictement homogènes** — aucun rang de statut, ni filet, ni graisse : voir **amendement A9**, qui remplace la prescription « liste tabulaire, pas une grille de cartes » de la révision 2.1. Toutes les fiches sur une page ; le filtre par secteur réduit la grille, il ne pagine pas.
 - **Relevé clair** (composé en clair dans `src/pages/index.astro`, § 01 — le composant `ChiffresCles.astro` a été supprimé le 2026-08-15, il n'était plus importé nulle part) : colonnes séparées par filets 1 px `filet-2`, bord haut `filet-1` ; par colonne : commentaire (Archivo 400, 14 px, pivot — **le commentaire précède le chiffre**) → étiquette mono « — libellé » → chiffre `.releve-chiffre`. **Un seul chiffre en encre pleine par relevé** (celui que la page défend), les autres en `.releve-retrait` — **au pivot** (amendement A1), jamais en encre 13 % (1,27 sur papier).
 - **Relevé encré** (fiche projet) : `.plan-encre`, chiffres `.releve-chiffre text-voile`, étiquettes `mono-label text-clair` — la réserve profonde de l'écran.
 - **Monogramme** (`Logo.astro`) : dessin inchangé (cadre ouvert + flux débordant) ; **hauteur minimale 28 px** à l'écran ; sous 180 px de place : `forme="cadre"`. Ne se déforme pas, ne reçoit ni ombre ni contour ; le débord ne se recadre jamais.

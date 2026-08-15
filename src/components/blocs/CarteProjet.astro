@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import PlancheReference from './PlancheReference.astro';
-import { chronologie, libelleChronologie, rangStatut, titreCourt } from '../../lib/projets';
+import { commune, libelleChronologie, titreCourt } from '../../lib/projets';
 
 // Vignette de projet — charte v3 (§ 09/10) : un plan posé (bordure 1 px
 // filet-2, ombre de rang 1), vignette de planche 3:2, pied cartouche
@@ -14,48 +14,27 @@ import { chronologie, libelleChronologie, rangStatut, titreCourt } from '../../l
 // mais un chemin mort.
 interface Props {
   projet: CollectionEntry<'projets'>;
-  /**
-   * Affiche le rang de statut : filet gauche par l'opacité + graisse de
-   * l'intitulé (voir `rangStatut`). **Réservé à `/references`**, la seule page
-   * où le statut est l'axe de comparaison — le composant sert cinq pages, et
-   * un changement de défaut ferait apparaître un signal de statut sur les
-   * quatre qui n'en veulent pas.
-   */
-  rang?: boolean;
 }
 
-const { projet, rang = false } = Astro.props;
-const { lieu, demo, planche, statut } = projet.data;
-
-const marques = rang ? rangStatut(projet) : null;
+const { projet } = Astro.props;
+const { lieu, demo, planche } = projet.data;
 
 // Le titre de carte est le titre COURT — celui de la planche. Le titre long
 // du frontmatter répète ici le lieu que le pied affiche juste dessous, et
 // monte à quatre lignes de capitales dans une carte de 276 px.
 const titre = titreCourt(projet);
 
-// Pied de vignette : lieu, puis chronologie publique (ADR-003). La vignette
+// Pied de vignette : commune, puis chronologie publique (ADR-003). La vignette
 // est rendue au pied de chaque fiche projet (ProjetsSimilaires) — c'est par
 // elle que le numéro d'affaire fuyait dans le HTML des fiches.
 //
-// C'est ce pied qui porte le statut EN TOUTES LETTRES — « livraison 2026 »
-// pour une affaire livrée, « en cours » sinon. Le rang graphique lui est
-// redondant, jamais substitué. Seule l'archive réceptionnée échappe au
-// libellé : sa chronologie annonce une livraison, et le mot manquerait.
-const chrono = chronologie(projet);
-const cartouche = [
-  lieu,
-  libelleChronologie(projet),
-  statut === 'archive' && chrono.label === 'livraison' ? 'archive' : null,
-]
-  .filter(Boolean)
-  .join(' · ');
+// La COMMUNE, pas le `lieu` brut : cinq fiches y portent une adresse de
+// chantier complète, qui prenait trois lignes de mono dans une carte de
+// 276 px et repoussait la chronologie sous le pli.
+const cartouche = `${commune(lieu).libelle} · ${libelleChronologie(projet)}`;
 ---
 
-<a
-  href={`/references/${projet.id}`}
-  class:list={['group flex flex-col h-full plan-pose', marques?.filet]}
->
+<a href={`/references/${projet.id}`} class="group flex flex-col h-full plan-pose">
   {/* Vignette de planche : le cadrage 3:2 est écrit par l'extraction, jamais
       calculé ici. Une planche entière réduite à 360 px ne serait qu'une texture
       — le recadrage est composé pour que le motif du dessin reste lisible.
@@ -68,7 +47,7 @@ const cartouche = [
     )}
   </div>
   <div class="flex-1 bg-calcaire border-t border-filet-2 px-4 py-3.5 transition-colors duration-300 ease-[var(--ease-blueprint)] group-hover:bg-papier">
-    <h3 class:list={['type-intitule text-encre text-[15px]', marques?.graisse]}>
+    <h3 class="type-intitule text-encre text-[15px]">
       {titre}
     </h3>
     <p class="mono-data text-pivot mt-1.5">{cartouche}</p>

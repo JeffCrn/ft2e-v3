@@ -9,7 +9,7 @@ import ProjetsSimilaires from '../../components/blocs/ProjetsSimilaires.astro';
 import PlancheReference from '../../components/blocs/PlancheReference.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 import JsonLd from '../../components/seo/JsonLd.astro';
-import { libelleChronologie } from '../../lib/projets';
+import { commune, libelleChronologie } from '../../lib/projets';
 import { SITE_NAME, SITE_URL } from '../../lib/constants';
 
 export async function getStaticPaths() {
@@ -37,10 +37,11 @@ const jalons = libelleChronologie(projet);
 // le titre s'ouvre sur un nom propre, ça ne donne rien quand il n'en a pas
 // — d'où le champ. Une fiche sans nom court reste publiable.
 //
-// `lieu` va de la commune seule à l'adresse complète : la ville est le
-// segment qui porte le code postal.
+// `lieu` va de la commune seule à l'adresse complète : `commune()` en extrait
+// le segment qui porte le code postal — l'unique implémentation, et c'est
+// aussi elle qui compose la localisation affichée en sous-titre.
 const nomOuvrage = ouvrage ?? titre.split(/\s*[:—]\s*|,\s/)[0].replace(/^[«»\s]+|[«»\s]+$/g, '');
-const ville = (lieu.match(/([^,]+?)\s*\(\d{5}\)/)?.[1] ?? lieu).trim();
+const { ville, libelle: localisation } = commune(lieu);
 const legendeMedia = [nomOuvrage, ville, surface_m2 ? `${surface_m2} m²` : null]
   .filter(Boolean)
   .join(' · ')
@@ -110,7 +111,7 @@ const jsonLd = {
     ]}
     eyebrow={`fiche d’affaire — ${secteur.toLowerCase()}`}
     titre={titre}
-    sousTitre={`${lieu} · ${jalons}`}
+    sousTitre={`${localisation} · ${jalons}`}
   />
 
   {/* La planche ouvre la fiche, sur toute la largeur du conteneur.

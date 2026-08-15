@@ -129,7 +129,7 @@ src/
 │   └── secteurs/*.md
 ├── lib/
 │   ├── constants.ts              # constantes de site (nav, chiffres clés, JSON-LD)
-│   └── projets.ts                # tri des affaires, titre court, chronologie, rang de statut
+│   └── projets.ts                # tri des affaires, titre court, commune, chronologie
 ├── layouts/
 │   ├── BaseLayout.astro          # html/head/body, meta, fonts, révélation de plan
 │   └── PageLayout.astro          # header + footer wrapper

@@ -16,10 +16,12 @@ import { parAffaireDecroissante } from '../../lib/projets';
 // taille de conception (274 px) sur moitié moins de hauteur que la ligne de
 // tableau agrandie.
 //
-// Le rang de statut survit au changement de contenant, encodé TROIS fois :
-// opacité du filet gauche, graisse de l'intitulé (`rangStatut`) et mot en
-// toutes lettres au pied de la carte. Toutes les fiches restent sur une seule
-// page ; le filtre réduit la grille, il ne pagine pas.
+// Le rang de statut, lui, N'A PAS survécu — et pas à cause du contenant : la
+// chronologie annonce depuis le 2026-08-15 une livraison sur toutes les
+// fiches, « en cours » ne s'affiche plus, et le statut a donc cessé d'être
+// une distinction publiée. Le mot en portait le sens ; sans lui, la graisse
+// et l'opacité du filet ne renvoyaient plus à rien. Toutes les fiches restent
+// sur une seule page ; le filtre réduit la grille, il ne pagine pas.
 const projets = (await getCollection('projets')).sort(parAffaireDecroissante);
 
 // Les sept secteurs d'activité, lus dans la collection `secteurs` (triée
@@ -114,21 +116,17 @@ const secteurs = (await getCollection('secteurs'))
       <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8" data-grille>
         {projets.map((projet) => (
           <li data-secteur={projet.data.secteur} class="min-w-0">
-            <CarteProjet projet={projet} rang />
+            <CarteProjet projet={projet} />
           </li>
         ))}
       </ul>
 
-      <div class="flex flex-col md:flex-row md:justify-between gap-2 mt-6">
-        {/* La légende de rang change d'objet en changeant de contenant. Dans
-            la nomenclature, l'opacité du filet était le SEUL porteur et
-            réclamait une clé de lecture ; en carte, le statut est écrit en
-            toutes lettres au pied de chacune, et la clé n'a plus rien à
-            décoder. Elle dit donc la nouvelle forme, dans l'ordre où les
-            signes se lisent : le mot, puis la graisse, puis le filet — mesuré
-            au rendu, 22 % contre 16 % d'encre sur un filet de 1 px ne se
-            départagent pas à l'œil d'une carte à l'autre. */}
-        <p class="mono-label font-normal text-pivot">statut&nbsp;: au pied de chaque carte — doublé par la graisse de l'intitulé et l'opacité du filet gauche</p>
+      {/* Plus de légende de rang : le statut ne se distingue plus d'une fiche
+          à l'autre depuis que la chronologie annonce partout une livraison
+          (2026-08-15). Une clé de lecture qui n'a plus rien à décoder ne se
+          réécrit pas, elle se retire — et avec elle la graisse et le filet
+          d'opacité, qui ne renvoyaient plus à aucune information publiée. */}
+      <div class="flex justify-end mt-6">
         <p class="mono-data text-pivot" data-compteur data-total={projets.length} aria-live="polite">
           {projets.length} fiches sur {projets.length}
         </p>

@@ -83,6 +83,23 @@ reproduisait l'ouvrage, donc l'œuvre de l'architecte.
   planche), `demo_reason` et `contact_email` (2026-08-15, renseignés dans zéro fichier et
   lus nulle part).
 
+## `lieu` : libre au frontmatter, réduit à la commune à l'écran
+
+Le champ `lieu` accepte de la commune nue — « Aytré (17440) » — à l'adresse de chantier
+complète — « 23 quai Valin, Vieux Port sud, La Rochelle (17000), Charente-Maritime ». La
+latitude est voulue : elle sert le dossier d'affaire. **Elle ne sort jamais telle quelle à
+l'écran** depuis le 2026-08-15 : `commune()` (`src/lib/projets.ts`) en extrait le segment
+qui porte le code postal, et c'est cette forme — « La Rochelle (17000) » — que rendent le
+pied de carte, le sous-titre de fiche, le cartouche et la carte-lien de la vedette.
+
+Deux conséquences pour qui édite une fiche :
+
+- **le code postal entre parenthèses est obligatoire** — c'est lui qui délimite le segment
+  de commune. `commune()` lève une erreur de build en son absence plutôt que de rendre
+  l'adresse entière : un repli silencieux ne se verrait que sur une fiche sur vingt-trois ;
+- **le reste est libre** — rue, lieu-dit, département, île : rien de tout cela ne s'affiche,
+  et le JSON-LD (`locationCreated.name`) conserve la chaîne entière pour le référencement.
+
 ## Référence vers les images
 
 - Les cinq pièces d'une planche dans `public/images/projets/{slug}/`, jamais ailleurs.
