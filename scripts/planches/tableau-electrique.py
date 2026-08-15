@@ -39,6 +39,15 @@ que la course) et la limite du réseau public (un raccordement refusé, un mât
 rapatrié sur le coffret). Trois longueurs et deux hauteurs sont portées à une
 échelle unique dérivée du tablier ; tout le reste est topologique.
 
+Le troisième mécanisme (`essaimage`, place des Chênes Verts) RENVERSE le motif :
+il n'y a pas de tableau. Cinq comptages descendent séparément du réseau public
+dans cinq cellules qu'aucune liaison ne relie, et la seule chose que les cinq
+partagent est la maçonnerie qui les contient. La démonstration se compte — cinq
+franchissements de la ligne du réseau, zéro des quatre refends — et se rompt à
+deux endroits distincts : un tronc triple (36 kVA en triphasé) dans une cellule,
+deux postes de plus dans une autre. Les libellés de poste sont nommés une fois,
+en gouttière : cinq jeux identiques seraient illisibles à 184 px de cellule.
+
 Cinquième module du chantier après `sankey-energie.py`, `zonage-ssi.py`,
 `coupe-traversee.py` et `boucle-fluide.py`. Le tronc commun (jetons, mesure des
 chasses, insécables, double écriture des couleurs, routine d'exécution) vit dans
@@ -1145,19 +1154,464 @@ def composer_appui_franchissement(donnees):
                 f"planche, à son échelle propre")
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+#  MÉCANISME `essaimage` — le tableau qui n'existe pas
+# ═════════════════════════════════════════════════════════════════════════════
+#
+# Le motif de l'archétype est ici RENVERSÉ : au lieu d'une arrivée qui se
+# ramifie, cinq comptages descendent séparément du réseau public dans cinq
+# cellules qui ne se parlent pas. Ce que le dessin démontre n'est pas une
+# distribution, c'est son absence — et la seule chose que les cinq partagent :
+# la maçonnerie qui les contient.
+#
+# Trois dispositifs, chacun doublé d'un texte (le signe ne porte jamais seul) :
+#
+#   1. LE HAUT EST FRANCHI CINQ FOIS — une ligne de réseau, cinq descentes, cinq
+#      comptages. Un bâtiment de cinq locaux ordinairement n'en compte qu'une.
+#   2. LES REFENDS NE LE SONT JAMAIS — quatre verticales de même poids que
+#      l'enveloppe, continues du haut en bas, qu'aucun trait ne coupe. Le compte
+#      des franchissements est porté au bloc `controles` : 5 en haut, 0 aux
+#      refends.
+#   3. DEUX SINGULARITÉS, ET PAS AU MÊME ENDROIT — la cellule destinée à la
+#      restauration s'alimente par un tronc TRIPLE (36 kVA en triphasé contre
+#      9 kVA en monophasé) ; l'agence postale porte DEUX branches de plus
+#      (répartiteur voix-données-images, centrale anti-intrusion). La répétition
+#      se lit d'autant mieux qu'elle est rompue à deux endroits distincts.
+#
+# Les postes sont nommés UNE FOIS, dans une gouttière à gauche, chaque libellé
+# relié à sa rangée par une amorce de filet : cinq jeux de libellés identiques
+# rendraient la planche illisible, et n'ajouteraient rien à la démonstration.
+# Aucune largeur de cellule n'est proportionnelle à une surface (43,08 contre
+# 66,23 m²) : la géométrie code le NOMBRE de locaux, jamais leur taille.
+
+# ── La gouttière des libellés de poste, et la rangée des cellules ────────────
+E_GUT_X1 = 194                     # les libellés y sont calés à droite ;
+#                                    l'amorce de filet qui les relie à leur
+#                                    rangée fait 28 px — à 12 elle se lisait
+#                                    comme un tiret pendu au libellé
+E_BAT_X0, E_BAT_X1 = 224, 1144
+E_Y_TAG = 214
+E_Y_RESEAU = 236                   # la ligne du réseau public
+E_ENV_Y0, E_ENV_Y1 = 262, 578      # l'enveloppe — le seul ouvrage commun
+
+# ── Le rythme d'une cellule (coordonnées relatives à son bord gauche) ────────
+E_DX_TRONC = 30                    # l'axe du tronc, et de la descente
+E_ECART_PHASE = 4                  # l'écart des trois conducteurs, en triphasé
+E_CPT_X0, E_CPT_X1 = 8, 52         # le comptage
+E_CPT_Y0, E_CPT_Y1 = 272, 290
+E_DX_TEXTE = 58                    # la colonne de cotes, à DROITE du tronc
+E_ORG_X0, E_ORG_X1 = 58, 168       # les organes
+E_H_ORG = 18
+E_Y_NOM = 256                      # le nom du local, au-dessus de l'enveloppe
+
+# Les rangées d'organes : y du haut de la boîte, au pas de 30. Les cinq
+# premières sont communes aux cinq locaux ; les deux dernières n'existent que
+# dans la cellule de l'agence postale — c'est la seconde singularité, et le vide
+# qu'elles laissent aux quatre autres cellules FAIT PARTIE de la démonstration.
+E_COMMUNS = ["pac", "vmc", "ballon", "alarme", "enseigne"]
+E_RANGS = [("pac", 336), ("vmc", 396), ("ballon", 426), ("alarme", 456),
+           ("enseigne", 486), ("vdi", 516), ("intrusion", 546)]
+E_Y_CASSETTES = 374
+E_H_CASSETTE = 8
+E_L_CASSETTE = 18
+
+# ── Sous l'enveloppe ─────────────────────────────────────────────────────────
+E_Y_LEGENDE = 602
+E_Y_COTE = 630
+E_Y_NOTE = 658
+
+
+def composer_essaimage(donnees):
+    e = donnees["essaimage"]
+    locaux = sorted(e["locaux"], key=lambda l: l["ordre"])
+    postes = {p["cle"]: p for p in e["postes"]}
+    rangs = dict(E_RANGS)
+    out = []
+    A = out.append
+    depassements = []
+
+    n = len(locaux)
+    cell = (E_BAT_X1 - E_BAT_X0) / n
+    bords = [E_BAT_X0 + k * cell for k in range(n + 1)]
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    def mono(x, y, chaine, dispo=None, nom=None, ancre=None, corps=10):
+        if dispo is not None:
+            controler(nom or chaine, chaine, corps, "mono", dispo, corps * 0.14)
+        A(texte(x, y, chaine, "mono", corps, 500, "pivot", ancre=ancre,
+                tracking=corps * 0.14))
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+    mono(MARGE, Y_ENTETE, e["entete"], UTILE, "en-tête du schéma")
+
+    # ── Les deux tags de registre, aux deux bouts de la même ligne ───────────
+    l_res = controler("tag réseau", e["tag_reseau"], 10, "mono", 520, 1.4)
+    mono(E_BAT_X0, E_Y_TAG, e["tag_reseau"])
+    l_clo = controler("tag cloisons", e["tag_cloisons"], 10, "mono",
+                      E_BAT_X1 - (E_BAT_X0 + l_res) - 40, 1.4)
+    mono(E_BAT_X1, E_Y_TAG, e["tag_cloisons"], ancre="end")
+
+    # ── LE RÉSEAU PUBLIC — une ligne, franchie cinq fois ─────────────────────
+    A(ligne(E_BAT_X0, E_Y_RESEAU, E_BAT_X1, E_Y_RESEAU, "encre", 1.5))
+
+    # ── L'ENVELOPPE — un seul contour, quatre refends que rien ne traverse ───
+    # Le contour et les refends sont de MÊME poids : c'est la même maçonnerie,
+    # continue, et rien dans le dessin ne doit laisser croire à une hiérarchie
+    # entre l'extérieur et les refends. `rect_bord` traçant toujours à 1 px, le
+    # contour se ferme ici en polyligne.
+    A(rect(E_BAT_X0, E_ENV_Y0, E_BAT_X1 - E_BAT_X0, E_ENV_Y1 - E_ENV_Y0,
+           "papier"))
+    A(polyligne([(E_BAT_X0, E_ENV_Y0), (E_BAT_X1, E_ENV_Y0),
+                 (E_BAT_X1, E_ENV_Y1), (E_BAT_X0, E_ENV_Y1),
+                 (E_BAT_X0, E_ENV_Y0)], "encre", 1.8))
+    for k in range(1, n):
+        A(ligne(bords[k], E_ENV_Y0, bords[k], E_ENV_Y1, "encre", 1.8))
+
+    # ── LA GOUTTIÈRE — les postes nommés une fois, reliés à leur rangée ──────
+    # Cinq jeux de libellés identiques seraient illisibles à 184 px de cellule,
+    # et n'ajouteraient rien : ce que la planche démontre est la RÉPÉTITION.
+    def gouttiere(cle, y_tag, y_amorce=None):
+        p = postes[cle]
+        controler(f"libellé {cle}", p["tag"], 10, "mono", E_GUT_X1 - MARGE, 1.4)
+        mono(E_GUT_X1, y_tag, p["tag"], ancre="end")
+        if y_amorce is not None:
+            A(ligne(E_GUT_X1 + 6, y_amorce, E_BAT_X0 - 2, y_amorce,
+                    "filet-1", 1))
+
+    gouttiere("comptage", 285, (E_CPT_Y0 + E_CPT_Y1) / 2)
+    for cle, y0 in E_RANGS:
+        gouttiere(cle, y0 + 13, y0 + E_H_ORG / 2)
+    # Deux mentions, sans amorce : la fane de la pompe à chaleur, et
+    # l'appartenance des deux derniers postes — écrite une seule fois pour deux.
+    for cle, y in (("pac", E_Y_CASSETTES + 14),
+                   ("vdi", rangs["intrusion"] + 29)):
+        controler(f"mention {cle}", postes[cle]["mention"], 10, "mono",
+                  E_GUT_X1 - MARGE, 1.4)
+        mono(E_GUT_X1, y, postes[cle]["mention"], ancre="end")
+
+    # ── LES CINQ CELLULES ────────────────────────────────────────────────────
+    franchissements_haut = 0
+    for k, lo in enumerate(locaux):
+        x0 = bords[k]
+        xt = x0 + E_DX_TRONC
+
+        # Le nom du local, au-dessus de l'enveloppe, à droite de la descente.
+        controler(f"nom {lo['cle']}", lo["nom"], 15, "sans-400",
+                  cell - E_DX_TEXTE - 8)
+        A(texte(x0 + E_DX_TEXTE, E_Y_NOM, lo["nom"], "sans", 15, 400, "encre",
+                wdth=100))
+
+        # La descente du réseau ET le tronc du local sont TRIPLES quand le
+        # comptage est en triphasé — première des deux singularités. Trois ticks
+        # sous la ligne du réseau ne se voyaient pas à 1152 px : c'est toute la
+        # hauteur du tronc qui porte le signe, doublé de sa cote « 36 kVA ».
+        e_ph = E_ECART_PHASE if lo["triphase"] else 0
+        axes = (xt - e_ph, xt, xt + e_ph) if lo["triphase"] else (xt,)
+        rangs_du_local = list(E_COMMUNS) + list(lo["extras"])
+        y_bas = rangs[rangs_du_local[-1]] + E_H_ORG / 2
+        for xa in axes:
+            A(ligne(xa, E_Y_RESEAU, xa, E_CPT_Y0 - 4, "encre", 1.5))
+        A(fleche(xt, E_CPT_Y0 - 1, "encre", "bas", 8))
+        franchissements_haut += 1
+
+        # Le comptage, puis le tronc propre au local.
+        A(rect_bord(x0 + E_CPT_X0, E_CPT_Y0, E_CPT_X1 - E_CPT_X0,
+                    E_CPT_Y1 - E_CPT_Y0, "calcaire", "filet-1"))
+        for xa in axes:
+            A(ligne(xa, E_CPT_Y1, xa, y_bas, "encre", 1.8))
+
+        # Les cotes du local, à DROITE du tronc : puissance, phase, surface.
+        val, phase = [s.strip() for s in lo["puissance"].split("·")]
+        lignes_cote = [val, phase] + ([lo["surface"]] if lo["surface"] else [])
+        lignes_cote += lo["mention"]
+        for j, l in enumerate(lignes_cote):
+            mono(x0 + E_DX_TEXTE, 286 + j * 14, l, cell - E_DX_TEXTE - 8,
+                 f"cote {lo['cle']} {j + 1}")
+
+        # Les organes du local — mêmes rangées pour tous, deux de plus pour
+        # l'agence postale : la seconde singularité, et elle n'est pas au même
+        # endroit que la première.
+        for cle in rangs_du_local:
+            y0 = rangs[cle]
+            ym = y0 + E_H_ORG / 2
+            A(ligne(xt + e_ph, ym, x0 + E_ORG_X0 - 7, ym, "encre", 1.5))
+            A(fleche(x0 + E_ORG_X0 - 1, ym, "encre", "droite", 7))
+            A(rect_bord(x0 + E_ORG_X0, y0, E_ORG_X1 - E_ORG_X0, E_H_ORG,
+                        "calcaire", "filet-1"))
+
+        # La fane de la pompe à chaleur : trois cassettes, comptées une à une.
+        y_pac = rangs["pac"] + E_H_ORG
+        x_pac = x0 + (E_ORG_X0 + E_ORG_X1) / 2
+        for j in range(3):
+            cx = x0 + 52 + j * 56
+            A(ligne(x_pac, y_pac, cx, E_Y_CASSETTES, "encre", 1.2))
+            A(rect(cx - E_L_CASSETTE / 2, E_Y_CASSETTES, E_L_CASSETTE,
+                   E_H_CASSETTE, "clair"))
+            A(ligne(cx - E_L_CASSETTE / 2, E_Y_CASSETTES + E_H_CASSETTE,
+                    cx + E_L_CASSETTE / 2, E_Y_CASSETTES + E_H_CASSETTE,
+                    "encre", 1))
+
+    # ── SOUS L'ENVELOPPE — sa légende, la cote des libres, la note ───────────
+    mono(E_BAT_X0, E_Y_LEGENDE, e["legende_enveloppe"], E_BAT_X1 - E_BAT_X0,
+         "légende de l'enveloppe")
+    controler("cote des locaux libres", e["cote_libres"], 10, "mono",
+              bords[4] - bords[1], 1.4)
+    _cote(A, bords[1], bords[4], E_Y_COTE, e["cote_libres"])
+    mono(MARGE, E_Y_NOTE, e["note_hors_batiment"], UTILE, "note hors bâtiment")
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"{franchissements_haut} franchissements de la ligne "
+                         f"du réseau (y {E_Y_RESEAU}) pour {n} cellules, contre "
+                         f"0 franchissement des {n - 1} refends (x "
+                         f"{', '.join(f'{b:.0f}' for b in bords[1:-1])}, "
+                         f"continus de {E_ENV_Y0} à {E_ENV_Y1}) : le haut est "
+                         f"traversé une fois par local, les refends jamais. "
+                         f"Deux singularités, à deux endroits distincts — un "
+                         f"tronc triple en cellule 3 (36 kVA triphasé) et deux "
+                         f"branches de plus en cellule 1 (5 organes contre 3)",
+        "topologie": f"gouttière des postes x {MARGE}–{E_GUT_X1} → rangée x "
+                     f"{E_BAT_X0}–{E_BAT_X1}, {n} cellules de {cell:.1f} px ; "
+                     f"par cellule : descente et tronc à x0+{E_DX_TRONC}, "
+                     f"comptage y {E_CPT_Y0}–{E_CPT_Y1}, organes aux rangées y "
+                     f"{', '.join(str(y) for _, y in E_RANGS)}, cassettes y "
+                     f"{E_Y_CASSETTES}",
+        "cellules_non_proportionnelles": f"{cell:.1f} px pour chacune des {n} "
+                                         "cellules — 43,08 et 66,23 m² diffèrent "
+                                         "de 54 %, la géométrie code le nombre "
+                                         "de locaux, jamais leur taille",
+        "organes_par_cellule": f"{len(E_COMMUNS)} rangées communes (pompe à "
+                               "chaleur et ses 3 cassettes, ventilation, "
+                               "ballon, alarme, enseigne) + 2 propres à "
+                               "l'agence postale, soit les 6 postes que la "
+                               "fiche énumère ; les postes sont nommés UNE "
+                               "fois, en gouttière — 5 jeux de libellés "
+                               "identiques seraient illisibles à 184 px",
+        "bas_du_dessin": f"enveloppe jusqu'à {E_ENV_Y1}, légende à "
+                         f"{E_Y_LEGENDE}, cote des libres à {E_Y_COTE}, note à "
+                         f"{E_Y_NOTE}, phrase de principe à {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
+                         f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "releve": "aucun — la démonstration est géométrique, les chiffres de la "
+                  "fiche restent à la fiche (révision 4)",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_essaimage(donnees):
+    """La vignette : la rangée seule, et rien de la nomenclature.
+
+    Ce qu'elle garde : la ligne du réseau franchie cinq fois, l'enveloppe et ses
+    quatre refends continus, les cinq troncs avec leur fane de trois cassettes,
+    le tronc triple de la cellule de restauration et les deux organes de plus de
+    l'agence postale. Ce qu'elle laisse : la gouttière des postes, les noms de
+    locaux, la légende de l'enveloppe, la cote des libres et la note — six
+    libellés dans 300 px ne se lisent pas."""
+    e = donnees["essaimage"]
+    locaux = sorted(e["locaux"], key=lambda l: l["ordre"])
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # Le tronc se pose à 13 px du refend : à 8, le tronc TRIPLE de la cellule
+    # de restauration se lisait comme un second refend dans la carte de 274 px.
+    x0b, x1b = 30, 286
+    n = len(locaux)
+    cell = (x1b - x0b) / n
+    y_res, y_env0, y_env1 = 36, 48, 168
+    A(texte(x1b, 30, f'{n}{NN}COMPTAGES', "mono", 9, 500, "pivot", ancre="end",
+            tracking=1.26))
+    A(ligne(x0b, y_res, x1b, y_res, "encre", 1.2))
+    A(rect(x0b, y_env0, x1b - x0b, y_env1 - y_env0, "papier"))
+    A(polyligne([(x0b, y_env0), (x1b, y_env0), (x1b, y_env1), (x0b, y_env1),
+                 (x0b, y_env0)], "encre", 1.4))
+    for k in range(1, n):
+        A(ligne(x0b + k * cell, y_env0, x0b + k * cell, y_env1, "encre", 1.4))
+
+    h, rangs = 8, {"pac": 66, "vmc": 90, "ballon": 102, "alarme": 114,
+                   "enseigne": 126, "vdi": 138, "intrusion": 150}
+    for k, lo in enumerate(locaux):
+        x0 = x0b + k * cell
+        xt = x0 + 13
+        e_ph = 2.5 if lo["triphase"] else 0
+        axes = (xt - e_ph, xt, xt + e_ph) if lo["triphase"] else (xt,)
+        cles = list(E_COMMUNS) + list(lo["extras"])
+        for xa in axes:
+            A(ligne(xa, y_res, xa, 52, "encre", 1.2))
+            A(ligne(xa, 60, xa, rangs[cles[-1]] + h / 2, "encre", 1.4))
+        A(rect_bord(x0 + 6, 52, 14, 8, "calcaire", "filet-1"))
+        for cle in cles:
+            y = rangs[cle]
+            A(ligne(xt + e_ph, y + h / 2, x0 + 24, y + h / 2, "encre", 1.2))
+            A(rect_bord(x0 + 24, y, 24, h, "calcaire", "filet-1"))
+        for j in range(3):
+            cx = x0 + 21 + j * 12
+            A(ligne(x0 + 36, rangs["pac"] + h, cx, 82, "encre", 1))
+            A(rect(cx - 3, 82, 6, 4, "clair"))
+        if lo["triphase"]:
+            A(ligne(x0 + cell / 2, y_env1 + 2, x0 + cell / 2, 176, "filet-1", 1))
+            A(texte(x0 + cell / 2, 186, lo["puissance"].split("·")[0].strip(),
+                    "mono", 9, 500, "pivot", ancre="middle", tracking=1.26))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": f"la ligne du réseau franchie {n} fois, l'enveloppe et ses "
+                 f"{n - 1} refends continus, {n} troncs à fane de trois "
+                 f"cassettes, le tronc triple de la cellule de restauration et "
+                 f"les deux organes de plus de l'agence postale — deux nœuds "
+                 f"au texte, « {n} COMPTAGES » et « 36 kVA ». Gouttière, noms "
+                 f"de locaux, légende d'enveloppe, cote et note laissés à la "
+                 f"planche",
+        "bas_du_dessin": "cote du triphasé à 182, enveloppe jusqu'à 164 — marge "
+                         "basse 18 px, aucun trait ne touche un bord",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_essaimage(donnees):
+    """L'appui du hero : la rangée entière à l'échelle 1, trois nœuds chiffrés.
+
+    Ce qu'il garde : la ligne du réseau franchie cinq fois, l'enveloppe et ses
+    refends, les cinq troncs et leurs fanes, les deux singularités, et les cotes
+    de puissance des deux cellules qui se distinguent, plus la surface commune.
+    Ce qu'il laisse : la gouttière des postes, les noms de locaux, la cote des
+    libres, la note, la phrase de principe et le cartouche."""
+    e = donnees["essaimage"]
+    locaux = sorted(e["locaux"], key=lambda l: l["ordre"])
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    x0b, x1b = A_MARGE, AW - A_MARGE
+    n = len(locaux)
+    cell = (x1b - x0b) / n
+    y_res, y_env0, y_env1 = 74, 92, 306
+    A(ligne(x0b, y_res, x1b, y_res, "encre", 1.4))
+    A(rect(x0b, y_env0, x1b - x0b, y_env1 - y_env0, "papier"))
+    A(polyligne([(x0b, y_env0), (x1b, y_env0), (x1b, y_env1), (x0b, y_env1),
+                 (x0b, y_env0)], "encre", 1.6))
+    for k in range(1, n):
+        A(ligne(x0b + k * cell, y_env0, x0b + k * cell, y_env1, "encre", 1.6))
+
+    rangs = {"pac": 126, "vmc": 166, "ballon": 190, "alarme": 214,
+             "enseigne": 238, "vdi": 262, "intrusion": 286}
+    h_org, y_cass = 14, 150
+    for k, lo in enumerate(locaux):
+        x0 = x0b + k * cell
+        xt = x0 + 16
+        e_ph = 3.5 if lo["triphase"] else 0
+        axes = (xt - e_ph, xt, xt + e_ph) if lo["triphase"] else (xt,)
+        cles = list(E_COMMUNS) + list(lo["extras"])
+        for xa in axes:
+            A(ligne(xa, y_res, xa, 100, "encre", 1.4))
+            A(ligne(xa, 112, xa, rangs[cles[-1]] + h_org / 2, "encre", 1.6))
+        A(rect_bord(x0 + 5, 100, 24, 12, "calcaire", "filet-1"))
+        for cle in cles:
+            y = rangs[cle]
+            A(ligne(xt + e_ph, y + h_org / 2, x0 + 34, y + h_org / 2,
+                    "encre", 1.3))
+            A(rect_bord(x0 + 34, y, 56, h_org, "calcaire", "filet-1"))
+        for j in range(3):
+            cx = x0 + 26 + j * 30
+            A(ligne(x0 + 62, rangs["pac"] + h_org, cx, y_cass, "encre", 1.1))
+            A(rect(cx - 5, y_cass, 10, 5, "clair"))
+        if lo["triphase"] or lo["extras"]:
+            A(ligne(x0 + cell / 2, y_env1 + 2, x0 + cell / 2, 316, "filet-1", 1))
+            A(texte(x0 + cell / 2, 326, lo["puissance"].split("·")[0].strip(),
+                    "mono", 10, 500, "pivot", ancre="middle", tracking=1.4))
+
+    enveloppe = next(el for el in e["elements"] if el["cle"] == "enveloppe")
+    A(texte(x0b, 350, f'{enveloppe["valeur"]}{NN}{enveloppe["unite"]} · '
+            f'SEUL OUVRAGE COMMUN', "mono", 10, 500, "pivot", tracking=1.4))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"la rangée entière à l'échelle 1 : ligne du réseau franchie "
+              f"{n} fois, enveloppe et ses {n - 1} refends continus, {n} troncs "
+              f"à fane de trois cassettes, tronc triple de la cellule de "
+              f"restauration et deux organes de plus de l'agence postale — "
+              f"trois nœuds chiffrés (9 kVA, 36 kVA, 247 m²) ; gouttière des "
+              f"postes, noms de locaux, cote des libres, note, phrase et "
+              f"cartouche laissés à la planche",
+        bas=f"légende de l'enveloppe à 348 — marge basse {AH - 348} px",
+        franchissements=f"{n} en haut, 0 aux {n - 1} refends — le compte de la "
+                        f"planche, tenu à l'échelle de l'appui")
+
+
 def _composer(donnees):
+    if "essaimage" in donnees:
+        return composer_essaimage(donnees)
     if "franchissement" in donnees:
         return composer_franchissement(donnees)
     return composer(donnees)
 
 
 def _composer_vignette(donnees):
+    if "essaimage" in donnees:
+        return composer_vignette_essaimage(donnees)
     if "franchissement" in donnees:
         return composer_vignette_franchissement(donnees)
     return composer_vignette(donnees)
 
 
 def _composer_appui(donnees):
+    if "essaimage" in donnees:
+        return composer_appui_essaimage(donnees)
     if "franchissement" in donnees:
         return composer_appui_franchissement(donnees)
     return composer_appui(donnees)

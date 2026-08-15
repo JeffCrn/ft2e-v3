@@ -78,8 +78,19 @@ INSEC = 0.196              # U+00A0 — mesuré 7,85 px à 40 px
 
 
 def mesurer(t, corps, profil="sans-400", tracking=0.0):
-    """Largeur d'une chaîne, aux avances calibrées ci-dessus."""
+    """Largeur d'une chaîne, aux avances calibrées ci-dessus.
+
+    En MONO, toutes les avances sont égales — les deux insécables comprises :
+    une police à chasse fixe ne connaît pas la fine. Les compter aux largeurs
+    d'Archivo (0,098 et 0,196 em) sous-mesure toute chaîne mono qui porte un
+    groupement de chiffres ou une unité : 5,5 px de moins sur un cartouche de
+    30 signes, ce qui rogne d'autant sa réserve profonde et rend permissif tout
+    contrôle de dépassement portant sur une ligne mono. Relevé au rendu de la
+    planche 21, où le dernier chiffre du millésime tombait hors du cartouche.
+    """
     a = AVANCE[profil]
+    if profil == "mono":
+        return a * corps * len(t) + tracking * max(len(t) - 1, 0)
     l = 0.0
     for c in t:
         if c == NN:

@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 20 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12. 21 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,7 +32,7 @@ façade l'affirme.
 
 ---
 
-## État — 20 / 23
+## État — 21 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -56,7 +56,7 @@ façade l'affirme.
 | 18 | `maison-relais-saint-jean-d-angely` | Logements | `boucle-fluide` (mécanisme `individualisation`) | ✅ **publiée** (versée le 2026-08-15) |
 | 19 | `maisons-tourtet-saint-georges-de-didonne` | Logements | `chronologie-affaire` (mécanisme `divergence`) | ✅ **publiée** (versée le 2026-08-15) |
 | 20 | `passerelle-ecluse-carreau-d-or-marans` | Monotechnique | `tableau-electrique` (mécanisme `franchissement`) | ✅ **publiée** (versée le 2026-08-15) |
-| — | `place-des-chenes-verts-saint-rogatien` | Industriel et commercial | | à faire |
+| 21 | `place-des-chenes-verts-saint-rogatien` | Industriel et commercial | `tableau-electrique` (mécanisme `essaimage`) | ✅ **publiée** (versée le 2026-08-15) |
 | — | `residence-intergenerationnelle-saint-agnant` | Logements | | à faire |
 | — | `siege-rese-aigrefeuille` | Tertiaire / ERP | | à faire |
 
@@ -68,7 +68,7 @@ façade l'affirme.
 | `zonage-ssi` | 3 — trois mécanismes : `zonage` (un même déclenchement, l'alarme avant/après — Abbaye de Sablonceaux), `transfert` (la mise à l'abri au même niveau, la descente barrée — EHPAD de Coulonges-sur-l'Autize) et `partage` (le découpage réglementaire d'une enveloppe montée d'un seul tenant — la limite sans mur qui commande l'étanchéité, les machines et l'incendie, habitat inclusif de Salignac-sur-Charente) | ✅ `scripts/planches/zonage-ssi.py` (dispatch sur le bloc de l'extraction) |
 | `boucle-fluide` | 6 — six mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae), `substitution` (production réversible, centre de formation de Saintes), `declinaison` (le parti répété — une maison dessinée une fois, 54 cellules identiques en `<defs>`/`<use>`, Le Fougerou), `appariement` (la partition des services — trois bandes de service, deux colonnes de machines, et dans chaque colonne UNE boîte qui enjambe une frontière de bande, jamais la même : l'eau chaude porte la ventilation chez les T2, le chauffage porte l'eau chaude chez les T3 ; contour d'encre dominant la frontière filet-1, logements du Pas des Bœufs au Bois-Plage) et `individualisation` (le collectif produit, chaque logement compte — deux flux collectifs entrent dans une colonne qui dessert une pile de 21 modules identiques en trois groupes typologiques ; UN module tiré au détail par deux filets d'agrandissement montre deux arrivées, trois départs, trois compteurs, maison relais de Saint-Jean-d'Angély) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
 | `coupe-traversee` | 4 — quatre mécanismes : `coupe` (l'enveloppe traversée, Marennes), `equilibre` (l'air extrait, l'air compensé — restaurant scolaire de Villedoux), `enjambement` (l'enveloppe qui ferme les faces qu'un bâtiment ordinaire n'a pas — dessous du plancher sur le passage, fosse d'ascenseur, abouts pontés — étude notariale Joffre) et `portee` (deux périmètres inégaux sur une même coupe de niveaux — la mission bornée au coin bas-gauche, l'enceinte de la zone d'alarme qui enclot tout, hôtel Le Yachtman) | ✅ `scripts/planches/coupe-traversee.py` (dispatch sur le bloc de l'extraction) |
-| `tableau-electrique` | 2 — deux mécanismes : `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) et `franchissement` (le sujet n'est plus la distribution mais ce que les départs TRAVERSENT — une arrivée, une barre, cinq départs, et trois frontières : la tension, où deux départs d'éclairage changent de poids de trait en sortant des blocs 48 V ; le joint mobile, où deux cotes se rejoignent en sens contraire, 10 m de câble d'un côté contre 6,80 m de course de l'autre, à la même échelle ; la limite du réseau public, où une descente barrée d'une croix vers un mât jamais construit répond à un mât dédié plus court, alimenté depuis la barre par le plus long des départs — passerelle du Carreau d'Or à Marans) | ✅ `scripts/planches/tableau-electrique.py` (dispatch sur le bloc de l'extraction) |
+| `tableau-electrique` | 3 — trois mécanismes : `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) et `franchissement` (le sujet n'est plus la distribution mais ce que les départs TRAVERSENT — une arrivée, une barre, cinq départs, et trois frontières : la tension, où deux départs d'éclairage changent de poids de trait en sortant des blocs 48 V ; le joint mobile, où deux cotes se rejoignent en sens contraire, 10 m de câble d'un côté contre 6,80 m de course de l'autre, à la même échelle ; la limite du réseau public, où une descente barrée d'une croix vers un mât jamais construit répond à un mât dédié plus court, alimenté depuis la barre par le plus long des départs — passerelle du Carreau d'Or à Marans) et `essaimage` (le tableau qui n'existe pas — le motif est renversé : au lieu d'une arrivée qui se ramifie, cinq comptages descendent séparément du réseau public dans cinq cellules qu'aucune liaison ne relie, et le seul ouvrage commun est la maçonnerie qui les contient. La démonstration se COMPTE — cinq franchissements de la ligne du réseau, zéro des quatre refends — et se rompt à deux endroits distincts : un tronc triple en cellule 3, deux postes de plus en cellule 1 ; les libellés de poste sont nommés une fois, en gouttière, place des Chênes Verts à Saint-Rogatien) | ✅ `scripts/planches/tableau-electrique.py` (dispatch sur le bloc de l'extraction) |
 | `chronologie-affaire` | 2 — deux mécanismes : `precedence` (le dessin précède le gros œuvre : l'escalier des réservations gravit les niveaux d'avance sur l'exécution, résidence Horizon) et `divergence` (l'écart qui se creuse — une ordonnée d'écart au seuil du label, deux tracés en marches sur le même axe des temps : le besoin bioclimatique plat et collé au seuil, la consommation qui décroche marche après marche ; deux cotes verticales dans le rapport exact que la fiche énonce, 1,58 point contre 23,01, maisons Tourtet à Saint-Georges-de-Didonne) | ✅ `scripts/planches/chronologie-affaire.py` (dispatch sur le bloc de l'extraction) |
 | `planche-chiffree` | 0 | à écrire — c'est le repli, il servira |
 
@@ -275,6 +275,36 @@ muets occupaient 40 % du dessin**. Ce qui reste est ce qui démontre : la barre 
 éventail, le tablier coupé, et les deux cotes qui se rejoignent au joint. Une vignette ne se
 dégraisse pas par économie, elle se dégraisse parce qu'un libellé illisible est du bruit.
 
+## Ce que la vingt-et-unième planche a appris — 2026-08-15 : la chasse fixe ne connaît pas la fine
+
+La planche de la place des Chênes Verts est la première dont le cartouche a **débordé de
+sa réserve** : le dernier chiffre du millésime tombait hors du rectangle profond. La cause
+n'est pas dans le compositeur, elle est dans l'instrument de mesure.
+
+`_tronc.mesurer` comptait les deux insécables aux largeurs relevées **dans Archivo** —
+U+202F à 0,098 em, U+00A0 à 0,196 — y compris sur les chaînes destinées au mono. Or *une
+police à chasse fixe ne connaît pas la fine* : dans IBM Plex Mono, l'espace fine avance de
+0,600 em comme tout autre glyphe. Sur un cartouche de trente signes portant une surface,
+l'écart vaut **5,5 px**, absorbés jusqu'ici par les 20 px de marge — sauf quand la légende
+est courte, ce qui est le cas dès que la ville est brève et la surface à trois chiffres.
+
+Correction : `mesurer` traite le profil `mono` à part, toutes avances égales. Deux
+conséquences, la seconde plus importante que la première :
+
+- les cartouches s'élargissent de 5 à 12 px — **les vingt et une légendes du chantier sont
+  concernées**, mesurées ;
+- surtout, **tout `controler()` portant sur une ligne mono était permissif** de ce même
+  écart. Un dépassement pouvait passer sans être signalé sur n'importe quelle planche.
+
+**La leçon : une avance calibrée l'est pour une police, pas pour un dessin.** Le fil du
+chantier — mesurer plutôt qu'estimer — ne protège de rien si l'instrument mesure la
+mauvaise police.
+
+⚠️ **Les vingt planches publiées avant celle-ci n'ont pas été régénérées.** Leur
+régénération n'est donc plus octet à octet : elle élargira leur cartouche. La passe est à
+faire d'un bloc, avec un contrôle du rendu à 1152 px de chacune — c'est un point ouvert
+ci-dessous, pas un oubli.
+
 ## Ce que la deuxième planche a arrêté — 2026-08-13
 
 **La planche schématise la solution, elle ne récapitule pas la fiche.** La première
@@ -330,6 +360,12 @@ suppose pas.
   d'exécution. L'extraction a été contrôlée par **régénération octet à octet** des
   quatre planches publiées. Un nouveau module importe le tronc et n'écrit que la
   géométrie de son archétype.
+- **La régénération des vingt planches antérieures n'est plus neutre** (2026-08-15) :
+  la correction de `_tronc.mesurer` sur le profil mono élargit les cartouches de 5 à
+  12 px — **21 légendes sur 21** sont concernées, écart mesuré fiche par fiche. Les vingt
+  planches publiées avant la 21 n'ont pas été régénérées ; la passe est à faire d'un bloc,
+  chaque planche recontrôlée à 1152 px, et l'invariant « régénération octet à octet » se
+  rétablit à ce moment-là et pas avant.
 - **Le `grep -c` de Git Bash sous Windows ne sait pas chercher U+202F** (`grep -c $' '`
   rend 0 sur un fichier qui en porte 9) : le contrôle des insécables du protocole se rejoue
   en Python (`collections.Counter`) sur cette machine, pas en grep.

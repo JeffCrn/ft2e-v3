@@ -14,8 +14,7 @@ performance: "RE2020 (agence postale) et RT2012 (commerces) · Cep −12 % et 
 synthese: >-
   À Saint-Rogatien, la commune a démoli les vestiaires de son stade pour construire à leur emplacement un bâtiment de cinq locaux — une agence postale, trois cellules commerciales et le club-house du terrain de football — et requalifier la place qui les dessert. FT2E porte l’étude thermique et deux lots techniques. Chaque local est autonome : son comptage électrique, sa pompe à chaleur, sa ventilation, son ballon d’eau chaude, son alarme. Un bâtiment, mais deux calculs réglementaires : l’agence postale relève de la RE2020 au titre des bureaux, les commerces restent sous la RT2012. Les deux concluent avec des marges nettes.
 mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA"]
-image_principale: "/images/projets/place-des-chenes-verts-saint-rogatien/01.jpg"
-image_principale_alt: "Extrait du plan d’implantation électrique FT2E : le bâtiment en plan brisé le long de la place, ses cinq locaux cotés et le tracé des circuits courants forts et courants faibles"
+planche: "/images/projets/place-des-chenes-verts-saint-rogatien/planche.svg"
 en_avant: false
 ---
 

@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de l'autonomie des cinq locaux. Sous une enveloppe continue — combles isolés par 400 mm de laine de verre, murs en blocs doublés de 160 mm, plancher de terre-plein isolé par 100 mm sous chape — cinq cellules ne partagent aucun équipement. Chacune descend du réseau public son propre comptage, puis porte sa pompe à chaleur air-air en multisplit à trois cassettes, sa ventilation mécanique contrôlée simple flux et son ballon d'eau chaude électrique de 50 litres. Deux cellules se distinguent, et pas la même : celle destinée à la restauration est comptée en 36 kVA triphasé quand les quatre autres le sont en 9 kVA monophasé ; l'agence postale ajoute seule un répartiteur voix-données-images et une centrale anti-intrusion. Aucune liaison ne traverse les refends.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · CINQ LOCAUX, CINQ INSTALLATIONS AUTONOMES</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Place des Chênes Verts</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Cinq locaux sous une enveloppe continue, cinq installations sans rien de commun</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES DEUX LOTS TECHNIQUES FT2E — CE QUE CHAQUE LOCAL PORTE SEUL, CE QUE LES CINQ PARTAGENT</text>
+  <text x="224.00" y="214.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE RÉSEAU PUBLIC — UN COMPTAGE PAR LOCAL</text>
+  <text x="1144.00" y="214.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">AUCUNE LIAISON D'UN LOCAL À L'AUTRE</text>
+  <path d="M 224.00 236.00 L 1144.00 236.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <rect x="224.00" y="262.00" width="920.00" height="316.00" class="c-papier" fill="#F7F9FA"/>
+  <path d="M 224.00 262.00 L 1144.00 262.00 L 1144.00 578.00 L 224.00 578.00 L 224.00 262.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 408.00 262.00 L 408.00 578.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 592.00 262.00 L 592.00 578.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 776.00 262.00 L 776.00 578.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 960.00 262.00 L 960.00 578.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="194.00" y="285.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">COMPTAGE</text>
+  <path d="M 200.00 281.00 L 222.00 281.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="194.00" y="349.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">POMPE À CHALEUR</text>
+  <path d="M 200.00 345.00 L 222.00 345.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="194.00" y="409.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">VMC SIMPLE FLUX</text>
+  <path d="M 200.00 405.00 L 222.00 405.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="194.00" y="439.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">BALLON 50 L</text>
+  <path d="M 200.00 435.00 L 222.00 435.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="194.00" y="469.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">ALARME DE TYPE 4</text>
+  <path d="M 200.00 465.00 L 222.00 465.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="194.00" y="499.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">ENSEIGNE</text>
+  <path d="M 200.00 495.00 L 222.00 495.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="194.00" y="529.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">RÉPARTITEUR VDI</text>
+  <path d="M 200.00 525.00 L 222.00 525.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="194.00" y="559.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">ANTI-INTRUSION</text>
+  <path d="M 200.00 555.00 L 222.00 555.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="194.00" y="388.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">TROIS CASSETTES</text>
+  <text x="194.00" y="575.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">— AGENCE POSTALE</text>
+  <text x="282.00" y="256.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Agence postale</text>
+  <path d="M 254.00 236.00 L 254.00 268.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 254.00 271.00 L 250.00 263.00 L 258.00 263.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="232.00" y="272.00" width="44.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 254.00 290.00 L 254.00 555.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="282.00" y="286.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">9 kVA</text>
+  <text x="282.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MONOPHASÉ</text>
+  <text x="282.00" y="314.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">43,08 m²</text>
+  <path d="M 254.00 345.00 L 275.00 345.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 281.00 345.00 L 274.00 341.50 L 274.00 348.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="282.00" y="336.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 254.00 405.00 L 275.00 405.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 281.00 405.00 L 274.00 401.50 L 274.00 408.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="282.00" y="396.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 254.00 435.00 L 275.00 435.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 281.00 435.00 L 274.00 431.50 L 274.00 438.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="282.00" y="426.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 254.00 465.00 L 275.00 465.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 281.00 465.00 L 274.00 461.50 L 274.00 468.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="282.00" y="456.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 254.00 495.00 L 275.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 281.00 495.00 L 274.00 491.50 L 274.00 498.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="282.00" y="486.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 254.00 525.00 L 275.00 525.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 281.00 525.00 L 274.00 521.50 L 274.00 528.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="282.00" y="516.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 254.00 555.00 L 275.00 555.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 281.00 555.00 L 274.00 551.50 L 274.00 558.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="282.00" y="546.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 337.00 354.00 L 276.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="267.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 267.00 382.00 L 285.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 337.00 354.00 L 332.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="323.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 323.00 382.00 L 341.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 337.00 354.00 L 388.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="379.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 379.00 382.00 L 397.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="466.00" y="256.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Local libre</text>
+  <path d="M 438.00 236.00 L 438.00 268.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 438.00 271.00 L 434.00 263.00 L 442.00 263.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="416.00" y="272.00" width="44.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 438.00 290.00 L 438.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="466.00" y="286.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">9 kVA</text>
+  <text x="466.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MONOPHASÉ</text>
+  <path d="M 438.00 345.00 L 459.00 345.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 465.00 345.00 L 458.00 341.50 L 458.00 348.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="466.00" y="336.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 438.00 405.00 L 459.00 405.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 465.00 405.00 L 458.00 401.50 L 458.00 408.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="466.00" y="396.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 438.00 435.00 L 459.00 435.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 465.00 435.00 L 458.00 431.50 L 458.00 438.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="466.00" y="426.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 438.00 465.00 L 459.00 465.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 465.00 465.00 L 458.00 461.50 L 458.00 468.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="466.00" y="456.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 438.00 495.00 L 459.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 465.00 495.00 L 458.00 491.50 L 458.00 498.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="466.00" y="486.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 521.00 354.00 L 460.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="451.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 451.00 382.00 L 469.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 521.00 354.00 L 516.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="507.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 507.00 382.00 L 525.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 521.00 354.00 L 572.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="563.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 563.00 382.00 L 581.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="650.00" y="256.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Local libre</text>
+  <path d="M 618.00 236.00 L 618.00 268.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 622.00 236.00 L 622.00 268.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 626.00 236.00 L 626.00 268.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 622.00 271.00 L 618.00 263.00 L 626.00 263.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="600.00" y="272.00" width="44.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 618.00 290.00 L 618.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 622.00 290.00 L 622.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 626.00 290.00 L 626.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="650.00" y="286.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">36 kVA</text>
+  <text x="650.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TRIPHASÉ</text>
+  <text x="650.00" y="314.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">· RESTAURATION</text>
+  <path d="M 626.00 345.00 L 643.00 345.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 649.00 345.00 L 642.00 341.50 L 642.00 348.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="650.00" y="336.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 626.00 405.00 L 643.00 405.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 649.00 405.00 L 642.00 401.50 L 642.00 408.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="650.00" y="396.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 626.00 435.00 L 643.00 435.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 649.00 435.00 L 642.00 431.50 L 642.00 438.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="650.00" y="426.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 626.00 465.00 L 643.00 465.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 649.00 465.00 L 642.00 461.50 L 642.00 468.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="650.00" y="456.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 626.00 495.00 L 643.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 649.00 495.00 L 642.00 491.50 L 642.00 498.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="650.00" y="486.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 705.00 354.00 L 644.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="635.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 635.00 382.00 L 653.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 705.00 354.00 L 700.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="691.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 691.00 382.00 L 709.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 705.00 354.00 L 756.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="747.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 747.00 382.00 L 765.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="834.00" y="256.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Local libre</text>
+  <path d="M 806.00 236.00 L 806.00 268.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 806.00 271.00 L 802.00 263.00 L 810.00 263.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="784.00" y="272.00" width="44.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 806.00 290.00 L 806.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="834.00" y="286.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">9 kVA</text>
+  <text x="834.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MONOPHASÉ</text>
+  <path d="M 806.00 345.00 L 827.00 345.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 833.00 345.00 L 826.00 341.50 L 826.00 348.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="834.00" y="336.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 806.00 405.00 L 827.00 405.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 833.00 405.00 L 826.00 401.50 L 826.00 408.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="834.00" y="396.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 806.00 435.00 L 827.00 435.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 833.00 435.00 L 826.00 431.50 L 826.00 438.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="834.00" y="426.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 806.00 465.00 L 827.00 465.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 833.00 465.00 L 826.00 461.50 L 826.00 468.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="834.00" y="456.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 806.00 495.00 L 827.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 833.00 495.00 L 826.00 491.50 L 826.00 498.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="834.00" y="486.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 889.00 354.00 L 828.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="819.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 819.00 382.00 L 837.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 889.00 354.00 L 884.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="875.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 875.00 382.00 L 893.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 889.00 354.00 L 940.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="931.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 931.00 382.00 L 949.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="1018.00" y="256.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Club-house</text>
+  <path d="M 990.00 236.00 L 990.00 268.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 990.00 271.00 L 986.00 263.00 L 994.00 263.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="968.00" y="272.00" width="44.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 990.00 290.00 L 990.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="1018.00" y="286.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">9 kVA</text>
+  <text x="1018.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MONOPHASÉ</text>
+  <text x="1018.00" y="314.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">66,23 m²</text>
+  <path d="M 990.00 345.00 L 1011.00 345.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 1017.00 345.00 L 1010.00 341.50 L 1010.00 348.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="1018.00" y="336.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 990.00 405.00 L 1011.00 405.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 1017.00 405.00 L 1010.00 401.50 L 1010.00 408.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="1018.00" y="396.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 990.00 435.00 L 1011.00 435.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 1017.00 435.00 L 1010.00 431.50 L 1010.00 438.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="1018.00" y="426.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 990.00 465.00 L 1011.00 465.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 1017.00 465.00 L 1010.00 461.50 L 1010.00 468.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="1018.00" y="456.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 990.00 495.00 L 1011.00 495.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 1017.00 495.00 L 1010.00 491.50 L 1010.00 498.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="1018.00" y="486.00" width="110.00" height="18.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 1073.00 354.00 L 1012.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="1003.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 1003.00 382.00 L 1021.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 1073.00 354.00 L 1068.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="1059.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 1059.00 382.00 L 1077.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 1073.00 354.00 L 1124.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="1115.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <path d="M 1115.00 382.00 L 1133.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="224.00" y="602.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L'ENVELOPPE — LE SEUL OUVRAGE COMMUN AUX CINQ LOCAUX · COMBLES 400 mm · MURS 160 mm · TERRE-PLEIN 100 mm SOUS CHAPE</text>
+  <path d="M 408.00 630.00 L 960.00 630.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 408.00 625.00 L 408.00 635.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 960.00 625.00 L 960.00 635.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 408.50 630.00 L 415.50 626.50 L 415.50 633.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 959.50 630.00 L 952.50 626.50 L 952.50 633.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="684.00" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">TROIS LOCAUX LIBRES · 39,21 À 49,88 m²</text>
+  <text x="56.00" y="658.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HORS BÂTIMENT · LA SEULE CHAUFFERIE DE L'OPÉRATION EST CELLE DE LA SALLE VOISINE, REPRISE</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Chaque local est autonome : son comptage, sa pompe à chaleur, sa ventilation, son ballon d'eau chaude, son alarme.</text>
+  <rect x="56.00" y="714.00" width="283.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SAINT-ROGATIEN · 247 m² · 2023</text>
+</svg>
