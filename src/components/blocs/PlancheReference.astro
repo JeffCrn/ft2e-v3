@@ -131,8 +131,22 @@ const svgAppui = fs.readFileSync(
 
 ---
 
+{/* La vignette de carte — plafonnée à sa taille de conception et centrée, comme
+    les trois dessins de la fiche. Le plafond vit ICI et non dans la grille
+    appelante : le nombre de colonnes est un réglage de page, la taille de
+    conception est une propriété du dessin. Tant que la première devait deviner
+    la seconde, chaque nouvelle grille rouvrait le défaut — relevé le
+    2026-08-15 sur les quatre grilles du site : 1,70 à 560 px de fenêtre (une
+    colonne, carte de 511), 1,44 à 480, 1,36 entre 768 et 900, et 1,22 au bas
+    des fiches. Un dessin servi à 1,70 rend ses filets de 1 px à 1,7 et son
+    mono de 9 à 15 : c'est le défaut fondateur du dispositif.
+
+    Pas de boîte au rapport fixe autour : la hauteur suit le dessin, sinon une
+    carte large ajouterait du papier au-dessus et en dessous en plus des côtés.
+    Les 23 vignettes partageant le même repère, les cartes d'une même ligne
+    gardent la même hauteur d'image. */}
 {variante === 'vignette' ? (
-  <span class="block w-full overflow-hidden" set:html={svgVignette} />
+  <span class="block w-full max-w-[300px] mx-auto overflow-hidden" set:html={svgVignette} />
 ) : (
   <Fragment>
   <figure class="plan-pose" data-plan>

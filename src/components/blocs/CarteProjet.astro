@@ -39,8 +39,14 @@ const cartouche = `${commune(lieu).libelle} · ${libelleChronologie(projet)}`;
       calculé ici. Une planche entière réduite à 360 px ne serait qu'une texture
       — le recadrage est composé pour que le motif du dessin reste lisible.
       Ni duotone ni équerres : la planche est déjà dans les jetons, et les
-      équerres sont un repère de tirage photographique. */}
-  <div class="aspect-[3/2] relative shrink-0 border-b border-filet-3 bg-papier overflow-hidden">
+      équerres sont un repère de tirage photographique.
+
+      Plus de `aspect-[3/2]` depuis le 2026-08-15 : la vignette se plafonne
+      elle-même à 300 px (son repère) et se centre, de sorte que la hauteur de
+      cette boîte suive le dessin. Imposer le rapport ici ajouterait du papier
+      au-dessus et en dessous dès que la carte dépasse 300 px de large — et
+      c'est de toute façon le dessin qui porte le 3:2, pas son support. */}
+  <div class="relative shrink-0 border-b border-filet-3 bg-papier overflow-hidden">
     <PlancheReference src={planche} variante="vignette" />
     {demo && (
       <span class="absolute right-3 top-2.5 mono-label font-normal text-pivot z-10">[démo]</span>
