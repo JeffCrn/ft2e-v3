@@ -42,7 +42,7 @@ const secteurs = (await getCollection('secteurs'))
       { label: 'Références', href: '/references' },
     ]}
     eyebrow="index des affaires"
-    titre="Nos références"
+    titre="Nos références récentes"
     sousTitre="Une sélection de projets représentatifs de notre activité en Charente-Maritime, Vendée et Deux-Sèvres."
   />
 
@@ -60,7 +60,10 @@ const secteurs = (await getCollection('secteurs'))
         <p class="mono-label text-pivot">index complet</p>
       </div>
       <h2 class="type-section text-[22px] md:text-[24px] mt-4 mb-6">
-        <span class="text-encre">Toutes les affaires</span>
+        {/* « Les affaires », pas « Toutes les affaires » : le `<h1>` annonce
+            désormais des références RÉCENTES, et un titre de section qui
+            promettrait l'exhaustivité le contredirait à trois lignes d'écart. */}
+        <span class="text-encre">Les affaires</span>
         <span class="text-clair" aria-hidden="true">/filtrables par secteur</span>
       </h2>
 
@@ -121,16 +124,18 @@ const secteurs = (await getCollection('secteurs'))
         ))}
       </ul>
 
-      {/* Plus de légende de rang : le statut ne se distingue plus d'une fiche
-          à l'autre depuis que la chronologie annonce partout une livraison
-          (2026-08-15). Une clé de lecture qui n'a plus rien à décoder ne se
-          réécrit pas, elle se retire — et avec elle la graisse et le filet
-          d'opacité, qui ne renvoyaient plus à aucune information publiée. */}
-      <div class="flex justify-end mt-6">
-        <p class="mono-data text-pivot" data-compteur data-total={projets.length} aria-live="polite">
-          {projets.length} fiches sur {projets.length}
-        </p>
-      </div>
+      {/* Ni légende de rang, ni compteur — deux mentions retirées le même jour
+          pour la même raison : elles avaient cessé de dire quelque chose.
+
+          La légende donnait la clé d'un rang de statut que la chronologie
+          uniformisée a rendu muet. Le compteur, lui, annonçait « 23 fiches sur
+          23 » : dans l'état par défaut, les deux nombres sont égaux par
+          construction, puisque la page ne pagine pas. Et sous filtre, il ne
+          disait rien de plus que la puce active, qui porte déjà son propre
+          décompte — « Logements (8) ». C'est aussi ce qui rend son retrait sûr
+          pour un lecteur d'écran : l'`aria-live` disparaît, mais l'information
+          qu'il annonçait reste dans le libellé de la puce, elle-même signalée
+          par `aria-pressed`. */}
     </div>
   </section>
 
@@ -149,18 +154,14 @@ const secteurs = (await getCollection('secteurs'))
     // positionne : le masquer sur le `<a>` intérieur laisserait une cellule
     // vide dans le flux et trouerait la grille.
     const cartes = document.querySelectorAll<HTMLElement>('[data-secteur]');
-    const compteur = document.querySelector<HTMLElement>('[data-compteur]');
-    const total = compteur?.dataset.total ?? String(cartes.length);
 
     // Le filtre réduit la grille, sans transition d'apparition (charte v3).
+    // Il ne tient plus de décompte : la puce active porte le sien.
     const appliquer = (secteur: string | null) => {
-      let visible = 0;
       cartes.forEach((carte) => {
         const match = secteur === 'tous' || carte.getAttribute('data-secteur') === secteur;
         carte.style.display = match ? '' : 'none';
-        if (match) visible++;
       });
-      if (compteur) compteur.textContent = `${visible} fiche${visible > 1 ? 's' : ''} sur ${total}`;
     };
 
     filtres.forEach((btn) => {
