@@ -52,7 +52,10 @@ reproduisait l'ouvrage, donc l'œuvre de l'architecte.
   `/images/projets/<slug>/planche.svg`. Quatre fichiers frères l'accompagnent dans le même
   répertoire — `planche.json`, `vignette.svg`, `appui.svg`, `planche.png` — et **ils ne se
   séparent pas** : le composant les charge par convention de nom, un manquant fait échouer
-  le build.
+  le build. Depuis le 2026-08-15 c'est littéral pour les trois SVG : la fiche les inline
+  **tous les trois** et en sert un par bande de largeur (planche ≥ 880 px, appui de 480 à
+  879, vignette en dessous). Un dossier amputé de son `appui.svg` — jusque-là utile au seul
+  hero de l'accueil — casse désormais toutes les fiches.
 - **Le frontmatter ne porte ni l'alternative textuelle de la planche, ni son surtitre de
   vignette, ni le TITRE COURT** : ils vivent dans le `planche.json`, que le site lit au
   build. Les recopier créerait deux vérités pour la même donnée, et c'est la copie —

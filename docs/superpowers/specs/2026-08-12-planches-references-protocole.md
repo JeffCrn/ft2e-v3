@@ -27,7 +27,9 @@ retomber sept défauts de géométrie sur un raisonnement par ailleurs juste.
 - **La session de génération produit `planche.json`.** C'est le travail irréductible :
   lire la fiche entière, choisir l'archétype, extraire des valeurs littérales, consigner
   chaque arbitrage dans `a_valider_ft2e`. C'est la pièce que FT2E relit, et c'est aussi
-  la source du repli de lecture que le site sert sous 1024 px.
+  la source du repli de lecture que le site sert **sous 880 px, désormais SOUS le dessin
+  et non plus à sa place** (chantier du 2026-08-15,
+  `docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`).
 - **Le dépôt compose les dessins**, par `scripts/planches/<archetype>.py` : géométrie
   calculée, jamais tapée, et bloc `controles` recalculé à chaque exécution. Depuis la
   révision 5, chaque compositeur écrit les TROIS dessins — planche, vignette, appui.
@@ -129,9 +131,9 @@ Un dossier nommé d'après le slug de la fiche, contenant **exactement cinq fich
 ```
 <slug>/
 ├── planche.json     l'extraction — la pièce que FT2E relit, et la source du repli de lecture
-├── planche.svg      la planche de fiche, viewBox 0 0 1200 800
-├── vignette.svg     la vignette de carte, viewBox 0 0 300 200
-├── appui.svg        l'appui du hero de l'accueil, viewBox 0 0 552 368 (révision 5)
+├── planche.svg      viewBox 0 0 1200 800 — la fiche au-dessus de 880 px
+├── vignette.svg     viewBox 0 0 300 200  — la carte de /references, et la fiche sous 480 px
+├── appui.svg        viewBox 0 0 552 368  — le hero de l'accueil, et la fiche de 480 à 879 px
 └── planche.png      rendu de contrôle et source de l'og:image, 2400 × 1600
 ```
 

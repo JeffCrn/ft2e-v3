@@ -5,6 +5,18 @@ Le § « Prompt de lancement » se colle tel quel en session neuve : rien d'autr
 supposé connu. Toutes les mesures ci-dessous ont été relevées au navigateur sur
 `/references/logements-nerea-aytre/`, jamais estimées.*
 
+> **✅ APPLIQUÉE le 2026-08-15.** Découpage retenu : `planche.svg` ≥ 880 px, `appui.svg` de
+> 480 à 879, `vignette.svg` en dessous — chacun plafonné à sa taille de conception et centré,
+> aucune échelle au-dessus de 1,00, mono minimal 6,79 px au point le plus défavorable.
+> **La question éditoriale a été tranchée par FT2E : le repli reste, SOUS le dessin, réduit**
+> de son surtitre et de son titre, et plafonné à 552 px comme le dessin. L'agrandissement est
+> proposé à toutes les largeurs et clone toujours la planche entière.
+>
+> Trois écarts par rapport aux hypothèses de ce document, tous imposés par la mesure et
+> détaillés au § « Ce que la mesure a corrigé » en fin de fichier : la borne haute est à 880
+> et non à `lg` ; la borne basse est à 480 et non à 640 ; le repli a dû être plafonné, ce que
+> la spec n'avait pas prévu.
+
 ---
 
 ## Le défaut
@@ -243,6 +255,109 @@ Trois réponses possibles, à soumettre avec un avis motivé :
   est servi à ~552 px, à sa cote.
 - **`planche.json`** comme source unique des titres, valeurs et alternatives textuelles.
 - **Le `<h1>`, la balise `<title>`, la description et le JSON-LD** des fiches.
+
+---
+
+## Ce que la mesure a corrigé — bilan d'exécution du 2026-08-15
+
+Trois hypothèses de ce document n'ont pas survécu au rendu. Elles sont consignées ici avec
+ce qui les a renversées, pour qu'on ne les repose pas.
+
+### 1. La borne haute n'est pas `lg` — elle est à 880
+
+La spec proposait « ≥ 1024 px → planche ». Le plancher du mono la dément : le mono minimal
+de la planche vaut **10 px sur les 23 dossiers**, il tient donc jusqu'à l'échelle 0,65, soit
+un conteneur de 780 px, soit **845 px de fenêtre**. La planche descend donc presque 180 px
+plus bas que `lg`. Contrôlée à l'œil à 880 px (échelle 0,679), elle reste parfaitement
+lisible — étiquettes mono, ligne de jalons et géométrie du sankey compris.
+
+880 plutôt que 845 : la marge, pour ne pas asseoir une borne sur la valeur exacte du
+plancher.
+
+### 2. La borne basse n'est pas 640 — elle est à 480
+
+La spec proposait « 640–1023 → appui ». Mais l'appui tient jusqu'à un conteneur de 359 px,
+soit **406 px de fenêtre** : le placer à 640 lui aurait retiré 160 px de bande utile. À
+l'inverse, à 390 px l'appui tomberait à l'échelle 0,62, soit **6,2 px de mono — sous le
+plancher**. La borne est donc posée à 480, c'est-à-dire **au-dessus de toutes les largeurs
+de téléphone** (430 au plus, iPhone 15 Pro Max) : un téléphone reçoit la vignette, toujours.
+
+### 3. Le repli devait être plafonné — la spec ne l'avait pas vu
+
+Défaut trouvé au rendu à 879 px, invisible au calcul : un dessin plafonné à 552 et centré
+dans un plan de 816 commence à **132 px** du bord, quand le repli commençait à **20**. Deux
+blocs sans arête commune, que l'œil lit comme deux objets sans rapport.
+
+Le même palier portait un second défaut, sans rapport apparent : le repli composait ses
+lignes sur **776 px, soit ≈ 103 signes**, là où la charte prescrit 52 à 68.
+
+Une seule règle corrige les deux — plafonner le repli à 552 px et le centrer comme le
+dessin. Les colonnes se superposent alors à 4 px près (24 de marge interne au dessin, 20 de
+padding au repli) et la ligne de lecture tombe à **512 px, soit 68 signes** : la borne haute
+exacte de la charte. Que deux défauts indépendants se corrigent par la même mesure est ce
+qui a fait retenir celle-ci plutôt qu'un réglage à l'œil.
+
+### Le relevé de réception
+
+Mesuré sur `logements-nerea-aytre` (sankey), `ehpad-coulonges-sur-autize-ssi` (zonage) et
+`passerelle-ecluse-carreau-d-or-marans` (liste `elements`). Les métriques de dessin sont
+identiques sur les trois, les 23 planches partageant leurs trois viewBox.
+
+| Fenêtre | Conteneur | Format servi | Largeur | Échelle | Mono | Débordement | Zoom |
+|---|---|---|---|---|---|---|---|
+| 1440 | 1152 | planche | 1150 | 0,958 | 9,58 | non | ✓ |
+| 1280 | 1152 | planche | 1150 | 0,958 | 9,58 | non | ✓ |
+| 1024 | 961 | planche | 959 | 0,799 | 7,99 | non | ✓ |
+| 900 | 837 | planche | 835 | 0,696 | 6,96 | non | ✓ |
+| 880 | 817 | planche | 815 | 0,679 | **6,79** | non | ✓ |
+| 879 | 816 | appui | 552 | 1,000 | 10,0 | non | ✓ |
+| 800 | 737 | appui | 552 | 1,000 | 10,0 | non | ✓ |
+| 640 | 593 | appui | 552 | 1,000 | 10,0 | non | ✓ |
+| 560 | 513 | appui | 511 | 0,926 | 9,26 | non | ✓ |
+| 480 | 433 | appui | 431 | 0,781 | 7,81 | non | ✓ |
+| 479 | 432 | vignette | 300 | 1,000 | 9,0 | non | ✓ |
+| 390 | 343 | vignette | 300 | 1,000 | 9,0 | non | ✓ |
+
+Poids de page, relevé avant et après sur les trois fiches :
+
+| Fiche | brut avant → après | gzip avant → après | Δ gzip |
+|---|---|---|---|
+| `logements-nerea-aytre` | 76 302 → 86 949 | 15 731 → 16 663 | **+932 o (+5,9 %)** |
+| `ehpad-coulonges-sur-autize-ssi` | 71 261 → 82 113 | 14 453 → 15 229 | **+776 o (+5,4 %)** |
+| `passerelle-…-marans` | 81 845 → 99 379 | 17 300 → 19 099 | **+1 799 o (+10,4 %)** |
+
+**+21 % de brut ne coûte que +10 % de transporté** : les trois SVG d'un dossier partagent
+mot pour mot leur bloc `<style>`, leurs noms de classes et la plupart de leurs libellés, et
+la fenêtre de 32 ko de DEFLATE les retrouve. C'est ce qui rend l'inlining des trois formats
+soutenable — et ce qui rend inutiles, pour l'instant, les deux replis que ce document
+réservait au cas où (n'inliner que deux formats, ou composer un SVG à media queries
+internes). **Ne pas les mettre en œuvre sans avoir refait la mesure.**
+
+Le reste : `npm run typecheck` et `npm run build` verts (0 erreur), classes de bascule
+présentes dans `dist/_astro/*.css` (`min-width:880px`), Lighthouse accessibilité **100** sur
+`/references/logements-nerea-aytre/`, agrandissement fonctionnel à 390 px **après deux
+navigations View Transitions** (le clone servi est bien la planche, viewBox 1200 × 800, à
+860 px), `/references` inchangée (23 cartes, vignette à 274 px à 1440 — amendement A9 intact).
+
+### Deux réserves, honnêtement
+
+- **Le budget de poids HTML était déjà dépassé avant ce chantier.** `docs/10-budget-performance.md`
+  fixe 15 ko gzip pour une page interne ; `logements-nerea-aytre` était à 15,7 et
+  `passerelle` à 17,3 **avant** toute modification — le terme dominant est la planche inlinée
+  elle-même, acquise au chantier des planches. Ce chantier ajoute 0,8 à 1,8 ko. Le seuil est
+  donc à réexaminer pour ce qu'il est : un budget écrit avant que les fiches ne portent un
+  dessin vectoriel inliné.
+- **La bascule à 880 px produit un saut de hauteur** de la figure : 617 px au-dessus, contre
+  1 033 (sankey), 1 265 (zonage) ou 1 408 (liste) juste en dessous. Ce n'est pas un défaut de
+  mise en page — c'est l'apparition du repli, qui découle directement de la décision
+  éditoriale. Tout découpage où le repli paraît à une borne produit ce saut ; seul « le
+  dessin remplace le repli » l'aurait évité. Aucun recouvrement ni débordement horizontal à
+  aucun palier, en revanche.
+
+  Corollaire du plafonnement du repli : la ligne de lecture vaut **512 px de 640 à 879 px**
+  (le plafond mord), puis suit le conteneur — 471 à 560 px de fenêtre, 391 à 480, 301 à 390.
+  Sous ≈ 480 px de fenêtre elle passe donc sous les 52 signes de la charte ; c'est la largeur
+  du téléphone qui l'impose, et non un choix de composition.
 
 ---
 

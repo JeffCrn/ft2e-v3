@@ -123,21 +123,56 @@ la miniature de `/references` était à la fois `hidden md:block` et `aria-hidde
 
 | Fichier | Rôle |
 |---|---|
-| `planche.json` | l'extraction — la pièce que FT2E relit, **et** la source du repli de lecture sous 1024 px |
-| `planche.svg` | la planche, `viewBox 0 0 1200 800`, lue à 1152 px (échelle 0,96) |
-| `vignette.svg` | la vignette de carte, `viewBox 0 0 300 200`, lue à 274-296 px |
-| `appui.svg` | l'appui du hero de l'accueil, `viewBox 0 0 552 368`, lu à ~552 px (fiche `en_avant`) |
+| `planche.json` | l'extraction — la pièce que FT2E relit, **et** la source du repli de lecture servi sous 880 px |
+| `planche.svg` | la planche, `viewBox 0 0 1200 800`, lue à 1152 px (échelle 0,96) — **fiche ≥ 880 px** |
+| `appui.svg` | `viewBox 0 0 552 368` — l'appui du hero de l'accueil (fiche `en_avant`) **et la fiche entre 480 et 879 px** |
+| `vignette.svg` | `viewBox 0 0 300 200` — la vignette de carte, lue à 274-296 px, **et la fiche sous 480 px** |
 | `planche.png` | 2400 × 1600 — contrôle, impression, et `og:image` de la fiche |
 
-**Trois principes de rendu, chacun mesuré :**
+**Quatre principes de rendu, chacun mesuré :**
 
 1. **Le SVG est inliné, jamais appelé en `<img src>`** — un SVG en `src` est un document
    isolé qui ne reçoit ni les polices ni les jetons de la page.
 2. **La planche occupe la largeur du conteneur, sans padding de plan** : elle porte ses
    propres marges de 56 et *est* le plan posé. Dans la colonne de 581 px de l'ancien visuel,
    son mono de 10 px tomberait à 3,9.
-3. **Sous `lg`, le dessin cède la place à sa lecture**, composée depuis le `planche.json` —
-   à 358 px l'échelle vaut 0,30, aucun schéma ne s'y lit.
+3. **Le dessin est présent à toutes les tailles d'écran** (2026-08-15 — remplace « sous `lg`,
+   le dessin cède la place à sa lecture »). Les trois SVG d'un dossier ne sont pas trois
+   tailles du même dessin : ce sont **trois compositions distinctes à charge de texte
+   décroissante** — 30, 13 et 6 éléments `<text>` sur `logements-nerea-aytre`. Servir l'une
+   ou l'autre selon la place n'est donc pas une mise à l'échelle, que le protocole interdit.
+   Les bornes sont dérivées du **plancher de lisibilité du mono, 6,5 px** (mono minimal
+   mesuré sur les 23 dossiers : 10 px sur la planche et l'appui, 9 px sur la vignette), et
+   **non de la grille Tailwind** :
+
+   | Fenêtre | Format | Largeur servie | Échelle | Mono rendu |
+   |---|---|---|---|---|
+   | ≥ 880 px | `planche.svg` | largeur du conteneur | 0,68 → 0,96 | 6,8 → 9,6 |
+   | 480 – 879 | `appui.svg` | max 552, centré | 0,74 → 1,00 | 7,4 → 10 |
+   | < 480 | `vignette.svg` | max 300, centré | ≤ 1,00 | 9 |
+
+   **Aucun format n'est jamais servi au-dessus de sa taille de conception** : la sur-échelle
+   épaissit les filets de 1 px, c'est le défaut fondateur du dispositif. La marge qui reste
+   autour d'un dessin plafonné est légitime — un plan a des marges. La borne haute n'est pas
+   `lg` : la planche tient jusqu'à 845 px avant de passer sous le plancher, 880 lui laisse la
+   marge. La borne basse est posée **au-dessus de toutes les largeurs de téléphone** (430 au
+   plus), de sorte qu'un téléphone reçoit toujours la vignette et jamais un appui rétréci à
+   6,2 px de mono. Les bascules sont écrites en `@media` dans le `<style>` du composant, pas
+   en variantes Tailwind arbitraires — une règle de composant échappe à l'élagage de sources
+   de Tailwind v4 (règle 11).
+4. **Le repli de lecture ne remplace plus le dessin : il le suit, réduit** (arbitré avec FT2E
+   le 2026-08-15). Sous 880 px, le dessin ouvre la figure et sa lecture vient dessous — une
+   image, puis sa lecture. Sur une fiche de bureau d'études les valeurs sont la démonstration,
+   et la vignette n'en publie que six ; elle est de surcroît `aria-hidden` à la source, de
+   sorte que la servir **seule** laisserait un lecteur d'écran mobile sans aucun équivalent
+   textuel. Le repli est allégé de deux rangs, chacun republié ailleurs sur le même écran : le
+   `surtitre` (les trois formats portent le leur) et le `titre` (porté par le `<h1>` de la
+   fiche). Il est **plafonné à 552 px et centré comme le dessin** — ce qui aligne les deux
+   colonnes *et* ramène la ligne de lecture de 103 à 68 signes, la borne haute de la charte.
+
+L'agrandissement (`data-planche-agrandir`) est proposé **à toutes les largeurs** depuis la
+même date, et clone toujours `planche.svg` : sur téléphone, la boîte donne les 30 textes de
+la planche là où la page sert les 6 de la vignette.
 
 **Ni duotone ni équerres** : les deux appartiennent à la photographie, et la planche est
 déjà composée dans les jetons.
@@ -210,7 +245,7 @@ l'échelle 0,24, quel que soit l'endroit où on le découpe.
 | **Planches de références — protocole de production** | **`docs/superpowers/specs/2026-08-12-planches-references-protocole.md`** |
 | **Planches de références — bilan de clôture et points ouverts** | **`docs/superpowers/plans/2026-08-12-chantier-planches-references.md`** |
 | **Remasterisation de `/references` en grille de cartes** (spec — **appliquée le 2026-08-15**, amendement A9) | **`docs/superpowers/specs/2026-08-15-remasterisation-nomenclature-references.md`** |
-| **Responsive des planches sur les fiches** (spec + prompt de lancement — **à ouvrir** : le dessin disparaît sous 1024 px) | **`docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`** |
+| **Responsive des planches sur les fiches** (spec — **appliquée le 2026-08-15** : trois compositions, trois bandes, le repli passe sous le dessin) | **`docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`** |
 | Version liminaire (historique de la première livraison) | `docs/14-version-liminaire.md` |
 | Pistes de production CMS | `docs/20-pistes-production-cms.md` (⚠ numéro 20 partagé avec la source plaquette) |
 | Script de la démonstration client du 2 juillet | `docs/21-script-demo-2-juillet.md` |

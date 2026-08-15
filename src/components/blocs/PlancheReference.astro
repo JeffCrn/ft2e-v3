@@ -22,10 +22,47 @@ import path from 'node:path';
  *    et le mono de 10 px du dessin se rend à 9,6 px. Dans la colonne de 581 px où
  *    logeait l'ancien visuel, il tomberait à 3,9 px.
  *
- * 3. **Sous `lg`, le dessin cède la place à sa lecture.** À 358 px l'échelle vaut
- *    0,30 : aucun schéma ne s'y lit. Le repli n'est pas un pis-aller, c'est la
- *    même information composée pour la largeur disponible — et il est bâti sur le
- *    `planche.json`, ce qui interdit qu'il diverge du dessin.
+ * 3. **Le dessin est présent à toutes les largeurs — trois compositions, trois
+ *    bandes.** Jusqu'au 2026-08-15 le dessin disparaissait sous `lg` et cédait la
+ *    place à sa seule lecture : à 390 px, 881 px de libellés alignés là où la page
+ *    devait poser une image. L'arbitrage était juste tant qu'il n'y avait qu'un
+ *    dessin à montrer ; les trois fichiers d'un dossier de planche ne sont pas
+ *    trois tailles du même dessin, ce sont **trois compositions distinctes à charge
+ *    de texte décroissante** (30, 13 et 6 textes sur `logements-nerea-aytre`),
+ *    chacune composée pour être lue à sa propre taille. Servir l'une ou l'autre
+ *    n'est donc pas une mise à l'échelle, que le protocole interdit.
+ *
+ *    Les bornes sont dérivées du **plancher de lisibilité du mono, 6,5 px**, mesuré
+ *    sur les 23 dossiers (mono minimal : 10 px sur la planche et l'appui, 9 px sur
+ *    la vignette) — elles ne viennent pas de la grille Tailwind :
+ *
+ *      ≥ 880 px  planche.svg   pleine largeur    échelle 0,68 → 0,96   mono 6,8 → 9,6
+ *      480–879   appui.svg     max 552, centré   échelle 0,74 → 1,00   mono 7,4 → 10
+ *      < 480     vignette.svg  max 300, centré   échelle ≤ 1,00        mono 9
+ *
+ *    Aucun format n'est servi au-dessus de sa taille de conception : la sur-échelle
+ *    épaissit les filets de 1 px, c'est le défaut fondateur du dispositif. La marge
+ *    qui reste autour d'un dessin plafonné est légitime — un plan a des marges.
+ *
+ *    La borne haute n'est pas `lg` : la planche tient jusqu'à 845 px de fenêtre
+ *    avant que son mono ne passe sous le plancher. 880 lui laisse la marge, et
+ *    480 est posé au-dessus de toutes les largeurs de téléphone (430 au plus),
+ *    de sorte qu'un téléphone reçoit toujours la vignette, jamais un appui rétréci
+ *    à 6,2 px de mono.
+ *
+ * 4. **Le repli de lecture ne disparaît pas : il passe SOUS le dessin, réduit.**
+ *    Arbitré avec FT2E le 2026-08-15. Sur une fiche de bureau d'études, les valeurs
+ *    — « 146 845 kWh/an », « 38 000 m³/h » — sont la démonstration ; la vignette
+ *    n'en publie que six et elle est `aria-hidden` à la source, de sorte que la
+ *    servir SEULE laisserait un lecteur d'écran mobile sans aucun équivalent
+ *    textuel du dessin. Le défaut corrigé ici est un défaut de hiérarchie, pas
+ *    d'information : une image, puis sa lecture.
+ *
+ *    Réduit de deux rangs, chacun republié ailleurs sur le même écran : le
+ *    `surtitre` (le dessin porte le sien dans les trois formats) et le `titre`
+ *    (le `<h1>` de la fiche le porte, quelques centaines de pixels plus haut).
+ *    Le `sous_titre`, le bloc d'archétype et la phrase de principe restent : aucun
+ *    format de dessin ne les porte.
  */
 interface Props {
   /** Chemin du SVG depuis `public/` — champ `planche` du frontmatter. */
@@ -62,6 +99,16 @@ const extraction = JSON.parse(
 // toujours doublée du titre de la fiche, qu'elle ne fait qu'illustrer.
 const svgVignette = fs.readFileSync(
   path.join(racine, src.replace(/planche\.svg$/, 'vignette.svg')),
+  'utf-8',
+);
+
+// L'appui — la composition intermédiaire, tenue jusqu'ici pour le seul hero de
+// l'accueil. Il porte le surtitre court, les chiffres de nœud et une légende
+// ramassée : de quoi lire le mécanisme entre 480 et 879 px, là où la planche
+// tomberait sous le plancher du mono et où la vignette flotterait dans la
+// largeur. Comme la planche, il porte `role="img"` et son `aria-label` complet.
+const svgAppui = fs.readFileSync(
+  path.join(racine, src.replace(/planche\.svg$/, 'appui.svg')),
   'utf-8',
 );
 
@@ -109,21 +156,26 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
 ) : (
   <Fragment>
   <figure class="plan-pose" data-plan>
-    {/* Le dessin — au-dessus de lg seulement. `display:none` le retire aussi de
-        l'arbre d'accessibilité, de sorte que le repli ci-dessous est la seule
-        version annoncée sur petit écran. */}
-    <div class="hidden lg:block" data-planche-dessin set:html={svgBrut} />
+    {/* Les trois dessins. Un seul est rendu à la fois ; `display:none` retire les
+        deux autres de l'arbre d'accessibilité, de sorte qu'un seul `aria-label`
+        de planche est annoncé. Les bornes sont posées dans le `<style>` du
+        composant, avec leur dérivation. Le dessin de la bande haute garde
+        `data-planche-dessin` : c'est LUI que l'agrandissement clone, à toutes
+        les largeurs — sur téléphone, la boîte donne les 30 textes de la planche
+        que la vignette n'en publie que six. */}
+    <div class="dessin-grand" data-planche-dessin set:html={svgBrut} />
+    <div class="dessin-moyen" set:html={svgAppui} />
+    <div class="dessin-petit" set:html={svgVignette} />
 
-    {/* Le repli de lecture — sous lg. Même matière, autre composition. */}
-    <div class="lg:hidden px-5 py-6">
-      <p class="mono-label normal-case text-pivot">{extraction.surtitre}</p>
-      {/* `normal-case` n'est pas décoratif : `@layer base` de `global.css` pose
-          `text-transform: uppercase` sur TOUS les titres h1–h6. Sans lui, le
-          repli affichait « ÉCOLE DES DOUANES » quand le dessin, lui, compose
-          « École des douanes » — deux casses pour le même nom, sur le même
-          écran. Les utilitaires Tailwind gagnent sur la couche de base. */}
-      <h2 class="text-[21px] font-semibold normal-case text-encre mt-3 leading-[1.15]">{extraction.titre}</h2>
-      <p class="text-[15px] text-pivot mt-1">{extraction.sous_titre}</p>
+    {/* Le repli de lecture — SOUS le dessin, partout où le dessin ne porte pas
+        déjà tout (donc sous 880 px). Même matière, autre composition. */}
+    <div class="repli-lecture px-5 pb-6">
+      {/* Ni surtitre ni titre : le dessin au-dessus porte le sien dans les trois
+          formats, et le titre est au `<h1>` de la fiche. Les republier ici
+          donnait deux surtitres empilés et un second titre pour le même objet.
+          Le sous-titre ouvre donc la lecture — c'est la thèse de la planche, et
+          aucun format de dessin ne la porte. */}
+      <p class="text-[15px] text-pivot">{extraction.sous_titre}</p>
 
       {/* Un bloc par archétype — `sankey-energie` puis `zonage-ssi` ; les cinq
           autres du protocole porteront chacun le leur. Le relevé et la phrase
@@ -264,21 +316,25 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
       <p class="text-[16px] text-encre leading-[1.5] mt-6">{extraction.phrase_principe}</p>
     </div>
 
-    <figcaption class="flex items-center justify-between gap-4 border-t border-filet-2 bg-calcaire px-5 py-3">
-      {/* Le libellé ne s'affiche QUE sous lg. Au-dessus, le dessin porte déjà son
-          cartouche de réserve, et le répéter ici donnait le même texte deux fois
-          à dix pixels d'intervalle — précisément le doublon que la révision 2 du
-          gabarit avait chassé de l'intérieur de la planche. */}
-      <span class="mono-label normal-case text-pivot lg:hidden">{extraction.cartouche_legende}</span>
-      <span class="hidden lg:block mono-label text-pivot">
+    <figcaption class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-t border-filet-2 bg-calcaire px-5 py-3">
+      {/* Le cartouche ne s'affiche QUE là où le dessin ne le porte pas — donc
+          sous 880 px, où l'appui et la vignette n'en composent aucun. Sur la
+          planche, le répéter ici donnait le même texte deux fois à dix pixels
+          d'intervalle : précisément le doublon que la révision 2 du gabarit
+          avait chassé de l'intérieur de la planche. */}
+      <span class="legende-petite mono-label normal-case text-pivot min-w-0">{extraction.cartouche_legende}</span>
+      <span class="legende-grande mono-label text-pivot">
         Planche FT2E — {extraction.archetype.replace('-', ' ')}
       </span>
-      {/* L'agrandissement n'est pas un agrément : au-delà de 1152 px la planche
-          ne grandit plus, et son mono de 10 px reste à 9,6. Le bouton n'apparaît
-          que là où le dessin est rendu. */}
+      {/* L'agrandissement est proposé à TOUTES les largeurs depuis le
+          2026-08-15. Il était `hidden lg:inline-flex` — donc absent précisément
+          là où il sert le plus : c'est sur téléphone que la boîte apporte le
+          plus, puisqu'elle donne la planche entière (30 textes) là où la page
+          sert la vignette (6). La feuille agrandie garde son `min-width` de
+          860 px et défile au doigt dans la zone. */}
       <button
         type="button"
-        class="btn-filaire cible-44 hidden lg:inline-flex shrink-0"
+        class="btn-filaire cible-44 inline-flex shrink-0 ml-auto"
         data-planche-agrandir
         aria-haspopup="dialog"
         aria-controls={`${id}-dialogue`}
@@ -327,6 +383,89 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
 )}
 
 <style>
+  /* ── Les trois bandes ────────────────────────────────────────────────────
+     Un dessin par bande de largeur, plafonné à sa taille de conception et
+     centré. Les bornes sont dérivées du plancher de lisibilité du mono
+     (6,5 px), pas de la grille Tailwind — voir l'en-tête du fichier. Elles
+     s'écrivent ici plutôt qu'en variantes utilitaires arbitraires
+     (`min-[880px]:block`) pour deux raisons : les trois bornes et leur
+     justification tiennent au même endroit, et une règle CSS de composant
+     échappe à l'élagage de sources de Tailwind v4, qui a déjà supprimé
+     silencieusement des classes en valeur arbitraire de ce dépôt sans faire
+     échouer le build (incident du 2026-08-08).
+
+     Le fond de chaque dessin est le papier, comme celui du `.plan-pose` qui le
+     porte : un dessin plafonné ne se lit donc pas comme une vignette collée sur
+     un panneau, mais comme un plan à marges plus larges. */
+  .dessin-grand,
+  .dessin-moyen,
+  .dessin-petit { display: none; }
+
+  /* ≥ 880 : la planche (1200 × 800), sur toute la largeur du conteneur.
+     Elle porte ses propres marges de 56 et EST le plan posé : aucun padding.
+     À 880 px de fenêtre l'échelle vaut 0,68 et son mono de 10 px se rend à
+     6,8 — au-dessus du plancher. Elle tiendrait jusqu'à 845 ; 880 lui laisse
+     la marge. */
+  @media (min-width: 880px) {
+    .dessin-grand { display: block; }
+  }
+
+  /* 480–879 : l'appui (552 × 368), plafonné et centré. Sa marge interne ne
+     vaut que 24 contre 56 à la planche : le padding vertical la porte à 52,
+     de sorte que le dessin ne touche pas le filet du plan. */
+  @media (min-width: 480px) and (max-width: 879.98px) {
+    .dessin-moyen {
+      display: block;
+      max-width: 552px;
+      margin-inline: auto;
+      padding-block: 28px;
+    }
+  }
+
+  /* < 480 : la vignette (300 × 200). La borne est posée au-dessus de toutes
+     les largeurs de téléphone (430 au plus) : un appui servi à 390 px tomberait
+     à l'échelle 0,62, soit 6,2 px de mono, sous le plancher. Marge interne 14,
+     portée à 42. */
+  @media (max-width: 479.98px) {
+    .dessin-petit {
+      display: block;
+      max-width: 300px;
+      margin-inline: auto;
+      padding-block: 28px;
+    }
+  }
+
+  /* Le repli de lecture suit le dessin partout où celui-ci ne porte pas tout :
+     la planche publie 30 textes, l'appui 13, la vignette 6.
+
+     Il est plafonné à la largeur de l'appui et centré comme lui, pour deux
+     raisons qui tombent ensemble — et chacune suffirait :
+
+     · l'ALIGNEMENT. Un dessin plafonné à 552 et centré dans un plan de 816
+       commence à 132 px du bord ; le repli, lui, commençait à 20. Mesuré au
+       rendu à 879 px : deux blocs sans aucune arête commune, que l'œil lit
+       comme deux objets sans rapport. Plafonnés de la même façon, leurs
+       colonnes se superposent à 4 px près (24 de marge interne au dessin,
+       20 de padding au repli).
+
+     · la JUSTIFICATION. La charte prescrit 52 à 68 signes par ligne pour le
+       corps. À 879 px le repli composait sur 776 px, soit environ 103 signes.
+       Plafonné, il compose sur 512 px — 68 signes, la borne haute exacte.
+
+     Sous 552 px de conteneur le plafond ne mord pas : le repli reprend toute
+     la largeur, comme le dessin. */
+  .repli-lecture {
+    display: block;
+    max-width: 552px;
+    margin-inline: auto;
+  }
+  .legende-grande { display: none; }
+  @media (min-width: 880px) {
+    .repli-lecture { display: none; }
+    .legende-petite { display: none; }
+    .legende-grande { display: block; }
+  }
+
   /* ── La boîte : transparente et plein écran ─────────────────────────────
      Le voile est porté par `::backdrop`, la mise en page par `.planche-scene`.
      Un `<dialog>` dimensionné et opaque obligeait à lui poser une barre
@@ -402,6 +541,15 @@ const chiffre = (valeur: string, unite: string) => `${valeur}${INSEC}${unite}`;
     letter-spacing: 0.12em;
   }
   @media (max-width: 520px) { .planche-touche { display: none; } }
+
+  /* Sur téléphone la boîte devient la vraie réponse au petit écran : c'est là
+     qu'elle donne les 30 textes de la planche là où la page sert les 6 de la
+     vignette. Les marges de 28 px y coûtent 56 px de dessin sur 390 — elles
+     tombent à 16. */
+  @media (max-width: 640px) {
+    .planche-barre { padding: 14px 16px; }
+    .planche-zone { padding: 0 16px 24px; }
+  }
 
   /* ── La feuille ── */
   .planche-zone {

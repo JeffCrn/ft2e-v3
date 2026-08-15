@@ -431,13 +431,26 @@ suppose pas.
 - **Le champ `performance`** compose ses milliers en fine insécable sur les 23 fiches :
   « 152 947 W » se lit « 152947 W » dans le relevé encré, à 28 px. Même mesure que pour les
   planches, même correction — U+00A0 au-delà de 22 px. Passe mécanique, à faire d'un bloc.
-- **Le repli de lecture sous 1024 px** est acquis par la **forme** de l'extraction
+- **Le repli de lecture sous 880 px** est acquis par la **forme** de l'extraction
   depuis le 2026-08-13 : tout bloc d'archétype à tableau `elements` ordonné est rendu
   par le bloc générique de `PlancheReference.astro` (`coupe-traversee` et
   `boucle-fluide` l'utilisent) ; `sankey-energie` et `zonage-ssi`, antérieurs à cette
   forme, gardent leur rendeur propre. Une extraction sans aucune forme de repli fait
   **échouer le build** — la fiche ne peut plus perdre son dessin sur téléphone en
   silence.
+
+  ⚠ **Le seuil et le rôle du repli ont changé le 2026-08-15** : il ne remplace plus le
+  dessin, il le suit. La fiche sert `planche.svg` au-dessus de 880 px, `appui.svg` de 480
+  à 879, `vignette.svg` en dessous — et sous 880 le repli vient **sous** le dessin, allégé
+  de son surtitre et de son titre. Détail et mesures :
+  `docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`.
+
+  À noter au passage, relevé en ouvrant ce chantier : **`extraction.releve` est vide sur
+  les 23 planches** — le bloc `releve` du repli (`releve_entete`, chiffres à 30 px,
+  `releve-retrait`) n'est rendu nulle part depuis la décision FT2E du 2026-08-13. Il est
+  conservé en l'état, parce que le garde-fou de build l'accepte encore comme forme de
+  repli valide : le retirer sans retirer la branche du garde-fou laisserait passer une
+  extraction qui ne rendrait rien.
 - **`planche-chiffree` n'a jamais servi et son module n'est pas écrit** — décision à
   prendre plutôt qu'un reste à faire. La révision 4 interdit de remonter à la planche les
   chiffres que la fiche porte déjà ; un repli typographique ne dessine rien d'autre. Soit
