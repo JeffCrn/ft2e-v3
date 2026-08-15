@@ -1,7 +1,7 @@
 # Chantier des planches de références — programme et suivi
 
 > **Objet.** Substituer, sur les 23 fiches de références, un dessin FT2E aux visuels
-> actuels. **Ouvert le 2026-08-12. 16 planches publiées sur 23.**
+> actuels. **Ouvert le 2026-08-12. 17 planches publiées sur 23.**
 >
 > **Protocole de production :** `docs/superpowers/specs/2026-08-12-planches-references-protocole.md`
 > **Compositeurs :** `scripts/planches/<archetype>.py`
@@ -32,7 +32,7 @@ façade l'affirme.
 
 ---
 
-## État — 16 / 23
+## État — 17 / 23
 
 | № | Fiche | Secteur | Archétype | État |
 |---|---|---|---|---|
@@ -52,7 +52,7 @@ façade l'affirme.
 | 14 | `hotel-yachtman-quai-valin-la-rochelle` | Tertiaire / ERP | `coupe-traversee` (mécanisme `portee`) | ✅ **publiée** (versée le 2026-08-14) |
 | 15 | `logements-maubec-chagnolet` | Logements | `sankey-energie` (mécanisme `plafonds`) | ✅ **publiée** (versée le 2026-08-15) |
 | 16 | `logements-nerea-aytre` | Logements | `sankey-energie` (mécanisme `dedoublement`) | ✅ **publiée** (versée le 2026-08-15) |
-| — | `logements-pas-des-boeufs-bois-plage` | Logements | | à faire |
+| 17 | `logements-pas-des-boeufs-bois-plage` | Logements | `boucle-fluide` (mécanisme `appariement`) | ✅ **publiée** (versée le 2026-08-15) |
 | — | `maison-relais-saint-jean-d-angely` | Logements | | à faire |
 | — | `maisons-tourtet-saint-georges-de-didonne` | Logements | | à faire |
 | — | `passerelle-ecluse-carreau-d-or-marans` | Monotechnique | | à faire |
@@ -66,7 +66,7 @@ façade l'affirme.
 |---|---|---|
 | `sankey-energie` | 3 — trois mécanismes : le flux à largeur proportionnelle (École des douanes), `plafonds` (la proportion sans flux — trois pistes à échelle commune, le plafond carbone qui tombe au tiers à la frontière réglementaire et commande le générateur, logements Maubec à Chagnolet) et `dedoublement` (la partition contractuelle — un permis contigu qui fourche en deux marchés à 3 px par logement, une bande calcaire unique qui traverse les deux flux, le BET fluides commun ; les arrivées en segments comptent les bâtiments, logements Néréa à Aytré) | ✅ `scripts/planches/sankey-energie.py` (dispatch sur le bloc de l'extraction) |
 | `zonage-ssi` | 3 — trois mécanismes : `zonage` (un même déclenchement, l'alarme avant/après — Abbaye de Sablonceaux), `transfert` (la mise à l'abri au même niveau, la descente barrée — EHPAD de Coulonges-sur-l'Autize) et `partage` (le découpage réglementaire d'une enveloppe montée d'un seul tenant — la limite sans mur qui commande l'étanchéité, les machines et l'incendie, habitat inclusif de Salignac-sur-Charente) | ✅ `scripts/planches/zonage-ssi.py` (dispatch sur le bloc de l'extraction) |
-| `boucle-fluide` | 4 — quatre mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae), `substitution` (production réversible, centre de formation de Saintes) et `declinaison` (le parti répété — une maison dessinée une fois, 54 cellules identiques en `<defs>`/`<use>`, Le Fougerou) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
+| `boucle-fluide` | 5 — cinq mécanismes : `boucle` (récupération, Atelier Dufour), `utilites` (réseau de livraison, Ateliers Capsulae), `substitution` (production réversible, centre de formation de Saintes), `declinaison` (le parti répété — une maison dessinée une fois, 54 cellules identiques en `<defs>`/`<use>`, Le Fougerou) et `appariement` (la partition des services — trois bandes de service, deux colonnes de machines, et dans chaque colonne UNE boîte qui enjambe une frontière de bande, jamais la même : l'eau chaude porte la ventilation chez les T2, le chauffage porte l'eau chaude chez les T3 ; contour d'encre dominant la frontière filet-1, logements du Pas des Bœufs au Bois-Plage) | ✅ `scripts/planches/boucle-fluide.py` (dispatch sur le bloc de l'extraction) |
 | `coupe-traversee` | 4 — quatre mécanismes : `coupe` (l'enveloppe traversée, Marennes), `equilibre` (l'air extrait, l'air compensé — restaurant scolaire de Villedoux), `enjambement` (l'enveloppe qui ferme les faces qu'un bâtiment ordinaire n'a pas — dessous du plancher sur le passage, fosse d'ascenseur, abouts pontés — étude notariale Joffre) et `portee` (deux périmètres inégaux sur une même coupe de niveaux — la mission bornée au coin bas-gauche, l'enceinte de la zone d'alarme qui enclot tout, hôtel Le Yachtman) | ✅ `scripts/planches/coupe-traversee.py` (dispatch sur le bloc de l'extraction) |
 | `tableau-electrique` | 1 — mécanisme `autoconsommation` (la toiture est la seconde arrivée du tableau, crèche de l'Oranger) | ✅ `scripts/planches/tableau-electrique.py` |
 | `chronologie-affaire` | 1 — mécanisme `precedence` (le dessin précède le gros œuvre : l'escalier des réservations gravit les niveaux d'avance sur l'exécution, résidence Horizon) | ✅ `scripts/planches/chronologie-affaire.py` |

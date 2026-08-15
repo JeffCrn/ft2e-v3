@@ -32,7 +32,7 @@ double écriture des couleurs, routine d'exécution) vit dans `_tronc.py` depuis
 le 2026-08-13 — extraction contrôlée par régénération octet à octet des quatre
 planches publiées.
 
-Le module compose QUATRE mécanismes de l'archétype, choisis par le bloc que
+Le module compose CINQ mécanismes de l'archétype, choisis par le bloc que
 porte l'extraction :
 
 - `boucle` — la boucle de récupération (atelier Dufour) : deux conduits qui ne
@@ -48,7 +48,11 @@ porte l'extraction :
   aucun point, et figent le mode de production ;
 - `declinaison` — le parti répété (Le Fougerou) : UNE maison dessinée en
   détail contre 54 cellules strictement identiques portant le même glyphe —
-  c'est la répétition qui démontre, l'accolade des 27 calculs la prouve.
+  c'est la répétition qui démontre, l'accolade des 27 calculs la prouve ;
+- `appariement` — la partition des services (Pas des Bœufs) : trois bandes de
+  service, deux colonnes de machines, et dans chaque colonne UNE boîte qui
+  enjambe une frontière de bande — jamais la même. À gauche l'eau chaude
+  porte la ventilation, à droite le chauffage porte l'eau chaude.
 """
 
 from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
@@ -1514,9 +1518,398 @@ def composer_appui_declinaison(donnees):
         bas=f"mention des calculs à {250 + 42}, marge basse {AH - 292} px")
 
 
+# ═══ Mécanisme `appariement` — trois services, deux regroupements ═══════════
+#
+# Le motif (logements du Pas des Bœufs) : trois bandes de service horizontales
+# — chauffage, eau chaude, ventilation — et deux colonnes de machines, une par
+# typologie. Dans chaque colonne, UNE boîte enjambe une frontière de bande,
+# mais jamais la même : à gauche (T2), la machine d'eau chaude enjambe vers la
+# ventilation (caisson d'extraction intégré au ballon) ; à droite (T3), la
+# machine de chauffage enjambe vers l'eau chaude (ballon intégré). Texte
+# masqué, l'asymétrie des deux enjambements porte seule la thèse « la
+# partition par typologie commande celle des équipements ».
+
+AP_GX0, AP_GX1 = 56, 312          # boîtes machines T2, à gauche
+AP_DX0, AP_DX1 = 888, 1144        # boîtes machines T3, à droite
+AP_CX = 600                       # l'axe des services, au centre
+AP_BANDES = ((252, 372), (396, 516), (540, 660))   # chauffage, ecs, ventilation
+AP_SEP = (384, 528)               # les deux frontières de bande
+AP_ECART = 16                     # respiration entre lien et libellé de service
+
+
+def _ap_contour(x, y, w, h, ep=1.5):
+    """Le contour d'une machine : un trait d'encre, comme les conduits des
+    autres mécanismes — il doit dominer la frontière de bande (filet-1) que
+    la boîte enjambe, sans quoi l'enjambement se lit comme deux boîtes."""
+    from _tronc import JETON
+    return (f'  <rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" '
+            f'class="c-papier s-encre" fill="{JETON["papier"]}" '
+            f'stroke="{JETON["encre"]}" stroke-width="{ep}"/>')
+
+
+def _ap_boite(A, controler, e, x0, x1, y0, y1, compartiment_y=None):
+    """Une boîte machine : libellé 15/600, détails mono 10 — et, si la machine
+    porte deux services, un compartiment (filet-1) avec son propre libellé.
+    C'est la boîte qui enjambe la frontière de bande, jamais un trait seul."""
+    A(_ap_contour(x0, y0, x1 - x0, y1 - y0))
+    dispo = x1 - x0 - 32
+    lib = e.get("libelle_dessin", e["libelle"])
+    controler(f"libellé {e['cle']}", lib, 15, "sans-600", dispo)
+    A(texte(x0 + 16, y0 + 28, lib, "sans", 15, 600, "encre", wdth=112))
+    for k, l in enumerate(e.get("detail_dessin", [])):
+        controler(f"détail {e['cle']} {k + 1}", l, 10, "mono", dispo, 10 * 0.14)
+        A(texte(x0 + 16, y0 + 48 + k * 16, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    if compartiment_y is not None:
+        c = e["compartiment"]
+        A(ligne(x0, compartiment_y, x1, compartiment_y, "filet-1", 1))
+        controler(f"compartiment {e['cle']}", c["libelle"], 15, "sans-400", dispo)
+        A(texte(x0 + 16, compartiment_y + 28, c["libelle"], "sans", 15, 400,
+                "encre", wdth=100))
+        for k, l in enumerate(c.get("detail", [])):
+            controler(f"compartiment {e['cle']} — détail {k + 1}", l, 10,
+                      "mono", dispo, 10 * 0.14)
+            A(texte(x0 + 16, compartiment_y + 46 + k * 14, l, "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+        for k, l in enumerate(e.get("mention_dessin", [])):
+            controler(f"mention {e['cle']} {k + 1}", l, 10, "mono", dispo,
+                      10 * 0.14)
+            A(texte(x0 + 16, y1 - 30 + k * 16, l, "mono", 10, 500, "pivot",
+                    tracking=10 * 0.14))
+
+
+def composer_appariement(donnees):
+    ap = donnees["appariement"]
+    elems = {e["cle"]: e for e in ap["elements"]}
+    services = {s["cle"]: s for s in ap["services"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête et registres ─────────────────────────────────────────────────
+    controler("en-tête schéma", ap["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, ap["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(MARGE, Y_REGISTRES, ap["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_REGISTRES, ap["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Les deux frontières de bande — visibles dans l'entre-deux ────────────
+    for y in AP_SEP:
+        A(ligne(MARGE, y, W - MARGE, y, "filet-1", 1))
+
+    # ── L'axe des services, au centre ────────────────────────────────────────
+    centres = {cle: (b0 + b1) / 2
+               for cle, (b0, b1) in zip(("chauffage", "ecs", "ventilation"),
+                                        AP_BANDES)}
+    demi = {}
+    for cle, cy in centres.items():
+        lib = services[cle]["libelle"]
+        l_srv = controler(f"service {cle}", lib, 15, "sans-600", 300)
+        demi[cle] = l_srv / 2
+        A(texte(AP_CX, cy + 5, lib, "sans", 15, 600, "encre",
+                wdth=112, ancre="middle"))
+
+    # ── Les quatre boîtes machines — deux par colonne ────────────────────────
+    _ap_boite(A, controler, elems["pac-air-air"], AP_GX0, AP_GX1,
+              AP_BANDES[0][0], AP_BANDES[0][1])
+    _ap_boite(A, controler, elems["cet"], AP_GX0, AP_GX1,
+              AP_BANDES[1][0], AP_BANDES[2][1], compartiment_y=AP_SEP[1])
+    _ap_boite(A, controler, elems["pac-air-eau"], AP_DX0, AP_DX1,
+              AP_BANDES[0][0], AP_BANDES[1][1], compartiment_y=AP_SEP[0])
+    _ap_boite(A, controler, elems["hygro-b"], AP_DX0, AP_DX1,
+              AP_BANDES[2][0], AP_BANDES[2][1])
+
+    # ── Les liens : chaque machine rejoint la bande du service qu'elle rend ──
+    def lien_gauche(cle_service, etiquettes, nom):
+        cy = centres[cle_service]
+        x_fin = AP_CX - demi[cle_service] - AP_ECART
+        A(ligne(AP_GX1, cy, x_fin - 8, cy, "encre", 1.5))
+        A(fleche(x_fin, cy, "encre", "droite", 9))
+        x_mi = (AP_GX1 + x_fin) / 2
+        for k, l in enumerate(etiquettes):
+            controler(f"lien {nom} {k + 1}", l, 10, "mono",
+                      x_fin - AP_GX1, 10 * 0.14)
+            A(texte(x_mi, cy - 10 - (len(etiquettes) - 1 - k) * 14, l,
+                    "mono", 10, 500, "pivot", ancre="middle",
+                    tracking=10 * 0.14))
+
+    def lien_droit(cle_service, etiquettes, nom):
+        cy = centres[cle_service]
+        x_fin = AP_CX + demi[cle_service] + AP_ECART
+        A(ligne(AP_DX0, cy, x_fin + 8, cy, "encre", 1.5))
+        A(fleche(x_fin, cy, "encre", "gauche", 9))
+        x_mi = (AP_DX0 + x_fin) / 2
+        for k, l in enumerate(etiquettes):
+            controler(f"lien {nom} {k + 1}", l, 10, "mono",
+                      AP_DX0 - x_fin, 10 * 0.14)
+            A(texte(x_mi, cy - 10 - (len(etiquettes) - 1 - k) * 14, l,
+                    "mono", 10, 500, "pivot", ancre="middle",
+                    tracking=10 * 0.14))
+
+    lien_gauche("chauffage", elems["pac-air-air"]["lien"], "unités intérieures")
+    lien_gauche("ecs", [], "ecs T2")
+    lien_gauche("ventilation", elems["cet"]["lien_ventilation"], "hygro A")
+    lien_droit("chauffage", elems["pac-air-eau"]["lien"], "radiateurs")
+    lien_droit("ecs", [], "ecs T3")
+    lien_droit("ventilation", elems["hygro-b"]["lien_ventilation"], "hygro B")
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur ajustée, jamais codée ────────────────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "trois bandes de service et deux colonnes de deux "
+                         "boîtes ; dans chaque colonne UNE boîte enjambe une "
+                         f"frontière de bande, jamais la même — à gauche le "
+                         f"chauffe-eau enjambe y {AP_SEP[1]} (eau chaude → "
+                         f"ventilation), à droite la PAC double service "
+                         f"enjambe y {AP_SEP[0]} (chauffage → eau chaude) ; "
+                         "les deux petites boîtes restent dans leur bande — "
+                         "texte masqué, l'asymétrie des enjambements porte "
+                         "seule la thèse",
+        "topologie": f"machines T2 (x {AP_GX0}–{AP_GX1}) → liens → axe des "
+                     f"services (x {AP_CX}) ← liens ← machines T3 "
+                     f"(x {AP_DX0}–{AP_DX1}) ; bandes chauffage y "
+                     f"{AP_BANDES[0][0]}–{AP_BANDES[0][1]}, eau chaude y "
+                     f"{AP_BANDES[1][0]}–{AP_BANDES[1][1]}, ventilation y "
+                     f"{AP_BANDES[2][0]}–{AP_BANDES[2][1]} ; frontières "
+                     f"y {AP_SEP[0]} et {AP_SEP[1]} — l'ordre des équipements "
+                     "est celui de la fiche, typologie par typologie",
+        "bas_du_dessin": f"boîtes basses jusqu'à {AP_BANDES[2][1]}, phrase de "
+                         f"principe à {Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
+                         f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+                          "pas chiffrée (révision 4) ; 4,40 kW, COP 4,63 et "
+                          "4,95, 100 L et 190 L, 50/45 °C restent au mono 10 "
+                          "pivot dans les boîtes et sur les liens",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_appariement(donnees):
+    """La vignette : le motif entier — trois bandes, deux colonnes, les deux
+    enjambements en miroir — et les deux ballons chiffrés (100 L, 190 L).
+    Ce qu'elle laisse : les libellés de machines, les étiquettes de liens,
+    les détails — huit libellés dans 300 px ne se liraient pas."""
+    ap = donnees["appariement"]
+    services = {s["cle"]: s for s in ap["services"]}
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    bandes = ((44, 84), (92, 132), (140, 180))
+    seps = (88, 136)
+    gx0, gx1, dx0, dx1, cx = 16, 84, 216, 284, 150
+    for y in seps:
+        A(ligne(V_MARGE, y, VW - V_MARGE, y, "filet-1", 1))
+
+    # Les tags de typologie.
+    A(texte(gx0, 38, "SEPT T2", "mono", 9, 500, "pivot", tracking=9 * 0.14))
+    A(texte(dx1, 38, "TROIS T3", "mono", 9, 500, "pivot", ancre="end",
+            tracking=9 * 0.14))
+
+    # Les quatre boîtes — les deux enjambements en miroir, contours d'encre
+    # dominant la frontière (filet-1) que les boîtes hautes enjambent.
+    A(_ap_contour(gx0, bandes[0][0], gx1 - gx0,
+                  bandes[0][1] - bandes[0][0], 1.2))
+    A(_ap_contour(gx0, bandes[1][0], gx1 - gx0,
+                  bandes[2][1] - bandes[1][0], 1.2))
+    A(ligne(gx0, seps[1], gx1, seps[1], "filet-1", 1))
+    A(_ap_contour(dx0, bandes[0][0], dx1 - dx0,
+                  bandes[1][1] - bandes[0][0], 1.2))
+    A(ligne(dx0, seps[0], dx1, seps[0], "filet-1", 1))
+    A(_ap_contour(dx0, bandes[2][0], dx1 - dx0,
+                  bandes[2][1] - bandes[2][0], 1.2))
+
+    # Les deux ballons chiffrés — les machines qui portent deux services.
+    A(texte((gx0 + gx1) / 2, 122, f"100{NN}L", "mono", 10, 500, "pivot",
+            ancre="middle", tabulaire=True))
+    A(texte((dx0 + dx1) / 2, 118, f"190{NN}L", "mono", 10, 500, "pivot",
+            ancre="middle", tabulaire=True))
+
+    # L'axe des services et les liens.
+    centres = {cle: (b0 + b1) / 2
+               for cle, (b0, b1) in zip(("chauffage", "ecs", "ventilation"),
+                                        bandes)}
+    liens = {"chauffage": ("g", "d"), "ecs": ("g", "d"),
+             "ventilation": ("g", "d")}
+    for cle, cy in centres.items():
+        lib = services[cle].get("libelle_court", services[cle]["libelle"])
+        l_srv = mesurer(lib, 12, "sans-600")
+        A(texte(cx, cy + 4, lib, "sans", 12, 600, "encre", wdth=112,
+                ancre="middle"))
+        xg = cx - l_srv / 2 - 8
+        xd = cx + l_srv / 2 + 8
+        A(ligne(gx1, cy, xg - 5, cy, "encre", 1.2))
+        A(fleche(xg, cy, "encre", "droite", 6))
+        A(ligne(dx0, cy, xd + 5, cy, "encre", 1.2))
+        A(fleche(xd, cy, "encre", "gauche", 6))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "trois bandes, deux colonnes, les deux enjambements en "
+                 "miroir (compartiments aux frontières 88 et 136) et les deux "
+                 "ballons chiffrés — libellés de machines, étiquettes de "
+                 "liens et détails laissés à la planche",
+        "bas_du_dessin": "boîtes basses à y 180, marge basse 20 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_appariement(donnees):
+    """L'appui du hero (mécanisme `appariement`) : le motif à l'échelle 1 —
+    trois bandes, deux colonnes nommées, les deux enjambements, les nœuds
+    chiffrés (COP 4,63 et 4,95, 100 L et 190 L). Ce qu'il laisse : les
+    étiquettes de liens, les mentions, la phrase — ils vivent sur la planche."""
+    ap = donnees["appariement"]
+    services = {s["cle"]: s for s in ap["services"]}
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    bandes = ((66, 148), (162, 244), (258, 340))
+    seps = (155, 251)
+    gx0, gx1, dx0, dx1, cx = 24, 196, 356, 528, 276
+
+    A(texte(gx0, 58, "SEPT T2", "mono", 10, 500, "pivot", tracking=10 * 0.14))
+    A(texte(dx1, 58, "TROIS T3", "mono", 10, 500, "pivot", ancre="end",
+            tracking=10 * 0.14))
+    for y in seps:
+        A(ligne(gx0, y, dx1, y, "filet-1", 1))
+
+    # T2 — la PAC air-air, bande du chauffage seule.
+    A(_ap_contour(gx0, bandes[0][0], gx1 - gx0,
+                  bandes[0][1] - bandes[0][0], 1.4))
+    A(texte(gx0 + 12, 90, "PAC air-air multisplit", "sans", 13, 600, "encre",
+            wdth=112))
+    A(texte(gx0 + 12, 110, "CHAUD SEUL · COP 4,63", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(gx0 + 12, 126, f"4,40{NN}kW À +7{NN}°C", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # T2 — le chauffe-eau, qui enjambe eau chaude et ventilation.
+    A(_ap_contour(gx0, bandes[1][0], gx1 - gx0,
+                  bandes[2][1] - bandes[1][0], 1.4))
+    A(ligne(gx0, seps[1], gx1, seps[1], "filet-1", 1))
+    A(texte(gx0 + 12, 186, "Chauffe-eau", "sans", 13, 600, "encre", wdth=112))
+    A(texte(gx0 + 12, 202, "thermodynamique", "sans", 13, 600, "encre",
+            wdth=112))
+    A(texte(gx0 + 12, 222, f"100{NN}L · R134a", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(gx0 + 12, 277, "CAISSON D’EXTRACTION", "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(gx0 + 12, 293, "INTÉGRÉ AU BALLON", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # T3 — la PAC double service, qui enjambe chauffage et eau chaude.
+    A(_ap_contour(dx0, bandes[0][0], dx1 - dx0,
+                  bandes[1][1] - bandes[0][0], 1.4))
+    A(ligne(dx0, seps[0], dx1, seps[0], "filet-1", 1))
+    A(texte(dx0 + 12, 90, "PAC air-eau", "sans", 13, 600, "encre", wdth=112))
+    A(texte(dx0 + 12, 110, "DOUBLE SERVICE", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(dx0 + 12, 126, f"COP 4,95 À +7{NN}°C", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(dx0 + 12, 182, f"BALLON 190{NN}L INTÉGRÉ", "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(dx0 + 12, 198, "HEURES CREUSES", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # T3 — la ventilation, seule, a sa machine.
+    A(_ap_contour(dx0, bandes[2][0], dx1 - dx0,
+                  bandes[2][1] - bandes[2][0], 1.4))
+    A(texte(dx0 + 12, 282, "Groupe hygroréglable B", "sans", 13, 600, "encre",
+            wdth=112))
+    A(texte(dx0 + 12, 302, "INDÉPENDANT", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # L'axe des services et les liens.
+    centres = {cle: (b0 + b1) / 2
+               for cle, (b0, b1) in zip(("chauffage", "ecs", "ventilation"),
+                                        bandes)}
+    for cle, cy in centres.items():
+        lib = services[cle].get("libelle_court", services[cle]["libelle"])
+        l_srv = mesurer(lib, 13, "sans-600")
+        A(texte(cx, cy + 4, lib, "sans", 13, 600, "encre", wdth=112,
+                ancre="middle"))
+        xg = cx - l_srv / 2 - 10
+        xd = cx + l_srv / 2 + 10
+        A(ligne(gx1, cy, xg - 6, cy, "encre", 1.4))
+        A(fleche(xg, cy, "encre", "droite", 7))
+        A(ligne(dx0, cy, xd + 6, cy, "encre", 1.4))
+        A(fleche(xd, cy, "encre", "gauche", 7))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="trois bandes de service, deux colonnes de machines nommées, "
+              "les deux enjambements en miroir (compartiments aux frontières "
+              "155 et 251), les nœuds chiffrés COP 4,63 / 4,95 et 100 L / "
+              "190 L — étiquettes de liens et mentions laissées à la planche",
+        bas=f"boîtes basses à 340, marge basse {AH - 340} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "appariement" in donnees:
+        return composer_appariement(donnees)
     if "declinaison" in donnees:
         return composer_declinaison(donnees)
     if "substitution" in donnees:
@@ -1527,6 +1920,8 @@ def composer(donnees):
 
 
 def composer_vignette(donnees):
+    if "appariement" in donnees:
+        return composer_vignette_appariement(donnees)
     if "declinaison" in donnees:
         return composer_vignette_declinaison(donnees)
     if "substitution" in donnees:
@@ -1537,6 +1932,8 @@ def composer_vignette(donnees):
 
 
 def composer_appui(donnees):
+    if "appariement" in donnees:
+        return composer_appui_appariement(donnees)
     if "declinaison" in donnees:
         return composer_appui_declinaison(donnees)
     if "substitution" in donnees:

@@ -1,0 +1,208 @@
+{
+  "fiche": "logements-pas-des-boeufs-bois-plage",
+  "archetype": "boucle-fluide",
+  "archetype_motif": "La fiche porte deux mécanismes. Le premier — dix logements, quatre volumes réglementaires, quatre marges carbone — est celui que la planche de Maubec dessine déjà (sankey, mécanisme plafonds), et la fiche s’y réfère elle-même : le reprendre serait la redite que le registre proscrit. La planche retient l’autre, que la fiche énonce littéralement : « Cette partition par typologie commande celle des équipements. » Trois services identiques à rendre dans chaque maison — chauffage, eau chaude, ventilation — et deux machines par logement pour les porter, mais pas appariées de la même façon : dans les sept T2, la machine d’eau chaude porte aussi la ventilation (caisson d’extraction intégré au ballon) ; dans les trois T3, la machine de chauffage porte aussi l’eau chaude (ballon de 190 litres intégré), et la ventilation a sa machine à elle. La démonstration est géométrique : deux colonnes de deux boîtes sur trois bandes de service, et dans chaque colonne une boîte enjambe deux bandes — jamais les mêmes.",
+  "surtitre": "SCHÉMA DE PRINCIPE · TROIS SERVICES, DEUX APPARIEMENTS",
+  "titre": "Pas des Bœufs, dix maisons",
+  "sous_titre": "Deux typologies, deux machines thermodynamiques par maison",
+  "cartouche_legende": "LE BOIS-PLAGE-EN-RÉ · 548 m² · 2022",
+  "aria_label": "Schéma de principe de l’appariement des équipements par typologie : trois services à rendre dans chaque maison — chauffage, eau chaude sanitaire, ventilation — et deux machines par logement. Dans les sept T2, une pompe à chaleur air-air multisplit en chaud seul porte le chauffage, et le chauffe-eau thermodynamique porte à la fois l’eau chaude et la ventilation, son caisson d’extraction simple flux étant intégré au ballon. Dans les trois T3, une pompe à chaleur air-eau double service porte ensemble le chauffage et l’eau chaude par son ballon intégré, et la ventilation revient à un groupe hygroréglable indépendant.",
+  "appariement": {
+    "entete": "TROIS SERVICES PAR MAISON — CHAUFFAGE, EAU CHAUDE, VENTILATION · DEUX MACHINES POUR LES PORTER",
+    "registres": {
+      "gauche": "SEPT T2 · 47,74 À 50,20 m² HABITABLES",
+      "droite": "TROIS T3 · 68,25 À 69,09 m² HABITABLES"
+    },
+    "services": [
+      {
+        "cle": "chauffage",
+        "libelle": "Chauffage",
+        "libelle_court": "Chauffage"
+      },
+      {
+        "cle": "ecs",
+        "libelle": "Eau chaude sanitaire",
+        "libelle_court": "Eau chaude"
+      },
+      {
+        "cle": "ventilation",
+        "libelle": "Ventilation",
+        "libelle_court": "Ventilation"
+      }
+    ],
+    "elements": [
+      {
+        "cle": "pac-air-air",
+        "ordre": 1,
+        "libelle": "Sept T2 — PAC air-air multisplit",
+        "libelle_dessin": "PAC air-air multisplit",
+        "valeur": "4,40",
+        "unite": "kW",
+        "detail": [
+          "CHAUD SEUL · COP 4,63 · FLUIDE R32",
+          "GARANTIE JUSQU’À −15 °C"
+        ],
+        "detail_dessin": [
+          "CHAUD SEUL · 4,40 kW À +7 °C",
+          "COP 4,63 · R32 · JUSQU’À −15 °C"
+        ],
+        "lien": [
+          "DEUX UNITÉS INTÉRIEURES",
+          "SÉJOUR ET CHAMBRE"
+        ],
+        "mention": "DEUX UNITÉS INTÉRIEURES · SÉJOUR ET CHAMBRE"
+      },
+      {
+        "cle": "cet",
+        "ordre": 2,
+        "libelle": "Sept T2 — chauffe-eau thermodynamique",
+        "libelle_dessin": "Chauffe-eau thermodynamique",
+        "valeur": "100",
+        "unite": "L",
+        "detail": [
+          "R134a · COMPRESSEUR INVERTER",
+          "CAISSON D’EXTRACTION SIMPLE FLUX INTÉGRÉ AU BALLON"
+        ],
+        "detail_dessin": [
+          "100 L · R134a · INVERTER"
+        ],
+        "compartiment": {
+          "libelle": "Caisson d’extraction",
+          "detail": [
+            "SIMPLE FLUX",
+            "INTÉGRÉ AU BALLON"
+          ]
+        },
+        "lien_ventilation": [
+          "HYGRORÉGLABLE TYPE A"
+        ],
+        "mention_dessin": [
+          "UNE MACHINE PORTE",
+          "L’EAU CHAUDE ET LA VENTILATION"
+        ],
+        "mention": "UNE MACHINE PORTE L’EAU CHAUDE ET LA VENTILATION · HYGRORÉGLABLE TYPE A"
+      },
+      {
+        "cle": "pac-air-eau",
+        "ordre": 3,
+        "libelle": "Trois T3 — PAC air-eau split double service",
+        "libelle_dessin": "PAC air-eau double service",
+        "valeur": "190",
+        "unite": "L",
+        "detail": [
+          "SPLIT INVERTER · COP 4,95 À +7 °C · 3,11 À −7 °C",
+          "BALLON 190 L INTÉGRÉ · HEURES CREUSES",
+          "APPOINT 3 kW · RÉGULATION EN LOI D’EAU"
+        ],
+        "detail_dessin": [
+          "COP 4,95 À +7 °C · 3,11 À −7 °C",
+          "SPLIT INVERTER · LOI D’EAU"
+        ],
+        "compartiment": {
+          "libelle": "Ballon 190 L intégré",
+          "detail": [
+            "HEURES CREUSES · APPOINT 3 kW"
+          ]
+        },
+        "lien": [
+          "RADIATEURS 50/45 °C",
+          "SÈCHE-SERVIETTES HYDRAULIQUE"
+        ],
+        "mention_dessin": [
+          "UNE MACHINE PORTE",
+          "LE CHAUFFAGE ET L’EAU CHAUDE"
+        ],
+        "mention": "UNE MACHINE PORTE LE CHAUFFAGE ET L’EAU CHAUDE · RADIATEURS 50/45 °C ET SÈCHE-SERVIETTES HYDRAULIQUE"
+      },
+      {
+        "cle": "hygro-b",
+        "ordre": 4,
+        "libelle": "Trois T3 — groupe hygroréglable de type B",
+        "libelle_dessin": "Groupe hygroréglable B",
+        "detail": [
+          "INDÉPENDANT DE L’EAU CHAUDE",
+          "EN FAUX PLAFOND OU EN COMBLES"
+        ],
+        "detail_dessin": [
+          "INDÉPENDANT DE L’EAU CHAUDE",
+          "FAUX PLAFOND OU COMBLES"
+        ],
+        "lien_ventilation": [
+          "HYGRORÉGLABLE TYPE B"
+        ],
+        "mention": "UNE MACHINE POUR LA SEULE VENTILATION"
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Cette partition par typologie commande celle des équipements.",
+  "vignette_surtitre": "L’APPARIEMENT DES SERVICES",
+  "a_valider_ft2e": [
+    {
+      "objet": "L’ordre des trois bandes de service",
+      "la_source_affirme": "La fiche décrit les équipements typologie par typologie ; elle n’ordonne jamais les trois services en une liste.",
+      "le_dessin_suppose": "Un empilement chauffage / eau chaude / ventilation, de haut en bas — c’est lui qui met les deux enjambements en miroir (le T2 sur les deux bandes basses, le T3 sur les deux hautes). Dire si un autre ordre est préférable."
+    },
+    {
+      "objet": "Deux maisons-types d’égale largeur",
+      "la_source_affirme": "Sept T2 de 47,74 à 50,20 m² habitables, trois T3 de 68,25 à 69,09 m² — ni les effectifs ni les surfaces ne sont égaux.",
+      "le_dessin_suppose": "Que chaque colonne dessine UNE maison-type et que les deux colonnes soient d’égale largeur : la géométrie code l’appariement des services, jamais l’effectif ni la surface, portés par les seules étiquettes SEPT T2 / TROIS T3. Une lecture proportionnelle des colonnes serait fausse."
+    },
+    {
+      "objet": "Le sèche-serviettes électrique des T2, absent du dessin",
+      "la_source_affirme": "Le lot électricité couvre « les sèche-serviettes électriques des T2 » ; en T3 le sèche-serviettes est hydraulique, raccordé à la PAC.",
+      "le_dessin_suppose": "Que le sèche-serviettes électrique des T2 n’entre pas dans l’appariement dessiné : il ne relève d’aucune des deux machines thermodynamiques. Le chauffage T2 est donc dessiné porté par la seule PAC air-air — dire s’il doit figurer en terminal du chauffage."
+    },
+    {
+      "objet": "L’appoint de 3 kW rangé au compartiment du ballon",
+      "la_source_affirme": "« Ballon de 190 litres intégré produisant en heures creuses, appoint électrique de 3 kW et régulation en loi d’eau » — la fiche ne dit pas quel service l’appoint secourt.",
+      "le_dessin_suppose": "Que l’appoint se range au compartiment du ballon, avec les heures creuses. S’il secourt le chauffage, il doit remonter au compartiment haut."
+    },
+    {
+      "objet": "Les unités extérieures fondues dans la boîte machine",
+      "la_source_affirme": "En T2, « une unité extérieure au jardin » et deux unités intérieures ; en T3 une PAC split.",
+      "le_dessin_suppose": "Qu’une machine se dessine en une seule boîte : la partition extérieur/intérieur n’est pas représentée, seules les deux unités intérieures apparaissent en terminal du chauffage T2. Dire si la scission doit se voir."
+    },
+    {
+      "objet": "Le millésime 2022 du cartouche",
+      "la_source_affirme": "Affaire ouverte en 2022 (champ annee), chantier ouvert en juillet 2024, opérations préalables à la réception fixées au 18 novembre 2025 par le dernier compte rendu — pas d’annee_livraison au frontmatter, statut « en cours ».",
+      "le_dessin_suppose": "Que le cartouche porte 2022, le millésime d’ouverture — seul millésime arrêté sur pièce. À basculer sur l’année de réception une fois celle-ci prononcée."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 22-066 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tout montant : enveloppe de travaux 1 100 000 € HT, coût d’objectif 1 850 € HT du m² habitable, APD à 1 281 944 € HT (+16,54 %), avenant n° 1 et ses trois causes.",
+    "Noms de tiers : la maîtrise d’ouvrage, l’architecte, le BET structure, l’économiste-OPC, le certificateur du label BPEC et les qualifications d’entreprises citées (Qualibat 5133 et 5231, QualiPAC, Qualifelec PAC, Cerqual, Promotelec).",
+    "Le volet réglementaire chiffré — quatre calculs RE2020 par îlot, Cep de −36,68 à −44,07 %, Cep,nr, Bbio, carbone de construction de 1 338,7 à 1 388,8 kg éq. CO₂/m² contre ses plafonds, degrés-heures 690,2 à 829,7 °C·h : la page les porte déjà, et le mécanisme du calcul par volume construit est celui de la planche de Maubec — reprendre un mécanisme déjà dessiné est la redite que le registre du chantier proscrit.",
+    "L’enveloppe : Uw ≤ 1,30, murs à 0,210 W/(m²·K), combles à 0,098, plancher à 0,250, perméabilité 0,50 m³/(h·m²) sous 4 Pa — des organes d’enveloppe, pas l’appariement dessiné.",
+    "Le lot électricité : 9 kVA par maison, 90 kVA installés, foisonnement 0,63, 71 kVA utiles, 103 A, fourreaux des onze places de stationnement — un autre mécanisme, non retenu.",
+    "Toute géométrie d’ouvrage : les quatre îlots, l’implantation avenue du Pas des Bœufs, les jardins privatifs, les locaux vélos — les colonnes sont deux maisons-types topologiques.",
+    "Les jalons d’affaire : notification du 15 mars 2023, APD validé le 3 janvier 2024, chantier ouvert en juillet 2024, essais de portance d’octobre 2024, implantation du 18 novembre 2024, 48 comptes rendus, OPR du 18 novembre 2025 — matière d’une chronologie, pas d’un appariement."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "trois bandes de service et deux colonnes de deux boîtes ; dans chaque colonne UNE boîte enjambe une frontière de bande, jamais la même — à gauche le chauffe-eau enjambe y 528 (eau chaude → ventilation), à droite la PAC double service enjambe y 384 (chauffage → eau chaude) ; les deux petites boîtes restent dans leur bande — texte masqué, l'asymétrie des enjambements porte seule la thèse",
+    "topologie": "machines T2 (x 56–312) → liens → axe des services (x 600) ← liens ← machines T3 (x 888–1144) ; bandes chauffage y 252–372, eau chaude y 396–516, ventilation y 540–660 ; frontières y 384 et 528 — l'ordre des équipements est celui de la fiche, typologie par typologie",
+    "bas_du_dessin": "boîtes basses jusqu'à 660, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 318 x 30 px = 9540 px², soit 0.99 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas chiffrée (révision 4) ; 4,40 kW, COP 4,63 et 4,95, 100 L et 190 L, 50/45 °C restent au mono 10 pivot dans les boîtes et sur les liens",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "61 signes — 518 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "trois bandes, deux colonnes, les deux enjambements en miroir (compartiments aux frontières 88 et 136) et les deux ballons chiffrés — libellés de machines, étiquettes de liens et détails laissés à la planche",
+    "bas_du_dessin": "boîtes basses à y 180, marge basse 20 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "trois bandes de service, deux colonnes de machines nommées, les deux enjambements en miroir (compartiments aux frontières 155 et 251), les nœuds chiffrés COP 4,63 / 4,95 et 100 L / 190 L — étiquettes de liens et mentions laissées à la planche",
+    "bas_du_dessin": "boîtes basses à 340, marge basse 28 px"
+  }
+}

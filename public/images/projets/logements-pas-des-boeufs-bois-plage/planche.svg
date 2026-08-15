@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de l’appariement des équipements par typologie : trois services à rendre dans chaque maison — chauffage, eau chaude sanitaire, ventilation — et deux machines par logement. Dans les sept T2, une pompe à chaleur air-air multisplit en chaud seul porte le chauffage, et le chauffe-eau thermodynamique porte à la fois l’eau chaude et la ventilation, son caisson d’extraction simple flux étant intégré au ballon. Dans les trois T3, une pompe à chaleur air-eau double service porte ensemble le chauffage et l’eau chaude par son ballon intégré, et la ventilation revient à un groupe hygroréglable indépendant.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · TROIS SERVICES, DEUX APPARIEMENTS</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Pas des Bœufs, dix maisons</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Deux typologies, deux machines thermodynamiques par maison</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TROIS SERVICES PAR MAISON — CHAUFFAGE, EAU CHAUDE, VENTILATION · DEUX MACHINES POUR LES PORTER</text>
+  <text x="56.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SEPT T2 · 47,74 À 50,20 m² HABITABLES</text>
+  <text x="1144.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">TROIS T3 · 68,25 À 69,09 m² HABITABLES</text>
+  <path d="M 56.00 384.00 L 1144.00 384.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 56.00 528.00 L 1144.00 528.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="600.00" y="317.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">Chauffage</text>
+  <text x="600.00" y="461.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">Eau chaude sanitaire</text>
+  <text x="600.00" y="605.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">Ventilation</text>
+  <rect x="56.00" y="252.00" width="256.00" height="120.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="72.00" y="280.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">PAC air-air multisplit</text>
+  <text x="72.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHAUD SEUL · 4,40 kW À +7 °C</text>
+  <text x="72.00" y="316.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">COP 4,63 · R32 · JUSQU’À −15 °C</text>
+  <rect x="56.00" y="396.00" width="256.00" height="264.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="72.00" y="424.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chauffe-eau thermodynamique</text>
+  <text x="72.00" y="444.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">100 L · R134a · INVERTER</text>
+  <path d="M 56.00 528.00 L 312.00 528.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="556.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Caisson d’extraction</text>
+  <text x="72.00" y="574.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SIMPLE FLUX</text>
+  <text x="72.00" y="588.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">INTÉGRÉ AU BALLON</text>
+  <text x="72.00" y="630.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UNE MACHINE PORTE</text>
+  <text x="72.00" y="646.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L’EAU CHAUDE ET LA VENTILATION</text>
+  <rect x="888.00" y="252.00" width="256.00" height="264.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="904.00" y="280.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">PAC air-eau double service</text>
+  <text x="904.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">COP 4,95 À +7 °C · 3,11 À −7 °C</text>
+  <text x="904.00" y="316.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SPLIT INVERTER · LOI D’EAU</text>
+  <path d="M 888.00 384.00 L 1144.00 384.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="904.00" y="412.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Ballon 190 L intégré</text>
+  <text x="904.00" y="430.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HEURES CREUSES · APPOINT 3 kW</text>
+  <text x="904.00" y="486.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UNE MACHINE PORTE</text>
+  <text x="904.00" y="502.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE CHAUFFAGE ET L’EAU CHAUDE</text>
+  <rect x="888.00" y="540.00" width="256.00" height="120.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="904.00" y="568.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Groupe hygroréglable B</text>
+  <text x="904.00" y="588.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">INDÉPENDANT DE L’EAU CHAUDE</text>
+  <text x="904.00" y="604.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">FAUX PLAFOND OU COMBLES</text>
+  <path d="M 312.00 312.00 L 543.60 312.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 551.60 312.00 L 542.60 307.50 L 542.60 316.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="431.80" y="288.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">DEUX UNITÉS INTÉRIEURES</text>
+  <text x="431.80" y="302.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">SÉJOUR ET CHAMBRE</text>
+  <path d="M 312.00 456.00 L 504.00 456.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 512.00 456.00 L 503.00 451.50 L 503.00 460.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 312.00 600.00 L 536.40 600.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 544.40 600.00 L 535.40 595.50 L 535.40 604.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="428.20" y="590.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">HYGRORÉGLABLE TYPE A</text>
+  <path d="M 888.00 312.00 L 656.40 312.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 648.40 312.00 L 657.40 307.50 L 657.40 316.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="768.20" y="288.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">RADIATEURS 50/45 °C</text>
+  <text x="768.20" y="302.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">SÈCHE-SERVIETTES HYDRAULIQUE</text>
+  <path d="M 888.00 456.00 L 696.00 456.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 688.00 456.00 L 697.00 451.50 L 697.00 460.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 888.00 600.00 L 663.60 600.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 655.60 600.00 L 664.60 595.50 L 664.60 604.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="771.80" y="590.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">HYGRORÉGLABLE TYPE B</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Cette partition par typologie commande celle des équipements.</text>
+  <rect x="56.00" y="714.00" width="318.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LE BOIS-PLAGE-EN-RÉ · 548 m² · 2022</text>
+</svg>
