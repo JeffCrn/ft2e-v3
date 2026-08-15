@@ -205,6 +205,7 @@ l'échelle 0,24, quel que soit l'endroit où on le découpe.
 | **Chantier des 23 fiches références réelles** (programme, protocole, suivi) | **`docs/superpowers/plans/2026-08-07-chantier-references-reelles.md`** |
 | **Planches de références — protocole de production** | **`docs/superpowers/specs/2026-08-12-planches-references-protocole.md`** |
 | **Planches de références — bilan de clôture et points ouverts** | **`docs/superpowers/plans/2026-08-12-chantier-planches-references.md`** |
+| **Remasterisation de `/references` en grille de cartes** (spec + prompt de lancement, à ouvrir) | **`docs/superpowers/specs/2026-08-15-remasterisation-nomenclature-references.md`** |
 | Version liminaire (historique de la première livraison) | `docs/14-version-liminaire.md` |
 | Pistes de production CMS | `docs/20-pistes-production-cms.md` (⚠ numéro 20 partagé avec la source plaquette) |
 | Script de la démonstration client du 2 juillet | `docs/21-script-demo-2-juillet.md` |
