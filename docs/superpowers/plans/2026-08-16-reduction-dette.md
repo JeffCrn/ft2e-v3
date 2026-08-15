@@ -9,7 +9,7 @@
 > s’ils divergent du dépôt, c’est le dépôt qui a bougé depuis `d3bd8d9`, et il faut
 > remesurer avant d’agir.
 >
-> **Ouvert le 2026-08-16.** État : 0 session sur 4 exécutée.
+> **Ouvert le 2026-08-16.** État : **1 session sur 4 exécutée** (S1), **1 décision sur 2 tranchée** (D1).
 
 ---
 
@@ -97,6 +97,10 @@ devra être mis à jour dans le même commit.
 ⚠ **La photographie collective est rendue à deux endroits** — `src/pages/equipe.astro`
 (`collectifExiste`) **et** `src/pages/index.astro` (même constante). Les deux migrent
 ensemble ou l’accueil casse.
+> ⚠ **Faux — il y en a TROIS.** Relevé à l’exécution le 2026-08-16 :
+> `src/pages/societe.astro` porte un troisième rendu (bandeau 21:8), avec la même
+> constante. Les trois sont migrés ; le chemin est désormais porté une seule fois
+> par `CHEMIN_COLLECTIF` (`src/lib/photos.ts`).
 
 ⚠ **`duotone-photo` est un filtre CSS posé sur l’élément.** `<Image>` émet bien un
 `<img>`, la classe se pose dessus sans changement. Le vérifier au rendu quand même :
@@ -118,6 +122,71 @@ la charte interdit toute couleur native (règle du duotone 197°).
 npm run build && npm run preview          # puis, sur un autre terminal :
 npx lighthouse http://localhost:4321/equipe/ --preset=perf --form-factor=mobile --quiet
 ```
+
+### ✅ Exécutée le 2026-08-16 — ce qui a été mesuré
+
+Toutes les mesures ci-dessous sont **Lighthouse mobile sur `npm run preview`**
+(localhost, throttling simulé), avant et après, sur la même machine et dans la même
+session. Trois runs de contrôle après migration : perf 98 / 98 / 98, LCP 2,2 s à
+chaque fois — la mesure est stable, pas un tirage heureux.
+
+| Page | Avant | Après |
+|---|---|---|
+| `/equipe/` — poids | **4 766 Kio** | **243 Kio** (**−94,9 %**) |
+| `/equipe/` — performance | 93 | **98** |
+| `/equipe/` — LCP | 3,0 s | **2,2 s** |
+| `/` — performance | 96 | **96** (aucune régression) |
+| `/societe/` — performance | non mesuré avant | 98 |
+
+- **AVIF et WebP** : 26 fichiers de chaque dans `dist/_astro/`. Sur `/equipe/`,
+  8 `<picture>`, 24 `srcset`, 8 × `type="image/avif"` et 8 × `type="image/webp"`.
+- **Ressource la plus lourde de `/equipe/`** : ce n'est plus une image mais la
+  police **Archivo variable, 88 Ko**. La plus grosse image fait 27 Ko.
+- **Repli** : `tanguy.jpg` retiré → build vert, 7 `<picture>` au lieu de 8, la
+  cellule bascule sur la hachure `duotone-media`, zéro occurrence de `tanguy` dans
+  le HTML émis.
+- **Duotone** : contrôlé en *computed style*, pas à l'œil —
+  `filter: grayscale(1) contrast(1.05)`, `mix-blend-mode: lighten`, fond
+  `rgb(0,23,24)`, `::after` `rgb(225,244,244)` en `darken`. Aucune couleur native.
+- **390 px** : `/equipe/` sans débordement horizontal, collectif servi à 293 px
+  (variante 420 w), portraits à 170 px.
+
+#### ⚠ Le critère « LCP mobile < 1,8 s » n'est pas tenu, et il n'est pas atteignable ici
+
+LCP = **2,2 s** contre 1,8 s exigés. Ce n'est pas un reste d'optimisation d'images :
+**le FCP de la page est lui-même de 1,7–1,8 s**, et aucun LCP ne peut précéder son
+FCP. La page d'accueil le démontre en creux — 147 Kio, aucune image chargée,
+LCP = FCP = **1,8 s exactement**. Le plancher est donc posé par la chaîne bloquante
+CSS + polices, pas par le pipeline d'images.
+
+Après correction, `lcp-discovery-insight` passe à 1/1 (`requestDiscoverable`,
+`eagerlyLoaded`, `priorityHinted` tous vrais) : côté image, il n'y a plus rien à
+gagner. **Le levier restant est la police de 88 Ko** — préchargement, sous-ensemble
+de glyphes, ou révision motivée du seuil. Ce n'est pas du ressort de S1 ; à verser au
+relevé comme constat nouveau.
+
+#### ⚠ Deux écarts entre le plan et le dépôt, relevés à l'exécution
+
+1. **La photographie collective est rendue à TROIS endroits, pas deux** : le plan
+   citait `index.astro` et `equipe.astro` ; `societe.astro` porte un troisième rendu
+   (bandeau 21:8) avec la même constante. Les trois sont migrés, et le chemin est
+   désormais porté une seule fois par `CHEMIN_COLLECTIF` — c'est par la recopie que
+   la troisième occurrence pouvait être manquée.
+2. **Le repli « [Photo à venir] » n'existait dans aucune page** — seulement dans
+   l'exemple de `.claude/rules/astro-conventions.md`. Les trois emplacements
+   rendaient une hachure `duotone-media` nue. Le comportement est **conservé tel
+   quel** et la règle a été réécrite pour décrire le code : le site est en
+   démonstration client, et une hachure se lit comme un placeholder dessiné là où un
+   libellé se lirait comme un site inachevé. À rouvrir si FT2E en décide autrement.
+
+#### ⚠ Le 74 / 15,68 s du relevé ne se rejoue pas sur localhost
+
+Mesuré sur `npm run preview` **avant** toute modification : perf 93, LCP 3,0 s — mais
+**poids 4 766 Kio, au kilo-octet près celui du relevé**. C'est donc bien la même page ;
+seule la latence réseau diffère (le relevé mesurait vraisemblablement le déploiement
+Vercel, où 4,6 Mio de JPEG coûtent tout autre chose qu'en localhost). **Les chiffres
+avant/après ci-dessus sont comparables entre eux, et non aux 74 et 15,68 s du relevé.**
+La grandeur qui se compare d'un instrument à l'autre est le poids : 4 766 → 243 Kio.
 
 ---
 
@@ -298,6 +367,29 @@ mesurables.** Le 100 des autres pages mesure la trame, pas le contraste.
 **Ne rien décider laisse en place un critère de blocage que personne ne peut
 satisfaire — et c’est ainsi qu’un critère cesse d’être appliqué.**
 
+### ✅ Tranché le 2026-08-16 — issue 2 : inscrire l’exception, viser 96
+
+**Décision.** A2 est maintenue telle quelle. `.claude/rules/accessibility-rgaa.md`
+reçoit l’exception : l’accueil est **reçue à 96** dès lors que la seule violation
+`axe` est un `color-contrast` portant sur un complément de titre `aria-hidden`.
+**Le critère 100/100 reste opposable à toute AUTRE violation** — c’est ce qui
+empêche l’exception de devenir une porte ouverte.
+
+Ce que la décision admet, et qu’il faut assumer par écrit : le critère de blocage
+n’était pas tenable tel qu’il était rédigé. Ce que la décision refuse : faire
+dépendre A2 du fond sur lequel le titre est posé (issue 1), ce qui aurait produit
+une règle redécouverte à chaque nouveau gabarit ; et abroger A2 en assombrissant le
+complément (issue 3), ce qui l’aurait fait cesser d’être un décor.
+
+⚠ **À retenir pour la recette de S3** : viser 96 sur l’accueil, 100 ailleurs, et
+**nommer la violation attendue** dans le compte rendu. Un 96 non expliqué est
+indistinguable d’une régression.
+
+⚠ Le constat du relevé reste vrai et n’est pas levé par la décision : **le 100 des
+autres pages mesure la trame, pas le contraste.** Six compléments sur sept échappent
+à `axe` parce que le `background-image` de la trame l’empêche de résoudre le fond.
+Ils ne sont pas plus conformes — seulement moins mesurables.
+
 ---
 
 ## D2 — Trois questions à poser à FT2E
@@ -334,11 +426,11 @@ Repris du relevé, et **volontairement laissé ouvert** :
 
 | Session | État | Commit | Recette |
 |---|---|---|---|
-| S1 — pipeline d’images | ☐ à faire | — | — |
+| S1 — pipeline d’images | ☑ **faite** le 2026-08-16 | voir § S1 | ⚠ **partielle** — poids 4 766 → 243 Kio, perf 93 → 98, AVIF+WebP+srcset, repli et duotone contrôlés ; **LCP 2,2 s contre 1,8 exigés**, plancher posé par la police, plus par les images |
 | S2 — planches : typo + régénération | ☐ à faire | — | — |
 | S3 — trois défauts de rendu | ☐ à faire | — | — |
 | S4 — hygiène et garde-fous | ☐ à faire | — | — |
-| D1 — arbitrage A2 × Lighthouse | ☐ à poser | — | — |
+| D1 — arbitrage A2 × Lighthouse | ☑ **tranché** le 2026-08-16 — issue 2 (inscrire l’exception, viser 96) | voir § D1 | à appliquer à `accessibility-rgaa.md` en S3 |
 | D2 — trois questions à FT2E | ☐ à poser | — | — |
 
 ---
