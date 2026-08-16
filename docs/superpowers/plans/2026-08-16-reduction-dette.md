@@ -354,11 +354,70 @@ complément clair d’un titre de section, voir D1). Deux conséquences :
 | Accessibilité de `/contact/` | **100** | Lighthouse |
 | Accessibilité de `/` | selon D1 | Lighthouse |
 
-⚠ **Deux pièges de mesure propres à cette machine**, tous deux en mémoire :
+⚠ **Deux pièges de mesure propres à cette machine**, tous deux en mémoire :
 Chrome refuse toute fenêtre sous 500 px — les mesures à 390 px passent par une
-**iframe servie en même origine** par `npm run preview` ; et `browser_resize` de
-Playwright **persiste** d’un appel à l’autre, ce qui fait passer une page saine pour
-cassée. Toujours restaurer la taille après mesure.
+**iframe servie en même origine** ; et `browser_resize` de Playwright **persiste** d'un
+appel à l'autre, ce qui fait passer une page saine pour cassée.
+
+⚠ **Troisième piège, relevé le 2026-08-16 et absent de la mémoire : la barre de
+défilement de l'iframe mange 15 px.** Une iframe de 390 px donne un document de
+**375**, soit une mesure 15 px plus sévère qu'un vrai téléphone, où la barre est en
+surimpression. Le probe doit s'élargir jusqu'à ce que `contentDocument.
+documentElement.clientWidth` vaille exactement la largeur visée — sans quoi on
+corrige un débordement qui n'existe pas, ou on en manque un de 15 px.
+
+### ✅ Exécutée le 2026-08-16 — recette mesurée sur le déploiement
+
+| Page | perf | FCP | LCP | CLS | a11y |
+|---|---|---|---|---|---|
+| `/` | 97 → **100** | 1,7 → **1,2 s** | 1,69 → **1,68 s** | **0,098 → 0** | 96 → 96 *(D1)* |
+| `/contact/` | 100 → **100** | 1,5 → **1,1 s** | 1,5 → **1,5 s** | **0,031 → 0** | **97 → 100** |
+| `/references/` | 98 → **99** | 1,8 → **1,1 s** | 1,8 → **1,7 s** | **0,057 → 0** | 100 → 100 |
+| `/equipe/` | 100 | — | — | **0** | 100 |
+
+Trois relevés de contrôle sur l'accueil : perf 100 / 100 / 100, LCP 1 673 / 1 683 / 1 688 ms,
+CLS 0 à chaque fois. **Tous les seuils du projet sont tenus** — CLS < 0,05, LCP < 1,8 s,
+performance ≥ 90 — et le FCP gagne 0,4 à 0,7 s sur toutes les pages, effet de bord du
+préchargement.
+
+#### ⚠ Le CLS n'était pas un défaut de mise en page
+
+Le plan l'imputait à « un seul bloc, déjà identifié » en citant le sélecteur que
+Lighthouse affiche. **C'est le bloc qui a bougé, pas celui qui l'a poussé** : un
+décalage s'impute toujours à la victime. Le sous-tableau `layout-shifts` nomme la
+cause — `cause: "Web font loaded"`, sur les trois fontes — et `unsized-images` est
+vide. Un seul décalage sur la page, entièrement dû au FOUT.
+
+La vedette est composée en `font-stretch: 125%`, un axe `wdth` que la police de repli
+système ne possède pas : l'écart de chasse au moment du swap est donc maximal, le
+titre change de nombre de lignes, et tout ce qui suit descend. C'est pourquoi
+l'accueil était la pire page du site sur ce critère — la seule qui porte une vedette.
+
+Correction : **préchargement des trois fontes du chemin critique**, résolues par
+`?url` pour suivre les hachages de build. Contrôlé que le fichier préchargé est bien
+celui du `@font-face` (hachage identique, une seule copie dans `dist/`) — précharger
+une copie que personne n'utilise ne se signale nulle part. `crossorigin` est
+obligatoire même en même origine.
+
+#### ⚠ La recette `.cible-44` ne convenait pas — premier cas où elle ne compose pas
+
+Le plan prévoyait de l'appliquer. Son `::after` est un **calque de 44 px centré** :
+sur deux liens distants de 22 px, les calques se chevauchent sur la moitié de leur
+hauteur, et toucher le haut de l'adresse déclencherait l'appel téléphonique. Ce sont
+donc les **boîtes** qui font 44 px, ce qui garantit l'espacement en même temps que la
+taille. À noter pour tout futur emploi : `.cible-44` vaut pour une cible **isolée**,
+pas pour des cibles empilées.
+
+#### ⚠ Deux constats hors périmètre, relevés au passage
+
+1. **Le footer porte les mêmes liens à 17 px, espacés de 29** — sur les 46 pages.
+   `axe` ne les signale pas (l'exception d'espacement de WCAG 2.2 joue à partir de
+   24 px), donc le défaut n'apparaît dans aucun score ; mais la règle FT2E dit
+   **44 × 44 pour tout élément actionnable**, sans exception d'espacement. C'est un
+   écart règle/code, pas un écart outil.
+2. **40 px de vide mort sous `sm` dans le hero de l'accueil** : le média est
+   `hidden sm:block`, mais sa cellule de grille et le `gap-10` du conteneur restent.
+   Sans effet sur le CLS ni sur le débordement.
 
 ---
 
@@ -473,9 +532,9 @@ Repris du relevé, et **volontairement laissé ouvert** :
 |---|---|---|---|
 | S1 — pipeline d’images | ☑ **faite** le 2026-08-16 | `71cc72f` · `4416c20` · `+1` | ✅ **complète, mesurée sur le déploiement** — `/equipe/` perf **100**, LCP **1,2 s** (seuil 1,8), poids **4 766 → 240 Kio** ; AVIF+WebP+srcset, repli et duotone contrôlés ; `/` sans régression (96) |
 | S2 — planches : typo + régénération | ☐ à faire | — | — |
-| S3 — trois défauts de rendu | ☐ à faire | — | — |
+| S3 — trois défauts de rendu | ☑ **faite** le 2026-08-16 | `806e803` | ✅ **complète** — CLS **0** sur `/`, `/contact/`, `/references/` et `/equipe/` (seuil 0,05) ; `/contact/` a11y **97 → 100** ; débordement nul sur 45 mesures (15 routes × 3 largeurs) et à 320 / 360 / 390 / 430 px ; accueil perf **100** |
 | S4 — hygiène et garde-fous | ☐ à faire | — | — |
-| D1 — arbitrage A2 × Lighthouse | ☑ **tranché** le 2026-08-16 — issue 2 (inscrire l’exception, viser 96) | voir § D1 | à appliquer à `accessibility-rgaa.md` en S3 |
+| D1 — arbitrage A2 × Lighthouse | ☑ **tranché** le 2026-08-16 — issue 2 (inscrire l’exception, viser 96) | `4416c20` · `806e803` | ✅ **appliqué** à `.claude/rules/accessibility-rgaa.md` en S3 |
 | D2 — trois questions à FT2E | ☐ à poser | — | — |
 
 ---
