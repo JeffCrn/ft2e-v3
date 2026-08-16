@@ -28,10 +28,22 @@ const {
   decoratif = true,
 } = Astro.props;
 
+// Le chaînage au jeton passe par des CLASSES Tailwind LITTÉRALES, jamais par
+// `var(--color-…)` dans un attribut SVG.
+//
+// Mesuré le 2026-08-16 : Tailwind v4 n'émet dans `:root` que les variables de
+// thème qu'une classe emploie — le CSS produit ne porte AUCUNE des couleurs par
+// défaut de Tailwind, et exactement les treize de la rampe. Un `var()` écrit dans
+// un attribut n'est pas vu au scan : le monogramme dépendrait alors d'un autre
+// composant employant `text-voile` ailleurs sur la page, et perdrait ses couleurs
+// le jour où celui-ci change — sans que le build en dise un mot (règle 11).
+//
+// D'où trois classes par version, écrites en toutes lettres : le cadre se trace
+// ET s'aplatit (lettres FT2E, baseline), le flux ne fait que se tracer.
 const couleurs = {
-  principal: { cadre: '#336667', flux: '#001718' },
-  inverse: { cadre: '#99CCCD', flux: '#E1F4F4' },
-  'valeur-unique': { cadre: '#00393A', flux: '#00393A' },
+  principal: { trait: 'stroke-pivot', aplat: 'fill-pivot', flux: 'stroke-profond' },
+  inverse: { trait: 'stroke-clair', aplat: 'fill-clair', flux: 'stroke-voile' },
+  'valeur-unique': { trait: 'stroke-encre', aplat: 'fill-encre', flux: 'stroke-encre' },
 }[version];
 
 const a11y = decoratif
@@ -47,8 +59,8 @@ const a11y = decoratif
     {...a11y}
   >
     <g fill="none" stroke-width="9">
-      <path stroke={couleurs.cadre} stroke-linejoin="miter" d="M8,42 V8 H82 V42 M82,64 V82 H8 V64" />
-      <path stroke={couleurs.flux} stroke-linecap="round" stroke-linejoin="round" d="M0,54 H28 V26 H58 V54 H90" />
+      <path class={couleurs.trait} stroke-linejoin="miter" d="M8,42 V8 H82 V42 M82,64 V82 H8 V64" />
+      <path class={couleurs.flux} stroke-linecap="round" stroke-linejoin="round" d="M0,54 H28 V26 H58 V54 H90" />
     </g>
   </svg>
 ) : (
@@ -59,17 +71,17 @@ const a11y = decoratif
     {...a11y}
   >
     <g transform="translate(5,5)" fill="none" stroke-width="7">
-      <path stroke={couleurs.cadre} stroke-linejoin="miter" d="M3.5,42 V3.5 H76.5 V42 M76.5,66 V76.5 H3.5 V66" />
-      <path stroke={couleurs.flux} stroke-linecap="round" stroke-linejoin="round" d="M-3,54 H26 V26 H54 V54 H83" />
+      <path class={couleurs.trait} stroke-linejoin="miter" d="M3.5,42 V3.5 H76.5 V42 M76.5,66 V76.5 H3.5 V66" />
+      <path class={couleurs.flux} stroke-linecap="round" stroke-linejoin="round" d="M-3,54 H26 V26 H54 V54 H83" />
     </g>
     <g transform="translate(104,16)">
-      <path fill={couleurs.cadre} d="M0,0 H24 V7 H7 V17.5 H19 V24.5 H7 V40 H0 Z" />
-      <path fill={couleurs.cadre} transform="translate(35,0)" d="M0,0 H26 V7 H16.5 V40 H9.5 V7 H0 Z" />
-      <g transform="translate(72,0)" fill="none" stroke={couleurs.flux} stroke-width="7">
+      <path class={couleurs.aplat} d="M0,0 H24 V7 H7 V17.5 H19 V24.5 H7 V40 H0 Z" />
+      <path class={couleurs.aplat} transform="translate(35,0)" d="M0,0 H26 V7 H16.5 V40 H9.5 V7 H0 Z" />
+      <g transform="translate(72,0)" fill="none" class={couleurs.flux} stroke-width="7">
         <path d="M3.5,12 A8.5,8.5 0 0 1 20.5,12 C20.5,19 17,27.5 3,36.5" />
         <path d="M0,36.5 H24" />
       </g>
-      <path fill={couleurs.cadre} transform="translate(107,0)" d="M0,0 H24 V7 H7 V16.5 H18 V23.5 H7 V33 H24 V40 H0 Z" />
+      <path class={couleurs.aplat} transform="translate(107,0)" d="M0,0 H24 V7 H7 V16.5 H18 V23.5 H7 V33 H24 V40 H0 Z" />
     </g>
     {baseline && (
       <text
@@ -78,7 +90,7 @@ const a11y = decoratif
         font-family="'IBM Plex Mono', monospace"
         font-size="8.5"
         letter-spacing="2.6"
-        fill={couleurs.cadre}
+        class={couleurs.aplat}
       >BUREAU D'ÉTUDES TECHNIQUES</text>
     )}
   </svg>

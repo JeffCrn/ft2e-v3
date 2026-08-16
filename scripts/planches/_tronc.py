@@ -50,6 +50,11 @@ AW, AH = 552, 368
 A_MARGE = 24
 
 # ── Jetons ────────────────────────────────────────────────────────────────────
+# ⚠ Cette table est le MIROIR du bloc `@theme` de `src/styles/global.css`, et
+# elle est nécessaire : une planche est lue hors du site (PNG de contrôle,
+# impression, `og:image`), donc elle ne peut pas résoudre `var(--color-…)`.
+# Conséquence : une révision de charte se répercute ICI AUSSI, et les 23 dossiers
+# se régénèrent — sans quoi le site et ses dessins divergeraient en silence.
 JETON = {
     "profond": "#001718",
     "encre": "#00393A",
