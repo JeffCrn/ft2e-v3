@@ -13,7 +13,7 @@ statut: en cours
 performance: "RT existant « globale » · consommation projetée −38 % par rapport à l’existant"
 synthese: >-
   À Saint-Jean-d’Angély, SOLIHA transforme un ancien foyer de jeunes travailleurs de 1960 en maison relais de 21 logements, destinée à l’UDAF. Le bâtiment dépasse 1 000 m² et le coût des travaux excède le quart de la valeur du bâti : la rénovation relève de la réglementation thermique dite globale, qui compare la consommation calculée avant et après travaux. FT2E porte la mission complète, du diagnostic à la réception, augmentée des études d’exécution des lots techniques. Chaque logement compte sa chaleur, son eau froide et son eau chaude par module thermique d’appartement. Le calcul passe de 160,49 à 98,84 kWhep/m²/an, soit 38 % de consommation en moins.
-mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", "Études d'exécution"]
+mission_ft2e: [Thermique, CVC, "Électricité CFO", "Électricité CFA", "Études d’exécution"]
 planche: "/images/projets/maison-relais-saint-jean-d-angely/planche.svg"
 en_avant: false
 ---

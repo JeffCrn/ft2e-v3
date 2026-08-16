@@ -5,7 +5,7 @@ import { glob } from 'astro/loaders';
  * Les sept secteurs d'activité de FT2E (message client du 2026-08-07,
  * cohérent avec la plaquette 2024) : quatre marchés du bâtiment, puis
  * trois modes d'intervention que le bureau porte comme segments à part
- * entière — monotechnique, coordination SSI, études d'exécution / BIM.
+ * entière — monotechnique, coordination SSI, études d’exécution / BIM.
  */
 const SECTEURS = [
   'Logements',
@@ -14,7 +14,7 @@ const SECTEURS = [
   'Patrimoine',
   'Monotechnique',
   'Coordination SSI',
-  "Études d'exécution / BIM",
+  "Études d’exécution / BIM",
 ] as const;
 /**
  * Typologies d'intervention. Les trois premières décrivent des travaux sur
@@ -26,8 +26,8 @@ const SECTEURS = [
  * `Réhabilitation`, ce qui annonçait des travaux qui n'ont pas eu lieu — et
  * le mot s'affiche en chip de filtre sur `/references`.
  */
-const TYPOLOGIES = ['Neuf', 'Réhabilitation', 'Extension', 'Étude', "Études d'exécution"] as const;
-const MISSIONS = ['CVC', 'Thermique', 'Électricité CFO', 'Électricité CFA', 'Photovoltaïque', 'SSI', 'BIM', "Études d'exécution", 'Audit & diagnostic'] as const;
+const TYPOLOGIES = ['Neuf', 'Réhabilitation', 'Extension', 'Étude', "Études d’exécution"] as const;
+const MISSIONS = ['CVC', 'Thermique', 'Électricité CFO', 'Électricité CFA', 'Photovoltaïque', 'SSI', 'BIM', "Études d’exécution", 'Audit & diagnostic'] as const;
 
 const projets = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projets' }),

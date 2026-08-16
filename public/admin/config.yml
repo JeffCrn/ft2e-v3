@@ -64,7 +64,7 @@ collections:
       - { label: "Patrimoine", field: secteur, pattern: "Patrimoine" }
       - { label: "Monotechnique", field: secteur, pattern: "Monotechnique" }
       - { label: "Coordination SSI", field: secteur, pattern: "Coordination SSI" }
-      - { label: "Études d'exécution / BIM", field: secteur, pattern: "Études d'exécution / BIM" }
+      - { label: "Études d’exécution / BIM", field: secteur, pattern: "Études d’exécution / BIM" }
       - { label: "Affaires en cours", field: statut, pattern: "en cours" }
     fields:
       - label: "Titre"
@@ -92,7 +92,7 @@ collections:
           - "Patrimoine"
           - "Monotechnique"
           - "Coordination SSI"
-          - "Études d'exécution / BIM"
+          - "Études d’exécution / BIM"
         hint: "Les sept secteurs d'activité de FT2E : quatre marchés du bâtiment, puis trois modes d'intervention portés comme segments à part entière. Cette liste est close — elle alimente les filtres de la page Références et le build refuse toute autre valeur."
 
       - label: "Typologie"
@@ -104,8 +104,8 @@ collections:
           - "Réhabilitation"
           - "Extension"
           - "Étude"
-          - "Études d'exécution"
-        hint: "« Étude » = mission d'ingénierie sur un existant sans marché de travaux (audit, calcul de charges, faisabilité) : elle n'annonce aucun chantier. « Études d'exécution » = phase EXE d'une opération de travaux. Le mot s'affiche en chip de filtre sur /references."
+          - "Études d’exécution"
+        hint: "« Étude » = mission d'ingénierie sur un existant sans marché de travaux (audit, calcul de charges, faisabilité) : elle n'annonce aucun chantier. « Études d’exécution » = phase EXE d'une opération de travaux. Le mot s'affiche en chip de filtre sur /references."
 
       - label: "Maître d'ouvrage"
         name: "moa"
@@ -198,7 +198,7 @@ collections:
           - "Photovoltaïque"
           - "SSI"
           - "BIM"
-          - "Études d'exécution"
+          - "Études d’exécution"
           - "Audit & diagnostic"
         hint: "Une mission au minimum. Liste close : le build refuse toute autre valeur. Six au maximum s'affichent proprement en étiquettes sur la fiche."
 
@@ -431,7 +431,7 @@ collections:
           - "Patrimoine"
           - "Monotechnique"
           - "Coordination SSI"
-          - "Études d'exécution / BIM"
+          - "Études d’exécution / BIM"
         hint: "Mêmes sept secteurs que les fiches projets — liste close, recopiée du schéma."
 
       - label: "Missions liées"
@@ -447,7 +447,7 @@ collections:
           - "Photovoltaïque"
           - "SSI"
           - "BIM"
-          - "Études d'exécution"
+          - "Études d’exécution"
           - "Audit & diagnostic"
         hint: "Mêmes missions que les fiches projets — sert à rattacher l'expertise aux références qui la mobilisent."
 
