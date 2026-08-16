@@ -114,12 +114,24 @@ npx axe http://localhost:4321
 
 Cible Lighthouse Accessibility : **100/100**. Toute régression < 100 = blocage.
 
-### L'unique exception : l'accueil est reçue à 96 (arbitrage D1, 2026-08-16)
+### L'unique exception : le complément clair `aria-hidden` (arbitrage D1, 2026-08-16 — portée corrigée le 2026-08-16 en session 7)
 
-**L'accueil plafonne à 96, et c'est admis** — à une condition stricte : que la
+**Une page peut plafonner sous 100, et c'est admis** — à une condition stricte : que sa
 **seule** violation `axe` soit un `color-contrast` portant sur un complément de titre
-`aria-hidden` (`<span class="text-clair" aria-hidden="true">`). Vérifié sur le
-déploiement le 2026-08-16 : c'est bien la seule.
+`aria-hidden` (`<span class="text-clair" aria-hidden="true">`).
+
+⚠ **L'exception porte sur le MOTIF, pas sur une page.** Elle a d'abord été rédigée
+« l'accueil plafonne à 96 » parce que l'accueil était alors la seule page mesurée. La
+recette d'ensemble du 2026-08-16 (session 7) a mesuré neuf routes du déploiement et en
+a trouvé **une seconde** : `/societe/` sort à **97**, sur exactement la même et unique
+violation — `text-clair` `aria-hidden` à 1,54 sur calcaire. Une formulation par page
+aurait fait lire ce 97 comme une régression, alors que c'est le cas que l'exception
+décrit. **Un critère dont la lettre ne couvre pas ce que sa justification couvre finit
+par être ignoré** — précisément ce que l'arbitrage D1 refusait.
+
+Relevé du 2026-08-16 sur le déploiement, mobile, neuf routes : `/` **96**, `/societe/`
+**97**, et **100** partout ailleurs (`/equipe/`, `/expertises/`, `/references/`, une
+fiche projet, `/actualites/`, un article, `/contact/`).
 
 Le motif est que les deux règles du système se contredisent. L'amendement **A2**
 autorise ce complément à 1,67:1 *parce qu'il est décoratif et masqué aux
@@ -137,6 +149,14 @@ compléments de l'accueil échappent à la détection parce que, sur le papier t
 `background-image` empêche `axe` de résoudre la couleur de fond et l'outil s'abstient.
 Ils ne sont **pas plus conformes — seulement moins mesurables**. Ne pas lire le 100
 d'une page interne comme une validation de ce motif.
+
+Le corollaire se lit dans le relevé de S7, et il vaut pour toute page à venir :
+**le complément est signalé exactement là où il est posé sur un aplat plein.** Les deux
+violations relevées le sont sur `calcaire` `#edf0f2`, une couleur pleine qu'`axe`
+résout ; partout ailleurs le complément repose sur le papier tramé et l'outil s'abstient.
+Un nouveau gabarit qui pose un titre de section sur un aplat fera donc **descendre son
+score sans qu'aucune règle du système ait été enfreinte**. C'est attendu, c'est couvert
+par l'exception, et cela ne se corrige pas en déplaçant le titre.
 
 Les deux autres issues ont été écartées, et il est utile de savoir pourquoi avant de
 les reproposer : retirer le complément des seules sections posées sur aplat ferait
