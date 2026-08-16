@@ -120,14 +120,16 @@ const partenaires = [
             La branche photographique a été retirée à la clôture du chantier des
             planches : `planche` est obligatoire au schéma, donc une fiche
             vedette a toujours son appui. */}
-        <div class="plan-pose" set:html={heroAppui} />
-        <a
-          href={`/references/${enAvant.id}`}
-          class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier"
-        >
-          <span class="type-intitule text-encre text-[15px]">{titreCourt(enAvant)}</span>
-          <span class="mono-data text-[11px] text-pivot ml-auto">{commune(enAvant.data.lieu).libelle} · {libelleChronologie(enAvant)}</span>
-        </a>
+        <div class="appui-hero">
+          <div class="plan-pose" set:html={heroAppui} />
+          <a
+            href={`/references/${enAvant.id}`}
+            class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier"
+          >
+            <span class="type-intitule text-encre text-[15px]">{titreCourt(enAvant)}</span>
+            <span class="mono-data text-[11px] text-pivot ml-auto">{commune(enAvant.data.lieu).libelle} · {libelleChronologie(enAvant)}</span>
+          </a>
+        </div>
       </Fragment>
     )}
   </Hero>
@@ -360,3 +362,49 @@ const partenaires = [
 
   <CtaFinal />
 </PageLayout>
+
+<style>
+  /* Le plafond de l'appui du hero — 552 px, sa taille de conception, jamais
+     au-delà. C'est la règle générale du site (`.claude/rules/tailwind-design-
+     tokens.md` § Composants signature : « aucune échelle au-dessus de 1,00 »),
+     et l'accueil en était le dernier manquement : mesuré le 2026-08-16, l'appui
+     était servi à 606 px à 640 de fenêtre (échelle 1,10), 718 à 768 (1,30) et
+     950 à 1 000 (1,72). Au-delà de 1 024 la grille à 12 colonnes reprenait la
+     main et le ramenait sous 1,00 toute seule — le défaut vivait entre `sm` et
+     `lg`, c'est-à-dire là où le dessin occupe la pleine largeur.
+
+     Ce n'était pas un défaut de LISIBILITÉ : le mono de 10 px y montait à 17.
+     C'est un ÉPAISSISSEMENT DES FILETS de 1 px, le défaut fondateur que le
+     chantier des planches a chassé partout ailleurs en plafonnant chaque dessin
+     à sa taille de conception (vignette à 300 dans `CarteProjet`, trois bandes
+     dans `PlancheReference`). Un filet rendu à 1,72 px n'est plus un filet de
+     rang : la hiérarchie de la charte passe par l'opacité, elle suppose donc
+     que l'épaisseur, elle, ne bouge pas.
+
+     Trois choix, écrits ici parce qu'aucun ne va de soi :
+
+     1. LE PLAFOND ENVELOPPE LE DESSIN ET SA CARTE-LIEN, pas le seul dessin. Les
+        deux font aujourd'hui la même largeur au pixel (952 / 952 à 1 000 px) et
+        la carte légende le dessin : plafonner le plan seul laisserait une
+        légende de 950 px sous un dessin de 552.
+     2. LA MESURE EST ÉCRITE ICI, chez qui compose le média, et non dans
+        `Hero.astro` : le nombre de colonnes est un réglage de page, la taille
+        de conception est une propriété du dessin. Même partage que pour la
+        vignette de `CarteProjet`, dont le plafond vit dans le composant du
+        dessin et jamais dans la grille appelante.
+     3. EN CSS DE COMPOSANT et non en `max-w-[552px]` : une classe en valeur
+        arbitraire, unique dans le dépôt, disparaîtrait sans un mot du build le
+        jour où l'élagage de sources de Tailwind v4 cesserait de voir ce fichier
+        (incident du 2026-08-08). C'est déjà la raison pour laquelle
+        `PlancheReference` écrit ses trois bornes en `@media`.
+
+     Aucune borne de largeur n'est nécessaire : sous `sm` le média entier est
+     masqué par `Hero.astro`, au-dessus de `lg` la colonne mesure 462 à 550 px
+     et la règle est sans effet. Elle ne mord qu'entre les deux. La marge de
+     papier qui reste autour du dessin est légitime — un plan a des marges, et
+     le fond de l'appui est le papier du plan qui le porte. */
+  .appui-hero {
+    max-width: 552px;
+    margin-inline: auto;
+  }
+</style>
