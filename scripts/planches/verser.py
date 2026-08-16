@@ -10,14 +10,28 @@ Ce que fait le script, dans l'ordre, en s'arrêtant à la première faute :
 1. vérifie que le dossier `public/images/projets/<slug>/` porte les CINQ
    fichiers du protocole (`planche.json`, `planche.svg`, `vignette.svg`,
    `appui.svg`, `planche.png`) — ils ne se séparent pas ;
-2. vérifie l'extraction : archétype nommé, `a_valider_ft2e` non vide (une liste
+2. vérifie l'extraction : archétype nommé et `a_valider_ft2e` non vide (une liste
    vide signifie que la session n'a pas vu ce qu'elle tranchait, pas qu'il n'y
-   avait rien à trancher), et une forme de repli mobile que le site sait rendre
-   (`sankey`, `zonage`, un bloc à tableau `elements`, ou un `releve` peuplé) ;
+   avait rien à trancher) ;
 3. vérifie le SVG : sous 40 Ko, `role="img"` + `aria-label`, ni `width` ni
    `height` sur la racine ;
-4. bascule le frontmatter de `src/content/projets/<slug>.md` :
-   `image_principale` / `image_principale_alt` → `planche:` (no-op si déjà fait).
+4. écrit `planche:` dans le frontmatter de `src/content/projets/<slug>.md`
+   (no-op si déjà fait), juste après le champ `mission_ft2e`.
+
+⚠ Deux contrôles ont été RETIRÉS le 2026-08-16, parce qu'ils avaient survécu à
+leur objet — un garde-fou qui contrôle ce qui n'existe plus ment sur ce qu'il
+contrôle (même principe que l'amendement A9) :
+
+- l'exigence d'« une forme de repli mobile que le site sait rendre ». Le repli
+  de lecture textuel a été supprimé le 2026-08-15 : une figure de fiche, c'est
+  le dessin, son cartouche et l'agrandissement, rien d'autre. Les quatre
+  rendeurs d'archétype du composant sont partis avec lui, et CLAUDE.md consigne
+  que le garde-fou de build l'a suivi. Celui-ci, lui, était resté ;
+- la bascule `image_principale` → `planche:`. Le champ a été supprimé du schéma
+  le même 2026-08-15. Sur une fiche neuve — donc dépourvue d'`image_principale`
+  — la substitution ne trouvait rien et le script REFUSAIT le versement, en
+  reprochant à la fiche l'absence d'un champ que le schéma lui interdit de
+  porter. Le versement est désormais une insertion, pas un remplacement.
 
 Il ne touche ni au build ni au dépôt : après lui, `npm run build` puis le
 contrôle du rendu (règle 11 — un build vert ne prouve pas que la page
@@ -62,16 +76,6 @@ def main():
     if not extraction.get("a_valider_ft2e"):
         faute("a_valider_ft2e est vide — un dessin tranche toujours ce qu’un texte "
               "laisse ouvert (protocole, règle 2)")
-    a_repli = (
-        extraction.get("sankey") or extraction.get("zonage")
-        or any(isinstance(v, dict) and isinstance(v.get("elements"), list)
-               for v in extraction.values())
-        or extraction.get("releve")
-    )
-    if not a_repli:
-        faute("aucune forme de repli mobile : ni bloc sankey/zonage, ni bloc à "
-              "tableau `elements`, ni relevé — la fiche serait muette sous 1024 px "
-              "(protocole, règle 7)")
 
     # 3 — le SVG
     svg = (dossier / "planche.svg").read_text(encoding="utf-8")
@@ -90,12 +94,17 @@ def main():
     if "planche:" in contenu.split("---", 2)[1]:
         print(f"déjà versé — le frontmatter de {slug}.md porte déjà `planche:`")
         return
-    nouveau = re.sub(
-        r'image_principale: "[^"]+"\n(?:image_principale_alt: "[^"]+"\n)?',
-        ligne_planche + "\n", contenu, count=1)
+    # Insertion après `mission_ft2e:`, parce que c’est là que le champ se trouve
+    # sur les 23 fiches versées — relevé, pas supposé : 23 sur 23. Le champ est
+    # partout une liste inline, donc une seule ligne. Ce fut un remplacement
+    # d’`image_principale` tant que ce champ existait ; il a été supprimé du
+    # schéma le 2026-08-15, et une fiche neuve n’en porte plus.
+    nouveau = re.sub(r"^(mission_ft2e: .*\n)",
+                     lambda m: m.group(1) + ligne_planche + "\n",
+                     contenu, count=1, flags=re.M)
     if nouveau == contenu:
-        faute(f"{slug}.md n’a pas de champ image_principale à remplacer — "
-              "bascule à faire à la main")
+        faute(f"{slug}.md n’a pas de champ `mission_ft2e:` après lequel insérer la "
+              "planche — insertion à faire à la main")
     io.open(fiche, "w", encoding="utf-8", newline="\n").write(nouveau)
 
     print(f"versé — {slug}.md pointe sur la planche ({extraction['archetype']})")
