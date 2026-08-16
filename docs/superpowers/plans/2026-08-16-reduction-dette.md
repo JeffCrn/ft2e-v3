@@ -1198,11 +1198,37 @@ ne trouve ses fautes que là où le soin est maximal se dénonce lui-même.**
 - l'URL `/secteurs/etudes-execution-bim/` **inchangée** malgré le renommage de
   l'énumération, le slug d'un secteur venant du nom de fichier.
 
-⚠ **Les cinq commits de cette session ne sont pas poussés** : le push est sortant,
-et il n'a pas été demandé. Tant qu'il ne l'est pas, le déploiement ne porte **ni** les
-corrections typographiques **ni** rien de cette session — et la recette Lighthouse
-ci-dessus reste valable, puisqu'elle a été faite **avant** les corrections, sur un site
-qui n'a pas changé de structure.
+⚠ **Poussé le 2026-08-16 sur demande de l'utilisateur** : `8518d49..e6cc9f0`,
+six commits. Arrivée du déploiement contrôlée **par marqueur du build et non par un
+délai** — l'apostrophe courbe de la baseline, produite par le build et absente de la
+version précédente — servie **en une vingtaine de secondes**.
+
+Recette refaite **après** déploiement, sur le code en ligne :
+
+- typographie du **site servi**, 12 routes : **0 apostrophe droite, 0 espace ordinaire
+  avant ponctuation double**, baseline courbée sur **12 / 12** pages ;
+- le renommage de l'énumération tient en production : `/secteurs/etudes-execution-bim/`,
+  `/references/` et la fiche EXE répondent `200`, et le chip de filtre affiche
+  « Études d'exécution / BIM **(1)** » — apostrophe courbe **et comptage non nul**, donc
+  l'appariement par égalité de chaînes fonctionne toujours. Zéro graphie droite
+  résiduelle ;
+- Lighthouse, huit routes, mobile : **perf 100 sur six routes et 99 sur deux**, a11y
+  **inchangée** (96 / 97 / 100 × 6 — exactement la répartition que prévoit l'amendement
+  D1), BP 100, SEO 69, **CLS 0 partout**, TBT 0 sauf 60 ms sur `/equipe/`.
+
+⚠ **Correction d'une lecture de cette même section : le LCP n'est pas un
+problème de `/equipe/`.** Le premier relevé concluait « `/equipe/` est la seule page dont
+la performance ne soit pas confortable ». Le second l'infirme : `/equipe/` y passe à
+1 768 ms, sous le seuil, et c'est **l'accueil** qui tombe à 1 806. Les sept mesures
+cumulées sur ces deux pages — 1 656, 1 658, 1 681, 1 768, 1 806, 1 807, 1 815 — se
+répartissent de part et d'autre de 1 800 **sans qu'aucune page ne soit systématiquement
+du mauvais côté**.
+
+Le constat juste est donc : **le LCP mobile du site est au seuil, pas sous le seuil**,
+sur ses deux pages les plus lourdes, et celle qui bascule change d'un tir à l'autre.
+Attribuer le dépassement à `/equipe/` enverrait une session future optimiser la mauvaise
+page. La fiche projet, elle, descend à **1 068 ms**.
+
 
 ---
 
@@ -1236,7 +1262,7 @@ Repris du relevé, et **volontairement laissé ouvert** :
 | D2 — trois questions à FT2E | ◑ **posées** le 2026-08-16, **toujours sans réponse** au soir du 2026-08-16 (revérifié en S5) | `7cf8918` (§ 6 bis) | ⚠ **La question 2 a changé de nature** : l'exposition des visuels n'est pas seulement archivée dans l'historique git, elle est **servie en HTTP** par deux déploiements vivants — coût de levée nul, contre une réécriture d'historique. Voir le constat A de S4 |
 | S5 — suites et dernier point ouvert | ☑ **faite** le 2026-08-16 | `c6f7c53` | ✅ **complète sur son périmètre réel** — les 40 px de vide mort du hero supprimés (`grid-template-rows` passe de `247,375px 0px` à `247,375px`, hero 625,88 → 585,88 px à 390 px, inchangé au centième à 640 et 1 280) ; garde-fou du millésime vérifié sur pièce, rien à faire ; **les trois points suspendus à FT2E laissés intacts, faute de réponse**. Trouvé au passage : l’appui du hero servi à l’échelle **1,72** entre `sm` et `lg` |
 | S6 — plafond du hero et points ajournés | ☑ **faite** le 2026-08-16 | `b0213f5` · `+2` | ✅ **complète sur son périmètre réel** — appui du hero plafonné à sa taille de conception : échelle **1,72 → 0,996** à 1 000 px, 0,996 de 640 à 1 000, inchangée au-delà de `lg` ; hero identique **au centième** à 390 et 1 280 px, donc recette de S5 intacte ; zéro débordement sur neuf largeurs de 360 à 1 440 ; leçon remontée dans `.claude/rules/tailwind-design-tokens.md`. **Les trois points suspendus à FT2E sont ajournés à la présentation du projet**, à la demande de l'utilisateur — les deux déploiements antérieurs en ont ensuite été **sortis définitivement**, il n'en reste que deux |
-| S7 — recette d'ensemble avant présentation | ☑ **faite** le 2026-08-16 | `653ce16` → `1df1afe` (5) | ✅ **complète sur les quatre volets** — Lighthouse sur 9 routes du déploiement : **perf 100 partout**, CLS 0, TBT 0, a11y 100 sauf `/` 96 et `/societe/` 97 (même et unique violation, exception D1 **portée sur le motif**), SEO 69 = le seul audit `is-crawlable`, donc le verrou ; 211 liens 0 mort ; typographie du texte servi **72 → 0** apostrophes droites et **39 → 0** espaces fautives ; script de démonstration refait (il faisait ouvrir une fiche supprimée) ; `docs/22` prise en main FT2E créée. 🔴 **Trouvé, et bloquant pour la présentation : la connexion au CMS échoue** — `/api/auth` rend `500`, il manque deux variables d'environnement Vercel et la callback GitHub. ⚠ **Incident consigné** : une passe de correction a détruit trois libellés en écrivant ses références arrière comme caractères de contrôle, **build vert** |
+| S7 — recette d'ensemble avant présentation | ☑ **faite** le 2026-08-16 | `653ce16` → `e6cc9f0` (6), **poussés** | ✅ **complète sur les quatre volets** — Lighthouse sur 9 routes du déploiement : **perf 100 partout**, CLS 0, TBT 0, a11y 100 sauf `/` 96 et `/societe/` 97 (même et unique violation, exception D1 **portée sur le motif**), SEO 69 = le seul audit `is-crawlable`, donc le verrou ; 211 liens 0 mort ; typographie du texte servi **72 → 0** apostrophes droites et **39 → 0** espaces fautives ; script de démonstration refait (il faisait ouvrir une fiche supprimée) ; `docs/22` prise en main FT2E créée. 🔴 **Trouvé, et bloquant pour la présentation : la connexion au CMS échoue** — `/api/auth` rend `500`, il manque deux variables d'environnement Vercel et la callback GitHub. ⚠ **Incident consigné** : une passe de correction a détruit trois libellés en écrivant ses références arrière comme caractères de contrôle, **build vert** |
 
 ---
 
@@ -1930,15 +1956,17 @@ de docs/superpowers/plans/2026-08-16-reduction-dette.md avant toute chose.
    le 2026-08-10 et a traversé six sessions sans être exécuté. Un commentaire n'échoue
    jamais. Ne pas se contenter d'en ajouter un de plus.
 
-2. CINQ COMMITS NE SONT PAS POUSSÉS. La session 7 a produit 653ce16 → 1df1afe. Le push
-   est sortant : le DEMANDER, ne pas le faire d'office. Tant qu'il n'est pas fait, le
-   déploiement ne porte aucune des corrections typographiques, et le client voit encore
-   72 apostrophes droites dont celle de la baseline du monogramme, sur les 46 pages.
-   ⚠ Le contrôle du déploiement est DOUBLE et prend dix secondes : git ls-remote origin
-   master (la référence locale peut être périmée) ET un marqueur du build dans le HTML
-   servi. En S6, le site en ligne s'était arrêté TROIS SESSIONS en arrière sans que rien
-   ne le signale. Après le push, remesurer Lighthouse : la recette de S7 a été faite
-   AVANT les corrections.
+2. LES COMMITS DE S7 SONT POUSSÉS ET DÉPLOYÉS. `8518d49..e6cc9f0`, six commits, poussés
+   le 2026-08-16 à la demande de l'utilisateur. Arrivée contrôlée par marqueur du build
+   (l'apostrophe courbe de la baseline) en une vingtaine de secondes, puis recette
+   refaite sur le code en ligne : typographie 0/0 sur 12 routes, baseline courbée 12/12,
+   l'énumération renommée tient en production (chip « Études d'exécution / BIM (1) »,
+   comptage non nul donc appariement intact), Lighthouse perf 100 sur six routes et 99
+   sur deux, a11y 96/97/100 x 6 inchangée, CLS 0 partout.
+   RIEN N'EST EN ATTENTE DE PUSH à l'ouverture de cette session. Le vérifier quand même,
+   en dix secondes et EN DEUX TEMPS : git ls-remote origin master (la référence locale
+   peut être périmée) ET un marqueur du build dans le HTML servi. En S6, le site en
+   ligne s'était arrêté TROIS SESSIONS en arrière sans que rien ne le signale.
 
 3. LES DEUX POINTS AJOURNÉS — ne PAS les rouvrir sans que l'utilisateur le demande. Ils
    sont en suspens jusqu'à la présentation du projet, à sa demande explicite du
@@ -1967,10 +1995,12 @@ de docs/superpowers/plans/2026-08-16-reduction-dette.md avant toute chose.
      docs/superpowers/plans/2026-08-12-chantier-planches-references.md) ;
    - les 7 marqueurs [DÉMO] restants, tous des image_alt de src/content/secteurs/, qui se
      lèvent au reportage photographique et pas par une validation ;
-   - le LCP de /equipe/, seule page dont la performance ne soit pas confortable : quatre
-     tirs à 1 807, 1 815, 1 658 et 1 656 ms pour un budget de 1 800. Au seuil, pas sous
-     le seuil. S1 y avait relevé 1,2 s, ce qui situe l'écart du côté des conditions de
-     mesure ; à reconfirmer sur plusieurs tirs avant d'y toucher.
+   - le LCP mobile, qui est AU seuil et non sous le seuil. Sept mesures sur les deux
+     pages les plus lourdes : 1 656, 1 658, 1 681, 1 768, 1 806, 1 807 et 1 815 ms pour
+     un budget de 1 800. Elles se répartissent de part et d'autre du seuil SANS qu'aucune
+     page ne soit systématiquement du mauvais côté — c'est l'accueil qui bascule sur un
+     tir, /equipe/ sur un autre. Ne PAS traiter cela comme un défaut de /equipe/ : ce
+     serait optimiser la mauvaise page. La fiche projet, elle, descend à 1 068 ms.
 
 Pièges vérifiés au dépôt, à ne pas redécouvrir :
 - ⚠ UN BUILD VERT NE PROUVE MÊME PAS QUE LE TEXTE EXISTE. En S7, une passe de correction
