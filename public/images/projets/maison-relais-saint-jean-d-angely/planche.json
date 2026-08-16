@@ -193,12 +193,12 @@
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "deux flux collectifs (la paire de chaleur, l'eau froide) entrent dans la colonne x 500 qui dessert une pile de 21 modules identiques (x 516–530, trois groupes 7/8/6) ; UN module est tiré au détail par deux filets d'agrandissement : deux arrivées y entrent, TROIS départs en sortent, chacun barré d'un compteur — texte masqué, la multiplication (2 traits → 21 modules → 3 comptages) porte seule la thèse",
-    "topologie": "productions (x 56–310 : chaufferie y 264–352, eau froide y 420–480) → colonne (x 500) → pile des modules (y 258–644, groupes 7/8/6) ; détail (x 640–1144, y 320–616) : module agrandi x 720–880, départs y 400/470/540, compteurs x 928 — l'ordre des typologies est celui de l'énumération de la fiche",
-    "bas_du_dessin": "pile des modules jusqu'à 644, bloc du détail jusqu'à 616, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 329 x 30 px = 9870 px², soit 1.03 % de la planche",
-    "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas chiffrée (révision 4) ; le seul nombre du dessin est le décompte 21 (7 T1 · 8 T1 BIS · 6 T2), au mono 10 pivot le long de la pile",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "demonstration": "deux flux collectifs (la paire de chaleur, l’eau froide) entrent dans la colonne x 500 qui dessert une pile de 21 modules identiques (x 516–530, trois groupes 7/8/6) ; UN module est tiré au détail par deux filets d’agrandissement : deux arrivées y entrent, TROIS départs en sortent, chacun barré d’un compteur — texte masqué, la multiplication (2 traits → 21 modules → 3 comptages) porte seule la thèse",
+    "topologie": "productions (x 56–310 : chaufferie y 264–352, eau froide y 420–480) → colonne (x 500) → pile des modules (y 258–644, groupes 7/8/6) ; détail (x 640–1144, y 320–616) : module agrandi x 720–880, départs y 400/470/540, compteurs x 928 — l’ordre des typologies est celui de l’énumération de la fiche",
+    "bas_du_dessin": "pile des modules jusqu’à 644, bloc du détail jusqu’à 616, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 340 x 30 px = 10200 px², soit 1.06 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; le seul nombre du dessin est le décompte 21 (7 T1 · 8 T1 BIS · 6 T2), au mono 10 pivot le long de la pile",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "phrase_principe": "103 signes — 876 px mesurés pour 1088 disponibles",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
@@ -207,13 +207,13 @@
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
     "motif": "deux flux collectifs, la colonne, la pile des 21 modules en trois groupes, un module tiré au détail avec ses trois compteurs — libellés de production, typologies et terminaux laissés à la planche",
-    "bas_du_dessin": "pile jusqu'à 168, nœuds chiffrés à y 186, marge basse 14 px"
+    "bas_du_dessin": "pile jusqu’à 168, nœuds chiffrés à y 186, marge basse 14 px"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
     "motif": "deux productions nommées, la colonne, la pile des 21 modules en trois typologies (7 T1 · 8 T1 BIS · 6 T2), le module agrandi et ses trois départs comptés — terminaux et mention laissés à la planche",
-    "bas_du_dessin": "pile jusqu'à 307, mention basse à 340, marge basse 28 px"
+    "bas_du_dessin": "pile jusqu’à 307, mention basse à 340, marge basse 28 px"
   }
 }

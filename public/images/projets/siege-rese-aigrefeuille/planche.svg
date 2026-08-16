@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la ventilation d'un bâtiment tertiaire restructuré : trois circuits d'air indépendants traversent une même enveloppe isolée par l'extérieur, et ce qui commande leur débit change d'un local à l'autre. Premier circuit, vestiaires et sanitaires : extraction mécanique permanente, le débit ne se décide nulle part. Deuxième circuit, bureaux : caisson d'extraction de 1 020 m³/h à moteurs à commutation électronique, régulation à pression constante — la commande naît dans le réseau. Troisième circuit, salle de réunion de trente places : centrale double flux de 540 m³/h pilotée par une sonde de CO2 posée dans le local, de sorte que l'occupation décide du débit. Son échangeur à contre-courant rend plus de 90 % de la chaleur à l'air neuf ; les deux autres circuits la laissent partir avec l'air rejeté.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la ventilation d’un bâtiment tertiaire restructuré : trois circuits d’air indépendants traversent une même enveloppe isolée par l’extérieur, et ce qui commande leur débit change d’un local à l’autre. Premier circuit, vestiaires et sanitaires : extraction mécanique permanente, le débit ne se décide nulle part. Deuxième circuit, bureaux : caisson d’extraction de 1 020 m³/h à moteurs à commutation électronique, régulation à pression constante — la commande naît dans le réseau. Troisième circuit, salle de réunion de trente places : centrale double flux de 540 m³/h pilotée par une sonde de CO2 posée dans le local, de sorte que l’occupation décide du débit. Son échangeur à contre-courant rend plus de 90 % de la chaleur à l’air neuf ; les deux autres circuits la laissent partir avec l’air rejeté.">
 <style>
   .c-profond { fill: var(--color-profond, #001718); }
   .c-encre { fill: var(--color-encre, #00393A); }
@@ -19,15 +19,15 @@
   .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 </style>
   <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · CE QUI COMMANDE LE DÉBIT D'AIR</text>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · CE QUI COMMANDE LE DÉBIT D’AIR</text>
   <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Siège du Fief Girard</text>
-  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Trois régimes d'air dans une même enveloppe, chacun commandé par ce qui l'exige</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Trois régimes d’air dans une même enveloppe, chacun commandé par ce qui l’exige</text>
   <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
-  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TROIS CIRCUITS D'AIR DANS UNE MÊME ENVELOPPE — CE QUI COMMANDE LE DÉBIT CHANGE D'UN LOCAL À L'AUTRE</text>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TROIS CIRCUITS D’AIR DANS UNE MÊME ENVELOPPE — CE QUI COMMANDE LE DÉBIT CHANGE D’UN LOCAL À L’AUTRE</text>
   <text x="56.00" y="224.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE LOCAL</text>
   <text x="296.00" y="224.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE RÉSEAU</text>
   <text x="620.00" y="224.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA MACHINE</text>
-  <text x="900.00" y="224.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L'ENVELOPPE · DEHORS</text>
+  <text x="900.00" y="224.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L’ENVELOPPE · DEHORS</text>
   <path d="M 280.00 234.00 L 280.00 628.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1"/>
   <path d="M 620.00 234.00 L 620.00 628.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1"/>
   <rect x="900.00" y="234.00" width="16.00" height="358.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
@@ -44,8 +44,8 @@
   <path d="M 850.00 268.00 L 1124.00 268.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
   <path d="M 1132.00 268.00 L 1123.00 263.50 L 1123.00 272.50 Z" class="c-encre" fill="#00393A"/>
   <rect x="850.00" y="282.00" width="266.00" height="22.00" class="c-encre" fill="#00393A"/>
-  <text x="924.00" y="260.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA CHALEUR PART AVEC L'AIR</text>
-  <text x="288.00" y="260.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA CHALEUR QUE L'AIR EMPORTE DU LOCAL</text>
+  <text x="924.00" y="260.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA CHALEUR PART AVEC L’AIR</text>
+  <text x="288.00" y="260.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA CHALEUR QUE L’AIR EMPORTE DU LOCAL</text>
   <path d="M 700.00 318.00 L 700.00 301.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
   <path d="M 700.00 292.00 L 695.50 301.00 L 704.50 301.00 Z" class="c-encre" fill="#00393A"/>
   <circle cx="700.00" cy="318.00" r="7.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
@@ -54,7 +54,7 @@
   <rect x="56.00" y="358.00" width="224.00" height="48.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
   <text x="72.00" y="386.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bureaux</text>
   <rect x="620.00" y="358.00" width="230.00" height="48.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
-  <text x="636.00" y="376.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Caisson d'extraction</text>
+  <text x="636.00" y="376.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Caisson d’extraction</text>
   <text x="636.00" y="396.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">1 020 m³/h</text>
   <path d="M 280.00 382.00 L 620.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
   <path d="M 430.00 382.00 L 421.00 377.50 L 421.00 386.50 Z" class="c-encre" fill="#00393A"/>
@@ -63,7 +63,7 @@
   <path d="M 850.00 382.00 L 1124.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
   <path d="M 1132.00 382.00 L 1123.00 377.50 L 1123.00 386.50 Z" class="c-encre" fill="#00393A"/>
   <rect x="850.00" y="396.00" width="266.00" height="22.00" class="c-encre" fill="#00393A"/>
-  <text x="924.00" y="374.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA CHALEUR PART AVEC L'AIR</text>
+  <text x="924.00" y="374.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA CHALEUR PART AVEC L’AIR</text>
   <path d="M 450.00 432.00 L 700.00 432.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
   <path d="M 700.00 432.00 L 700.00 415.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
   <path d="M 700.00 406.00 L 695.50 415.00 L 704.50 415.00 Z" class="c-encre" fill="#00393A"/>
@@ -94,15 +94,15 @@
   <path d="M 400.00 554.00 L 409.00 549.50 L 409.00 558.50 Z" class="c-encre" fill="#00393A"/>
   <path d="M 515.00 554.00 L 524.00 549.50 L 524.00 558.50 Z" class="c-encre" fill="#00393A"/>
   <rect x="280.00" y="568.00" width="340.00" height="19.80" class="c-encre" fill="#00393A"/>
-  <text x="288.00" y="546.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">&gt; 90 % DE LA CHALEUR REVIENT À L'AIR NEUF</text>
+  <text x="288.00" y="546.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">&gt; 90 % DE LA CHALEUR REVIENT À L’AIR NEUF</text>
   <path d="M 168.00 604.00 L 700.00 604.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
   <path d="M 700.00 604.00 L 700.00 587.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
   <path d="M 700.00 578.00 L 695.50 587.00 L 704.50 587.00 Z" class="c-encre" fill="#00393A"/>
   <circle cx="168.00" cy="604.00" r="7.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
   <rect x="156.00" y="613.00" width="363.80" height="15.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="161.00" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SONDE DE CO2 DANS LE LOCAL · L'OCCUPATION DÉCIDE</text>
-  <text x="56.00" y="652.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L'ENVELOPPE EST ISOLÉE PAR L'EXTÉRIEUR, MURS ET TOITURE — L'AIR LA TRAVERSE TROIS FOIS, UNE SEULE EN RENDANT SA CHALEUR</text>
-  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Chaque usage reçoit son système, et la salle de réunion n'est ventilée qu'à la mesure de son occupation.</text>
+  <text x="161.00" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SONDE DE CO2 DANS LE LOCAL · L’OCCUPATION DÉCIDE</text>
+  <text x="56.00" y="652.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L’ENVELOPPE EST ISOLÉE PAR L’EXTÉRIEUR, MURS ET TOITURE — L’AIR LA TRAVERSE TROIS FOIS, UNE SEULE EN RENDANT SA CHALEUR</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Chaque usage reçoit son système, et la salle de réunion n’est ventilée qu’à la mesure de son occupation.</text>
   <rect x="56.00" y="714.00" width="332.00" height="30.00" class="c-profond" fill="#001718"/>
-  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">AIGREFEUILLE-D'AUNIS · 600 m² · 2026</text>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">AIGREFEUILLE-D’AUNIS · 600 m² · 2026</text>
 </svg>

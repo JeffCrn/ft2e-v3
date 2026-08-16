@@ -1,17 +1,17 @@
 {
   "fiche": "fougerou-sainte-marie-de-re",
   "archetype": "boucle-fluide",
-  "archetype_motif": "La thèse de la fiche est sa déclinaison : « un schéma technique sobre, décliné 54 fois ». Le parti est une topologie production → distribution → terminaux — une PAC air/eau double service alimente des radiateurs en régime 50/45 °C et un ballon d'eau chaude sanitaire intégré, une VMC hygroréglable extrait l'air — donc `boucle-fluide`, quatrième emploi de l'archétype, assumé : aucun autre de la liste fermée ne porte un schéma hydraulique individuel. Le mécanisme, lui, est neuf (`declinaison`) : la géométrie oppose UNE maison dessinée en détail à 54 cellules strictement identiques, et c'est la répétition qui démontre — 27 calculs réglementaires concluent tous à la conformité.",
+  "archetype_motif": "La thèse de la fiche est sa déclinaison : « un schéma technique sobre, décliné 54 fois ». Le parti est une topologie production → distribution → terminaux — une PAC air/eau double service alimente des radiateurs en régime 50/45 °C et un ballon d’eau chaude sanitaire intégré, une VMC hygroréglable extrait l’air — donc `boucle-fluide`, quatrième emploi de l’archétype, assumé : aucun autre de la liste fermée ne porte un schéma hydraulique individuel. Le mécanisme, lui, est neuf (`declinaison`) : la géométrie oppose UNE maison dessinée en détail à 54 cellules strictement identiques, et c’est la répétition qui démontre — 27 calculs réglementaires concluent tous à la conformité.",
   "surtitre": "SCHÉMA DE PRINCIPE · UN PARTI TECHNIQUE DÉCLINÉ 54 FOIS",
   "titre": "Le Fougerou",
   "sous_titre": "Un schéma technique sobre, décliné dans chacune des 54 maisons",
   "cartouche_legende": "SAINTE-MARIE-DE-RÉ · 4 590 m² · 2026",
-  "aria_label": "Schéma de principe d'un parti technique décliné : dans la maison-type, une pompe à chaleur air/eau double service — fluide R32, COP de 4,65 à +7 °C — alimente des radiateurs à eau chaude en régime 50/45 °C et un ballon d'eau chaude sanitaire de 190 litres intégré ; une ventilation hygroréglable de type B à caisson individuel extrait l'air. Le même équipement se répète, à l'identique, dans les 54 maisons de l'opération, et les 27 calculs réglementaires RT2012 qui les couvrent concluent tous à la conformité, de 14 à 36 % sous l'exigence.",
+  "aria_label": "Schéma de principe d’un parti technique décliné : dans la maison-type, une pompe à chaleur air/eau double service — fluide R32, COP de 4,65 à +7 °C — alimente des radiateurs à eau chaude en régime 50/45 °C et un ballon d’eau chaude sanitaire de 190 litres intégré ; une ventilation hygroréglable de type B à caisson individuel extrait l’air. Le même équipement se répète, à l’identique, dans les 54 maisons de l’opération, et les 27 calculs réglementaires RT2012 qui les couvrent concluent tous à la conformité, de 14 à 36 % sous l’exigence.",
   "declinaison": {
     "entete": "UN SEUL SCHÉMA TECHNIQUE, RÉPÉTÉ DANS CHACUNE DES 54 MAISONS",
     "registres": {
       "gauche": "LA MAISON-TYPE · LE PARTI, DESSINÉ UNE FOIS",
-      "droite": "L'OPÉRATION · 54 MAISONS INDIVIDUELLES"
+      "droite": "L’OPÉRATION · 54 MAISONS INDIVIDUELLES"
     },
     "dehors": {
       "entree": "AIR EXTÉRIEUR",
@@ -19,7 +19,7 @@
     },
     "mention_calculs": [
       "27 CALCULS RT2012 · UN PAR MAISON OU GROUPE DE MAISONS ACCOLÉES",
-      "TOUS CONFORMES · DE 14 À 36 % SOUS L'EXIGENCE DE CONSOMMATION"
+      "TOUS CONFORMES · DE 14 À 36 % SOUS L’EXIGENCE DE CONSOMMATION"
     ],
     "elements": [
       {
@@ -39,10 +39,10 @@
         "valeur": "50/45",
         "unite": "°C",
         "detail": [
-          "RÉGULATION EN LOI D'EAU"
+          "RÉGULATION EN LOI D’EAU"
         ],
         "detail_dessin": [
-          "50/45 °C · LOI D'EAU"
+          "50/45 °C · LOI D’EAU"
         ]
       },
       {
@@ -86,7 +86,7 @@
         "unite": "calculs",
         "detail": [
           "UN PAR MAISON OU GROUPE DE MAISONS ACCOLÉES",
-          "TOUS CONFORMES · DE 14 À 36 % SOUS L'EXIGENCE"
+          "TOUS CONFORMES · DE 14 À 36 % SOUS L’EXIGENCE"
         ]
       }
     ]
@@ -103,23 +103,23 @@
     },
     {
       "objet": "Les 27 calculs, portés en accolade et non en groupes",
-      "la_source_affirme": "« Chaque maison ou groupe de maisons accolées fait l'objet de son propre calcul RT2012 » — 27 calculs pour 54 maisons, sans la composition des groupes.",
-      "le_dessin_suppose": "Que l'accolade « 27 calculs » sous la grille suffit : dessiner les groupes exigerait d'inventer la partition. Fournir la composition réelle si elle doit se voir."
+      "la_source_affirme": "« Chaque maison ou groupe de maisons accolées fait l’objet de son propre calcul RT2012 » — 27 calculs pour 54 maisons, sans la composition des groupes.",
+      "le_dessin_suppose": "Que l’accolade « 27 calculs » sous la grille suffit : dessiner les groupes exigerait d’inventer la partition. Fournir la composition réelle si elle doit se voir."
     },
     {
       "objet": "Les émetteurs de la maison-type",
-      "la_source_affirme": "Des radiateurs à eau chaude en régime 50/45 °C ; en dernière tranche, l'option plancher chauffant, chiffrée dès la consultation, remplace les radiateurs.",
-      "le_dessin_suppose": "Que la maison-type porte le parti des CCTP — les radiateurs — sans mentionner l'option de la dernière tranche. Dire si la variante plancher chauffant doit figurer."
+      "la_source_affirme": "Des radiateurs à eau chaude en régime 50/45 °C ; en dernière tranche, l’option plancher chauffant, chiffrée dès la consultation, remplace les radiateurs.",
+      "le_dessin_suppose": "Que la maison-type porte le parti des CCTP — les radiateurs — sans mentionner l’option de la dernière tranche. Dire si la variante plancher chauffant doit figurer."
     },
     {
-      "objet": "La prise d'air de la PAC",
-      "la_source_affirme": "« Une pompe à chaleur air/eau double service » — la fiche ne décrit pas la prise d'air.",
-      "le_dessin_suppose": "Une flèche « air extérieur » entrant du dehors vers la PAC : c'est ce qu'« air/eau » implique, mais la fiche ne l'écrit pas."
+      "objet": "La prise d’air de la PAC",
+      "la_source_affirme": "« Une pompe à chaleur air/eau double service » — la fiche ne décrit pas la prise d’air.",
+      "le_dessin_suppose": "Une flèche « air extérieur » entrant du dehors vers la PAC : c’est ce qu’« air/eau » implique, mais la fiche ne l’écrit pas."
     },
     {
-      "objet": "L'uniformité des 54 cellules",
+      "objet": "L’uniformité des 54 cellules",
       "la_source_affirme": "Des maisons « du T3 au T6 », de tailles différentes.",
-      "le_dessin_suppose": "54 cellules d'égale taille : la géométrie code le nombre de maisons, jamais leur typologie ni leur surface. Une lecture proportionnelle des cellules serait fausse."
+      "le_dessin_suppose": "54 cellules d’égale taille : la géométrie code le nombre de maisons, jamais leur typologie ni leur surface. Une lecture proportionnelle des cellules serait fausse."
     },
     {
       "objet": "Millésime du cartouche",
@@ -128,24 +128,24 @@
     }
   ],
   "exclusions_appliquees": [
-    "Numéro d'affaire 20-014 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Numéro d’affaire 20-014 (champ reference) — il encode le volume annuel d’affaires du bureau.",
     "Montant des travaux : 8 455 000 € HT.",
-    "Noms de tiers : la Coopérative Vendéenne du Logement (maîtrise d'ouvrage) et l'agence Sébastien Pellereau (architecte).",
+    "Noms de tiers : la Coopérative Vendéenne du Logement (maîtrise d’ouvrage) et l’agence Sébastien Pellereau (architecte).",
     "Le lot électricité tout entier (CFO/CFA, précâblage VDI, fibre optique, détection de fumée, raccordement de 513 kVA) : un second réseau brouillerait le mécanisme dessiné — la déclinaison vaut pour lui comme pour les fluides, et il reste au texte de la fiche.",
-    "Le cadre patrimonial (site inscrit depuis 1979, Site Patrimonial Remarquable, prescriptions de l'ABF) et le rythme du chantier (travaux d'été limités, trois tranches, 152 réunions) — matière de contexte ou de chronologie d'affaire, pas du parti technique.",
-    "Les valeurs d'enveloppe (murs à 0,19–0,22 W/m²·°C, toitures à 0,10, menuiseries bois double vitrage) et les consommations calculées (36,4 à 45,1 kWhep/m²/an) — la fiche les porte ; seule la conclusion « de 14 à 36 % sous l'exigence » monte, en mention des 27 calculs.",
+    "Le cadre patrimonial (site inscrit depuis 1979, Site Patrimonial Remarquable, prescriptions de l’ABF) et le rythme du chantier (travaux d’été limités, trois tranches, 152 réunions) — matière de contexte ou de chronologie d’affaire, pas du parti technique.",
+    "Les valeurs d’enveloppe (murs à 0,19–0,22 W/m²·°C, toitures à 0,10, menuiseries bois double vitrage) et les consommations calculées (36,4 à 45,1 kWhep/m²/an) — la fiche les porte ; seule la conclusion « de 14 à 36 % sous l’exigence » monte, en mention des 27 calculs.",
     "Le terrain de 22 149 m² — le cartouche porte les 4 590 m² habitables (champ surface_m2).",
-    "Toute géométrie d'ouvrage : ni implantation des treize îlots, ni plan de maison — la grille est une matrice topologique, la maison un bloc."
+    "Toute géométrie d’ouvrage : ni implantation des treize îlots, ni plan de maison — la grille est une matrice topologique, la maison un bloc."
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "UNE maison dessinée en détail (PAC à compartiment ballon, deux départs, VMC, deux échanges d'air avec le dehors) contre 54 cellules STRICTEMENT identiques portant le même glyphe (production → deux départs) ; l'accolade de cote les prend toutes — la géométrie porte la thèse « un parti, décliné », aucun chiffre de la fiche n'est répété en colonne",
+    "demonstration": "UNE maison dessinée en détail (PAC à compartiment ballon, deux départs, VMC, deux échanges d’air avec le dehors) contre 54 cellules STRICTEMENT identiques portant le même glyphe (production → deux départs) ; l’accolade de cote les prend toutes — la géométrie porte la thèse « un parti, décliné », aucun chiffre de la fiche n’est répété en colonne",
     "topologie": "dehors (x < 158) → maison-type (x 158–560 : PAC x 176–356 avec ballon intégré, radiateurs x 442–546, ECS, VMC y 496–600) → flèche → grille 9 × 6 (x 634–1140, y 256–591, cellule 50, gouttière 7) — matrice topologique, ni îlots ni implantation",
-    "bas_du_dessin": "maison jusqu'à 632, grille jusqu'à 591, accolade à 609, mention des calculs jusqu'à 646, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 320 x 30 px = 9600 px², soit 1.00 % de la planche",
-    "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas chiffrée (révision 4) ; COP 4,65, 50/45 °C, 190 L et la mention des 27 calculs restent au mono 10 pivot",
+    "bas_du_dessin": "maison jusqu’à 632, grille jusqu’à 591, accolade à 609, mention des calculs jusqu’à 646, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 332 x 30 px = 9960 px², soit 1.04 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; COP 4,65, 50/45 °C, 190 L et la mention des 27 calculs restent au mono 10 pivot",
     "grille": "54 cellules — le compte est celui de la fiche (54 maisons), vérifié par construction 9 × 6",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "phrase_principe": "103 signes — 876 px mesurés pour 1088 disponibles",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
@@ -160,7 +160,7 @@
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "la maison-type nommée (PAC double service, ballon intégré, départs chauffage 50/45 °C et ECS 190 L, COP 4,65), la flèche, la matrice complète des 54 cellules, la mention des 27 calculs — VMC, échanges d'air et radiateurs dessinés laissés à la planche",
+    "motif": "la maison-type nommée (PAC double service, ballon intégré, départs chauffage 50/45 °C et ECS 190 L, COP 4,65), la flèche, la matrice complète des 54 cellules, la mention des 27 calculs — VMC, échanges d’air et radiateurs dessinés laissés à la planche",
     "bas_du_dessin": "mention des calculs à 292, marge basse 76 px"
   }
 }

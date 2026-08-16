@@ -1,18 +1,18 @@
 {
   "fiche": "ecole-des-douanes-rue-du-jura-la-rochelle",
   "archetype": "sankey-energie",
-  "archetype_motif": "La thèse de la fiche est une proportion : « Dans une école, la charge de climatisation ne vient pas des murs : elle vient des occupants, des ordinateurs et de l'éclairage. » Un Sankey est le seul archétype de la liste qui démontre une proportion au lieu de l'affirmer. La fiche fournit par ailleurs une décomposition complète, littérale et arithmétiquement close pour un local — la salle de cours du rez-de-chaussée — ce qui donne au diagramme une matière entièrement citable.",
+  "archetype_motif": "La thèse de la fiche est une proportion : « Dans une école, la charge de climatisation ne vient pas des murs : elle vient des occupants, des ordinateurs et de l’éclairage. » Un Sankey est le seul archétype de la liste qui démontre une proportion au lieu de l’affirmer. La fiche fournit par ailleurs une décomposition complète, littérale et arithmétiquement close pour un local — la salle de cours du rez-de-chaussée — ce qui donne au diagramme une matière entièrement citable.",
   "surtitre": "SCHÉMA DE PRINCIPE · RÉPARTITION DES APPORTS DE CHALEUR",
   "titre": "École des douanes",
-  "sous_titre": "La charge ne vient pas de l'enveloppe",
+  "sous_titre": "La charge ne vient pas de l’enveloppe",
   "cartouche_legende": "LA ROCHELLE · 1 657 m² · 2026",
-  "aria_label": "Diagramme de flux des apports de chaleur d'une salle de cours en été : cinq postes d'origine interne — occupants, ordinateurs, éclairage, renouvellement d'air, vidéoprojecteur et baie de brassage — convergent vers un flux large de 8 414 watts ; un sixième poste, les apports de l'enveloppe par le mur et la baie, forme à côté un filet de 217 watts. Le rapport des deux est la démonstration de la planche.",
+  "aria_label": "Diagramme de flux des apports de chaleur d’une salle de cours en été : cinq postes d’origine interne — occupants, ordinateurs, éclairage, renouvellement d’air, vidéoprojecteur et baie de brassage — convergent vers un flux large de 8 414 watts ; un sixième poste, les apports de l’enveloppe par le mur et la baie, forme à côté un filet de 217 watts. Le rapport des deux est la démonstration de la planche.",
   "sankey": {
     "unite": "W",
     "entete": "UNE SALLE DE COURS DU REZ-DE-CHAUSSÉE · 63 m² · MATIN DE JUILLET",
     "perimetre": "une salle de cours du rez-de-chaussée, 63 m²",
     "moment": "un matin de juillet",
-    "note_pied": "CINQ POSTES D'ORIGINE INTERNE : 8 416 W · POSTE DE DÉBIT COMPLÉMENTAIRE : −2 W",
+    "note_pied": "CINQ POSTES D’ORIGINE INTERNE : 8 416 W · POSTE DE DÉBIT COMPLÉMENTAIRE : −2 W",
     "flux_dessines_total": 8633,
     "sources": [
       {
@@ -54,7 +54,7 @@
       {
         "ordre": 4,
         "cle": "air-neuf",
-        "libelle": "Renouvellement d'air",
+        "libelle": "Renouvellement d’air",
         "valeur": 445,
         "unite": "W",
         "valeur_affichee": "445",
@@ -91,7 +91,7 @@
       "valeur": -2,
       "unite": "W",
       "origine": "interieur",
-      "traitement": "porté en note de pied de la zone de dessin, non représenté en bande : −2 W valent 0,06 px à l'échelle retenue"
+      "traitement": "porté en note de pied de la zone de dessin, non représenté en bande : −2 W valent 0,06 px à l’échelle retenue"
     },
     "noeuds": [
       {
@@ -115,77 +115,77 @@
   "a_valider_ft2e": [
     {
       "objet": "Échelle du diagramme",
-      "la_source_affirme": "Le total du bâtiment (152 947 W), sa répartition sensible/latent et la part de l'enveloppe (10,6 kW, moins de 7 %). La décomposition poste par poste n'est donnée que pour un local : « Une salle de cours du rez-de-chaussée suffit à le montrer. »",
-      "le_dessin_suppose": "Que ce local est représentatif de la hiérarchie du bâtiment. Depuis la révision 4, la planche ne porte plus le relevé du bâtiment : le diagramme ne montre que la salle de cours, et son en-tête de périmètre est le seul garde-fou contre une lecture à l'échelle du bâtiment. Les chiffres du bâtiment restent au champ performance et au récit de la fiche."
+      "la_source_affirme": "Le total du bâtiment (152 947 W), sa répartition sensible/latent et la part de l’enveloppe (10,6 kW, moins de 7 %). La décomposition poste par poste n’est donnée que pour un local : « Une salle de cours du rez-de-chaussée suffit à le montrer. »",
+      "le_dessin_suppose": "Que ce local est représentatif de la hiérarchie du bâtiment. Depuis la révision 4, la planche ne porte plus le relevé du bâtiment : le diagramme ne montre que la salle de cours, et son en-tête de périmètre est le seul garde-fou contre une lecture à l’échelle du bâtiment. Les chiffres du bâtiment restent au champ performance et au récit de la fiche."
     },
     {
       "objet": "Deux moments — réglé par la révision 4",
       "la_source_affirme": "La salle de cours est calculée « un matin de juillet ». Le bâtiment culmine « en pointe de juillet à 16 h ».",
-      "le_dessin_suppose": "La planche ne portait les deux moments que par la coexistence du diagramme (matin) et du relevé (16 h). Le relevé retiré, un seul moment subsiste — celui de la salle, nommé par l'en-tête. Plus rien à trancher, consigné pour mémoire."
+      "le_dessin_suppose": "La planche ne portait les deux moments que par la coexistence du diagramme (matin) et du relevé (16 h). Le relevé retiré, un seul moment subsiste — celui de la salle, nommé par l’en-tête. Plus rien à trancher, consigné pour mémoire."
     },
     {
       "objet": "Bouclage à 2 W près de la salle de cours",
-      "la_source_affirme": "8 414 W d'usages, détaillés en 5 519 + 1 260 + 992 + 445 + 200 = 8 416, « un poste de débit complémentaire en retranchant deux ».",
-      "le_dessin_suppose": "Que les cinq postes cités se dessinent à leur valeur littérale (8 416 W) et que le poste de −2 W se porte en note plutôt qu'en bande. Le nœud reste étiqueté 8 414 W, valeur de la fiche. La formulation du poste complémentaire est à confirmer."
+      "la_source_affirme": "8 414 W d’usages, détaillés en 5 519 + 1 260 + 992 + 445 + 200 = 8 416, « un poste de débit complémentaire en retranchant deux ».",
+      "le_dessin_suppose": "Que les cinq postes cités se dessinent à leur valeur littérale (8 416 W) et que le poste de −2 W se porte en note plutôt qu’en bande. Le nœud reste étiqueté 8 414 W, valeur de la fiche. La formulation du poste complémentaire est à confirmer."
     },
     {
-      "objet": "Rattachement du renouvellement d'air",
-      "la_source_affirme": "Les 445 W du renouvellement d'air à 720 m³/h sont comptés parmi « ses usages », donc dans les 8 414 W d'origine interne.",
-      "le_dessin_suppose": "Que FT2E maintient ce rattachement, alors qu'un apport d'air neuf est une charge de climat autant que d'usage. Basculer ce poste du côté enveloppe changerait la lecture du schéma."
+      "objet": "Rattachement du renouvellement d’air",
+      "la_source_affirme": "Les 445 W du renouvellement d’air à 720 m³/h sont comptés parmi « ses usages », donc dans les 8 414 W d’origine interne.",
+      "le_dessin_suppose": "Que FT2E maintient ce rattachement, alors qu’un apport d’air neuf est une charge de climat autant que d’usage. Basculer ce poste du côté enveloppe changerait la lecture du schéma."
     },
     {
       "objet": "Part latente des occupants",
       "la_source_affirme": "« 5 519 W pour 42 occupants, dont plus de la moitié en chaleur latente. »",
-      "le_dessin_suppose": "Que « plus de la moitié » n'est pas une valeur dessinable : la bande des occupants n'est pas subdivisée. Depuis la révision 4, le partage sensible/latent n'apparaît plus sur la planche — il reste au champ performance de la fiche (104 656 / 48 291 W)."
+      "le_dessin_suppose": "Que « plus de la moitié » n’est pas une valeur dessinable : la bande des occupants n’est pas subdivisée. Depuis la révision 4, le partage sensible/latent n’apparaît plus sur la planche — il reste au champ performance de la fiche (104 656 / 48 291 W)."
     },
     {
       "objet": "Coefficient porté au poste « Mur et baie »",
       "la_source_affirme": "0,354 W/(m²·K) est le coefficient du mur du bâtiment. Les baies relèvent de quatre types, de coefficient global 1,40 à 2,00.",
-      "le_dessin_suppose": "Que ce coefficient peut être porté en appui du poste, explicitement étiqueté « MUR ». Aucun coefficient de baie n'est affiché : la fiche ne dit pas lequel des quatre types équipe cette salle."
+      "le_dessin_suppose": "Que ce coefficient peut être porté en appui du poste, explicitement étiqueté « MUR ». Aucun coefficient de baie n’est affiché : la fiche ne dit pas lequel des quatre types équipe cette salle."
     },
     {
       "objet": "Absence de tout pourcentage sur le dessin",
-      "la_source_affirme": "« Moins de 7 % » qualifie la part enveloppe à l'échelle du bâtiment, à 16 h.",
-      "le_dessin_suppose": "Qu'aucun pourcentage ne doit figurer sur le diagramme de la salle, sous peine d'être lu contre le chiffre du bâtiment. La proportion y est portée par la seule géométrie des bandes."
+      "la_source_affirme": "« Moins de 7 % » qualifie la part enveloppe à l’échelle du bâtiment, à 16 h.",
+      "le_dessin_suppose": "Qu’aucun pourcentage ne doit figurer sur le diagramme de la salle, sous peine d’être lu contre le chiffre du bâtiment. La proportion y est portée par la seule géométrie des bandes."
     },
     {
       "objet": "Millésime porté au cartouche",
       "la_source_affirme": "Affaire ouverte en 2025 (champ annee), rapport remis le 13 avril 2026, achèvement constaté le 30 avril 2026 (champ annee_livraison, 2026).",
-      "le_dessin_suppose": "Que le cartouche porte le millésime de remise et non celui d'ouverture — c'est la date que le lecteur associe au résultat affiché. Arbitrage nouveau : la révision 2 du gabarit a retiré le nom d'ouvrage du cartouche, qui faisait doublon avec le titre, et l'a remplacé par le millésime."
+      "le_dessin_suppose": "Que le cartouche porte le millésime de remise et non celui d’ouverture — c’est la date que le lecteur associe au résultat affiché. Arbitrage nouveau : la révision 2 du gabarit a retiré le nom d’ouvrage du cartouche, qui faisait doublon avec le titre, et l’a remplacé par le millésime."
     },
     {
       "objet": "Surface au cartouche",
       "la_source_affirme": "1 657 m² au frontmatter (surface_m2), 1 656,75 m² au corps et au champ performance.",
-      "le_dessin_suppose": "Que le cartouche porte la valeur arrondie du champ de surface (1 657 m²) ; la valeur exacte du calcul (1 656,75 m²) reste à la fiche — le relevé qui l'affichait a été retiré par la révision 4. À trancher si l'écart doit disparaître."
+      "le_dessin_suppose": "Que le cartouche porte la valeur arrondie du champ de surface (1 657 m²) ; la valeur exacte du calcul (1 656,75 m²) reste à la fiche — le relevé qui l’affichait a été retiré par la révision 4. À trancher si l’écart doit disparaître."
     },
     {
       "objet": "Ordre des postes",
-      "la_source_affirme": "L'ordre d'énumération de la fiche : occupants, ordinateurs, éclairage, renouvellement d'air, vidéoprojecteur et baie de brassage.",
-      "le_dessin_suppose": "Que cet ordre d'énumération vaut ordre de haut en bas, l'enveloppe venant en dernier et séparée par un écart plus large — l'écart porte le changement d'origine. Rien dans la fiche ne fixe un ordre de représentation."
+      "la_source_affirme": "L’ordre d’énumération de la fiche : occupants, ordinateurs, éclairage, renouvellement d’air, vidéoprojecteur et baie de brassage.",
+      "le_dessin_suppose": "Que cet ordre d’énumération vaut ordre de haut en bas, l’enveloppe venant en dernier et séparée par un écart plus large — l’écart porte le changement d’origine. Rien dans la fiche ne fixe un ordre de représentation."
     },
     {
       "objet": "Distribution horaire non portée",
       "la_source_affirme": "La charge culmine à 9 h dans huit salles, à 10 h dans quatre autres, à 16 h dans douze locaux — soit 24 des 26.",
-      "le_dessin_suppose": "Que cette distribution ne figure pas sur la planche. Si FT2E la veut, il faut d'abord dire ce qu'il advient des deux locaux non comptés."
+      "le_dessin_suppose": "Que cette distribution ne figure pas sur la planche. Si FT2E la veut, il faut d’abord dire ce qu’il advient des deux locaux non comptés."
     }
   ],
   "exclusions_appliquees": [
-    "Numéro d'affaire 25-084 (champ reference) — il encode le volume annuel d'affaires du bureau.",
-    "Montant de la prestation, 2 800 € HT, et celui de la seconde proposition d'honoraires.",
-    "Noms de tiers : maîtrise d'ouvrage et son service acheteur, entreprise titulaire de l'accord-cadre, plateforme régionale des achats.",
-    "Procès-verbal d'achèvement : lieu de signature et six évaluations — donnée commerciale.",
+    "Numéro d’affaire 25-084 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Montant de la prestation, 2 800 € HT, et celui de la seconde proposition d’honoraires.",
+    "Noms de tiers : maîtrise d’ouvrage et son service acheteur, entreprise titulaire de l’accord-cadre, plateforme régionale des achats.",
+    "Procès-verbal d’achèvement : lieu de signature et six évaluations — donnée commerciale.",
     "Matériel existant du client : groupes multisplit de 6,8 kW en froid, millésime 2018, trois pièces desservies au plus.",
-    "Toute géométrie d'ouvrage : aucune façade, aucun plan, aucune distribution de locaux, aucune implantation. La salle de cours n'est présente que par la répartition de sa charge.",
+    "Toute géométrie d’ouvrage : aucune façade, aucun plan, aucune distribution de locaux, aucune implantation. La salle de cours n’est présente que par la répartition de sa charge.",
     "Le relevé du bâtiment — 152 947 W, 92 W/m², moins de 7 %, parts sensible et latente, foisonnement : retiré de la planche le 2026-08-13 (révision 4 — la planche schématise la solution, la fiche porte déjà ces chiffres). Le dessin ne montre plus que le mécanisme mesuré sur la salle de cours."
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "gabarit_schema": "flux de 366 à 906 px, nœuds étiquetés jusqu'à 1144 px — schéma pleine largeur, colonne de relevé supprimée (révision 4)",
+    "gabarit_schema": "flux de 366 à 906 px, nœuds étiquetés jusqu’à 1144 px — schéma pleine largeur, colonne de relevé supprimée (révision 4)",
     "bouclage_bandes": "5519 + 1260 + 992 + 445 + 200 + 217 = 8633 W ; hauteur totale 232.00 px (échelle 0.026874 px/W)",
     "part_enveloppe_dans_la_hauteur": "217 / 8633 = 2.514 %",
-    "bas_du_dessin": "bandes jusqu'à 574.00 px, libellés jusqu'à 602.17 px — note de pied à 638.17, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 263 x 30 px = 7890 px², soit 0.82 % de la planche",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)"
+    "bas_du_dessin": "bandes jusqu’à 574.00 px, libellés jusqu’à 602.17 px — note de pied à 638.17, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 275 x 30 px = 8250 px², soit 0.86 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)"
   },
   "controles_vignette": {
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
@@ -197,7 +197,7 @@
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "les six bandes proportionnelles et les deux nœuds chiffrés à l'échelle 1 ; libellés portés par les bandes assez hautes (plus l'enveloppe) — valeurs par poste, détails et note de pied laissés à la planche",
-    "bas_du_dessin": "bandes jusqu'à 328 px, marge basse 40 px"
+    "motif": "les six bandes proportionnelles et les deux nœuds chiffrés à l’échelle 1 ; libellés portés par les bandes assez hautes (plus l’enveloppe) — valeurs par poste, détails et note de pied laissés à la planche",
+    "bas_du_dessin": "bandes jusqu’à 328 px, marge basse 40 px"
   }
 }

@@ -170,13 +170,13 @@
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "trois pistes à la même origine et à l'échelle commune de 1 px par kg éq. CO₂/m² : plafonds de 633, 650 et 206 px, remplissages de 474, 519 et 76 px — texte masqué, la chute du plafond au double trait et le seuil prolongé que les remplissages du gaz dépassent portent la thèse",
+    "demonstration": "trois pistes à la même origine et à l’échelle commune de 1 px par kg éq. CO₂/m² : plafonds de 633, 650 et 206 px, remplissages de 474, 519 et 76 px — texte masqué, la chute du plafond au double trait et le seuil prolongé que les remplissages du gaz dépassent portent la thèse",
     "topologie": "colonne bâtiment (x 56–454) → pistes (x 470–1120) ; frontière à double trait y 488–492, seuil prolongé à x 676.5",
     "cellules": "4 + 6 + 3 = 13 logements — la géométrie code le nombre, jamais la surface",
-    "bas_du_dessin": "rangs A/B/C jusqu'à 344, 452 et 650 px, seuil prolongé jusqu'à 574, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 236 x 30 px = 7080 px², soit 0.74 % de la planche",
+    "bas_du_dessin": "rangs A/B/C jusqu’à 344, 452 et 650 px, seuil prolongé jusqu’à 574, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 242 x 30 px = 7260 px², soit 0.76 % de la planche",
     "chiffre_unique": "aucun chiffre de relevé — les six valeurs des pistes sont des cotes mono 10 et 12 (révision 4)",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "phrase_principe": "103 signes — 876 px mesurés pour 1088 disponibles",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
@@ -185,13 +185,13 @@
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
     "motif": "trois pistes à échelle commune, le double trait de la frontière, le seuil prolongé et les couples résultat / plafond — cellules, compositions et légende laissées à la planche",
-    "bas_du_dessin": "piste C jusqu'à 158 px, marge basse 42 px"
+    "bas_du_dessin": "piste C jusqu’à 158 px, marge basse 42 px"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "les trois pistes à l'échelle 1, la frontière à double trait et sa mention, le seuil prolongé, les couples résultat / plafond et la légende des deux signes — cellules, compositions et détails de générateur laissés à la planche",
-    "bas_du_dessin": "légende jusqu'à 296 px, marge basse 72 px"
+    "motif": "les trois pistes à l’échelle 1, la frontière à double trait et sa mention, le seuil prolongé, les couples résultat / plafond et la légende des deux signes — cellules, compositions et détails de générateur laissés à la planche",
+    "bas_du_dessin": "légende jusqu’à 296 px, marge basse 72 px"
   }
 }

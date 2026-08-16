@@ -391,6 +391,35 @@ s'écrit en un seul mot (« quatre chambres », « treize logements ») ; chiffr
 noms composés (« 21 logements », « 46 chambres ») ; **les unités et les mesures toujours
 en chiffres**, quelle que soit la valeur.
 
+### L'apostrophe — U+2019, et elle se pose dans l'EXTRACTION
+
+Tout le texte que tu écris dans `planche.json` porte l'apostrophe typographique
+**U+2019** (`'`), jamais la droite (`'`) : titre, surtitre, sous-titre, cartouche,
+libellés dessinés, phrase de principe, et **`aria_label` au premier chef** — c'est
+lui que les lecteurs d'écran prononcent. La règle vaut pour « tout contenu textuel
+destiné à l'utilisateur final » (`.claude/rules/french-editorial.md`), et le corpus
+dessiné en fait partie : il l'a manqué jusqu'au 2026-08-16, où 1 694 apostrophes
+droites ont été courbées d'un coup sur les 23 dossiers.
+
+**Elle se pose dans l'extraction, jamais dans le SVG.** Le SVG est une sortie : la
+première régénération l'écrase. Si ton compositeur porte des libellés en dur ou un
+bloc `controles` en français, ils se courbent aussi — `_tronc.executer` réécrit
+`controles` dans le `planche.json` à chaque passage.
+
+⚠ **Ne courbe jamais à l'aveugle.** Trois apostrophes du corpus sont de la SYNTAXE et
+doivent rester droites : `font-variation-settings="'wdth' 112, 'wght' 700"`,
+`font-family='…'` et les clés de dictionnaire logées dans une f-string
+(`f"{d['cle']}"` — en Python 3.11 une f-string est un seul jeton, son intérieur est
+donc dans le littéral). L'instrument rejouable est `scripts/apostrophes-planches.py` :
+il ne courbe que ce qui est encadré d'une lettre à gauche et d'une lettre ou d'un
+guillemet ouvrant à droite, et **nomme** tout ce qu'il refuse.
+
+⚠ **N'y passe pas `scripts/injection-typographique.py`**, qui est taillé pour le
+Markdown de `src/content/` : il ajouterait 1 186 insécables aux extractions, et
+comme `_tronc.mesurer` mesure les chaînes pour poser la géométrie, **chaque insécable
+ajoutée déplace le dessin**. Les insécables du corpus dessiné restent un chantier
+ouvert, à recetter au rendu sur les 23 planches.
+
 ---
 
 ## Gabarit de composition — **1200 × 800**
@@ -513,7 +542,7 @@ jamais en rognage : les vingt-trois fiches partagent aujourd'hui la même image 
 
 ---
 
-## Trois pièges déjà rencontrés
+## Quatre pièges déjà rencontrés
 
 **Le duotone du site ne récupérera pas ta planche.** Le sandwich CSS `.duotone-photo`
 (`grayscale` + `mix-blend-mode: lighten/darken`) ne mappe correctement que le noir et le
@@ -526,6 +555,28 @@ appartiennent à la photographie.
 dans la page. C'est le défaut qui a motivé cette révision : une planche peut être
 parfaitement composée et parfaitement illisible, et le PNG de contrôle ne le montre pas —
 il faut la regarder à 1152 px (temps 4).
+
+**Une constante de gabarit ne se nomme qu'UNE fois par fichier.** Un compositeur qui
+porte plusieurs mécanismes les écrit à la suite dans le même module — et deux
+mécanismes qui affectent le même nom au niveau du module se marchent dessus : les
+deux affectations s'exécutent à l'import, **la seconde gagne**, et c'est le PREMIER
+dessin qui se recompose faux. Relevé le 2026-08-16 sur `tableau-electrique.py`, où
+`XB0, XB1` était posé deux fois (l. 82 pour `autoconsommation`, l. 582 pour
+`franchissement`) : rejouée, la planche de la crèche sortait sa barre de distribution
+à x 56 au lieu de 420, avec des flèches hors marge et un bloc `controles` qui
+annonçait des largeurs **négatives**. Ni le build, ni `astro check`, ni le rendu de
+l'autre mécanisme ne le signalaient — **seule la régénération l'a montré**. Nomme donc
+tes repères par mécanisme, comme `Y_BUS` / `Y_BARRE` et `XB0` / `XBARRE0`.
+
+**La régénération octet à octet est le contrôle, et la date de commit n'en est pas
+un indicateur.** Avant toute reprise du tronc commun, rejoue les 23 compositeurs dans
+une copie hors dépôt et compare : c'est le seul test qui dise si les planches
+publiées se refabriquent. En 2026-08, six planches versées le jour même de la
+correction de `_tronc.mesurer` avaient été composées avant elle — leur date les
+disait à jour, la régénération disait le contraire. ⚠ `core.autocrlf` vaut `true`
+sans `.gitattributes` : dans un clone neuf, les pièces sont en CRLF et les
+compositeurs écrivent du LF. Normalise les fins de ligne avant de comparer, ou tu
+liras 92 écarts qui n'en sont pas.
 
 **Les espaces fines insécables se perdent en cours de route.** Plusieurs outils
 d'écriture normalisent U+202F en espace ordinaire sans le signaler. Après avoir écrit le

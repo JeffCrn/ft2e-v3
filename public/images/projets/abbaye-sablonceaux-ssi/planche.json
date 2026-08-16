@@ -1,21 +1,21 @@
 {
   "fiche": "abbaye-sablonceaux-ssi",
   "archetype": "zonage-ssi",
-  "archetype_motif": "La thèse de la fiche est un découpage : l'installation d'origine ne formait qu'une seule zone d'alarme, sans temporisation, et le moindre déclenchement sonnait l'évacuation générale des 3 370 m² ; le nouveau SSI de catégorie A n'évacue que le bâtiment concerné. Le schéma suit un même déclenchement à travers les deux systèmes : avant, l'alarme se diffuse partout ; après, la centrale adressable ne la diffuse que dans la zone concernée. La démonstration est portée par la géométrie — une barre d'alarme partout contre une barre d'alarme sur un seul bloc — et non par un récapitulatif de données que la fiche porte déjà.",
-  "surtitre": "SCHÉMA DE PRINCIPE · ZONAGE DE L'ALARME INCENDIE",
+  "archetype_motif": "La thèse de la fiche est un découpage : l’installation d’origine ne formait qu’une seule zone d’alarme, sans temporisation, et le moindre déclenchement sonnait l’évacuation générale des 3 370 m² ; le nouveau SSI de catégorie A n’évacue que le bâtiment concerné. Le schéma suit un même déclenchement à travers les deux systèmes : avant, l’alarme se diffuse partout ; après, la centrale adressable ne la diffuse que dans la zone concernée. La démonstration est portée par la géométrie — une barre d’alarme partout contre une barre d’alarme sur un seul bloc — et non par un récapitulatif de données que la fiche porte déjà.",
+  "surtitre": "SCHÉMA DE PRINCIPE · ZONAGE DE L’ALARME INCENDIE",
   "titre": "Abbaye de Sablonceaux",
-  "sous_titre": "Dissocier les alarmes d'un site patrimonial occupé",
+  "sous_titre": "Dissocier les alarmes d’un site patrimonial occupé",
   "cartouche_legende": "SABLONCEAUX · 3 370 m² · 2026",
-  "aria_label": "Schéma de principe du zonage de l'alarme incendie : un même déclenchement de détecteur est suivi avant et après travaux. Avant : le SDI d'origine, une seule zone d'alarme sans temporisation, sonne l'évacuation générale des 3 370 m². Après : la centrale de catégorie A, adressable point par point, ne diffuse l'alarme que dans la zone concernée — quatre zones d'alarme dont une provisionnée pour le bâtiment Figuier ; l'aile François-Xavier, hors zonage, passe en détecteurs avertisseurs autonomes de fumée.",
-  "releve_entete": "L'AFFAIRE · DU DIAGNOSTIC À LA RÉCEPTION · 2023–2026",
+  "aria_label": "Schéma de principe du zonage de l’alarme incendie : un même déclenchement de détecteur est suivi avant et après travaux. Avant : le SDI d’origine, une seule zone d’alarme sans temporisation, sonne l’évacuation générale des 3 370 m². Après : la centrale de catégorie A, adressable point par point, ne diffuse l’alarme que dans la zone concernée — quatre zones d’alarme dont une provisionnée pour le bâtiment Figuier ; l’aile François-Xavier, hors zonage, passe en détecteurs avertisseurs autonomes de fumée.",
+  "releve_entete": "L’AFFAIRE · DU DIAGNOSTIC À LA RÉCEPTION · 2023–2026",
   "zonage": {
     "entete": "UN MÊME DÉCLENCHEMENT, SUIVI AVANT ET APRÈS TRAVAUX",
     "legende_alarme": "ALARME DIFFUSÉE",
     "evenement": "UN DÉTECTEUR SE DÉCLENCHE",
     "avant": {
-      "tag": "AVANT TRAVAUX · L'INSTALLATION D'ORIGINE",
+      "tag": "AVANT TRAVAUX · L’INSTALLATION D’ORIGINE",
       "systeme": {
-        "libelle": "SDI d'origine",
+        "libelle": "SDI d’origine",
         "detail": [
           "UNE SEULE ZONE",
           "SANS TEMPORISATION"
@@ -23,7 +23,7 @@
       },
       "diffusion": {
         "libelle": "Évacuation générale",
-        "libelle_vignette": "Une seule zone d'alarme",
+        "libelle_vignette": "Une seule zone d’alarme",
         "valeur": "3 370",
         "unite": "m²",
         "alarme": true
@@ -41,7 +41,7 @@
         {
           "ordre": 1,
           "cle": "za1",
-          "tag": "ZONE D'ALARME 1",
+          "tag": "ZONE D’ALARME 1",
           "libelle": "Moines-Logis",
           "alarme": true,
           "mention": "EN ALARME — ÉVACUE",
@@ -50,7 +50,7 @@
         {
           "ordre": 2,
           "cle": "za2",
-          "tag": "ZONE D'ALARME 2",
+          "tag": "ZONE D’ALARME 2",
           "libelle": "Aile Jonas",
           "alarme": false,
           "etat": "active"
@@ -58,7 +58,7 @@
         {
           "ordre": 3,
           "cle": "za3",
-          "tag": "ZONE D'ALARME 3",
+          "tag": "ZONE D’ALARME 3",
           "libelle": "Bâtiment communautaire",
           "libelle_vignette": "Communautaire",
           "alarme": false,
@@ -67,7 +67,7 @@
         {
           "ordre": 4,
           "cle": "za4",
-          "tag": "ZONE D'ALARME 4 · PROVISIONNÉE",
+          "tag": "ZONE D’ALARME 4 · PROVISIONNÉE",
           "libelle": "Bâtiment Figuier",
           "alarme": false,
           "mention": "RECLASSEMENT EN ERP ENVISAGÉ",
@@ -80,43 +80,43 @@
   },
   "releve": [],
   "releve_secondaire": [],
-  "phrase_principe": "Un SSI adressable nomme la zone et le point en alarme, et n'évacue que le bâtiment concerné.",
-  "vignette_surtitre": "ZONAGE D'ALARME",
+  "phrase_principe": "Un SSI adressable nomme la zone et le point en alarme, et n’évacue que le bâtiment concerné.",
+  "vignette_surtitre": "ZONAGE D’ALARME",
   "a_valider_ft2e": [
     {
       "objet": "La zone en alarme du scénario",
-      "la_source_affirme": "Le système « nomme la zone et le point en alarme, et n'évacue que le bâtiment concerné » — la fiche ne donne aucun exemple de déclenchement.",
-      "le_dessin_suppose": "Un scénario illustratif où la zone en alarme est « Moines-Logis » (zone 1). N'importe laquelle des trois zones ferait la même démonstration — dire si une autre est préférable."
+      "la_source_affirme": "Le système « nomme la zone et le point en alarme, et n’évacue que le bâtiment concerné » — la fiche ne donne aucun exemple de déclenchement.",
+      "le_dessin_suppose": "Un scénario illustratif où la zone en alarme est « Moines-Logis » (zone 1). N’importe laquelle des trois zones ferait la même démonstration — dire si une autre est préférable."
     },
     {
-      "objet": "Rattachement du grenier d'abondance",
-      "la_source_affirme": "Le bâtiment des Moines, le Logis et le grenier d'abondance forment l'ERP de troisième catégorie ; les trois zones d'alarme sont nommées « Moines-Logis, aile Jonas, bâtiment communautaire ».",
-      "le_dessin_suppose": "Que les noms de zones de la fiche suffisent au dessin : le grenier d'abondance n'est rattaché à aucun bloc. Dire quelle zone d'alarme le couvre."
+      "objet": "Rattachement du grenier d’abondance",
+      "la_source_affirme": "Le bâtiment des Moines, le Logis et le grenier d’abondance forment l’ERP de troisième catégorie ; les trois zones d’alarme sont nommées « Moines-Logis, aile Jonas, bâtiment communautaire ».",
+      "le_dessin_suppose": "Que les noms de zones de la fiche suffisent au dessin : le grenier d’abondance n’est rattaché à aucun bloc. Dire quelle zone d’alarme le couvre."
     },
     {
       "objet": "Composition et classement du « bâtiment communautaire »",
-      "la_source_affirme": "Il n'apparaît que comme troisième zone d'alarme ; aucun classement ni contenu ne lui est donné.",
-      "le_dessin_suppose": "Que son bloc se dessine sans ligne de classement plutôt que d'en inventer une. À compléter si un classement doit y figurer."
+      "la_source_affirme": "Il n’apparaît que comme troisième zone d’alarme ; aucun classement ni contenu ne lui est donné.",
+      "le_dessin_suppose": "Que son bloc se dessine sans ligne de classement plutôt que d’en inventer une. À compléter si un classement doit y figurer."
     },
     {
       "objet": "Numérotation des zones 1 à 4",
-      "la_source_affirme": "« Trois zones d'alarme » puis « une quatrième provisionnée » — la fiche ne numérote jamais les zones.",
-      "le_dessin_suppose": "Une numérotation de 1 à 4 dans l'ordre d'énumération de la fiche. Les numéros réels sont au dossier d'identité SSI."
+      "la_source_affirme": "« Trois zones d’alarme » puis « une quatrième provisionnée » — la fiche ne numérote jamais les zones.",
+      "le_dessin_suppose": "Une numérotation de 1 à 4 dans l’ordre d’énumération de la fiche. Les numéros réels sont au dossier d’identité SSI."
     },
     {
-      "objet": "Des blocs d'égale hauteur",
-      "la_source_affirme": "Aucune surface par bâtiment ni par zone n'est donnée — seul le total de 3 370 m².",
+      "objet": "Des blocs d’égale hauteur",
+      "la_source_affirme": "Aucune surface par bâtiment ni par zone n’est donnée — seul le total de 3 370 m².",
       "le_dessin_suppose": "Que les blocs se dessinent à hauteur égale : la géométrie code le nombre de zones, jamais leur taille. Une lecture proportionnelle des blocs serait fausse."
     },
     {
-      "objet": "Périmètre de la zone unique d'origine",
-      "la_source_affirme": "« Une seule zone d'alarme, sans temporisation, pour la totalité du site » ; l'évacuation générale porte sur les 3 370 m².",
-      "le_dessin_suppose": "Que la bande AVANT vaut tout l'ensemble, ailes de logements comprises — la fiche ne dit pas si l'installation d'origine couvrait aussi les ailes hors classement."
+      "objet": "Périmètre de la zone unique d’origine",
+      "la_source_affirme": "« Une seule zone d’alarme, sans temporisation, pour la totalité du site » ; l’évacuation générale porte sur les 3 370 m².",
+      "le_dessin_suppose": "Que la bande AVANT vaut tout l’ensemble, ailes de logements comprises — la fiche ne dit pas si l’installation d’origine couvrait aussi les ailes hors classement."
     },
     {
       "objet": "François-Xavier posé hors zonage",
-      "la_source_affirme": "L'aile François-Xavier, hors classement, passe en détecteurs avertisseurs autonomes de fumée (DAAF).",
-      "le_dessin_suppose": "Que des DAAF ne relèvent pas du SSI : le bloc est posé sous l'étiquette « hors zonage SSI » — la fiche l'implique sans l'écrire."
+      "la_source_affirme": "L’aile François-Xavier, hors classement, passe en détecteurs avertisseurs autonomes de fumée (DAAF).",
+      "le_dessin_suppose": "Que des DAAF ne relèvent pas du SSI : le bloc est posé sous l’étiquette « hors zonage SSI » — la fiche l’implique sans l’écrire."
     },
     {
       "objet": "Millésime du cartouche",
@@ -125,21 +125,21 @@
     }
   ],
   "exclusions_appliquees": [
-    "Numéro d'affaire 22-042 (champ reference) — il encode le volume annuel d'affaires du bureau.",
+    "Numéro d’affaire 22-042 (champ reference) — il encode le volume annuel d’affaires du bureau.",
     "Montant du marché de travaux : 58 255,70 € HT, lot unique SSI — cité deux fois par la fiche.",
-    "Noms de tiers : la maîtrise d'ouvrage, l'entreprise titulaire du lot, le fabricant et la référence commerciale du système de détection d'origine — le dessin dit seulement « l'installation d'origine ».",
-    "Jalons contractuels : dossier de consultation de septembre 2023, avenant de février 2025, indice B de mai 2025, notification du 13 janvier 2026 — matière d'une chronologie d'affaire, pas d'un zonage.",
+    "Noms de tiers : la maîtrise d’ouvrage, l’entreprise titulaire du lot, le fabricant et la référence commerciale du système de détection d’origine — le dessin dit seulement « l’installation d’origine ».",
+    "Jalons contractuels : dossier de consultation de septembre 2023, avenant de février 2025, indice B de mai 2025, notification du 13 janvier 2026 — matière d’une chronologie d’affaire, pas d’un zonage.",
     "Équipements non dessinés : sirènes à message pré-enregistré des salles de type L, asservissements (arrêt de la sonorisation, remise en lumière sur alarme), flashs lumineux des sanitaires, détection radio reconduite dans les maçonneries anciennes, essai au foyer type NF S 61-970 — aucun ne modifie le découpage des zones ; seuls les BAES et BAEH passent au relevé secondaire.",
-    "Toute géométrie d'ouvrage : ni plan, ni implantation, ni cloître ni clocher — les zones sont des blocs topologiques d'égale hauteur, empilés dans l'ordre d'énumération de la fiche.",
-    "Les données que la fiche porte déjà — relevé chiffré (24 points essayés, neuf semaines, classements ERP, détection généralisée, BAES/BAEH) : retirées du dessin le 2026-08-13. La planche schématise la solution ; répéter les chiffres de la page l'alourdirait sans rien démontrer (principe arrêté par FT2E)."
+    "Toute géométrie d’ouvrage : ni plan, ni implantation, ni cloître ni clocher — les zones sont des blocs topologiques d’égale hauteur, empilés dans l’ordre d’énumération de la fiche.",
+    "Les données que la fiche porte déjà — relevé chiffré (24 points essayés, neuf semaines, classements ERP, détection généralisée, BAES/BAEH) : retirées du dessin le 2026-08-13. La planche schématise la solution ; répéter les chiffres de la page l’alourdirait sans rien démontrer (principe arrêté par FT2E)."
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "barres d'alarme : 1 sur 1 bloc AVANT (tout le site) contre 1 sur 4 blocs APRÈS — la géométrie porte la thèse, aucun chiffre de la fiche n'est répété",
+    "demonstration": "barres d’alarme : 1 sur 1 bloc AVANT (tout le site) contre 1 sur 4 blocs APRÈS — la géométrie porte la thèse, aucun chiffre de la fiche n’est répété",
     "topologie": "événement (x 56) → système (x 270–496) → site (x 520–1144) ; tronc de distribution à x 508",
-    "bas_du_dessin": "pile de zones jusqu'à 636 px, ligne hors zonage à 660, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 263 x 30 px = 7890 px², soit 0.82 % de la planche",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "bas_du_dessin": "pile de zones jusqu’à 636 px, ligne hors zonage à 660, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 275 x 30 px = 8250 px², soit 0.86 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
   "controles_vignette": {
@@ -153,7 +153,7 @@
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "1 bloc AVANT (barre d'alarme sur tout, 3 370 m² évacués) contre 4 zones APRÈS dont la provisionnée, barre et mention sur la seule zone en alarme, légende en tête — événement, systèmes et hors zonage laissés à la planche",
-    "bas_du_dessin": "pile de zones jusqu'à 336 px, marge basse 32 px"
+    "motif": "1 bloc AVANT (barre d’alarme sur tout, 3 370 m² évacués) contre 4 zones APRÈS dont la provisionnée, barre et mention sur la seule zone en alarme, légende en tête — événement, systèmes et hors zonage laissés à la planche",
+    "bas_du_dessin": "pile de zones jusqu’à 336 px, marge basse 32 px"
   }
 }

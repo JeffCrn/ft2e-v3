@@ -1,19 +1,19 @@
 {
   "fiche": "place-des-chenes-verts-saint-rogatien",
   "archetype": "tableau-electrique",
-  "archetype_motif": "La thèse de la fiche est une topologie d'alimentation, et c'est une topologie qui se refuse : « chaque local est autonome — son comptage électrique, sa pompe à chaleur, sa ventilation, son ballon d'eau chaude, son alarme ». Le motif de l'archétype (arrivée → tableau → départs) est ici essaimé : au lieu d'un point d'entrée qui se ramifie, cinq comptages descendent du réseau public dans cinq cellules qui ne se parlent pas, et la seule chose que les cinq partagent est la maçonnerie qui les contient. La géométrie porte seule la démonstration — cinq franchissements en haut, quatre refends que rien ne traverse, cinq arbres identiques dont un s'alimente en triple et un porte deux branches de plus. La frontière réglementaire RE2020 / RT2012, l'autre thèse possible de la fiche, est laissée au texte : elle refait le dessin déjà publié de l'habitat inclusif de Salignac.",
+  "archetype_motif": "La thèse de la fiche est une topologie d’alimentation, et c’est une topologie qui se refuse : « chaque local est autonome — son comptage électrique, sa pompe à chaleur, sa ventilation, son ballon d’eau chaude, son alarme ». Le motif de l’archétype (arrivée → tableau → départs) est ici essaimé : au lieu d’un point d’entrée qui se ramifie, cinq comptages descendent du réseau public dans cinq cellules qui ne se parlent pas, et la seule chose que les cinq partagent est la maçonnerie qui les contient. La géométrie porte seule la démonstration — cinq franchissements en haut, quatre refends que rien ne traverse, cinq arbres identiques dont un s’alimente en triple et un porte deux branches de plus. La frontière réglementaire RE2020 / RT2012, l’autre thèse possible de la fiche, est laissée au texte : elle refait le dessin déjà publié de l’habitat inclusif de Salignac.",
   "surtitre": "SCHÉMA DE PRINCIPE · CINQ LOCAUX, CINQ INSTALLATIONS AUTONOMES",
   "titre": "Place des Chênes Verts",
   "sous_titre": "Cinq locaux sous une enveloppe continue, cinq installations sans rien de commun",
   "cartouche_legende": "SAINT-ROGATIEN · 247 m² · 2023",
-  "aria_label": "Schéma de principe de l'autonomie des cinq locaux. Sous une enveloppe continue — combles isolés par 400 mm de laine de verre, murs en blocs doublés de 160 mm, plancher de terre-plein isolé par 100 mm sous chape — cinq cellules ne partagent aucun équipement. Chacune descend du réseau public son propre comptage, puis porte sa pompe à chaleur air-air en multisplit à trois cassettes, sa ventilation mécanique contrôlée simple flux et son ballon d'eau chaude électrique de 50 litres. Deux cellules se distinguent, et pas la même : celle destinée à la restauration est comptée en 36 kVA triphasé quand les quatre autres le sont en 9 kVA monophasé ; l'agence postale ajoute seule un répartiteur voix-données-images et une centrale anti-intrusion. Aucune liaison ne traverse les refends.",
+  "aria_label": "Schéma de principe de l’autonomie des cinq locaux. Sous une enveloppe continue — combles isolés par 400 mm de laine de verre, murs en blocs doublés de 160 mm, plancher de terre-plein isolé par 100 mm sous chape — cinq cellules ne partagent aucun équipement. Chacune descend du réseau public son propre comptage, puis porte sa pompe à chaleur air-air en multisplit à trois cassettes, sa ventilation mécanique contrôlée simple flux et son ballon d’eau chaude électrique de 50 litres. Deux cellules se distinguent, et pas la même : celle destinée à la restauration est comptée en 36 kVA triphasé quand les quatre autres le sont en 9 kVA monophasé ; l’agence postale ajoute seule un répartiteur voix-données-images et une centrale anti-intrusion. Aucune liaison ne traverse les refends.",
   "essaimage": {
     "entete": "LES DEUX LOTS TECHNIQUES FT2E — CE QUE CHAQUE LOCAL PORTE SEUL, CE QUE LES CINQ PARTAGENT",
     "tag_reseau": "LE RÉSEAU PUBLIC — UN COMPTAGE PAR LOCAL",
-    "tag_cloisons": "AUCUNE LIAISON D'UN LOCAL À L'AUTRE",
-    "legende_enveloppe": "L'ENVELOPPE — LE SEUL OUVRAGE COMMUN AUX CINQ LOCAUX · COMBLES 400 mm · MURS 160 mm · TERRE-PLEIN 100 mm SOUS CHAPE",
+    "tag_cloisons": "AUCUNE LIAISON D’UN LOCAL À L’AUTRE",
+    "legende_enveloppe": "L’ENVELOPPE — LE SEUL OUVRAGE COMMUN AUX CINQ LOCAUX · COMBLES 400 mm · MURS 160 mm · TERRE-PLEIN 100 mm SOUS CHAPE",
     "cote_libres": "TROIS LOCAUX LIBRES · 39,21 À 49,88 m²",
-    "note_hors_batiment": "HORS BÂTIMENT · LA SEULE CHAUFFERIE DE L'OPÉRATION EST CELLE DE LA SALLE VOISINE, REPRISE",
+    "note_hors_batiment": "HORS BÂTIMENT · LA SEULE CHAUFFERIE DE L’OPÉRATION EST CELLE DE LA SALLE VOISINE, REPRISE",
     "postes": [
       {
         "cle": "comptage",
@@ -116,7 +116,7 @@
         "unite": "comptages",
         "detail": [
           "UN COMPTAGE ÉLECTRIQUE PAR LOCAL",
-          "AUCUNE LIAISON D'UN LOCAL À L'AUTRE"
+          "AUCUNE LIAISON D’UN LOCAL À L’AUTRE"
         ]
       },
       {
@@ -172,7 +172,7 @@
           "SON COMPTAGE ÉLECTRIQUE",
           "SA POMPE À CHALEUR AIR-AIR EN MULTISPLIT À TROIS CASSETTES",
           "SA VENTILATION MÉCANIQUE CONTRÔLÉE SIMPLE FLUX",
-          "SON BALLON D'EAU CHAUDE ÉLECTRIQUE DE 50 LITRES",
+          "SON BALLON D’EAU CHAUDE ÉLECTRIQUE DE 50 LITRES",
           "SON ALARME INCENDIE DE TYPE 4",
           "SON ENSEIGNE"
         ]
@@ -180,12 +180,12 @@
       {
         "ordre": 7,
         "cle": "enveloppe",
-        "libelle": "L'enveloppe, le seul ouvrage commun",
+        "libelle": "L’enveloppe, le seul ouvrage commun",
         "valeur": "247",
         "unite": "m²",
         "detail": [
           "COMBLES ISOLÉS PAR 400 mm DE LAINE DE VERRE",
-          "MURS EN BLOCS DOUBLÉS DE 160 mm D'ISOLANT INTÉRIEUR",
+          "MURS EN BLOCS DOUBLÉS DE 160 mm D’ISOLANT INTÉRIEUR",
           "PLANCHER DE TERRE-PLEIN ISOLÉ PAR 100 mm SOUS CHAPE"
         ]
       },
@@ -204,33 +204,33 @@
   },
   "releve": [],
   "releve_secondaire": [],
-  "phrase_principe": "Chaque local est autonome : son comptage, sa pompe à chaleur, sa ventilation, son ballon d'eau chaude, son alarme.",
+  "phrase_principe": "Chaque local est autonome : son comptage, sa pompe à chaleur, sa ventilation, son ballon d’eau chaude, son alarme.",
   "vignette_surtitre": "CINQ LOCAUX AUTONOMES",
   "a_valider_ft2e": [
     {
       "objet": "Laquelle des trois cellules libres est destinée à la restauration",
-      "la_source_affirme": "« 9 kVA en monophasé, 36 kVA en triphasé pour la cellule destinée à la restauration » — la fiche ne dit pas de quelle cellule il s'agit ni où elle se situe.",
-      "le_dessin_suppose": "Qu'elle occupe la troisième position de la rangée, au milieu des trois locaux libres. N'importe laquelle des trois ferait la même démonstration — dire laquelle est la bonne."
+      "la_source_affirme": "« 9 kVA en monophasé, 36 kVA en triphasé pour la cellule destinée à la restauration » — la fiche ne dit pas de quelle cellule il s’agit ni où elle se situe.",
+      "le_dessin_suppose": "Qu’elle occupe la troisième position de la rangée, au milieu des trois locaux libres. N’importe laquelle des trois ferait la même démonstration — dire laquelle est la bonne."
     },
     {
       "objet": "Cinq branchements, ou un branchement et cinq comptages",
       "la_source_affirme": "« Il reçoit son propre comptage électrique — 9 kVA en monophasé, 36 kVA en triphasé… » : la fiche affirme un comptage par local, jamais un branchement par local.",
-      "le_dessin_suppose": "Cinq liaisons descendant séparément du réseau public, une par comptage. Si les cinq comptages sont regroupés sur un seul branchement de site, la géométrie du haut de la planche est à revoir — la démonstration d'autonomie, elle, tient dans les deux cas."
+      "le_dessin_suppose": "Cinq liaisons descendant séparément du réseau public, une par comptage. Si les cinq comptages sont regroupés sur un seul branchement de site, la géométrie du haut de la planche est à revoir — la démonstration d’autonomie, elle, tient dans les deux cas."
     },
     {
-      "objet": "L'ordre de la rangée",
-      "la_source_affirme": "« agence postale de 43,08 m², trois locaux libres de 39,21 à 49,88 m², club-house de 66,23 m² » — un ordre d'énumération. Le bâtiment, lui, « se déplie en plan brisé autour de la place ».",
-      "le_dessin_suppose": "Que la rangée reprend cet ordre d'énumération. Ce n'est pas une implantation, et elle ne doit pas être lue comme telle."
+      "objet": "L’ordre de la rangée",
+      "la_source_affirme": "« agence postale de 43,08 m², trois locaux libres de 39,21 à 49,88 m², club-house de 66,23 m² » — un ordre d’énumération. Le bâtiment, lui, « se déplie en plan brisé autour de la place ».",
+      "le_dessin_suppose": "Que la rangée reprend cet ordre d’énumération. Ce n’est pas une implantation, et elle ne doit pas être lue comme telle."
     },
     {
-      "objet": "Des cellules d'égale largeur",
+      "objet": "Des cellules d’égale largeur",
       "la_source_affirme": "Trois surfaces sont données : 43,08 m², une fourchette de 39,21 à 49,88 m² pour les trois locaux libres, 66,23 m² pour le club-house.",
-      "le_dessin_suppose": "Que les cinq cellules se dessinent à largeur égale : la géométrie code le nombre de locaux, jamais leur taille. Le club-house fait pourtant 54 % de plus que l'agence postale — une lecture proportionnelle des cellules serait fausse."
+      "le_dessin_suppose": "Que les cinq cellules se dessinent à largeur égale : la géométrie code le nombre de locaux, jamais leur taille. Le club-house fait pourtant 54 % de plus que l’agence postale — une lecture proportionnelle des cellules serait fausse."
     },
     {
       "objet": "Les trois surfaces individuelles des locaux libres",
       "la_source_affirme": "Une fourchette, « de 39,21 à 49,88 m² », et rien de plus.",
-      "le_dessin_suppose": "Que la fourchette se porte une seule fois, en cote sous les trois cellules concernées, plutôt que trois fois à l'identique. Les trois surfaces réelles complèteraient la cote."
+      "le_dessin_suppose": "Que la fourchette se porte une seule fois, en cote sous les trois cellules concernées, plutôt que trois fois à l’identique. Les trois surfaces réelles complèteraient la cote."
     },
     {
       "objet": "Le club-house doté comme les quatre autres",
@@ -239,34 +239,34 @@
     },
     {
       "objet": "Les six postes accrochés au comptage du local",
-      "la_source_affirme": "« Il reçoit son propre comptage électrique […], sa pompe à chaleur […], sa ventilation […], son ballon […], son alarme incendie de type 4 et son enseigne » — six postes énumérés d'une seule phrase, sans schéma de raccordement.",
-      "le_dessin_suppose": "Que les cinq postes suivent le comptage du local sur un même tronc, l'enseigne comprise. Si l'enseigne ou l'alarme relève d'un autre point de livraison — un comptage de parties communes, par exemple — l'arborescence est à corriger."
+      "la_source_affirme": "« Il reçoit son propre comptage électrique […], sa pompe à chaleur […], sa ventilation […], son ballon […], son alarme incendie de type 4 et son enseigne » — six postes énumérés d’une seule phrase, sans schéma de raccordement.",
+      "le_dessin_suppose": "Que les cinq postes suivent le comptage du local sur un même tronc, l’enseigne comprise. Si l’enseigne ou l’alarme relève d’un autre point de livraison — un comptage de parties communes, par exemple — l’arborescence est à corriger."
     },
     {
       "objet": "Les sanitaires publics automatiques",
-      "la_source_affirme": "Le programme d'octobre 2023 prévoit « des cellules commerciales, le club-house et des sanitaires publics automatiques » ; la solution, elle, ne compte que cinq locaux.",
-      "le_dessin_suppose": "Que les sanitaires ne comptent pas parmi les cinq cellules autonomes et ne se dessinent pas. Dire s'ils relèvent des lots FT2E."
+      "la_source_affirme": "Le programme d’octobre 2023 prévoit « des cellules commerciales, le club-house et des sanitaires publics automatiques » ; la solution, elle, ne compte que cinq locaux.",
+      "le_dessin_suppose": "Que les sanitaires ne comptent pas parmi les cinq cellules autonomes et ne se dessinent pas. Dire s’ils relèvent des lots FT2E."
     },
     {
-      "objet": "L'enveloppe donnée pour commune aux cinq",
+      "objet": "L’enveloppe donnée pour commune aux cinq",
       "la_source_affirme": "Les épaisseurs sont énoncées une fois pour le bâtiment : combles 400 mm de laine de verre, murs en blocs doublés de 160 mm, terre-plein 100 mm sous chape.",
-      "le_dessin_suppose": "Qu'elles valent pour les cinq locaux sans exception — c'est ce qui fait de l'enveloppe le seul ouvrage commun de la planche. Si le club-house ou l'agence postale reçoit une composition différente, la démonstration est à corriger."
+      "le_dessin_suppose": "Qu’elles valent pour les cinq locaux sans exception — c’est ce qui fait de l’enveloppe le seul ouvrage commun de la planche. Si le club-house ou l’agence postale reçoit une composition différente, la démonstration est à corriger."
     },
     {
       "objet": "Le millésime du cartouche",
       "la_source_affirme": "Affaire ouverte en 2023 (champ annee), programme arrêté en octobre 2023, chantier ouvert le 18 novembre 2024, mise en service des pompes à chaleur en décembre 2025 ; statut « en cours », aucune année de livraison.",
-      "le_dessin_suppose": "Que le cartouche porte 2023, millésime d'ouverture — la réception n'étant pas prononcée. À reprendre à la réception, comme le reste de la fiche."
+      "le_dessin_suppose": "Que le cartouche porte 2023, millésime d’ouverture — la réception n’étant pas prononcée. À reprendre à la réception, comme le reste de la fiche."
     }
   ],
   "exclusions_appliquees": [
-    "Numéro d'affaire 23-079 (champ reference) — il encode le volume annuel d'affaires du bureau.",
-    "Tous les montants : 1 455 613,50 € HT d'estimation de consultation, 175 400 € HT pour les deux lots FT2E, 33 000 € HT pour la chaufferie reprise.",
-    "Noms de tiers : la commune maître d'ouvrage, son mandataire, l'agence d'architecture, le BET infrastructure du groupement, le concessionnaire du réseau électrique.",
-    "Les deux réglementations thermiques et leurs indicateurs (Cep, Bbio, impact carbone, degrés-heures, perméabilité 0,80 contre 3,0 m³/(h·m²)) : la fiche y consacre deux sections entières et le champ performance. Surtout, la frontière réglementaire dans une enveloppe montée d'un seul tenant est le dessin déjà publié de l'habitat inclusif de Salignac — la reprendre ici ferait une redite, pas une série.",
-    "Les règles d'urbanisme (zone UL, hauteur plafonnée à 8 m, coefficient de biotope de 30 %, infiltration des eaux à la parcelle) et la requalification des 2 000 m² de la place : hors du périmètre des deux lots FT2E dessinés.",
-    "La chaufferie de la salle voisine (dépose de la chaudière existante, stockage, remise en service à côté d'une chaudière neuve) : portée en une note d'une ligne, jamais dessinée — son mécanisme est une chronologie, pas une topologie, et elle appartient à un autre bâtiment.",
-    "Les jalons de chantier (18 novembre 2024, démolitions en janvier 2025, raccordements et mise en service en décembre 2025, voirie fin janvier 2026, seize mois) : matière d'une chronologie d'affaire.",
-    "Toute géométrie d'ouvrage : le bâtiment « se déplie en plan brisé autour de la place ». La rangée de cinq cellules d'égale largeur est un ordre d'énumération et une topologie d'alimentation — jamais un plan, jamais une implantation.",
+    "Numéro d’affaire 23-079 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tous les montants : 1 455 613,50 € HT d’estimation de consultation, 175 400 € HT pour les deux lots FT2E, 33 000 € HT pour la chaufferie reprise.",
+    "Noms de tiers : la commune maître d’ouvrage, son mandataire, l’agence d’architecture, le BET infrastructure du groupement, le concessionnaire du réseau électrique.",
+    "Les deux réglementations thermiques et leurs indicateurs (Cep, Bbio, impact carbone, degrés-heures, perméabilité 0,80 contre 3,0 m³/(h·m²)) : la fiche y consacre deux sections entières et le champ performance. Surtout, la frontière réglementaire dans une enveloppe montée d’un seul tenant est le dessin déjà publié de l’habitat inclusif de Salignac — la reprendre ici ferait une redite, pas une série.",
+    "Les règles d’urbanisme (zone UL, hauteur plafonnée à 8 m, coefficient de biotope de 30 %, infiltration des eaux à la parcelle) et la requalification des 2 000 m² de la place : hors du périmètre des deux lots FT2E dessinés.",
+    "La chaufferie de la salle voisine (dépose de la chaudière existante, stockage, remise en service à côté d’une chaudière neuve) : portée en une note d’une ligne, jamais dessinée — son mécanisme est une chronologie, pas une topologie, et elle appartient à un autre bâtiment.",
+    "Les jalons de chantier (18 novembre 2024, démolitions en janvier 2025, raccordements et mise en service en décembre 2025, voirie fin janvier 2026, seize mois) : matière d’une chronologie d’affaire.",
+    "Toute géométrie d’ouvrage : le bâtiment « se déplie en plan brisé autour de la place ». La rangée de cinq cellules d’égale largeur est un ordre d’énumération et une topologie d’alimentation — jamais un plan, jamais une implantation.",
     "Les données que la fiche porte déjà : `releve` et `releve_secondaire` restent vides (protocole, révision 4)."
   ],
   "controles": {
@@ -274,11 +274,11 @@
     "demonstration": "5 franchissements de la ligne du réseau (y 236) pour 5 cellules, contre 0 franchissement des 4 refends (x 408, 592, 776, 960, continus de 262 à 578) : le haut est traversé une fois par local, les refends jamais. Deux singularités, à deux endroits distincts — un tronc triple en cellule 3 (36 kVA triphasé) et deux branches de plus en cellule 1 (5 organes contre 3)",
     "topologie": "gouttière des postes x 56–194 → rangée x 224–1144, 5 cellules de 184.0 px ; par cellule : descente et tronc à x0+30, comptage y 272–290, organes aux rangées y 336, 396, 426, 456, 486, 516, 546, cassettes y 374",
     "cellules_non_proportionnelles": "184.0 px pour chacune des 5 cellules — 43,08 et 66,23 m² diffèrent de 54 %, la géométrie code le nombre de locaux, jamais leur taille",
-    "organes_par_cellule": "5 rangées communes (pompe à chaleur et ses 3 cassettes, ventilation, ballon, alarme, enseigne) + 2 propres à l'agence postale, soit les 6 postes que la fiche énumère ; les postes sont nommés UNE fois, en gouttière — 5 jeux de libellés identiques seraient illisibles à 184 px",
-    "bas_du_dessin": "enveloppe jusqu'à 578, légende à 602, cote des libres à 630, note à 658, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "organes_par_cellule": "5 rangées communes (pompe à chaleur et ses 3 cassettes, ventilation, ballon, alarme, enseigne) + 2 propres à l’agence postale, soit les 6 postes que la fiche énumère ; les postes sont nommés UNE fois, en gouttière — 5 jeux de libellés identiques seraient illisibles à 184 px",
+    "bas_du_dessin": "enveloppe jusqu’à 578, légende à 602, cote des libres à 630, note à 658, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
     "reserve_profonde": "cartouche 283 x 30 px = 8490 px², soit 0.88 % de la planche",
     "releve": "aucun — la démonstration est géométrique, les chiffres de la fiche restent à la fiche (révision 4)",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "phrase_principe": "114 signes — 962 px mesurés pour 1088 disponibles",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
@@ -286,15 +286,15 @@
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
-    "motif": "la ligne du réseau franchie 5 fois, l'enveloppe et ses 4 refends continus, 5 troncs à fane de trois cassettes, le tronc triple de la cellule de restauration et les deux organes de plus de l'agence postale — deux nœuds au texte, « 5 COMPTAGES » et « 36 kVA ». Gouttière, noms de locaux, légende d'enveloppe, cote et note laissés à la planche",
-    "bas_du_dessin": "cote du triphasé à 182, enveloppe jusqu'à 164 — marge basse 18 px, aucun trait ne touche un bord"
+    "motif": "la ligne du réseau franchie 5 fois, l’enveloppe et ses 4 refends continus, 5 troncs à fane de trois cassettes, le tronc triple de la cellule de restauration et les deux organes de plus de l’agence postale — deux nœuds au texte, « 5 COMPTAGES » et « 36 kVA ». Gouttière, noms de locaux, légende d’enveloppe, cote et note laissés à la planche",
+    "bas_du_dessin": "cote du triphasé à 182, enveloppe jusqu’à 164 — marge basse 18 px, aucun trait ne touche un bord"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "la rangée entière à l'échelle 1 : ligne du réseau franchie 5 fois, enveloppe et ses 4 refends continus, 5 troncs à fane de trois cassettes, tronc triple de la cellule de restauration et deux organes de plus de l'agence postale — trois nœuds chiffrés (9 kVA, 36 kVA, 247 m²) ; gouttière des postes, noms de locaux, cote des libres, note, phrase et cartouche laissés à la planche",
-    "bas_du_dessin": "légende de l'enveloppe à 348 — marge basse 20 px",
-    "franchissements": "5 en haut, 0 aux 4 refends — le compte de la planche, tenu à l'échelle de l'appui"
+    "motif": "la rangée entière à l’échelle 1 : ligne du réseau franchie 5 fois, enveloppe et ses 4 refends continus, 5 troncs à fane de trois cassettes, tronc triple de la cellule de restauration et deux organes de plus de l’agence postale — trois nœuds chiffrés (9 kVA, 36 kVA, 247 m²) ; gouttière des postes, noms de locaux, cote des libres, note, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "légende de l’enveloppe à 348 — marge basse 20 px",
+    "franchissements": "5 en haut, 0 aux 4 refends — le compte de la planche, tenu à l’échelle de l’appui"
   }
 }

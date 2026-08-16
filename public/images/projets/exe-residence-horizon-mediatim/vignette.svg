@@ -18,7 +18,7 @@
   .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 </style>
   <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">RÉSERVER AVANT D'EXÉCUTER</text>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">RÉSERVER AVANT D’EXÉCUTER</text>
   <path d="M 84.86 40.00 L 84.86 172.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
   <path d="M 148.86 40.00 L 148.86 172.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
   <path d="M 219.71 40.00 L 219.71 172.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>

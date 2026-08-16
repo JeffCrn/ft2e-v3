@@ -58,9 +58,9 @@ def main():
     # 2 — l'extraction
     extraction = json.loads((dossier / "planche.json").read_text(encoding="utf-8"))
     if not extraction.get("archetype"):
-        faute("l'extraction ne nomme pas son archétype")
+        faute("l’extraction ne nomme pas son archétype")
     if not extraction.get("a_valider_ft2e"):
-        faute("a_valider_ft2e est vide — un dessin tranche toujours ce qu'un texte "
+        faute("a_valider_ft2e est vide — un dessin tranche toujours ce qu’un texte "
               "laisse ouvert (protocole, règle 2)")
     a_repli = (
         extraction.get("sankey") or extraction.get("zonage")
@@ -94,7 +94,7 @@ def main():
         r'image_principale: "[^"]+"\n(?:image_principale_alt: "[^"]+"\n)?',
         ligne_planche + "\n", contenu, count=1)
     if nouveau == contenu:
-        faute(f"{slug}.md n'a pas de champ image_principale à remplacer — "
+        faute(f"{slug}.md n’a pas de champ image_principale à remplacer — "
               "bascule à faire à la main")
     io.open(fiche, "w", encoding="utf-8", newline="\n").write(nouveau)
 

@@ -349,21 +349,21 @@ def composer(donnees):
 
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "demonstration": "la ligne d'enveloppe (bandes claires) est continue du "
-                         "sol au faîtage et ne s'interrompt qu'aux traversées "
-                         "marquées : 2 baies vitrées, 2 conduits d'air fléchés "
+        "demonstration": "la ligne d’enveloppe (bandes claires) est continue du "
+                         "sol au faîtage et ne s’interrompt qu’aux traversées "
+                         "marquées : 2 baies vitrées, 2 conduits d’air fléchés "
                          "en sens opposés — les champs de modules sont posés "
                          "AU-DESSUS des couches (surimposition) et la chaîne "
                          "sort du cadre à droite : la géométrie porte la thèse "
-                         "« l'enveloppe d'abord, la production ensuite »",
+                         "« l’enveloppe d’abord, la production ensuite »",
         "topologie": f"appels (x {CALL_X}–{CALL_X + CALL_L}) → coupe "
                      f"(x {ITE_X0G}–{ITE_X1D}, sol {Y_SOL}, faîtage {Y_APEX}) "
                      f"→ production (onduleurs x {BOX_OND[0]}–"
                      f"{BOX_OND[0] + BOX_OND[2]}, export y {Y_EXPORT} "
-                     f"jusqu'à x {X_EXPORT_FIN + 8})",
+                     f"jusqu’à x {X_EXPORT_FIN + 8})",
         "pans": f"pente {PENTE:.2f} — couches à {D_C280} et {D_C220} px des "
                 f"pans, modules à {D_PV} px (surimposition lisible)",
-        "bas_du_dessin": f"sol à {Y_SOL} (hachures jusqu'à {Y_SOL + 10}), "
+        "bas_du_dessin": f"sol à {Y_SOL} (hachures jusqu’à {Y_SOL + 10}), "
                          f"dernier appel à 636, phrase de principe à "
                          f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
                          f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
@@ -377,7 +377,7 @@ def composer(donnees):
                            f"sur sa ligne (la mesure prévaut sur la règle des "
                            f"120 signes ; arbitrage consigné dans "
                            f"a_valider_ft2e)",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "depassements": depassements if depassements
                         else "aucun — toutes les lignes mesurées sous leur colonne",
@@ -453,7 +453,7 @@ def composer_vignette(donnees):
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": "la coupe fermée par sa bande continue, les champs en "
-                 "surimposition et la flèche d'export — baies, centrale, "
+                 "surimposition et la flèche d’export — baies, centrale, "
                  "conduits et appels sont laissés à la planche",
         "bas_du_dessin": f"sol à 172 px, marge basse {VH - 172} px",
     }
@@ -695,7 +695,7 @@ def composer_equilibre(donnees):
                          "par son percement) : deux pleins fléchés vers le "
                          "haut, trois interrompus sans flèche — et AUCUN "
                          "conduit plein ne descend : la géométrie seule montre "
-                         "que l'air sort sans être compensé ; les largeurs "
+                         "que l’air sort sans être compensé ; les largeurs "
                          f"sont proportionnelles aux débits ({E_K * 1000:.1f} "
                          "px pour 1 000 m³/h), le conduit le plus large du "
                          "dessin étant celui dont la compensation est coupée",
@@ -704,14 +704,14 @@ def composer_equilibre(donnees):
                      f"salles x {SX0}–{SX1} (conduits à {CX_SOUF} et "
                      f"{CX_REPR}), laverie x {LX0}–{LX1} (extraction à "
                      f"{CX_LAV}), cuisson x {CX0}–{CX1} (compensation à "
-                     f"{CX_CMP}, hotte à {CX_HOT}) — l'ordre est celui du "
+                     f"{CX_CMP}, hotte à {CX_HOT}) — l’ordre est celui du "
                      "récit de la visite",
         "conduits": f"soufflage/reprise CTA {w_sal:.1f} px chacun — une "
                     f"double flux souffle ET reprend son débit nominal "
                     f"(2 340 m³/h), laverie {w_lav:.1f} px (1 800), "
                     f"compensation {w_cmp:.1f} px (6 000), hotte du piano "
                     f"{w_hot:.1f} px (7 500) — largeur = débit x {E_K:.5f}",
-        "bas_du_dessin": f"locaux jusqu'à {E_ROOM1}, ligne de pied à "
+        "bas_du_dessin": f"locaux jusqu’à {E_ROOM1}, ligne de pied à "
                          f"{E_Y_PIED}, phrase de principe à {Y_PHRASE}, "
                          f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
                          f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
@@ -719,10 +719,10 @@ def composer_equilibre(donnees):
                             f"{largeur * H_CARTOUCHE} px², soit "
                             f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
                             f"de la planche",
-        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
                           "pas chiffrée (révision 4) ; les quatre débits "
                           "restent au mono 10 pivot, en cote de leur conduit",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -889,8 +889,8 @@ def composer_appui(donnees):
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
         motif="la coupe fermée par sa bande continue, les champs en "
-              "surimposition, la flèche d'export et trois nœuds (modules, "
-              "isolation, revente) à l'échelle 1 — baies, centrale, conduits "
+              "surimposition, la flèche d’export et trois nœuds (modules, "
+              "isolation, revente) à l’échelle 1 — baies, centrale, conduits "
               "et appels laissés à la planche",
         bas=f"sol à 318 px (hachures à 327), marge basse {AH - 327} px")
 
@@ -983,9 +983,9 @@ def composer_appui_equilibre(donnees):
         motif="la ligne de toiture percée, trois locaux nommés, cinq conduits "
               "proportionnels (24 px pour 7 500 m³/h) — deux pleins cotés qui "
               "montent, trois interrompus dont la compensation supposée "
-              "coupée — CTA, voyant, mentions d'absence et ligne de pied "
+              "coupée — CTA, voyant, mentions d’absence et ligne de pied "
               "laissés à la planche",
-        bas=f"locaux jusqu'à 300 px, marge basse {AH - 300} px")
+        bas=f"locaux jusqu’à 300 px, marge basse {AH - 300} px")
 
 
 # ═══ Mécanisme `enjambement` — l'enveloppe d'une parcelle enjambée (Joffre) ══
@@ -1217,25 +1217,25 @@ def composer_enjambement(donnees):
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
         "demonstration": "la ligne isolante (bandes claires) ferme chaque face "
-                         "de l'empilement, y compris trois faces qu'un bâtiment "
-                         "ordinaire n'a pas : SOUS la dalle du R+1 au-dessus du "
-                         "vide du passage (l'extérieur y est fléché vers le "
-                         "haut), autour de la fosse d'ascenseur SOUS le sol, et "
-                         "à chaque about de dalle, ponté d'un rupteur — texte "
+                         "de l’empilement, y compris trois faces qu’un bâtiment "
+                         "ordinaire n’a pas : SOUS la dalle du R+1 au-dessus du "
+                         "vide du passage (l’extérieur y est fléché vers le "
+                         "haut), autour de la fosse d’ascenseur SOUS le sol, et "
+                         "à chaque about de dalle, ponté d’un rupteur — texte "
                          "masqué, la bande continue et le vide traversé par la "
-                         "flèche suffisent à lire l'enjambement",
+                         "flèche suffisent à lire l’enjambement",
         "topologie": f"appels gauche (x {MARGE}–{MARGE + N_CALL_L}) → coupe "
                      f"(x {N_MUR_G}–{N_MUR_D + N_EP}, sol {N_Y_SOL}, toit "
                      f"{N_Y_TOIT - 4}, passage x 680–{N_MUR_D} sous la dalle "
                      f"{N_Y_R1}) → appels droite (x {N_CALL_XD}–{W - MARGE}) ; "
                      f"fosse y {N_Y_SOL}–{N_FOSSE_Y + 10}",
-        "bandes": f"épaisseur = épaisseur d'isolant x {N_K_ISOL:.4f} px/mm : "
+        "bandes": f"épaisseur = épaisseur d’isolant x {N_K_ISOL:.4f} px/mm : "
                   f"murs {w_mur:.1f} px (180 mm), polyuréthane {w_pu:.1f} px "
                   f"(140 mm), laine de verre {w_ldv:.1f} px (480 mm), "
                   f"toiture-terrasse {w_ter:.1f} px (200 mm) — le plancher sur "
                   f"le passage et la fosse, dont la fiche ne fixe pas "
-                  f"l'épaisseur, sont au trait minimal de {N_EP_MIN:.0f} px",
-        "bas_du_dessin": f"sol à {N_Y_SOL}, fosse jusqu'à {N_FOSSE_Y + 10}, "
+                  f"l’épaisseur, sont au trait minimal de {N_EP_MIN:.0f} px",
+        "bas_du_dessin": f"sol à {N_Y_SOL}, fosse jusqu’à {N_FOSSE_Y + 10}, "
                          f"dernier appel à 602, phrase de principe à "
                          f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
                          f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
@@ -1246,9 +1246,9 @@ def composer_enjambement(donnees):
                             f"de la planche",
         "chiffre_unique": "aucun chiffre de relevé — les résultats RE2020 "
                           "restent à la page (révision 4) ; les épaisseurs "
-                          "d'isolant sont des cotes mono 10 pivot dans les "
+                          "d’isolant sont des cotes mono 10 pivot dans les "
                           "appels",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -1318,10 +1318,10 @@ def composer_vignette_enjambement(donnees):
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": "deux traits : la silhouette encrée à encoche de passage, la "
                  "ligne isolante claire qui la double — dessous du plancher et "
-                 "fosse compris — une flèche qui sort par l'encoche, deux "
+                 "fosse compris — une flèche qui sort par l’encoche, deux "
                  "nœuds chiffrés ; dalles, rupteurs, niveaux et appels sont "
                  "laissés à la planche",
-        "bas_du_dessin": "fosse jusqu'à 189 px, marge basse 11 px",
+        "bas_du_dessin": "fosse jusqu’à 189 px, marge basse 11 px",
     }
     return "\n".join(out) + "\n", controles
 
@@ -1418,12 +1418,12 @@ def composer_appui_enjambement(donnees):
 
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
-        motif="l'empilement aux niveaux nommés, le passage voiture fléché "
+        motif="l’empilement aux niveaux nommés, le passage voiture fléché "
               "sous la dalle isolée, la ligne isolante complète — dessous, "
               "terrasse et fosse compris, quatre abouts pontés — et trois "
-              "nœuds chiffrés à l'échelle 1 ; flèches d'extérieur, appels, "
+              "nœuds chiffrés à l’échelle 1 ; flèches d’extérieur, appels, "
               "phrase et cartouche laissés à la planche",
-        bas=f"fosse jusqu'à 344 px, marge basse {AH - 344} px")
+        bas=f"fosse jusqu’à 344 px, marge basse {AH - 344} px")
 
 
 # ═══ Mécanisme `portee` — la mission bornée, le système entier (Yachtman) ════
@@ -1667,11 +1667,11 @@ def composer_portee(donnees):
 
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "demonstration": "deux bandes de travaux calcaire cernées d'un L encré "
+        "demonstration": "deux bandes de travaux calcaire cernées d’un L encré "
                          f"({w_rdc:.0f} et {w_r1:.0f} px, proportionnelles aux "
                          "140 et 90 m² de la fiche) tiennent dans le coin "
-                         "bas-gauche de la coupe ; l'enceinte claire de la "
-                         "zone d'alarme enclot les deux piles entières "
+                         "bas-gauche de la coupe ; l’enceinte claire de la "
+                         "zone d’alarme enclot les deux piles entières "
                          f"(x {P_QX0 - P_ENV}–{P_SX1 + P_ENV}, "
                          f"y {P_Y_COMBLES - P_ENV}–{P_Y_FOND + P_ENV}) et "
                          "13 points de détection occupent chaque niveau, "
@@ -1685,8 +1685,8 @@ def composer_portee(donnees):
                      f"{P_X_RISER}, centrale 566–588 au RDC",
         "emprises": f"largeur = surface x {P_K_M2} px/m² : RDC 140 m² → "
                     f"{w_rdc:.0f} px, R+1 90 m² → {w_r1:.0f} px — aucune "
-                    "autre proportion d'ouvrage n'est reprise",
-        "bas_du_dessin": f"fond du sous-sol à {P_Y_FOND}, enceinte jusqu'à "
+                    "autre proportion d’ouvrage n’est reprise",
+        "bas_du_dessin": f"fond du sous-sol à {P_Y_FOND}, enceinte jusqu’à "
                          f"{P_Y_FOND + P_ENV + 2}, dernier appel à 634, "
                          f"phrase de principe à {Y_PHRASE}, cartouche "
                          f"{Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, marge "
@@ -1695,10 +1695,10 @@ def composer_portee(donnees):
                             f"{largeur * H_CARTOUCHE} px², soit "
                             f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
                             f"de la planche",
-        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
                           "pas chiffrée (révision 4) ; les surfaces restent "
                           "au mono 10 pivot, dans les appels",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -1774,11 +1774,11 @@ def composer_vignette_portee(donnees):
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": "deux piles inégales, le L de la mission au coin bas-gauche, "
-                 "l'enceinte claire qui enclot tout, la colonne montante et "
+                 "l’enceinte claire qui enclot tout, la colonne montante et "
                  "13 points de détection, deux nœuds chiffrés — centrale, "
                  "répétiteurs, escalier et niveaux nommés sont laissés à la "
                  "planche",
-        "bas_du_dessin": "enceinte jusqu'à 178,5 px, marge basse 21,5 px",
+        "bas_du_dessin": "enceinte jusqu’à 178,5 px, marge basse 21,5 px",
     }
     return "\n".join(out) + "\n", controles
 
@@ -1841,7 +1841,7 @@ def composer_appui_portee(donnees):
     A(texte(400, 220, "Lots techniques", "sans", 14, 600, "encre", wdth=112))
     A(texte(400, 237, f"230{NN}m²", "mono", 11, 500, "pivot", tabulaire=True))
     A(polyligne([(397, 216), (179, 274)], "filet-1", 1))
-    A(texte(400, 300, "L'établissement", "sans", 14, 600, "encre", wdth=112))
+    A(texte(400, 300, "L’établissement", "sans", 14, 600, "encre", wdth=112))
     A(texte(400, 317, f'{elems["etablissement"]["valeur"]} CHAMBRES', "mono",
             11, 500, "pivot", tracking=11 * 0.14))
     A(polyligne([(397, 296), (384, 298)], "filet-1", 1))
@@ -1849,11 +1849,11 @@ def composer_appui_portee(donnees):
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
         motif="les deux piles inégales, le L de la mission et sa flèche, "
-              "l'enceinte claire de la zone d'alarme, la centrale, la "
+              "l’enceinte claire de la zone d’alarme, la centrale, la "
               "colonne montante et 13 points de détection, trois nœuds "
-              "chiffrés à l'échelle 1 — répétiteurs, escalier, légende et "
+              "chiffrés à l’échelle 1 — répétiteurs, escalier, légende et "
               "niveaux nommés laissés à la planche",
-        bas=f"enceinte jusqu'à 340 px, marge basse {AH - 340} px")
+        bas=f"enceinte jusqu’à 340 px, marge basse {AH - 340} px")
 
 
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════

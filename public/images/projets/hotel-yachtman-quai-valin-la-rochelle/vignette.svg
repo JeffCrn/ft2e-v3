@@ -19,7 +19,7 @@
   .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 </style>
   <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">MISSIONS D'ÉTENDUE INÉGALE</text>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">MISSIONS D’ÉTENDUE INÉGALE</text>
   <rect x="38.00" y="130.50" width="23.00" height="13.50" class="c-calcaire" fill="#EDF0F2"/>
   <rect x="38.00" y="144.50" width="36.00" height="13.00" class="c-calcaire" fill="#EDF0F2"/>
   <path d="M 37.00 116.00 L 103.00 116.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="0.8"/>

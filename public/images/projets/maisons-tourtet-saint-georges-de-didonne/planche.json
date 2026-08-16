@@ -1,12 +1,12 @@
 {
   "fiche": "maisons-tourtet-saint-georges-de-didonne",
   "archetype": "chronologie-affaire",
-  "archetype_motif": "La thèse de la fiche est un écart qui se creuse dans le temps : « l'enveloppe est arrêtée dès 2020 ; ce sont les systèmes qui progressent ensuite ». Quatre calculs réglementaires datés portent deux indicateurs sur un même axe des temps — le besoin bioclimatique, qui mesure l'enveloppe, ne bouge plus après avril 2020 et frôle le seuil du label ; la consommation d'énergie primaire, qui mesure les systèmes, s'en éloigne de marche en marche jusqu'à le dépasser de plus de vingt points. La démonstration est portée par la géométrie — une ligne plate collée au seuil contre une ligne qui décroche, et deux cotes dont l'une est quinze fois l'autre — et non par un récapitulatif des chiffres que la fiche porte déjà. Deuxième emploi de l'archétype, et deuxième mécanisme : la précédence de la résidence Horizon empilait des niveaux d'ouvrage, celui-ci trace deux grandeurs contre un seuil ; aucun autre archétype du registre ne sait montrer qu'une chose ne bouge pas pendant qu'une autre descend.",
-  "surtitre": "SCHÉMA DE PRINCIPE · L'ENVELOPPE ET LES SYSTÈMES, 2020–2023",
+  "archetype_motif": "La thèse de la fiche est un écart qui se creuse dans le temps : « l’enveloppe est arrêtée dès 2020 ; ce sont les systèmes qui progressent ensuite ». Quatre calculs réglementaires datés portent deux indicateurs sur un même axe des temps — le besoin bioclimatique, qui mesure l’enveloppe, ne bouge plus après avril 2020 et frôle le seuil du label ; la consommation d’énergie primaire, qui mesure les systèmes, s’en éloigne de marche en marche jusqu’à le dépasser de plus de vingt points. La démonstration est portée par la géométrie — une ligne plate collée au seuil contre une ligne qui décroche, et deux cotes dont l’une est quinze fois l’autre — et non par un récapitulatif des chiffres que la fiche porte déjà. Deuxième emploi de l’archétype, et deuxième mécanisme : la précédence de la résidence Horizon empilait des niveaux d’ouvrage, celui-ci trace deux grandeurs contre un seuil ; aucun autre archétype du registre ne sait montrer qu’une chose ne bouge pas pendant qu’une autre descend.",
+  "surtitre": "SCHÉMA DE PRINCIPE · L’ENVELOPPE ET LES SYSTÈMES, 2020–2023",
   "titre": "Maisons Tourtet",
-  "sous_titre": "L'enveloppe arrêtée en 2020, les systèmes améliorés jusqu'en 2023",
+  "sous_titre": "L’enveloppe arrêtée en 2020, les systèmes améliorés jusqu’en 2023",
   "cartouche_legende": "SAINT-GEORGES-DE-DIDONNE · 700 m² · 2023",
-  "aria_label": "Schéma de principe de la progression réglementaire d'une opération de logements : quatre calculs datés d'avril 2020 à octobre 2023 sont portés sur un même axe, gradué en écart au seuil du label. Le besoin bioclimatique, qui mesure l'enveloppe, reste à 52,7 pour un maximum de 67,2 aux quatre calculs — une ligne plate qui ne dépasse le seuil du label RT2012−20 % que de 1,58 point. La consommation d'énergie primaire, qui mesure les systèmes, descend par marches de 37,2 à 33,0 kWh/m²/an pour un maximum inchangé de 57,9, et s'éloigne du seuil jusqu'à 23,01 points ; la dernière marche, la plus haute, suit une opération arrêtée de mars 2021 à janvier 2023 et tient pour l'essentiel au passage des modules photovoltaïques de 285 à 375 Wc. L'enveloppe fixe la limite, les systèmes font la marge.",
+  "aria_label": "Schéma de principe de la progression réglementaire d’une opération de logements : quatre calculs datés d’avril 2020 à octobre 2023 sont portés sur un même axe, gradué en écart au seuil du label. Le besoin bioclimatique, qui mesure l’enveloppe, reste à 52,7 pour un maximum de 67,2 aux quatre calculs — une ligne plate qui ne dépasse le seuil du label RT2012−20 % que de 1,58 point. La consommation d’énergie primaire, qui mesure les systèmes, descend par marches de 37,2 à 33,0 kWh/m²/an pour un maximum inchangé de 57,9, et s’éloigne du seuil jusqu’à 23,01 points ; la dernière marche, la plus haute, suit une opération arrêtée de mars 2021 à janvier 2023 et tient pour l’essentiel au passage des modules photovoltaïques de 285 à 375 Wc. L’enveloppe fixe la limite, les systèmes font la marge.",
   "divergence": {
     "entete": "LES QUATRE CALCULS RÉGLEMENTAIRES · ÉCART AU SEUIL DU LABEL",
     "legende_calcul": "UN CALCUL RÉGLEMENTAIRE",
@@ -35,8 +35,8 @@
     "arret": {
       "debut": "2021-03-15",
       "fin": "2023-01-15",
-      "libelle": "L'OPÉRATION S'ARRÊTE · MARS 2021 → JANVIER 2023",
-      "libelle_court": "L'OPÉRATION S'ARRÊTE"
+      "libelle": "L’OPÉRATION S’ARRÊTE · MARS 2021 → JANVIER 2023",
+      "libelle_court": "L’OPÉRATION S’ARRÊTE"
     },
     "pistes": [
       {
@@ -48,7 +48,7 @@
           "bioclimatique"
         ],
         "libelle_court": "Bbio",
-        "detail": "L'ENVELOPPE",
+        "detail": "L’ENVELOPPE",
         "maximum": 67.2,
         "unite": "",
         "points": [
@@ -79,16 +79,16 @@
         ],
         "notes": [
           "52,7 POUR UN MAXIMUM DE 67,2 — INCHANGÉ AUX QUATRE CALCULS",
-          "AVRIL 2020 · L'ENVELOPPE EST RENFORCÉE, PUIS PLUS RETOUCHÉE"
+          "AVRIL 2020 · L’ENVELOPPE EST RENFORCÉE, PUIS PLUS RETOUCHÉE"
         ]
       },
       {
         "cle": "cep",
         "ordre": 2,
-        "libelle": "Consommation d'énergie primaire",
+        "libelle": "Consommation d’énergie primaire",
         "libelle_lignes": [
           "Consommation",
-          "d'énergie primaire"
+          "d’énergie primaire"
         ],
         "libelle_court": "Cep",
         "detail": "LES SYSTÈMES",
@@ -122,7 +122,7 @@
         ],
         "note_depart": "37,2 kWh/m²/an POUR UN MAXIMUM DE 57,9",
         "note_marche": "MODULES DE 285 À 375 Wc · RENOUVELABLE DÉCOMPTÉ DE 7,9 À 10,6 kWh/m²/an",
-        "note_arrivee": "33,0 kWh/m²/an · 43,01 % SOUS L'EXIGENCE"
+        "note_arrivee": "33,0 kWh/m²/an · 43,01 % SOUS L’EXIGENCE"
       }
     ],
     "cotes": [
@@ -152,11 +152,11 @@
       },
       {
         "ordre": 2,
-        "libelle": "Besoin bioclimatique — l'enveloppe, avril 2020",
+        "libelle": "Besoin bioclimatique — l’enveloppe, avril 2020",
         "valeur": "52,7",
         "unite": "",
         "detail": [
-          "POUR UN MAXIMUM DE 67,2 · SOIT 21,58 % SOUS L'EXIGENCE"
+          "POUR UN MAXIMUM DE 67,2 · SOIT 21,58 % SOUS L’EXIGENCE"
         ]
       },
       {
@@ -165,45 +165,45 @@
         "valeur": "52,7",
         "unite": "",
         "detail": [
-          "INCHANGÉ AUX TROIS CALCULS SUIVANTS · L'ENVELOPPE NE CHANGE PLUS"
+          "INCHANGÉ AUX TROIS CALCULS SUIVANTS · L’ENVELOPPE NE CHANGE PLUS"
         ]
       },
       {
         "ordre": 4,
-        "libelle": "Consommation d'énergie primaire — les systèmes, avril 2020",
+        "libelle": "Consommation d’énergie primaire — les systèmes, avril 2020",
         "valeur": "37,2",
         "unite": "kWh/m²/an",
         "detail": [
-          "POUR UN MAXIMUM DE 57,9 · SOIT 35,75 % SOUS L'EXIGENCE"
+          "POUR UN MAXIMUM DE 57,9 · SOIT 35,75 % SOUS L’EXIGENCE"
         ]
       },
       {
         "ordre": 5,
-        "libelle": "Consommation d'énergie primaire — septembre 2020",
+        "libelle": "Consommation d’énergie primaire — septembre 2020",
         "valeur": "36,6",
         "unite": "kWh/m²/an"
       },
       {
         "ordre": 6,
-        "libelle": "Consommation d'énergie primaire — mars 2021",
+        "libelle": "Consommation d’énergie primaire — mars 2021",
         "valeur": "35,8",
         "unite": "kWh/m²/an",
         "detail": [
-          "L'OPÉRATION S'ARRÊTE ENSUITE JUSQU'EN JANVIER 2023"
+          "L’OPÉRATION S’ARRÊTE ENSUITE JUSQU’EN JANVIER 2023"
         ]
       },
       {
         "ordre": 7,
-        "libelle": "Consommation d'énergie primaire — octobre 2023",
+        "libelle": "Consommation d’énergie primaire — octobre 2023",
         "valeur": "33,0",
         "unite": "kWh/m²/an",
         "detail": [
-          "SOIT 43,01 % SOUS L'EXIGENCE · L'ÉTUDE DÉFINITIVE"
+          "SOIT 43,01 % SOUS L’EXIGENCE · L’ÉTUDE DÉFINITIVE"
         ]
       },
       {
         "ordre": 8,
-        "libelle": "Le poste qui fait l'essentiel du dernier gain",
+        "libelle": "Le poste qui fait l’essentiel du dernier gain",
         "valeur": "285 → 375",
         "unite": "Wc",
         "detail": [
@@ -212,7 +212,7 @@
       },
       {
         "ordre": 9,
-        "libelle": "L'écart au seuil du label, à l'arrivée",
+        "libelle": "L’écart au seuil du label, à l’arrivée",
         "valeur": "23,01",
         "unite": "points",
         "detail": [
@@ -227,91 +227,91 @@
   },
   "releve": [],
   "releve_secondaire": [],
-  "phrase_principe": "Les systèmes font la marge, l'enveloppe fixe la limite : c'est pourquoi elle a été renforcée dès 2020.",
-  "vignette_surtitre": "L'ÉCART SE CREUSE",
+  "phrase_principe": "Les systèmes font la marge, l’enveloppe fixe la limite : c’est pourquoi elle a été renforcée dès 2020.",
+  "vignette_surtitre": "L’ÉCART SE CREUSE",
   "a_valider_ft2e": [
     {
       "objet": "Les quatre calculs, datés au mois près",
-      "la_source_affirme": "« les quatre études d'avril 2020, septembre 2020, mars 2021 et octobre 2023 » — aucune n'est datée au jour, sauf le rendu définitif du 19 septembre 2023, que la fiche distingue de l'étude thermique « d'octobre ».",
-      "le_dessin_suppose": "Chaque calcul posé au 15 de son mois : un axe des temps exige un jour. Les dates des quatre récapitulatifs standardisés d'étude thermique (RSET) sont au dossier — elles resserreraient ou étireraient les trois premières marches, sans changer la démonstration."
+      "la_source_affirme": "« les quatre études d’avril 2020, septembre 2020, mars 2021 et octobre 2023 » — aucune n’est datée au jour, sauf le rendu définitif du 19 septembre 2023, que la fiche distingue de l’étude thermique « d’octobre ».",
+      "le_dessin_suppose": "Chaque calcul posé au 15 de son mois : un axe des temps exige un jour. Les dates des quatre récapitulatifs standardisés d’étude thermique (RSET) sont au dossier — elles resserreraient ou étireraient les trois premières marches, sans changer la démonstration."
     },
     {
       "objet": "Les deux indicateurs sur une même échelle",
-      "la_source_affirme": "« La consommation d'énergie primaire le dépasse de 23,01 points, à −43,01 % ; le besoin bioclimatique, lui, ne le dépasse que de 1,58 point. » La fiche compare donc bien les deux au même seuil — mais le Bbio est un nombre de points sans unité (max 67,2) et le Cep des kWh/m²/an (max 57,9).",
-      "le_dessin_suppose": "Un axe unique gradué en écart à l'exigence, en pourcentage — la seule échelle sur laquelle la phrase de la fiche se dessine. Confirmer que cette lecture commune est celle que le bureau défend devant le certificateur."
+      "la_source_affirme": "« La consommation d’énergie primaire le dépasse de 23,01 points, à −43,01 % ; le besoin bioclimatique, lui, ne le dépasse que de 1,58 point. » La fiche compare donc bien les deux au même seuil — mais le Bbio est un nombre de points sans unité (max 67,2) et le Cep des kWh/m²/an (max 57,9).",
+      "le_dessin_suppose": "Un axe unique gradué en écart à l’exigence, en pourcentage — la seule échelle sur laquelle la phrase de la fiche se dessine. Confirmer que cette lecture commune est celle que le bureau défend devant le certificateur."
     },
     {
       "objet": "Un seuil unique de −20 % pour les deux indicateurs",
       "la_source_affirme": "« Le label porte son seuil dans son nom : RT2012−20 %. » La fiche mesure ensuite les deux indicateurs à ce seuil.",
-      "le_dessin_suppose": "Une seule ligne de seuil, traversant les deux tracés. Si le référentiel Effinergie+ n'impose ses −20 % qu'à la consommation, la cote de 1,58 point portée sur le besoin bioclimatique compare à un seuil qui ne lui est pas opposable — dire si la ligne doit alors être interrompue sous le tracé du Bbio."
+      "le_dessin_suppose": "Une seule ligne de seuil, traversant les deux tracés. Si le référentiel Effinergie+ n’impose ses −20 % qu’à la consommation, la cote de 1,58 point portée sur le besoin bioclimatique compare à un seuil qui ne lui est pas opposable — dire si la ligne doit alors être interrompue sous le tracé du Bbio."
     },
     {
       "objet": "Les deux points intermédiaires, placés par le calcul",
       "la_source_affirme": "Les quatre consommations (37,2 · 36,6 · 35,8 · 33,0), le maximum inchangé (57,9) et les deux écarts extrêmes (35,75 % et 43,01 %) sont cités ; les écarts de septembre 2020 et de mars 2021 ne le sont pas.",
-      "le_dessin_suppose": "Leur position dérivée de (57,9 − valeur) / 57,9, soit 36,79 % et 38,17 %. Aucun chiffre intermédiaire n'est écrit sur la planche ; vérifier que les RSET n'arrondissent pas autrement."
+      "le_dessin_suppose": "Leur position dérivée de (57,9 − valeur) / 57,9, soit 36,79 % et 38,17 %. Aucun chiffre intermédiaire n’est écrit sur la planche ; vérifier que les RSET n’arrondissent pas autrement."
     },
     {
-      "objet": "L'appellation de la bande grise",
-      "la_source_affirme": "Rien : la fiche nomme l'exigence RT2012 et le seuil du label, jamais l'intervalle qui les sépare.",
-      "le_dessin_suppose": "« Zone RT2012 sans label » — un bâtiment qui s'y arrête est réglementaire mais non labellisable. Dire si l'appellation convient, ou en donner une du référentiel."
+      "objet": "L’appellation de la bande grise",
+      "la_source_affirme": "Rien : la fiche nomme l’exigence RT2012 et le seuil du label, jamais l’intervalle qui les sépare.",
+      "le_dessin_suppose": "« Zone RT2012 sans label » — un bâtiment qui s’y arrête est réglementaire mais non labellisable. Dire si l’appellation convient, ou en donner une du référentiel."
     },
     {
       "objet": "Le premier rendu de septembre 2019, hors des tracés",
-      "la_source_affirme": "« Du premier rendu, en septembre 2019, ne subsiste au dossier que la synthèse des exigences. Elle ne vise aucun label et retient une perméabilité à l'air de 0,6 m³/(h·m²). »",
-      "le_dessin_suppose": "Que ce rendu ne porte aucun point : les tracés partent d'avril 2020 et 2019 n'est cité qu'en mention. Si les valeurs de septembre 2019 existent ailleurs, elles ajouteraient un cinquième point et une pente de départ que le dessin ne montre pas."
+      "la_source_affirme": "« Du premier rendu, en septembre 2019, ne subsiste au dossier que la synthèse des exigences. Elle ne vise aucun label et retient une perméabilité à l’air de 0,6 m³/(h·m²). »",
+      "le_dessin_suppose": "Que ce rendu ne porte aucun point : les tracés partent d’avril 2020 et 2019 n’est cité qu’en mention. Si les valeurs de septembre 2019 existent ailleurs, elles ajouteraient un cinquième point et une pente de départ que le dessin ne montre pas."
     },
     {
       "objet": "La reprise de calcul de décembre 2024, non portée",
-      "la_source_affirme": "« Une reprise du calcul réglementaire est demandée pour vérifier que la performance visée tient avec des réseaux non isolés hors volume chauffé. Elle a été menée. » Son résultat n'est pas donné.",
-      "le_dessin_suppose": "Un axe qui s'arrête au 31 décembre 2023, donc quatre calculs et non cinq. Si cette reprise a produit un Cep, elle fait un cinquième point — et c'est le seul qui pourrait remonter."
+      "la_source_affirme": "« Une reprise du calcul réglementaire est demandée pour vérifier que la performance visée tient avec des réseaux non isolés hors volume chauffé. Elle a été menée. » Son résultat n’est pas donné.",
+      "le_dessin_suppose": "Un axe qui s’arrête au 31 décembre 2023, donc quatre calculs et non cinq. Si cette reprise a produit un Cep, elle fait un cinquième point — et c’est le seul qui pourrait remonter."
     },
     {
       "objet": "Le dernier gain attribué à un seul poste",
-      "la_source_affirme": "« L'essentiel de ce dernier gain tient à un seul poste : entre 2021 et 2023, les modules photovoltaïques passent de 285 à 375 Wc, et la production renouvelable décomptée de 7,9 à 10,6 kWh/m²/an. » — « l'essentiel », donc pas la totalité.",
-      "le_dessin_suppose": "Une note attachée à toute la dernière marche (2,8 kWh/m²/an). Dire quelle part revient au photovoltaïque (2,7 des 2,8, si l'on soustrait les deux productions décomptées) et quelle part aux autres postes."
+      "la_source_affirme": "« L’essentiel de ce dernier gain tient à un seul poste : entre 2021 et 2023, les modules photovoltaïques passent de 285 à 375 Wc, et la production renouvelable décomptée de 7,9 à 10,6 kWh/m²/an. » — « l’essentiel », donc pas la totalité.",
+      "le_dessin_suppose": "Une note attachée à toute la dernière marche (2,8 kWh/m²/an). Dire quelle part revient au photovoltaïque (2,7 des 2,8, si l’on soustrait les deux productions décomptées) et quelle part aux autres postes."
     },
     {
       "objet": "La surface portée au cartouche",
-      "la_source_affirme": "700 m² habitables, 754 m² de surface de plancher, 910 m² de surface de référence thermique, 483,66 m² d'emprise au sol.",
-      "le_dessin_suppose": "Les 700 m² du champ de la fiche. Mais une planche qui trace des kWh/m²/an rapporte ses valeurs aux 910 m² de surface de référence thermique : dire si c'est cette surface-là qui doit figurer au cartouche d'un dessin réglementaire."
+      "la_source_affirme": "700 m² habitables, 754 m² de surface de plancher, 910 m² de surface de référence thermique, 483,66 m² d’emprise au sol.",
+      "le_dessin_suppose": "Les 700 m² du champ de la fiche. Mais une planche qui trace des kWh/m²/an rapporte ses valeurs aux 910 m² de surface de référence thermique : dire si c’est cette surface-là qui doit figurer au cartouche d’un dessin réglementaire."
     },
     {
       "objet": "Le millésime du cartouche",
-      "la_source_affirme": "Affaire ouverte en 2019 (champ annee, numéro d'affaire de 2019), chantier ouvert le 22 mars 2024, réception non prononcée — pas d'année de livraison.",
-      "le_dessin_suppose": "Que le cartouche porte 2023, millésime de l'étude définitive que la planche dessine — même arbitrage que les planches 02 et 11 : le millésime de ce que montre le dessin."
+      "la_source_affirme": "Affaire ouverte en 2019 (champ annee, numéro d’affaire de 2019), chantier ouvert le 22 mars 2024, réception non prononcée — pas d’année de livraison.",
+      "le_dessin_suppose": "Que le cartouche porte 2023, millésime de l’étude définitive que la planche dessine — même arbitrage que les planches 02 et 11 : le millésime de ce que montre le dessin."
     }
   ],
   "exclusions_appliquees": [
-    "Numéro d'affaire 19-033 (champ reference) — il encode le volume annuel d'affaires du bureau.",
-    "Montants : l'estimation de maîtrise d'œuvre (1 589 790 € HT), nos deux lots (255 677 € HT, dont 159 806 en plomberie-chauffage-ventilation et 95 871 en électricité) — cités par la fiche, jamais au dessin.",
-    "Noms de tiers : la maîtrise d'ouvrage, l'architecte, le certificateur, le fabricant et les références commerciales de la chaudière et des caissons de ventilation, les deux entreprises titulaires, l'organisme de qualification de la pose photovoltaïque — le dessin ne nomme que des grandeurs.",
-    "Toute géométrie d'ouvrage : ni plan, ni façade, ni la bande des dix maisons accolées, ni le profil de la parcelle et de sa nappe — le dessin n'a qu'un axe des temps et une échelle d'écart, et ne reproduit aucune forme.",
-    "Les données que la fiche porte déjà et que le mécanisme n'appelle pas : l'équipement (puissance et modulation de la chaudière, rendements, débit d'eau chaude, puissance des caissons, micro-onduleurs, inclinaison et orientation des modules), l'enveloppe poste par poste (épaisseurs d'isolant, coefficients de transmission, ponts thermiques, perméabilité), le terrain et le piézomètre, l'électricité (12 kVA par logement, 76 kVA pour l'opération), le suivi de chantier (visas, visites, comptes rendus, opérations préalables) et les quatorze lots de travaux.",
-    "La température intérieure conventionnelle (29,3 °C pour une référence de 33,6 °C) : un troisième indicateur, sur une échelle qui ne se compare pas au seuil du label — l'y porter aurait fait trois tracés dont un muet."
+    "Numéro d’affaire 19-033 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Montants : l’estimation de maîtrise d’œuvre (1 589 790 € HT), nos deux lots (255 677 € HT, dont 159 806 en plomberie-chauffage-ventilation et 95 871 en électricité) — cités par la fiche, jamais au dessin.",
+    "Noms de tiers : la maîtrise d’ouvrage, l’architecte, le certificateur, le fabricant et les références commerciales de la chaudière et des caissons de ventilation, les deux entreprises titulaires, l’organisme de qualification de la pose photovoltaïque — le dessin ne nomme que des grandeurs.",
+    "Toute géométrie d’ouvrage : ni plan, ni façade, ni la bande des dix maisons accolées, ni le profil de la parcelle et de sa nappe — le dessin n’a qu’un axe des temps et une échelle d’écart, et ne reproduit aucune forme.",
+    "Les données que la fiche porte déjà et que le mécanisme n’appelle pas : l’équipement (puissance et modulation de la chaudière, rendements, débit d’eau chaude, puissance des caissons, micro-onduleurs, inclinaison et orientation des modules), l’enveloppe poste par poste (épaisseurs d’isolant, coefficients de transmission, ponts thermiques, perméabilité), le terrain et le piézomètre, l’électricité (12 kVA par logement, 76 kVA pour l’opération), le suivi de chantier (visas, visites, comptes rendus, opérations préalables) et les quatorze lots de travaux.",
+    "La température intérieure conventionnelle (29,3 °C pour une référence de 33,6 °C) : un troisième indicateur, sur une échelle qui ne se compare pas au seuil du label — l’y porter aurait fait trois tracés dont un muet."
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "deux tracés de 4 calculs sur un même écart au seuil : bbio PLAT à 1.58 point sous le seuil, cep DESCENDANT de 15.75 à 23.01 points ; dernière marche 57.6 px contre 12.4 et 16.5 pour les deux premières — la géométrie porte la thèse, aucun chiffre de la fiche n'est répété hors des nœuds du mécanisme",
+    "demonstration": "deux tracés de 4 calculs sur un même écart au seuil : bbio PLAT à 1.58 point sous le seuil, cep DESCENDANT de 15.75 à 23.01 points ; dernière marche 57.6 px contre 12.4 et 16.5 pour les deux premières — la géométrie porte la thèse, aucun chiffre de la fiche n’est répété hors des nœuds du mécanisme",
     "cotes": "cote bbio = 1.577 points (18.80 px, citée 1.58) ; cote cep = 23.005 points (274.22 px, citée 23.01) ; rapport dessiné 14.58 contre 14.56 cité",
-    "ordonnee": "origine = le seuil du label (RT2012 moins 20 points), à y 230 ; écart 0 à 25 points sur 298 px, soit 11.920 px par point — toute ordonnée dérivée de (maximum − valeur) / maximum, jamais tapée ; bande du côté interdit 202–230 (un module, marge de limite et non surface à l'échelle)",
+    "ordonnee": "origine = le seuil du label (RT2012 moins 20 points), à y 230 ; écart 0 à 25 points sur 298 px, soit 11.920 px par point — toute ordonnée dérivée de (maximum − valeur) / maximum, jamais tapée ; bande du côté interdit 202–230 (un module, marge de limite et non surface à l’échelle)",
     "topologie": "pistes (x 56–228) → axe des temps (x 240–1144), 2020-01-01 → 2023-12-31 ; calculs à x 305, 400, 512, 1096 ; cotes à x 1116 et 1134",
-    "bas_du_dessin": "cadre jusqu'à 528, bande d'arrêt 542–558, axe à 578, millésimes à 598, mention à 630, phrase à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 359 x 30 px = 10770 px², soit 1.12 % de la planche (la bande « sans label » est en calcaire, surface secondaire, elle ne compte pas comme réserve)",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "bas_du_dessin": "cadre jusqu’à 528, bande d’arrêt 542–558, axe à 578, millésimes à 598, mention à 630, phrase à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 364 x 30 px = 10920 px², soit 1.14 % de la planche (la bande « sans label » est en calcaire, surface secondaire, elle ne compte pas comme réserve)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
   "controles_vignette": {
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
-    "motif": "le cadre et les deux tracés seuls : ligne plate à 6.7 px sous le seuil contre 97.5 px à l'arrivée de la seconde, deux étiquettes et trois valeurs — cotes, axe des temps, dates et notes laissés à la planche",
+    "motif": "le cadre et les deux tracés seuls : ligne plate à 6.7 px sous le seuil contre 97.5 px à l’arrivée de la seconde, deux étiquettes et trois valeurs — cotes, axe des temps, dates et notes laissés à la planche",
     "bas_du_dessin": "176 px, marge basse 24 px"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "le motif entier : le cadre, la bande sans label, les deux tracés de 4 calculs en marches, les deux cotes au seuil (11.4 px contre 165.6 px), la bande d'arrêt et l'axe des millésimes — trois nœuds chiffrés ; dates des calculs, notes, phrase et cartouche laissés à la planche",
-    "bas_du_dessin": "bande d'arrêt 284–298, axe à 304, millésimes à 322, marge basse 46 px"
+    "motif": "le motif entier : le cadre, la bande sans label, les deux tracés de 4 calculs en marches, les deux cotes au seuil (11.4 px contre 165.6 px), la bande d’arrêt et l’axe des millésimes — trois nœuds chiffrés ; dates des calculs, notes, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "bande d’arrêt 284–298, axe à 304, millésimes à 322, marge basse 46 px"
   }
 }

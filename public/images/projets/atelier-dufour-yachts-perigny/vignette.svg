@@ -39,6 +39,6 @@
   <path d="M 200.00 144.00 L 193.00 140.50 L 193.00 147.50 Z" class="c-encre" fill="#00393A"/>
   <text x="150.00" y="100.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Boucle glycolée</text>
   <text x="150.00" y="114.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" font-variant-numeric="tabular-nums">146 045 kWh/an</text>
-  <text x="22.00" y="180.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">L'air neuf</text>
+  <text x="22.00" y="180.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">L’air neuf</text>
   <text x="80.00" y="180.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" font-variant-numeric="tabular-nums">38 000 m³/h</text>
 </svg>

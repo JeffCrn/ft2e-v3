@@ -42,6 +42,32 @@
 - **Points de suspension** `…` (jamais `...`).
 - **Espace fine insécable** (`U+202F`) idéalement entre nombres et unités : `17 ans`, `1 240 m²`.
 
+### « Tout contenu textuel » comprend le corpus DESSINÉ
+
+La portée de cette page n'est pas `src/content/` mais **le texte que l'utilisateur
+final lit ou s'entend lire** — ce qui inclut les planches de références, dont le
+texte est composé hors des Markdown. La discipline n'y avait pas suivi le contenu
+quand il a changé de répertoire : au 2026-08-16, les 23 dossiers de
+`public/images/projets/` portaient **1 694 apostrophes droites**, dont 186 dans
+les `aria_label` — c'est-à-dire dans ce que les lecteurs d'écran prononcent.
+
+**La correction porte sur la source.** Le texte dessiné vient de `planche.json` et
+des libellés en dur des compositeurs ; les SVG sont une sortie que la première
+régénération écrase. Instrument rejouable, contrôle autant que correcteur :
+`scripts/apostrophes-planches.py` (sans argument il mesure, `--appliquer` il écrit).
+
+⚠ **Il est distinct de `scripts/injection-typographique.py`, et ce n'est pas un
+doublon.** Ce dernier applique la typographie entière — insécables comprises — ce qui
+convient au Markdown mais **déplace le dessin** d'une planche : les compositeurs
+mesurent leurs chaînes pour poser la géométrie, et U+202F n'a pas la même chasse
+qu'une espace. Les insécables du corpus dessiné restent donc un chantier ouvert.
+
+⚠ **Une apostrophe droite n'est pas toujours une apostrophe.** Dans le corpus
+dessiné, 3 596 d'entre elles sont de la syntaxe de police
+(`font-variation-settings="'wdth' 112"`, `font-family='…'`) et se courberaient en
+cassant le rendu. Le critère qui les départage : une élision française est encadrée
+d'une lettre à gauche, d'une lettre ou d'un guillemet ouvrant à droite.
+
 ## Nombres et quantités
 
 **Cette règle a été relevée, pas décrétée.** Elle décrit l'usage déjà en vigueur dans les vingt récits de `src/content/projets/`, constaté au 2026-08-09 : les récits l'appliquaient avant qu'elle soit écrite. Elle est consignée ici pour que les chapôs et les textes à venir s'y conforment sans avoir à la redécouvrir.

@@ -275,10 +275,10 @@ def composer(donnees):
         "demonstration": f"escalier de {len(marques)} marques "
                          f"{'strictement montantes' if montees else '⚠ NON MONOTONES'} "
                          f"(x {marques[0][0]:.0f} → {marques[-1][0]:.0f}), chaque "
-                         f"niveau figé de sa marque au bout de l'axe, bande des "
+                         f"niveau figé de sa marque au bout de l’axe, bande des "
                          f"plans {ech(p['debut']):.0f} → {ech(p['fin']):.0f} sous "
                          f"la pile — la géométrie porte la précédence, aucun "
-                         f"chiffre de la fiche n'est répété",
+                         f"chiffre de la fiche n’est répété",
         "topologie": f"libellés (x {MARGE}) → axe des temps (x {X0}–{X1}) ; "
                      f"pile de {n_rows} niveaux {Y_ROWS}–{bas_pile}, bande des "
                      f"plans {Y_BANDE}–{Y_BANDE + H_BANDE}, axe à y {Y_AXE}",
@@ -290,7 +290,7 @@ def composer(donnees):
                             f"{largeur * H_CARTOUCHE} px², soit "
                             f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % de "
                             f"la planche",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "depassements": depassements if depassements
                         else "aucun — toutes les lignes mesurées sous leur colonne",
@@ -360,7 +360,7 @@ def composer_vignette(donnees):
         "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
-        "motif": f"l'escalier seul : {n_rows} niveaux, marques montantes de "
+        "motif": f"l’escalier seul : {n_rows} niveaux, marques montantes de "
                  f"x {marques[0][0]:.0f} à {marques[-1][0]:.0f}, deux étiquettes "
                  f"(pied et tête) — plans, mentions et mois laissés à la planche",
         "bas_du_dessin": f"{bas + 3:.0f} px, marge basse {VH - bas - 3:.0f} px",
@@ -433,7 +433,7 @@ def composer_appui(donnees):
     p = ch["plans"]
     x_deb, x_fin = ech(p["debut"]), ech(p["fin"])
     A(rect_bord(x_deb, y_bande, x_fin - x_deb, h_bande, "calcaire", "filet-1"))
-    A(texte(x_deb + 12, y_bande + 20, "Plans d'exécution", "sans", 13, 600,
+    A(texte(x_deb + 12, y_bande + 20, "Plans d’exécution", "sans", 13, 600,
             "encre", wdth=112))
     for k, v in enumerate(p["versions"]):
         xv = ech(v["date"])
@@ -610,7 +610,7 @@ def composer_divergence(donnees):
     ar = dv["arret"]
     xa0, xa1 = ech(ar["debut"]), ech(ar["fin"])
     A(rect_bord(xa0, D_Y_ARRET, xa1 - xa0, D_H_ARRET, "calcaire", "filet-1"))
-    controler("libellé d'arrêt", ar["libelle"], 10, "mono",
+    controler("libellé d’arrêt", ar["libelle"], 10, "mono",
               xa1 - xa0 - 24, 1.4)
     A(mono((xa0 + xa1) / 2, D_Y_ARRET + 11, ar["libelle"], ancre="middle"))
 
@@ -728,7 +728,7 @@ def composer_divergence(donnees):
             f"dernière marche {abs(ecarts[-1] - ecarts[-2]):.1f} px contre "
             f"{abs(ecarts[1] - ecarts[0]):.1f} et {abs(ecarts[2] - ecarts[1]):.1f} "
             f"pour les deux premières — la géométrie porte la thèse, aucun "
-            f"chiffre de la fiche n'est répété hors des nœuds du mécanisme",
+            f"chiffre de la fiche n’est répété hors des nœuds du mécanisme",
         "cotes":
             f"cote {cotes_mesurees[0][0]} = {cotes_mesurees[0][1]:.3f} points "
             f"({cotes_mesurees[0][2]:.2f} px, citée {dv['cotes'][0]['valeur_citee']}) ; "
@@ -742,12 +742,12 @@ def composer_divergence(donnees):
                     f"soit {k:.3f} px par point — toute ordonnée dérivée de "
                     f"(maximum − valeur) / maximum, jamais tapée ; bande du côté "
                     f"interdit {D_Y_BANDE}–{D_Y_BANDE + D_H_BANDE} (un module, "
-                    f"marge de limite et non surface à l'échelle)",
+                    f"marge de limite et non surface à l’échelle)",
         "topologie": f"pistes (x {MARGE}–{D_X0 - 12}) → axe des temps "
                      f"(x {D_X0}–{D_X1}), {axe['debut']} → {axe['fin']} ; "
                      f"calculs à x " + ", ".join(f"{ech(d):.0f}" for d in dates)
                      + f" ; cotes à x {D_COTE[0]} et {D_COTE[1]}",
-        "bas_du_dessin": f"cadre jusqu'à {D_Y_MAX}, bande d'arrêt {D_Y_ARRET}–"
+        "bas_du_dessin": f"cadre jusqu’à {D_Y_MAX}, bande d’arrêt {D_Y_ARRET}–"
                          f"{D_Y_ARRET + D_H_ARRET}, axe à {D_Y_AXE}, millésimes "
                          f"à {D_Y_ANNEES}, mention à {D_Y_MENTION}, phrase à "
                          f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
@@ -758,7 +758,7 @@ def composer_divergence(donnees):
                             f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % de "
                             f"la planche (la bande « sans label » est en calcaire, "
                             f"surface secondaire, elle ne compte pas comme réserve)",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "depassements": depassements if depassements
                         else "aucun — toutes les lignes mesurées sous leur colonne",
@@ -841,7 +841,7 @@ def composer_vignette_divergence(donnees):
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": f"le cadre et les deux tracés seuls : ligne plate à "
                  f"{ecart_bbio:.1f} px sous le seuil contre {ecart_cep:.1f} px à "
-                 f"l'arrivée de la seconde, deux étiquettes et trois valeurs — "
+                 f"l’arrivée de la seconde, deux étiquettes et trois valeurs — "
                  f"cotes, axe des temps, dates et notes laissés à la planche",
         "bas_du_dessin": f"{bas} px, marge basse {VH - bas} px",
     }
@@ -935,9 +935,9 @@ def composer_appui_divergence(donnees):
               f"tracés de {len(pistes[0]['points'])} calculs en marches, les "
               f"deux cotes au seuil ({abs(traces['bbio'][-1][1] - y_seuil):.1f} px "
               f"contre {abs(traces['cep'][-1][1] - y_seuil):.1f} px), la bande "
-              f"d'arrêt et l'axe des millésimes — trois nœuds chiffrés ; dates "
+              f"d’arrêt et l’axe des millésimes — trois nœuds chiffrés ; dates "
               f"des calculs, notes, phrase et cartouche laissés à la planche",
-        bas=f"bande d'arrêt {y_arret}–{y_arret + h_arret}, axe à {y_axe}, "
+        bas=f"bande d’arrêt {y_arret}–{y_arret + h_arret}, axe à {y_axe}, "
             f"millésimes à {y_annees}, marge basse {AH - y_annees} px")
 
 

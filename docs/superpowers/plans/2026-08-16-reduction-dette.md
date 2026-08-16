@@ -9,7 +9,7 @@
 > s’ils divergent du dépôt, c’est le dépôt qui a bougé depuis `d3bd8d9`, et il faut
 > remesurer avant d’agir.
 >
-> **Ouvert le 2026-08-16.** État : **1 session sur 4 exécutée** (S1), **1 décision sur 2 tranchée** (D1).
+> **Ouvert le 2026-08-16.** État : **3 sessions sur 4 exécutées** (S1, S2, S3), **1 décision sur 2 tranchée** (D1).
 
 ---
 
@@ -295,6 +295,118 @@ l’original, jamais la copie.
 ⚠ **Contrôler à la taille de lecture, jamais en pleine page** (règle 13 du `CLAUDE.md`) :
 1 152 px pour la planche, 552 pour l’appui, 300 pour la vignette.
 
+### ✅ Exécutée le 2026-08-16 — recette tenue sur les six critères
+
+| Critère | Seuil | Mesuré |
+|---|---|---|
+| Apostrophes droites dans les 23 `planche.json` | 0 | **0** (1 330 courbées) |
+| Apostrophes droites dans les `<text>` des 69 SVG | 0 | **0** (178 courbées) |
+| Apostrophes droites dans les `aria-label` des 69 SVG | — | **0** (186 courbées) — *le critère qui portait l’enjeu d’accessibilité ne figurait pas au tableau* |
+| Régénération octet à octet | 23 / 23 | **23 / 23** — second passage intégralement stable |
+| Rendu de la planche à 1 152 px, de l’appui à 552, de la vignette à 300 | inchangé hors apostrophes | **9 bandes d’écart sur 5 200 lignes de pixels** : 3 bandes de 30 px = les cartouches élargis (voulu), 6 bandes de 3 à 13 px = les glyphes d’apostrophe |
+| Build | vert | **vert**, `astro check` 0 erreur 0 avertissement |
+
+Restent 3 596 apostrophes droites dans les SVG : ce sont les
+`font-variation-settings="'wdth' …"` et `font-family='…'`. **De la syntaxe, pas du
+texte** — les courber casserait le rendu des polices.
+
+#### Les trois chiffres du constat ne se reproduisent pas — et le dépôt n’a pas bougé
+
+| Grandeur | Annoncé par le relevé | Mesuré | Écart |
+|---|---|---|---|
+| Apostrophes dans le texte dessiné des SVG | 205 | **178** | −27 |
+| Apostrophes dans les extractions | 1 325 | **1 330** | +5 |
+| Planches à régénérer | 14 | **20** | +6 |
+
+Le préambule de cette programmation prévoit le cas : « s’ils divergent du dépôt, c’est
+le dépôt qui a bougé depuis `d3bd8d9` ». **Vérifié : il n’a pas bougé.** Remesuré à
+`d3bd8d9` même, le corpus donne 178 / 186 / 1 330 — les chiffres d’aujourd’hui. Les
+deux premiers écarts viennent donc de la méthode du relevé, qu’on ne peut pas
+reconstituer : ni le décompte par occurrences ni le décompte par lignes ne donnent 205.
+
+**Le troisième écart, lui, s’explique — et il est instructif.** Les 14 planches
+« des 13 et 14 août » sont exactes *au jour de commit* : 8 le 13, 6 le 14. Mais six
+des neuf planches versées le 15 ont été composées **avant** que la correction de
+`_tronc.mesurer` n’arrive dans la journée (`1b23d48`, planche 21). **La date de commit
+n’est pas un indicateur de l’invariant** : seules les planches 21, 22 et 23 se
+rejouaient à l’identique. Le seul test valable est de rejouer.
+
+#### ⚠ Ce que la régénération a trouvé — une collision de constantes, pas une somme de contrôle
+
+C’est le vrai gain de la session, et il n’était pas au programme. `tableau-electrique.py`
+affecte **`XB0, XB1` deux fois au niveau du module** : ligne 82 pour le mécanisme
+`autoconsommation` (la crèche, `420, 1050`) et ligne 582 pour `franchissement`
+(Marans, `56, 930`). Les deux affectations s’exécutent à l’import, **la seconde
+gagne**, et c’est le **premier** dessin qui se recompose faux.
+
+Rejouée, la planche de la crèche sortait avec sa barre de distribution partant de 56
+au lieu de 420, deux flèches pointant à x 46 — hors de la marge de 56 — et un bloc de
+contrôle qui annonçait des largeurs **négatives** (`étiquette surplus : 110 px pour
+-190 px`). Huit lignes de SVG déplacées.
+
+Rien ne le signalait : ni le build, ni `astro check`, ni le rendu de Marans, qui était
+juste. La planche publiée l’était aussi — elle avait été composée quand la seconde
+affectation n’existait pas encore. **Le défaut n’était visible nulle part ailleurs que
+dans la régénération**, c’est-à-dire dans le contrôle même que le constat 2 déclarait
+rompu. C’est la démonstration de ce à quoi sert l’invariant : il ne garde pas des
+sommes de contrôle, il garde la capacité de refabriquer.
+
+Correction : le second mécanisme nomme désormais ses repères `XBARRE0` / `XBARRE1`, à
+l’image de `Y_BUS` / `Y_BARRE` que le fichier distinguait déjà. Un balayage des sept
+compositeurs — toute constante affectée plus d’une fois au niveau du module — ne
+trouve **aucune autre collision** : les autres fichiers préfixent leurs repères par
+mécanisme.
+
+#### La portée a été réduite à l’apostrophe, et c’est mesuré
+
+Le constat renvoyait à `scripts/injection-typographique.py`, « qui n’a simplement
+jamais été passé sur `public/images/projets/` ». Passé tel quel, il change **1 186
+signes de plus** que les apostrophes — des insécables. Or les compositeurs **mesurent**
+leurs chaînes pour poser la géométrie (`_tronc.mesurer`) : chaque insécable ajoutée
+déplace le dessin, sur 23 planches à recetter au rendu. La recette de cette session dit
+« inchangé hors apostrophes » : les deux ne tiennent pas ensemble.
+
+**Les insécables des extractions restent donc ouvertes** et deviennent un chantier à
+part entière — voir les points ouverts ci-dessous.
+
+L’instrument est `scripts/apostrophes-planches.py`, rejouable, qui sert de contrôle
+autant que de correcteur (`--appliquer` pour écrire, sans argument pour mesurer).
+Son garde-fou fait le vrai travail : **une apostrophe n’est courbée que si elle est
+française** — une lettre à gauche, une lettre ou un guillemet ouvrant à droite. Tout
+le reste est refusé et nommé. C’est ce qui protège la syntaxe qui emploie la même
+touche, et le piège n’est pas théorique : en Python 3.11 une f-string est **un seul
+jeton**, si bien que `f"{d['cle']}"` porte ses apostrophes de syntaxe à l’intérieur du
+littéral. **302 refus**, tous examinés, tous légitimes : clés de dictionnaire,
+`'wdth'`, `font-family='…'`.
+
+#### La preuve que l’ordre a été respecté
+
+Le piège annoncé — régénérer avant de corriger efface la correction — se contrôle
+autrement que par la parole. Les 23 dossiers ont été régénérés **une première fois
+avant toute correction**, dans une copie hors dépôt. Le corpus final, comparé à cette
+copie **apostrophes neutralisées**, donne **zéro écart** : la passe typographique n’a
+déplacé aucun dessin, et la régénération n’a effacé aucune apostrophe.
+
+#### Trois points ouverts, laissés en l’état et documentés
+
+1. **`logements-pas-des-boeufs` : deux textes 4 px plus larges que leur colonne.**
+   `détail pac-air-air 2 : 228 px pour 224 px`, et son jumeau `pac-air-eau 1`. Le
+   défaut est **antérieur** — le SVG n’a pas bougé — mais l’ancienne mesure le
+   cachait : elle comptait les insécables du mono aux avances d’Archivo. Le bloc
+   `depassements` de l’extraction le dit maintenant. Non corrigé ici : le réparer
+   demande de recomposer une planche, ce que la recette de cette session interdit.
+2. **`core.autocrlf` vaut `true` et le dépôt n’a pas de `.gitattributes`.** Les 92
+   pièces sont en LF dans cette copie de travail, et l’invariant y tient. **Il ne
+   tiendrait pas dans un clone neuf** : git y écrirait des CRLF, les compositeurs
+   réécriraient du LF, et la régénération afficherait 92 écarts qui n’en seraient pas.
+   Le contrôle de l’invariant doit donc porter sur une copie écrite par Python, ou
+   normaliser les fins de ligne avant de comparer.
+3. **`scripts/planches/verser.py` contrôle deux choses qui n’existent plus** : une
+   « forme de repli mobile » (retirée le 2026-08-15 avec le repli lui-même) et un
+   champ `image_principale` (supprimé du schéma le même jour). Un garde-fou qui
+   survit à son objet est un contrôle qui ment — même principe que l’amendement A9.
+   Renvoyé à S4, dont c’est exactement le périmètre.
+
 ---
 
 ## S3 — Les trois défauts de rendu
@@ -531,7 +643,7 @@ Repris du relevé, et **volontairement laissé ouvert** :
 | Session | État | Commit | Recette |
 |---|---|---|---|
 | S1 — pipeline d’images | ☑ **faite** le 2026-08-16 | `71cc72f` · `4416c20` · `+1` | ✅ **complète, mesurée sur le déploiement** — `/equipe/` perf **100**, LCP **1,2 s** (seuil 1,8), poids **4 766 → 240 Kio** ; AVIF+WebP+srcset, repli et duotone contrôlés ; `/` sans régression (96) |
-| S2 — planches : typo + régénération | ☐ à faire | — | — |
+| S2 — planches : typo + régénération | ☑ **faite** le 2026-08-16 | `+1` | ✅ **complète** — **0** apostrophe droite dans les 23 extractions, les 69 `<text>` et les 69 `aria-label` (1 694 courbées) ; régénération **23 / 23** octet à octet ; rendu inchangé hors apostrophes et cartouches (9 bandes de pixels sur 5 200) ; build vert. **Trouvé au passage : une collision `XB0` entre deux mécanismes de `tableau-electrique.py`, qui recomposait faux la planche de la crèche** |
 | S3 — trois défauts de rendu | ☑ **faite** le 2026-08-16 | `806e803` | ✅ **complète** — CLS **0** sur `/`, `/contact/`, `/references/` et `/equipe/` (seuil 0,05) ; `/contact/` a11y **97 → 100** ; débordement nul sur 45 mesures (15 routes × 3 largeurs) et à 320 / 360 / 390 / 430 px ; accueil perf **100** |
 | S4 — hygiène et garde-fous | ☐ à faire | — | — |
 | D1 — arbitrage A2 × Lighthouse | ☑ **tranché** le 2026-08-16 — issue 2 (inscrire l’exception, viser 96) | `4416c20` · `806e803` | ✅ **appliqué** à `.claude/rules/accessibility-rgaa.md` en S3 |
@@ -763,6 +875,24 @@ Deux constats ajoutés par la session 3, à arbitrer ici ou à laisser ouverts :
   doivent faire 44 px (voir la section S3 du plan) ;
 - 40 px de vide mort sous sm dans le hero de l'accueil : le média est
   `hidden sm:block`, mais sa cellule de grille et le gap-10 du conteneur restent.
+
+Deux constats ajoutés par la session 2, tous deux dans le périmètre « garde-fous » :
+- scripts/planches/verser.py CONTRÔLE DEUX CHOSES QUI N'EXISTENT PLUS. Sa règle 2
+  exige « une forme de repli mobile que le site sait rendre » — or le repli de
+  lecture a été SUPPRIMÉ le 2026-08-15, et CLAUDE.md consigne que son garde-fou a
+  été retiré avec lui ; celui de verser.py a survécu. Son étape 4 bascule
+  `image_principale` en `planche:` — champ supprimé du schéma le même jour, donc la
+  bascule échouerait sur toute fiche neuve. Un garde-fou qui survit à son objet est
+  un contrôle qui ment sur ce qu'il contrôle : même principe que l'amendement A9.
+- core.autocrlf VAUT true ET LE DÉPÔT N'A PAS DE .gitattributes. Les 92 pièces des
+  planches (69 SVG + 23 JSON) sont en LF dans la copie de travail actuelle, et
+  l'invariant de régénération y tient — 23 / 23 octet à octet. Dans un CLONE NEUF il
+  ne tiendrait pas : git écrirait des CRLF, les compositeurs réécrivent du LF
+  (`newline="\n"` dans _tronc.executer), et la régénération afficherait 92 écarts qui
+  n'en seraient pas. À trancher : poser un .gitattributes (`*.svg text eol=lf`,
+  `*.json text eol=lf`) ou inscrire dans le protocole que le contrôle de l'invariant
+  normalise les fins de ligne avant de comparer. Ne PAS conclure « l'invariant est
+  rompu » sur une machine fraîchement clonée sans avoir vérifié ce point d'abord.
 
 ⚠ Toute suppression de champ Zod se répercute dans public/admin/config.yml AU SEIN
 DU MÊME COMMIT (règle du sous-agent content-modeller).

@@ -18,7 +18,7 @@
   .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 </style>
   <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">L'ÉCART SE CREUSE</text>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">L’ÉCART SE CREUSE</text>
   <rect x="14.00" y="32.00" width="268.00" height="20.00" class="c-calcaire" fill="#EDF0F2"/>
   <text x="282.00" y="46.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="end">SEUIL DU LABEL</text>
   <path d="M 14.00 52.00 L 282.00 52.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>

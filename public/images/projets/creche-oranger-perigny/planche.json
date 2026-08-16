@@ -140,12 +140,12 @@
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "la production descend du bandeau (48 rectangles dessinés = 48 modules de la fiche) vers la barre de distribution ; l'échange réseau se lit par deux flèches opposées (y 366 et 392) ; le départ suivi s'élargit en traversant la pompe à chaleur — trois bandes de 4, 14.4 et 18.4 px, soit 1 / 3.6 / 4.6, proportionnelles au COP — avant de se répandre dans la dalle ; la géométrie porte la thèse « de la toiture au sol »",
+    "demonstration": "la production descend du bandeau (48 rectangles dessinés = 48 modules de la fiche) vers la barre de distribution ; l’échange réseau se lit par deux flèches opposées (y 366 et 392) ; le départ suivi s’élargit en traversant la pompe à chaleur — trois bandes de 4, 14.4 et 18.4 px, soit 1 / 3.6 / 4.6, proportionnelles au COP — avant de se répandre dans la dalle ; la géométrie porte la thèse « de la toiture au sol »",
     "topologie": "toiture (y 240–272, x 380–1144) → descente (x 762) → barre (y 376, x 420–1050) ; réseau x 56–230 à gauche ; pompe à chaleur x 480–700 et départs groupés x 800–1144 dessous ; dalle y 580–620, x 420–1144",
-    "bas_du_dessin": "dalle jusqu'à 620, dernier détail du sol à 636, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 220 x 30 px = 6600 px², soit 0.69 % de la planche",
+    "bas_du_dessin": "dalle jusqu’à 620, dernier détail du sol à 636, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 226 x 30 px = 6780 px², soit 0.71 % de la planche",
     "chiffre_unique": "un seul chiffre en encre pleine — 96 px mesurés à 22 px (17,5 kWc, la production que la planche défend) ; 7,5 kW, COP 4,60 et le régime 30/35 °C restent au mono 10 pivot",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "phrase_principe": "119 signes — 1005 px mesurés pour 1088 disponibles",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
@@ -153,14 +153,14 @@
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
-    "motif": "le bandeau des 48 modules, la descente, la barre, l'échange réseau à deux flèches, les trois bandes du COP (2 / 7,2 / 9,2 px) et la dalle — libellés d'organes, étiquettes d'échange et bloc des autres départs laissés à la planche",
-    "bas_du_dessin": "dalle jusqu'à y 178, marge basse 22 px"
+    "motif": "le bandeau des 48 modules, la descente, la barre, l’échange réseau à deux flèches, les trois bandes du COP (2 / 7,2 / 9,2 px) et la dalle — libellés d’organes, étiquettes d’échange et bloc des autres départs laissés à la planche",
+    "bas_du_dessin": "dalle jusqu’à y 178, marge basse 22 px"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "le motif entier à l'échelle 1 : bandeau des 48 modules, descente, barre, échange réseau à deux flèches légendées, trois bandes du COP (4 / 14,4 / 18,4 px) et dalle — trois nœuds chiffrés (17,5 kWc, COP 4,60, régime 30/35 °C) ; détails de pose, contenu des départs, phrase et cartouche laissés à la planche",
-    "bas_du_dessin": "dalle jusqu'à 334, régime à 331 — marge basse 34 px"
+    "motif": "le motif entier à l’échelle 1 : bandeau des 48 modules, descente, barre, échange réseau à deux flèches légendées, trois bandes du COP (4 / 14,4 / 18,4 px) et dalle — trois nœuds chiffrés (17,5 kWc, COP 4,60, régime 30/35 °C) ; détails de pose, contenu des départs, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "dalle jusqu’à 334, régime à 331 — marge basse 34 px"
   }
 }

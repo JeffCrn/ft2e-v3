@@ -75,6 +75,6 @@
   <path d="M 676.50 252.00 L 676.50 574.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
   <text x="684.50" y="246.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">206,5 — LE PLAFOND DES ACCOLÉES, PROLONGÉ SUR LES COLLECTIFS</text>
   <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Cette frontière, invisible sur le plan de masse, commande deux jeux de seuils réglementaires distincts.</text>
-  <rect x="56.00" y="714.00" width="236.00" height="30.00" class="c-profond" fill="#001718"/>
+  <rect x="56.00" y="714.00" width="242.00" height="30.00" class="c-profond" fill="#001718"/>
   <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">CHAGNOLET · 767 m² · 2022</text>
 </svg>

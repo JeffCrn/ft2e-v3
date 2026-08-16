@@ -296,16 +296,16 @@ def composer_recuperation(donnees):
                          f"nulle part — bande de séparation y {YT1}–{YB0}, "
                          f"haute de {YB0 - YT1} px ; le seul trait qui la "
                          f"franchit est la paire de conduites de la boucle "
-                         f"(x {XP1} et {XP2}) ; le chemin d'air de l'atelier "
+                         f"(x {XP1} et {XP2}) ; le chemin d’air de l’atelier "
                          "reste dans son bloc — la géométrie porte la thèse "
-                         "« l'échange sans le contact »",
+                         "« l’échange sans le contact »",
         "topologie": f"dehors (x < {X_DUCT0}) → conduits (x {X_DUCT0}–{X_AT0}) "
                      f"→ atelier (x {X_AT0}–{X_AT1}) ; extrait y {YT0}–{YT1} "
                      f"vers la gauche, neuf y {YB0}–{YB1} vers la droite ; "
                      f"batteries alignées x {BX0}–{BX1}, gaz x {GX0}–{GX1}, "
-                     f"pac x {PX0}–{PX1} — l'ordre du flux est celui du "
-                     "descriptif d'origine",
-        "bas_du_dessin": f"libellés d'organes à {Y_LIB}, dernier détail à "
+                     f"pac x {PX0}–{PX1} — l’ordre du flux est celui du "
+                     "descriptif d’origine",
+        "bas_du_dessin": f"libellés d’organes à {Y_LIB}, dernier détail à "
                          f"{Y_DET + 14}, phrase de principe à {Y_PHRASE}, "
                          f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
                          f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
@@ -317,7 +317,7 @@ def composer_recuperation(donnees):
                           f"{l_val:.0f} px mesurés à 22 px (Archivo 700, "
                           f"tabulaire, U+00A0 au groupement) ; 158 kW et "
                           f"38 000 m³/h restent au mono 10 pivot",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -374,7 +374,7 @@ def composer_vignette_recuperation(donnees):
     # Les deux nœuds chiffrés.
     bg = elems["boucle-glycol"]
     cn = elems["conduit-neuf"]
-    A(texte(150, 100, bg["libelle"].replace("d'eau glycolée", "glycolée"),
+    A(texte(150, 100, bg["libelle"].replace("d’eau glycolée", "glycolée"),
             "sans", 12, 600, "encre", wdth=112))
     val = f'{bg["valeur"]}{NN}{bg["unite"]}'.replace(INS, NN)
     A(texte(150, 114, val, "mono", 10, 500, "pivot", tabulaire=True))
@@ -390,8 +390,8 @@ def composer_vignette_recuperation(donnees):
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": "deux conduits à contre-courant, deux batteries, la boucle "
                  "seule à traverser, le bloc atelier — gaz, pac, circulateur, "
-                 "vase et étiquettes d'air sont laissés à la planche",
-        "bas_du_dessin": "nœud de l'air neuf à y 180, marge basse 20 px",
+                 "vase et étiquettes d’air sont laissés à la planche",
+        "bas_du_dessin": "nœud de l’air neuf à y 180, marge basse 20 px",
     }
     return "\n".join(out) + "\n", controles
 
@@ -534,16 +534,16 @@ def composer_utilites(donnees):
 
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "demonstration": "quatre chaînes partent des productions et s'arrêtent "
+        "demonstration": "quatre chaînes partent des productions et s’arrêtent "
                          f"TOUTES sur la limite (x {U_XLIM}, trait interrompu) "
-                         "où chacune porte son nœud d'attente ; les trois blocs "
-                         "d'atelier se tiennent au-delà, sans aucun trait qui "
+                         "où chacune porte son nœud d’attente ; les trois blocs "
+                         "d’atelier se tiennent au-delà, sans aucun trait qui "
                          "les relie — la géométrie porte la thèse « livrer "
-                         "jusqu'aux attentes, pas au-delà »",
+                         "jusqu’aux attentes, pas au-delà »",
         "topologie": f"productions (x {U_BX0}–{U_BX1}, quatre boîtes de "
                      f"{U_BH} px) → chaînes (x {U_BX1}–{U_XLIM - 7}) → limite "
                      f"(x {U_XLIM}, y 240–648) → ateliers (x {U_AX0}–{U_AX1}, "
-                     "trois blocs) — l'ordre est celui de l'énumération de la "
+                     "trois blocs) — l’ordre est celui de l’énumération de la "
                      "fiche",
         "bas_du_dessin": f"dernière production à {U_Y0S[-1] + U_BH}, dernier "
                          f"atelier à {U_AY[-1][1]}, mention des attentes à 664, "
@@ -557,7 +557,7 @@ def composer_utilites(donnees):
         "chiffre_unique": f"un seul chiffre en encre pleine — {l_val:.0f} px "
                           "mesurés à 22 px (261 kW, au plan de marché) ; le "
                           "régime 2/6 °C reste au mono 10 pivot",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -609,8 +609,8 @@ def composer_vignette_utilites(donnees):
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": "quatre chaînes arrêtées sur la limite interrompue, leurs "
-                 "nœuds d'attente, trois blocs au-delà — libellés de "
-                 "production et noms d'atelier laissés à la planche",
+                 "nœuds d’attente, trois blocs au-delà — libellés de "
+                 "production et noms d’atelier laissés à la planche",
         "bas_du_dessin": "nœud du froid glycolé à y 180, marge basse 20 px",
     }
     return "\n".join(out) + "\n", controles
@@ -842,9 +842,9 @@ def composer_substitution(donnees):
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
         "demonstration": "en haut, les deux raccordements (plein pour la "
                          f"chaudière, interrompu pour le réseau à venir) "
-                         f"convergent sur l'UNIQUE cercle du point de "
-                         f"substitution (x {S_NX}, y {S_NY}) d'où partent les "
-                         f"deux conduites du réseau d'émission ; en bas, les "
+                         f"convergent sur l’UNIQUE cercle du point de "
+                         f"substitution (x {S_NX}, y {S_NY}) d’où partent les "
+                         f"deux conduites du réseau d’émission ; en bas, les "
                          f"trois liaisons du parti écarté filent de la machine "
                          f"au bâtiment sans rencontrer AUCUN nœud — la "
                          "géométrie seule oppose « un raccord se change » à "
@@ -856,18 +856,18 @@ def composer_substitution(donnees):
                      f"{S_AX1}, trois émetteurs génériques) ; parti écarté "
                      f"sous le filet y {S_YSEP}, liaisons y "
                      f"{'/'.join(str(y) for y in Y_LIAISONS)}",
-        "bas_du_dessin": f"liaisons jusqu'à {Y_LIAISONS[-1]}, blocs écartés "
-                         f"jusqu'à {S_PAC_Y1}, phrase de principe à {Y_PHRASE}, "
+        "bas_du_dessin": f"liaisons jusqu’à {Y_LIAISONS[-1]}, blocs écartés "
+                         f"jusqu’à {S_PAC_Y1}, phrase de principe à {Y_PHRASE}, "
                          f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
                          f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
         "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
                             f"{largeur * H_CARTOUCHE} px², soit "
                             f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
                             f"de la planche",
-        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
                           "pas chiffrée (révision 4) ; 40 kW reste au mono 10 "
                           "pivot dans la boîte de la chaudière",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -946,7 +946,7 @@ def composer_vignette_substitution(donnees):
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": "deux productions (pleine, interrompue) convergeant sur le "
                  "point, deux conduites, le bâtiment et ses trois émetteurs — "
-                 "le parti écarté, les tags et l'étiquette du réseau sont "
+                 "le parti écarté, les tags et l’étiquette du réseau sont "
                  "laissés à la planche",
         "bas_du_dessin": "nœud des émetteurs à y 186, marge basse 14 px",
     }
@@ -1006,9 +1006,9 @@ def composer_appui_recuperation(donnees):
     return "\n".join(out) + "\n", controles_appui(
         motif="les deux conduits à contre-courant nommés, les deux batteries, "
               "la boucle seule à traverser avec son chiffre (146 045 kWh/an), "
-              "le bloc atelier et la cote de l'air neuf — gaz, pompe à "
+              "le bloc atelier et la cote de l’air neuf — gaz, pompe à "
               "chaleur, circulateur et vase laissés à la planche",
-        bas=f"conduit bas jusqu'à 302 px, marge basse {AH - 312} px")
+        bas=f"conduit bas jusqu’à 302 px, marge basse {AH - 312} px")
 
 
 def composer_appui_utilites(donnees):
@@ -1060,10 +1060,10 @@ def composer_appui_utilites(donnees):
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
         motif="quatre productions nommées, chaînes arrêtées sur la limite "
-              "interrompue (nommée) et ses nœuds d'attente, trois ateliers "
+              "interrompue (nommée) et ses nœuds d’attente, trois ateliers "
               "nommés au-delà, nœud chiffré du froid (261 kW) — étiquettes de "
               "chaîne et mention des attentes laissées à la planche",
-        bas=f"ateliers jusqu'à 314 px, marge basse {AH - 314} px")
+        bas=f"ateliers jusqu’à 314 px, marge basse {AH - 314} px")
 
 
 def composer_appui_substitution(donnees):
@@ -1125,8 +1125,8 @@ def composer_appui_substitution(donnees):
         motif="deux productions nommées (pleine, interrompue « à venir ») "
               "convergeant sur le point de substitution nommé, deux "
               "conduites, le bâtiment et ses trois émetteurs — le parti "
-              "écarté et l'étiquette du réseau laissés à la planche",
-        bas=f"bâtiment jusqu'à 264 px, marge basse {AH - 264} px")
+              "écarté et l’étiquette du réseau laissés à la planche",
+        bas=f"bâtiment jusqu’à 264 px, marge basse {AH - 264} px")
 
 
 # ═══ Mécanisme `declinaison` — un parti dessiné une fois, 54 cellules ════════
@@ -1349,13 +1349,13 @@ def composer_declinaison(donnees):
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
         "demonstration": "UNE maison dessinée en détail (PAC à compartiment "
-                         "ballon, deux départs, VMC, deux échanges d'air avec "
+                         "ballon, deux départs, VMC, deux échanges d’air avec "
                          f"le dehors) contre {D_COLS * D_LIGNES} cellules "
                          "STRICTEMENT identiques portant le même glyphe "
-                         "(production → deux départs) ; l'accolade de cote "
+                         "(production → deux départs) ; l’accolade de cote "
                          "les prend toutes — la géométrie porte la thèse "
                          "« un parti, décliné », aucun chiffre de la fiche "
-                         "n'est répété en colonne",
+                         "n’est répété en colonne",
         "topologie": f"dehors (x < {D_MX0}) → maison-type (x {D_MX0}–{D_MX1} : "
                      f"PAC x {D_PX0}–{D_PX1} avec ballon intégré, radiateurs "
                      f"x {D_EX0}–{D_EX1}, ECS, VMC y {D_VY0}–{D_VY0 + D_VH}) "
@@ -1363,8 +1363,8 @@ def composer_declinaison(donnees):
                      f"(x {D_GX0}–{gx1}, y {D_GY0}–{gy1}, cellule {D_GC}, "
                      f"gouttière {D_GG}) — matrice topologique, ni îlots ni "
                      "implantation",
-        "bas_du_dessin": f"maison jusqu'à {D_MY1}, grille jusqu'à {gy1}, "
-                         f"accolade à {yb}, mention des calculs jusqu'à "
+        "bas_du_dessin": f"maison jusqu’à {D_MY1}, grille jusqu’à {gy1}, "
+                         f"accolade à {yb}, mention des calculs jusqu’à "
                          f"{yb + 21 + 16}, phrase de principe à {Y_PHRASE}, "
                          f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
                          f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
@@ -1372,14 +1372,14 @@ def composer_declinaison(donnees):
                             f"{largeur * H_CARTOUCHE} px², soit "
                             f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
                             f"de la planche",
-        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
                           "pas chiffrée (révision 4) ; COP 4,65, 50/45 °C, "
                           "190 L et la mention des 27 calculs restent au "
                           "mono 10 pivot",
         "grille": f"{D_COLS * D_LIGNES} cellules — le compte est celui de la "
                   "fiche (54 maisons), vérifié par construction "
                   f"{D_COLS} × {D_LIGNES}",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -1505,7 +1505,7 @@ def composer_appui_declinaison(donnees):
     x_mi = (ax0 + ax1) / 2
     A(texte(x_mi, ay1 + 24, "27 CALCULS RT2012 · TOUS CONFORMES", "mono", 10,
             500, "pivot", ancre="middle", tracking=10 * 0.14))
-    A(texte(x_mi, ay1 + 42, f"DE 14 À 36{NN}% SOUS L'EXIGENCE", "mono", 10,
+    A(texte(x_mi, ay1 + 42, f"DE 14 À 36{NN}% SOUS L’EXIGENCE", "mono", 10,
             500, "pivot", ancre="middle", tracking=10 * 0.14))
 
     A("</svg>")
@@ -1513,7 +1513,7 @@ def composer_appui_declinaison(donnees):
         motif="la maison-type nommée (PAC double service, ballon intégré, "
               "départs chauffage 50/45 °C et ECS 190 L, COP 4,65), la flèche, "
               "la matrice complète des 54 cellules, la mention des 27 calculs "
-              "— VMC, échanges d'air et radiateurs dessinés laissés à la "
+              "— VMC, échanges d’air et radiateurs dessinés laissés à la "
               "planche",
         bas=f"mention des calculs à {250 + 42}, marge basse {AH - 292} px")
 
@@ -1701,7 +1701,7 @@ def composer_appariement(donnees):
                          f"ventilation), à droite la PAC double service "
                          f"enjambe y {AP_SEP[0]} (chauffage → eau chaude) ; "
                          "les deux petites boîtes restent dans leur bande — "
-                         "texte masqué, l'asymétrie des enjambements porte "
+                         "texte masqué, l’asymétrie des enjambements porte "
                          "seule la thèse",
         "topologie": f"machines T2 (x {AP_GX0}–{AP_GX1}) → liens → axe des "
                      f"services (x {AP_CX}) ← liens ← machines T3 "
@@ -1709,9 +1709,9 @@ def composer_appariement(donnees):
                      f"{AP_BANDES[0][0]}–{AP_BANDES[0][1]}, eau chaude y "
                      f"{AP_BANDES[1][0]}–{AP_BANDES[1][1]}, ventilation y "
                      f"{AP_BANDES[2][0]}–{AP_BANDES[2][1]} ; frontières "
-                     f"y {AP_SEP[0]} et {AP_SEP[1]} — l'ordre des équipements "
+                     f"y {AP_SEP[0]} et {AP_SEP[1]} — l’ordre des équipements "
                      "est celui de la fiche, typologie par typologie",
-        "bas_du_dessin": f"boîtes basses jusqu'à {AP_BANDES[2][1]}, phrase de "
+        "bas_du_dessin": f"boîtes basses jusqu’à {AP_BANDES[2][1]}, phrase de "
                          f"principe à {Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
                          f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
                          f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
@@ -1719,11 +1719,11 @@ def composer_appariement(donnees):
                             f"{largeur * H_CARTOUCHE} px², soit "
                             f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
                             f"de la planche",
-        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
                           "pas chiffrée (révision 4) ; 4,40 kW, COP 4,63 et "
                           "4,95, 100 L et 190 L, 50/45 °C restent au mono 10 "
                           "pivot dans les boîtes et sur les liens",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -2154,13 +2154,13 @@ def composer_individualisation(donnees):
 
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "demonstration": "deux flux collectifs (la paire de chaleur, l'eau "
+        "demonstration": "deux flux collectifs (la paire de chaleur, l’eau "
                          f"froide) entrent dans la colonne x {I_XCOL} qui "
                          f"dessert une pile de 21 modules identiques "
                          f"(x {I_MX0}–{I_MX1}, trois groupes 7/8/6) ; UN module "
-                         "est tiré au détail par deux filets d'agrandissement : "
+                         "est tiré au détail par deux filets d’agrandissement : "
                          "deux arrivées y entrent, TROIS départs en sortent, "
-                         "chacun barré d'un compteur — texte masqué, la "
+                         "chacun barré d’un compteur — texte masqué, la "
                          "multiplication (2 traits → 21 modules → 3 comptages) "
                          "porte seule la thèse",
         "topologie": f"productions (x {I_PX0}–{I_PX1} : chaufferie y "
@@ -2171,10 +2171,10 @@ def composer_individualisation(donnees):
                      f"(x {I_BX0}–{I_BX1}, y {I_BY0}–{I_BY1}) : module agrandi "
                      f"x {I_DX0}–{I_DX1}, départs y "
                      f"{'/'.join(str(y) for y in I_Y_DEP)}, compteurs "
-                     f"x {I_XCPT} — l'ordre des typologies est celui de "
-                     "l'énumération de la fiche",
-        "bas_du_dessin": f"pile des modules jusqu'à {etendues[-1][1]}, bloc du "
-                         f"détail jusqu'à {I_BY1}, phrase de principe à "
+                     f"x {I_XCPT} — l’ordre des typologies est celui de "
+                     "l’énumération de la fiche",
+        "bas_du_dessin": f"pile des modules jusqu’à {etendues[-1][1]}, bloc du "
+                         f"détail jusqu’à {I_BY1}, phrase de principe à "
                          f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
                          f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
                          f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
@@ -2182,11 +2182,11 @@ def composer_individualisation(donnees):
                             f"{largeur * H_CARTOUCHE} px², soit "
                             f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
                             f"de la planche",
-        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est "
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
                           "pas chiffrée (révision 4) ; le seul nombre du "
                           "dessin est le décompte 21 (7 T1 · 8 T1 BIS · 6 T2), "
                           "au mono 10 pivot le long de la pile",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -2261,7 +2261,7 @@ def composer_vignette_individualisation(donnees):
                  "trois groupes, un module tiré au détail avec ses trois "
                  "compteurs — libellés de production, typologies et terminaux "
                  "laissés à la planche",
-        "bas_du_dessin": f"pile jusqu'à {etendues[-1][1]:.0f}, nœuds chiffrés "
+        "bas_du_dessin": f"pile jusqu’à {etendues[-1][1]:.0f}, nœuds chiffrés "
                          "à y 186, marge basse 14 px",
     }
     return "\n".join(out) + "\n", controles
@@ -2336,7 +2336,7 @@ def composer_appui_individualisation(donnees):
               "en trois typologies (7 T1 · 8 T1 BIS · 6 T2), le module "
               "agrandi et ses trois départs comptés — terminaux et mention "
               "laissés à la planche",
-        bas=f"pile jusqu'à {etendues[-1][1]:.0f}, mention basse à 340, marge "
+        bas=f"pile jusqu’à {etendues[-1][1]:.0f}, mention basse à 340, marge "
             f"basse {AH - 340} px")
 
 
@@ -2611,25 +2611,25 @@ def composer_commande(donnees):
                          "lignes de commande, distance de la machine au point "
                          "où le débit se décide : "
                          f"{'/'.join(str(l) for l in longueurs)} px, croissante "
-                         "d'un circuit à l'autre ; (2) l'ÉPAISSEUR de la bande "
+                         "d’un circuit à l’autre ; (2) l’ÉPAISSEUR de la bande "
                          "de chaleur APRÈS la machine, dans la même colonne "
                          f"(x {C_XM1}–{C_XOUT}) pour les trois : "
                          f"{C_H_CHALEUR:.0f}/{C_H_CHALEUR:.0f}/"
                          f"{C_H_CHALEUR * (1 - part):.1f} px — texte masqué, "
-                         "trois lignes qui s'allongent et un filet qui remplace "
+                         "trois lignes qui s’allongent et un filet qui remplace "
                          "une bande portent seuls la thèse",
         "topologie": f"local (x {C_XL0}–{C_XL1}) → réseau → machine "
                      f"(x {C_XM0}–{C_XM1}) → enveloppe (x {C_XE0}–{C_XE1}) → "
                      f"dehors ; points de commande x "
                      f"{'/'.join(str(C_PROBE_X[e['commande_zone']]) for e in elements)}"
-                     f", remontée commune à x {C_XRISER} ; l'ordre des circuits "
-                     "est celui de l'énumération de la fiche",
+                     f", remontée commune à x {C_XRISER} ; l’ordre des circuits "
+                     "est celui de l’énumération de la fiche",
         "proportion_chaleur": f"rendement dessiné au plancher de la fiche "
                               f"({ch['rendement_dessine']} %) : la bande qui "
                               f"revient vaut {C_H_CHALEUR * part:.1f} px, celle "
                               f"qui part {C_H_CHALEUR * (1 - part):.1f} px, "
                               f"pour {C_H_CHALEUR:.0f} px emportés du local",
-        "bas_du_dessin": f"dernier circuit jusqu'à {bandes[-1]['etiq']:.0f}, "
+        "bas_du_dessin": f"dernier circuit jusqu’à {bandes[-1]['etiq']:.0f}, "
                          f"mention à {y_mention:.0f}, phrase de principe à "
                          f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
                          f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
@@ -2640,15 +2640,15 @@ def composer_commande(donnees):
                             f"de la planche",
         "aplats_encre": f"bandes de chaleur {aplats:.0f} px², soit "
                         f"{aplats / (W * H) * 100:.2f} % de la planche — "
-                        "aplats d'encre sur papier (12,08), doublés d'une "
+                        "aplats d’encre sur papier (12,08), doublés d’une "
                         "mention mono chacun",
-        "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas "
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas "
                           "chiffrée (révision 4) ; les deux seuls nombres du "
                           "dessin sont les débits portés par leur machine "
                           f"({'/'.join(e['valeur'] for e in elements if e.get('valeur'))}"
                           " m³/h), et le troisième circuit porte à leur place la "
                           "mention de son absence",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -2728,8 +2728,8 @@ def composer_vignette_commande(donnees):
         "proportion_non_dessinee": "la part qui PART après la machine "
                  f"({100 - c['chaleur']['rendement_dessine']} % de {h_ch:.0f} px "
                  f"= {h_ch*(1-part):.1f} px, soit {h_ch*(1-part)*274/VW:.2f} px "
-                 "rendus dans une carte de 274) n'est pas dessinée : un "
-                 "sous-pixel n'est pas une proportion, c'est un arrondi. La "
+                 "rendus dans une carte de 274) n’est pas dessinée : un "
+                 "sous-pixel n’est pas une proportion, c’est un arrondi. La "
                  "planche la porte, la vignette la tait — comme elle tait ses "
                  "libellés",
         "bas_du_dessin": f"dernière ligne de commande à {bandes[-1]['cmd']:.0f}, "
@@ -2809,13 +2809,13 @@ def composer_appui_commande(donnees):
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
         motif="trois circuits nommés par leur local, les deux débits portés, "
-              "l'enveloppe traversée, et les trois lignes de commande avec la "
+              "l’enveloppe traversée, et les trois lignes de commande avec la "
               "zone où chacune naît ; la chaleur emportée du local et celle qui "
               "revient au troisième — machines nommées, légendes, mention et "
               "phrase laissées à la planche",
         proportion_non_dessinee="la part qui PART après la machine vaudrait "
-              f"{h_ch * (1 - part):.1f} px à l'échelle 1 : indiscernable du "
-              "conduit de 1,4 px qui la surmonte. Même arbitrage qu'à la "
+              f"{h_ch * (1 - part):.1f} px à l’échelle 1 : indiscernable du "
+              "conduit de 1,4 px qui la surmonte. Même arbitrage qu’à la "
               "vignette — seule la planche, à 1152, la dessine",
         bas=f"dernière étiquette de commande à {bandes[-1]['etiq']:.0f}, marge "
             f"basse {AH - bandes[-1]['etiq'] - 4:.0f} px",

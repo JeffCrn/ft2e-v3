@@ -210,6 +210,7 @@ l'échelle 0,24, quel que soit l'endroit où on le découpe.
 | Protocole de production (à coller en session neuve) | `docs/superpowers/specs/2026-08-12-planches-references-protocole.md` |
 | Compositeurs, un par archétype | `scripts/planches/<archetype>.py` (tronc commun : `scripts/planches/_tronc.py`) |
 | Versement d'une planche sur sa fiche | `scripts/planches/verser.py <slug>` — contrôles puis bascule du frontmatter |
+| Apostrophe typographique du corpus dessiné (contrôle et correction) | `scripts/apostrophes-planches.py` — sans argument il mesure, `--appliquer` il écrit ; ne courbe que les élisions françaises, refuse et nomme le reste |
 | Bilan de clôture du chantier et points ouverts | `docs/superpowers/plans/2026-08-12-chantier-planches-references.md` |
 | Rendu | `src/components/blocs/PlancheReference.astro` |
 

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Chronologie de principe des études d'exécution : de janvier à avril 2026, les réservations montent le bâtiment niveau par niveau — attentes au sol du rez-de-chaussée le 16 janvier, planchers bois du R+1 au R+4 en février, toiture début mars —, chaque diffusion figeant son niveau avant exécution, car rien ne se perce dans un plancher bois après coup ; suivent les plans d'exécution plomberie et chauffage-rafraîchissement, repris en trois versions jusqu'à la version 3 complète du 20 avril.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Chronologie de principe des études d’exécution : de janvier à avril 2026, les réservations montent le bâtiment niveau par niveau — attentes au sol du rez-de-chaussée le 16 janvier, planchers bois du R+1 au R+4 en février, toiture début mars —, chaque diffusion figeant son niveau avant exécution, car rien ne se perce dans un plancher bois après coup ; suivent les plans d’exécution plomberie et chauffage-rafraîchissement, repris en trois versions jusqu’à la version 3 complète du 20 avril.">
 <style>
   .c-profond { fill: var(--color-profond, #001718); }
   .c-encre { fill: var(--color-encre, #00393A); }
@@ -18,14 +18,14 @@
   .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 </style>
   <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · CALENDRIER DES ÉTUDES D'EXÉCUTION</text>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · CALENDRIER DES ÉTUDES D’EXÉCUTION</text>
   <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Résidence Horizon</text>
-  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Missionné par l'installateur : les réservations d'abord, les plans ensuite</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Missionné par l’installateur : les réservations d’abord, les plans ensuite</text>
   <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
   <rect x="968.00" y="182.00" width="14.00" height="8.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
   <text x="1144.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">NIVEAU FIGÉ AU DESSIN</text>
   <rect x="738.00" y="182.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
-  <text x="944.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">DIFFUSION À L'INSTALLATEUR</text>
+  <text x="944.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">DIFFUSION À L’INSTALLATEUR</text>
   <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES RÉSERVATIONS · CHAQUE NIVEAU SE FIGE AVANT SON EXÉCUTION</text>
   <path d="M 428.17 214.00 L 428.17 600.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
   <path d="M 655.93 214.00 L 655.93 600.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
@@ -33,7 +33,7 @@
   <text x="56.00" y="447.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">RDC</text>
   <path d="M 176.00 442.00 L 298.02 442.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
   <rect x="298.02" y="424.00" width="845.98" height="36.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
-  <text x="312.02" y="445.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">16 JANV · ATTENTES AU SOL · JOUR DE L'ÉCHÉANCE</text>
+  <text x="312.02" y="445.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">16 JANV · ATTENTES AU SOL · JOUR DE L’ÉCHÉANCE</text>
   <text x="56.00" y="405.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">R+1</text>
   <path d="M 176.00 400.00 L 468.84 400.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
   <rect x="468.84" y="382.00" width="675.16" height="36.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
@@ -58,9 +58,9 @@
   <rect x="636.16" y="270.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
   <rect x="684.97" y="228.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
   <path d="M 298.02 442.00 L 298.02 400.00 L 468.84 400.00 L 468.84 358.00 L 525.78 358.00 L 525.78 316.00 L 582.72 316.00 L 582.72 274.00 L 639.66 274.00 L 639.66 232.00 L 688.47 232.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
-  <text x="56.00" y="490.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES PLANS D'EXÉCUTION · TROIS VERSIONS</text>
+  <text x="56.00" y="490.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES PLANS D’EXÉCUTION · TROIS VERSIONS</text>
   <rect x="411.90" y="512.00" width="650.76" height="44.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
-  <text x="425.90" y="531.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Plans d'exécution — plomberie, chauffage-rafraîchissement</text>
+  <text x="425.90" y="531.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Plans d’exécution — plomberie, chauffage-rafraîchissement</text>
   <text x="425.90" y="548.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AVEC LEURS NOTES DE CALCUL · TOUS NIVEAUX</text>
   <path d="M 411.90 508.00 L 411.90 520.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
   <path d="M 411.90 548.00 L 411.90 562.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
@@ -84,6 +84,6 @@
   <text x="782.02" y="620.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">MARS</text>
   <text x="1026.05" y="620.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">AVRIL</text>
   <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Les étages portent sur des planchers bois : rien ne se perce après coup, tout se réserve au dessin.</text>
-  <rect x="56.00" y="714.00" width="253.00" height="30.00" class="c-profond" fill="#001718"/>
+  <rect x="56.00" y="714.00" width="258.00" height="30.00" class="c-profond" fill="#001718"/>
   <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LA ROCHELLE · 864 m² · 2026</text>
 </svg>

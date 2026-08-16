@@ -1,16 +1,16 @@
 {
   "fiche": "etude-notariale-boulevard-joffre",
   "archetype": "coupe-traversee",
-  "archetype_motif": "La thèse de la fiche est une histoire d'enveloppe et d'empilement : trois niveaux sur une parcelle urbaine étroite que le bâtiment doit enjamber — le plancher du premier étage passe au-dessus d'un passage voiture et se traite comme un plancher sur l'extérieur — et, le besoin bioclimatique ressortant à un dixième de point du plafond, « la conformité s'est jouée sur la seule enveloppe, portée partout où elle pouvait l'être ». C'est une coupe de principe, mais son mécanisme est nouveau : ni l'enveloppe traversée de Marennes ni l'équilibre d'air de Villedoux — ici l'enveloppe doit fermer des faces qu'un bâtiment ordinaire n'a pas : le dessous du plancher au-dessus du vide, la fosse d'ascenseur sous le sol, chaque about de dalle. Ni boucle-fluide (le DRV n'est pas la thèse), ni sankey (pas de bilan de flux à largeurs comparables), ni chronologie (la commande de l'installateur est une anecdote contractuelle, pas la démonstration).",
-  "surtitre": "SCHÉMA DE PRINCIPE · L'ENVELOPPE D'UNE PARCELLE ENJAMBÉE",
+  "archetype_motif": "La thèse de la fiche est une histoire d’enveloppe et d’empilement : trois niveaux sur une parcelle urbaine étroite que le bâtiment doit enjamber — le plancher du premier étage passe au-dessus d’un passage voiture et se traite comme un plancher sur l’extérieur — et, le besoin bioclimatique ressortant à un dixième de point du plafond, « la conformité s’est jouée sur la seule enveloppe, portée partout où elle pouvait l’être ». C’est une coupe de principe, mais son mécanisme est nouveau : ni l’enveloppe traversée de Marennes ni l’équilibre d’air de Villedoux — ici l’enveloppe doit fermer des faces qu’un bâtiment ordinaire n’a pas : le dessous du plancher au-dessus du vide, la fosse d’ascenseur sous le sol, chaque about de dalle. Ni boucle-fluide (le DRV n’est pas la thèse), ni sankey (pas de bilan de flux à largeurs comparables), ni chronologie (la commande de l’installateur est une anecdote contractuelle, pas la démonstration).",
+  "surtitre": "SCHÉMA DE PRINCIPE · L’ENVELOPPE D’UNE PARCELLE ENJAMBÉE",
   "titre": "Étude notariale Joffre",
-  "sous_titre": "L'enveloppe ferme chaque face d'un bâtiment qui enjambe sa parcelle",
+  "sous_titre": "L’enveloppe ferme chaque face d’un bâtiment qui enjambe sa parcelle",
   "cartouche_legende": "LA ROCHELLE · 381 m² · 2024",
-  "aria_label": "Coupe de principe de l'enveloppe : trois niveaux de bureaux empilés sur une parcelle étroite que le bâtiment enjambe — le plancher du premier étage passe au-dessus d'un passage voiture et se traite comme un plancher sur l'extérieur. L'isolation ferme chaque face : 180 mm d'isolant intérieur sur les murs, 140 mm de polyuréthane au dernier étage, 200 mm en toiture-terrasse, 480 mm de laine de verre sous les combles, rupteurs de ponts thermiques à chaque plancher intermédiaire et cage d'ascenseur isolée jusqu'à sa fosse.",
+  "aria_label": "Coupe de principe de l’enveloppe : trois niveaux de bureaux empilés sur une parcelle étroite que le bâtiment enjambe — le plancher du premier étage passe au-dessus d’un passage voiture et se traite comme un plancher sur l’extérieur. L’isolation ferme chaque face : 180 mm d’isolant intérieur sur les murs, 140 mm de polyuréthane au dernier étage, 200 mm en toiture-terrasse, 480 mm de laine de verre sous les combles, rupteurs de ponts thermiques à chaque plancher intermédiaire et cage d’ascenseur isolée jusqu’à sa fosse.",
   "enjambement": {
-    "entete": "TROIS NIVEAUX EMPILÉS, UN PASSAGE ENJAMBÉ — L'ENVELOPPE FERME CHAQUE FACE",
+    "entete": "TROIS NIVEAUX EMPILÉS, UN PASSAGE ENJAMBÉ — L’ENVELOPPE FERME CHAQUE FACE",
     "registres": {
-      "gauche": "L'ENVELOPPE, FACE PAR FACE",
+      "gauche": "L’ENVELOPPE, FACE PAR FACE",
       "droite": "LA PARCELLE ENJAMBÉE"
     },
     "niveaux": [
@@ -29,17 +29,17 @@
         "valeur": "",
         "unite": "",
         "detail": [
-          "TRAITÉ EN PLANCHER SUR L'EXTÉRIEUR"
+          "TRAITÉ EN PLANCHER SUR L’EXTÉRIEUR"
         ]
       },
       {
         "ordre": 2,
         "cle": "murs",
-        "libelle": "Murs, isolés par l'intérieur",
+        "libelle": "Murs, isolés par l’intérieur",
         "valeur": "180",
         "unite": "mm",
         "detail": [
-          "180 mm D'ISOLANT INTÉRIEUR"
+          "180 mm D’ISOLANT INTÉRIEUR"
         ]
       },
       {
@@ -79,13 +79,13 @@
         "valeur": "200",
         "unite": "mm",
         "detail": [
-          "200 mm D'ISOLANT"
+          "200 mm D’ISOLANT"
         ]
       },
       {
         "ordre": 7,
         "cle": "ascenseur",
-        "libelle": "Cage d'ascenseur",
+        "libelle": "Cage d’ascenseur",
         "valeur": "",
         "unite": "",
         "detail": [
@@ -96,8 +96,8 @@
   },
   "releve": [],
   "releve_secondaire": [],
-  "phrase_principe": "La conformité s'est donc jouée sur la seule enveloppe, portée partout où elle pouvait l'être.",
-  "vignette_surtitre": "L'ENVELOPPE, DESSOUS COMPRIS",
+  "phrase_principe": "La conformité s’est donc jouée sur la seule enveloppe, portée partout où elle pouvait l’être.",
+  "vignette_surtitre": "L’ENVELOPPE, DESSOUS COMPRIS",
   "a_valider_ft2e": [
     {
       "objet": "La paroi du dernier étage qui reçoit les 140 mm de polyuréthane",
@@ -106,13 +106,13 @@
     },
     {
       "objet": "La toiture-terrasse et la terrasse accessible sont-elles la même toiture",
-      "la_source_affirme": "« 200 mm en toiture-terrasse » d'une part ; « trois bureaux et la salle de réunion, ouverts sur une terrasse accessible » d'autre part — la fiche ne dit pas si c'est le même ouvrage.",
-      "le_dessin_suppose": "Une seule et même terrasse : l'isolant de 200 mm posé sur la toiture-terrasse accessible qui couvre la travée enjambante, au droit du passage. À corriger si la toiture-terrasse est un autre pan."
+      "la_source_affirme": "« 200 mm en toiture-terrasse » d’une part ; « trois bureaux et la salle de réunion, ouverts sur une terrasse accessible » d’autre part — la fiche ne dit pas si c’est le même ouvrage.",
+      "le_dessin_suppose": "Une seule et même terrasse : l’isolant de 200 mm posé sur la toiture-terrasse accessible qui couvre la travée enjambante, au droit du passage. À corriger si la toiture-terrasse est un autre pan."
     },
     {
       "objet": "La position du passage voiture dans la parcelle",
-      "la_source_affirme": "« Le plancher du premier étage passe au-dessus d'un passage voiture » — sans situer le passage ni donner la part de l'emprise qu'il occupe.",
-      "le_dessin_suppose": "Un passage sous un flanc du bâtiment, le rez-de-chaussée occupant l'autre, pour environ un tiers de la largeur dessinée — proportion de principe, pas d'implantation."
+      "la_source_affirme": "« Le plancher du premier étage passe au-dessus d’un passage voiture » — sans situer le passage ni donner la part de l’emprise qu’il occupe.",
+      "le_dessin_suppose": "Un passage sous un flanc du bâtiment, le rez-de-chaussée occupant l’autre, pour environ un tiers de la largeur dessinée — proportion de principe, pas d’implantation."
     },
     {
       "objet": "Le sens de circulation du passage",
@@ -120,9 +120,9 @@
       "le_dessin_suppose": "Une flèche qui traverse le vide dans le plan de la coupe — un sens de lecture, pas un sens de circulation relevé."
     },
     {
-      "objet": "La position de l'ascenseur et de sa fosse",
-      "la_source_affirme": "« Trois niveaux, un ascenseur » et « isolation de la cage d'ascenseur, fosse comprise » — sans plan d'implantation.",
-      "le_dessin_suppose": "Une cage au cœur du rez-de-chaussée, sa fosse descendant sous le niveau du sol — c'est la fosse sous le sol qui porte le principe, pas sa position en plan."
+      "objet": "La position de l’ascenseur et de sa fosse",
+      "la_source_affirme": "« Trois niveaux, un ascenseur » et « isolation de la cage d’ascenseur, fosse comprise » — sans plan d’implantation.",
+      "le_dessin_suppose": "Une cage au cœur du rez-de-chaussée, sa fosse descendant sous le niveau du sol — c’est la fosse sous le sol qui porte le principe, pas sa position en plan."
     },
     {
       "objet": "Le nombre et la position des rupteurs dessinés",
@@ -132,43 +132,43 @@
     {
       "objet": "Le millésime du cartouche",
       "la_source_affirme": "Affaire ouverte en 2024 (champ annee), statut en cours — les opérations préalables à la réception étaient annoncées pour la mi-décembre 2025, sans réception prononcée sur pièce.",
-      "le_dessin_suppose": "Que le cartouche porte 2024, millésime d'ouverture, tant que la réception n'est pas prononcée — à basculer sur le millésime de réception quand la fiche recevra son annee_livraison."
+      "le_dessin_suppose": "Que le cartouche porte 2024, millésime d’ouverture, tant que la réception n’est pas prononcée — à basculer sur le millésime de réception quand la fiche recevra son annee_livraison."
     },
     {
       "objet": "Un gabarit sans proportion",
-      "la_source_affirme": "Trois niveaux de 110, 151 et 119 m² utiles, une parcelle « étroite » — aucune cote d'élévation.",
-      "le_dessin_suppose": "Des hauteurs d'étage égales et une largeur de principe : aucune proportion réelle de l'ouvrage n'est reprise, et c'est voulu (règle 4). Les surfaces par niveau ne montent pas sur le dessin."
+      "la_source_affirme": "Trois niveaux de 110, 151 et 119 m² utiles, une parcelle « étroite » — aucune cote d’élévation.",
+      "le_dessin_suppose": "Des hauteurs d’étage égales et une largeur de principe : aucune proportion réelle de l’ouvrage n’est reprise, et c’est voulu (règle 4). Les surfaces par niveau ne montent pas sur le dessin."
     },
     {
-      "objet": "La phrase de principe s'arrête où la fiche ouvre une énumération",
-      "la_source_affirme": "« La conformité s'est donc jouée sur la seule enveloppe, portée partout où elle pouvait l'être : 180 mm d'isolant intérieur sur les murs, … » — la phrase continue par la liste des couches.",
+      "objet": "La phrase de principe s’arrête où la fiche ouvre une énumération",
+      "la_source_affirme": "« La conformité s’est donc jouée sur la seule enveloppe, portée partout où elle pouvait l’être : 180 mm d’isolant intérieur sur les murs, … » — la phrase continue par la liste des couches.",
       "le_dessin_suppose": "Que la citation se clôt par un point avant le deux-points, la liste étant précisément ce que le dessin montre. Dire si une autre phrase de la fiche est préférée."
     },
     {
-      "objet": "Une ligne d'enveloppe continue",
+      "objet": "Une ligne d’enveloppe continue",
       "la_source_affirme": "La fiche liste les faces isolées une à une, sans décrire leurs raccords.",
-      "le_dessin_suppose": "Une ligne isolante dessinée continue de face en face — c'est le principe que la liste implique, pas un détail d'exécution constaté."
+      "le_dessin_suppose": "Une ligne isolante dessinée continue de face en face — c’est le principe que la liste implique, pas un détail d’exécution constaté."
     }
   ],
   "exclusions_appliquees": [
-    "Numéro d'affaire 24-006 (champ reference) — il encode le volume annuel d'affaires du bureau.",
-    "Noms de tiers : SCI Objectif Neptune (MOA), UBIK architectes, BET structures SETTEC, l'entreprise titulaire du lot chauffage-ventilation.",
-    "Les résultats réglementaires chiffrés — Bbio 95,9 pour un plafond de 96, Cep 72,90 pour 91,50, part non renouvelable 72,90 pour 80,70, impact carbone de l'énergie 85,60 pour 215,30, confort d'été 497,9 degrés-heures pour 1 150 : le champ performance et le récit de la fiche les portent déjà, ils ne montent pas sur la planche (révision 4).",
-    "Le système à débit de réfrigérant variable — une unité extérieure, 154 m de liaisons, douze unités gainables de 2,2 à 3,6 kW, 33,6 kW en froid et 38 kW en chaud —, la double flux à sondes CO₂ et la climatisation de la baie de brassage : matière d'une boucle-fluide, pas de la thèse d'enveloppe.",
-    "La chronologie de l'affaire : proposition d'honoraires du 15 janvier 2024, ordre de service du 2 décembre 2024, quinze lots, 45 comptes rendus jusqu'au 25 novembre 2025, neuf observations d'octobre 2025, réception annoncée à la mi-décembre 2025 — matière d'une chronologie-affaire.",
-    "La commande du calcul des déperditions pièce par pièce (norme EN 12831) passée par l'installateur en janvier 2025 — anecdote contractuelle du récit, pas un organe de l'enveloppe.",
+    "Numéro d’affaire 24-006 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Noms de tiers : SCI Objectif Neptune (MOA), UBIK architectes, BET structures SETTEC, l’entreprise titulaire du lot chauffage-ventilation.",
+    "Les résultats réglementaires chiffrés — Bbio 95,9 pour un plafond de 96, Cep 72,90 pour 91,50, part non renouvelable 72,90 pour 80,70, impact carbone de l’énergie 85,60 pour 215,30, confort d’été 497,9 degrés-heures pour 1 150 : le champ performance et le récit de la fiche les portent déjà, ils ne montent pas sur la planche (révision 4).",
+    "Le système à débit de réfrigérant variable — une unité extérieure, 154 m de liaisons, douze unités gainables de 2,2 à 3,6 kW, 33,6 kW en froid et 38 kW en chaud —, la double flux à sondes CO₂ et la climatisation de la baie de brassage : matière d’une boucle-fluide, pas de la thèse d’enveloppe.",
+    "La chronologie de l’affaire : proposition d’honoraires du 15 janvier 2024, ordre de service du 2 décembre 2024, quinze lots, 45 comptes rendus jusqu’au 25 novembre 2025, neuf observations d’octobre 2025, réception annoncée à la mi-décembre 2025 — matière d’une chronologie-affaire.",
+    "La commande du calcul des déperditions pièce par pièce (norme EN 12831) passée par l’installateur en janvier 2025 — anecdote contractuelle du récit, pas un organe de l’enveloppe.",
     "La zone de bruit BR3 et les locaux retenus climatisés — hypothèses de calcul, matière du texte.",
-    "Toute géométrie d'ouvrage : la coupe est un gabarit de principe, sans proportion, élévation ni implantation réelles (règle 4)."
+    "Toute géométrie d’ouvrage : la coupe est un gabarit de principe, sans proportion, élévation ni implantation réelles (règle 4)."
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "la ligne isolante (bandes claires) ferme chaque face de l'empilement, y compris trois faces qu'un bâtiment ordinaire n'a pas : SOUS la dalle du R+1 au-dessus du vide du passage (l'extérieur y est fléché vers le haut), autour de la fosse d'ascenseur SOUS le sol, et à chaque about de dalle, ponté d'un rupteur — texte masqué, la bande continue et le vide traversé par la flèche suffisent à lire l'enjambement",
+    "demonstration": "la ligne isolante (bandes claires) ferme chaque face de l’empilement, y compris trois faces qu’un bâtiment ordinaire n’a pas : SOUS la dalle du R+1 au-dessus du vide du passage (l’extérieur y est fléché vers le haut), autour de la fosse d’ascenseur SOUS le sol, et à chaque about de dalle, ponté d’un rupteur — texte masqué, la bande continue et le vide traversé par la flèche suffisent à lire l’enjambement",
     "topologie": "appels gauche (x 56–306) → coupe (x 430–810, sol 640, toit 261, passage x 680–804 sous la dalle 530) → appels droite (x 852–1144) ; fosse y 640–670",
-    "bandes": "épaisseur = épaisseur d'isolant x 0.0389 px/mm : murs 7.0 px (180 mm), polyuréthane 5.4 px (140 mm), laine de verre 18.7 px (480 mm), toiture-terrasse 7.8 px (200 mm) — le plancher sur le passage et la fosse, dont la fiche ne fixe pas l'épaisseur, sont au trait minimal de 5 px",
-    "bas_du_dessin": "sol à 640, fosse jusqu'à 670, dernier appel à 602, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 253 x 30 px = 7590 px², soit 0.79 % de la planche",
-    "chiffre_unique": "aucun chiffre de relevé — les résultats RE2020 restent à la page (révision 4) ; les épaisseurs d'isolant sont des cotes mono 10 pivot dans les appels",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "bandes": "épaisseur = épaisseur d’isolant x 0.0389 px/mm : murs 7.0 px (180 mm), polyuréthane 5.4 px (140 mm), laine de verre 18.7 px (480 mm), toiture-terrasse 7.8 px (200 mm) — le plancher sur le passage et la fosse, dont la fiche ne fixe pas l’épaisseur, sont au trait minimal de 5 px",
+    "bas_du_dessin": "sol à 640, fosse jusqu’à 670, dernier appel à 602, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 258 x 30 px = 7740 px², soit 0.81 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — les résultats RE2020 restent à la page (révision 4) ; les épaisseurs d’isolant sont des cotes mono 10 pivot dans les appels",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "phrase_principe": "93 signes — 790 px mesurés pour 1088 disponibles",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
@@ -176,14 +176,14 @@
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
-    "motif": "deux traits : la silhouette encrée à encoche de passage, la ligne isolante claire qui la double — dessous du plancher et fosse compris — une flèche qui sort par l'encoche, deux nœuds chiffrés ; dalles, rupteurs, niveaux et appels sont laissés à la planche",
-    "bas_du_dessin": "fosse jusqu'à 189 px, marge basse 11 px"
+    "motif": "deux traits : la silhouette encrée à encoche de passage, la ligne isolante claire qui la double — dessous du plancher et fosse compris — une flèche qui sort par l’encoche, deux nœuds chiffrés ; dalles, rupteurs, niveaux et appels sont laissés à la planche",
+    "bas_du_dessin": "fosse jusqu’à 189 px, marge basse 11 px"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "l'empilement aux niveaux nommés, le passage voiture fléché sous la dalle isolée, la ligne isolante complète — dessous, terrasse et fosse compris, quatre abouts pontés — et trois nœuds chiffrés à l'échelle 1 ; flèches d'extérieur, appels, phrase et cartouche laissés à la planche",
-    "bas_du_dessin": "fosse jusqu'à 344 px, marge basse 24 px"
+    "motif": "l’empilement aux niveaux nommés, le passage voiture fléché sous la dalle isolée, la ligne isolante complète — dessous, terrasse et fosse compris, quatre abouts pontés — et trois nœuds chiffrés à l’échelle 1 ; flèches d’extérieur, appels, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "fosse jusqu’à 344 px, marge basse 24 px"
   }
 }

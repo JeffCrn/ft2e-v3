@@ -210,7 +210,7 @@ def composer(donnees, slug):
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
         "gabarit_schema": f"flux de {BANDE_X0} à {BANDE_X1} px, nœuds étiquetés "
-                          f"jusqu'à {W - MARGE} px — schéma pleine largeur, colonne "
+                          f"jusqu’à {W - MARGE} px — schéma pleine largeur, colonne "
                           f"de relevé supprimée (révision 4)",
         "bouclage_bandes": " + ".join(str(s["valeur"]) for s in sources)
                            + f" = {total}{NN}{sk['unite']} ; "
@@ -219,14 +219,14 @@ def composer(donnees, slug):
         "part_enveloppe_dans_la_hauteur":
             f"{sources[-1]['valeur']} / {total} = "
             f"{sources[-1]['valeur']/total*100:.3f} %",
-        "bas_du_dessin": f"bandes jusqu'à {bas_bandes:.2f} px, libellés jusqu'à "
+        "bas_du_dessin": f"bandes jusqu’à {bas_bandes:.2f} px, libellés jusqu’à "
                          f"{bas_libelles:.2f} px — note de pied à {y_note:.2f}, "
                          f"phrase de principe à 688, cartouche 714–744, "
                          f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
         "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
                             f"{largeur*H_CARTOUCHE} px², soit "
                             f"{largeur*H_CARTOUCHE/(W*H)*100:.2f} % de la planche",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 "
                          f"(1152 / {W})",
     }
     return "\n".join(out) + "\n", controles
@@ -385,10 +385,10 @@ def composer_appui(donnees):
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
         motif="les six bandes proportionnelles et les deux nœuds chiffrés à "
-              "l'échelle 1 ; libellés portés par les bandes assez hautes "
-              "(plus l'enveloppe) — valeurs par poste, détails et note de "
+              "l’échelle 1 ; libellés portés par les bandes assez hautes "
+              "(plus l’enveloppe) — valeurs par poste, détails et note de "
               "pied laissés à la planche",
-        bas=f"bandes jusqu'à {poses[-1]['y1']:.0f} px, marge basse "
+        bas=f"bandes jusqu’à {poses[-1]['y1']:.0f} px, marge basse "
             f"{AH - poses[-1]['y1']:.0f} px")
 
 
@@ -544,7 +544,7 @@ def composer_plafonds(donnees):
 
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "demonstration": "trois pistes à la même origine et à l'échelle commune "
+        "demonstration": "trois pistes à la même origine et à l’échelle commune "
                          f"de {P_K:.0f} px par kg éq. CO₂/m² : plafonds de "
                          f"{bats[0]['plafond']:.0f}, {bats[1]['plafond']:.0f} et "
                          f"{bats[2]['plafond']:.0f} px, remplissages de "
@@ -560,15 +560,15 @@ def composer_plafonds(donnees):
                     f"{bats[2]['cellules']} = "
                     f"{sum(b['cellules'] for b in bats)} logements — la géométrie "
                     "code le nombre, jamais la surface",
-        "bas_du_dessin": f"rangs A/B/C jusqu'à {bas_a:.0f}, {bas_b:.0f} et "
-                         f"{bas_c:.0f} px, seuil prolongé jusqu'à "
+        "bas_du_dessin": f"rangs A/B/C jusqu’à {bas_a:.0f}, {bas_b:.0f} et "
+                         f"{bas_c:.0f} px, seuil prolongé jusqu’à "
                          f"{y_c + 6 + P_H + 14:.0f}, phrase de principe à 688, "
                          f"cartouche 714–744, marge basse {H - 744} px",
         "reserve_profonde": f"cartouche {largeur} x 30 px = {largeur * 30} px², "
                             f"soit {largeur * 30 / (W * H) * 100:.2f} % de la planche",
         "chiffre_unique": "aucun chiffre de relevé — les six valeurs des pistes "
                           "sont des cotes mono 10 et 12 (révision 4)",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -638,7 +638,7 @@ def composer_vignette_plafonds(donnees):
         "motif": "trois pistes à échelle commune, le double trait de la "
                  "frontière, le seuil prolongé et les couples résultat / "
                  "plafond — cellules, compositions et légende laissées à la planche",
-        "bas_du_dessin": "piste C jusqu'à 158 px, marge basse "
+        "bas_du_dessin": "piste C jusqu’à 158 px, marge basse "
                          f"{VH - 158} px",
     }
     return "\n".join(out) + "\n", controles
@@ -697,11 +697,11 @@ def composer_appui_plafonds(donnees):
 
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
-        motif="les trois pistes à l'échelle 1, la frontière à double trait et "
+        motif="les trois pistes à l’échelle 1, la frontière à double trait et "
               "sa mention, le seuil prolongé, les couples résultat / plafond "
               "et la légende des deux signes — cellules, compositions et "
               "détails de générateur laissés à la planche",
-        bas="légende jusqu'à 296 px, marge basse 72 px")
+        bas="légende jusqu’à 296 px, marge basse 72 px")
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -887,7 +887,7 @@ def composer_dedoublement(donnees):
     total = sum(p["f"]["logements"] for p in poses)
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "demonstration": f"une barre d'origine contiguë de {bas_barre - DD_Y0:.0f} px "
+        "demonstration": f"une barre d’origine contiguë de {bas_barre - DD_Y0:.0f} px "
                          f"(90 logements à {DD_PXL:.0f} px) qui fourche en deux "
                          f"groupes divergents de ±{DD_ECART:.0f} px, traversés par "
                          f"une bande calcaire unique (x {bx0:.0f}–{bx1:.0f}) — "
@@ -906,7 +906,7 @@ def composer_dedoublement(donnees):
         "segments": " + ".join(str(len(g["a"]["batiments"])) for g in groupes)
                     + " = 5 bâtiments — la géométrie code le nombre, jamais "
                       "la contenance",
-        "bas_du_dessin": f"arrivées jusqu'à {bas_arrivees:.0f} px, bande nommée à "
+        "bas_du_dessin": f"arrivées jusqu’à {bas_arrivees:.0f} px, bande nommée à "
                          f"{bande_y1 + 24:.0f} et {bande_y1 + 40:.0f}, phrase de "
                          f"principe à 688, cartouche 714–744, marge basse "
                          f"{H - 744} px",
@@ -915,7 +915,7 @@ def composer_dedoublement(donnees):
         "chiffre_unique": "aucun chiffre de relevé — les comptes des flux sont "
                           "des libellés Archivo 15 et des cotes mono 10 "
                           "(révision 4)",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -975,7 +975,7 @@ def composer_vignette_dedoublement(donnees):
         "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — "
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
-        "motif": "la barre d'origine, les trois rubans proportionnels, la bande "
+        "motif": "la barre d’origine, les trois rubans proportionnels, la bande "
                  "unique nommée et les deux arrivées avec leur total — libellés "
                  "de flux, certifications et permis laissés à la planche",
         "bas_du_dessin": f"bande nommée à 168 px, marge basse {VH - 168} px",
@@ -1025,7 +1025,7 @@ def composer_appui_dedoublement(donnees):
 
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
-        motif="la fourche complète à l'échelle 1 avec ses trois comptes, la "
+        motif="la fourche complète à l’échelle 1 avec ses trois comptes, la "
               "bande unique nommée, les cinq bâtiments en segments lettrés, "
               "le permis et la ligne de résumé — libellés de flux et "
               "certifications laissés à la planche",
@@ -1178,7 +1178,7 @@ def composer_bascule(donnees):
              z1["w"] - 2 * BC_SRC_PAD, f"détail zone 1 {i}")
     mono(W - MARGE, BC_TAG_AXE_Y, pose_bilan["z"]["tag"], 420, "tag zone 2",
          ancre="end")
-    mono(MARGE, BC_TAG_AXE_Y, bc["tag_axe"], 420, "tag d'axe")
+    mono(MARGE, BC_TAG_AXE_Y, bc["tag_axe"], 420, "tag d’axe")
 
     # ── Les filets de projection : la colonne de la zone descend sur l'axe ───
     for x in (pose_bilan["x0"], pose_bilan["x1"]):
@@ -1254,7 +1254,7 @@ def composer_bascule(donnees):
                          f"({-bilan:.1f} unités) — rapport {h_colonne/h_bande:.2f}, "
                          f"soit celui des deux valeurs ({-bilan/seuil:.2f}). Texte "
                          "masqué : une flèche qui plonge dans le dixième droit "
-                         "d'une bande large, une mince bande claire, une colonne "
+                         "d’une bande large, une mince bande claire, une colonne "
                          "qui pend deux fois et demie plus bas",
         "echelle": f"{k:.5f} px par {bc['unite']} — origine AU ZÉRO "
                    f"(y {y_zero:.2f}), plafond +{seuil:.0f} à y {BC_SEUIL_Y:.0f}, "
@@ -1282,7 +1282,7 @@ def composer_bascule(donnees):
         "chiffre_unique": f"un seul chiffre de relevé — {bilan_e['valeur']} en "
                           "encre pleine (Archivo 40) ; le plafond "
                           f"{seuil_e['valeur']} est une cote mono 10",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 "
                          f"(1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",

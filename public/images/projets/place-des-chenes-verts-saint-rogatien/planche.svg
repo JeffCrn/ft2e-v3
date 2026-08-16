@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de l'autonomie des cinq locaux. Sous une enveloppe continue — combles isolés par 400 mm de laine de verre, murs en blocs doublés de 160 mm, plancher de terre-plein isolé par 100 mm sous chape — cinq cellules ne partagent aucun équipement. Chacune descend du réseau public son propre comptage, puis porte sa pompe à chaleur air-air en multisplit à trois cassettes, sa ventilation mécanique contrôlée simple flux et son ballon d'eau chaude électrique de 50 litres. Deux cellules se distinguent, et pas la même : celle destinée à la restauration est comptée en 36 kVA triphasé quand les quatre autres le sont en 9 kVA monophasé ; l'agence postale ajoute seule un répartiteur voix-données-images et une centrale anti-intrusion. Aucune liaison ne traverse les refends.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de l’autonomie des cinq locaux. Sous une enveloppe continue — combles isolés par 400 mm de laine de verre, murs en blocs doublés de 160 mm, plancher de terre-plein isolé par 100 mm sous chape — cinq cellules ne partagent aucun équipement. Chacune descend du réseau public son propre comptage, puis porte sa pompe à chaleur air-air en multisplit à trois cassettes, sa ventilation mécanique contrôlée simple flux et son ballon d’eau chaude électrique de 50 litres. Deux cellules se distinguent, et pas la même : celle destinée à la restauration est comptée en 36 kVA triphasé quand les quatre autres le sont en 9 kVA monophasé ; l’agence postale ajoute seule un répartiteur voix-données-images et une centrale anti-intrusion. Aucune liaison ne traverse les refends.">
 <style>
   .c-profond { fill: var(--color-profond, #001718); }
   .c-encre { fill: var(--color-encre, #00393A); }
@@ -25,7 +25,7 @@
   <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
   <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES DEUX LOTS TECHNIQUES FT2E — CE QUE CHAQUE LOCAL PORTE SEUL, CE QUE LES CINQ PARTAGENT</text>
   <text x="224.00" y="214.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE RÉSEAU PUBLIC — UN COMPTAGE PAR LOCAL</text>
-  <text x="1144.00" y="214.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">AUCUNE LIAISON D'UN LOCAL À L'AUTRE</text>
+  <text x="1144.00" y="214.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">AUCUNE LIAISON D’UN LOCAL À L’AUTRE</text>
   <path d="M 224.00 236.00 L 1144.00 236.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
   <rect x="224.00" y="262.00" width="920.00" height="316.00" class="c-papier" fill="#F7F9FA"/>
   <path d="M 224.00 262.00 L 1144.00 262.00 L 1144.00 578.00 L 224.00 578.00 L 224.00 262.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
@@ -219,15 +219,15 @@
   <path d="M 1073.00 354.00 L 1124.00 374.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
   <rect x="1115.00" y="374.00" width="18.00" height="8.00" class="c-clair" fill="#99CCCD"/>
   <path d="M 1115.00 382.00 L 1133.00 382.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
-  <text x="224.00" y="602.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L'ENVELOPPE — LE SEUL OUVRAGE COMMUN AUX CINQ LOCAUX · COMBLES 400 mm · MURS 160 mm · TERRE-PLEIN 100 mm SOUS CHAPE</text>
+  <text x="224.00" y="602.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L’ENVELOPPE — LE SEUL OUVRAGE COMMUN AUX CINQ LOCAUX · COMBLES 400 mm · MURS 160 mm · TERRE-PLEIN 100 mm SOUS CHAPE</text>
   <path d="M 408.00 630.00 L 960.00 630.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
   <path d="M 408.00 625.00 L 408.00 635.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
   <path d="M 960.00 625.00 L 960.00 635.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
   <path d="M 408.50 630.00 L 415.50 626.50 L 415.50 633.50 Z" class="c-encre" fill="#00393A"/>
   <path d="M 959.50 630.00 L 952.50 626.50 L 952.50 633.50 Z" class="c-encre" fill="#00393A"/>
   <text x="684.00" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">TROIS LOCAUX LIBRES · 39,21 À 49,88 m²</text>
-  <text x="56.00" y="658.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HORS BÂTIMENT · LA SEULE CHAUFFERIE DE L'OPÉRATION EST CELLE DE LA SALLE VOISINE, REPRISE</text>
-  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Chaque local est autonome : son comptage, sa pompe à chaleur, sa ventilation, son ballon d'eau chaude, son alarme.</text>
+  <text x="56.00" y="658.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HORS BÂTIMENT · LA SEULE CHAUFFERIE DE L’OPÉRATION EST CELLE DE LA SALLE VOISINE, REPRISE</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Chaque local est autonome : son comptage, sa pompe à chaleur, sa ventilation, son ballon d’eau chaude, son alarme.</text>
   <rect x="56.00" y="714.00" width="283.00" height="30.00" class="c-profond" fill="#001718"/>
   <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SAINT-ROGATIEN · 247 m² · 2023</text>
 </svg>

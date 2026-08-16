@@ -227,21 +227,21 @@ def composer(donnees):
     barres_apres = sum(1 for zz in zones if zz.get("alarme"))
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "demonstration": f"barres d'alarme : {barres_avant} sur 1 bloc AVANT "
+        "demonstration": f"barres d’alarme : {barres_avant} sur 1 bloc AVANT "
                          f"(tout le site) contre {barres_apres} sur {len(zones)} "
                          f"blocs APRÈS — la géométrie porte la thèse, aucun "
-                         f"chiffre de la fiche n'est répété",
+                         f"chiffre de la fiche n’est répété",
         "topologie": f"événement (x {EVT_X}) → système (x {BOITE_X0}–"
                      f"{BOITE_X0 + BOITE_W}) → site (x {BLOC_X0}–{BLOC_X1}) ; "
                      f"tronc de distribution à x {TRONC_X}",
-        "bas_du_dessin": f"pile de zones jusqu'à {bas_zones:.0f} px, ligne hors "
+        "bas_du_dessin": f"pile de zones jusqu’à {bas_zones:.0f} px, ligne hors "
                          f"zonage à {Y_HORS}, phrase de principe à {Y_PHRASE}, "
                          f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
                          f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
         "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
                             f"{largeur * H_CARTOUCHE} px², soit "
                             f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % de la planche",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 "
                          f"(1152 / {W})",
         "depassements": depassements if depassements
                         else "aucun — toutes les lignes mesurées sous leur colonne",
@@ -401,11 +401,11 @@ def composer_appui(donnees):
 
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
-        motif=f"1 bloc AVANT (barre d'alarme sur tout, {avant['valeur']} m² "
+        motif=f"1 bloc AVANT (barre d’alarme sur tout, {avant['valeur']} m² "
               f"évacués) contre {len(zones)} zones APRÈS dont la provisionnée, "
               "barre et mention sur la seule zone en alarme, légende en tête — "
               "événement, systèmes et hors zonage laissés à la planche",
-        bas=f"pile de zones jusqu'à {y1} px, marge basse {AH - y1} px")
+        bas=f"pile de zones jusqu’à {y1} px, marge basse {AH - y1} px")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -644,10 +644,10 @@ def composer_transfert(donnees):
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
         "demonstration": "trois flèches, trois sens : le transfert traverse la "
-                         "paroi à l'horizontale (encre 2,5), la descente est "
-                         "barrée d'une croix, l'escalier extérieur monte vers "
-                         "l'étage — la géométrie porte la thèse, aucun chiffre "
-                         "de la fiche n'est répété",
+                         "paroi à l’horizontale (encre 2,5), la descente est "
+                         "barrée d’une croix, l’escalier extérieur monte vers "
+                         "l’étage — la géométrie porte la thèse, aucun chiffre "
+                         "de la fiche n’est répété",
         "topologie": f"alerte : événement (x {MARGE}) → centrale "
                      f"(x {T_BOITE_X0}–{T_BOITE_X0 + T_BOITE_W}) → départs "
                      f"(x {T_X_DEPART}) ; coupe : étage {T_E_Y0}–{T_E_Y1}, "
@@ -661,8 +661,8 @@ def composer_transfert(donnees):
                             f"{largeur * T_H_CARTOUCHE} px², soit "
                             f"{largeur * T_H_CARTOUCHE / (W * H) * 100:.2f} % "
                             f"de la planche (la paroi et les marques sont de "
-                            f"l'encre, pas de la réserve)",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+                            f"l’encre, pas de la réserve)",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "depassements": depassements if depassements
                         else "aucun — toutes les lignes mesurées sous leur colonne",
@@ -721,8 +721,8 @@ def composer_vignette_transfert(donnees):
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": "la coupe seule : deux zones, la paroi ouverte, la flèche qui "
-                 "la traverse, la descente barrée — l'alerte, l'escalier des "
-                 "secours et l'unité protégée sont laissés à la planche",
+                 "la traverse, la descente barrée — l’alerte, l’escalier des "
+                 "secours et l’unité protégée sont laissés à la planche",
         "bas_du_dessin": f"{r_y1} px, marge basse {VH - r_y1} px",
     }
     return "\n".join(out) + "\n", controles
@@ -794,9 +794,9 @@ def composer_appui_transfert(donnees):
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
         motif="la coupe entière : deux zones coupe-feu, la flèche de "
-              "transfert à travers la paroi, la descente barrée, l'unité "
-              "protégée du rez-de-chaussée, l'escalier des secours — "
-              "l'alerte (centrale et départs) reste à la planche",
+              "transfert à travers la paroi, la descente barrée, l’unité "
+              "protégée du rez-de-chaussée, l’escalier des secours — "
+              "l’alerte (centrale et départs) reste à la planche",
         bas=f"sol à {sol_y} px, notes de pied empilées à 316–332, "
             f"marge basse {AH - 332} px")
 
@@ -1001,7 +1001,7 @@ def composer_partage(donnees):
 
     # ── La ligne d'incendie : la même limite, une troisième fois ─────────────
     for l, y in zip(p["mention_separation"], P_Y_NOTES):
-        controler("ligne d'incendie", l, 10, "mono", UTILE, 10 * 0.14)
+        controler("ligne d’incendie", l, 10, "mono", UTILE, 10 * 0.14)
         A(texte(MARGE, y, l, "mono", 10, 500, "pivot", tracking=10 * 0.14))
 
     # ── Phrase de principe, pleine largeur ───────────────────────────────────
@@ -1022,22 +1022,22 @@ def composer_partage(donnees):
 
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
-        "demonstration": "une seule enveloppe fermée d'un trait continu qui "
+        "demonstration": "une seule enveloppe fermée d’un trait continu qui "
                          f"change de graisse à la limite ({P_TRAIT_FORT} côté "
                          f"mesuré, {P_TRAIT_FIN} côté par défaut) ; la limite "
                          "en trait interrompu — aucun mur ne la porte ; "
                          f"{rangees * par_rangee} cellules marquées chacune de "
                          "sa production contre 1 boîte collective — la "
                          "géométrie porte le partage, aucun chiffre de la "
-                         "fiche n'est répété",
+                         "fiche n’est répété",
         "partage": f"limite à x {x_lim:.1f} = {P_E_X0} + {P_E_X1 - P_E_X0} x "
                    f"{s_g:.2f} / ({s_g:.2f} + {s_d:.2f}) — {frac * 100:.1f} % "
                    f"/ {(1 - frac) * 100:.1f} % : la position code les deux "
                    "surfaces de la fiche",
         "cellules": f"{rangees} rangées de {par_rangee} cellules de "
                     f"{w_cell:.1f} x {P_H_CELL} px — le compte de la fiche, "
-                    "jamais l'implantation (règle 4)",
-        "bas_du_dessin": f"enveloppe jusqu'à {P_E_Y1}, mentions d'étanchéité à "
+                    "jamais l’implantation (règle 4)",
+        "bas_du_dessin": f"enveloppe jusqu’à {P_E_Y1}, mentions d’étanchéité à "
                          f"{P_Y_ETANCH}, incendie à {P_Y_NOTES[0]}–"
                          f"{P_Y_NOTES[1]}, phrase de principe à {P_Y_PHRASE}, "
                          f"cartouche {P_Y_CARTOUCHE}–"
@@ -1047,7 +1047,7 @@ def composer_partage(donnees):
                             f"{largeur * P_H_CARTOUCHE} px², soit "
                             f"{largeur * P_H_CARTOUCHE / (W * H) * 100:.2f} % "
                             "de la planche",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "depassements": depassements if depassements
                         else "aucun — toutes les lignes mesurées sous leur colonne",
@@ -1112,12 +1112,12 @@ def composer_vignette_partage(donnees):
         "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
-        "motif": "l'enveloppe au trait double, la limite interrompue au "
+        "motif": "l’enveloppe au trait double, la limite interrompue au "
                  f"partage des surfaces ({frac * 100:.0f} %), 14 cellules "
                  "contre 1 boîte, les deux régimes nommés et les deux niveaux "
-                 "d'étanchéité — étiquettes, productions et incendie sont "
+                 "d’étanchéité — étiquettes, productions et incendie sont "
                  "laissés à la planche",
-        "bas_du_dessin": "nœuds d'étanchéité à y 184, marge basse 16 px",
+        "bas_du_dessin": "nœuds d’étanchéité à y 184, marge basse 16 px",
     }
     return "\n".join(out) + "\n", controles
 
@@ -1169,7 +1169,7 @@ def composer_appui_partage(donnees):
 
     # La zone commune : trois lignes courtes, la colonne fait 110 px.
     dx = x_lim + 10
-    for k, l in enumerate(("L'ESPACE", "COMMUN", "RT2012")):
+    for k, l in enumerate(("L’ESPACE", "COMMUN", "RT2012")):
         A(texte(dx, 96 + k * 16, l, "mono", 10, 500, "pivot",
                 tracking=10 * 0.14))
     for k, l in enumerate(("UNE", "PRODUCTION", "COLLECTIVE")):
@@ -1184,13 +1184,13 @@ def composer_appui_partage(donnees):
 
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
-        motif="l'enveloppe au trait double fermant les deux zones, la limite "
+        motif="l’enveloppe au trait double fermant les deux zones, la limite "
               f"interrompue étiquetée au partage des surfaces ({frac * 100:.0f}"
               " %), 14 cellules marquées et leur légende contre la zone "
-              "commune nommée, les deux niveaux d'étanchéité en pied — "
+              "commune nommée, les deux niveaux d’étanchéité en pied — "
               "exigences, cotes de surface, boîte machine et incendie laissés "
               "à la planche",
-        bas="mentions d'étanchéité à y 322, marge basse 46 px")
+        bas="mentions d’étanchéité à y 322, marge basse 46 px")
 
 
 if __name__ == "__main__":

@@ -182,14 +182,17 @@
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "trois bandes de service et deux colonnes de deux boîtes ; dans chaque colonne UNE boîte enjambe une frontière de bande, jamais la même — à gauche le chauffe-eau enjambe y 528 (eau chaude → ventilation), à droite la PAC double service enjambe y 384 (chauffage → eau chaude) ; les deux petites boîtes restent dans leur bande — texte masqué, l'asymétrie des enjambements porte seule la thèse",
-    "topologie": "machines T2 (x 56–312) → liens → axe des services (x 600) ← liens ← machines T3 (x 888–1144) ; bandes chauffage y 252–372, eau chaude y 396–516, ventilation y 540–660 ; frontières y 384 et 528 — l'ordre des équipements est celui de la fiche, typologie par typologie",
-    "bas_du_dessin": "boîtes basses jusqu'à 660, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 318 x 30 px = 9540 px², soit 0.99 % de la planche",
-    "chiffre_unique": "aucun chiffre de relevé — la démonstration n'est pas chiffrée (révision 4) ; 4,40 kW, COP 4,63 et 4,95, 100 L et 190 L, 50/45 °C restent au mono 10 pivot dans les boîtes et sur les liens",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "demonstration": "trois bandes de service et deux colonnes de deux boîtes ; dans chaque colonne UNE boîte enjambe une frontière de bande, jamais la même — à gauche le chauffe-eau enjambe y 528 (eau chaude → ventilation), à droite la PAC double service enjambe y 384 (chauffage → eau chaude) ; les deux petites boîtes restent dans leur bande — texte masqué, l’asymétrie des enjambements porte seule la thèse",
+    "topologie": "machines T2 (x 56–312) → liens → axe des services (x 600) ← liens ← machines T3 (x 888–1144) ; bandes chauffage y 252–372, eau chaude y 396–516, ventilation y 540–660 ; frontières y 384 et 528 — l’ordre des équipements est celui de la fiche, typologie par typologie",
+    "bas_du_dessin": "boîtes basses jusqu’à 660, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 323 x 30 px = 9690 px², soit 1.01 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; 4,40 kW, COP 4,63 et 4,95, 100 L et 190 L, 50/45 °C restent au mono 10 pivot dans les boîtes et sur les liens",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "phrase_principe": "61 signes — 518 px mesurés pour 1088 disponibles",
-    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+    "depassements": [
+      "détail pac-air-air 2 : 228 px pour 224 px",
+      "détail pac-air-eau 1 : 228 px pour 224 px"
+    ]
   },
   "controles_vignette": {
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",

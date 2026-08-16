@@ -268,15 +268,15 @@
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "echelle": "27.5591 px/m, dérivée du tablier (700 px pour 25,40 m) — elle porte les trois longueurs et les deux hauteurs, rien d'autre",
-    "demonstration": "une arrivée, une barre, cinq départs, et trois frontières franchies : la TENSION (deux départs traversent la boîte des blocs et passent de 1,5 à 3 px de trait), le JOINT MOBILE (pointillé à x 712.6 ; deux cotes s'y rejoignent en sens contraire — câble 275.6 px contre course 187.4 px, soit 10 m contre 6,80 m à la même échelle), le RÉSEAU PUBLIC (descente barrée d'une croix vers un mât de 192.9 px, contre un mât de 137.8 px alimenté depuis la barre par le plus long départ)",
+    "echelle": "27.5591 px/m, dérivée du tablier (700 px pour 25,40 m) — elle porte les trois longueurs et les deux hauteurs, rien d’autre",
+    "demonstration": "une arrivée, une barre, cinq départs, et trois frontières franchies : la TENSION (deux départs traversent la boîte des blocs et passent de 1,5 à 3 px de trait), le JOINT MOBILE (pointillé à x 712.6 ; deux cotes s’y rejoignent en sens contraire — câble 275.6 px contre course 187.4 px, soit 10 m contre 6,80 m à la même échelle), le RÉSEAU PUBLIC (descente barrée d’une croix vers un mât de 192.9 px, contre un mât de 137.8 px alimenté depuis la barre par le plus long départ)",
     "topologie": "amont x 56–268 → coffret x 320–600 → descente x 460 → barre y 348, x 56–930 ; départs x 100, 170, 450, 710, 930 ; tablier y 502–550, x 200–900, joint à 712.6 ; enrouleur à 437.0 ; quai x 950–1144",
     "cotes_a_l_echelle": "25,40 m = 700 px · 6,80 m = 187.4 px · 10 m de câble = 275.6 px · 7,00 m = 192.9 px · 5,00 m = 137.8 px — rapport câble/course 1.471, conforme à 10 ÷ 6,80",
-    "linéaires_non_cotés": "les 43 m et 28 m de bandeau sont des CUMULS, portés en étiquette et jamais tracés à l'échelle ; la note du dessin le dit",
+    "linéaires_non_cotés": "les 43 m et 28 m de bandeau sont des CUMULS, portés en étiquette et jamais tracés à l’échelle ; la note du dessin le dit",
     "bas_du_dessin": "cote de câble à 614, départ du mât à 642, note à 664, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 310 x 30 px = 9300 px², soit 0.97 % de la planche",
+    "reserve_profonde": "cartouche 315 x 30 px = 9450 px², soit 0.98 % de la planche",
     "releve": "aucun — la démonstration est géométrique, les chiffres de la fiche restent à la fiche (révision 4)",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "phrase_principe": "111 signes — 944 px mesurés pour 1088 disponibles",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
@@ -284,16 +284,16 @@
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
-    "motif": "la barre et son éventail de cinq départs, le tablier coupé au joint (x 200.1), l'enrouleur et les deux cotes qui s'y rejoignent en sens contraire (64.6 px de câble contre 43.9 px de course), les deux mâts dont un barré — un seul nœud chiffré au texte, 48 V. Coffret, amont, réseau public et blocs de départ laissés à la planche : quatre rectangles muets mangeaient 40 % du dessin dans la carte de 274 px",
+    "motif": "la barre et son éventail de cinq départs, le tablier coupé au joint (x 200.1), l’enrouleur et les deux cotes qui s’y rejoignent en sens contraire (64.6 px de câble contre 43.9 px de course), les deux mâts dont un barré — un seul nœud chiffré au texte, 48 V. Coffret, amont, réseau public et blocs de départ laissés à la planche : quatre rectangles muets mangeaient 40 % du dessin dans la carte de 274 px",
     "bas_du_dessin": "cote de câble à 186, route du mât à 184 — marge basse 14 px, aucun trait ne touche un bord"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "le motif entier à l'échelle 1 : coffret, barre, cinq départs, le filet de conversion et ses deux tensions, tablier coupé au joint (x 333.1), enrouleur et les deux cotes qui s'y rejoignent (98.4 px de câble contre 66.9 px de course), deux mâts cotés dont un barré — trois nœuds chiffrés (48 V, 10 m, 6,80 m) ; amont, réseau public, note des linéaires, phrase et cartouche laissés à la planche",
+    "motif": "le motif entier à l’échelle 1 : coffret, barre, cinq départs, le filet de conversion et ses deux tensions, tablier coupé au joint (x 333.1), enrouleur et les deux cotes qui s’y rejoignent (98.4 px de câble contre 66.9 px de course), deux mâts cotés dont un barré — trois nœuds chiffrés (48 V, 10 m, 6,80 m) ; amont, réseau public, note des linéaires, phrase et cartouche laissés à la planche",
     "bas_du_dessin": "cote de câble à 322, route du mât à 336 — marge basse 32 px",
-    "ecart_des_mats": "mâts à x 440 et 505 : l'écart de 65 px est celui qu'imposent leurs deux étiquettes centrées (43 px chacune) ; la remontée du long départ passe à x 470, dans l'intervalle",
+    "ecart_des_mats": "mâts à x 440 et 505 : l’écart de 65 px est celui qu’imposent leurs deux étiquettes centrées (43 px chacune) ; la remontée du long départ passe à x 470, dans l’intervalle",
     "echelle": "9.8425 px/m, dérivée du tablier — même construction que la planche, à son échelle propre"
   }
 }

@@ -1,25 +1,25 @@
 {
   "fiche": "atelier-dufour-yachts-perigny",
   "archetype": "boucle-fluide",
-  "archetype_motif": "La thèse de la fiche est la boucle elle-même : les prescriptions CARSAT interdisent tout contact entre l'air extrait et l'air soufflé, et la solution étudiée échange les calories entre les deux flux par une boucle d'eau glycolée qui est seule à traverser. Le schéma suit cette traversée : deux conduits d'air superposés qui ne se rencontrent jamais, une boucle fermée entre leurs deux batteries, et le quart du besoin qui change de flux. La géométrie porte la démonstration — le seul trait qui relie les deux conduits est la paire de conduites de la boucle. Un sankey (déjà employé sur l'École des douanes) aurait montré la proportion reprise, pas le mécanisme qui la permet.",
+  "archetype_motif": "La thèse de la fiche est la boucle elle-même : les prescriptions CARSAT interdisent tout contact entre l’air extrait et l’air soufflé, et la solution étudiée échange les calories entre les deux flux par une boucle d’eau glycolée qui est seule à traverser. Le schéma suit cette traversée : deux conduits d’air superposés qui ne se rencontrent jamais, une boucle fermée entre leurs deux batteries, et le quart du besoin qui change de flux. La géométrie porte la démonstration — le seul trait qui relie les deux conduits est la paire de conduites de la boucle. Un sankey (déjà employé sur l’École des douanes) aurait montré la proportion reprise, pas le mécanisme qui la permet.",
   "surtitre": "SCHÉMA DE PRINCIPE · RÉCUPÉRATION DE CHALEUR FATALE",
   "titre": "Atelier Dufour Yachts",
   "sous_titre": "Un quart du besoin de chauffage repris sur un air que les prescriptions obligent à jeter",
   "cartouche_legende": "PÉRIGNY · 38 000 m³/h · 2026",
-  "aria_label": "Schéma de principe de la récupération de chaleur fatale : deux conduits d'air superposés ne se rencontrent jamais — en haut, l'air extrait du process passe sur une batterie de récupération avant d'être rejeté dehors ; en bas, les 38 000 m³/h d'air neuf imposés passent sur la seconde batterie, puis sur l'appoint gaz et la pompe à chaleur, avant d'être soufflés dans l'atelier. Une boucle d'eau glycolée, seule à traverser entre les deux conduits, reprend 146 045 kWh par an sur l'air extrait — le quart du besoin de chauffage.",
+  "aria_label": "Schéma de principe de la récupération de chaleur fatale : deux conduits d’air superposés ne se rencontrent jamais — en haut, l’air extrait du process passe sur une batterie de récupération avant d’être rejeté dehors ; en bas, les 38 000 m³/h d’air neuf imposés passent sur la seconde batterie, puis sur l’appoint gaz et la pompe à chaleur, avant d’être soufflés dans l’atelier. Une boucle d’eau glycolée, seule à traverser entre les deux conduits, reprend 146 045 kWh par an sur l’air extrait — le quart du besoin de chauffage.",
   "boucle": {
-    "entete": "LA ZONE DU PROCESS · 38 000 m³/h D'AIR NEUF IMPOSÉS PAR LES PRESCRIPTIONS CARSAT, SANS RECYCLAGE",
+    "entete": "LA ZONE DU PROCESS · 38 000 m³/h D’AIR NEUF IMPOSÉS PAR LES PRESCRIPTIONS CARSAT, SANS RECYCLAGE",
     "registres": {
       "gauche": "DEHORS",
-      "droite": "L'ATELIER · ZONE DU PROCESS"
+      "droite": "L’ATELIER · ZONE DU PROCESS"
     },
     "mention_separation": [
       "LES DEUX AIRS NE SE RENCONTRENT JAMAIS",
-      "SEULE L'EAU GLYCOLÉE TRAVERSE"
+      "SEULE L’EAU GLYCOLÉE TRAVERSE"
     ],
     "atelier": {
       "detail": [
-        "LE PROCÉDÉ D'INFUSION",
+        "LE PROCÉDÉ D’INFUSION",
         "DÉGAGE DES COV"
       ]
     },
@@ -27,11 +27,11 @@
       {
         "ordre": 1,
         "cle": "conduit-extrait",
-        "libelle": "L'air extrait du process",
+        "libelle": "L’air extrait du process",
         "etiquette_amont": "AIR EXTRAIT",
         "etiquette_aval": "AIR REJETÉ",
         "detail": [
-          "CHARGÉ EN COV PAR LE PROCÉDÉ D'INFUSION",
+          "CHARGÉ EN COV PAR LE PROCÉDÉ D’INFUSION",
           "REJETÉ DEHORS APRÈS ÉCHANGE"
         ]
       },
@@ -42,26 +42,26 @@
         "valeur": "158",
         "unite": "kW",
         "detail": [
-          "DANS LE FLUX D'AIR EXTRAIT"
+          "DANS LE FLUX D’AIR EXTRAIT"
         ]
       },
       {
         "ordre": 3,
         "cle": "boucle-glycol",
-        "libelle": "Boucle d'eau glycolée",
+        "libelle": "Boucle d’eau glycolée",
         "valeur": "146 045",
         "unite": "kWh/an",
-        "legende": "REPRIS SUR L'AIR EXTRAIT",
+        "legende": "REPRIS SUR L’AIR EXTRAIT",
         "mention": "LE QUART DU BESOIN DE CHAUFFAGE",
         "detail": [
-          "CIRCULATEUR · VASE D'EXPANSION",
-          "RÉGULATION · COMPTEURS D'ÉNERGIE"
+          "CIRCULATEUR · VASE D’EXPANSION",
+          "RÉGULATION · COMPTEURS D’ÉNERGIE"
         ]
       },
       {
         "ordre": 4,
         "cle": "conduit-neuf",
-        "libelle": "L'air neuf",
+        "libelle": "L’air neuf",
         "valeur": "38 000",
         "unite": "m³/h",
         "etiquette_amont": "AIR NEUF · 38 000 m³/h",
@@ -75,7 +75,7 @@
         "cle": "batterie-neuf",
         "libelle": "Batterie de récupération",
         "detail": [
-          "DANS LE FLUX D'AIR NEUF"
+          "DANS LE FLUX D’AIR NEUF"
         ]
       },
       {
@@ -84,7 +84,7 @@
         "libelle": "Appoint gaz",
         "detail": [
           "ANTIGIVRAGE",
-          "L'AIR RELEVÉ À +8 °C"
+          "L’AIR RELEVÉ À +8 °C"
         ]
       },
       {
@@ -99,33 +99,33 @@
   },
   "releve": [],
   "releve_secondaire": [],
-  "phrase_principe": "Les calories passent d'un flux à l'autre sans que les deux airs se rencontrent.",
+  "phrase_principe": "Les calories passent d’un flux à l’autre sans que les deux airs se rencontrent.",
   "vignette_surtitre": "CHALEUR FATALE RÉCUPÉRÉE",
   "a_valider_ft2e": [
     {
-      "objet": "L'ordre des modules dans la centrale de soufflage",
-      "la_source_affirme": "Le corps du récit cite la batterie, la pompe à chaleur et l'appoint gaz sans fixer leur ordre dans le flux ; seul le descriptif du visuel d'origine énumère « batterie de récupération, module gaz, module thermodynamique ».",
-      "le_dessin_suppose": "Cet ordre-là, repris tel quel : batterie, puis appoint gaz, puis pompe à chaleur. Confirmer qu'il correspond à la centrale réellement décrite dans l'étude."
+      "objet": "L’ordre des modules dans la centrale de soufflage",
+      "la_source_affirme": "Le corps du récit cite la batterie, la pompe à chaleur et l’appoint gaz sans fixer leur ordre dans le flux ; seul le descriptif du visuel d’origine énumère « batterie de récupération, module gaz, module thermodynamique ».",
+      "le_dessin_suppose": "Cet ordre-là, repris tel quel : batterie, puis appoint gaz, puis pompe à chaleur. Confirmer qu’il correspond à la centrale réellement décrite dans l’étude."
     },
     {
       "objet": "Un débit unique pour les deux conduits",
-      "la_source_affirme": "« Un renouvellement d'air de 38 000 m³/h » et « 38 000 m³/h d'air neuf imposés » — le débit d'extraction n'est jamais chiffré séparément.",
-      "le_dessin_suppose": "Deux conduits de même largeur, le chiffre posé sur le seul air neuf. Dire si le débit repris diffère et s'il doit figurer."
+      "la_source_affirme": "« Un renouvellement d’air de 38 000 m³/h » et « 38 000 m³/h d’air neuf imposés » — le débit d’extraction n’est jamais chiffré séparément.",
+      "le_dessin_suppose": "Deux conduits de même largeur, le chiffre posé sur le seul air neuf. Dire si le débit repris diffère et s’il doit figurer."
     },
     {
       "objet": "La puissance de 158 kW et son organe",
-      "la_source_affirme": "« La batterie de 158 kW reprend 146 045 kWh par an sur l'air extrait » — au singulier, alors que le système compte deux batteries.",
-      "le_dessin_suppose": "158 kW posé sur la batterie du flux extrait. Dire si la valeur vaut pour chaque batterie ou pour l'échange dans son ensemble."
+      "la_source_affirme": "« La batterie de 158 kW reprend 146 045 kWh par an sur l’air extrait » — au singulier, alors que le système compte deux batteries.",
+      "le_dessin_suppose": "158 kW posé sur la batterie du flux extrait. Dire si la valeur vaut pour chaque batterie ou pour l’échange dans son ensemble."
     },
     {
       "objet": "Le cartouche sans surface",
-      "la_source_affirme": "La fiche ne porte aucune surface d'atelier ; le gabarit du cartouche veut Ville · Surface · Millésime.",
-      "le_dessin_suppose": "Le débit de 38 000 m³/h substitué à la surface — c'est la mesure qui définit l'affaire. Fournir la surface si elle doit y figurer à la place."
+      "la_source_affirme": "La fiche ne porte aucune surface d’atelier ; le gabarit du cartouche veut Ville · Surface · Millésime.",
+      "le_dessin_suppose": "Le débit de 38 000 m³/h substitué à la surface — c’est la mesure qui définit l’affaire. Fournir la surface si elle doit y figurer à la place."
     },
     {
       "objet": "Le millésime du cartouche",
-      "la_source_affirme": "Étude commandée en octobre 2025 (millésime d'ouverture 2025), rendus de janvier à février, atelier reçu en 2026 (annee_livraison).",
-      "le_dessin_suppose": "2026, millésime de la livraison — même arbitrage que les planches précédentes. Dire si le millésime de l'étude (2025) est préférable pour une mission de faisabilité."
+      "la_source_affirme": "Étude commandée en octobre 2025 (millésime d’ouverture 2025), rendus de janvier à février, atelier reçu en 2026 (annee_livraison).",
+      "le_dessin_suppose": "2026, millésime de la livraison — même arbitrage que les planches précédentes. Dire si le millésime de l’étude (2025) est préférable pour une mission de faisabilité."
     },
     {
       "objet": "Le sens de circulation de la boucle",
@@ -133,34 +133,34 @@
       "le_dessin_suppose": "Descente par la conduite gauche, remontée par la droite, circulateur sur la conduite descendante. Le choix est purement conventionnel."
     },
     {
-      "objet": "La position du circulateur et du vase d'expansion",
-      "la_source_affirme": "« Un circuit avec circulateur, régulation, vase d'expansion et compteurs d'énergie communicants » — sans implantation.",
+      "objet": "La position du circulateur et du vase d’expansion",
+      "la_source_affirme": "« Un circuit avec circulateur, régulation, vase d’expansion et compteurs d’énergie communicants » — sans implantation.",
       "le_dessin_suppose": "Le circulateur en partie basse de la conduite gauche, le vase en dérivation de la conduite droite. La régulation et les compteurs restent en mention mono, sans symbole."
     },
     {
-      "objet": "La boucle d'air refermée par l'atelier",
-      "la_source_affirme": "L'air est soufflé dans l'atelier et extrait du process — la fiche ne décrit aucun cheminement intérieur.",
-      "le_dessin_suppose": "Un trait topologique unique relie le soufflage à l'extraction à travers le bloc atelier, sans prétendre à une implantation."
+      "objet": "La boucle d’air refermée par l’atelier",
+      "la_source_affirme": "L’air est soufflé dans l’atelier et extrait du process — la fiche ne décrit aucun cheminement intérieur.",
+      "le_dessin_suppose": "Un trait topologique unique relie le soufflage à l’extraction à travers le bloc atelier, sans prétendre à une implantation."
     }
   ],
   "exclusions_appliquees": [
-    "Numéro d'affaire 25-080 (champ reference) — il encode le volume annuel d'affaires du bureau.",
-    "Tout montant : 136 464 € HT de surcoût, 5 206 € HT d'économie annuelle, 120 845 € de plafond d'aide, 4 500 € HT d'honoraires — et avec eux le temps de retour de 26 ans et le seuil des 36 mois : c'est le mécanisme financier de la fiche, pas celui de la récupération.",
-    "Noms de tiers : l'agence d'architecture du projet ; le maître d'ouvrage ne subsiste que dans le nom de l'ouvrage, que le titre porte (champ ouvrage de la fiche). La CARSAT et l'ADEME, autorités publiques dont les prescriptions fondent le mécanisme, ne sont pas des tiers commerciaux — seule la CARSAT est nommée, dans l'en-tête.",
-    "La comparaison des trois solutions : le make-up gaz de référence (brûleurs de 520 kW), la solution thermodynamique seule et leurs bilans — 603 401 kWh/an de besoin, 74 % d'énergie finale en moins, 58 285 kWh de gaz, 97 334 kWh d'électricité, 348 200 kWh évités, 5 909 € HT. Le dessin schématise la solution avec récupération ; la page raconte la comparaison.",
-    "Le calcul : 4 500 heures de chauffe, régime 6 h – 21 h à 19 °C et 15 °C d'inoccupation, hypothèses de soufflage de 29 °C par −5 °C, monotone de puissance — matière du récit, pas du mécanisme.",
-    "Les filtres des deux centrales, cités par le descriptif du visuel d'origine : ils ne modifient pas l'échange.",
-    "Les vannes d'isolement, citées par le même descriptif : le circulateur et le vase d'expansion suffisent à dire le circuit.",
-    "Aucune géométrie d'ouvrage : ni le bâtiment ni son implantation — l'atelier est un bloc topologique, les centrales des rectangles posés sur les conduits."
+    "Numéro d’affaire 25-080 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tout montant : 136 464 € HT de surcoût, 5 206 € HT d’économie annuelle, 120 845 € de plafond d’aide, 4 500 € HT d’honoraires — et avec eux le temps de retour de 26 ans et le seuil des 36 mois : c’est le mécanisme financier de la fiche, pas celui de la récupération.",
+    "Noms de tiers : l’agence d’architecture du projet ; le maître d’ouvrage ne subsiste que dans le nom de l’ouvrage, que le titre porte (champ ouvrage de la fiche). La CARSAT et l’ADEME, autorités publiques dont les prescriptions fondent le mécanisme, ne sont pas des tiers commerciaux — seule la CARSAT est nommée, dans l’en-tête.",
+    "La comparaison des trois solutions : le make-up gaz de référence (brûleurs de 520 kW), la solution thermodynamique seule et leurs bilans — 603 401 kWh/an de besoin, 74 % d’énergie finale en moins, 58 285 kWh de gaz, 97 334 kWh d’électricité, 348 200 kWh évités, 5 909 € HT. Le dessin schématise la solution avec récupération ; la page raconte la comparaison.",
+    "Le calcul : 4 500 heures de chauffe, régime 6 h – 21 h à 19 °C et 15 °C d’inoccupation, hypothèses de soufflage de 29 °C par −5 °C, monotone de puissance — matière du récit, pas du mécanisme.",
+    "Les filtres des deux centrales, cités par le descriptif du visuel d’origine : ils ne modifient pas l’échange.",
+    "Les vannes d’isolement, citées par le même descriptif : le circulateur et le vase d’expansion suffisent à dire le circuit.",
+    "Aucune géométrie d’ouvrage : ni le bâtiment ni son implantation — l’atelier est un bloc topologique, les centrales des rectangles posés sur les conduits."
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "les deux conduits (parois encre 1,5) ne se touchent nulle part — bande de séparation y 308–512, haute de 204 px ; le seul trait qui la franchit est la paire de conduites de la boucle (x 492 et 524) ; le chemin d'air de l'atelier reste dans son bloc — la géométrie porte la thèse « l'échange sans le contact »",
-    "topologie": "dehors (x < 120) → conduits (x 120–920) → atelier (x 920–1144) ; extrait y 252–308 vers la gauche, neuf y 512–568 vers la droite ; batteries alignées x 470–546, gaz x 650–730, pac x 810–890 — l'ordre du flux est celui du descriptif d'origine",
-    "bas_du_dessin": "libellés d'organes à 596, dernier détail à 628, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 255 x 30 px = 7650 px², soit 0.80 % de la planche",
+    "demonstration": "les deux conduits (parois encre 1,5) ne se touchent nulle part — bande de séparation y 308–512, haute de 204 px ; le seul trait qui la franchit est la paire de conduites de la boucle (x 492 et 524) ; le chemin d’air de l’atelier reste dans son bloc — la géométrie porte la thèse « l’échange sans le contact »",
+    "topologie": "dehors (x < 120) → conduits (x 120–920) → atelier (x 920–1144) ; extrait y 252–308 vers la gauche, neuf y 512–568 vers la droite ; batteries alignées x 470–546, gaz x 650–730, pac x 810–890 — l’ordre du flux est celui du descriptif d’origine",
+    "bas_du_dessin": "libellés d’organes à 596, dernier détail à 628, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 266 x 30 px = 7980 px², soit 0.83 % de la planche",
     "chiffre_unique": "un seul chiffre en encre pleine — 166 px mesurés à 22 px (Archivo 700, tabulaire, U+00A0 au groupement) ; 158 kW et 38 000 m³/h restent au mono 10 pivot",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "phrase_principe": "79 signes — 672 px mesurés pour 1088 disponibles",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
@@ -168,14 +168,14 @@
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
-    "motif": "deux conduits à contre-courant, deux batteries, la boucle seule à traverser, le bloc atelier — gaz, pac, circulateur, vase et étiquettes d'air sont laissés à la planche",
-    "bas_du_dessin": "nœud de l'air neuf à y 180, marge basse 20 px"
+    "motif": "deux conduits à contre-courant, deux batteries, la boucle seule à traverser, le bloc atelier — gaz, pac, circulateur, vase et étiquettes d’air sont laissés à la planche",
+    "bas_du_dessin": "nœud de l’air neuf à y 180, marge basse 20 px"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "les deux conduits à contre-courant nommés, les deux batteries, la boucle seule à traverser avec son chiffre (146 045 kWh/an), le bloc atelier et la cote de l'air neuf — gaz, pompe à chaleur, circulateur et vase laissés à la planche",
-    "bas_du_dessin": "conduit bas jusqu'à 302 px, marge basse 56 px"
+    "motif": "les deux conduits à contre-courant nommés, les deux batteries, la boucle seule à traverser avec son chiffre (146 045 kWh/an), le bloc atelier et la cote de l’air neuf — gaz, pompe à chaleur, circulateur et vase laissés à la planche",
+    "bas_du_dessin": "conduit bas jusqu’à 302 px, marge basse 56 px"
   }
 }

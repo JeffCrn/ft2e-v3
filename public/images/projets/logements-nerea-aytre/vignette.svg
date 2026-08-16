@@ -17,7 +17,7 @@
   .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 </style>
   <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">L'OPÉRATION DÉDOUBLÉE</text>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">L’OPÉRATION DÉDOUBLÉE</text>
   <rect x="103.00" y="28.00" width="38.00" height="121.00" class="c-calcaire s-filet-2" fill="#EDF0F2" stroke="#00393A29" stroke-width="1"/>
   <path d="M 26.00 48.00 C 122.00 48.00, 122.00 38.00, 218.00 38.00 L 218.00 75.80 C 122.00 75.80, 122.00 85.80, 26.00 85.80 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
   <path d="M 26.00 85.80 C 122.00 85.80, 122.00 95.80, 218.00 95.80 L 218.00 122.80 C 122.00 122.80, 122.00 112.80, 26.00 112.80 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>

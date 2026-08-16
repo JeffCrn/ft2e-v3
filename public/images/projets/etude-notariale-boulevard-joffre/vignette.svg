@@ -19,7 +19,7 @@
   .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 </style>
   <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">L'ENVELOPPE, DESSOUS COMPRIS</text>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">L’ENVELOPPE, DESSOUS COMPRIS</text>
   <path d="M 26.00 168.00 L 88.00 168.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.5"/>
   <path d="M 124.00 168.00 L 258.00 168.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.5"/>
   <path d="M 44.00 168.00 L 44.00 52.00 L 160.00 52.00 L 160.00 94.00 L 228.00 94.00 L 228.00 140.00 L 164.00 140.00 L 164.00 168.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.5"/>

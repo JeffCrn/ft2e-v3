@@ -210,25 +210,25 @@
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "trois flèches, trois sens : le transfert traverse la paroi à l'horizontale (encre 2,5), la descente est barrée d'une croix, l'escalier extérieur monte vers l'étage — la géométrie porte la thèse, aucun chiffre de la fiche n'est répété",
+    "demonstration": "trois flèches, trois sens : le transfert traverse la paroi à l’horizontale (encre 2,5), la descente est barrée d’une croix, l’escalier extérieur monte vers l’étage — la géométrie porte la thèse, aucun chiffre de la fiche n’est répété",
     "topologie": "alerte : événement (x 56) → centrale (x 270–500) → départs (x 574) ; coupe : étage 390–502, rez-de-chaussée 502–570, paroi à x 533, sol à y 570",
     "bas_du_dessin": "sol à 570, notes de pied à 590, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
-    "reserve_profonde": "cartouche 353 x 30 px = 10590 px², soit 1.10 % de la planche (la paroi et les marques sont de l'encre, pas de la réserve)",
-    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle 0,96 (1152 / 1200)",
+    "reserve_profonde": "cartouche 364 x 30 px = 10920 px², soit 1.14 % de la planche (la paroi et les marques sont de l’encre, pas de la réserve)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
   },
   "controles_vignette": {
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
-    "motif": "la coupe seule : deux zones, la paroi ouverte, la flèche qui la traverse, la descente barrée — l'alerte, l'escalier des secours et l'unité protégée sont laissés à la planche",
+    "motif": "la coupe seule : deux zones, la paroi ouverte, la flèche qui la traverse, la descente barrée — l’alerte, l’escalier des secours et l’unité protégée sont laissés à la planche",
     "bas_du_dessin": "168 px, marge basse 32 px"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "la coupe entière : deux zones coupe-feu, la flèche de transfert à travers la paroi, la descente barrée, l'unité protégée du rez-de-chaussée, l'escalier des secours — l'alerte (centrale et départs) reste à la planche",
+    "motif": "la coupe entière : deux zones coupe-feu, la flèche de transfert à travers la paroi, la descente barrée, l’unité protégée du rez-de-chaussée, l’escalier des secours — l’alerte (centrale et départs) reste à la planche",
     "bas_du_dessin": "sol à 292 px, notes de pied empilées à 316–332, marge basse 36 px"
   }
 }

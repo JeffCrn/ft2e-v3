@@ -296,10 +296,10 @@ def composer(donnees):
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
         "demonstration": f"la production descend du bandeau ({N_MODULES} "
                          f"rectangles dessinés = {N_MODULES} modules de la "
-                         f"fiche) vers la barre de distribution ; l'échange "
+                         f"fiche) vers la barre de distribution ; l’échange "
                          f"réseau se lit par deux flèches opposées (y "
                          f"{Y_SURPLUS} et {Y_APPOINT}) ; le départ suivi "
-                         f"s'élargit en traversant la pompe à chaleur — trois "
+                         f"s’élargit en traversant la pompe à chaleur — trois "
                          f"bandes de {UCOP:.0f}, {cop['part_air'] * UCOP:.1f} "
                          f"et {cop['rapport'] * UCOP:.1f} px, soit 1 / "
                          f"{cop['part_air']} / {cop['rapport']}, "
@@ -311,7 +311,7 @@ def composer(donnees):
                      f"réseau x {R_X0}–{R_X1} à gauche ; pompe à chaleur x "
                      f"{P_X0}–{P_X1} et départs groupés x {D_X0}–{D_X1} "
                      f"dessous ; dalle y {S_Y0}–{S_Y1}, x {S_X0}–{S_X1}",
-        "bas_du_dessin": f"dalle jusqu'à {S_Y1}, dernier détail du sol à "
+        "bas_du_dessin": f"dalle jusqu’à {S_Y1}, dernier détail du sol à "
                          f"{y_det + (len(pl['detail'])) * 14}, phrase de "
                          f"principe à {Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
                          f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
@@ -324,7 +324,7 @@ def composer(donnees):
                           f"mesurés à 22 px (17,5 kWc, la production que la "
                           f"planche défend) ; 7,5 kW, COP 4,60 et le régime "
                           f"30/35 °C restent au mono 10 pivot",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -418,11 +418,11 @@ def composer_vignette(donnees):
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": f"le bandeau des {N_MODULES} modules, la descente, la barre, "
-                 "l'échange réseau à deux flèches, les trois bandes du COP "
-                 "(2 / 7,2 / 9,2 px) et la dalle — libellés d'organes, "
-                 "étiquettes d'échange et bloc des autres départs laissés à "
+                 "l’échange réseau à deux flèches, les trois bandes du COP "
+                 "(2 / 7,2 / 9,2 px) et la dalle — libellés d’organes, "
+                 "étiquettes d’échange et bloc des autres départs laissés à "
                  "la planche",
-        "bas_du_dessin": "dalle jusqu'à y 178, marge basse 22 px",
+        "bas_du_dessin": "dalle jusqu’à y 178, marge basse 22 px",
     }
     return "\n".join(out) + "\n", controles
 
@@ -538,13 +538,13 @@ def composer_appui(donnees):
 
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
-        motif=f"le motif entier à l'échelle 1 : bandeau des {N_MODULES} "
+        motif=f"le motif entier à l’échelle 1 : bandeau des {N_MODULES} "
               "modules, descente, barre, échange réseau à deux flèches "
               "légendées, trois bandes du COP (4 / 14,4 / 18,4 px) et dalle — "
               "trois nœuds chiffrés (17,5 kWc, COP 4,60, régime 30/35 °C) ; "
               "détails de pose, contenu des départs, phrase et cartouche "
               "laissés à la planche",
-        bas=f"dalle jusqu'à 334, régime à 331 — marge basse {AH - 334} px")
+        bas=f"dalle jusqu’à 334, régime à 331 — marge basse {AH - 334} px")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -578,8 +578,15 @@ CF_X0, CF_X1, CF_Y0, CF_Y1 = 320, 600, 216, 306     # le coffret du banc
 RS_X0, RS_X1, RS_Y0, RS_Y1 = 940, 1144, 216, 284    # le réseau public
 
 # ── La barre et ses cinq départs ─────────────────────────────────────────────
+# ⚠ XBARRE0/1 et non XB0/1 : le mécanisme `autoconsommation` porte déjà XB0, XB1
+# (l. 82) au niveau du MODULE. Les deux affectations s'exécutent à l'import, la
+# seconde gagne, et c'est le PREMIER dessin qui se recompose faux — sa barre de
+# distribution partait à 56 au lieu de 420. Rien ne le signalait : ni le build,
+# ni le typecheck, ni le rendu de Marans, qui, lui, était juste. Seule la
+# régénération de la crèche l'a montré (2026-08-16). Comme Y_BUS et Y_BARRE, un
+# repère porté par deux mécanismes du même fichier se nomme deux fois.
 Y_BARRE = 348
-XB0, XB1 = 56, 930
+XBARRE0, XBARRE1 = 56, 930
 X_DESCENTE = 460                                     # coffret → barre
 TB_X0, TB_X1, TB_Y0, TB_Y1 = 76, 194, 372, 416       # les blocs 48 V
 BL_Y0, BL_Y1 = 372, 430                              # les deux départs à bloc
@@ -738,8 +745,9 @@ def composer_franchissement(donnees):
     # ── LA BARRE ET SES CINQ DÉPARTS ─────────────────────────────────────────
     A(ligne(X_DESCENTE, CF_Y1, X_DESCENTE, Y_BARRE - 6, "encre", 2))
     A(fleche(X_DESCENTE, Y_BARRE - 2, "encre", "bas", 9))
-    mono(XB0, Y_BARRE - 14, f["tag_barre"], X_DESCENTE - XB0 - 20, "tag de la barre")
-    A(ligne(XB0, Y_BARRE, XB1, Y_BARRE, "encre", 3))
+    mono(XBARRE0, Y_BARRE - 14, f["tag_barre"], X_DESCENTE - XBARRE0 - 20,
+         "tag de la barre")
+    A(ligne(XBARRE0, Y_BARRE, XBARRE1, Y_BARRE, "encre", 3))
 
     # FRONTIÈRE 1 — la tension. Les deux départs d'éclairage traversent la
     # boîte des blocs d'alimentation et changent de POIDS DE TRAIT en sortant.
@@ -785,7 +793,7 @@ def composer_franchissement(donnees):
                  f"détail {cle} {k + 1}")
 
     # ── LE TABLIER — la bande cotée, et le joint qui la coupe ────────────────
-    controler("tag de l'ouvrage", f["tag_ouvrage"], 10, "mono",
+    controler("tag de l’ouvrage", f["tag_ouvrage"], 10, "mono",
               X_PONT1 - X_PONT0, 1.4)
     _etiquette(A, X_PONT0, Y_COTE_LONG - 18, f["tag_ouvrage"])
     x_mobile = x_joint + JEU_JOINT              # le jeu où le câble remonte
@@ -881,22 +889,22 @@ def composer_franchissement(donnees):
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
         "echelle": f"{ech:.4f} px/m, dérivée du tablier ({X_PONT1 - X_PONT0} px "
                    f"pour {tab['longueur']} m) — elle porte les trois longueurs "
-                   f"et les deux hauteurs, rien d'autre",
+                   f"et les deux hauteurs, rien d’autre",
         "demonstration": f"une arrivée, une barre, cinq départs, et trois "
                          f"frontières franchies : la TENSION (deux départs "
                          f"traversent la boîte des blocs et passent de 1,5 à "
                          f"3 px de trait), le JOINT MOBILE (pointillé à x "
-                         f"{x_joint:.1f} ; deux cotes s'y rejoignent en sens "
+                         f"{x_joint:.1f} ; deux cotes s’y rejoignent en sens "
                          f"contraire — câble {10 * ech:.1f} px contre course "
                          f"{mob_m * ech:.1f} px, soit 10 m contre "
                          f"{tab['mobile']} m à la même échelle), le RÉSEAU "
-                         f"PUBLIC (descente barrée d'une croix vers un mât de "
+                         f"PUBLIC (descente barrée d’une croix vers un mât de "
                          f"{h_refuse:.1f} px, contre un mât de "
                          f"{h_retenu:.1f} px alimenté depuis la barre par le "
                          f"plus long départ)",
         "topologie": f"amont x {AM_X0}–{AM_X1} → coffret x {CF_X0}–{CF_X1} → "
-                     f"descente x {X_DESCENTE} → barre y {Y_BARRE}, x {XB0}–"
-                     f"{XB1} ; départs x {X_D1}, {X_D2}, {X_D4}, {X_D3}, "
+                     f"descente x {X_DESCENTE} → barre y {Y_BARRE}, x {XBARRE0}–"
+                     f"{XBARRE1} ; départs x {X_D1}, {X_D2}, {X_D4}, {X_D3}, "
                      f"{X_D5} ; tablier y {Y_PONT0}–{Y_PONT1}, x {X_PONT0}–"
                      f"{X_PONT1}, joint à {x_joint:.1f} ; enrouleur à "
                      f"{x_enrouleur:.1f} ; quai x {QU_X0}–{QU_X1}",
@@ -910,7 +918,7 @@ def composer_franchissement(donnees):
                              f"{10 / mob_m:.3f}, conforme à 10 ÷ {tab['mobile']}",
         "linéaires_non_cotés": "les 43 m et 28 m de bandeau sont des CUMULS, "
                                "portés en étiquette et jamais tracés à "
-                               "l'échelle ; la note du dessin le dit",
+                               "l’échelle ; la note du dessin le dit",
         "bas_du_dessin": f"cote de câble à {Y_COTE_CABLE}, départ du mât à "
                          f"{Y_MAT_ROUTE}, note à {Y_NOTE}, phrase de principe à "
                          f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
@@ -922,7 +930,7 @@ def composer_franchissement(donnees):
                             f"de la planche",
         "releve": "aucun — la démonstration est géométrique, les chiffres de la "
                   "fiche restent à la fiche (révision 4)",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -1021,7 +1029,7 @@ def composer_vignette_franchissement(donnees):
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
         "motif": f"la barre et son éventail de cinq départs, le tablier coupé "
-                 f"au joint (x {xj:.1f}), l'enrouleur et les deux cotes qui s'y "
+                 f"au joint (x {xj:.1f}), l’enrouleur et les deux cotes qui s’y "
                  f"rejoignent en sens contraire ({10 * ech:.1f} px de câble "
                  f"contre {mob_m * ech:.1f} px de course), les deux mâts dont "
                  f"un barré — un seul nœud chiffré au texte, 48 V. Coffret, "
@@ -1137,19 +1145,19 @@ def composer_appui_franchissement(donnees):
 
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
-        motif=f"le motif entier à l'échelle 1 : coffret, barre, cinq départs, "
+        motif=f"le motif entier à l’échelle 1 : coffret, barre, cinq départs, "
               f"le filet de conversion et ses deux tensions, tablier coupé au "
-              f"joint (x {xj:.1f}), enrouleur et les deux cotes qui s'y "
+              f"joint (x {xj:.1f}), enrouleur et les deux cotes qui s’y "
               f"rejoignent ({10 * ech:.1f} px de câble contre "
               f"{mob_m * ech:.1f} px de course), deux mâts cotés dont un barré "
               f"— trois nœuds chiffrés (48 V, 10 m, {tab['mobile']} m) ; amont, "
               f"réseau public, note des linéaires, phrase et cartouche laissés "
               f"à la planche",
         bas=f"cote de câble à 322, route du mât à 336 — marge basse {AH - 336} px",
-        ecart_des_mats=f"mâts à x {x_ref} et {x_ret} : l'écart de "
-                       f"{x_ret - x_ref} px est celui qu'imposent leurs deux "
+        ecart_des_mats=f"mâts à x {x_ref} et {x_ret} : l’écart de "
+                       f"{x_ret - x_ref} px est celui qu’imposent leurs deux "
                        f"étiquettes centrées (43 px chacune) ; la remontée du "
-                       f"long départ passe à x {x_riser}, dans l'intervalle",
+                       f"long départ passe à x {x_riser}, dans l’intervalle",
         echelle=f"{ech:.4f} px/m, dérivée du tablier — même construction que la "
                 f"planche, à son échelle propre")
 
@@ -1372,7 +1380,7 @@ def composer_essaimage(donnees):
 
     # ── SOUS L'ENVELOPPE — sa légende, la cote des libres, la note ───────────
     mono(E_BAT_X0, E_Y_LEGENDE, e["legende_enveloppe"], E_BAT_X1 - E_BAT_X0,
-         "légende de l'enveloppe")
+         "légende de l’enveloppe")
     controler("cote des locaux libres", e["cote_libres"], 10, "mono",
               bords[4] - bords[1], 1.4)
     _cote(A, bords[1], bords[4], E_Y_COTE, e["cote_libres"])
@@ -1418,11 +1426,11 @@ def composer_essaimage(donnees):
         "organes_par_cellule": f"{len(E_COMMUNS)} rangées communes (pompe à "
                                "chaleur et ses 3 cassettes, ventilation, "
                                "ballon, alarme, enseigne) + 2 propres à "
-                               "l'agence postale, soit les 6 postes que la "
+                               "l’agence postale, soit les 6 postes que la "
                                "fiche énumère ; les postes sont nommés UNE "
                                "fois, en gouttière — 5 jeux de libellés "
                                "identiques seraient illisibles à 184 px",
-        "bas_du_dessin": f"enveloppe jusqu'à {E_ENV_Y1}, légende à "
+        "bas_du_dessin": f"enveloppe jusqu’à {E_ENV_Y1}, légende à "
                          f"{E_Y_LEGENDE}, cote des libres à {E_Y_COTE}, note à "
                          f"{E_Y_NOTE}, phrase de principe à {Y_PHRASE}, "
                          f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
@@ -1433,7 +1441,7 @@ def composer_essaimage(donnees):
                             f"de la planche",
         "releve": "aucun — la démonstration est géométrique, les chiffres de la "
                   "fiche restent à la fiche (révision 4)",
-        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l'échelle "
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
                          f"0,96 (1152 / {W})",
         "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
                            f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
@@ -1510,14 +1518,14 @@ def composer_vignette_essaimage(donnees):
         "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
                             f"échelle {274/VW:.2f} à {296/VW:.2f}",
         "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
-        "motif": f"la ligne du réseau franchie {n} fois, l'enveloppe et ses "
+        "motif": f"la ligne du réseau franchie {n} fois, l’enveloppe et ses "
                  f"{n - 1} refends continus, {n} troncs à fane de trois "
                  f"cassettes, le tronc triple de la cellule de restauration et "
-                 f"les deux organes de plus de l'agence postale — deux nœuds "
+                 f"les deux organes de plus de l’agence postale — deux nœuds "
                  f"au texte, « {n} COMPTAGES » et « 36 kVA ». Gouttière, noms "
-                 f"de locaux, légende d'enveloppe, cote et note laissés à la "
+                 f"de locaux, légende d’enveloppe, cote et note laissés à la "
                  f"planche",
-        "bas_du_dessin": "cote du triphasé à 182, enveloppe jusqu'à 164 — marge "
+        "bas_du_dessin": "cote du triphasé à 182, enveloppe jusqu’à 164 — marge "
                          "basse 18 px, aucun trait ne touche un bord",
     }
     return "\n".join(out) + "\n", controles
@@ -1581,16 +1589,16 @@ def composer_appui_essaimage(donnees):
 
     A("</svg>")
     return "\n".join(out) + "\n", controles_appui(
-        motif=f"la rangée entière à l'échelle 1 : ligne du réseau franchie "
+        motif=f"la rangée entière à l’échelle 1 : ligne du réseau franchie "
               f"{n} fois, enveloppe et ses {n - 1} refends continus, {n} troncs "
               f"à fane de trois cassettes, tronc triple de la cellule de "
-              f"restauration et deux organes de plus de l'agence postale — "
+              f"restauration et deux organes de plus de l’agence postale — "
               f"trois nœuds chiffrés (9 kVA, 36 kVA, 247 m²) ; gouttière des "
               f"postes, noms de locaux, cote des libres, note, phrase et "
               f"cartouche laissés à la planche",
-        bas=f"légende de l'enveloppe à 348 — marge basse {AH - 348} px",
+        bas=f"légende de l’enveloppe à 348 — marge basse {AH - 348} px",
         franchissements=f"{n} en haut, 0 aux {n - 1} refends — le compte de la "
-                        f"planche, tenu à l'échelle de l'appui")
+                        f"planche, tenu à l’échelle de l’appui")
 
 
 def _composer(donnees):

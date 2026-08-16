@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Coupe de principe de l'enveloppe : trois niveaux de bureaux empilés sur une parcelle étroite que le bâtiment enjambe — le plancher du premier étage passe au-dessus d'un passage voiture et se traite comme un plancher sur l'extérieur. L'isolation ferme chaque face : 180 mm d'isolant intérieur sur les murs, 140 mm de polyuréthane au dernier étage, 200 mm en toiture-terrasse, 480 mm de laine de verre sous les combles, rupteurs de ponts thermiques à chaque plancher intermédiaire et cage d'ascenseur isolée jusqu'à sa fosse.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Coupe de principe de l’enveloppe : trois niveaux de bureaux empilés sur une parcelle étroite que le bâtiment enjambe — le plancher du premier étage passe au-dessus d’un passage voiture et se traite comme un plancher sur l’extérieur. L’isolation ferme chaque face : 180 mm d’isolant intérieur sur les murs, 140 mm de polyuréthane au dernier étage, 200 mm en toiture-terrasse, 480 mm de laine de verre sous les combles, rupteurs de ponts thermiques à chaque plancher intermédiaire et cage d’ascenseur isolée jusqu’à sa fosse.">
 <style>
   .c-profond { fill: var(--color-profond, #001718); }
   .c-encre { fill: var(--color-encre, #00393A); }
@@ -19,12 +19,12 @@
   .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 </style>
   <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · L'ENVELOPPE D'UNE PARCELLE ENJAMBÉE</text>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · L’ENVELOPPE D’UNE PARCELLE ENJAMBÉE</text>
   <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Étude notariale Joffre</text>
-  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">L'enveloppe ferme chaque face d'un bâtiment qui enjambe sa parcelle</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">L’enveloppe ferme chaque face d’un bâtiment qui enjambe sa parcelle</text>
   <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
-  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TROIS NIVEAUX EMPILÉS, UN PASSAGE ENJAMBÉ — L'ENVELOPPE FERME CHAQUE FACE</text>
-  <text x="56.00" y="240.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L'ENVELOPPE, FACE PAR FACE</text>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TROIS NIVEAUX EMPILÉS, UN PASSAGE ENJAMBÉ — L’ENVELOPPE FERME CHAQUE FACE</text>
+  <text x="56.00" y="240.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L’ENVELOPPE, FACE PAR FACE</text>
   <text x="1144.00" y="240.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LA PARCELLE ENJAMBÉE</text>
   <path d="M 356.00 640.00 L 591.00 640.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="2"/>
   <path d="M 649.00 640.00 L 880.00 640.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="2"/>
@@ -85,22 +85,22 @@
   <text x="56.00" y="368.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Dernier étage</text>
   <text x="56.00" y="386.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">140 mm DE POLYURÉTHANE</text>
   <path d="M 161.50 364.00 L 490.00 313.28" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
-  <text x="56.00" y="440.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Murs, isolés par l'intérieur</text>
-  <text x="56.00" y="458.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">180 mm D'ISOLANT INTÉRIEUR</text>
+  <text x="56.00" y="440.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Murs, isolés par l’intérieur</text>
+  <text x="56.00" y="458.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">180 mm D’ISOLANT INTÉRIEUR</text>
   <path d="M 274.00 436.00 L 440.50 470.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
   <text x="56.00" y="512.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Rupteurs de ponts thermiques</text>
   <text x="56.00" y="530.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">À CHAQUE PLANCHER INTERMÉDIAIRE</text>
   <path d="M 274.00 508.00 L 440.00 535.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
-  <text x="56.00" y="584.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Cage d'ascenseur</text>
+  <text x="56.00" y="584.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Cage d’ascenseur</text>
   <text x="56.00" y="602.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ISOLÉE, FOSSE COMPRISE</text>
   <path d="M 184.00 580.00 L 595.00 648.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
   <text x="852.00" y="348.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Toiture-terrasse</text>
-  <text x="852.00" y="366.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">200 mm D'ISOLANT</text>
+  <text x="852.00" y="366.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">200 mm D’ISOLANT</text>
   <path d="M 844.00 344.00 L 770.00 416.11" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
   <text x="852.00" y="436.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Plancher sur le passage voiture</text>
-  <text x="852.00" y="454.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TRAITÉ EN PLANCHER SUR L'EXTÉRIEUR</text>
+  <text x="852.00" y="454.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TRAITÉ EN PLANCHER SUR L’EXTÉRIEUR</text>
   <path d="M 844.00 432.00 L 752.00 542.50" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
-  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">La conformité s'est donc jouée sur la seule enveloppe, portée partout où elle pouvait l'être.</text>
-  <rect x="56.00" y="714.00" width="253.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">La conformité s’est donc jouée sur la seule enveloppe, portée partout où elle pouvait l’être.</text>
+  <rect x="56.00" y="714.00" width="258.00" height="30.00" class="c-profond" fill="#001718"/>
   <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LA ROCHELLE · 381 m² · 2024</text>
 </svg>
