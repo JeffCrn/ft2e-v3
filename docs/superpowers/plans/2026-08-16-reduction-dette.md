@@ -835,6 +835,118 @@ d’un point qualifié de « le moins coûteux du lot ». Reporté au prompt sui
 
 ---
 
+## S6 — Le plafond du hero, et trois points ajournés
+
+> **Session du 2026-08-16.** Ouverte pour exécuter ce que des réponses de FT2E
+> auraient débloqué ; refermée sur le seul point qui ne dépendait de personne.
+
+### Les trois points suspendus : ajournés, et non plus en attente
+
+État revérifié au dépôt et par `curl` en ouverture de session, inchangé depuis S5 :
+
+| Point | Mesure du 2026-08-16 |
+|---|---|
+| Les deux déploiements résiduels | `ft2e-site.vercel.app` et `ft2e-v2.vercel.app` répondent **toujours 200** sur `/references/`, au même titre que `ft2e-v3` |
+| Réception de la crèche de l'Oranger | `annee_livraison` toujours absent, `statut` toujours absent : la fiche annonce une affaire livrée **sans dire quand**, et plus rien dans le fichier ne le signale |
+| L'archétype `planche-chiffree` | toujours dans la liste fermée du protocole, toujours cité par sa règle de bascule, toujours jamais exercé |
+
+**Ce qui change est le statut de l'attente, pas son contenu.** Arbitrage rendu en
+ouverture de session : le projet n'a pas encore été présenté à FT2E, et les trois
+points sont mis en suspens jusque-là.
+
+La conséquence pratique est celle de S5 — rien supprimé, aucun millésime fabriqué,
+aucun archétype retiré. La conséquence de méthode diffère : ils ne sont plus en
+attente d'une réponse qui tarde, ils sont **ajournés à la présentation du projet**.
+Ils repartent au prompt suivant sous cette forme, et non comme une relance.
+
+⚠ **Une seule des trois porte une échéance qui ne dépend pas de FT2E.** La réception
+de la crèche est le premier des quatorze relevés qu'appelle
+`MILLESIME_LIVRAISON_ANNONCE` : le garde-fou posé en S4 fera **échouer le build au
+1ᵉʳ janvier 2027**, et la seule réponse admise est d'aller chercher les réceptions.
+L'ajournement est sans coût jusqu'à cette date, et bloquant après.
+
+### Point 4 — l'appui du hero plafonné à sa taille de conception
+
+Le seul point exécutable de la session, et le dernier endroit du site où un dessin
+était servi au-dessus de son repère.
+
+#### Ce que la mesure a confirmé, avant et après
+
+Sonde en iframe même origine, sur le `dist/` du commit en cours :
+
+| Fenêtre | Appui avant | Échelle | Appui après | Échelle |
+|---|---|---|---|---|
+| 640 px | 606,00 px | 1,098 | **550,00 px** | **0,996** |
+| 700 px | 666,00 px | 1,207 | 550,00 px | 0,996 |
+| 768 px | 718,00 px | 1,301 | 550,00 px | 0,996 |
+| 900 px | 850,00 px | 1,540 | 550,00 px | 0,996 |
+| 1 000 px | **950,00 px** | **1,721** | 550,00 px | 0,996 |
+| 1 024 px | 462,00 px | 0,837 | 462,00 px | 0,837 — inchangé |
+| 1 280 px | 550,00 px | 0,996 | 550,00 px | 0,996 — inchangé |
+
+La carte-lien qui légende le dessin suivait sa largeur **au pixel** (952 contre 952 à
+1 000 px) : c'est la raison pour laquelle le plafond enveloppe les deux, et non le
+seul plan posé.
+
+#### Trois choix d'implantation, dont aucun ne va de soi
+
+| Question | Retenu | Pourquoi |
+|---|---|---|
+| Sur quoi porte le plafond | le dessin **et** sa carte-lien | plafonner le plan seul laisserait une légende de 950 px sous un dessin de 552 |
+| Où il s'écrit | `src/pages/index.astro`, chez qui compose le média | le nombre de colonnes est un réglage de page, la taille de conception une propriété du dessin — même partage que la vignette de `CarteProjet`, dont le plafond vit dans le composant du dessin |
+| Comment | CSS de composant (`.appui-hero`), pas `max-w-[552px]` | une classe en valeur arbitraire, unique au dépôt, disparaîtrait sans un mot du build le jour où l'élagage de sources de Tailwind v4 cesserait de voir ce fichier (incident du 2026-08-08) |
+
+**Aucune borne de largeur n'a été nécessaire** : sous `sm` le média entier est masqué
+par `Hero.astro`, au-dessus de `lg` la colonne mesure 462 à 550 px et la règle est
+sans effet. Elle ne mord qu'entre les deux, ce qui est exactement l'étendue du défaut.
+
+#### Recette
+
+- échelle **0,996 partout de 640 à 1 000 px**, contre 1,10 à 1,72 avant ;
+- **rien déplacé ailleurs** : hero **585,88 px à 390 px** et **1 006,72 px à 1 280 px**,
+  identiques **au centième** à la recette de S5 — la correction des 40 px de vide mort
+  n'est pas touchée. À 640 px le hero passe de 1 052,31 à 1 014,97 px, soit 37,34 px de
+  moins : c'est la hauteur que perd l'appui en cessant d'être étiré (368 × 550/552
+  contre 368 × 606/552), pas un déplacement ;
+- `scrollWidth == clientWidth` sur **neuf largeurs de 360 à 1 440 px** ;
+- règle présente dans le HTML produit : `.appui-hero[data-astro-cid-…]{max-width:552px;margin-inline:auto}` ;
+- rendu contrôlé par capture à **1 000 px** — la largeur où le défaut culminait — et à
+  1 440 px, où rien ne devait bouger et où rien n'a bougé ;
+- `npm run typecheck` : 0 erreur, 0 avertissement. `npm run build` : 46 pages.
+
+#### La leçon, remontée dans les règles
+
+L'argument qui avait épargné le hero jusqu'ici — « c'est un ornement de couverture,
+pas une figure de fiche » — ne tient pas, et il valait d'être tranché explicitement
+plutôt que laissé implicite : **la règle porte sur le filet, pas sur le rôle du
+dessin.** La lisibilité *gagnait* à l'étirement, le mono de 10 px montant à 17 ; ce
+qui se dégradait est l'épaisseur des filets de 1 px, or la charte fait porter le rang
+d'un filet par son **opacité**, ce qui suppose que son épaisseur ne bouge pas. Un
+dessin agrandi rend donc tous ses rangs faux à la fois — et c'est vrai d'un ornement
+comme d'une figure. Consigné dans `.claude/rules/tailwind-design-tokens.md`
+§ Composants signature, à la suite de la vignette et des trois bandes.
+
+### Trois pièges de mesure, dont deux inédits
+
+1. ⚠ **La sonde en iframe voit 15 px de moins que les media queries.** Les `min-width`
+   de CSS comptent la barre de défilement, `clientWidth` non : à `clientWidth == 1023`
+   la page est **déjà en `lg`**, parce que la viewport CSS vaut 1 038. Les seuils
+   relevés par cette sonde sont donc décalés d'une largeur de barre — sans conséquence
+   sur une échelle, mais décisif sur une borne. Ne pas conclure « la bascule a lieu à
+   1 023 » sur ce seul chiffre.
+2. ⚠ **`--user-data-dir` fait échouer `--dump-dom` en silence.** Chrome sort en **code
+   0** et n'écrit **rien** — ni DOM, ni message d'erreur. Le même appel sans l'option
+   rend le document complet. Cherché du côté de la page et du serveur avant d'être
+   trouvé du côté de la ligne de commande.
+3. **Des serveurs `astro preview` de sessions antérieures tournent encore** — seize
+   ports occupés, plusieurs répondant `200`. Le risque n'est pas celui qu'on croit :
+   `astro preview` sert le **disque**, donc tous servent le `dist/` courant, ce qui a
+   été vérifié par un marqueur déposé dans `dist/` et relu sur trois ports. Le vrai
+   risque est de mesurer **sans avoir rebuild** — un marqueur du build le dit, un
+   numéro de port ne dit rien.
+
+---
+
 ## Ce que cette programmation ne traite pas
 
 Repris du relevé, et **volontairement laissé ouvert** :
@@ -864,6 +976,7 @@ Repris du relevé, et **volontairement laissé ouvert** :
 | D1 — arbitrage A2 × Lighthouse | ☑ **tranché** le 2026-08-16 — issue 2 (inscrire l’exception, viser 96) | `4416c20` · `806e803` | ✅ **appliqué** à `.claude/rules/accessibility-rgaa.md` en S3 |
 | D2 — trois questions à FT2E | ◑ **posées** le 2026-08-16, **toujours sans réponse** au soir du 2026-08-16 (revérifié en S5) | `7cf8918` (§ 6 bis) | ⚠ **La question 2 a changé de nature** : l'exposition des visuels n'est pas seulement archivée dans l'historique git, elle est **servie en HTTP** par deux déploiements vivants — coût de levée nul, contre une réécriture d'historique. Voir le constat A de S4 |
 | S5 — suites et dernier point ouvert | ☑ **faite** le 2026-08-16 | `c6f7c53` | ✅ **complète sur son périmètre réel** — les 40 px de vide mort du hero supprimés (`grid-template-rows` passe de `247,375px 0px` à `247,375px`, hero 625,88 → 585,88 px à 390 px, inchangé au centième à 640 et 1 280) ; garde-fou du millésime vérifié sur pièce, rien à faire ; **les trois points suspendus à FT2E laissés intacts, faute de réponse**. Trouvé au passage : l’appui du hero servi à l’échelle **1,72** entre `sm` et `lg` |
+| S6 — plafond du hero et points ajournés | ☑ **faite** le 2026-08-16 | `b0213f5` · `+2` | ✅ **complète sur son périmètre réel** — appui du hero plafonné à sa taille de conception : échelle **1,72 → 0,996** à 1 000 px, 0,996 de 640 à 1 000, inchangée au-delà de `lg` ; hero identique **au centième** à 390 et 1 280 px, donc recette de S5 intacte ; zéro débordement sur neuf largeurs de 360 à 1 440 ; leçon remontée dans `.claude/rules/tailwind-design-tokens.md`. **Les trois points suspendus à FT2E sont ajournés à la présentation du projet**, à la demande de l'utilisateur |
 
 ---
 
@@ -1372,4 +1485,122 @@ sont content, docs, fix, design-system selon les points.
 Termine par le prompt de lancement de la session suivante, en annexe du plan et
 reproduit intégralement dans ton message final. Cette règle est dans CLAUDE.md parce
 qu'elle a été manquée deux fois.
+```
+
+### Annexe F — session 7, la finalisation avant présentation à FT2E (à coller telle quelle)
+
+```
+Session 7 du chantier FT2E v3 — trois points ajournes, et la finalisation avant
+presentation.
+
+Contexte. FT2E v3 est un site institutionnel Astro statique, deploye en demonstration
+client sur https://ft2e-v3.vercel.app, indexation verrouillee par triple securite
+(robots.txt Disallow, meta noindex, header X-Robots-Tag). Le chantier de reduction de
+dette ouvert le 2026-08-16 est CLOS : ses quatre sessions sont faites, sa decision D1
+est tranchee, et ses deux sessions de suites S5 et S6 ont solde les deux derniers
+points de rendu. Le plan et toutes ses recettes sont dans
+docs/superpowers/plans/2026-08-16-reduction-dette.md — lis sa section S6 avant toute
+chose. Le site ne porte plus AUCUN dessin servi au-dessus de sa taille de conception.
+
+1. LES TROIS POINTS AJOURNES — ne PAS les rouvrir sans que l'utilisateur le demande.
+   Ils ne sont plus en attente d'une reponse de FT2E : ils sont mis en suspens
+   jusqu'a la presentation du projet final, a la demande explicite de l'utilisateur
+   le 2026-08-16 (« je veux finaliser sans me preoccuper de ces questions annexes »).
+   Les redire en fin de session, ne rien executer dessus, ne rien fabriquer :
+   a. Deux deploiements residuels — ft2e-site.vercel.app (v1) et ft2e-v2.vercel.app
+      repondent 200 et servent les photographies d'ouvrages que le chantier des
+      planches avait retirees de la v3 pour motif de droit d'auteur. Procedure et
+      controle par curl : docs/19-migration-production.md § 6 bis. Ce sont LEURS
+      deploiements ; la CLI Vercel repond « Not authorized » sur cette machine, la
+      suppression se fait au tableau de bord, par FT2E ou avec elle.
+   b. Reception de la creche de l'Oranger — src/content/projets/creche-oranger-
+      perigny.md annonce une affaire livree sans dire quand : annee_livraison vide,
+      ligne statut absente, et plus rien dans le fichier ne signale l'anomalie. Seule
+      des 23 dans ce cas. NE PAS FABRIQUER DE MILLESIME.
+   c. planche-chiffree — seul archetype de la liste fermee du protocole que les 23
+      planches n'ont pas exerce, donc le seul dont rien ne garantit qu'il fonctionne.
+      Le retirer ou le redefinir est un arbitrage editorial.
+   ⚠ Un seul de ces trois porte une echeance propre : la reception de la creche est
+   le premier des quatorze releves qu'appelle MILLESIME_LIVRAISON_ANNONCE, et le
+   garde-fou de S4 fera ECHOUER LE BUILD au 1er janvier 2027. Ne jamais y repondre en
+   poussant la constante : cela desarmerait le garde-fou pour s'epargner exactement
+   l'echec qu'on lui demande de produire. La reponse est d'aller relever les
+   receptions aupres de FT2E.
+
+2. CE QUE LA SESSION FAIT REELLEMENT — a definir avec l'utilisateur en ouverture.
+   Le chantier de dette est clos et son dernier point de rendu est solde : il n'y a
+   plus de travail programme en attente. Demande ce que « finaliser » recouvre pour
+   lui avant de lancer quoi que ce soit. Les candidats connus, tous hors dette et
+   aucun ouvert d'office :
+   - la recette d'ensemble avant presentation : Lighthouse sur les pages
+     principales du DEPLOIEMENT (jamais sur npm run preview), controle des liens
+     internes par scripts/controle-liens-internes.py, relecture editoriale ;
+   - le script de demonstration client (docs/21-script-demo-2-juillet.md) a
+     actualiser pour la presentation reelle ;
+   - la prise en main de Decap par FT2E (le code est en place et coherent ; ce qui
+     manque est la prise en main) ;
+   - les 7 marqueurs [DEMO] restants, tous des image_alt de src/content/secteurs/,
+     qui se levent au reportage photographique et pas par une validation.
+
+Pieges verifies au depot, a ne pas redecouvrir :
+- Un build vert ne prouve pas que la page s'affiche (regle 11). La PERFORMANCE ne se
+  mesure JAMAIS sur npm run preview, qui ne compresse rien : 0,8 s de biais sur la
+  chaine bloquante. Elle se mesure sur https://ft2e-v3.vercel.app, apres avoir
+  verifie par un MARQUEUR DU BUILD — jamais par un delai d'attente — que le
+  deploiement porte bien le commit en cours.
+- ⚠ Des serveurs astro preview de sessions anterieures tournent encore : seize ports
+  occupes au 2026-08-16, plusieurs repondant 200. Ce n'est pas grave en soi (astro
+  preview sert le DISQUE, donc tous servent le dist/ courant, verifie par marqueur
+  sur trois ports) — le vrai risque est de mesurer SANS AVOIR REBUILD.
+- ⚠ Chrome refuse toute fenetre sous 500 px, EN HEADLESS AUSSI : une capture en
+  --window-size=390,900 compose la page a ~500 px puis ROGNE l'image a 390, ce qui
+  montre un debordement parfaitement credible et parfaitement faux. Les largeurs de
+  telephone se mesurent par une IFRAME servie en meme origine, elargie jusqu'a ce que
+  contentDocument.documentElement.clientWidth vaille la largeur visee.
+- ⚠ Et cette sonde a deux biais connus : le document about:blank INITIAL de l'iframe a
+  exactement la largeur du cadre, donc caler sur onload ET sur la presence d'un
+  element de la page, sinon la boucle sort au premier tour et mesure le vide ; et les
+  media queries CSS comptent la barre de defilement quand clientWidth ne la compte
+  pas, soit 15 px d'ecart — a clientWidth 1023 la page est deja en lg. Sans
+  consequence sur une echelle, decisif sur une borne.
+- ⚠ --user-data-dir fait echouer --dump-dom de Chrome EN SILENCE : code de sortie 0 et
+  aucune sortie du tout. Le meme appel sans l'option rend le document complet.
+- browser_resize de Playwright persiste d'un appel a l'autre et fait passer une page
+  saine pour cassee ; son profil peut etre VERROUILLE si le navigateur du client est
+  ouvert. Chrome headless lance a la main n'a ni l'un ni l'autre probleme.
+- Tailwind v4 elague les variables de theme qu'aucune classe n'emploie. Une couleur
+  s'ecrit en CLASSE litterale (stroke-encre), jamais en var(--color-…) dans un
+  attribut SVG. Et une mesure de mise en page (un plafond, une borne) s'ecrit en CSS
+  de composant plutot qu'en classe arbitraire unique, pour la meme raison.
+- Dans un frontmatter .astro, une sonde de typage se fait en REMPLACANT un attribut,
+  jamais en en ajoutant un second — un attribut duplique ne leve aucune erreur. Et
+  ts(6196) sur une interface Props ne dit pas « code mort », il dit « contrat non
+  consomme ».
+- Le depot porte un .gitattributes depuis le 2026-08-16 : ne pas le retirer. Sans lui,
+  un clone neuf sort les 92 pieces des planches en CRLF et l'invariant de
+  regeneration se lit comme rompu alors qu'il tient.
+- L'accueil est recue a 96 en accessibilite, et c'est admis — a condition que la SEULE
+  violation axe soit le color-contrast d'un complement de titre aria-hidden (arbitrage
+  D1). Un 96 du a autre chose est un blocage ; un 96 non explique dans le compte rendu
+  est indistinguable d'une regression.
+- ⚠ Les insecables sont normalisees EN ENTREE des outils d'edition : un U+00A0 ou
+  U+202F tape dans une chaine a remplacer en ressort en espace ordinaire, et l'edition
+  echoue sans rien dire d'utile — le plan de dette en porte 174 et 57. Pour editer ces
+  documents, passer par un petit script Python qui lit et ecrit l'UTF-8 tel quel, avec
+  un controle d'occurrences qui ECHOUE plutot que de remplacer au hasard, et qui ecrit
+  ses propres insecables en echappement \u00a0 / \u202f — un echappement, lui, survit
+  a la normalisation. ⚠ Ne PAS lancer scripts/injection-typographique.py sur un
+  document entier qui n'a jamais ete normalise : il reecrit des centaines de lignes
+  sans rapport avec le travail en cours (mesure sur le plan de dette : 173 lignes).
+
+Recette de fin de session : npm run typecheck (0 erreur), npm run build (46 pages),
+controle du RENDU de toute page touchee a sa largeur de lecture, et consignation dans
+le plan.
+
+Portee de commit : plusieurs commits nets valent mieux qu'un fourre-tout — les portees
+sont content, docs, fix, design-system selon les points.
+
+Termine par le prompt de lancement de la session suivante, en annexe du plan et
+reproduit integralement dans ton message final. Cette regle est dans CLAUDE.md parce
+qu'elle a ete manquee deux fois.
 ```
