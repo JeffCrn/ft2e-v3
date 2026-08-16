@@ -106,24 +106,24 @@ const partenaires = [
   >
     {enAvant && (
       <Fragment slot="media">
-        {/* Sous `sm`, la vedette n'affiche AUCUN média : l'appui (composé pour
-            ~552 px) y tomberait à l'échelle 0,62 — mono de 10 rendu à 6,2 px.
-            Seule la carte-lien reste, c'est elle qui informe (décision FT2E du
-            2026-08-14). La branche photographique a été retirée à la clôture
-            du chantier des planches : `planche` est obligatoire au schéma,
-            donc une fiche vedette a toujours son appui. */}
-        <div class="plan-pose hidden sm:block" set:html={heroAppui} />
-        {/* La carte-lien SUIT son visuel : seule sous le titre, sans le dessin
-            qu'elle légende, elle se lit comme un bloc orphelin — on se demande
-            ce qu'elle fait là (retour FT2E du 2026-08-14). L'appui étant masqué
-            sous `sm`, la carte l'est aussi ; la vedette reste accessible par
-            « Nos références ». */}
+        {/* Sous `sm`, la vedette n'affiche AUCUN média — ni l'appui, ni la
+            carte-lien qui le légende. L'appui est composé pour ~552 px : à
+            390 px il tomberait à l'échelle 0,62, mono de 10 rendu à 6,2 px,
+            sous le plancher de lisibilité de 6,5. Et la carte-lien SUIT son
+            visuel : seule sous le titre, sans le dessin qu'elle légende, elle
+            se lit comme un bloc orphelin (retour FT2E du 2026-08-14). La
+            vedette reste accessible par « Nos références ».
+            ⚠ Le `hidden sm:block` n'est PAS écrit ici mais sur l'enveloppe du
+            slot, dans `Hero.astro` : porté par ces deux enfants, il laissait
+            une cellule de grille vide et 40 px de vide mort sous la vedette
+            (mesuré à 390 px le 2026-08-16).
+            La branche photographique a été retirée à la clôture du chantier des
+            planches : `planche` est obligatoire au schéma, donc une fiche
+            vedette a toujours son appui. */}
+        <div class="plan-pose" set:html={heroAppui} />
         <a
           href={`/references/${enAvant.id}`}
-          class:list={[
-            'hidden sm:flex',
-            'flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier',
-          ]}
+          class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier"
         >
           <span class="type-intitule text-encre text-[15px]">{titreCourt(enAvant)}</span>
           <span class="mono-data text-[11px] text-pivot ml-auto">{commune(enAvant.data.lieu).libelle} · {libelleChronologie(enAvant)}</span>

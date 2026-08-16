@@ -96,8 +96,16 @@ const tailleTitre = isAccueil
           )}
         </div>
 
+        {/* ⚠ Le masquage du média sous `sm` se fait sur l'ENVELOPPE, jamais sur
+            le contenu du slot. Porté par les enfants, il laissait ici une
+            cellule de grille de hauteur 0 — invisible, mais le `row-gap` du
+            conteneur se payait quand même : 40 px de vide mort mesurés à 390 px
+            le 2026-08-16 (`grid-template-rows: 247.375px 0px`, `row-gap: 40px`).
+            Le MOTIF du masquage appartient à l'appelant qui compose le média
+            (`src/pages/index.astro`) et y est écrit ; le point de rupture, lui,
+            n'existe qu'ici — deux exemplaires et c'est la copie qui dérive. */}
         {hasMedia && (
-          <div class="lg:col-span-6">
+          <div class="hidden sm:block lg:col-span-6">
             <slot name="media" />
           </div>
         )}
