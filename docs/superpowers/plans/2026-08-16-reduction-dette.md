@@ -138,10 +138,17 @@ chaque fois — la mesure est stable, pas un tirage heureux.
 | `/` — performance | 96 | **96** (aucune régression) |
 | `/societe/` — performance | non mesuré avant | 98 |
 
+⚠ Ces chiffres sont ceux de `npm run preview`. **Ceux qui font foi sont ceux du
+déploiement**, plus bas : `/equipe/` perf **100**, LCP **1,2 s**. Voir la règle de
+méthode ci-dessous — le serveur de prévisualisation ne compresse rien.
+
 - **AVIF et WebP** : 26 fichiers de chaque dans `dist/_astro/`. Sur `/equipe/`,
   8 `<picture>`, 24 `srcset`, 8 × `type="image/avif"` et 8 × `type="image/webp"`.
 - **Ressource la plus lourde de `/equipe/`** : ce n'est plus une image mais la
-  police **Archivo variable, 88 Ko**. La plus grosse image fait 27 Ko.
+  police Archivo variable ( 90 104 octets ). La plus grosse image fait 27 Ko.
+  ⚠ Constat de taille, **pas** de goulot : un woff2 est déjà compressé, et le
+  déploiement le sert à l'octet près comme le fait le serveur local — voir la
+  correction plus bas.
 - **Repli** : `tanguy.jpg` retiré → build vert, 7 `<picture>` au lieu de 8, la
   cellule bascule sur la hachure `duotone-media`, zéro occurrence de `tanguy` dans
   le HTML émis.
@@ -151,19 +158,49 @@ chaque fois — la mesure est stable, pas un tirage heureux.
 - **390 px** : `/equipe/` sans débordement horizontal, collectif servi à 293 px
   (variante 420 w), portraits à 170 px.
 
-#### ⚠ Le critère « LCP mobile < 1,8 s » n'est pas tenu, et il n'est pas atteignable ici
+#### ✅ Le critère « LCP mobile < 1,8 s » EST tenu — mesuré sur le déploiement
 
-LCP = **2,2 s** contre 1,8 s exigés. Ce n'est pas un reste d'optimisation d'images :
-**le FCP de la page est lui-même de 1,7–1,8 s**, et aucun LCP ne peut précéder son
-FCP. La page d'accueil le démontre en creux — 147 Kio, aucune image chargée,
-LCP = FCP = **1,8 s exactement**. Le plancher est donc posé par la chaîne bloquante
-CSS + polices, pas par le pipeline d'images.
+| Instrument | perf | FCP | LCP | poids |
+|---|---|---|---|---|
+| `npm run preview` (localhost) | 98 | 1,8 s | 2,2 s | 243 Kio |
+| **`ft2e-v3.vercel.app` (déployé)** | **100** | **1,0 s** | **1,2 s** ✅ | 240 Kio |
+
+⚠ **Correction d'une conclusion publiée quelques minutes plus tôt**, y compris dans
+le message du commit `71cc72f` : ce message annonce le critère non tenu et
+« non atteignable », en désignant la police de 88 Ko comme plancher. **C'est faux,
+et le commit ne sera pas réécrit** — réécrire l'historique invalide tous les SHA
+cités dans les plans et les règles (voir § D2). La correction vit ici.
+
+**Ce qui était mesuré n'était pas le site, c'était le serveur de prévisualisation.**
+`astro preview` sert **tout sans compression** — aucun en-tête `Content-Encoding` ;
+Vercel sert le HTML et le CSS en **brotli**. Le CSS fait 48 Kio bruts, et sous le
+throttling simulé slow-4G de Lighthouse ces 48 Kio non compressés sur le chemin
+bloquant sont exactement ce qui portait le FCP à 1,8 s.
+
+La police que le diagnostic accusait est un **faux coupable** : un woff2 est déjà
+compressé en interne, il est servi à **90 104 octets sur les deux serveurs** — et le
+LCP passe pourtant de 2,2 à 1,2 s. Ce n'était pas elle.
 
 Après correction, `lcp-discovery-insight` passe à 1/1 (`requestDiscoverable`,
-`eagerlyLoaded`, `priorityHinted` tous vrais) : côté image, il n'y a plus rien à
-gagner. **Le levier restant est la police de 88 Ko** — préchargement, sous-ensemble
-de glyphes, ou révision motivée du seuil. Ce n'est pas du ressort de S1 ; à verser au
-relevé comme constat nouveau.
+`eagerlyLoaded`, `priorityHinted` tous vrais) : côté image il n'y a plus rien à
+gagner, et il n'y a plus rien à chercher ailleurs non plus.
+
+> ### 📏 Règle de méthode, à appliquer aux sessions suivantes
+>
+> **`npm run preview` n'est pas un instrument de mesure de performance sur ce
+> projet.** Il reste l'instrument du *rendu* (règle 11 du `CLAUDE.md`, inchangée),
+> mais tout jugement de LCP, de FCP ou de score de performance pris dessus est
+> biaisé d'environ **0,8 s vers le haut** — et le biais porte précisément sur la
+> chaîne bloquante, c'est-à-dire là où l'on cherche à conclure.
+>
+> Une performance se mesure **sur `https://ft2e-v3.vercel.app`**, après avoir
+> vérifié que le déploiement porte bien le commit en cours. C'est ce que faisait le
+> relevé de dette, et c'est pourquoi ses chiffres ne se rejouaient pas en local.
+>
+> Le contrôle de fraîcheur du déploiement doit porter sur un **marqueur du build**,
+> jamais sur un délai : ici, le passage de 0 à 8 occurrences de `type="image/avif"`
+> dans le HTML servi de `/equipe/`. Un `sleep` suivi d'une mesure peut mesurer
+> l'ancienne build sans que rien ne le signale.
 
 #### ⚠ Deux écarts entre le plan et le dépôt, relevés à l'exécution
 
@@ -179,14 +216,22 @@ relevé comme constat nouveau.
    démonstration client, et une hachure se lit comme un placeholder dessiné là où un
    libellé se lirait comme un site inachevé. À rouvrir si FT2E en décide autrement.
 
-#### ⚠ Le 74 / 15,68 s du relevé ne se rejoue pas sur localhost
+#### ✅ Le relevé mesurait le déploiement — et sur cet instrument, avant/après se compare
 
-Mesuré sur `npm run preview` **avant** toute modification : perf 93, LCP 3,0 s — mais
-**poids 4 766 Kio, au kilo-octet près celui du relevé**. C'est donc bien la même page ;
-seule la latence réseau diffère (le relevé mesurait vraisemblablement le déploiement
-Vercel, où 4,6 Mio de JPEG coûtent tout autre chose qu'en localhost). **Les chiffres
-avant/après ci-dessus sont comparables entre eux, et non aux 74 et 15,68 s du relevé.**
-La grandeur qui se compare d'un instrument à l'autre est le poids : 4 766 → 243 Kio.
+Le relevé donnait `/equipe/` à **perf 74, LCP 15,68 s, poids 4 766 Kio**. Ce chiffre
+ne se rejouait pas sur `npm run preview` (93 / 3,0 s / 4 766 Kio) et cet écart a
+d'abord été mis au compte de l'instrument. **La vraie raison est que le relevé
+mesurait le déploiement**, ce que la mesure post-déploiement confirme : sur
+`ft2e-v3.vercel.app`, la même page passe de **74 à 100** et de **15,68 à 1,2 s**.
+
+Le poids, lui, tombait au kilo-octet près sur les deux instruments — c'est ce qui a
+permis de vérifier qu'il s'agissait bien de la même page avant d'agir.
+
+| `/equipe/` sur le déploiement | Relevé du 2026-08-15 | Après S1 |
+|---|---|---|
+| Performance | 74 | **100** |
+| LCP | 15,68 s | **1,2 s** |
+| Poids | 4 766 Kio | **240 Kio** |
 
 ---
 
@@ -426,7 +471,7 @@ Repris du relevé, et **volontairement laissé ouvert** :
 
 | Session | État | Commit | Recette |
 |---|---|---|---|
-| S1 — pipeline d’images | ☑ **faite** le 2026-08-16 | voir § S1 | ⚠ **partielle** — poids 4 766 → 243 Kio, perf 93 → 98, AVIF+WebP+srcset, repli et duotone contrôlés ; **LCP 2,2 s contre 1,8 exigés**, plancher posé par la police, plus par les images |
+| S1 — pipeline d’images | ☑ **faite** le 2026-08-16 | `71cc72f` · `4416c20` · `+1` | ✅ **complète, mesurée sur le déploiement** — `/equipe/` perf **100**, LCP **1,2 s** (seuil 1,8), poids **4 766 → 240 Kio** ; AVIF+WebP+srcset, repli et duotone contrôlés ; `/` sans régression (96) |
 | S2 — planches : typo + régénération | ☐ à faire | — | — |
 | S3 — trois défauts de rendu | ☐ à faire | — | — |
 | S4 — hygiène et garde-fous | ☐ à faire | — | — |

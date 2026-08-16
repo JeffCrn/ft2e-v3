@@ -251,6 +251,30 @@ Contrôler la page réellement modifiée (Playwright ou navigateur), pas seuleme
 
 ## Performances — critères de blocage
 
+⚠ **Où se mesurent-ils : sur le déploiement, jamais sur `npm run preview`.**
+`astro preview` sert **tout sans compression** — aucun en-tête `Content-Encoding` —
+là où Vercel sert le HTML et le CSS en **brotli**. Sous le throttling simulé de
+Lighthouse, les 48 Kio de CSS non compressés se paient sur le chemin bloquant et
+gonflent FCP et LCP d'environ **0,8 s**. Mesuré le 2026-08-16 sur `/equipe/` :
+preview 98 / LCP 2,2 s contre déploiement **100 / LCP 1,2 s**, pour un HTML identique.
+
+Le biais porte précisément sur la chaîne bloquante, c'est-à-dire là où l'on cherche
+à conclure : une session entière a failli être livrée sur le constat « le critère
+n'est pas atteignable », en accusant une police qui pesait le même nombre d'octets
+des deux côtés. **`npm run preview` reste l'instrument du rendu** (§ Vérification du
+rendu, inchangé) ; il n'est pas celui de la performance.
+
+```bash
+# Avant de mesurer : vérifier que le déploiement porte bien le commit en cours,
+# par un MARQUEUR DU BUILD et non par un délai d'attente.
+# ⚠ `grep -o … | wc -l` et NON `grep -c` : le HTML est minifié sur peu de lignes,
+#   et `grep -c` compte les lignes, pas les occurrences.
+curl -s https://ft2e-v3.vercel.app/equipe/ | grep -o 'type="image/avif"' | wc -l   # 8 attendus
+
+npx lighthouse https://ft2e-v3.vercel.app/equipe/ --only-categories=performance \
+  --form-factor=mobile --screenEmulation.mobile --quiet
+```
+
 Si l'un de ces critères n'est pas tenu, **ne pas merger** :
 
 - LCP mobile (4G, Moto G4) < 1.8 s
