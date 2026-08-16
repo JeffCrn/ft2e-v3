@@ -859,6 +859,20 @@ aucun archétype retiré. La conséquence de méthode diffère : ils ne sont pl
 attente d'une réponse qui tarde, ils sont **ajournés à la présentation du projet**.
 Ils repartent au prompt suivant sous cette forme, et non comme une relance.
 
+⚠ **Correction du même jour, après lecture du compte rendu : les deux déploiements
+antérieurs sortent du périmètre.** Arbitrage de l'utilisateur, mot pour mot : « Ces
+projets antérieurs ne sont plus concernés par quoi que ce soit. On traite la V3 et
+uniquement la v3. » Le point est donc **clos, et non ajourné** — il quitte le prompt
+de la session suivante, et il ne reste que **deux** points en suspens : la réception
+de la crèche et `planche-chiffree`.
+
+Le § 6 bis de `docs/19-migration-production.md` est **conservé mais marqué hors
+périmètre**. Il documente un fait vrai, qui redevient opérationnel le jour de la mise
+en production — quand les redirections 301 et la levée du `noindex` se poseront — et
+ce jour-là seulement. Le supprimer ferait perdre l'information ; le laisser sans son
+arbitrage la ferait rouvrir à chaque session, ce que ce dépôt a déjà payé
+plusieurs fois.
+
 ⚠ **Une seule des trois porte une échéance qui ne dépend pas de FT2E.** La réception
 de la crèche est le premier des quatorze relevés qu'appelle
 `MILLESIME_LIVRAISON_ANNONCE` : le garde-fou posé en S4 fera **échouer le build au
@@ -992,7 +1006,7 @@ Repris du relevé, et **volontairement laissé ouvert** :
 | D1 — arbitrage A2 × Lighthouse | ☑ **tranché** le 2026-08-16 — issue 2 (inscrire l’exception, viser 96) | `4416c20` · `806e803` | ✅ **appliqué** à `.claude/rules/accessibility-rgaa.md` en S3 |
 | D2 — trois questions à FT2E | ◑ **posées** le 2026-08-16, **toujours sans réponse** au soir du 2026-08-16 (revérifié en S5) | `7cf8918` (§ 6 bis) | ⚠ **La question 2 a changé de nature** : l'exposition des visuels n'est pas seulement archivée dans l'historique git, elle est **servie en HTTP** par deux déploiements vivants — coût de levée nul, contre une réécriture d'historique. Voir le constat A de S4 |
 | S5 — suites et dernier point ouvert | ☑ **faite** le 2026-08-16 | `c6f7c53` | ✅ **complète sur son périmètre réel** — les 40 px de vide mort du hero supprimés (`grid-template-rows` passe de `247,375px 0px` à `247,375px`, hero 625,88 → 585,88 px à 390 px, inchangé au centième à 640 et 1 280) ; garde-fou du millésime vérifié sur pièce, rien à faire ; **les trois points suspendus à FT2E laissés intacts, faute de réponse**. Trouvé au passage : l’appui du hero servi à l’échelle **1,72** entre `sm` et `lg` |
-| S6 — plafond du hero et points ajournés | ☑ **faite** le 2026-08-16 | `b0213f5` · `+2` | ✅ **complète sur son périmètre réel** — appui du hero plafonné à sa taille de conception : échelle **1,72 → 0,996** à 1 000 px, 0,996 de 640 à 1 000, inchangée au-delà de `lg` ; hero identique **au centième** à 390 et 1 280 px, donc recette de S5 intacte ; zéro débordement sur neuf largeurs de 360 à 1 440 ; leçon remontée dans `.claude/rules/tailwind-design-tokens.md`. **Les trois points suspendus à FT2E sont ajournés à la présentation du projet**, à la demande de l'utilisateur |
+| S6 — plafond du hero et points ajournés | ☑ **faite** le 2026-08-16 | `b0213f5` · `+2` | ✅ **complète sur son périmètre réel** — appui du hero plafonné à sa taille de conception : échelle **1,72 → 0,996** à 1 000 px, 0,996 de 640 à 1 000, inchangée au-delà de `lg` ; hero identique **au centième** à 390 et 1 280 px, donc recette de S5 intacte ; zéro débordement sur neuf largeurs de 360 à 1 440 ; leçon remontée dans `.claude/rules/tailwind-design-tokens.md`. **Les trois points suspendus à FT2E sont ajournés à la présentation du projet**, à la demande de l'utilisateur — les deux déploiements antérieurs en ont ensuite été **sortis définitivement**, il n'en reste que deux |
 
 ---
 
@@ -1518,25 +1532,28 @@ points de rendu. Le plan et toutes ses recettes sont dans
 docs/superpowers/plans/2026-08-16-reduction-dette.md — lis sa section S6 avant toute
 chose. Le site ne porte plus AUCUN dessin servi au-dessus de sa taille de conception.
 
-1. LES TROIS POINTS AJOURNES — ne PAS les rouvrir sans que l'utilisateur le demande.
-   Ils ne sont plus en attente d'une reponse de FT2E : ils sont mis en suspens
-   jusqu'a la presentation du projet final, a la demande explicite de l'utilisateur
-   le 2026-08-16 (« je veux finaliser sans me preoccuper de ces questions annexes »).
-   Les redire en fin de session, ne rien executer dessus, ne rien fabriquer :
-   a. Deux deploiements residuels — ft2e-site.vercel.app (v1) et ft2e-v2.vercel.app
-      repondent 200 et servent les photographies d'ouvrages que le chantier des
-      planches avait retirees de la v3 pour motif de droit d'auteur. Procedure et
-      controle par curl : docs/19-migration-production.md § 6 bis. Ce sont LEURS
-      deploiements ; la CLI Vercel repond « Not authorized » sur cette machine, la
-      suppression se fait au tableau de bord, par FT2E ou avec elle.
-   b. Reception de la creche de l'Oranger — src/content/projets/creche-oranger-
+0. LE PERIMETRE — la v3, et uniquement la v3. Deux deploiements anterieurs
+   (ft2e-site.vercel.app, la v1, et ft2e-v2.vercel.app) repondent encore et servent
+   des photographies d'ouvrages. Ils sont HORS PERIMETRE par decision de
+   l'utilisateur du 2026-08-16 : « ces projets anterieurs ne sont plus concernes par
+   quoi que ce soit ». Ne pas les mesurer, ne pas les proposer, ne pas les remettre
+   dans un compte rendu. Le fait reste documente au § 6 bis de
+   docs/19-migration-production.md, ou il sert le jour de la mise en production et ce
+   jour-la seulement.
+
+1. LES DEUX POINTS AJOURNES — ne PAS les rouvrir sans que l'utilisateur le demande.
+   Ils sont mis en suspens jusqu'a la presentation du projet final, a la demande
+   explicite de l'utilisateur le 2026-08-16 (« je veux finaliser sans me preoccuper
+   de ces questions annexes »). Les redire en fin de session, ne rien executer
+   dessus, ne rien fabriquer :
+   a. Reception de la creche de l'Oranger — src/content/projets/creche-oranger-
       perigny.md annonce une affaire livree sans dire quand : annee_livraison vide,
       ligne statut absente, et plus rien dans le fichier ne signale l'anomalie. Seule
       des 23 dans ce cas. NE PAS FABRIQUER DE MILLESIME.
-   c. planche-chiffree — seul archetype de la liste fermee du protocole que les 23
+   b. planche-chiffree — seul archetype de la liste fermee du protocole que les 23
       planches n'ont pas exerce, donc le seul dont rien ne garantit qu'il fonctionne.
       Le retirer ou le redefinir est un arbitrage editorial.
-   ⚠ Un seul de ces trois porte une echeance propre : la reception de la creche est
+   ⚠ Un seul de ces deux porte une echeance propre : la reception de la creche est
    le premier des quatorze releves qu'appelle MILLESIME_LIVRAISON_ANNONCE, et le
    garde-fou de S4 fera ECHOUER LE BUILD au 1er janvier 2027. Ne jamais y repondre en
    poussant la constante : cela desarmerait le garde-fou pour s'epargner exactement

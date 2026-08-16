@@ -149,6 +149,14 @@ Voir `docs/09-deploiement-ovh.md` en intégralité. Points complémentaires au r
 
 ## §6 bis — Les deux déploiements résiduels (mesuré le 2026-08-16)
 
+> ⛔ **HORS PÉRIMÈTRE DU CHANTIER V3 — décision de l'utilisateur du 2026-08-16.**
+> « Ces projets antérieurs ne sont plus concernés par quoi que ce soit. On traite la
+> V3 et uniquement la v3. » Cette section **n'est plus un point ouvert** et ne se
+> rouvre pas en session de chantier. Elle est conservée parce que le fait reste vrai
+> et qu'il redevient opérationnel **le jour de la mise en production** — quand les
+> redirections 301 et la levée du `noindex` se poseront — et à ce moment-là
+> seulement.
+
 ⚠ **Ce dépôt n'est pas le seul à servir un site FT2E.** Les deux forks antérieurs
 ont gardé leur déploiement Vercel, et **les deux répondent** :
 
