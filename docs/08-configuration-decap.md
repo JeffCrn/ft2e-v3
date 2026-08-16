@@ -39,7 +39,7 @@ Trois options possibles, à arbitrer en cadrage :
 ```yaml
 backend:
   name: github
-  repo: <organisation>/ft2e-site     # à remplacer
+  repo: JeffCrn/ft2e-v3              # l'état réel de public/admin/config.yml
   branch: main
   base_url: https://api.netlify.com  # ou OAuth proxy auto-hébergé
   # auth_endpoint: auth                # selon implémentation OAuth

@@ -1,11 +1,11 @@
 # 21 · Script de démonstration — présentation FT2E du 2 juillet 2026
 
-> Déroulé pas-à-pas pour présenter le site **et** le back-office en direct, sur l'URL live `https://ft2e-site.vercel.app`. Aucune machine locale requise. Durée cible : 15–20 min.
+> Déroulé pas-à-pas pour présenter le site **et** le back-office en direct, sur l'URL live `https://ft2e-v3.vercel.app`. Aucune machine locale requise. Durée cible : 15–20 min.
 
 ## A. Pré-vol (la veille + 15 min avant)
 
-- [ ] Le site répond : ouvrir `https://ft2e-site.vercel.app/` (navigation privée pour éviter le cache).
-- [ ] La connexion CMS fonctionne : `https://ft2e-site.vercel.app/admin/` → **Se connecter** → autoriser GitHub → les collections s'affichent. **Faire ce test AVANT la réunion** (la 1ʳᵉ autorisation GitHub n'est demandée qu'une fois).
+- [ ] Le site répond : ouvrir `https://ft2e-v3.vercel.app/` (navigation privée pour éviter le cache).
+- [ ] La connexion CMS fonctionne : `https://ft2e-v3.vercel.app/admin/` → **Se connecter** → autoriser GitHub → les collections s'affichent. **Faire ce test AVANT la réunion** (la 1ʳᵉ autorisation GitHub n'est demandée qu'une fois).
 - [ ] Être **déjà connecté à GitHub** dans le navigateur de présentation (évite la saisie de mot de passe devant le client).
 - [ ] Onglets prêts : 1) accueil, 2) `/admin/`. Zoom navigateur ~100–110 %.
 - [ ] **Plan B** : si le wifi est mauvais, avoir une **capture vidéo** (screencast) du parcours CMS enregistrée la veille.
@@ -25,7 +25,7 @@ Fil conducteur : « sobre, technique, chaleureux ». Laisser parler le design.
 
 ## C. Démonstration du back-office en direct (~7 min) — le moment clé
 
-1. Ouvrir **`https://ft2e-site.vercel.app/admin/`** → **Se connecter**.
+1. Ouvrir **`https://ft2e-v3.vercel.app/admin/`** → **Se connecter**.
 2. Montrer les **5 collections** (Projets, Actualités, Équipe, Expertises, Secteurs) — « tout le contenu du site se gère ici, sans toucher au code ».
 3. Ouvrir **Projets / Références** → cliquer une fiche (ex. Maison Pierre Loti) → montrer le **formulaire structuré** (titre, secteur, mission, image, récit) et l'**aperçu en direct**.
 4. **Édition live** (effet « waouh »), au choix :

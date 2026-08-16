@@ -1,4 +1,4 @@
-# TEMPORAIRE — site de démonstration pour validation client sur ft2e-site.vercel.app.
+# TEMPORAIRE — site de démonstration pour validation client sur ft2e-v3.vercel.app.
 # À remplacer en phase de production (migration sur ft2e.fr) par :
 #   User-agent: *
 #   Allow: /

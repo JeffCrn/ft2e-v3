@@ -2,7 +2,11 @@
 
 > **Document à exécuter au moment de la mise en production.** À ne PAS exécuter avant validation explicite de FT2E.
 >
-> Le site est actuellement hébergé sur Vercel (`https://ft2e-site.vercel.app`) en mode **démo client**, avec **indexation moteurs bloquée par triple sécurité** (commit `7e21628`, 2026-05-28). Ce document décrit la séquence exacte pour basculer en production sur `ft2e.fr` — y compris le revert du blocage SEO.
+> Le site est actuellement hébergé sur Vercel (`https://ft2e-v3.vercel.app`) en mode **démo client**, avec **indexation moteurs bloquée par triple sécurité** (commit `7e21628`, 2026-05-28). Ce document décrit la séquence exacte pour basculer en production sur `ft2e.fr` — y compris le revert du blocage SEO.
+>
+> ⚠ **L'hôte, corrigé le 2026-08-16.** Ce document nommait `ft2e-site.vercel.app` — le déploiement de la **v1**, qui n'est pas celui de ce dépôt. La confusion aurait été exécutée au pire moment : c'est ici que se règlent le domaine, les redirections 301 et le retrait du `noindex`.
+>
+> ⚠ Et `ft2e-site.vercel.app` **n'est pas une adresse morte** : mesuré le 2026-08-16, il répond `200` et sert encore le site v1 avec ses photographies d'ouvrages. `ft2e-v2.vercel.app` aussi. Voir § 6 bis.
 
 ## Pré-requis avant de démarrer
 
@@ -102,7 +106,7 @@ Retirer les mentions de mode démo / indexation bloquée dans la section « Stat
 
 ### 3.1 — Ajouter le domaine
 
-Dashboard Vercel → projet `ft2e-site` → **Settings → Domains** → ajouter `ft2e.fr` et `www.ft2e.fr`.
+Dashboard Vercel → projet `ft2e-v3` → **Settings → Domains** → ajouter `ft2e.fr` et `www.ft2e.fr`.
 
 ### 3.2 — Configurer le DNS chez le registrar
 
@@ -124,7 +128,7 @@ Google Search Console → propriété `https://ft2e.fr/` → Sitemaps → ajoute
 Voir `docs/09-deploiement-ovh.md` en intégralité. Points complémentaires au revert SEO :
 
 - Ajouter le fichier `public/.htaccess` (contenu fourni dans `docs/09-deploiement-ovh.md` § « Fichier `.htaccess` à déployer »). **Vérifier qu'il ne contient AUCUN header `X-Robots-Tag: noindex`** introduit par erreur.
-- Configurer les **redirections 301** depuis `ft2e.myportfolio.com` ET depuis `ft2e-site.vercel.app` vers les URLs équivalentes `ft2e.fr` — pour ne pas perdre le trafic acquis pendant la phase démo Vercel.
+- Configurer les **redirections 301** depuis `ft2e.myportfolio.com` ET depuis `ft2e-v3.vercel.app` vers les URLs équivalentes `ft2e.fr` — pour ne pas perdre le trafic acquis pendant la phase démo Vercel. ⚠ **`ft2e-v3`, pas `ft2e-site`** : ce dernier est le déploiement de la v1, dont les URLs de références ne correspondent plus (voir § 6 bis).
 - Activer **Plausible Analytics** (RGPD-friendly).
 - Soumettre le sitemap à Google Search Console.
 
@@ -143,13 +147,48 @@ Voir `docs/09-deploiement-ovh.md` en intégralité. Points complémentaires au r
 
 ---
 
+## §6 bis — Les deux déploiements résiduels (mesuré le 2026-08-16)
+
+⚠ **Ce dépôt n'est pas le seul à servir un site FT2E.** Les deux forks antérieurs
+ont gardé leur déploiement Vercel, et **les deux répondent** :
+
+| Hôte | Code | Ce qu'il sert | Indexation |
+|---|---|---|---|
+| `ft2e-site.vercel.app` | `200` | le site **v1**, avec ses photographies d'ouvrages (`/images/projets/<slug>/01.jpg`, **8 distincts sur `/references` seule**, 819 à 937 Ko chacune, servies en `200`) | `noindex` + `Disallow: /` |
+| `ft2e-v2.vercel.app` | `200` | le site **v2**, mêmes visuels | `noindex` + `Disallow: /` |
+| `ft2e-v3.vercel.app` | `200` | **ce dépôt** — planches dessinées, aucune photographie d'ouvrage | `noindex` + `Disallow: /` |
+
+**Ce que cela change pour la question des visuels d'architecte.** Le chantier des
+planches les a retirés de *ce* site parce qu'ils exposaient le bureau au droit
+d'auteur des architectes. La programmation de réduction de dette (D2, question 2)
+posait le reste de l'exposition comme un problème d'**historique git**, dont la
+levée coûterait une réécriture invalidant tous les SHA. La mesure dit autre chose :
+l'exposition la plus directe n'est pas archivée, elle est **servie en HTTP à qui
+connaît l'URL**, et la lever coûte la suppression de deux déploiements — rien.
+
+Le `noindex` limite l'exposition, il ne la supprime pas : il empêche le référencement,
+pas l'accès. Et c'est un verrou de démonstration, pensé pour être **levé** un jour ;
+s'il l'était par erreur sur `ft2e-site`, la v1 se retrouverait indexée avec ses
+photographies.
+
+**À exécuter au moment de la mise en production, avant de toucher au `noindex` :**
+
+- [ ] Décider avec FT2E du sort de `ft2e-site` et `ft2e-v2` — suppression du projet
+      Vercel, ou protection par mot de passe (Deployment Protection).
+- [ ] Ne PAS se contenter de supprimer le domaine : un projet Vercel garde ses URLs
+      de déploiement (`<projet>-<hash>.vercel.app`) tant que le projet existe.
+- [ ] Vérifier après coup, par la mesure et non par le tableau de bord :
+      `curl -s -o /dev/null -w "%{http_code}" https://ft2e-site.vercel.app/`.
+
+---
+
 ## Pièges connus
 
 1. **Cache navigateur et edge** — après revert, vider le cache local et tester en navigation privée. Vercel peut conserver un edge cache pendant ~quelques minutes ; forcer une redéploiement complet si besoin.
 
 2. **`PUBLIC_MODE` oublié** — sans la bascule en `production`, les `BadgeDemo` continuent d'apparaître et le formulaire reste désactivé. C'est un piège silencieux : aucun warning au build.
 
-3. **Sitemap stale côté Google** — Google peut mettre des semaines à abandonner d'éventuelles URLs `ft2e-site.vercel.app` indexées (si jamais le robots.txt avait été contourné). Mettre une `301` Vercel → `ft2e.fr` au niveau projet Vercel et utiliser l'outil « Removal » de Search Console si nécessaire.
+3. **Sitemap stale côté Google** — Google peut mettre des semaines à abandonner d'éventuelles URLs `ft2e-v3.vercel.app` indexées (si jamais le robots.txt avait été contourné). Mettre une `301` Vercel → `ft2e.fr` au niveau projet Vercel et utiliser l'outil « Removal » de Search Console si nécessaire.
 
 4. **Headers `X-Robots-Tag` persistants** — si on supprime `vercel.json` mais qu'on garde le projet Vercel, vérifier qu'aucun autre fichier (ex. `next.config`, `astro.config`) ne réinjecte ce header.
 

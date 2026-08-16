@@ -1,6 +1,6 @@
 # 14 · Version liminaire — cadrage opérationnel
 
-**📌 ÉTAT (juin 2026)** : la version liminaire est **déployée en production sur Vercel** (`ft2e-site.vercel.app`). Le **bandeau « Version liminaire »** a été **retiré** du site sur demande de FT2E. Les contenus encore en démonstration restent marqués `[DÉMO]` dans les fichiers Markdown. La phase d'atelier de cadrage avec l'équipe FT2E peut commencer.
+**📌 ÉTAT (juin 2026)** : la version liminaire est **déployée en production sur Vercel** (`ft2e-site.vercel.app` — l'hôte de la **v1**, à ne pas confondre avec `ft2e-v3.vercel.app`, celui de ce dépôt ; il répond encore, voir `docs/19-migration-production.md` § 6 bis). Le **bandeau « Version liminaire »** a été **retiré** du site sur demande de FT2E. Les contenus encore en démonstration restent marqués `[DÉMO]` dans les fichiers Markdown. La phase d'atelier de cadrage avec l'équipe FT2E peut commencer.
 
 > Ce document définit ce que Claude Code a produit dans le cadre actuel : une **version liminaire** du site ft2e.fr, qui sert de support à l'atelier de cadrage avec l'équipe FT2E.
 

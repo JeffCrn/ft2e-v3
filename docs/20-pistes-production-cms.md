@@ -5,16 +5,16 @@
 ## Ce qui est en place (live, fonctionnel)
 
 - `public/admin/index.html` — charge Decap CMS **3.14.1** (version épinglée + intégrité SRI) depuis unpkg, page `noindex`, config chargée par chemin absolu (`<link rel="cms-config-url">`).
-- `public/admin/config.yml` — `backend: name: github` (`repo: JeffCrn/ft2e-site`, `branch: master`, `base_url: https://ft2e-site.vercel.app`, `auth_endpoint: api/auth`). Après connexion GitHub, Decap lit/écrit le **vrai** contenu du dépôt.
-- **Proxy OAuth** : fonctions serverless Vercel `api/auth.js` + `api/callback.js` (`client_secret` côté serveur ; `state` CSRF via CSPRNG+cookie ; origine postMessage figée ; anti-XSS). Variables d'env Vercel : `OAUTH_GITHUB_CLIENT_ID`, `OAUTH_GITHUB_CLIENT_SECRET`. OAuth App GitHub « FT2E CMS », callback `https://ft2e-site.vercel.app/api/callback`.
+- `public/admin/config.yml` — `backend: name: github` (`repo: JeffCrn/ft2e-v3`, `branch: master`, `base_url: https://ft2e-v3.vercel.app`, `auth_endpoint: api/auth`). Après connexion GitHub, Decap lit/écrit le **vrai** contenu du dépôt.
+- **Proxy OAuth** : fonctions serverless Vercel `api/auth.js` + `api/callback.js` (`client_secret` côté serveur ; `state` CSRF via CSPRNG+cookie ; origine postMessage figée ; anti-XSS). Variables d'env Vercel : `OAUTH_GITHUB_CLIENT_ID`, `OAUTH_GITHUB_CLIENT_SECRET`. OAuth App GitHub « FT2E CMS », callback `https://ft2e-v3.vercel.app/api/callback`.
 - **5 collections** alignées sur les schémas Zod (`src/content.config.ts`) : `projets`, `actualites`, `equipe`, `expertises`, `secteurs`.
 
 ### À montrer pendant la démo (2026-07-02) — sur l'URL live, sans machine locale
 
-Décision FT2E (2026-06-18) : la démo se fait **directement sur `https://ft2e-site.vercel.app/admin/`**, sans poste de démo local. L'**authentification est repoussée** et sera montée au moment du passage en production (OVH ou autre) — l'utilisateur sollicitera EuporIA à ce moment-là.
+Décision FT2E (2026-06-18) : la démo se fait **directement sur `https://ft2e-v3.vercel.app/admin/`**, sans poste de démo local. L'**authentification est repoussée** et sera montée au moment du passage en production (OVH ou autre) — l'utilisateur sollicitera EuporIA à ce moment-là.
 
 Parcours démontrable sur l'URL live (vérifié le 2026-06-18) :
-1. Ouvrir `https://ft2e-site.vercel.app/admin/` → bouton « Se connecter » (test-repo, aucune authentification).
+1. Ouvrir `https://ft2e-v3.vercel.app/admin/` → bouton « Se connecter » (test-repo, aucune authentification).
 2. Les **5 collections** s'affichent (Projets, Actualités, Équipe, Expertises, Secteurs).
 3. Cliquer « ＋ Projet » → le **formulaire structuré complet** s'ouvre (titre, secteur, typologie, MOA, lieu, surface, année, performance, mission, image, badge démo, récit en markdown) **avec aperçu en direct**.
 
@@ -45,7 +45,7 @@ Remplacer le bloc `backend: test-repo` du `config.yml` par :
 ```yaml
 backend:
   name: github          # ou gitlab / git-gateway selon l'hébergeur
-  repo: <organisation>/ft2e-site
+  repo: JeffCrn/ft2e-v3
   branch: main
 publish_mode: editorial_workflow   # brouillon → relecture → publication (via PR)
 ```

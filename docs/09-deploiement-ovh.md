@@ -2,7 +2,7 @@
 
 > Cette section reprend strictement la **configuration retenue dans l'annexe A du PDF** (pp. 28–29). En cas de divergence avec ce document, le PDF gagne.
 >
-> ⚠️ **État actuel** : le site est hébergé sur **Vercel** (`https://ft2e-site.vercel.app`) en démo client, avec indexation moteurs bloquée. Le présent document reste valide comme cible long terme. **La séquence exacte de migration (Vercel ou OVH) — y compris le revert du blocage SEO — est consolidée dans `docs/19-migration-production.md`**, à exécuter au feu vert FT2E.
+> ⚠️ **État actuel** : le site est hébergé sur **Vercel** (`https://ft2e-v3.vercel.app`) en démo client, avec indexation moteurs bloquée. Le présent document reste valide comme cible long terme. **La séquence exacte de migration (Vercel ou OVH) — y compris le revert du blocage SEO — est consolidée dans `docs/19-migration-production.md`**, à exécuter au feu vert FT2E.
 
 ## Pourquoi OVHcloud (PDF p. 28)
 
