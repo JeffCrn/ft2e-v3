@@ -926,6 +926,22 @@ dessin agrandi rend donc tous ses rangs faux à la fois — et c'est vrai d'un o
 comme d'une figure. Consigné dans `.claude/rules/tailwind-design-tokens.md`
 § Composants signature, à la suite de la vignette et des trois bandes.
 
+### Trouvé au passage : le déploiement a dix-huit commits de retard
+
+`origin/master` est à `ba3cc3b`, relevé par `git ls-remote` et non par la référence
+locale, qui pouvait être périmée. Le déploiement `ft2e-v3.vercel.app` est donc à cet
+état : il porte S1, S2 et S3, et **ni S4, ni S5, ni S6**. Contrôlé par des marqueurs
+du build plutôt que par une date — les huit `type="image/avif"` de `/equipe/` (S1)
+**sont** servis, les cibles de 44 px du pied de page (S4) ne le sont **pas**, et la
+règle `.appui-hero` de cette session non plus.
+
+**La conséquence pour la session suivante est bloquante** : toute mesure faite « sur
+le déploiement » — c'est-à-dire toute mesure de performance, puisque `npm run preview`
+ne compresse rien — porterait sur un site vieux de trois sessions. Le push n'a pas été
+fait ici : il est sortant, et personne ne l'a demandé. Il doit l'être avant toute
+recette de performance, et le contrôle reste le même : un marqueur du build, jamais un
+délai d'attente.
+
 ### Trois pièges de mesure, dont deux inédits
 
 1. ⚠ **La sonde en iframe voit 15 px de moins que les media queries.** Les `min-width`
@@ -1543,6 +1559,13 @@ chose. Le site ne porte plus AUCUN dessin servi au-dessus de sa taille de concep
      qui se levent au reportage photographique et pas par une validation.
 
 Pieges verifies au depot, a ne pas redecouvrir :
+- ⚠ AVANT TOUTE MESURE DE PERFORMANCE, VERIFIER QUE LE DEPLOIEMENT PORTE LE CODE.
+  Au 2026-08-16, origin/master est a ba3cc3b et le local a 18 commits d'avance : le
+  site en ligne porte S1, S2 et S3, mais ni S4, ni S5, ni S6. Releve par git ls-remote
+  (la reference locale peut etre perimee) et par deux marqueurs du build — les 8
+  type="image/avif" de /equipe/ y sont, les cibles 44 px du pied n'y sont pas. Rien
+  n'a ete pousse : le push est sortant et n'a pas ete demande. Le demander avant toute
+  recette de performance.
 - Un build vert ne prouve pas que la page s'affiche (regle 11). La PERFORMANCE ne se
   mesure JAMAIS sur npm run preview, qui ne compresse rien : 0,8 s de biais sur la
   chaine bloquante. Elle se mesure sur https://ft2e-v3.vercel.app, apres avoir
