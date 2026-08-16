@@ -176,6 +176,13 @@ body {
     text-transform: uppercase;
     letter-spacing: -0.025em;
     line-height: 0.92;
+    /* Plancher de sécurité, pas un mode de composition : `break-word` ne
+       coupe un mot que s'il ne tient PAS sur sa ligne autrement. La borne
+       basse du clamp est calée pour que ça n'arrive à aucune largeur de
+       téléphone (≥ 360 px) ; en dessous, un mot cassé vaut mieux qu'une page
+       qui défile latéralement. Sans cette ligne, le débordement de 390 px
+       corrigé le 2026-08-16 se rejouerait tel quel à 320. */
+    overflow-wrap: break-word;
   }
 
   /* Titre d'écran : accroche de page interne — casse normale, jamais en

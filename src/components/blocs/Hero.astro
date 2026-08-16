@@ -33,8 +33,17 @@ const lignes = titre.split('\\n');
 // Vedette de couverture (accueil) ou titre d'écran (variante page, aligné
 // sur HeroPage) — l'interligne vient des recettes .type-display / .type-ecran.
 const titreClasses = isAccueil ? 'type-display text-profond' : 'type-ecran text-encre';
+// ⚠ Borne basse de la vedette : 2,4 rem et non les 3 rem de la charte.
+// Mesuré à 390 px le 2026-08-16 : à 3 rem (48 px) et chasse 125, « L’ingénierie »
+// fait 389 px dans une boîte de 358 — trois mots sur sept dépassent, la page
+// défile latéralement (scrollWidth 405 pour clientWidth 390). La borne de la
+// charte n’avait jamais été validée à cette largeur avec cette chasse ; la
+// charte tranche elle-même ce cas — « la mesure prévaut sur la règle ».
+// À 2,4 rem (38,4 px) le mot tombe à 311 px : il tient à 390 px (boîte 358) et
+// à 360 px (boîte 328), les deux largeurs de téléphone qui comptent. Au-delà
+// de 512 px de fenêtre, la pente en vw reprend la main et rien ne change.
 const tailleTitre = isAccueil
-  ? 'font-size: clamp(3rem, 7.5vw, 6.5rem);'
+  ? 'font-size: clamp(2.4rem, 7.5vw, 6.5rem);'
   : 'font-size: clamp(2.25rem, 5vw, 3.875rem);';
 ---
 

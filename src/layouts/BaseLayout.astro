@@ -2,6 +2,31 @@
 import '../styles/global.css';
 import { ClientRouter, fade } from 'astro:transitions';
 
+/**
+ * Les trois fontes du chemin critique, préchargées.
+ *
+ * Elles sont déclarées par `@import` dans `global.css` : le navigateur ne les
+ * découvre donc qu'APRÈS avoir analysé la feuille, soit deux sauts de réseau
+ * après le HTML. Avec `font-display: swap`, la première peinture se fait aux
+ * métriques de la police de repli, puis tout se recompose à l'arrivée
+ * d'Archivo — et la vedette de l'accueil est composée en `font-stretch: 125%`,
+ * un axe `wdth` que le repli système ne possède pas. L'écart de chasse est
+ * donc maximal, le titre change de nombre de lignes, et tout le bloc suivant
+ * descend.
+ *
+ * Mesuré le 2026-08-16 sur le déploiement : CLS 0,098 pour un plafond de
+ * 0,05, en UN SEUL décalage que Lighthouse impute explicitement — sous-tableau
+ * `layout-shifts`, `cause: "Web font loaded"`, ces trois fichiers nommés.
+ *
+ * ⚠ `crossorigin` est obligatoire même en même origine : une fonte est
+ * toujours cherchée en mode CORS anonyme, et un `preload` sans l'attribut
+ * remplit un autre seau de cache que celui où `@font-face` viendra puiser —
+ * le fichier part deux fois et le préchargement ne sert à rien.
+ */
+import archivoWdth from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import plexMono400 from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url';
+import plexMono500 from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2?url';
+
 interface Props {
   title: string;
   description: string;
@@ -33,6 +58,13 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/* Avant tout le reste du head : le préchargement ne vaut que s'il est
+        découvert tôt. Voir le commentaire du frontmatter — c'est la
+        correction du CLS de 0,098 relevé sur l'accueil. */}
+    <link rel="preload" href={archivoWdth} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={plexMono400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={plexMono500} as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />

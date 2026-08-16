@@ -114,6 +114,39 @@ npx axe http://localhost:4321
 
 Cible Lighthouse Accessibility : **100/100**. Toute régression < 100 = blocage.
 
+### L'unique exception : l'accueil est reçue à 96 (arbitrage D1, 2026-08-16)
+
+**L'accueil plafonne à 96, et c'est admis** — à une condition stricte : que la
+**seule** violation `axe` soit un `color-contrast` portant sur un complément de titre
+`aria-hidden` (`<span class="text-clair" aria-hidden="true">`). Vérifié sur le
+déploiement le 2026-08-16 : c'est bien la seule.
+
+Le motif est que les deux règles du système se contredisent. L'amendement **A2**
+autorise ce complément à 1,67:1 *parce qu'il est décoratif et masqué aux
+technologies d'assistance* ; `axe` signale le contraste dès qu'il parvient à
+résoudre la couleur de fond, et `aria-hidden` ne l'en dispense pas. Les deux sont
+respectées à la lettre, et elles ne peuvent pas l'être ensemble.
+
+**Ce que l'exception ne couvre pas.** Le 100/100 reste opposable à **toute autre
+violation**, sur toute page, y compris l'accueil : un 96 dû à autre chose est un
+blocage, pas une exception. Et un compte rendu qui annonce 96 doit **nommer la
+violation attendue** — un 96 non expliqué est indistinguable d'une régression.
+
+⚠ **Le 100 des autres pages mesure la trame, pas le contraste.** Six des sept
+compléments de l'accueil échappent à la détection parce que, sur le papier tramé, le
+`background-image` empêche `axe` de résoudre la couleur de fond et l'outil s'abstient.
+Ils ne sont **pas plus conformes — seulement moins mesurables**. Ne pas lire le 100
+d'une page interne comme une validation de ce motif.
+
+Les deux autres issues ont été écartées, et il est utile de savoir pourquoi avant de
+les reproposer : retirer le complément des seules sections posées sur aplat ferait
+dépendre A2 du fond, donc une règle à redécouvrir à chaque nouveau gabarit ; assombrir
+le complément pour franchir 4,5:1 l'abrogerait — il cesserait d'être un décor et
+redeviendrait du texte, ce qui change le dessin des titres de section sur tout le site.
+
+Ce qui a été refusé, en somme : **laisser en place un critère de blocage que personne
+ne peut satisfaire.** C'est ainsi qu'un critère cesse d'être appliqué.
+
 ## Page de mention
 
 Le site inclut une **page « Accessibilité »** (`/accessibilite`) déclarant le niveau de conformité, les éventuelles dérogations, et la date du dernier audit.

@@ -151,9 +151,19 @@ const partenaires = [
               {releves.map((r) => (
                 <div class="bg-papier p-6 flex flex-col">
                   <p class="mono-label text-pivot">— {r.etiquette}</p>
+                  {/* ⚠ Borne basse à 1,9 rem et non 2,5. Mesuré à 390 px le
+                      2026-08-16 : « +1 686 » fait 148 px dans une colonne
+                      utile de 130 (115 à 360 px), et la page défile
+                      latéralement. Une seule des quatre valeurs déborde, mais
+                      le clamp est commun — les quatre passent donc de 40 à
+                      30 px sur téléphone, le « 17 » en encre pleine compris.
+                      Arbitrage FT2E du 2026-08-16 : garder les deux colonnes
+                      plutôt que la taille des chiffres, l'alternative étant
+                      une colonne unique qui allongeait la section de 216 px.
+                      Au-delà de 555 px de fenêtre, rien ne change. */}
                   <p
                     class:list={[
-                      'releve-chiffre mt-3 text-[clamp(2.5rem,4.5vw,3.75rem)]',
+                      'releve-chiffre mt-3 text-[clamp(1.9rem,4.5vw,3.75rem)]',
                       r.plein ? 'text-encre' : 'releve-retrait',
                     ]}
                   >

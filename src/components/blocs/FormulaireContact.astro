@@ -159,9 +159,21 @@ const labelClasses = 'mono-label block text-pivot mb-1.5';
           <p class="mono-label text-pivot px-5 py-3 bg-calcaire border-b border-filet-2">coordonnées</p>
           <address class="not-italic mono-data text-encre leading-[1.7] px-5 py-4">
             <p>35 Rue Nicolas Denys de Fronsac<br />17000 La Rochelle</p>
-            <p class="mt-3">
-              <a href="tel:+33546278593" class="hover:text-pivot transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a><br />
-              <a href="mailto:ft2e@ft2e.fr" class="hover:text-pivot transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
+            {/* Cibles tactiles de 44 px (RGAA AA, § Cible tactile) : les deux
+                liens étaient séparés par un simple <br /> dans un interligne
+                de 1,7, soit 22 px entre leurs centres — sous le seuil, et
+                `/contact/` plafonnait à 97 d'accessibilité.
+
+                ⚠ La recette `.cible-44` ne convient PAS ici, et c'est le
+                premier cas du site où elle ne compose pas : son `::after` de
+                44 px est un calque centré, donc deux liens distants de 22 px
+                verraient leurs calques se chevaucher sur la moitié de leur
+                hauteur. Toucher le haut de l'adresse déclencherait l'appel
+                téléphonique. Ce sont donc les BOÎTES qui font 44 px, ce qui
+                garantit l'espacement en même temps que la taille. */}
+            <p class="mt-3 flex flex-col items-start">
+              <a href="tel:+33546278593" class="inline-flex items-center min-h-[44px] hover:text-pivot transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a>
+              <a href="mailto:ft2e@ft2e.fr" class="inline-flex items-center min-h-[44px] hover:text-pivot transition-colors duration-[260ms] ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
             </p>
           </address>
           <div class="px-5 py-4 bg-calcaire border-t border-filet-2">
