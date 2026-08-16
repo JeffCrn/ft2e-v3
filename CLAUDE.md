@@ -16,6 +16,7 @@ Une **build Astro statique** fonctionnelle, déployée sur Vercel, qui :
 Ce qui n'est pas encore en place :
 
 - **Decap CMS est configuré** (`public/admin/config.yml`, cinq collections, backend GitHub via le proxy OAuth `api/auth.js` + `api/callback.js` sur Vercel) — il reste à le faire valider et prendre en main par FT2E. Toute modification d'un schéma Zod se répercute dans `config.yml` **au sein du même commit** (sous-agent `content-modeller`).
+  🔴 **Mais la connexion échoue en production, mesuré le 2026-08-16** : `/admin/` répond `200`, et `/api/auth?provider=github` rend **`HTTP 500` — « Configuration OAuth manquante »**. **Rien n'est en cause dans le dépôt** ; il manque `OAUTH_GITHUB_CLIENT_ID` / `_SECRET` sur Vercel et la callback `https://ft2e-v3.vercel.app/api/callback` sur l'OAuth App GitHub. Trois gestes hors dépôt, avec leur commande de contrôle : `docs/22-prise-en-main-decap.md` § 0. ⚠ L'avertissement existait **en commentaire** en tête de `config.yml` depuis le 2026-08-10 et a traversé six sessions : **un commentaire n'échoue jamais.** À refaire au changement de domaine, la callback portant l'adresse du site.
 - Pas de formulaire Contact branché (UI uniquement, sans backend).
 - Pas encore migré sur `ft2e.fr` (déploiement Vercel sur `ft2e-v3.vercel.app`).
 - **Indexation moteurs bloquée par triple sécurité** (robots.txt `Disallow: /`, meta `noindex` global, header HTTP `X-Robots-Tag`) tant que le site est en démo client. Procédure de revert exacte : `docs/19-migration-production.md`.
@@ -291,7 +292,8 @@ lui : sa place est ici.
 | **Responsive des planches sur les fiches** (spec — **appliquée le 2026-08-15** : trois compositions, trois bandes, repli supprimé, agrandissement à deux états) | **`docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`** |
 | Version liminaire (historique de la première livraison) | `docs/14-version-liminaire.md` |
 | Pistes de production CMS | `docs/20-pistes-production-cms.md` (⚠ numéro 20 partagé avec la source plaquette) |
-| Script de la démonstration client du 2 juillet | `docs/21-script-demo-2-juillet.md` |
+| **Script de la démonstration client** (refait le 2026-08-16 ; le nom de fichier reste historique) | **`docs/21-script-demo-2-juillet.md`** |
+| **Prise en main du CMS par FT2E** (mode d'emploi rédacteur — ⚠ son § 0 porte le blocage OAuth qui empêche toute connexion) | **`docs/22-prise-en-main-decap.md`** |
 
 ## Commandes disponibles
 
