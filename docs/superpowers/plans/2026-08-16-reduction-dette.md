@@ -539,10 +539,23 @@ Repris du relevé, et **volontairement laissé ouvert** :
 
 ---
 
-## Annexe — prompt de lancement de la session 1
+## Annexes — prompts de lancement
 
-> À coller tel quel dans une session neuve. Il est écrit pour être autoportant :
-> il ne suppose aucun contexte de la session d’audit.
+> **Règle de continuité du chantier.** Toute session se termine par le prompt de
+> lancement de la suivante — `docs/superpowers/plans/2026-08-07-chantier-references-reelles.md`
+> § 12 la donne comme « OBLIGATOIRE, clôture de session », et le protocole des
+> planches la reprend en dernière consigne.
+>
+> ⚠ **Elle n’a été tenue ni à la clôture de S1 ni à celle de S3.** Omission relevée
+> et réparée le 2026-08-16 : les annexes B et C ci-dessous ont été rédigées
+> **après coup**, et non au fil des sessions comme le protocole l’exige. Le manque
+> n’a pas eu de conséquence — les deux sessions ont été enchaînées dans la même
+> conversation — mais c’est précisément ce qui l’a rendu invisible.
+>
+> Un prompt est écrit pour être **autoportant** : collé dans une session neuve,
+> il ne suppose aucun contexte des sessions précédentes.
+
+### Annexe A — session 1, le pipeline d’images (exécutée le 2026-08-16)
 
 ```text
 Session 1 de la réduction de dette FT2E v3 — le pipeline d’images.
@@ -597,4 +610,178 @@ Question à poser en ouverture, sans attendre : l’arbitrage D1 (A2 contre le 
 Lighthouse) doit être tranché avant la recette de la session 3. Sa formulation est
 en section D1 du plan. Pose-la, note la réponse dans le plan, et continue S1 sans
 attendre qu’elle arrive.
+```
+
+---
+
+### Annexe B — session 2, les planches : typographie et régénération
+
+```text
+Session 2 de la réduction de dette FT2E v3 — les planches : typographie puis
+régénération.
+
+Contexte. Le relevé de dette du 2026-08-15 (commit d3bd8d9) classe ces deux
+constats aux rangs 2 et 3, fusionnés parce qu'ils réécrivent les mêmes fichiers —
+les séparer doublerait le contrôle de rendu à 1 152 px. La programmation est dans
+docs/superpowers/plans/2026-08-16-reduction-dette.md : lis sa section « S2 » avant
+toute chose. Le protocole de production des planches est dans
+docs/superpowers/specs/2026-08-12-planches-references-protocole.md, le bilan de
+clôture du chantier dans docs/superpowers/plans/2026-08-12-chantier-planches-references.md.
+
+Deux constats, tels que mesurés.
+
+1. L'APOSTROPHE DROITE, SUR TOUT LE CORPUS DESSINÉ. La règle éditoriale impose
+   U+2019 sur « tout contenu textuel destiné à l'utilisateur final ». Les planches —
+   le livrable le plus récent et le plus visible — ne l'ont jamais reçue : 205
+   occurrences dans le texte dessiné des SVG, 1 325 dans les extractions
+   planche.json, aria_label compris. Les aria_label sont LUS TELS QUELS par les
+   lecteurs d'écran : ce n'est pas une coquetterie typographique, c'est de
+   l'accessibilité. L'outil existe déjà — scripts/injection-typographique.py définit
+   APO = U+2019 — il n'a simplement jamais été passé sur public/images/projets/. Le
+   relevé nomme la cause exactement : la discipline appliquée à src/content/ n'a pas
+   suivi le contenu quand il a changé de répertoire.
+
+2. L'INVARIANT DE RÉGÉNÉRATION EST ROMPU. Quatorze planches datent des 13 et 14
+   août, alors que la correction de _tronc.mesurer n'est arrivée que le 15 avec la
+   planche 21 (commit 1b23d48). « Régénération octet à octet » est le seul contrôle
+   qui protège les planches publiées d'une dérive du tronc commun ; il ne tient plus
+   tant que la passe n'est pas faite.
+
+L'ORDRE DES DEUX OPÉRATIONS N'EST PAS INDIFFÉRENT — c'est le seul vrai piège de
+cette session. Corriger la typographie D'ABORD, régénérer ENSUITE. Dans l'autre
+sens, la régénération réécrit les SVG depuis les compositeurs et ÉCRASE les
+apostrophes corrigées : on aurait fait le travail deux fois, et le second passage
+effacerait le premier sans que rien ne le signale.
+
+Corollaire : la correction porte sur la SOURCE, jamais sur le rendu.
+  1. les planche.json de chaque dossier — la pièce que FT2E relit, et la source du
+     titre court, du cartouche et de l'aria_label ;
+  2. les compositeurs scripts/planches/<archetype>.py et le tronc _tronc.py, s'ils
+     portent des chaînes littérales à apostrophe ;
+  3. PUIS la régénération des 23 dossiers, qui propage la correction aux trois SVG.
+
+Corriger les SVG directement serait une correction de sortie : elle disparaîtrait à
+la première régénération. Même principe que la règle des deux titres — on corrige
+l'original, jamais la copie.
+
+Recette — mesurée, pas déclarée :
+- 0 apostrophe droite dans les 23 planche.json ;
+- 0 apostrophe droite dans les <text> des 69 SVG ;
+- régénération octet à octet : 23 / 23, sommes de contrôle comparées ;
+- rendu de la planche à 1 152 px et de la vignette à 300 px inchangé hors
+  apostrophes, sur un échantillon de trois dossiers, par capture ;
+- npm run build vert.
+
+⚠ Contrôler À LA TAILLE DE LECTURE, jamais en pleine page (règle 13 du CLAUDE.md) :
+1 152 px pour la planche, 552 pour l'appui, 300 pour la vignette. Une planche ne se
+recadre pas, ne se duotone pas, ne s'illustre pas.
+
+⚠ Insécables : l'outil d'écriture de fichiers normalise U+00A0 et U+202F. Si tu dois
+en écrire dans un .md ou un .json, réinjecte-les par script après coup — voir la
+mémoire insecables-normalisees-par-write.
+
+Pièges de mesure propres à cette machine, tous vérifiés :
+- la PERFORMANCE ne se mesure pas sur npm run preview, qui ne compresse rien : 0,8 s
+  de biais sur la chaîne bloquante. Elle se mesure sur https://ft2e-v3.vercel.app,
+  après avoir vérifié par un MARQUEUR DU BUILD — pas par un délai d'attente — que le
+  déploiement porte bien le commit en cours. Règle consignée dans
+  .claude/rules/astro-conventions.md § Performances ;
+- Chrome refuse toute fenêtre sous 500 px : les largeurs de téléphone se mesurent par
+  une iframe servie en même origine ;
+- ⚠ la barre de défilement de l'iframe mange 15 px — une iframe de 390 donne un
+  document de 375. Élargir jusqu'à ce que contentDocument.documentElement.clientWidth
+  vaille exactement la largeur visée ;
+- browser_resize de Playwright persiste d'un appel à l'autre et fait passer une page
+  saine pour cassée. Préférer l'iframe, qui n'a rien à restaurer.
+
+Commit selon .claude/rules/git-commit.md, portée `references` ou `design-system`.
+Consigne la recette dans la section S2 du plan et mets à jour le tableau de suivi.
+
+Termine par le prompt de lancement de la session suivante, en annexe du plan. ⚠ La
+règle de continuité n'a été tenue ni en S1 ni en S3 — ne la manque pas une
+troisième fois.
+```
+
+---
+
+### Annexe C — session 4, hygiène documentaire et garde-fous
+
+```text
+Session 4 de la réduction de dette FT2E v3 — hygiène documentaire et garde-fous.
+
+Contexte. Rangs 6, 7 et 8 du relevé de dette du 2026-08-15 (commit d3bd8d9),
+regroupés parce que le coût de contrôle est le même pour un bloc que pour trois.
+Aucune dépendance, aucun arbitrage technique, aucun risque. La programmation est
+dans docs/superpowers/plans/2026-08-16-reduction-dette.md : lis sa section « S4 »
+avant toute chose.
+
+Six points, tous déjà mesurés. Le premier est le seul qui soit urgent.
+
+1. L'HÔTE, DANS CINQ DOCUMENTS. docs/09, docs/14, docs/19, docs/20-pistes et les
+   commentaires de public/robots.txt et src/layouts/BaseLayout.astro nomment
+   ft2e-site.vercel.app. L'hôte réel est ft2e-v3.vercel.app — l'opérationnel, lui,
+   est juste (config.yml, remote git). ⚠ Le risque est concentré sur
+   docs/19-migration-production.md : c'est le RUNBOOK DE MISE EN PRODUCTION, il
+   nommera le mauvais hôte au moment précis où on l'exécutera, redirections 301
+   comprises.
+
+2. GARDE-FOU MILLESIME_LIVRAISON_ANNONCE. La constante vaut 2026 et sera fausse sur
+   quatorze affaires au 1er janvier 2027 — ni le build, ni le typecheck, ni le rendu
+   ne le signaleront. Un test de build qui échoue au-delà de l'année en cours coûte
+   trois lignes et supprime une échéance silencieuse.
+
+3. legendeMedia, CODE MORT. Calculé sur quatre lignes dans
+   src/pages/references/[...slug].astro, lu nulle part : c'est la légende de média
+   d'avant les planches, manquée par le nettoyage de clôture. Signalé par le
+   typecheck avec l'interface Props de PlancheReference — deux hints sur 82, les
+   deux seuls qui désignent du code réellement mort.
+
+4. QUATRE VALEURS HEXADÉCIMALES EN DUR. Trois dans Logo.astro, une dans
+   TraceFlux.astro. Les valeurs SONT celles de la rampe — c'est le chaînage au jeton
+   qui manque, donc la garantie qu'elles suivront la prochaine révision de charte
+   (§ 17 de la charte, sans réserve).
+
+5. CHAMPS IMAGE MORTS DES ACTUALITÉS. `image` et `image_alt` sont déclarés au Zod ET
+   à Decap pour la collection actualites, lus par aucun rendu ; le fichier pointé
+   n'existe pas, le répertoire est vide. Conséquence de comptage : un des huit
+   marqueurs [DÉMO] restants ne peut jamais s'afficher — le compte réel des marqueurs
+   ATTEIGNABLES est de sept, tous dans les secteurs. Corriger le champ ET le compte
+   annoncé dans CLAUDE.md.
+
+6. FINE DES MILLIERS DU CHAMP `performance`. ⚠ Le périmètre annoncé par le plan est
+   faux : il dit « sur les 23 fiches », la mesure en trouve QUATRE — Dufour (5),
+   Villedoux (4), École des douanes (4), Marans (1). La passe est bien plus courte
+   qu'annoncé.
+
+Deux constats ajoutés par la session 3, à arbitrer ici ou à laisser ouverts :
+- le footer porte les liens tel: et mailto: à 17 px de haut, espacés de 29, sur les
+  46 pages. axe ne les signale pas — l'exception d'espacement de WCAG 2.2 joue à
+  partir de 24 px — mais la règle FT2E dit 44 × 44 pour tout élément actionnable,
+  sans exception d'espacement. C'est un écart règle/code, pas un écart d'outil.
+  ⚠ Ne PAS y appliquer la recette .cible-44 : son ::after est un calque de 44 px
+  centré, qui se chevaucherait sur des cibles empilées — ce sont les BOÎTES qui
+  doivent faire 44 px (voir la section S3 du plan) ;
+- 40 px de vide mort sous sm dans le hero de l'accueil : le média est
+  `hidden sm:block`, mais sa cellule de grille et le gap-10 du conteneur restent.
+
+⚠ Toute suppression de champ Zod se répercute dans public/admin/config.yml AU SEIN
+DU MÊME COMMIT (règle du sous-agent content-modeller).
+
+⚠ Un build vert ne prouve pas que la page s'affiche (règle 11) : après toute
+modification de mise en page ou de global.css, contrôler le rendu de la page
+touchée. La PERFORMANCE, elle, se mesure sur https://ft2e-v3.vercel.app et jamais
+sur npm run preview, qui ne compresse rien — voir .claude/rules/astro-conventions.md
+§ Performances.
+
+Commit selon .claude/rules/git-commit.md ; les portées sont multiples, préfère
+plusieurs commits nets à un fourre-tout. Consigne la recette dans la section S4 du
+plan et mets à jour le tableau de suivi.
+
+Question à poser en ouverture, sans attendre : D2, les trois questions à FT2E —
+réception de la crèche de l'Oranger, sort des 25 visuels qui subsistent dans
+l'historique git, archétype planche-chiffree jamais exercé. Leur formulation est en
+section D2 du plan. Aucune n'est décidable depuis le dépôt, et la première masque un
+défaut devenu invisible : la ligne statut a disparu du frontmatter, donc la fiche
+annonce une affaire livrée sans dire quand, et plus rien dans le fichier ne signale
+l'anomalie. C'est la seule des 23 dans ce cas.
 ```

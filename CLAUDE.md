@@ -240,6 +240,23 @@ l'échelle 0,24, quel que soit l'endroit où on le découpe.
 - Avant commit : `npm run build` (échec = blocage).
 - Après commit + push : `npx vercel deploy --prod --yes` pour déployer.
 
+### Règle de continuité — tout chantier en sessions
+
+**Une session de chantier se termine par le prompt de lancement de la suivante.**
+Le prompt est **autoportant** : collé dans une session neuve, il ne suppose aucun
+contexte des précédentes — constat mesuré, travail à faire, pièges vérifiés au
+dépôt, critères de recette, portée de commit, et la question éventuelle à poser en
+ouverture. Il vit en annexe du plan du chantier, et il est reproduit intégralement
+dans le message final à l'utilisateur.
+
+⚠ **Cette règle est ici parce qu'elle a été manquée.** Elle n'existait que dans le
+plan du chantier des références (`docs/superpowers/plans/2026-08-07-…` § 12) et
+dans le protocole des planches — deux chantiers **clos**. Le chantier de réduction
+de dette ouvert le 2026-08-16 l'a donc perdue en route et a livré **deux sessions
+sans prompt de continuité** (S1 et S3), sans que rien ne le signale. Une règle de
+méthode qui ne vit que dans le document du chantier qui l'a inventée meurt avec
+lui : sa place est ici.
+
 ## Où trouver quoi
 
 | Besoin | Fichier |
