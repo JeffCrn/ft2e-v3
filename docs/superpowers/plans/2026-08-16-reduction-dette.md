@@ -1964,8 +1964,9 @@ de docs/superpowers/plans/2026-08-16-reduction-dette.md avant toute chose.
 
 2. LES COMMITS DE S7 SONT POUSSÉS ET DÉPLOYÉS, à partir de `8518d49`, le 2026-08-16 à la
    demande de l'utilisateur. (Pas de décompte ici : chaque commit qui documente le
-   décompte l'invalide. `git log --oneline 8518d49..master` le donne, et reste juste.) Arrivée contrôlée par marqueur du build
-   (l'apostrophe courbe de la baseline) en une vingtaine de secondes, puis recette
+   décompte l'invalide. `git log --oneline 8518d49..master` le donne, et reste juste.)
+   Arrivée contrôlée par marqueur du build (l'apostrophe courbe de la baseline) en une
+   vingtaine de secondes, puis recette
    refaite sur le code en ligne : typographie 0/0 sur 12 routes, baseline courbée 12/12,
    l'énumération renommée tient en production (chip « Études d'exécution / BIM (1) »,
    comptage non nul donc appariement intact), Lighthouse perf 100 sur six routes et 99
