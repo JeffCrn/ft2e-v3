@@ -1520,7 +1520,7 @@ qu'elle a été manquée deux fois.
 ### Annexe F — session 7, la finalisation avant présentation à FT2E (à coller telle quelle)
 
 ```
-Session 7 du chantier FT2E v3 — trois points ajournes, et la finalisation avant
+Session 7 du chantier FT2E v3 — deux points ajournes, et la finalisation avant
 presentation.
 
 Contexte. FT2E v3 est un site institutionnel Astro statique, deploye en demonstration
@@ -1577,12 +1577,15 @@ chose. Le site ne porte plus AUCUN dessin servi au-dessus de sa taille de concep
 
 Pieges verifies au depot, a ne pas redecouvrir :
 - ⚠ AVANT TOUTE MESURE DE PERFORMANCE, VERIFIER QUE LE DEPLOIEMENT PORTE LE CODE.
-  Au 2026-08-16, origin/master est a ba3cc3b et le local a 18 commits d'avance : le
-  site en ligne porte S1, S2 et S3, mais ni S4, ni S5, ni S6. Releve par git ls-remote
-  (la reference locale peut etre perimee) et par deux marqueurs du build — les 8
-  type="image/avif" de /equipe/ y sont, les cibles 44 px du pied n'y sont pas. Rien
-  n'a ete pousse : le push est sortant et n'a pas ete demande. Le demander avant toute
-  recette de performance.
+  Il le portait au 2026-08-16 au soir — cd0e635 pousse, arrivee controlee par marqueur
+  et capture du deploiement identique a la locale au MD5 — mais il ne l'a pas toujours
+  porte : les sessions S4, S5 et S6 avaient accumule 18 commits non pousses, et le site
+  en ligne s'etait arrete TROIS SESSIONS en arriere sans que rien ne le signale. Les
+  recettes de ces sessions restent valables (elles mesuraient le local et le disaient),
+  mais le client, lui, voyait un site vieux de trois sessions. Le controle prend dix
+  secondes et il est double : git ls-remote origin master — la reference LOCALE peut
+  etre perimee — et un MARQUEUR DU BUILD dans le HTML servi. Le push reste sortant : le
+  demander, ne pas le faire d'office.
 - Un build vert ne prouve pas que la page s'affiche (regle 11). La PERFORMANCE ne se
   mesure JAMAIS sur npm run preview, qui ne compresse rien : 0,8 s de biais sur la
   chaine bloquante. Elle se mesure sur https://ft2e-v3.vercel.app, apres avoir
@@ -1625,7 +1628,7 @@ Pieges verifies au depot, a ne pas redecouvrir :
   est indistinguable d'une regression.
 - ⚠ Les insecables sont normalisees EN ENTREE des outils d'edition : un U+00A0 ou
   U+202F tape dans une chaine a remplacer en ressort en espace ordinaire, et l'edition
-  echoue sans rien dire d'utile — le plan de dette en porte 174 et 57. Pour editer ces
+  echoue sans rien dire d'utile — le plan de dette en porte 219 et 75. Pour editer ces
   documents, passer par un petit script Python qui lit et ecrit l'UTF-8 tel quel, avec
   un controle d'occurrences qui ECHOUE plutot que de remplacer au hasard, et qui ecrit
   ses propres insecables en echappement \u00a0 / \u202f — un echappement, lui, survit
