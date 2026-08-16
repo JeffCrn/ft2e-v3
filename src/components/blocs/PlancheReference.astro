@@ -2,6 +2,24 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// ⚠ `interface Props` SE DÉCLARE AVANT le commentaire de dessin, et pas après.
+// Mesuré le 2026-08-16 : intercalé entre les imports et l'interface, le bloc de
+// 71 lignes ci-dessous empêchait Astro de reconnaître `Props` — `Astro.props`
+// retombait sur `Record<string, any>` et les DEUX appelants du composant
+// n'étaient plus contrôlés du tout (une variante inexistante et un `src`
+// manquant passaient tous deux le typecheck). Le seul signe était un hint,
+// « 'Props' is declared but never used », qui se lit comme du code mort.
+// Recette : mettre une valeur invalide dans `variante=` chez `CarteProjet` —
+// `npm run typecheck` doit rendre une erreur ts(2322), pas zéro.
+interface Props {
+  /** Chemin du SVG depuis `public/` — champ `planche` du frontmatter. */
+  src: string;
+  /** `pleine` : la planche entière. `vignette` : le cadrage 3:2 écrit par l'extraction. */
+  variante?: 'pleine' | 'vignette';
+  /** Identifiant de la boîte d'agrandissement — unique par page. */
+  id?: string;
+}
+
 /**
  * Planche de schéma de principe — le dispositif visuel des fiches de référence.
  *
@@ -73,16 +91,8 @@ import path from 'node:path';
  *    figure, et le titre au `<h1>` de la fiche par `titreCourt()`. Le reste du
  *    `planche.json` sert le dessin, l'alternative textuelle et la relecture FT2E.
  */
-interface Props {
-  /** Chemin du SVG depuis `public/` — champ `planche` du frontmatter. */
-  src: string;
-  /** `pleine` : la planche entière. `vignette` : le cadrage 3:2 écrit par l'extraction. */
-  variante?: 'pleine' | 'vignette';
-  /** Identifiant de la boîte d'agrandissement — unique par page. */
-  id?: string;
-}
 
-const { src, variante = 'pleine', id = 'planche' } = Astro.props;
+const { src, variante = 'pleine', id = 'planche' }: Props = Astro.props;
 
 const racine = path.join(process.cwd(), 'public');
 const svgBrut = fs.readFileSync(path.join(racine, src), 'utf-8');

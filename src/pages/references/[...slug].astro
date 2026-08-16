@@ -21,16 +21,15 @@ export async function getStaticPaths() {
 }
 
 const { projet } = Astro.props;
-const { titre, ouvrage, secteur, lieu, surface_m2, annee, annee_livraison, reference, synthese, performance, planche, demo } = projet.data;
+const { titre, ouvrage, secteur, lieu, annee, annee_livraison, reference, synthese, performance, planche, demo } = projet.data;
 const { Content } = await render(projet);
 
 // Chronologie publique (ADR-003) — `annee` et `reference` ne servent plus
 // qu'au tri et au JSON-LD ci-dessous : ils ne sont plus affichés.
 const jalons = libelleChronologie(projet);
 
-// Légende de média (amendement A8) : le cartouche de réserve porte
-// « ouvrage · ville · surface », et non le titre entier — reprendre le h1
-// n'était pas la spécification, et c'est ce qui le faisait déborder.
+// Nom court d'ouvrage et commune — les deux servent les métadonnées SEO
+// ci-dessous et le sous-titre de la fiche.
 //
 // Le nom d'ouvrage vient du champ `ouvrage` quand la fiche le porte. À
 // défaut, on retombe sur le premier segment du `titre` : ça dépanne quand
@@ -40,12 +39,15 @@ const jalons = libelleChronologie(projet);
 // `lieu` va de la commune seule à l'adresse complète : `commune()` en extrait
 // le segment qui porte le code postal — l'unique implémentation, et c'est
 // aussi elle qui compose la localisation affichée en sous-titre.
+//
+// ⚠ Une `legendeMedia` (« ouvrage · ville · surface ») se composait ici pour le
+// cartouche de réserve de l'amendement A8. Elle a cessé d'être lue le
+// 2026-08-15, quand la planche a remplacé le visuel photographique : une
+// planche ne porte ni duotone, ni équerres, ni cartouche de légende — elle est
+// déjà composée dans les jetons. Le calcul, lui, a survécu au nettoyage de
+// clôture, et se refaisait sur chacune des 23 fiches à chaque build.
 const nomOuvrage = ouvrage ?? titre.split(/\s*[:—]\s*|,\s/)[0].replace(/^[«»\s]+|[«»\s]+$/g, '');
 const { ville, libelle: localisation } = commune(lieu);
-const legendeMedia = [nomOuvrage, ville, surface_m2 ? `${surface_m2} m²` : null]
-  .filter(Boolean)
-  .join(' · ')
-  .toLowerCase();
 
 // Métadonnées SEO (fin de chantier § 2.3) : composées sur le nom court
 // d'ouvrage et la ville, jamais sur le `titre` descriptif — Zod l'admet
