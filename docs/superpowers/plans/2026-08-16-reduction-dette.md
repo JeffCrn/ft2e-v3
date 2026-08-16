@@ -1229,6 +1229,9 @@ sur ses deux pages les plus lourdes, et celle qui bascule change d'un tir à l'a
 Attribuer le dépassement à `/equipe/` enverrait une session future optimiser la mauvaise
 page. La fiche projet, elle, descend à **1 068 ms**.
 
+Le présent constat a été consigné par un **septième commit**, `31ebaf6`, poussé dans
+la foulée : l'intervalle complet de la session est donc `8518d49..31ebaf6`.
+
 
 ---
 
@@ -1909,11 +1912,11 @@ Termine par le prompt de lancement de la session suivante, en annexe du plan et
 reproduit integralement dans ton message final. Cette regle est dans CLAUDE.md parce
 qu'elle a ete manquee deux fois.
 ```
-### Annexe G — session 8, le déblocage du CMS et la mise en ligne des corrections (à coller telle quelle)
+### Annexe G — session 8, le déblocage du CMS (à coller telle quelle)
 
 ````
-Session 8 du chantier FT2E v3 — un blocage hors dépôt, cinq commits en attente,
-et deux points toujours ajournés.
+Session 8 du chantier FT2E v3 — un blocage hors dépôt qui ne se lève pas depuis le
+code, et deux points toujours ajournés.
 
 Contexte. FT2E v3 est un site institutionnel Astro statique, déployé en démonstration
 client sur https://ft2e-v3.vercel.app, indexation verrouillée par triple sécurité
@@ -1956,7 +1959,7 @@ de docs/superpowers/plans/2026-08-16-reduction-dette.md avant toute chose.
    le 2026-08-10 et a traversé six sessions sans être exécuté. Un commentaire n'échoue
    jamais. Ne pas se contenter d'en ajouter un de plus.
 
-2. LES COMMITS DE S7 SONT POUSSÉS ET DÉPLOYÉS. `8518d49..e6cc9f0`, six commits, poussés
+2. LES COMMITS DE S7 SONT POUSSÉS ET DÉPLOYÉS. `8518d49..31ebaf6`, sept commits, poussés
    le 2026-08-16 à la demande de l'utilisateur. Arrivée contrôlée par marqueur du build
    (l'apostrophe courbe de la baseline) en une vingtaine de secondes, puis recette
    refaite sur le code en ligne : typographie 0/0 sur 12 routes, baseline courbée 12/12,
@@ -2027,8 +2030,9 @@ Pièges vérifiés au dépôt, à ne pas redécouvrir :
 - ⚠ La PERFORMANCE ne se mesure JAMAIS sur npm run preview, qui ne compresse rien :
   0,8 s de biais sur la chaîne bloquante. Elle se mesure sur le déploiement, après avoir
   vérifié par un MARQUEUR DU BUILD — jamais par un délai d'attente — qu'il porte le
-  commit en cours. Et une seule mesure ne conclut pas : le LCP de /equipe/ passe de
-  1 656 à 1 815 ms d'un tir à l'autre, de part et d'autre du seuil.
+  commit en cours. Et une seule mesure ne conclut pas : le LCP des deux pages les plus
+  lourdes passe de 1 656 à 1 815 ms d'un tir à l'autre, de part et d'autre du seuil, et
+  ce n'est pas toujours la même qui bascule.
 - ⚠ npx lighthouse est un processus Windows et n'accepte PAS les chemins Git-Bash
   /c/... en --output-path : il n'écrit rien, en silence, et le script conclut « aucun
   JSON ». Se placer dans le répertoire et passer un chemin relatif.
