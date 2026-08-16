@@ -550,6 +550,100 @@ pas pour des cibles empilées.
 ⚠ Toute suppression de champ Zod se répercute dans `public/admin/config.yml` **au sein
 du même commit** (règle du sous-agent `content-modeller`).
 
+
+### ✅ Exécutée le 2026-08-16 — neuf commits, et deux constats que la mesure a déplacés
+
+| № | État | Ce qui a été fait, et ce que la mesure a dit |
+|---|---|---|
+| 1 | ☑ | Six documents et deux commentaires corrigés (`docs/08`, `09`, `14`, `19`, `20-pistes`, `21`, `robots.txt`, `BaseLayout.astro`) — **six, pas cinq** : `docs/21` portait quatre occurrences que le relevé n’avait pas vues. **⚠ Voir le constat A ci-dessous : la vérification de l’hôte a trouvé bien plus qu’une faute de frappe.** |
+| 2 | ☑ | Garde-fou posé dans `src/lib/projets.ts`, **échec dur** (arbitrage retenu contre l’avertissement). Recette par échec provoqué : constante ramenée à 2025 → `npm run build` sort en code 1 avec le message attendu ; remise à 2026 → code 0 |
+| 3 | ☑ | `legendeMedia` retirée, et `surface_m2` avec elle (seul consommateur). **Mais le second hint n’était PAS du code mort** — voir le constat B |
+| 4 | ☑ | Six valeurs (cinq distinctes) chaînées par **classes Tailwind littérales**, pas par `var()` en attribut — voir le constat C. Rendu identique au pixel près (même MD5 sur 1440 × 3000) |
+| 5 | ☑ | `image` / `image_alt` retirés du Zod **et** de Decap dans le même commit, frontmatter nettoyé, compte des `[DÉMO]` corrigé à **sept** dans `CLAUDE.md` |
+| 6 | ☒ | **Sans objet : le défaut n’existait pas.** Les quatorze groupes de milliers portaient déjà U+202F, et ils le portaient **au commit du relevé lui-même** (`d3bd8d9`), vérifié fiche par fiche. Les chiffres « Dufour (5), Villedoux (4), École des douanes (4), Marans (1) » comptaient les groupes du corpus, pas les écarts — un dénombrement de la **population** lu comme un dénombrement du **défaut**. L’écart réel était ailleurs : trois U+00A0 dans le récit de l’abbaye, corrigés. Le corpus porte 203 séparateurs, tous en fine |
+| S2-a | ☑ | `verser.py` : les deux contrôles périmés retirés ; le versement devient une **insertion après `mission_ft2e:`**, ancre relevée sur 23 fiches / 23. Recette sur les deux chemins |
+| S2-b | ☑ | `.gitattributes` posé (`* text=auto eol=lf`). **Défaut reproduit avant correction** : clone neuf → 92 pièces sur 92 en CRLF ; après → 92 sur 92 en LF, PNG intacts octet pour octet |
+| S3-a | ☑ | Cibles du pied portées à 44 px — **douze, pas deux** (7 liens de plan du site, 2 coordonnées, 3 mentions légales). Par la **boîte**, jamais par `.cible-44`. Zéro sous 44, zéro chevauchement, aucun débordement à 390 / 768 / 1440 ; a11y `/contact/` à 100 |
+| S3-b | ☐ | **Laissé ouvert** : les 40 px de vide mort sous `sm` dans le hero de l’accueil |
+
+**Commits** : `7cf8918` · `4ed3e6b` · `e8e3b69` · `348de96` · `0d8b0e8` · `270f93d` · `6e74910` · `d7e5cfc` · `5c0cc69`.
+
+#### Constat A — deux déploiements résiduels servent encore les photographies d’ouvrages
+
+C’est le résultat le plus important de la session, et il ne figurait à aucun rang
+du relevé. En vérifiant **lequel** des deux hôtes était le bon, la mesure a montré
+que `ft2e-site.vercel.app` (la v1) **et** `ft2e-v2.vercel.app` répondent tous deux
+`200` et servent encore leur site, avec les visuels que le chantier des planches
+avait retirés de la v3 pour motif de droit d’auteur — huit distincts sur la seule
+page `/references`, de 819 à 937 Ko, servis en `200`.
+
+**Cela déplace la question 2 de D2.** Elle posait l’exposition résiduelle comme un
+problème d’**historique git**, dont la levée coûterait une réécriture invalidant
+tous les SHA cités dans les plans et les règles. L’exposition la plus directe n’est
+pas archivée : elle est **servie en HTTP à qui connaît l’URL**, et se lève en
+supprimant deux déploiements — coût nul. Les deux sont `noindex` et `Disallow: /`,
+ce qui empêche le référencement mais pas l’accès, et ce verrou est justement pensé
+pour être levé un jour. Consigné en **§ 6 bis de `docs/19-migration-production.md`**,
+avec la procédure et le contrôle par `curl`.
+
+#### Constat B — le hint `Props` désignait un contrat débranché, pas du code mort
+
+Le relevé rangeait les deux hints ensemble, comme « les deux seuls qui désignent
+du code réellement mort ». Ils disaient l’inverse l’un de l’autre.
+
+Sonde, avec témoin : un `variante="VALEUR-INVALIDE"` chez `CarteProjet`, et un
+appel de `PlancheReference` **sans son `src` requis**, passaient tous deux le
+typecheck sans une erreur — là où le même essai sur `HeroPage` en lève une.
+`Astro.props` y retombait sur `Record<string, any>` : les **deux** appelants du
+composant n’étaient pas contrôlés du tout. Supprimer l’interface, comme le
+prévoyait la programmation, aurait entériné l’absence de contrôle.
+
+⚠ **La cause n’est pas caractérisée, et deux explications plausibles ont été
+écartées par la mesure.** Une première rédaction de ce constat attribuait le défaut
+au bloc de commentaire de 71 lignes intercalé entre les imports et l’interface. C’est
+faux : `MarqueOpqibi` porte 3 771 signes de commentaire au même endroit et
+`CarteProjet` a le motif exact — trois imports, puis 548 signes de commentaire, puis
+l’interface — et les deux sont correctement typés, sondés un par un. Ni la nature
+JSDoc (le passer en `/*` ne changeait rien), ni une balise `<img src>` citée dans le
+commentaire (injectée dans `CarteProjet`, sans effet) ne rendent compte du défaut.
+
+**Ce qui est établi, et qui suffit :** retirer le bloc réparait, remonter l’interface
+au-dessus répare aussi, et c’est la seconde solution qui est en place. Le composant
+était le SEUL atteint — `ts(6196)` n’a flambé que sur lui, et trois sondes
+indépendantes (`HeroPage`, `MarqueOpqibi`, `CarteProjet`) confirment que les autres
+sont branchés. La recette est écrite au-dessus de l’interface : une valeur invalide
+dans le `variante=` de `CarteProjet` doit rendre une erreur `ts(2322)`.
+
+**À retenir au-delà de ce fichier :** `ts(6196)` sur une interface `Props` ne dit
+jamais « code mort » — il dit « contrat non consommé », ce qui est l’inverse d’un
+surplus. Et une sonde de typage se fait en REMPLAÇANT un attribut, jamais en en
+ajoutant un second : un attribut dupliqué ne lève aucune erreur, et la première
+version de cette vérification a conclu à tort que `MarqueOpqibi` était atteint.
+
+#### Constat C — pourquoi des classes et non `var(--color-…)`
+
+Tailwind v4 **élague les variables de thème qu’aucune classe n’emploie** : mesuré,
+le CSS produit ne porte aucune des couleurs par défaut de Tailwind, et exactement
+les treize de la rampe. Un `var()` écrit dans un attribut SVG échappe au scan : le
+monogramme aurait dépendu d’un autre composant employant `text-voile` ailleurs sur
+la page, et aurait perdu ses couleurs le jour où celui-ci change — **sans un mot du
+build** (même famille que la règle 11). Les huit classes ont été contrôlées
+présentes dans le CSS produit, chacune résolvant bien sur son jeton.
+
+`_tronc.py` reçoit une note : sa table `JETON` est le **miroir nécessaire** du bloc
+`@theme` — une planche est lue hors du site (PNG, impression, `og:image`) et ne peut
+pas résoudre `var()`. Une révision de charte s’y répercute donc aussi, et les 23
+dossiers se régénèrent.
+
+#### Ce que trois de ces points ont en commun
+
+Les rangs 6, 3 et le constat A tiennent le même enseignement : **un relevé de dette
+se vérifie avant d’être exécuté.** Le rang 6 comptait une population pour un
+défaut ; le rang 3 rangeait un contrat débranché avec du code mort ; le rang 1
+nommait une faute de frappe là où il y avait une exposition vivante. Aucun des
+trois n’était un mensonge : chacun était une lecture plausible d’une mesure qui
+n’avait pas été poussée d’un cran.
+
 ---
 
 ## D1 — Arbitrage : A2 contre le 100 de Lighthouse
@@ -645,9 +739,9 @@ Repris du relevé, et **volontairement laissé ouvert** :
 | S1 — pipeline d’images | ☑ **faite** le 2026-08-16 | `71cc72f` · `4416c20` · `+1` | ✅ **complète, mesurée sur le déploiement** — `/equipe/` perf **100**, LCP **1,2 s** (seuil 1,8), poids **4 766 → 240 Kio** ; AVIF+WebP+srcset, repli et duotone contrôlés ; `/` sans régression (96) |
 | S2 — planches : typo + régénération | ☑ **faite** le 2026-08-16 | `22033a2` · `+1` | ✅ **complète** — **0** apostrophe droite dans les 23 extractions, les 69 `<text>` et les 69 `aria-label` (1 694 courbées) ; régénération **23 / 23** octet à octet ; rendu inchangé hors apostrophes et cartouches (9 bandes de pixels sur 5 200) ; build vert. **Trouvé au passage : une collision `XB0` entre deux mécanismes de `tableau-electrique.py`, qui recomposait faux la planche de la crèche** |
 | S3 — trois défauts de rendu | ☑ **faite** le 2026-08-16 | `806e803` | ✅ **complète** — CLS **0** sur `/`, `/contact/`, `/references/` et `/equipe/` (seuil 0,05) ; `/contact/` a11y **97 → 100** ; débordement nul sur 45 mesures (15 routes × 3 largeurs) et à 320 / 360 / 390 / 430 px ; accueil perf **100** |
-| S4 — hygiène et garde-fous | ☐ à faire | — | — |
+| S4 — hygiène et garde-fous | ☑ **faite** le 2026-08-16 | `7cf8918` → `5c0cc69` (9) | ✅ **complète** — cinq des six points exécutés, le sixième **sans objet** (la fine des milliers était déjà posée au commit du relevé) ; plus les deux garde-fous de S2 et les cibles 44 px de S3. Garde-fou du millésime recetté **par échec provoqué** ; `.gitattributes` recetté **sur un clone neuf** (92 CRLF → 92 LF) ; rendu identique **au pixel** ; a11y `/contact/` 100. **Trouvé au passage : `ft2e-site` et `ft2e-v2` répondent encore et servent les photographies d'ouvrages** |
 | D1 — arbitrage A2 × Lighthouse | ☑ **tranché** le 2026-08-16 — issue 2 (inscrire l’exception, viser 96) | `4416c20` · `806e803` | ✅ **appliqué** à `.claude/rules/accessibility-rgaa.md` en S3 |
-| D2 — trois questions à FT2E | ☐ à poser | — | — |
+| D2 — trois questions à FT2E | ◑ **posées** le 2026-08-16, réponses attendues | `7cf8918` (§ 6 bis) | ⚠ **La question 2 a changé de nature** : l'exposition des visuels n'est pas seulement archivée dans l'historique git, elle est **servie en HTTP** par deux déploiements vivants — coût de levée nul, contre une réécriture d'historique. Voir le constat A de S4 |
 
 ---
 

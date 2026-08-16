@@ -3,14 +3,31 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 // ⚠ `interface Props` SE DÉCLARE AVANT le commentaire de dessin, et pas après.
-// Mesuré le 2026-08-16 : intercalé entre les imports et l'interface, le bloc de
-// 71 lignes ci-dessous empêchait Astro de reconnaître `Props` — `Astro.props`
-// retombait sur `Record<string, any>` et les DEUX appelants du composant
-// n'étaient plus contrôlés du tout (une variante inexistante et un `src`
-// manquant passaient tous deux le typecheck). Le seul signe était un hint,
-// « 'Props' is declared but never used », qui se lit comme du code mort.
-// Recette : mettre une valeur invalide dans `variante=` chez `CarteProjet` —
-// `npm run typecheck` doit rendre une erreur ts(2322), pas zéro.
+// Ne pas la redéplacer : ce n'est pas une préférence de mise en page.
+//
+// Mesuré le 2026-08-16 : avec l'interface déclarée APRÈS le bloc de commentaire
+// ci-dessous, Astro ne reconnaissait pas `Props`. `Astro.props` retombait sur
+// `Record<string, any>` et les DEUX appelants du composant n'étaient plus
+// contrôlés du tout — une `variante` inexistante ET un appel privé de son `src`
+// requis passaient l'un comme l'autre le typecheck sans une erreur.
+//
+// Le seul signe était un hint, « 'Props' is declared but never used », qui se lit
+// comme du code mort — et qui a bien failli faire supprimer le contrat.
+//
+// ⚠ LA CAUSE N'EST PAS CARACTÉRISÉE, et deux explications plausibles ont été
+// ÉCARTÉES par la mesure. Ce n'est pas la longueur du commentaire :
+// `MarqueOpqibi` en porte 3 771 signes et `CarteProjet` a le motif exact
+// (imports, puis commentaire, puis interface) — les deux sont correctement
+// typés, sondés un par un. Ce n'est pas non plus sa nature JSDoc (le passer en
+// `/*` ne changeait rien), ni une balise `<img src>` citée dedans (injectée dans
+// `CarteProjet`, sans effet). Ce qui est établi : retirer le bloc réparait, et
+// remonter l'interface au-dessus répare aussi — c'est la seconde qui est en
+// place. Ne pas réécrire cette note comme si la cause était connue.
+//
+// RECETTE, à rejouer après toute reprise du frontmatter : mettre une valeur
+// invalide dans le `variante=` de `CarteProjet`, puis `npm run typecheck`. Il
+// DOIT rendre une erreur ts(2322). Zéro erreur signifie que le contrat est
+// redébranché, quoi qu'en dise le build.
 interface Props {
   /** Chemin du SVG depuis `public/` — champ `planche` du frontmatter. */
   src: string;
