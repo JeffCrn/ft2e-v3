@@ -1636,6 +1636,12 @@ Pieges verifies au depot, a ne pas redecouvrir :
   document entier qui n'a jamais ete normalise : il reecrit des centaines de lignes
   sans rapport avec le travail en cours (mesure sur le plan de dette : 173 lignes).
 
+- ⚠ Une ancre de remplacement se COPIE du fichier, elle ne se retape pas : le corpus
+  melange apostrophes droites et typographiques, et une ancre retapee echoue en
+  disant seulement « 0 occurrence », ce qui ne designe pas la cause. Cibler par
+  PREFIXE DE LIGNE quand c'est possible, et faire echouer le script plutot que
+  remplacer au hasard.
+
 Recette de fin de session : npm run typecheck (0 erreur), npm run build (46 pages),
 controle du RENDU de toute page touchee a sa largeur de lecture, et consignation dans
 le plan.
