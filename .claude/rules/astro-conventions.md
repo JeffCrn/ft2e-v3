@@ -169,6 +169,96 @@ De même `src/lib/projets.ts` (`titreCourt`) lit un `planche.json` garanti prés
 statut de l'absence : une planche manquante signale une rupture, une photographie
 manquante est un état de production normal jusqu'au reportage.
 
+## `interface Props` se déclare juste après les imports (2026-08-16)
+
+Un composant `.astro` ne type ses appelants que si Astro reconnaît son
+`interface Props`. Quand la reconnaissance échoue, `Astro.props` retombe sur
+`Record<string, any>` et **plus rien n'est contrôlé** : un prop inexistant passe,
+un prop requis manquant passe. Le build est vert, le rendu est juste, et le seul
+signe est un **hint** d'`astro check`.
+
+### Le hint ment sur ce qu'il désigne
+
+```
+warning ts(6196): 'Props' is declared but never used.
+```
+
+Il se lit « code mort ». Il dit en réalité « **contrat non consommé** », ce qui est
+l'inverse d'un surplus : l'interface est correcte et utile, c'est le fil qui est
+coupé. Constaté sur `PlancheReference.astro` le 2026-08-16, où la programmation de
+dette l'avait classé parmi le code à supprimer — le supprimer aurait entériné
+l'absence de contrôle sur ses deux appelants.
+
+### La règle
+
+**Déclarer `interface Props` immédiatement après les `import`**, avant tout bloc de
+commentaire de composant. Le long commentaire de dessin vient ensuite.
+
+⚠ **La cause du débranchement n'est pas caractérisée**, et deux explications
+plausibles ont été écartées par la mesure : ce n'est ni la longueur du commentaire
+(`MarqueOpqibi` en porte 3 771 signes au même endroit, `CarteProjet` a le motif
+exact — imports, commentaire, interface —, et les deux sont branchés), ni sa nature
+JSDoc, ni une balise `<img src>` citée dedans. Ce qui est établi : dans le seul cas
+observé, déclarer l'interface en tête réparait. La règle est donc une **précaution
+vérifiée**, pas une explication.
+
+### La sonde — et la façon de la rater
+
+Pour vérifier qu'un composant type bien ses appelants, **remplacer** la valeur d'un
+prop existant par une valeur invalide, puis `npm run typecheck` :
+
+```astro
+<CarteProjet projet="PAS-UN-PROJET" />   <!-- doit lever ts(2322) -->
+```
+
+⚠ **Jamais en AJOUTANT un second attribut** : un attribut dupliqué ne lève aucune
+erreur, et la sonde conclut « zéro erreur » sur un composant parfaitement sain. Une
+sonde qui ne peut pas échouer ne mesure rien. C'est ainsi que `MarqueOpqibi` a été
+déclaré atteint à tort le 2026-08-16.
+
+Un composant sain, pris pour témoin, fait partie de la sonde : sans lui, « zéro
+erreur » se lit comme « tout va bien ».
+
+## Une couleur s'écrit en classe, jamais en `var()` dans un attribut (2026-08-16)
+
+**Tailwind v4 n'émet dans `:root` que les variables de thème qu'une classe emploie.**
+Mesuré : le CSS produit ne porte aucune des couleurs par défaut de Tailwind, et
+exactement les treize de la rampe — celles que des utilitaires appellent.
+
+Conséquence pour un SVG inliné dans un composant : `stroke="var(--color-voile)"`
+**échappe au scan**. La variable n'existe alors dans `:root` que si un *autre*
+composant emploie `text-voile` ou `bg-voile` quelque part sur la page. Le jour où
+celui-ci change, le dessin perd ses couleurs — et rien ne le signale : ni le build,
+ni le typecheck, ni le CSS, qui reste valide.
+
+```astro
+<path class="stroke-pivot" d="…" />              <!-- ✅ littéral, donc scanné -->
+<path stroke="var(--color-pivot)" d="…" />       <!-- ❌ invisible au scan -->
+<path class={`stroke-${teinte}`} d="…" />        <!-- ❌ construit, donc invisible -->
+```
+
+Le nom de classe doit être **littéral dans la source** : une table de correspondance
+(`{ principal: 'stroke-pivot', … }`) convient, une concaténation non. Contrôle :
+`grep -o "\.stroke-pivot{[^}]*}" dist/_astro/*.css` doit rendre la règle.
+
+C'est la même famille que le piège `.gitignore` (§ « Tailwind v4 — détection de
+sources » plus bas) — dans les deux cas,
+Tailwind ne signale jamais ce qu'il n'a pas vu.
+
+## Les fins de ligne sont figées par `.gitattributes` (2026-08-16)
+
+Le dépôt porte `* text=auto eol=lf`. **Ne pas le retirer.** Sans lui, et avec
+`core.autocrlf=true` sous Windows, un **clone neuf** sort les 92 pièces des planches
+(69 SVG + 23 JSON) en CRLF, alors que les compositeurs écrivent du LF
+(`newline="\n"`). La première régénération les réécrit toutes, et **l'invariant
+« 23 / 23 octet à octet » du protocole se lit comme rompu alors qu'il tient.**
+
+⚠ Le piège est invisible sur la machine qui a produit le corpus — les fichiers y sont
+nés en LF. Il n'apparaît qu'après un clone, c'est-à-dire quand quelqu'un reprend le
+chantier, et il se présente alors comme une rupture d'invariant. **Ne jamais conclure
+« l'invariant est rompu » sur une machine fraîchement clonée sans avoir vérifié les
+fins de ligne d'abord.**
+
 ## Structure attendue
 
 ```

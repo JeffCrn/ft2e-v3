@@ -1009,3 +1009,93 @@ défaut devenu invisible : la ligne statut a disparu du frontmatter, donc la fic
 annonce une affaire livrée sans dire quand, et plus rien dans le fichier ne signale
 l'anomalie. C'est la seule des 23 dans ce cas.
 ```
+
+### Annexe D — session 5, les suites de FT2E et les deux points ouverts (à coller telle quelle)
+
+> Rédigée le 2026-08-16 **à la clôture de S4**, comme l'exige la règle de continuité
+> de `CLAUDE.md`. Autoportante : elle ne suppose aucun contexte des sessions
+> précédentes.
+
+```
+Session 5 du chantier FT2E v3 — suites des réponses FT2E et deux points ouverts.
+
+Contexte. Le chantier de réduction de dette ouvert le 2026-08-16 est CLOS : ses
+quatre sessions sont faites, sa décision D1 est tranchée, et ses trois questions
+D2 ont été posées à FT2E le 2026-08-16. Le plan et ses recettes sont dans
+docs/superpowers/plans/2026-08-16-reduction-dette.md — lis la section S4 et son
+constat A avant toute chose. Cette session-ci n'a de contenu que si des réponses
+sont arrivées ; sans elles, elle se limite aux deux points 4 et 5.
+
+1. ⚠ LE PLUS URGENT, ET IL NE VIENT PAS DU RELEVÉ DE DETTE. Deux déploiements
+   Vercel antérieurs répondent encore et servent les photographies d'ouvrages que
+   le chantier des planches avait retirées de la v3 pour motif de droit d'auteur :
+   ft2e-site.vercel.app (la v1) et ft2e-v2.vercel.app. Mesuré le 2026-08-16 : code
+   200, huit visuels distincts sur la seule page /references, 819 à 937 Ko chacun,
+   servis en 200. Les deux portent noindex et Disallow: / — ce qui empêche le
+   référencement, pas l'accès, et c'est un verrou de démonstration pensé pour être
+   levé un jour.
+   Procédure, contrôle par curl et cases à cocher : docs/19-migration-production.md
+   § 6 bis. NE RIEN SUPPRIMER SANS ARBITRAGE FT2E : ce sont leurs déploiements, et
+   la décision est la leur. Vérifier d'abord si la réponse est arrivée.
+   ⚠ La CLI Vercel répond « Not authorized » sur cette machine — la suppression se
+   fait au tableau de bord, par FT2E ou avec elle.
+
+2. RÉCEPTION DE LA CRÈCHE DE L'ORANGER, si la pièce est arrivée. La fiche
+   src/content/projets/creche-oranger-perigny.md annonce une affaire livrée sans
+   dire quand : annee_livraison est vide, la ligne statut a disparu du frontmatter,
+   et plus rien dans le fichier ne signale l'anomalie. C'est la seule des 23 dans ce
+   cas. Avec la date de réception : renseigner annee_livraison (le schéma l'exige
+   dès que statut ne vaut plus « en cours », règle 10). Sans réponse : laisser en
+   l'état et le redire dans le prompt suivant — ne pas fabriquer un millésime.
+
+3. planche-chiffree, SI FT2E A TRANCHÉ. Seul archétype du protocole que les 23
+   planches n'ont pas exercé, donc le seul dont rien ne garantit qu'il fonctionne.
+   Soit le retirer de la liste fermée de
+   docs/superpowers/specs/2026-08-12-planches-references-protocole.md, soit
+   redéfinir ce qu'il montre. Le retirer suppose de vérifier qu'aucun compositeur
+   ni verser.py n'y renvoie.
+
+4. 40 PX DE VIDE MORT SOUS sm DANS LE HERO DE L'ACCUEIL. Le média est
+   `hidden sm:block`, mais sa cellule de grille et le gap-10 du conteneur restent.
+   Sans effet sur le CLS ni sur le débordement — c'est le seul point de la S3 laissé
+   ouvert, et le moins coûteux du lot.
+
+5. LE MILLÉSIME ANNONCÉ, SI ON APPROCHE DE 2027. MILLESIME_LIVRAISON_ANNONCE vaut
+   2026 dans src/lib/projets.ts et porte l'affichage de quatorze affaires. Depuis le
+   2026-08-16, le build ÉCHOUE en dur passé cette année-là — ce n'est plus une
+   échéance silencieuse, mais il faut y répondre par des réceptions relevées auprès
+   de FT2E, pas en poussant la constante.
+
+Pièges vérifiés au dépôt, à ne pas redécouvrir :
+- Un build vert ne prouve pas que la page s'affiche (règle 11). La PERFORMANCE ne se
+  mesure JAMAIS sur npm run preview, qui ne compresse rien : 0,8 s de biais sur la
+  chaîne bloquante. Elle se mesure sur https://ft2e-v3.vercel.app.
+- Tailwind v4 élague les variables de thème qu'aucune classe n'emploie. Une couleur
+  s'écrit en CLASSE littérale (stroke-encre), jamais en var(--color-…) dans un
+  attribut SVG : le var() échappe au scan et la couleur tombe sans un mot du build.
+- Dans un frontmatter .astro, une sonde de typage se fait en REMPLAÇANT un attribut,
+  jamais en en ajoutant un second — un attribut dupliqué ne lève aucune erreur.
+  Et ts(6196) sur une interface Props ne dit pas « code mort », il dit « contrat non
+  consommé ». Recette écrite au-dessus de l'interface de PlancheReference.astro.
+- Le dépôt porte un .gitattributes depuis le 2026-08-16 : ne pas le retirer. Sans
+  lui, un clone neuf sort les 92 pièces des planches en CRLF et l'invariant de
+  régénération se lit comme rompu alors qu'il tient.
+- L'accueil est reçue à 96 en accessibilité, et c'est admis — à condition que la
+  SEULE violation axe soit le color-contrast d'un complément de titre aria-hidden
+  (arbitrage D1). Un 96 dû à autre chose est un blocage. Un 96 non expliqué dans le
+  compte rendu est indistinguable d'une régression.
+- L'outil Write normalise U+00A0 et U+202F : les insécables se réinjectent après coup
+  par scripts/injection-typographique.py. ⚠ Ne PAS lancer ce script sur un document
+  entier qui n'a jamais été normalisé — il réécrit alors des centaines de lignes sans
+  rapport avec le travail en cours (mesuré sur le plan de dette : 173 lignes).
+
+Recette de fin de session : npm run typecheck (0 erreur), npm run build (46 pages),
+contrôle du RENDU de toute page touchée, et consignation dans le plan.
+
+Portée de commit : plusieurs commits nets valent mieux qu'un fourre-tout — les
+portées sont content, docs, fix, a11y selon les points.
+
+Termine par le prompt de lancement de la session suivante, en annexe du plan et
+reproduit intégralement dans ton message final. Cette règle est dans CLAUDE.md
+parce qu'elle a été manquée deux fois.
+```
