@@ -977,6 +977,235 @@ délai d'attente.
 
 ---
 
+## S7 — La recette d'ensemble avant présentation
+
+> **Session du 2026-08-16.** Le chantier de dette étant clos et son dernier point de
+> rendu soldé, cette session n'exécute pas un programme : elle **mesure l'état du site
+> avant qu'il soit montré**, et corrige ce que la mesure trouve. Périmètre défini avec
+> l'utilisateur en ouverture, en quatre volets : recette d'ensemble, relecture
+> éditoriale, script de démonstration, prise en main du CMS.
+
+### Le constat le plus important : le CMS ne se connecte pas
+
+C'est le seul défaut de cette session qui **empêche quelque chose**, et il ne vit pas
+dans le dépôt.
+
+| Mesuré le 2026-08-16 sur le déploiement | Résultat |
+|---|---|
+| `GET /admin/` | `200` — l'interface Decap s'affiche |
+| `GET /admin/config.yml` | `200` — la configuration est servie et à jour |
+| `GET /api/auth?provider=github` | **`500`** — « Configuration OAuth manquante : definir `OAUTH_GITHUB_CLIENT_ID` » |
+
+Le bouton **Se connecter** tombe donc sur une erreur serveur. La section C du script de
+démonstration — celle que le script lui-même appelle « le moment clé » — ne peut pas
+avoir lieu.
+
+**Rien n'est en cause dans le dépôt.** `api/auth.js` et `api/callback.js` sont justes,
+`config.yml` pointe le bon dépôt depuis la correction du 2026-08-10. Il manque, hors du
+dépôt : `OAUTH_GITHUB_CLIENT_ID` et `OAUTH_GITHUB_CLIENT_SECRET` sur le projet Vercel,
+et la callback `https://ft2e-v3.vercel.app/api/callback` sur l'OAuth App GitHub.
+
+⚠ **Ce qu'il faut retenir de méthode, plus que du fait lui-même.** L'avertissement
+existait, mot pour mot, **en commentaire en tête de `config.yml` depuis le 2026-08-10** :
+« Tant que ce n'est pas fait, la connexion au CMS échoue. » Il a traversé **six
+sessions** sans être exécuté ni même relevé. **Un commentaire n'échoue jamais** — il
+n'est lu que par qui ouvre déjà le fichier, et pour une autre raison. C'est pourquoi il
+est désormais dans `CLAUDE.md`, dans `docs/22` § 0, dans le pré-vol du script de
+démonstration, et surtout accompagné d'une **commande de contrôle** qui, elle, se rejoue :
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" "https://ft2e-v3.vercel.app/api/auth?provider=github"
+```
+
+Aucune recette de code ne pouvait le trouver : `npm run build` est vert, `npm run
+typecheck` est vert, `/admin/` répond `200`. Il fallait appeler la chaîne
+d'authentification.
+
+### La recette mesurée — Lighthouse sur le déploiement, neuf routes, mobile
+
+Le déploiement portait bien le code en cours, contrôlé **avant** de mesurer, en deux
+temps : `git ls-remote origin master` (et non la référence locale, qui peut être
+périmée) puis le marqueur de build `.appui-hero[data-astro-cid-…]{max-width:552px}`
+servi sur `/`.
+
+| Route | Perf | A11y | BP | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|
+| `/` | **100** | 96 | 100 | 69 | 1 681 ms | 0 | 0 |
+| `/societe/` | **100** | 97 | 100 | 69 | 1 686 ms | 0 | 0 |
+| `/equipe/` | **100** | **100** | 100 | 69 | 1 807 ms | 0 | 0 |
+| `/expertises/` | **100** | **100** | 100 | 69 | 1 681 ms | 0 | 0 |
+| `/references/` | **100** | **100** | 100 | 69 | 1 673 ms | 0 | 0 |
+| fiche `abbaye-sablonceaux-ssi` | **100** | **100** | 100 | 69 | 1 663 ms | 0 | 0 |
+| `/actualites/` | **100** | **100** | 100 | 69 | 1 669 ms | 0 | 0 |
+| article de lancement | **100** | **100** | 100 | 69 | 1 527 ms | 0 | 0 |
+| `/contact/` | **100** | **100** | 100 | 69 | 1 516 ms | 0 | 0 |
+
+Trois lectures, dont deux qui ne vont pas de soi :
+
+- **Le 69 en SEO n'est pas un défaut.** L'unique audit en échec est `is-crawlable`,
+  « Page is blocked from indexing ». C'est le verrou à trois serrures, voulu, et il
+  remontera mécaniquement à la levée du `noindex`. Vérifié audit par audit, pas déduit.
+- **Le 97 de `/societe/` a fait bouger une règle**, voir ci-dessous.
+- **`/equipe/` est AU seuil de LCP, pas sous le seuil.** Quatre tirs : 1 807, 1 815,
+  1 658, 1 656 ms pour un budget de 1 800, et une fois 98 en performance. Ce n'est ni un
+  échec ni une réussite franche, et une mesure unique n'aurait pas permis de le dire —
+  le premier tir seul concluait « 7 ms au-dessus, donc bloqué ». C'est la seule page du
+  site dont la performance ne soit pas confortable ; S1 y avait relevé 1,2 s, ce qui
+  situe l'écart du côté des conditions de mesure plus que du code.
+
+Contrôles déterministes, tous verts : **211 liens internes, 0 mort** ; **23 numéros
+d'affaire, 0 fuite** en HTML lisible ; typecheck 0 erreur ; build 46 pages.
+
+### L'exception D1 était rédigée par page, sa justification portait sur un motif
+
+`/societe/` sort à **97**, et l'exception D1 ne nommait que l'accueil. À la lettre,
+c'était donc un blocage. La violation est pourtant **exactement la même et la seule** :
+`color-contrast` sur `<span class="text-clair" aria-hidden="true">`, à 1,54 sur calcaire.
+
+D1 avait été rédigé « l'accueil plafonne à 96 » parce que l'accueil était **la seule
+page alors mesurée**. Neuf routes plus tard, la formulation par page aurait fait lire un
+cas prévu comme une régression. Elle est donc portée sur le **motif**.
+
+Le corollaire, ajouté à la règle parce qu'il vaut pour tout gabarit à venir : **le
+complément est signalé exactement là où il est posé sur un aplat plein.** Les deux
+violations le sont sur `calcaire` `#edf0f2`, qu'`axe` sait résoudre ; partout ailleurs
+le complément repose sur le papier tramé, dont le `background-image` empêche la
+résolution, et l'outil s'abstient. Un futur gabarit qui pose un titre de section sur un
+aplat fera **baisser son score sans qu'aucune règle du système ait été enfreinte**.
+
+### La relecture éditoriale — ce que la portée des règles avait laissé passer
+
+Le corpus de `src/content/` s'est révélé remarquablement propre : zéro point de
+suspension en trois points, zéro tiret double, zéro guillemet droit, zéro `m2`, zéro
+`RT 2012`, zéro exclamation, et les insécables autour des « » correctes partout. Le
+relevé numéral est inchangé (95/1 · 40/8 · 1/22).
+
+Les écarts étaient **hors de `src/content/`**, c'est-à-dire là où la portée des règles
+ne les faisait pas chercher :
+
+| Écart | Où | Servi au visiteur | Levé |
+|---|---|---|---|
+| Apostrophe droite de l'énumération « Études d'exécution » | énumérations Zod + Decap + 6 fiches | 26 occ., 6 pages, dont le chip de filtre de `/references` | oui |
+| Apostrophe droite de la baseline du monogramme | `Logo.astro`, SVG `<text>` | **46 pages**, à côté d'un « Bureau d'études » déjà courbe | oui |
+| La même dans l'`aria-label` du monogramme | `Logo.astro` | prononcée par les lecteurs d'écran | oui |
+| Espace ordinaire avant `?` et `:` | 4 points de microcopie en composants, dont le CTA des 23 fiches | 27 occ., 25 pages | oui |
+| Espace ordinaire avant `:` | un `image_alt` de secteur | 1 occ. | oui |
+| Ponctuation du corpus **dessiné** | 12 occ. dans les planches SVG | oui | **non — délibérément** |
+
+**Mesure du texte servi, hors SVG : apostrophe droite 72 → 0, espace ordinaire avant
+ponctuation double 39 → 0.** La convention retenue est celle du corpus, relevée et non
+décrétée : **U+00A0** avant la ponctuation double (540 occurrences contre une seule
+espace ordinaire), **U+202F** entre nombre et unité (541).
+
+Deux points d'arbitrage valent d'être consignés :
+
+- **Les 12 écarts du corpus dessiné ne se corrigent pas ici.**
+  `injection-typographique.py` **déplace le dessin** : les compositeurs mesurent leurs
+  chaînes pour poser la géométrie, et U+202F n'a pas la chasse d'une espace ordinaire.
+  `french-editorial.md` identifiait déjà ce chantier comme ouvert. Un défaut se corrige,
+  une dette se programme ; les confondre la veille d'une présentation est la façon la
+  plus sûre de casser quelque chose.
+- **Les 65 autres apostrophes droites de `config.yml` sont hors périmètre par la règle
+  elle-même** : ce sont des libellés d'aide de Decap, et `french-editorial.md` borne sa
+  portée au « contenu destiné à l'utilisateur final ». Une aide de saisie s'adresse à
+  l'éditeur.
+
+**La charte ne s'opposait pas au redressement de la baseline**, contrairement à ce qu'un
+`grep` laissait croire : ses deux pièces comptent **213 et 217 apostrophes droites pour
+zéro courbe**. Une décision typographique se manifeste par un **contraste**, un filtre
+d'export par une **uniformité** — 100 % / 0 % est la signature du second.
+
+### Le script de démonstration portait quatre erreurs, dont deux cassantes
+
+Il datait d'avant trois chantiers. Il faisait ouvrir **deux fois** « Maison Pierre
+Loti », fiche **supprimée le 2026-08-08** ; il annonçait au client « cible : hébergement
+souverain français (OVH) » alors que `docs/19` présente le choix comme **non tranché** ;
+il décrivait le design comme « Apple-style », soit la charte v1 ; il parlait des
+« fiches marquées `[DÉMO]` », dont il ne reste aucune. Et il ne disait **pas un mot des
+planches**, qui sont le principal travail des trois derniers mois.
+
+Refait intégralement, avec le blocage OAuth en tête du pré-vol et la conduite à tenir
+s'il n'est pas levé le jour J — ouvrir `/admin/` pour buter sur une erreur coûte plus
+que de ne pas l'ouvrir.
+
+### La prise en main du CMS — `docs/22`, et ce qu'elle a vérifié au passage
+
+`docs/08` décrit la **configuration** du CMS ; il manquait un mode d'emploi destiné aux
+**rédacteurs**. Neuf sections, dont deux pièges qu'un rédacteur ne peut pas deviner : le
+numéro d'affaire **se relève sur pièce et ne se fabrique pas**, et le visuel d'une fiche
+**ne se téléverse pas** — créer une fiche dont la planche n'existe pas fait échouer la
+publication du site entier.
+
+Vérifié et conforme au passage : le champ `photo` de la collection Équipe **surcharge
+bien** `media_folder` vers `/src/assets/equipe` (`config.yml` l. 355-356). Un
+téléversement Decap atterrit donc là où `astro:assets` le résout, et non dans `public/`
+où il ne s'afficherait pas.
+
+### L'incident de la session : un remplacement qui a détruit du contenu, build vert
+
+À consigner parce qu'il a failli passer.
+
+Une passe de correction typographique a écrit ses références arrière `\1` `\2` `\3`
+**comme caractères de contrôle** `U+0001` `U+0002` `U+0003` : le double antislash s'est
+effondré en simple sur le trajet, et Python a lu `"\1"` comme `chr(1)`. Le texte capturé
+n'a donc pas été réinséré, il a été **remplacé**. Trois libellés détruits :
+
+- `index.astro:347` — « 07 — maîtres d'ouvrage » réduit à trois caractères invisibles ;
+- `index.astro:351` — « /maîtres d'ouvrage et clients » idem ;
+- `societe.astro:240` — « une méthode : elle atteste » idem.
+
+**`npm run build` a produit 46 pages sans broncher.** Astro n'a rien à valider
+là-dedans : du texte reste du texte, fût-il invisible. Seul `astro check` a protesté, et
+pour une raison **indirecte** — il sérialise l'AST en JSON, qui interdit les caractères
+de contrôle nus dans une chaîne. Le garde-fou qui a sauvé la mise n'était pas celui
+prévu pour ça.
+
+Trois enseignements, tous vérifiés dans la session :
+
+1. **Une mesure d'absence de défaut ne distingue pas « corrigé » de « supprimé ».**
+   L'instrument annonçait « 0 apostrophe droite, 0 ponctuation fautive » — exact,
+   puisque le texte fautif n'existait plus **du tout**. Il faut contrôler la **présence
+   du texte attendu**, et c'est ce que fait la passe de reprise.
+2. **Ne pas faire traverser au canal d'écriture les caractères qu'il normalise — lui
+   faire traverser leur recette.** `chr(0xA0)` est strictement plus sûr qu'un littéral
+   *et* qu'un échappement : les deux premiers peuvent être réécrits en route, un appel
+   de fonction non. L'échappement a échoué **deux fois** avant que ce soit clair.
+3. **L'assertion d'auto-contrôle n'est pas une précaution de style.** La normalisation
+   des insécables **n'est pas déterministe d'un appel à l'autre** : le même script
+   littéral est passé une fois et a échoué la suivante. C'est l'assertion qui a empêché
+   la seconde écriture ; le script qui n'en avait pas a détruit du contenu.
+
+Un corollaire de mesure, du même ordre : un instrument dont les insécables ont été
+normalisées signale comme **fautives les pages les mieux composées** — parce que
+`.replace('&nbsp;', NBSP)` y injecte alors des espaces ordinaires. Deux relevés
+intermédiaires de cette session l'ont fait (41 guillemets « fautifs », puis 28
+ponctuations), tous deux sur des pages légales écrites au cordeau. **Un instrument qui
+ne trouve ses fautes que là où le soin est maximal se dénonce lui-même.**
+
+### Recette de la session
+
+- typecheck **0 erreur, 0 avertissement** ; build **46 pages** ;
+- **211 liens internes, 0 mort** ; **23 numéros d'affaire, 0 fuite** ;
+- texte servi hors SVG : **0 apostrophe droite, 0 espace ordinaire avant ponctuation
+  double** (contre 72 et 39 à l'ouverture) ;
+- **présence** du texte attendu contrôlée sur les 10 corrections, et **zéro caractère de
+  contrôle** sur les 13 fichiers modifiés ;
+- rendu contrôlé par sonde en iframe même origine, serveur apparié à son `dist` par
+  marqueur : baseline du monogramme **x 104,0 → 304,1 pour un `viewBox` de 330**, donc
+  sans débordement, identique sur sept largeurs ; `scrollWidth == clientWidth` sur
+  **neuf mesures de 320 à 1 440 px** ; CTA rendant leur insécable et se repliant
+  normalement (285 × 73 à 390 px, 215 × 121 à 320 px) ;
+- l'URL `/secteurs/etudes-execution-bim/` **inchangée** malgré le renommage de
+  l'énumération, le slug d'un secteur venant du nom de fichier.
+
+⚠ **Les cinq commits de cette session ne sont pas poussés** : le push est sortant,
+et il n'a pas été demandé. Tant qu'il ne l'est pas, le déploiement ne porte **ni** les
+corrections typographiques **ni** rien de cette session — et la recette Lighthouse
+ci-dessus reste valable, puisqu'elle a été faite **avant** les corrections, sur un site
+qui n'a pas changé de structure.
+
+---
+
 ## Ce que cette programmation ne traite pas
 
 Repris du relevé, et **volontairement laissé ouvert** :
@@ -1007,6 +1236,7 @@ Repris du relevé, et **volontairement laissé ouvert** :
 | D2 — trois questions à FT2E | ◑ **posées** le 2026-08-16, **toujours sans réponse** au soir du 2026-08-16 (revérifié en S5) | `7cf8918` (§ 6 bis) | ⚠ **La question 2 a changé de nature** : l'exposition des visuels n'est pas seulement archivée dans l'historique git, elle est **servie en HTTP** par deux déploiements vivants — coût de levée nul, contre une réécriture d'historique. Voir le constat A de S4 |
 | S5 — suites et dernier point ouvert | ☑ **faite** le 2026-08-16 | `c6f7c53` | ✅ **complète sur son périmètre réel** — les 40 px de vide mort du hero supprimés (`grid-template-rows` passe de `247,375px 0px` à `247,375px`, hero 625,88 → 585,88 px à 390 px, inchangé au centième à 640 et 1 280) ; garde-fou du millésime vérifié sur pièce, rien à faire ; **les trois points suspendus à FT2E laissés intacts, faute de réponse**. Trouvé au passage : l’appui du hero servi à l’échelle **1,72** entre `sm` et `lg` |
 | S6 — plafond du hero et points ajournés | ☑ **faite** le 2026-08-16 | `b0213f5` · `+2` | ✅ **complète sur son périmètre réel** — appui du hero plafonné à sa taille de conception : échelle **1,72 → 0,996** à 1 000 px, 0,996 de 640 à 1 000, inchangée au-delà de `lg` ; hero identique **au centième** à 390 et 1 280 px, donc recette de S5 intacte ; zéro débordement sur neuf largeurs de 360 à 1 440 ; leçon remontée dans `.claude/rules/tailwind-design-tokens.md`. **Les trois points suspendus à FT2E sont ajournés à la présentation du projet**, à la demande de l'utilisateur — les deux déploiements antérieurs en ont ensuite été **sortis définitivement**, il n'en reste que deux |
+| S7 — recette d'ensemble avant présentation | ☑ **faite** le 2026-08-16 | `653ce16` → `1df1afe` (5) | ✅ **complète sur les quatre volets** — Lighthouse sur 9 routes du déploiement : **perf 100 partout**, CLS 0, TBT 0, a11y 100 sauf `/` 96 et `/societe/` 97 (même et unique violation, exception D1 **portée sur le motif**), SEO 69 = le seul audit `is-crawlable`, donc le verrou ; 211 liens 0 mort ; typographie du texte servi **72 → 0** apostrophes droites et **39 → 0** espaces fautives ; script de démonstration refait (il faisait ouvrir une fiche supprimée) ; `docs/22` prise en main FT2E créée. 🔴 **Trouvé, et bloquant pour la présentation : la connexion au CMS échoue** — `/api/auth` rend `500`, il manque deux variables d'environnement Vercel et la callback GitHub. ⚠ **Incident consigné** : une passe de correction a détruit trois libellés en écrivant ses références arrière comme caractères de contrôle, **build vert** |
 
 ---
 
@@ -1653,3 +1883,174 @@ Termine par le prompt de lancement de la session suivante, en annexe du plan et
 reproduit integralement dans ton message final. Cette regle est dans CLAUDE.md parce
 qu'elle a ete manquee deux fois.
 ```
+### Annexe G — session 8, le déblocage du CMS et la mise en ligne des corrections (à coller telle quelle)
+
+````
+Session 8 du chantier FT2E v3 — un blocage hors dépôt, cinq commits en attente,
+et deux points toujours ajournés.
+
+Contexte. FT2E v3 est un site institutionnel Astro statique, déployé en démonstration
+client sur https://ft2e-v3.vercel.app, indexation verrouillée par triple sécurité
+(robots.txt Disallow, meta noindex, header X-Robots-Tag). Le chantier de réduction de
+dette est CLOS depuis S6. La session 7 (2026-08-16) a fait la recette d'ensemble avant
+présentation : Lighthouse sur neuf routes du déploiement, relecture éditoriale, script
+de démonstration refait, et création du mode d'emploi CMS pour FT2E. Lis la section S7
+de docs/superpowers/plans/2026-08-16-reduction-dette.md avant toute chose.
+
+0. LE PÉRIMÈTRE — la v3, et uniquement la v3. Deux déploiements antérieurs
+   (ft2e-site.vercel.app et ft2e-v2.vercel.app) répondent encore et servent des
+   photographies d'ouvrages. Ils sont HORS PÉRIMÈTRE par décision de l'utilisateur du
+   2026-08-16 : « ces projets antérieurs ne sont plus concernés par quoi que ce soit ».
+   Ne pas les mesurer, ne pas les proposer, ne pas les remettre dans un compte rendu.
+   Le fait reste documenté au § 6 bis de docs/19-migration-production.md, où il sert le
+   jour de la mise en production et ce jour-là seulement.
+
+1. LE POINT BLOQUANT, ET IL N'EST PAS DANS LE DÉPÔT — la connexion au CMS échoue.
+   Mesuré sur le déploiement le 2026-08-16 : /admin/ répond 200 et l'interface Decap
+   s'affiche, /admin/config.yml répond 200, mais /api/auth?provider=github rend
+   HTTP 500 — « Configuration OAuth manquante : definir OAUTH_GITHUB_CLIENT_ID dans les
+   variables d'environnement Vercel ». Le bouton « Se connecter » est donc mort.
+
+   ⚠ NE RIEN CORRIGER DANS LE DÉPÔT : api/auth.js et api/callback.js sont justes, et
+   config.yml pointe le bon dépôt depuis la correction du 2026-08-10. Ce qui manque vit
+   dans deux consoles d'administration, et SEUL L'UTILISATEUR PEUT LE FAIRE (la CLI
+   Vercel répond « Not authorized » sur cette machine, et elle n'est même pas installée).
+   Les trois gestes, dans l'ordre, sont écrits avec leur commande de contrôle dans
+   docs/22-prise-en-main-decap.md § 0 : callback GitHub sur
+   https://ft2e-v3.vercel.app/api/callback, puis OAUTH_GITHUB_CLIENT_ID et
+   OAUTH_GITHUB_CLIENT_SECRET sur le projet Vercel, puis redéploiement.
+
+   OUVRIR LA SESSION EN LE DEMANDANT. Tant que ce n'est pas levé, la section C du script
+   de démonstration — que le script appelle lui-même « le moment clé » — ne peut pas
+   avoir lieu, et la prise en main par FT2E ne peut pas commencer. Contrôle en dix
+   secondes, doit cesser de rendre 500 :
+   curl -s -o /dev/null -w "%{http_code}\n" "https://ft2e-v3.vercel.app/api/auth?provider=github"
+
+   ⚠ Cet avertissement existait EN COMMENTAIRE en tête de public/admin/config.yml depuis
+   le 2026-08-10 et a traversé six sessions sans être exécuté. Un commentaire n'échoue
+   jamais. Ne pas se contenter d'en ajouter un de plus.
+
+2. CINQ COMMITS NE SONT PAS POUSSÉS. La session 7 a produit 653ce16 → 1df1afe. Le push
+   est sortant : le DEMANDER, ne pas le faire d'office. Tant qu'il n'est pas fait, le
+   déploiement ne porte aucune des corrections typographiques, et le client voit encore
+   72 apostrophes droites dont celle de la baseline du monogramme, sur les 46 pages.
+   ⚠ Le contrôle du déploiement est DOUBLE et prend dix secondes : git ls-remote origin
+   master (la référence locale peut être périmée) ET un marqueur du build dans le HTML
+   servi. En S6, le site en ligne s'était arrêté TROIS SESSIONS en arrière sans que rien
+   ne le signale. Après le push, remesurer Lighthouse : la recette de S7 a été faite
+   AVANT les corrections.
+
+3. LES DEUX POINTS AJOURNÉS — ne PAS les rouvrir sans que l'utilisateur le demande. Ils
+   sont en suspens jusqu'à la présentation du projet, à sa demande explicite du
+   2026-08-16 (« je veux finaliser sans me préoccuper de ces questions annexes »). Les
+   redire en fin de session, ne rien exécuter dessus, ne rien fabriquer :
+   a. Réception de la crèche de l'Oranger — src/content/projets/creche-oranger-perigny.md
+      annonce une affaire livrée sans dire quand : annee_livraison vide, ligne statut
+      absente. Seule des 23 dans ce cas. NE PAS FABRIQUER DE MILLÉSIME.
+   b. planche-chiffree — seul archétype de la liste fermée du protocole que les 23
+      planches n'ont pas exercé, donc le seul dont rien ne garantit qu'il fonctionne.
+      Le retirer ou le redéfinir est un arbitrage éditorial.
+   ⚠ Un seul des deux porte une échéance propre : la réception de la crèche est le
+   premier des quatorze relevés qu'appelle MILLESIME_LIVRAISON_ANNONCE, et le garde-fou
+   de S4 fera ÉCHOUER LE BUILD au 1er janvier 2027. Ne jamais y répondre en poussant la
+   constante : cela désarmerait le garde-fou pour s'épargner exactement l'échec qu'on lui
+   demande de produire. La réponse est d'aller relever les réceptions auprès de FT2E.
+
+4. CE QUE LA SESSION FAIT D'AUTRE — à définir avec l'utilisateur en ouverture. Rien
+   n'est programmé. Les candidats connus, aucun ouvert d'office :
+   - les insécables du CORPUS DESSINÉ : 12 écarts de ponctuation subsistent dans les
+     planches SVG. ⚠ Ne PAS lancer scripts/injection-typographique.py dessus : il
+     DÉPLACE LE DESSIN, les compositeurs mesurant leurs chaînes pour poser la géométrie
+     et U+202F n'ayant pas la chasse d'une espace ordinaire. C'est un chantier avec
+     régénération des 23 dossiers et contrôle du rendu, pas une passe de correction ;
+   - la régénération des vingt planches antérieures à la 21 (point ouvert le plus ancien,
+     docs/superpowers/plans/2026-08-12-chantier-planches-references.md) ;
+   - les 7 marqueurs [DÉMO] restants, tous des image_alt de src/content/secteurs/, qui se
+     lèvent au reportage photographique et pas par une validation ;
+   - le LCP de /equipe/, seule page dont la performance ne soit pas confortable : quatre
+     tirs à 1 807, 1 815, 1 658 et 1 656 ms pour un budget de 1 800. Au seuil, pas sous
+     le seuil. S1 y avait relevé 1,2 s, ce qui situe l'écart du côté des conditions de
+     mesure ; à reconfirmer sur plusieurs tirs avant d'y toucher.
+
+Pièges vérifiés au dépôt, à ne pas redécouvrir :
+- ⚠ UN BUILD VERT NE PROUVE MÊME PAS QUE LE TEXTE EXISTE. En S7, une passe de correction
+  a écrit ses références arrière \1 \2 \3 comme caractères de contrôle U+0001-0003 et
+  a DÉTRUIT trois libellés de l'accueil et de /societe/ ; npm run build a produit ses
+  46 pages sans broncher. Seul astro check a protesté, et pour une raison indirecte (il
+  sérialise l'AST en JSON, qui interdit les caractères de contrôle nus). Corollaire :
+  après toute correction de texte, contrôler la PRÉSENCE du texte attendu — une mesure
+  d'absence de défaut ne distingue pas « corrigé » de « supprimé ».
+- ⚠ Les insécables sont normalisées EN ENTRÉE des outils d'édition, ET CE N'EST PAS
+  DÉTERMINISTE : en S7 le même script littéral est passé une fois puis a échoué la
+  suivante. Trois conséquences. (1) Tout script qui manipule des insécables doit porter
+  une ASSERTION D'AUTO-CONTRÔLE en tête — c'est elle qui a empêché la seconde écriture
+  destructrice. (2) Les caractères sensibles se CONSTRUISENT par chr(0xA0) / chr(0x2019),
+  jamais en littéral et pas davantage en échappement \u00a0 : l'échappement a échoué
+  deux fois avant que ce soit clair, un appel de fonction ne peut pas être réécrit en
+  route. (3) Un instrument dont les insécables ont été normalisées signale comme
+  fautives LES PAGES LES MIEUX COMPOSÉES, parce que .replace('&nbsp;', NBSP) y injecte
+  des espaces ordinaires — deux relevés de S7 l'ont fait, sur des pages légales.
+- ⚠ Une ancre de remplacement se COPIE du fichier, elle ne se retape pas : le corpus
+  mélange apostrophes droites et typographiques, et une ancre retapée échoue en disant
+  seulement « 0 occurrence ». Le plan de dette porte 219 U+00A0 et 75 U+202F : l'éditer
+  passe obligatoirement par un script Python, avec contrôle du compte AVANT et APRÈS.
+- ⚠ La PERFORMANCE ne se mesure JAMAIS sur npm run preview, qui ne compresse rien :
+  0,8 s de biais sur la chaîne bloquante. Elle se mesure sur le déploiement, après avoir
+  vérifié par un MARQUEUR DU BUILD — jamais par un délai d'attente — qu'il porte le
+  commit en cours. Et une seule mesure ne conclut pas : le LCP de /equipe/ passe de
+  1 656 à 1 815 ms d'un tir à l'autre, de part et d'autre du seuil.
+- ⚠ npx lighthouse est un processus Windows et n'accepte PAS les chemins Git-Bash
+  /c/... en --output-path : il n'écrit rien, en silence, et le script conclut « aucun
+  JSON ». Se placer dans le répertoire et passer un chemin relatif.
+- ⚠ Chrome refuse toute fenêtre sous 500 px, EN HEADLESS AUSSI : une capture en
+  --window-size=390,900 compose la page à ~500 px puis ROGNE l'image, ce qui montre un
+  débordement crédible et faux. Les largeurs de téléphone se mesurent par une IFRAME
+  servie en même origine. Deux biais de cette sonde : caler sur onload ET sur la
+  présence d'un élément de la page (le about:blank initial a la largeur du cadre) ; et
+  les media queries comptent la barre de défilement que clientWidth ne compte pas, soit
+  15 px d'écart — sans conséquence sur une échelle, décisif sur une borne.
+- ⚠ Une sonde en iframe dont le sentinelle de résultat apparaît LITTÉRALEMENT dans son
+  propre <script> se fait extraire son code source au lieu de son résultat. Construire
+  le sentinelle à l'exécution.
+- ⚠ --user-data-dir fait échouer --dump-dom de Chrome EN SILENCE : code de sortie 0 et
+  aucune sortie. Le même appel sans l'option rend le document complet.
+- ⚠ Des serveurs astro preview de sessions antérieures tournent encore. Ce n'est pas
+  grave en soi (astro preview sert le DISQUE, donc tous servent le dist/ courant) — le
+  vrai risque est de mesurer SANS AVOIR REBUILD. Apparier le serveur à son dist par un
+  marqueur déposé dans dist/ et relu par curl.
+- L'accueil est reçue à 96 en accessibilité et /societe/ à 97, et c'est admis :
+  l'exception D1 a été portée SUR LE MOTIF en S7, et non plus sur la seule page. La
+  condition reste stricte — la SEULE violation doit être le color-contrast d'un
+  complément de titre aria-hidden. Elle se déclenche exactement là où ce complément est
+  posé sur un APLAT PLEIN, qu'axe sait résoudre ; ailleurs le papier tramé l'empêche de
+  conclure et l'outil s'abstient. Un score non expliqué dans un compte rendu est
+  indistinguable d'une régression.
+- Le SEO plafonne à 69 sur toutes les pages, et l'unique audit en échec est
+  is-crawlable. C'est le verrou d'indexation, pas un défaut. Ne pas le « corriger ».
+- Tailwind v4 élague les variables de thème qu'aucune classe n'emploie. Une couleur
+  s'écrit en CLASSE littérale (stroke-encre), jamais en var(--color-…) dans un attribut
+  SVG. Et une mesure de mise en page (un plafond, une borne) s'écrit en CSS de composant
+  plutôt qu'en classe arbitraire unique, pour la même raison.
+- Dans un frontmatter .astro, une sonde de typage se fait en REMPLAÇANT un attribut,
+  jamais en en ajoutant un second — un attribut dupliqué ne lève aucune erreur. Et
+  ts(6196) sur une interface Props ne dit pas « code mort », il dit « contrat non
+  consommé ».
+- Le dépôt porte un .gitattributes depuis le 2026-08-16 : ne pas le retirer. Sans lui,
+  un clone neuf sort les 92 pièces des planches en CRLF et l'invariant de régénération
+  se lit comme rompu alors qu'il tient.
+- L'énumération « Études d'exécution » s'écrit depuis S7 avec l'APOSTROPHE
+  TYPOGRAPHIQUE, dans src/content.config.ts, public/admin/config.yml et six fiches.
+  L'appariement fiche/secteur se fait en égalité de chaînes : une fiche rédigée hors
+  Decap avec l'ancienne graphie fait échouer le build. C'est voulu.
+
+Recette de fin de session : npm run typecheck (0 erreur), npm run build (46 pages),
+python scripts/controle-liens-internes.py (0 lien mort), contrôle du RENDU de toute page
+touchée à sa largeur de lecture, et consignation dans le plan.
+
+Portée de commit : plusieurs commits nets valent mieux qu'un fourre-tout — les portées
+sont content, docs, fix, design-system selon les points.
+
+Termine par le prompt de lancement de la session suivante, en annexe du plan et
+reproduit intégralement dans ton message final. Cette règle est dans CLAUDE.md parce
+qu'elle a été manquée deux fois.
+````
