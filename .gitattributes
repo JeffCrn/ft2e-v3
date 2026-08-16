@@ -1,0 +1,36 @@
+# Fins de ligne — posées le 2026-08-16, sur une mesure et pas sur un principe.
+#
+# Le dépôt est travaillé sous Windows avec `core.autocrlf=true`, et il ne portait
+# aucun `.gitattributes`. Conséquence dans un CLONE NEUF, et là seulement : git
+# écrit les fichiers texte en CRLF, alors que les outils du dépôt écrivent du LF —
+# `_tronc.executer` et `verser.py` ouvrent tous deux leurs sorties avec
+# `newline="\n"`. Les 92 pièces des planches (69 SVG + 23 JSON) apparaîtraient
+# donc comme modifiées dès la première régénération, et l'invariant « 23 / 23
+# octet à octet » du protocole se lirait comme rompu alors qu'il tient.
+#
+# ⚠ Le piège est qu'il ne se voit PAS sur la machine où le corpus a été produit :
+# les fichiers y sont nés en LF et y sont restés. Il n'apparaît qu'après un clone,
+# c'est-à-dire au moment où quelqu'un d'autre reprend le chantier.
+#
+# `eol=lf` fixe la forme en copie de travail, quelle que soit la plateforme et
+# quel que soit le réglage `core.autocrlf` de la machine. Le dépôt stockait déjà
+# du LF : rien n'est réécrit dans l'historique, seule la sortie de `checkout`
+# change.
+
+* text=auto eol=lf
+
+# Binaires — jamais convertis, jamais diffés comme du texte.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.avif  binary
+*.ico   binary
+*.pdf   binary
+*.zip   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.docx  binary
+*.xlsx  binary
