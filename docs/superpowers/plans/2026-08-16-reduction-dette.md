@@ -9,7 +9,10 @@
 > s’ils divergent du dépôt, c’est le dépôt qui a bougé depuis `d3bd8d9`, et il faut
 > remesurer avant d’agir.
 >
-> **Ouvert le 2026-08-16.** État : **3 sessions sur 4 exécutées** (S1, S2, S3), **1 décision sur 2 tranchée** (D1).
+> **Ouvert le 2026-08-16.** État : **4 sessions sur 4 exécutées** (S1, S2, S3, S4),
+> **1 décision sur 2 tranchée** (D1) — **D2 reste pendante chez FT2E**. Une session
+> de suites, **S5**, a soldé le dernier point laissé ouvert et constaté au
+> 2026-08-16 qu’aucune des trois réponses n’était arrivée.
 
 ---
 
@@ -527,9 +530,12 @@ pas pour des cibles empilées.
    24 px), donc le défaut n'apparaît dans aucun score ; mais la règle FT2E dit
    **44 × 44 pour tout élément actionnable**, sans exception d'espacement. C'est un
    écart règle/code, pas un écart outil.
-2. **40 px de vide mort sous `sm` dans le hero de l'accueil** : le média est
+2. **40 px de vide mort sous `sm` dans le hero de l’accueil** : le média est
    `hidden sm:block`, mais sa cellule de grille et le `gap-10` du conteneur restent.
    Sans effet sur le CLS ni sur le débordement.
+   ✅ **Corrigé en S5** le 2026-08-16 (`c6f7c53`) — et le diagnostic ci-dessus était
+   juste à un mot près : ce n’est pas le `gap-10` **et** la cellule, c’est le
+   `gap-10` **parce que** la cellule. Voir la section S5.
 
 ---
 
@@ -564,7 +570,7 @@ du même commit** (règle du sous-agent `content-modeller`).
 | S2-a | ☑ | `verser.py` : les deux contrôles périmés retirés ; le versement devient une **insertion après `mission_ft2e:`**, ancre relevée sur 23 fiches / 23. Recette sur les deux chemins |
 | S2-b | ☑ | `.gitattributes` posé (`* text=auto eol=lf`). **Défaut reproduit avant correction** : clone neuf → 92 pièces sur 92 en CRLF ; après → 92 sur 92 en LF, PNG intacts octet pour octet |
 | S3-a | ☑ | Cibles du pied portées à 44 px — **douze, pas deux** (7 liens de plan du site, 2 coordonnées, 3 mentions légales). Par la **boîte**, jamais par `.cible-44`. Zéro sous 44, zéro chevauchement, aucun débordement à 390 / 768 / 1440 ; a11y `/contact/` à 100 |
-| S3-b | ☐ | **Laissé ouvert** : les 40 px de vide mort sous `sm` dans le hero de l’accueil |
+| S3-b | ☑ | **Reporté en S5**, et corrigé le 2026-08-16 (`c6f7c53`) : les 40 px de vide mort sous `sm` dans le hero de l’accueil |
 
 **Commits** : `7cf8918` · `4ed3e6b` · `e8e3b69` · `348de96` · `0d8b0e8` · `270f93d` · `6e74910` · `d7e5cfc` · `5c0cc69`.
 
@@ -714,6 +720,121 @@ Ils ne sont pas plus conformes — seulement moins mesurables.
 
 ---
 
+## S5 — Les suites : le dernier point ouvert, et l’attente de FT2E
+
+> **Session de suites, le 2026-08-16.** Le chantier de réduction de dette est clos ;
+> cette session solde ce qu’il laissait derrière lui. Elle avait deux contenus
+> possibles selon que les réponses de FT2E soient arrivées ou non.
+
+### Ce que FT2E a répondu : rien, à ce jour
+
+Les trois questions de D2 ont été posées le 2026-08-16 et **aucune n’a reçu de
+réponse**. Les trois points qui en dépendent sont donc **laissés strictement en
+l’état** — c’est la consigne, et elle est plus forte qu’une préférence :
+
+| Point | État au 2026-08-16 | Ce qui a été fait |
+|---|---|---|
+| **Les deux déploiements résiduels** | `ft2e-site.vercel.app` et `ft2e-v2.vercel.app` répondent **toujours `200`** — remesuré en ouverture de session | **Rien supprimé.** Ce sont les déploiements de FT2E, la décision leur appartient, et la CLI Vercel répond « Not authorized » sur cette machine de toute façon |
+| **Réception de la crèche de l’Oranger** | `annee_livraison` toujours vide, `statut` toujours absent du frontmatter | **Aucun millésime fabriqué.** Un millésime inventé serait indistinguable d’un millésime relevé — c’est précisément ce que la règle 10 interdit |
+| **L’archétype `planche-chiffree`** | toujours dans la liste fermée du protocole, toujours jamais exercé | **Rien retiré.** Retirer un archétype est un arbitrage éditorial, pas une opération d’hygiène |
+
+**Ne pas confondre « laissé en l’état » et « oublié ».** Les trois repartent
+intégralement dans le prompt de la session suivante (annexe E).
+
+### Point 4 — les 40 px de vide mort du hero : corrigé, mesuré
+
+Le seul point de S3 resté ouvert. Le diagnostic de S3 nommait deux causes — « sa
+cellule de grille **et** le `gap-10` du conteneur restent » — là où il n’y en a
+qu’une, et la nuance décide de la correction : c’est le `gap-10` **parce que** la
+cellule. Une cellule de grille de hauteur 0 est invisible, mais elle ouvre une
+seconde rangée, et une seconde rangée se paie son `row-gap`.
+
+**Mesuré avant correction, à 390 px :** `grid-template-rows: 247,375px 0px` pour un
+`row-gap: 40px` — **40,00 px** de vide entre le bouton « Nos références » et la
+section 01.
+
+#### La correction, et pourquoi celle-là
+
+Deux formes possibles, qui ne rangent pas la connaissance du point de rupture au
+même endroit :
+
+| Forme | Ce qu’elle fait | Ce qu’elle laisse |
+|---|---|---|
+| Neutraliser le `row-gap` sous `sm` | le conteneur compense | la rangée fantôme, **et le `sm` écrit à deux endroits** |
+| **Retenue** — masquer l’enveloppe du slot | la cellule n’existe plus | le `sm` écrit **une seule fois** |
+
+`Hero.astro` porte désormais le `hidden sm:block` sur l’**enveloppe** du slot, et
+`index.astro` cesse de le porter sur les deux enfants qu’il y range. Le **motif** du
+masquage — l’appui composé pour 552 px tomberait à l’échelle 0,62, mono de 10 rendu
+à 6,2 px, sous le plancher de 6,5 — reste écrit chez l’appelant, qui compose le
+média ; le **point de rupture**, lui, n’existe plus qu’à un endroit.
+
+C’est la règle que ce dépôt réapprend à chaque session : deux exemplaires d’une même
+donnée, et c’est la copie qui dérive. Ici la copie n’avait même pas dérivé — les deux
+fichiers étaient justes **pris séparément**. Le défaut vivait dans l’écart entre eux,
+ce qui explique qu’aucune relecture ne l’ait vu.
+
+#### Recette
+
+| Largeur | Avant | Après |
+|---|---|---|
+| 390 px | `grid-template-rows: 247,375px 0px` · vide mort **40,00 px** · hero 625,88 px | `247,375px` · vide mort **0,00 px** · hero **585,88 px** |
+| 480 px | — | une seule rangée · vide mort **0,00 px** |
+| 640 px | hero 1 052,31 px | hero **1 052,31 px** — inchangé au centième |
+| 1 280 px | — | hero **1 006,72 px** · deux colonnes · vide mort **0,00 px** |
+
+`scrollWidth` = `clientWidth` aux quatre largeurs : aucun débordement introduit.
+Rendu contrôlé par capture à 390 px réels. `npm run typecheck` : 0 erreur,
+0 avertissement. `npm run build` : 46 pages.
+
+⚠ **Un quatrième piège de mesure, à ajouter aux trois de S3 : Chrome refuse les
+fenêtres sous 500 px EN HEADLESS AUSSI.** Une capture directe en
+`--window-size=390,900` ne rend pas une page de 390 px : elle compose la page à
+~500 px puis **rogne l’image à 390**. Le résultat montre un texte coupé au bord
+droit — c’est-à-dire un débordement parfaitement crédible, et parfaitement faux, sur
+une page dont la sonde venait de mesurer `scrollWidth == clientWidth`. La sonde en
+iframe calibrée reste le seul instrument valable, et elle n’a rien à restaurer.
+
+### Point 5 — le millésime annoncé : rien à faire, et c’est la bonne réponse
+
+`MILLESIME_LIVRAISON_ANNONCE` vaut **2026**, nous sommes en **2026**, et le garde-fou
+posé en S4 échoue en dur au-delà. Vérifié sur pièce : le `throw` est bien en place
+dans `src/lib/projets.ts`, il compare `new Date().getFullYear()` à la constante, et
+son message ordonne les trois opérations dans le bon sens — relever les réceptions
+auprès de FT2E, renseigner les `annee_livraison`, **puis** porter la constante.
+
+**Il n’y a donc rien à exécuter, et surtout rien à anticiper.** Pousser la constante
+maintenant reviendrait à désarmer le garde-fou quatre mois avant qu’il ne serve, pour
+s’épargner un échec de build qui est exactement ce qu’on lui demande de produire.
+
+### Relevé au passage, hors périmètre et non corrigé
+
+**L’appui du hero est servi au-dessus de sa taille de conception entre `sm` et `lg`.**
+Constaté en mesurant le point 4, sur des largeurs que la session n’avait pas de raison
+de visiter autrement :
+
+| Fenêtre | Appui rendu | Échelle (dessin composé à 552 px) |
+|---|---|---|
+| 640 px | 606 px | 1,10 |
+| 700 px | 666 px | 1,21 |
+| 768 px | 718 px | 1,30 |
+| 900 px | 850 px | 1,54 |
+| 1 000 px | **950 px** | **1,72** |
+| ≥ 1 024 px | 460 à 550 px | ≤ 1,00 — la grille à 12 colonnes reprend la main |
+
+**Ce n’est pas un défaut de lisibilité** — le mono de 10 px y gagne, il monte à 17.
+C’est un **épaississement des filets de 1 px**, c’est-à-dire le défaut fondateur que
+le chantier des planches a chassé partout ailleurs en plafonnant chaque dessin à sa
+taille de conception : la vignette à 300 px dans `CarteProjet`, les trois bandes de
+`PlancheReference`. Le hero de l’accueil est le seul endroit du site où un dessin est
+encore étiré, et il l’était **avant** cette session — les hauteurs mesurées à 640 et
+1 280 px sont identiques au centième avant et après correction.
+
+Non corrigé ici : plafonner l’appui touche à la composition du hero, ce qui déborde
+d’un point qualifié de « le moins coûteux du lot ». Reporté au prompt suivant.
+
+---
+
 ## Ce que cette programmation ne traite pas
 
 Repris du relevé, et **volontairement laissé ouvert** :
@@ -741,7 +862,8 @@ Repris du relevé, et **volontairement laissé ouvert** :
 | S3 — trois défauts de rendu | ☑ **faite** le 2026-08-16 | `806e803` | ✅ **complète** — CLS **0** sur `/`, `/contact/`, `/references/` et `/equipe/` (seuil 0,05) ; `/contact/` a11y **97 → 100** ; débordement nul sur 45 mesures (15 routes × 3 largeurs) et à 320 / 360 / 390 / 430 px ; accueil perf **100** |
 | S4 — hygiène et garde-fous | ☑ **faite** le 2026-08-16 | `7cf8918` → `5c0cc69` (9) | ✅ **complète** — cinq des six points exécutés, le sixième **sans objet** (la fine des milliers était déjà posée au commit du relevé) ; plus les deux garde-fous de S2 et les cibles 44 px de S3. Garde-fou du millésime recetté **par échec provoqué** ; `.gitattributes` recetté **sur un clone neuf** (92 CRLF → 92 LF) ; rendu identique **au pixel** ; a11y `/contact/` 100. **Trouvé au passage : `ft2e-site` et `ft2e-v2` répondent encore et servent les photographies d'ouvrages** |
 | D1 — arbitrage A2 × Lighthouse | ☑ **tranché** le 2026-08-16 — issue 2 (inscrire l’exception, viser 96) | `4416c20` · `806e803` | ✅ **appliqué** à `.claude/rules/accessibility-rgaa.md` en S3 |
-| D2 — trois questions à FT2E | ◑ **posées** le 2026-08-16, réponses attendues | `7cf8918` (§ 6 bis) | ⚠ **La question 2 a changé de nature** : l'exposition des visuels n'est pas seulement archivée dans l'historique git, elle est **servie en HTTP** par deux déploiements vivants — coût de levée nul, contre une réécriture d'historique. Voir le constat A de S4 |
+| D2 — trois questions à FT2E | ◑ **posées** le 2026-08-16, **toujours sans réponse** au soir du 2026-08-16 (revérifié en S5) | `7cf8918` (§ 6 bis) | ⚠ **La question 2 a changé de nature** : l'exposition des visuels n'est pas seulement archivée dans l'historique git, elle est **servie en HTTP** par deux déploiements vivants — coût de levée nul, contre une réécriture d'historique. Voir le constat A de S4 |
+| S5 — suites et dernier point ouvert | ☑ **faite** le 2026-08-16 | `c6f7c53` | ✅ **complète sur son périmètre réel** — les 40 px de vide mort du hero supprimés (`grid-template-rows` passe de `247,375px 0px` à `247,375px`, hero 625,88 → 585,88 px à 390 px, inchangé au centième à 640 et 1 280) ; garde-fou du millésime vérifié sur pièce, rien à faire ; **les trois points suspendus à FT2E laissés intacts, faute de réponse**. Trouvé au passage : l’appui du hero servi à l’échelle **1,72** entre `sm` et `lg` |
 
 ---
 
@@ -1098,4 +1220,156 @@ portées sont content, docs, fix, a11y selon les points.
 Termine par le prompt de lancement de la session suivante, en annexe du plan et
 reproduit intégralement dans ton message final. Cette règle est dans CLAUDE.md
 parce qu'elle a été manquée deux fois.
+```
+
+---
+
+### Annexe E — session 6, les trois réponses attendues et un dessin étiré (à coller telle quelle)
+
+> Rédigée le 2026-08-16 **à la clôture de S5**, comme l’exige la règle de continuité
+> de `CLAUDE.md`. Autoportante : elle ne suppose aucun contexte des sessions
+> précédentes.
+
+```
+Session 6 du chantier FT2E v3 — trois réponses attendues de FT2E, et un dessin étiré.
+
+Contexte. FT2E v3 est un site institutionnel Astro statique, déployé en démonstration
+client sur https://ft2e-v3.vercel.app, indexation verrouillée par triple sécurité. Le
+chantier de réduction de dette ouvert le 2026-08-16 est CLOS : ses quatre sessions
+sont faites, sa décision D1 est tranchée, et sa session de suites S5 a soldé le
+dernier point de rendu qui restait. Le plan et toutes ses recettes sont dans
+docs/superpowers/plans/2026-08-16-reduction-dette.md — lis sa section S5 et le
+constat A de S4 avant toute chose.
+
+Les points 1, 2 et 3 attendent une réponse de FT2E, posée le 2026-08-16 et TOUJOURS
+SANS RÉPONSE au soir du 2026-08-16 (revérifié en S5). Vérifie d'abord si elle est
+arrivée. Sans elle, ces trois points ne s'exécutent pas — ne rien supprimer, ne rien
+fabriquer, ne rien retirer — et la session se limite au point 4, qui ne dépend de
+personne.
+
+1. ⚠ LES DEUX DÉPLOIEMENTS RÉSIDUELS — le plus urgent, et il ne vient pas du relevé
+   de dette. ft2e-site.vercel.app (la v1) et ft2e-v2.vercel.app répondent encore et
+   servent les photographies d'ouvrages que le chantier des planches avait retirées
+   de la v3 pour motif de droit d'auteur : code 200, huit visuels distincts sur la
+   seule page /references, 819 à 937 Ko chacun. Revérifié le 2026-08-16 en ouverture
+   de S5 : les deux répondent toujours 200. Les deux portent noindex et Disallow: /
+   — ce qui empêche le référencement, pas l'accès, et c'est un verrou de démonstration
+   pensé pour être levé un jour.
+   Procédure, contrôle par curl et cases à cocher : docs/19-migration-production.md
+   § 6 bis. NE RIEN SUPPRIMER SANS ARBITRAGE FT2E : ce sont leurs déploiements, et la
+   décision est la leur.
+   ⚠ La CLI Vercel répond « Not authorized » sur cette machine — la suppression se
+   fait au tableau de bord, par FT2E ou avec elle.
+
+2. RÉCEPTION DE LA CRÈCHE DE L'ORANGER, si la pièce est arrivée. La fiche
+   src/content/projets/creche-oranger-perigny.md annonce une affaire livrée sans dire
+   quand : annee_livraison est vide, la ligne statut a disparu du frontmatter, et plus
+   rien dans le fichier ne signale l'anomalie. C'est la seule des 23 dans ce cas. Avec
+   la date de réception : renseigner annee_livraison (le schéma l'exige dès que statut
+   ne vaut plus « en cours », règle 10). Sans réponse : laisser en l'état et le redire
+   dans le prompt suivant — ne pas fabriquer un millésime.
+
+3. planche-chiffree, SI FT2E A TRANCHÉ. Seul archétype du protocole que les 23
+   planches n'ont pas exercé, donc le seul dont rien ne garantit qu'il fonctionne.
+   Soit le retirer de la liste fermée de
+   docs/superpowers/specs/2026-08-12-planches-references-protocole.md, soit redéfinir
+   ce qu'il montre. Le retirer suppose de vérifier qu'aucun compositeur ni verser.py
+   n'y renvoie.
+
+4. L'APPUI DU HERO EST SERVI ÉTIRÉ ENTRE sm ET lg — le seul point exécutable sans
+   FT2E. Il ne vient pas non plus du relevé de dette : il a été mesuré en S5, en
+   passant. L'appui de la fiche vedette (public/images/projets/<slug>/appui.svg,
+   viewBox 0 0 552 368) est inliné dans le hero de src/pages/index.astro et occupe
+   toute la largeur de sa colonne. Mesuré le 2026-08-16 par sonde en iframe :
+
+     fenêtre      appui rendu    échelle
+     640 px         606 px        1,10
+     700 px         666 px        1,21
+     768 px         718 px        1,30
+     900 px         850 px        1,54
+     1 000 px       950 px        1,72
+     >= 1 024 px    460 a 550 px  <= 1,00   (la grille a 12 colonnes reprend la main)
+
+   Ce n'est PAS un défaut de lisibilité — le mono de 10 px y gagne, il monte à 17.
+   C'est un ÉPAISSISSEMENT DES FILETS DE 1 px, c'est-à-dire le défaut fondateur que le
+   chantier des planches a chassé partout ailleurs en plafonnant chaque dessin à sa
+   taille de conception : la vignette à 300 px dans CarteProjet, les trois bandes de
+   PlancheReference. Le hero de l'accueil est le seul endroit du site où un dessin est
+   encore étiré, et il l'était avant S5 — la correction des 40 px n'y est pour rien,
+   les hauteurs à 640 et 1 280 px sont identiques au centième avant et après.
+   Règles applicables : .claude/rules/tailwind-design-tokens.md § Composants signature
+   (« aucune échelle au-dessus de 1,00 ») et CLAUDE.md § Les planches de références,
+   principe 3. Le plafond vit dans le COMPOSANT DU DESSIN, jamais dans la grille
+   appelante — leçon écrite pour CarteProjet le 2026-08-15, et elle vaut ici : le
+   nombre de colonnes est un réglage de page, la taille de conception est une
+   propriété du dessin.
+   ⚠ Pose la question avant de corriger : le hero relève-t-il du même plafond ?
+   L'appui y est un ornement de couverture, pas une figure de fiche, et la charte ne
+   tranche pas explicitement ce cas. Si le plafond s'applique, la marge de papier qui
+   reste autour d'un dessin plafonné est légitime — un plan a des marges.
+
+5. LE MILLÉSIME ANNONCÉ, SI ON APPROCHE DE 2027. MILLESIME_LIVRAISON_ANNONCE vaut 2026
+   dans src/lib/projets.ts et porte l'affichage de quatorze affaires. Depuis le
+   2026-08-16 le build ÉCHOUE EN DUR passé cette année-là — ce n'est plus une échéance
+   silencieuse. Il faut y répondre par des réceptions relevées auprès de FT2E, jamais
+   en poussant la constante : la pousser désarmerait le garde-fou pour s'épargner
+   exactement l'échec qu'on lui demande de produire.
+
+Pièges vérifiés au dépôt, à ne pas redécouvrir :
+- Un build vert ne prouve pas que la page s'affiche (règle 11). La PERFORMANCE ne se
+  mesure JAMAIS sur npm run preview, qui ne compresse rien : 0,8 s de biais sur la
+  chaîne bloquante. Elle se mesure sur https://ft2e-v3.vercel.app, après avoir vérifié
+  par un MARQUEUR DU BUILD — jamais par un délai d'attente — que le déploiement porte
+  bien le commit en cours.
+- ⚠ Chrome refuse toute fenêtre sous 500 px, EN HEADLESS AUSSI. Une capture directe en
+  --window-size=390,900 ne rend pas une page de 390 : elle la compose à ~500 px puis
+  ROGNE l'image à 390. Le résultat montre un texte coupé au bord droit, c'est-à-dire
+  un débordement parfaitement crédible et parfaitement faux — sur une page dont la
+  sonde venait de mesurer scrollWidth == clientWidth. Les largeurs de téléphone se
+  mesurent par une IFRAME servie en même origine, élargie jusqu'à ce que
+  contentDocument.documentElement.clientWidth vaille exactement la largeur visée : la
+  barre de défilement de l'iframe mange 15 px.
+- ⚠ Et cette sonde ne se cale pas sur la seule largeur : le document about:blank
+  INITIAL de l'iframe a exactement la largeur du cadre, donc une boucle qui compare
+  clientWidth à la cible sort au premier tour et mesure le vide. Le symptôme ne
+  ressemble pas à une erreur de synchronisation mais à un défaut de la page —
+  conteneur introuvable, hauteurs nulles, sélecteurs qui ne mordent pas. Attendre
+  onload, ou caler sur la présence d'un élément de la page (querySelector('h1')).
+- browser_resize de Playwright persiste d'un appel à l'autre et fait passer une page
+  saine pour cassée ; et son profil Chrome peut être VERROUILLÉ quand le navigateur du
+  client est ouvert (« Browser is already in use »). Chrome headless lancé à la main
+  avec son propre --user-data-dir n'a ni l'un ni l'autre problème.
+- Tailwind v4 élague les variables de thème qu'aucune classe n'emploie. Une couleur
+  s'écrit en CLASSE littérale (stroke-encre), jamais en var(--color-…) dans un
+  attribut SVG : le var() échappe au scan et la couleur tombe sans un mot du build.
+- Dans un frontmatter .astro, une sonde de typage se fait en REMPLAÇANT un attribut,
+  jamais en en ajoutant un second — un attribut dupliqué ne lève aucune erreur. Et
+  ts(6196) sur une interface Props ne dit pas « code mort », il dit « contrat non
+  consommé ».
+- Le dépôt porte un .gitattributes depuis le 2026-08-16 : ne pas le retirer. Sans lui,
+  un clone neuf sort les 92 pièces des planches en CRLF et l'invariant de régénération
+  se lit comme rompu alors qu'il tient.
+- L'accueil est reçue à 96 en accessibilité, et c'est admis — à condition que la SEULE
+  violation axe soit le color-contrast d'un complément de titre aria-hidden (arbitrage
+  D1). Un 96 dû à autre chose est un blocage. Un 96 non expliqué dans le compte rendu
+  est indistinguable d'une régression.
+- ⚠ Les insécables sont normalisées EN ENTRÉE des outils d'édition : un U+00A0 ou
+  U+202F tapé dans une chaîne à remplacer en ressort en espace ordinaire, et l'édition
+  échoue sans rien dire d'utile — le plan de dette en porte 174 et 57. Pour éditer ces
+  documents, passer par un petit script Python qui lit et écrit l'UTF-8 tel quel, avec
+  un contrôle d'occurrences qui ÉCHOUE plutôt que de remplacer au hasard. ⚠ Ne PAS
+  lancer scripts/injection-typographique.py sur un document entier qui n'a jamais été
+  normalisé : il réécrit des centaines de lignes sans rapport avec le travail en cours
+  (mesuré sur le plan de dette : 173 lignes).
+
+Recette de fin de session : npm run typecheck (0 erreur), npm run build (46 pages),
+contrôle du RENDU de toute page touchée à sa largeur de lecture, et consignation dans
+le plan.
+
+Portée de commit : plusieurs commits nets valent mieux qu'un fourre-tout — les portées
+sont content, docs, fix, design-system selon les points.
+
+Termine par le prompt de lancement de la session suivante, en annexe du plan et
+reproduit intégralement dans ton message final. Cette règle est dans CLAUDE.md parce
+qu'elle a été manquée deux fois.
 ```
