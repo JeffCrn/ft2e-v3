@@ -11,6 +11,19 @@ const year = new Date().getFullYear();
     filet haut 1 px au rang porteur (filet-1), séparateur interne au rang 3. */}
 <footer class="bg-calcaire border-t border-filet-1 mt-auto" role="contentinfo">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 py-10">
+    {/* Cibles tactiles — RGAA : 44 × 44 px pour tout élément actionnable, sans
+        exception d'espacement. Mesuré le 2026-08-16 : les DOUZE liens du pied
+        faisaient 17 px de haut (19,5 pour les mentions), sur les 46 pages. `axe`
+        n'en disait rien — WCAG 2.2 tolère 24 px dès que les cibles sont espacées
+        de 24 — mais la règle FT2E ne connaît pas cette tolérance. C'était un écart
+        règle/code, pas un écart d'outil.
+
+        ⚠ La hauteur est portée par la BOÎTE (`inline-flex items-center
+        min-h-[44px]`), jamais par la recette `.cible-44` : son `::after` est un
+        calque de 44 px centré sur un tracé plus petit, qui se chevaucherait d'une
+        cible à l'autre sur des liens empilés — le clic irait au mauvais lien.
+        Les listes perdent donc leur `space-y-2` : ce sont les boîtes qui
+        espacent désormais, et les additionner donnerait 52 px. */}
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
       <div class="col-span-2 md:col-span-1">
         {/* 60 px et non 52 : équilibre de pied arrêté le 2026-08-15 avec la
@@ -41,10 +54,10 @@ const year = new Date().getFullYear();
 
       <div>
         <p class="mono-label text-pivot mb-4">Plan du site</p>
-        <ul class="space-y-2" role="list">
+        <ul role="list">
           {NAV_LINKS.map((link) => (
             <li>
-              <a href={link.href} class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">
+              <a href={link.href} class="inline-flex items-center min-h-[44px] mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">
                 {link.label}
               </a>
             </li>
@@ -54,13 +67,13 @@ const year = new Date().getFullYear();
 
       <div>
         <p class="mono-label text-pivot mb-4">Contact</p>
-        <address class="not-italic mono-data text-encre space-y-2 leading-relaxed">
+        <address class="not-italic mono-data text-encre leading-relaxed">
           <p>35 Rue Nicolas Denys de Fronsac<br />17000 La Rochelle</p>
           <p>
-            <a href="tel:+33546278593" class="hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a>
+            <a href="tel:+33546278593" class="inline-flex items-center min-h-[44px] hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">05&nbsp;46&nbsp;27&nbsp;85&nbsp;93</a>
           </p>
           <p>
-            <a href="mailto:ft2e@ft2e.fr" class="hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
+            <a href="mailto:ft2e@ft2e.fr" class="inline-flex items-center min-h-[44px] hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">ft2e@ft2e.fr</a>
           </p>
         </address>
         <p class="mono-label text-pivot mt-4">réponse sous 48&nbsp;h ouvrées</p>
@@ -77,9 +90,9 @@ const year = new Date().getFullYear();
     <div class="border-t border-filet-3 mt-10 pt-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
       <p class="mono-data text-pivot">© {year} {SITE_NAME}. Tous droits réservés.</p>
       <nav aria-label="Mentions légales" class="flex flex-wrap gap-5">
-        <a href="/mentions-legales" class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">Mentions légales</a>
-        <a href="/politique-confidentialite" class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">Confidentialité</a>
-        <a href="/accessibilite" class="mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">Accessibilité</a>
+        <a href="/mentions-legales" class="inline-flex items-center min-h-[44px] mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">Mentions légales</a>
+        <a href="/politique-confidentialite" class="inline-flex items-center min-h-[44px] mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">Confidentialité</a>
+        <a href="/accessibilite" class="inline-flex items-center min-h-[44px] mono-data text-encre hover:text-pivot motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">Accessibilité</a>
       </nav>
     </div>
   </div>
