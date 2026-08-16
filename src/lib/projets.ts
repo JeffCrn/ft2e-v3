@@ -116,6 +116,26 @@ export function commune(lieu: string): Commune {
  */
 export const MILLESIME_LIVRAISON_ANNONCE = 2026;
 
+// Le garde-fou de l'échéance (2026-08-16). La constante ci-dessus est datée ;
+// sans ce test, elle deviendrait fausse sur quatorze affaires au 1ᵉʳ janvier
+// 2027 sans que rien ne le signale — ni le build, ni le typecheck, ni le rendu,
+// puisque `2026` reste une chaîne parfaitement valide à afficher.
+//
+// L'échec est DUR, et c'est l'arbitrage : le dépôt fait déjà échouer
+// bruyamment `commune()` et `titreCourt()` plutôt que de servir un repli
+// silencieux. Une échéance qui n'arrête rien n'est pas une échéance.
+if (new Date().getFullYear() > MILLESIME_LIVRAISON_ANNONCE) {
+  throw new Error(
+    `MILLESIME_LIVRAISON_ANNONCE vaut ${MILLESIME_LIVRAISON_ANNONCE}, or nous ` +
+      `sommes en ${new Date().getFullYear()} : les affaires sans réception ` +
+      'prononcée annonceraient une livraison passée. À faire, dans cet ordre — ' +
+      'relever auprès de FT2E les réceptions désormais prononcées, renseigner ' +
+      'leur `annee_livraison` (le schéma l’exige dès que `statut` ne vaut plus ' +
+      '« en cours »), puis porter cette constante au millésime annoncé. ' +
+      'Voir src/lib/projets.ts et la § « Localisation et chronologie » de CLAUDE.md.',
+  );
+}
+
 /**
  * Chronologie publique d'une affaire — l'unique implémentation de la règle
  * (ADR-003). Le numéro d'affaire et le millésime d'ouverture sont une
