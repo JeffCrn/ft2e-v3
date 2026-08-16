@@ -3,8 +3,6 @@ titre: "Lancement du nouveau site FT2E"
 chapo: "Un nouveau site institutionnel pour donner toute leur place aux références techniques et refléter la pluridisciplinarité de l’équipe."
 date: 2026-09-01
 auteur: "L’équipe FT2E"
-image: "/images/actualites/2026-09-lancement.jpg"
-image_alt: "[DÉMO] Vue du nouveau site ft2e.fr sur écran et mobile"
 categories: ["Vie du cabinet"]
 en_avant: true
 demo: true

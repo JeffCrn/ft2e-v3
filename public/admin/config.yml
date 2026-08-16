@@ -265,16 +265,6 @@ collections:
         required: false
         hint: "Prénom Nom — Fonction"
 
-      - label: "Image d'illustration"
-        name: "image"
-        widget: "image"
-        required: false
-
-      - label: "Texte alternatif image"
-        name: "image_alt"
-        widget: "string"
-        required: false
-        hint: "Facultatif seulement en l'absence d'image : dès qu'une illustration est choisie, ce texte devient obligatoire (accessibilité)."
 
       - label: "Catégories"
         name: "categories"

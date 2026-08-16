@@ -206,8 +206,20 @@ const actualites = defineCollection({
     chapo: z.string().min(40).max(280),
     date: z.coerce.date(),
     auteur: z.string().optional(),
-    image: z.string().optional(),
-    image_alt: z.string().optional(),
+    /**
+     * ⚠ Pas de champ image ici, et c'est délibéré (2026-08-16).
+     *
+     * `image` / `image_alt` y étaient déclarés, et Decap les proposait. Aucun
+     * rendu ne les lisait : ni l'index des actualités, ni l'article, ni
+     * l'accueil. L'unique actualité pointait `/images/actualites/2026-09-
+     * lancement.jpg`, fichier qui n'a jamais existé dans un répertoire vide.
+     * Un champ qu'un éditeur peut remplir sans qu'il paraisse nulle part est
+     * pire qu'un champ absent : il promet une illustration que le site ne sert
+     * pas. À rétablir le jour où une actualité s'illustre — avec son rendu, et
+     * par `astro:assets` depuis `src/assets/` (voir la § Photographies
+     * optionnelles de `.claude/rules/astro-conventions.md`), pas depuis
+     * `public/`, qui n'est pas un pipeline.
+     */
     categories: z.array(z.enum([
       'Chantier en cours', 'Livraison', 'Événement', 'Article technique', 'Vie du cabinet',
     ])),
