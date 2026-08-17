@@ -32,6 +32,12 @@ Thumbs.db
 /.playwright-mcp/
 /assets/
 
+# Jeu de captures d'écran du portfolio — engendré par
+# `scripts/captures/portfolio.mjs`, plusieurs centaines de Mo, régénérable en
+# une commande. Le motif est ancré et NOMME LE DOSSIER ENTIER : un `captures/`
+# non ancré élaguerait aussi `scripts/captures/`.
+/livrables/captures-portfolio/
+
 # Bundles de charte graphique reçus du studio (volumineux, non versionnés).
 /branding-v2/
 /branding-v3/

@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check",
-    "lint": "astro check"
+    "lint": "astro check",
+    "captures": "node scripts/captures/portfolio.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -21,6 +22,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "docx": "^9.7.1"
+    "docx": "^9.7.1",
+    "puppeteer-core": "^25.8.0"
   }
 }
