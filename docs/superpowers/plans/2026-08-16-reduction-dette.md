@@ -1238,6 +1238,103 @@ l'écrit, et dérive d'une passe à l'autre. La session part de `8518d49` ;
 
 ---
 
+## S8 — Un blocage qui ne se lève pas depuis le code
+
+> **Session du 2026-08-17.** Elle ne touche pas une ligne de `src/`. Son périmètre a été
+> arrêté avec l’utilisateur en ouverture, et il tient en deux décisions : le déblocage
+> du CMS est **remis à plus tard**, et **rien d’autre n’est engagé** avant la
+> présentation. Ce qui suit est un relevé et une consignation, pas un chantier.
+
+### L’état mesuré à l’ouverture
+
+Trois contrôles, tous rejoués **sur le déploiement** et non sur le disque.
+
+| Contrôle | Instrument | Résultat |
+|---|---|---|
+| Le dépôt est-il poussé ? | `git ls-remote origin master` | `62fb9ff`, **identique** au HEAD local |
+| Le déploiement porte-t-il ce code ? | marqueur de build dans le HTML servi | la baseline du monogramme **à l’apostrophe courbe**, et 46 occurrences d’U+2019 sur `/` |
+| La chaîne d’authentification répond-elle ? | `GET /api/auth?provider=github` | **`500`** — « Configuration OAuth manquante » |
+
+Le deuxième contrôle mérite d’être détaillé, parce que c’est celui qu’on est tenté de
+sauter. `git ls-remote` prouve que GitHub porte la même chose que le disque ; il ne
+prouve **pas** que Vercel a construit depuis. Le marqueur, lui, est un fait du **HTML
+servi** : l’apostrophe courbe de la baseline n’existe dans aucun build antérieur au
+2026-08-16. Les deux contrôles **ensemble** ferment la chaîne disque, dépôt,
+déploiement ; pris séparément, chacun laisse un maillon dans l’ombre. En S6, c’est
+exactement là que le site en ligne s’était arrêté **trois sessions en arrière** sans que
+rien ne le signale.
+
+### Le blocage a changé de nature, pas d’état
+
+`/api/auth` rend toujours `500`, et c’est le même `500` qu’au 2026-08-16. Il ne faut
+pourtant pas lire cette session comme une septième traversée du même défaut.
+
+**Ce qui a changé est le régime du blocage.** Jusqu’au 2026-08-16 il vivait en
+commentaire en tête de `config.yml` : personne ne le voyait, personne n’en répondait,
+et il se reconduisait tout seul. Il est désormais **relevé à l’ouverture de session par
+une commande**, inscrit dans `CLAUDE.md`, dans `docs/22` § 0 et dans le pré-vol du
+script de démonstration — et l’utilisateur l’a **explicitement ajourné**. Un défaut
+ajourné et un défaut non vu ont le même état et deux natures opposées : le premier a
+un propriétaire, le second n’en a pas.
+
+C’est la seule raison pour laquelle cette session ne le traite pas, et ce n’est pas une
+tolérance : **les trois gestes sont hors du dépôt** — la callback sur l’OAuth App
+GitHub, les deux variables sur le projet Vercel, le redéploiement — et aucun outil de
+cette machine ne peut les poser (la CLI Vercel répond « Not authorized », et elle
+n’est même pas installée). **Il n’existe aucune correction de code qui approche du
+problème.**
+
+⚠ **Ne pas ajouter un avertissement de plus.** Le fait est écrit à quatre endroits ;
+il lui manque une exécution, pas une cinquième mention. La seule chose qui se rejoue est
+la commande de contrôle.
+
+### Le dépôt a bougé pendant la session, et pas de mon fait
+
+Le contrôle d’ouverture donnait `62fb9ff` des deux côtés. Trois heures plus tard, au
+moment de committer, `HEAD` valait `1ad72b5` : **six commits** `chore(deploy)`
+s’étaient intercalés et avaient été **poussés** par un hook `Stop`, le travail d’une
+session parallèle sur le même dépôt (un script de captures de portfolio,
+`scripts/captures/portfolio.mjs`, plus `package.json` et `.gitignore`).
+
+**Rien n’est en cause dans ce qu’ils ont écrit.** Le motif ajouté au `.gitignore` est
+**correctement ancré** (`/livrables/captures-portfolio/`) et porte même le
+commentaire qui rappelle le piège. Contrôle joué et non déduit : `git check-ignore`
+ne rend rien sur les quatre répertoires de pages, les quatre paliers de `grid-cols` sont
+bien émis dans le CSS produit, et le site servi est inchangé **à l’octet près** (82 383),
+les commits ne touchant pas `src/`.
+
+Deux conséquences de méthode, qui valent plus que l’incident :
+
+- **« Rien n’est en attente de push » est une mesure périssable, pas un état.**
+  Elle était juste à l’ouverture et fausse trois heures plus tard, sans que rien ne le
+  signale. Un dépôt que se partagent plusieurs sessions, avec un hook qui commite et
+  pousse tout seul, se revérifie **au moment de committer** — pas seulement à
+  l’ouverture.
+- **Un marqueur de build prouve « pas plus ancien que », jamais « exactement ce
+  commit ».** L’apostrophe courbe de la baseline est servie aussi bien par `62fb9ff`
+  que par `1ad72b5` : elle date le déploiement du 2026-08-16 au plus tôt, elle ne
+  l’identifie pas. Pour trancher qu’un déploiement porte **le** commit en cours, il faut
+  un marqueur introduit **par ce commit-là**. C’est une limite du procédé de S7, pas un
+  défaut de son application.
+
+### Ce que la session n’a pas fait, et pourquoi c’est écrit
+
+Aucun des candidats connus n’a été ouvert — insécables du corpus dessiné,
+régénération des vingt planches, marqueurs `[DÉMO]`, LCP au seuil — et les deux
+points ajournés (réception de la crèche de l’Oranger, archétype `planche-chiffree`) sont
+restés fermés.
+
+Une session dont la sortie honnête est « rien à faire » doit tout de même laisser
+une trace, faute de quoi la suivante remesure depuis zéro et croit découvrir. C’est
+l’objet de cette section : **elle vaut par ce qu’elle dispense de refaire.**
+
+**Relevé au passage, non traité** : `livrables/cv-ft2e/CV-FT2E.zip` est non suivi dans
+un répertoire qui n’est pas ignoré. Sans incidence sur le site — `livrables/` ne sert
+pas au build — mais c’est une pièce binaire qui attend une décision : suivre,
+ignorer, ou retirer.
+
+---
+
 ## Ce que cette programmation ne traite pas
 
 Repris du relevé, et **volontairement laissé ouvert** :
@@ -1269,6 +1366,7 @@ Repris du relevé, et **volontairement laissé ouvert** :
 | S5 — suites et dernier point ouvert | ☑ **faite** le 2026-08-16 | `c6f7c53` | ✅ **complète sur son périmètre réel** — les 40 px de vide mort du hero supprimés (`grid-template-rows` passe de `247,375px 0px` à `247,375px`, hero 625,88 → 585,88 px à 390 px, inchangé au centième à 640 et 1 280) ; garde-fou du millésime vérifié sur pièce, rien à faire ; **les trois points suspendus à FT2E laissés intacts, faute de réponse**. Trouvé au passage : l’appui du hero servi à l’échelle **1,72** entre `sm` et `lg` |
 | S6 — plafond du hero et points ajournés | ☑ **faite** le 2026-08-16 | `b0213f5` · `+2` | ✅ **complète sur son périmètre réel** — appui du hero plafonné à sa taille de conception : échelle **1,72 → 0,996** à 1 000 px, 0,996 de 640 à 1 000, inchangée au-delà de `lg` ; hero identique **au centième** à 390 et 1 280 px, donc recette de S5 intacte ; zéro débordement sur neuf largeurs de 360 à 1 440 ; leçon remontée dans `.claude/rules/tailwind-design-tokens.md`. **Les trois points suspendus à FT2E sont ajournés à la présentation du projet**, à la demande de l'utilisateur — les deux déploiements antérieurs en ont ensuite été **sortis définitivement**, il n'en reste que deux |
 | S7 — recette d'ensemble avant présentation | ☑ **faite** le 2026-08-16 | `653ce16` → `e6cc9f0` (6), **poussés** | ✅ **complète sur les quatre volets** — Lighthouse sur 9 routes du déploiement : **perf 100 partout**, CLS 0, TBT 0, a11y 100 sauf `/` 96 et `/societe/` 97 (même et unique violation, exception D1 **portée sur le motif**), SEO 69 = le seul audit `is-crawlable`, donc le verrou ; 211 liens 0 mort ; typographie du texte servi **72 → 0** apostrophes droites et **39 → 0** espaces fautives ; script de démonstration refait (il faisait ouvrir une fiche supprimée) ; `docs/22` prise en main FT2E créée. 🔴 **Trouvé, et bloquant pour la présentation : la connexion au CMS échoue** — `/api/auth` rend `500`, il manque deux variables d'environnement Vercel et la callback GitHub. ⚠ **Incident consigné** : une passe de correction a détruit trois libellés en écrivant ses références arrière comme caractères de contrôle, **build vert** |
+| S8 — blocage hors dépôt et consignation | ☑ **faite** le 2026-08-17 | portée `docs` | ✅ **conforme à son périmètre, qui est un relevé** — dépôt et déploiement alignés, contrôlés **en deux temps** (`git ls-remote origin master` puis marqueur de build dans le HTML servi) ; `/api/auth` rend toujours **`500`**, blocage **ajourné par l’utilisateur**, aucun geste possible depuis le dépôt ; **aucun candidat ouvert**, les deux points ajournés laissés fermés. `src/` intact — **zéro ligne touchée**, donc aucune recette de rendu à jouer. ⚠ **Le dépôt a bougé pendant la session** — six commits `chore(deploy)` d’une session parallèle, poussés par un hook `Stop` ; contrôlés, **sans conséquence** (`.gitignore` ancré, grille émise, site inchangé à l’octet près) |
 
 ---
 
@@ -2092,4 +2190,221 @@ sont content, docs, fix, design-system selon les points.
 Termine par le prompt de lancement de la session suivante, en annexe du plan et
 reproduit intégralement dans ton message final. Cette règle est dans CLAUDE.md parce
 qu'elle a été manquée deux fois.
+````
+
+### Annexe H — session 9, le CMS toujours bloqué et rien de programmé (à coller telle quelle)
+
+````
+Session 9 du chantier FT2E v3 - un blocage hors depot qui n'a toujours pas ete leve, et
+rien de programme par ailleurs.
+
+Contexte. FT2E v3 est un site institutionnel Astro statique, deploye en demonstration
+client sur https://ft2e-v3.vercel.app, indexation verrouillee par triple securite
+(robots.txt Disallow, meta noindex, header X-Robots-Tag). Le chantier de reduction de
+dette est CLOS depuis S6. La session 7 (2026-08-16) a fait la recette d'ensemble avant
+presentation : Lighthouse sur neuf routes du deploiement, relecture editoriale, script
+de demonstration refait, mode d'emploi CMS cree. La session 8 (2026-08-17) N'A RIEN
+CONSTRUIT, et c'est son resultat : elle a mesure l'etat, constate que le seul point
+bloquant est hors du depot, et tout le reste a ete ajourne par l'utilisateur. Lis les
+sections S7 et S8 de docs/superpowers/plans/2026-08-16-reduction-dette.md avant toute
+chose.
+
+0. LE PERIMETRE - la v3, et uniquement la v3. Deux deploiements anterieurs
+   (ft2e-site.vercel.app et ft2e-v2.vercel.app) repondent encore et servent des
+   photographies d'ouvrages. Ils sont HORS PERIMETRE par decision de l'utilisateur du
+   2026-08-16 : « ces projets anterieurs ne sont plus concernes par quoi que ce soit ».
+   Ne pas les mesurer, ne pas les proposer, ne pas les remettre dans un compte rendu.
+   Le fait reste documente au § 6 bis de docs/19-migration-production.md, ou il sert le
+   jour de la mise en production et ce jour-la seulement.
+
+1. LE POINT BLOQUANT, ET IL N'EST PAS DANS LE DEPOT - la connexion au CMS echoue.
+   Remesure le 2026-08-17, inchangee depuis le 2026-08-16 : /admin/ repond 200 et
+   l'interface Decap s'affiche, mais /api/auth?provider=github rend HTTP 500 -
+   « Configuration OAuth manquante : definir OAUTH_GITHUB_CLIENT_ID dans les variables
+   d'environnement Vercel ». Le bouton « Se connecter » est donc mort.
+
+   OUVRIR LA SESSION EN LE DEMANDANT, et commencer par le controle - dix secondes, il
+   doit cesser de rendre 500 :
+   curl -s -o /dev/null -w "%{http_code}\n" "https://ft2e-v3.vercel.app/api/auth?provider=github"
+
+   Si la reponse est encore 500, RIEN DANS LE DEPOT N'EST EN CAUSE et il n'y a rien a
+   corriger la : api/auth.js et api/callback.js sont justes, config.yml pointe le bon
+   depot depuis le 2026-08-10. Ce qui manque vit dans deux consoles d'administration et
+   SEUL L'UTILISATEUR PEUT LE FAIRE (la CLI Vercel repond « Not authorized » sur cette
+   machine, et elle n'est meme pas installee). Les trois gestes, dans l'ordre, avec leur
+   commande de controle, sont dans docs/22-prise-en-main-decap.md § 0 : callback GitHub
+   sur https://ft2e-v3.vercel.app/api/callback, puis OAUTH_GITHUB_CLIENT_ID et
+   OAUTH_GITHUB_CLIENT_SECRET sur le projet Vercel, puis redeploiement.
+
+   ATTENTION - l'utilisateur a AJOURNE ce point le 2026-08-17 en connaissance de cause.
+   Ce n'est donc pas un oubli a rattraper de force : c'est une decision a lui rappeler
+   une fois, en ouverture, puis a respecter. Tant qu'il n'est pas leve, la section C du
+   script de demonstration - que le script appelle lui-meme « le moment cle » - ne peut
+   pas avoir lieu, et la prise en main par FT2E ne peut pas commencer.
+
+   ATTENTION - NE PAS AJOUTER UN AVERTISSEMENT DE PLUS. Le fait est deja ecrit dans
+   CLAUDE.md, dans docs/22 § 0, dans le pre-vol du script de demonstration et en
+   commentaire de public/admin/config.yml. Il a survecu six sessions SOUS FORME DE
+   COMMENTAIRE : un commentaire n'echoue jamais. Ce qui manque est une execution hors
+   depot, pas une cinquieme mention.
+
+2. L'ETAT DU DEPOT A L'OUVERTURE - la session 8 n'a produit qu'une consignation de
+   portee docs. MAIS CE DEPOT EST PARTAGE, et c'est le constat le plus utile de S8 :
+   pendant la session, SIX COMMITS chore(deploy) s'y sont intercales et ont ete POUSSES
+   par un hook Stop, sans aucun rapport avec son travail (un script de captures de
+   portfolio, scripts/captures/portfolio.mjs, plus package.json et .gitignore). Ne
+   jamais supposer que le depot est reste ou on l'a laisse.
+   LE VERIFIER, en dix secondes et EN DEUX TEMPS, parce que ni l'un ni l'autre ne
+   suffit seul :
+   a. git ls-remote origin master - a comparer au HEAD local ; la reference locale
+      (origin/master) peut etre perimee et mentir.
+   b. un MARQUEUR DU BUILD dans le HTML servi - git ls-remote prouve que GitHub a le
+      code, PAS que Vercel a construit depuis. Marqueur disponible, present sur les
+      46 pages depuis le 2026-08-16 - la baseline du monogramme :
+      curl -s https://ft2e-v3.vercel.app/ | grep -c "BUREAU D’ÉTUDES TECHNIQUES"
+      L'apostrophe y est TYPOGRAPHIQUE : retapee droite, le grep rend 0 et fait
+      conclure a tort que le deploiement est perime. La copier, ne pas la retaper.
+   c. ET REVERIFIER AU MOMENT DE COMMITTER, pas seulement a l'ouverture. « Rien n'est
+      en attente de push » est une mesure PERISSABLE sur un depot ou un hook commite
+      tout seul : en S8 elle est devenue fausse en trois heures, en silence.
+   En S6, le site en ligne s'etait arrete TROIS SESSIONS en arriere sans que rien ne le
+   signale. Jamais par un delai d'attente : toujours par un marqueur.
+   ATTENTION SUR LA PORTEE D'UN MARQUEUR : il prouve « pas plus ancien que », JAMAIS
+   « exactement ce commit ». La baseline est servie par tout build posterieur au
+   2026-08-16 et ne distingue pas deux commits de cette periode. Pour trancher qu'un
+   deploiement porte LE commit en cours, il faut un marqueur introduit PAR CE COMMIT -
+   sinon on ne mesure qu'un plancher de date.
+
+3. LES DEUX POINTS AJOURNES - ne PAS les rouvrir sans que l'utilisateur le demande. Ils
+   sont en suspens jusqu'a la presentation du projet, a sa demande explicite du
+   2026-08-16, reconduite le 2026-08-17. Les redire en fin de session, ne rien executer
+   dessus, ne rien fabriquer :
+   a. Reception de la creche de l'Oranger - src/content/projets/creche-oranger-perigny.md
+      annonce une affaire livree sans dire quand : annee_livraison vide, ligne statut
+      absente. Seule des 23 dans ce cas. NE PAS FABRIQUER DE MILLESIME.
+   b. planche-chiffree - seul archetype de la liste fermee du protocole que les 23
+      planches n'ont pas exerce, donc le seul dont rien ne garantit qu'il fonctionne.
+      Le retirer ou le redefinir est un arbitrage editorial.
+   ATTENTION - un seul des deux porte une echeance propre : la reception de la creche
+   est le premier des quatorze releves qu'appelle MILLESIME_LIVRAISON_ANNONCE, et le
+   garde-fou de S4 fera ECHOUER LE BUILD au 1er janvier 2027. Ne jamais y repondre en
+   poussant la constante : cela desarmerait le garde-fou pour s'epargner exactement
+   l'echec qu'on lui demande de produire. La reponse est d'aller relever les receptions
+   aupres de FT2E.
+
+4. CE QUE LA SESSION FAIT D'AUTRE - a definir avec l'utilisateur en ouverture. Rien
+   n'est programme, et la session 8 n'a rien laisse en cours. Les candidats connus,
+   aucun ouvert d'office :
+   - les insecables du CORPUS DESSINE : 12 ecarts de ponctuation subsistent dans les
+     planches SVG. NE PAS lancer scripts/injection-typographique.py dessus : il DEPLACE
+     LE DESSIN, les compositeurs mesurant leurs chaines pour poser la geometrie et
+     U+202F n'ayant pas la chasse d'une espace ordinaire. C'est un chantier avec
+     regeneration des 23 dossiers et controle du rendu, pas une passe de correction ;
+   - la regeneration des vingt planches anterieures a la 21 (point ouvert le plus ancien,
+     docs/superpowers/plans/2026-08-12-chantier-planches-references.md) ;
+   - les 7 marqueurs [DEMO] restants, tous des image_alt de src/content/secteurs/, qui
+     se levent au reportage photographique et pas par une validation ;
+   - le LCP mobile, qui est AU seuil et non sous le seuil. Sept mesures sur les deux
+     pages les plus lourdes : 1 656, 1 658, 1 681, 1 768, 1 806, 1 807 et 1 815 ms pour
+     un budget de 1 800. Elles se repartissent de part et d'autre du seuil SANS qu'aucune
+     page ne soit systematiquement du mauvais cote - c'est l'accueil qui bascule sur un
+     tir, /equipe/ sur un autre. NE PAS traiter cela comme un defaut de /equipe/ : ce
+     serait optimiser la mauvaise page. La fiche projet, elle, descend a 1 068 ms ;
+   - livrables/cv-ft2e/CV-FT2E.zip est non suivi dans un repertoire qui n'est pas ignore
+     (releve en S8, non traite). Sans incidence sur le build. Trois issues : suivre,
+     ignorer, retirer - c'est une decision de l'utilisateur, pas un defaut a corriger.
+
+Pieges verifies au depot, a ne pas redecouvrir :
+- UN BUILD VERT NE PROUVE MEME PAS QUE LE TEXTE EXISTE. En S7, une passe de correction
+  a ecrit ses references arriere \1 \2 \3 comme caracteres de controle U+0001-0003 et
+  a DETRUIT trois libelles de l'accueil et de /societe/ ; npm run build a produit ses
+  46 pages sans broncher. Seul astro check a proteste, et pour une raison indirecte (il
+  serialise l'AST en JSON, qui interdit les caracteres de controle nus). Corollaire :
+  apres toute correction de texte, controler la PRESENCE du texte attendu - une mesure
+  d'absence de defaut ne distingue pas « corrige » de « supprime ».
+- Les insecables sont normalisees EN ENTREE des outils d'edition, ET CE N'EST PAS
+  DETERMINISTE : en S7 le meme script litteral est passe une fois puis a echoue la
+  suivante. Trois consequences. (1) Tout script qui manipule des insecables doit porter
+  une ASSERTION D'AUTO-CONTROLE en tete - c'est elle qui a empeche la seconde ecriture
+  destructrice. (2) Les caracteres sensibles se CONSTRUISENT par chr(0xA0) / chr(0x2019),
+  jamais en litteral et pas davantage en echappement \u00a0 : l'echappement a echoue
+  deux fois avant que ce soit clair, un appel de fonction ne peut pas etre reecrit en
+  route. (3) Un instrument dont les insecables ont ete normalisees signale comme
+  fautives LES PAGES LES MIEUX COMPOSEES, parce que .replace('&nbsp;', NBSP) y injecte
+  des espaces ordinaires - deux releves de S7 l'ont fait, sur des pages legales.
+  La recette qui a marche en S8, et qui est rejouable : ecrire le contenu en clair avec
+  des JETONS pour les seuls caracteres sensibles, les substituer en fin de course par
+  chr(), et asserter que le SOURCE DU SCRIPT n'en contient aucun en litteral - s'il n'y
+  en a pas, il n'y a rien qu'un outil ait pu normaliser en silence. Mesure faite en S8 :
+  les lettres accentuees (e accent aigu, E accent aigu), les guillemets, les points de
+  suspension et les fleches traversent l'ecriture intacts ; seules les insecables sont
+  effacees. Ne pas tokeniser plus que necessaire, le texte en deviendrait illisible.
+- Une ancre de remplacement se COPIE du fichier, elle ne se retape pas : le corpus
+  melange apostrophes droites et typographiques, et une ancre retapee echoue en disant
+  seulement « 0 occurrence ». Le plan de dette porte plus de 200 U+00A0 et 75 U+202F :
+  l'editer passe obligatoirement par un script Python, avec comptage AVANT et APRES et
+  une assertion que chaque ancre est presente EXACTEMENT UNE FOIS.
+- La PERFORMANCE ne se mesure JAMAIS sur npm run preview, qui ne compresse rien :
+  0,8 s de biais sur la chaine bloquante. Elle se mesure sur le deploiement, apres avoir
+  verifie par un MARQUEUR DU BUILD - jamais par un delai d'attente - qu'il porte le
+  commit en cours. Et une seule mesure ne conclut pas : le LCP des deux pages les plus
+  lourdes passe de 1 656 a 1 815 ms d'un tir a l'autre, de part et d'autre du seuil, et
+  ce n'est pas toujours la meme qui bascule.
+- npx lighthouse est un processus Windows et n'accepte PAS les chemins Git-Bash
+  /c/... en --output-path : il n'ecrit rien, en silence, et le script conclut « aucun
+  JSON ». Se placer dans le repertoire et passer un chemin relatif. Meme famille, releve
+  en S8 : /tmp n'existe pas depuis ce shell - ecrire dans le repertoire temporaire de la
+  session, sous peine d'un FileNotFoundError au milieu d'une mesure.
+- Chrome refuse toute fenetre sous 500 px, EN HEADLESS AUSSI : une capture en
+  --window-size=390,900 compose la page a ~500 px puis ROGNE l'image, ce qui montre un
+  debordement credible et faux. Les largeurs de telephone se mesurent par une IFRAME
+  servie en meme origine. Deux biais de cette sonde : caler sur onload ET sur la
+  presence d'un element de la page (le about:blank initial a la largeur du cadre) ; et
+  les media queries comptent la barre de defilement que clientWidth ne compte pas, soit
+  15 px d'ecart - sans consequence sur une echelle, decisif sur une borne.
+- Une sonde en iframe dont le sentinelle de resultat apparait LITTERALEMENT dans son
+  propre <script> se fait extraire son code source au lieu de son resultat. Construire
+  le sentinelle a l'execution.
+- --user-data-dir fait echouer --dump-dom de Chrome EN SILENCE : code de sortie 0 et
+  aucune sortie. Le meme appel sans l'option rend le document complet.
+- Des serveurs astro preview de sessions anterieures tournent encore. Ce n'est pas grave
+  en soi (astro preview sert le DISQUE, donc tous servent le dist/ courant) - le vrai
+  risque est de mesurer SANS AVOIR REBUILD. Apparier le serveur a son dist par un
+  marqueur depose dans dist/ et relu par curl.
+- L'accueil est recue a 96 en accessibilite et /societe/ a 97, et c'est admis :
+  l'exception D1 a ete portee SUR LE MOTIF en S7, et non plus sur la seule page. La
+  condition reste stricte - la SEULE violation doit etre le color-contrast d'un
+  complement de titre aria-hidden. Elle se declenche exactement la ou ce complement est
+  pose sur un APLAT PLEIN, qu'axe sait resoudre ; ailleurs le papier trame l'empeche de
+  conclure et l'outil s'abstient. Un score non explique dans un compte rendu est
+  indistinguable d'une regression.
+- Le SEO plafonne a 69 sur toutes les pages, et l'unique audit en echec est
+  is-crawlable. C'est le verrou d'indexation, pas un defaut. Ne pas le « corriger ».
+- Tailwind v4 elague les variables de theme qu'aucune classe n'emploie. Une couleur
+  s'ecrit en CLASSE litterale (stroke-encre), jamais en var(--color-...) dans un attribut
+  SVG. Et une mesure de mise en page (un plafond, une borne) s'ecrit en CSS de composant
+  plutot qu'en classe arbitraire unique, pour la meme raison.
+- Dans un frontmatter .astro, une sonde de typage se fait en REMPLACANT un attribut,
+  jamais en en ajoutant un second - un attribut duplique ne leve aucune erreur. Et
+  ts(6196) sur une interface Props ne dit pas « code mort », il dit « contrat non
+  consomme ».
+- Le depot porte un .gitattributes depuis le 2026-08-16 : ne pas le retirer. Sans lui,
+  un clone neuf sort les 92 pieces des planches en CRLF et l'invariant de regeneration
+  se lit comme rompu alors qu'il tient.
+- L'enumeration « Etudes d'execution » s'ecrit depuis S7 avec l'APOSTROPHE
+  TYPOGRAPHIQUE, dans src/content.config.ts, public/admin/config.yml et six fiches.
+  L'appariement fiche/secteur se fait en egalite de chaines : une fiche redigee hors
+  Decap avec l'ancienne graphie fait echouer le build. C'est voulu.
+
+Recette de fin de session : npm run typecheck (0 erreur), npm run build (46 pages),
+python scripts/controle-liens-internes.py (0 lien mort), controle du RENDU de toute page
+touchee a sa largeur de lecture, et consignation dans le plan. Si la session ne touche
+pas src/, le dire explicitement plutot que de laisser croire a une recette non jouee.
+
+Portee de commit : plusieurs commits nets valent mieux qu'un fourre-tout - les portees
+sont content, docs, fix, design-system selon les points.
+
+Termine par le prompt de lancement de la session suivante, en annexe du plan et
+reproduit integralement dans ton message final. Cette regle est dans CLAUDE.md parce
+qu'elle a ete manquee deux fois.
 ````
