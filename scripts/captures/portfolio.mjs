@@ -290,14 +290,21 @@ async function preparer(page, url) {
   // était une régularité du journal : la page mesurait exactement la hauteur du
   // viewport là où toutes les autres font des milliers de pixels.
   //
-  // Un transitoire (relevé une fois sur soixante-dix navigations, sur une route
-  // qui répond 200 huit fois de suite au contrôle) se rejoue ; une route morte
-  // ne se rejoue pas. Deux tentatives séparent les deux cas.
-  let reponse = null;
+  // ⚠ ET LE CACHE FAIT PARTIE DU CONTRÔLE. Un outil de capture doit photographier
+  // ce que le serveur sert MAINTENANT, jamais une entrée de cache revalidée : les
+  // cinq paliers visitent la même URL, et sans cette ligne les quatre derniers
+  // reçoivent un **304 Not Modified** (mesuré : 200 puis 304, 304, 304, 304). Le
+  // cache désactivé, chaque palier repart d'un document réellement servi.
+  await page.setCacheEnabled(false);
+
+  // Un 304 reste néanmoins accepté : il signifie « ta copie est à jour », donc le
+  // document EST servi. Seul un vrai code d'échec est fatal — une route absente
+  // de `dist/` ne se rejoue pas, et trois tentatives la distinguent d'un aléa.
+  const servi = (c) => (c >= 200 && c < 300) || c === 304;
   for (let essai = 1; essai <= 3; essai += 1) {
-    reponse = await page.goto(url, { waitUntil: 'networkidle2', timeout: 60_000 });
+    const reponse = await page.goto(url, { waitUntil: 'networkidle2', timeout: 60_000 });
     const code = reponse?.status() ?? 0;
-    if (code === 200) break;
+    if (servi(code)) break;
     if (essai === 3) {
       throw new Error(
         `${url} répond ${code} après 3 tentatives — route absente de \`dist/\`, ` +
@@ -305,6 +312,7 @@ async function preparer(page, url) {
       );
     }
     ennuis.push(`HTTP ${code} à la tentative ${essai}, reprise`);
+    process.stdout.write(`      ⟳ ${url} → HTTP ${code} (tentative ${essai})\n`);
     await new Promise((r) => setTimeout(r, 600));
   }
 
@@ -343,6 +351,23 @@ async function preparer(page, url) {
       ).length,
   );
   if (plansVoiles) ennuis.push(`${plansVoiles} bloc(s) [data-plan] encore transparent(s)`);
+
+  // Sentinelle de page substituée. C'est CE signe, et non un contrôle, qui a
+  // trouvé le premier défaut du script : une page 404 photographiée mesurait
+  // exactement la hauteur du viewport, là où les quatorze pages du site font de
+  // 1 500 à 9 400 px. Le contrôle HTTP couvre la cause connue ; celui-ci couvre
+  // le symptôme, donc aussi les causes qu'on n'a pas prévues — page d'erreur du
+  // serveur, redirection vers une coquille vide, gabarit qui ne rend rien.
+  const { hauteur, viewport } = await page.evaluate(() => ({
+    hauteur: document.documentElement.scrollHeight,
+    viewport: window.innerHeight,
+  }));
+  if (hauteur <= viewport) {
+    ennuis.push(
+      `page de ${hauteur}${NBSP}px pour un viewport de ${viewport}${NBSP}px — ` +
+        'page vide ou substituée ?',
+    );
+  }
 
   return ennuis;
 }
