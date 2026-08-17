@@ -199,6 +199,19 @@ async function demarrerPreview(port) {
   const entree = path.join(RACINE, 'node_modules', 'astro', 'bin', 'astro.mjs');
   if (!existsSync(entree)) throw new Error(`Point d'entrée Astro introuvable : ${entree}`);
 
+  // ⚠ Le port doit être vérifié LIBRE avant de démarrer, et pas seulement
+  // joignable après. `proc.kill()` ne tue que l'enfant direct sous Windows : un
+  // serveur survivant d'une exécution précédente laisse le nouveau `astro
+  // preview` échouer à se lier, tandis que `joignable()` répond vrai — c'est
+  // alors le serveur PÉRIMÉ, servant un autre `dist/`, qu'on photographierait.
+  if (await joignable(`http://localhost:${port}/`)) {
+    throw new Error(
+      `Le port ${port} est déjà occupé. Un serveur survivant servirait un autre ` +
+        `\`dist/\` sans que rien ne le signale. Arrêter ce processus, ou choisir ` +
+        `un autre port avec --port.`,
+    );
+  }
+
   const proc = spawn(process.execPath, [entree, 'preview', '--port', String(port)], {
     cwd: RACINE,
     stdio: ['ignore', 'pipe', 'pipe'],
@@ -239,7 +252,32 @@ async function demarrerPreview(port) {
 async function preparer(page, url) {
   const ennuis = [];
 
-  await page.goto(url, { waitUntil: 'networkidle2', timeout: 60_000 });
+  // ⚠ LE CONTRÔLE LE PLUS IMPORTANT DU SCRIPT, et le dernier venu.
+  //
+  // Pour Puppeteer, une page 404 est une page : elle se charge, ses polices se
+  // résolvent, elle se photographie sans un mot. Aucun contrôle en aval ne peut
+  // la rattraper — le 404 d'Astro n'a ni image ni `[data-plan]`. Le seul signe
+  // était une régularité du journal : la page mesurait exactement la hauteur du
+  // viewport là où toutes les autres font des milliers de pixels.
+  //
+  // Un transitoire (relevé une fois sur soixante-dix navigations, sur une route
+  // qui répond 200 huit fois de suite au contrôle) se rejoue ; une route morte
+  // ne se rejoue pas. Deux tentatives séparent les deux cas.
+  let reponse = null;
+  for (let essai = 1; essai <= 3; essai += 1) {
+    reponse = await page.goto(url, { waitUntil: 'networkidle2', timeout: 60_000 });
+    const code = reponse?.status() ?? 0;
+    if (code === 200) break;
+    if (essai === 3) {
+      throw new Error(
+        `${url} répond ${code} après 3 tentatives — route absente de \`dist/\`, ` +
+          'ou table `ROUTES` périmée. Aucune capture écrite.',
+      );
+    }
+    ennuis.push(`HTTP ${code} à la tentative ${essai}, reprise`);
+    await new Promise((r) => setTimeout(r, 600));
+  }
+
   await page.evaluate(() => document.fonts.ready);
 
   await page.evaluate(async () => {
@@ -468,7 +506,15 @@ async function main() {
   }
 
   const duree = Math.round((Date.now() - debut) / 1000);
-  await ecrireLisezMoi({ routes, manifeste, avertissements, base, chrome, duree });
+
+  // Le LISEZ-MOI décrit le DOSSIER, pas l'exécution. Le réengendrer après un
+  // `--route` le ferait annoncer une seule page pour un dossier qui en contient
+  // quatorze : un inventaire faux est pire qu'un inventaire daté.
+  if (opts.route) {
+    process.stdout.write('\nExécution partielle : LISEZ-MOI.md laissé intact.\n');
+  } else {
+    await ecrireLisezMoi({ routes, manifeste, avertissements, base, chrome, duree });
+  }
 
   process.stdout.write(`\n${manifeste.length} image(s) écrite(s) en ${duree}${NBSP}s\n`);
   process.stdout.write(`Dossier : ${SORTIE}\n`);
