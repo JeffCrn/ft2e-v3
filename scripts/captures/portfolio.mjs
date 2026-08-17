@@ -35,7 +35,7 @@
 
 import { spawn } from 'node:child_process';
 import { execFileSync } from 'node:child_process';
-import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, rm, writeFile } from 'node:fs/promises';
 import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
@@ -504,9 +504,18 @@ async function main() {
   try {
     for (const { dossier, route, titre } of routes) {
       const cible = path.join(SORTIE, dossier);
-      await rm(cible, { recursive: true, force: true });
+
+      // ⚠ On vide les sous-dossiers de leurs PNG, on ne SUPPRIME PAS les
+      // répertoires. Sous Windows, un répertoire ouvert dans l'explorateur de
+      // fichiers est verrouillé et `rmdir` échoue en EBUSY — or le public de ce
+      // dossier est justement quelqu'un qui le parcourt pendant qu'on le
+      // régénère. Un livrable ne doit pas échouer parce qu'on le regarde.
       for (const sous of ['fenetre', 'page-entiere', 'sections']) {
-        await mkdir(path.join(cible, sous), { recursive: true });
+        const rep = path.join(cible, sous);
+        await mkdir(rep, { recursive: true });
+        for (const f of await readdir(rep)) {
+          if (f.endsWith('.png')) await rm(path.join(rep, f), { force: true });
+        }
       }
 
       process.stdout.write(`${dossier}  ${route}\n`);
