@@ -645,7 +645,7 @@ retenues portent trois dessins de planche et trois longueurs de récit différen
 les vingt autres donneraient vingt fois la même démonstration. Pour tout capturer,
 étendre la table \`ROUTES\` du script.
 
-## Comment c'est produit — et les deux pièges que ça évite
+## Comment c'est produit — et les cinq pièges que ça évite
 
 \`\`\`bash
 npm run build                              # obligatoire : le script photographie dist/
@@ -660,7 +660,8 @@ Navigateur employé : \`${chrome}\` — un binaire dédié, **jamais le Chrome d
 imposer une taille de zone de rendu à une fenêtre visible persiste après le contrôle et
 fait passer une page saine pour cassée.
 
-Deux précautions, dont aucune ne se signalerait par une erreur si on l'omettait :
+Cinq précautions. **Aucune ne se signalerait par une erreur si on l'omettait** : c'est la
+raison pour laquelle elles sont écrites ici, et non seulement dans le code.
 
 1. **Passe de défilement avant chaque capture.** \`captureBeyondViewport\` — le mécanisme
    de \`fullPage\` — agrandit la zone photographiée **sans faire défiler la page**.
@@ -672,12 +673,31 @@ Deux précautions, dont aucune ne se signalerait par une erreur si on l'omettait
    de largeur utile — un viewport de 390 rend un document de 375 — là où un téléphone la
    met en surimpression. Sans ce drapeau, tous les paliers étroits seraient 15${NBSP}px plus
    sévères que la réalité.
+3. **Contrôle du code HTTP de chaque navigation.** Pour Puppeteer, une page 404 est une
+   page : elle se charge, ses polices se résolvent, elle se photographie. \`astro preview\`
+   rend un **404 intermittent** — mesuré à environ une navigation sur soixante-dix, sur
+   des routes qui répondent 200 huit fois de suite au contrôle. Le script réessaie trois
+   fois, consigne la reprise en avertissement, et **échoue** si le code persiste.
+4. **Cache de Chrome désactivé.** Les cinq paliers visitent la même URL : sans cette
+   ligne, les quatre derniers reçoivent un **304 Not Modified** (mesuré : 200 puis 304,
+   304, 304, 304). Un outil de capture doit photographier ce que le serveur sert
+   maintenant, jamais une entrée de cache revalidée.
+5. **Arrêt de l'arborescence du serveur, et garde de port.** \`astro preview\` engendre un
+   enfant qui tient la socket ; sous Windows \`proc.kill()\` laisse cet enfant **orphelin
+   sur le port** (relevé : un PID survivant à la fin du script). L'exécution suivante
+   photographierait alors un serveur périmé servant un autre \`dist/\` — le port est donc
+   vérifié **libre avant** de démarrer, et pas seulement joignable après.
 
 À quoi s'ajoute l'émulation de \`prefers-reduced-motion:${NBSP}reduce\` : le site le traduit
 par « tout est posé d'emblée » (\`src/styles/motion.css\`), donc l'état réduit **est** l'état
 final des quatre mouvements, et la capture devient déterministe au lieu de photographier
-une transition en vol. Le script vérifie après coup qu'aucun \`[data-plan]\` n'est resté
-transparent, et le dit s'il en reste.
+une transition en vol.
+
+Et deux contrôles d'aval, qui couvrent les causes non prévues : le script vérifie après
+coup qu'aucun \`[data-plan]\` n'est resté transparent, et **qu'aucune page ne mesure la
+hauteur exacte de son viewport** — c'est ce signe, et non un contrôle, qui a trouvé la
+première page substituée (une 404 photographiée mesurait 844${NBSP}px là où les quatorze
+pages du site en font de 1${NBSP}500 à 9${NBSP}400).
 
 ## Ce que les captures ne montrent pas
 
