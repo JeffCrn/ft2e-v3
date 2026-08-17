@@ -230,8 +230,38 @@ async function demarrerPreview(port) {
     }
     await new Promise((r) => setTimeout(r, 400));
   }
-  proc.kill();
+  arreter(proc);
   throw new Error(`astro preview n'a pas répondu sur ${base} en 45${NBSP}s :\n${journal}`);
+}
+
+/**
+ * Arrête le serveur de prévisualisation ET sa descendance.
+ *
+ * ⚠ `proc.kill()` ne suffit pas, et c'est mesuré : `astro preview` engendre un
+ * enfant qui tient la socket. Tuer le seul processus direct laisse cet enfant
+ * orphelin sur le port (relevé : PID 35856, « processus enfant de PID 17064 »,
+ * survivant à la fin du script). L'exécution suivante trouve alors le port
+ * occupé — c'est ce qui a produit une capture 404 dans un jeu de 228.
+ *
+ * Le contrôle final n'est pas décoratif : si l'arrêt échoue, la garde de port de
+ * `demarrerPreview()` bloquera la prochaine exécution avec un message exact.
+ * L'échec est donc rapporté ici et rattrapé là — jamais avalé.
+ */
+function arreter(proc) {
+  if (!proc || proc.exitCode !== null) return;
+  if (process.platform === 'win32') {
+    try {
+      execFileSync('taskkill', ['/pid', String(proc.pid), '/T', '/F'], { stdio: 'ignore' });
+    } catch {
+      process.stderr.write(`⚠ taskkill a échoué sur le PID ${proc.pid} — vérifier le port.\n`);
+    }
+  } else {
+    try {
+      process.kill(-proc.pid, 'SIGTERM'); // le groupe entier
+    } catch {
+      proc.kill('SIGTERM');
+    }
+  }
 }
 
 // ── Préparation d'une page ───────────────────────────────────────────────────
@@ -502,7 +532,7 @@ async function main() {
     }
   } finally {
     await navigateur.close();
-    serveur?.proc.kill();
+    arreter(serveur?.proc);
   }
 
   const duree = Math.round((Date.now() - debut) / 1000);
