@@ -265,6 +265,7 @@ lui : sa place est ici.
 |---|---|
 | Vision produit | `docs/00-vision-produit.md` |
 | **ÉTAT DE L'ART — point de reprise, remesuré le 2026-08-17** (ce qui est clos, ce qui est ouvert et qui peut le lever, les décisions à ne pas re-litiger) | **`docs/23-etat-de-l-art.md`** |
+| **Chantier du bloc SECTEURS de l'accueil** (ouvert le 2026-08-17, **additif**) — constat mesuré, six arbitrages à rendre avant tout montage, et le prompt de lancement en annexe A. La maquette est `docs/maquettes/ft2e-accueil-bloc-secteurs.html` — ⚠ page **bundlée**, son contenu vit dans un manifeste JSON, la lire brute ne montre que l'enveloppe | **`docs/superpowers/plans/2026-08-17-chantier-bloc-secteurs.md`** |
 | Audit du site précédent | `docs/15-audit-site-actuel.md` |
 | Périmètre du livrable | `docs/17-perimetre-livrable.md` |
 | Écosystème clients FT2E | `docs/16-ecosysteme-clients.md` |
