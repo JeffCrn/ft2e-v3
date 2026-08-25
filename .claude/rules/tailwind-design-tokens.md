@@ -2,7 +2,7 @@
 
 **Scope** : tout fichier utilisant Tailwind (`.astro`, `.tsx`, `.html`).
 
-**Référence** : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026), bundle `branding-v3-bis/` — remplace la révision 2 (`branding-v3/`) et la révision 1 (`branding-v2/`). La 2.1 conserve la structure de la 2 et corrige **huit prescriptions** consignées à son § 16 (registre des amendements) : elles sont reportées ci-dessous sous les repères A1 à A8. **A9 s'y ajoute, qui ne vient pas du PDF** : c'est un amendement d'application, arbitré ici le 2026-08-15 (index des références en grille de cartes). Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
+**Référence** : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026), bundle `branding-v3-bis/` — remplace la révision 2 (`branding-v3/`) et la révision 1 (`branding-v2/`). La 2.1 conserve la structure de la 2 et corrige **huit prescriptions** consignées à son § 16 (registre des amendements) : elles sont reportées ci-dessous sous les repères A1 à A8. **A9 et A10 s'y ajoutent, qui ne viennent pas du PDF** : ce sont des amendements d'application, arbitrés ici (A9 le 2026-08-15, index des références en grille de cartes ; A10 le 2026-08-25, ouverture de tranche de la coupe des secteurs). Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
 
 **Autorité** : en cas de contradiction entre la charte et un support existant, la charte prévaut. En cas de contradiction interne à la charte, **la mesure prévaut sur la règle**.
 
@@ -68,7 +68,7 @@ Sept rangs, pas huit. Chacun se distingue du précédent par **au moins deux par
 - **Substitution** (gabarit imposé, courrier bureautique) : **Arial** en normale ou grasse, sans variation de chasse ; **Consolas** ou **Menlo** pour le mono. Aucune autre, et **aucun serif**.
 - `.type-annexe` (chasse 72) a été **supprimé** : la 2.1 ne compte que sept rangs, et la hiérarchie passe par la graisse et l'opacité.
 
-## Les amendements — huit de la charte (§ 16), un d'application (A9)
+## Les amendements — huit de la charte (§ 16), deux d'application (A9, A10)
 
 | № | Objet | Révision 2 | Révision 2.1 — ce qui s'applique |
 |---|---|---|---|
@@ -123,6 +123,33 @@ qui a présidé ici : **le mot porte, le reste double** — jamais l'inverse, et
 seule couleur (RGAA 3.2). Mesuré au rendu, 22 % contre 16 % d'encre sur un filet de 1 px
 ne se départagent pas à l'œil à travers une gouttière ; en nomenclature les lignes étaient
 contiguës et le filet pouvait porter seul, en grille non.
+
+### A10 — l'ouverture de tranche de la coupe des secteurs (2026-08-25)
+
+**A10 est, comme A9, un amendement d'application** : arbitré le 2026-08-25 à l'ouverture
+du chantier du bloc secteurs de l'accueil, consigné ici parce que ce fichier fait foi sur
+le design. Ne pas le chercher dans le PDF de FT2E.
+
+| № | Objet | Révision 2.1 | Ce qui s'applique |
+|---|---|---|---|
+| A10 | Survol de la coupe des secteurs | « le survol est une bascule de fond, **jamais un déplacement** » | **l'ouverture d'une tranche au survol déplace ses voisines** — accepté pour cette seule pièce, borné |
+
+Le mécanisme même de la coupe (`CoupeSecteurs.astro`, accueil § 04) est que la tranche
+pointée s'ouvre et que ses voisines cèdent la largeur : l'écart n'est pas réductible, il
+a donc été arbitré plutôt que contourné. Il est **borné, et les bornes font partie de
+l'amendement** :
+
+- **une seule propriété bouge** — la largeur des tranches, sur la durée du survol de
+  cellule (300 ms) et la courbe unique ; rien d'autre ne se déplace dans le bloc, la
+  promotion d'un cliché est un fondu d'opacité dans un cadre fixe ;
+- **un délai d'intention de 120 ms** précède l'ouverture au pointeur — mesuré au montage :
+  une traversée vive de la coupe (23 ms par tranche) passe de 6 ouvertures involontaires
+  sans délai à 0 au vol, la seule ouverture restante étant le point d'arrêt du pointeur,
+  qui est une intention ; un arrêt de 200 ms ouvre. Le focus et le toucher ouvrent sans
+  délai ;
+- **la portée est cette pièce, et elle seule.** A10 n'est pas une licence : tout autre
+  déplacement au survol reste interdit, et un composant qui croirait pouvoir s'en
+  réclamer devra passer par le même arbitrage.
 
 **Implantation de la légende et des équerres (§ 13)** — la charte veut la légende **en bas à gauche** *et* les équerres intactes (« repère de tirage, jamais un encadrement ») : les deux ne peuvent pas se disputer l'angle. La géométrie tranche, et elle est **dérivée**, jamais réglée à l'œil. Les jetons `--equerre-cote` (18 px) et `--equerre-retrait` (5 px) donnent `--equerre-gouttiere` (28 px), dont découlent à la fois les quatre équerres de `CoinsCuivre` et la recette `.legende-media` :
 
@@ -181,7 +208,7 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
   2. révélation de plan (`[data-plan]`), 760 ms, 22 px, une fois à l'entrée dans la vue ;
   3. survol de cellule, 300 ms, calcaire → papier ;
   4. survol de bouton, 260 ms, encre → profond.
-- **Survol = bascule de fond** — aucun déplacement, aucun filet qui s'épaissit (**plus de `box-shadow` inset**), aucune ombre qui apparaît. Le filet ne bouge pas.
+- **Survol = bascule de fond** — aucun déplacement, aucun filet qui s'épaissit (**plus de `box-shadow` inset**), aucune ombre qui apparaît. Le filet ne bouge pas. *Unique exception : A10 — l'ouverture de tranche de la coupe des secteurs, bornée au registre des amendements.*
 - **Focus** : cadre `2px solid pivot`, décalé 2 px.
 - Aucun compteur qui s'incrémente, aucun parallax, aucun hover lift ; `prefers-reduced-motion` partout (tout est posé d'emblée).
 
