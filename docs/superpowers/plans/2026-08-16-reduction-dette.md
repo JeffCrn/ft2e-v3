@@ -1,5 +1,16 @@
 # Programmation de la réduction de dette — FT2E v3
 
+> ## ⚠ CHANTIER EN PAUSE depuis le 2026-08-17
+
+> Mis en pause à la demande de l’utilisateur, **au profit d’un chantier additif**.
+> Les sessions **S1 à S8 sont faites et recettées** ; rien n’est en cours.
+>
+> **Ne pas reprendre ce plan sans avoir lu `docs/23-etat-de-l-art.md`**, qui est le
+> point de reprise : il remesure l’état du produit au 2026-08-17, classe les points
+> ouverts par **ce qui les débloque** (hors dépôt, FT2E, arbitrage, dépôt), et liste
+> les décisions à ne pas re-litiger. Le prompt de reprise de la dette elle-même est en
+> **annexe H** ci-dessous.
+
 > **Objet.** Ordonnancer en sessions de travail les constats du **relevé de dette du
 > 2026-08-15** (commit `d3bd8d9`). Le relevé mesure ; ce document exécute.
 >

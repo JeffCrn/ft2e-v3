@@ -264,6 +264,7 @@ lui : sa place est ici.
 | Besoin | Fichier |
 |---|---|
 | Vision produit | `docs/00-vision-produit.md` |
+| **ÉTAT DE L'ART — point de reprise, remesuré le 2026-08-17** (ce qui est clos, ce qui est ouvert et qui peut le lever, les décisions à ne pas re-litiger) | **`docs/23-etat-de-l-art.md`** |
 | Audit du site précédent | `docs/15-audit-site-actuel.md` |
 | Périmètre du livrable | `docs/17-perimetre-livrable.md` |
 | Écosystème clients FT2E | `docs/16-ecosysteme-clients.md` |
@@ -287,7 +288,7 @@ lui : sa place est ici.
 | **Chantier des 23 fiches références réelles** (programme, protocole, suivi) | **`docs/superpowers/plans/2026-08-07-chantier-references-reelles.md`** |
 | **Planches de références — protocole de production** | **`docs/superpowers/specs/2026-08-12-planches-references-protocole.md`** |
 | **Planches de références — bilan de clôture et points ouverts** | **`docs/superpowers/plans/2026-08-12-chantier-planches-references.md`** |
-| **Réduction de dette — programmation en 4 sessions + 2 décisions** (ouverte le 2026-08-16, issue du relevé de dette du 2026-08-15) | **`docs/superpowers/plans/2026-08-16-reduction-dette.md`** |
+| **Réduction de dette — ⚠ EN PAUSE depuis le 2026-08-17**, au profit d'un chantier additif. S1 à S8 faites et recettées ; ce qui reste ouvert est récapitulé dans `docs/23-etat-de-l-art.md`, et le prompt de reprise est en annexe H du plan | **`docs/superpowers/plans/2026-08-16-reduction-dette.md`** |
 | **Remasterisation de `/references` en grille de cartes** (spec — **appliquée le 2026-08-15**, amendement A9) | **`docs/superpowers/specs/2026-08-15-remasterisation-nomenclature-references.md`** |
 | **Responsive des planches sur les fiches** (spec — **appliquée le 2026-08-15** : trois compositions, trois bandes, repli supprimé, agrandissement à deux états) | **`docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`** |
 | Version liminaire (historique de la première livraison) | `docs/14-version-liminaire.md` |
