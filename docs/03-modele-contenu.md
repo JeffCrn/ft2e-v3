@@ -123,11 +123,27 @@ Convention de nom de fichier : `YYYY-MM-titre-court.md`.
 const secteurs = defineCollection({
   type: 'content',
   schema: z.object({
-    titre: z.string(),                          // ex: "Logement"
+    titre: z.string(),                          // ex: "Logements"
     accroche: z.string().min(40).max(240),
-    image: z.string(),
-    image_alt: z.string().min(5),
+    // Le CORPUS photographique du secteur (photographies réelles, © FT2E),
+    // remplace image/image_alt depuis le 2026-08-25. La coupe de l'accueil
+    // en TIRE le film au build (quatre clichés, au moins un par famille
+    // présente) ; le premier cliché du corpus illustre /secteurs/[slug].
+    // La graphie d'`image` est publique (/images/secteurs/<slug>/…) ; les
+    // fichiers vivent dans src/assets/secteurs/, résolus par photoSecteur().
+    cliches: z.array(z.object({
+      image: z.string(),                        // /images/secteurs/<slug>/<fichier>, minuscules
+      legende: z.string().min(3).max(40),       // 18 signes au plus pour une ligne de cartouche
+      alt: z.string().min(10),
+      credit: z.string().min(2),                // « © FT2E »
+      famille: z.string().optional(),           // gros-collectif, petit-collectif, erp…
+    })).min(3),
     ordre: z.number().int(),
+    livrables: z.array(z.string()).optional(),
+    faq: z.array(z.object({
+      question: z.string(),
+      reponse: z.string(),
+    })).optional(),
   }),
 });
 ```
