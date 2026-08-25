@@ -72,3 +72,36 @@ export function photoEquipe(chemin: string): ImageMetadata | null {
  * là que la troisième occurrence pouvait être manquée.
  */
 export const CHEMIN_COLLECTIF = `${PREFIXE_PUBLIC}collectif.jpg`;
+
+/**
+ * Résolution des clichés de secteurs (chantier du bloc secteurs,
+ * 2026-08-25) — même mécanique que l'équipe, à un niveau de dossier
+ * près : un sous-dossier par slug de secteur. Le frontmatter écrit
+ * `/images/secteurs/<slug>/<fichier>`, le glob résout depuis
+ * `src/assets/secteurs/<slug>/`.
+ *
+ * Le repli est SILENCIEUX (null → hachure `duotone-media`), comme pour
+ * l'équipe et conformément au § 09 de la maquette : une fiche éditée
+ * dans Decap peut traverser un état où le fichier n'est pas encore
+ * poussé, et la page doit traverser cet état sans casser.
+ */
+const modulesSecteurs = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/secteurs/*/*.{jpg,jpeg,png,webp,avif}',
+  { eager: true },
+);
+
+const PREFIXE_SECTEURS = '/images/secteurs/';
+
+const secteursParChemin = new Map<string, ImageMetadata>(
+  Object.entries(modulesSecteurs).map(([cle, mod]) => {
+    const segments = cle.split('/');
+    const fichier = segments[segments.length - 1];
+    const slug = segments[segments.length - 2];
+    return [`${PREFIXE_SECTEURS}${slug}/${fichier}`, mod.default];
+  }),
+);
+
+/** Résout le chemin public d'un cliché de secteur ; null si le fichier manque. */
+export function photoSecteur(chemin: string): ImageMetadata | null {
+  return secteursParChemin.get(chemin) ?? null;
+}

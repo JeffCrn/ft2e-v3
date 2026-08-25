@@ -1,9 +1,24 @@
 ---
 titre: "Coordination SSI"
 accroche: "La coordination des systèmes de sécurité incendie portée comme une mission à part entière, en ERP comme en IGH. Plus de vingt ans de pratique."
-image: "/images/secteurs/coordination-ssi.jpg"
-image_alt: "[DÉMO] Essai d’un détecteur de fumée au générateur d’aérosol, mené depuis une nacelle dans le hall d’un bâtiment en service"
 ordre: 6
+cliches:
+  - image: "/images/secteurs/coordination-ssi/01.jpeg"
+    legende: "relayage"
+    alt: "Coffrets de relayage alignés sur trois rangs dans un local technique, conduits orange en attente."
+    credit: "© FT2E"
+  - image: "/images/secteurs/coordination-ssi/02.jpeg"
+    legende: "essai feu"
+    alt: "Essai au feu réel dans une salle d’escalade, foyer calibré posé au centre du tapis de réception."
+    credit: "© FT2E"
+  - image: "/images/secteurs/coordination-ssi/03.jpeg"
+    legende: "centrale ssi"
+    alt: "Centrale de sécurité incendie et tableau répétiteur, plans des zones de détection affichés au mur."
+    credit: "© FT2E"
+  - image: "/images/secteurs/coordination-ssi/04.jpeg"
+    legende: "détection"
+    alt: "Détecteur automatique d’incendie posé au plafond, entre les moellons calcaires d’une salle voûtée."
+    credit: "© FT2E"
 livrables:
   - "Concept SSI et zonage"
   - "CCTP lot SSI"

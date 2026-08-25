@@ -1,9 +1,20 @@
 ---
 titre: "Études d’exécution / BIM"
 accroche: "Les études d’exécution des lots techniques menées pour les entreprises et les promoteurs, sur maquette Revit MEP, jusqu’au DOE numérique."
-image: "/images/secteurs/etudes-execution-bim.jpg"
-image_alt: "[DÉMO] Réseaux techniques posés en sous-face de dalle : gaines de ventilation, antennes cuivre, chemins de câbles et réseau sprinkler"
 ordre: 7
+cliches:
+  - image: "/images/secteurs/etudes-execution-bim/01.jpeg"
+    legende: "chaufferie bois"
+    alt: "Maquette Revit d’une chaufferie bois et de sa sous-station, chaudières, ballons et réseaux modélisés."
+    credit: "© FT2E"
+  - image: "/images/secteurs/etudes-execution-bim/03.jpeg"
+    legende: "chaufferie annotée"
+    alt: "Maquette MEP d’une chaufferie annotée, hauteurs d’axes et diamètres portés sur chaque réseau."
+    credit: "© FT2E"
+  - image: "/images/secteurs/etudes-execution-bim/05.jpeg"
+    legende: "halle en maquette"
+    alt: "Halle industrielle modélisée, réseaux de ventilation en toiture et schéma des équipements de traitement d’air."
+    credit: "© FT2E"
 livrables:
   - "Maquette Revit MEP (CVC, plomberie, électricité)"
   - "Plans d’exécution 2D extraits de la maquette"

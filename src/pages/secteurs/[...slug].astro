@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
-import fs from 'node:fs';
-import path from 'node:path';
+import { Picture } from 'astro:assets';
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
 import CarteProjet from '../../components/blocs/CarteProjet.astro';
@@ -10,6 +9,7 @@ import CtaFinal from '../../components/blocs/CtaFinal.astro';
 import FAQ from '../../components/blocs/FAQ.astro';
 import JsonLd from '../../components/seo/JsonLd.astro';
 import { parAffaireDecroissante } from '../../lib/projets';
+import { photoSecteur } from '../../lib/photos';
 
 export async function getStaticPaths() {
   const secteurs = await getCollection('secteurs');
@@ -20,11 +20,17 @@ export async function getStaticPaths() {
 }
 
 const { secteur } = Astro.props;
-const { titre, accroche, image, image_alt, ordre, livrables, faq } = secteur.data;
+const { titre, accroche, cliches, ordre, livrables, faq } = secteur.data;
 const { Content } = await render(secteur);
 
 const numero = String(ordre).padStart(2, '0');
-const imageExiste = fs.existsSync(path.join(process.cwd(), 'public', image));
+
+/* Le premier cliché du CORPUS illustre la page du secteur — stable d'un
+   build à l'autre, contrairement au film de l'accueil qui est tiré.
+   `photoSecteur` rend null si le fichier n'est pas encore poussé : la
+   page bascule alors sur la hachure, elle ne casse pas. */
+const [cliche] = cliches;
+const photo = photoSecteur(cliche.image);
 
 const projetsSecteur = (await getCollection('projets'))
   .filter((p) => p.data.secteur === titre)
@@ -63,17 +69,20 @@ const projetsSecteur = (await getCollection('projets'))
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-x-16 lg:gap-y-8 items-start">
           <div class="lg:col-start-8 lg:col-span-5 lg:row-start-1">
             <div class="relative">
-              <div class:list={['w-full aspect-[3/2]', imageExiste ? 'duotone-photo' : 'duotone-media']}>
-                {imageExiste && (
-                  <img
-                    src={image}
-                    alt={image_alt}
+              <div class:list={['w-full aspect-[3/2]', photo ? 'duotone-photo' : 'duotone-media']}>
+                {photo && (
+                  <Picture
+                    src={photo}
+                    formats={['avif', 'webp']}
+                    widths={[400, 640, 880]}
+                    sizes="(min-width: 1024px) 440px, calc(100vw - 40px)"
+                    alt={cliche.alt}
                     class="w-full h-full object-cover"
                     loading="lazy"
                   />
                 )}
                 <span class="cartouche-legende legende-media z-10" aria-hidden="true">
-                  secteur {titre.toLowerCase()}
+                  {cliche.legende}
                 </span>
               </div>
               <CoinsCuivre />

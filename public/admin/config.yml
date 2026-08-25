@@ -489,17 +489,47 @@ collections:
         pattern: ['^[\s\S]{40,240}$', '40 à 240 signes']
         hint: "40 à 240 signes, espaces comprises."
 
-      - label: "Image"
-        name: "image"
-        widget: "image"
+      - label: "Clichés du secteur"
+        name: "cliches"
+        widget: "list"
         required: true
-
-      - label: "Texte alternatif image"
-        name: "image_alt"
-        widget: "string"
-        required: true
-        pattern: ['^.{5,}$', 'Cinq caractères au minimum']
-        hint: "Description du visuel, lue par les lecteurs d'écran. Cinq caractères au minimum."
+        min: 3
+        summary: "{{fields.legende}}"
+        hint: "Le corpus photographique du secteur. Le film de l'accueil en tire quatre au hasard à chaque publication, avec au moins un cliché par famille renseignée ; le premier de la liste illustre aussi la page du secteur. Trois entrées au minimum, chacune complète."
+        fields:
+          - label: "Image"
+            name: "image"
+            widget: "image"
+            required: true
+            # Le fichier est déposé dans src/assets/secteurs/<slug>/ mais le
+            # frontmatter enregistre la graphie publique /images/secteurs/<slug>/… :
+            # c'est le rendu qui la résout (photoSecteur, src/lib/photos.ts) —
+            # même mécanique que la photo d'équipe ci-dessus.
+            media_folder: "/src/assets/secteurs/{{slug}}"
+            public_folder: "/images/secteurs/{{slug}}"
+            hint: "Photographie réelle uniquement — ni perspective d'architecte ni plan sur fond de tiers. Le site en tire l'AVIF, le WebP et le srcset au build."
+          - label: "Légende"
+            name: "legende"
+            widget: "string"
+            required: true
+            pattern: ['^.{3,40}$', '3 à 40 signes']
+            hint: "En minuscules, 18 signes au plus pour tenir sur une ligne du cartouche."
+          - label: "Texte alternatif"
+            name: "alt"
+            widget: "string"
+            required: true
+            pattern: ['^.{10,}$', 'Dix caractères au minimum']
+            hint: "Description du cliché, lue par les lecteurs d'écran."
+          - label: "Crédit photographique"
+            name: "credit"
+            widget: "string"
+            required: true
+            default: "© FT2E"
+          - label: "Famille"
+            name: "famille"
+            widget: "string"
+            required: false
+            hint: "Sous-famille du secteur (gros-collectif, petit-collectif, individuel-en-bande, erp, tertiaire). Le tirage du film garantit au moins un cliché par famille présente dans le corpus."
 
       - label: "Ordre"
         name: "ordre"

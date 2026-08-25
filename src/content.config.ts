@@ -233,8 +233,29 @@ const secteurs = defineCollection({
   schema: z.object({
     titre: z.string(),
     accroche: z.string().min(40).max(240),
-    image: z.string(),
-    image_alt: z.string().min(5),
+    /**
+     * Le corpus photographique du secteur — photographies réelles, © FT2E
+     * (arbitrage E du 2026-08-25 ; les [DÉMO] sont tombés avec les images IA).
+     * La liste est le CORPUS, pas le film : la coupe de l'accueil tire au
+     * build quatre clichés au hasard, au moins un par `famille` présente
+     * (arbitrage D). Le premier cliché du corpus sert la page /secteurs/[slug].
+     * La graphie d'`image` est publique (/images/secteurs/<slug>/…) ; les
+     * fichiers vivent dans src/assets/secteurs/ et c'est le rendu qui résout
+     * (photoSecteur, src/lib/photos.ts) — déposer un fichier dans public/
+     * ne l'affichera pas.
+     */
+    cliches: z.array(z.object({
+      image: z.string().regex(
+        /^\/images\/secteurs\/[a-z0-9-]+\/[a-z0-9][a-z0-9.-]*\.(jpg|jpeg|png|webp|avif)$/,
+        { message: 'chemin attendu : /images/secteurs/<slug>/<fichier>, tout en minuscules' },
+      ),
+      /** 18 signes au plus tiennent la ligne du cartouche ; au-delà, deux lignes. */
+      legende: z.string().min(3).max(40),
+      alt: z.string().min(10),
+      credit: z.string().min(2),
+      /** Sous-famille éditoriale (gros-collectif, erp…) — le tirage du film couvre chaque famille présente. */
+      famille: z.string().optional(),
+    })).min(3),
     ordre: z.number().int(),
     /** Segments de type mission (Coordination SSI, EXE/BIM) : livrables et FAQ hérités des anciennes pages expertise. */
     livrables: z.array(z.string()).optional(),
