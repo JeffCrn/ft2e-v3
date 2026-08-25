@@ -1,0 +1,502 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import CoinsCuivre from '../primitives/CoinsCuivre.astro';
+import { photoSecteur } from '../../lib/photos';
+import { filmSecteur } from '../../lib/secteurs';
+
+interface Props {
+  /** Les sept fiches secteurs triées par `ordre`, avec leur numéro composé (« 01 »). */
+  secteurs: Array<CollectionEntry<'secteurs'> & { numero: string }>;
+}
+
+/*
+ * La coupe déployée — bloc 04 de l'accueil (maquette 2b, révision a du
+ * 24.08.2026 ; arbitrages du 2026-08-25 : A10 accepté, cote 552 × 345,
+ * tirage du film au build).
+ *
+ * Sept tranches verticales, une seule ouverte. La tranche ouverte sert un
+ * cliché principal en 16:10 et le film de ses clichés en 3:2 ; pointer une
+ * vignette promeut son cliché par fondu dans un cadre qui ne bouge pas.
+ * Le texte n'est jamais posé sur un cliché : cartouche de réserve (A8) sur
+ * le cadre, ligne de pied sous la coupe.
+ *
+ * Géométrie — une seule, deux régimes de largeur : le cadre porte le
+ * rapport 16:10 et les vignettes le 3:2 ; les hauteurs en découlent.
+ *   ≥ 1200 px : ouverture 552 (cadre 552 × 345, film ≈ 4 × 137 × 92,
+ *               pièce 438), tranches fermées 99 px — cotes de conception.
+ *   768–1199  : tranche fermée 44 px (la cible tactile), ouverture au
+ *               reste ; le film garde ses vignettes, la quatrième amorcée
+ *               (défilement).
+ *   < 768     : la coupe SE REDRESSE en accordéon — sept lignes du dessin
+ *               tabulaire, la ligne ouverte sert son cliché pleine largeur
+ *               et son film au doigt. Aucune tranche verticale.
+ *
+ * Interactions (amendement A10 — le seul écart accepté : l'ouverture
+ * déplace les tranches voisines ; une direction, 300 ms, courbe unique,
+ * rien d'autre ne bouge) :
+ *   – pointage d'une tranche : ouverture après un délai d'intention de
+ *     120 ms (mesuré : il supprime les ouvertures involontaires à la
+ *     traversée de la coupe) ;
+ *   – prise de focus : ouverture immédiate. Quand la face fermée disparaît
+ *     avec l'ouverture (régimes ≥ 768), le focus est reporté sur la
+ *     première vignette du film — sans quoi il serait perdu sur un élément
+ *     masqué. La navigation vers la fiche passe alors par « Lire la
+ *     fiche » en pied ;
+ *   – clic ou toucher d'une tranche fermée : première activation =
+ *     ouverture (le lien ne navigue pas), la tranche déjà ouverte navigue.
+ *     Au clavier, Entrée suit le lien — la tranche est déjà ouverte par le
+ *     focus ;
+ *   – vignette : survol, focus ou clic promeut, sans délai ; flèches
+ *     gauche/droite dans le film (équivalent clavier de la promotion) ;
+ *   – le compteur de pied porte aria-live="polite" — le lecteur d'écran
+ *     annonce le changement de cliché sans bavarder.
+ *
+ * Sans JavaScript : la pièce est rendue avec la tranche 01 ouverte et
+ * chaque tranche fermée est un lien vers sa fiche — le bloc dégrade en
+ * liste de sept liens illustrée d'un cliché. prefers-reduced-motion
+ * supprime les deux transitions (règle globale de motion.css).
+ *
+ * Chargement : tout est en lazy — le bloc est sous la ligne de flottaison
+ * (position 04) et le LCP de l'accueil est au seuil ; c'est l'écart assumé
+ * au § 09 de la maquette, qui voulait les quatre calques du secteur 01
+ * dans le chemin critique. Aucun format servi au-dessus de sa taille :
+ * srcset borné à 1104 px (2 × 552 — les sources de 1200 suffisent).
+ */
+
+const { secteurs } = Astro.props;
+
+const NOMBRES = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six'] as const;
+
+const tranches = secteurs.map((secteur) => {
+  const film = filmSecteur(secteur.data.cliches).map((cliche) => ({
+    ...cliche,
+    photo: photoSecteur(cliche.image),
+  }));
+  return {
+    id: secteur.id,
+    numero: secteur.numero,
+    titre: secteur.data.titre,
+    accroche: secteur.data.accroche,
+    film,
+    total: String(film.length).padStart(2, '0'),
+    enLettres: NOMBRES[film.length] ?? String(film.length),
+  };
+});
+
+const premiere = tranches[0];
+---
+
+<div class="plan-pose coupe" data-plan data-coupe>
+  {/* md:bg-filet-2 et non bg-filet-2 : ce fond ne sert qu'à dessiner les
+      filets d'1 px entre tranches à travers les gap du flex — en accordéon
+      (display:block) il laverait tout le bloc d'encre à 16 %. */}
+  <ul class="coupe-rail md:bg-filet-2" role="list">
+    {tranches.map((t, i) => (
+      <li
+        class:list={[
+          'coupe-tranche max-md:border-b max-md:border-filet-3 max-md:last:border-b-0',
+          i === 0 && 'est-ouverte',
+        ]}
+        data-tranche
+        data-numero={t.numero}
+        data-titre={t.titre}
+        data-accroche={t.accroche}
+        data-href={`/secteurs/${t.id}`}
+        data-calque="0"
+      >
+        <a
+          class="coupe-entete bg-calcaire hover:bg-papier max-md:bg-transparent max-md:hover:bg-calcaire"
+          href={`/secteurs/${t.id}`}
+          data-entete
+          aria-expanded={i === 0 ? 'true' : 'false'}
+          aria-controls={`coupe-contenu-${t.id}`}
+          aria-label={`Secteur ${t.numero} — ${t.titre}, ${t.enLettres} clichés`}
+        >
+          <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{t.numero}</span>
+          <span class="type-intitule text-encre coupe-intitule">{t.titre}</span>
+          <span class="coupe-accroche text-pivot">{t.accroche}</span>
+        </a>
+
+        <div class="coupe-contenu bg-filet-2" id={`coupe-contenu-${t.id}`}>
+          <div class="relative">
+            <div class="coupe-cadre duotone-photo">
+              {t.film.map((c, j) => (
+                c.photo && (
+                  <Picture
+                    src={c.photo}
+                    formats={['avif', 'webp']}
+                    widths={[552, 828, 1104]}
+                    sizes="(min-width: 1200px) 552px, (min-width: 768px) calc(100vw - 318px), calc(100vw - 48px)"
+                    alt={c.alt}
+                    class:list={['coupe-calque', j === 0 && 'est-promu']}
+                    data-calque={j}
+                    aria-hidden={j === 0 ? undefined : 'true'}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )
+              ))}
+              <span class="cartouche-legende legende-media z-10" data-cartouche aria-hidden="true">
+                {t.numero} — {t.film[0].legende}
+              </span>
+            </div>
+            <CoinsCuivre />
+          </div>
+
+          <div class="coupe-film" data-film role="group" aria-label={`Film du secteur ${t.titre}`}>
+            {t.film.map((c, j) => (
+              <button
+                type="button"
+                class="coupe-vignette duotone-photo"
+                data-vignette={j}
+                data-legende={c.legende}
+                aria-pressed={j === 0 ? 'true' : 'false'}
+                aria-label={`Cliché ${j + 1} sur ${t.film.length} — ${c.legende}, ${t.titre}`}
+              >
+                {c.photo && (
+                  <Picture
+                    src={c.photo}
+                    formats={['avif', 'webp']}
+                    widths={[160, 274, 420]}
+                    sizes="(min-width: 1200px) 137px, (min-width: 768px) 30vw, 46vw"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+
+          <div class="coupe-pied-mobile bg-papier">
+            <span class="mono-label font-normal text-pivot" aria-live="polite" data-compteur-mobile>
+              cliché 01 / {t.total} — {t.film[0].legende}
+            </span>
+            <a class="btn-filaire" href={`/secteurs/${t.id}`}>Lire la fiche →</a>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+
+  <div class="coupe-pied border-t border-filet-1">
+    <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true" data-pied-numero>{premiere.numero}</span>
+    <div class="coupe-pied-corps">
+      <span class="type-intitule text-encre coupe-pied-titre" data-pied-titre>{premiere.titre}</span>
+      <span class="coupe-pied-accroche text-pivot" data-pied-accroche>{premiere.accroche}</span>
+      <span class="mono-label font-normal text-pivot coupe-pied-compteur" aria-live="polite" data-pied-compteur>
+        cliché 01 / {premiere.total} — {premiere.film[0].legende}
+      </span>
+    </div>
+    <a class="btn-filaire coupe-pied-lien" href={`/secteurs/${premiere.id}`} data-pied-lien>Lire la fiche →</a>
+  </div>
+</div>
+
+<style is:global>
+  /* Les mesures de la pièce vivent ici, en CSS de composant — jamais en
+     classe Tailwind arbitraire (élagage silencieux) ; les COULEURS vivent
+     dans le balisage, en classes littérales (bg-profond, border-filet-1…).
+     Style global : les calques sont rendus par <Picture>, un style scopé
+     ne franchirait pas la frontière de composant. Tout est préfixé
+     `coupe-`. */
+
+  .coupe { padding: 0; }
+
+  .coupe-rail {
+    display: flex;
+    gap: 1px; /* les six filets verticaux — le fond filet-2 du rail les dessine */
+  }
+
+  .coupe-tranche {
+    position: relative;
+    overflow: hidden;
+    transition: width 300ms var(--ease-blueprint);
+  }
+
+  .coupe-entete {
+    text-decoration: none;
+    transition: background-color 300ms var(--ease-blueprint);
+  }
+
+  .coupe-contenu {
+    display: flex;
+    flex-direction: column;
+    gap: 1px; /* le filet horizontal entre cadre et film */
+  }
+
+  .coupe-cadre {
+    position: relative;
+    aspect-ratio: 16 / 10; /* à 552 px d'ouverture : 345 px — la cote B */
+    overflow: hidden;
+  }
+
+  .coupe-calque {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 300ms var(--ease-blueprint);
+  }
+  .coupe-calque.est-promu { opacity: 1; }
+
+  .coupe-film { display: flex; gap: 1px; }
+
+  .coupe-vignette {
+    flex: 1 1 0;
+    min-width: 0; /* sans lui, l'intrinsèque de l'image force des vignettes inégales */
+    aspect-ratio: 3 / 2; /* à 137 px : 92 px */
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0.42;
+    transition: opacity 300ms var(--ease-blueprint);
+  }
+  .coupe-vignette[aria-pressed='true'] { opacity: 1; }
+
+  /* ── Régimes à tranches (≥ 768) ─────────────────────────────────── */
+  @media (min-width: 768px) {
+    .coupe-tranche { display: flex; }
+
+    .coupe-tranche.est-ouverte .coupe-entete { display: none; }
+    .coupe-tranche:not(.est-ouverte) .coupe-contenu { display: none; }
+
+    .coupe-entete {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      width: 100%;
+      padding: 16px 0;
+    }
+
+    .coupe-intitule {
+      font-size: 15px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .coupe-accroche { display: none; }
+
+    .coupe-contenu { width: 100%; }
+
+    .coupe-pied-mobile { display: none; }
+
+    .coupe-pied {
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      gap: 24px;
+      align-items: baseline;
+      margin-top: 22px;
+      padding: 18px 24px 24px;
+    }
+    .coupe-pied-corps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 660px;
+    }
+    .coupe-pied-titre { font-size: 19px; }
+    .coupe-pied-accroche { font-size: 15px; line-height: 1.55; }
+    .coupe-pied-compteur { padding-top: 2px; }
+  }
+
+  /* Régime de conception, ≥ 1200 : ouverture 552, fermées 99. Le calc
+     retranche six fermées et six filets ; les 2 px de bordure du plan posé
+     sont absorbés par l'ouverture, jamais par les cotes fermées. */
+  @media (min-width: 1200px) {
+    .coupe-tranche { width: 99px; flex: none; }
+    .coupe-tranche.est-ouverte { width: calc(100% - 600px); }
+  }
+
+  /* Régime intermédiaire : la tranche fermée descend à 44 px — la cible
+     tactile minimale — et le film garde ses vignettes, la quatrième
+     amorcée par le défilement. */
+  @media (min-width: 768px) and (max-width: 1199.98px) {
+    .coupe-tranche { width: 44px; flex: none; }
+    .coupe-tranche.est-ouverte { width: calc(100% - 270px); }
+
+    .coupe-film { overflow-x: auto; }
+    .coupe-vignette { flex: 0 0 31%; }
+  }
+
+  /* ── Accordéon (< 768) : la coupe se redresse. Aucune tranche
+     verticale — un intitulé pivoté n'est pas lisible sur téléphone.
+     Les filets entre lignes passent par la bordure des <li> (classes
+     max-md:border-b … du balisage) : en display:block, le gap du rail
+     ne dessine plus rien. ── */
+  @media (max-width: 767.98px) {
+    .coupe-rail { display: block; }
+
+    .coupe-tranche { width: auto; }
+
+    .coupe-entete {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      column-gap: 24px;
+      row-gap: 4px;
+      padding: 16px;
+      align-items: baseline;
+    }
+    .coupe-intitule { font-size: 19px; }
+    .coupe-accroche {
+      grid-column: 2;
+      display: block;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .coupe-tranche:not(.est-ouverte) .coupe-contenu { display: none; }
+
+    .coupe-cadre { width: 100%; }
+
+    .coupe-film {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .coupe-vignette { flex: 0 0 46%; }
+
+    .coupe-pied-mobile {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px 18px;
+    }
+
+    .coupe-pied { display: none; }
+  }
+</style>
+
+<script>
+  /* Règle 9 de CLAUDE.md : initialisation via astro:page-load + guard
+     dataset.bound, sans quoi la pièce devient inerte après la première
+     navigation View Transitions. */
+  function initCoupeSecteurs() {
+    const coupe = document.querySelector<HTMLElement>('[data-coupe]');
+    if (!coupe || coupe.dataset.bound) return;
+    coupe.dataset.bound = '1';
+
+    /* Délai d'intention avant ouverture au pointage — contre les
+       ouvertures involontaires à la traversée de la coupe (maquette § 06,
+       mesuré au montage). Le focus et le toucher ouvrent sans délai. */
+    const DELAI_INTENTION = 120;
+
+    const tranches = [...coupe.querySelectorAll<HTMLElement>('[data-tranche]')];
+    const pied = {
+      numero: coupe.querySelector<HTMLElement>('[data-pied-numero]'),
+      titre: coupe.querySelector<HTMLElement>('[data-pied-titre]'),
+      accroche: coupe.querySelector<HTMLElement>('[data-pied-accroche]'),
+      compteur: coupe.querySelector<HTMLElement>('[data-pied-compteur]'),
+      lien: coupe.querySelector<HTMLAnchorElement>('[data-pied-lien]'),
+    };
+    const pad = (n: number) => String(n).padStart(2, '0');
+    let minuterie: ReturnType<typeof setTimeout> | undefined;
+
+    function compteurDe(li: HTMLElement): string {
+      const vignettes = li.querySelectorAll<HTMLButtonElement>('[data-vignette]');
+      const j = Number(li.dataset.calque ?? '0');
+      const legende = vignettes[j]?.dataset.legende ?? '';
+      return `cliché ${pad(j + 1)} / ${pad(vignettes.length)} — ${legende}`;
+    }
+
+    function majCompteurs(li: HTMLElement) {
+      const texte = compteurDe(li);
+      const mobile = li.querySelector<HTMLElement>('[data-compteur-mobile]');
+      if (mobile) mobile.textContent = texte;
+      if (li.classList.contains('est-ouverte') && pied.compteur) pied.compteur.textContent = texte;
+      const cartouche = li.querySelector<HTMLElement>('[data-cartouche]');
+      const vignettes = li.querySelectorAll<HTMLButtonElement>('[data-vignette]');
+      const j = Number(li.dataset.calque ?? '0');
+      if (cartouche) cartouche.textContent = `${li.dataset.numero} — ${vignettes[j]?.dataset.legende ?? ''}`;
+    }
+
+    function promeut(li: HTMLElement, j: number) {
+      if (Number(li.dataset.calque ?? '0') === j) return;
+      li.dataset.calque = String(j);
+      li.querySelectorAll<HTMLElement>('[data-calque]').forEach((img) => {
+        const actif = Number(img.dataset.calque) === j;
+        img.classList.toggle('est-promu', actif);
+        if (actif) img.removeAttribute('aria-hidden');
+        else img.setAttribute('aria-hidden', 'true');
+      });
+      li.querySelectorAll<HTMLButtonElement>('[data-vignette]').forEach((v, k) => {
+        v.setAttribute('aria-pressed', k === j ? 'true' : 'false');
+      });
+      majCompteurs(li);
+    }
+
+    function ouvre(li: HTMLElement, versFilm = false) {
+      if (!li.classList.contains('est-ouverte')) {
+        tranches.forEach((t) => {
+          const ouverte = t === li;
+          t.classList.toggle('est-ouverte', ouverte);
+          t.querySelector('[data-entete]')?.setAttribute('aria-expanded', ouverte ? 'true' : 'false');
+        });
+        if (pied.numero) pied.numero.textContent = li.dataset.numero ?? '';
+        if (pied.titre) pied.titre.textContent = li.dataset.titre ?? '';
+        if (pied.accroche) pied.accroche.textContent = li.dataset.accroche ?? '';
+        if (pied.lien) pied.lien.href = li.dataset.href ?? '#';
+        if (pied.compteur) pied.compteur.textContent = compteurDe(li);
+      }
+      /* La prise de focus ouvre ; quand la face fermée disparaît (régimes
+         à tranches), le focus est reporté sur la première vignette — sans
+         quoi il serait perdu sur un élément masqué. */
+      if (versFilm) {
+        const entete = li.querySelector<HTMLElement>('[data-entete]');
+        if (entete && getComputedStyle(entete).display === 'none') {
+          li.querySelector<HTMLButtonElement>('[data-vignette]')?.focus();
+        }
+      }
+    }
+
+    tranches.forEach((li) => {
+      const entete = li.querySelector<HTMLAnchorElement>('[data-entete]');
+      if (!entete) return;
+
+      entete.addEventListener('mouseenter', () => {
+        clearTimeout(minuterie);
+        minuterie = setTimeout(() => ouvre(li), DELAI_INTENTION);
+      });
+      entete.addEventListener('mouseleave', () => clearTimeout(minuterie));
+      entete.addEventListener('focusin', () => ouvre(li, true));
+
+      /* Premier toucher d'une tranche fermée : ouverture, pas navigation.
+         La tranche déjà ouverte (ou l'Entrée clavier, qui suit un focus
+         ayant déjà ouvert) navigue vers la fiche. */
+      entete.addEventListener('pointerdown', () => {
+        entete.dataset.etaitOuverte = li.classList.contains('est-ouverte') ? '1' : '';
+      });
+      entete.addEventListener('click', (e) => {
+        if (entete.dataset.etaitOuverte === '') {
+          e.preventDefault();
+          ouvre(li);
+        }
+        delete entete.dataset.etaitOuverte;
+      });
+
+      li.querySelectorAll<HTMLButtonElement>('[data-vignette]').forEach((v, j) => {
+        v.addEventListener('mouseenter', () => promeut(li, j));
+        v.addEventListener('focus', () => promeut(li, j));
+        v.addEventListener('click', () => promeut(li, j));
+      });
+
+      /* L'équivalent clavier de la promotion : flèches dans le film. */
+      li.querySelector<HTMLElement>('[data-film]')?.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        const vignettes = [...li.querySelectorAll<HTMLButtonElement>('[data-vignette]')];
+        const depuis = vignettes.indexOf(document.activeElement as HTMLButtonElement);
+        if (depuis === -1) return;
+        e.preventDefault();
+        const vers = e.key === 'ArrowRight'
+          ? Math.min(depuis + 1, vignettes.length - 1)
+          : Math.max(depuis - 1, 0);
+        vignettes[vers].focus();
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCoupeSecteurs);
+</script>

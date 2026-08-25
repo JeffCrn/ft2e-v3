@@ -6,6 +6,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/blocs/Hero.astro';
 import CarteExpertise from '../components/blocs/CarteExpertise.astro';
 import CarteProjet from '../components/blocs/CarteProjet.astro';
+import CoupeSecteurs from '../components/blocs/CoupeSecteurs.astro';
 import Bouton from '../components/primitives/Bouton.astro';
 import CtaFinal from '../components/blocs/CtaFinal.astro';
 import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
@@ -233,7 +234,10 @@ const partenaires = [
       </section>
     </div>
 
-    {/* ── 04 · Sept secteurs d'activité — liste tabulaire sur la trame ── */}
+    {/* ── 04 · Sept secteurs d'activité — la coupe déployée (maquette 2b,
+        arbitrages du 2026-08-25 : A10, cote 552 × 345, film tiré au build).
+        Titre, puce et complément inchangés ; la liste tabulaire a cédé la
+        place à la pièce, qui porte la seule réserve profonde de la page. ── */}
     <div>
       <section class="py-12 md:py-[76px]">
         <div class="max-w-[1200px] mx-auto px-4 md:px-6">
@@ -246,20 +250,9 @@ const partenaires = [
             <span class="text-clair" aria-hidden="true">/centre ouest atlantique</span>
           </h2>
 
-          <ul class="border-t border-filet-1 mt-8" role="list">
-            {secteurs.map((secteur) => (
-              <li class="border-b border-filet-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-calcaire">
-                <a
-                  href={`/secteurs/${secteur.id}`}
-                  class="grid grid-cols-[44px_1fr] md:grid-cols-[44px_200px_1fr] gap-x-6 gap-y-1 py-4 items-baseline"
-                >
-                  <span class="mono-label font-normal text-pivot tabular-nums" aria-hidden="true">{secteur.numero}</span>
-                  <h3 class="type-intitule text-encre text-[19px]">{secteur.data.titre}</h3>
-                  <p class="col-start-2 md:col-start-3 text-[15px] text-pivot leading-[1.55]">{secteur.data.accroche}</p>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div class="mt-8">
+            <CoupeSecteurs secteurs={secteurs} />
+          </div>
         </div>
       </section>
     </div>
