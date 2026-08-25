@@ -133,6 +133,13 @@ qu'elle n'est pas faite, l'invariant « régénération octet à octet » du cha
 plus, et c'est le seul contrôle qui protégeait les planches publiées d'une dérive
 silencieuse du tronc.
 
+> ✅ **CLOS le 2026-08-16, et revérifié le 2026-08-17.** La passe a été faite par la
+> session S2 du chantier de réduction de dette. Contrôle rejoué de bout en bout le
+> 2026-08-17 : **23 compositeurs sur 23**, **69 SVG sur 69 identiques à l’octet**,
+> arbre de travail inchangé. Le paragraphe ci-dessus est conservé pour l’historique ;
+> **il ne décrit plus l’état du dépôt.** Voir `docs/23-etat-de-l-art.md` § 3.
+
+
 ---
 
 ## Le nettoyage de clôture — 2026-08-15
@@ -319,6 +326,13 @@ régénération n'est donc plus octet à octet : elle élargira leur cartouche. 
 faire d'un bloc, avec un contrôle du rendu à 1152 px de chacune — c'est un point ouvert
 ci-dessous, pas un oubli.
 
+> ✅ **CLOS le 2026-08-16, et revérifié le 2026-08-17.** La passe a été faite par la
+> session S2 du chantier de réduction de dette. Contrôle rejoué de bout en bout le
+> 2026-08-17 : **23 compositeurs sur 23**, **69 SVG sur 69 identiques à l’octet**,
+> arbre de travail inchangé. Le paragraphe ci-dessus est conservé pour l’historique ;
+> **il ne décrit plus l’état du dépôt.** Voir `docs/23-etat-de-l-art.md` § 3.
+
+
 ## Ce que la vingt-deuxième planche a appris — 2026-08-15 : deux hauteurs ne se comparent que dans la même colonne
 
 La planche de Saint-Agnant est la première dont la thèse est un **rapport entre deux
@@ -469,6 +483,13 @@ suppose pas.
   planches publiées avant la 21 n'ont pas été régénérées ; la passe est à faire d'un bloc,
   chaque planche recontrôlée à 1152 px, et l'invariant « régénération octet à octet » se
   rétablit à ce moment-là et pas avant.
+
+> ✅ **CLOS le 2026-08-16, et revérifié le 2026-08-17.** La passe a été faite par la
+> session S2 du chantier de réduction de dette. Contrôle rejoué de bout en bout le
+> 2026-08-17 : **23 compositeurs sur 23**, **69 SVG sur 69 identiques à l’octet**,
+> arbre de travail inchangé. Le paragraphe ci-dessus est conservé pour l’historique ;
+> **il ne décrit plus l’état du dépôt.** Voir `docs/23-etat-de-l-art.md` § 3.
+
 - **La vignette de `/references` est servie à 54 px** (mesuré au navigateur sur les
   vingt-trois lignes de la nomenclature : colonne de tête de 56 px, échelle 0,18, mono de
   9 px rendu à 1,6). Le dessin y est une texture, pas un schéma — il est `aria-hidden` à
