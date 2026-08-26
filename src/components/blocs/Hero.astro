@@ -43,15 +43,16 @@ const titreClasses = isAccueil ? 'type-display text-profond' : 'type-ecran text-
 // à 360 px (boîte 328), les deux largeurs de téléphone qui comptent. Au-delà
 // de 512 px de fenêtre, la pente en vw reprend la main et rien ne change.
 // ⚠ Borne haute de la vedette : 5,1 rem et non les 6,5 rem de la charte
-// (arbitrage FT2E du 2026-08-26). Le titre en trois segments « Études
-// techniques / portées jusqu'à / l'exécution » doit composer en TROIS lignes
-// au bureau ; or « ÉTUDES TECHNIQUES » (chasse 125, capitales) mesure
-// 1 195 px à 86,4 px de corps pour 1 152 px de boîte — mesuré au navigateur,
-// pas estimé : deux tentatives à l'estime (6,5 puis 5,4 rem) ont cassé la
-// ligne. À 81,6 px (5,1 rem) le segment tombe à ~1 128 px et tient avec
-// 24 px de marge dès que le conteneur atteint ses 1 152 px. Sous ~1 090 px
-// de fenêtre la pente en 7.5vw reprend la main : rien ne change pour les
-// téléphones, qui empilent les cinq mots.
+// (arbitrages FT2E du 2026-08-26). La vedette « Des études / techniques /
+// portées jusqu'à / l'exécution » compose en QUATRE lignes explicites au
+// bureau, et sa ligne la plus large — « PORTÉES JUSQU'À », 964 px à
+// 81,6 px de corps — ferait 1 228 px à 104 px pour 1 152 px de boîte.
+// Toutes les cotes sont MESURÉES au navigateur, pas estimées : deux
+// tentatives à l'estime (6,5 puis 5,4 rem) ont cassé des lignes, et
+// « Des études techniques » sur une seule ligne exigerait 4,25 rem —
+// refusé, la vedette rejoindrait le corps des titres de pages internes.
+// Sous ~1 090 px de fenêtre la pente en 7.5vw reprend la main : rien ne
+// change pour les téléphones, qui empilent les mots.
 const tailleTitre = isAccueil
   ? 'font-size: clamp(2.4rem, 7.5vw, 5.1rem);'
   : 'font-size: clamp(2.25rem, 5vw, 3.875rem);';
