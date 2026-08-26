@@ -161,10 +161,10 @@ désigne comme l'élément LCP (audit `lcp-discovery-insight`, dont la checklist
 
 ### Ce qui reste du motif `fs`
 
-`src/pages/index.astro` emploie encore `fs.readFileSync` pour **inliner l'appui de la
-fiche vedette** : ce n'est pas le même motif — l'appui est produit par le protocole des
-planches et sa présence est garantie par `verser.py`, il n'y a donc rien à tester.
-De même `src/lib/projets.ts` (`titreCourt`) lit un `planche.json` garanti présent, et
+`src/pages/index.astro` n'emploie plus `fs.readFileSync` depuis le 2026-08-26 : le
+hero est passé de l'appui inliné de la fiche vedette à un cliché du corpus secteurs,
+résolu par le glob de `photos.ts` comme toute photographie. Reste
+`src/lib/projets.ts` (`titreCourt`), qui lit un `planche.json` garanti présent, et
 **échoue bruyamment** en son absence. La différence avec les photographies est le
 statut de l'absence : une planche manquante signale une rupture, une photographie
 manquante est un état de production normal jusqu'au reportage.

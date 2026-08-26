@@ -105,7 +105,10 @@ const tailleSousVedette = 'font-size: clamp(1.125rem, 2.2vw, 1.75rem);';
 
     {hasAppui && (
       <div class:list={['mt-8 md:mt-10', hasMedia && 'grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start']}>
-        <div class:list={[hasMedia && 'lg:col-span-6']}>
+        {/* Partage 5/7 depuis le 2026-08-26 (le média est un cliché, plus un
+            plan) : l'accroche est bornée à 46ch et tient dans 5 colonnes sans
+            réflow, l'image gagne la largeur — ~660 px à pleine planche. */}
+        <div class:list={[hasMedia && 'lg:col-span-5']}>
           {sousTitre && (
             <p class="text-base leading-[1.6] text-pivot max-w-[46ch] text-pretty">
               {sousTitre}
@@ -135,16 +138,16 @@ const tailleSousVedette = 'font-size: clamp(1.125rem, 2.2vw, 1.75rem);';
           )}
         </div>
 
-        {/* ⚠ Le masquage du média sous `sm` se fait sur l'ENVELOPPE, jamais sur
-            le contenu du slot. Porté par les enfants, il laissait ici une
-            cellule de grille de hauteur 0 — invisible, mais le `row-gap` du
-            conteneur se payait quand même : 40 px de vide mort mesurés à 390 px
-            le 2026-08-16 (`grid-template-rows: 247.375px 0px`, `row-gap: 40px`).
-            Le MOTIF du masquage appartient à l'appelant qui compose le média
-            (`src/pages/index.astro`) et y est écrit ; le point de rupture, lui,
-            n'existe qu'ici — deux exemplaires et c'est la copie qui dérive. */}
+        {/* Le média s'affiche à TOUTES les largeurs depuis le 2026-08-26 :
+            le masquage sous `sm` protégeait le mono de l'appui SVG (6,2 px
+            à 390), et l'appui a été remplacé par une photographie, qui n'a
+            pas de plancher de lisibilité. Si un dessin revient un jour dans
+            ce slot, le masquage se remet sur cette ENVELOPPE, jamais sur le
+            contenu du slot — porté par les enfants, il laissait une cellule
+            de grille de hauteur 0 dont le `row-gap` se payait quand même
+            (40 px de vide mort mesurés à 390 px le 2026-08-16). */}
         {hasMedia && (
-          <div class="hidden sm:block lg:col-span-6">
+          <div class="lg:col-span-7">
             <slot name="media" />
           </div>
         )}

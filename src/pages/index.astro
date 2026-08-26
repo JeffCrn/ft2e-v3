@@ -1,7 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import fs from 'node:fs';
-import path from 'node:path';
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/blocs/Hero.astro';
 import CarteExpertise from '../components/blocs/CarteExpertise.astro';
@@ -12,31 +10,38 @@ import CtaFinal from '../components/blocs/CtaFinal.astro';
 import CoinsCuivre from '../components/primitives/CoinsCuivre.astro';
 import { Picture } from 'astro:assets';
 import { CHIFFRES_CLES } from '../lib/constants';
-import { commune, parAffaireDecroissante, libelleChronologie, titreCourt } from '../lib/projets';
-import { photoEquipe, CHEMIN_COLLECTIF } from '../lib/photos';
+import { parAffaireDecroissante } from '../lib/projets';
+import { photoEquipe, photoSecteur, CHEMIN_COLLECTIF } from '../lib/photos';
 
 // Média du hero (écran 1 de la charte) : l'image recule dans sa colonne,
-// elle ne porte pas le titre. Projet mis en avant le plus récent.
-const enAvant = (await getCollection('projets'))
-  .filter((p) => p.data.en_avant)
-  .sort(parAffaireDecroissante)[0];
-
-// Fiche vedette illustrée par une planche : le hero rend son APPUI —
-// une troisième composition (552 x 368), dessinée pour la largeur où la
-// colonne média la lit. La planche entière (1200) y tomberait à l'échelle
-// 0,48 (mono de 10 px rendu à 4,8) et la vignette (300) grossie à 1,84
-// épaissirait tous les filets de 1 px : ni l'une ni l'autre ne se transpose —
-// même arithmétique que le protocole des planches, appliquée au hero.
-// L'appui est inliné (il hérite des polices et des jetons de la page) et ne
-// reçoit NI duotone NI équerres : ces deux traitements appartiennent à la
-// photographie, et l'appui porte déjà son surtitre.
-const heroAppui = enAvant?.data.planche
-  ? fs.readFileSync(
-      path.join(process.cwd(), 'public',
-        enAvant.data.planche.replace(/planche\.svg$/, 'appui.svg')),
-      'utf-8',
-    )
-  : null;
+// elle ne porte pas le titre. Depuis le 2026-08-26 (arbitrage FT2E), ce
+// n'est plus l'appui de la fiche vedette mais un CLICHÉ du corpus
+// secteurs — l'appui, un plan posé blanc sur le papier tramé, « flottait
+// dans le vide » : l'accueil demande une image qui raconte d'emblée.
+// Le cliché reçoit les trois signatures média de la charte (duotone,
+// équerres, cartouche de réserve) et lie vers la grille des références
+// filtrée — le motif exact du cliché principal de la coupe.
+//
+// Le chemin est le POINTEUR ; la légende, l'alt et le crédit restent à
+// leur unique source, la collection secteurs — si le cliché quitte le
+// corpus, le build échoue bruyamment plutôt que de servir une légende
+// orpheline. (L'ancien mécanisme — appui.svg inliné par fs.readFileSync,
+// plafonné à 552 px par `.appui-hero` — est parti avec l'appui : une
+// photographie n'a ni filets de 1 px à protéger, ni plancher de mono.)
+const CHEMIN_CLICHE_HERO = '/images/secteurs/logements/gros-collectif-02.jpeg';
+const SECTEUR_CLICHE_HERO = 'Logements';
+const secteurHero = (await getCollection('secteurs'))
+  .find((s) => s.data.titre === SECTEUR_CLICHE_HERO);
+const clicheHero = secteurHero?.data.cliches.find((c) => c.image === CHEMIN_CLICHE_HERO);
+if (!clicheHero) {
+  throw new Error(
+    `Cliché du hero introuvable dans le corpus du secteur ${SECTEUR_CLICHE_HERO} : ${CHEMIN_CLICHE_HERO}`,
+  );
+}
+const photoHero = photoSecteur(clicheHero.image);
+if (!photoHero) {
+  throw new Error(`Fichier du cliché du hero absent du glob : ${clicheHero.image}`);
+}
 
 // Relevé clair : étiquette mono + chiffre, un seul chiffre plein par
 // relevé — celui que la page défend (17 ans, depuis 2008).
@@ -65,10 +70,11 @@ const secteurs = (await getCollection('secteurs'))
   }));
 
 // Grille « références récentes » : les fiches mises en avant d'abord, puis
-// les plus récentes pour atteindre quatre. `en_avant` reste maître du média
-// du hero (ci-dessus) mais ne conditionne plus le remplissage de la grille :
-// une grille à quatre colonnes ne doit pas tomber à une carte parce que le
-// corpus mis en avant a maigri.
+// les plus récentes pour atteindre quatre. Depuis le 2026-08-26 c'est le
+// SEUL métier d'`en_avant` — le média du hero est un cliché du corpus
+// secteurs, plus l'appui de la fiche vedette. Le champ reste au schéma et
+// à Decap : il ordonne cette sélection, et une grille à quatre colonnes ne
+// doit pas tomber à une carte parce que le corpus mis en avant a maigri.
 const tousProjets = (await getCollection('projets')).sort(parAffaireDecroissante);
 const projetsRecents = [
   ...tousProjets.filter((p) => p.data.en_avant),
@@ -106,34 +112,38 @@ const partenaires = [
     ctaPrincipal={{ label: 'Parlons de votre projet', href: '/contact' }}
     ctaSecondaire={{ label: 'Nos références', href: '/references' }}
   >
-    {enAvant && (
-      <Fragment slot="media">
-        {/* Sous `sm`, la vedette n'affiche AUCUN média — ni l'appui, ni la
-            carte-lien qui le légende. L'appui est composé pour ~552 px : à
-            390 px il tomberait à l'échelle 0,62, mono de 10 rendu à 6,2 px,
-            sous le plancher de lisibilité de 6,5. Et la carte-lien SUIT son
-            visuel : seule sous le titre, sans le dessin qu'elle légende, elle
-            se lit comme un bloc orphelin (retour FT2E du 2026-08-14). La
-            vedette reste accessible par « Nos références ».
-            ⚠ Le `hidden sm:block` n'est PAS écrit ici mais sur l'enveloppe du
-            slot, dans `Hero.astro` : porté par ces deux enfants, il laissait
-            une cellule de grille vide et 40 px de vide mort sous la vedette
-            (mesuré à 390 px le 2026-08-16).
-            La branche photographique a été retirée à la clôture du chantier des
-            planches : `planche` est obligatoire au schéma, donc une fiche
-            vedette a toujours son appui. */}
-        <div class="appui-hero">
-          <div class="plan-pose" set:html={heroAppui} />
-          <a
-            href={`/references/${enAvant.id}`}
-            class="flex flex-wrap items-baseline gap-x-4 gap-y-1 border border-filet-1 bg-calcaire px-4 py-3 transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-papier"
-          >
-            <span class="type-intitule text-encre text-[15px]">{titreCourt(enAvant)}</span>
-            <span class="mono-data text-[11px] text-pivot ml-auto">{commune(enAvant.data.lieu).libelle} · {libelleChronologie(enAvant)}</span>
-          </a>
-        </div>
-      </Fragment>
-    )}
+    <Fragment slot="media">
+      {/* Le cliché du hero (2026-08-26) — voir le commentaire du frontmatter.
+          Les trois signatures média de la charte : duotone 197°, équerres
+          voile, cartouche de réserve (A8). Le lien reprend le motif du
+          cliché principal de la coupe : même destination filtrée, même
+          aria-label — et le cartouche est `aria-hidden` comme dans la coupe,
+          le lien portant déjà son nom. `eager` + `fetchpriority="high"` :
+          l'image est au-dessus de la ligne de flottaison, c'est le candidat
+          LCP de la page (le LCP accueil est AU seuil — se mesure sur le
+          déploiement, plusieurs tirs, après tout changement ici).
+          Le média s'affiche à TOUTES les largeurs : le masquage sous `sm`
+          protégeait le mono de l'appui (6,2 px à 390), une photographie n'a
+          pas de plancher de lisibilité. */}
+      <a
+        class="relative block aspect-[3/2] duotone-photo"
+        href={`/references/?secteur=${encodeURIComponent(SECTEUR_CLICHE_HERO)}`}
+        aria-label={`Voir les références du secteur ${SECTEUR_CLICHE_HERO}`}
+      >
+        <Picture
+          src={photoHero}
+          formats={['avif', 'webp']}
+          widths={[480, 760, 1080, 1520]}
+          sizes="(min-width: 1280px) 660px, (min-width: 1024px) 55vw, calc(100vw - 48px)"
+          alt={clicheHero.alt}
+          class="w-full h-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <CoinsCuivre taille={18} />
+        <span class="cartouche-legende legende-media z-10" aria-hidden="true">{clicheHero.legende}</span>
+      </a>
+    </Fragment>
   </Hero>
 
   <div class="relative">
@@ -357,49 +367,3 @@ const partenaires = [
 
   <CtaFinal />
 </PageLayout>
-
-<style>
-  /* Le plafond de l'appui du hero — 552 px, sa taille de conception, jamais
-     au-delà. C'est la règle générale du site (`.claude/rules/tailwind-design-
-     tokens.md` § Composants signature : « aucune échelle au-dessus de 1,00 »),
-     et l'accueil en était le dernier manquement : mesuré le 2026-08-16, l'appui
-     était servi à 606 px à 640 de fenêtre (échelle 1,10), 718 à 768 (1,30) et
-     950 à 1 000 (1,72). Au-delà de 1 024 la grille à 12 colonnes reprenait la
-     main et le ramenait sous 1,00 toute seule — le défaut vivait entre `sm` et
-     `lg`, c'est-à-dire là où le dessin occupe la pleine largeur.
-
-     Ce n'était pas un défaut de LISIBILITÉ : le mono de 10 px y montait à 17.
-     C'est un ÉPAISSISSEMENT DES FILETS de 1 px, le défaut fondateur que le
-     chantier des planches a chassé partout ailleurs en plafonnant chaque dessin
-     à sa taille de conception (vignette à 300 dans `CarteProjet`, trois bandes
-     dans `PlancheReference`). Un filet rendu à 1,72 px n'est plus un filet de
-     rang : la hiérarchie de la charte passe par l'opacité, elle suppose donc
-     que l'épaisseur, elle, ne bouge pas.
-
-     Trois choix, écrits ici parce qu'aucun ne va de soi :
-
-     1. LE PLAFOND ENVELOPPE LE DESSIN ET SA CARTE-LIEN, pas le seul dessin. Les
-        deux font aujourd'hui la même largeur au pixel (952 / 952 à 1 000 px) et
-        la carte légende le dessin : plafonner le plan seul laisserait une
-        légende de 950 px sous un dessin de 552.
-     2. LA MESURE EST ÉCRITE ICI, chez qui compose le média, et non dans
-        `Hero.astro` : le nombre de colonnes est un réglage de page, la taille
-        de conception est une propriété du dessin. Même partage que pour la
-        vignette de `CarteProjet`, dont le plafond vit dans le composant du
-        dessin et jamais dans la grille appelante.
-     3. EN CSS DE COMPOSANT et non en `max-w-[552px]` : une classe en valeur
-        arbitraire, unique dans le dépôt, disparaîtrait sans un mot du build le
-        jour où l'élagage de sources de Tailwind v4 cesserait de voir ce fichier
-        (incident du 2026-08-08). C'est déjà la raison pour laquelle
-        `PlancheReference` écrit ses trois bornes en `@media`.
-
-     Aucune borne de largeur n'est nécessaire : sous `sm` le média entier est
-     masqué par `Hero.astro`, au-dessus de `lg` la colonne mesure 462 à 550 px
-     et la règle est sans effet. Elle ne mord qu'entre les deux. La marge de
-     papier qui reste autour du dessin est légitime — un plan a des marges, et
-     le fond de l'appui est le papier du plan qui le porte. */
-  .appui-hero {
-    max-width: 552px;
-    margin-inline: auto;
-  }
-</style>
