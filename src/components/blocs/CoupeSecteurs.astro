@@ -119,7 +119,16 @@ const premiere = tranches[0];
         </a>
 
         <div class="coupe-contenu bg-filet-2" id={`coupe-contenu-${t.id}`}>
-          <div class="relative">
+          {/* Le cliché principal est un LIEN vers la grille des références
+              filtrée sur le secteur (2026-08-26) : la vignette du film
+              choisit, le grand cliché emmène. Un secteur sans fiche publiée
+              (Monotechnique) passe le même paramètre — la page l'ignore et
+              sert la grille complète. */}
+          <a
+            class="coupe-lien-galerie relative block"
+            href={`/references/?secteur=${encodeURIComponent(t.titre)}`}
+            aria-label={`Voir les références du secteur ${t.titre}`}
+          >
             <div class="coupe-cadre duotone-photo">
               {t.film.map((c, j) => (
                 c.photo && (
@@ -142,7 +151,7 @@ const premiere = tranches[0];
               </span>
             </div>
             <CoinsCuivre />
-          </div>
+          </a>
 
           <div class="coupe-film" data-film role="group" aria-label={`Film du secteur ${t.titre}`}>
             {t.film.map((c, j) => (
@@ -173,7 +182,7 @@ const premiere = tranches[0];
             <span class="mono-label font-normal text-pivot" aria-live="polite" data-compteur-mobile>
               cliché 01 / {t.total} — {t.film[0].legende}
             </span>
-            <a class="btn-filaire" href={`/secteurs/${t.id}`}>Lire la fiche →</a>
+            <a class="btn-filaire" href={`/secteurs/${t.id}`}>En savoir plus →</a>
           </div>
         </div>
       </li>
@@ -189,7 +198,7 @@ const premiere = tranches[0];
         cliché 01 / {premiere.total} — {premiere.film[0].legende}
       </span>
     </div>
-    <a class="btn-filaire coupe-pied-lien" href={`/secteurs/${premiere.id}`} data-pied-lien>Lire la fiche →</a>
+    <a class="btn-filaire coupe-pied-lien" href={`/secteurs/${premiere.id}`} data-pied-lien>En savoir plus →</a>
   </div>
 </div>
 
