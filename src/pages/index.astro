@@ -124,7 +124,12 @@ const partenaires = [
           déploiement, plusieurs tirs, après tout changement ici).
           Le média s'affiche à TOUTES les largeurs : le masquage sous `sm`
           protégeait le mono de l'appui (6,2 px à 390), une photographie n'a
-          pas de plancher de lisibilité. */}
+          pas de plancher de lisibilité.
+          ⚠ Sous 640 px, `sizes` déclare 290px pour PLAFONNER LA DENSITÉ à
+          ~2× (variant 760w, ~30 Ko) : le slot réel fait ~364 px CSS mais à
+          DPR 2,6 le navigateur tirait le 1080w (52 Ko), et ces octets sur la
+          chaîne critique coûtaient ~130 ms d'un LCP déjà au seuil (2 005,
+          1 894, 1 823 ms mesurés au déploiement le 2026-08-26). */}
       <a
         class="relative block aspect-[3/2] duotone-photo"
         href={`/references/?secteur=${encodeURIComponent(SECTEUR_CLICHE_HERO)}`}
@@ -134,7 +139,7 @@ const partenaires = [
           src={photoHero}
           formats={['avif', 'webp']}
           widths={[480, 760, 1080, 1520]}
-          sizes="(min-width: 1280px) 660px, (min-width: 1024px) 55vw, calc(100vw - 48px)"
+          sizes="(min-width: 1280px) 660px, (min-width: 1024px) 55vw, (min-width: 640px) calc(100vw - 48px), 290px"
           alt={clicheHero.alt}
           class="w-full h-full object-cover"
           loading="eager"
