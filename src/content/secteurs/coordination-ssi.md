@@ -1,7 +1,7 @@
 ---
 titre: "Coordination SSI"
 accroche: "La coordination des systèmes de sécurité incendie portée comme une mission à part entière, en ERP comme en IGH. Plus de vingt ans de pratique."
-ordre: 6
+ordre: 5
 cliches:
   - image: "/images/secteurs/coordination-ssi/01.jpeg"
     legende: "EHPAD Aliénor d’Aquitaine"

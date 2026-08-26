@@ -10,9 +10,9 @@ import { glob } from 'astro/loaders';
 const SECTEURS = [
   'Logements',
   'Tertiaire / ERP',
-  'Industriel et commercial',
+  'Industriel',
   'Patrimoine',
-  'Monotechnique',
+  'Monotechnique — Audit et EXE',
   'Coordination SSI',
   "Études d’exécution / BIM",
 ] as const;

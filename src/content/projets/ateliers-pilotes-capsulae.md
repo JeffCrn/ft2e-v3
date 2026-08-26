@@ -1,7 +1,7 @@
 ---
 titre: "Ateliers de micro-production agroalimentaire Capsulae à La Rochelle"
 ouvrage: "Ateliers Capsulae"
-secteur: Industriel et commercial
+secteur: Industriel
 typologie: Neuf
 moa: "Capsulae — groupe Innov’ia (La Rochelle)"
 architecte: "SD Architectes (Rochefort), mandataire du groupement de maîtrise d’œuvre"

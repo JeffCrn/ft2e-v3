@@ -1,7 +1,7 @@
 ---
 titre: "Faisabilité d’une récupération de chaleur fatale, atelier Dufour Yachts"
 ouvrage: "Atelier Dufour Yachts"
-secteur: Industriel et commercial
+secteur: Industriel
 typologie: Neuf
 moa: "Dufour Yachts"
 architecte: "Agence Sébastien Pellereau (La Rochelle)"

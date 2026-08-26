@@ -1,5 +1,5 @@
 ---
-titre: "Industriel et commercial"
+titre: "Industriel"
 accroche: "Ateliers, entrepôts, process industriels, surfaces commerciales. Ventilation spécifique, conformité ICPE, puissances électriques élevées."
 ordre: 3
 cliches:

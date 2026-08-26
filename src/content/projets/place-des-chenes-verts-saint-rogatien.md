@@ -1,7 +1,7 @@
 ---
 titre: "Commerces et services de la place des Chênes Verts, Saint-Rogatien"
 ouvrage: "Place des Chênes Verts"
-secteur: Industriel et commercial
+secteur: Tertiaire / ERP
 typologie: Neuf
 moa: "Commune de Saint-Rogatien — mandataire SPL Charente-Maritime Développement"
 architecte: "Agence Blanchard Tétaud Blanchet (La Rochelle)"
@@ -18,7 +18,7 @@ planche: "/images/projets/place-des-chenes-verts-saint-rogatien/planche.svg"
 en_avant: false
 ---
 
-À Saint-Rogatien, dans l’agglomération de La Rochelle, la commune a démoli les vestiaires de son stade pour construire à leur emplacement un bâtiment de cinq locaux — une agence postale, [trois cellules commerciales](/secteurs/industriel-commercial), le club-house du terrain de football — et requalifier la place des Chênes Verts qui les dessert. FT2E porte les fluides au sein de la maîtrise d’œuvre réunie autour de l’agence Blanchard Tétaud Blanchet : [l’étude thermique réglementaire](/expertises/etude-thermique) et deux lots techniques, [électricité](/expertises/electricite) et chauffage-ventilation-plomberie. Le chantier, ouvert le 18 novembre 2024, entrait en phase de mise en service fin 2025.
+À Saint-Rogatien, dans l’agglomération de La Rochelle, la commune a démoli les vestiaires de son stade pour construire à leur emplacement un bâtiment de cinq locaux — une agence postale, [trois cellules commerciales](/secteurs/tertiaire-erp), le club-house du terrain de football — et requalifier la place des Chênes Verts qui les dessert. FT2E porte les fluides au sein de la maîtrise d’œuvre réunie autour de l’agence Blanchard Tétaud Blanchet : [l’étude thermique réglementaire](/expertises/etude-thermique) et deux lots techniques, [électricité](/expertises/electricite) et chauffage-ventilation-plomberie. Le chantier, ouvert le 18 novembre 2024, entrait en phase de mise en service fin 2025.
 
 ## L’enjeu : recomposer un morceau de centre-bourg
 

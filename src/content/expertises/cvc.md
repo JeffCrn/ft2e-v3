@@ -10,7 +10,7 @@ livrables:
   - "Analyse des offres entreprises"
   - "Visa des plans d’exécution"
   - "Suivi de chantier et réception"
-typique_pour: [Logements, "Tertiaire / ERP", "Industriel et commercial", Monotechnique]
+typique_pour: [Logements, "Tertiaire / ERP", Industriel, "Monotechnique — Audit et EXE"]
 missions_liees: [CVC]
 faq:
   - question: "PAC air-eau ou géothermie : comment choisir ?"
