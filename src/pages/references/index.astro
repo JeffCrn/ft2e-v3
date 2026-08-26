@@ -99,9 +99,13 @@ const secteurs = (await getCollection('secteurs'))
           pleinement lisible aux deux états : le voilage ne s'applique qu'à
           l'image, jamais au mot (contraste RGAA). « Tous » n'a pas de cliché :
           sa case reprend la hachure neutre du système. */}
-      <div class="border-t border-b border-filet-2 py-4 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:items-start">
-        <p class="mono-label font-normal text-pivot pt-1">secteur</p>
-        <div class="filtres-vignettes" role="group" aria-label="Filtres par secteur">
+      {/* Le libellé SURPLOMBE la rangée (2026-08-26) : posé en colonne à
+          gauche, il lui volait 100 px et les huit vignettes cassaient en
+          deux lignes. En pleine largeur, 8 × 130 px + 7 × 16 px de
+          gouttière = 1 152 px — la largeur utile exacte du conteneur. */}
+      <div class="border-t border-b border-filet-2 py-4">
+        <p class="mono-label font-normal text-pivot">secteur</p>
+        <div class="filtres-vignettes mt-3" role="group" aria-label="Filtres par secteur">
           <button class="filtre-vignette" data-filtre="tous" aria-pressed="true">
             <span class="filtre-vignette-image duotone-media"></span>
             <span class="mono-label font-normal text-pivot filtre-vignette-legende">
@@ -194,7 +198,7 @@ const secteurs = (await getCollection('secteurs'))
     display: flex;
     flex-direction: column;
     gap: 6px;
-    width: 132px;
+    width: 130px; /* 8 × 130 + 7 × 16 de gouttière = 1 152, la largeur utile */
     padding: 0;
     border: 0;
     background: none;
