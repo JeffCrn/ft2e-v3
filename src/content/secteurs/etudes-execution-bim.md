@@ -4,15 +4,15 @@ accroche: "Les études d’exécution des lots techniques menées pour les entre
 ordre: 7
 cliches:
   - image: "/images/secteurs/etudes-execution-bim/01.jpeg"
-    legende: "chaufferie bois"
+    legende: "Chaufferie bois CDAIR"
     alt: "Maquette Revit d’une chaufferie bois et de sa sous-station, chaudières, ballons et réseaux modélisés."
     credit: "© FT2E"
   - image: "/images/secteurs/etudes-execution-bim/03.jpeg"
-    legende: "chaufferie annotée"
+    legende: "Chaufferie Fountaine Pajot"
     alt: "Maquette MEP d’une chaufferie annotée, hauteurs d’axes et diamètres portés sur chaque réseau."
     credit: "© FT2E"
   - image: "/images/secteurs/etudes-execution-bim/05.jpeg"
-    legende: "halle en maquette"
+    legende: "Carl Zeiss Meditec, Périgny"
     alt: "Halle industrielle modélisée, réseaux de ventilation en toiture et schéma des équipements de traitement d’air."
     credit: "© FT2E"
 livrables:

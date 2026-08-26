@@ -4,19 +4,19 @@ accroche: "La coordination des systèmes de sécurité incendie portée comme un
 ordre: 6
 cliches:
   - image: "/images/secteurs/coordination-ssi/01.jpeg"
-    legende: "relayage"
+    legende: "EHPAD Aliénor d’Aquitaine"
     alt: "Coffrets de relayage alignés sur trois rangs dans un local technique, conduits orange en attente."
     credit: "© FT2E"
   - image: "/images/secteurs/coordination-ssi/02.jpeg"
-    legende: "essai feu"
+    legende: "Cabanes urbaines"
     alt: "Essai au feu réel dans une salle d’escalade, foyer calibré posé au centre du tapis de réception."
     credit: "© FT2E"
   - image: "/images/secteurs/coordination-ssi/03.jpeg"
-    legende: "centrale ssi"
+    legende: "EHPAD Aliénor d’Aquitaine"
     alt: "Centrale de sécurité incendie et tableau répétiteur, plans des zones de détection affichés au mur."
     credit: "© FT2E"
   - image: "/images/secteurs/coordination-ssi/04.jpeg"
-    legende: "détection"
+    legende: "Abbaye de Sablonceaux"
     alt: "Détecteur automatique d’incendie posé au plafond, entre les moellons calcaires d’une salle voûtée."
     credit: "© FT2E"
 livrables:

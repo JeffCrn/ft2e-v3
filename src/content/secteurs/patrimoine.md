@@ -4,11 +4,11 @@ accroche: "Monuments historiques, bâtiments classés, réhabilitations patrimon
 ordre: 4
 cliches:
   - image: "/images/secteurs/patrimoine/01.jpeg"
-    legende: "abbaye"
+    legende: "Abbaye de Sablonceaux"
     alt: "Abbatiale et logis d’une abbaye de Saintonge, clocher octogonal dominant les toits de tuiles."
     credit: "© FT2E"
   - image: "/images/secteurs/patrimoine/02.jpeg"
-    legende: "clocher gothique"
+    legende: "Église Saint-Sauveur"
     alt: "Tour gothique et portail classique à colonnes d’une église de centre ancien, sur son parvis."
     credit: "© FT2E"
   - image: "/images/secteurs/patrimoine/03.jpeg"
@@ -16,11 +16,11 @@ cliches:
     alt: "Passerelle métallique au platelage acier, garde-corps câblés et main courante bois, sur un canal."
     credit: "© FT2E"
   - image: "/images/secteurs/patrimoine/04.jpeg"
-    legende: "salon oriental"
+    legende: "Maison de Pierre Loti"
     alt: "Salon aux céramiques orientales d’une demeure d’écrivain, tentures et chandeliers sous les vitraux."
     credit: "© FT2E"
   - image: "/images/secteurs/patrimoine/06.jpeg"
-    legende: "église romane"
+    legende: "Abbatiale de Guîtres"
     alt: "Église romane à large pignon, portail à voussures et clocher d’ardoise, sur une place de village."
     credit: "© FT2E"
 livrables:
