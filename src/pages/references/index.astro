@@ -99,72 +99,90 @@ const secteurs = (await getCollection('secteurs'))
           pleinement lisible aux deux états : le voilage ne s'applique qu'à
           l'image, jamais au mot (contraste RGAA). « Tous » n'a pas de cliché :
           sa case reprend la hachure neutre du système. */}
-      {/* Le libellé SURPLOMBE la rangée (2026-08-26) : posé en colonne à
-          gauche, il lui volait 100 px et les huit vignettes cassaient en
-          deux lignes. En pleine largeur, 8 × 130 px + 7 × 16 px de
-          gouttière = 1 152 px — la largeur utile exacte du conteneur. */}
-      <div class="border-t border-b border-filet-2 py-4">
-        <p class="mono-label font-normal text-pivot">secteur</p>
-        <div class="filtres-vignettes mt-3" role="group" aria-label="Filtres par secteur">
-          <button class="filtre-vignette" data-filtre="tous" aria-pressed="true">
-            <span class="filtre-vignette-image duotone-media"></span>
-            <span class="mono-label font-normal text-pivot filtre-vignette-legende">
-              Tous ({projets.length})
-            </span>
-          </button>
-          {secteurs.map((s) => {
-            const count = projets.filter((p) => p.data.secteur === s.titre).length;
-            // Un secteur sans référence publiée n'apparaît pas au filtre :
-            // une puce « (0) » qui ne filtre rien annonce une lacune au lieu
-            // de servir. Le secteur reste présent sur /secteurs et à l'accueil.
-            if (count === 0) return null;
-            return (
-              <button class="filtre-vignette" data-filtre={s.titre} aria-pressed="false">
-                <span class:list={['filtre-vignette-image', s.photo ? 'duotone-photo' : 'duotone-media']}>
-                  {s.photo && (
-                    <Picture
-                      src={s.photo}
-                      formats={['avif', 'webp']}
-                      widths={[132, 264]}
-                      sizes="132px"
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  )}
-                </span>
-                <span class="mono-label font-normal text-pivot filtre-vignette-legende">
-                  {s.titre} ({count})
-                </span>
-              </button>
-            );
-          })}
+      {/* RAIL À GAUCHE au-dessus de 1 024 px (2026-08-26, seconde demande
+          FT2E du jour — les vignettes de 130 px de la rangée étaient jugées
+          trop petites) : les filtres occupent la première colonne du rythme
+          de la grille (216 px à 1 024, 276 px dès 1 248 — les mesures sont
+          dans le <style> du composant), et la grille de cartes passe à trois
+          colonnes à leur droite. L'image double (276 px contre 130), la
+          distinction contrôle/contenu devient SPATIALE, et la légende passe
+          au cartouche de réserve (A8) posé sur l'image. En dessous, le rail
+          se replie en rangée au-dessus de la grille — 4 par ligne sur
+          tablette, 2 par ligne sur téléphone — et la légende revient SOUS
+          l'image : sous ~200 px de tuile, « Industriel et commercial (5) »
+          en cartouche replierait sur trois lignes et couvrirait le cliché.
+          Les deux légendes coexistent dans le balisage (`lg:hidden` /
+          `hidden lg:inline-flex`) : `display: none` retire l'autre de
+          l'arbre d'accessibilité, le bouton n'est jamais nommé deux fois. */}
+      <div class="agencement-references">
+        <div class="border-t border-b border-filet-2 py-4">
+          <p class="mono-label font-normal text-pivot">secteur</p>
+          <div class="filtres-vignettes mt-3" role="group" aria-label="Filtres par secteur">
+            <button class="filtre-vignette" data-filtre="tous" aria-pressed="true">
+              <span class="filtre-vignette-image duotone-media"></span>
+              <span class="mono-label font-normal text-pivot filtre-vignette-legende lg:hidden">
+                Tous ({projets.length})
+              </span>
+              <span class="cartouche-legende legende-media hidden lg:inline-flex">
+                Tous ({projets.length})
+              </span>
+            </button>
+            {secteurs.map((s) => {
+              const count = projets.filter((p) => p.data.secteur === s.titre).length;
+              // Un secteur sans référence publiée n'apparaît pas au filtre :
+              // une puce « (0) » qui ne filtre rien annonce une lacune au lieu
+              // de servir. Le secteur reste présent sur /secteurs et à l'accueil.
+              if (count === 0) return null;
+              return (
+                <button class="filtre-vignette" data-filtre={s.titre} aria-pressed="false">
+                  <span class:list={['filtre-vignette-image', s.photo ? 'duotone-photo' : 'duotone-media']}>
+                    {s.photo && (
+                      <Picture
+                        src={s.photo}
+                        formats={['avif', 'webp']}
+                        widths={[168, 276, 552]}
+                        sizes="(min-width: 1248px) 276px, (min-width: 1024px) 216px, (min-width: 768px) 23vw, 46vw"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
+                  </span>
+                  <span class="mono-label font-normal text-pivot filtre-vignette-legende lg:hidden">
+                    {s.titre} ({count})
+                  </span>
+                  <span class="cartouche-legende legende-media hidden lg:inline-flex">
+                    {s.titre} ({count})
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
+
+        {/* Trois colonnes à côté du rail — et la vignette reste servie à sa
+            taille de conception : dès 1 248 px de fenêtre, la boîte fait
+            1 152 px, le rail en prend 276 plus 16 de gouttière, et
+            (860 − 2 × 16) / 3 = 276 px de carte — la mesure même qui
+            justifiait les quatre colonnes d'avant le rail (A9 : jamais de
+            sur-échelle du dessin). À 1 024, rail de 216 : cartes de 232 à
+            237 px selon l'ascenseur (mesuré au navigateur, ascenseur
+            déduit), mono de la vignette rendu à 7,0–7,1 px — au-dessus du
+            plancher de 6,5.
+
+            `md:grid-cols-3` s'écarte des quatre autres grilles du site, qui
+            vont de deux à quatre colonnes. Elles n'affichent que trois ou
+            quatre cartes, où une colonne de plus laisse des orphelines ; ici
+            il y en a vingt-trois, et la bande 768–1023 px passerait sans elle
+            de 288 à 366 px de vignette. Mesuré, pas supposé. */}
+        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 grille-references" data-grille>
+          {projets.map((projet) => (
+            <li data-secteur={projet.data.secteur} class="min-w-0">
+              <CarteProjet projet={projet} />
+            </li>
+          ))}
+        </ul>
       </div>
-
-      {/* Quatre colonnes au palier large, et la gouttière vaut 16 px : la
-          vignette est composée dans un repère de 300 × 200 pour être LUE entre
-          274 et 296 px, et (1 152 − 3 × 16) / 4 = 276 px de carte, moins les
-          2 px de filet du plan posé, donnent exactement 274.
-
-          Il n'y a PAS de palier `xl` : le conteneur plafonne à 1 200 px, donc
-          il vaut 1 152 dès 1 248 px de fenêtre. Une grille de trois colonnes à
-          `lg` servirait 373 px à 1 279 — la sur-échelle de 1,24 qui épaissit
-          tous les filets de 1 px du dessin de 24 %, le défaut même que le
-          protocole des planches documente.
-
-          `md:grid-cols-3` s'écarte des quatre autres grilles du site, qui vont
-          de deux à quatre colonnes. Elles n'affichent que trois ou quatre
-          cartes, où une colonne de plus laisse des orphelines ; ici il y en a
-          vingt-trois, et la bande 768–1023 px passerait sans elle de 288 à
-          366 px de vignette. Mesuré, pas supposé. */}
-      <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8" data-grille>
-        {projets.map((projet) => (
-          <li data-secteur={projet.data.secteur} class="min-w-0">
-            <CarteProjet projet={projet} />
-          </li>
-        ))}
-      </ul>
 
       {/* Ni légende de rang, ni compteur — deux mentions retirées le même jour
           pour la même raison : elles avaient cessé de dire quelque chose.
@@ -185,9 +203,30 @@ const secteurs = (await getCollection('secteurs'))
 </PageLayout>
 
 <style>
-  /* Les mesures des vignettes de filtre — les couleurs restent en classes
-     dans le balisage. Le voilage (opacité 0,42, la valeur du film de
-     l'accueil) porte sur la BOÎTE d'image, jamais sur la légende. */
+  /* Les mesures du rail et des vignettes de filtre — les couleurs restent en
+     classes dans le balisage. Le voilage (opacité 0,42, la valeur du film de
+     l'accueil) porte sur la BOÎTE d'image, jamais sur la légende : c'est
+     aussi pourquoi le cartouche du rail est un FRÈRE de la boîte d'image
+     (absolu par `.legende-media`), jamais son enfant — enfant, il hériterait
+     du voilage.
+
+     Trois paliers, écrits ici et non en variantes Tailwind arbitraires
+     (règle 11 — l'élagage de sources ferait tomber une valeur arbitraire
+     sans un mot du build) :
+     — < 768 px : rangée au-dessus de la grille, 2 tuiles par ligne
+       ((358 − 16) / 2 = 171 px à 390 de fenêtre, contre 130 avant) ;
+     — 768 à 1 023 px : rangée, 4 tuiles par ligne (168 à 232 px) ;
+     — ≥ 1 024 px : RAIL en première colonne — 216 px à 1 024 (les trois
+       cartes font alors 237 px, mono de vignette à 7,1 px ≥ plancher 6,5),
+       276 px dès 1 248 (cartes à 276 px, la taille de conception). */
+  .agencement-references {
+    /* < 1024 : flux normal — filtres au-dessus, grille en dessous. */
+  }
+
+  .grille-references {
+    margin-top: 2rem;
+  }
+
   .filtres-vignettes {
     display: flex;
     flex-wrap: wrap;
@@ -195,15 +234,45 @@ const secteurs = (await getCollection('secteurs'))
   }
 
   .filtre-vignette {
+    position: relative; /* ancre du cartouche `.legende-media` au rail */
     display: flex;
     flex-direction: column;
     gap: 6px;
-    width: 130px; /* 8 × 130 + 7 × 16 de gouttière = 1 152, la largeur utile */
+    width: calc((100% - 16px) / 2);
     padding: 0;
     border: 0;
     background: none;
     cursor: pointer;
     text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .filtre-vignette {
+      width: calc((100% - 48px) / 4);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .agencement-references {
+      display: grid;
+      grid-template-columns: 216px minmax(0, 1fr);
+      column-gap: 16px;
+      align-items: start;
+    }
+
+    .grille-references {
+      margin-top: 0;
+    }
+
+    .filtre-vignette {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 1248px) {
+    .agencement-references {
+      grid-template-columns: 276px minmax(0, 1fr);
+    }
   }
 
   .filtre-vignette-image {
