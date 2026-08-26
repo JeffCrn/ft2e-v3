@@ -97,8 +97,8 @@ const secteurs = (await getCollection('secteurs'))
           au focus et à l'état actif (aria-pressed) — une bascule d'opacité,
           aucun déplacement. La légende porte le sens (nom + décompte) et reste
           pleinement lisible aux deux états : le voilage ne s'applique qu'à
-          l'image, jamais au mot (contraste RGAA). « Tous » n'a pas de cliché :
-          sa case reprend la hachure neutre du système. */}
+          l'image, jamais au mot (contraste RGAA). La tuile « Tous » porte une
+          mini-coupe des sept secteurs — voir son commentaire dédié. */}
       {/* RAIL À GAUCHE au-dessus de 1 024 px (2026-08-26, seconde demande
           FT2E du jour — les vignettes de 130 px de la rangée étaient jugées
           trop petites) : les filtres occupent la première colonne du rythme
@@ -118,8 +118,32 @@ const secteurs = (await getCollection('secteurs'))
         <div class="border-t border-b border-filet-2 py-4">
           <p class="mono-label font-normal text-pivot">secteur</p>
           <div class="filtres-vignettes mt-3" role="group" aria-label="Filtres par secteur">
+            {/* « Tous » n'a pas de cliché propre : sa tuile est une MINI-COUPE
+                des sept secteurs (2026-08-26) — sept tranches verticales, une
+                par secteur, chacune portant son premier cliché en duotone. Le
+                motif est celui de la coupe de l'accueil : « tous » se dessine
+                comme toutes les tranches. Le monogramme a été écarté — voilé
+                à 0,42 il se lirait comme un tampon délavé, et la charte le
+                protège des emplois d'ornement. Les SEPT secteurs y figurent,
+                y compris ceux sans fiche publiée : la tuile représente le
+                bureau, pas le filtre. */}
             <button class="filtre-vignette" data-filtre="tous" aria-pressed="true">
-              <span class="filtre-vignette-image duotone-media"></span>
+              <span class="filtre-vignette-image filtre-vignette-coupe">
+                {secteurs.filter((s) => s.photo).map((s) => (
+                  <span class="duotone-photo tranche-tous">
+                    <Picture
+                      src={s.photo!}
+                      formats={['avif', 'webp']}
+                      widths={[80, 160]}
+                      sizes="40px"
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-full object-cover"
+                    />
+                  </span>
+                ))}
+              </span>
               <span class="mono-label font-normal text-pivot filtre-vignette-legende lg:hidden">
                 Tous ({projets.length})
               </span>
@@ -293,6 +317,19 @@ const secteurs = (await getCollection('secteurs'))
   .filtre-vignette-legende {
     font-size: 10px;
     line-height: 1.35;
+  }
+
+  /* La mini-coupe de « Tous » : sept tranches égales, jointes par un filet
+     de papier de 2 px — l'écho, en réduction, de la coupe de l'accueil. */
+  .filtre-vignette-coupe {
+    display: flex;
+    gap: 2px;
+  }
+
+  .tranche-tous {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
   }
 </style>
 
