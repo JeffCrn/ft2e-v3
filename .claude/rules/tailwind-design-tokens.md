@@ -134,7 +134,7 @@ le design. Ne pas le chercher dans le PDF de FT2E.
 |---|---|---|---|
 | A10 | Survol de la coupe des secteurs | « le survol est une bascule de fond, **jamais un déplacement** » | **l'ouverture d'une tranche au survol déplace ses voisines** — accepté pour cette seule pièce, borné |
 
-Le mécanisme même de la coupe (`CoupeSecteurs.astro`, accueil § 04) est que la tranche
+Le mécanisme même de la coupe (`CoupeSecteurs.astro`, bloc secteurs de l'accueil) est que la tranche
 pointée s'ouvre et que ses voisines cèdent la largeur : l'écart n'est pas réductible, il
 a donc été arbitré plutôt que contourné. Il est **borné, et les bornes font partie de
 l'amendement** :
