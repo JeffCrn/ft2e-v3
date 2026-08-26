@@ -6,6 +6,9 @@
 // l'épaisseur d'un filet : plus de barre de rang.
 interface Props {
   titre: string;
+  /** Second rang de la vedette (accueil) : capitales réduites sous le h1,
+      dessin .type-intitule — jamais rendu en variante page. */
+  sousVedette?: string;
   sousTitre?: string;
   eyebrow?: string;
   ctaPrincipal?: { label: string; href: string };
@@ -15,6 +18,7 @@ interface Props {
 
 const {
   titre,
+  sousVedette,
   sousTitre,
   eyebrow,
   ctaPrincipal,
@@ -42,20 +46,33 @@ const titreClasses = isAccueil ? 'type-display text-profond' : 'type-ecran text-
 // À 2,4 rem (38,4 px) le mot tombe à 311 px : il tient à 390 px (boîte 358) et
 // à 360 px (boîte 328), les deux largeurs de téléphone qui comptent. Au-delà
 // de 512 px de fenêtre, la pente en vw reprend la main et rien ne change.
-// ⚠ Borne haute de la vedette : 5,1 rem et non les 6,5 rem de la charte
-// (arbitrages FT2E du 2026-08-26). La vedette « Des études / techniques /
-// portées jusqu'à / l'exécution » compose en QUATRE lignes explicites au
-// bureau, et sa ligne la plus large — « PORTÉES JUSQU'À », 964 px à
-// 81,6 px de corps — ferait 1 228 px à 104 px pour 1 152 px de boîte.
-// Toutes les cotes sont MESURÉES au navigateur, pas estimées : deux
-// tentatives à l'estime (6,5 puis 5,4 rem) ont cassé des lignes, et
-// « Des études techniques » sur une seule ligne exigerait 4,25 rem —
-// refusé, la vedette rejoindrait le corps des titres de pages internes.
-// Sous ~1 090 px de fenêtre la pente en 7.5vw reprend la main : rien ne
-// change pour les téléphones, qui empilent les mots.
+// ⚠ Borne haute de la vedette : 4,5 rem et non les 6,5 rem de la charte
+// (directive FT2E du 2026-08-26, seconde composition du jour — remplace la
+// vedette en quatre segments « Des études / techniques / portées jusqu'à /
+// l'exécution », bornée elle à 5,1 rem). La vedette « Ingénierie / fluides
+// et thermique / du bâtiment » compose en TROIS lignes explicites, et sa
+// ligne la plus large — « FLUIDES ET THERMIQUE », 1 093 px à 72 px de
+// corps — tient dans les 1 152 px de boîte avec 59 px de marge ; à 5,1 rem
+// elle ferait ~1 238 px. Toutes les cotes sont MESURÉES au navigateur,
+// jamais estimées (deux estimations ont cassé des lignes le 2026-08-26).
+// Sous ~1 141 px de fenêtre la boîte passe sous les 1 093 px de la ligne
+// médiane, qui se replie (« fluides et / thermique ») : l'empilement des
+// mots, déjà arbitré pour les téléphones, vaut aussi pour 768 et 1 024 —
+// contrôlé en capture, quatre lignes propres, aucun débordement (360, 390,
+// 768 mesurés à la sonde iframe : scrollWidth = clientWidth partout).
+// Borne basse 2,4 rem inchangée : le mot le plus large, « INGÉNIERIE »,
+// fait 280 px à 38,4 px pour une boîte de 328 px à 360 px de fenêtre.
 const tailleTitre = isAccueil
-  ? 'font-size: clamp(2.4rem, 7.5vw, 5.1rem);'
+  ? 'font-size: clamp(2.4rem, 7.5vw, 4.5rem);'
   : 'font-size: clamp(2.25rem, 5vw, 3.875rem);';
+// Second rang de la vedette : dessin .type-intitule (capitales, 600,
+// wdth 112) en encre — le profond reste au seul titre, la hiérarchie passe
+// par le corps, la graisse et la valeur. Mesuré le 2026-08-26 : une seule
+// ligne de 538 px à 28 px de corps (1 440 de fenêtre, ratio 0,39× la
+// vedette) ; sur téléphone la ligne se replie naturellement en deux
+// (208 px au plus large à 18 px, aucun débordement). Pas de max-width :
+// 24ch la repliait en trois à 28 px de corps.
+const tailleSousVedette = 'font-size: clamp(1.125rem, 2.2vw, 1.75rem);';
 ---
 
 <section class="py-16 md:py-20">
@@ -79,6 +96,12 @@ const tailleTitre = isAccueil
         <Fragment>{ligne}{i < lignes.length - 1 ? <br /> : ''}</Fragment>
       ))}
     </h1>
+
+    {isAccueil && sousVedette && (
+      <p class="type-intitule text-encre mt-5" style={tailleSousVedette}>
+        {sousVedette}
+      </p>
+    )}
 
     {hasAppui && (
       <div class:list={['mt-8 md:mt-10', hasMedia && 'grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start']}>
