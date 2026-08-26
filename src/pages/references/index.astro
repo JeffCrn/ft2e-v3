@@ -1,10 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 import CarteProjet from '../../components/blocs/CarteProjet.astro';
 import { parAffaireDecroissante } from '../../lib/projets';
+import { photoSecteur } from '../../lib/photos';
 
 // Index des affaires — une GRILLE DE CARTES depuis le 2026-08-15, au gabarit
 // déjà employé par l'accueil, les secteurs, les expertises et les projets
@@ -25,11 +27,17 @@ import { parAffaireDecroissante } from '../../lib/projets';
 const projets = (await getCollection('projets')).sort(parAffaireDecroissante);
 
 // Les sept secteurs d'activité, lus dans la collection `secteurs` (triée
-// par ordre) — la même source que la section « secteurs » de l'accueil :
-// le filtre reste aligné quel que soit le contenu.
+// par ordre) — la même source que la coupe de l'accueil : le filtre reste
+// aligné quel que soit le contenu. Depuis le 2026-08-26 chaque filtre est
+// une VIGNETTE d'image à l'état masqué/dévoilé du carrousel (demande FT2E) :
+// le premier cliché du corpus du secteur — stable d'un build à l'autre, là
+// où le film de l'accueil est tiré — légendé du nom du secteur.
 const secteurs = (await getCollection('secteurs'))
   .sort((a, b) => a.data.ordre - b.data.ordre)
-  .map((s) => s.data.titre);
+  .map((s) => ({
+    titre: s.data.titre,
+    photo: photoSecteur(s.data.cliches[0].image),
+  }));
 ---
 
 <PageLayout
@@ -84,29 +92,46 @@ const secteurs = (await getCollection('secteurs'))
           du site : chaque carte EST un plan posé, et un plan ne se pose pas sur
           un plan. C'est ce qui retire le `data-plan` de cet écran — la charte
           réserve la révélation aux plans significatifs, jamais aux cartes. */}
-      <div class="border-t border-b border-filet-2 py-3.5 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:items-center">
-        <p class="mono-label font-normal text-pivot">secteur</p>
-        <div class="flex flex-wrap" role="group" aria-label="Filtres par secteur">
-          <button
-            class="chip-blueprint -ml-px -mt-px cursor-pointer"
-            data-filtre="tous"
-            aria-pressed="true"
-          >
-            Tous ({projets.length})
+      {/* Les filtres sont des vignettes à l'état masqué/dévoilé du carrousel
+          de l'accueil : image en retrait à 42 % d'opacité, dévoilée au survol,
+          au focus et à l'état actif (aria-pressed) — une bascule d'opacité,
+          aucun déplacement. La légende porte le sens (nom + décompte) et reste
+          pleinement lisible aux deux états : le voilage ne s'applique qu'à
+          l'image, jamais au mot (contraste RGAA). « Tous » n'a pas de cliché :
+          sa case reprend la hachure neutre du système. */}
+      <div class="border-t border-b border-filet-2 py-4 grid grid-cols-1 md:grid-cols-[100px_1fr] gap-4 md:items-start">
+        <p class="mono-label font-normal text-pivot pt-1">secteur</p>
+        <div class="filtres-vignettes" role="group" aria-label="Filtres par secteur">
+          <button class="filtre-vignette" data-filtre="tous" aria-pressed="true">
+            <span class="filtre-vignette-image duotone-media"></span>
+            <span class="mono-label font-normal text-pivot filtre-vignette-legende">
+              Tous ({projets.length})
+            </span>
           </button>
           {secteurs.map((s) => {
-            const count = projets.filter((p) => p.data.secteur === s).length;
+            const count = projets.filter((p) => p.data.secteur === s.titre).length;
             // Un secteur sans référence publiée n'apparaît pas au filtre :
             // une puce « (0) » qui ne filtre rien annonce une lacune au lieu
             // de servir. Le secteur reste présent sur /secteurs et à l'accueil.
             if (count === 0) return null;
             return (
-              <button
-                class="chip-blueprint -ml-px -mt-px cursor-pointer"
-                data-filtre={s}
-                aria-pressed="false"
-              >
-                {s} ({count})
+              <button class="filtre-vignette" data-filtre={s.titre} aria-pressed="false">
+                <span class:list={['filtre-vignette-image', s.photo ? 'duotone-photo' : 'duotone-media']}>
+                  {s.photo && (
+                    <Picture
+                      src={s.photo}
+                      formats={['avif', 'webp']}
+                      widths={[132, 264]}
+                      sizes="132px"
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                </span>
+                <span class="mono-label font-normal text-pivot filtre-vignette-legende">
+                  {s.titre} ({count})
+                </span>
               </button>
             );
           })}
@@ -155,6 +180,49 @@ const secteurs = (await getCollection('secteurs'))
   <CtaFinal />
 </PageLayout>
 
+<style>
+  /* Les mesures des vignettes de filtre — les couleurs restent en classes
+     dans le balisage. Le voilage (opacité 0,42, la valeur du film de
+     l'accueil) porte sur la BOÎTE d'image, jamais sur la légende. */
+  .filtres-vignettes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .filtre-vignette {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 132px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .filtre-vignette-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    opacity: 0.42;
+    transition: opacity 300ms var(--ease-blueprint);
+  }
+
+  .filtre-vignette:hover .filtre-vignette-image,
+  .filtre-vignette:focus-visible .filtre-vignette-image,
+  .filtre-vignette[aria-pressed='true'] .filtre-vignette-image {
+    opacity: 1;
+  }
+
+  .filtre-vignette-legende {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+</style>
+
 <script>
   function initFiltres() {
     const grille = document.querySelector<HTMLElement>('[data-grille]');
@@ -177,13 +245,25 @@ const secteurs = (await getCollection('secteurs'))
       });
     };
 
+    const activer = (btn: HTMLButtonElement) => {
+      filtres.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      appliquer(btn.getAttribute('data-filtre'));
+    };
+
     filtres.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        filtres.forEach((b) => b.setAttribute('aria-pressed', 'false'));
-        btn.setAttribute('aria-pressed', 'true');
-        appliquer(btn.getAttribute('data-filtre'));
-      });
+      btn.addEventListener('click', () => activer(btn));
     });
+
+    /* La page se laisse filtrer par l'URL — `/references/?secteur=Logements` —
+       depuis le 2026-08-26 : c'est par là que les clichés de la coupe de
+       l'accueil arrivent. Un secteur inconnu ou sans fiche publiée (donc sans
+       filtre) est ignoré : la grille reste complète, rien ne casse. */
+    const demande = new URLSearchParams(window.location.search).get('secteur');
+    if (demande) {
+      const btn = [...filtres].find((b) => b.getAttribute('data-filtre') === demande);
+      if (btn) activer(btn);
+    }
   }
 
   document.addEventListener('astro:page-load', initFiltres);
