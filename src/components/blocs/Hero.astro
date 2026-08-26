@@ -42,8 +42,18 @@ const titreClasses = isAccueil ? 'type-display text-profond' : 'type-ecran text-
 // À 2,4 rem (38,4 px) le mot tombe à 311 px : il tient à 390 px (boîte 358) et
 // à 360 px (boîte 328), les deux largeurs de téléphone qui comptent. Au-delà
 // de 512 px de fenêtre, la pente en vw reprend la main et rien ne change.
+// ⚠ Borne haute de la vedette : 5,1 rem et non les 6,5 rem de la charte
+// (arbitrage FT2E du 2026-08-26). Le titre en trois segments « Études
+// techniques / portées jusqu'à / l'exécution » doit composer en TROIS lignes
+// au bureau ; or « ÉTUDES TECHNIQUES » (chasse 125, capitales) mesure
+// 1 195 px à 86,4 px de corps pour 1 152 px de boîte — mesuré au navigateur,
+// pas estimé : deux tentatives à l'estime (6,5 puis 5,4 rem) ont cassé la
+// ligne. À 81,6 px (5,1 rem) le segment tombe à ~1 128 px et tient avec
+// 24 px de marge dès que le conteneur atteint ses 1 152 px. Sous ~1 090 px
+// de fenêtre la pente en 7.5vw reprend la main : rien ne change pour les
+// téléphones, qui empilent les cinq mots.
 const tailleTitre = isAccueil
-  ? 'font-size: clamp(2.4rem, 7.5vw, 6.5rem);'
+  ? 'font-size: clamp(2.4rem, 7.5vw, 5.1rem);'
   : 'font-size: clamp(2.25rem, 5vw, 3.875rem);';
 ---
 
@@ -55,8 +65,13 @@ const tailleTitre = isAccueil
       </p>
     )}
 
+    {/* Pas de text-balance sur la vedette d'accueil : ses césures sont
+        EXPLICITES (segments \n du titre), et l'équilibrage cassait « études
+        techniques » en deux lignes pour égaliser — c'est lui qui empêchait la
+        composition en trois lignes arbitrée le 2026-08-26. Le titre d'écran
+        (variante page), sans césures forcées, le garde. */}
     <h1
-      class:list={[titreClasses, 'max-w-[24ch] text-balance']}
+      class:list={[titreClasses, 'max-w-[24ch]', !isAccueil && 'text-balance']}
       style={tailleTitre}
     >
       {lignes.map((ligne, i) => (
