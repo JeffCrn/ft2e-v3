@@ -570,3 +570,151 @@ Termine par le prompt de lancement de la session suivante, en annexe du plan de
 ce chantier et reproduit integralement dans ton message final - la regle de
 continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
 ````
+
+
+---
+
+## 7. Session d'ajustements du 2026-08-26 — d'après-montage, sur directives FT2E
+
+Neuf commits (`bfdc2b6` à `87476ef`), tous poussés et vérifiés par marqueur sur le
+déploiement. Ce qui a changé, et ce qui a été arbitré :
+
+- **Vedette de l'accueil**, en quatre itérations dirigées par FT2E : le titre est
+  « Des études / techniques / portées jusqu'à / l'exécution » en QUATRE segments
+  explicites, surtitre « BET La Rochelle — depuis 2008 », sous-titre pluridisciplinaire
+  rétabli, `<title>` SEO « FT2E — BET fluides, thermique et électricité à La Rochelle ».
+  Trois mesures au navigateur ont tranché ce que l'estime ratait deux fois : la borne
+  haute de la vedette d'accueil est **5,1 rem** (« PORTÉES JUSQU'À » fait 964 px à
+  81,6 px ; 1 228 px à la taille de charte pour 1 152 de boîte), le `text-balance` lui
+  est **retiré** (ses césures sont explicites, l'équilibrage cassait le premier segment),
+  et la version « Des études techniques » sur une ligne (4,25 rem) a été **refusée** par
+  FT2E au profit du rang monumental. Tout est consigné dans le commentaire de
+  `Hero.astro`. Une leçon de méthode au passage : une insécable posée dans un fichier
+  source s'écrit en **échappement JavaScript** (`u00a0` précédé de la barre inverse),
+  jamais en littéral — l'essai d'insécable intégrale sur « à La Rochelle » cassait
+  d'ailleurs DANS le mot sur les fenêtres étroites (381 px de groupe pour 358 de boîte
+  à 390 px, mesuré) et a été remplacé par des césures explicites.
+- **L'accueil se lit désormais 01 relevé, 02 identité, 03 SECTEURS, 04 expertises** :
+  la coupe est passée devant les expertises (demande FT2E, renumérotation suivie). La
+  consignation d'A10 cite « le bloc secteurs de l'accueil » et plus un numéro de section.
+- **Les légendes des clichés nomment les projets** : le document FT2E
+  `correspondance_Site_projet.docx` couvre exactement les 27 clichés des films alors
+  tirés. Les deux adossés à des fiches publiées reprennent la légende de leur planche
+  (« Abbaye de Sablonceaux » ×2, « EHPAD Aliénor d'Aquitaine » ×2) ; 21 autres sont
+  composées dans le même style (« Aurora, 147 logements », « Chaufferie bois CDAIR »…) ;
+  « Sous station » et « Réseau existant », génériques au document, restent descriptives.
+  ⚠ **17 clichés du corpus restent en légende descriptive** et peuvent sortir à tout
+  build — FT2E : « on fixera quand je les aurai » (les correspondances).
+- **Le cliché principal de chaque tranche est un lien** vers `/references/?secteur=…`
+  filtrée sur le secteur ; les vignettes du film gardent la sélection (au toucher,
+  c'est le seul parcours du film). « Lire la fiche » est devenu « En savoir plus »
+  (destination inchangée : la page du secteur). Au passage, **Monotechnique compte
+  maintenant 2 fiches publiées** : son filtre existe, la réserve de l'annexe B tombe.
+- **Les filtres de `/references` sont des vignettes d'images** à l'état
+  masqué/dévoilé du carrousel (opacité 0,42 → 1 au survol, au focus et à l'état actif ;
+  le voilage ne touche jamais la légende — contraste RGAA). Image = premier cliché du
+  corpus, stable ; « Tous » porte la hachure neutre. La page **lit `?secteur=` dans
+  l'URL** (mesuré : 8 cartes sur Logements, grille complète sur paramètre inconnu).
+  Le libellé « secteur » surplombe la rangée et la vignette fait 130 px :
+  8 × 130 + 7 × 16 = 1 152, les huit boutons tiennent sur une ligne.
+
+Rendu contrôlé à chaque pas (captures 390/768/1440), builds verts, liens de la coupe
+vérifiés au navigateur. L'annexe B est **remplacée par l'annexe C** ci-dessous.
+
+## Annexe C — prompt de la session suivante (à coller tel quel en session neuve)
+
+````
+Session de suite du chantier bloc secteurs - FT2E v3 (fin de legendes, gel du
+film, validations).
+
+Contexte. FT2E v3 est un site institutionnel Astro statique (Astro 6, Tailwind 4,
+TypeScript strict), deploye en demonstration client sur https://ft2e-v3.vercel.app,
+indexation verrouillee par triple securite (robots.txt Disallow, meta noindex,
+header X-Robots-Tag) - ne pas y toucher. La source de verite du design est
+.claude/rules/tailwind-design-tokens.md (rampe monochrome 197, aucune couleur
+d'accent, filets 1 px par opacite, rayon 0, courbe unique, amendements A1-A10).
+Le chantier de reduction de dette est EN PAUSE (docs/23-etat-de-l-art.md).
+
+ETAT AU 2026-08-26 SOIR (commits jusqu'a 87476ef, tout deploye et verifie) :
+la coupe deployee des secteurs est en position 03 de l'accueil (expertises en
+04) ; le film de chaque tranche est TIRE AU BUILD dans le corpus (44 cliches
+reels (c) FT2E, filmSecteur() dans src/lib/secteurs.ts) ; le cliche principal
+est un lien vers /references/?secteur=... ; le pied dit « En savoir plus » ;
+les filtres de /references sont des vignettes d'images (130 px, huit sur une
+ligne, etat masque/devoile) et la page lit ?secteur= dans l'URL ; 27 cliches
+portent une legende de PROJET issue de correspondance_Site_projet.docx (dont
+« Abbaye de Sablonceaux » et « EHPAD Alienor d'Aquitaine », reprises des
+planches de leurs fiches) ; la vedette de l'accueil est « Des etudes /
+techniques / portees jusqu'a / l'execution », bornee a 5,1 rem SANS
+text-balance (mesures dans le commentaire de Hero.astro - ne pas y revenir
+a l'estime).
+
+LIRE D'ABORD : docs/superpowers/plans/2026-08-17-chantier-bloc-secteurs.md
+(§ 6 : montage et corpus ; § 7 : ajustements du 2026-08-26) ; CLAUDE.md ;
+src/components/blocs/CoupeSecteurs.astro et src/pages/references/index.astro.
+
+CE QUE CETTE SESSION FAIT :
+
+1. QUAND FT2E LIVRE LES CORRESPONDANCES RESTANTES (il a dit : « on fixera
+   quand je les aurai ») - 17 cliches encore en legende descriptive :
+   villa urbaine (Logements) ; ecomusee, tiers-lieu bois, pharmacie, siege
+   d'entreprise, bureaux zinc dore (Tertiaire/ERP) ; centre technique, poste
+   ferroviaire, site en plaine, atelier agro, chantier naval (Industriel) ;
+   videoprotection, borne irve, hydraulique, calorifuge, cameras en facade
+   (Monotechnique) ; passerelle (Patrimoine).
+   a. Legender ces 17 comme les 27 premiers : legende de la planche si le
+      projet a une fiche publiee (lire le titre du planche.json), sinon
+      composer dans le meme style, 40 signes au plus (borne Zod).
+   b. PUIS GELER LE FILM avec FT2E : soit remplacer filmSecteur() par une
+      lecture ordonnee du corpus (film = 4 premiers de la liste, l'ordre
+      redevient editorial et Decap le pilote), soit garder le tirage une
+      fois tout legende. Documenter le choix dans le meme commit.
+2. PASSER NVDA sur l'accueil (la coupe) et une page secteur - exigence RGAA
+   du depot, TOUJOURS DUE depuis le montage : tabulation (le focus ouvre une
+   tranche et se reporte sur la premiere vignette du film), fleches
+   gauche-droite dans le film, compteur aria-live="polite", calques
+   aria-hidden muets, lien du cliche principal annonce « Voir les references
+   du secteur ... ». Consigner le releve dans le plan (script APPEND).
+3. RECUEILLIR LES VALIDATIONS FT2E du § 6 du plan, toujours ouvertes : les
+   17 fichiers ecartes (14 perspectives de tiers, 3 fonds de plan), les
+   artefacts d'agrandissement IA sur cliches retenus (plaque de mairie,
+   panneau, etiquettes), le credit (c) FT2E.
+4. DECAP : la connexion echoue en production (HTTP 500 - deux variables OAuth
+   Vercel et une callback GitHub manquantes, docs/22-prise-en-main-decap.md
+   § 0, trois gestes que seul l'utilisateur peut faire, AJOURNES en
+   connaissance de cause). Le rappeler UNE FOIS en ouverture puis le
+   respecter ; essayer la collection cliches des que l'OAuth sera pose.
+
+PIEGES VERIFIES, A NE PAS REDECOUVRIR (detail : CLAUDE.md, les rules, et le
+§ 8 de l'annexe B ci-dessus, qui reste valable en bloc) : scripts de composant
+via astro:page-load + guard dataset.bound ; mesures en CSS de composant,
+couleurs en classes litterales ; motifs .gitignore ANCRES ; un build vert ne
+prouve pas le rendu (npm run captures -- --route 01-accueil ; Chrome refuse
+toute fenetre sous 500 px, meme headless) ; la performance se mesure sur le
+DEPLOIEMENT, jamais sur npm run preview, jamais en un tir ; depot PARTAGE
+(git ls-remote avant commit, marqueur de build dans le HTML servi apres push ;
+la CLI Vercel repond Not authorized, c'est le push qui deploie) ; les
+insecables sont normalisees par les outils d'edition (docs : script Python en
+mode APPEND, chr(160) construit, assertion apres coup ; source .astro :
+echappement JavaScript u00a0, jamais le caractere) ; pas de commentaire JSX
+entre la parenthese d'un .map et son element ; min-width: 0 sur les flex
+porteurs d'images ; TOUTE COTE DE LA VEDETTE SE MESURE AU NAVIGATEUR avant
+d'etre posee - deux estimations ont casse des lignes le 2026-08-26.
+
+Recette de fin de session : npm run typecheck (0 erreur), npm run build
+(46 pages), python scripts/controle-liens-internes.py (0 lien mort), controle
+du RENDU des pages touchees aux largeurs utiles, Lighthouse mobile sur le
+DEPLOIEMENT si la structure a change (accessibilite : 96 attendu sur
+l'accueil, violation unique color-contrast du complement text-clair
+aria-hidden - motif de l'exception D1 ; toute violation NOUVELLE est un
+blocage), et consignation dans
+docs/superpowers/plans/2026-08-17-chantier-bloc-secteurs.md par script append.
+
+Portees de commit : content, feat(accueil), feat(references), a11y, docs selon
+les points. Tout changement de schema Zod va dans le MEME commit que
+public/admin/config.yml.
+
+Termine par le prompt de lancement de la session suivante, en annexe du plan
+de ce chantier et reproduit integralement dans ton message final - la regle de
+continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
+````
