@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>FT2E — Motion&nbsp;: quatre pistes à arbitrer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Google Fonts : admis dans une MAQUETTE de docs/ (hors site — le site
+     charge fontsource, jamais de CDN). -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── Rampe 197° — recopiée de global.css (une maquette ne résout pas les
+        jetons du site : elle les recopie, comme les compositeurs de planches) ── */
+  :root {
+    --profond: #001718;
+    --encre: #00393a;
+    --pivot: #336667;
+    --clair: #99cccd;
+    --voile: #e1f4f4;
+    --papier: #f7f9fa;
+    --calcaire: #edf0f2;
+    --filet-1: #00393a38;
+    --filet-2: #00393a29;
+    --filet-3: #00393a1f;
+    --filet-chip: #00393a47;
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --shadow-plan-1: 0 24px 60px #00393a1f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--calcaire); }
+  body {
+    font-family: 'Archivo', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--encre);
+    max-width: 1200px;
+    margin: 0 auto;
+    background:
+      repeating-linear-gradient(to right, #00393a12 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(to bottom, #00393a12 0 1px, transparent 1px 28px),
+      var(--papier);
+    box-shadow: 0 0 90px #00393a2e;
+    padding: 56px 56px 84px;
+  }
+  @media (max-width: 800px) { body { padding: 28px 20px 56px; } }
+
+  .mono { font-family: 'IBM Plex Mono', Consolas, monospace; }
+  .mono-label {
+    font-family: 'IBM Plex Mono', Consolas, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-weight: 600;
+    font-stretch: 100%;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    line-height: 1.02;
+    margin-top: 16px;
+    max-width: 24ch;
+  }
+  .chapo {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--pivot);
+    max-width: 62ch;
+    margin-top: 20px;
+  }
+  section { margin-top: 84px; }
+  .puce { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--profond); vertical-align: 2px; margin-right: 12px; }
+  h2 {
+    font-weight: 700;
+    font-stretch: 118%;
+    font-size: 26px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-top: 16px;
+  }
+  h2 .comp { color: var(--clair); }
+  .statut {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 5px 10px;
+    border: 1px solid var(--filet-chip);
+    font-family: 'IBM Plex Mono', Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pivot);
+  }
+  p.corps { max-width: 68ch; margin-top: 16px; }
+  p.corps + p.corps { margin-top: 12px; }
+  strong { font-weight: 600; }
+
+  /* plan posé */
+  .plan {
+    background: var(--papier);
+    border: 1px solid var(--filet-2);
+    box-shadow: var(--shadow-plan-1);
+  }
+
+  /* tableau des bornes */
+  table.bornes { border-collapse: collapse; width: 100%; max-width: 760px; margin-top: 20px; }
+  table.bornes th, table.bornes td {
+    text-align: left; vertical-align: top;
+    padding: 10px 14px 10px 0;
+    border-top: 1px solid var(--filet-3);
+    font-size: 14px;
+  }
+  table.bornes th {
+    font-family: 'IBM Plex Mono', Consolas, monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 500; color: var(--pivot); white-space: nowrap; padding-right: 28px;
+  }
+
+  /* démos */
+  .demo { margin-top: 28px; padding: 28px; }
+  .demo-titre { color: var(--pivot); margin-bottom: 16px; }
+  button.rejouer {
+    font-family: 'IBM Plex Mono', Consolas, monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--encre); color: var(--papier);
+    border: none; border-left: 3px solid var(--clair);
+    padding: 12px 18px; cursor: pointer;
+    transition: background-color 260ms ease;
+  }
+  button.rejouer:hover { background: var(--profond); }
+  button.rejouer:focus-visible { outline: 2px solid var(--pivot); outline-offset: 2px; }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 800px) { .duo { grid-template-columns: 1fr; } }
+
+  /* ── PISTE 0 : filet de flux ── */
+  .flux-scene { position: relative; padding-left: 64px; }
+  .flux-trace { position: absolute; left: 8px; top: 0; bottom: 0; width: 40px; pointer-events: none; }
+  .flux-trace polyline { stroke: var(--encre); stroke-width: 1; fill: none; }
+  .flux-noeud { position: absolute; width: 7px; height: 7px; background: var(--encre); transform: translate(-50%, -50%); opacity: 0; transition: opacity 300ms var(--ease); }
+  .flux-noeud.pose { opacity: 1; }
+  .flux-section { border-top: 1px solid var(--filet-3); padding: 18px 0; }
+  .flux-section:first-child { border-top: 0; }
+  .flux-section .mono-label { color: var(--pivot); }
+  .flux-section p { font-size: 14px; max-width: 52ch; margin-top: 6px; }
+
+  /* ── PISTE 1 : cascade ── */
+  .grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 14px; }
+  .carte {
+    background: var(--papier); border: 1px solid var(--filet-2);
+    box-shadow: var(--shadow-plan-1);
+  }
+  .carte .img {
+    height: 74px;
+    background: repeating-linear-gradient(112deg, #c9dcdd 0 2px, var(--calcaire) 2px 10px);
+  }
+  .carte .pied { padding: 10px 12px; }
+  .carte .pied .t { font-weight: 600; font-stretch: 112%; font-size: 13px; text-transform: uppercase; }
+  .carte .pied .l { font-family: 'IBM Plex Mono', Consolas, monospace; font-size: 10px; color: var(--pivot); margin-top: 2px; }
+  .anim-plans .carte { opacity: 0; transform: translateY(22px); }
+  .anim-plans.joue .carte {
+    opacity: 1; transform: none;
+    transition: opacity 760ms var(--ease), transform 760ms var(--ease);
+  }
+  /* aujourd'hui : tout part ensemble — la cascade ajoute le délai par rang */
+  .anim-plans.cascade.joue .carte { transition-delay: calc(var(--rang) * 80ms); }
+
+  /* ── PISTE 2 : clichés au survol ── */
+  .media { position: relative; overflow: hidden; isolation: isolate; background: var(--profond); }
+  .media img {
+    display: block; width: 100%; height: auto;
+    filter: grayscale(100%) contrast(1.05);
+    mix-blend-mode: lighten;
+  }
+  .media::after {
+    content: ""; position: absolute; inset: 0;
+    background: var(--voile); mix-blend-mode: darken; pointer-events: none;
+  }
+  .media .coin { position: absolute; width: 18px; height: 18px; z-index: 1; }
+  .media .coin::before, .media .coin::after { content: ""; position: absolute; background: var(--voile); }
+  .media .coin::before { width: 100%; height: 1px; }
+  .media .coin::after { width: 1px; height: 100%; }
+  .media .coin.ht { top: 5px; left: 5px; }
+  .media .coin.hd { top: 5px; right: 5px; transform: scaleX(-1); }
+  .media .coin.bg { bottom: 5px; left: 5px; transform: scaleY(-1); }
+  .media .coin.bd { bottom: 5px; right: 5px; transform: scale(-1); }
+  .cartouche {
+    position: absolute; left: 28px; bottom: 14px; z-index: 1;
+    display: inline-flex; padding: 7px 12px;
+    background: var(--profond); color: var(--voile);
+    font-family: 'IBM Plex Mono', Consolas, monospace; font-size: 11px; letter-spacing: 0.05em;
+  }
+  /* variante A — le voile d'encre se lève (opacité seule) */
+  .var-voile .lever {
+    position: absolute; inset: 0; z-index: 1;
+    background: var(--encre); opacity: 0.14; pointer-events: none;
+    transition: opacity 300ms var(--ease);
+  }
+  .var-voile:hover .lever, .var-voile:focus-within .lever { opacity: 0; }
+  /* variante B — micro-échelle du cliché dans un cadre fixe (amendement requis) */
+  .var-echelle img { transition: transform 400ms var(--ease); transform-origin: 50% 50%; }
+  .var-echelle:hover img, .var-echelle:focus-within img { transform: scale(1.025); }
+  .legende-variante { margin-top: 10px; font-size: 14px; color: var(--pivot); max-width: 46ch; }
+
+  /* ── PISTE 3 : transitions de pages ── */
+  .viewport {
+    position: relative; height: 330px; overflow: hidden;
+    background: var(--papier); border: 1px solid var(--filet-2);
+  }
+  .page { position: absolute; inset: 0; padding: 22px; }
+  .page[hidden] { display: none; }
+  .page .fil { font-family: 'IBM Plex Mono', Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pivot); }
+  .page h3 { font-weight: 600; font-stretch: 100%; font-size: 24px; line-height: 1.05; margin-top: 8px; }
+  .page .mini-cartes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  .mini-carte { border: 1px solid var(--filet-2); background: var(--papier); cursor: pointer; text-align: left; padding: 0; font: inherit; color: inherit; }
+  .mini-carte:focus-visible { outline: 2px solid var(--pivot); outline-offset: 2px; }
+  .mini-carte .img { height: 92px; overflow: hidden; position: relative; isolation: isolate; background: var(--profond); }
+  .mini-carte .img img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.05); mix-blend-mode: lighten; }
+  .mini-carte .img::after { content: ""; position: absolute; inset: 0; background: var(--voile); mix-blend-mode: darken; pointer-events: none; }
+  .mini-carte .pied { padding: 8px 10px; font-size: 12px; font-weight: 600; font-stretch: 112%; text-transform: uppercase; }
+  .fiche-bandeau { margin-top: 16px; height: 150px; overflow: hidden; position: relative; isolation: isolate; background: var(--profond); }
+  .fiche-bandeau img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.05); mix-blend-mode: lighten; }
+  .fiche-bandeau::after { content: ""; position: absolute; inset: 0; background: var(--voile); mix-blend-mode: darken; pointer-events: none; }
+  .retour { margin-top: 14px; background: none; border: 1px solid var(--filet-chip); color: var(--pivot); padding: 9px 14px; cursor: pointer; }
+  .retour:hover { color: var(--encre); border-color: var(--encre); }
+  .retour:focus-visible { outline: 2px solid var(--pivot); outline-offset: 2px; }
+  /* le morph : même nom de transition des deux côtés */
+  .vt-cliche { view-transition-name: cliche-demo; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 350ms; animation-timing-function: var(--ease); }
+  ::view-transition-old(cliche-demo), ::view-transition-new(cliche-demo) { animation-duration: 350ms; animation-timing-function: var(--ease); height: 100%; }
+  /* fondu directionnel simulé (quand l'API View Transitions n'est pas là) */
+  @keyframes entre-par-le-bas { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .page.entre { animation: entre-par-le-bas 350ms var(--ease); }
+
+  /* pied */
+  .note-reduite { margin-top: 84px; border-top: 1px solid var(--filet-1); padding-top: 20px; font-size: 14px; color: var(--pivot); max-width: 68ch; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-plans .carte { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .flux-trace polyline { stroke-dashoffset: 0 !important; transition: none !important; }
+    .flux-noeud { opacity: 1 !important; transition: none !important; }
+    .var-voile .lever { transition: none !important; }
+    .var-echelle img { transition: none !important; }
+    .page.entre { animation: none !important; }
+    ::view-transition-old(root), ::view-transition-new(root),
+    ::view-transition-old(cliche-demo), ::view-transition-new(cliche-demo) { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="mono-label" style="color: var(--pivot);">FT2E — chantier motion · maquette d&rsquo;arbitrage · 2026-08-27</p>
+  <h1>Quatre pistes de mouvement, chacune bornée</h1>
+  <p class="chapo">Le style du site est volontairement aride&nbsp;: quatre mouvements, une seule courbe, rien d&rsquo;autre ne bouge. Pour lui donner le dynamisme demandé sans le dénaturer, chaque piste ci-dessous dit où elle joue, ce qui bouge, en combien de temps — et ce qu&rsquo;elle ne touche pas. Les pistes sont indépendantes&nbsp;: on peut en retenir une, deux, trois ou aucune.</p>
+  <p class="corps" style="color: var(--pivot); font-size: 14px;">Chaque démonstration se rejoue. Tout est posé d&rsquo;emblée si votre système demande la réduction des animations.</p>
+</header>
+
+<!-- ══════════ PISTE 1 ══════════ -->
+<section>
+  <p><span class="puce" aria-hidden="true"></span><span class="mono-label" style="color: var(--pivot);">piste 1 — la cascade</span></p>
+  <h2>Révélation séquencée <span class="comp" aria-hidden="true">/des grilles</span></h2>
+  <p class="statut">orchestration du mouvement existant — amendement a11</p>
+  <p class="corps">Aujourd&rsquo;hui, un bloc se révèle d&rsquo;un seul tenant à son entrée dans la vue (760&nbsp;ms, 22&nbsp;px). La piste&nbsp;: dans les grilles — cartes de références, cellules d&rsquo;expertises, colonnes de relevé, tuiles de filtres —, les éléments partent <strong>en cascade, 80&nbsp;ms d&rsquo;écart par rang</strong>, mêmes durée et courbe. La page semble se construire, comme un plan se dessine.</p>
+
+  <div class="plan demo">
+    <div class="duo">
+      <div>
+        <p class="mono-label demo-titre">aujourd&rsquo;hui — tout part ensemble</p>
+        <div class="grille anim-plans" id="grille-avant">
+          <div class="carte" style="--rang:0"><div class="img"></div><div class="pied"><p class="t">Néréa</p><p class="l">AYTRÉ (17440)</p></div></div>
+          <div class="carte" style="--rang:0"><div class="img"></div><div class="pied"><p class="t">Les Minimes</p><p class="l">LA ROCHELLE (17000)</p></div></div>
+          <div class="carte" style="--rang:0"><div class="img"></div><div class="pied"><p class="t">EHPAD</p><p class="l">SAINTES (17100)</p></div></div>
+          <div class="carte" style="--rang:0"><div class="img"></div><div class="pied"><p class="t">Yachtman</p><p class="l">LA ROCHELLE (17000)</p></div></div>
+          <div class="carte" style="--rang:0"><div class="img"></div><div class="pied"><p class="t">Marans</p><p class="l">MARANS (17230)</p></div></div>
+          <div class="carte" style="--rang:0"><div class="img"></div><div class="pied"><p class="t">Fougerou</p><p class="l">SAINTE-MARIE-DE-RÉ (17740)</p></div></div>
+        </div>
+      </div>
+      <div>
+        <p class="mono-label demo-titre">piste — cascade de 80&nbsp;ms par rang</p>
+        <div class="grille anim-plans cascade" id="grille-apres">
+          <div class="carte" style="--rang:0"><div class="img"></div><div class="pied"><p class="t">Néréa</p><p class="l">AYTRÉ (17440)</p></div></div>
+          <div class="carte" style="--rang:1"><div class="img"></div><div class="pied"><p class="t">Les Minimes</p><p class="l">LA ROCHELLE (17000)</p></div></div>
+          <div class="carte" style="--rang:2"><div class="img"></div><div class="pied"><p class="t">EHPAD</p><p class="l">SAINTES (17100)</p></div></div>
+          <div class="carte" style="--rang:3"><div class="img"></div><div class="pied"><p class="t">Yachtman</p><p class="l">LA ROCHELLE (17000)</p></div></div>
+          <div class="carte" style="--rang:4"><div class="img"></div><div class="pied"><p class="t">Marans</p><p class="l">MARANS (17230)</p></div></div>
+          <div class="carte" style="--rang:5"><div class="img"></div><div class="pied"><p class="t">Fougerou</p><p class="l">SAINTE-MARIE-DE-RÉ (17740)</p></div></div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top: 22px;"><button class="rejouer" type="button" data-rejoue-cascade>Rejouer côte à côte</button></p>
+  </div>
+
+  <table class="bornes">
+    <tr><th scope="row">Où</th><td>les grilles et listes significatives, sous la ligne de flottaison seulement — références, expertises, relevés, filtres, équipe</td></tr>
+    <tr><th scope="row">Ce qui bouge</th><td>opacité et translation 22&nbsp;px — les propriétés du mouvement existant, rien de nouveau</td></tr>
+    <tr><th scope="row">Durée · courbe</th><td>760&nbsp;ms, courbe unique, délai de 80&nbsp;ms par rang plafonné au sixième (au-delà, tout suit le dernier rang)</td></tr>
+    <tr><th scope="row">Ne touche pas</th><td>le hero et tout ce qui est visible au chargement (posé d&rsquo;emblée, protection du LCP conservée)&nbsp;; les survols&nbsp;; les durées</td></tr>
+  </table>
+</section>
+
+<!-- ══════════ PISTE 2 ══════════ -->
+<section>
+  <p><span class="puce" aria-hidden="true"></span><span class="mono-label" style="color: var(--pivot);">piste 2 — le cliché qui répond</span></p>
+  <h2>Survol des photographies <span class="comp" aria-hidden="true">/deux variantes</span></h2>
+  <p class="statut">variante a&nbsp;: sans levée d&rsquo;interdit · variante b&nbsp;: amendement a12</p>
+  <p class="corps">Les photographies du site (coupe des secteurs, tuiles de filtres, cliché du hero) sont les seules surfaces qui peuvent «&nbsp;répondre&nbsp;» au survol sans toucher au texte ni aux filets. Deux variantes, cumulables ou exclusives — <strong>jamais sur un dessin de planche</strong>, dont les filets de 1&nbsp;px interdisent toute mise à l&rsquo;échelle.</p>
+
+  <div class="plan demo">
+    <div class="duo">
+      <div>
+        <p class="mono-label demo-titre">variante a — le voile se lève</p>
+        <div class="media var-voile" tabindex="0">
+          <img src="assets/cliche-demo.jpg" alt="Petit collectif de logements — cliché de démonstration">
+          <div class="lever" aria-hidden="true"></div>
+          <span class="coin ht" aria-hidden="true"></span><span class="coin hd" aria-hidden="true"></span>
+          <span class="coin bg" aria-hidden="true"></span><span class="coin bd" aria-hidden="true"></span>
+          <span class="cartouche">Petit collectif — Logements</span>
+        </div>
+        <p class="legende-variante">Au repos, un voile d&rsquo;encre à 14&nbsp;%&nbsp;; il se lève au survol (300&nbsp;ms). Seule une opacité bouge — aucun interdit levé, cousin du dévoilement déjà en place sur les filtres.</p>
+      </div>
+      <div>
+        <p class="mono-label demo-titre">variante b — micro-échelle dans le cadre</p>
+        <div class="media var-echelle" tabindex="0">
+          <img src="assets/cliche-demo.jpg" alt="Petit collectif de logements — cliché de démonstration">
+          <span class="coin ht" aria-hidden="true"></span><span class="coin hd" aria-hidden="true"></span>
+          <span class="coin bg" aria-hidden="true"></span><span class="coin bd" aria-hidden="true"></span>
+          <span class="cartouche">Petit collectif — Logements</span>
+        </div>
+        <p class="legende-variante">Le cliché passe à l&rsquo;échelle 1,025 en 400&nbsp;ms, dans un cadre strictement fixe&nbsp;: équerres et cartouche ne bougent pas. Lève ponctuellement «&nbsp;aucun déplacement au survol&nbsp;» — au précédent de l&rsquo;amendement A10.</p>
+      </div>
+    </div>
+  </div>
+
+  <table class="bornes">
+    <tr><th scope="row">Où</th><td>les photographies en cadre — coupe des secteurs, tuiles de filtres, cliché du hero. Jamais les planches ni leurs vignettes</td></tr>
+    <tr><th scope="row">Ce qui bouge</th><td>a&nbsp;: l&rsquo;opacité d&rsquo;un voile d&rsquo;encre · b&nbsp;: l&rsquo;échelle du cliché seul (1,00 → 1,025)</td></tr>
+    <tr><th scope="row">Durée · courbe</th><td>a&nbsp;: 300&nbsp;ms · b&nbsp;: 400&nbsp;ms — courbe unique</td></tr>
+    <tr><th scope="row">Ne touche pas</th><td>le cadre, les équerres, le cartouche, le duotone, les dessins de planches, les textes</td></tr>
+  </table>
+</section>
+
+<!-- ══════════ PISTE 3 ══════════ -->
+<section>
+  <p><span class="puce" aria-hidden="true"></span><span class="mono-label" style="color: var(--pivot);">piste 3 — la continuité</span></p>
+  <h2>Transitions de pages enrichies <span class="comp" aria-hidden="true">/carte vers fiche</span></h2>
+  <p class="statut">enrichissement du fondu existant — amendement a13</p>
+  <p class="corps">Aujourd&rsquo;hui, chaque navigation interne est un fondu uniforme de 300&nbsp;ms. La piste&nbsp;: la page entrante <strong>fond en montant de 12&nbsp;px</strong> (350&nbsp;ms), et sur le trajet carte&nbsp;→&nbsp;fiche de référence, <strong>le visuel voyage</strong> — la boîte d&rsquo;image de la carte devient le bandeau de la fiche, le reste fond. Aucun effet au premier chargement&nbsp;: le LCP n&rsquo;est pas concerné.</p>
+
+  <div class="plan demo">
+    <p class="mono-label demo-titre">démonstration — cliquer une carte, puis revenir</p>
+    <div class="viewport" id="vt-viewport">
+      <div class="page" id="page-liste">
+        <p class="fil">RÉFÉRENCES / SECTEUR LOGEMENTS</p>
+        <h3>Deux affaires</h3>
+        <div class="mini-cartes">
+          <button class="mini-carte" type="button" data-ouvre-fiche>
+            <span class="img vt-cliche"><img src="assets/cliche-demo.jpg" alt=""></span>
+            <span class="pied" style="display:block;">Petit collectif</span>
+          </button>
+          <button class="mini-carte" type="button" data-ouvre-fiche>
+            <span class="img"><img src="assets/cliche-demo.jpg" alt="" style="transform: scaleX(-1);"></span>
+            <span class="pied" style="display:block;">Autre affaire</span>
+          </button>
+        </div>
+      </div>
+      <div class="page" id="page-fiche" hidden>
+        <p class="fil">RÉFÉRENCES / PETIT COLLECTIF</p>
+        <h3>Petit collectif, Logements</h3>
+        <div class="fiche-bandeau vt-cliche"><img src="assets/cliche-demo.jpg" alt=""></div>
+        <button class="retour mono-label" type="button" data-retour-liste>&larr; Retour aux références</button>
+      </div>
+    </div>
+    <p class="legende-variante" style="margin-top: 14px;">La démonstration emploie l&rsquo;API View Transitions du navigateur — la même que le site (Astro). Sur un navigateur qui ne la porte pas, la bascule est immédiate, comme sur le site.</p>
+  </div>
+
+  <table class="bornes">
+    <tr><th scope="row">Où</th><td>toutes les navigations internes (fondu montant)&nbsp;; le voyage du visuel sur le seul trajet carte&nbsp;→&nbsp;fiche et son retour</td></tr>
+    <tr><th scope="row">Ce qui bouge</th><td>l&rsquo;opacité et 12&nbsp;px de translation de la page entrante&nbsp;; la boîte du visuel entre ses deux positions</td></tr>
+    <tr><th scope="row">Durée · courbe</th><td>350&nbsp;ms, courbe unique</td></tr>
+    <tr><th scope="row">Ne touche pas</th><td>le premier chargement (LCP intact), l&rsquo;en-tête et le pied de page, le contenu des planches</td></tr>
+  </table>
+</section>
+
+<!-- ══════════ OPTION 0 ══════════ -->
+<section>
+  <p><span class="puce" aria-hidden="true"></span><span class="mono-label" style="color: var(--pivot);">option 0 — le filet de flux</span></p>
+  <h2>Le tracé qui revient <span class="comp" aria-hidden="true">/à revalider</span></h2>
+  <p class="statut">mouvement déjà charté — retiré en août sur votre demande</p>
+  <p class="corps">Le système possède un cinquième mouvement, aujourd&rsquo;hui débranché&nbsp;: un filet vertical qui «&nbsp;câble&nbsp;» les sections de l&rsquo;accueil et se dessine une fois au chargement (900&nbsp;ms), un nœud carré à chaque frontière. Il avait été retiré lors des retouches d&rsquo;août. Si le site doit gagner en dynamisme, c&rsquo;est le candidat le plus naturel — il existe, il est dans la charte, il ne demande aucun amendement. À vous de dire s&rsquo;il revient.</p>
+
+  <div class="plan demo">
+    <p class="mono-label demo-titre">le tracé se dessine, les nœuds se posent à son passage</p>
+    <div class="flux-scene" id="flux-scene">
+      <div class="flux-trace" aria-hidden="true">
+        <svg viewBox="0 0 40 100" preserveAspectRatio="none" style="display:block; width:100%; height:100%;">
+          <polyline id="flux-ligne" points="20,0 20,100" />
+        </svg>
+      </div>
+      <div class="flux-section"><p class="mono-label">01 — relevé</p><p>Dix-sept années d&rsquo;exercice, sept personnes, quatre champs d&rsquo;ingénierie.</p></div>
+      <div class="flux-section"><p class="mono-label">02 — identité</p><p>Un bureau d&rsquo;études né en 2008, toujours à La Rochelle.</p></div>
+      <div class="flux-section"><p class="mono-label">03 — secteurs</p><p>Sept secteurs, une coupe — du logement au patrimoine.</p></div>
+      <div class="flux-section"><p class="mono-label">04 — expertises</p><p>De l&rsquo;audit à la réception, un interlocuteur unique.</p></div>
+    </div>
+    <p style="margin-top: 22px;"><button class="rejouer" type="button" data-rejoue-flux>Rejouer le tracé</button></p>
+  </div>
+
+  <table class="bornes">
+    <tr><th scope="row">Où</th><td>l&rsquo;accueil (marge gauche des sections 01 à 07) — au bureau seulement, la marge n&rsquo;existe pas au téléphone</td></tr>
+    <tr><th scope="row">Ce qui bouge</th><td>le tracé d&rsquo;un filet de 1&nbsp;px (une fois par chargement), l&rsquo;opacité des nœuds</td></tr>
+    <tr><th scope="row">Durée · courbe</th><td>900&nbsp;ms, courbe unique — la spécification existante, inchangée</td></tr>
+    <tr><th scope="row">Ne touche pas</th><td>rien d&rsquo;autre&nbsp;: purement décoratif, masqué aux lecteurs d&rsquo;écran, aucun suivi du défilement</td></tr>
+  </table>
+</section>
+
+<p class="note-reduite">Ce que cette maquette ne décide pas&nbsp;: les pistes retenues seront consignées en amendements A11+ au registre de la charte, puis implémentées avec la réduction de mouvement intégrale (tout posé d&rsquo;emblée), le repli sans JavaScript, et la mesure avant/après des budgets de performance — le premier rendu de l&rsquo;accueil est au seuil et ne sera pas retardé.</p>
+
+<script>
+  // ── Piste 1 : cascade — joue à l'entrée dans la vue, rejouable ──
+  (function () {
+    const grilles = [document.getElementById('grille-avant'), document.getElementById('grille-apres')];
+    const joue = () => grilles.forEach((g) => {
+      g.classList.remove('joue');
+      // reflow pour réarmer les transitions
+      void g.offsetWidth;
+      g.classList.add('joue');
+    });
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((e) => { if (e.isIntersecting) { joue(); obs.disconnect(); } });
+    }, { threshold: 0.3 });
+    io.observe(grilles[0]);
+    document.querySelector('[data-rejoue-cascade]').addEventListener('click', joue);
+  })();
+
+  // ── Option 0 : filet de flux — dashoffset vers 0, nœuds au passage ──
+  (function () {
+    const scene = document.getElementById('flux-scene');
+    const ligne = document.getElementById('flux-ligne');
+    const svg = ligne.closest('svg');
+    const DUREE = 900;
+    let noeuds = [];
+
+    function geometrie() {
+      const h = Math.max(scene.clientHeight, 1);
+      svg.setAttribute('viewBox', '0 0 40 ' + h);
+      const sections = Array.from(scene.querySelectorAll('.flux-section'));
+      const top = scene.getBoundingClientRect().top;
+      const ys = [];
+      for (let i = 0; i < sections.length - 1; i++) {
+        const a = sections[i].getBoundingClientRect();
+        const b = sections[i + 1].getBoundingClientRect();
+        ys.push(Math.round((a.bottom + b.top) / 2 - top));
+      }
+      let x = 20;
+      const pts = [x + ',0'];
+      const pos = [];
+      ys.forEach((y) => {
+        pts.push(x + ',' + (y - 8));
+        pos.push({ x: x, y: y - 8 });
+        x = x === 20 ? 32 : 20;
+        pts.push(x + ',' + (y + 8));
+      });
+      pts.push(x + ',' + h);
+      ligne.setAttribute('points', pts.join(' '));
+      noeuds.forEach((n) => n.remove());
+      noeuds = pos.map((p) => {
+        const s = document.createElement('span');
+        s.className = 'flux-noeud';
+        s.style.cssText = 'top:' + p.y + 'px;left:' + (p.x + 8) + 'px;';
+        s.dataset.at = String(p.y / h);
+        scene.querySelector('.flux-trace').appendChild(s);
+        return s;
+      });
+      return ligne.getTotalLength();
+    }
+
+    function joue() {
+      const len = geometrie();
+      ligne.style.transition = 'none';
+      ligne.style.strokeDasharray = String(len);
+      ligne.style.strokeDashoffset = String(len);
+      noeuds.forEach((n) => n.classList.remove('pose'));
+      void ligne.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        ligne.style.transition = 'stroke-dashoffset ' + DUREE + 'ms var(--ease)';
+        ligne.style.strokeDashoffset = '0';
+        noeuds.forEach((n) => {
+          setTimeout(() => n.classList.add('pose'), Number(n.dataset.at || 0) * DUREE);
+        });
+      });
+    }
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      geometrie();
+      ligne.style.strokeDashoffset = '0';
+      noeuds.forEach((n) => n.classList.add('pose'));
+    } else {
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach((e) => { if (e.isIntersecting) { joue(); obs.disconnect(); } });
+      }, { threshold: 0.4 });
+      io.observe(scene);
+    }
+    document.querySelector('[data-rejoue-flux]').addEventListener('click', joue);
+  })();
+
+  // ── Piste 3 : bascule de « pages » via l'API View Transitions ──
+  (function () {
+    const liste = document.getElementById('page-liste');
+    const fiche = document.getElementById('page-fiche');
+    const reduite = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function bascule(vers, de) {
+      const change = () => {
+        de.hidden = true;
+        vers.hidden = false;
+        if (!reduite && !document.startViewTransition) {
+          vers.classList.remove('entre');
+          void vers.offsetWidth;
+          vers.classList.add('entre');
+        }
+      };
+      if (!reduite && document.startViewTransition) {
+        document.startViewTransition(change);
+      } else {
+        change();
+      }
+    }
+    document.querySelectorAll('[data-ouvre-fiche]').forEach((b) =>
+      b.addEventListener('click', () => bascule(fiche, liste)));
+    document.querySelector('[data-retour-liste]').addEventListener('click', () => bascule(liste, fiche));
+  })();
+</script>
+
+</body>
+</html>

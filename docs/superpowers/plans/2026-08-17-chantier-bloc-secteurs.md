@@ -928,3 +928,47 @@ Termine par le prompt de lancement de la session suivante, en annexe du plan
 du chantier concerné et reproduit intégralement dans ton message final - la
 règle de continuité est dans CLAUDE.md parce qu'elle a été manquée deux fois.
 ````
+
+
+## 9. Session du 2026-08-27 — cadrage motion, relevé d'arbre d'accessibilité
+
+- **CHANTIER MOTION ouvert dans son propre plan** :
+  `docs/superpowers/plans/2026-08-27-chantier-motion.md` — inventaire des
+  mouvements (fait saillant : `TraceFlux` orphelin depuis `7562544`, retiré
+  sur demande FT2E), contraintes, quatre pistes bornées (0 : filet de flux à
+  revalider ; 1 : cascade A11 ; 2 : survol des photographies, variantes a/b,
+  A12 ; 3 : View Transitions enrichies A13), et maquette d'arbitrage
+  `docs/maquettes/ft2e-motion-pistes.html` (démonstrations jouables,
+  contrôlées au navigateur). **Aucune implémentation sur le site : la porte
+  est l'arbitrage FT2E.**
+- **Correspondances des 17 clichés : non livrées** — le point 2 du prompt
+  reste intact pour la suite.
+- **NVDA : toujours dû (passage humain).** En préparation, relevé de l'ARBRE
+  D'ACCESSIBILITÉ sur le déploiement (Playwright, 2026-08-27) :
+  - accueil / coupe : groupe « Film du secteur Logements » ; boutons
+    « Cliché N sur 4 — [légende] » avec état `pressed` ; tranches 02-07
+    nommées « Secteur NN — [intitulé], quatre clichés » ; compteur de film
+    présent dans l'arbre ; hero : lien « Voir les références du secteur
+    Logements », alt descriptif du cliché Aurora ;
+  - `/references/` : groupe « Filtres par secteur », UNE légende par bouton
+    (le doublon `lg:hidden` / `lg:inline-flex` ne fuit pas dans l'arbre),
+    `pressed` sur le filtre actif ; cartes-liens : vignette SVG
+    `aria-hidden` à la source, nom du lien = titre court + commune +
+    chronologie. ⚠ Le dump Playwright affiche ces liens « sans nom » : c'est
+    une élision de l'outil, vérifiée au DOM (`aria-hidden` posé, nom
+    calculable) — ne pas conclure à un défaut sur le seul dump ;
+  - `/secteurs/logements/` : `h1` unique, hiérarchie sans saut, alt
+    descriptifs, maillage interne réel (expertises + fiches).
+  - Reste À L'ÉCOUTE (NVDA seul) : l'annonce du compteur `aria-live` au fil
+    du film, l'ordre de lecture de la coupe au clavier, la verbosité des
+    noms de boutons du film, les FAQ des pages secteurs.
+- **Validations FT2E** : liste consolidée remise à l'utilisateur — § 6 du
+  plan (17 fichiers écartés, artefacts d'agrandissement IA, crédit
+  © FT2E) + session du 26 soir (vedette à deux rangs, rail et mini-coupe
+  « Tous », intitulés de secteurs, cliché Aurora au hero et son absence au
+  téléphone) + l'arbitrage motion lui-même.
+- **Decap** : rappelé une fois en ouverture, ajourné en connaissance de
+  cause (blocage OAuth hors dépôt, `docs/22-prise-en-main-decap.md` § 0).
+
+**Le prompt de la session suivante vit en annexe A du plan motion** et
+remplace l'annexe D ci-dessus.
