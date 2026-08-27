@@ -62,7 +62,7 @@ collections:
       - { label: "Tertiaire / ERP", field: secteur, pattern: "Tertiaire / ERP" }
       - { label: "Industriel", field: secteur, pattern: "Industriel" }
       - { label: "Patrimoine", field: secteur, pattern: "Patrimoine" }
-      - { label: "Monotechnique — Audit et EXE", field: secteur, pattern: "Monotechnique — Audit et EXE" }
+      - { label: "Monotechnique — Audit", field: secteur, pattern: "Monotechnique — Audit" }
       - { label: "Coordination SSI", field: secteur, pattern: "Coordination SSI" }
       - { label: "Études d’exécution / BIM", field: secteur, pattern: "Études d’exécution / BIM" }
       - { label: "Affaires en cours", field: statut, pattern: "en cours" }
@@ -90,7 +90,7 @@ collections:
           - "Tertiaire / ERP"
           - "Industriel"
           - "Patrimoine"
-          - "Monotechnique — Audit et EXE"
+          - "Monotechnique — Audit"
           - "Coordination SSI"
           - "Études d’exécution / BIM"
         hint: "Les sept secteurs d'activité de FT2E : quatre marchés du bâtiment, puis trois modes d'intervention portés comme segments à part entière. Cette liste est close — elle alimente les filtres de la page Références et le build refuse toute autre valeur."
@@ -429,7 +429,7 @@ collections:
           - "Tertiaire / ERP"
           - "Industriel"
           - "Patrimoine"
-          - "Monotechnique — Audit et EXE"
+          - "Monotechnique — Audit"
           - "Coordination SSI"
           - "Études d’exécution / BIM"
         hint: "Mêmes sept secteurs que les fiches projets — liste close, recopiée du schéma."

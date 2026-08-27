@@ -1,5 +1,5 @@
 ---
-titre: "Monotechnique — Audit et EXE"
+titre: "Monotechnique — Audit"
 accroche: "Une seule spécialité technique, un seul intervenant : FT2E assure seul la maîtrise d’œuvre d’opérations ciblées, du diagnostic à la réception."
 ordre: 6
 cliches:

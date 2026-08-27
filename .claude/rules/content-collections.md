@@ -36,7 +36,7 @@ Le schéma Zod doit **refuser** :
 
 - Un titre vide ou > 80 caractères.
 - Un slug contenant majuscules, accents ou espaces.
-- Un `secteur` en dehors de l'énumération (`Logements | Tertiaire / ERP | Industriel | Patrimoine | Coordination SSI | Monotechnique — Audit et EXE | Études d'exécution / BIM`).
+- Un `secteur` en dehors de l'énumération (`Logements | Tertiaire / ERP | Industriel | Patrimoine | Coordination SSI | Monotechnique — Audit | Études d'exécution / BIM`).
 - Une `mission_ft2e` vide.
 - Une date dans le futur pour un projet livré.
 

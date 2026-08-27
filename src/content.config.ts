@@ -12,7 +12,7 @@ const SECTEURS = [
   'Tertiaire / ERP',
   'Industriel',
   'Patrimoine',
-  'Monotechnique — Audit et EXE',
+  'Monotechnique — Audit',
   'Coordination SSI',
   "Études d’exécution / BIM",
 ] as const;

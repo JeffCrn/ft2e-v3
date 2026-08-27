@@ -999,3 +999,23 @@ seul mécanisme :
 Documentation alignée dans le même commit (CLAUDE.md, tokens rule § Index
 des références). Pas un amendement : le chip de filtre est le composant
 canonique de la charte, et A9 n'est pas touché.
+
+
+## 11. Renommage du 2026-08-27 — le secteur 6 devient « Monotechnique — Audit »
+
+Demande FT2E (« on supprime EXE »). Graphie arbitrée conservée (tiret
+cadratin, Audit en bas de casse). Même famille que le BREAKING de
+`8250827` : l'énumération Zod, Decap (label ET pattern du filtre de
+collection), le titre de la fiche secteur, les deux fiches projets, les
+trois `typique_pour` d'expertises, le lien en dur de `/expertises` et la
+règle `content-collections.md` — dans le même commit. Slugs et répertoires
+INCHANGÉS (`monotechnique`, l'URL n'est pas l'intitulé). Seul le titre
+portait « EXE » : la prose du secteur n'est pas touchée. Le commentaire de
+`/references` qui citait ce libellé comme le plus long est réécrit (le plus
+long est désormais « Études d'exécution / BIM (1) »). Tout brouillon Decap
+antérieur devra reprendre un secteur de la nouvelle énumération.
+
+⚠ Toute annexe et tout § antérieurs qui écrivent « Monotechnique — Audit
+et EXE » (dont la liste des 17 clichés de l'annexe B du plan motion) se
+lisent désormais « Monotechnique — Audit » : l'historique n'est pas
+réécrit, la donnée fait foi.
