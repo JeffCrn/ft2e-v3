@@ -46,7 +46,14 @@ const cartouche = `${commune(lieu).libelle} · ${libelleChronologie(projet)}`;
       cette boîte suive le dessin. Imposer le rapport ici ajouterait du papier
       au-dessus et en dessous dès que la carte dépasse 300 px de large — et
       c'est de toute façon le dessin qui porte le 3:2, pas son support. */}
-  <div class="relative shrink-0 border-b border-filet-3 bg-papier overflow-hidden">
+  {/* A13 : la boîte du visuel porte le nom de transition de l'affaire — en
+      navigation carte -> fiche, elle voyage jusqu'au cadre de la planche de
+      la fiche (même nom, posé dans references/[...slug].astro). Les
+      similaires excluent la fiche courante : le nom reste unique par page. */}
+  <div
+    class="relative shrink-0 border-b border-filet-3 bg-papier overflow-hidden"
+    transition:name={`planche-${projet.id}`}
+  >
     <PlancheReference src={planche} variante="vignette" />
     {demo && (
       <span class="absolute right-3 top-2.5 mono-label font-normal text-pivot z-10">[démo]</span>

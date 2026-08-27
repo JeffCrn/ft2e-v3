@@ -125,7 +125,12 @@ const jsonLd = {
       composée dans les jetons. */}
   <section class="pt-12 md:pt-14">
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
-      <PlancheReference src={planche} id={`planche-${projet.id}`} />
+      {/* A13 : même nom de transition que la boîte de vignette des cartes
+          (CarteProjet) — en navigation carte -> fiche, le visuel voyage de
+          la carte au cadre de la planche. */}
+      <div transition:name={`planche-${projet.id}`}>
+        <PlancheReference src={planche} id={`planche-${projet.id}`} />
+      </div>
     </div>
   </section>
 

@@ -1,6 +1,19 @@
 ---
 import '../styles/global.css';
-import { ClientRouter, fade } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
+
+// Transition de page — amendement A13 (2026-08-27) : le fondu uniforme de
+// 300 ms devient un FONDU MONTANT — la page entrante fond en montant de
+// 12 px (350 ms), la sortante fond en 200 ms. Les keyframes vivent dans
+// motion.css ; la courbe est la courbe unique. Rien au premier chargement :
+// les View Transitions ne jouent qu'en navigation interne, le LCP n'est
+// pas concerné. prefers-reduced-motion coupe tout (garde dans motion.css).
+const COURBE_UNIQUE = 'cubic-bezier(0.2, 0.7, 0.2, 1)';
+const fonduMontant = {
+  old: { name: 'vt-fondu-sortant', duration: '200ms', easing: COURBE_UNIQUE, fillMode: 'both' },
+  new: { name: 'vt-fondu-montant', duration: '350ms', easing: COURBE_UNIQUE, fillMode: 'both' },
+};
+const transitionPage = { forwards: fonduMontant, backwards: fonduMontant };
 
 /**
  * Les trois fontes du chemin critique, préchargées.
@@ -104,7 +117,7 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <div class="min-h-screen flex flex-col max-w-[1440px] mx-auto bg-papier trame-fond shadow-[var(--shadow-page)]">
       <slot name="header" />
 
-      <main id="contenu-principal" class="flex-1" transition:animate={fade({ duration: '0.3s' })}>
+      <main id="contenu-principal" class="flex-1" transition:animate={transitionPage}>
         <slot />
       </main>
 

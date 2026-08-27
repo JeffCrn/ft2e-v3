@@ -101,6 +101,31 @@ html.js-plans [data-plan-groupe].plan-immediat > * {
   opacity: 1;
 }
 
+/* ─── Transitions de pages (A13) — le fondu montant ───
+   Keyframes du transition:animate de BaseLayout : la page entrante fond
+   en montant de 12 px, la sortante fond. Sur le trajet carte -> fiche,
+   la boîte du visuel porte un transition:name partagé (CarteProjet et la
+   fiche) : le navigateur interpole sa position et sa taille — le groupe
+   reprend la durée et la courbe du système. */
+
+@keyframes vt-fondu-montant {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes vt-fondu-sortant {
+  to {
+    opacity: 0;
+  }
+}
+
+::view-transition-group(*) {
+  animation-duration: 350ms;
+  animation-timing-function: var(--ease-blueprint);
+}
+
 /* ═══════════════════════════════════════════════
    Reduced motion — tout est posé d'emblée
    ═══════════════════════════════════════════════ */
@@ -127,5 +152,13 @@ html.js-plans [data-plan-groupe].plan-immediat > * {
   /* A12 : le voile se lève toujours (c'est un état), mais sans fondu. */
   .lien-cliche .voile-cliche {
     transition: none !important;
+  }
+
+  /* A13 : la navigation bascule sans transition. */
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }

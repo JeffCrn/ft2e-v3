@@ -191,6 +191,24 @@ d'état** (0,42 — il dit la sélection, pas le survol) et ne reçoivent pas ce
 plus. Aucun déplacement : c'est une bascule d'opacité, dans l'esprit de la règle
 qu'elle infléchit.
 
+### A13 — les transitions de pages enrichies (2026-08-27)
+
+Troisième amendement du chantier motion (arbitrage FT2E : piste 3).
+
+| № | Objet | Révision 2.1 | Ce qui s'applique |
+|---|---|---|---|
+| A13 | Navigation interne | fondu uniforme 300 ms | **fondu montant** — la page entrante fond en montant de 12 px (350 ms), la sortante fond (200 ms) ; et sur le trajet carte → fiche de référence, **le visuel voyage** (`transition:name` partagé entre la boîte de vignette de `CarteProjet` et le cadre de la planche de la fiche) |
+
+Les bornes : courbe unique, 350 ms partout (les groupes nommés reprennent la durée et
+la courbe via `::view-transition-group(*)` dans `motion.css`) ; **rien au premier
+chargement** — les View Transitions ne jouent qu'en navigation interne, le LCP n'est
+pas concerné ; le nom de transition est `planche-<slug>`, unique par page
+(`ProjetsSimilaires` exclut la fiche courante) ; `prefers-reduced-motion` coupe
+toutes les animations de transition (`animation: none` sur les pseudo-éléments
+`::view-transition-*`). Implantation : `BaseLayout` (`transition:animate` du
+`<main>`), `motion.css` (keyframes `vt-fondu-montant` / `vt-fondu-sortant`),
+`CarteProjet` et `references/[...slug]` (le nom partagé).
+
 **Implantation de la légende et des équerres (§ 13)** — la charte veut la légende **en bas à gauche** *et* les équerres intactes (« repère de tirage, jamais un encadrement ») : les deux ne peuvent pas se disputer l'angle. La géométrie tranche, et elle est **dérivée**, jamais réglée à l'œil. Les jetons `--equerre-cote` (18 px) et `--equerre-retrait` (5 px) donnent `--equerre-gouttiere` (28 px), dont découlent à la fois les quatre équerres de `CoinsCuivre` et la recette `.legende-media` :
 
 - **horizontalement** : `left: gouttière`, `max-width: 100% − 2 × gouttière` — les deux équerres basses sont dégagées quelle que soit la longueur de la légende, qui déborde vers le haut, où aucune équerre ne l'attend ;
@@ -250,6 +268,8 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
   4. survol de bouton, 260 ms, encre → profond.
 - **Survol = bascule de fond** — aucun déplacement, aucun filet qui s'épaissit (**plus de `box-shadow` inset**), aucune ombre qui apparaît. Le filet ne bouge pas. *Unique exception : A10 — l'ouverture de tranche de la coupe des secteurs, bornée au registre des amendements.*
 - **Focus** : cadre `2px solid pivot`, décalé 2 px.
+- **Survol d'un cliché-lien** : voile d'encre 14 % levé au survol et au focus, 300 ms (A12 — cliché du hero, cliché principal de la coupe ; jamais un dessin de planche).
+- **Navigation interne** : fondu montant 12 px / 350 ms, et le visuel voyage sur le trajet carte → fiche (A13) — rien au premier chargement.
 - Aucun compteur qui s'incrémente, aucun parallax, aucun hover lift ; `prefers-reduced-motion` partout (tout est posé d'emblée).
 
 ## Patterns
