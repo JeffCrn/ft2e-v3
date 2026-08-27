@@ -53,6 +53,12 @@ porte l'extraction :
   service, deux colonnes de machines, et dans chaque colonne UNE boîte qui
   enjambe une frontière de bande — jamais la même. À gauche l'eau chaude
   porte la ventilation, à droite le chauffage porte l'eau chaude.
+
+- `terminaux` — l'équipement par local (mairie des Portes-en-Ré) : six
+  cellules portant chacune leur équipement propre, l'air pour seul réseau
+  — trois flèches entrantes, quatre lignes menant chacune à son groupe
+  d'extraction dimensionnés par zone — et AUCUN nœud central : la
+  décentralisation est la démonstration.
 """
 
 from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
@@ -2823,9 +2829,299 @@ def composer_appui_commande(donnees):
             str(xriser - probes[e["commande_zone"]]) for e in elements) + " px")
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Mécanisme `terminaux` — des équipements par local, aucune production centrale
+# Huitième emploi, mairie des Portes-en-Ré (2026-08-27, reprise sur arbitrage
+# FT2E : la planche schématise la solution technique, pas le déroulé de
+# l'affaire). Six cellules de locaux portent chacune leur équipement propre
+# (une marque encrée + son intitulé) ; le seul réseau est l'air — trois
+# flèches entrantes par les menuiseries, quatre lignes qui convergent vers
+# trois groupes d'extraction dimensionnés par zone et le caisson régulé du
+# local serveur. Texte masqué : six boîtes à marque propre, des flèches
+# entrantes, quatre lignes vers quatre petites boîtes, AUCUN nœud central —
+# la décentralisation est la démonstration. Les cellules sont des bandes
+# topologiques d'égale taille : aucune implantation réelle (règle 4).
+# Constantes préfixées TX_ — deux affectations d'un même nom au niveau du
+# module se marchent dessus, et c'est le premier dessin qui se recompose faux.
+# ─────────────────────────────────────────────────────────────────────────────
+
+TX_ARR0 = 66                    # la menuiserie (tick) et le départ des flèches
+TX_LX0, TX_LX1 = 148, 620       # les cellules de locaux
+TX_GX0, TX_GX1 = 920, 1144      # les groupes d'extraction
+TX_Y0 = 248                     # haut de la première cellule
+TX_H_CEL = 56
+TX_ECART = 12
+TX_H_GRP = 48
+
+
+def composer_terminaux(donnees):
+    tx = donnees["terminaux"]
+    locaux = sorted(tx["locaux"], key=lambda l: l["ordre"])
+    groupes = {g["cle"]: g for g in tx["groupes"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête + double légende courte (le signe toujours doublé d'un mot) ──
+    leg_eq = tx["legende_equipement_court"]
+    leg_air = tx["legende_air_court"]
+    l_air = mesurer(leg_air, 10, "mono", 10 * 0.14)
+    x_fl = W - MARGE - l_air - 30
+    A(ligne(x_fl, Y_ENTETE - 3.5, x_fl + 16, Y_ENTETE - 3.5, "encre", 1.5))
+    A(fleche(x_fl + 22, Y_ENTETE - 3.5, "encre", direction="droite", taille=7))
+    A(texte(W - MARGE, Y_ENTETE, leg_air, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    l_eq = mesurer(leg_eq, 10, "mono", 10 * 0.14)
+    x_chip = x_fl - 24 - l_eq - 15
+    A(rect(x_chip, Y_ENTETE - 7.5, 7, 7, "encre"))
+    A(texte(x_fl - 24, Y_ENTETE, leg_eq, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    controler("en-tête schéma", tx["entete"], 10, "mono",
+              x_chip - 24 - MARGE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, tx["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Les deux registres ───────────────────────────────────────────────────
+    A(texte(MARGE, Y_REGISTRES, tx["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_REGISTRES, tx["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Les six cellules, leurs équipements, leurs flux ──────────────────────
+    cys = {}
+    for i, lo in enumerate(locaux):
+        y = TX_Y0 + i * (TX_H_CEL + TX_ECART)
+        cy = y + TX_H_CEL / 2
+        cys[lo["cle"]] = cy
+        A(rect_bord(TX_LX0, y, TX_LX1 - TX_LX0, TX_H_CEL, "papier", "filet-1"))
+        controler(f'libellé {lo["cle"]}', lo["libelle"], 15, "sans-600",
+                  TX_LX1 - TX_LX0 - 32)
+        A(texte(TX_LX0 + 16, y + 23, lo["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        if lo["equipement"]:
+            A(rect(TX_LX0 + 16, y + 37, 7, 7, "encre"))
+            controler(f'équipement {lo["cle"]}', lo["equipement"], 10, "mono",
+                      TX_LX1 - TX_LX0 - 46, 10 * 0.14)
+            A(texte(TX_LX0 + 30, y + 44, lo["equipement"], "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+        if lo["entree_air"]:
+            A(ligne(TX_ARR0, cy - 8, TX_ARR0, cy + 8, "encre", 1.5))
+            A(ligne(TX_ARR0, cy, TX_LX0 - 10, cy, "encre", 1.5))
+            A(fleche(TX_LX0 - 3, cy, "encre", direction="droite", taille=8))
+
+    # ── Les groupes d'extraction, alignés sur leur local ─────────────────────
+    ordre_groupes = [lo["extraction"] for lo in locaux if lo["extraction"]]
+    for cle in ordre_groupes:
+        g = groupes[cle]
+        cy = cys[cle]
+        y = cy - TX_H_GRP / 2
+        A(ligne(TX_LX1, cy, TX_GX0 - 10, cy, "encre", 1.5))
+        A(fleche(TX_GX0 - 3, cy, "encre", direction="droite", taille=8))
+        A(rect_bord(TX_GX0, y, TX_GX1 - TX_GX0, TX_H_GRP, "papier", "filet-1"))
+        controler(f'groupe {cle}', g["libelle"], 13, "sans-600",
+                  TX_GX1 - TX_GX0 - 24)
+        A(texte(TX_GX0 + 12, y + 20, g["libelle"], "sans", 13, 600,
+                "encre", wdth=112))
+        # Forme courte dans la boîte — la forme longue vit au JSON et à l’aria.
+        det = g.get("detail_court", g["detail"])
+        valeur = g["affichee"] + (" · " + det if det else "")
+        controler(f'valeur {cle}', valeur, 10, "mono",
+                  TX_GX1 - TX_GX0 - 24, 10 * 0.14)
+        A(texte(TX_GX0 + 12, y + 38, valeur, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    controler("phrase de principe", donnees["phrase_principe"], 17,
+              "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    n_eq = sum(1 for lo in locaux if lo["equipement"])
+    n_arr = sum(1 for lo in locaux if lo["entree_air"])
+    bas_cellules = TX_Y0 + len(locaux) * TX_H_CEL + (len(locaux) - 1) * TX_ECART
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"{len(locaux)} cellules dont {n_eq} à équipement "
+                         f"propre (marque encrée), {n_arr} flèches d’air "
+                         f"entrantes, {len(ordre_groupes)} lignes horizontales "
+                         f"menant chacune à sa boîte "
+                         f"d’extraction alignées chacune sur son local — aucun "
+                         f"nœud central sur la planche : la décentralisation "
+                         f"est portée par la géométrie seule",
+        "topologie": f"menuiseries x {TX_ARR0}, cellules x {TX_LX0}–{TX_LX1}, "
+                     f"groupes x {TX_GX0}–{TX_GX1} ; cellules y {TX_Y0}–"
+                     f"{bas_cellules}",
+        "bas_du_dessin": f"cellules jusqu’à y {bas_cellules}, phrase à "
+                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
+                         f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % de "
+                            f"la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_terminaux(donnees):
+    """La vignette : le motif seul — six cellules à marque propre, trois
+    flèches entrantes, quatre lignes vers quatre boîtes chiffrées. Libellés
+    et légendes laissés à la planche ; quatre valeurs se lisent."""
+    tx = donnees["terminaux"]
+    locaux = sorted(tx["locaux"], key=lambda l: l["ordre"])
+    groupes = {g["cle"]: g for g in tx["groupes"]}
+    x_arr, lx0, lx1 = 8, 24, 140
+    gx0, gx1 = 204, 286
+    y0, h_cel, ecart = 44, 16, 6
+    h_grp = 18
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    cys = {}
+    for i, lo in enumerate(locaux):
+        y = y0 + i * (h_cel + ecart)
+        cy = y + h_cel / 2
+        cys[lo["cle"]] = cy
+        A(rect_bord(lx0, y, lx1 - lx0, h_cel, "papier", "filet-1"))
+        if lo["equipement"]:
+            A(rect(lx0 + 6, cy - 2.5, 5, 5, "encre"))
+        if lo["entree_air"]:
+            A(ligne(x_arr, cy, lx0 - 7, cy, "encre", 1.2))
+            A(fleche(lx0 - 2, cy, "encre", direction="droite", taille=5))
+
+    for cle in [lo["extraction"] for lo in locaux if lo["extraction"]]:
+        g = groupes[cle]
+        cy = cys[cle]
+        y = cy - h_grp / 2
+        A(ligne(lx1, cy, gx0 - 7, cy, "encre", 1.2))
+        A(fleche(gx0 - 2, cy, "encre", direction="droite", taille=5))
+        A(rect_bord(gx0, y, gx1 - gx0, h_grp, "papier", "filet-1"))
+        A(texte(gx0 + 8, cy + 3.5, g["affichee"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    A("</svg>")
+    bas = y0 + len(locaux) * h_cel + (len(locaux) - 1) * ecart
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": f"le motif seul : {len(locaux)} cellules à marque propre, "
+                 f"trois flèches entrantes, quatre lignes vers quatre boîtes "
+                 f"chiffrées (les débits) — libellés et légendes laissés à la "
+                 f"planche",
+        "bas_du_dessin": f"{bas:.0f} px, marge basse {VH - bas:.0f} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_terminaux(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1 — les six cellules
+    nommées en court, leurs équipements en court, les flux et les quatre
+    boîtes chiffrées. Sans phrase de principe ni cartouche."""
+    tx = donnees["terminaux"]
+    locaux = sorted(tx["locaux"], key=lambda l: l["ordre"])
+    groupes = {g["cle"]: g for g in tx["groupes"]}
+    x_arr, lx0, lx1 = 8, 24, 300
+    gx0, gx1 = 392, AW - A_MARGE
+    y0, h_cel, ecart = 64, 34, 8
+    h_grp = 34
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    leg_eq = tx["legende_equipement_court"]
+    l_eq = mesurer(leg_eq, 10, "mono", 10 * 0.14)
+    A(rect(gx1 - l_eq - 15, 27.5, 6, 6, "encre"))
+    A(texte(gx1, 34, leg_eq, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+
+    cys = {}
+    for i, lo in enumerate(locaux):
+        y = y0 + i * (h_cel + ecart)
+        cy = y + h_cel / 2
+        cys[lo["cle"]] = cy
+        A(rect_bord(lx0, y, lx1 - lx0, h_cel, "papier", "filet-1"))
+        A(texte(lx0 + 10, y + 15, lo["libelle_court"], "sans", 13, 600,
+                "encre", wdth=112))
+        if lo["equipement_court"]:
+            A(rect(lx0 + 10, y + 23, 5, 5, "encre"))
+            A(texte(lx0 + 21, y + 29, lo["equipement_court"], "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+        if lo["entree_air"]:
+            A(ligne(x_arr, cy, lx0 - 8, cy, "encre", 1.5))
+            A(fleche(lx0 - 2, cy, "encre", direction="droite", taille=6))
+
+    for cle in [lo["extraction"] for lo in locaux if lo["extraction"]]:
+        g = groupes[cle]
+        cy = cys[cle]
+        y = cy - h_grp / 2
+        A(ligne(lx1, cy, gx0 - 8, cy, "encre", 1.5))
+        A(fleche(gx0 - 2, cy, "encre", direction="droite", taille=6))
+        A(rect_bord(gx0, y, gx1 - gx0, h_grp, "papier", "filet-1"))
+        valeur = g["affichee"] + (" · SONDE" if g["detail"] else "")
+        A(texte(gx0 + 10, cy + 3.5, valeur, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    A("</svg>")
+    bas = y0 + len(locaux) * h_cel + (len(locaux) - 1) * ecart
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"le motif entier : {len(locaux)} cellules nommées avec leur "
+              f"équipement en court, trois flèches entrantes, quatre lignes "
+              f"vers quatre boîtes chiffrées — la légende courte de "
+              f"l’équipement en tête ; phrase et cartouche laissés à la planche",
+        bas=f"cellules jusqu’à y {bas} px, marge basse {AH - bas} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "terminaux" in donnees:
+        return composer_terminaux(donnees)
     if "commande" in donnees:
         return composer_commande(donnees)
     if "individualisation" in donnees:
@@ -2842,6 +3138,8 @@ def composer(donnees):
 
 
 def composer_vignette(donnees):
+    if "terminaux" in donnees:
+        return composer_vignette_terminaux(donnees)
     if "commande" in donnees:
         return composer_vignette_commande(donnees)
     if "individualisation" in donnees:
@@ -2858,6 +3156,8 @@ def composer_vignette(donnees):
 
 
 def composer_appui(donnees):
+    if "terminaux" in donnees:
+        return composer_appui_terminaux(donnees)
     if "commande" in donnees:
         return composer_appui_commande(donnees)
     if "individualisation" in donnees:

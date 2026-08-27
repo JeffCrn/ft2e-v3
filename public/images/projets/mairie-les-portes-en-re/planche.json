@@ -1,106 +1,173 @@
 {
   "fiche": "mairie-les-portes-en-re",
-  "archetype": "chronologie-affaire",
-  "archetype_motif": "La thèse de la fiche est un calendrier de coexistence : « la commune a réhabilité sa mairie sans la fermer ». Le dessin porte un axe des temps et trois registres — une ligne continue, le service public, qui traverse la planche sans s’interrompre ; deux blocs de chantier qui se succèdent au-dessous d’elle, l’office de tourisme au printemps 2023 puis la mairie et la salle des fêtes de février 2024 à avril 2025 ; et le relais orthogonal qui les relie, la salle des fêtes libérée par le premier chantier permettant le second. Texte masqué, il reste une ligne ininterrompue et deux blocs décalés reliés par une marche : c’est la démonstration. Troisième emploi de l’archétype et troisième mécanisme — la précédence d’Horizon empilait des niveaux, la divergence de Tourtet traçait deux grandeurs contre un seuil ; aucun des deux ne sait montrer qu’une chose continue pendant que d’autres se déplacent.",
-  "surtitre": "SCHÉMA DE PRINCIPE · DEUX CHANTIERS, UN SERVICE CONTINU",
+  "archetype": "boucle-fluide",
+  "archetype_motif": "La thèse de la fiche est un parti de conception : « le chauffage et la ventilation sont traités local par local plutôt qu’en grand système ». L’archétype est retenu contre sa forme canonique — production, distribution, terminaux — parce que la thèse est précisément l’absence du premier terme : le dessin montre six locaux portant chacun son équipement propre (rideau d’air chaud asservi à la porte, pompe à chaleur monosplit, panneaux rayonnants dimensionnés pièce par pièce), et, pour seul réseau, l’air — qui entre par les menuiseries et rejoint trois groupes d’extraction dimensionnés par zone, plus le caisson régulé du local serveur. Texte masqué, il reste six cellules à marque propre, trois flèches entrantes, quatre lignes menant chacune à sa petite boîte, et AUCUN nœud central : c’est la démonstration. Huitième mécanisme du module. Reprise du 2026-08-27 : la première planche de la fiche (chronologie-affaire, mécanisme relais) racontait le déroulé de l’opération — l’arbitrage FT2E rappelle que la planche schématise la solution technique, pas l’histoire de l’affaire.",
+  "surtitre": "SCHÉMA DE PRINCIPE · LE CHAUFFAGE ET L’AIR, LOCAL PAR LOCAL",
   "titre": "Mairie des Portes-en-Ré",
-  "sous_titre": "Réhabiliter en site occupé : le chantier se déplace, le service reste",
+  "sous_titre": "Des équipements dimensionnés local par local, plutôt qu’en grand système",
   "cartouche_legende": "LES PORTES-EN-RÉ · 492 m² · 2025",
-  "aria_label": "Chronologie de principe d’une réhabilitation en site occupé : de 2023 à 2025, deux chantiers se succèdent — l’office de tourisme au printemps 2023, créé dans l’emprise de la salle des fêtes, puis la mairie et la salle des fêtes elles-mêmes, de février 2024 à avril 2025, au fil de 55 comptes rendus de chantier — pendant qu’une ligne continue porte le service public, accueil, police municipale et agence postale, sans interruption sur toute la durée. La salle des fêtes libérée par le premier chantier permet le second, et la mairie réaménagée est livrée au printemps 2025.",
-  "relais": {
-    "entete": "DEUX CHANTIERS SUCCESSIFS, UN SERVICE QUI NE S’INTERROMPT PAS",
-    "legende_chantier": "UN CHANTIER",
-    "legende_service": "LE SERVICE, CONTINU",
-    "legende_chantier_court": "CHANTIER",
-    "legende_service_court": "SERVICE",
-    "axe": {
-      "debut": "2023-01-01",
-      "fin": "2025-06-30",
-      "annees": [
-        "2023",
-        "2024",
-        "2025"
-      ]
+  "aria_label": "Schéma de principe des lots fluides d’une mairie réhabilitée, sans production centrale : six locaux portent chacun leur équipement propre — l’accueil du public un rideau d’air chaud asservi au contact de porte, la salle du conseil et des mariages une pompe à chaleur monosplit au R32 de 7 kW en chaud et 6 kW en froid, les bureaux des panneaux rayonnants dimensionnés sur des déperditions calculées pièce par pièce, les archives des bouches coupe-feu, le local serveur un refroidissement par extraction. L’air entre par les menuiseries de l’accueil, de la salle et des bureaux, puis rejoint trois groupes d’extraction basse consommation dimensionnés par zone — 120 m³/h aux sanitaires, 515 m³/h aux bureaux, 915 m³/h aux archives — et vers le caisson du local serveur, 900 m³/h régulé par sonde de température. Aucun nœud central : chaque local reçoit la réponse dimensionnée pour son usage.",
+  "terminaux": {
+    "entete": "SIX LOCAUX, CHACUN SON ÉQUIPEMENT · L’AIR CONVERGE VERS TROIS GROUPES D’EXTRACTION",
+    "registres": {
+      "gauche": "ENTRÉES D’AIR EN MENUISERIES",
+      "droite": "L’EXTRACTION, DIMENSIONNÉE PAR ZONE"
     },
-    "service": {
-      "libelle": "Le service public",
-      "detail": "ACCUEIL · POLICE MUNICIPALE · AGENCE POSTALE",
-      "mention": "SANS INTERRUPTION",
-      "valeur": "2023 → 2025",
-      "unite": "",
-      "ordre": 1
-    },
-    "chantiers": [
+    "legende_equipement": "L’ÉQUIPEMENT PROPRE AU LOCAL",
+    "legende_air": "L’AIR, DE LA MENUISERIE À L’EXTRACTION",
+    "legende_equipement_court": "ÉQUIPEMENT DU LOCAL",
+    "legende_air_court": "L’AIR EXTRAIT",
+    "entrees_libelle": "ENTRÉES D’AIR EN MENUISERIES",
+    "locaux": [
       {
-        "cle": "ot",
-        "ordre": 2,
-        "libelle": "Office de tourisme",
-        "detail": "CRÉÉ DANS L’EMPRISE DE LA SALLE DES FÊTES",
-        "mention": "PRINTEMPS 2023",
-        "valeur": "printemps 2023",
+        "cle": "accueil",
+        "ordre": 1,
+        "libelle": "Accueil du public",
+        "libelle_court": "Accueil",
+        "equipement": "RIDEAU D’AIR CHAUD · ASSERVI AU CONTACT DE PORTE",
+        "equipement_court": "RIDEAU D’AIR CHAUD",
+        "valeur": "",
         "unite": "",
-        "debut": "2023-03-01",
-        "fin": "2023-06-30"
+        "entree_air": true,
+        "extraction": null
       },
       {
-        "cle": "mairie",
+        "cle": "salle",
+        "ordre": 2,
+        "libelle": "Salle du conseil et des mariages",
+        "libelle_court": "Salle du conseil",
+        "equipement": "PAC MONOSPLIT R32 · 7 kW CHAUD · 6 kW FROID",
+        "equipement_court": "PAC 7 kW · 6 kW",
+        "valeur": "7",
+        "unite": "kW",
+        "entree_air": true,
+        "extraction": null
+      },
+      {
+        "cle": "bureaux",
         "ordre": 3,
-        "libelle": "Mairie et salle des fêtes",
-        "detail": "55 COMPTES RENDUS DE CHANTIER",
-        "mention": "FÉVR. 2024 → AVR. 2025",
-        "valeur": "février 2024 → avril 2025",
+        "libelle": "Bureaux",
+        "libelle_court": "Bureaux",
+        "equipement": "PANNEAUX RAYONNANTS · DÉPERDITIONS PIÈCE PAR PIÈCE",
+        "equipement_court": "PANNEAUX RAYONNANTS",
+        "valeur": "",
         "unite": "",
-        "debut": "2024-02-01",
-        "fin": "2025-04-23"
+        "entree_air": true,
+        "extraction": "bureaux"
+      },
+      {
+        "cle": "archives",
+        "ordre": 4,
+        "libelle": "Archives",
+        "libelle_court": "Archives",
+        "equipement": "BOUCHES COUPE-FEU",
+        "equipement_court": "BOUCHES COUPE-FEU",
+        "valeur": "",
+        "unite": "",
+        "entree_air": false,
+        "extraction": "archives"
+      },
+      {
+        "cle": "sanitaires",
+        "ordre": 5,
+        "libelle": "Sanitaires",
+        "libelle_court": "Sanitaires",
+        "equipement": "",
+        "equipement_court": "",
+        "valeur": "",
+        "unite": "",
+        "entree_air": false,
+        "extraction": "sanitaires"
+      },
+      {
+        "cle": "serveur",
+        "ordre": 6,
+        "libelle": "Local serveur",
+        "libelle_court": "Serveur",
+        "equipement": "REFROIDI PAR L’EXTRACTION",
+        "equipement_court": "REFROIDI PAR L’AIR",
+        "valeur": "",
+        "unite": "",
+        "entree_air": false,
+        "extraction": "serveur"
       }
     ],
-    "relais": {
-      "libelle": "LA SALLE DES FÊTES LIBÉRÉE",
-      "ordre": 4
-    },
-    "livraison": {
-      "date": "2025-04-23",
-      "libelle": "LIVRAISON · PRINTEMPS 2025",
-      "ordre": 5
-    }
+    "groupes": [
+      {
+        "cle": "bureaux",
+        "ordre": 7,
+        "libelle": "Groupe bureaux",
+        "valeur": "515",
+        "unite": "m³/h",
+        "affichee": "515 m³/h",
+        "detail": ""
+      },
+      {
+        "cle": "archives",
+        "ordre": 8,
+        "libelle": "Groupe archives",
+        "valeur": "915",
+        "unite": "m³/h",
+        "affichee": "915 m³/h",
+        "detail": ""
+      },
+      {
+        "cle": "sanitaires",
+        "ordre": 9,
+        "libelle": "Groupe sanitaires",
+        "valeur": "120",
+        "unite": "m³/h",
+        "affichee": "120 m³/h",
+        "detail": ""
+      },
+      {
+        "cle": "serveur",
+        "ordre": 10,
+        "libelle": "Caisson du local serveur",
+        "valeur": "900",
+        "unite": "m³/h",
+        "affichee": "900 m³/h",
+        "detail": "RÉGULÉ PAR SONDE DE TEMPÉRATURE",
+        "detail_court": "RÉGULÉ PAR SONDE"
+      }
+    ]
   },
   "releve": [],
   "releve_secondaire": [],
-  "phrase_principe": "La commune a réhabilité sa mairie sans la fermer : les travaux se font en site occupé, phasés.",
-  "vignette_surtitre": "RÉHABILITER SANS FERMER",
+  "phrase_principe": "Dans un bâti ancien dont chaque pièce a son usage, le chauffage et la ventilation sont traités local par local.",
+  "vignette_surtitre": "LOCAL PAR LOCAL",
   "a_valider_ft2e": [
     {
-      "objet": "Les bornes du chantier de l’office de tourisme",
-      "la_source_affirme": "Sept comptes rendus de chantier numérotés, le septième daté du 04/05/2023 (réunion suivante convoquée au 11/05) ; le planning du CR n° 7 place les interventions des lots entre les semaines 12 et 17 de 2023.",
-      "le_dessin_suppose": "Un bloc de mars à fin juin 2023 : un axe des temps exige deux bornes, et l’archive ne porte ni ordre de service ni procès-verbal de réception pour cette phase. La date de fin réelle resserrerait ou étirerait le bloc sans changer la démonstration."
+      "objet": "La position des entrées d’air",
+      "la_source_affirme": "Le CCTP prescrit des entrées d’air acoustiques « en menuiserie », localisation « suivant plans ».",
+      "le_dessin_suppose": "Des flèches entrantes sur l’accueil, la salle et les bureaux — les locaux à occupation — et aucune sur les archives, les sanitaires et le serveur. La localisation réelle des modules peut différer."
     },
     {
-      "objet": "Le début du chantier de la mairie",
-      "la_source_affirme": "Le compte rendu de chantier porte au 01/02/2024 la demande de transmission des PPSPS au coordonnateur SPS — première trace datée du chantier de la phase mairie.",
-      "le_dessin_suppose": "Un début de bloc au 1ᵉʳ février 2024. L’ordre de service exact n’est pas dans l’archive."
+      "objet": "L’appariement local ↔ groupe d’extraction",
+      "la_source_affirme": "Le CCTP nomme trois groupes par leur zone — sanitaires 120 m³/h, bureaux 515 m³/h, archives 915 m³/h — et un caisson dédié au local serveur, 900 m³/h régulé par sonde.",
+      "le_dessin_suppose": "Un raccordement exclusif : chaque ligne d’air ne dessert qu’un groupe. Confirmer qu’aucun autre local ne se raccorde à ces réseaux."
     },
     {
-      "objet": "La marque de livraison au 23 avril 2025",
-      "la_source_affirme": "Le CR n° 55 (17/04/2025) fixe l’achèvement de tous les ouvrages « pour le 23/04 », le mobilier livré le 18/04, l’agence postale aménagée le 29/04 ; le document commercial du bureau porte « RÉALISATION : 2025 ». Aucun procès-verbal de réception n’est dans l’archive.",
-      "le_dessin_suppose": "La fin du bloc et la marque de livraison posées au 23/04/2025, et le cartouche au millésime 2025. La date de réception prononcée est demandée à FT2E (question B1 de la fiche de collecte)."
+      "objet": "L’accueil et la salle sans extraction dessinée",
+      "la_source_affirme": "La fiche ne cite aucune extraction pour l’accueil du public ni pour la salle du conseil et des mariages.",
+      "le_dessin_suppose": "Deux cellules sans ligne d’air sortante — leur réponse est le chauffage propre au local. Confirmer l’absence de raccordement VMC de ces deux locaux."
     },
     {
-      "objet": "La continuité du service public",
-      "la_source_affirme": "Le programme décrit une mairie occupée (cinq agents, cinq élus, police municipale) et l’estimation s’intitule « travaux en site occupé avec phasage » ; les comptes rendus montrent le personnel en place et la salle du conseil en usage pendant les travaux.",
-      "le_dessin_suppose": "Une ligne continue sans aucune interruption de 2023 à 2025. Confirmer qu’aucune fermeture temporaire du service n’a eu lieu (déménagement provisoire, fermeture d’accueil)."
+      "objet": "Le choix des six locaux",
+      "la_source_affirme": "Le programme compte davantage de locaux (vestiaires, palier, salle de repos…).",
+      "le_dessin_suppose": "Le dessin retient les six locaux que la fiche équipe nommément. Les autres suivent le même principe sans être dessinés."
     }
   ],
   "exclusions_appliquees": [
-    "Le numéro d’affaire, l’enveloppe travaux, l’estimation APD et les honoraires : exclusions permanentes (règle dure 3).",
-    "Les noms de tiers — commune, architecte, cotraitants, entreprises — ne montent pas sur le dessin ; « agence postale » désigne un service, pas l’opérateur.",
-    "L’axe des temps ouvre en janvier 2023 : le marché de maîtrise d’œuvre et les études antérieures en sont exclus, pour ne pas exposer le millésime d’ouverture de l’affaire (ADR-003).",
-    "Aucune géométrie de l’ouvrage : les trois bâtiments en U et la cour ne sont pas dessinés — les registres sont des bandes topologiques."
+    "Le numéro d’affaire, les montants et les noms de tiers — fabricants des matériels compris — ne montent pas au dessin (règle dure 3).",
+    "Aucune géométrie de l’ouvrage : les cellules sont des bandes topologiques d’égale taille — ni les trois bâtiments en U, ni la cour, ni aucune implantation réelle (règle dure 4).",
+    "Le phasage et le calendrier de l’opération restent au récit : arbitrage FT2E du 2026-08-27 — la planche schématise la solution apportée, pas le déroulé de l’affaire."
   ],
   "controles": {
     "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
-    "demonstration": "une ligne continue de x 56 à 1144 (le service, sans coupure) contre deux blocs disjoints strictement successifs (OT 126–271, mairie 529–1063) reliés par une marche orthogonale — la géométrie porte la coexistence, aucun chiffre de la fiche n’est répété",
-    "topologie": "axe des temps x 56–1144 ; service y 262, bloc OT 330–386, bloc mairie 440–496, axe à y 600",
-    "bas_du_dessin": "axe à 600, millésimes à 620, phrase à 688, cartouche 714–744, marge basse 56 px",
+    "demonstration": "6 cellules dont 5 à équipement propre (marque encrée), 3 flèches d’air entrantes, 4 lignes horizontales menant chacune à sa boîte d’extraction alignées chacune sur son local — aucun nœud central sur la planche : la décentralisation est portée par la géométrie seule",
+    "topologie": "menuiseries x 66, cellules x 148–620, groupes x 920–1144 ; cellules y 248–644",
+    "bas_du_dessin": "cellules jusqu’à y 644, phrase à 688, cartouche 714–744, marge basse 56 px",
     "reserve_profonde": "cartouche 299 x 30 px = 8970 px², soit 0.93 % de la planche",
     "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
     "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
@@ -109,14 +176,14 @@
     "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
     "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
-    "motif": "le motif seul : la ligne continue x 14–286, deux blocs décalés (OT 32–68, mairie 132–266), la marche du relais — deux étiquettes et deux valeurs ; détails et axe laissés à la planche",
-    "bas_du_dessin": "176 px, marge basse 24 px"
+    "motif": "le motif seul : 6 cellules à marque propre, trois flèches entrantes, quatre lignes vers quatre boîtes chiffrées (les débits) — libellés et légendes laissés à la planche",
+    "bas_du_dessin": "170 px, marge basse 30 px"
   },
   "controles_appui": {
     "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
     "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
     "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
-    "motif": "le motif entier : la ligne continue du service x 24–528, deux blocs successifs (OT 57–124, mairie 243–490), la marche du relais, la descente de livraison et l’axe des millésimes — trois nœuds datés (PRINTEMPS 2023, 55 CR, LIVRAISON), double légende courte ; phrase et cartouche laissés à la planche",
-    "bas_du_dessin": "axe à 300 px, millésimes à 318 px, marge basse 50 px"
+    "motif": "le motif entier : 6 cellules nommées avec leur équipement en court, trois flèches entrantes, quatre lignes vers quatre boîtes chiffrées — la légende courte de l’équipement en tête ; phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "cellules jusqu’à y 308 px, marge basse 60 px"
   }
 }

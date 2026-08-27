@@ -73,6 +73,17 @@ textes opératoires restent :
   si un dossier l'exige, décision à prendre (l'écrire, ou retirer l'archétype de
   la liste fermée) plutôt qu'un bricolage. Varier : se re-mesurer à chaque
   session (`grep archetype public/images/projets/*/planche.json`).
+- **Arbitrage FT2E du 2026-08-27 (session N01, sur la premiere planche livree) : la
+  planche schematise la SOLUTION APPORTEE, jamais le deroule de l'affaire.** La
+  premiere planche des Portes-en-Re portait le phasage de l'operation (deux
+  chantiers sur un axe des temps) : refusee — c'est un recit historique, pas une
+  conception technique. Elle a ete refaite en `boucle-fluide`, mecanisme
+  `terminaux` (six locaux a equipement propre, l'air pour seul reseau, aucun
+  noeud central), et le mecanisme `relais` retire du compositeur chronologie.
+  C'est la regle de la revision 4 du protocole (« le dessin montre un mecanisme »)
+  relue strictement : un archetype `chronologie-affaire` n'est admissible que si
+  sa these est d'INGENIERIE (precedence de reservations d'Horizon, divergence
+  reglementaire de Tourtet), pas le calendrier d'une operation.
 - **L'accueil bougera tout seul** : « Références récentes » sert les `en_avant`
   puis les affaires les plus récentes — une fiche 25-NNN ou 26-NNN nouvelle y
   entrera d'elle-même. `en_avant: false` par défaut, arbitrage FT2E sinon.
@@ -179,7 +190,7 @@ textes opératoires restent :
 
 | N | Affaire | Slug | Fiche | Planche (archétype) | Collecte | Notes |
 |---|---|---|---|---|---|---|
-| N01 | 22-011 — Réhabilitation de la mairie et création de l'office de tourisme, Les Portes-en-Ré | `mairie-les-portes-en-re` | ✅ rédigée, build 47 pages | ✅ `chronologie-affaire`, **mécanisme `relais` créé** (3ᵉ du compositeur — invariant octet des 2 planches existantes vérifié avant/après la greffe) | ✅ ref_024 (8 pièces) | `annee_livraison: 2025` sur docx commercial « RÉALISATION : 2025 » + cadrage tranche — PV de réception absent (→ B1) ; questions B1-B4, C1-C2, E1-E2 ouvertes ; Eric Moinet vérificateur des CCTP (T6) ; secteur Tertiaire / ERP |
+| N01 | 22-011 — Réhabilitation de la mairie et création de l'office de tourisme, Les Portes-en-Ré | `mairie-les-portes-en-re` | ✅ rédigée, build 47 pages | ✅ `boucle-fluide`, **mécanisme `terminaux` créé** (8ᵉ du compositeur — invariant octet des 7 planches existantes vérifié avant/après ; une 1ʳᵉ planche `chronologie/relais` a été refusée par FT2E — voir l'arbitrage au § 1 — et le mécanisme retiré) | ✅ ref_024 (8 pièces) | `annee_livraison: 2025` sur docx commercial « RÉALISATION : 2025 » + cadrage tranche — PV de réception absent (→ B1) ; questions B1-B4, C1-C2, E1-E2 ouvertes ; Eric Moinet vérificateur des CCTP (T6) ; secteur Tertiaire / ERP |
 
 ## Annexe A — prompt d'initialisation de la session N01 (à coller tel quel en session neuve)
 
@@ -325,15 +336,21 @@ CE QUE LA N01 A ETABLI (verifiable au depot) :
 - Les numeros des cotraitants pietinent les pieces : BAG « 232 030 »,
   BF ECO « 542 » (prefixe economiste, cf. « 539 »/« 563 ») - le numero
   FT2E se releve sur page de garde CCTP (« Affaire n° : 21-062 »).
-- Archetypes apres N01 : boucle-fluide 7 - coupe-traversee 4 - sankey 4 -
-  zonage 3 - tableau 3 - chronologie 3 (relais, Portes-en-Re) -
+- Archetypes apres N01 : boucle-fluide 8 (terminaux, Portes-en-Re) -
+  coupe-traversee 4 - sankey 4 - zonage 3 - tableau 3 - chronologie 2 -
   planche-chiffree 0 SANS module. VARIER - l'archetype se choisit sur la
   THESE de la fiche, jamais sur le secteur.
+- ARBITRAGE FT2E (N01, a lire au § 1 du plan) : la planche schematise la
+  SOLUTION APPORTEE, jamais le deroule de l'affaire. Une premiere planche
+  de la N01 portait le phasage de l'operation : refusee et refaite en
+  schema des equipements. Choisir un mecanisme d'INGENIERIE (flux,
+  traversee, partition, dimensionnement), pas un recit.
 - Si la these exige un mecanisme nouveau : il s'ecrit DANS le compositeur
   d'archetype (constantes prefixees par mecanisme - deux affectations du
   meme nom au niveau module se marchent dessus), et l'invariant octet des
   planches existantes du meme compositeur se rejoue AVANT et APRES la
-  greffe, dans une copie hors depot (N01 : 8/8 OK deux fois).
+  greffe, dans une copie hors depot (N01 : 28/28 sur boucle-fluide, deux
+  fois). Un mecanisme dont la planche est retiree se retire avec elle.
 
 DEROULER LE PIPELINE § 2 INTEGRALEMENT : depouillement -> releve du
 numero NN-NNN sur piece FT2E -> references/ref_025/ (3 a 8 pieces) ->

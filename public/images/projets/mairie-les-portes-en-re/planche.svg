@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Chronologie de principe d’une réhabilitation en site occupé : de 2023 à 2025, deux chantiers se succèdent — l’office de tourisme au printemps 2023, créé dans l’emprise de la salle des fêtes, puis la mairie et la salle des fêtes elles-mêmes, de février 2024 à avril 2025, au fil de 55 comptes rendus de chantier — pendant qu’une ligne continue porte le service public, accueil, police municipale et agence postale, sans interruption sur toute la durée. La salle des fêtes libérée par le premier chantier permet le second, et la mairie réaménagée est livrée au printemps 2025.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe des lots fluides d’une mairie réhabilitée, sans production centrale : six locaux portent chacun leur équipement propre — l’accueil du public un rideau d’air chaud asservi au contact de porte, la salle du conseil et des mariages une pompe à chaleur monosplit au R32 de 7 kW en chaud et 6 kW en froid, les bureaux des panneaux rayonnants dimensionnés sur des déperditions calculées pièce par pièce, les archives des bouches coupe-feu, le local serveur un refroidissement par extraction. L’air entre par les menuiseries de l’accueil, de la salle et des bureaux, puis rejoint trois groupes d’extraction basse consommation dimensionnés par zone — 120 m³/h aux sanitaires, 515 m³/h aux bureaux, 915 m³/h aux archives — et vers le caisson du local serveur, 900 m³/h régulé par sonde de température. Aucun nœud central : chaque local reçoit la réponse dimensionnée pour son usage.">
 <style>
   .c-profond { fill: var(--color-profond, #001718); }
   .c-encre { fill: var(--color-encre, #00393A); }
@@ -14,49 +14,75 @@
   .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
   .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
   .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
   .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
   .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 </style>
   <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
-  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · DEUX CHANTIERS, UN SERVICE CONTINU</text>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · LE CHAUFFAGE ET L’AIR, LOCAL PAR LOCAL</text>
   <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Mairie des Portes-en-Ré</text>
-  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Réhabiliter en site occupé : le chantier se déplace, le service reste</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Des équipements dimensionnés local par local, plutôt qu’en grand système</text>
   <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
-  <rect x="1042.00" y="182.00" width="14.00" height="8.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
-  <text x="1144.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">UN CHANTIER</text>
-  <path d="M 854.80 186.50 L 870.80 186.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.5"/>
-  <text x="1018.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LE SERVICE, CONTINU</text>
-  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DEUX CHANTIERS SUCCESSIFS, UN SERVICE QUI NE S’INTERROMPT PAS</text>
-  <path d="M 491.92 222.00 L 491.92 600.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
-  <path d="M 929.03 222.00 L 929.03 600.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
-  <text x="56.00" y="240.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Le service public</text>
-  <text x="1144.00" y="240.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">SANS INTERRUPTION</text>
-  <path d="M 56.00 262.00 L 1144.00 262.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.5"/>
-  <rect x="56.00" y="258.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
-  <rect x="1137.00" y="258.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
-  <text x="56.00" y="286.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ACCUEIL · POLICE MUNICIPALE · AGENCE POSTALE</text>
-  <rect x="126.46" y="330.00" width="144.51" height="56.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
-  <text x="140.46" y="361.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PRINTEMPS 2023</text>
-  <text x="284.97" y="353.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Office de tourisme</text>
-  <text x="284.97" y="371.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CRÉÉ DANS L’EMPRISE DE LA SALLE DES FÊTES</text>
-  <path d="M 270.97 358.00 L 528.94 358.00 L 528.94 433.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
-  <path d="M 528.94 438.00 L 524.94 430.00 L 532.94 430.00 Z" class="c-encre" fill="#00393A"/>
-  <text x="540.94" y="409.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA SALLE DES FÊTES LIBÉRÉE</text>
-  <rect x="528.94" y="440.00" width="533.85" height="56.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
-  <text x="542.94" y="463.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Mairie et salle des fêtes</text>
-  <text x="542.94" y="481.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">55 COMPTES RENDUS DE CHANTIER</text>
-  <text x="1048.79" y="463.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">FÉVR. 2024 → AVR. 2025</text>
-  <path d="M 1062.79 496.00 L 1062.79 600.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
-  <text x="1054.79" y="552.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LIVRAISON · PRINTEMPS 2025</text>
-  <path d="M 56.00 600.00 L 1144.00 600.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
-  <path d="M 56.00 600.00 L 56.00 606.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
-  <path d="M 491.92 600.00 L 491.92 606.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
-  <path d="M 929.03 600.00 L 929.03 606.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
-  <path d="M 1144.00 600.00 L 1144.00 606.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
-  <text x="273.96" y="620.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2023</text>
-  <text x="710.47" y="620.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2024</text>
-  <text x="1036.51" y="620.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2025</text>
-  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">La commune a réhabilité sa mairie sans la fermer : les travaux se font en site occupé, phasés.</text>
+  <path d="M 1019.20 186.50 L 1035.20 186.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 1041.20 186.50 L 1034.20 183.00 L 1034.20 190.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="1144.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">L’AIR EXTRAIT</text>
+  <rect x="841.00" y="182.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <text x="995.20" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">ÉQUIPEMENT DU LOCAL</text>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SIX LOCAUX, CHACUN SON ÉQUIPEMENT · L’AIR CONVERGE VERS TROIS GROUPES D’EXTRACTION</text>
+  <text x="56.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ENTRÉES D’AIR EN MENUISERIES</text>
+  <text x="1144.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">L’EXTRACTION, DIMENSIONNÉE PAR ZONE</text>
+  <rect x="148.00" y="248.00" width="472.00" height="56.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="164.00" y="271.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Accueil du public</text>
+  <rect x="164.00" y="285.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <text x="178.00" y="292.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RIDEAU D’AIR CHAUD · ASSERVI AU CONTACT DE PORTE</text>
+  <path d="M 66.00 268.00 L 66.00 284.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 66.00 276.00 L 138.00 276.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 145.00 276.00 L 137.00 272.00 L 137.00 280.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="148.00" y="316.00" width="472.00" height="56.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="164.00" y="339.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Salle du conseil et des mariages</text>
+  <rect x="164.00" y="353.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <text x="178.00" y="360.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PAC MONOSPLIT R32 · 7 kW CHAUD · 6 kW FROID</text>
+  <path d="M 66.00 336.00 L 66.00 352.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 66.00 344.00 L 138.00 344.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 145.00 344.00 L 137.00 340.00 L 137.00 348.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="148.00" y="384.00" width="472.00" height="56.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="164.00" y="407.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bureaux</text>
+  <rect x="164.00" y="421.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <text x="178.00" y="428.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PANNEAUX RAYONNANTS · DÉPERDITIONS PIÈCE PAR PIÈCE</text>
+  <path d="M 66.00 404.00 L 66.00 420.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 66.00 412.00 L 138.00 412.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 145.00 412.00 L 137.00 408.00 L 137.00 416.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="148.00" y="452.00" width="472.00" height="56.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="164.00" y="475.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Archives</text>
+  <rect x="164.00" y="489.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <text x="178.00" y="496.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">BOUCHES COUPE-FEU</text>
+  <rect x="148.00" y="520.00" width="472.00" height="56.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="164.00" y="543.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Sanitaires</text>
+  <rect x="148.00" y="588.00" width="472.00" height="56.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="164.00" y="611.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Local serveur</text>
+  <rect x="164.00" y="625.00" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <text x="178.00" y="632.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">REFROIDI PAR L’EXTRACTION</text>
+  <path d="M 620.00 412.00 L 910.00 412.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 917.00 412.00 L 909.00 408.00 L 909.00 416.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="920.00" y="388.00" width="224.00" height="48.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="932.00" y="408.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Groupe bureaux</text>
+  <text x="932.00" y="426.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">515 m³/h</text>
+  <path d="M 620.00 480.00 L 910.00 480.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 917.00 480.00 L 909.00 476.00 L 909.00 484.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="920.00" y="456.00" width="224.00" height="48.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="932.00" y="476.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Groupe archives</text>
+  <text x="932.00" y="494.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">915 m³/h</text>
+  <path d="M 620.00 548.00 L 910.00 548.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 917.00 548.00 L 909.00 544.00 L 909.00 552.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="920.00" y="524.00" width="224.00" height="48.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="932.00" y="544.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Groupe sanitaires</text>
+  <text x="932.00" y="562.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">120 m³/h</text>
+  <path d="M 620.00 616.00 L 910.00 616.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 917.00 616.00 L 909.00 612.00 L 909.00 620.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="920.00" y="592.00" width="224.00" height="48.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="932.00" y="612.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Caisson du local serveur</text>
+  <text x="932.00" y="630.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">900 m³/h · RÉGULÉ PAR SONDE</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Dans un bâti ancien dont chaque pièce a son usage, le chauffage et la ventilation sont traités local par local.</text>
   <rect x="56.00" y="714.00" width="299.00" height="30.00" class="c-profond" fill="#001718"/>
   <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LES PORTES-EN-RÉ · 492 m² · 2025</text>
 </svg>
