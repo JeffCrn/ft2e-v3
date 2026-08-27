@@ -171,6 +171,26 @@ prime sur l'effet, sans exception. Implantation : `motion.css` (les rangs sont d
 `data-plan-groupe` (grille 05 de l'accueil, grille de `/references`,
 `ProjetsSimilaires`).
 
+### A12 — le voile des photographies-liens (2026-08-27)
+
+Deuxième amendement du chantier motion (arbitrage FT2E : piste 2, **variante a** —
+la variante b, micro-échelle dans le cadre, a été présentée et n'a pas été retenue).
+
+| № | Objet | Révision 2.1 | Ce qui s'applique |
+|---|---|---|---|
+| A12 | Survol d'un cliché-lien | le survol est une bascule de fond | **un voile d'encre à 14 % couvre la photographie au repos et se lève au survol et au focus** (300 ms, opacité seule) |
+
+Les bornes : la portée est la **photographie qui sert de lien** — le cliché du hero
+de l'accueil et le cliché principal de la coupe des secteurs (`.lien-cliche` +
+`.voile-cliche`, recette dans `global.css`) ; **jamais un dessin de planche** (la
+sur-échelle comme le voilage d'un dessin sont interdits — ses filets de 1 px et son
+mono sont calibrés pour être lus tels quels) ; le voile passe sous les équerres et
+sous le cartouche de réserve, qui restent pleinement lisibles aux deux états ; les
+vignettes du rail de `/references` et du film de la coupe gardent leur **voilage
+d'état** (0,42 — il dit la sélection, pas le survol) et ne reçoivent pas ce voile en
+plus. Aucun déplacement : c'est une bascule d'opacité, dans l'esprit de la règle
+qu'elle infléchit.
+
 **Implantation de la légende et des équerres (§ 13)** — la charte veut la légende **en bas à gauche** *et* les équerres intactes (« repère de tirage, jamais un encadrement ») : les deux ne peuvent pas se disputer l'angle. La géométrie tranche, et elle est **dérivée**, jamais réglée à l'œil. Les jetons `--equerre-cote` (18 px) et `--equerre-retrait` (5 px) donnent `--equerre-gouttiere` (28 px), dont découlent à la fois les quatre équerres de `CoinsCuivre` et la recette `.legende-media` :
 
 - **horizontalement** : `left: gouttière`, `max-width: 100% − 2 × gouttière` — les deux équerres basses sont dégagées quelle que soit la longueur de la légende, qui déborde vers le haut, où aucune équerre ne l'attend ;

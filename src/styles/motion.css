@@ -123,4 +123,9 @@ html.js-plans [data-plan-groupe].plan-immediat > * {
     opacity: 1 !important;
     transition: none !important;
   }
+
+  /* A12 : le voile se lève toujours (c'est un état), mais sans fondu. */
+  .lien-cliche .voile-cliche {
+    transition: none !important;
+  }
 }

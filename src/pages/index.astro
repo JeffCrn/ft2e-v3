@@ -130,7 +130,7 @@ const partenaires = [
           changé, mesuré). Se remesure sur le déploiement, plusieurs tirs,
           après tout changement ici. */}
       <a
-        class="relative block aspect-[3/2] duotone-photo"
+        class="relative block aspect-[3/2] duotone-photo lien-cliche"
         href={`/references/?secteur=${encodeURIComponent(SECTEUR_CLICHE_HERO)}`}
         aria-label={`Voir les références du secteur ${SECTEUR_CLICHE_HERO}`}
       >
@@ -144,6 +144,7 @@ const partenaires = [
           loading="eager"
           fetchpriority="high"
         />
+        <span class="voile-cliche" aria-hidden="true"></span>
         <CoinsCuivre taille={18} />
         <span class="cartouche-legende legende-media z-10" aria-hidden="true">{clicheHero.legende}</span>
       </a>

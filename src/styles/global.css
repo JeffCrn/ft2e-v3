@@ -550,6 +550,27 @@ body {
     );
   }
 
+  /* Le voile d'un cliché-lien — amendement A12 (2026-08-27). Au repos, une
+     encre à 14 % couvre la photographie ; le survol et le focus la lèvent
+     (300 ms, courbe unique). Une bascule d'opacité, aucun déplacement — le
+     cousin du dévoilement du rail de /references (0,42), qui reste un
+     mécanisme d'ÉTAT du filtre et ne reçoit pas ce voile en plus. Le voile
+     passe au-dessus du duotone, sous les équerres (rendues après lui) et
+     sous le cartouche (z-10). Jamais sur un dessin de planche. */
+  .lien-cliche .voile-cliche {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: var(--color-encre);
+    opacity: 0.14;
+    transition: opacity 300ms var(--ease-blueprint);
+    pointer-events: none;
+  }
+  .lien-cliche:hover .voile-cliche,
+  .lien-cliche:focus-visible .voile-cliche {
+    opacity: 0;
+  }
+
   /* Légende d'image — amendement A8. Une légende posée à même la
      photographie n'est pas mesurable : dans la zone mesurée, ni le profond
      (4,49) ni le voile (3,62) n'atteint 4,5. La légende se pose donc dans un

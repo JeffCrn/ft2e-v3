@@ -125,7 +125,7 @@ const premiere = tranches[0];
               passe le même paramètre — la page l'ignore et
               sert la grille complète. */}
           <a
-            class="coupe-lien-galerie relative block"
+            class="coupe-lien-galerie lien-cliche relative block"
             href={`/references/?secteur=${encodeURIComponent(t.titre)}`}
             aria-label={`Voir les références du secteur ${t.titre}`}
           >
@@ -146,6 +146,7 @@ const premiere = tranches[0];
                   />
                 )
               ))}
+              <span class="voile-cliche" aria-hidden="true"></span>
               <span class="cartouche-legende legende-media z-10" data-cartouche aria-hidden="true">
                 {t.numero} — {t.film[0].legende}
               </span>
