@@ -1,7 +1,7 @@
 ---
 titre: "Commerces et services de la place des Chênes Verts, Saint-Rogatien"
 ouvrage: "Place des Chênes Verts"
-secteur: Tertiaire / ERP
+secteur: Industriel
 typologie: Neuf
 moa: "Commune de Saint-Rogatien — mandataire SPL Charente-Maritime Développement"
 architecte: "Agence Blanchard Tétaud Blanchet (La Rochelle)"

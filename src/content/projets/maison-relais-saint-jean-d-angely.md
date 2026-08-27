@@ -1,7 +1,7 @@
 ---
 titre: "Maison relais de 21 logements dans un ancien foyer à Saint-Jean-d’Angély"
 ouvrage: "Maison relais Pasteur"
-secteur: Logements
+secteur: Tertiaire / ERP
 typologie: Réhabilitation
 moa: "SOLIHA Bâtisseur de Logement d’Insertion Nouvelle-Aquitaine"
 architecte: "Agence Sébastien Pellereau (La Rochelle)"

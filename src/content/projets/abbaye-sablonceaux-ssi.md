@@ -1,7 +1,7 @@
 ---
 titre: "Abbaye de Sablonceaux — modification du système de sécurité incendie"
 ouvrage: "Abbaye de Sablonceaux"
-secteur: Patrimoine
+secteur: Coordination SSI
 typologie: Réhabilitation
 moa: "Congrégation de la Communauté du Chemin Neuf"
 lieu: "Sablonceaux (17600)"

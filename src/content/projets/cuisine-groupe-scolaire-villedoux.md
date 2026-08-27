@@ -1,7 +1,7 @@
 ---
 titre: "Audit énergétique du restaurant scolaire de Villedoux"
 ouvrage: "Restaurant scolaire"
-secteur: Tertiaire / ERP
+secteur: Monotechnique — Audit
 typologie: Étude
 moa: "Commune de Villedoux"
 lieu: "3 bis rue du Marais Guyot, Villedoux (17230), Charente-Maritime"

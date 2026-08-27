@@ -1,7 +1,7 @@
 ---
 titre: "Électricité de la passerelle cyclo-piétonne du Carreau d’Or, Marans"
 ouvrage: "Passerelle du Carreau d’Or"
-secteur: Monotechnique — Audit
+secteur: Patrimoine
 typologie: Neuf
 moa: "Communauté de communes Aunis Atlantique"
 architecte: "Impact Urbanisme, architecte mandataire du groupement de maîtrise d’œuvre"
