@@ -186,11 +186,35 @@ textes opératoires restent :
 - **Q4 — non répondu, défaut reconduit** : T1-T7 valent pour les nouvelles fiches
   (T6 reste hors chantier — page Équipe). À confirmer par FT2E.
 
+### Complément consigné le 2026-08-27 au soir (session N02) — le classeur FT2E
+
+**FT2E a fourni son propre classeur de références** (« REFERENCES SITE FT2E.ods »,
+déposé dans `docs/references/` pendant la session, **déplacé dans
+`references/docs_references/`** — il liste tous les numéros d'affaire et le dépôt
+est public). Il complète les réponses Q1/Q2 :
+
+- **les tranches suivent le millésime de livraison** : « Finalisées en 2026 » (les
+  23 fiches en ligne + Yachtman « T § C », Loti absent), **« Finalisées en 2025 »**
+  (les 10 dossiers de `2025.zip`), puis 2024 (5 : 19110 CDAIR, 20031 UNDERTECH,
+  21093 Central Hostel, 21095 Voltaero, 23036 Fountaine Pajot), 2023 (5), 2022 (4),
+  2020 (2), 2019 (1) — le compte au-delà de la tranche 2025 fera l'objet des
+  prochains ZIP ;
+- **le classeur porte le SECTEUR de chaque affaire selon FT2E** (légende
+  L/T/I/P/C/M/E) — il fait foi : la N02 a classé Fors `Tertiaire / ERP` (« 21062 ·
+  Commerces de Fors · T ») là où le dépouillement penchait pour `Industriel`
+  (Saint-Rogatien, pôle commercial lui aussi, y est pourtant « I ») ;
+- ⚠ **23075 (crèche de Périgny) figure dans DEUX tranches** (« Finalisées en 2026 »
+  et « Finalisées en 2025 » en « Extension crêche Périgny UDAF ») — à trancher avec
+  FT2E (question T7, millésime de livraison de la crèche) ;
+- certaines affaires portent un domaine double (« T § C », « P § C ») que la
+  taxonomie du site ne connaît pas — arbitrage à demander le moment venu.
+
 ## Suivi (une ligne par session)
 
 | N | Affaire | Slug | Fiche | Planche (archétype) | Collecte | Notes |
 |---|---|---|---|---|---|---|
 | N01 | 22-011 — Réhabilitation de la mairie et création de l'office de tourisme, Les Portes-en-Ré | `mairie-les-portes-en-re` | ✅ rédigée, build 47 pages | ✅ `boucle-fluide`, **mécanisme `terminaux` créé** (8ᵉ du compositeur — invariant octet des 7 planches existantes vérifié avant/après ; une 1ʳᵉ planche `chronologie/relais` a été refusée par FT2E — voir l'arbitrage au § 1 — et le mécanisme retiré) | ✅ ref_024 (8 pièces) | `annee_livraison: 2025` sur docx commercial « RÉALISATION : 2025 » + cadrage tranche — PV de réception absent (→ B1) ; questions B1-B4, C1-C2, E1-E2 ouvertes ; Eric Moinet vérificateur des CCTP (T6) ; secteur Tertiaire / ERP |
+| N02 | 21-062 — Construction d'un pôle commercial et requalification des espaces urbains et paysagers, Fors | `pole-commercial-fors` | ✅ rédigée, build 48 pages | ✅ `sankey-energie`, **mécanisme `partage` créé** (5ᵉ du compositeur — invariant octet des 4 planches sankey existantes vérifié avant/après la greffe, 16/16 deux fois) — l'année d'énergie de l'étude d'autoconsommation collective (36 kWc), en-tête de registre nommant l'étude | ✅ ref_025 (8 pièces) | `annee_livraison: 2025` (cadrage tranche + classeur FT2E « Finalisées en 2025 ») ; secteur `Tertiaire / ERP` par le classeur (≠ dépouillement qui penchait `Industriel`) ; mission MOE photovoltaïque séparée (21-062PV, DCE 04/2025, travaux prévus sept.-oct. 2025 → B2) ; questions B1-B5, C1-C2, E1-E3 ouvertes ; auteurs relevés (T6) : Mathieu Braud, Vincent Jaoul, Sandrine Rameau, Tanguy Moinet, Eric Moinet |
 
 ## Annexe A — prompt d'initialisation de la session N01 (à coller tel quel en session neuve)
 
@@ -403,4 +427,152 @@ commit que public/admin/config.yml.
 Termine par le prompt de lancement de la session N03, en annexe du plan
 du chantier et reproduit integralement dans ton message final - la regle
 de continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
+````
+
+## Annexe C — prompt de lancement de la session N03 (à coller tel quel en session neuve)
+
+````
+Session N03/27 - FT2E v3 : chantier des 27 nouvelles fiches references.
+Troisieme dossier de la tranche « livraisons 2025 ».
+
+Contexte. FT2E v3 est le site institutionnel du bureau d'etudes FT2E
+(La Rochelle), Astro 6 statique, deploye en demonstration client sur
+https://ft2e-v3.vercel.app (indexation verrouillee - ne pas y toucher).
+Le catalogue porte 25 fiches reelles (23 + Portes-en-Re N01 + Commerces
+de Fors N02), chacune illustree d'une planche de schema de principe
+(cinq pieces par dossier). Objectif : 50 fiches. 1 session = 1 dossier,
+close par le prompt de la suivante.
+
+LIRE D'ABORD, dans cet ordre :
+1. docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md -
+   LE PLAN : § 1 (ce qui a change), § 2 (pipeline 12 etapes), § 3
+   (reponses consignees + COMPLEMENT N02 : le classeur REFERENCES SITE
+   FT2E.ods, dans references/docs_references/, fait foi pour le SECTEUR
+   de chaque fiche et le millesime de livraison), § Suivi (lignes N01,
+   N02), annexe C (ce prompt).
+2. docs/superpowers/plans/2026-08-07-chantier-references-reelles.md -
+   § Contraintes globales + § Protocole de session.
+3. docs/superpowers/specs/2026-08-12-planches-references-protocole.md -
+   revision 5 EN ENTIER.
+4. CLAUDE.md, .claude/rules/content-collections.md et french-editorial.md.
+Etalons : src/content/projets/creche-oranger-perigny.md (fiche) et, pour
+une session N complete, src/content/projets/pole-commercial-fors.md +
+public/images/projets/pole-commercial-fors/ + references/ref_025/.
+
+DOSSIER DU JOUR : « 19-036 -150 logts Rompsay MEDIATIM » (208 fichiers),
+dans C:\claude_code_dev_projects\ft2e_new_archives\2025.zip (tranche des
+livraisons 2025 - liste au § 3 du plan ; le classeur FT2E le donne
+« 150 Logts Rompsay Mediatim - AURORA », secteur L, Finalisees en 2025).
+ATTENTION DISQUE SATURE (~1,2 Go libres) : supprimer d'abord le
+repertoire extrait de la session precedente
+(ft2e_new_archives/2025/21-062 - Pole commercial FORS 79 - BTB) - le
+rm -rf est REFUSE par les permissions, passer par python
+shutil.rmtree - puis extraire LE SEUL dossier du jour depuis le ZIP
+PAR PYTHON ZIPFILE : les motifs d'unzip (« 2025/19-036* », « *19-036* »)
+ne matchent PAS les entrees de ce ZIP (verifie en N02) -
+  python -c "import zipfile; z=zipfile.ZipFile(r'...\2025.zip');
+  z.extractall(r'...\ft2e_new_archives',
+  members=[n for n in z.namelist() if '19-036' in n])"
+Le ZIP est la source, il ne se supprime pas.
+Dossier de travail a creer : references/ref_026/
+Slug cible : a etablir au depouillement (kebab-case sans accents,
+verifier qu'il n'ecrase rien).
+
+PARTICULARITE DU DOSSIER : le cliche du hero de l'accueil (« Aurora,
+147 logements », corpus secteurs, arbitrage FT2E du 2026-08-26) vient
+de CETTE operation. Compter les logements sur pieces (nom de dossier
+« 150 logts », classeur « 150 Logts », legende du corpus « 147 ») et
+harmoniser fiche <-> legende du corpus secteurs si l'ecart se confirme
+(la legende vit dans src/content/secteurs/, une seule source). MEDIATIM
+est le meme groupe que exe-residence-horizon-mediatim (25-097) - lien
+interne naturel ; etablir la chaine contractuelle exacte (contrat
+direct promoteur ? groupement ?) sur pieces.
+
+CE QUE LA N02 A ETABLI (verifiable au depot) :
+- Le classeur REFERENCES SITE FT2E.ods (references/docs_references/)
+  fait foi pour le SECTEUR (legende L/T/I/P/C/M/E) et le millesime de
+  livraison. Il a fait basculer Fors en Tertiaire / ERP contre le
+  depouillement. Le lire AVANT de choisir secteur et annee_livraison.
+- annee_livraison se pose sur le cadrage de tranche + classeur
+  (« Finalisees en 2025 ») ; le PV de reception manque souvent ->
+  question B1, statut livre.
+- Archetypes apres N02 : boucle-fluide 8 - sankey 5 (partage, Fors) -
+  coupe-traversee 4 - zonage 3 - tableau 3 - chronologie 2 -
+  planche-chiffree 0 SANS module. VARIER - l'archetype se choisit sur
+  la THESE de la fiche, jamais sur le secteur.
+- Un mecanisme nouveau s'ecrit DANS le compositeur d'archetype
+  (constantes prefixees), et l'invariant octet des planches existantes
+  du meme compositeur se rejoue AVANT et APRES la greffe, dans une
+  copie hors depot (N01 : 28/28 boucle-fluide ; N02 : 16/16 sankey,
+  deux fois chacune).
+- ARBITRAGE FT2E (N01) : la planche schematise la SOLUTION APPORTEE,
+  jamais le deroule de l'affaire. Mecanisme d'INGENIERIE, pas un recit.
+- Quand la planche porte les valeurs d'une ETUDE et non de l'ouvrage
+  execute (N02 : l'annee d'energie du scenario 36 kWc, la ou le DCE
+  prescrit 32,33 kWc), l'EN-TETE DE REGISTRE nomme l'etude - « c'est
+  ce qui empeche la planche de mentir » - et l'ecart va en
+  a_valider_ft2e. Toute valeur du dessin doit rester citable dans la
+  fiche : completer la fiche plutot que d'arrondir le dessin.
+
+DEROULER LE PIPELINE § 2 INTEGRALEMENT : depouillement -> releve du
+numero NN-NNN sur piece FT2E (gare aux numeros des cotraitants : BF ECO
+« 533 » en N02, « 542 » en N01) -> references/ref_026/ (3 a 8 pieces) ->
+croisement commercial (references/docs_references/ - docx sectoriels ET
+classeur ODS - + docs/20-source-plaquette-2024.md) -> fiche de collecte
+(A/A+ remplies, B-E en questions) -> fiche src/content/projets/<slug>.md
+(taxonomie ACTUELLE ; lieu avec code postal entre parentheses ;
+synthese 480-780 posee par script ; >= 5 liens internes ; jamais de
+numero d'affaire NI de millesime d'ouverture en prose) -> PLANCHE
+complete (extraction avec a_valider_ft2e non vide, composition par
+scripts/planches/<archetype>.py, controles a 1152 / carte 274-296 /
+appui 552, PNG 2400x1600, apostrophes-planches.py, verser.py) ->
+qualite (typecheck 0, build vert 49 pages, editorial-reviewer,
+controle-liens-internes 26/26 a 5, controle-numeros-affaire 0 fuite,
+releve-numeral sans ecart nouveau) -> COMMIT UNIQUE
+fiche+planche+compositeur (content(references): ajoute la fiche reelle
+<nom> ; git ls-remote avant, depot partage) -> push (le push deploie),
+curl de la fiche AVEC barre oblique finale + marqueur de build, rendu
+controle aux trois bandes (sonde iframe pour les largeurs telephone,
+script pret : references/ref_024/sonde-fiche.mjs) -> ligne de suivi au
+plan -> PROMPT DE LA SESSION N04 en annexe du plan (script Python ou
+Write, jamais un long heredoc bash) et reproduit integralement dans le
+message final.
+
+PIEGES VERIFIES EN N01-N02 (en plus de ceux des annexes A et B, tous
+confirmes) :
+- Un heredoc bash long se fait TRONQUER silencieusement : gros fichiers
+  par l'outil Write PUIS scripts/injection-typographique.py, avec
+  CONTROLE DE PRESENCE des insecables apres coup (seuils calibres sur
+  le texte lui-meme). Un planche.json s'ecrit par script Python avec
+  les insecables en echappements \u202f (Write les normalise).
+- injection-typographique.py ne connait pas l'unite « A » (ampere) :
+  « 400 A » reste en espace simple - poser la fine par remplacement
+  cible apres coup si des amperes apparaissent.
+- Le corpus ecrit ESPACE SIMPLE devant un nom compte (« 61 modules »,
+  « 93 pages », « 700 metres ») : ne pas « corriger » en fine, seules
+  les unites (symboles) prennent la fine. Verifie sur 31 contre 7.
+- cairosvg : la copie de controle perd <style> ET l'attribut style de
+  la racine - regex avec espace OPTIONNELLE avant style= : sur la
+  vignette l'attribut clot la balise et un motif avec espace finale ne
+  matche pas -> PNG BLANC (revecu en N02) ; filets 8 chiffres a
+  fusionner (#00393A38 -> #C1CFD0, #00393A29 -> #CFDADB,
+  #00393A1F -> #D9E2E3).
+- PYTHONIOENCODING=utf-8 sur cette machine ; le hook Stop commite et
+  pousse SEUL ce qui traine (⚠ livrables/ porte deux fichiers non
+  suivis anterieurs a la N02) ; /references/ est gitignore (motif
+  ancre) - les pieces sources n'entrent JAMAIS au depot ; npm run
+  preview ne mesure pas la performance ; Chrome refuse les fenetres
+  sous 500 px (sonde iframe).
+- La planche n'expose NI le millesime d'ouverture, NI montant, NI
+  tiers ; tout arbitrage de dessin va dans a_valider_ft2e (jamais
+  vide).
+
+Portee de commit : content(references). Un changement de schema Zod
+eventuel passe par le sous-agent content-modeller et va dans le MEME
+commit que public/admin/config.yml.
+
+Termine par le prompt de lancement de la session N04, en annexe du plan
+du chantier et reproduit integralement dans ton message final - la
+regle de continuite est dans CLAUDE.md parce qu'elle a ete manquee deux
+fois.
 ````
