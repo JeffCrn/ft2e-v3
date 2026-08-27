@@ -206,8 +206,18 @@ est public). Il complète les réponses Q1/Q2 :
 - ⚠ **23075 (crèche de Périgny) figure dans DEUX tranches** (« Finalisées en 2026 »
   et « Finalisées en 2025 » en « Extension crêche Périgny UDAF ») — à trancher avec
   FT2E (question T7, millésime de livraison de la crèche) ;
-- certaines affaires portent un domaine double (« T § C », « P § C ») que la
-  taxonomie du site ne connaît pas — arbitrage à demander le moment venu.
+- ~~certaines affaires portent un domaine double (« T § C », « P § C ») que la
+  taxonomie du site ne connaît pas~~ — **TRAITÉ le 2026-08-27 au soir** (demande
+  utilisateur) : champ optionnel `secteur_secondaire` au schéma + Decap (commit
+  `ce334b2`, sous-agent content-modeller), branché sur les filtres de /references,
+  les pages de secteur, les projets similaires, l’eyebrow, le cartouche et le
+  JSON-LD. **Les 25 fiches publiées sont alignées sur le classeur** (commit
+  `09270a3`) : sept bascules (abbaye → Coordination SSI, Dufour et Villedoux →
+  Monotechnique — Audit, École des douanes → Études d’exécution / BIM, maison
+  relais → Tertiaire / ERP, passerelle de Marans → Patrimoine, Chênes Verts →
+  Industriel) et le Yachtman « T § C » en double domaine. Répartition vérifiée
+  au déploiement : 7/9/2/1/3/2/2 — les sept secteurs peuplés. Les fiches à venir
+  prennent leur secteur (et l’éventuel secondaire) DANS LE CLASSEUR.
 
 ## Suivi (une ligne par session)
 
