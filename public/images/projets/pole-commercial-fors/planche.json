@@ -1,0 +1,171 @@
+{
+  "fiche": "pole-commercial-fors",
+  "archetype": "sankey-energie",
+  "archetype_motif": "La thèse de la fiche est un flux qui se partage : la toiture du pôle commercial produit 41 178 kWh par an, dont 56 % rejoignent deux bâtiments communaux à travers le réseau public, le reste partant en surplus vendu — et les bâtiments complètent leurs besoins en soutirant au réseau. C’est la famille du Sankey — une proportion portée par la géométrie — mais aucun des mécanismes écrits ne connaît une production qui se SÉPARE en deux destinations ni deux origines qui CONVERGENT vers un même consommateur : le mécanisme `partage` dessine la séparation et la convergence — la conservation des flux tient l’équilibre des deux colonnes (114 482 kWh de part et d’autre).",
+  "mecanisme": "partage",
+  "surtitre": "SCHÉMA DE PRINCIPE · AUTOCONSOMMATION COLLECTIVE",
+  "titre": "Pôle commercial de Fors",
+  "sous_titre": "La toiture des commerces alimente l’école et les salles communales",
+  "cartouche_legende": "FORS · 768 m² · 2025",
+  "aria_label": "Schéma de principe d’une autoconsommation collective. À gauche, deux origines : la toiture du pôle commercial, qui produit 41 178 kilowattheures par an dans le scénario de l’étude de faisabilité, et le réseau public. La production se partage en deux rubans : 23 190 kilowattheures — 56 % de la production — rejoignent les deux bâtiments communaux, le groupe scolaire avec sa salle polyvalente et la salle multi-fonctions, qui consomment ensemble 96 494 kilowattheures par an ; 17 988 kilowattheures partent en surplus vendu. Le solde des besoins, 73 304 kilowattheures, reste soutiré au réseau. Tous les flux traversent le réseau public de distribution, dans une boucle d’autoconsommation collective de 700 mètres.",
+  "partage": {
+    "entete": "L’ANNÉE D’ÉNERGIE DE L’ÉTUDE DE FAISABILITÉ · SCÉNARIO RETENU DE 36 kWc EN TOITURE",
+    "unite": "kWh/an",
+    "note_pied": "LES FLUX TRAVERSENT LE RÉSEAU PUBLIC DE DISTRIBUTION · BOUCLE D’AUTOCONSOMMATION COLLECTIVE DE 700 m",
+    "origines": [
+      {
+        "ordre": 1,
+        "cle": "toiture",
+        "libelle": "La toiture du pôle",
+        "valeur": 41178,
+        "valeur_affichee": "41 178",
+        "unite": "kWh/an",
+        "detail": [
+          "PRODUCTION DE LA PREMIÈRE ANNÉE",
+          "CENTRALE DE 36 kWc À L’ÉTUDE"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "reseau",
+        "libelle": "Le réseau public",
+        "valeur": 73304,
+        "valeur_affichee": "73 304",
+        "unite": "kWh/an",
+        "detail": [
+          "LE SOLDE DES BESOINS DES BÂTIMENTS"
+        ]
+      }
+    ],
+    "flux": [
+      {
+        "ordre": 1,
+        "cle": "surplus",
+        "de": "toiture",
+        "vers": "revente",
+        "valeur": 17988,
+        "valeur_affichee": "17 988",
+        "unite": "kWh/an",
+        "libelle_bande": "LE SURPLUS VENDU · 17 988 kWh/an"
+      },
+      {
+        "ordre": 2,
+        "cle": "partage",
+        "de": "toiture",
+        "vers": "communaux",
+        "valeur": 23190,
+        "valeur_affichee": "23 190",
+        "unite": "kWh/an",
+        "libelle_bande": "23 190 kWh/an · 56 % DE LA PRODUCTION"
+      },
+      {
+        "ordre": 3,
+        "cle": "soutirage",
+        "de": "reseau",
+        "vers": "communaux",
+        "valeur": 73304,
+        "valeur_affichee": "73 304",
+        "unite": "kWh/an",
+        "libelle_bande": "SOUTIRÉS AU RÉSEAU · 73 304 kWh/an"
+      }
+    ],
+    "destinations": [
+      {
+        "ordre": 1,
+        "cle": "revente",
+        "libelle": "La revente du surplus",
+        "valeur": 17988,
+        "valeur_affichee": "17 988",
+        "unite": "kWh/an",
+        "detail": []
+      },
+      {
+        "ordre": 2,
+        "cle": "communaux",
+        "libelle": "Deux bâtiments communaux",
+        "valeur": 96494,
+        "valeur_affichee": "96 494",
+        "unite": "kWh/an",
+        "detail": [
+          "GROUPE SCOLAIRE,",
+          "SALLE POLYVALENTE,",
+          "SALLE MULTI-FONCTIONS",
+          "UN QUART DES BESOINS",
+          "COUVERT PAR LA TOITURE"
+        ]
+      }
+    ],
+    "libelles_courts": {
+      "toiture": "Toiture du pôle",
+      "reseau": "Réseau public",
+      "communaux": "École et salles",
+      "revente": "Surplus vendu"
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "La toiture du commerce de Fors est dessinée pour éclairer aussi son école.",
+  "vignette_surtitre": "LA TOITURE PARTAGÉE",
+  "a_valider_ft2e": [
+    {
+      "objet": "L’année d’énergie dessinée est celle de l’étude de faisabilité, pas du dossier de consultation",
+      "la_source_affirme": "L’étude d’autoconsommation collective (scénario retenu, 36 kWc) donne 41 178 kWh produits, 23 190 autoconsommés collectivement, 17 988 de surplus et 73 304 soutirés ; le dossier de consultation d’avril 2025 prescrit 61 modules de 530 Wc, soit 32,33 kWc, sans bilan annuel recalculé.",
+      "le_dessin_suppose": "Que le scénario d’étude reste la bonne image du principe — l’en-tête du dessin nomme l’étude et sa puissance. Fournir le productible du dimensionnement final s’il a été calculé, et le dessin sera repris à ces valeurs."
+    },
+    {
+      "objet": "La mise en service de la centrale",
+      "la_source_affirme": "Le cahier des charges prévoit une réalisation en septembre-octobre 2025 ; aucun procès-verbal de réception de ce lot ne figure à l’archive.",
+      "le_dessin_suppose": "Le dispositif tel que conçu — la fiche dit « dessinée pour ». Confirmer la pose, la mise en service et la signature de la convention d’autoconsommation collective."
+    },
+    {
+      "objet": "Le nœud unique « deux bâtiments communaux »",
+      "la_source_affirme": "L’étude compte deux points de livraison consommateurs : le groupe scolaire avec la salle polyvalente (80 MWh/an), et la salle multi-fonctions (16,5 MWh/an).",
+      "le_dessin_suppose": "Un seul nœud de 96 494 kWh/an : à cette échelle, la salle multi-fonctions ferait une tranche de 14 % du nœud. Dire si la répartition doit se lire sur le dessin."
+    },
+    {
+      "objet": "La boucle de 700 m",
+      "la_source_affirme": "La carte de l’étude de faisabilité côte le périmètre à 700,17 m.",
+      "le_dessin_suppose": "L’arrondi à 700 m, comme la fiche. Confirmer que la cote de la carte est bien le diamètre de la boucle réglementaire."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Les commerces sont livrés au printemps 2025 (mise sous tension le 21 mars 2025) ; la centrale, elle, était à poser à l’automne 2025.",
+      "le_dessin_suppose": "Que le cartouche porte 2025, millésime de livraison de l’opération. À confirmer avec la date de réception (question B1 de la collecte)."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéros d’affaire 21-062 et 21-062PV (champ reference) — ils encodent le volume annuel d’affaires du bureau.",
+    "Tous les montants : enveloppe et estimations de travaux, rémunérations de maîtrise d’œuvre, coûts d’investissement de la centrale, tarif de rachat du surplus, taux de rentabilité interne et temps de retour.",
+    "Noms de tiers : maîtrise d’ouvrage, agence d’architecture, paysagiste, BET structure, économiste, syndicat d’énergie, bureau d’études photovoltaïque de l’étude, gestionnaire de réseau, fournisseurs et fabricants de modules ou d’onduleurs, entreprises des lots. Le groupe scolaire et les salles sont désignés par leur usage, jamais par un nom propre.",
+    "Les numéros de points de livraison des bâtiments communaux — donnée d’exploitation du client.",
+    "Le détail de l’installation prescrite (61 modules de 530 Wc, onduleur de 15 kW, surimposition sur la toiture sud-est) : la fiche le porte déjà, et le dessin montre le principe du partage, pas la centrale.",
+    "Les résultats RT2012 des deux bâtiments (Bbio −33,4 % et −23,4 %, Cep −25,6 % et −24,0 %) — la fiche les porte, et ils relèvent d’un autre mécanisme que le partage des flux.",
+    "Toute géométrie d’ouvrage : ni toiture dessinée, ni plan de masse, ni carte de la boucle — les origines et destinations sont des barres dont seule la hauteur porte du sens."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "conservation": "17988 + 23190 (toiture) + 73304 (réseau) = 114482 kWh/an de part et d’autre — colonnes closes à 592.00 et 592.00 px (écart 0.0000)",
+    "echelle": "0.002795 px par kWh/an — encre totale 320 px par colonne, écart d’origine 40 px",
+    "demonstration": "partagé 23190 contre surplus 17988 (56.3 % de la production) ; part de la toiture dans le nœud communal 24.0 %. Texte masqué : une petite barre se sépare en deux, sa moitié colorée coiffe un grand flux pâle",
+    "topologie": "origines x 366, rubans 375 → 906, destinations étiquetées jusqu’à 1144 px — revente en haut à droite : aucun croisement",
+    "cotes_des_rubans": "surplus 235 px sur 531 disponibles ; partage 272 px sur 531 disponibles ; soutirage 250 px sur 531 disponibles",
+    "bas_du_dessin": "rubans jusqu’à 592.00 px, note de pied à 622.00, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 201 x 30 px = 6030 px², soit 0.63 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "les deux origines, la séparation et la convergence à l’échelle commune ; les deux nœuds de droite chiffrés — libellés d’origine, cotes de ruban et note laissés à la planche",
+    "bas_du_dessin": "150.00 px, marge basse 50.00 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les quatre barres, les trois rubans et les quatre valeurs à l’échelle 1, une cote dans le ruban partagé — détails, cotes des autres rubans et note laissés à la planche",
+    "bas_du_dessin": "rubans jusqu’à 290 px, marge basse 78 px",
+    "echelle_derivee": "0.001747 px par kWh/an, colonnes closes à 290.00 et 290.00 px"
+  }
+}

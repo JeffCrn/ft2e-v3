@@ -1439,11 +1439,343 @@ def composer_appui_bascule(donnees):
                         f"(y {y_zero:.2f})")
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# Mécanisme `partage` — une production qui se partage sur le réseau public
+# (pôle commercial de Fors). Même famille que le Sankey : la proportion portée
+# par la géométrie. Deux origines à gauche (la toiture, le réseau), deux
+# destinations à droite (la revente du surplus, les bâtiments communaux) ; la
+# bande de la toiture se SÉPARE en deux rubans, et la part partagée CONVERGE
+# avec le soutirage vers le même nœud. La conservation des flux tient
+# l'équilibre : production + soutirage = consommation + surplus, donc les deux
+# colonnes finissent à la même ordonnée — c'est le contrôle du mécanisme.
+# L'ordre des destinations (revente en haut) évite tout croisement de rubans.
+# Texte masqué : une petite barre dont la couleur part pour moitié vers un
+# petit nœud isolé et pour moitié dans le haut d'un grand flux pâle — une
+# production modeste, plus qu'à moitié partagée, des besoins bien plus grands.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+PART_BARRE_W = 9
+PART_X_BARRE_G = 366                        # barre des origines
+PART_X_BARRE_D = 906                        # barre des destinations
+PART_X0 = PART_X_BARRE_G + PART_BARRE_W     # 375 — départ des rubans
+PART_LIB_D_X = PART_X_BARRE_D + PART_BARRE_W + 10   # 925 — étiquettes de droite
+PART_Y0 = 232.0
+PART_HAUTEUR = 320.0                        # encre totale d'une colonne
+PART_ECART = 40.0                           # écart entre origines ET entre destinations
+
+
+def _part_valeurs(pg):
+    v = {f["cle"]: float(f["valeur"]) for f in pg["flux"]}
+    total = v["surplus"] + v["partage"] + v["soutirage"]
+    return v, total
+
+
+def _part_geometrie(pg, y0, hauteur, ecart):
+    """Les ordonnées des tranches, à l'échelle commune des deux colonnes.
+    Gauche : toiture (surplus puis partagé), écart, réseau.
+    Droite : revente, écart, communaux (partagé puis soutirage) — sans croisement."""
+    v, total = _part_valeurs(pg)
+    e = hauteur / total
+    g = {"echelle": e, "total": total}
+    y = y0
+    g["surplus_g"] = (y, y + v["surplus"] * e); y = g["surplus_g"][1]
+    g["partage_g"] = (y, y + v["partage"] * e); y = g["partage_g"][1]
+    g["toiture"] = (y0, y)
+    y += ecart
+    g["reseau"] = (y, y + v["soutirage"] * e)
+    y = y0
+    g["revente"] = (y, y + v["surplus"] * e); y = g["revente"][1]
+    y += ecart
+    g["partage_d"] = (y, y + v["partage"] * e); y = g["partage_d"][1]
+    g["soutirage_d"] = (y, y + v["soutirage"] * e)
+    g["communaux"] = (g["partage_d"][0], g["soutirage_d"][1])
+    g["bas"] = max(g["reseau"][1], g["communaux"][1])
+    return g
+
+
+def _part_ruban(x0, x1, y0g, y1g, y0d, y1d, couleur):
+    xm = (x0 + x1) / 2
+    d = (f"M {x0:.2f} {y0g:.2f} "
+         f"C {xm:.2f} {y0g:.2f}, {xm:.2f} {y0d:.2f}, {x1:.2f} {y0d:.2f} "
+         f"L {x1:.2f} {y1d:.2f} "
+         f"C {xm:.2f} {y1d:.2f}, {xm:.2f} {y1g:.2f}, {x0:.2f} {y1g:.2f} Z")
+    return (f'  <path d="{d}" class="c-{couleur} s-filet1" fill="{JETON[couleur]}" '
+            f'stroke="{JETON["filet-1"]}" stroke-width="1"/>')
+
+
+PART_COULEUR = {"surplus": "clair", "partage": "clair", "soutirage": "calcaire"}
+PART_TRANCHES = {"surplus": ("surplus_g", "revente"),
+                 "partage": ("partage_g", "partage_d"),
+                 "soutirage": ("reseau", "soutirage_d")}
+
+
+def composer_partage(donnees):
+    pg = donnees["partage"]
+    v, total = _part_valeurs(pg)
+    g = _part_geometrie(pg, PART_Y0, PART_HAUTEUR, PART_ECART)
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    A("<style>")
+    for cle, hexa in JETON.items():
+        A(f"  .c-{cle} {{ fill: var(--color-{cle}, {hexa}); }}")
+    A(f'  .s-filet1 {{ stroke: var(--color-filet-1, {JETON["filet-1"]}); }}')
+    A(f"  .t-sans {{ font-family: {SANS}; }}")
+    A(f"  .t-mono {{ font-family: {MONO}; }}")
+    A("</style>")
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête de registre — il empêche la planche de mentir ────────────────
+    A(texte(DESSIN_X0, Y_ENTETE, pg["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Rubans, puis barres par-dessus ───────────────────────────────────────
+    for f in pg["flux"]:
+        cg, cd = PART_TRANCHES[f["cle"]]
+        A(_part_ruban(PART_X0, PART_X_BARRE_D, g[cg][0], g[cg][1],
+                      g[cd][0], g[cd][1], PART_COULEUR[f["cle"]]))
+    A(rect(PART_X_BARRE_G, g["toiture"][0], PART_BARRE_W,
+           g["toiture"][1] - g["toiture"][0], "encre"))
+    A(rect(PART_X_BARRE_G, g["reseau"][0], PART_BARRE_W,
+           g["reseau"][1] - g["reseau"][0], "encre"))
+    A(rect(PART_X_BARRE_D, g["revente"][0], PART_BARRE_W,
+           g["revente"][1] - g["revente"][0], "encre"))
+    A(rect(PART_X_BARRE_D, g["communaux"][0], PART_BARRE_W,
+           g["communaux"][1] - g["communaux"][0], "encre"))
+
+    # ── Cotes des rubans — sur la bande, en encre (le pivot n'atteint pas
+    #    4,5:1 sur le clair) ─────────────────────────────────────────────────
+    xm = (PART_X0 + PART_X_BARRE_D) / 2
+    depassements = []
+    for f in pg["flux"]:
+        cg, cd = PART_TRANCHES[f["cle"]]
+        ym = ((g[cg][0] + g[cg][1]) / 2 + (g[cd][0] + g[cd][1]) / 2) / 2
+        A(texte(xm, ym + 3.5, f["libelle_bande"], "mono", 10, 500, "encre",
+                ancre="middle", tracking=10 * 0.14))
+        largeur = mesurer(f["libelle_bande"], 10, "mono", tracking=10 * 0.14)
+        depassements.append((f["cle"], largeur))
+
+    # ── Étiquettes des origines, à gauche — bloc centré sur la tranche ──────
+    for o in pg["origines"]:
+        y0o, y1o = g[o["cle"]]
+        centre = (y0o + y1o) / 2
+        nd = len(o.get("detail", []) or [])
+        y_lib = centre - (17 + nd * 13) / 2 + 12
+        valeur = f'{o["valeur_affichee"]}{NN}{o["unite"]}'
+        A(texte(DESSIN_X0, y_lib, o["libelle"], "sans", 15, 400, "encre", wdth=100))
+        A(texte(VAL_X, y_lib, valeur, "mono", 12, 500, "encre",
+                ancre="end", tabulaire=True))
+        for k, d_ligne in enumerate(o.get("detail", []) or []):
+            A(texte(DESSIN_X0, y_lib + 17 + k * 13, d_ligne, "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+
+    # ── Étiquettes des destinations, à droite ────────────────────────────────
+    for de in pg["destinations"]:
+        y0d, y1d = g[de["cle"]]
+        centre = (y0d + y1d) / 2
+        A(texte(PART_LIB_D_X, centre - 2, de["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        A(texte(PART_LIB_D_X, centre + 16,
+                f'{de["valeur_affichee"]}{NN}{de["unite"]}',
+                "mono", 12, 500, "pivot", tabulaire=True))
+        for k, d_ligne in enumerate(de.get("detail", []) or []):
+            A(texte(PART_LIB_D_X, centre + 32 + k * 13, d_ligne, "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+
+    # ── Note de pied — la boucle que les rubans traversent ───────────────────
+    y_note = g["bas"] + 30
+    A(rect(DESSIN_X0, y_note - 18, UTILE, 1, "filet-3"))
+    A(texte(DESSIN_X0, y_note, pg["note_pied"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Phrase de principe, cartouche ────────────────────────────────────────
+    A(texte(MARGE, 688, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+    A("</svg>")
+
+    gauche = v["surplus"] + v["partage"] + v["soutirage"]
+    droite = (g["revente"][1] - g["revente"][0]) + (g["communaux"][1] - g["communaux"][0])
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "conservation": f'{pg["flux"][0]["valeur"]} + {pg["flux"][1]["valeur"]} '
+                        f'(toiture) + {pg["flux"][2]["valeur"]} (réseau) '
+                        f'= {int(gauche)}{NN}{pg["unite"]} de part et d’autre — '
+                        f'colonnes closes à {g["reseau"][1]:.2f} et '
+                        f'{g["communaux"][1]:.2f} px (écart '
+                        f'{abs(g["reseau"][1] - g["communaux"][1]):.4f})',
+        "echelle": f'{g["echelle"]:.6f} px par {pg["unite"]} — encre totale '
+                   f'{PART_HAUTEUR:.0f} px par colonne, écart d’origine {PART_ECART:.0f} px',
+        "demonstration": f'partagé {v["partage"]:.0f} contre surplus {v["surplus"]:.0f} '
+                         f'({v["partage"]/(v["partage"]+v["surplus"])*100:.1f} % de la '
+                         f'production) ; part de la toiture dans le nœud communal '
+                         f'{v["partage"]/(v["partage"]+v["soutirage"])*100:.1f} %. '
+                         f'Texte masqué : une petite barre se sépare en deux, '
+                         f'sa moitié colorée coiffe un grand flux pâle',
+        "topologie": f'origines x {PART_X_BARRE_G}, rubans {PART_X0} → '
+                     f'{PART_X_BARRE_D}, destinations étiquetées jusqu’à '
+                     f'{W - MARGE} px — revente en haut à droite : aucun croisement',
+        "cotes_des_rubans": " ; ".join(f"{c} {l:.0f} px sur "
+                                       f"{PART_X_BARRE_D - PART_X0:.0f} disponibles"
+                                       for c, l in depassements),
+        "bas_du_dessin": f'rubans jusqu’à {g["bas"]:.2f} px, note de pied à '
+                         f'{y_note:.2f}, phrase de principe à 688, cartouche '
+                         f'714–744, marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px',
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur*H_CARTOUCHE} px², soit "
+                            f"{largeur*H_CARTOUCHE/(W*H)*100:.2f} % de la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 "
+                         f"(1152 / {W})",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_partage(donnees):
+    """La vignette : le partage entier — deux origines, la séparation, la
+    convergence — et les deux nœuds de droite chiffrés. Libellés d'origine,
+    détails et note laissés à la planche."""
+    pg = donnees["partage"]
+    x_bar_g, x_bar_d, bar_w = 18.0, 170.0, 5.0
+    x0 = x_bar_g + bar_w
+    lib_x = 182.0
+    g = _part_geometrie(pg, 40.0, 100.0, 10.0)
+    courts = pg["libelles_courts"]
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    A("<style>")
+    for cle, hexa in JETON.items():
+        A(f"  .c-{cle} {{ fill: var(--color-{cle}, {hexa}); }}")
+    A(f'  .s-filet1 {{ stroke: var(--color-filet-1, {JETON["filet-1"]}); }}')
+    A(f"  .t-sans {{ font-family: {SANS}; }}")
+    A(f"  .t-mono {{ font-family: {MONO}; }}")
+    A("</style>")
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    for f in pg["flux"]:
+        cg, cd = PART_TRANCHES[f["cle"]]
+        A(_part_ruban(x0, x_bar_d, g[cg][0], g[cg][1],
+                      g[cd][0], g[cd][1], PART_COULEUR[f["cle"]]))
+    A(rect(x_bar_g, g["toiture"][0], bar_w,
+           g["toiture"][1] - g["toiture"][0], "encre"))
+    A(rect(x_bar_g, g["reseau"][0], bar_w,
+           g["reseau"][1] - g["reseau"][0], "encre"))
+    A(rect(x_bar_d, g["revente"][0], bar_w + 1,
+           g["revente"][1] - g["revente"][0], "encre"))
+    A(rect(x_bar_d, g["communaux"][0], bar_w + 1,
+           g["communaux"][1] - g["communaux"][0], "encre"))
+
+    for cle in ("revente", "communaux"):
+        de = next(d for d in pg["destinations"] if d["cle"] == cle)
+        centre = (g[cle][0] + g[cle][1]) / 2
+        A(texte(lib_x, centre - 3, courts[cle], "sans", 12, 600, "encre", wdth=112))
+        A(texte(lib_x, centre + 11, f'{de["valeur_affichee"]}{NN}{de["unite"]}',
+                "mono", 10, 500, "pivot", tabulaire=True))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "les deux origines, la séparation et la convergence à "
+                 "l’échelle commune ; les deux nœuds de droite chiffrés — "
+                 "libellés d’origine, cotes de ruban et note laissés à la planche",
+        "bas_du_dessin": f'{g["bas"]:.2f} px, marge basse {VH - g["bas"]:.2f} px',
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_partage(donnees):
+    """L'appui : le motif entier à l'échelle 1 — les quatre barres, les trois
+    rubans, les origines et destinations chiffrées, une cote dans le ruban
+    partagé. Détails et note laissés à la planche."""
+    pg = donnees["partage"]
+    v, total = _part_valeurs(pg)
+    x_lib_g, x_bar_g, x_bar_d, bar_w = 180.0, 188.0, 392.0, 8.0
+    x0 = x_bar_g + bar_w
+    lib_x = 408.0
+    g = _part_geometrie(pg, 66.0, 200.0, 24.0)
+    courts = pg["libelles_courts"]
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1",))
+
+    for f in pg["flux"]:
+        cg, cd = PART_TRANCHES[f["cle"]]
+        A(_part_ruban(x0, x_bar_d, g[cg][0], g[cg][1],
+                      g[cd][0], g[cd][1], PART_COULEUR[f["cle"]]))
+    A(rect(x_bar_g, g["toiture"][0], bar_w,
+           g["toiture"][1] - g["toiture"][0], "encre"))
+    A(rect(x_bar_g, g["reseau"][0], bar_w,
+           g["reseau"][1] - g["reseau"][0], "encre"))
+    A(rect(x_bar_d, g["revente"][0], bar_w,
+           g["revente"][1] - g["revente"][0], "encre"))
+    A(rect(x_bar_d, g["communaux"][0], bar_w,
+           g["communaux"][1] - g["communaux"][0], "encre"))
+
+    for o in pg["origines"]:
+        centre = (g[o["cle"]][0] + g[o["cle"]][1]) / 2
+        A(texte(x_lib_g, centre - 2, courts[o["cle"]], "sans", 13, 600,
+                "encre", wdth=112, ancre="end"))
+        A(texte(x_lib_g, centre + 14, f'{o["valeur_affichee"]}{NN}{o["unite"]}',
+                "mono", 11, 500, "pivot", ancre="end", tabulaire=True))
+    for de in pg["destinations"]:
+        centre = (g[de["cle"]][0] + g[de["cle"]][1]) / 2
+        A(texte(lib_x, centre - 2, courts[de["cle"]], "sans", 13, 600,
+                "encre", wdth=112))
+        A(texte(lib_x, centre + 14, f'{de["valeur_affichee"]}{NN}{de["unite"]}',
+                "mono", 11, 500, "pivot", tabulaire=True))
+
+    # Une seule cote de ruban : la part partagée, la thèse de l'appui.
+    xm = (x0 + x_bar_d) / 2
+    ym = ((g["partage_g"][0] + g["partage_g"][1]) / 2
+          + (g["partage_d"][0] + g["partage_d"][1]) / 2) / 2
+    pct = v["partage"] / (v["partage"] + v["surplus"]) * 100
+    A(texte(xm, ym + 3.5, f'{pct:.0f}{NN}%{NN}PARTAGÉS', "mono", 10, 500,
+            "encre", ancre="middle", tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="les quatre barres, les trois rubans et les quatre valeurs à "
+              "l’échelle 1, une cote dans le ruban partagé — détails, cotes "
+              "des autres rubans et note laissés à la planche",
+        bas=f'rubans jusqu’à {g["bas"]:.0f} px, marge basse '
+            f'{AH - g["bas"]:.0f} px',
+        echelle_derivee=f'{g["echelle"]:.6f} px par {pg["unite"]}, colonnes '
+                        f'closes à {g["reseau"][1]:.2f} et {g["communaux"][1]:.2f} px')
+
+
 def _composer(donnees):
     if "bascule" in donnees:
         return composer_bascule(donnees)
     if "dedoublement" in donnees:
         return composer_dedoublement(donnees)
+    if "partage" in donnees:
+        return composer_partage(donnees)
     if "plafonds" in donnees:
         return composer_plafonds(donnees)
     return composer(donnees, donnees["fiche"])
@@ -1454,6 +1786,8 @@ def _composer_vignette(donnees):
         return composer_vignette_bascule(donnees)
     if "dedoublement" in donnees:
         return composer_vignette_dedoublement(donnees)
+    if "partage" in donnees:
+        return composer_vignette_partage(donnees)
     if "plafonds" in donnees:
         return composer_vignette_plafonds(donnees)
     return composer_vignette(donnees)
@@ -1464,6 +1798,8 @@ def _composer_appui(donnees):
         return composer_appui_bascule(donnees)
     if "dedoublement" in donnees:
         return composer_appui_dedoublement(donnees)
+    if "partage" in donnees:
+        return composer_appui_partage(donnees)
     if "plafonds" in donnees:
         return composer_appui_plafonds(donnees)
     return composer_appui(donnees)
