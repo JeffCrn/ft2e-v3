@@ -1019,3 +1019,24 @@ antérieur devra reprendre un secteur de la nouvelle énumération.
 et EXE » (dont la liste des 17 clichés de l'annexe B du plan motion) se
 lisent désormais « Monotechnique — Audit » : l'historique n'est pas
 réécrit, la donnée fait foi.
+
+
+## 12. Ajustement du 2026-08-27 — la remontée à l'ancre au filtrage
+
+Demande FT2E : au bureau, cliquer une vignette du bas du rail affiche des
+résultats situés en haut, hors de vue. Options pesées : le rail collant ne
+résout rien (le rail fait ~1 500 px, plus haut que l'écran) ; la remontée
+automatique est retenue, avec deux garde-fous UX :
+
+- **la page ne remonte que si l'ancre est sortie de l'écran** — cliquer un
+  chip de la barre du haut ne provoque aucun mouvement (mesuré : 0 px) ;
+- le défilement est doux, sec sous `prefers-reduced-motion`, et **jamais
+  déclenché par le lien profond** `?secteur=` (la page se charge en haut —
+  mesuré : scrollY 0, filtre appliqué).
+
+L'ancre est la puce « filtrer par secteur » (`data-ancre-filtres`), dont le
+`scroll-margin-top` compense la navigation fixe plus le module (84 px, 102
+au-dessus de 768) — et c'est CETTE valeur que le script lit en computed
+style comme seuil de déclenchement : une seule cote, dans le CSS du
+composant. Mesuré au navigateur à 1 280 : clic sur Monotechnique depuis
+scrollY 1 445 → ancre posée à 102 px exactement, résultats en vue.

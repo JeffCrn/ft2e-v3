@@ -71,7 +71,14 @@ const secteurs = (await getCollection('secteurs'))
           de 100 à 98. Les quatre autres grilles du site portent déjà ce même
           motif (puce + étiquette mono + titre de section) : c'est aussi par là
           qu'elles restent conformes. */}
-      <div class="flex items-center gap-3">
+      {/* L'ancre de remontée des filtres (2026-08-27, demande FT2E) : un clic
+          sur un filtre situé bas dans le rail affiche des résultats situés en
+          haut — hors de vue. Le clic remonte donc la page à cette puce, MAIS
+          seulement si elle est sortie de l'écran : cliquer un chip de la
+          barre du haut ne provoque aucun mouvement. Le scroll-margin-top
+          (CSS du composant) compense la navigation fixe, et c'est LUI que le
+          script lit comme seuil — une seule valeur, jamais deux. */}
+      <div class="flex items-center gap-3" data-ancre-filtres>
         <span class="puce-section" aria-hidden="true"></span>
         <p class="mono-label text-pivot">filtrer par secteur</p>
       </div>
@@ -287,6 +294,20 @@ const secteurs = (await getCollection('secteurs'))
     margin-top: 2rem;
   }
 
+  /* L'ancre de remontée : la marge compense la navigation fixe (56 px
+     mobile / 74 px bureau) plus le module de la trame (28 px). Le script
+     de filtre lit cette valeur en computed style comme seuil de
+     déclenchement — la modifier ici suffit. */
+  [data-ancre-filtres] {
+    scroll-margin-top: 84px;
+  }
+
+  @media (min-width: 768px) {
+    [data-ancre-filtres] {
+      scroll-margin-top: 102px;
+    }
+  }
+
   .filtres-vignettes {
     display: flex;
     flex-wrap: wrap;
@@ -415,8 +436,26 @@ const secteurs = (await getCollection('secteurs'))
       appliquer(secteur);
     };
 
+    /* La remontée à l'ancre (2026-08-27) : filtrer depuis le bas du rail
+       affiche des résultats hors de vue — le clic ramène la page à la puce
+       de la section. Seulement si l'ancre est sortie de l'écran (le seuil
+       est son propre scroll-margin-top : une seule valeur, dans le CSS du
+       composant), en douceur sauf réduction de mouvement demandée, et
+       JAMAIS au filtrage par URL — la page se charge déjà en haut. */
+    const ancre = document.querySelector<HTMLElement>('[data-ancre-filtres]');
+    const remonte = () => {
+      if (!ancre) return;
+      const seuil = parseFloat(getComputedStyle(ancre).scrollMarginTop) || 0;
+      if (ancre.getBoundingClientRect().top >= seuil - 1) return;
+      const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      ancre.scrollIntoView({ behavior: reduit ? 'auto' : 'smooth', block: 'start' });
+    };
+
     filtres.forEach((btn) => {
-      btn.addEventListener('click', () => activer(btn));
+      btn.addEventListener('click', () => {
+        activer(btn);
+        remonte();
+      });
     });
 
     /* La page se laisse filtrer par l'URL — `/references/?secteur=Logements` —
