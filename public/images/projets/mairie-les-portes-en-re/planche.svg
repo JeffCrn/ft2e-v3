@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Chronologie de principe d’une réhabilitation en site occupé : de 2023 à 2025, deux chantiers se succèdent — l’office de tourisme au printemps 2023, créé dans l’emprise de la salle des fêtes, puis la mairie et la salle des fêtes elles-mêmes, de février 2024 à avril 2025, au fil de 55 comptes rendus de chantier — pendant qu’une ligne continue porte le service public, accueil, police municipale et agence postale, sans interruption sur toute la durée. La salle des fêtes libérée par le premier chantier permet le second, et la mairie réaménagée est livrée au printemps 2025.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · DEUX CHANTIERS, UN SERVICE CONTINU</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Mairie des Portes-en-Ré</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Réhabiliter en site occupé : le chantier se déplace, le service reste</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <rect x="1042.00" y="182.00" width="14.00" height="8.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="1144.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">UN CHANTIER</text>
+  <path d="M 854.80 186.50 L 870.80 186.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.5"/>
+  <text x="1018.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LE SERVICE, CONTINU</text>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DEUX CHANTIERS SUCCESSIFS, UN SERVICE QUI NE S’INTERROMPT PAS</text>
+  <path d="M 491.92 222.00 L 491.92 600.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <path d="M 929.03 222.00 L 929.03 600.00" fill="none" class="s-filet-3" stroke="#00393A1F" stroke-width="1.0"/>
+  <text x="56.00" y="240.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Le service public</text>
+  <text x="1144.00" y="240.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">SANS INTERRUPTION</text>
+  <path d="M 56.00 262.00 L 1144.00 262.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.5"/>
+  <rect x="56.00" y="258.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="1137.00" y="258.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <text x="56.00" y="286.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ACCUEIL · POLICE MUNICIPALE · AGENCE POSTALE</text>
+  <rect x="126.46" y="330.00" width="144.51" height="56.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="140.46" y="361.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PRINTEMPS 2023</text>
+  <text x="284.97" y="353.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Office de tourisme</text>
+  <text x="284.97" y="371.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CRÉÉ DANS L’EMPRISE DE LA SALLE DES FÊTES</text>
+  <path d="M 270.97 358.00 L 528.94 358.00 L 528.94 433.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 528.94 438.00 L 524.94 430.00 L 532.94 430.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="540.94" y="409.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA SALLE DES FÊTES LIBÉRÉE</text>
+  <rect x="528.94" y="440.00" width="533.85" height="56.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="542.94" y="463.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Mairie et salle des fêtes</text>
+  <text x="542.94" y="481.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">55 COMPTES RENDUS DE CHANTIER</text>
+  <text x="1048.79" y="463.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">FÉVR. 2024 → AVR. 2025</text>
+  <path d="M 1062.79 496.00 L 1062.79 600.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="1054.79" y="552.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LIVRAISON · PRINTEMPS 2025</text>
+  <path d="M 56.00 600.00 L 1144.00 600.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 56.00 600.00 L 56.00 606.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 491.92 600.00 L 491.92 606.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 929.03 600.00 L 929.03 606.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 1144.00 600.00 L 1144.00 606.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="273.96" y="620.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2023</text>
+  <text x="710.47" y="620.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2024</text>
+  <text x="1036.51" y="620.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">2025</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">La commune a réhabilité sa mairie sans la fermer : les travaux se font en site occupé, phasés.</text>
+  <rect x="56.00" y="714.00" width="299.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LES PORTES-EN-RÉ · 492 m² · 2025</text>
+</svg>

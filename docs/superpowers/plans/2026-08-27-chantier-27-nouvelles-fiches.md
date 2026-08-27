@@ -139,11 +139,47 @@ textes opératoires restent :
 - **Q4 — les questions transversales T1-T7** du chantier fondateur (autorisations
   MOA, montants publiables, graphies d'acteurs…) valent-elles pour les 27 ?
 
+### Réponses consignées le 2026-08-27 (session N01)
+
+- **Q1 — répondu.** Le fonds est livré **par tranches de millésime de livraison** :
+  la première est `C:\claude_code_dev_projectst2e_new_archives5.zip`
+  (1,7 Go, 1 298 fichiers, un répertoire par affaire sous `2025/`, pas
+  d'inventaire). Cadrage utilisateur : **les 23 fiches en ligne couvrent les
+  livraisons 2026 ; cette tranche couvre les livraisons 2025.** ⚠ Le disque de la
+  machine est saturé (1,9 Go libres avant extraction) : l'extraction se fait
+  **dossier par dossier, par session** — le ZIP reste la source, le répertoire
+  extrait de la session précédente se supprime à l'ouverture de la suivante.
+- **Q2 — partiellement répondu.** La tranche 2025 porte **10 dossiers** (liste
+  ci-dessous) ; les tranches suivantes viendront d'autres millésimes (objectif 27).
+  Ordre non imposé par FT2E → règle par défaut reconduite : les mieux documentés
+  d'abord, couverture des secteurs, dossiers minces en fin. ⚠ **Collision relevée :
+  `23-075` (« Extension crèche Périgny UDAF ») est déjà publié**
+  (`creche-oranger-perigny.md`, ref_001) — ce dossier ne produit pas de fiche
+  nouvelle ; il peut en revanche répondre à la question T7 (millésime de livraison
+  de la crèche) et compléter la fiche existante. **9 dossiers publiables.**
+
+  | Fichiers | Dossier de la tranche 2025 | Note |
+  |---|---|---|
+  | 273 | `22-011- Réhab Mairie Les Portes en Ré - BTB` | **N01 → ref_024** |
+  | 255 | `21-062 - Pôle commercial FORS 79 - BTB` | |
+  | 208 | `19-036 -150 logts Rompsay MEDIATIM` | « AURORA » — le cliché du hero de l'accueil vient de cette opération |
+  | 191 | `25-004 - Musée Pierre Loti ROCHEFORT` | l'ancienne fiche DÉMO « maison-pierre-loti » (supprimée) portait ce sujet |
+  | 103 | `19-096 - Eglise St Sauveur - GOUTAL` | |
+  | 102 | `22-013- 16 Logts L'Houmeau OPH - BTB` | |
+  | 73 | `23-075- Extension creche Périgny UDAF - ASP` | ⚠ déjà publié (ref_001) — hors programme de fiches neuves |
+  | 58 | `23-009- 60 maisons Louise Magnan - IAA` | |
+  | 25 | `23-099 - CPAM La Rochelle` | dossier mince ? |
+  | 10 | `23-083- Airbus - Comptage énergie - EQUANS` | dossier mince ? candidat Monotechnique — Audit |
+- **Q3 — non répondu, défaut reconduit** : matière insuffisante → collecte seule +
+  substitution proposée. À confirmer par FT2E.
+- **Q4 — non répondu, défaut reconduit** : T1-T7 valent pour les nouvelles fiches
+  (T6 reste hors chantier — page Équipe). À confirmer par FT2E.
+
 ## Suivi (une ligne par session)
 
 | N | Affaire | Slug | Fiche | Planche (archétype) | Collecte | Notes |
 |---|---|---|---|---|---|---|
-| — | — | — | — | — | — | — |
+| N01 | 22-011 — Réhabilitation de la mairie et création de l'office de tourisme, Les Portes-en-Ré | `mairie-les-portes-en-re` | ✅ rédigée, build 47 pages | ✅ `chronologie-affaire`, **mécanisme `relais` créé** (3ᵉ du compositeur — invariant octet des 2 planches existantes vérifié avant/après la greffe) | ✅ ref_024 (8 pièces) | `annee_livraison: 2025` sur docx commercial « RÉALISATION : 2025 » + cadrage tranche — PV de réception absent (→ B1) ; questions B1-B4, C1-C2, E1-E2 ouvertes ; Eric Moinet vérificateur des CCTP (T6) ; secteur Tertiaire / ERP |
 
 ## Annexe A — prompt d'initialisation de la session N01 (à coller tel quel en session neuve)
 
@@ -234,4 +270,120 @@ content-modeller et va dans le MEME commit que public/admin/config.yml.
 Termine par le prompt de lancement de la session N02, en annexe du plan du
 chantier et reproduit integralement dans ton message final - la regle de
 continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
+````
+
+## Annexe B — prompt de lancement de la session N02 (à coller tel quel en session neuve)
+
+````
+Session N02/27 - FT2E v3 : chantier des 27 nouvelles fiches references.
+Deuxieme dossier de la tranche « livraisons 2025 ».
+
+Contexte. FT2E v3 est le site institutionnel du bureau d'etudes FT2E
+(La Rochelle), Astro 6 statique, deploye en demonstration client sur
+https://ft2e-v3.vercel.app (indexation verrouillee - ne pas y toucher).
+Le catalogue porte 24 fiches reelles (23 + la mairie des Portes-en-Re,
+session N01), chacune illustree d'une planche de schema de principe (cinq
+pieces par dossier). Objectif : 50 fiches. 1 session = 1 dossier, close
+par le prompt de la suivante.
+
+LIRE D'ABORD, dans cet ordre :
+1. docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md - LE
+   PLAN : § 1 (ce qui a change), § 2 (pipeline 12 etapes), § 3 (REPONSES
+   CONSIGNEES le 2026-08-27 - ne pas re-poser les questions d'ouverture),
+   § Suivi (ligne N01), annexe B (ce prompt).
+2. docs/superpowers/plans/2026-08-07-chantier-references-reelles.md -
+   § Contraintes globales + § Protocole de session.
+3. docs/superpowers/specs/2026-08-12-planches-references-protocole.md -
+   revision 5 EN ENTIER.
+4. CLAUDE.md, .claude/rules/content-collections.md et french-editorial.md.
+Etalons : src/content/projets/creche-oranger-perigny.md (fiche) et, pour
+une session N complete, src/content/projets/mairie-les-portes-en-re.md +
+public/images/projets/mairie-les-portes-en-re/ + references/ref_024/.
+
+DOSSIER DU JOUR : « 21-062 - Pole commercial FORS 79 - BTB » (255
+fichiers, 673 Mo), dans
+C:\claude_code_dev_projects\ft2e_new_archives\2025.zip (tranche des
+livraisons 2025, 10 dossiers - liste au § 3 du plan).
+ATTENTION DISQUE SATURE (~1,7 Go libres) : supprimer d'abord le
+repertoire extrait de la session precedente
+(ft2e_new_archives/2025/22-011- Rehab Mairie Les Portes en Re - BTB),
+puis extraire LE SEUL dossier du jour depuis le ZIP
+(unzip 2025.zip "2025/21-062*"). Le ZIP est la source, il ne se
+supprime pas.
+Dossier de travail a creer : references/ref_025/
+Slug cible : a etablir au depouillement (kebab-case sans accents,
+verifier qu'il n'ecrase rien).
+
+CE QUE LA N01 A ETABLI (verifiable au depot) :
+- annee_livraison: 2025 se pose sur le docx commercial (« REALISATION :
+  2025 », docx Rehabilitation/batiments publics 2024) + le cadrage
+  utilisateur de la tranche ; le PV de reception manque souvent a
+  l'archive -> question B1 de la collecte, statut livre.
+- Architecte Agence Blanchard Tetaud Blanchet (La Rochelle) - graphie T3
+  harmonisee (Maubec, Saint-Rogatien, Portes-en-Re). FORS 79 est aussi
+  un dossier BTB.
+- Les numeros des cotraitants pietinent les pieces : BAG « 232 030 »,
+  BF ECO « 542 » (prefixe economiste, cf. « 539 »/« 563 ») - le numero
+  FT2E se releve sur page de garde CCTP (« Affaire n° : 21-062 »).
+- Archetypes apres N01 : boucle-fluide 7 - coupe-traversee 4 - sankey 4 -
+  zonage 3 - tableau 3 - chronologie 3 (relais, Portes-en-Re) -
+  planche-chiffree 0 SANS module. VARIER - l'archetype se choisit sur la
+  THESE de la fiche, jamais sur le secteur.
+- Si la these exige un mecanisme nouveau : il s'ecrit DANS le compositeur
+  d'archetype (constantes prefixees par mecanisme - deux affectations du
+  meme nom au niveau module se marchent dessus), et l'invariant octet des
+  planches existantes du meme compositeur se rejoue AVANT et APRES la
+  greffe, dans une copie hors depot (N01 : 8/8 OK deux fois).
+
+DEROULER LE PIPELINE § 2 INTEGRALEMENT : depouillement -> releve du
+numero NN-NNN sur piece FT2E -> references/ref_025/ (3 a 8 pieces) ->
+croisement commercial (references/docs_references/ + docs/20-source-
+plaquette-2024.md) -> fiche de collecte (A/A+ remplies, B-E en questions)
+-> fiche src/content/projets/<slug>.md (taxonomie ACTUELLE ; lieu avec
+code postal entre parentheses ; synthese 480-780 posee par script ; >= 5
+liens internes ; jamais de numero d'affaire NI de millesime d'ouverture
+en prose) -> PLANCHE complete (extraction avec a_valider_ft2e non vide,
+composition par scripts/planches/<archetype>.py, controles a 1152 /
+carte 274-296 / appui 552, PNG 2400x1600, apostrophes-planches.py,
+verser.py) -> qualite (typecheck 0, build vert 48 pages,
+editorial-reviewer, controle-liens-internes 25/25 a 5,
+controle-numeros-affaire 0 fuite, releve-numeral sans ecart nouveau) ->
+COMMIT UNIQUE fiche+planche+compositeur (content(references): ajoute la
+fiche reelle <nom> et sa planche ; git ls-remote avant, depot partage)
+-> push (le push deploie), curl de la fiche AVEC barre oblique finale +
+marqueur de build, rendu controle aux trois bandes (sonde iframe pour
+les largeurs telephone) -> ligne de suivi au plan -> PROMPT DE LA
+SESSION N03 en annexe du plan (script Python ou Write, jamais un long
+heredoc bash) et reproduit integralement dans le message final.
+
+PIEGES VERIFIES EN N01 (en plus de ceux de l'annexe A, tous confirmes) :
+- Un heredoc bash long (env. 70 lignes et plus) se fait TRONQUER
+  silencieusement : ecrire les gros fichiers par l'outil Write PUIS
+  passer scripts/injection-typographique.py, avec CONTROLE DE PRESENCE
+  des insecables apres coup (calibrer les seuils d'assertion sur le
+  texte lui-meme, pas sur un autre fichier).
+- Le hook PreToolUse « hookify » peut bloquer l'outil Read par
+  intermittence (fichier python manquant dans le cache du plugin) :
+  reessayer, ou lire par Bash.
+- cairosvg : la copie de controle perd <style> ET l'attribut style de la
+  racine ; filets 8 chiffres a fusionner (#00393A38 -> #C1CFD0,
+  #00393A29 -> #CFDADB, #00393A1F -> #D9E2E3) ; la fleche U+2192 sort en
+  tofu au controle cairosvg mais rend au navigateur (precedent Tourtet,
+  reverifie en N01).
+- PYTHONIOENCODING=utf-8 sur cette machine ; le hook Stop commite et
+  pousse SEUL ce qui traine ; /references/ est gitignore (motif ancre) -
+  les pieces sources n'entrent JAMAIS au depot ; npm run preview ne
+  mesure pas la performance ; Chrome refuse les fenetres sous 500 px
+  (sonde iframe).
+- La planche n'expose NI le millesime d'ouverture (l'axe des temps de la
+  N01 ouvre en 2023 pour cette raison), NI montant, NI tiers ; tout
+  arbitrage de dessin va dans a_valider_ft2e (jamais vide).
+
+Portee de commit : content(references). Un changement de schema Zod
+eventuel passe par le sous-agent content-modeller et va dans le MEME
+commit que public/admin/config.yml.
+
+Termine par le prompt de lancement de la session N03, en annexe du plan
+du chantier et reproduit integralement dans ton message final - la regle
+de continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
 ````
