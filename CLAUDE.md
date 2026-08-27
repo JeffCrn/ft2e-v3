@@ -11,7 +11,7 @@ Une **build Astro statique** fonctionnelle, déployée sur Vercel, qui :
 2 bis. **Illustre chaque fiche par une planche de schéma de principe** — un dessin FT2E composé à partir de sa propre matière technique, sans aucune géométrie d'ouvrage ni œuvre de tiers. **Chantier ouvert le 2026-08-12, CLOS le 2026-08-15 : 23 planches sur 23, vingt-trois mécanismes distincts.** Bilan de clôture et points ouverts (au premier rang : la régénération des vingt planches antérieures à la 21) : `docs/superpowers/plans/2026-08-12-chantier-planches-references.md`.
 3. Donne à voir le design system complet (rampe monochrome 197°, plans et ombres à l'encre, trame 28 px, typo Archivo + IBM Plex Mono, cartouches, grille de références, monogramme).
 4. Démontre les filtres de la page Références, le gabarit de fiche projet, le composant `HeroPage` unifié, la signature éditoriale, le JSON-LD, les performances.
-5. Anime le tout via quatre mouvements vanilla (filet de flux 900 ms, révélation de plan 760 ms / 22 px, survols 300/260 ms) + View Transitions Astro, courbe unique `cubic-bezier(0.2, 0.7, 0.2, 1)`.
+5. Anime le tout sur la courbe unique `cubic-bezier(0.2, 0.7, 0.2, 1)` : révélation de plan 1000 ms / 28 px avec cascade des grilles (A11), survols 300/260 ms, voile des clichés-liens (A12), View Transitions en fondu montant avec voyage du visuel carte → fiche (A13), compteur du relevé de l'accueil (A14) — l'infléchissement motion arbitré par FT2E le 2026-08-27 ; le filet de flux (900 ms) reste débranché, option non arbitrée.
 
 Ce qui n'est pas encore en place :
 
@@ -99,12 +99,14 @@ Règles : 2 valeurs par composition (3 max) · une seule réserve profonde par �
 - **Le papier gouverne**, tramé 28 px à 7 % ; les plans posés occultent la trame ; aucune section sombre décorative hors la ligne encrée.
 - **Aucune ombre hors des trois rangs** (+ planche de page), **aucun rayon** (seule exception : puce de section, cercle 7 px).
 
-### Motion design
+### Motion design — infléchi par l'arbitrage FT2E du 2026-08-27 (A11 à A14)
 
-- **Quatre mouvements, une seule courbe** `cubic-bezier(0.2, 0.7, 0.2, 1)` : filet de flux (`TraceFlux.astro`, 900 ms, une fois par chargement) ; révélation de plan (`[data-plan]`, 760 ms, 22 px, une fois à l'entrée dans la vue — observée par `BaseLayout`) ; survol de cellule (300 ms, calcaire → papier) ; survol de bouton (260 ms, encre → profond).
-- Aucun compteur qui s'incrémente, aucun parallax, aucun hover lift, aucun filet qui s'épaissit ; survol = bascule de fond, **aucun déplacement** ; focus = 2 px pivot décalé 2 px.
-- View Transitions Astro pour cross-fade entre pages ; `prefers-reduced-motion` respecté partout (tout posé d'emblée, fallback complet sans JS).
-- Implémenté dans `src/styles/motion.css` + script `initPlans` de `BaseLayout.astro` + script du composant `TraceFlux.astro`.
+- **Une seule courbe** `cubic-bezier(0.2, 0.7, 0.2, 1)` : révélation de plan (`[data-plan]`, **1000 ms, 28 px** — A11, observée par `BaseLayout`) et **cascade des grilles de cartes** (`[data-plan-groupe]`, 80 ms par rang plafonné au sixième — A11) ; survol de cellule (300 ms, calcaire → papier) ; survol de bouton (260 ms, encre → profond) ; **voile des clichés-liens** (encre 14 % levée au survol/focus, 300 ms — A12, jamais sur un dessin) ; filet de flux (`TraceFlux.astro`, 900 ms — **débranché**, option non arbitrée du chantier motion).
+- **View Transitions** : fondu montant (12 px / 350 ms) et voyage du visuel sur le trajet carte → fiche (`transition:name` — A13) ; rien au premier chargement.
+- **Le relevé de l'accueil se compte** (900 ms, une fois, à l'entrée dans la vue — A14, l'unique compteur du site) et ses cellules répondent au survol (fond + rang de rampe).
+- Aucun parallax, aucun hover lift, aucun filet qui s'épaissit ; survol = bascule de fond ou de valeur, aucun déplacement (exceptions bornées : A10, la coupe) ; focus = 2 px pivot décalé 2 px.
+- `prefers-reduced-motion` respecté partout (tout posé d'emblée, compteur compris, transitions coupées ; fallback complet sans JS).
+- Implémenté dans `src/styles/motion.css` + scripts `initPlans` (`BaseLayout.astro`) et `initCompteurs` (`index.astro`) ; le registre des amendements fait foi (`.claude/rules/tailwind-design-tokens.md`).
 
 ## Les planches de références — le dispositif visuel des fiches
 
@@ -218,7 +220,7 @@ l'échelle 0,24, quel que soit l'endroit où on le découpe.
 
 1. **Toute donnée métier de démo** (titre projet, MOA, surface, performance, chiffre) doit être **plausible** mais clairement signalée par le tag `[DÉMO]` dans le contenu Markdown ET par un badge visuel sur la page.
 2. **L'équipe de sept personnes** (Mathieu, Géraldine, Sandrine, Vincent, Tanguy, Emma, Carole) est désignée uniformément par prénom dans toute la narration. Aucun membre n'est distingué individuellement — le bureau est porté collectivement. Les rôles (co-gérants associés, associés, collaborateurs) ne s'affichent que dans la grille structurée de la page Équipe, avec un traitement visuel identique pour tous les profils.
-3. **Design system charte v3 « Plans et profondeur » — révision 2.1** (rampe 197°, trois rangs d'ombre, filets par opacité, **huit amendements A1–A8, plus A9–A10 d'application**) — voir `.claude/rules/tailwind-design-tokens.md` (§ Les amendements) et la spec `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`. La charte prévaut sur tout support existant ; **en cas de contradiction interne à la charte, la mesure prévaut sur la règle**.
+3. **Design system charte v3 « Plans et profondeur » — révision 2.1** (rampe 197°, trois rangs d'ombre, filets par opacité, **huit amendements A1–A8, plus A9–A14 d'application** — A11 à A14 : l'infléchissement motion du 2026-08-27) — voir `.claude/rules/tailwind-design-tokens.md` (§ Les amendements) et la spec `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`. La charte prévaut sur tout support existant ; **en cas de contradiction interne à la charte, la mesure prévaut sur la règle**.
 4. **Audit RGAA AA** dès le premier composant.
 5. **Performance** : Lighthouse mobile ≥ 90 sur la home, 100/100/100 sur A11y / BP / SEO.
 6. **Aucun lorem ipsum.** Tout texte est en français, conforme à la voix FT2E, et marqué `[DÉMO]` si non vérifié.

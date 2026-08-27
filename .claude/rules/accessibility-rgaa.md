@@ -93,13 +93,15 @@ Combinaisons validées (ratios mesurés de la charte) :
 ### Mouvement
 
 - Aucune animation > 5 s en boucle sans contrôle utilisateur.
-- **Quatre mouvements v3, une seule courbe** (`cubic-bezier(0.2, 0.7, 0.2, 1)`) :
-  1. tracé de flux (`TraceFlux.astro`) — 900 ms, une fois par chargement, décoratif, `aria-hidden` ;
-  2. révélation de plan (`[data-plan]`, initiée par `BaseLayout.astro`) — 760 ms / 22 px, une fois par élément, à l'entrée dans la vue ;
-  3. survol de cellule — 300 ms, bascule calcaire → papier ;
-  4. survol de bouton — 260 ms, bascule encre → profond.
-- `prefers-reduced-motion: reduce` **supprime les quatre** : tout est posé d'emblée (`motion.css` + garde dans `initPlans`). Sans JavaScript, rien n'est masqué (classe `html.js-plans`).
-- Rien d'autre ne bouge : ni compteur, ni parallax, ni déplacement au survol.
+- **Une seule courbe** (`cubic-bezier(0.2, 0.7, 0.2, 1)`) — mouvements amendés A11-A14 le 2026-08-27 :
+  1. révélation de plan (`[data-plan]`, initiée par `BaseLayout.astro`) — 1000 ms / 28 px (A11), une fois par élément, à l'entrée dans la vue ; les grilles de cartes en cascade (`[data-plan-groupe]`, 80 ms par rang — A11) ;
+  2. survol de cellule — 300 ms, bascule calcaire → papier ; survol de bouton — 260 ms, bascule encre → profond ;
+  3. voile des clichés-liens (A12) — bascule d'opacité 300 ms, aucun sens porté : le lien est nommé par son `aria-label` ;
+  4. transitions de pages (A13) — fondu montant 350 ms, uniquement en navigation interne ;
+  5. compteur du relevé de l'accueil (A14) — 900 ms, une fois ; **le span animé est `aria-hidden`, la valeur finale est doublée en `sr-only`** : le lecteur d'écran n'entend jamais le décompte ;
+  6. tracé de flux (`TraceFlux.astro`) — 900 ms, décoratif, `aria-hidden` — actuellement débranché.
+- `prefers-reduced-motion: reduce` **supprime tout** : tout est posé d'emblée, le compteur affiche sa valeur, les transitions de pages basculent sans animation (`motion.css` + gardes dans `initPlans` et `initCompteurs`). Sans JavaScript, rien n'est masqué (classe `html.js-plans`) et les valeurs sont dans le HTML.
+- Rien d'autre ne bouge : ni parallax, ni déplacement au survol (exception bornée A10).
 
 ### Lecteur d'écran
 

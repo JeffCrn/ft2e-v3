@@ -51,7 +51,7 @@ Tout `<script>` d'un composant `.astro` qui appelle `addEventListener` doit :
 - `src/components/layout/Header.astro` — `initMenu` (menu mobile).
 - `src/pages/references/index.astro` — `initFiltres`, filtres par secteur de la grille de références (guard `dataset.filtresBound`).
 
-Citer les fonctions par **nom**, jamais par numéro de ligne : les lignes bougent à chaque refonte et la règle devient fausse sans que rien ne le signale. `Chiffre.astro` n'a plus de script — la v3 interdit les compteurs qui s'incrémentent (`.claude/rules/tailwind-design-tokens.md` § Interactions).
+Citer les fonctions par **nom**, jamais par numéro de ligne : les lignes bougent à chaque refonte et la règle devient fausse sans que rien ne le signale. `Chiffre.astro` n'a plus de script ; l'unique compteur du site est `initCompteurs` dans `src/pages/index.astro` (amendement A14 du 2026-08-27 — tout autre compteur reste interdit, `.claude/rules/tailwind-design-tokens.md` § Interactions).
 
 ### Anti-pattern interdit
 

@@ -2,7 +2,7 @@
 
 **Scope** : tout fichier utilisant Tailwind (`.astro`, `.tsx`, `.html`).
 
-**Référence** : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026), bundle `branding-v3-bis/` — remplace la révision 2 (`branding-v3/`) et la révision 1 (`branding-v2/`). La 2.1 conserve la structure de la 2 et corrige **huit prescriptions** consignées à son § 16 (registre des amendements) : elles sont reportées ci-dessous sous les repères A1 à A8. **A9 et A10 s'y ajoutent, qui ne viennent pas du PDF** : ce sont des amendements d'application, arbitrés ici (A9 le 2026-08-15, index des références en grille de cartes ; A10 le 2026-08-25, ouverture de tranche de la coupe des secteurs). Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
+**Référence** : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026), bundle `branding-v3-bis/` — remplace la révision 2 (`branding-v3/`) et la révision 1 (`branding-v2/`). La 2.1 conserve la structure de la 2 et corrige **huit prescriptions** consignées à son § 16 (registre des amendements) : elles sont reportées ci-dessous sous les repères A1 à A8. **A9 à A14 s'y ajoutent, qui ne viennent pas du PDF** : ce sont des amendements d'application, arbitrés ici (A9 le 2026-08-15, index des références en grille de cartes ; A10 le 2026-08-25, ouverture de tranche de la coupe des secteurs ; A11 à A14 le 2026-08-27, l'infléchissement motion demandé par FT2E — révélation ample et cascade, voile des clichés-liens, transitions de pages, compteur du relevé). Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
 
 **Autorité** : en cas de contradiction entre la charte et un support existant, la charte prévaut. En cas de contradiction interne à la charte, **la mesure prévaut sur la règle**.
 
@@ -68,7 +68,7 @@ Sept rangs, pas huit. Chacun se distingue du précédent par **au moins deux par
 - **Substitution** (gabarit imposé, courrier bureautique) : **Arial** en normale ou grasse, sans variation de chasse ; **Consolas** ou **Menlo** pour le mono. Aucune autre, et **aucun serif**.
 - `.type-annexe` (chasse 72) a été **supprimé** : la 2.1 ne compte que sept rangs, et la hiérarchie passe par la graisse et l'opacité.
 
-## Les amendements — huit de la charte (§ 16), deux d'application (A9, A10)
+## Les amendements — huit de la charte (§ 16), six d'application (A9 à A14)
 
 | № | Objet | Révision 2 | Révision 2.1 — ce qui s'applique |
 |---|---|---|---|
@@ -154,78 +154,78 @@ l'amendement** :
 ### A11 — la révélation ample et séquencée (2026-08-27)
 
 **A11 est, comme A9 et A10, un amendement d'application** — le premier du chantier
-motion, arbitré par FT2E le 2026-08-27 (« le style est déjà très aride, des effets
-plus marqués apporteraient un peu de dynamisme »). Ne pas le chercher dans le PDF.
+motion, arbitré par FT2E le 2026-08-27 (« le style est déjà très aride, des effets
+plus marqués apporteraient un peu de dynamisme »). Ne pas le chercher dans le PDF.
 
 | № | Objet | Révision 2.1 | Ce qui s'applique |
 |---|---|---|---|
-| A11 | Révélation de plan | 760 ms, 22 px, un bloc d'un seul tenant | **1000 ms, 28 px — le module de la trame** ; et les grilles de cartes se révèlent **en cascade**, 80 ms par rang plafonné au sixième |
+| A11 | Révélation de plan | 760 ms, 22 px, un bloc d'un seul tenant | **1000 ms, 28 px — le module de la trame** ; et les grilles de cartes se révèlent **en cascade**, 80 ms par rang plafonné au sixième |
 
-Les bornes font partie de l'amendement : mêmes propriétés (opacité et translation —
+Les bornes font partie de l'amendement : mêmes propriétés (opacité et translation —
 composited seulement, jamais de layout à l'entrée), même courbe, une seule fois par
-élément ; la traîne de la cascade est plafonnée à 400 ms quelle que soit la taille de
-la grille (23 cartes sur `/references` comme 4 à l'accueil) ; et **tout ce qui est
+élément ; la traîne de la cascade est plafonnée à 400 ms quelle que soit la taille de
+la grille (23 cartes sur `/references` comme 4 à l'accueil) ; et **tout ce qui est
 visible au chargement reste posé d'emblée** (`plan-immediat`) — la protection du LCP
-prime sur l'effet, sans exception. Implantation : `motion.css` (les rangs sont du
+prime sur l'effet, sans exception. Implantation : `motion.css` (les rangs sont du
 `:nth-child` pur, aucun attribut par carte), `initPlans` (`BaseLayout`), conteneurs
 `data-plan-groupe` (grille 05 de l'accueil, grille de `/references`,
 `ProjetsSimilaires`).
 
 ### A12 — le voile des photographies-liens (2026-08-27)
 
-Deuxième amendement du chantier motion (arbitrage FT2E : piste 2, **variante a** —
+Deuxième amendement du chantier motion (arbitrage FT2E : piste 2, **variante a** —
 la variante b, micro-échelle dans le cadre, a été présentée et n'a pas été retenue).
 
 | № | Objet | Révision 2.1 | Ce qui s'applique |
 |---|---|---|---|
 | A12 | Survol d'un cliché-lien | le survol est une bascule de fond | **un voile d'encre à 14 % couvre la photographie au repos et se lève au survol et au focus** (300 ms, opacité seule) |
 
-Les bornes : la portée est la **photographie qui sert de lien** — le cliché du hero
+Les bornes : la portée est la **photographie qui sert de lien** — le cliché du hero
 de l'accueil et le cliché principal de la coupe des secteurs (`.lien-cliche` +
-`.voile-cliche`, recette dans `global.css`) ; **jamais un dessin de planche** (la
+`.voile-cliche`, recette dans `global.css`) ; **jamais un dessin de planche** (la
 sur-échelle comme le voilage d'un dessin sont interdits — ses filets de 1 px et son
-mono sont calibrés pour être lus tels quels) ; le voile passe sous les équerres et
-sous le cartouche de réserve, qui restent pleinement lisibles aux deux états ; les
+mono sont calibrés pour être lus tels quels) ; le voile passe sous les équerres et
+sous le cartouche de réserve, qui restent pleinement lisibles aux deux états ; les
 vignettes du rail de `/references` et du film de la coupe gardent leur **voilage
 d'état** (0,42 — il dit la sélection, pas le survol) et ne reçoivent pas ce voile en
-plus. Aucun déplacement : c'est une bascule d'opacité, dans l'esprit de la règle
+plus. Aucun déplacement : c'est une bascule d'opacité, dans l'esprit de la règle
 qu'elle infléchit.
 
 ### A13 — les transitions de pages enrichies (2026-08-27)
 
-Troisième amendement du chantier motion (arbitrage FT2E : piste 3).
+Troisième amendement du chantier motion (arbitrage FT2E : piste 3).
 
 | № | Objet | Révision 2.1 | Ce qui s'applique |
 |---|---|---|---|
-| A13 | Navigation interne | fondu uniforme 300 ms | **fondu montant** — la page entrante fond en montant de 12 px (350 ms), la sortante fond (200 ms) ; et sur le trajet carte → fiche de référence, **le visuel voyage** (`transition:name` partagé entre la boîte de vignette de `CarteProjet` et le cadre de la planche de la fiche) |
+| A13 | Navigation interne | fondu uniforme 300 ms | **fondu montant** — la page entrante fond en montant de 12 px (350 ms), la sortante fond (200 ms) ; et sur le trajet carte → fiche de référence, **le visuel voyage** (`transition:name` partagé entre la boîte de vignette de `CarteProjet` et le cadre de la planche de la fiche) |
 
-Les bornes : courbe unique, 350 ms partout (les groupes nommés reprennent la durée et
-la courbe via `::view-transition-group(*)` dans `motion.css`) ; **rien au premier
+Les bornes : courbe unique, 350 ms partout (les groupes nommés reprennent la durée et
+la courbe via `::view-transition-group(*)` dans `motion.css`) ; **rien au premier
 chargement** — les View Transitions ne jouent qu'en navigation interne, le LCP n'est
-pas concerné ; le nom de transition est `planche-<slug>`, unique par page
-(`ProjetsSimilaires` exclut la fiche courante) ; `prefers-reduced-motion` coupe
+pas concerné ; le nom de transition est `planche-<slug>`, unique par page
+(`ProjetsSimilaires` exclut la fiche courante) ; `prefers-reduced-motion` coupe
 toutes les animations de transition (`animation: none` sur les pseudo-éléments
-`::view-transition-*`). Implantation : `BaseLayout` (`transition:animate` du
+`::view-transition-*`). Implantation : `BaseLayout` (`transition:animate` du
 `<main>`), `motion.css` (keyframes `vt-fondu-montant` / `vt-fondu-sortant`),
 `CarteProjet` et `references/[...slug]` (le nom partagé).
 
 ### A14 — le compteur du relevé de l'accueil (2026-08-27)
 
 Quatrième amendement du chantier motion — et le seul qui lève un **interdit
-nominal** de la charte : « aucun compteur qui s'incrémente ».
+nominal** de la charte : « aucun compteur qui s'incrémente ».
 
 | № | Objet | Révision 2.1 | Ce qui s'applique |
 |---|---|---|---|
-| A14 | Chiffres du relevé de l'accueil | aucun compteur qui s'incrémente | **les quatre chiffres se comptent une fois**, à l'entrée dans la vue (900 ms, courbe unique) ; au survol, la cellule bascule papier → calcaire (300 ms) et **le chiffre monte d'un rang de la rampe** — encre → profond pour le plein, pivot → encre pour les retraits (260 ms) |
+| A14 | Chiffres du relevé de l'accueil | aucun compteur qui s'incrémente | **les quatre chiffres se comptent une fois**, à l'entrée dans la vue (900 ms, courbe unique) ; au survol, la cellule bascule papier → calcaire (300 ms) et **le chiffre monte d'un rang de la rampe** — encre → profond pour le plein, pivot → encre pour les retraits (260 ms) |
 
-Les bornes : **le relevé de l'accueil, et lui seul** — aucun autre chiffre du site ne
-se compte, ni les relevés encrés des fiches, ni les décomptes des filtres ; une fois
-par chargement ; chiffres tabulaires dans une cellule de grille à largeur fixe (aucun
-décalage de mise en page) ; la valeur finale vit dans le HTML (repli sans JS) et en
+Les bornes : **le relevé de l'accueil, et lui seul** — aucun autre chiffre du site ne
+se compte, ni les relevés encrés des fiches, ni les décomptes des filtres ; une fois
+par chargement ; chiffres tabulaires dans une cellule de grille à largeur fixe (aucun
+décalage de mise en page) ; la valeur finale vit dans le HTML (repli sans JS) et en
 `sr-only` — le span animé est `aria-hidden`, le lecteur d'écran n'entend jamais le
-décompte ; `prefers-reduced-motion` : la valeur est posée d'emblée, rien ne compte.
+décompte ; `prefers-reduced-motion` : la valeur est posée d'emblée, rien ne compte.
 Le survol est une bascule de valeur **dans la rampe**, jamais une couleur nouvelle.
-Implantation : `initCompteurs` (`src/pages/index.astro`), courbe unique évaluée
+Implantation : `initCompteurs` (`src/pages/index.astro`), courbe unique évaluée
 numériquement.
 
 **Implantation de la légende et des équerres (§ 13)** — la charte veut la légende **en bas à gauche** *et* les équerres intactes (« repère de tirage, jamais un encadrement ») : les deux ne peuvent pas se disputer l'angle. La géométrie tranche, et elle est **dérivée**, jamais réglée à l'œil. Les jetons `--equerre-cote` (18 px) et `--equerre-retrait` (5 px) donnent `--equerre-gouttiere` (28 px), dont découlent à la fois les quatre équerres de `CoinsCuivre` et la recette `.legende-media` :
