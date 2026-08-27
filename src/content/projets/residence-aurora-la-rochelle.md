@@ -1,0 +1,36 @@
+---
+titre: "Résidence Aurora, 147 logements dans le quartier de Rompsay à La Rochelle"
+ouvrage: "Résidence Aurora"
+secteur: Logements
+typologie: Neuf
+moa: "SARL Opus (Mediatim Promotion, constructeur-promoteur)"
+architecte: "SMART Architecture (Nieul-sur-Mer)"
+lieu: "Rue Maurice Ravel — rue Louise Pinchon, quartier de Rompsay, La Rochelle (17000)"
+surface_m2: 7960
+reference: "19-036"
+annee: 2019
+annee_livraison: 2025
+performance: "RT2012 · bâtiment C −10 % · six bâtiments en un seul calcul, label Promotelec −20 % visé"
+synthese: >-
+  À Rompsay, à l’est de La Rochelle, la résidence Aurora aligne sept bâtiments : 147 logements en trois gammes — libres, abordables, sociaux — et des locaux commerciaux en pied d’immeuble. En contrat direct avec le promoteur Mediatim, FT2E a conçu les deux lots techniques, de l’étude de faisabilité énergétique au visa des études d’exécution : une chaudière gaz à condensation par logement, dimensionnée sur les débits d’eau chaude du label Promotelec, des conduits collectifs 3CEp pour les chaudières éloignées des façades, l’électricité des sept bâtiments. Le calcul RT2012 a suivi la vie de l’opération — deux régimes de performance, un gain porté de 10 à 20 % pour le label, une reprise quand le gros œuvre a changé de système constructif. Livraison en 2025.
+mission_ft2e: [CVC, Thermique, "Électricité CFO", "Électricité CFA"]
+planche: "/images/projets/residence-aurora-la-rochelle/planche.svg"
+---
+
+À Rompsay, à l’est de La Rochelle, la résidence Aurora aligne sept bâtiments entre la rue Maurice Ravel et la rue Louise Pinchon : 147 logements — libres, abordables et sociaux — et des locaux commerciaux livrés bruts en rez-de-chaussée. FT2E y a tenu les deux lots techniques pour le promoteur rochelais Mediatim, de l’étude de faisabilité énergétique au visa des études d’exécution, et a accompagné la démarche de label Promotelec jusqu’à la réception.
+
+## L’enjeu : un morceau de quartier, trois gammes de logements
+
+La SARL Opus, structure d’opération du promoteur Mediatim Promotion — le même groupe que la [résidence Horizon](/references/exe-residence-horizon-mediatim), où le bureau intervient cette fois pour l’entreprise de chauffage —, construit à Rompsay un ensemble de sept bâtiments en R+2 et R+3, dessiné par SMART Architecture, l’agence déjà rencontrée aux [90 logements de Néréa à Aytré](/references/logements-nerea-aytre). Le programme de [logements](/secteurs/logements) se décline en trois gammes — libres, abordables et sociaux — avec des commerces au pied de trois des bâtiments. FT2E y est en contrat direct avec le promoteur : mission de base sur les lots chauffage-ventilation-plomberie et électricité, de la faisabilité énergétique à l’analyse des offres puis au visa des études d’exécution, le suivi de chantier étant porté par l’économiste, également maître d’œuvre d’exécution. Les cahiers des charges se déclinent gamme par gamme, jusqu’aux robinetteries et aux volets roulants — électriques sur toutes les baies des logements libres, sur les baies principales des pièces de vie en social et en abordable.
+
+## La solution : une chaufferie par logement, des conduits partagés
+
+Chaque logement produit sa chaleur : une chaudière murale gaz à condensation, l’eau chaude sanitaire par micro-accumulation, choisie dans trois tailles — de 3,4 à 25 kW — pour servir 12, 14 ou 16 litres par minute selon la surface et le nombre de salles de bains, les débits qu’exige le label Promotelec ; en phase chantier, tout changement de typologie d’un appartement impose de recontrôler ce débit. Les T1 font exception pour l’eau chaude seule, servie par un chauffe-eau électrique de 100 litres. Le gaz arrive par un réseau aérien à 20 mbar et des colonnes montantes en cuivre, avec un compteur par logement posé en gaine palière et repéré d’une plaque gravée au numéro du logement qu’il dessert. L’évacuation des fumées suit deux régimes : la ventouse individuelle quand la chaudière peut déboucher en façade ou en toiture, et, pour les chaudières en gaine technique, des conduits collectifs 3CEp — un conduit concentrique en inox qui monte d’un té de purge raccordé aux eaux usées jusqu’au débouché en toiture. Chaque chaudière étanche s’y pique à son niveau, munie d’un clapet anti-retour : l’air de combustion descend par la couronne pendant que les fumées montent par le cœur ; chaque conduit est éprouvé au test de fumée avant la fermeture des gaines. La distribution de [chauffage](/expertises/cvc) court en polyéthylène réticulé (PER) encastré depuis des collecteurs — un départ par radiateur — sur un régime d’eau de 60/45, et le thermostat d’ambiance affiche les consommations par énergie et par poste, comme l’article 23 de la RT2012 le demande. Côté [électricité](/expertises/electricite), le lot dessert les sept bâtiments : colonnes montantes en aluminium, infrastructure de recharge des véhicules électriques raccordée depuis le poste de transformation pour 84 kVA, et plans de vente logement par logement, avant et après les travaux modificatifs des acquéreurs.
+
+## Les particularités : un calcul thermique qui suit la vie de l’opération
+
+Le calcul réglementaire est double dès l’origine : le bâtiment C, détaché des autres au sens du calcul — moins de 50 m² de contact —, est un bâtiment thermique à part entière, conforme RT2012 −10 % avec un besoin bioclimatique de 53,9 pour un maximum de 60 et une consommation de 52,2 pour 59,2 kWhep/m²/an ; les six autres, mitoyens, forment un seul bâtiment au sens de [l’étude thermique](/expertises/etude-thermique), à −25,8 % sur le besoin bioclimatique. Le calcul a ensuite été remis deux fois sur le métier, au rythme de l’opération : une première fois au printemps 2021 pour porter le gain de consommation de 10 à 20 % sur les six bâtiments mitoyens — sans toucher au dossier de consultation des entreprises (DCE) déjà finalisé, le bâtiment C restant à −10 % —, quand le label Promotelec RT2012 −20 % a été visé ; une seconde fois en pleine exécution, à la demande de l’entreprise de gros œuvre ECBL qui proposait de passer la structure de la brique au système Alkern — compositions de parois, ponts thermiques et métrés revalidés sur les plans d’exécution. L’accompagnement du label, lui, court du dossier de consultation à la réception : vérification des isolants proposés dans les cahiers de matériel, reprise de l’étude selon les produits réellement posés, gestion des attestations. Le programme lui-même a bougé : 150 logements à la première proposition, 148 aux études, 147 au marché.
+
+## Le résultat : une résidence livrée en 2025
+
+Le chantier s’est ouvert au printemps 2022 ; 132 comptes rendus de maîtrise d’œuvre plus tard, l’été 2025 le trouve en suivi de bonne fin de travaux — levée des réserves de livraison sur la plateforme numérique du chantier, remise des dossiers des ouvrages exécutés, garantie de parfait achèvement. Les premières réserves de livraison ont été attribuées dès décembre 2024, et la résidence est livrée en 2025. Les deux lots conçus par le bureau pèsent ensemble 2 548 362,55 € HT — 1 004 765,31 € pour les courants forts et faibles, 1 543 597,24 € pour la plomberie, le chauffage et la ventilation — au sein d’une opération dont le calcul thermique, repris à chaque inflexion du projet, a servi de fil continu des premières esquisses à la remise des clés.

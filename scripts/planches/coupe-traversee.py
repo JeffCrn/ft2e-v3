@@ -46,6 +46,11 @@ porte l'extraction :
   d'un passage voiture — la ligne isolante ferme des faces qu'un bâtiment
   ordinaire n'a pas : le dessous du plancher au-dessus du vide, la fosse
   d'ascenseur sous le sol, chaque about de dalle marqué d'un rupteur.
+- `colonne` — le conduit collectif 3CEp (résidence Aurora) : une chaudière
+  étanche par logement, et, en gaine technique, un conduit concentrique
+  unique traversant les niveaux — fumées par le cœur, air de combustion par
+  la couronne, clapet à chaque piquage, té de purge en pied — confronté à la
+  ventouse individuelle et aux trois gabarits de débit du label.
 """
 
 import math
@@ -1858,7 +1863,459 @@ def composer_appui_portee(donnees):
 
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
+# ── Mécanisme `colonne` — le conduit collectif 3CEp (résidence Aurora) ───────
+# Une production décentralisée (une chaudière étanche par logement) dont
+# l'évacuation se partage : en gaine technique, les chaudières de quatre
+# niveaux se piquent sur un conduit concentrique unique — fumées par le cœur,
+# air de combustion par la couronne — éprouvé au test de fumée ; en façade,
+# la ventouse individuelle. Deux registres confrontés, comme l'équilibre de
+# Villedoux ; la géométrie porte la thèse : un seul conduit, quatre piquages.
+# Toutes les constantes sont préfixées C_ (piège des affectations doublées,
+# relevé le 2026-08-16 sur tableau-electrique.py).
+
+C_Y_REGISTRES = 240           # en-têtes des deux registres
+C_Y_TOIT = 300                # ligne de toiture du registre gauche
+C_Y_SOL = 620                 # ligne de sol
+C_PLANCHERS = (380, 460, 540) # les trois dalles intermédiaires
+C_BANDES = (300, 380, 460, 540, 620)
+C_X0, C_X1 = 80, 620          # emprise du registre gauche
+C_BX0, C_BX1 = 140, 300       # les chaudières
+C_CX = 340                    # axe du conduit collectif
+C_AN = 16                     # demi-largeur de l'annulaire (couronne)
+C_CO = 7                      # demi-largeur du cœur (fumées)
+C_GX0, C_GX1 = 310, 370       # parois de la gaine technique
+C_Y_TERMINAL = 262            # sommet du conduit (débouché)
+C_Y_BASE = 596                # pied du conduit (té de purge)
+C_X_APPELS = 400              # colonne des appels du registre gauche
+C_LARG_APPELS = 236           # 636 − 400
+
+C_VX0 = 704                   # emprise du registre droit
+C_VMUR = 1010                 # nu de la façade
+C_VBY0, C_VBY1 = 340, 384     # la chaudière de la ventouse
+C_VDY = 362                   # axe du conduit concentrique horizontal
+C_Y_TAILLES = 470             # en-tête du bloc des trois tailles
+C_Y_BOITES = 488              # les trois gabarits
+C_H_BOITES = 48
+C_K_TAILLE = 8                # 1 L/min = 8 px de largeur de gabarit
+
+C_Y_PIED = 655                # mention de pied
+
+
+def composer_colonne(donnees):
+    q = donnees["colonne"]
+    elems = {e["cle"]: e for e in q["elements"]}
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête (il nomme la pièce d'où viennent les valeurs) et registres ───
+    controler("en-tête schéma", q["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, q["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("registre gauche", q["registres"]["gauche"], 10, "mono",
+              584, 10 * 0.14)
+    A(texte(MARGE, C_Y_REGISTRES, q["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("registre droite", q["registres"]["droite"], 10, "mono",
+              W - MARGE - C_VX0, 10 * 0.14)
+    A(texte(W - MARGE, C_Y_REGISTRES, q["registres"]["droite"], "mono", 10,
+            500, "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Registre gauche — la coupe : toiture, sol, dalles, gaine ─────────────
+    # La ligne de toiture, percée au seul passage du conduit.
+    A(ligne(C_X0, C_Y_TOIT, C_CX - C_AN - 4, C_Y_TOIT, "encre", 2))
+    A(ligne(C_CX + C_AN + 4, C_Y_TOIT, C_X1, C_Y_TOIT, "encre", 2))
+    # Le sol, et ses hachures.
+    A(ligne(C_X0, C_Y_SOL, C_X1, C_Y_SOL, "filet-1", 2))
+    for k in range(9):
+        x = C_X0 + 30 + k * 60
+        A(ligne(x, C_Y_SOL + 2, x - 9, C_Y_SOL + 10, "filet-2", 1))
+    # Les dalles intermédiaires, interrompues par la gaine.
+    for y in C_PLANCHERS:
+        A(ligne(C_X0, y, C_GX0, y, "filet-2", 1.5))
+        A(ligne(C_GX1, y, C_X1, y, "filet-2", 1.5))
+    # Les parois de la gaine technique.
+    for x in (C_GX0, C_GX1):
+        A(ligne(x, C_Y_TOIT, x, C_Y_SOL, "filet-2", 1))
+
+    # ── Les niveaux, et une chaudière par niveau ─────────────────────────────
+    chaud = elems["chaudiere"]
+    for k, niveau in enumerate(q["niveaux"]):
+        haut = C_BANDES[k]
+        controler(f"niveau {niveau}", niveau, 10, "mono", 44, 10 * 0.14)
+        A(texte(C_X0 + 8, haut + 22, niveau, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        y0 = haut + 18
+        A(rect_bord(C_BX0, y0, C_BX1 - C_BX0, 44, "papier", "filet-1"))
+        y_racc = y0 + 22
+        # Le raccord concentrique, et son clapet au piquage.
+        A(ligne(C_BX1, y_racc - 4, C_CX - C_AN, y_racc - 4, "encre", 1.5))
+        A(ligne(C_BX1, y_racc + 4, C_CX - C_AN, y_racc + 4, "encre", 1.5))
+        A(cercle(C_CX - C_AN - 8, y_racc + 10, 3.5, "papier", "encre", 1.2))
+    # La première chaudière porte le libellé du motif répété.
+    y0 = C_BANDES[0] + 18
+    controler("libellé chaudière", chaud["libelle"], 15, "sans-600",
+              C_BX1 - C_BX0 - 24)
+    A(texte(C_BX0 + 12, y0 + 19, chaud["libelle"], "sans", 15, 600, "encre",
+            wdth=112))
+    controler("détail chaudière", chaud["detail"][0], 10, "mono",
+              C_BX1 - C_BX0 - 24, 10 * 0.14)
+    A(texte(C_BX0 + 12, y0 + 36, chaud["detail"][0], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Le conduit collectif : couronne, cœur, terminal, té de purge ─────────
+    for x in (C_CX - C_AN, C_CX + C_AN):
+        A(ligne(x, C_Y_TERMINAL, x, C_Y_BASE, "encre", 1.5))
+    A(f'  <rect x="{C_CX - C_CO:.2f}" y="{C_Y_TERMINAL + 6:.2f}" '
+      f'width="{2 * C_CO:.2f}" height="{C_Y_BASE - C_Y_TERMINAL - 6:.2f}" '
+      f'class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" '
+      f'stroke-width="1"/>')
+    # Le chapeau du débouché, au-dessus de la toiture.
+    A(ligne(C_CX - C_AN - 4, C_Y_TERMINAL - 4, C_CX + C_AN + 4,
+            C_Y_TERMINAL - 4, "encre", 2))
+    deb = elems["debouche"]
+    controler("libellé débouché", deb["libelle"].upper(), 10, "mono",
+              C_X1 - (C_CX + C_AN + 16), 10 * 0.14)
+    A(texte(C_CX + C_AN + 16, C_Y_TERMINAL + 2, deb["libelle"].upper(),
+            "mono", 10, 500, "pivot", tracking=10 * 0.14))
+    # Les fumées montent par le cœur…
+    for y in (336, 476):
+        A(fleche(C_CX, y, "encre", "haut", 8))
+    # …l'air de combustion descend par la couronne.
+    for x, y in ((C_CX - C_AN + 4.5, 318), (C_CX + C_AN - 4.5, 356)):
+        A(fleche(x, y, "encre", "bas", 6))
+    # Le té de purge, en pied, vers la colonne EU.
+    A(ligne(C_CX, C_Y_BASE, C_CX, C_Y_SOL - 10, "encre", 1.5))
+    A(ligne(C_CX, C_Y_SOL - 10, C_CX + 42, C_Y_SOL - 10, "encre", 1.5))
+    A(fleche(C_CX + 50, C_Y_SOL - 10, "encre", "droite", 8))
+
+    # ── Les appels du registre gauche ────────────────────────────────────────
+    cond = elems["conduit"]
+    A(ligne(C_CX + C_AN + 2, 332, C_X_APPELS - 8, 332, "filet-1", 1))
+    controler("appel fumées", cond["detail"][0], 10, "mono",
+              C_LARG_APPELS, 10 * 0.14)
+    A(texte(C_X_APPELS, 335, cond["detail"][0], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(ligne(C_CX + C_AN + 2, 372, C_X_APPELS - 8, 372, "filet-1", 1))
+    for k, l in enumerate(("AIR DE COMBUSTION", "PAR LA COURONNE")):
+        controler(f"appel air {k + 1}", l, 10, "mono", C_LARG_APPELS, 10 * 0.14)
+        A(texte(C_X_APPELS, 375 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    clap = elems["clapet"]
+    A(ligne(C_CX + C_AN + 2, 500, C_X_APPELS - 8, 500, "filet-1", 1))
+    for k, l in enumerate((clap["libelle"].upper(), clap["detail"][0])):
+        controler(f"appel clapet {k + 1}", l, 10, "mono", C_LARG_APPELS,
+                  10 * 0.14)
+        A(texte(C_X_APPELS, 503 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    purge = elems["purge"]
+    lib_purge = f'TÉ DE PURGE · {purge["detail"][0]}'
+    controler("appel purge", lib_purge, 10, "mono",
+              C_X1 - (C_CX + 58) + 240, 10 * 0.14)
+    A(texte(C_CX + 58, C_Y_SOL - 6, lib_purge, "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Registre droit — la ventouse individuelle ────────────────────────────
+    vent = elems["ventouse"]
+    # La façade, en deux segments de part et d'autre du conduit.
+    A(rect(C_VMUR, 300, 6, C_VDY - 14 - 300, "encre"))
+    A(rect(C_VMUR, C_VDY + 14, 6, 430 - (C_VDY + 14), "encre"))
+    controler("mention extérieur", q.get("exterieur", "EXTÉRIEUR"), 10,
+              "mono", 100, 10 * 0.14)
+    A(texte(C_VMUR + 22, 316, q.get("exterieur", "EXTÉRIEUR"), "mono", 10,
+            500, "pivot", tracking=10 * 0.14))
+    # La chaudière, même gabarit qu'à gauche.
+    A(rect_bord(790, C_VBY0, 160, C_VBY1 - C_VBY0, "papier", "filet-1"))
+    controler("libellé chaudière ventouse", chaud["libelle"], 15, "sans-600",
+              136)
+    A(texte(802, C_VBY0 + 19, chaud["libelle"], "sans", 15, 600, "encre",
+            wdth=112))
+    A(texte(802, C_VBY0 + 36, chaud["detail"][0], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    # Le conduit concentrique horizontal, à travers la façade.
+    A(ligne(950, C_VDY - 10, C_VMUR + 30, C_VDY - 10, "encre", 1.5))
+    A(ligne(950, C_VDY + 10, C_VMUR + 30, C_VDY + 10, "encre", 1.5))
+    A(f'  <rect x="950.00" y="{C_VDY - 4:.2f}" width="{C_VMUR + 42 - 950:.2f}" '
+      f'height="8.00" class="c-clair s-encre" fill="#99CCCD" '
+      f'stroke="#00393A" stroke-width="1"/>')
+    A(ligne(C_VMUR + 42, C_VDY - 16, C_VMUR + 42, C_VDY + 16, "encre", 2))
+    A(fleche(C_VMUR + 60, C_VDY, "encre", "droite", 8))
+    controler("appel ventouse", vent["detail"][0], 10, "mono", 380, 10 * 0.14)
+    A(texte(790, 412, vent["detail"][0], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Les trois tailles : des gabarits proportionnels aux débits ───────────
+    tailles = elems["tailles"]
+    debits = [int(v.strip()) for v in tailles["valeur"].split("/")]
+    controler("en-tête tailles", tailles["libelle"].upper(), 10, "mono",
+              W - MARGE - C_VX0, 10 * 0.14)
+    A(texte(C_VX0, C_Y_TAILLES, tailles["libelle"].upper(), "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    x = C_VX0
+    boites = []
+    for d in debits:
+        w_b = d * C_K_TAILLE
+        A(rect_bord(x, C_Y_BOITES, w_b, C_H_BOITES, "papier", "filet-1"))
+        lib = f'{d}{NN}{tailles["unite"]}'
+        controler(f"gabarit {d}", lib, 10, "mono", w_b - 8, 10 * 0.14)
+        A(texte(x + w_b / 2, C_Y_BOITES + C_H_BOITES / 2 + 4, lib, "mono",
+                10, 500, "pivot", ancre="middle", tracking=10 * 0.14))
+        boites.append((x, w_b))
+        x += w_b + ((W - MARGE - C_VX0) - sum(dd * C_K_TAILLE
+                                              for dd in debits)) / 2
+    for k, l in enumerate(tailles["detail"]):
+        controler(f"détail tailles {k + 1}", l, 10, "mono",
+                  W - MARGE - C_VX0, 10 * 0.14)
+        A(texte(C_VX0, C_Y_BOITES + C_H_BOITES + 24 + k * 16, l, "mono", 10,
+                500, "pivot", tracking=10 * 0.14))
+
+    # ── Mention de pied, phrase de principe, cartouche ───────────────────────
+    controler("mention de pied", q["mention_pied"], 10, "mono", UTILE,
+              10 * 0.14)
+    A(texte(MARGE, C_Y_PIED, q["mention_pied"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "un seul conduit vertical traverse quatre niveaux et "
+                         "la toiture ; quatre chaudières identiques s’y "
+                         "piquent, chacune par son clapet ; les fumées "
+                         "montent par le cœur (flèches hautes), l’air "
+                         "descend par la couronne (flèches basses), le té de "
+                         "purge sort en pied — face à lui, la ventouse "
+                         "individuelle traverse la façade en un seul "
+                         "terminal ; en bas à droite, trois gabarits de "
+                         "largeur proportionnelle aux débits "
+                         f"({C_K_TAILLE} px par L/min)",
+        "topologie": f"registre gauche x {C_X0}–{C_X1} (chaudières "
+                     f"{C_BX0}–{C_BX1}, conduit à x {C_CX}, couronne "
+                     f"±{C_AN}, cœur ±{C_CO}, gaine {C_GX0}–{C_GX1}, "
+                     f"toiture y {C_Y_TOIT}, sol y {C_Y_SOL}) ; registre "
+                     f"droit x {C_VX0}–{W - MARGE} (façade à x {C_VMUR}, "
+                     f"conduit horizontal à y {C_VDY}, gabarits y "
+                     f"{C_Y_BOITES}–{C_Y_BOITES + C_H_BOITES})",
+        "gabarits_debits": " · ".join(f"{d} L/min = {d * C_K_TAILLE} px"
+                                      for d in debits),
+        "bas_du_dessin": f"sol à {C_Y_SOL} (hachures à {C_Y_SOL + 10}), "
+                         f"mention de pied à {C_Y_PIED}, phrase à {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
+                         f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
+                          "pas chiffrée (révision 4) ; les débits restent au "
+                          "mono 10 pivot, dans leur gabarit",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_colonne(donnees):
+    """La vignette : la colonne seule — le conduit, trois piquages, le motif.
+
+    Ce qu'elle garde : le conduit concentrique qui traverse les niveaux et la
+    toiture, trois chaudières piquées, les flèches du cœur, le té de purge.
+    Ce qu'elle laisse : la ventouse, les gabarits de débit, les appels — dix
+    annotations dans 300 px ne se liraient pas."""
+    q = donnees["colonne"]
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    y_toit, y_sol = 56, 168
+    planchers = (94, 131)
+    cx, an, co = 170, 11, 5
+    bx0, bx1 = 84, 148
+    gx0, gx1 = 152, 190
+
+    # Toiture percée, sol, dalles, gaine.
+    A(ligne(30, y_toit, cx - an - 3, y_toit, "encre", 1.5))
+    A(ligne(cx + an + 3, y_toit, 270, y_toit, "encre", 1.5))
+    A(ligne(30, y_sol, 270, y_sol, "filet-1", 1.5))
+    for y in planchers:
+        A(ligne(30, y, gx0, y, "filet-2", 1))
+        A(ligne(gx1, y, 270, y, "filet-2", 1))
+    for x in (gx0, gx1):
+        A(ligne(x, y_toit, x, y_sol, "filet-2", 0.8))
+
+    # Le conduit : couronne, cœur, chapeau, purge.
+    for x in (cx - an, cx + an):
+        A(ligne(x, 44, x, 160, "encre", 1))
+    A(f'  <rect x="{cx - co:.2f}" y="48.00" width="{2 * co:.2f}" '
+      f'height="108.00" class="c-clair s-encre" fill="#99CCCD" '
+      f'stroke="#00393A" stroke-width="0.8"/>')
+    A(ligne(cx - an - 3, 41, cx + an + 3, 41, "encre", 1.5))
+    A(fleche(cx, 66, "encre", "haut", 6))
+    A(fleche(cx, 112, "encre", "haut", 6))
+    A(ligne(cx, 160, cx, y_sol - 5, "encre", 1))
+    A(ligne(cx, y_sol - 5, cx + 22, y_sol - 5, "encre", 1))
+    A(fleche(cx + 27, y_sol - 5, "encre", "droite", 5))
+
+    # Trois chaudières piquées, chacune par son raccord double.
+    for haut, bas in ((y_toit, planchers[0]), (planchers[0], planchers[1]),
+                      (planchers[1], y_sol)):
+        y0 = haut + 9
+        A(rect_bord(bx0, y0, bx1 - bx0, 18, "papier", "filet-1"))
+        y_racc = y0 + 9
+        A(ligne(bx1, y_racc - 2, cx - an, y_racc - 2, "encre", 0.8))
+        A(ligne(bx1, y_racc + 2, cx - an, y_racc + 2, "encre", 0.8))
+
+    # Le nœud : le motif répété a un nom.
+    A(texte(V_MARGE, 188, "Une chaudière par logement", "sans", 12, 600,
+            "encre", wdth=112))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "le conduit collectif seul : couronne, cœur fléché vers le "
+                 "haut, trois chaudières piquées, té de purge — ventouse, "
+                 "gabarits de débit et appels laissés à la planche",
+        "bas_du_dessin": "nœud à y 188, marge basse 12 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_colonne(donnees):
+    """L'appui du hero : la colonne à l'échelle 1, trois appels, un nœud.
+
+    Ce qu'il garde : le conduit traversant trois niveaux, les chaudières
+    piquées, les flèches des deux flux, le té de purge, et le nœud des trois
+    débits. Ce qu'il laisse : la ventouse et la mention de pied."""
+    q = donnees["colonne"]
+    elems = {e["cle"]: e for e in q["elements"]}
+    tailles = elems["tailles"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    y_toit, y_sol = 96, 316
+    planchers = (170, 243)
+    cx, an, co = 268, 13, 6
+    bx0, bx1 = 96, 226
+    gx0, gx1 = 232, 304
+
+    A(ligne(48, y_toit, cx - an - 4, y_toit, "encre", 2))
+    A(ligne(cx + an + 4, y_toit, 330, y_toit, "encre", 2))
+    A(ligne(48, y_sol, 330, y_sol, "filet-1", 1.5))
+    for k in range(5):
+        x = 66 + k * 60
+        A(ligne(x, y_sol + 2, x - 7, y_sol + 8, "filet-2", 1))
+    for y in planchers:
+        A(ligne(48, y, gx0, y, "filet-2", 1))
+        A(ligne(gx1, y, 330, y, "filet-2", 1))
+    for x in (gx0, gx1):
+        A(ligne(x, y_toit, x, y_sol, "filet-2", 1))
+
+    for x in (cx - an, cx + an):
+        A(ligne(x, 74, x, 296, "encre", 1.2))
+    A(f'  <rect x="{cx - co:.2f}" y="79.00" width="{2 * co:.2f}" '
+      f'height="212.00" class="c-clair s-encre" fill="#99CCCD" '
+      f'stroke="#00393A" stroke-width="1"/>')
+    A(ligne(cx - an - 4, 70, cx + an + 4, 70, "encre", 2))
+    for y in (108, 208):
+        A(fleche(cx, y, "encre", "haut", 7))
+    A(fleche(cx + an - 4, 152, "encre", "bas", 5))
+    A(ligne(cx, 296, cx, y_sol - 8, "encre", 1.2))
+    A(ligne(cx, y_sol - 8, cx + 30, y_sol - 8, "encre", 1.2))
+    A(fleche(cx + 36, y_sol - 8, "encre", "droite", 6))
+
+    chaud = elems["chaudiere"]
+    for haut, bas in ((y_toit, planchers[0]), (planchers[0], planchers[1]),
+                      (planchers[1], y_sol)):
+        y0 = haut + 20
+        A(rect_bord(bx0, y0, bx1 - bx0, 34, "papier", "filet-1"))
+        y_racc = y0 + 17
+        A(ligne(bx1, y_racc - 3, cx - an, y_racc - 3, "encre", 1))
+        A(ligne(bx1, y_racc + 3, cx - an, y_racc + 3, "encre", 1))
+        A(cercle(cx - an - 6, y_racc + 8, 2.5, "papier", "encre", 1))
+    A(texte(bx0 + 8, y_toit + 41, chaud["libelle"], "sans", 13, 600,
+            "encre", wdth=112))
+
+    # Les appels, à droite.
+    x_ap = 350
+    A(ligne(cx + an + 2, 104, x_ap - 8, 104, "filet-1", 1))
+    A(texte(x_ap, 107, "FUMÉES PAR LE CŒUR", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(ligne(cx + an + 2, 132, x_ap - 8, 132, "filet-1", 1))
+    A(texte(x_ap, 135, "AIR PAR LA COURONNE", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(ligne(cx + an + 2, 196, x_ap - 8, 196, "filet-1", 1))
+    A(texte(x_ap, 191, "CLAPET ANTI-RETOUR", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(x_ap, 205, "À CHAQUE PIQUAGE", "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(cx + 44, y_sol - 4, "CONDENSATS VERS EU", "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # Le nœud chiffré : les trois débits du label.
+    A(texte(x_ap, 258, tailles["libelle"], "sans", 14, 600, "encre",
+            wdth=112))
+    A(texte(x_ap, 276, f'{tailles["valeur"]}{NN}{tailles["unite"]}', "mono",
+            11, 500, "pivot", tabulaire=True))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="la colonne à l’échelle 1 : conduit concentrique traversant "
+              "trois niveaux, chaudières piquées à clapet, flèches des deux "
+              "flux, té de purge, et le nœud des trois débits — la ventouse "
+              "et la mention de pied restent à la planche",
+        bas=f"sol à 316 px (hachures à 324), condensats à 312, marge basse "
+            f"{AH - 324} px")
+
+
 def _composer(donnees):
+    if "colonne" in donnees:
+        return composer_colonne(donnees)
     if "equilibre" in donnees:
         return composer_equilibre(donnees)
     if "enjambement" in donnees:
@@ -1869,6 +2326,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "colonne" in donnees:
+        return composer_vignette_colonne(donnees)
     if "equilibre" in donnees:
         return composer_vignette_equilibre(donnees)
     if "enjambement" in donnees:
@@ -1879,6 +2338,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "colonne" in donnees:
+        return composer_appui_colonne(donnees)
     if "equilibre" in donnees:
         return composer_appui_equilibre(donnees)
     if "enjambement" in donnees:

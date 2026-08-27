@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Coupe de principe de l’évacuation des chaudières individuelles de la résidence : chaque logement porte une chaudière gaz à condensation étanche à micro-accumulation. En gaine technique, les chaudières de quatre niveaux se piquent sur un conduit collectif 3CEp — un conduit concentrique unique où les fumées montent par le cœur pendant que l’air de combustion descend par la couronne, jusqu’au débouché en toiture ; chaque piquage porte un clapet anti-retour, un té de purge en pied renvoie les condensats à la colonne d’eaux usées, et chaque conduit est éprouvé au test de fumée avant la fermeture des gaines. En façade ou en toiture, la ventouse individuelle réunit l’air et les fumées dans un terminal concentrique. Trois tailles de chaudières servent 12, 14 ou 16 litres par minute à ΔT 30 K, selon la surface et le nombre de salles de bains.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LE CONDUIT COLLECTIF</text>
+  <path d="M 48.00 96.00 L 251.00 96.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 285.00 96.00 L 330.00 96.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 48.00 316.00 L 330.00 316.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.5"/>
+  <path d="M 66.00 318.00 L 59.00 324.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 126.00 318.00 L 119.00 324.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 186.00 318.00 L 179.00 324.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 246.00 318.00 L 239.00 324.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 306.00 318.00 L 299.00 324.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 48.00 170.00 L 232.00 170.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 304.00 170.00 L 330.00 170.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 48.00 243.00 L 232.00 243.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 304.00 243.00 L 330.00 243.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 232.00 96.00 L 232.00 316.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 304.00 96.00 L 304.00 316.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 255.00 74.00 L 255.00 296.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 281.00 74.00 L 281.00 296.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="262.00" y="79.00" width="12.00" height="212.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <path d="M 251.00 70.00 L 285.00 70.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 268.00 108.00 L 264.50 115.00 L 271.50 115.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 268.00 208.00 L 264.50 215.00 L 271.50 215.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 277.00 152.00 L 274.50 147.00 L 279.50 147.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 268.00 296.00 L 268.00 308.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 268.00 308.00 L 298.00 308.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 304.00 308.00 L 298.00 305.00 L 298.00 311.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="96.00" y="116.00" width="130.00" height="34.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 226.00 130.00 L 255.00 130.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 226.00 136.00 L 255.00 136.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <circle cx="249.00" cy="141.00" r="2.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="96.00" y="190.00" width="130.00" height="34.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 226.00 204.00 L 255.00 204.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 226.00 210.00 L 255.00 210.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <circle cx="249.00" cy="215.00" r="2.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="96.00" y="263.00" width="130.00" height="34.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 226.00 277.00 L 255.00 277.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 226.00 283.00 L 255.00 283.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <circle cx="249.00" cy="288.00" r="2.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <text x="104.00" y="137.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaudière étanche</text>
+  <path d="M 283.00 104.00 L 342.00 104.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="350.00" y="107.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">FUMÉES PAR LE CŒUR</text>
+  <path d="M 283.00 132.00 L 342.00 132.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="350.00" y="135.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AIR PAR LA COURONNE</text>
+  <path d="M 283.00 196.00 L 342.00 196.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="350.00" y="191.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CLAPET ANTI-RETOUR</text>
+  <text x="350.00" y="205.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">À CHAQUE PIQUAGE</text>
+  <text x="312.00" y="312.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CONDENSATS VERS EU</text>
+  <text x="350.00" y="258.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="14" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Trois tailles de chaudière</text>
+  <text x="350.00" y="276.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" font-variant-numeric="tabular-nums">12 / 14 / 16 L/min</text>
+</svg>

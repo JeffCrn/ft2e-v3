@@ -1,0 +1,155 @@
+{
+  "fiche": "residence-aurora-la-rochelle",
+  "archetype": "coupe-traversee",
+  "archetype_motif": "La thèse de la fiche est une histoire de production décentralisée et de traversée : chaque logement porte sa chaudière gaz à condensation étanche, et l’évacuation des fumées suit deux régimes — la ventouse individuelle quand la façade ou la toiture est à portée, et le conduit collectif 3CEp quand la chaudière est en gaine technique : un conduit concentrique unique traverse les niveaux, les fumées montent par le cœur pendant que l’air de combustion descend par la couronne, chaque piquage porte un clapet anti-retour et un té de purge renvoie les condensats aux eaux usées. C’est un mécanisme de traversée verticale — l’archétype coupe-traversee — mais aucun de ses quatre mécanismes ne le porte : ni l’enveloppe de Marennes, ni l’équilibre d’air de Villedoux, ni l’enjambement de Joffre, ni la portée du Yachtman — d’où le mécanisme nouveau « colonne ». Ni boucle-fluide (déjà huit planches, et le mécanisme terminaux des Portes-en-Ré dirait la décentralisation sans dire la traversée partagée, qui est la singularité d’Aurora) ; ni sankey (pas de bilan de flux) ; ni chronologie (les reprises du calcul sont un récit d’affaire, pas un mécanisme — arbitrage N01).",
+  "surtitre": "SCHÉMA DE PRINCIPE · L’ÉVACUATION DES CHAUDIÈRES INDIVIDUELLES",
+  "titre": "Résidence Aurora",
+  "sous_titre": "Une chaudière par logement, deux régimes d’évacuation des fumées",
+  "cartouche_legende": "LA ROCHELLE · 7 960 m² · 2025",
+  "aria_label": "Coupe de principe de l’évacuation des chaudières individuelles de la résidence : chaque logement porte une chaudière gaz à condensation étanche à micro-accumulation. En gaine technique, les chaudières de quatre niveaux se piquent sur un conduit collectif 3CEp — un conduit concentrique unique où les fumées montent par le cœur pendant que l’air de combustion descend par la couronne, jusqu’au débouché en toiture ; chaque piquage porte un clapet anti-retour, un té de purge en pied renvoie les condensats à la colonne d’eaux usées, et chaque conduit est éprouvé au test de fumée avant la fermeture des gaines. En façade ou en toiture, la ventouse individuelle réunit l’air et les fumées dans un terminal concentrique. Trois tailles de chaudières servent 12, 14 ou 16 litres par minute à ΔT 30 K, selon la surface et le nombre de salles de bains.",
+  "colonne": {
+    "entete": "LOT CHAUFFAGE, CCTP MARCHÉ DE DÉCEMBRE 2022 — CHAUDIÈRES GAZ À CONDENSATION ÉTANCHES, MICRO-ACCUMULATION",
+    "registres": {
+      "gauche": "EN GAINE TECHNIQUE · LE CONDUIT COLLECTIF 3CEp",
+      "droite": "EN FAÇADE OU EN TOITURE · LA VENTOUSE INDIVIDUELLE"
+    },
+    "niveaux": [
+      "R+3",
+      "R+2",
+      "R+1",
+      "RDC"
+    ],
+    "mention_pied": "CHAQUE CONDUIT COLLECTIF EST ÉPROUVÉ AU TEST DE FUMÉE AVANT LA FERMETURE DES GAINES · UN COMPTEUR GAZ PAR LOGEMENT, EN GAINE PALIÈRE",
+    "elements": [
+      {
+        "ordre": 1,
+        "cle": "chaudiere",
+        "libelle": "Chaudière étanche",
+        "valeur": "",
+        "unite": "",
+        "detail": [
+          "MICRO-ACCUMULATION"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "conduit",
+        "libelle": "Conduit collectif 3CEp",
+        "valeur": "",
+        "unite": "",
+        "detail": [
+          "FUMÉES PAR LE CŒUR",
+          "AIR DE COMBUSTION PAR LA COURONNE"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "clapet",
+        "libelle": "Clapet anti-retour",
+        "valeur": "",
+        "unite": "",
+        "detail": [
+          "À CHAQUE PIQUAGE"
+        ]
+      },
+      {
+        "ordre": 4,
+        "cle": "debouche",
+        "libelle": "Débouché en toiture",
+        "valeur": "",
+        "unite": "",
+        "detail": []
+      },
+      {
+        "ordre": 5,
+        "cle": "purge",
+        "libelle": "Té de purge en pied",
+        "valeur": "",
+        "unite": "",
+        "detail": [
+          "CONDENSATS VERS LA COLONNE EU"
+        ]
+      },
+      {
+        "ordre": 6,
+        "cle": "ventouse",
+        "libelle": "Ventouse individuelle",
+        "valeur": "",
+        "unite": "",
+        "detail": [
+          "AIR ET FUMÉES CONCENTRIQUES"
+        ]
+      },
+      {
+        "ordre": 7,
+        "cle": "tailles",
+        "libelle": "Trois tailles de chaudière",
+        "valeur": "12 / 14 / 16",
+        "unite": "L/min",
+        "detail": [
+          "À ΔT 30 K · SELON SURFACE ET SALLES DE BAINS",
+          "DE 3,4 À 25 kW"
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "L’air de combustion descend par la couronne pendant que les fumées montent par le cœur.",
+  "vignette_surtitre": "LE CONDUIT COLLECTIF",
+  "a_valider_ft2e": [
+    {
+      "objet": "Le nombre de niveaux du dessin",
+      "la_source_affirme": "Des bâtiments en R+2 et R+3, des conduits collectifs 3CEp pour les chaudières en gaine technique — sans fixer le nombre de chaudières raccordées par conduit.",
+      "le_dessin_a_du": "Empiler quatre niveaux (RDC à R+3) avec un piquage par niveau — un gabarit de principe, pas la coupe d’un bâtiment réel."
+    },
+    {
+      "objet": "La répartition ventouse / conduit collectif",
+      "la_source_affirme": "Le CCTP prescrit les deux régimes d’évacuation (ventouse individuelle verticale ou horizontale, système 3CEp pour les chaudières étanches en gaines techniques) sans chiffrer leur répartition par bâtiment.",
+      "le_dessin_a_du": "Confronter les deux régimes à parts égales, sans prétendre à une proportion."
+    },
+    {
+      "objet": "Les débits d’ECS portés au registre des tailles",
+      "la_source_affirme": "Le CCTP marché exige 12, 14 ou 16 L/min à ΔT 30 K selon la surface (moins ou plus de 90 m²) et le nombre de salles de bains — exigences du label Promotelec —, et des plages de puissance chauffage de 3,4 à 25 kW selon le modèle.",
+      "le_dessin_a_du": "Rendre la gradation par trois gabarits de largeur croissante, proportionnels aux débits — la correspondance visuelle largeur/débit est un choix de dessin."
+    },
+    {
+      "objet": "Les T1",
+      "la_source_affirme": "Les T1 ont leur eau chaude par chauffe-eau électrique à accumulation de 100 L (CCTP § 3.3) ; le comptage gaz est prévu pour chaque logement (§ 5.1).",
+      "le_dessin_a_du": "Dessiner le régime général (chaudière par logement) sans figurer l’exception des T1 — elle est dite dans la fiche."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Le numéro d’affaire et le millésime d’ouverture (rien au dessin ne les encode).",
+    "Les marques du CCTP (chaudières, conduits, distribution) — le dessin ne porte que les systèmes génériques (3CEp, ventouse).",
+    "Les tiers : promoteur, MOA, architecte, BET, entreprises des lots.",
+    "Les montants des lots et des honoraires.",
+    "Toute géométrie d’ouvrage : la colonne est un gabarit à quatre niveaux, la façade un fragment de principe — aucune proportion réelle."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "un seul conduit vertical traverse quatre niveaux et la toiture ; quatre chaudières identiques s’y piquent, chacune par son clapet ; les fumées montent par le cœur (flèches hautes), l’air descend par la couronne (flèches basses), le té de purge sort en pied — face à lui, la ventouse individuelle traverse la façade en un seul terminal ; en bas à droite, trois gabarits de largeur proportionnelle aux débits (8 px par L/min)",
+    "topologie": "registre gauche x 80–620 (chaudières 140–300, conduit à x 340, couronne ±16, cœur ±7, gaine 310–370, toiture y 300, sol y 620) ; registre droit x 704–1144 (façade à x 1010, conduit horizontal à y 362, gabarits y 488–536)",
+    "gabarits_debits": "12 L/min = 96 px · 14 L/min = 112 px · 16 L/min = 128 px",
+    "bas_du_dessin": "sol à 620 (hachures à 630), mention de pied à 655, phrase à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 275 x 30 px = 8250 px², soit 0.86 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; les débits restent au mono 10 pivot, dans leur gabarit",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "87 signes — 740 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "le conduit collectif seul : couronne, cœur fléché vers le haut, trois chaudières piquées, té de purge — ventouse, gabarits de débit et appels laissés à la planche",
+    "bas_du_dessin": "nœud à y 188, marge basse 12 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "la colonne à l’échelle 1 : conduit concentrique traversant trois niveaux, chaudières piquées à clapet, flèches des deux flux, té de purge, et le nœud des trois débits — la ventouse et la mention de pied restent à la planche",
+    "bas_du_dessin": "sol à 316 px (hachures à 324), condensats à 312, marge basse 44 px"
+  }
+}
