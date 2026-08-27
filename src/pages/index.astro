@@ -291,7 +291,10 @@ const partenaires = [
             </a>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+          {/* Cascade A11 : la grille est un groupe, ses cartes se révèlent
+              à 80 ms d'écart — le rang vit en CSS (motion.css), rien à
+              poser sur les cartes. */}
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8" data-plan-groupe>
             {projetsRecents.map((projet) => (
               <CarteProjet projet={projet} />
             ))}

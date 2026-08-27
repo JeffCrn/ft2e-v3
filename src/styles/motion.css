@@ -1,17 +1,24 @@
 /* ═══════════════════════════════════════════════
-   Motion — charte v3 « ingénierie de l'invisible » (§ 13)
+   Motion — charte v3 « ingénierie de l'invisible » (§ 13),
+   infléchie par l'arbitrage FT2E du 2026-08-27 (amendements A11+).
 
-   Quatre mouvements, une seule courbe : cubic-bezier(0.2, 0.7, 0.2, 1).
+   Une seule courbe : cubic-bezier(0.2, 0.7, 0.2, 1).
 
-   1. Révélation de plan — 760 ms, 22 px, à l'entrée dans la vue, une
-      seule fois (data-plan, initié par BaseLayout).
+   1. Révélation de plan — 1000 ms, 28 px (le module de la trame), à
+      l'entrée dans la vue, une seule fois (data-plan, initié par
+      BaseLayout). Amendement A11 : amplitude et durée relevées — la
+      charte portait 760 ms / 22 px.
+   1 bis. Révélation en cascade (A11) — les grilles de cartes
+      (data-plan-groupe) révèlent leurs enfants directs à 80 ms d'écart
+      par rang, plafonné au sixième : au-delà, tout suit le dernier rang.
    2. Survol de cellule — 300 ms, calcaire vers papier, aucun déplacement.
    3. Survol de bouton — 260 ms, encre vers profond, le filet ne bouge pas.
    4. Filet de flux — 900 ms au chargement, une fois. Le seul tracé
-      animé du système (TraceFlux.astro).
+      animé du système (TraceFlux.astro — actuellement débranché, option
+      non arbitrée du chantier motion).
 
-   Rien d'autre ne bouge : ni les titres, ni les chiffres, ni les
-   images, ni le monogramme après son tracé.
+   Rien d'autre ne bouge sans amendement consigné : le registre vit dans
+   .claude/rules/tailwind-design-tokens.md (§ Les amendements).
    ═══════════════════════════════════════════════ */
 
 :root {
@@ -24,21 +31,55 @@
 
 html.js-plans [data-plan] {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(28px);
 }
 
 html.js-plans [data-plan].plan-revele {
   opacity: 1;
   transform: none;
   transition:
-    opacity 760ms var(--ease-blueprint),
-    transform 760ms var(--ease-blueprint);
+    opacity 1000ms var(--ease-blueprint),
+    transform 1000ms var(--ease-blueprint);
 }
 
 /* Plan déjà dans la vue à l'initialisation (au-dessus du fold) : posé
    d'emblée, sans transition — le contenu critique ne fond jamais. */
 html.js-plans [data-plan].plan-immediat {
   transition: none;
+}
+
+/* ─── 1 bis. Révélation en cascade (A11) — les grilles de cartes ───
+   Le conteneur porte data-plan-groupe et c'est lui qu'observe initPlans ;
+   ses ENFANTS DIRECTS portent le mouvement, à 80 ms d'écart par rang.
+   Le rang est du :nth-child pur : aucun attribut à poser dans les
+   boucles, et le délai par défaut de 400 ms plafonne de lui-même tous
+   les rangs au-delà du sixième. */
+
+html.js-plans [data-plan-groupe] > * {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+html.js-plans [data-plan-groupe].plan-revele > * {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 1000ms var(--ease-blueprint),
+    transform 1000ms var(--ease-blueprint);
+  transition-delay: 400ms; /* rang 6 et au-delà */
+}
+
+html.js-plans [data-plan-groupe].plan-revele > :nth-child(1) { transition-delay: 0ms; }
+html.js-plans [data-plan-groupe].plan-revele > :nth-child(2) { transition-delay: 80ms; }
+html.js-plans [data-plan-groupe].plan-revele > :nth-child(3) { transition-delay: 160ms; }
+html.js-plans [data-plan-groupe].plan-revele > :nth-child(4) { transition-delay: 240ms; }
+html.js-plans [data-plan-groupe].plan-revele > :nth-child(5) { transition-delay: 320ms; }
+
+/* Groupe déjà dans la vue au chargement : tout posé d'emblée — la
+   protection du LCP vaut pour la cascade comme pour les plans. */
+html.js-plans [data-plan-groupe].plan-immediat > * {
+  transition: none;
+  transition-delay: 0ms;
 }
 
 /* ─── 4. Tracé de flux — se dessine une fois au chargement ─── */
@@ -65,7 +106,8 @@ html.js-plans [data-plan].plan-immediat {
    ═══════════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
-  html.js-plans [data-plan] {
+  html.js-plans [data-plan],
+  html.js-plans [data-plan-groupe] > * {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;

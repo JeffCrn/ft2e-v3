@@ -49,7 +49,7 @@ const similaires = tous
           Pas de palier `md:grid-cols-3` ici, contrairement à `/references` :
           avec quatre cartes il laisserait une orpheline — l'index, lui, en a
           vingt-trois. */}
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8" data-plan-groupe>
         {similaires.map((projet) => (
           <CarteProjet projet={projet} />
         ))}

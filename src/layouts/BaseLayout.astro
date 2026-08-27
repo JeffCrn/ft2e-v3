@@ -113,14 +113,17 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
 
     <slot name="json-ld" />
 
-    {/* Révélation de plan (charte v3 § 13) : 760 ms, 22 px, à l'entrée
-        dans la vue, une seule fois par élément [data-plan]. Le CSS ne
-        masque rien tant que html.js-plans n'est pas posé (fallback sans JS). */}
+    {/* Révélation de plan (charte v3 § 13, amendement A11) : 1000 ms, 28 px,
+        à l'entrée dans la vue, une seule fois par élément [data-plan] — et
+        les grilles de cartes [data-plan-groupe] révèlent leurs enfants en
+        cascade (80 ms par rang, le CSS de motion.css porte les rangs). Le
+        CSS ne masque rien tant que html.js-plans n'est pas posé (fallback
+        sans JS). */}
     <script>
       function initPlans() {
         document.documentElement.classList.add('js-plans');
 
-        const plans = document.querySelectorAll<HTMLElement>('[data-plan]');
+        const plans = document.querySelectorAll<HTMLElement>('[data-plan], [data-plan-groupe]');
         if (!plans.length) return;
 
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -151,6 +151,26 @@ l'amendement** :
   déplacement au survol reste interdit, et un composant qui croirait pouvoir s'en
   réclamer devra passer par le même arbitrage.
 
+### A11 — la révélation ample et séquencée (2026-08-27)
+
+**A11 est, comme A9 et A10, un amendement d'application** — le premier du chantier
+motion, arbitré par FT2E le 2026-08-27 (« le style est déjà très aride, des effets
+plus marqués apporteraient un peu de dynamisme »). Ne pas le chercher dans le PDF.
+
+| № | Objet | Révision 2.1 | Ce qui s'applique |
+|---|---|---|---|
+| A11 | Révélation de plan | 760 ms, 22 px, un bloc d'un seul tenant | **1000 ms, 28 px — le module de la trame** ; et les grilles de cartes se révèlent **en cascade**, 80 ms par rang plafonné au sixième |
+
+Les bornes font partie de l'amendement : mêmes propriétés (opacité et translation —
+composited seulement, jamais de layout à l'entrée), même courbe, une seule fois par
+élément ; la traîne de la cascade est plafonnée à 400 ms quelle que soit la taille de
+la grille (23 cartes sur `/references` comme 4 à l'accueil) ; et **tout ce qui est
+visible au chargement reste posé d'emblée** (`plan-immediat`) — la protection du LCP
+prime sur l'effet, sans exception. Implantation : `motion.css` (les rangs sont du
+`:nth-child` pur, aucun attribut par carte), `initPlans` (`BaseLayout`), conteneurs
+`data-plan-groupe` (grille 05 de l'accueil, grille de `/references`,
+`ProjetsSimilaires`).
+
 **Implantation de la légende et des équerres (§ 13)** — la charte veut la légende **en bas à gauche** *et* les équerres intactes (« repère de tirage, jamais un encadrement ») : les deux ne peuvent pas se disputer l'angle. La géométrie tranche, et elle est **dérivée**, jamais réglée à l'œil. Les jetons `--equerre-cote` (18 px) et `--equerre-retrait` (5 px) donnent `--equerre-gouttiere` (28 px), dont découlent à la fois les quatre équerres de `CoinsCuivre` et la recette `.legende-media` :
 
 - **horizontalement** : `left: gouttière`, `max-width: 100% − 2 × gouttière` — les deux équerres basses sont dégagées quelle que soit la longueur de la légende, qui déborde vers le haut, où aucune équerre ne l'attend ;
@@ -203,9 +223,9 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
 
 ## Interactions & motion
 
-- **Quatre mouvements, une seule courbe** `--ease-blueprint` = `cubic-bezier(0.2, 0.7, 0.2, 1)` — remplace `cubic-bezier(0.16, 1, 0.3, 1)` :
-  1. filet de flux (`TraceFlux.astro`), 900 ms, une fois par chargement — le seul tracé animé ;
-  2. révélation de plan (`[data-plan]`), 760 ms, 22 px, une fois à l'entrée dans la vue ;
+- **Une seule courbe** `--ease-blueprint` = `cubic-bezier(0.2, 0.7, 0.2, 1)` — remplace `cubic-bezier(0.16, 1, 0.3, 1)` :
+  1. filet de flux (`TraceFlux.astro`), 900 ms, une fois par chargement — le seul tracé animé (⚠ actuellement débranché : retiré sur demande FT2E le 2026-08-07, option non arbitrée du chantier motion) ;
+  2. révélation de plan (`[data-plan]`), **1000 ms, 28 px** (A11 — la charte portait 760 ms / 22 px), une fois à l'entrée dans la vue ; les grilles de cartes (`[data-plan-groupe]`) se révèlent **en cascade**, 80 ms par rang plafonné au sixième (A11) ;
   3. survol de cellule, 300 ms, calcaire → papier ;
   4. survol de bouton, 260 ms, encre → profond.
 - **Survol = bascule de fond** — aucun déplacement, aucun filet qui s'épaissit (**plus de `box-shadow` inset**), aucune ombre qui apparaît. Le filet ne bouge pas. *Unique exception : A10 — l'ouverture de tranche de la coupe des secteurs, bornée au registre des amendements.*

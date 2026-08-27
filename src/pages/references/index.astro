@@ -90,8 +90,10 @@ const secteurs = (await getCollection('secteurs'))
 
       {/* La grille de cartes se pose à même le papier, comme les quatre autres
           du site : chaque carte EST un plan posé, et un plan ne se pose pas sur
-          un plan. C'est ce qui retire le `data-plan` de cet écran — la charte
-          réserve la révélation aux plans significatifs, jamais aux cartes. */}
+          un plan. La grille n'est donc pas un [data-plan] — mais depuis
+          l'amendement A11 (2026-08-27) elle est un GROUPE [data-plan-groupe] :
+          ses cartes se révèlent en cascade, 80 ms par rang plafonné au sixième
+          (le rang vit dans motion.css). */}
       {/* Les filtres sont des vignettes à l'état masqué/dévoilé du carrousel
           de l'accueil : image en retrait à 42 % d'opacité, dévoilée au survol,
           au focus et à l'état actif (aria-pressed) — une bascule d'opacité,
@@ -199,7 +201,7 @@ const secteurs = (await getCollection('secteurs'))
             quatre cartes, où une colonne de plus laisse des orphelines ; ici
             il y en a vingt-trois, et la bande 768–1023 px passerait sans elle
             de 288 à 366 px de vignette. Mesuré, pas supposé. */}
-        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 grille-references" data-grille>
+        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 grille-references" data-grille data-plan-groupe>
           {projets.map((projet) => (
             <li data-secteur={projet.data.secteur} class="min-w-0">
               <CarteProjet projet={projet} />
