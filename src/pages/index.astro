@@ -120,16 +120,15 @@ const partenaires = [
           aria-label — et le cartouche est `aria-hidden` comme dans la coupe,
           le lien portant déjà son nom. `eager` + `fetchpriority="high"` :
           l'image est au-dessus de la ligne de flottaison, c'est le candidat
-          LCP de la page (le LCP accueil est AU seuil — se mesure sur le
-          déploiement, plusieurs tirs, après tout changement ici).
-          Le média s'affiche à TOUTES les largeurs : le masquage sous `sm`
-          protégeait le mono de l'appui (6,2 px à 390), une photographie n'a
-          pas de plancher de lisibilité.
-          ⚠ Sous 640 px, `sizes` déclare 290px pour PLAFONNER LA DENSITÉ à
-          ~2× (variant 760w, ~30 Ko) : le slot réel fait ~364 px CSS mais à
-          DPR 2,6 le navigateur tirait le 1080w (52 Ko), et ces octets sur la
-          chaîne critique coûtaient ~130 ms d'un LCP déjà au seuil (2 005,
-          1 894, 1 823 ms mesurés au déploiement le 2026-08-26). */}
+          LCP de la page au bureau.
+          ⚠ Le média est BUREAU SEUL — masqué sous `lg` par l'enveloppe du
+          slot (`Hero.astro`), arbitrage FT2E du 2026-08-27 : affiché au
+          téléphone, le cliché devenait l'élément LCP mobile et coûtait
+          150–200 ms (7 tirs sur le déploiement, 1 823–2 013 ms pour un
+          budget de 1 800 — le poste dominant était le délai de rendu,
+          1 235 ms, pas les octets : plafonner la densité servie n'a rien
+          changé, mesuré). Se remesure sur le déploiement, plusieurs tirs,
+          après tout changement ici. */}
       <a
         class="relative block aspect-[3/2] duotone-photo"
         href={`/references/?secteur=${encodeURIComponent(SECTEUR_CLICHE_HERO)}`}
@@ -139,7 +138,7 @@ const partenaires = [
           src={photoHero}
           formats={['avif', 'webp']}
           widths={[480, 760, 1080, 1520]}
-          sizes="(min-width: 1280px) 660px, (min-width: 1024px) 55vw, (min-width: 640px) calc(100vw - 48px), 290px"
+          sizes="(min-width: 1280px) 660px, 55vw"
           alt={clicheHero.alt}
           class="w-full h-full object-cover"
           loading="eager"

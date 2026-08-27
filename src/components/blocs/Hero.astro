@@ -138,16 +138,17 @@ const tailleSousVedette = 'font-size: clamp(1.125rem, 2.2vw, 1.75rem);';
           )}
         </div>
 
-        {/* Le média s'affiche à TOUTES les largeurs depuis le 2026-08-26 :
-            le masquage sous `sm` protégeait le mono de l'appui SVG (6,2 px
-            à 390), et l'appui a été remplacé par une photographie, qui n'a
-            pas de plancher de lisibilité. Si un dessin revient un jour dans
-            ce slot, le masquage se remet sur cette ENVELOPPE, jamais sur le
-            contenu du slot — porté par les enfants, il laissait une cellule
-            de grille de hauteur 0 dont le `row-gap` se payait quand même
-            (40 px de vide mort mesurés à 390 px le 2026-08-16). */}
+        {/* Le média est BUREAU SEUL (≥ 1024) depuis l'arbitrage LCP du
+            2026-08-27 : le cliché du hero coûtait 150–200 ms de LCP mobile
+            (7 tirs, 1 823–2 013 ms pour un budget de 1 800 — l'élément LCP
+            devenait l'image, qui peint après la chaîne critique). Sous `lg`
+            le hero redevient textuel, et le LCP mobile revient à son état
+            « au seuil » documenté. Le masquage vit sur cette ENVELOPPE,
+            jamais sur le contenu du slot — porté par les enfants, il
+            laissait une cellule de grille de hauteur 0 dont le `row-gap` se
+            payait quand même (40 px de vide mort mesurés le 2026-08-16). */}
         {hasMedia && (
-          <div class="lg:col-span-7">
+          <div class="hidden lg:block lg:col-span-7">
             <slot name="media" />
           </div>
         )}
