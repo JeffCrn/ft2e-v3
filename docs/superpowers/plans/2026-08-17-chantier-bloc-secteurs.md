@@ -972,3 +972,30 @@ règle de continuité est dans CLAUDE.md parce qu'elle a été manquée deux foi
 
 **Le prompt de la session suivante vit en annexe A du plan motion** et
 remplace l'annexe D ci-dessus.
+
+
+## 10. Ajustement du 2026-08-27 — barre textuelle et alignement du rail de /references
+
+Demande FT2E (avec capture) : en haut de page le bas du rail est hors de vue,
+et la grille n'était pas alignée sur la tuile « Tous ». Deux réponses, un
+seul mécanisme :
+
+- **l'agencement passe à deux rangées** au-dessus de 1 024 px — rangée 1 :
+  l'étiquette « secteur » (colonne du rail) et une **barre textuelle de
+  chips** `.chip-blueprint` (colonne de la grille), deux cellules étirées à
+  la même hauteur (`align-self: stretch`, filets haut et bas coïncidents) ;
+  rangée 2 : les vignettes du rail et la grille de cartes. **L'alignement de
+  la tuile « Tous » sur la première ligne de cartes est garanti par
+  construction** (mesuré : écart 0 px à 1 280), le `row-gap` reprend la
+  gouttière (24 px) ;
+- la barre textuelle est la **seconde navigation** : mêmes `data-filtre` que
+  le rail, chips actifs à l'aplat encre (`aria-pressed`), groupe nommé
+  « Filtres par secteur, en texte » ; `initFiltres` pose désormais l'état
+  **par valeur de filtre** — les deux jeux de boutons restent synchrones,
+  contrôlé au navigateur (chip et tuile pressés ensemble, 8 cartes au filtre
+  Logements). Sous 1 024 px, rien ne change (barre masquée, rangée de tuiles
+  et filets identiques, 4 par ligne à 768).
+
+Documentation alignée dans le même commit (CLAUDE.md, tokens rule § Index
+des références). Pas un amendement : le chip de filtre est le composant
+canonique de la charte, et A9 n'est pas touché.

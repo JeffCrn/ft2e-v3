@@ -446,3 +446,24 @@ Termine par le prompt de lancement de la session suivante, en annexe du plan
 du chantier concerne et reproduit integralement dans ton message final - la
 regle de continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
 ````
+
+
+## Annexe C — prompt de la session suivante (REMPLACE l'annexe B : /references porte désormais deux navigations de filtre)
+
+Le prompt de l'annexe B reste valable À DEUX COMPLÉMENTS PRÈS, à intégrer
+tels quels dans son ÉTAT et ses PIÈGES :
+
+- **ÉTAT, à ajouter** : `/references` porte depuis le 2026-08-27 soir DEUX
+  navigations de filtre au-dessus de 1 024 px — rail visuel à gauche, barre
+  textuelle de chips `.chip-blueprint` en tête de grille, rangée d'en-tête
+  partagée qui aligne par construction la tuile « Tous » et la première
+  ligne de cartes ; `initFiltres` pose l'état actif PAR VALEUR de filtre
+  (les deux jeux de boutons sont synchrones). Consigné au § 10 du plan
+  bloc-secteurs. La validation FT2E en situation du point 1 COUVRE AUSSI
+  cette barre, et le passage NVDA du point 3 y ajoute : les deux groupes de
+  filtres (« Filtres par secteur » / « Filtres par secteur, en texte ») se
+  distinguent-ils bien à l'écoute, et l'état pressé double est-il annoncé
+  proprement ?
+- **PIÈGE, à ajouter** : quand deux jeux de contrôles partagent un même
+  `data-filtre`, l'état actif se pose par VALEUR, jamais sur le seul bouton
+  cliqué — c'est déjà le cas dans `initFiltres`, ne pas le « simplifier ».

@@ -116,10 +116,43 @@ const secteurs = (await getCollection('secteurs'))
           Les deux légendes coexistent dans le balisage (`lg:hidden` /
           `hidden lg:inline-flex`) : `display: none` retire l'autre de
           l'arbre d'accessibilité, le bouton n'est jamais nommé deux fois. */}
+      {/* DEUX navigations de filtre depuis le 2026-08-27 (demande FT2E) : le
+          rail visuel à gauche ET une barre TEXTUELLE en tête de grille — en
+          haut de page, les secteurs du bas du rail sont hors de vue, la barre
+          les rend tous atteignables d'emblée. L'ALIGNEMENT est garanti par
+          construction, jamais au pixel : au-dessus de 1 024 px l'agencement
+          est une grille à DEUX RANGÉES — rangée 1 : l'étiquette « secteur »
+          (colonne du rail) et la barre de chips (colonne de la grille), deux
+          cellules étirées à la même hauteur (align-self: stretch, leurs
+          filets haut et bas coïncident) ; rangée 2 : les vignettes du rail
+          et la grille de cartes, qui partent donc du même haut. Les chips
+          sont le composant canonique .chip-blueprint (actif = aplat encre,
+          aria-pressed) ; initFiltres synchronise les DEUX jeux de boutons —
+          même data-filtre, même état. */}
       <div class="agencement-references">
-        <div class="border-t border-b border-filet-2 py-4">
+        <div class="rail-entete border-t border-filet-2 pt-4 lg:pt-0 lg:border-b lg:flex lg:items-center">
           <p class="mono-label font-normal text-pivot">secteur</p>
-          <div class="filtres-vignettes mt-3" role="group" aria-label="Filtres par secteur">
+        </div>
+
+        <div
+          class="filtres-textes hidden lg:flex flex-wrap items-center gap-2 border-t border-b border-filet-2 py-3"
+          role="group"
+          aria-label="Filtres par secteur, en texte"
+        >
+          <button class="chip-blueprint" data-filtre="tous" aria-pressed="true">Tous ({projets.length})</button>
+          {secteurs.map((s) => {
+            const count = projets.filter((p) => p.data.secteur === s.titre).length;
+            if (count === 0) return null;
+            return (
+              <button class="chip-blueprint" data-filtre={s.titre} aria-pressed="false">
+                {s.titre} ({count})
+              </button>
+            );
+          })}
+        </div>
+
+        <div class="rail-vignettes border-b border-filet-2 pb-4 lg:border-b-0 lg:pb-0">
+          <div class="filtres-vignettes mt-3 lg:mt-0" role="group" aria-label="Filtres par secteur">
             {/* « Tous » n'a pas de cliché propre : sa tuile est une MINI-COUPE
                 des sept secteurs (2026-08-26) — sept tranches verticales, une
                 par secteur, chacune portant son premier cliché en duotone. Le
@@ -279,11 +312,23 @@ const secteurs = (await getCollection('secteurs'))
   }
 
   @media (min-width: 1024px) {
+    /* Deux rangées : [étiquette | barre textuelle] puis [vignettes | grille].
+       Les deux cellules de la rangée 1 s'étirent à la même hauteur
+       (align-self: stretch) : leurs filets haut et bas coïncident, et la
+       rangée 2 — vignette « Tous » et première ligne de cartes — part du
+       même haut par construction. Le row-gap reprend la gouttière (24 px). */
     .agencement-references {
       display: grid;
       grid-template-columns: 216px minmax(0, 1fr);
+      grid-template-rows: auto 1fr;
       column-gap: 16px;
+      row-gap: 24px;
       align-items: start;
+    }
+
+    .rail-entete,
+    .filtres-textes {
+      align-self: stretch;
     }
 
     .grille-references {
@@ -357,10 +402,16 @@ const secteurs = (await getCollection('secteurs'))
       });
     };
 
+    /* Deux jeux de boutons portent les mêmes data-filtre depuis le
+       2026-08-27 (rail visuel + barre textuelle) : l'état actif se pose
+       par VALEUR de filtre, jamais sur le seul bouton cliqué — les deux
+       navigations restent synchrones. */
     const activer = (btn: HTMLButtonElement) => {
-      filtres.forEach((b) => b.setAttribute('aria-pressed', 'false'));
-      btn.setAttribute('aria-pressed', 'true');
-      appliquer(btn.getAttribute('data-filtre'));
+      const secteur = btn.getAttribute('data-filtre');
+      filtres.forEach((b) => {
+        b.setAttribute('aria-pressed', b.getAttribute('data-filtre') === secteur ? 'true' : 'false');
+      });
+      appliquer(secteur);
     };
 
     filtres.forEach((btn) => {
