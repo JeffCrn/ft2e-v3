@@ -33,7 +33,7 @@ const [cliche] = cliches;
 const photo = photoSecteur(cliche.image);
 
 const projetsSecteur = (await getCollection('projets'))
-  .filter((p) => p.data.secteur === titre)
+  .filter((p) => p.data.secteur === titre || p.data.secteur_secondaire === titre)
   .sort(parAffaireDecroissante);
 ---
 

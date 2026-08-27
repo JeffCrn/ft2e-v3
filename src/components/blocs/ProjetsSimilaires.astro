@@ -19,8 +19,13 @@ const similaires = tous
   .sort((a, b) => {
     let scoreA = 0;
     let scoreB = 0;
-    if (a.data.secteur === projetActuel.data.secteur) scoreA += 2;
-    if (b.data.secteur === projetActuel.data.secteur) scoreB += 2;
+    // Une affaire à double domaine (secteur_secondaire, classeur FT2E) est
+    // parente par l'un OU l'autre de ses domaines.
+    const secteursDe = (p: typeof projetActuel) =>
+      [p.data.secteur, p.data.secteur_secondaire].filter(Boolean);
+    const courants = secteursDe(projetActuel);
+    if (secteursDe(a).some((s) => courants.includes(s))) scoreA += 2;
+    if (secteursDe(b).some((s) => courants.includes(s))) scoreB += 2;
     if (a.data.typologie === projetActuel.data.typologie) scoreA += 1;
     if (b.data.typologie === projetActuel.data.typologie) scoreB += 1;
     return scoreB - scoreA;

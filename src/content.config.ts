@@ -49,6 +49,15 @@ const projets = defineCollection({
      */
     ouvrage: z.string().min(2).max(40).optional(),
     secteur: z.enum(SECTEURS),
+    /**
+     * Second domaine d'une affaire à double classement. Le classeur de
+     * références FT2E (« REFERENCES SITE FT2E.ods », fourni le 2026-08-27)
+     * classe certaines affaires dans DEUX domaines (« T § C ») : `secteur`
+     * reste le domaine principal (le premier du classeur), celui-ci porte le
+     * second — la fiche paraît alors dans les deux filtres de /references et
+     * sur les deux pages de secteur.
+     */
+    secteur_secondaire: z.enum(SECTEURS).optional(),
     typologie: z.enum(TYPOLOGIES),
     moa: z.string().min(2),
     architecte: z.string().optional(),
@@ -130,6 +139,13 @@ const projets = defineCollection({
     en_avant: z.boolean().default(false),
     demo: z.boolean().default(false),
   }).superRefine((data, ctx) => {
+    if (data.secteur_secondaire && data.secteur_secondaire === data.secteur) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['secteur_secondaire'],
+        message: 'Le secteur secondaire doit différer du secteur principal — le laisser vide pour une affaire à domaine unique.',
+      });
+    }
     if (!data.demo && !data.reference) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

@@ -149,7 +149,7 @@ const secteurs = (await getCollection('secteurs'))
         >
           <button class="chip-blueprint" data-filtre="tous" aria-pressed="true">Tous ({projets.length})</button>
           {secteurs.map((s) => {
-            const count = projets.filter((p) => p.data.secteur === s.titre).length;
+            const count = projets.filter((p) => p.data.secteur === s.titre || p.data.secteur_secondaire === s.titre).length;
             if (count === 0) return null;
             return (
               <button class="chip-blueprint" data-filtre={s.titre} aria-pressed="false">
@@ -195,7 +195,7 @@ const secteurs = (await getCollection('secteurs'))
               </span>
             </button>
             {secteurs.map((s) => {
-              const count = projets.filter((p) => p.data.secteur === s.titre).length;
+              const count = projets.filter((p) => p.data.secteur === s.titre || p.data.secteur_secondaire === s.titre).length;
               // Un secteur sans référence publiée n'apparaît pas au filtre :
               // une puce « (0) » qui ne filtre rien annonce une lacune au lieu
               // de servir. Le secteur reste présent sur /secteurs et à l'accueil.
@@ -244,7 +244,7 @@ const secteurs = (await getCollection('secteurs'))
             de 288 à 366 px de vignette. Mesuré, pas supposé. */}
         <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 grille-references" data-grille data-plan-groupe>
           {projets.map((projet) => (
-            <li data-secteur={projet.data.secteur} class="min-w-0">
+            <li data-secteur={projet.data.secteur} data-secteur-2={projet.data.secteur_secondaire} class="min-w-0">
               <CarteProjet projet={projet} />
             </li>
           ))}
@@ -419,7 +419,10 @@ const secteurs = (await getCollection('secteurs'))
     // Il ne tient plus de décompte : la puce active porte le sien.
     const appliquer = (secteur: string | null) => {
       cartes.forEach((carte) => {
-        const match = secteur === 'tous' || carte.getAttribute('data-secteur') === secteur;
+        const match =
+          secteur === 'tous' ||
+          carte.getAttribute('data-secteur') === secteur ||
+          carte.getAttribute('data-secteur-2') === secteur;
         carte.style.display = match ? '' : 'none';
       });
     };

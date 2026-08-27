@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { projet } = Astro.props;
-const { secteur, typologie, moa, architecte, lieu, surface_m2, mission_ft2e, demo } = projet.data;
+const { secteur, secteur_secondaire, typologie, moa, architecte, lieu, surface_m2, mission_ft2e, demo } = projet.data;
 
 // Chronologie publique (ADR-003) : toujours « livraison », le millésime de
 // réception quand elle est prononcée, celui annoncé sinon (2026-08-15). Le
@@ -35,7 +35,7 @@ const lignes = [
 
 <aside class="plan-pose" data-plan>
   <div class="px-5 py-4 bg-calcaire border-b border-filet-1 flex items-center gap-3">
-    <h2 class="mono-label text-pivot font-medium">{secteur.toLowerCase()} — {typologie.toLowerCase()}</h2>
+    <h2 class="mono-label text-pivot font-medium">{[secteur, secteur_secondaire].filter(Boolean).map((s) => s!.toLowerCase()).join(' · ')} — {typologie.toLowerCase()}</h2>
     {demo && <BadgeDemo />}
   </div>
 

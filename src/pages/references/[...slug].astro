@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 }
 
 const { projet } = Astro.props;
-const { titre, ouvrage, secteur, lieu, annee, annee_livraison, reference, synthese, performance, planche, demo } = projet.data;
+const { titre, ouvrage, secteur, secteur_secondaire, lieu, annee, annee_livraison, reference, synthese, performance, planche, demo } = projet.data;
 const { Content } = await render(projet);
 
 // A13 — fondu croisé du visuel qui voyage, sur la courbe unique (mêmes
@@ -104,7 +104,7 @@ const jsonLd = {
     '@type': 'Place',
     name: lieu,
   },
-  about: projet.data.secteur,
+  about: secteur_secondaire ? [secteur, secteur_secondaire] : secteur,
   keywords: projet.data.mission_ft2e.join(', '),
 };
 ---
@@ -120,7 +120,7 @@ const jsonLd = {
       { label: 'Références', href: '/references' },
       { label: titre, href: `/references/${projet.id}` },
     ]}
-    eyebrow={`fiche d’affaire — ${secteur.toLowerCase()}`}
+    eyebrow={`fiche d’affaire — ${[secteur, secteur_secondaire].filter(Boolean).map((s) => s!.toLowerCase()).join(' · ')}`}
     titre={titre}
     sousTitre={`${localisation} · ${jalons}`}
   />

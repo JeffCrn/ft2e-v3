@@ -95,6 +95,20 @@ collections:
           - "Études d’exécution / BIM"
         hint: "Les sept secteurs d'activité de FT2E : quatre marchés du bâtiment, puis trois modes d'intervention portés comme segments à part entière. Cette liste est close — elle alimente les filtres de la page Références et le build refuse toute autre valeur."
 
+      - label: "Secteur secondaire"
+        name: "secteur_secondaire"
+        widget: "select"
+        required: false
+        options:
+          - "Logements"
+          - "Tertiaire / ERP"
+          - "Industriel"
+          - "Patrimoine"
+          - "Monotechnique — Audit"
+          - "Coordination SSI"
+          - "Études d’exécution / BIM"
+        hint: "À ne remplir que pour une affaire que le classeur FT2E range dans deux domaines (« T § C ») : le secteur principal reste au champ précédent, celui-ci porte le second — et il doit en différer. La fiche paraît alors dans les deux filtres de la page Références."
+
       - label: "Typologie"
         name: "typologie"
         widget: "select"
