@@ -718,3 +718,213 @@ Termine par le prompt de lancement de la session suivante, en annexe du plan
 de ce chantier et reproduit integralement dans ton message final - la regle de
 continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
 ````
+
+
+## 8. Session du 2026-08-26 soir — vedette, rail de filtres, taxonomie, cliché du hero
+
+Neuf commits (`6b96cbf` à `e69a2db`), tous poussés et vérifiés par marqueur dans le
+HTML servi. L'annexe C n'a PAS été jouée en entrée de cette session (elle reste
+ci-dessus pour l'historique) : la session a suivi des directives FT2E en direct.
+
+- **Vedette recomposée en deux rangs** (`6b96cbf`) : titre « Ingénierie / fluides
+  et thermique / du bâtiment » en trois lignes explicites, borne haute REMESURÉE à
+  4,5 rem (« FLUIDES ET THERMIQUE » : 1 093 px à 72 px pour 1 152 de boîte) ;
+  second rang nouveau « De l'étude jusqu'à l'exécution », prop `sousVedette` de
+  `Hero.astro`, dessin `.type-intitule` en encre, 0,39x la vedette. Cotes dans le
+  commentaire du composant.
+- **Filtres de `/references` en RAIL vertical** (`754d563`) : au-dessus de 1 024 px
+  les filtres occupent la première colonne du rythme (216 px à 1 024, 276 dès
+  1 248), grille à trois colonnes à droite — la vignette reste servie à 274 px, la
+  mesure d'A9 est préservée. Légende au cartouche de réserve (A8) sur l'image au
+  rail, sous l'image en rangée repliée (< 1 024 : 4 puis 2 tuiles par ligne).
+  Les deux fichiers normatifs qui prescrivaient `lg:grid-cols-4` mis à jour dans
+  le même commit.
+- **Tuile « Tous » en mini-coupe** (`dc91fe6`) : sept tranches verticales, le
+  premier cliché de chaque secteur en duotone — l'écho de la coupe de l'accueil.
+  Le monogramme a été écarté (voilé à 0,42, il se lirait comme un tampon délavé).
+- **Taxonomie des secteurs** (`8250827`, BREAKING CHANGE consigné) : « Industriel
+  et commercial » devient « Industriel » ; « Monotechnique » devient
+  « Monotechnique — Audit et EXE » (graphie arbitrée : tiret cadratin, Audit en
+  bas de casse) ; « Coordination SSI » passe en position 5, Monotechnique en 6.
+  La place des Chênes Verts (commerces) migre dans Tertiaire / ERP (8 fiches ;
+  Industriel : 2). Zod + Decap dans le même commit ; slugs et répertoires
+  d'images INCHANGÉS (l'URL n'est pas l'intitulé) ; le mot « monotechnique » en
+  prose commune non touché.
+- **Cliché du hero** (`050f0cc`, `957639a`, `e69a2db`) : l'appui de la fiche
+  vedette (plan posé blanc, « flottait dans le vide » — retour FT2E) est remplacé
+  par « Aurora, 147 logements » du corpus secteurs — duotone, équerres, cartouche,
+  3:2, colonne 7/12, lien vers `/references/?secteur=Logements`. Légende/alt/crédit
+  relus depuis la collection secteurs (échec bruyant si le cliché quitte le
+  corpus). Partis avec l'appui : `fs.readFileSync`, le plafond `.appui-hero`, la
+  carte-lien (`en_avant` garde l'ordonnancement de la sélection).
+  ⚠ ARBITRAGE LCP (2026-08-27) : affiché au téléphone, le cliché devenait
+  l'élément LCP mobile — 7 tirs entre 1 823 et 2 013 ms pour un budget de 1 800,
+  poste dominant le délai de rendu (1 235 ms), le plafonnement de densité tenté
+  en `957639a` n'a RIEN changé (mesuré). Le média est donc BUREAU SEUL (masqué
+  sous `lg` par l'enveloppe du slot) ; remesure : 1 668-1 804 ms, l'état « au
+  seuil » documenté est retrouvé. Réserve : l'image masquée est tout de même
+  téléchargée (52 Ko) — sans effet mesurable ; une direction artistique par
+  `<source media>` serait le levier si l'on voulait aussi ces octets.
+- **Incident de dépôt réglé** (`c9ce606` hook, `e8d359c` correction) : le hook
+  Stop a commité et poussé seul `lh-refs.json` (7 091 lignes, rapport Lighthouse
+  laissé sur le disque). Retiré au commit suivant. Leçon : les artefacts
+  d'instrument se suppriment du disque sitôt lus.
+- `CLAUDE.md` perd son point périmé « Monotechnique sans référence publiée »
+  (2 fiches publiées).
+
+Recette jouée à chaque pas : typecheck 0 erreur, build 46 pages, 0 lien mort,
+rendu contrôlé aux largeurs utiles (sonde iframe pour les téléphones),
+Lighthouse accessibilité 100 sur `/references/` après le rail, LCP mobile sur le
+déploiement en tirs multiples. L'annexe C — jamais jouée — est **remplacée par
+l'annexe D** ci-dessous, qui intègre le nouveau chantier MOTION demandé par FT2E.
+
+## Annexe D — prompt de la session suivante (à coller tel quel en session neuve)
+
+````
+Session de suite - FT2E v3 : chantier MOTION (infléchissement de charte),
+fin de légendes du bloc secteurs, NVDA, validations.
+
+Contexte. FT2E v3 est un site institutionnel Astro statique (Astro 6,
+Tailwind 4, TypeScript strict), déployé en démonstration client sur
+https://ft2e-v3.vercel.app, indexation verrouillée par triple sécurité
+(robots.txt Disallow, meta noindex, header X-Robots-Tag) - ne pas y toucher.
+La source de vérité du design est .claude/rules/tailwind-design-tokens.md
+(rampe monochrome 197, aucune couleur d'accent, filets 1 px par opacité,
+rayon 0, courbe unique, amendements A1-A10). Le chantier de réduction de
+dette est EN PAUSE (docs/23-etat-de-l-art.md).
+
+ÉTAT AU 2026-08-27 MATIN (commits jusqu'à e69a2db, tout déployé et vérifié) :
+la vedette de l'accueil est « Ingénierie / fluides et thermique / du
+bâtiment » en trois lignes, bornée à 4,5 rem, avec un second rang
+« De l'étude jusqu'à l'exécution » (.type-intitule encre - cotes mesurées
+dans le commentaire de Hero.astro, ne pas y revenir à l'estime) ; le média
+du hero est le cliché « Aurora, 147 logements » (duotone + équerres +
+cartouche, lien vers /references/?secteur=Logements), BUREAU SEUL - arbitrage
+LCP du 2026-08-27, 7 tirs au-dessus du budget quand il s'affichait au
+téléphone, consigné dans Hero.astro ; les filtres de /references sont un
+RAIL vertical à gauche au-dessus de 1 024 px (216/276 px, cartouche de
+réserve sur l'image) et une rangée repliée en dessous (légende sous
+l'image) - la grille est à 3 colonnes, vignette toujours servie à 274 px ;
+la tuile « Tous » est une mini-coupe des sept secteurs ; les secteurs sont
+renommés et réordonnés (« Industriel », « Coordination SSI » en 5,
+« Monotechnique - Audit et EXE » en 6 - graphie : tiret cadratin, Audit en
+bas de casse) et la place des Chênes Verts est dans Tertiaire / ERP
+(8 fiches ; Industriel 2) ; la coupe des secteurs reste en position 03 de
+l'accueil, film TIRÉ AU BUILD (44 clichés réels (c) FT2E).
+
+LIRE D'ABORD : docs/superpowers/plans/2026-08-17-chantier-bloc-secteurs.md
+(§ 6-7 : montage et ajustements ; § 8 : session du 2026-08-26 soir) ;
+CLAUDE.md ; .claude/rules/tailwind-design-tokens.md § Interactions & motion ;
+src/styles/motion.css ; src/components/blocs/Hero.astro, CoupeSecteurs.astro
+et src/pages/references/index.astro.
+
+CE QUE CETTE SESSION FAIT :
+
+1. CHANTIER MOTION - NOUVEAU, et c'est un INFLÉCHISSEMENT DE CHARTE (demande
+   FT2E du 2026-08-27 : « le style est déjà très aride, des effets plus
+   marqués apporteraient un peu de dynamisme »). La charte actuelle prescrit
+   QUATRE mouvements sur une courbe unique et interdit tout le reste
+   (compteurs, parallax, hover lift, déplacement au survol - seule exception
+   bornée : A10, l'ouverture de tranche de la coupe). Un effet plus marqué ne
+   se glisse donc pas : il S'ARBITRE, au précédent d'A10.
+   a. OUVRIR PAR UN CADRAGE (brainstorming avant tout code) : inventorier les
+      quatre mouvements existants et leurs emplois, puis proposer 2-3 pistes
+      d'intensification BORNÉES - par exemple : révélations de plans plus
+      amples ou séquencées (stagger), transitions de pages enrichies (View
+      Transitions), micro-mouvements d'entrée sur les vignettes/cartes, survols
+      plus expressifs sur les pièces signature (coupe, rail, hero). Chaque
+      piste dit : où, quelle propriété bouge, durée/courbe, et ce qu'elle NE
+      touche pas.
+   b. FAIRE VALIDER LES PISTES PAR FT2E (maquette ou démo sur une page avant
+      généralisation).
+   c. CONSIGNER l'arbitrage en amendement(s) A11+ dans
+      .claude/rules/tailwind-design-tokens.md (registre des amendements),
+      comme A9 et A10 : ce qui s'ouvre, ses bornes, ce qui reste interdit.
+   d. IMPLÉMENTER dans src/styles/motion.css + composants concernés, avec :
+      prefers-reduced-motion INTÉGRAL (tout posé d'emblée), fallback sans JS,
+      aucune régression TBT/CLS (budget : TBT < 200 ms, CLS < 0,05, mesuré
+      sur le DÉPLOIEMENT en tirs multiples), et le pattern astro:page-load +
+      guard dataset.bound pour tout script.
+   ⚠ Le LCP accueil est AU seuil (1 668-1 804 ms pour 1 800) : toute
+   animation d'entrée qui retarderait le premier rendu du hero est à
+   proscrire ou à mesurer avant/après.
+
+2. QUAND FT2E LIVRE LES CORRESPONDANCES RESTANTES (« on fixera quand je les
+   aurai ») - 17 clichés encore en légende descriptive : villa urbaine
+   (Logements) ; écomusée, tiers-lieu bois, pharmacie, siège d'entreprise,
+   bureaux zinc doré (Tertiaire/ERP) ; centre technique, poste ferroviaire,
+   site en plaine, atelier agro, chantier naval (Industriel) ;
+   vidéoprotection, borne IRVE, hydraulique, calorifuge, caméras en façade
+   (Monotechnique - Audit et EXE) ; passerelle (Patrimoine).
+   a. Légender ces 17 comme les 27 premiers : légende de la planche si le
+      projet a une fiche publiée (lire le titre du planche.json), sinon
+      composer dans le même style, 40 signes au plus (borne Zod).
+   b. PUIS GELER LE FILM avec FT2E : soit remplacer filmSecteur() par une
+      lecture ordonnée du corpus (film = 4 premiers, l'ordre redevient
+      éditorial et Decap le pilote), soit garder le tirage une fois tout
+      légendé. Documenter le choix dans le même commit.
+
+3. PASSER NVDA - exigence RGAA du dépôt, TOUJOURS DUE depuis le montage, et
+   le périmètre a GRANDI : l'accueil (la coupe : tabulation, flèches dans le
+   film, compteur aria-live, calques aria-hidden muets, lien du cliché
+   principal ; et le nouveau média du hero : lien « Voir les références du
+   secteur Logements », cartouche aria-hidden), une page secteur, et le RAIL
+   de /references (boutons aria-pressed, une seule légende par bouton dans
+   l'arbre d'accessibilité - lg:hidden / hidden lg:inline-flex). Consigner le
+   relevé dans le plan (script APPEND).
+
+4. RECUEILLIR LES VALIDATIONS FT2E, liste augmentée : celles du § 6 du plan
+   (17 fichiers écartés, artefacts d'agrandissement IA, crédit (c) FT2E) PLUS
+   celles de la session du 2026-08-26 soir : la vedette à deux rangs, le rail
+   et la mini-coupe « Tous », les nouveaux intitulés de secteurs en
+   situation, le cliché Aurora au hero (et son absence assumée au téléphone).
+
+5. DECAP : la connexion échoue en production (HTTP 500 - deux variables OAuth
+   Vercel et une callback GitHub manquantes, docs/22-prise-en-main-decap.md
+   § 0, trois gestes que seul l'utilisateur peut faire, AJOURNÉS en
+   connaissance de cause). Le rappeler UNE FOIS en ouverture puis le
+   respecter. ⚠ Le schéma des secteurs a changé (BREAKING du commit 8250827) :
+   tout brouillon Decap antérieur au 2026-08-26 devra reprendre un secteur de
+   la nouvelle énumération.
+
+PIÈGES VÉRIFIÉS, À NE PAS REDÉCOUVRIR (détail : CLAUDE.md et les rules) :
+scripts de composant via astro:page-load + guard dataset.bound ; mesures en
+CSS de composant, couleurs en classes littérales ; motifs .gitignore ANCRÉS ;
+un build vert ne prouve pas le rendu (npm run captures -- --route 01-accueil ;
+Chrome refuse toute fenêtre sous 500 px, même headless - sonde iframe, sa
+barre mange 15 px) ; la performance se mesure sur le DÉPLOIEMENT, jamais sur
+npm run preview, JAMAIS en un tir ; dépôt PARTAGÉ (git ls-remote avant
+commit, marqueur de build dans le HTML servi après push ; la CLI Vercel
+répond Not authorized, c'est le push qui déploie) ; le hook Stop commite et
+pousse SEUL ce qui traîne sur le disque - supprimer les artefacts
+d'instrument sitôt lus (incident lh-refs.json du 2026-08-26) ; les insécables
+sont normalisées par les outils d'édition (docs : script Python en mode
+APPEND, chr(160) construit, assertion après coup ; source .astro :
+échappement JavaScript u00a0, jamais le caractère) ; pas de commentaire JSX
+entre la parenthèse d'une expression et son élément (a cassé le build le
+2026-08-26 dans Hero.astro) ; min-width: 0 sur les flex porteurs d'images ;
+TOUTE COTE DE LA VEDETTE SE MESURE AU NAVIGATEUR avant d'être posée ;
+display:none n'empêche PAS le téléchargement d'une image eager.
+
+Recette de fin de session : npm run typecheck (0 erreur), npm run build
+(46 pages), python scripts/controle-liens-internes.py (0 lien mort), contrôle
+du RENDU des pages touchées aux largeurs utiles, Lighthouse mobile sur le
+DÉPLOIEMENT si la structure a changé (accessibilité : 96 attendu sur
+l'accueil, violation unique color-contrast du complément text-clair
+aria-hidden - motif de l'exception D1 ; toute violation NOUVELLE est un
+blocage ; LCP accueil < 1 800 en tirs multiples), et consignation dans
+docs/superpowers/plans/2026-08-17-chantier-bloc-secteurs.md par script
+append. Si le chantier motion prend de l'ampleur, lui ouvrir son PROPRE plan
+docs/superpowers/plans/2026-08-27-chantier-motion.md et y consigner à partir
+de là.
+
+Portées de commit : design-system (motion), content, feat(accueil),
+feat(references), a11y, docs selon les points. Tout changement de schéma Zod
+va dans le MÊME commit que public/admin/config.yml. Tout amendement de charte
+va dans .claude/rules/tailwind-design-tokens.md dans le même commit que son
+implémentation.
+
+Termine par le prompt de lancement de la session suivante, en annexe du plan
+du chantier concerné et reproduit intégralement dans ton message final - la
+règle de continuité est dans CLAUDE.md parce qu'elle a été manquée deux fois.
+````
