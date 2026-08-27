@@ -24,6 +24,15 @@ const { projet } = Astro.props;
 const { titre, ouvrage, secteur, lieu, annee, annee_livraison, reference, synthese, performance, planche, demo } = projet.data;
 const { Content } = await render(projet);
 
+// A13 — fondu croisé du visuel qui voyage, sur la courbe unique (mêmes
+// valeurs que dans CarteProjet, les deux côtés du nom le portent).
+const COURBE_UNIQUE = 'cubic-bezier(0.2, 0.7, 0.2, 1)';
+const fonduVisuel = {
+  old: { name: 'vt-fondu-sortant', duration: '350ms', easing: COURBE_UNIQUE, fillMode: 'both' },
+  new: { name: 'vt-fondu-entrant', duration: '350ms', easing: COURBE_UNIQUE, fillMode: 'both' },
+};
+const animVisuel = { forwards: fonduVisuel, backwards: fonduVisuel };
+
 // Chronologie publique (ADR-003) — `annee` et `reference` ne servent plus
 // qu'au tri et au JSON-LD ci-dessous : ils ne sont plus affichés.
 const jalons = libelleChronologie(projet);
@@ -127,8 +136,10 @@ const jsonLd = {
     <div class="max-w-[1200px] mx-auto px-4 md:px-6">
       {/* A13 : même nom de transition que la boîte de vignette des cartes
           (CarteProjet) — en navigation carte -> fiche, le visuel voyage de
-          la carte au cadre de la planche. */}
-      <div transition:name={`planche-${projet.id}`}>
+          la carte au cadre de la planche. Le transition:animate impose la
+          courbe unique au fondu croisé de la paire (mêmes valeurs que dans
+          CarteProjet — sans lui, Astro applique sa courbe par défaut). */}
+      <div transition:name={`planche-${projet.id}`} transition:animate={animVisuel}>
         <PlancheReference src={planche} id={`planche-${projet.id}`} />
       </div>
     </div>

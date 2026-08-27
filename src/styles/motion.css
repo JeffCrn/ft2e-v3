@@ -121,6 +121,14 @@ html.js-plans [data-plan-groupe].plan-immediat > * {
   }
 }
 
+/* Fondu croisé des paires nommées (le visuel qui voyage) : sans
+   translation — le déplacement est porté par le groupe, pas par la paire. */
+@keyframes vt-fondu-entrant {
+  from {
+    opacity: 0;
+  }
+}
+
 ::view-transition-group(*) {
   animation-duration: 350ms;
   animation-timing-function: var(--ease-blueprint);

@@ -19,6 +19,17 @@ interface Props {
 const { projet } = Astro.props;
 const { lieu, demo, planche } = projet.data;
 
+// A13 — le fondu croisé du visuel qui voyage : sans lui, Astro anime la
+// paire nommée avec SA courbe par défaut (cubic-bezier(0.76, 0, 0.24, 1),
+// 180 ms), et la charte n'a qu'une courbe. Même objet dans la fiche
+// (references/[...slug].astro) : les deux côtés du nom le portent.
+const COURBE_UNIQUE = 'cubic-bezier(0.2, 0.7, 0.2, 1)';
+const fonduVisuel = {
+  old: { name: 'vt-fondu-sortant', duration: '350ms', easing: COURBE_UNIQUE, fillMode: 'both' },
+  new: { name: 'vt-fondu-entrant', duration: '350ms', easing: COURBE_UNIQUE, fillMode: 'both' },
+};
+const animVisuel = { forwards: fonduVisuel, backwards: fonduVisuel };
+
 // Le titre de carte est le titre COURT — celui de la planche. Le titre long
 // du frontmatter répète ici le lieu que le pied affiche juste dessous, et
 // monte à quatre lignes de capitales dans une carte de 276 px.
@@ -53,6 +64,7 @@ const cartouche = `${commune(lieu).libelle} · ${libelleChronologie(projet)}`;
   <div
     class="relative shrink-0 border-b border-filet-3 bg-papier overflow-hidden"
     transition:name={`planche-${projet.id}`}
+    transition:animate={animVisuel}
   >
     <PlancheReference src={planche} variante="vignette" />
     {demo && (
