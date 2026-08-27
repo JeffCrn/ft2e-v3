@@ -44,9 +44,13 @@ if (!photoHero) {
 }
 
 // Relevé clair : étiquette mono + chiffre, un seul chiffre plein par
-// relevé — celui que la page défend (17 ans, depuis 2008).
+// relevé — celui que la page défend (17 ans, depuis 2008). La valeur
+// numérique et le préfixe accompagnent la chaîne composée : le compteur
+// A14 recompose le nombre à chaque pas avec le même toLocaleString.
 const releves = CHIFFRES_CLES.map((c, i) => ({
   chiffre: `${'prefixe' in c ? c.prefixe : ''}${c.valeur.toLocaleString('fr-FR')}`,
+  valeur: c.valeur,
+  prefixe: 'prefixe' in c ? c.prefixe : '',
   etiquette: [c.suffixe, c.label].filter(Boolean).join(' '),
   plein: i === 0,
   demo: c.demo,
@@ -168,7 +172,7 @@ const partenaires = [
           <div class="plan-pose mt-8" data-plan>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-filet-2">
               {releves.map((r) => (
-                <div class="bg-papier p-6 flex flex-col">
+                <div class="group bg-papier p-6 flex flex-col transition-colors duration-300 ease-[var(--ease-blueprint)] hover:bg-calcaire">
                   <p class="mono-label text-pivot">— {r.etiquette}</p>
                   {/* ⚠ Borne basse à 1,9 rem et non 2,5. Mesuré à 390 px le
                       2026-08-16 : « +1 686 » fait 148 px dans une colonne
@@ -180,13 +184,19 @@ const partenaires = [
                       plutôt que la taille des chiffres, l'alternative étant
                       une colonne unique qui allongeait la section de 216 px.
                       Au-delà de 555 px de fenêtre, rien ne change. */}
+                  {/* A14 : le chiffre se compte une fois à l'entrée dans la
+                      vue (span animé aria-hidden, valeur finale au HTML et
+                      en sr-only), et le survol de la cellule monte le
+                      chiffre d'un rang de la rampe — encre → profond pour
+                      le plein, pivot → encre pour les retraits. */}
                   <p
                     class:list={[
-                      'releve-chiffre mt-3 text-[clamp(1.9rem,4.5vw,3.75rem)]',
-                      r.plein ? 'text-encre' : 'releve-retrait',
+                      'releve-chiffre mt-3 text-[clamp(1.9rem,4.5vw,3.75rem)] transition-colors duration-[260ms] ease-[var(--ease-blueprint)]',
+                      r.plein ? 'text-encre group-hover:text-profond' : 'releve-retrait group-hover:text-encre',
                     ]}
                   >
-                    {r.chiffre}
+                    <span data-compteur data-valeur={r.valeur} data-prefixe={r.prefixe} aria-hidden="true">{r.chiffre}</span>
+                    <span class="sr-only">{r.chiffre}</span>
                   </p>
                 </div>
               ))}
@@ -375,3 +385,72 @@ const partenaires = [
 
   <CtaFinal />
 </PageLayout>
+
+<script>
+  /* Compteur du relevé — amendement A14 (2026-08-27), l'UNIQUE compteur du
+     site : la charte les interdit, FT2E a arbitré cette seule exception.
+     Une fois par chargement, 900 ms, courbe unique — résolue numériquement,
+     CSS ne sait pas conduire un nombre. La valeur finale vit dans le HTML
+     (repli sans JS) et en sr-only (le lecteur d'écran n'entend jamais le
+     décompte : le span animé est aria-hidden). Aucun décalage de mise en
+     page : le chiffre est tabulaire dans une cellule de grille à largeur
+     fixe. Règle 9 : astro:page-load + guard dataset.bound. */
+  function initCompteurs() {
+    const compteurs = document.querySelectorAll<HTMLElement>('[data-compteur]');
+    if (!compteurs.length) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    /* La courbe unique cubic-bezier(0.2, 0.7, 0.2, 1), évaluée par
+       bissection sur x(t) — douze itérations suffisent largement à
+       l'écran. */
+    const x = (t: number) => 3 * t * (1 - t) * (1 - t) * 0.2 + 3 * t * t * (1 - t) * 0.2 + t * t * t;
+    const y = (t: number) => 3 * t * (1 - t) * (1 - t) * 0.7 + 3 * t * t * (1 - t) * 1 + t * t * t;
+    const courbe = (u: number) => {
+      let bas = 0;
+      let haut = 1;
+      let t = u;
+      for (let i = 0; i < 12; i++) {
+        if (x(t) < u) bas = t;
+        else haut = t;
+        t = (bas + haut) / 2;
+      }
+      return y(t);
+    };
+
+    const DUREE = 900;
+
+    const anime = (el: HTMLElement) => {
+      const cible = Number(el.dataset.valeur ?? '0');
+      const prefixe = el.dataset.prefixe ?? '';
+      const debut = performance.now();
+      const pas = (maintenant: number) => {
+        const u = Math.min((maintenant - debut) / DUREE, 1);
+        const v = Math.round(courbe(u) * cible);
+        el.textContent = `${prefixe}${v.toLocaleString('fr-FR')}`;
+        if (u < 1) requestAnimationFrame(pas);
+      };
+      requestAnimationFrame(pas);
+    };
+
+    const io = new IntersectionObserver(
+      (entries, observer) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            anime(entry.target as HTMLElement);
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    compteurs.forEach((el) => {
+      if (el.dataset.bound) return;
+      el.dataset.bound = '1';
+      io.observe(el);
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCompteurs);
+</script>
