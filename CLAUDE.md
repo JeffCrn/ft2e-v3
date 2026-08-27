@@ -288,6 +288,7 @@ lui : sa place est ici.
 | **Migration vers `ft2e.fr` (revert SEO inclus)** | **`docs/19-migration-production.md`** |
 | Faits vérifiés issus de la plaquette 2024 (références réelles, chiffres, qualifications) | `docs/20-source-plaquette-2024.md` |
 | **Chantier des 23 fiches références réelles** (programme, protocole, suivi) | **`docs/superpowers/plans/2026-08-07-chantier-references-reelles.md`** |
+| **Chantier des 27 NOUVELLES fiches références — OUVERT le 2026-08-27** (23 → 50, 1 session = 1 dossier, pipeline et prompt d'initialisation en annexe A ; les archives sont fournies par l'utilisateur, l'ancien fonds étant supprimé) | **`docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md`** |
 | **Planches de références — protocole de production** | **`docs/superpowers/specs/2026-08-12-planches-references-protocole.md`** |
 | **Planches de références — bilan de clôture et points ouverts** | **`docs/superpowers/plans/2026-08-12-chantier-planches-references.md`** |
 | **Réduction de dette — ⚠ EN PAUSE depuis le 2026-08-17**, au profit d'un chantier additif. S1 à S8 faites et recettées ; ce qui reste ouvert est récapitulé dans `docs/23-etat-de-l-art.md`, et le prompt de reprise est en annexe H du plan | **`docs/superpowers/plans/2026-08-16-reduction-dette.md`** |

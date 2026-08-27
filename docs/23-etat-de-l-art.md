@@ -234,3 +234,36 @@ Ils coûtent tous une demi-session à qui les redécouvre.
    (46 pages), `python scripts/controle-liens-internes.py` (0 lien mort), contrôle du
    **rendu** de toute page touchée à sa largeur de lecture. Si la session ne touche pas
    `src/`, le dire plutôt que de laisser croire à une recette non jouée.
+
+
+---
+
+# Remis à jour le 2026-08-27 — addendum (l'état ci-dessus reste celui du 2026-08-17)
+
+Ce qui a changé depuis, en renvois — le détail vit dans les plans :
+
+- **Chantier MOTION : arbitré, implémenté, mesuré, déployé le 2026-08-27**
+  (amendements A11-A14 au registre de la charte ; LCP médian 1 705 ms, TBT
+  0-100, CLS 0, a11y 96/D1). Restent : l'arbitrage de l'option 0 (filet de
+  flux, TraceFlux débranché), la validation FT2E en situation, l'écoute NVDA.
+  → `docs/superpowers/plans/2026-08-27-chantier-motion.md` (§ 6-7, annexes B-C).
+- **/references** : deux navigations de filtre (rail + barre textuelle
+  synchronisées par valeur), alignement par rangée d'en-tête partagée,
+  remontée à l'ancre au filtrage hors de vue, correctif de la révélation
+  (seuil au bord, jamais relatif — § 7 du plan motion).
+  → § 10-12 de `docs/superpowers/plans/2026-08-17-chantier-bloc-secteurs.md`.
+- **Taxonomie** : « Industriel », « Coordination SSI » en 5, et le secteur 6
+  est « **Monotechnique — Audit** » depuis le 2026-08-27 (BREAKING `3a24cdf`).
+- **Bloc secteurs** : restent les 17 correspondances de clichés à légender
+  puis le gel du film, les validations FT2E (liste au § 9 du plan
+  bloc-secteurs), le passage NVDA humain.
+- **Decap** : blocage OAuth inchangé (`docs/22-prise-en-main-decap.md` § 0,
+  trois gestes hors dépôt, ajournés en connaissance de cause).
+- **NOUVEAU CHANTIER ouvert le 2026-08-27 : 27 nouvelles fiches références**
+  (23 → 50), une session = un dossier, archives fournies par l'utilisateur
+  (l'ancien fonds est supprimé). Pipeline, écarts aux protocoles fondateurs
+  et prompt d'initialisation :
+  → **`docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md`**.
+- Le prompt opératoire de la reprise des chantiers accueil/motion reste
+  l'annexe B du plan motion, lue avec ses compléments (annexe C, § 11-12 du
+  plan bloc-secteurs).
