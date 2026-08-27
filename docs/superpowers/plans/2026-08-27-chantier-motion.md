@@ -467,3 +467,32 @@ tels quels dans son ÉTAT et ses PIÈGES :
 - **PIÈGE, à ajouter** : quand deux jeux de contrôles partagent un même
   `data-filtre`, l'état actif se pose par VALEUR, jamais sur le seul bouton
   cliqué — c'est déjà le cas dans `initFiltres`, ne pas le « simplifier ».
+
+
+## 7. Correctif du 2026-08-27 soir — la cascade invisible au téléphone
+
+Bogue signalé par FT2E sur `/references` au téléphone : les cartes ne
+s'affichaient jamais au chargement, seulement après un clic sur un filtre.
+
+Cause mesurée : `initPlans` observait avec `threshold: 0.15` — un seuil
+RELATIF, qui exige que 15 % de l'élément tiennent à l'écran d'un coup. La
+grille en une colonne fait **6 671 px** ; ses 15 % (1 001 px) dépassent tout
+viewport de téléphone : l'observateur ne tirait jamais. Le filtrage
+raccourcissait la grille sous le seuil — d'où le symptôme exact. Au bureau,
+la grille est visible au chargement (`plan-immediat`) et le chemin fautif ne
+s'exécutait pas. Le défaut était LATENT depuis la première révélation de
+plan : aucun `[data-plan]` n'avait encore été plus haut que ~6,6 fois le
+viewport ; la cascade A11, posée sur une grille de 23 cartes, l'a exposé.
+
+Correction (`BaseLayout.astro`) : **l'entrée dans la vue se mesure au BORD**
+— `threshold: 0` + `rootMargin: '0px 0px -80px 0px'` (80 px francs sous la
+ligne basse), qui ne dépend pas de la hauteur de l'élément. Contrôlé au
+navigateur à 520 px : révélation dès que le haut de la grille franchit les
+80 px, cascade 0→400 ms intacte, et les six cibles de l'accueil se révèlent
+toutes au fil du parcours. ⚠ Piège de contrôle rencontré en route : le
+preview sert le HTML en 304 — après un rebuild, toute sonde se recharge avec
+un cache-buster, sinon elle mesure l'ancien script inline.
+
+Règle à retenir : **un seuil d'IntersectionObserver en pourcentage est un
+plafond de hauteur déguisé** — pour un déclenchement « à l'entrée dans la
+vue », c'est le bord qui se mesure, jamais une fraction.

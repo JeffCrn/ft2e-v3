@@ -141,6 +141,14 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
 
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        /* ⚠ Seuil 0, jamais un pourcentage : un seuil relatif ne se déclenche
+           QUE si cette fraction de l'élément tient à l'écran d'un coup. Mesuré
+           le 2026-08-27 sur /references au téléphone : la grille en une
+           colonne fait 6 671 px, ses 15 % (1 001 px) dépassent tout viewport
+           — les cartes ne se révélaient jamais (elles n'apparaissaient qu'au
+           filtrage, qui raccourcit la grille sous le seuil). L'entrée dans la
+           vue se mesure au BORD (80 px francs sous la ligne basse), qui ne
+           dépend pas de la hauteur de l'élément. */
         const io = new IntersectionObserver(
           (entries, observer) => {
             for (const entry of entries) {
@@ -150,7 +158,7 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
               }
             }
           },
-          { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+          { threshold: 0, rootMargin: '0px 0px -80px 0px' }
         );
 
         plans.forEach((el) => {
