@@ -439,7 +439,7 @@ du chantier et reproduit integralement dans ton message final - la regle
 de continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
 ````
 
-## Annexe C — prompt de lancement de la session N03 (à coller tel quel en session neuve)
+## Annexe C — prompt de lancement de la session N03 (à coller tel quel en session neuve — récrit le 2026-08-27 au soir : la règle d'indexation sectorielle est ancrée à la rédaction de fiche)
 
 ````
 Session N03/27 - FT2E v3 : chantier des 27 nouvelles fiches references.
@@ -456,10 +456,8 @@ close par le prompt de la suivante.
 LIRE D'ABORD, dans cet ordre :
 1. docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md -
    LE PLAN : § 1 (ce qui a change), § 2 (pipeline 12 etapes), § 3
-   (reponses consignees + COMPLEMENT N02 : le classeur REFERENCES SITE
-   FT2E.ods, dans references/docs_references/, fait foi pour le SECTEUR
-   de chaque fiche et le millesime de livraison), § Suivi (lignes N01,
-   N02), annexe C (ce prompt).
+   (reponses consignees + COMPLEMENT N02 : le classeur de references
+   FT2E), § Suivi (lignes N01, N02), annexe C (ce prompt).
 2. docs/superpowers/plans/2026-08-07-chantier-references-reelles.md -
    § Contraintes globales + § Protocole de session.
 3. docs/superpowers/specs/2026-08-12-planches-references-protocole.md -
@@ -469,10 +467,42 @@ Etalons : src/content/projets/creche-oranger-perigny.md (fiche) et, pour
 une session N complete, src/content/projets/pole-commercial-fors.md +
 public/images/projets/pole-commercial-fors/ + references/ref_025/.
 
+REGLE D'INDEXATION SECTORIELLE - etablie le 2026-08-27, A APPLIQUER A
+LA REDACTION DE CHAQUE FICHE (etape 6 du pipeline), pas apres coup :
+« REFERENCES SITE FT2E.ods » (references/docs_references/, classeur
+fourni par FT2E) FAIT FOI pour le classement sectoriel. Concretement,
+AVANT d'ecrire le frontmatter :
+1. Ouvrir le classeur (python zipfile sur content.xml, ou pandoc) et y
+   retrouver l'affaire PAR SON NUMERO (graphie sans tiret : « 19036 »).
+2. En relever le domaine (legende : L Logements / T Tertiaire & ERP /
+   I Industriel / P Patrimoine / C Coordination SSI /
+   M Monotechnique-Audit / E EXE) -> champ `secteur`.
+3. Si le classeur porte un domaine DOUBLE (« T § C ») : le premier est
+   le `secteur`, le second va au champ `secteur_secondaire` (optionnel
+   au schema depuis le 2026-08-27, garde-fou « doit differer ») - la
+   fiche parait alors dans les deux filtres et sur les deux pages de
+   secteur. Precedent : hotel-yachtman (T § C).
+4. JAMAIS de deduction depuis le dossier, l'usage RT ou le nom de
+   l'operation : la N02 penchait « Industriel » pour Fors, le classeur
+   dit T - et les 25 fiches ont du etre re-referencees le soir meme
+   (7 bascules, commits ce334b2/09270a3). Le classeur peut contredire
+   l'intuition (Saint-Rogatien, pole commercial : I ; Fors, pole
+   commercial : T) - il gagne.
+5. CONSIGNER la lecture dans la fiche de collecte (ligne « Secteur » :
+   citer l'entree du classeur telle quelle) ; si l'affaire est ABSENTE
+   du classeur ou son domaine illisible -> question B a FT2E et choix
+   provisoire argumente, jamais silencieux.
+6. EN RECETTE (etape 10) : verifier sur le deploiement que la fiche
+   repond au(x) bon(s) filtre(s) de /references (compteurs de chips)
+   et parait sur sa ou ses pages /secteurs/<slug> - sonde precedente :
+   references/ref_025/sonde-filtres.mjs. Repartition attendue AVANT la
+   N03 : L7 T9 I2 P1 C3 M2 E2 pour 25 fiches (Yachtman compte double).
+
 DOSSIER DU JOUR : « 19-036 -150 logts Rompsay MEDIATIM » (208 fichiers),
 dans C:\claude_code_dev_projects\ft2e_new_archives\2025.zip (tranche des
-livraisons 2025 - liste au § 3 du plan ; le classeur FT2E le donne
-« 150 Logts Rompsay Mediatim - AURORA », secteur L, Finalisees en 2025).
+livraisons 2025 - liste au § 3 du plan ; le classeur donne « 19036 ·
+150 Logts Rompsay Mediatim - AURORA · L », Finalisees en 2025 ->
+secteur Logements, pas de domaine double, annee_livraison 2025).
 ATTENTION DISQUE SATURE (~1,2 Go libres) : supprimer d'abord le
 repertoire extrait de la session precedente
 (ft2e_new_archives/2025/21-062 - Pole commercial FORS 79 - BTB) - le
@@ -498,11 +528,7 @@ est le meme groupe que exe-residence-horizon-mediatim (25-097) - lien
 interne naturel ; etablir la chaine contractuelle exacte (contrat
 direct promoteur ? groupement ?) sur pieces.
 
-CE QUE LA N02 A ETABLI (verifiable au depot) :
-- Le classeur REFERENCES SITE FT2E.ods (references/docs_references/)
-  fait foi pour le SECTEUR (legende L/T/I/P/C/M/E) et le millesime de
-  livraison. Il a fait basculer Fors en Tertiaire / ERP contre le
-  depouillement. Le lire AVANT de choisir secteur et annee_livraison.
+CE QUE LES N01-N02 ONT ETABLI (verifiable au depot) :
 - annee_livraison se pose sur le cadrage de tranche + classeur
   (« Finalisees en 2025 ») ; le PV de reception manque souvent ->
   question B1, statut livre.
@@ -529,11 +555,14 @@ numero NN-NNN sur piece FT2E (gare aux numeros des cotraitants : BF ECO
 « 533 » en N02, « 542 » en N01) -> references/ref_026/ (3 a 8 pieces) ->
 croisement commercial (references/docs_references/ - docx sectoriels ET
 classeur ODS - + docs/20-source-plaquette-2024.md) -> fiche de collecte
-(A/A+ remplies, B-E en questions) -> fiche src/content/projets/<slug>.md
-(taxonomie ACTUELLE ; lieu avec code postal entre parentheses ;
-synthese 480-780 posee par script ; >= 5 liens internes ; jamais de
-numero d'affaire NI de millesime d'ouverture en prose) -> PLANCHE
-complete (extraction avec a_valider_ft2e non vide, composition par
+(A/A+ remplies, B-E en questions, ligne Secteur citant le classeur) ->
+fiche src/content/projets/<slug>.md (SECTEUR ET EVENTUEL
+SECTEUR_SECONDAIRE RELEVES AU CLASSEUR - regle d'indexation
+sectorielle ci-dessus, points 1 a 5 ; taxonomie ACTUELLE ; lieu avec
+code postal entre parentheses ; synthese 480-780 posee par script ;
+>= 5 liens internes ; jamais de numero d'affaire NI de millesime
+d'ouverture en prose) -> PLANCHE complete (extraction avec
+a_valider_ft2e non vide, composition par
 scripts/planches/<archetype>.py, controles a 1152 / carte 274-296 /
 appui 552, PNG 2400x1600, apostrophes-planches.py, verser.py) ->
 qualite (typecheck 0, build vert 49 pages, editorial-reviewer,
@@ -543,10 +572,12 @@ fiche+planche+compositeur (content(references): ajoute la fiche reelle
 <nom> ; git ls-remote avant, depot partage) -> push (le push deploie),
 curl de la fiche AVEC barre oblique finale + marqueur de build, rendu
 controle aux trois bandes (sonde iframe pour les largeurs telephone,
-script pret : references/ref_024/sonde-fiche.mjs) -> ligne de suivi au
-plan -> PROMPT DE LA SESSION N04 en annexe du plan (script Python ou
-Write, jamais un long heredoc bash) et reproduit integralement dans le
-message final.
+script pret : references/ref_024/sonde-fiche.mjs) ET CONTROLE DE
+L'INDEXATION SECTORIELLE (point 6 de la regle : filtres de /references
+et page(s) de secteur, sonde references/ref_025/sonde-filtres.mjs) ->
+ligne de suivi au plan -> PROMPT DE LA SESSION N04 en annexe du plan
+(script Python ou Write, jamais un long heredoc bash) et reproduit
+integralement dans le message final.
 
 PIEGES VERIFIES EN N01-N02 (en plus de ceux des annexes A et B, tous
 confirmes) :
@@ -584,5 +615,7 @@ commit que public/admin/config.yml.
 Termine par le prompt de lancement de la session N04, en annexe du plan
 du chantier et reproduit integralement dans ton message final - la
 regle de continuite est dans CLAUDE.md parce qu'elle a ete manquee deux
-fois.
+fois. Le prompt N04 REPREND le bloc « REGLE D'INDEXATION SECTORIELLE »
+ci-dessus tel quel (repartition attendue remise a jour) : la regle est
+permanente, elle ne se resume pas.
 ````
