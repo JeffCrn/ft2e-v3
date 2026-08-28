@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la mise en sécurité incendie : deux familles de détection — 46 détecteurs radio sur piles avec huit déclencheurs manuels radio, et 38 détecteurs filaires avec onze déclencheurs — convergent vers une centrale adressable de catégorie A à équipement d’alarme de type 1. Le bâtiment ne forme qu’une seule zone d’alarme : toute détection commande simultanément l’alarme générale à 90 dB, la remise en lumière des salles que la scénographie tamise, l’arrêt de la sonorisation et l’arrêt des centrales de traitement d’air. L’alarme se reporte à l’accueil et au bâtiment DAC, avec renvoi vers un poste de télésurveillance.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · MISE EN SÉCURITÉ INCENDIE</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Maison de Pierre Loti</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Mettre en sécurité un musée classé sans toucher à ses décors</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA DÉTECTION · 15 ZONES · DE LA CAVE AUX COMBLES</text>
+  <text x="1144.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LA MISE EN SÉCURITÉ · UNE SEULE ZONE D’ALARME</text>
+  <rect x="250.00" y="268.00" width="300.00" height="155.52" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="266.00" y="292.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">46 DÉTECTEURS · 8 DÉCLENCHEURS</text>
+  <text x="266.00" y="315.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Détection radio</text>
+  <text x="266.00" y="336.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SUR PILES · 6 INTERFACES RADIO</text>
+  <text x="266.00" y="350.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SANS SAIGNÉE DANS LES DÉCORS</text>
+  <rect x="250.00" y="435.52" width="300.00" height="128.48" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="266.00" y="459.52" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">38 DÉTECTEURS · 11 DÉCLENCHEURS</text>
+  <text x="266.00" y="482.52" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Détection filaire</text>
+  <text x="266.00" y="503.52" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PAR LES CHEMINEMENTS EXISTANTS</text>
+  <text x="56.00" y="418.76" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UNE FUMÉE EST DÉTECTÉE</text>
+  <text x="56.00" y="432.76" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">— N’IMPORTE OÙ</text>
+  <rect x="232.00" y="424.26" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <path d="M 239.00 427.76 L 242.00 427.76" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 242.00 345.76 L 242.00 499.76" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 242.00 345.76 L 250.00 345.76" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 242.00 499.76 L 250.00 499.76" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <rect x="620.00" y="368.00" width="230.00" height="96.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="636.00" y="409.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">ECS + CMSI catégorie A</text>
+  <text x="636.00" y="427.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ADRESSABLE POINT PAR POINT</text>
+  <text x="636.00" y="440.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ALARME DE TYPE 1</text>
+  <path d="M 550.00 345.76 L 585.00 345.76 L 585.00 416.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 550.00 499.76 L 585.00 499.76 L 585.00 416.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 585.00 416.00 L 611.00 416.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 620.00 416.00 L 611.00 411.50 L 611.00 420.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="900.00" y="268.00" width="244.00" height="65.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="901.00" y="269.00" width="242.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <text x="916.00" y="298.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Alarme générale</text>
+  <text x="916.00" y="318.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">90 dB · EN TOUS POINTS</text>
+  <rect x="900.00" y="345.00" width="244.00" height="65.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="916.00" y="375.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Remise en lumière</text>
+  <text x="916.00" y="395.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">LES SALLES TAMISÉES RALLUMÉES</text>
+  <rect x="900.00" y="422.00" width="244.00" height="65.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="916.00" y="452.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Arrêt de la sonorisation</text>
+  <text x="916.00" y="472.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">LE PARCOURS SONORE SE TAIT</text>
+  <rect x="900.00" y="499.00" width="244.00" height="65.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="916.00" y="529.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Arrêt des centrales d’air</text>
+  <text x="916.00" y="549.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">LE TRAITEMENT D’AIR S’ARRÊTE</text>
+  <path d="M 850.00 416.00 L 875.00 416.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 875.00 300.50 L 875.00 531.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 875.00 300.50 L 891.00 300.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 900.00 300.50 L 891.00 296.00 L 891.00 305.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 875.00 377.50 L 891.00 377.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 900.00 377.50 L 891.00 373.00 L 891.00 382.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 875.00 454.50 L 891.00 454.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 900.00 454.50 L 891.00 450.00 L 891.00 459.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 875.00 531.50 L 891.00 531.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 900.00 531.50 L 891.00 527.00 L 891.00 536.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="56.00" y="660.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">REPORT D’ALARME À L’ACCUEIL ET AU BÂTIMENT DAC · RENVOI VERS UN PC DE TÉLÉSURVEILLANCE</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Toute détection rend la lumière, tait la sonorisation, arrête l’air et sonne l’alarme dans tout le musée.</text>
+  <rect x="56.00" y="714.00" width="258.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">ROCHEFORT · 1 200 m² · 2025</text>
+</svg>

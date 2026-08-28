@@ -1193,6 +1193,381 @@ def composer_appui_partage(donnees):
         bas="mentions d’étanchéité à y 322, marge basse 46 px")
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+# Mécanisme `inversion` — Maison de Pierre Loti, Rochefort (2026-08-28)
+#
+# Même archétype (détection et mise en sécurité), démonstration inverse de
+# celle de Sablonceaux : là-bas la géométrie montrait qu'une seule zone évacue
+# quand les autres ne bougent pas ; ici elle montre que TOUT s'exécute sur
+# toute détection — le musée ne forme qu'une seule zone d'alarme, et le
+# déclenchement commande quatre gestes simultanés (alarme générale, remise en
+# lumière, arrêt de la sonorisation, arrêt des CTA) : la mise en sécurité
+# inverse la scénographie. La géométrie porte la thèse deux fois : les hauteurs
+# des deux familles de détection sont proportionnelles à leurs effectifs
+# (46 radio / 38 filaire — la radio majoritaire, qui épargne les décors
+# classés), et les QUATRE départs de la centrale sont encrés et fléchés, contre
+# l'unique départ encré du mécanisme par défaut. Le dispatch se fait sur le
+# bloc de l'extraction (`inversion` contre `zonage`), comme les deux autres.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# ── Rythme de la planche `inversion` ─────────────────────────────────────────
+I_Y_ENTETE = 190                    # les deux en-têtes de registre
+I_Y0 = 268                          # haut des piles — centré entre en-têtes et report
+I_H_PILE = 296                      # hauteur commune des deux piles
+I_ECART = 12
+I_F_X0, I_F_X1 = 250, 550           # la pile des familles de détection
+I_B_X0, I_B_W = 620, 230            # la boîte ECS + CMSI
+I_A_X0, I_A_X1 = 900, 1144          # la pile des gestes de mise en sécurité
+I_COUDE_X = 585                     # le coude des collecteurs familles → boîte
+I_TRONC_X = 875                     # le tronc des départs boîte → gestes
+I_H_BOITE = 96
+I_Y_REPORT = 660
+I_Y_PHRASE = 688
+I_Y_CARTOUCHE = 714
+I_H_CARTOUCHE = 30
+
+
+def _hauteurs_familles(familles, h_totale, ecart):
+    """Hauteurs proportionnelles aux effectifs de détecteurs — la géométrie
+    code la proportion (46/38), jamais réglée à l'œil."""
+    valeurs = [float(f["valeur"]) for f in familles]
+    dispo = h_totale - ecart * (len(familles) - 1)
+    return [dispo * v / sum(valeurs) for v in valeurs]
+
+
+def composer_inversion(donnees):
+    inv = donnees["inversion"]
+    familles = inv["familles"]
+    actions = inv["actions"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── Les deux en-têtes de registre — ce qui empêche la planche de mentir ──
+    controler("en-tête détection", inv["entete_detection"], 10, "mono",
+              680, 10 * 0.14)
+    A(texte(MARGE, I_Y_ENTETE, inv["entete_detection"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("en-tête mise en sécurité", inv["entete_actions"], 10, "mono",
+              I_A_X1 - MARGE - 680, 10 * 0.14)
+    A(texte(I_A_X1, I_Y_ENTETE, inv["entete_actions"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── La pile des familles, hauteurs proportionnelles aux effectifs ────────
+    hauteurs = _hauteurs_familles(familles, I_H_PILE, I_ECART)
+    centres_familles = []
+    y = I_Y0
+    for f, h in zip(familles, hauteurs):
+        A(rect_bord(I_F_X0, y, I_F_X1 - I_F_X0, h, "calcaire", "filet-1"))
+        controler(f'tag {f["cle"]}', f["tag"], 10, "mono",
+                  I_F_X1 - I_F_X0 - 28, 10 * 0.14)
+        A(texte(I_F_X0 + PAD, y + 24, f["tag"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14, tabulaire=True))
+        A(texte(I_F_X0 + PAD, y + 47, f["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        for k, l in enumerate(f["detail"]):
+            controler(f'détail {f["cle"]} l.{k + 1}', l, 10, "mono",
+                      I_F_X1 - I_F_X0 - 28, 10 * 0.14)
+            A(texte(I_F_X0 + PAD, y + 68 + k * 14, l, "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+        centres_familles.append(y + h / 2)
+        y += h + I_ECART
+
+    # ── L'événement : deux lignes mono, la marque carrée, la fourche ─────────
+    cy_evt = sum(centres_familles) / len(centres_familles)
+    for k, l in enumerate(inv["evenement"]):
+        controler(f"événement l.{k + 1}", l, 10, "mono",
+                  I_F_X0 - 28 - MARGE, 10 * 0.14)
+        A(texte(MARGE, cy_evt - 4 + k * 14, l, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+    A(rect(I_F_X0 - 18, cy_evt - 3.5 + 5, 7, 7, "encre"))
+    x_fourche = I_F_X0 - 8
+    A(ligne(I_F_X0 - 11, cy_evt + 5, x_fourche, cy_evt + 5, "encre", 1.0))
+    A(ligne(x_fourche, centres_familles[0], x_fourche, centres_familles[-1],
+            "encre", 1.0))
+    for c in centres_familles:
+        A(ligne(x_fourche, c, I_F_X0, c, "encre", 1.0))
+
+    # ── La boîte ECS + CMSI, centrée sur la pile ─────────────────────────────
+    cy_boite = I_Y0 + I_H_PILE / 2
+    y_boite = cy_boite - I_H_BOITE / 2
+    sys_ = inv["systeme"]
+    A(rect_bord(I_B_X0, y_boite, I_B_W, I_H_BOITE, "papier", "filet-1"))
+    n = len(sys_["detail"])
+    base = cy_boite - (n * 13 + 4) / 2 + 8
+    controler("libellé système", sys_["libelle"], 15, "sans-600",
+              I_B_W - 2 * PAD)
+    A(texte(I_B_X0 + PAD, base, sys_["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    for k, l in enumerate(sys_["detail"]):
+        controler(f"détail système l.{k + 1}", l, 10, "mono",
+                  I_B_W - 2 * PAD, 10 * 0.14)
+        A(texte(I_B_X0 + PAD, base + 18 + k * 13, l, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # ── Les collecteurs : chaque famille rejoint la boîte, encrée, fléchée ───
+    for c in centres_familles:
+        A(polyligne([(I_F_X1, c), (I_COUDE_X, c), (I_COUDE_X, cy_boite)],
+                    "encre", 1.5))
+    A(ligne(I_COUDE_X, cy_boite, I_B_X0 - 9, cy_boite, "encre", 1.5))
+    A(fleche(I_B_X0, cy_boite, "encre"))
+
+    # ── La pile des gestes : TOUS les départs sont encrés et fléchés ─────────
+    n_a = len(actions)
+    h_a = (I_H_PILE - (n_a - 1) * I_ECART) / n_a
+    centres_actions = []
+    y = I_Y0
+    for a_ in actions:
+        A(rect_bord(I_A_X0, y, I_A_X1 - I_A_X0, h_a, "calcaire", "filet-1"))
+        if a_.get("alarme"):
+            A(rect(I_A_X0 + 1, y + 1, I_A_X1 - I_A_X0 - 2, H_BARRE, "clair"))
+        controler(f'libellé {a_["cle"]}', a_["libelle"], 15, "sans-600",
+                  I_A_X1 - I_A_X0 - 28)
+        A(texte(I_A_X0 + PAD, y + 30, a_["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        if a_.get("detail"):
+            controler(f'détail {a_["cle"]}', a_["detail"], 10, "mono",
+                      I_A_X1 - I_A_X0 - 28, 10 * 0.14)
+            A(texte(I_A_X0 + PAD, y + 50, a_["detail"], "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14, tabulaire=True))
+        centres_actions.append(y + h_a / 2)
+        y += h_a + I_ECART
+
+    A(ligne(I_B_X0 + I_B_W, cy_boite, I_TRONC_X, cy_boite, "encre", 1.5))
+    A(ligne(I_TRONC_X, centres_actions[0], I_TRONC_X, centres_actions[-1],
+            "encre", 1.5))
+    for c in centres_actions:
+        A(ligne(I_TRONC_X, c, I_A_X0 - 9, c, "encre", 1.5))
+        A(fleche(I_A_X0, c, "encre"))
+
+    # ── Le report : une ligne, pas un bloc ───────────────────────────────────
+    controler("report", inv["report"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, I_Y_REPORT, inv["report"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    controler("phrase de principe", donnees["phrase_principe"], 17,
+              "sans-400", UTILE)
+    A(texte(MARGE, I_Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, I_Y_CARTOUCHE, largeur, I_H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, I_Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    ratio = " / ".join(f'{f["valeur"]}' for f in familles)
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"{len(familles)} familles de détection aux hauteurs "
+                         f"proportionnelles ({ratio} : "
+                         f"{hauteurs[0]:.0f} px / {hauteurs[1]:.0f} px) "
+                         f"convergent vers la centrale, et les {n_a} départs "
+                         f"de mise en sécurité sont TOUS encrés et fléchés — "
+                         f"contre l’unique barre d’alarme claire : tout "
+                         f"s’exécute sur toute détection",
+        "topologie": f"événement (x {MARGE}) → familles (x {I_F_X0}–{I_F_X1}) "
+                     f"→ centrale (x {I_B_X0}–{I_B_X0 + I_B_W}) → gestes "
+                     f"(x {I_A_X0}–{I_A_X1}) ; coude des collecteurs à "
+                     f"x {I_COUDE_X}, tronc des départs à x {I_TRONC_X}",
+        "bas_du_dessin": f"piles jusqu’à {I_Y0 + I_H_PILE} px, report à "
+                         f"{I_Y_REPORT}, phrase de principe à {I_Y_PHRASE}, "
+                         f"cartouche {I_Y_CARTOUCHE}–"
+                         f"{I_Y_CARTOUCHE + I_H_CARTOUCHE}, marge basse "
+                         f"{H - (I_Y_CARTOUCHE + I_H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {I_H_CARTOUCHE} px = "
+                            f"{largeur * I_H_CARTOUCHE} px², soit "
+                            f"{largeur * I_H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_inversion(donnees):
+    """La vignette : le motif sans son appareil — les deux familles aux
+    hauteurs proportionnelles, la flèche, la pile des quatre gestes avec la
+    barre d'alarme. Ce qu'elle laisse : l'événement, la centrale, le report
+    et tous les détails — six blocs annotés dans 300 px ne se liraient pas."""
+    inv = donnees["inversion"]
+    familles = inv["familles"]
+    actions = inv["actions"]
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre"))
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    y0, y1 = 48, VH - 24                              # 48..176
+    h_pile = y1 - y0
+    f_x0, f_x1 = V_MARGE, 98                          # familles
+    a_x0, a_x1 = 164, VW - V_MARGE                    # gestes
+
+    # Les familles, hauteurs proportionnelles.
+    hauteurs = _hauteurs_familles(familles, h_pile, 6)
+    y = y0
+    for f, h in zip(familles, hauteurs):
+        A(rect_bord(f_x0, y, f_x1 - f_x0, h, "calcaire", "filet-1"))
+        cy = y + h / 2
+        A(texte(f_x0 + 8, cy - 1, f.get("libelle_vignette", f["libelle"]),
+                "sans", 12, 600, "encre", wdth=112))
+        A(texte(f_x0 + 8, cy + 15, f["valeur"], "mono", 10, 500, "pivot",
+                tabulaire=True))
+        y += h + 6
+
+    # La flèche du principe.
+    fy = (y0 + y1) / 2
+    A(ligne(f_x1 + 10, fy, a_x0 - 16, fy, "encre", 1.5))
+    A(fleche(a_x0 - 8, fy, "encre", "droite", 8))
+
+    # La pile des gestes, la barre claire sur l'alarme.
+    n = len(actions)
+    ecart = 6
+    h_bloc = (h_pile - (n - 1) * ecart) / n
+    for i, a_ in enumerate(actions):
+        ya = y0 + i * (h_bloc + ecart)
+        A(rect_bord(a_x0, ya, a_x1 - a_x0, h_bloc, "calcaire", "filet-1"))
+        if a_.get("alarme"):
+            A(rect(a_x0 + 1, ya + 1, a_x1 - a_x0 - 2, 5, "clair"))
+        A(texte(a_x0 + 8, ya + h_bloc / 2 + 4 + (2 if a_.get("alarme") else 0),
+                a_.get("libelle_vignette", a_["libelle"]), "sans", 12, 600,
+                "encre", wdth=112))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": f"{len(familles)} familles aux hauteurs proportionnelles "
+                 f"({familles[0]['valeur']}/{familles[1]['valeur']}) contre "
+                 f"{n} gestes, la barre claire sur l’alarme — événement, "
+                 f"centrale et report laissés à la planche",
+        "bas_du_dessin": f"{y1} px, marge basse {VH - y1} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_inversion(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, densité intermédiaire.
+
+    Ce qu'il garde : les deux familles avec leurs effectifs, la centrale
+    (libellé court), les quatre gestes tous fléchés, la barre et les 90 dB
+    sur l'alarme. Ce qu'il laisse : l'événement, les détails des familles et
+    le report — ils vivent sur la planche."""
+    inv = donnees["inversion"]
+    familles = inv["familles"]
+    actions = inv["actions"]
+    sys_ = inv["systeme"]
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1", "filet-2", "filet-3", "encre"))
+
+    y0, y1 = 76, 336
+    h_pile = y1 - y0
+    f_x0, f_x1 = A_MARGE, 174
+    b_x0, b_w = 204, 140
+    a_x0, a_x1 = 380, AW - A_MARGE
+
+    # Les familles, hauteurs proportionnelles, effectifs en mono.
+    hauteurs = _hauteurs_familles(familles, h_pile, 12)
+    centres = []
+    y = y0
+    for f, h in zip(familles, hauteurs):
+        A(rect_bord(f_x0, y, f_x1 - f_x0, h, "calcaire", "filet-1"))
+        cy = y + h / 2
+        A(texte(f_x0 + 12, cy - 4, f["libelle"], "sans", 14, 600,
+                "encre", wdth=112))
+        A(texte(f_x0 + 12, cy + 14,
+                f'{f["valeur"]}{NN}{f["unite"].upper()}', "mono", 10, 500,
+                "pivot", tabulaire=True))
+        centres.append(cy)
+        y += h + 12
+
+    # La centrale, centrée, et ses collecteurs.
+    cy_boite = (y0 + y1) / 2
+    y_boite = cy_boite - 38
+    A(rect_bord(b_x0, y_boite, b_w, 76, "papier", "filet-1"))
+    base = cy_boite - 8
+    A(texte(b_x0 + 12, base, sys_.get("libelle_appui", sys_["libelle"]),
+            "sans", 14, 600, "encre", wdth=112))
+    for k, l in enumerate(sys_.get("detail_appui", [])):
+        A(texte(b_x0 + 12, base + 16 + k * 13, l, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+    coude = (f_x1 + b_x0) / 2
+    for c in centres:
+        A(polyligne([(f_x1, c), (coude, c), (coude, cy_boite)], "encre", 1.5))
+    A(ligne(coude, cy_boite, b_x0 - 8, cy_boite, "encre", 1.5))
+    A(fleche(b_x0, cy_boite, "encre", "droite", 8))
+
+    # Les gestes : quatre départs, tous fléchés, la barre sur l'alarme.
+    n = len(actions)
+    h_a = (h_pile - (n - 1) * 10) / n
+    tronc = (b_x0 + b_w + a_x0) / 2
+    A(ligne(b_x0 + b_w, cy_boite, tronc, cy_boite, "encre", 1.5))
+    centres_a = [y0 + i * (h_a + 10) + h_a / 2 for i in range(n)]
+    A(ligne(tronc, centres_a[0], tronc, centres_a[-1], "encre", 1.5))
+    for i, a_ in enumerate(actions):
+        ya = y0 + i * (h_a + 10)
+        A(rect_bord(a_x0, ya, a_x1 - a_x0, h_a, "calcaire", "filet-1"))
+        if a_.get("alarme"):
+            A(rect(a_x0 + 1, ya + 1, a_x1 - a_x0 - 2, 7, "clair"))
+        A(texte(a_x0 + 12, ya + h_a / 2 + (0 if a_.get("alarme") else 4),
+                a_.get("libelle_vignette", a_["libelle"]), "sans", 13, 600,
+                "encre", wdth=112))
+        if a_.get("alarme"):
+            A(texte(a_x0 + 12, ya + h_a / 2 + 16, "90" + NN + "dB", "mono",
+                    10, 500, "pivot", tabulaire=True))
+        A(ligne(tronc, centres_a[i], a_x0 - 8, centres_a[i], "encre", 1.5))
+        A(fleche(a_x0, centres_a[i], "encre", "droite", 8))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"les {len(familles)} familles aux hauteurs proportionnelles "
+              f"({familles[0]['valeur']}/{familles[1]['valeur']}, effectifs "
+              "en mono), la centrale au libellé court, et les "
+              f"{n} gestes TOUS fléchés avec la barre claire et les 90 dB "
+              "sur l’alarme — événement, détails des familles et report "
+              "laissés à la planche",
+        bas=f"piles jusqu’à {y1} px, marge basse {AH - y1} px")
+
+
 if __name__ == "__main__":
     import json as _json
     import sys
@@ -1205,5 +1580,8 @@ if __name__ == "__main__":
     elif "partage" in _d:
         executer(composer_partage, composer_vignette_partage,
                  composer_appui_partage)
+    elif "inversion" in _d:
+        executer(composer_inversion, composer_vignette_inversion,
+                 composer_appui_inversion)
     else:
         executer(composer, composer_vignette, composer_appui)

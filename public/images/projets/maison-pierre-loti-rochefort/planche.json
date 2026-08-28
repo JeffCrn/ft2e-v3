@@ -1,0 +1,167 @@
+{
+  "fiche": "maison-pierre-loti-rochefort",
+  "archetype": "zonage-ssi",
+  "archetype_motif": "La thèse de la fiche est la mise en sécurité : un musée classé couvert en entier par un SSI de catégorie A dont la détection est mi-filaire mi-radio pour épargner les décors, et dont le déclenchement inverse la scénographie — la lumière revient, la sonorisation se tait, l’air s’arrête, l’alarme sonne partout. Le schéma suit ce mécanisme : deux familles de détection convergent vers une centrale unique, qui commande quatre gestes simultanés sur une seule zone d’alarme. À l’inverse du zonage de Sablonceaux (une zone évacue, les autres ne bougent pas), la démonstration est ici que TOUT s’exécute sur toute détection — les quatre départs sont fléchés. La géométrie porte la thèse deux fois : les hauteurs des familles sont proportionnelles à 46/38 (la radio majoritaire), et les quatre départs encrés contre l’unique barre d’alarme claire disent la simultanéité.",
+  "mecanisme": "inversion",
+  "surtitre": "SCHÉMA DE PRINCIPE · MISE EN SÉCURITÉ INCENDIE",
+  "titre": "Maison de Pierre Loti",
+  "sous_titre": "Mettre en sécurité un musée classé sans toucher à ses décors",
+  "cartouche_legende": "ROCHEFORT · 1 200 m² · 2025",
+  "aria_label": "Schéma de principe de la mise en sécurité incendie : deux familles de détection — 46 détecteurs radio sur piles avec huit déclencheurs manuels radio, et 38 détecteurs filaires avec onze déclencheurs — convergent vers une centrale adressable de catégorie A à équipement d’alarme de type 1. Le bâtiment ne forme qu’une seule zone d’alarme : toute détection commande simultanément l’alarme générale à 90 dB, la remise en lumière des salles que la scénographie tamise, l’arrêt de la sonorisation et l’arrêt des centrales de traitement d’air. L’alarme se reporte à l’accueil et au bâtiment DAC, avec renvoi vers un poste de télésurveillance.",
+  "inversion": {
+    "entete_detection": "LA DÉTECTION · 15 ZONES · DE LA CAVE AUX COMBLES",
+    "entete_actions": "LA MISE EN SÉCURITÉ · UNE SEULE ZONE D’ALARME",
+    "evenement": [
+      "UNE FUMÉE EST DÉTECTÉE",
+      "— N’IMPORTE OÙ"
+    ],
+    "familles": [
+      {
+        "cle": "radio",
+        "ordre": 1,
+        "tag": "46 DÉTECTEURS · 8 DÉCLENCHEURS",
+        "libelle": "Détection radio",
+        "libelle_vignette": "Radio",
+        "valeur": "46",
+        "unite": "détecteurs",
+        "detail": [
+          "SUR PILES · 6 INTERFACES RADIO",
+          "SANS SAIGNÉE DANS LES DÉCORS"
+        ]
+      },
+      {
+        "cle": "filaire",
+        "ordre": 2,
+        "tag": "38 DÉTECTEURS · 11 DÉCLENCHEURS",
+        "libelle": "Détection filaire",
+        "libelle_vignette": "Filaire",
+        "valeur": "38",
+        "unite": "détecteurs",
+        "detail": [
+          "PAR LES CHEMINEMENTS EXISTANTS"
+        ]
+      }
+    ],
+    "systeme": {
+      "libelle": "ECS + CMSI catégorie A",
+      "libelle_appui": "ECS + CMSI",
+      "detail": [
+        "ADRESSABLE POINT PAR POINT",
+        "ALARME DE TYPE 1"
+      ],
+      "detail_appui": [
+        "CATÉGORIE A",
+        "ALARME TYPE 1"
+      ]
+    },
+    "actions": [
+      {
+        "cle": "alarme",
+        "ordre": 1,
+        "libelle": "Alarme générale",
+        "libelle_vignette": "Alarme générale",
+        "detail": "90 dB · EN TOUS POINTS",
+        "alarme": true
+      },
+      {
+        "cle": "lumiere",
+        "ordre": 2,
+        "libelle": "Remise en lumière",
+        "libelle_vignette": "Remise en lumière",
+        "detail": "LES SALLES TAMISÉES RALLUMÉES",
+        "alarme": false
+      },
+      {
+        "cle": "sonorisation",
+        "ordre": 3,
+        "libelle": "Arrêt de la sonorisation",
+        "libelle_vignette": "Arrêt sonorisation",
+        "detail": "LE PARCOURS SONORE SE TAIT",
+        "alarme": false
+      },
+      {
+        "cle": "cta",
+        "ordre": 4,
+        "libelle": "Arrêt des centrales d’air",
+        "libelle_vignette": "Arrêt des CTA",
+        "detail": "LE TRAITEMENT D’AIR S’ARRÊTE",
+        "alarme": false
+      }
+    ],
+    "report": "REPORT D’ALARME À L’ACCUEIL ET AU BÂTIMENT DAC · RENVOI VERS UN PC DE TÉLÉSURVEILLANCE"
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Toute détection rend la lumière, tait la sonorisation, arrête l’air et sonne l’alarme dans tout le musée.",
+  "vignette_surtitre": "MISE EN SÉCURITÉ",
+  "a_valider_ft2e": [
+    {
+      "objet": "Les effectifs des deux familles de détection",
+      "la_source_affirme": "Le rapport de mise en service définitive du 01/09/2025 compte 46 détecteurs radio, 38 détecteurs filaires, 8 déclencheurs radio et 11 filaires, tous testés ; le devis de fourniture de janvier 2025 portait 43 radio, 41 filaires et 7 déclencheurs radio.",
+      "le_dessin_suppose": "Que l’as-built testé fait foi : le dessin retient 46/38 et 8/11. Confirmer que la mise en service reflète bien l’installation réceptionnée."
+    },
+    {
+      "objet": "Le ratio des hauteurs des deux familles",
+      "la_source_affirme": "46 détecteurs radio et 38 filaires, plus 8 et 11 déclencheurs manuels.",
+      "le_dessin_suppose": "Des hauteurs proportionnelles aux seuls DÉTECTEURS (46/38), déclencheurs exclus du ratio — les inclure resserrerait la proportion (54/49). Dire si le ratio doit les compter."
+    },
+    {
+      "objet": "La surface du cartouche",
+      "la_source_affirme": "1 200 m² aux deux docx commerciaux (Réf. SSI et Réf. Patrimoine) ; aucune pièce du dossier d’affaires ne la recoupe.",
+      "le_dessin_suppose": "Que la surface commerciale est publiable au cartouche — question B2 de la collecte."
+    },
+    {
+      "objet": "Le niveau sonore de l’alarme",
+      "la_source_affirme": "Le PV des essais écrit « temporisation par diffuseurs sonores 90dB » et « audible sur l’ensemble du bâtiment » ; la fiche technique des diffuseurs installés annonce 97 dB à 1 m.",
+      "le_dessin_suppose": "Que la valeur du PV d’essais (90 dB) fait foi sur celle du catalogue. Trancher si le catalogue doit primer."
+    },
+    {
+      "objet": "Le libellé « bâtiment DAC » du report",
+      "la_source_affirme": "« Un report d’alarme est prévu au niveau de l’accueil et du bâtiment DAC » — le sigle n’est développé nulle part au dossier.",
+      "le_dessin_suppose": "Que le sigle se reprend tel quel. Donner l’intitulé en clair si FT2E souhaite qu’il paraisse."
+    },
+    {
+      "objet": "L’ordre des quatre gestes de mise en sécurité",
+      "la_source_affirme": "Le tableau de corrélation donne les sous-fonctions en colonnes (remise en lumière, arrêt sonorisation, arrêt CTA) sans hiérarchie, l’alarme générale étant portée à part.",
+      "le_dessin_suppose": "Un empilement alarme → lumière → sonorisation → CTA, du geste le plus audible au plus discret. N’importe quel ordre ferait la même démonstration."
+    },
+    {
+      "objet": "Millésime du cartouche",
+      "la_source_affirme": "Avis favorable à la réception du SSI le 21/10/2025 ; classeur FT2E « Finalisées en 2025 ».",
+      "le_dessin_suppose": "Que le cartouche porte 2025, millésime de la réception — même arbitrage que les planches précédentes."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 25-004 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Montants : honoraires FT2E 12 300 € HT, travaux SSI 48 200 € HT au docx commercial.",
+    "Noms de tiers : la maîtrise d’ouvrage, l’AMO, le mandataire de la maîtrise d’œuvre et l’ACMH, le BET d’origine, les entreprises des lots, le fournisseur du matériel SSI, les personnes présentes aux essais.",
+    "Le déroulé de la reprise de mission (cessation d’activité du BET d’origine, avancement 80-90 %, cinq mois de chantier restants) — matière du récit, pas du mécanisme.",
+    "Le dimensionnement salle par salle de la détection (alvéoles de la salle Renaissance, cantons du salon turc, allées de la mosquée) et les noms des salles — la fiche les porte ; le dessin ne reproduit aucune géométrie d’ouvrage.",
+    "Le détail des 15 zones (10 ZDA + 5 ZDM, une zone de compartimentage sans DAS, désenfumage sans objet) et les jalons de réception (essais des 23/06 et 07/07/2025, trois réserves levées le 20/10, avis favorable du 21/10) — portés par la fiche et le dossier d’identité.",
+    "La peinture du matériel aux teintes des salles et le classement ERP (types Y, L et M, cinquième catégorie) — la fiche les porte.",
+    "Toute géométrie d’ouvrage : ni plan, ni façade, ni parcours de visite — les familles et les gestes sont des blocs topologiques."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "2 familles de détection aux hauteurs proportionnelles (46 / 38 : 156 px / 128 px) convergent vers la centrale, et les 4 départs de mise en sécurité sont TOUS encrés et fléchés — contre l’unique barre d’alarme claire : tout s’exécute sur toute détection",
+    "topologie": "événement (x 56) → familles (x 250–550) → centrale (x 620–850) → gestes (x 900–1144) ; coude des collecteurs à x 585, tronc des départs à x 875",
+    "bas_du_dessin": "piles jusqu’à 564 px, report à 660, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 258 x 30 px = 7740 px², soit 0.81 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "2 familles aux hauteurs proportionnelles (46/38) contre 4 gestes, la barre claire sur l’alarme — événement, centrale et report laissés à la planche",
+    "bas_du_dessin": "176 px, marge basse 24 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les 2 familles aux hauteurs proportionnelles (46/38, effectifs en mono), la centrale au libellé court, et les 4 gestes TOUS fléchés avec la barre claire et les 90 dB sur l’alarme — événement, détails des familles et report laissés à la planche",
+    "bas_du_dessin": "piles jusqu’à 336 px, marge basse 32 px"
+  }
+}

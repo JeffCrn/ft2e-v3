@@ -226,6 +226,7 @@ est public). Il complète les réponses Q1/Q2 :
 | N01 | 22-011 — Réhabilitation de la mairie et création de l'office de tourisme, Les Portes-en-Ré | `mairie-les-portes-en-re` | ✅ rédigée, build 47 pages | ✅ `boucle-fluide`, **mécanisme `terminaux` créé** (8ᵉ du compositeur — invariant octet des 7 planches existantes vérifié avant/après ; une 1ʳᵉ planche `chronologie/relais` a été refusée par FT2E — voir l'arbitrage au § 1 — et le mécanisme retiré) | ✅ ref_024 (8 pièces) | `annee_livraison: 2025` sur docx commercial « RÉALISATION : 2025 » + cadrage tranche — PV de réception absent (→ B1) ; questions B1-B4, C1-C2, E1-E2 ouvertes ; Eric Moinet vérificateur des CCTP (T6) ; secteur Tertiaire / ERP |
 | N02 | 21-062 — Construction d'un pôle commercial et requalification des espaces urbains et paysagers, Fors | `pole-commercial-fors` | ✅ rédigée, build 48 pages | ✅ `sankey-energie`, **mécanisme `partage` créé** (5ᵉ du compositeur — invariant octet des 4 planches sankey existantes vérifié avant/après la greffe, 16/16 deux fois) — l'année d'énergie de l'étude d'autoconsommation collective (36 kWc), en-tête de registre nommant l'étude | ✅ ref_025 (8 pièces) | `annee_livraison: 2025` (cadrage tranche + classeur FT2E « Finalisées en 2025 ») ; secteur `Tertiaire / ERP` par le classeur (≠ dépouillement qui penchait `Industriel`) ; mission MOE photovoltaïque séparée (21-062PV, DCE 04/2025, travaux prévus sept.-oct. 2025 → B2) ; questions B1-B5, C1-C2, E1-E3 ouvertes ; auteurs relevés (T6) : Mathieu Braud, Vincent Jaoul, Sandrine Rameau, Tanguy Moinet, Eric Moinet |
 | N03 | 19-036 — Résidence Aurora, 147 logements dans le quartier de Rompsay, La Rochelle | `residence-aurora-la-rochelle` | ✅ rédigée, build 49 pages | ✅ `coupe-traversee`, **mécanisme `colonne` créé** (5ᵉ du compositeur — invariant octet des 4 planches existantes vérifié avant/après la greffe puis après la passe apostrophes, 16/16 trois fois) — le conduit collectif 3CEp confronté à la ventouse individuelle, trois gabarits proportionnels aux débits Promotelec (12/14/16 L/min) | ✅ ref_026 (8 pièces) | `annee_livraison: 2025` (classeur « Finalisées en 2025 » + cadrage tranche ; CR MOE 132 du 16/07/2025 en « bonne fin de travaux », GPA — PV de réception absent → B1) ; secteur `Logements` par le classeur (« 19036 · 150 Logts Rompsay Mediatim - AURORA · L ») ; MOA SARL Opus, commanditaire Mediatim Promotion (contrat direct promoteur — même groupe que Horizon 25-097) ; compte de logements élucidé sur pièces : 150 (propo 2019) → 148 (études 2021) → 147 (marché déc. 2022) — la légende du hero « Aurora, 147 logements » était déjà juste, aucune retouche ; T1 en chauffe-eau électrique 100 L (§ 3.3), compteur gaz par logement (§ 5.1) ; mission de base sans DET ni AOR (suivi OTEEC) + AMO label Promotelec (−20 % A-B-D-E-F-G / −10 % C) + 2 reprises thermiques (gain 20 % 2021, Alkern/ECBL 2023) ≠ docx « mission complète » → B2 ; questions B1-B6, C1-C3, E1-E3 ouvertes ; /secteurs/logements n'affiche que les 4 affaires les plus récentes du secteur — 19-036 hors du top 4, comportement de gabarit |
+| N04 | 25-004 — Maison de Pierre Loti, reprise des lots techniques et coordination SSI, Rochefort | `maison-pierre-loti-rochefort` | ✅ rédigée, build 50 pages | ✅ `zonage-ssi`, **mécanisme `inversion` créé** (4ᵉ du compositeur — invariant octet des 3 planches existantes rejoué avant la greffe, après la greffe et après la passe apostrophes : 12/12 trois fois ; la passe a courbé 8 apostrophes droites fuies dans les chaînes de contrôles du compositeur, piège N03 reconfirmé) — deux familles de détection aux hauteurs proportionnelles (46 radio / 38 filaire) convergent vers l’ECS-CMSI, quatre départs de mise en sécurité TOUS fléchés : la mise en sécurité inverse la scénographie | ✅ ref_027 (8 pièces) | **Premier double domaine de la tranche** : `Patrimoine` + `secteur_secondaire: Coordination SSI` par le classeur (« 25004 · Maison pierre Loti · P § C ») ; `annee_livraison: 2025` sur PV de réception SSI du 21/10/2025 (avis favorable, V. Jaoul) + classeur — le PV de réception des TRAVAUX manque → B1 ; mission de REPRISE : cessation d’activité du BET CIEL Ingénierie, lots à 80-90 %, FT2E sous-traitant de Sunmetron par acte spécial DC4 (marché MOE Ville de Rochefort n° 2019/030) — conception et visas restés à l’équipe d’origine ; les docx commerciaux disent « Livraison 2026 » et « type E », les pièces 2025 et « type Y, L et M, 5ᵉ catégorie » → B3/B4, la pièce fait foi ; SSI catégorie A / alarme type 1 sur ERP 5ᵉ catégorie, détection 46 radio / 38 filaire (as-built Chubb 01/09/2025), 15 zones, une seule ZA, sous-fonctions remise en lumière / arrêt sonorisation / arrêt CTA ; § Loti de `secteurs/patrimoine.md` RÉÉCRIT sur pièces (plancher chauffant et BIM non sourcés retirés, lien vers la fiche) ; questions B1-B6, C1-C2, E1-E4 ouvertes |
 
 ## Annexe A — prompt d'initialisation de la session N01 (à coller tel quel en session neuve)
 
@@ -827,4 +828,227 @@ deux fois. Le prompt N05 REPREND le bloc « REGLE D'INDEXATION
 SECTORIELLE » ci-dessus tel quel (repartition attendue remise a jour :
 apres la N04, P2 et C4 si le double domaine se confirme) : la regle
 est permanente, elle ne se resume pas.
+````
+
+## Annexe E — prompt de lancement de la session N05 (à coller tel quel en session neuve)
+
+````
+Session N05/27 - FT2E v3 : chantier des 27 nouvelles fiches references.
+Cinquieme dossier de la tranche « livraisons 2025 ».
+
+Contexte. FT2E v3 est le site institutionnel du bureau d'etudes FT2E
+(La Rochelle), Astro 6 statique, deploye en demonstration client sur
+https://ft2e-v3.vercel.app (indexation verrouillee - ne pas y toucher).
+Le catalogue porte 27 fiches reelles (23 + Portes-en-Re N01 + Commerces
+de Fors N02 + Residence Aurora N03 + Maison de Pierre Loti N04), chacune
+illustree d'une planche de schema de principe (cinq pieces par dossier).
+Objectif : 50 fiches. 1 session = 1 dossier, close par le prompt de la
+suivante.
+
+LIRE D'ABORD, dans cet ordre :
+1. docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md -
+   LE PLAN : § 1 (ce qui a change), § 2 (pipeline 12 etapes), § 3
+   (reponses consignees + COMPLEMENT N02 : le classeur de references
+   FT2E), § Suivi (lignes N01 a N04), annexe E (ce prompt).
+2. docs/superpowers/plans/2026-08-07-chantier-references-reelles.md -
+   § Contraintes globales + § Protocole de session.
+3. docs/superpowers/specs/2026-08-12-planches-references-protocole.md -
+   revision 5 EN ENTIER.
+4. CLAUDE.md, .claude/rules/content-collections.md et french-editorial.md.
+Etalons : src/content/projets/creche-oranger-perigny.md (fiche) et, pour
+une session N complete, src/content/projets/maison-pierre-loti-rochefort.md
++ public/images/projets/maison-pierre-loti-rochefort/ + references/ref_027/
+(premier double domaine, mission de reprise).
+
+REGLE D'INDEXATION SECTORIELLE - etablie le 2026-08-27, A APPLIQUER A
+LA REDACTION DE CHAQUE FICHE (etape 6 du pipeline), pas apres coup :
+« REFERENCES SITE FT2E.ods » (references/docs_references/, classeur
+fourni par FT2E) FAIT FOI pour le classement sectoriel. Concretement,
+AVANT d'ecrire le frontmatter :
+1. Ouvrir le classeur (python zipfile sur content.xml, ou pandoc) et y
+   retrouver l'affaire PAR SON NUMERO (graphie sans tiret : « 19096 »).
+2. En relever le domaine (legende : L Logements / T Tertiaire & ERP /
+   I Industriel / P Patrimoine / C Coordination SSI /
+   M Monotechnique-Audit / E EXE) -> champ `secteur`.
+3. Si le classeur porte un domaine DOUBLE (« T § C ») : le premier est
+   le `secteur`, le second va au champ `secteur_secondaire` (optionnel
+   au schema depuis le 2026-08-27, garde-fou « doit differer ») - la
+   fiche parait alors dans les deux filtres et sur les deux pages de
+   secteur. Precedents : hotel-yachtman (T § C), maison-pierre-loti-
+   rochefort (P § C, N04).
+4. JAMAIS de deduction depuis le dossier, l'usage RT ou le nom de
+   l'operation : la N02 penchait « Industriel » pour Fors, le classeur
+   dit T - et les 25 fiches ont du etre re-referencees le soir meme
+   (7 bascules, commits ce334b2/09270a3). Le classeur peut contredire
+   l'intuition (Saint-Rogatien, pole commercial : I ; Fors, pole
+   commercial : T ; 23083 « plan de comptage Airbus » : E et non M) -
+   il gagne.
+5. CONSIGNER la lecture dans la fiche de collecte (ligne « Secteur » :
+   citer l'entree du classeur telle quelle) ; si l'affaire est ABSENTE
+   du classeur ou son domaine illisible -> question B a FT2E et choix
+   provisoire argumente, jamais silencieux.
+6. EN RECETTE (etape 10) : verifier sur le deploiement que la fiche
+   repond au(x) bon(s) filtre(s) de /references (compteurs de chips)
+   et parait sur sa ou ses pages /secteurs/<slug> - sondes precedentes :
+   references/ref_027/sonde-filtres.mjs et sonde-fiche.mjs. ⚠ Une page
+   /secteurs/<slug> n'affiche que les 4 affaires les plus recentes du
+   secteur (tri par numero decroissant) : une affaire ancienne peut
+   legitimement n'y pas paraitre (N03 : 19-036 hors du top 4 de
+   Logements ; 19-096 sera dans le meme cas si Patrimoine depasse
+   4 affaires) - le filtre de /references, lui, montre tout.
+   Repartition attendue AVANT la N05 : L8 T9 I2 P2 C4 M2 E2 pour
+   27 fiches (Yachtman T+C et Loti P+C comptent double).
+
+DOSSIER DU JOUR : « 19-096 - Eglise St Sauveur - GOUTAL »
+(103 fichiers), dans
+C:\claude_code_dev_projects\ft2e_new_archives\2025.zip (tranche des
+livraisons 2025 - liste au § 3 du plan ; le classeur donne « 19096 ·
+Eglise St SAUVEUR · P », Finalisees en 2025 -> secteur Patrimoine, pas
+de domaine double, annee_livraison 2025 ; affaire ouverte en 2019 ->
+annee: 2019, une affaire LONGUE : ni le millesime d'ouverture ni l'axe
+2019-2025 ne montent sur la planche ni en prose).
+ATTENTION DISQUE SATURE (~1,2 Go libres avant nettoyage) : supprimer
+d'abord le repertoire extrait de la session precedente - ⚠ son nom
+(« 25-004 - Musée Pierre Loti ROCHEFORT ») est sorti de zipfile en
+MOJIBAKE cp437 : NE PAS taper le nom accentue, le resoudre par
+os.listdir puis startswith('25-004'), et supprimer par python
+shutil.rmtree (le rm -rf est refuse par les permissions). Puis
+extraire LE SEUL dossier du jour depuis le ZIP PAR PYTHON ZIPFILE
+(les motifs d'unzip ne matchent PAS les entrees de ce ZIP) -
+  python -c "import zipfile; z=zipfile.ZipFile(r'...\2025.zip');
+  z.extractall(r'...\ft2e_new_archives',
+  members=[n for n in z.namelist() if '19-096' in n])"
+Le ZIP est la source, il ne se supprime pas.
+Dossier de travail a creer : references/ref_028/
+Slug cible : a etablir au depouillement (kebab-case sans accents,
+verifier qu'il n'ecrase rien - « eglise-saint-sauveur-la-rochelle »
+pressenti).
+
+PARTICULARITES DU DOSSIER : l'entree du docx commercial
+« Réf. Réhabilitation Patrimoine.docx » porte : « Restauration du
+clocher, des cloches et du beffroi de l'eglise Saint-Sauveur - LA
+ROCHELLE (17). MOA : Ville de La Rochelle. ARCHITECTE : M. GOUTAL
+ACMH. MONTANT TRAVAUX : 1 200 000 € HT. MISSION COMPLETE DE MAITRISE
+D'ŒUVRE : Refection du systeme electrique et programmation des
+sonneries des cloches. REALISATION : 2025 » - donc mission COMPLETE
+(a l'inverse de la reprise N04), monument historique, electricite d'un
+clocher et programmation de sonneries de cloches. Etablir sur pieces
+la graphie et le role exacts de GOUTAL (ACMH), la nature de la mission
+FT2E et son numero releve sur piece FT2E (gare aux numeros des
+cotraitants). Le corpus secteurs patrimoine porte deja un cliche reel
+« Eglise Saint-Sauveur » (patrimoine/02.jpeg) ; verifier par grep
+saint-sauveur sur src/ qu'aucune prose preexistante ne raconte
+l'operation - si elle existe, la confronter aux pieces (precedent N04 :
+le § Loti de patrimoine.md portait deux affirmations non sourcees,
+reecrites sur pieces dans le meme commit). L'archetype se choisit sur
+la THESE (une refection electrique + sonneries peut appeler
+tableau-electrique, 3 planches seulement - mais seulement si la these
+est bien la distribution), jamais sur le secteur.
+
+CE QUE LES N01-N04 ONT ETABLI (verifiable au depot) :
+- annee_livraison se pose sur le cadrage de tranche + classeur
+  (« Finalisees en 2025 ») ; le PV de reception des travaux manque
+  souvent -> question B1, statut livre. N04 : un PV de reception SSI
+  (21/10/2025) peut asseoir la livraison meme sans PV des travaux.
+- Archetypes apres N04 : boucle-fluide 8 - coupe-traversee 5 -
+  sankey 5 - zonage-ssi 4 (inversion, Loti) - tableau 3 -
+  chronologie 2 - planche-chiffree 0 SANS module. VARIER -
+  l'archetype se choisit sur la THESE de la fiche, jamais sur le
+  secteur.
+- Un mecanisme nouveau s'ecrit DANS le compositeur d'archetype
+  (constantes prefixees), et l'invariant octet des planches existantes
+  du meme compositeur se rejoue AVANT et APRES la greffe, dans une
+  copie hors depot, ET APRES la passe apostrophes-planches.py (N04 :
+  12/12 trois fois ; la passe a ENCORE modifie le compositeur - 8
+  apostrophes droites fuies dans les chaines de controles : les ecrire
+  COURBES des l'ecriture du mecanisme).
+- ARBITRAGE FT2E (N01) : la planche schematise la SOLUTION APPORTEE,
+  jamais le deroule de l'affaire. Mecanisme d'INGENIERIE, pas un recit.
+- Quand la planche porte les valeurs d'une ETUDE ou d'un as-built d'un
+  tiers, l'EN-TETE DE REGISTRE ou a_valider_ft2e le nomme (N02 :
+  l'etude 36 kWc ; N04 : l'as-built de mise en service 46/38 contre le
+  devis 43/41). Toute valeur du dessin doit rester citable dans la
+  fiche : completer la fiche plutot que d'arrondir le dessin.
+- N03 : chercher l'EXCEPTION du systeme decrit avant d'ecrire
+  « chaque » ou « tous » (les T1 d'Aurora ; en N04 le « un point par
+  zone » du PV d'essais etait dementi par sa propre liste - 16 points
+  sur 14 zones : la fiche ecrit « a travers les zones »).
+- N04 : les docx commerciaux peuvent contredire les pieces (« Livraison
+  2026 » et « type E » aux docx ; PV et CCTP disent 2025 et « type Y,
+  L et M ») - la piece fait foi, l'ecart va en question B.
+
+DEROULER LE PIPELINE § 2 INTEGRALEMENT : depouillement -> releve du
+numero NN-NNN sur piece FT2E (gare aux numeros des cotraitants) ->
+references/ref_028/ (3 a 8 pieces) -> croisement commercial
+(references/docs_references/ - docx sectoriels ET classeur ODS - +
+docs/20-source-plaquette-2024.md) -> fiche de collecte (A/A+
+remplies, B-E en questions, ligne Secteur citant le classeur) -> fiche
+src/content/projets/<slug>.md (SECTEUR Patrimoine RELEVE AU CLASSEUR -
+regle d'indexation sectorielle ci-dessus, points 1 a 5 ; taxonomie
+ACTUELLE ; lieu avec code postal entre parentheses ; synthese 480-780
+posee par script ; >= 5 liens internes ; jamais de numero d'affaire NI
+de millesime d'ouverture en prose - 19-096 est ouverte en 2019, seule
+la livraison 2025 se publie) -> PLANCHE complete (extraction avec
+a_valider_ft2e non vide, composition par
+scripts/planches/<archetype>.py, controles a 1152 / carte 274-296 /
+appui 552, PNG 2400x1600, apostrophes-planches.py, verser.py) ->
+qualite (typecheck 0, build vert 51 pages, editorial-reviewer,
+controle-liens-internes 28/28 a 5, controle-numeros-affaire 0 fuite,
+releve-numeral sans ecart nouveau) -> COMMIT UNIQUE
+fiche+planche+compositeur (content(references): ajoute la fiche reelle
+<nom> ; git ls-remote avant, depot partage) -> push (le push deploie),
+curl de la fiche AVEC barre oblique finale + marqueur de build, rendu
+controle aux trois bandes (sonde iframe pour les largeurs telephone,
+script pret : references/ref_027/sonde-fiche.mjs, URL a adapter) ET
+CONTROLE DE L'INDEXATION SECTORIELLE (point 6 : filtre Patrimoine de
+/references et page /secteurs/patrimoine, sonde
+references/ref_027/sonde-filtres.mjs) -> ligne de suivi au plan ->
+PROMPT DE LA SESSION N06 en annexe du plan (script Python ou Write,
+jamais un long heredoc) et reproduit integralement dans le message
+final.
+
+PIEGES VERIFIES EN N01-N04 (en plus de ceux des annexes A et B, tous
+confirmes) :
+- Un heredoc long se fait TRONQUER ou refuser silencieusement - bash
+  COMME python (revecu en N04 sur un python << EOF de 100 lignes) :
+  gros fichiers et scripts par l'outil Write PUIS execution, avec
+  CONTROLE DE PRESENCE des insecables apres coup (seuils calibres sur
+  le texte lui-meme : compter les emplois nombre-unite du texte et
+  exiger l'egalite, N04). Un planche.json s'ecrit par script Python
+  avec fines et apostrophes construites par chr(8239)/chr(8217).
+- injection-typographique.py ne connait pas l'unite « A » (ampere) :
+  poser la fine par remplacement cible apres coup si besoin.
+- Le corpus ecrit ESPACE SIMPLE devant un nom compte (« 61 modules »,
+  « 46 detecteurs ») MAIS la fine devant les unites : en cas de doute
+  sur un mot-unite, MESURER le corpus avant de « corriger ».
+- cairosvg : la copie de controle perd <style> ET l'attribut style de
+  la racine (regex avec espace OPTIONNELLE avant style=) ; filets
+  8 chiffres a fusionner (#00393A38 -> #C1CFD0, #00393A29 -> #CFDADB,
+  #00393A1F -> #D9E2E3) ; U+2192 et Δ (U+0394) sortent en tofu au
+  controle cairosvg mais rendent au navigateur (precedents Tourtet,
+  Aurora).
+- PYTHONIOENCODING=utf-8 sur cette machine ; le hook Stop commite et
+  pousse SEUL ce qui traine (⚠ livrables/ porte deux fichiers non
+  suivis anterieurs a la N02) ; /references/ est gitignore (motif
+  ancre) - les pieces sources n'entrent JAMAIS au depot ; npm run
+  preview ne mesure pas la performance ; Chrome refuse les fenetres
+  sous 500 px (sonde iframe).
+- La planche n'expose NI le millesime d'ouverture, NI montant, NI
+  tiers ; tout arbitrage de dessin va dans a_valider_ft2e (jamais
+  vide).
+- verser.py repond « deja verse » quand `planche:` est ecrit
+  directement au frontmatter (fiche neuve) : ses controles 1-3 (cinq
+  pieces, extraction, SVG) ont TOURNE avant ce message - c'est un
+  succes, pas un refus.
+
+Portee de commit : content(references). Un changement de schema Zod
+eventuel passe par le sous-agent content-modeller et va dans le MEME
+commit que public/admin/config.yml.
+
+Termine par le prompt de lancement de la session N06, en annexe du
+plan du chantier et reproduit integralement dans ton message final -
+la regle de continuite est dans CLAUDE.md parce qu'elle a ete manquee
+deux fois. Le prompt N06 REPREND le bloc « REGLE D'INDEXATION
+SECTORIELLE » ci-dessus tel quel (repartition attendue remise a jour :
+apres la N05, P3) : la regle est permanente, elle ne se resume pas.
 ````
