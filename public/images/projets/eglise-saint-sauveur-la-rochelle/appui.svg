@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la distribution électrique du clocher : depuis le tableau général existant de la sacristie, deux liaisons de 25 mm² montent par le comble de la nef jusqu’à deux tableaux divisionnaires implantés dans la salle des cloches — service et mise en valeur, 5 kVA, et mécanisme campanaire, 3 kVA, qui alimente cinq moteurs de volée et cinq de tintement, l’aval revenant au lot campanaire. La commande des sonneries monte aussi : programmable depuis la sacristie, synchronisée sur l’heure légale par une antenne ALS162. Chaque salle reçoit un départ d’éclairage, l’escalier un luminaire et un bloc de secours par volée, le clocher une alarme de type 4. En sens inverse, un paratonnerre à dispositif d’amorçage de niveau I, dépassant de 2 m le point le plus haut, redescend la foudre par deux conducteurs vers des prises de terre triangulées tenues sous les 10 ohms, reliées au tableau général par une liaison équipotentielle en cuivre nu de 25 mm² ; des parafoudres protègent le tableau général et les deux divisionnaires.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">DEUX FLUX CONTRAIRES</text>
+  <rect x="180.00" y="64.00" width="180.00" height="232.00" class="c-papier" fill="#F7F9FA"/>
+  <path d="M 180.00 64.00 L 360.00 64.00 L 360.00 296.00 L 180.00 296.00 L 180.00 64.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 180.00 156.00 L 360.00 156.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <path d="M 180.00 204.00 L 360.00 204.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <path d="M 180.00 252.00 L 360.00 252.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <rect x="196.00" y="96.00" width="64.00" height="36.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="228.00" y="110.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">TD-SMV</text>
+  <text x="228.00" y="126.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">5 kVA</text>
+  <rect x="199.00" y="93.00" width="5.00" height="5.00" class="c-encre" fill="#00393A"/>
+  <rect x="272.00" y="96.00" width="72.00" height="36.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="308.00" y="110.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">TD-MC</text>
+  <text x="308.00" y="126.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">3 kVA</text>
+  <rect x="275.00" y="93.00" width="5.00" height="5.00" class="c-encre" fill="#00393A"/>
+  <path d="M 308.00 96.00 L 308.00 89.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 308.00 81.00 L 304.50 88.00 L 311.50 88.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 276.00 88.00 L 336.00 88.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 276.00 88.00 L 276.00 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <rect x="272.00" y="72.00" width="8.00" height="8.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 291.00 88.00 L 291.00 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <rect x="287.00" y="72.00" width="8.00" height="8.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 306.00 88.00 L 306.00 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <rect x="302.00" y="72.00" width="8.00" height="8.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 321.00 88.00 L 321.00 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <rect x="317.00" y="72.00" width="8.00" height="8.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 336.00 88.00 L 336.00 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <rect x="332.00" y="72.00" width="8.00" height="8.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="172.00" y="80.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">5 MOTEURS DE VOLÉE</text>
+  <text x="172.00" y="94.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">5 DE TINTEMENT</text>
+  <rect x="40.00" y="306.00" width="110.00" height="40.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="95.00" y="329.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">TGBT EXISTANT</text>
+  <path d="M 150.00 314.00 L 196.00 314.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 196.00 314.00 L 196.00 118.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 196.00 116.00 L 192.50 123.00 L 199.50 123.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 150.00 322.00 L 204.00 322.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 204.00 322.00 L 204.00 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 204.00 140.00 L 308.00 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 308.00 140.00 L 308.00 134.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 308.00 133.00 L 304.50 140.00 L 311.50 140.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 240.00 132.00 L 240.00 274.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <circle cx="240.00" cy="180.00" r="3.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <circle cx="240.00" cy="228.00" r="3.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <circle cx="240.00" cy="274.00" r="3.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 270.00 48.00 L 266.00 56.00 L 274.00 56.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 270.00 53.00 L 270.00 64.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 270.00 52.00 L 396.00 52.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <path d="M 270.00 58.00 L 410.00 58.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <path d="M 396.00 52.00 L 396.00 326.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <path d="M 410.00 58.00 L 410.00 326.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <path d="M 396.00 332.00 L 392.50 325.00 L 399.50 325.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 410.00 332.00 L 406.50 325.00 L 413.50 325.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 389.00 336.00 L 403.00 336.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 392.00 340.00 L 400.00 340.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <path d="M 394.50 344.00 L 397.50 344.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 403.00 336.00 L 417.00 336.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 406.00 340.00 L 414.00 340.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1"/>
+  <path d="M 408.50 344.00 L 411.50 344.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 403.00 346.00 L 403.00 352.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 403.00 352.00 L 95.00 352.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 95.00 352.00 L 95.00 347.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="420.00" y="70.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PDA · NIVEAU I</text>
+  <text x="420.00" y="86.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">2 DESCENTES</text>
+  <text x="420.00" y="320.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">&lt; 10 Ω</text>
+</svg>

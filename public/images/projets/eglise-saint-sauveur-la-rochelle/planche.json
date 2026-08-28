@@ -1,0 +1,184 @@
+{
+  "fiche": "eglise-saint-sauveur-la-rochelle",
+  "archetype": "tableau-electrique",
+  "archetype_motif": "La thèse de la fiche est la distribution : une électricité refaite qui monte du TGBT de la sacristie jusqu’à deux tableaux divisionnaires en salle des cloches — c’est le motif arrivée → tableau → départs, avec le tableau déplacé au sommet. Le mécanisme composé ici est nouveau : `montee` — deux flux contraires sur la même verticale, l’énergie qui monte (et la commande des sonneries avec elle), la foudre qui redescend du paratonnerre vers ses prises de terre, chaque tableau verrouillé d’un parafoudre. Quatrième mécanisme du compositeur après `autoconsommation`, `franchissement` et `essaimage`.",
+  "surtitre": "SCHÉMA DE PRINCIPE · DISTRIBUTION D’UN CLOCHER CLASSÉ",
+  "titre": "Clocher Saint-Sauveur",
+  "sous_titre": "L’énergie monte de la sacristie aux cloches, la foudre redescend du sommet à la terre",
+  "cartouche_legende": "LA ROCHELLE · TOUR DE 40 m · 2025",
+  "aria_label": "Schéma de principe de la distribution électrique du clocher : depuis le tableau général existant de la sacristie, deux liaisons de 25 mm² montent par le comble de la nef jusqu’à deux tableaux divisionnaires implantés dans la salle des cloches — service et mise en valeur, 5 kVA, et mécanisme campanaire, 3 kVA, qui alimente cinq moteurs de volée et cinq de tintement, l’aval revenant au lot campanaire. La commande des sonneries monte aussi : programmable depuis la sacristie, synchronisée sur l’heure légale par une antenne ALS162. Chaque salle reçoit un départ d’éclairage, l’escalier un luminaire et un bloc de secours par volée, le clocher une alarme de type 4. En sens inverse, un paratonnerre à dispositif d’amorçage de niveau I, dépassant de 2 m le point le plus haut, redescend la foudre par deux conducteurs vers des prises de terre triangulées tenues sous les 10 ohms, reliées au tableau général par une liaison équipotentielle en cuivre nu de 25 mm² ; des parafoudres protègent le tableau général et les deux divisionnaires.",
+  "montee": {
+    "entete": "CE QUE PRESCRIVENT LES LOTS ÉLECTRICITÉ ET PARATONNERRE — CCTP D’OCTOBRE 2021",
+    "tag_montee": "L’ÉNERGIE MONTE DE LA SACRISTIE AUX CLOCHES",
+    "tag_foudre": "LA FOUDRE REDESCEND DU SOMMET À LA TERRE",
+    "niveaux": [
+      {
+        "ordre": 1,
+        "cle": "cloches",
+        "libelle": "Salle des cloches",
+        "valeur": "2",
+        "unite": "tableaux",
+        "detail": "les deux tableaux divisionnaires et les moteurs des cloches"
+      },
+      {
+        "ordre": 2,
+        "cle": "salle2",
+        "libelle": "Salle intermédiaire 2",
+        "valeur": "1",
+        "unite": "départ d’éclairage",
+        "detail": "linéaires suspendus, gradation DALI"
+      },
+      {
+        "ordre": 3,
+        "cle": "salle1",
+        "libelle": "Salle intermédiaire 1",
+        "valeur": "1",
+        "unite": "départ d’éclairage",
+        "detail": "linéaires suspendus, gradation DALI"
+      },
+      {
+        "ordre": 4,
+        "cle": "chapelle",
+        "libelle": "Chapelle des fonts baptismaux",
+        "valeur": "1",
+        "unite": "départ d’éclairage",
+        "detail": "projecteurs orientables et encastrés de sol",
+        "equipement": "PROJECTEURS ET ENCASTRÉS"
+      }
+    ],
+    "tableaux": [
+      {
+        "ordre": 1,
+        "cle": "td-smv",
+        "libelle": "TD-SMV",
+        "valeur": "5",
+        "unite": "kVA",
+        "cote": "5 kVA · 400 V",
+        "detail": "service et mise en valeur — éclairage des salles, blocs de secours, alarme, attentes de mise en valeur"
+      },
+      {
+        "ordre": 2,
+        "cle": "td-mc",
+        "libelle": "TD-MC",
+        "valeur": "3",
+        "unite": "kVA",
+        "cote": "3 kVA · 230 V",
+        "detail": "mécanisme campanaire — un disjoncteur différentiel par moteur"
+      }
+    ],
+    "moteurs": {
+      "libelle": "moteurs de cloches",
+      "valeur": "5 + 5",
+      "unite": "volée et tintement",
+      "tag": "5 MOTEURS DE VOLÉE · 5 DE TINTEMENT",
+      "mention": "L’AVAL REVIENT AU LOT CAMPANAIRE"
+    },
+    "parafoudres": {
+      "tag": "PARAFOUDRES AU TGBT ET AUX DEUX TABLEAUX",
+      "libelle": "parafoudres",
+      "valeur": "3",
+      "unite": "tableaux protégés"
+    },
+    "eclairage": {
+      "tag": "UN DÉPART D’ÉCLAIRAGE PAR SALLE"
+    },
+    "escalier": {
+      "tag": "UN LUMINAIRE ET UN BAES PAR VOLÉE"
+    },
+    "alarme": {
+      "tag": "ALARME TYPE 4 · DÉCLENCHEURS AUX PALIERS"
+    },
+    "sacristie": {
+      "libelle": "Sacristie",
+      "tgbt": [
+        "TGBT",
+        "EXISTANT"
+      ],
+      "coffret": [
+        "PILOTAGE DES",
+        "SONNERIES"
+      ]
+    },
+    "commande": {
+      "l1": "LA COMMANDE DES SONNERIES MONTE AUSSI",
+      "l2": "PROGRAMMABLE, SYNCHRONISÉE PAR ANTENNE ALS162"
+    },
+    "liaisons": {
+      "tag": "PAR LE COMBLE AU-DESSUS DE LA NEF · 2 × 5G25 mm²",
+      "libelle": "liaisons montantes",
+      "valeur": "2",
+      "unite": "câbles 5G25 mm²"
+    },
+    "foudre": {
+      "pda_l1": "PARATONNERRE À DISPOSITIF D’AMORÇAGE",
+      "pda_l2": "NIVEAU DE PROTECTION I · DÉPASSE DE 2 m LE SOMMET",
+      "descentes": "2 DESCENTES · RUBAN CUIVRE ÉTAMÉ 30 × 2 mm",
+      "compteur": "COMPTEUR DE FOUDRE SUR UNE DESCENTE",
+      "terre": "PRISES DE TERRE TRIANGULÉES · < 10 Ω",
+      "liaison": "LIAISON ÉQUIPOTENTIELLE · CUIVRE NU 25 mm² ENTERRÉ, DES PRISES DE TERRE AU TGBT",
+      "libelle": "protection foudre",
+      "valeur": "I",
+      "unite": "niveau de protection"
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "L’électricité est ici la seule ingénierie de l’ouvrage — et elle se plie à lui.",
+  "vignette_surtitre": "DEUX FLUX CONTRAIRES",
+  "a_valider_ft2e": [
+    {
+      "objet": "Le nombre de volées de l’escalier",
+      "la_source_affirme": "Le CCTP prescrit « 1 luminaire par volée sur hauteur du clocher » et un bloc de secours par volée, sans compter les volées.",
+      "le_dessin_suppose": "La bande d’escalier porte un motif répété de points, au pas régulier, qui n’est PAS un compte de volées — valider qu’il ne puisse pas être lu comme tel."
+    },
+    {
+      "objet": "Des valeurs de prescription, pas d’as-built",
+      "la_source_affirme": "Toutes les valeurs du dessin (5 et 3 kVA, 5G25 mm², 30 × 2 mm, < 10 Ω, niveau I, +2 m) viennent des CCTP PRO d’octobre 2021 — le dossier archivé ne porte pas de DOE.",
+      "le_dessin_suppose": "Que l’exécution (2022-2025) n’a pas modifié ces prescriptions. Tout écart relevé au DOE devra se répercuter ici."
+    },
+    {
+      "objet": "L’implantation des deux tableaux et le trajet des liaisons",
+      "la_source_affirme": "Le CCTP implante les deux tableaux « dans la salle des cloches » et fait cheminer les liaisons par le comble de la nef puis la salle intermédiaire 1, sans plan de détail dans les pièces retenues.",
+      "le_dessin_suppose": "Les deux tableaux côte à côte, et une montée unique le long de la tourelle d’escalier — topologie, pas implantation."
+    },
+    {
+      "objet": "Le nombre de niveaux dessinés",
+      "la_source_affirme": "Les plans FT2E découpent le clocher en chapelle, salles intermédiaires 1 et 2, et deux niveaux de cloches (EL-NIV CLOCHE 1 et 2).",
+      "le_dessin_suppose": "Une seule bande « salle des cloches » regroupant les deux niveaux hauts — le beffroi n’y est pas distingué."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 19-096 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tous les montants : enveloppe initiale de 1 200 000 € HT, coût prévisionnel APD de 1 966 332,88 € HT, forfaits et parts d’honoraires.",
+    "Tous les tiers : Ville de La Rochelle, Agence Goutal, économiste, entreprises des huit lots, marque du coffret de pilotage.",
+    "Le millésime d’ouverture (2019) et l’axe 2019-2025 de cette affaire longue — seule la livraison 2025 paraît, au cartouche.",
+    "Toute géométrie de l’édifice : la tour n’est pas dessinée, la bande de niveaux est une topologie (succession de salles), pas une silhouette."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "deux flux contraires sur la même verticale : la montée (deux liaisons de x 444 et 460, flèches vers le haut aux deux tableaux, plus la commande en pointillé x 476) contre la descente (deux conducteurs x 726 et 748, flèches vers le bas aux prises de terre) — et la boucle refermée par la liaison équipotentielle à y 648",
+    "topologie": "tour x 400–704, y 240–540, planchers à y 364, 420, 476 ; sacristie x 64–312, y 560–636 ; tableaux y 304–340, moteurs y 262–282 — bande de niveaux topologique, aucune silhouette d’édifice",
+    "escalier_non_compte": "10 points au pas de 28 px sur la bande d’escalier — un motif répété, PAS un compte de volées : le nombre de volées n’est pas une donnée du dossier (a_valider_ft2e)",
+    "signes_doubles": "chaque signe est doublé d’un texte : moteurs (tag gouttière), parafoudres (carrés pleins + tag), départs d’éclairage (cercles + tag), escalier (points + tag), alarme (tag sur le palier), foudre (cinq libellés en marge droite), liaisons (tag sous le comble), commande (deux lignes sous la tour)",
+    "reserve_profonde": "cartouche 307 x 30 px = 9210 px², soit 0.96 % de la planche",
+    "releve": "aucun — la démonstration est géométrique, les chiffres de la fiche restent à la fiche (révision 4)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "79 signes — 672 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "les deux flux contraires : la double liaison fléchée vers le haut (du TGBT aux deux tableaux, chiffrés 5 et 3 kVA), la descente foudre fléchée vers le bas jusqu’au glyphe de terre, la liaison équipotentielle qui referme la boucle — gouttière, noms de niveaux, moteurs et libellés foudre laissés à la planche",
+    "bas_du_dessin": "liaison équipotentielle à 188 — marge basse 12 px, aucun trait ne touche un bord"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier à l’échelle 1 : bande de niveaux et ses trois planchers, montée double fléchée du TGBT aux deux tableaux (TD-SMV 5 kVA, TD-MC 3 kVA), rangée campanaire 5 + 5, descente d’éclairage à un cercle par salle, deux descentes foudre vers la terre chiffrée (< 10 Ω), liaison équipotentielle refermée — gouttière, noms de niveaux, commande, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "liaison équipotentielle à 352 — marge basse 16 px",
+    "contre_flux": "flèches vers le haut aux deux tableaux (x 196, 308), flèches vers le bas aux prises de terre (x 396, 410) — le contre-flux tenu à l’échelle de l’appui"
+  }
+}

@@ -1,0 +1,34 @@
+---
+titre: "Le clocher de Saint-Sauveur à La Rochelle, restauration et remise en sonnerie"
+ouvrage: "Clocher Saint-Sauveur"
+secteur: Patrimoine
+typologie: Réhabilitation
+moa: "Ville de La Rochelle"
+architecte: "Agence Goutal — Michel Goutal, architecte en chef des monuments historiques"
+lieu: "Rue Saint-Sauveur, La Rochelle (17000), Charente-Maritime"
+reference: "19-096"
+annee: 2019
+annee_livraison: 2025
+synthese: >-
+  À La Rochelle, le clocher du XVᵉ siècle de l’église Saint-Sauveur — classé monument historique depuis 1907 — ne sonnait plus : le beffroi avait perdu son étage supérieur et les sonneries étaient hors d’usage. La Ville a confié la restauration du clocher, des cloches et du beffroi à une maîtrise d’œuvre menée par un architecte en chef des monuments historiques, dont FT2E est le bureau d’études fluides — mission complète, du diagnostic à la réception. L’électricité neuve monte de la sacristie vers deux tableaux en salle des cloches : l’un sert l’éclairage des salles et de l’escalier, l’autre les moteurs de volée et de tintement, programmés et synchronisés sur l’heure légale. Un paratonnerre de niveau I ramène la foudre à la terre. Depuis 2025, le clocher sonne de nouveau.
+mission_ft2e: ["Électricité CFO", "Électricité CFA"]
+planche: "/images/projets/eglise-saint-sauveur-la-rochelle/planche.svg"
+---
+
+Entre le quai Maubec et la rue Saint-Sauveur, au centre ancien de La Rochelle, l’église Saint-Sauveur dresse un clocher du XVᵉ siècle, classé monument historique depuis 1907 — l’église elle-même est inscrite à l’inventaire supplémentaire. Quand la Ville décide de restaurer le clocher, les cloches et le beffroi, les sonneries sont inutilisables. FT2E est le bureau d’études fluides de la maîtrise d’œuvre : à lui l’électricité du clocher et la protection contre la foudre, en mission complète, du diagnostic à la réception.
+
+## L’enjeu : un clocher classé qui ne sonnait plus
+
+Le constat d’entrée est sévère : le beffroi et son plancher support sont dans un état avancé de dégradation — le beffroi a perdu son étage supérieur, seuls subsistent ses poteaux d’angle — et les parties mécaniques et électriques des sonneries sont hors d’usage. Des deux cloches en place, seule Gabrielle Paule, bénie en 1720 et plus vieille cloche de la Ville, classée au titre d’objet, est en bon état ; Victoire Louise, venue de l’ancienne église Saint-Nicolas, présente un éclat et doit être refondue. Le programme embrasse la réfection complète du beffroi en conservant un maximum de bois anciens, la fonte de cloches neuves, la remise en sonnerie à la volée et au tintement — en remplaçant l’intégralité des moteurs, mécaniques, fileries et tableaux —, et la restauration de la tourelle d’escalier, des façades, de la couverture et des salles. La maîtrise d’œuvre est un groupement conjoint mené par Michel Goutal, architecte en chef des monuments historiques, avec un économiste spécialiste du patrimoine et FT2E, qui ouvre sa mission par [deux diagnostics](/expertises/audit-diagnostic) — patrimonial, puis de restauration — avant les études et le suivi des travaux. Le bureau écrit deux des huit lots : l’électricité courants forts et faibles, et le paratonnerre.
+
+## La solution : l’électricité monte, dissimulée, jusqu’aux cloches
+
+Toute la distribution du clocher est refaite depuis le tableau général de l’église, dans la sacristie. Deux liaisons de 25 mm² cheminent dans le comble au-dessus de la nef, gagnent la première salle intermédiaire puis montent jusqu’à la salle des cloches, où s’implantent deux tableaux divisionnaires neufs, avec 30 % de réserve : l’un pour le service et la mise en valeur — 5 kVA en triphasé —, l’autre pour le mécanisme campanaire — 3 kVA. Le premier dessert l’éclairage refait salle par salle : projecteurs orientables gradables et encastrés de sol dans la chapelle des fonts baptismaux, linéaires suspendus dans les salles intermédiaires, projecteurs de service dans la salle des cloches et, dans l’escalier à vis, un luminaire et un bloc autonome de secours par volée, sur toute la hauteur. L’[électricité](/expertises/electricite) d’un monument s’efface : cheminements dissimulés ou posés sous gaine rigide en acier noir, boîtes de dérivation métalliques noires quand elles restent apparentes, appareillages dont les teintes se valident en chantier — laiton brossé dans la chapelle, bronze médaille sur les goulottes en bois, noir dans la salle des cloches. Le clocher, établissement recevant du public de type V, reçoit aussi son équipement d’alarme de type 4 : deux boucles surveillées, déclencheurs manuels aux paliers, sirènes.
+
+## Les particularités : des sonneries à l’heure légale, la foudre à la terre
+
+Le tableau campanaire aligne un disjoncteur différentiel par moteur — cinq moteurs de volée, cinq de tintement —, l’aval revenant au lot campanaire. Dans la sacristie, un coffret de pilotage programme les sonneries : chacune est configurable depuis ce coffret, et l’ensemble se synchronise sur l’heure légale par une antenne radio ALS162. En sens inverse, la foudre. L’analyse de risque, menée selon la NF EN 62305 sur une tour de 40 mètres, calcule jusqu’au risque de perte « d’héritage culturel » et conclut au niveau de protection I : un paratonnerre à dispositif d’amorçage, haubané au sommet de la cage d’escalier, dépasse de 2 m le point le plus haut ; deux descentes en ruban de cuivre étamé — l’une équipée d’un compteur de foudre — le relient à des prises de terre triangulées, tenues sous les 10 ohms ; des parafoudres verrouillent le tableau général et les deux divisionnaires, et une liaison équipotentielle en cuivre nu de 25 mm², enterrée, referme la boucle jusqu’au tableau général — les pavés de la rue des Moureilles et de la rue Saint-Sauveur sont déposés puis reposés pour l’enfouir. Comme sur la [passerelle de l’écluse du Carreau d’Or](/references/passerelle-ecluse-carreau-d-or-marans), l’électricité est ici la seule ingénierie de l’ouvrage — et elle se plie à lui.
+
+## Le résultat : le clocher sonne de nouveau
+
+Le chantier s’ouvre en septembre 2022, huit lots sur un édifice en exploitation, et s’interrompt quatre fois — juillets et décembres — par décision de la Ville. Les opérations préalables à la réception sont conduites du 8 au 22 avril 2025, la levée des réserves le 6 mai. Le 20 avril, les cloches sont bénies dans la nef, où elles restent présentées aux fidèles ; leur levage au beffroi et leur mise en service sont calés, avec la Ville et la paroisse, à la fin juin 2025 — l’affaire est soldée dans l’année. Après l’[abbaye de Sablonceaux](/references/abbaye-sablonceaux-ssi) et la [maison de Pierre Loti](/references/maison-pierre-loti-rochefort), le clocher de Saint-Sauveur ajoute au [patrimoine](/secteurs/patrimoine) du bureau une figure rare : un monument dont la restauration s’entend, à la volée et au tintement, pilotée depuis la sacristie.

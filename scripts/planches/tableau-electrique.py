@@ -1601,7 +1601,487 @@ def composer_appui_essaimage(donnees):
                         f"planche, tenu à l’échelle de l’appui")
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+#  MÉCANISME `montee` — le tableau déplacé au sommet, la foudre en sens inverse
+# ═════════════════════════════════════════════════════════════════════════════
+#
+# Le motif de l'archétype (arrivée → tableau → départs) est ici mis DEBOUT :
+# l'arrivée est en bas (le TGBT existant de la sacristie), les deux tableaux
+# divisionnaires en haut (la salle des cloches), et la même verticale porte
+# deux flux contraires — c'est la démonstration :
+#
+#   1. L'ÉNERGIE MONTE — deux liaisons partent de la sacristie, cheminent par
+#      le comble de la nef et gravissent la bande de niveaux jusqu'aux deux
+#      tableaux ; la commande des sonneries monte avec elles, en pointillé,
+#      depuis le coffret de pilotage de la sacristie jusqu'au TD-MC.
+#   2. LA FOUDRE REDESCEND — captée au-dessus du sommet, elle descend par deux
+#      conducteurs dédiés vers ses prises de terre, et la liaison
+#      équipotentielle referme la boucle jusqu'au TGBT ; chaque tableau est
+#      verrouillé d'un parafoudre (carré plein au coin, doublé du libellé).
+#
+# La bande de niveaux est une TOPOLOGIE (succession de salles), jamais une
+# silhouette : aucune géométrie d'édifice (règle 4). Le motif répété de la
+# bande d'escalier n'est PAS un compte de volées — le nombre de volées n'est
+# pas une donnée du dossier, et le bloc `controles` le dit.
+
+# ── Les tags de registre et la tour ──────────────────────────────────────────
+MT_Y_TAG = 214
+MT_X_TOUR0, MT_X_TOUR1 = 400, 704
+MT_X_ESC = 428                     # la bande de la tourelle d'escalier
+MT_XR1, MT_XR2 = 444, 460          # les deux liaisons montantes
+MT_XCMD = 476                      # la commande des sonneries (pointillé)
+MT_X_DROP = 536                    # la descente d'éclairage, un cercle par salle
+MT_Y_TOUR0, MT_Y_TOUR1 = 240, 540
+MT_RUNGS = [364, 420, 476]         # les planchers : cloches | s2 | s1 | chapelle
+
+# ── La salle des cloches : moteurs et tableaux ───────────────────────────────
+MT_TD_Y0, MT_TD_Y1 = 304, 340
+MT_SMV_X0, MT_SMV_X1 = 484, 588
+MT_MC_X0, MT_MC_X1 = 596, 700
+MT_Y_MOT0, MT_Y_MOT1 = 262, 274    # la rangée des cinq moteurs de volée
+MT_Y_TINT = 282                    # les cinq tintements, un tick sous chacun
+MT_Y_MANIF = 290                   # le collecteur qui les dessert
+
+# ── La sacristie, le comble, la terre ────────────────────────────────────────
+MT_SAC_X0, MT_SAC_X1 = 64, 312
+MT_SAC_Y0, MT_SAC_Y1 = 560, 636
+MT_Y_RUN1, MT_Y_RUN2 = 572, 584    # les deux liaisons, à l'horizontale
+MT_Y_CMD = 578                     # la commande passe entre les deux
+MT_XD1, MT_XD2 = 726, 748          # les deux descentes paratonnerre
+MT_Y_LIAISON = 648                 # la liaison équipotentielle, en sol
+MT_Y_NOTE_LIAISON = 668
+
+
+def composer_montee(donnees):
+    m = donnees["montee"]
+    niveaux = sorted(m["niveaux"], key=lambda n: n["ordre"])
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    def mono(x, y, chaine, dispo=None, nom=None, ancre=None, corps=10):
+        if dispo is not None:
+            controler(nom or chaine, chaine, corps, "mono", dispo, corps * 0.14)
+        A(texte(x, y, chaine, "mono", corps, 500, "pivot", ancre=ancre,
+                tracking=corps * 0.14))
+
+    # ── Racine et bloc de titre ──────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+    mono(MARGE, Y_ENTETE, m["entete"], UTILE, "en-tête du schéma")
+
+    # ── Les deux tags de registre — la thèse en toutes lettres ───────────────
+    l_tag1 = controler("tag montée", m["tag_montee"], 10, "mono", 500, 1.4)
+    mono(MARGE, MT_Y_TAG, m["tag_montee"])
+    controler("tag foudre", m["tag_foudre"], 10, "mono",
+              W - MARGE - (MARGE + l_tag1) - 40, 1.4)
+    mono(W - MARGE, MT_Y_TAG, m["tag_foudre"], ancre="end")
+
+    # ── LA TOUR — une bande de niveaux, jamais une silhouette ────────────────
+    A(rect(MT_X_TOUR0, MT_Y_TOUR0, MT_X_TOUR1 - MT_X_TOUR0,
+           MT_Y_TOUR1 - MT_Y_TOUR0, "papier"))
+    A(polyligne([(MT_X_TOUR0, MT_Y_TOUR0), (MT_X_TOUR1, MT_Y_TOUR0),
+                 (MT_X_TOUR1, MT_Y_TOUR1), (MT_X_TOUR0, MT_Y_TOUR1),
+                 (MT_X_TOUR0, MT_Y_TOUR0)], "encre", 1.8))
+    for y in MT_RUNGS:
+        A(ligne(MT_X_TOUR0, y, MT_X_TOUR1, y, "encre", 1.2))
+    # La bande de l'escalier, et son motif répété (PAS un compte de volées).
+    A(ligne(MT_X_ESC, MT_Y_TOUR0, MT_X_ESC, MT_Y_TOUR1, "filet-1", 1))
+    for k in range(10):
+        A(cercle(414, 258 + k * 28, 2.5, "clair", "encre", 1.0))
+
+    # ── Les noms de niveaux ──────────────────────────────────────────────────
+    bords = [MT_Y_TOUR0] + MT_RUNGS + [MT_Y_TOUR1]
+    for k, n in enumerate(niveaux):
+        controler(f"nom {n['cle']}", n["libelle"], 13, "sans-400",
+                  MT_X_TOUR1 - 492 - 8)
+        A(texte(492, bords[k] + 18, n["libelle"], "sans", 13, 400, "encre",
+                wdth=100))
+        if n.get("equipement"):
+            mono(492, bords[k + 1] - 10, n["equipement"],
+                 MT_X_TOUR1 - 492 - 8, f"équipement {n['cle']}")
+
+    # ── LES DEUX TABLEAUX, ET LES MOTEURS AU-DESSUS ──────────────────────────
+    tds = sorted(m["tableaux"], key=lambda t: t["ordre"])
+    for td, (x0, x1) in zip(tds, ((MT_SMV_X0, MT_SMV_X1),
+                                  (MT_MC_X0, MT_MC_X1))):
+        A(rect_bord(x0, MT_TD_Y0, x1 - x0, MT_TD_Y1 - MT_TD_Y0,
+                    "calcaire", "filet-1"))
+        xm = (x0 + x1) / 2
+        A(texte(xm, MT_TD_Y0 + 15, td["libelle"], "sans", 13, 600, "encre",
+                wdth=112, ancre="middle"))
+        controler(f"cote {td['cle']}", td["cote"], 10, "mono", x1 - x0 - 8, 1.4)
+        mono(xm, MT_TD_Y0 + 31, td["cote"], ancre="middle")
+        # Le parafoudre : un carré plein au coin haut, doublé du libellé commun.
+        A(rect(x0 + 4, MT_TD_Y0 - 3, 6, 6, "encre"))
+
+    # La rangée campanaire : cinq moteurs de volée, cinq tintements.
+    A(ligne((MT_MC_X0 + MT_MC_X1) / 2, MT_TD_Y0,
+            (MT_MC_X0 + MT_MC_X1) / 2, MT_Y_MANIF + 1, "encre", 1.5))
+    A(fleche((MT_MC_X0 + MT_MC_X1) / 2, MT_Y_MANIF - 8, "encre", "haut", 8))
+    A(ligne(MT_MC_X0 + 6, MT_Y_MANIF, MT_MC_X1 - 6, MT_Y_MANIF, "encre", 1.5))
+    for k in range(5):
+        cx = MT_MC_X0 + 6 + k * 19
+        A(ligne(cx, MT_Y_MANIF, cx, MT_Y_MOT1, "encre", 1.2))
+        A(rect_bord(cx - 5, MT_Y_MOT0, 10, MT_Y_MOT1 - MT_Y_MOT0,
+                    "calcaire", "filet-1"))
+        A(ligne(cx, MT_Y_MANIF, cx, MT_Y_TINT, "encre", 1.0))
+        A(cercle(cx, MT_Y_TINT + 2.5, 2.5, "clair", "encre", 1.0))
+
+    # ── LA GOUTTIÈRE — chaque signe doublé d'un texte ────────────────────────
+    def gouttiere(chaine, y_tag, y_amorce=None, nom=None):
+        controler(nom or chaine, chaine, 10, "mono", 380 - MARGE, 1.4)
+        mono(380, y_tag, chaine, ancre="end")
+        if y_amorce is not None:
+            A(ligne(386, y_amorce, MT_X_TOUR0 - 4, y_amorce, "filet-1", 1))
+
+    gouttiere(m["moteurs"]["tag"], 271, 268)
+    gouttiere(m["moteurs"]["mention"], 287)
+    gouttiere(m["parafoudres"]["tag"], 314, 310)
+    gouttiere(m["eclairage"]["tag"], 392, 396)
+    gouttiere(m["alarme"]["tag"], 424, 420)
+    gouttiere(m["escalier"]["tag"], 508, 504)
+
+    # ── LA MONTÉE — deux liaisons, de la sacristie aux tableaux ──────────────
+    A(ligne(MT_SAC_X1, MT_Y_RUN1, MT_XR1, MT_Y_RUN1, "encre", 1.5))
+    A(ligne(MT_XR1, MT_Y_RUN1, MT_XR1, 322, "encre", 1.5))
+    A(ligne(MT_XR1, 322, MT_SMV_X0 - 2, 322, "encre", 1.5))
+    A(fleche(MT_SMV_X0 - 1, 322, "encre", "droite", 8))
+    A(ligne(MT_SAC_X1, MT_Y_RUN2, MT_XR2, MT_Y_RUN2, "encre", 1.5))
+    A(ligne(MT_XR2, MT_Y_RUN2, MT_XR2, 352, "encre", 1.5))
+    A(ligne(MT_XR2, 352, (MT_MC_X0 + MT_MC_X1) / 2, 352, "encre", 1.5))
+    A(ligne((MT_MC_X0 + MT_MC_X1) / 2, 352, (MT_MC_X0 + MT_MC_X1) / 2,
+            MT_TD_Y1 + 2, "encre", 1.5))
+    A(fleche((MT_MC_X0 + MT_MC_X1) / 2, MT_TD_Y1 + 1, "encre", "haut", 8))
+    mono(292, 608, m["liaisons"]["tag"], 460, "tag liaisons")
+
+    # La commande des sonneries — un pointillé qui monte lui aussi.
+    xc = (MT_MC_X0 + MT_MC_X1) / 2 - 32
+    for x0, y0, x1, y1 in ((249, MT_SAC_Y0 + 28, 249, MT_Y_CMD),
+                           (249, MT_Y_CMD, MT_XCMD, MT_Y_CMD),
+                           (MT_XCMD, MT_Y_CMD, MT_XCMD, 296),
+                           (MT_XCMD, 296, xc, 296),
+                           (xc, 296, xc, MT_TD_Y0 - 4)):
+        A(_pointille(x0, y0, x1, y1, "encre", 1.2))
+    A(fleche(xc, MT_TD_Y0 - 2, "encre", "bas", 7))
+    controler("commande l1", m["commande"]["l1"], 10, "mono",
+              MT_X_TOUR0 - MARGE - 8, 1.4)
+    mono(MARGE + 8, 538, m["commande"]["l1"])
+    controler("commande l2", m["commande"]["l2"], 10, "mono",
+              MT_X_TOUR0 - MARGE - 8, 1.4)
+    mono(MARGE + 8, 552, m["commande"]["l2"])
+
+    # ── LA SACRISTIE — le TGBT existant et le coffret de pilotage ────────────
+    A(rect(MT_SAC_X0, MT_SAC_Y0, MT_SAC_X1 - MT_SAC_X0,
+           MT_SAC_Y1 - MT_SAC_Y0, "papier"))
+    A(polyligne([(MT_SAC_X0, MT_SAC_Y0), (MT_SAC_X1, MT_SAC_Y0),
+                 (MT_SAC_X1, MT_SAC_Y1), (MT_SAC_X0, MT_SAC_Y1),
+                 (MT_SAC_X0, MT_SAC_Y0)], "encre", 1.8))
+    A(texte(MT_SAC_X0 + 12, MT_SAC_Y0 + 16, m["sacristie"]["libelle"],
+            "sans", 13, 400, "encre", wdth=100))
+    A(rect_bord(76, 588, 110, 32, "calcaire", "filet-1"))
+    A(rect(76 + 4, 588 - 3, 6, 6, "encre"))          # parafoudre du TGBT
+    for j, l in enumerate(m["sacristie"]["tgbt"]):
+        mono(131, 600 + j * 13, l, 102, f"tgbt {j}", ancre="middle")
+    A(rect_bord(198, 588, 102, 32, "calcaire", "filet-1"))
+    for j, l in enumerate(m["sacristie"]["coffret"]):
+        mono(249, 600 + j * 13, l, 94, f"coffret {j}", ancre="middle")
+
+    # ── LA FOUDRE — pointe, deux descentes, prises de terre, liaison ─────────
+    A(fleche(414, 210, "encre", "haut", 11))
+    A(ligne(414, 218, 414, MT_Y_TOUR0, "encre", 2.0))
+    A(ligne(414, 232, 404, MT_Y_TOUR0, "encre", 1.0))
+    A(ligne(414, 232, 424, MT_Y_TOUR0, "encre", 1.0))
+    A(ligne(414, 226, MT_XD1, 226, "encre", 1.2))
+    A(ligne(414, 232, MT_XD2, 232, "encre", 1.2))
+    A(ligne(MT_XD1, 226, MT_XD1, 592, "encre", 1.2))
+    A(ligne(MT_XD2, 232, MT_XD2, 592, "encre", 1.2))
+    A(fleche(MT_XD1, 600, "encre", "bas", 8))
+    A(fleche(MT_XD2, 600, "encre", "bas", 8))
+    # Le compteur de foudre, sur UNE descente ; le joint de contrôle sur les deux.
+    A(rect_bord(MT_XD1 - 5, 508, 10, 14, "calcaire", "filet-1"))
+    for xd in (MT_XD1, MT_XD2):
+        A(ligne(xd - 4, 556, xd + 4, 556, "encre", 1.2))
+        A(ligne(xd - 4, 562, xd + 4, 562, "encre", 1.2))
+    # Les prises de terre : le glyphe normalisé, trois traits décroissants.
+    for xd in (MT_XD1, MT_XD2):
+        A(ligne(xd - 8, 604, xd + 8, 604, "encre", 1.5))
+        A(ligne(xd - 5, 608, xd + 5, 608, "encre", 1.2))
+        A(ligne(xd - 2, 612, xd + 2, 612, "encre", 1.0))
+    # La liaison équipotentielle referme la boucle jusqu'au TGBT.
+    A(ligne((MT_XD1 + MT_XD2) / 2, 614, (MT_XD1 + MT_XD2) / 2,
+            MT_Y_LIAISON, "encre", 1.2))
+    A(ligne((MT_XD1 + MT_XD2) / 2, MT_Y_LIAISON, 131, MT_Y_LIAISON,
+            "encre", 1.2))
+    A(ligne(131, MT_Y_LIAISON, 131, MT_SAC_Y1 + 2, "encre", 1.2))
+    A(fleche(131, MT_SAC_Y1 + 1, "encre", "haut", 7))
+    mono(MARGE, MT_Y_NOTE_LIAISON, m["foudre"]["liaison"], UTILE,
+         "note liaison équipotentielle")
+
+    # Les libellés de la colonne foudre, dans la marge droite.
+    for y, cle in ((240, "pda_l1"), (256, "pda_l2"), (300, "descentes"),
+                   (518, "compteur"), (608, "terre")):
+        mono(764, y, m["foudre"][cle], W - MARGE - 764, f"foudre {cle}")
+    A(ligne(MT_XD2 + 6, 514, 760, 514, "filet-1", 1))
+
+    # ── La descente d'éclairage interne : un cercle par salle ────────────────
+    A(ligne(MT_X_DROP, MT_TD_Y1, MT_X_DROP, 504, "encre", 1.2))
+    for y in (392, 448, 504):
+        A(cercle(MT_X_DROP, y, 4, "papier", "encre", 1.3))
+
+    # ── Phrase de principe, cartouche ────────────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"deux flux contraires sur la même verticale : la "
+                         f"montée (deux liaisons de x {MT_XR1} et {MT_XR2}, "
+                         f"flèches vers le haut aux deux tableaux, plus la "
+                         f"commande en pointillé x {MT_XCMD}) contre la "
+                         f"descente (deux conducteurs x {MT_XD1} et {MT_XD2}, "
+                         f"flèches vers le bas aux prises de terre) — et la "
+                         f"boucle refermée par la liaison équipotentielle à "
+                         f"y {MT_Y_LIAISON}",
+        "topologie": f"tour x {MT_X_TOUR0}–{MT_X_TOUR1}, y {MT_Y_TOUR0}–"
+                     f"{MT_Y_TOUR1}, planchers à y "
+                     f"{', '.join(str(y) for y in MT_RUNGS)} ; sacristie x "
+                     f"{MT_SAC_X0}–{MT_SAC_X1}, y {MT_SAC_Y0}–{MT_SAC_Y1} ; "
+                     f"tableaux y {MT_TD_Y0}–{MT_TD_Y1}, moteurs y "
+                     f"{MT_Y_MOT0}–{MT_Y_TINT} — bande de niveaux "
+                     f"topologique, aucune silhouette d’édifice",
+        "escalier_non_compte": "10 points au pas de 28 px sur la bande "
+                               "d’escalier — un motif répété, PAS un compte "
+                               "de volées : le nombre de volées n’est pas une "
+                               "donnée du dossier (a_valider_ft2e)",
+        "signes_doubles": "chaque signe est doublé d’un texte : moteurs "
+                          "(tag gouttière), parafoudres (carrés pleins + tag), "
+                          "départs d’éclairage (cercles + tag), escalier "
+                          "(points + tag), alarme (tag sur le palier), foudre "
+                          "(cinq libellés en marge droite), liaisons (tag sous "
+                          "le comble), commande (deux lignes sous la tour)",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "releve": "aucun — la démonstration est géométrique, les chiffres de "
+                  "la fiche restent à la fiche (révision 4)",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_montee(donnees):
+    """La vignette : les deux flux contraires, et rien d'autre.
+
+    Ce qu'elle garde : la bande de niveaux et ses trois planchers, la montée
+    (double liaison fléchée vers les deux tableaux, chiffrés 5 et 3 kVA), la
+    descente foudre jusqu'au glyphe de terre, la liaison équipotentielle, la
+    sacristie. Ce qu'elle laisse : la gouttière, les noms de niveaux, les
+    moteurs, la commande, tous les libellés de la colonne foudre."""
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    x0t, x1t, y0t, y1t = 96, 192, 40, 164
+    A(rect(x0t, y0t, x1t - x0t, y1t - y0t, "papier"))
+    A(polyligne([(x0t, y0t), (x1t, y0t), (x1t, y1t), (x0t, y1t),
+                 (x0t, y0t)], "encre", 1.4))
+    for y in (84, 112, 140):
+        A(ligne(x0t, y, x1t, y, "encre", 1.0))
+
+    # Les deux tableaux, chiffrés — les seuls nœuds à valeur de la vignette.
+    tds = sorted(donnees["montee"]["tableaux"], key=lambda t: t["ordre"])
+    for td, (bx0, bx1) in zip(tds, ((112, 146), (152, 186))):
+        A(rect_bord(bx0, 48, bx1 - bx0, 18, "calcaire", "filet-1"))
+        A(texte((bx0 + bx1) / 2, 79, f'{td["valeur"]}{NN}{td["unite"]}',
+                "mono", 9, 500, "pivot", ancre="middle", tracking=1.26))
+
+    # La montée : sacristie, comble, double liaison fléchée.
+    A(rect_bord(24, 150, 60, 30, "calcaire", "filet-1"))
+    A(texte(54, 168, "TGBT", "mono", 9, 500, "pivot", ancre="middle",
+            tracking=1.26))
+    A(ligne(84, 158, 102, 158, "encre", 1.2))
+    A(ligne(84, 166, 108, 166, "encre", 1.2))
+    A(ligne(102, 158, 102, 62, "encre", 1.2))
+    A(ligne(108, 166, 108, 68, "encre", 1.2))
+    A(fleche(102, 60, "encre", "haut", 7))
+    A(fleche(108, 66, "encre", "haut", 7))
+
+    # La descente d'éclairage : un cercle par salle. Elle part SOUS la rangée
+    # des cotes (y 82) — amorcée à 66 elle traversait la cote « 3 kVA ».
+    A(ligne(168, 82, 168, 152, "encre", 1.0))
+    for y in (98, 126, 152):
+        A(cercle(168, y, 2.5, "papier", "encre", 1.1))
+
+    # La foudre : pointe, descente, terre, liaison équipotentielle.
+    A(fleche(144, 26, "encre", "haut", 8))
+    A(ligne(144, 32, 144, y0t, "encre", 1.6))
+    A(ligne(144, 36, 240, 36, "encre", 1.0))
+    A(ligne(240, 36, 240, 166, "encre", 1.0))
+    A(fleche(240, 170, "encre", "bas", 7))
+    A(ligne(232, 174, 248, 174, "encre", 1.3))
+    A(ligne(235, 178, 245, 178, "encre", 1.1))
+    A(ligne(238, 182, 242, 182, "encre", 1.0))
+    A(ligne(240, 184, 240, 188, "encre", 1.0))
+    A(ligne(240, 188, 54, 188, "encre", 1.0))
+    A(ligne(54, 188, 54, 181, "encre", 1.0))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "les deux flux contraires : la double liaison fléchée vers "
+                 "le haut (du TGBT aux deux tableaux, chiffrés 5 et 3 kVA), "
+                 "la descente foudre fléchée vers le bas jusqu’au glyphe de "
+                 "terre, la liaison équipotentielle qui referme la boucle — "
+                 "gouttière, noms de niveaux, moteurs et libellés foudre "
+                 "laissés à la planche",
+        "bas_du_dessin": "liaison équipotentielle à 188 — marge basse 12 px, "
+                         "aucun trait ne touche un bord",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_montee(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, trois nœuds chiffrés.
+
+    Ce qu'il garde : la bande de niveaux, la montée double fléchée, les deux
+    tableaux chiffrés, la rangée campanaire, la descente foudre et sa terre
+    chiffrée, la liaison équipotentielle, la sacristie nommée. Ce qu'il
+    laisse : la gouttière, les noms de niveaux, la commande, la phrase et le
+    cartouche."""
+    m = donnees["montee"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    x0t, x1t, y0t, y1t = 180, 360, 64, 296
+    A(rect(x0t, y0t, x1t - x0t, y1t - y0t, "papier"))
+    A(polyligne([(x0t, y0t), (x1t, y0t), (x1t, y1t), (x0t, y1t),
+                 (x0t, y0t)], "encre", 1.6))
+    for y in (156, 204, 252):
+        A(ligne(x0t, y, x1t, y, "encre", 1.1))
+
+    tds = sorted(m["tableaux"], key=lambda t: t["ordre"])
+    for td, (bx0, bx1) in zip(tds, ((196, 260), (272, 344))):
+        A(rect_bord(bx0, 96, bx1 - bx0, 36, "calcaire", "filet-1"))
+        xm = (bx0 + bx1) / 2
+        A(texte(xm, 110, td["libelle"], "sans", 12, 600, "encre", wdth=112,
+                ancre="middle"))
+        A(texte(xm, 126, f'{td["valeur"]}{NN}{td["unite"]}', "mono", 10, 500,
+                "pivot", ancre="middle", tracking=1.4))
+        A(rect(bx0 + 3, 93, 5, 5, "encre"))
+
+    # La rangée campanaire, nommée dans la marge gauche.
+    A(ligne(308, 96, 308, 89, "encre", 1.3))
+    A(fleche(308, 81, "encre", "haut", 7))
+    A(ligne(276, 88, 336, 88, "encre", 1.3))
+    for k in range(5):
+        cx = 276 + k * 15
+        A(ligne(cx, 88, cx, 80, "encre", 1.0))
+        A(rect_bord(cx - 4, 72, 8, 8, "calcaire", "filet-1"))
+    A(texte(172, 80, m["moteurs"]["tag"].split("·")[0].strip(), "mono", 10,
+            500, "pivot", ancre="end", tracking=1.4))
+    A(texte(172, 94, m["moteurs"]["tag"].split("·")[1].strip(), "mono", 10,
+            500, "pivot", ancre="end", tracking=1.4))
+
+    # La montée : sacristie, comble, double liaison fléchée vers les tableaux.
+    A(rect_bord(40, 306, 110, 40, "calcaire", "filet-1"))
+    A(texte(95, 329, "TGBT EXISTANT", "mono", 10, 500, "pivot",
+            ancre="middle", tracking=1.4))
+    A(ligne(150, 314, 196, 314, "encre", 1.4))
+    A(ligne(196, 314, 196, 118, "encre", 1.4))
+    A(fleche(196, 116, "encre", "haut", 7))
+    A(ligne(150, 322, 204, 322, "encre", 1.4))
+    A(ligne(204, 322, 204, 140, "encre", 1.4))
+    A(ligne(204, 140, 308, 140, "encre", 1.4))
+    A(ligne(308, 140, 308, 134, "encre", 1.4))
+    A(fleche(308, 133, "encre", "haut", 7))
+
+    # La descente d'éclairage : un cercle par salle.
+    A(ligne(240, 132, 240, 274, "encre", 1.1))
+    for y in (180, 228, 274):
+        A(cercle(240, y, 3, "papier", "encre", 1.2))
+
+    # La foudre : pointe, deux descentes, terre chiffrée, liaison.
+    A(fleche(270, 48, "encre", "haut", 8))
+    A(ligne(270, 53, 270, y0t, "encre", 1.4))
+    A(ligne(270, 52, 396, 52, "encre", 1.1))
+    A(ligne(270, 58, 410, 58, "encre", 1.1))
+    A(ligne(396, 52, 396, 326, "encre", 1.1))
+    A(ligne(410, 58, 410, 326, "encre", 1.1))
+    A(fleche(396, 332, "encre", "bas", 7))
+    A(fleche(410, 332, "encre", "bas", 7))
+    for xd in (396, 410):
+        A(ligne(xd - 7, 336, xd + 7, 336, "encre", 1.3))
+        A(ligne(xd - 4, 340, xd + 4, 340, "encre", 1.1))
+        A(ligne(xd - 1.5, 344, xd + 1.5, 344, "encre", 1.0))
+    A(ligne(403, 346, 403, 352, "encre", 1.0))
+    A(ligne(403, 352, 95, 352, "encre", 1.0))
+    A(ligne(95, 352, 95, 347, "encre", 1.0))
+    A(texte(420, 70, "PDA · NIVEAU I", "mono", 10, 500, "pivot",
+            tracking=1.4))
+    A(texte(420, 86, "2 DESCENTES", "mono", 10, 500, "pivot", tracking=1.4))
+    A(texte(420, 320, m["foudre"]["terre"].split("·")[1].strip(), "mono", 10,
+            500, "pivot", tracking=1.4))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="le motif entier à l’échelle 1 : bande de niveaux et ses trois "
+              "planchers, montée double fléchée du TGBT aux deux tableaux "
+              "(TD-SMV 5 kVA, TD-MC 3 kVA), rangée campanaire 5 + 5, descente "
+              "d’éclairage à un cercle par salle, deux descentes foudre vers "
+              "la terre chiffrée (< 10 Ω), liaison équipotentielle refermée — "
+              "gouttière, noms de niveaux, commande, phrase et cartouche "
+              "laissés à la planche",
+        bas="liaison équipotentielle à 352 — marge basse 16 px",
+        contre_flux="flèches vers le haut aux deux tableaux (x 196, 308), "
+                    "flèches vers le bas aux prises de terre (x 396, 410) — "
+                    "le contre-flux tenu à l’échelle de l’appui")
+
+
 def _composer(donnees):
+    if "montee" in donnees:
+        return composer_montee(donnees)
     if "essaimage" in donnees:
         return composer_essaimage(donnees)
     if "franchissement" in donnees:
@@ -1610,6 +2090,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "montee" in donnees:
+        return composer_vignette_montee(donnees)
     if "essaimage" in donnees:
         return composer_vignette_essaimage(donnees)
     if "franchissement" in donnees:
@@ -1618,6 +2100,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "montee" in donnees:
+        return composer_appui_montee(donnees)
     if "essaimage" in donnees:
         return composer_appui_essaimage(donnees)
     if "franchissement" in donnees:
