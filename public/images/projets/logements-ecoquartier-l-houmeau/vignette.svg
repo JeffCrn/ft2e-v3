@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">L’ÉNERGIE INDIVIDUALISÉE</text>
+  <path d="M 23.00 44.00 C 96.50 44.00, 96.50 44.00, 170.00 44.00 L 170.00 110.00 C 96.50 110.00, 96.50 110.00, 23.00 110.00 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 23.00 116.00 C 96.50 116.00, 96.50 110.00, 170.00 110.00 L 170.00 122.00 C 96.50 122.00, 96.50 128.00, 23.00 128.00 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 23.00 134.00 C 96.50 134.00, 96.50 140.00, 170.00 140.00 L 170.00 146.00 C 96.50 146.00, 96.50 140.00, 23.00 140.00 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 23.00 146.00 C 96.50 146.00, 96.50 164.00, 170.00 164.00 L 170.00 176.00 C 96.50 176.00, 96.50 158.00, 23.00 158.00 Z" class="c-clair s-filet1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <rect x="18.00" y="44.00" width="5.00" height="66.00" class="c-encre" fill="#00393A"/>
+  <rect x="18.00" y="116.00" width="5.00" height="12.00" class="c-encre" fill="#00393A"/>
+  <rect x="18.00" y="134.00" width="5.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="18.00" y="146.00" width="5.00" height="12.00" class="c-encre" fill="#00393A"/>
+  <rect x="170.00" y="44.00" width="6.00" height="78.00" class="c-encre" fill="#00393A"/>
+  <rect x="170.00" y="140.00" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <rect x="170.00" y="164.00" width="6.00" height="12.00" class="c-encre" fill="#00393A"/>
+  <text x="182.00" y="80.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaudière gaz</text>
+  <text x="182.00" y="94.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TREIZE</text>
+  <text x="182.00" y="147.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">PAC air/eau</text>
+  <text x="182.00" y="174.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Tout électrique</text>
+</svg>

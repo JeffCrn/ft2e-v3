@@ -1769,7 +1769,339 @@ def composer_appui_partage(donnees):
                         f'closes à {g["reseau"][1]:.2f} et {g["communaux"][1]:.2f} px')
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Mécanisme AFFECTATION — un parc de logements réparti entre des productions
+# individuelles (session N06, ÉcoQuartier de L'Houmeau). La donnée est un
+# COMPTE : l'échelle est en px par logement, comme le dédoublement — mais ici
+# rien ne se dédouble : une origine unique (l'opération, segmentée par
+# typologie) s'affecte à des familles de production, et un second registre
+# porte la toiture photovoltaïque, elle-même distribuée logement par logement.
+# ─────────────────────────────────────────────────────────────────────────────
+AFF_X_BARRE_G = 366                        # barre des typologies
+AFF_X_BARRE_D = 906                        # barre des productions
+AFF_BARRE_W = 9
+AFF_X0 = AFF_X_BARRE_G + AFF_BARRE_W       # 375 — départ des rubans
+AFF_LIB_D_X = AFF_X_BARRE_D + AFF_BARRE_W + 10   # 925 — étiquettes de droite
+AFF_PXL = 17.0                             # px par logement — l'échelle EST la donnée
+AFF_Y0 = 216.0
+AFF_ECART_TYPO = 12.0                      # entre deux typologies, à gauche
+AFF_ECART_PROD = 26.0                      # entre deux productions, à droite
+AFF_Y_FILET_TOIT = 592.0                   # le registre de la toiture
+AFF_Y_ENTETE_TOIT = 610.0
+AFF_TOIT_Y = 624.0                         # haut des modules
+AFF_TOIT_W, AFF_TOIT_H, AFF_TOIT_GAP = 22.0, 16.0, 6.0
+
+
+def _aff_geometrie(aff, pxl, y0, ecart_typo, ecart_prod):
+    """Typologies à gauche (séparées), productions à droite (groupées) : les
+    rubans d'une même production arrivent contigus, sans croisement."""
+    typos = []
+    y = float(y0)
+    for i, t in enumerate(aff["typologies"]):
+        if i > 0:
+            y += ecart_typo
+        h = t["logements"] * pxl
+        typos.append({"t": t, "o0": y, "o1": y + h, "h": h})
+        y += h
+    bas_g = y
+    prods = []
+    ya = float(y0)
+    for i, p in enumerate(aff["productions"]):
+        if i > 0:
+            ya += ecart_prod
+        membres = [tp for tp in typos if tp["t"]["vers"] == p["cle"]]
+        yg = ya
+        for tp in membres:
+            tp["a0"], tp["a1"] = yg, yg + tp["h"]
+            yg += tp["h"]
+        prods.append({"p": p, "y0": ya, "y1": yg, "centre": (ya + yg) / 2})
+        ya = yg
+    return typos, prods, bas_g, ya
+
+
+def composer_affectation(donnees):
+    aff = donnees["affectation"]
+    typos, prods, bas_g, bas_d = _aff_geometrie(
+        aff, AFF_PXL, AFF_Y0, AFF_ECART_TYPO, AFF_ECART_PROD)
+    total_g = sum(t["logements"] for t in aff["typologies"])
+    total_d = sum(p["valeur"] for p in aff["productions"])
+    depassements = []
+
+    def controler(nom, contenu, corps, profil, dispo, tracking=0.0):
+        l = mesurer(contenu, corps, profil, tracking)
+        if l > dispo:
+            depassements.append(f"{nom} : {l:.0f} px pour {dispo:.0f} disponibles")
+        return l
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, strokes=("filet-1", "filet-3"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête de registre — il empêche la planche de mentir ────────────────
+    controler("entete", aff["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(DESSIN_X0, Y_ENTETE, aff["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Rubans, puis barres par-dessus ───────────────────────────────────────
+    for tp in typos:
+        A(_ruban(AFF_X0, AFF_X_BARRE_D, tp["o0"], tp["o1"], tp["a0"], tp["a1"]))
+    for tp in typos:
+        A(rect(AFF_X_BARRE_G, tp["o0"], AFF_BARRE_W, tp["h"], "encre"))
+    for pr in prods:
+        A(rect(AFF_X_BARRE_D, pr["y0"], AFF_BARRE_W, pr["y1"] - pr["y0"], "encre"))
+
+    # ── Étiquettes des typologies, à gauche ──────────────────────────────────
+    for tp in typos:
+        centre = (tp["o0"] + tp["o1"]) / 2
+        controler(f'typologie {tp["t"]["cle"]}', tp["t"]["libelle"], 15,
+                  "sans-400", AFF_X_BARRE_G - 16 - DESSIN_X0)
+        A(texte(AFF_X_BARRE_G - 16, centre + 5, tp["t"]["libelle"], "sans", 15,
+                400, "encre", wdth=100, ancre="end"))
+
+    # ── Le parc, en marge gauche — c'est lui qui donne sens à « l'étage »
+    #    du registre de toiture ────────────────────────────────────────────────
+    for k, d_ligne in enumerate(aff.get("parc_detail", []) or []):
+        controler(f"parc l.{k+1}", d_ligne, 10, "mono", 290, 10 * 0.14)
+        A(texte(DESSIN_X0, AFF_Y0 + 14 + k * 13, d_ligne, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # ── La cote du ruban dominant ────────────────────────────────────────────
+    xm = (AFF_X0 + AFF_X_BARRE_D) / 2
+    gaz = prods[0]
+    controler("cote gaz", aff["cote_gaz"], 10, "mono",
+              AFF_X_BARRE_D - AFF_X0, 10 * 0.14)
+    A(texte(xm, gaz["centre"] + 3.5, aff["cote_gaz"], "mono", 10, 500,
+            "encre", ancre="middle", tracking=10 * 0.14))
+
+    # ── Étiquettes des productions, à droite ─────────────────────────────────
+    dispo_d = W - MARGE - AFF_LIB_D_X
+    for pr in prods:
+        p = pr["p"]
+        centre = pr["centre"]
+        controler(f'production {p["cle"]}', p["libelle"], 15, "sans-600", dispo_d)
+        A(texte(AFF_LIB_D_X, centre - 2, p["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        for k, d_ligne in enumerate(p.get("detail", []) or []):
+            controler(f'détail {p["cle"]} l.{k+1}', d_ligne, 10, "mono",
+                      dispo_d, 10 * 0.14)
+            A(texte(AFF_LIB_D_X, centre + 14 + k * 13, d_ligne, "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+
+    # ── Le registre de la toiture — huit modules COMPTÉS, jamais dimensionnés ─
+    toit = aff["toiture"]
+    A(rect(DESSIN_X0, AFF_Y_FILET_TOIT, UTILE, 1, "filet-3"))
+    controler("entête toiture", toit["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(DESSIN_X0, AFF_Y_ENTETE_TOIT, toit["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    y_mod = AFF_TOIT_Y
+    centre_mod = y_mod + AFF_TOIT_H / 2
+    for i in range(toit["modules"]):
+        A(rect_bord(AFF_X_BARRE_G + i * (AFF_TOIT_W + AFF_TOIT_GAP), y_mod,
+                    AFF_TOIT_W, AFF_TOIT_H, "clair", "filet-1"))
+    x_fin_mod = AFF_X_BARRE_G + toit["modules"] * (AFF_TOIT_W + AFF_TOIT_GAP) - AFF_TOIT_GAP
+    controler("libellé modules", toit["libelle"], 15, "sans-400",
+              AFF_X_BARRE_G - 16 - DESSIN_X0)
+    A(texte(DESSIN_X0, centre_mod + 5, toit["libelle"], "sans", 15, 400,
+            "encre", wdth=100))
+    A(texte(DESSIN_X0, centre_mod + 22, toit["libelle_detail"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    x_pointe = x_fin_mod + 56
+    A(ligne(x_fin_mod + 12, centre_mod, x_pointe - 2, centre_mod, "encre", 1.5))
+    A(fleche(x_pointe, centre_mod, "encre"))
+    x_vers = x_pointe + 12
+    controler("libellé vers", toit["vers"], 15, "sans-600", W - MARGE - x_vers)
+    A(texte(x_vers, centre_mod + 5, toit["vers"], "sans", 15, 600,
+            "encre", wdth=112))
+    controler("détail vers", toit["vers_detail"], 10, "mono",
+              W - MARGE - x_vers, 10 * 0.14)
+    A(texte(x_vers, centre_mod + 22, toit["vers_detail"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Phrase de principe, cartouche ────────────────────────────────────────
+    A(texte(MARGE, 688, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "conservation": f'{" + ".join(str(t["logements"]) for t in aff["typologies"])} '
+                        f'= {total_g} logements à gauche ; '
+                        f'{" + ".join(str(p["valeur"]) for p in aff["productions"])} '
+                        f'= {total_d} à droite — colonnes closes à '
+                        f'{bas_g:.2f} et {bas_d:.2f} px',
+        "echelle": f'{AFF_PXL:.1f} px par logement — un T4 fait un ruban de '
+                   f'{AFF_PXL:.0f} px, lisible sans étiquette',
+        "demonstration": f'le ruban des chaudières porte '
+                         f'{prods[0]["p"]["valeur"]}/{total_g} logements '
+                         f'({prods[0]["p"]["valeur"]/total_g*100:.0f} % de l’encre). '
+                         f'Texte masqué : une barre segmentée se répartit en trois '
+                         f'rubans inégaux, et huit modules identiques fléchés vers '
+                         f'la droite — l’affectation et l’individualisation se '
+                         f'lisent sans un mot',
+        "topologie": f'typologies x {AFF_X_BARRE_G}, rubans {AFF_X0} → '
+                     f'{AFF_X_BARRE_D}, productions étiquetées jusqu’à '
+                     f'{W - MARGE} px — T3 et T2 convergent vers la première '
+                     f'barre : aucun croisement',
+        "toiture": f'{aff["toiture"]["modules"]} modules de {AFF_TOIT_W:.0f} x '
+                   f'{AFF_TOIT_H:.0f} px — comptés, jamais dimensionnés — flèche '
+                   f'{x_fin_mod + 12:.0f} → {x_pointe:.0f}, libellé à {x_vers:.0f} px',
+        "bas_du_dessin": f'rubans jusqu’à {max(bas_g, bas_d):.2f} px, registre '
+                         f'toiture {AFF_Y_FILET_TOIT:.0f}–{centre_mod + 22:.0f}, '
+                         f'phrase de principe à 688, cartouche 714–744, marge '
+                         f'basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px',
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur*H_CARTOUCHE} px², soit "
+                            f"{largeur*H_CARTOUCHE/(W*H)*100:.2f} % de la planche",
+        "depassements": " ; ".join(depassements) if depassements else
+                        "aucun — toutes les chaînes tiennent leur colonne",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 "
+                         f"(1152 / {W})",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_affectation(donnees):
+    """La vignette : la barre segmentée, les trois rubans, les trois barres de
+    production — le nœud dominant chiffré. Détails, cote et toiture laissés à
+    la planche."""
+    aff = donnees["affectation"]
+    x_bar_g, x_bar_d, bar_w = 18.0, 170.0, 5.0
+    x0 = x_bar_g + bar_w
+    lib_x = 182.0
+    typos, prods, bas_g, bas_d = _aff_geometrie(aff, 6.0, 44.0, 6.0, 18.0)
+    courts = aff["libelles_courts"]
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, strokes=("filet-1",))
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    for tp in typos:
+        A(_ruban(x0, x_bar_d, tp["o0"], tp["o1"], tp["a0"], tp["a1"]))
+    for tp in typos:
+        A(rect(x_bar_g, tp["o0"], bar_w, tp["h"], "encre"))
+    for pr in prods:
+        A(rect(x_bar_d, pr["y0"], bar_w + 1, pr["y1"] - pr["y0"], "encre"))
+
+    # Le nœud dominant porte son compte ; les deux autres, leur seul nom —
+    # à 6 px par logement, deux blocs à valeur se chevaucheraient.
+    for i, pr in enumerate(prods):
+        centre = pr["centre"]
+        if i == 0:
+            A(texte(lib_x, centre - 3, courts[pr["p"]["cle"]], "sans", 12, 600,
+                    "encre", wdth=112))
+            A(texte(lib_x, centre + 11, pr["p"]["valeur_dessinee"], "mono", 10,
+                    500, "pivot", tracking=10 * 0.14))
+        else:
+            A(texte(lib_x, centre + 4, courts[pr["p"]["cle"]], "sans", 12, 600,
+                    "encre", wdth=112))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "la barre segmentée des typologies, les trois rubans inégaux et "
+                 "les trois productions ; le nœud dominant chiffré, les deux "
+                 "autres nommés — détails, cote et registre de toiture laissés "
+                 "à la planche",
+        "bas_du_dessin": f'{max(bas_g, bas_d):.2f} px, marge basse '
+                         f'{VH - max(bas_g, bas_d):.2f} px',
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_affectation(donnees):
+    """L'appui : le motif entier à l'échelle 1 — la partition et ses trois
+    nœuds chiffrés, la cote du ruban dominant, et la rangée des huit modules.
+    Détails d'équipement et libellés longs laissés à la planche."""
+    aff = donnees["affectation"]
+    x_lib_g, x_bar_g, x_bar_d, bar_w = 180.0, 188.0, 392.0, 8.0
+    x0 = x_bar_g + bar_w
+    lib_x = 408.0
+    typos, prods, bas_g, bas_d = _aff_geometrie(aff, 9.0, 64.0, 8.0, 18.0)
+    courts = aff["libelles_courts"]
+    toit = aff["toiture"]
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1",))
+
+    for tp in typos:
+        A(_ruban(x0, x_bar_d, tp["o0"], tp["o1"], tp["a0"], tp["a1"]))
+    for tp in typos:
+        A(rect(x_bar_g, tp["o0"], bar_w, tp["h"], "encre"))
+    for pr in prods:
+        A(rect(x_bar_d, pr["y0"], bar_w, pr["y1"] - pr["y0"], "encre"))
+
+    for tp in typos:
+        centre = (tp["o0"] + tp["o1"]) / 2
+        A(texte(x_lib_g, centre + 4, tp["t"]["libelle"], "sans", 13, 600,
+                "encre", wdth=112, ancre="end"))
+    for pr in prods:
+        centre = pr["centre"]
+        A(texte(lib_x, centre - 2, courts[pr["p"]["cle"]], "sans", 13, 600,
+                "encre", wdth=112))
+        A(texte(lib_x, centre + 14, pr["p"]["valeur_dessinee"], "mono", 11, 500,
+                "pivot", tracking=11 * 0.14))
+
+    # La cote du ruban dominant — la thèse de l'appui.
+    xm = (x0 + x_bar_d) / 2
+    A(texte(xm, prods[0]["centre"] + 3.5, aff["cote_gaz_court"], "mono", 10,
+            500, "encre", ancre="middle", tracking=10 * 0.14))
+
+    # La rangée des modules — comptés, jamais dimensionnés.
+    tw, th, tgap = 14.0, 10.0, 4.0
+    y_mod = 300.0
+    centre_mod = y_mod + th / 2
+    x_mod0 = A_MARGE
+    for i in range(toit["modules"]):
+        A(rect_bord(x_mod0 + i * (tw + tgap), y_mod, tw, th, "clair", "filet-1"))
+    x_fin = x_mod0 + toit["modules"] * (tw + tgap) - tgap
+    A(ligne(x_fin + 8, centre_mod, x_fin + 34, centre_mod, "encre", 1.5))
+    A(fleche(x_fin + 40, centre_mod, "encre", taille=7.0))
+    A(texte(x_fin + 50, centre_mod + 3.5, toit["appui_libelle"], "mono", 10,
+            500, "pivot", tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="la partition entière à l’échelle 1 — typologies, trois rubans, "
+              "trois productions chiffrées, la cote du ruban dominant — et la "
+              "rangée des huit modules fléchée vers l’étage ; détails "
+              "d’équipement laissés à la planche",
+        bas=f'rubans jusqu’à {max(bas_g, bas_d):.0f} px, modules {y_mod:.0f}–'
+            f'{y_mod + th:.0f}, marge basse {AH - (y_mod + th):.0f} px',
+        echelle_derivee="9,0 px par logement — le T4 reste un ruban de 9 px")
+
+
 def _composer(donnees):
+    if "affectation" in donnees:
+        return composer_affectation(donnees)
     if "bascule" in donnees:
         return composer_bascule(donnees)
     if "dedoublement" in donnees:
@@ -1782,6 +2114,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "affectation" in donnees:
+        return composer_vignette_affectation(donnees)
     if "bascule" in donnees:
         return composer_vignette_bascule(donnees)
     if "dedoublement" in donnees:
@@ -1794,6 +2128,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "affectation" in donnees:
+        return composer_appui_affectation(donnees)
     if "bascule" in donnees:
         return composer_appui_bascule(donnees)
     if "dedoublement" in donnees:

@@ -1,0 +1,172 @@
+{
+  "fiche": "logements-ecoquartier-l-houmeau",
+  "archetype": "sankey-energie",
+  "archetype_motif": "La thèse de la fiche est une affectation : seize logements sans aucune chaufferie commune, répartis entre trois familles de production dimensionnées à la typologie — treize chaudières gaz individuelles, une PAC double service pour le T4, deux T1 tout électriques —, et une toiture photovoltaïque elle-même distribuée logement par logement. C’est la famille du Sankey — une proportion portée par la géométrie, l’échelle en pixels par logement — mais aucun mécanisme écrit ne connaît un parc qui s’AFFECTE à des productions : le `partage` divise une production entre consommateurs, le `dedoublement` divise un permis entre marchés. Le mécanisme `affectation` dessine la répartition d’un parc par typologie, et un second registre compte les huit modules de la toiture.",
+  "mecanisme": "affectation",
+  "surtitre": "SCHÉMA DE PRINCIPE · PRODUCTIONS INDIVIDUELLES",
+  "titre": "ÉcoQuartier, seize logements",
+  "sous_titre": "Pas de chaufferie commune : à chaque logement sa production d’énergie",
+  "cartouche_legende": "L’HOUMEAU · 943 m² · 2025",
+  "aria_label": "Schéma de principe d’une opération de seize logements aux productions d’énergie individuelles. À gauche, la barre des typologies : onze T3, deux T2, un T4 et deux T1. Trois rubans, larges comme leur compte de logements, les affectent à trois familles de production : treize logements — les T2 et les T3 — à une chaudière murale gaz à condensation individuelle de 18,5 kilowatts, le gaz compté par logement en gaine palière ; le T4 à une pompe à chaleur air-eau double service avec ballon de 190 litres ; les deux T1 à l’électricité directe avec chauffe-eau thermodynamique de 100 litres sur air extérieur. En dessous, un second registre montre la toiture : huit modules photovoltaïques de 375 watts-crête — 3 000 watts-crête en tout —, chacun muni de son micro-onduleur, alimentent en autoconsommation l’électricité des logements de l’étage, un coffret par logement en gaine technique. Aucune chaufferie commune : l’énergie se produit et se compte logement par logement.",
+  "affectation": {
+    "entete": "SEIZE LOGEMENTS · LES PRODUCTIONS DU DOSSIER DE CONSULTATION · JUILLET 2023",
+    "unite": "logements",
+    "typologies": [
+      {
+        "ordre": 1,
+        "cle": "t3",
+        "libelle": "Onze T3",
+        "logements": 11,
+        "vers": "gaz"
+      },
+      {
+        "ordre": 2,
+        "cle": "t2",
+        "libelle": "Deux T2",
+        "logements": 2,
+        "vers": "gaz"
+      },
+      {
+        "ordre": 3,
+        "cle": "t4",
+        "libelle": "Un T4",
+        "logements": 1,
+        "vers": "pac"
+      },
+      {
+        "ordre": 4,
+        "cle": "t1",
+        "libelle": "Deux T1",
+        "logements": 2,
+        "vers": "elec"
+      }
+    ],
+    "productions": [
+      {
+        "ordre": 1,
+        "cle": "gaz",
+        "libelle": "Chaudière gaz à condensation",
+        "valeur": 13,
+        "valeur_dessinee": "TREIZE",
+        "unite": "logements",
+        "detail": [
+          "MURALE INDIVIDUELLE · 18,5 kW",
+          "GAZ COMPTÉ PAR LOGEMENT",
+          "VENTOUSE INDIVIDUELLE"
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "pac",
+        "libelle": "PAC air/eau double service",
+        "valeur": 1,
+        "valeur_dessinee": "UN",
+        "unite": "logement",
+        "detail": [
+          "4,82 kW À −7 °C",
+          "BALLON DE 190 L INTÉGRÉ"
+        ]
+      },
+      {
+        "ordre": 3,
+        "cle": "elec",
+        "libelle": "Électricité directe",
+        "valeur": 2,
+        "valeur_dessinee": "DEUX",
+        "unite": "logements",
+        "detail": [
+          "RAYONNANTS + SÈCHE-SERVIETTES",
+          "CHAUFFE-EAU THERMODYNAMIQUE",
+          "DE 100 L SUR AIR EXTÉRIEUR"
+        ]
+      }
+    ],
+    "cote_gaz": "TREIZE CHAUDIÈRES INDIVIDUELLES",
+    "cote_gaz_court": "TREIZE CHAUDIÈRES",
+    "toiture": {
+      "entete": "ET EN TOITURE · 3 000 Wc EN AUTOCONSOMMATION INDIVIDUELLE",
+      "modules": 8,
+      "libelle": "Huit modules de 375 Wc",
+      "libelle_detail": "UN MICRO-ONDULEUR PAR MODULE",
+      "vers": "L’électricité des logements de l’étage",
+      "vers_detail": "UN COFFRET EN GAINE TECHNIQUE PAR LOGEMENT",
+      "appui_libelle": "3 000 Wc EN AUTOCONSOMMATION · L’ÉTAGE"
+    },
+    "libelles_courts": {
+      "gaz": "Chaudière gaz",
+      "pac": "PAC air/eau",
+      "elec": "Tout électrique"
+    },
+    "parc_detail": [
+      "DEUX BÂTIMENTS D’UN ÉTAGE",
+      "NEUF LOGEMENTS DE PLAIN-PIED,",
+      "SEPT À L’ÉTAGE"
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "L’énergie se conçoit, se produit et se paie logement par logement.",
+  "vignette_surtitre": "L’ÉNERGIE INDIVIDUALISÉE",
+  "a_valider_ft2e": [
+    {
+      "objet": "Les valeurs dessinées sont celles du dossier de consultation de juillet 2023, pas d’un dossier des ouvrages exécutés",
+      "la_source_affirme": "CCTP et DPGF des lots 09 et 10 (DCE, juillet 2023) : 13 chaudières gaz à condensation (plage 3,4-18,5 kW), 1 PAC air/eau double service (4,82 kW à −7 °C, ballon 190 L), 2 chauffe-eau thermodynamiques de 100 L, 8 modules de 375 Wc à micro-onduleur. L’étude thermique modélise une chaudière « Naia 2 », le CCTP prescrit une « NAIA 3 » ; aucun DOE à l’archive.",
+      "le_dessin_suppose": "Que l’exécution (2024-2025) est conforme à la prescription — l’en-tête de registre nomme le dossier de consultation et son mois. Fournir le DOE ou confirmer les équipements posés, et le dessin sera repris au besoin."
+    },
+    {
+      "objet": "L’affectation des treize chaudières aux T2 et T3 est déduite par élimination",
+      "la_source_affirme": "Le DPGF compte 13 chaudières sans les nommer ; les plans CVC identifient B003 et B004 (T1, chauffe-eau thermodynamique + rayonnants au lot 09) et B005 (« T4 PAC »). Restent 13 logements : les deux T2 et les onze T3.",
+      "le_dessin_suppose": "Que la déduction 13 = 2 T2 + 11 T3 est la bonne lecture — aucune pièce ne l’écrit en toutes lettres. Confirmer."
+    },
+    {
+      "objet": "Huit modules pour sept logements à l’étage",
+      "la_source_affirme": "Le CCTP écrit « autoconsommation des logements en R+1, 3 000 Wc » ; le DPGF compte 8 modules, 8 micro-onduleurs et 8 coffrets AC « dans la GTL de chaque logement du R+1 » ; les plans donnent 7 logements à l’étage.",
+      "le_dessin_suppose": "Le dessin compte huit modules et ne trace pas un trait par logement — l’affectation exacte module ↔ logement reste à confirmer (un logement à deux modules ? un coffret au T4-PAC ?)."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Le CR de chantier n° 60 (30/06/2025) porte « RÉCEPTION LE 30/06 (hors VRD et espaces verts) » ; le classeur FT2E range l’affaire en « Finalisées en 2025 ». Le PV de réception des travaux est absent de l’archive.",
+      "le_dessin_suppose": "Que le cartouche porte 2025, millésime de la réception annoncée au CR. À confirmer avec le PV (question B1 de la collecte)."
+    },
+    {
+      "objet": "La surface du cartouche",
+      "la_source_affirme": "La synthèse RE2020 donne 357,90 + 585,60 = 943,50 m² de surface habitable ; le document commercial publie 943 m².",
+      "le_dessin_suppose": "L’arrondi commercial à 943 m². Confirmer la surface à publier."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 22-013 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tous les montants : enveloppe travaux, honoraires du groupement et part FT2E, coût cible du programme.",
+    "Noms de tiers : maîtrise d’ouvrage, aménageur de la ZAC, agence d’architecture, BET cotraitants, économiste-OPC, bureau de contrôle, entreprises des lots, gestionnaires de réseaux, fabricants des chaudières, de la PAC, des chauffe-eau, des groupes de ventilation, des modules et des micro-onduleurs, organisme certificateur. Les équipements sont désignés par leur fonction, jamais par une marque.",
+    "Les financements locatifs (PLUS, PLAI, PLS) et toute donnée locative — la fiche porte la mixité, le dessin montre l’énergie.",
+    "Les résultats RE2020 chiffrés (Bbio, Cep, Cep,nr, perméabilité) — la fiche les porte, et ils relèvent du calcul réglementaire, pas du mécanisme d’affectation.",
+    "Toute géométrie d’ouvrage : ni plan de masse, ni façades, ni implantation des deux bâtiments — typologies et productions sont des barres dont seule la hauteur porte du sens, et les modules des rectangles comptés, jamais dimensionnés."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "conservation": "11 + 2 + 1 + 2 = 16 logements à gauche ; 13 + 1 + 2 = 16 à droite — colonnes closes à 524.00 et 540.00 px",
+    "echelle": "17.0 px par logement — un T4 fait un ruban de 17 px, lisible sans étiquette",
+    "demonstration": "le ruban des chaudières porte 13/16 logements (81 % de l’encre). Texte masqué : une barre segmentée se répartit en trois rubans inégaux, et huit modules identiques fléchés vers la droite — l’affectation et l’individualisation se lisent sans un mot",
+    "topologie": "typologies x 366, rubans 375 → 906, productions étiquetées jusqu’à 1144 px — T3 et T2 convergent vers la première barre : aucun croisement",
+    "toiture": "8 modules de 22 x 16 px — comptés, jamais dimensionnés — flèche 596 → 640, libellé à 652 px",
+    "bas_du_dessin": "rubans jusqu’à 540.00 px, registre toiture 592–654, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 242 x 30 px = 7260 px², soit 0.76 % de la planche",
+    "depassements": "aucun — toutes les chaînes tiennent leur colonne",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la barre segmentée des typologies, les trois rubans inégaux et les trois productions ; le nœud dominant chiffré, les deux autres nommés — détails, cote et registre de toiture laissés à la planche",
+    "bas_du_dessin": "176.00 px, marge basse 24.00 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "la partition entière à l’échelle 1 — typologies, trois rubans, trois productions chiffrées, la cote du ruban dominant — et la rangée des huit modules fléchée vers l’étage ; détails d’équipement laissés à la planche",
+    "bas_du_dessin": "rubans jusqu’à 244 px, modules 300–310, marge basse 58 px",
+    "echelle_derivee": "9,0 px par logement — le T4 reste un ruban de 9 px"
+  }
+}
