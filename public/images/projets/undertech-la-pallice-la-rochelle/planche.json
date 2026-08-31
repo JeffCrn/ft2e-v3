@@ -1,0 +1,202 @@
+{
+  "fiche": "undertech-la-pallice-la-rochelle",
+  "archetype": "tableau-electrique",
+  "archetype_motif": "La thèse de la fiche est une bifurcation de puissance : deux champs photovoltaïques conçus dans le même dossier de consultation, dont l’énergie n’a pas la même destination — les ateliers vendent tout au réseau public, les bureaux consomment sur place. C’est le motif source → barres → départs → point de livraison de l’archétype tableau-électrique, dédoublé et mis à l’échelle commune : le champ des ateliers est cinq fois celui des bureaux, et la barre de son point de livraison est plus courte que la somme de ses départs, parce que l’injection est plafonnée. La géométrie porte seule les deux démonstrations — le rapport des deux champs, et le bridage.",
+  "mecanisme": "regimes",
+  "surtitre": "SCHÉMA DE PRINCIPE · DEUX CHAMPS PHOTOVOLTAÏQUES SUR UNE MÊME OPÉRATION",
+  "titre": "Parc Undertech",
+  "sous_titre": "Deux champs solaires dans le même dossier, deux destinations inverses",
+  "cartouche_legende": "LA ROCHELLE · 10 093 m² · 2024",
+  "aria_label": "Schéma de principe des deux champs photovoltaïques d’un parc de bureaux et d’ateliers. À gauche, le champ des ateliers : 1 104 panneaux de 330 watts-crête, soit 364 kilowatts-crête, dont la production passe par cinq groupes d’onduleurs — deux de 80 kilovoltampères, puis 60, 55 et 40 — totalisant 315 kilovoltampères, avant de rejoindre une logette de comptage en limite de propriété équipée d’un disjoncteur de branchement de 400 ampères. La barre du point de livraison y est plus courte que la somme des départs, parce que l’injection sur le réseau public est plafonnée à 250 kilovoltampères et que le cahier des charges prescrit le bridage correspondant. À droite, à la même échelle, le champ des bureaux : 240 panneaux de 300 watts-crête, soit 72 kilowatts-crête — cinq fois moins —, distribués sur trois onduleurs de 25 kilovoltampères, un par immeuble, qui se raccordent au tableau général des services généraux. Les deux chaînes ne se rejoignent jamais, et leurs flèches de sortie pointent en sens inverses : l’énergie des ateliers quitte la parcelle, celle des bureaux y reste.",
+  "regimes": {
+    "entete": "DEUX CHAMPS PHOTOVOLTAÏQUES SUR LA MÊME OPÉRATION · CE QUE DEVIENT L’ÉNERGIE PRODUITE — DCE DE DÉCEMBRE 2021",
+    "registres": {
+      "gauche": "LES ATELIERS · REVENTE TOTALE AU RÉSEAU PUBLIC",
+      "droite": "LES BUREAUX · AUTOCONSOMMATION SUR PLACE"
+    },
+    "unite_champ": "kWc",
+    "unite_groupe": "kVA",
+    "champs": [
+      {
+        "cle": "ateliers",
+        "ordre": 1,
+        "libelle": "Toitures des ateliers",
+        "modules": "1 104 PANNEAUX DE 330 Wc",
+        "valeur": 364,
+        "unite": "kWc",
+        "detail": "PLOTS POLYMÈRE SUR ÉTANCHÉITÉ · SANS PERFORATION"
+      },
+      {
+        "cle": "bureaux",
+        "ordre": 2,
+        "libelle": "Toitures des bureaux",
+        "modules": "240 PANNEAUX DE 300 Wc",
+        "valeur": 72,
+        "unite": "kWc",
+        "detail": "BAC SUPPORT · POSE EN PAYSAGE"
+      }
+    ],
+    "groupes": {
+      "ateliers": [
+        {
+          "nom": "B1",
+          "ordre": 1,
+          "libelle": "Groupe B1",
+          "valeur": 80,
+          "unite": "kVA"
+        },
+        {
+          "nom": "B2",
+          "ordre": 2,
+          "libelle": "Groupe B2",
+          "valeur": 80,
+          "unite": "kVA"
+        },
+        {
+          "nom": "C1",
+          "ordre": 3,
+          "libelle": "Groupe C1",
+          "valeur": 60,
+          "unite": "kVA"
+        },
+        {
+          "nom": "C2",
+          "ordre": 4,
+          "libelle": "Groupe C2",
+          "valeur": 55,
+          "unite": "kVA"
+        },
+        {
+          "nom": "C3",
+          "ordre": 5,
+          "libelle": "Groupe C3",
+          "valeur": 40,
+          "unite": "kVA"
+        }
+      ],
+      "bureaux": [
+        {
+          "nom": "A",
+          "ordre": 1,
+          "libelle": "Immeuble A",
+          "valeur": 25,
+          "unite": "kVA"
+        },
+        {
+          "nom": "B",
+          "ordre": 2,
+          "libelle": "Immeuble B",
+          "valeur": 25,
+          "unite": "kVA"
+        },
+        {
+          "nom": "C",
+          "ordre": 3,
+          "libelle": "Immeuble C",
+          "valeur": 25,
+          "unite": "kVA"
+        }
+      ]
+    },
+    "livraisons": {
+      "ateliers": {
+        "libelle": "Logette de comptage en limite de propriété",
+        "detail": "DISJONCTEUR DE BRANCHEMENT 400 A",
+        "plafond": 250,
+        "unite": "kVA",
+        "destination": "RÉSEAU PUBLIC",
+        "mot_barre": "INJECTÉS",
+        "sens": "sortie",
+        "franchissement": "LIMITE DE PROPRIÉTÉ"
+      },
+      "bureaux": {
+        "libelle": "Tableau général des services généraux",
+        "detail": "UN ONDULEUR PAR IMMEUBLE",
+        "plafond": null,
+        "unite": "kVA",
+        "destination": "COMMUNS ET PARKING",
+        "mot_barre": "RACCORDÉS",
+        "sens": "retour"
+      }
+    },
+    "vignette_destinations": {
+      "ateliers": "VENDU AU RÉSEAU",
+      "bureaux": "CONSOMMÉ SUR PLACE"
+    },
+    "appui_registres": {
+      "ateliers": "LES ATELIERS · REVENTE TOTALE",
+      "bureaux": "LES BUREAUX · AUTOCONSOMMATION"
+    },
+    "note_pied": "LE BRIDAGE EST PRESCRIT AU CAHIER DES CHARGES · 315 kVA D’ONDULEURS POUR UNE INJECTION PLAFONNÉE À 250 kVA"
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Le régime d’une installation solaire se décide sur la destination de l’énergie, pas sur la surface de toiture.",
+  "vignette_surtitre": "DEUX CHAMPS, DEUX SORTIES",
+  "a_valider_ft2e": [
+    {
+      "objet": "Des valeurs de DCE, pas d’as-built",
+      "la_source_affirme": "Toutes les valeurs du dessin (1 104 et 240 panneaux, 330 et 300 Wc, 364 et 72 kWc, les cinq groupes d’onduleurs 80-80-60-55-40 kVA, les trois onduleurs de 25 kVA, le disjoncteur de 400 A, le plafond d’injection de 250 kVA) viennent des CCTP B10 et C11 du DCE de décembre 2021.",
+      "le_dessin_suppose": "Que les deux champs ont été réalisés conformément au dossier de consultation. Le dossier des ouvrages exécutés n’est pas à l’archive, et les comptes rendus de chantier ne portent pas le compte des modules posés."
+    },
+    {
+      "objet": "La composition des blocs d’ateliers est contradictoire au CCTP",
+      "la_source_affirme": "Le CCTP B10 § 2.2 annonce la revente « sur les toitures des ateliers groupés B et C (Ateliers 1-2-3-4-5-6-7-11-12-13-14-15) », tandis que son § 3.3 dimensionne le bloc B sur les ateliers 5-6-7-13-14-15 (575 modules, 189 kWc) et le bloc C sur les ateliers 8-9-10-16-17 (529 modules, 175 kWc). La DPGF porte une troisième colonne de prix (ateliers 1-2-3-4-11-12) que le CCTP ne dimensionne pas.",
+      "le_dessin_suppose": "Le comptage du § 3.3, seul endroit où les modules et les onduleurs sont dénombrés : 1 104 modules et 364 kWc au total. Le dessin ne nomme aucun numéro d’atelier et n’ordonne les cinq groupes que par bloc, puis par puissance décroissante."
+    },
+    {
+      "objet": "Le bridage est une éventualité au CCTP, une géométrie au dessin",
+      "la_source_affirme": "« Sachant que la puissance injectée sur le réseau ne sera pas supérieure à 250 kVA, un bridage pourra être envisagé » (CCTP B10 § 3.3) ; le raccordement est prévu « pour une injection maximum de 250 kVA » (§ 3.10).",
+      "le_dessin_suppose": "Que le plafond de 250 kVA s’applique, et le porte en une barre plus courte que la somme des départs. Si le bridage n’a finalement pas été mis en œuvre, la barre du point de livraison est à ramener à 315 kVA et la note de pied à retirer."
+    },
+    {
+      "objet": "Deux échelles distinctes, jamais mêlées",
+      "la_source_affirme": "Les champs se mesurent en kilowatts-crête, les onduleurs en kilovoltampères : ce ne sont pas les mêmes grandeurs.",
+      "le_dessin_suppose": "Deux échelles séparées — une pour les bandeaux de champ, une pour les barres de puissance — chacune commune aux deux registres, de sorte que la comparaison gauche-droite reste vraie dans les deux cas. Les valeurs sont publiées au bloc controles."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Réception des travaux convoquée le 13 février 2024 (compte rendu OPC n° 66 du 6 février 2024) ; le procès-verbal de réception n’est pas à l’archive.",
+      "le_dessin_suppose": "Le millésime 2024 au cartouche, cohérent avec le classeur de références FT2E (tranche « Finalisées en 2024 »). Question B1 de la fiche de collecte."
+    },
+    {
+      "objet": "La surface portée au cartouche",
+      "la_source_affirme": "Le document commercial FT2E donne 3 889 m² de bureaux et 6 204 m² d’ateliers ; la synthèse thermique donne 1 101 et 2 250 m² de surface utile pour les seuls bâtiments A et B.",
+      "le_dessin_suppose": "La somme du document commercial, 10 093 m², qui est la seule grandeur couvrant l’opération entière. Question B5."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 20-031 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tous les montants : forfait de maîtrise d’œuvre 33 100 € HT, reprise thermique 3 800 € HT, montant des travaux annoncé au document commercial.",
+    "Tous les tiers : le maître d’ouvrage, l’architecte, les autres bureaux d’études du groupement, l’économiste-ordonnanceur, le contrôleur technique, et les entreprises titulaires des lots.",
+    "Toutes les marques citées « à titre indicatif » aux CCTP (modules, onduleurs, bac support, pompe à chaleur, caissons de ventilation).",
+    "Aucune géométrie d’ouvrage : ni implantation des bâtiments, ni calepinage de toiture, ni tracé de réseau — le dessin est une topologie de puissance, pas un plan.",
+    "Le millésime d’ouverture de l’affaire."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "echelle_des_champs": "1.021978 px par kWc, commune aux deux registres — 364 contre 72 donne 372.0 contre 73.6 px, soit un rapport de 5.06",
+    "echelle_des_departs": "1.079365 px par kVA, commune aux deux registres — largeur utile 372 px moins 8 px d’écart entre blocs",
+    "demonstration": "à gauche la barre de livraison mesure 269.8 px pour 340.0 px de départs, soit 70.2 px de moins (315→250 kVA) ; à droite les deux barres sont égales (75 = 75). Texte masqué : deux peignes de largeurs très différentes, dont un seul déborde de son pied",
+    "departs": "ateliers : B1 86.3 px, B2 86.3 px, C1 64.8 px, C2 59.4 px, C3 43.2 px ; bureaux : A 27.0 px, B 27.0 px, C 27.0 px",
+    "registres": "gauche x 56–586, droite x 614–1144, filet de séparation à x 600",
+    "bas_du_dessin": "destinations à 572, note de pied à 618, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 283 x 30 px = 8490 px², soit 0.88 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "les deux champs EMPILÉS à l’échelle commune (0.7088 px par kWc — 258 contre 51 px) et leurs deux destinations ; départs, barres, point de livraison et note laissés à la planche",
+    "bas_du_dessin": "172.0 px, marge basse 28.0 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les deux registres empilés à l’échelle 1 : chaque champ à l’échelle commune (0.9341 px par kWc), sa somme de départs et ce que son point de livraison retient (1.0794 px par kVA), sa destination — blocs d’onduleurs, libellés de point de livraison, note et cartouche laissés à la planche",
+    "bas_du_dessin": "destination du second registre à 318 px — marge basse 50 px",
+    "echelle_derivee": "champs 0.9341 px/kWc, départs 1.0794 px/kVA sur 315 kVA et 5 départs max"
+  }
+}

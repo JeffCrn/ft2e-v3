@@ -2559,7 +2559,375 @@ def composer_appui_mutualisation(donnees):
                 "doublés de deux lignes en toutes lettres")
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Mécanisme REGIMES — deux champs photovoltaïques sur la même opération, dont
+# l'énergie n'a pas la même destination (session N11, parc Undertech).
+#
+# Le motif de l'archétype — source, barres, départs, point de livraison — est
+# DÉDOUBLÉ en deux registres mis à des échelles COMMUNES, et c'est le
+# dédoublement qui démontre : le champ des ateliers est cinq fois celui des
+# bureaux (même échelle en px par kWc), et à gauche seulement la barre du point
+# de livraison est plus courte que la somme des départs, parce que l'injection
+# sur le réseau public est plafonnée (même échelle en px par kVA).
+#
+# Deux échelles distinctes, jamais mêlées : les champs se comptent en
+# kilowatts-crête, les onduleurs en kilovoltampères. Chacune est commune aux
+# deux registres — sans quoi la comparaison gauche-droite serait fausse.
+# ─────────────────────────────────────────────────────────────────────────────
+RG_X0 = {"gauche": MARGE, "droite": 614}      # origine des deux registres
+RG_L_REG = 530                                 # largeur d'un registre
+RG_X_SEP = 600                                 # le filet qui les sépare
+RG_SEP_Y0, RG_SEP_Y1 = 206, 586
+RG_D_ETIQ = 142                                # fin des étiquettes (ancre end)
+RG_D_BARRE = 158                               # départ des barres et bandeaux
+RG_L_MAX = RG_L_REG - RG_D_BARRE               # 372 — largeur utile d'un registre
+RG_ECART = 8.0                                 # entre deux blocs d'onduleurs
+
+RG_Y_ENTETE = 190
+RG_Y_REG = 214
+RG_CH_Y0, RG_CH_Y1 = 232, 264                  # le bandeau de champ
+RG_Y_CH_ETIQ = 252
+RG_Y_LIB = 288
+RG_Y_MODULES = 306
+RG_Y_DETAIL = 320
+RG_OND_Y0, RG_OND_Y1 = 342, 386                # les blocs d'onduleurs
+RG_Y_OND_NOM = 369
+RG_Y_OND_VAL = 400
+RG_COL_Y0, RG_COL_Y1 = 416, 428                # la somme des départs
+RG_Y_COL_ETIQ = 425
+RG_LIV_Y0, RG_LIV_Y1 = 434, 446                # ce que le point de livraison prend
+RG_Y_LIV_ETIQ = 443
+RG_PL_Y0, RG_PL_Y1 = 468, 520                  # le bloc du point de livraison
+RG_Y_PL_LIB = 493
+RG_Y_PL_DET = 511
+RG_Y_FLECHE = 560
+RG_Y_LIMITE = 546                              # la ligne que seule la sortie franchit
+RG_Y_DEST = 584
+RG_Y_FILET_NOTE = 600
+RG_Y_NOTE = 618
+RG_Y_PHRASE = 688
+
+
+def _rg_echelles(rg, l_max=RG_L_MAX, ecart=RG_ECART):
+    """Les deux échelles, chacune commune aux deux registres.
+
+    px par kWc : le plus grand champ occupe toute la largeur utile.
+    px par kVA : la plus longue rangée de départs l'occupe aussi, écarts déduits
+    — de sorte que la barre de collecte (sans écarts) et la rangée de blocs
+    (avec écarts) restent comparables d'un registre à l'autre.
+    """
+    kwc_max = max(c["valeur"] for c in rg["champs"])
+    n_max = max(len(g) for g in rg["groupes"].values())
+    kva_max = max(sum(o["valeur"] for o in g) for g in rg["groupes"].values())
+    px_kwc = l_max / kwc_max
+    px_kva = (l_max - ecart * (n_max - 1)) / kva_max
+    return px_kwc, px_kva
+
+
+def _rg_barre_etiquetee(A, x0, y0, y1, largeur, etiquette, y_etiq):
+    """Une barre pleine en encre, précédée à gauche de sa cote chiffrée."""
+    A(rect(x0 + RG_D_BARRE, y0, largeur, y1 - y0, "encre"))
+    A(texte(x0 + RG_D_ETIQ, y_etiq, etiquette, "mono", 10, 500, "encre",
+            ancre="end", tracking=10 * 0.14))
+
+
+def _rg_registre(A, rg, cote, x0, px_kwc, px_kva, libelle_registre):
+    """Un registre entier — champ, départs, les deux barres, point de livraison.
+    Rend ses mesures pour le bloc `controles`."""
+    champ = next(c for c in rg["champs"] if c["cle"] == cote)
+    groupes = rg["groupes"][cote]
+    liv = rg["livraisons"][cote]
+    somme = sum(o["valeur"] for o in groupes)
+    retenu = liv["plafond"] if liv["plafond"] is not None else somme
+
+    A(texte(x0, RG_Y_REG, libelle_registre, "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Le champ : un bandeau dont la largeur EST la puissance crête ─────────
+    l_champ = champ["valeur"] * px_kwc
+    A(rect_bord(x0 + RG_D_BARRE, RG_CH_Y0, l_champ, RG_CH_Y1 - RG_CH_Y0,
+                "clair", "filet-1"))
+    A(texte(x0 + RG_D_ETIQ, RG_Y_CH_ETIQ,
+            f'{champ["valeur"]}{NN}{champ["unite"]}', "mono", 11, 500, "encre",
+            ancre="end", tabulaire=True))
+    # Libellé, compte et détail s’alignent sur la COLONNE DES MESURES
+    # (x0 + RG_D_BARRE) et non sur le bord du registre : sans cela le texte
+    # s’intercale à gauche entre deux groupes de barres, et la lecture zigzague.
+    A(texte(x0 + RG_D_BARRE, RG_Y_LIB, champ["libelle"], "sans", 15, 400,
+            "encre", wdth=100))
+    A(texte(x0 + RG_D_BARRE, RG_Y_MODULES, champ["modules"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(x0 + RG_D_BARRE, RG_Y_DETAIL, champ["detail"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Les départs : un bloc par groupe, largeur proportionnelle ────────────
+    x = x0 + RG_D_BARRE
+    largeurs = []
+    for o in groupes:
+        l = o["valeur"] * px_kva
+        A(rect_bord(x, RG_OND_Y0, l, RG_OND_Y1 - RG_OND_Y0, "papier", "filet-1"))
+        A(texte(x + l / 2, RG_Y_OND_NOM, o["nom"], "sans", 12, 600, "encre",
+                wdth=112, ancre="middle"))
+        A(texte(x + l / 2, RG_Y_OND_VAL, str(o["valeur"]), "mono", 10, 500,
+                "pivot", ancre="middle", tabulaire=True))
+        largeurs.append((o["nom"], l))
+        x += l + RG_ECART
+
+    # ── Les deux barres : ce que les départs font, ce que la livraison prend ─
+    _rg_barre_etiquetee(A, x0, RG_COL_Y0, RG_COL_Y1, somme * px_kva,
+                        f'{somme}{NN}{rg["unite_groupe"]}{NN}D{chr(8217)}ONDULEURS',
+                        RG_Y_COL_ETIQ)
+    _rg_barre_etiquetee(A, x0, RG_LIV_Y0, RG_LIV_Y1, retenu * px_kva,
+                        f'{retenu}{NN}{liv["unite"]}{NN}{liv["mot_barre"]}',
+                        RG_Y_LIV_ETIQ)
+
+    # ── Le point de livraison, puis la destination ──────────────────────────
+    A(rect_bord(x0 + RG_D_BARRE, RG_PL_Y0, RG_L_MAX, RG_PL_Y1 - RG_PL_Y0,
+                "calcaire", "filet-1"))
+    A(texte(x0 + RG_D_BARRE + 16, RG_Y_PL_LIB, liv["libelle"], "sans", 15, 400,
+            "encre", wdth=100))
+    A(texte(x0 + RG_D_BARRE + 16, RG_Y_PL_DET, liv["detail"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    x_fl = x0 + RG_D_BARRE + 40
+    A(ligne(x_fl, RG_PL_Y1, x_fl, RG_Y_FLECHE - 9, "encre", 1.4))
+    # Seul le registre dont l’énergie SORT franchit une ligne : c’est ce
+    # franchissement, et non la flèche seule, qui porte géométriquement les
+    # « deux destinations inverses » du sous-titre. La ligne est doublée du
+    # mot, et le libellé du point de livraison la nomme déjà.
+    if liv["sens"] == "sortie":
+        A(_pointille(x0 + RG_D_BARRE, RG_Y_LIMITE, x0 + RG_L_REG, RG_Y_LIMITE,
+                     "encre", 1.1, "5 5"))
+        A(texte(x0 + RG_L_REG, RG_Y_LIMITE - 7, liv["franchissement"], "mono",
+                10, 500, "pivot", ancre="end", tracking=10 * 0.14))
+    A(fleche(x_fl, RG_Y_FLECHE, "encre", "bas"))
+    A(texte(x_fl + 20, RG_Y_DEST - 12, liv["destination"], "mono", 11, 500,
+            "encre", tracking=11 * 0.14))
+
+    return {"somme": somme, "retenu": retenu, "l_champ": l_champ,
+            "largeurs": largeurs}
+
+
+def composer_regimes(donnees):
+    rg = donnees["regimes"]
+    px_kwc, px_kva = _rg_echelles(rg)
+    cotes = [c["cle"] for c in rg["champs"]]
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, strokes=("filet-1", "filet-3", "encre"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400, "pivot",
+            wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête général — il empêche la planche de mentir ────────────────────
+    A(texte(MARGE, RG_Y_ENTETE, rg["entete"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Les deux registres, à échelles communes ──────────────────────────────
+    A(ligne(RG_X_SEP, RG_SEP_Y0, RG_X_SEP, RG_SEP_Y1, "filet-3", 1))
+    mesures = {}
+    for cote, cle_x in zip(cotes, ("gauche", "droite")):
+        mesures[cote] = _rg_registre(A, rg, cote, RG_X0[cle_x], px_kwc,
+                                     px_kva, rg["registres"][cle_x])
+
+    # ── Note de pied, phrase de principe, cartouche ─────────────────────────
+    A(rect(MARGE, RG_Y_FILET_NOTE, UTILE, 1, "filet-3"))
+    A(texte(MARGE, RG_Y_NOTE, rg["note_pied"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(MARGE, RG_Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600, round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+    A("</svg>")
+
+    g, d = mesures[cotes[0]], mesures[cotes[1]]
+    ch_g = next(c for c in rg["champs"] if c["cle"] == cotes[0])
+    ch_d = next(c for c in rg["champs"] if c["cle"] == cotes[1])
+    # Le dessin ne peut pas mentir sur ses sommes : on les recalcule ici.
+    assert g["somme"] == sum(o["valeur"] for o in rg["groupes"][cotes[0]])
+    assert d["somme"] == sum(o["valeur"] for o in rg["groupes"][cotes[1]])
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "echelle_des_champs": f"{px_kwc:.6f} px par {rg['unite_champ']}, commune "
+                              f"aux deux registres — {ch_g['valeur']} contre "
+                              f"{ch_d['valeur']} donne {g['l_champ']:.1f} contre "
+                              f"{d['l_champ']:.1f} px, soit un rapport de "
+                              f"{ch_g['valeur']/ch_d['valeur']:.2f}",
+        "echelle_des_departs": f"{px_kva:.6f} px par {rg['unite_groupe']}, commune "
+                               f"aux deux registres — largeur utile {RG_L_MAX} px "
+                               f"moins {RG_ECART:.0f} px d’écart entre blocs",
+        "demonstration": f"à gauche la barre de livraison mesure "
+                         f"{g['retenu']*px_kva:.1f} px pour "
+                         f"{g['somme']*px_kva:.1f} px de départs, soit "
+                         f"{(g['somme']-g['retenu'])*px_kva:.1f} px de moins "
+                         f"({g['somme']}→{g['retenu']} {rg['unite_groupe']}) ; "
+                         f"à droite les deux barres sont égales "
+                         f"({d['somme']} = {d['retenu']}). Texte masqué : deux "
+                         f"peignes de largeurs très différentes, dont un seul "
+                         f"déborde de son pied",
+        "departs": " ; ".join(f"{cote} : " + ", ".join(
+            f"{n} {l:.1f} px" for n, l in mesures[cote]["largeurs"])
+            for cote in cotes),
+        "registres": f"gauche x {RG_X0['gauche']}–{RG_X0['gauche']+RG_L_REG}, "
+                     f"droite x {RG_X0['droite']}–{RG_X0['droite']+RG_L_REG}, "
+                     f"filet de séparation à x {RG_X_SEP}",
+        "bas_du_dessin": f"destinations à {RG_Y_DEST - 12}, note de pied à "
+                         f"{RG_Y_NOTE}, phrase de principe à {RG_Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
+                         f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur*H_CARTOUCHE} px², soit "
+                            f"{largeur*H_CARTOUCHE/(W*H)*100:.2f} % de la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 "
+                         f"(1152 / {W})",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── La vignette : les deux champs EMPILÉS, à l'échelle commune ───────────────
+# Côte à côte, deux registres de 136 px ne portent plus rien ; empilés, le
+# rapport des deux champs se lit d'un coup d'œil, et c'est la thèse.
+RGV_X0 = 14.0
+RGV_L_MAX = 258.0
+RGV_H = 26.0
+RGV_Y = {"champ1": 52.0, "champ2": 122.0}
+RGV_DY_VAL = -8.0
+RGV_DY_FLECHE = 24.0
+
+
+def composer_vignette_regimes(donnees):
+    rg = donnees["regimes"]
+    px_kwc = RGV_L_MAX / max(c["valeur"] for c in rg["champs"])
+    courts = rg["vignette_destinations"]
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, strokes=("filet-1", "encre"))
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 24, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    bas = 0.0
+    for i, champ in enumerate(rg["champs"]):
+        y = RGV_Y[f"champ{i+1}"]
+        l = champ["valeur"] * px_kwc
+        A(texte(RGV_X0, y + RGV_DY_VAL, f'{champ["valeur"]}{NN}{champ["unite"]}',
+                "mono", 10, 500, "encre", tabulaire=True))
+        A(rect_bord(RGV_X0, y, l, RGV_H, "clair", "filet-1"))
+        x_fl = RGV_X0 + 14
+        A(ligne(x_fl, y + RGV_H, x_fl, y + RGV_H + RGV_DY_FLECHE - 7, "encre", 1.3))
+        A(fleche(x_fl, y + RGV_H + RGV_DY_FLECHE, "encre", "bas"))
+        A(texte(x_fl + 16, y + RGV_H + RGV_DY_FLECHE - 1,
+                courts[champ["cle"]], "mono", 9, 500, "pivot", tracking=9 * 0.14))
+        bas = y + RGV_H + RGV_DY_FLECHE
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": f"les deux champs EMPILÉS à l’échelle commune "
+                 f"({px_kwc:.4f} px par {rg['unite_champ']} — "
+                 f"{rg['champs'][0]['valeur']*px_kwc:.0f} contre "
+                 f"{rg['champs'][1]['valeur']*px_kwc:.0f} px) et leurs deux "
+                 f"destinations ; départs, barres, point de livraison et note "
+                 f"laissés à la planche",
+        "bas_du_dessin": f"{bas:.1f} px, marge basse {VH - bas:.1f} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── L'appui : le motif entier à l'échelle 1, les deux registres empilés ──────
+RGA_X_ETIQ = 132.0
+RGA_X_BARRE = 140.0
+RGA_L_MAX = 340.0
+RGA_Y = {"champ1": 80.0, "champ2": 224.0}
+RGA_H_CHAMP = 28.0
+RGA_DY_COL = 46.0
+RGA_DY_LIV = 62.0
+RGA_H_BARRE = 10.0
+RGA_DY_DEST = 94.0
+RGA_DY_ENTETE = -14.0
+
+
+def composer_appui_regimes(donnees):
+    rg = donnees["regimes"]
+    px_kwc = RGA_L_MAX / max(c["valeur"] for c in rg["champs"])
+    n_max = max(len(g) for g in rg["groupes"].values())
+    kva_max = max(sum(o["valeur"] for o in g) for g in rg["groupes"].values())
+    px_kva = RGA_L_MAX / kva_max
+    courts = rg["appui_registres"]
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1", "encre"))
+
+    bas = 0.0
+    for i, champ in enumerate(rg["champs"]):
+        cote = champ["cle"]
+        y = RGA_Y[f"champ{i+1}"]
+        groupes = rg["groupes"][cote]
+        liv = rg["livraisons"][cote]
+        somme = sum(o["valeur"] for o in groupes)
+        retenu = liv["plafond"] if liv["plafond"] is not None else somme
+
+        A(texte(RGA_X_BARRE, y + RGA_DY_ENTETE, courts[cote], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        A(rect_bord(RGA_X_BARRE, y, champ["valeur"] * px_kwc, RGA_H_CHAMP,
+                    "clair", "filet-1"))
+        A(texte(RGA_X_ETIQ, y + 18, f'{champ["valeur"]}{NN}{champ["unite"]}',
+                "mono", 11, 500, "encre", ancre="end", tabulaire=True))
+
+        A(rect(RGA_X_BARRE, y + RGA_DY_COL, somme * px_kva, RGA_H_BARRE, "encre"))
+        A(texte(RGA_X_ETIQ, y + RGA_DY_COL + 9, f'{somme}{NN}{rg["unite_groupe"]}',
+                "mono", 10, 500, "encre", ancre="end", tabulaire=True))
+        A(rect(RGA_X_BARRE, y + RGA_DY_LIV, retenu * px_kva, RGA_H_BARRE, "encre"))
+        A(texte(RGA_X_ETIQ, y + RGA_DY_LIV + 9, f'{retenu}{NN}{liv["unite"]}',
+                "mono", 10, 500, "encre", ancre="end", tabulaire=True))
+
+        x_fl = RGA_X_BARRE + 12
+        A(ligne(x_fl, y + RGA_DY_LIV + RGA_H_BARRE, x_fl,
+                y + RGA_DY_DEST - 8, "encre", 1.3))
+        A(fleche(x_fl, y + RGA_DY_DEST, "encre", "bas"))
+        A(texte(x_fl + 18, y + RGA_DY_DEST - 1, liv["destination"], "mono", 10,
+                500, "encre", tracking=10 * 0.14))
+        bas = y + RGA_DY_DEST
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"les deux registres empilés à l’échelle 1 : chaque champ à "
+              f"l’échelle commune ({px_kwc:.4f} px par {rg['unite_champ']}), sa "
+              f"somme de départs et ce que son point de livraison retient "
+              f"({px_kva:.4f} px par {rg['unite_groupe']}), sa destination — "
+              f"blocs d’onduleurs, libellés de point de livraison, note et "
+              f"cartouche laissés à la planche",
+        bas=f"destination du second registre à {bas:.0f} px — marge basse "
+            f"{AH - bas:.0f} px",
+        echelle_derivee=f"champs {px_kwc:.4f} px/{rg['unite_champ']}, départs "
+                        f"{px_kva:.4f} px/{rg['unite_groupe']} sur "
+                        f"{kva_max} {rg['unite_groupe']} et {n_max} départs max")
+
+
 def _composer(donnees):
+    if "regimes" in donnees:
+        return composer_regimes(donnees)
     if "mutualisation" in donnees:
         return composer_mutualisation(donnees)
     if "montee" in donnees:
@@ -2572,6 +2940,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "regimes" in donnees:
+        return composer_vignette_regimes(donnees)
     if "mutualisation" in donnees:
         return composer_vignette_mutualisation(donnees)
     if "montee" in donnees:
@@ -2584,6 +2954,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "regimes" in donnees:
+        return composer_appui_regimes(donnees)
     if "mutualisation" in donnees:
         return composer_appui_mutualisation(donnees)
     if "montee" in donnees:

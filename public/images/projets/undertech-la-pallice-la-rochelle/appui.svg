@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe des deux champs photovoltaïques d’un parc de bureaux et d’ateliers. À gauche, le champ des ateliers : 1 104 panneaux de 330 watts-crête, soit 364 kilowatts-crête, dont la production passe par cinq groupes d’onduleurs — deux de 80 kilovoltampères, puis 60, 55 et 40 — totalisant 315 kilovoltampères, avant de rejoindre une logette de comptage en limite de propriété équipée d’un disjoncteur de branchement de 400 ampères. La barre du point de livraison y est plus courte que la somme des départs, parce que l’injection sur le réseau public est plafonnée à 250 kilovoltampères et que le cahier des charges prescrit le bridage correspondant. À droite, à la même échelle, le champ des bureaux : 240 panneaux de 300 watts-crête, soit 72 kilowatts-crête — cinq fois moins —, distribués sur trois onduleurs de 25 kilovoltampères, un par immeuble, qui se raccordent au tableau général des services généraux. Les deux chaînes ne se rejoignent jamais, et leurs flèches de sortie pointent en sens inverses : l’énergie des ateliers quitte la parcelle, celle des bureaux y reste.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">DEUX CHAMPS, DEUX SORTIES</text>
+  <text x="140.00" y="66.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES ATELIERS · REVENTE TOTALE</text>
+  <rect x="140.00" y="80.00" width="340.00" height="28.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="132.00" y="98.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">364 kWc</text>
+  <rect x="140.00" y="126.00" width="340.00" height="10.00" class="c-encre" fill="#00393A"/>
+  <text x="132.00" y="135.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">315 kVA</text>
+  <rect x="140.00" y="142.00" width="269.84" height="10.00" class="c-encre" fill="#00393A"/>
+  <text x="132.00" y="151.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">250 kVA</text>
+  <path d="M 152.00 152.00 L 152.00 166.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 152.00 174.00 L 147.50 165.00 L 156.50 165.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="170.00" y="173.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RÉSEAU PUBLIC</text>
+  <text x="140.00" y="210.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LES BUREAUX · AUTOCONSOMMATION</text>
+  <rect x="140.00" y="224.00" width="67.25" height="28.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="132.00" y="242.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">72 kWc</text>
+  <rect x="140.00" y="270.00" width="80.95" height="10.00" class="c-encre" fill="#00393A"/>
+  <text x="132.00" y="279.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">75 kVA</text>
+  <rect x="140.00" y="286.00" width="80.95" height="10.00" class="c-encre" fill="#00393A"/>
+  <text x="132.00" y="295.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" text-anchor="end" font-variant-numeric="tabular-nums">75 kVA</text>
+  <path d="M 152.00 296.00 L 152.00 310.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 152.00 318.00 L 147.50 309.00 L 156.50 309.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="170.00" y="317.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">COMMUNS ET PARKING</text>
+</svg>
