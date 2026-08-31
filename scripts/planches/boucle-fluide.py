@@ -3545,9 +3545,378 @@ def composer_appui_comptage(donnees):
         bas=f"total sous la chaufferie à y {bas} px, marge basse {AH - bas} px")
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Mécanisme `cascade` — la puissance s'ajuste au juste besoin. Dixième emploi,
+# chaufferie bois granulés du foyer de Saint-Martin-de-Ré (2026-08-31, N10).
+# L'archétype dans son sens premier, production → distribution → terminaux,
+# mais la thèse est la MODULATION : quatre chaudières identiques s'enclenchent
+# en cascade (la quatrième est le secours), un ballon tampon découple la
+# production, et trois départs comptés partent en réseau enterré vers trois
+# sous-stations. Texte masqué : une réserve qui nourrit quatre cellules
+# identiques, leurs sorties rassemblées sur un collecteur vers une cellule
+# unique, puis trois branches en pointillé (l'enterré) traversant chacune un
+# cercle (le compteur) vers trois cellules — la modulation est portée par la
+# répétition du module, le comptage par le cercle sur chaque branche. Bandes
+# topologiques d'égale taille : aucune implantation réelle (règle 4).
+# Constantes préfixées CA_ — deux affectations d'un même nom au niveau du
+# module se marchent dessus (piège tableau-electrique, 2026-08-16).
+# ─────────────────────────────────────────────────────────────────────────────
+
+CA_SX0, CA_SX1 = 56, 214        # la pièce de réserve
+CA_CHX0, CA_CHX1 = 278, 434     # les quatre chaudières
+CA_COLX = 466                   # le collecteur des départs
+CA_BX0, CA_BX1 = 506, 648       # le ballon tampon
+CA_DISX = 690                   # la ligne verticale de distribution
+CA_CPX = 738                    # le compteur de chaque départ
+CA_SSX0, CA_SSX1 = 806, 1050    # les sous-stations
+CA_CHY0 = 300                   # ordonnée de la première chaudière
+CA_CH_H, CA_CH_E = 54, 14       # cellule de chaudière, écart
+CA_SS_H, CA_SS_E = 68, 42       # cellule de sous-station, écart
+CA_R = 9                        # rayon du compteur
+
+
+def composer_cascade(donnees):
+    ca = donnees["cascade"]
+    chaudieres = sorted(ca["chaudieres"], key=lambda c: c["ordre"])
+    circuits = sorted(ca["circuits"], key=lambda c: c["ordre"])
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête + double légende (le signe toujours doublé d'un mot) ─────────
+    leg_cp = ca["legende_compteur"]
+    l_cp = mesurer(leg_cp, 10, "mono", 10 * 0.14)
+    A(cercle(W - MARGE - l_cp - 16, Y_ENTETE - 3.5, 5, "papier", "encre", 1.5))
+    A(texte(W - MARGE, Y_ENTETE, leg_cp, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    leg_re = ca["legende_reseau"]
+    x_txt_re = W - MARGE - l_cp - 40
+    l_re = mesurer(leg_re, 10, "mono", 10 * 0.14)
+    A(ligne_pointillee(x_txt_re - l_re - 26, Y_ENTETE - 3.5,
+                       x_txt_re - l_re - 8, Y_ENTETE - 3.5, "encre", 1.5))
+    A(texte(x_txt_re, Y_ENTETE, leg_re, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    controler("en-tête schéma", ca["entete"], 10, "mono",
+              x_txt_re - l_re - 50 - MARGE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, ca["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Les deux registres ───────────────────────────────────────────────────
+    A(texte(MARGE, Y_REGISTRES, ca["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_REGISTRES, ca["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    bas_ch = CA_CHY0 + 4 * CA_CH_H + 3 * CA_CH_E
+    cy_mid = (CA_CHY0 + bas_ch) / 2
+
+    # ── La pièce de réserve, qui nourrit les quatre chaudières ───────────────
+    re_ = ca["reserve"]
+    A(rect_bord(CA_SX0, CA_CHY0, CA_SX1 - CA_SX0, bas_ch - CA_CHY0,
+                "calcaire", "filet-1"))
+    controler("libellé réserve", re_["libelle"], 15, "sans-600",
+              CA_SX1 - CA_SX0 - 24)
+    A(texte(CA_SX0 + 12, CA_CHY0 + 26, re_["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    for k, d in enumerate(re_["details"]):
+        controler(f"détail réserve {k}", d, 10, "mono",
+                  CA_SX1 - CA_SX0 - 24, 10 * 0.14)
+        A(texte(CA_SX0 + 12, CA_CHY0 + 48 + 16 * k, d, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # ── Les quatre chaudières identiques, alimentées et collectées ───────────
+    cys = []
+    for i, ch in enumerate(chaudieres):
+        y = CA_CHY0 + i * (CA_CH_H + CA_CH_E)
+        cy = y + CA_CH_H / 2
+        cys.append(cy)
+        A(ligne(CA_SX1, cy, CA_CHX0 - 9, cy, "encre", 1.5))
+        A(fleche(CA_CHX0 - 2, cy, "encre", direction="droite", taille=7))
+        A(rect_bord(CA_CHX0, y, CA_CHX1 - CA_CHX0, CA_CH_H, "papier", "filet-1"))
+        controler(f'libellé {ch["cle"]}', ch["libelle"], 13, "sans-600",
+                  CA_CHX1 - CA_CHX0 - 24)
+        A(texte(CA_CHX0 + 12, y + 21, ch["libelle"], "sans", 13, 600,
+                "encre", wdth=112))
+        A(texte(CA_CHX0 + 12, y + 39, ch["affichee"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        A(ligne(CA_CHX1, cy, CA_COLX, cy, "encre", 1.5))
+    A(ligne(CA_COLX, cys[0], CA_COLX, cys[-1], "encre", 1.5))
+    A(ligne(CA_COLX, cy_mid, CA_BX0 - 9, cy_mid, "encre", 1.5))
+    A(fleche(CA_BX0 - 2, cy_mid, "encre", direction="droite", taille=7))
+
+    # ── Le total de la cascade et sa règle de conduite ───────────────────────
+    controler("total cascade", ca["total"]["affichee"], 10, "mono",
+              CA_BX0 - 24 - CA_CHX0, 10 * 0.14)
+    A(texte(CA_CHX0, bas_ch + 26, ca["total"]["affichee"], "mono", 10, 500,
+            "encre", tracking=10 * 0.14))
+    controler("légende cascade", ca["legende_cascade"], 10, "mono",
+              CA_DISX - 40 - CA_SX0, 10 * 0.14)
+    A(texte(CA_SX0, bas_ch + 50, ca["legende_cascade"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Le ballon tampon, qui découple ───────────────────────────────────────
+    ba = ca["ballon"]
+    b_y0, b_h = cy_mid - 60, 120
+    A(rect_bord(CA_BX0, b_y0, CA_BX1 - CA_BX0, b_h, "papier", "filet-1"))
+    controler("libellé ballon", ba["libelle"], 15, "sans-600",
+              CA_BX1 - CA_BX0 - 24)
+    A(texte(CA_BX0 + 12, b_y0 + 30, ba["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    A(texte(CA_BX0 + 12, b_y0 + 52, ba["affichee"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(CA_BX0 + 12, b_y0 + 68, ba["detail"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Trois départs comptés, en réseau enterré, vers trois sous-stations ───
+    cys_ss = [cy_mid - (CA_SS_H + CA_SS_E), cy_mid, cy_mid + (CA_SS_H + CA_SS_E)]
+    A(ligne(CA_BX1, cy_mid, CA_DISX, cy_mid, "encre", 1.5))
+    A(ligne(CA_DISX, cys_ss[0], CA_DISX, cys_ss[-1], "encre", 1.5))
+    for ci, cy in zip(circuits, cys_ss):
+        A(ligne_pointillee(CA_DISX, cy, CA_SSX0 - 9, cy, "encre", 1.5))
+        A(fleche(CA_SSX0 - 2, cy, "encre", direction="droite", taille=7))
+        A(cercle(CA_CPX, cy, CA_R, "papier", "encre", 1.5))
+        y = cy - CA_SS_H / 2
+        A(rect_bord(CA_SSX0, y, CA_SSX1 - CA_SSX0, CA_SS_H, "papier", "filet-1"))
+        controler(f'libellé {ci["cle"]}', ci["libelle"], 15, "sans-600",
+                  CA_SSX1 - CA_SSX0 - 24)
+        A(texte(CA_SSX0 + 12, y + 24, ci["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        controler(f'détail {ci["cle"]}', ci["detail"], 10, "mono",
+                  CA_SSX1 - CA_SSX0 - 24, 10 * 0.14)
+        A(texte(CA_SSX0 + 12, y + 42, ci["detail"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        if ci.get("detail2"):
+            controler(f'détail 2 {ci["cle"]}', ci["detail2"], 10, "mono",
+                      CA_SSX1 - CA_SSX0 - 24, 10 * 0.14)
+            A(texte(CA_SSX0 + 12, y + 58, ci["detail2"], "mono", 10, 500,
+                    "pivot", tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    controler("phrase de principe", donnees["phrase_principe"], 17,
+              "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"une réserve nourrit {len(chaudieres)} cellules "
+                         f"identiques (la modulation est portée par la "
+                         f"répétition du module), leurs sorties collectées "
+                         f"vers une cellule unique de découplage, puis "
+                         f"{len(circuits)} branches en pointillé — l’enterré — "
+                         f"traversant chacune un cercle — le compteur — vers "
+                         f"{len(circuits)} sous-stations : aucun texte "
+                         f"nécessaire pour lire cascade, découplage et "
+                         f"comptage",
+        "topologie": f"réserve x {CA_SX0}–{CA_SX1}, chaudières x {CA_CHX0}–"
+                     f"{CA_CHX1} y {CA_CHY0}–{bas_ch}, collecteur x {CA_COLX}, "
+                     f"ballon x {CA_BX0}–{CA_BX1}, distribution x {CA_DISX}, "
+                     f"compteurs x {CA_CPX}, sous-stations x {CA_SSX0}–"
+                     f"{CA_SSX1} y {cys_ss[0] - CA_SS_H / 2:.0f}–"
+                     f"{cys_ss[-1] + CA_SS_H / 2:.0f}",
+        "bas_du_dessin": f"légende de cascade à y {bas_ch + 50}, sous-stations "
+                         f"jusqu’à y {cys_ss[-1] + CA_SS_H / 2:.0f}, phrase à "
+                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % de "
+                            f"la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_cascade(donnees):
+    """La vignette : le motif seul — quatre cellules identiques collectées vers
+    le ballon, trois branches pointillées à cercle vers trois cellules. Deux
+    valeurs se lisent : la cascade totale et le ballon."""
+    ca = donnees["cascade"]
+    chaudieres = sorted(ca["chaudieres"], key=lambda c: c["ordre"])
+    circuits = sorted(ca["circuits"], key=lambda c: c["ordre"])
+    chx0, chx1, colx = 14, 64, 74
+    bx0, bx1 = 92, 146
+    disx, cpx = 162, 182
+    ssx0, ssx1 = 204, 286
+    y0, h_ch, e_ch = 58, 15, 5
+    h_ss = 15
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    bas_ch = y0 + 4 * h_ch + 3 * e_ch
+    cy_mid = (y0 + bas_ch) / 2
+    cys = []
+    for i in range(4):
+        y = y0 + i * (h_ch + e_ch)
+        cy = y + h_ch / 2
+        cys.append(cy)
+        A(rect_bord(chx0, y, chx1 - chx0, h_ch, "papier", "filet-1"))
+        A(ligne(chx1, cy, colx, cy, "encre", 1.2))
+    A(ligne(colx, cys[0], colx, cys[-1], "encre", 1.2))
+    A(ligne(colx, cy_mid, bx0 - 6, cy_mid, "encre", 1.2))
+    A(fleche(bx0 - 1, cy_mid, "encre", direction="droite", taille=5))
+    A(rect_bord(bx0, cy_mid - 22, bx1 - bx0, 44, "papier", "filet-1"))
+    A(texte((bx0 + bx1) / 2, cy_mid + 3.5, ca["ballon"]["affichee"], "mono",
+            10, 500, "pivot", ancre="middle", tracking=10 * 0.14))
+    cys_ss = [cy_mid - 30, cy_mid, cy_mid + 30]
+    A(ligne(bx1, cy_mid, disx, cy_mid, "encre", 1.2))
+    A(ligne(disx, cys_ss[0], disx, cys_ss[-1], "encre", 1.2))
+    for cy in cys_ss:
+        A(ligne_pointillee(disx, cy, ssx0 - 6, cy, "encre", 1.2, motif="4 4"))
+        A(fleche(ssx0 - 1, cy, "encre", direction="droite", taille=5))
+        A(cercle(cpx, cy, 4.5, "papier", "encre", 1.2))
+        A(rect_bord(ssx0, cy - h_ss / 2, ssx1 - ssx0, h_ss, "papier", "filet-1"))
+    A(texte(chx0, bas_ch + 18, ca["total"]["affichee"], "mono", 10, 500,
+            "encre", tracking=10 * 0.14))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "le motif seul : quatre cellules identiques collectées vers "
+                 "le ballon, trois branches pointillées à cercle vers trois "
+                 "cellules — deux valeurs lisibles, la cascade et le ballon ; "
+                 "la réserve, les libellés et les légendes laissés à la planche",
+        "bas_du_dessin": f"total de cascade à y {bas_ch + 18} px, marge basse "
+                         f"{VH - (bas_ch + 18)} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_cascade(donnees):
+    """L'appui : le motif entier à l'échelle 1 — la réserve, les quatre
+    chaudières nommées et chiffrées, le ballon, les trois branches comptées
+    vers les sous-stations nommées en court. Sans phrase ni cartouche."""
+    ca = donnees["cascade"]
+    chaudieres = sorted(ca["chaudieres"], key=lambda c: c["ordre"])
+    circuits = sorted(ca["circuits"], key=lambda c: c["ordre"])
+    sx0, sx1 = 24, 104
+    chx0, chx1, colx = 122, 234, 252
+    bx0, bx1 = 274, 348
+    disx, cpx = 366, 388
+    ssx0, ssx1 = 410, 528
+    y0, h_ch, e_ch = 76, 34, 8
+    h_ss = 36
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    leg_cp = ca["legende_compteur"]
+    l_cp = mesurer(leg_cp, 10, "mono", 10 * 0.14)
+    A(cercle(AW - A_MARGE - l_cp - 14, 30.5, 4.5, "papier", "encre", 1.2))
+    A(texte(AW - A_MARGE, 34, leg_cp, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+
+    bas_ch = y0 + 4 * h_ch + 3 * e_ch
+    cy_mid = (y0 + bas_ch) / 2
+    re_ = ca["reserve"]
+    A(rect_bord(sx0, y0, sx1 - sx0, bas_ch - y0, "calcaire", "filet-1"))
+    A(texte(sx0 + 10, y0 + 20, re_["libelle_court"], "sans", 13, 600,
+            "encre", wdth=112))
+    A(texte(sx0 + 10, y0 + 36, re_["detail_court"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    cys = []
+    for i, ch in enumerate(chaudieres):
+        y = y0 + i * (h_ch + e_ch)
+        cy = y + h_ch / 2
+        cys.append(cy)
+        A(ligne(sx1, cy, chx0 - 8, cy, "encre", 1.5))
+        A(fleche(chx0 - 2, cy, "encre", direction="droite", taille=6))
+        A(rect_bord(chx0, y, chx1 - chx0, h_ch, "papier", "filet-1"))
+        A(texte(chx0 + 10, y + 15, ch["libelle"], "sans", 13, 600,
+                "encre", wdth=112))
+        A(texte(chx0 + 10, y + 28, ch["affichee"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        A(ligne(chx1, cy, colx, cy, "encre", 1.5))
+    A(ligne(colx, cys[0], colx, cys[-1], "encre", 1.5))
+    A(ligne(colx, cy_mid, bx0 - 8, cy_mid, "encre", 1.5))
+    A(fleche(bx0 - 2, cy_mid, "encre", direction="droite", taille=6))
+
+    ba = ca["ballon"]
+    A(rect_bord(bx0, cy_mid - 37, bx1 - bx0, 74, "papier", "filet-1"))
+    A(texte(bx0 + 10, cy_mid - 12, ba["libelle_court"], "sans", 13, 600,
+            "encre", wdth=112))
+    A(texte(bx0 + 10, cy_mid + 6, ba["affichee"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    cys_ss = [cy_mid - 58, cy_mid, cy_mid + 58]
+    A(ligne(bx1, cy_mid, disx, cy_mid, "encre", 1.5))
+    A(ligne(disx, cys_ss[0], disx, cys_ss[-1], "encre", 1.5))
+    for ci, cy in zip(circuits, cys_ss):
+        A(ligne_pointillee(disx, cy, ssx0 - 8, cy, "encre", 1.5, motif="5 5"))
+        A(fleche(ssx0 - 2, cy, "encre", direction="droite", taille=6))
+        A(cercle(cpx, cy, 6, "papier", "encre", 1.5))
+        A(rect_bord(ssx0, cy - h_ss / 2, ssx1 - ssx0, h_ss, "papier", "filet-1"))
+        A(texte(ssx0 + 10, cy - 2, ci["libelle_court"], "sans", 13, 600,
+                "encre", wdth=112))
+        A(texte(ssx0 + 10, cy + 12, ci["detail_court"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+    A(texte(chx0, bas_ch + 22, ca["total"]["affichee"], "mono", 10, 500,
+            "encre", tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="le motif entier à l’échelle 1 : la réserve nommée, les quatre "
+              "chaudières nommées et chiffrées, le collecteur, le ballon "
+              "chiffré, les trois branches pointillées à cercle vers les "
+              "sous-stations nommées en court, la légende du compteur en "
+              "tête — total de cascade sous la pile ; phrase et cartouche "
+              "laissés à la planche",
+        bas=f"total de cascade à y {bas_ch + 22} px, marge basse "
+            f"{AH - (bas_ch + 22)} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "cascade" in donnees:
+        return composer_cascade(donnees)
     if "comptage" in donnees:
         return composer_comptage(donnees)
     if "terminaux" in donnees:
@@ -3568,6 +3937,8 @@ def composer(donnees):
 
 
 def composer_vignette(donnees):
+    if "cascade" in donnees:
+        return composer_vignette_cascade(donnees)
     if "comptage" in donnees:
         return composer_vignette_comptage(donnees)
     if "terminaux" in donnees:
@@ -3588,6 +3959,8 @@ def composer_vignette(donnees):
 
 
 def composer_appui(donnees):
+    if "cascade" in donnees:
+        return composer_appui_cascade(donnees)
     if "comptage" in donnees:
         return composer_appui_comptage(donnees)
     if "terminaux" in donnees:

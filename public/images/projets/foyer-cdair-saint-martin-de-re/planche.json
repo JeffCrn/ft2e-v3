@@ -1,0 +1,187 @@
+{
+  "fiche": "foyer-cdair-saint-martin-de-re",
+  "archetype": "boucle-fluide",
+  "archetype_motif": "La thèse de la fiche est la bascule de tout un site au bois par une production qui module : quatre chaudières identiques de 64 kW s’enclenchent en cascade — la régulation permute leurs priorités et garde un secours —, un ballon tampon découple, et trois départs comptés partent en réseau enterré vers trois sous-stations. C’est l’archétype production → distribution → terminaux dans son sens premier ; dixième mécanisme du compositeur, « cascade » : la modulation est portée par la répétition du module, le comptage par un cercle sur chaque branche, l’enterré par le pointillé. Ni sankey (aucune répartition mesurée entre les circuits : les largeurs n’auraient rien à proportionner) ; ni zonage-ssi (le SSI est le domaine secondaire de l’affaire, pas la thèse de la fiche) ; ni coupe-traversée (rien ne traverse : tout se distribue). Le boucle-fluide est le plus employé du corpus et a servi en N09 — assumé : la thèse est hydraulique, l’archétype se choisit sur elle, jamais sur le quota.",
+  "mecanisme": "cascade",
+  "surtitre": "SCHÉMA DE PRINCIPE · CHAUFFERIE BOIS GRANULÉS ET DISTRIBUTION",
+  "titre": "Foyer de Saint-Martin-de-Ré",
+  "sous_titre": "Quatre chaudières de 64 kW en cascade, un ballon tampon, trois départs comptés",
+  "cartouche_legende": "SAINT-MARTIN-DE-RÉ · 1 147 m² · 2024",
+  "aria_label": "Schéma de principe d’une chaufferie bois granulés en cascade et de sa distribution. À gauche, la pièce de réserve — granulés de bois, plans inclinés, vis d’extraction — alimente quatre chaudières identiques de 64 kW, 256 kW en tout : la régulation les enclenche à la demande, permute leurs priorités pour vider l’intégralité du silo et garde un secours. Leurs départs se rassemblent sur un collecteur vers un ballon tampon de 2 500 litres, qui découple la production. Du ballon, trois départs partent en réseau enterré pré-isolé, figuré en pointillé, vers trois sous-stations : le foyer existant, raccordé par échangeur à plaques, avec sa production d’eau chaude sanitaire ; l’extension, avec sa panoplie d’eau froide, d’eau chaude et de bouclage, qui dessert aussi l’atelier bois ; la maison de retraite, avec l’atelier sport. Chaque départ traverse un compteur d’énergie, figuré par un cercle, reporté sur l’automate de la chaufferie avec son historique mensuel.",
+  "cascade": {
+    "entete": "DU SILO AUX SOUS-STATIONS · LA PUISSANCE S’AJUSTE AU JUSTE BESOIN",
+    "registres": {
+      "gauche": "LA PRODUCTION · QUATRE CHAUDIÈRES, UN SILO, UN BALLON",
+      "droite": "LA DISTRIBUTION · TROIS DÉPARTS COMPTÉS"
+    },
+    "legende_compteur": "COMPTEUR D’ÉNERGIE",
+    "legende_reseau": "RÉSEAU ENTERRÉ PRÉ-ISOLÉ",
+    "reserve": {
+      "libelle": "Pièce de réserve",
+      "libelle_court": "Réserve",
+      "valeur": "",
+      "unite": "",
+      "details": [
+        "GRANULÉS DE BOIS",
+        "PLANS INCLINÉS",
+        "VIS D’EXTRACTION"
+      ],
+      "detail_court": "GRANULÉS",
+      "detail": "Pièce de réserve maçonnée : plans inclinés à 35° minimum, vis d’extraction et de transfert, quatre bouches de remplissage à raccord pompier dont deux rallongées, capteur capacitif de niveau"
+    },
+    "chaudieres": [
+      {
+        "cle": "c1",
+        "ordre": 1,
+        "libelle": "Chaudière 1",
+        "valeur": "64",
+        "unite": "kW",
+        "affichee": "64 kW"
+      },
+      {
+        "cle": "c2",
+        "ordre": 2,
+        "libelle": "Chaudière 2",
+        "valeur": "64",
+        "unite": "kW",
+        "affichee": "64 kW"
+      },
+      {
+        "cle": "c3",
+        "ordre": 3,
+        "libelle": "Chaudière 3",
+        "valeur": "64",
+        "unite": "kW",
+        "affichee": "64 kW"
+      },
+      {
+        "cle": "c4",
+        "ordre": 4,
+        "libelle": "Chaudière 4",
+        "valeur": "64",
+        "unite": "kW",
+        "affichee": "64 kW"
+      }
+    ],
+    "total": {
+      "libelle": "Puissance totale de la cascade",
+      "valeur": "256",
+      "unite": "kW",
+      "affichee": "4 × 64 kW · 256 kW",
+      "affichee_courte": "256 kW"
+    },
+    "legende_cascade": "ENCLENCHEMENT À LA DEMANDE · PERMUTATION DES PRIORITÉS · UN SECOURS",
+    "ballon": {
+      "libelle": "Ballon tampon",
+      "libelle_court": "Ballon",
+      "valeur": "2 500",
+      "unite": "litres",
+      "affichee": "2 500 L",
+      "detail": "DÉCOUPLAGE"
+    },
+    "circuits": [
+      {
+        "cle": "existant",
+        "ordre": 1,
+        "libelle": "FOH existant",
+        "libelle_court": "FOH existant",
+        "valeur": "",
+        "unite": "",
+        "detail": "ÉCHANGEUR À PLAQUES · ECS",
+        "detail_court": "ÉCHANGEUR",
+        "detail2": "",
+        "circuit": "Circuit FOH existant"
+      },
+      {
+        "cle": "extension",
+        "ordre": 2,
+        "libelle": "FOH extension",
+        "libelle_court": "FOH extension",
+        "valeur": "",
+        "unite": "",
+        "detail": "PANOPLIE EFS · ECS · BOUCLAGE",
+        "detail_court": "PANOPLIES",
+        "detail2": "AVEC L’ATELIER BOIS",
+        "circuit": "Circuit FOH extension / Atelier bois"
+      },
+      {
+        "cle": "mrs",
+        "ordre": 3,
+        "libelle": "Maison de retraite",
+        "libelle_court": "MRS",
+        "valeur": "",
+        "unite": "",
+        "detail": "PANOPLIE PRIMAIRE · RÉSEAUX",
+        "detail_court": "SOUS-STATION",
+        "detail2": "AVEC L’ATELIER SPORT",
+        "circuit": "Circuit MRS / Atelier sport"
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Quatre chaudières en cascade ajustent la puissance au juste besoin ; la permutation des priorités vide tout le silo.",
+  "vignette_surtitre": "CASCADE BOIS 256 kW",
+  "a_valider_ft2e": [
+    {
+      "objet": "La topologie de la distribution",
+      "la_source_affirme": "Le CCTP du lot 12 prévoit trois panoplies de circuits secondaires au départ de la chaufferie (FOH extension / atelier bois, FOH existant, MRS / atelier sport) et décrit trois sous-stations ; il ne dessine pas le tracé du réseau enterré.",
+      "le_dessin_suppose": "Trois branches parallèles, une par sous-station — une topologie de principe, pas le tracé réel des canalisations pré-isolées."
+    },
+    {
+      "objet": "Le nombre de chaudières au réalisé",
+      "la_source_affirme": "Le DCE prescrit « une cascade de 4 chaudières à granulé afin d’ajuster la puissance au juste besoin et d’avoir un secours », 64 kW l’unité, 256 kW en tout ; le DOE est absent de l’archive, et l’un des clichés du corpus secteurs montre deux générateurs.",
+      "le_dessin_suppose": "Le dispositif du DCE, quatre chaudières — à confirmer sur le dossier des ouvrages exécutés (question B2 de la collecte)."
+    },
+    {
+      "objet": "La position des compteurs d’énergie",
+      "la_source_affirme": "Le § 4.1.1 installe les compteurs « sur départ » en chaufferie, un par circuit, reportés sur l’automate.",
+      "le_dessin_suppose": "Un cercle sur chaque branche entre le ballon et la sous-station — la position exacte dans la chaufferie n’est pas figurée."
+    },
+    {
+      "objet": "La capacité du ballon tampon",
+      "la_source_affirme": "« Capacité minimale : 2 500 litres » — un minimum prescrit, pas une capacité posée.",
+      "le_dessin_suppose": "La valeur prescrite affichée comme capacité du ballon, faute de DOE."
+    },
+    {
+      "objet": "Les désignations internes FOH et MRS",
+      "la_source_affirme": "Les pièces désignent les bâtiments par leurs sigles d’usage — FOH (foyer occupationnel et d’hébergement), MRS (maison de retraite spécialisée).",
+      "le_dessin_suppose": "Ces sigles sont admis au dessin comme désignations internes, au précédent de la chaufferie « O » d’un site industriel — à confirmer (question E de la collecte)."
+    },
+    {
+      "objet": "L’eau chaude solaire absente du dessin",
+      "la_source_affirme": "L’ECS solaire est une prestation supplémentaire éventuelle du DCE (PSE 3), commandée en exécution d’après les échanges de 2023-2024.",
+      "le_dessin_suppose": "Rien — sa consistance réalisée n’est établie par aucune pièce de synthèse FT2E de l’archive ; elle reste au texte de la fiche et à la question B2."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 19-110 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tous les montants : coût d’objectif 2 076 401 € HT, honoraires du groupement et leur répartition.",
+    "Tous les tiers : le maître d’ouvrage et son mandataire (CDAIR, SEMDAS — nommés dans la fiche, jamais sur le dessin), l’architecte, le BET structure, l’installateur, les marques des équipements (chaudières, compteurs, réseaux pré-isolés, ballon).",
+    "Le millésime d’ouverture (2019) — seul le millésime de livraison paraît, au cartouche.",
+    "Toute géométrie de l’ouvrage : ni plan, ni façade, ni implantation — les cellules sont des bandes topologiques d’égale taille."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "une réserve nourrit 4 cellules identiques (la modulation est portée par la répétition du module), leurs sorties collectées vers une cellule unique de découplage, puis 3 branches en pointillé — l’enterré — traversant chacune un cercle — le compteur — vers 3 sous-stations : aucun texte nécessaire pour lire cascade, découplage et comptage",
+    "topologie": "réserve x 56–214, chaudières x 278–434 y 300–558, collecteur x 466, ballon x 506–648, distribution x 690, compteurs x 738, sous-stations x 806–1050 y 285–573",
+    "bas_du_dessin": "légende de cascade à y 608, sous-stations jusqu’à y 573, phrase à 688, cartouche 714–744",
+    "reserve_profonde": "cartouche 332 x 30 px = 9960 px², soit 1.04 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "le motif seul : quatre cellules identiques collectées vers le ballon, trois branches pointillées à cercle vers trois cellules — deux valeurs lisibles, la cascade et le ballon ; la réserve, les libellés et les légendes laissés à la planche",
+    "bas_du_dessin": "total de cascade à y 151 px, marge basse 49 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier à l’échelle 1 : la réserve nommée, les quatre chaudières nommées et chiffrées, le collecteur, le ballon chiffré, les trois branches pointillées à cercle vers les sous-stations nommées en court, la légende du compteur en tête — total de cascade sous la pile ; phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "total de cascade à y 258 px, marge basse 110 px"
+  }
+}

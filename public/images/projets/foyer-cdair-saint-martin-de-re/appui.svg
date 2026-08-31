@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe d’une chaufferie bois granulés en cascade et de sa distribution. À gauche, la pièce de réserve — granulés de bois, plans inclinés, vis d’extraction — alimente quatre chaudières identiques de 64 kW, 256 kW en tout : la régulation les enclenche à la demande, permute leurs priorités pour vider l’intégralité du silo et garde un secours. Leurs départs se rassemblent sur un collecteur vers un ballon tampon de 2 500 litres, qui découple la production. Du ballon, trois départs partent en réseau enterré pré-isolé, figuré en pointillé, vers trois sous-stations : le foyer existant, raccordé par échangeur à plaques, avec sa production d’eau chaude sanitaire ; l’extension, avec sa panoplie d’eau froide, d’eau chaude et de bouclage, qui dessert aussi l’atelier bois ; la maison de retraite, avec l’atelier sport. Chaque départ traverse un compteur d’énergie, figuré par un cercle, reporté sur l’automate de la chaufferie avec son historique mensuel.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">CASCADE BOIS 256 kW</text>
+  <circle cx="382.20" cy="30.50" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <text x="528.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">COMPTEUR D’ÉNERGIE</text>
+  <rect x="24.00" y="76.00" width="80.00" height="160.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="34.00" y="96.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Réserve</text>
+  <text x="34.00" y="112.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">GRANULÉS</text>
+  <path d="M 104.00 93.00 L 114.00 93.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 120.00 93.00 L 114.00 90.00 L 114.00 96.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="122.00" y="76.00" width="112.00" height="34.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="132.00" y="91.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaudière 1</text>
+  <text x="132.00" y="104.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">64 kW</text>
+  <path d="M 234.00 93.00 L 252.00 93.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 104.00 135.00 L 114.00 135.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 120.00 135.00 L 114.00 132.00 L 114.00 138.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="122.00" y="118.00" width="112.00" height="34.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="132.00" y="133.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaudière 2</text>
+  <text x="132.00" y="146.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">64 kW</text>
+  <path d="M 234.00 135.00 L 252.00 135.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 104.00 177.00 L 114.00 177.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 120.00 177.00 L 114.00 174.00 L 114.00 180.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="122.00" y="160.00" width="112.00" height="34.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="132.00" y="175.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaudière 3</text>
+  <text x="132.00" y="188.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">64 kW</text>
+  <path d="M 234.00 177.00 L 252.00 177.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 104.00 219.00 L 114.00 219.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 120.00 219.00 L 114.00 216.00 L 114.00 222.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="122.00" y="202.00" width="112.00" height="34.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="132.00" y="217.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaudière 4</text>
+  <text x="132.00" y="230.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">64 kW</text>
+  <path d="M 234.00 219.00 L 252.00 219.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 252.00 93.00 L 252.00 219.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 252.00 156.00 L 266.00 156.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 272.00 156.00 L 266.00 153.00 L 266.00 159.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="274.00" y="119.00" width="74.00" height="74.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="284.00" y="144.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Ballon</text>
+  <text x="284.00" y="162.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">2 500 L</text>
+  <path d="M 348.00 156.00 L 366.00 156.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 366.00 98.00 L 366.00 214.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 366.00 98.00 L 402.00 98.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <path d="M 408.00 98.00 L 402.00 95.00 L 402.00 101.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="388.00" cy="98.00" r="6.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <rect x="410.00" y="80.00" width="118.00" height="36.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="420.00" y="96.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">FOH existant</text>
+  <text x="420.00" y="110.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ÉCHANGEUR</text>
+  <path d="M 366.00 156.00 L 402.00 156.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <path d="M 408.00 156.00 L 402.00 153.00 L 402.00 159.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="388.00" cy="156.00" r="6.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <rect x="410.00" y="138.00" width="118.00" height="36.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="420.00" y="154.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">FOH extension</text>
+  <text x="420.00" y="168.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PANOPLIES</text>
+  <path d="M 366.00 214.00 L 402.00 214.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <path d="M 408.00 214.00 L 402.00 211.00 L 402.00 217.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="388.00" cy="214.00" r="6.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <rect x="410.00" y="196.00" width="118.00" height="36.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="420.00" y="212.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">MRS</text>
+  <text x="420.00" y="226.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SOUS-STATION</text>
+  <text x="122.00" y="258.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">4 × 64 kW · 256 kW</text>
+</svg>
