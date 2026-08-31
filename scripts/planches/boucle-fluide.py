@@ -59,6 +59,13 @@ porte l'extraction :
   — trois flèches entrantes, quatre lignes menant chacune à son groupe
   d'extraction dimensionnés par zone — et AUCUN nœud central : la
   décentralisation est la démonstration.
+
+- `comptage` — le compteur sur le retour (plan de comptage d'énergie d'un site
+  industriel, Rochefort) : une chaufferie, un départ unique, quatre retours
+  dont trois passent par un cercle et un se termine en éventail sans cercle,
+  un cercle seul sur le tronc de retour — le bâtiment trop ramifié se compte
+  par soustraction ; en regard, le bilan du site en carrés pleins (existants)
+  et cercles vides (à installer).
 """
 
 from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
@@ -3117,9 +3124,432 @@ def composer_appui_terminaux(donnees):
         bas=f"cellules jusqu’à y {bas} px, marge basse {AH - bas} px")
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Mécanisme `comptage` — où se pose le compteur, et quel bâtiment se compte
+# par soustraction. Neuvième emploi, plan de comptage de l'énergie de
+# chauffage d'un site industriel de Rochefort (2026-08-31, session N09).
+# L'archétype est lu au RETOUR : la chaufferie envoie un départ unique vers
+# quatre bâtiments, et chaque retour revient au collecteur à travers un
+# compteur — sauf celui du bâtiment trop ramifié, qui n'en reçoit aucun et
+# se déduit du compteur général posé sur le retour commun. Texte masqué : une
+# boîte de production, deux collecteurs verticaux, quatre allers, quatre
+# retours dont trois portent un cercle (un en porte trois) et un qui se
+# termine en éventail sans cercle, un cercle seul sur le tronc de retour —
+# la soustraction est portée par la géométrie. En regard, le bilan du site :
+# quatre rangs de marques, carré plein pour l'existant, cercle vide pour ce
+# qui reste à poser. Les cellules sont des bandes topologiques d'égale
+# taille : aucune implantation réelle (règle 4). Constantes préfixées CP_ —
+# deux affectations d'un même nom au niveau du module se marchent dessus.
+# ─────────────────────────────────────────────────────────────────────────────
+
+CP_CX0, CP_CX1 = 56, 190        # la chaufferie
+CP_XA, CP_XR = 250, 282         # les deux collecteurs verticaux : aller, retour
+CP_BX0, CP_BX1 = 500, 700       # les cellules de bâtiment
+CP_H_BAT = 44
+CP_Y0 = 322                     # ordonnée du premier rang
+CP_PAS = 72                     # pas des rangs
+CP_DEC = 8                      # demi-écart aller / retour dans un rang
+CP_XC = 420                     # le compteur d'un bâtiment à un compteur
+CP_PAS_C = 54                   # pas entre les compteurs d'un même bâtiment
+CP_R = 9                        # rayon du compteur
+CP_XSEP = 730                   # filet séparant les deux registres
+CP_RX0, CP_RX1 = 760, 1144      # le registre du site
+CP_PAS_MARQUE = 20              # pas des marques du bilan
+CP_Y_TOTAUX = 606               # la ligne des totaux
+
+
+def _cp_compteur(A, x, y, r):
+    """Le compteur d'énergie : un cercle vide sur le retour — même signe que
+    « à installer » au bilan, puisque tous ceux de la chaufferie le sont."""
+    A(cercle(x, y, r, "papier", "encre", 1.5))
+
+
+def _cp_eventail(A, x0, x1, y, n, pas):
+    """Les ramifications du bâtiment sans compteur : n lignes divergentes qui
+    naissent du retour et entrent dans la cellule à des hauteurs différentes."""
+    for k in range(n):
+        yk = y - pas * (n - 1) / 2 + pas * k
+        A(ligne(x0, y, x1, yk, "encre", 1.2))
+
+
+def composer_comptage(donnees):
+    cp = donnees["comptage"]
+    bats = sorted(cp["batiments"], key=lambda b: b["ordre"])
+    bilan = sorted(cp["bilan"], key=lambda b: b["ordre"])
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête + double légende (le signe toujours doublé d'un mot) ────────
+    leg_ex, leg_ai = cp["legende_existant"], cp["legende_a_installer"]
+    l_ai = mesurer(leg_ai, 10, "mono", 10 * 0.14)
+    x_ai = W - MARGE - l_ai
+    A(cercle(x_ai - 13, Y_ENTETE - 3.5, 4.5, "papier", "encre", 1.5))
+    A(texte(W - MARGE, Y_ENTETE, leg_ai, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    x_ex1 = x_ai - 13 - 4.5 - 26
+    l_ex = mesurer(leg_ex, 10, "mono", 10 * 0.14)
+    A(rect(x_ex1 - l_ex - 15, Y_ENTETE - 7.5, 7, 7, "encre"))
+    A(texte(x_ex1, Y_ENTETE, leg_ex, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    controler("en-tête schéma", cp["entete"], 10, "mono",
+              x_ex1 - l_ex - 15 - 24 - MARGE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, cp["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Les deux registres ───────────────────────────────────────────────────
+    controler("registre gauche", cp["registres"]["gauche"], 10, "mono",
+              CP_XSEP - 24 - MARGE, 10 * 0.14)
+    A(texte(MARGE, Y_REGISTRES, cp["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("registre droit", cp["registres"]["droite"], 10, "mono",
+              CP_RX1 - CP_RX0, 10 * 0.14)
+    A(texte(W - MARGE, Y_REGISTRES, cp["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+    A(ligne(CP_XSEP, Y_REGISTRES + 20, CP_XSEP, CP_Y_TOTAUX + 10, "filet-2", 1))
+
+    # ── La chaufferie et ses deux collecteurs ────────────────────────────────
+    cys = [CP_Y0 + i * CP_PAS for i in range(len(bats))]
+    ya_tr = cys[0] - CP_DEC                # le tronc aller, au premier rang
+    yr_tr = cys[-1] + CP_DEC               # le tronc retour, au dernier rang
+    cy0, cy1 = ya_tr - 22, yr_tr + 20
+    A(rect_bord(CP_CX0, cy0, CP_CX1 - CP_CX0, cy1 - cy0, "calcaire", "filet-1"))
+    ch = cp["chaufferie"]
+    controler("chaufferie", ch["libelle"], 15, "sans-600", CP_CX1 - CP_CX0 - 32)
+    A(texte(CP_CX0 + 16, cy0 + 30, ch["libelle"], "sans", 15, 600, "encre", wdth=112))
+    for k, d in enumerate(ch["details"]):
+        controler(f"chaufferie détail {k}", d, 10, "mono", CP_CX1 - CP_CX0 - 32, 10 * 0.14)
+        A(texte(CP_CX0 + 16, cy0 + 50 + 16 * k, d, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    # tronc aller → collecteur aller
+    A(ligne(CP_CX1, ya_tr, CP_XA, ya_tr, "encre", 1.5))
+    A(ligne(CP_XA, ya_tr, CP_XA, cys[-1] - CP_DEC, "encre", 1.5))
+    A(texte(CP_CX1 + 6, ya_tr - 6, cp["legende_aller"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    # collecteur retour → tronc retour → chaufferie, à travers le compteur général
+    A(ligne(CP_XR, cys[0] + CP_DEC, CP_XR, yr_tr, "encre", 1.5))
+    A(ligne(CP_XR, yr_tr, CP_CX1 + 8, yr_tr, "encre", 1.5))
+    A(fleche(CP_CX1 + 1, yr_tr, "encre", direction="gauche", taille=8))
+    x_tot = (CP_CX1 + CP_XR) / 2
+    _cp_compteur(A, x_tot, yr_tr, CP_R)
+    A(texte(CP_CX1 + 6, yr_tr - 14, cp["legende_retour"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    tot = cp["total"]
+    l_tot = controler("total", tot["affichee"], 10, "mono", 200, 10 * 0.14)
+    A(texte(x_tot, yr_tr + 24, tot["affichee"], "mono", 10, 500, "encre",
+            ancre="middle", tracking=10 * 0.14))
+
+    # ── Les quatre rangs : aller, cellule, retour et ses compteurs ───────────
+    n_compteurs = 0
+    n_fans = 0
+    for b, cy in zip(bats, cys):
+        ya, yr = cy - CP_DEC, cy + CP_DEC
+        # l'aller franchit le collecteur retour sans s'y raccorder : un saut
+        if cy > cys[0]:
+            A(ligne(CP_XA, ya, CP_XR - 5, ya, "encre", 1.5))
+            A(ligne(CP_XR + 5, ya, CP_BX0 - 8, ya, "encre", 1.5))
+        else:
+            A(ligne(CP_XA, ya, CP_BX0 - 8, ya, "encre", 1.5))
+        A(fleche(CP_BX0 - 1, ya, "encre", direction="droite", taille=8))
+        A(rect_bord(CP_BX0, cy - CP_H_BAT / 2, CP_BX1 - CP_BX0, CP_H_BAT,
+                    "papier", "filet-1"))
+        controler(f'libellé {b["cle"]}', b["libelle"], 15, "sans-600",
+                  CP_BX1 - CP_BX0 - 32)
+        A(texte(CP_BX0 + 16, cy - 2, b["libelle"], "sans", 15, 600, "encre", wdth=112))
+        controler(f'détail {b["cle"]}', b["detail"], 10, "mono",
+                  CP_BX1 - CP_BX0 - 32, 10 * 0.14)
+        A(texte(CP_BX0 + 16, cy + 15, b["detail"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        # le retour, du bâtiment au collecteur
+        A(ligne(CP_BX0, yr, CP_XR + 8, yr, "encre", 1.5))
+        A(fleche(CP_XR + 1, yr, "encre", direction="gauche", taille=8))
+        n = len(b["compteurs"])
+        for k, c in enumerate(b["compteurs"]):
+            x = CP_XC + (k - (n - 1) / 2) * CP_PAS_C
+            _cp_compteur(A, x, yr, CP_R)
+            controler(f'compteur {c["cle"]}', c["affichee"], 10, "mono",
+                      CP_PAS_C - 6, 10 * 0.14)
+            A(texte(x, yr + 24, c["affichee"], "mono", 10, 500, "pivot",
+                    ancre="middle", tracking=10 * 0.14))
+            n_compteurs += 1
+        if b.get("soustraction"):
+            _cp_eventail(A, CP_BX0 - 72, CP_BX0, yr, b["ramifications"], 6)
+            n_fans += 1
+            # la formule sous l'éventail, calée à droite — la ligne du total,
+            # centrée sous son cercle, garde sa propre place à gauche
+            controler("formule de soustraction", b["formule"], 10, "mono",
+                      CP_BX0 - 8 - (x_tot + 60), 10 * 0.14)
+            A(texte(CP_BX0 - 8, yr + 24, b["formule"], "mono", 10, 500, "encre",
+                    ancre="end", tracking=10 * 0.14))
+
+    # ── Le bilan du site : quatre rangs de marques ───────────────────────────
+    n_ex = n_ai = 0
+    for r, cy in zip(bilan, cys):
+        controler(f'bilan {r["cle"]}', r["libelle"], 13, "sans-600", CP_RX1 - CP_RX0)
+        A(texte(CP_RX0, cy - 10, r["libelle"], "sans", 13, 600, "encre", wdth=112))
+        x = CP_RX0 + 4
+        for _ in range(r["existants"]):
+            A(rect(x - 4, cy + 2, 8, 8, "encre"))
+            x += CP_PAS_MARQUE
+            n_ex += 1
+        for _ in range(r["a_installer"]):
+            A(cercle(x, cy + 6, 4.5, "papier", "encre", 1.5))
+            x += CP_PAS_MARQUE
+            n_ai += 1
+        controler(f'bilan détail {r["cle"]}', r["detail"], 10, "mono",
+                  CP_RX1 - CP_RX0, 10 * 0.14)
+        A(texte(CP_RX0, cy + 26, r["detail"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    A(rect(CP_RX0, CP_Y_TOTAUX - 18, CP_RX1 - CP_RX0, 1, "filet-2"))
+    controler("totaux", cp["totaux"]["affichee"], 10, "mono",
+              CP_RX1 - CP_RX0, 10 * 0.14)
+    A(texte(CP_RX0, CP_Y_TOTAUX, cp["totaux"]["affichee"], "mono", 10, 500,
+            "encre", tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    controler("phrase de principe", donnees["phrase_principe"], 17,
+              "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    assert n_ex == cp["totaux"]["existants"] and n_ai == cp["totaux"]["a_installer"], \
+        "le bilan dessiné ne somme pas comme les totaux de l’extraction"
+    bas_gauche = yr_tr + 24
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"chaufferie O : un tronc aller, un collecteur, {len(bats)} "
+                         f"cellules, {len(bats)} retours dont {len(bats) - n_fans} "
+                         f"portent {n_compteurs} cercles et {n_fans} se termine en "
+                         f"éventail sans cercle, un cercle seul sur le tronc de "
+                         f"retour — la soustraction est portée par la géométrie ; "
+                         f"bilan du site : {n_ex} carrés pleins et {n_ai} cercles "
+                         f"vides sur {len(bilan)} rangs, la somme vaut celle de "
+                         f"l’extraction",
+        "topologie": f"chaufferie x {CP_CX0}–{CP_CX1} y {cy0}–{cy1}, collecteurs "
+                     f"x {CP_XA} (aller) et {CP_XR} (retour), compteurs autour de "
+                     f"x {CP_XC} au pas {CP_PAS_C}, cellules x {CP_BX0}–{CP_BX1} ; "
+                     f"rangs y {cys[0]}–{cys[-1]} au pas {CP_PAS} ; bilan "
+                     f"x {CP_RX0}–{CP_RX1}, totaux y {CP_Y_TOTAUX}",
+        "bas_du_dessin": f"formule et total à y {bas_gauche}, totaux du bilan à "
+                         f"{CP_Y_TOTAUX}, phrase à {Y_PHRASE}, cartouche "
+                         f"{Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
+                         f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % de "
+                            f"la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_comptage(donnees):
+    """La vignette : le motif de la chaufferie seul — la boîte, les deux
+    collecteurs, quatre allers, quatre retours, les cercles et l'éventail, le
+    cercle du tronc. Les diamètres se lisent en mono 9 ; le bilan reste à la
+    planche."""
+    cp = donnees["comptage"]
+    bats = sorted(cp["batiments"], key=lambda b: b["ordre"])
+    cx0, cx1 = V_MARGE, 58
+    xa, xr = 76, 90
+    bx0, bx1 = 212, VW - V_MARGE
+    h_bat, y0, pas, dec, r = 20, 66, 30, 4, 3.5
+    xc, pas_c = 152, 36
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    cys = [y0 + i * pas for i in range(len(bats))]
+    ya_tr, yr_tr = cys[0] - dec, cys[-1] + dec
+    cy0, cy1 = ya_tr - 12, yr_tr + 12
+    A(rect_bord(cx0, cy0, cx1 - cx0, cy1 - cy0, "calcaire", "filet-1"))
+    A(ligne(cx1, ya_tr, xa, ya_tr, "encre", 1.2))
+    A(ligne(xa, ya_tr, xa, cys[-1] - dec, "encre", 1.2))
+    A(ligne(xr, cys[0] + dec, xr, yr_tr, "encre", 1.2))
+    A(ligne(xr, yr_tr, cx1 + 5, yr_tr, "encre", 1.2))
+    A(fleche(cx1 + 1, yr_tr, "encre", direction="gauche", taille=5))
+    x_tot = (cx1 + xr) / 2
+    _cp_compteur(A, x_tot, yr_tr, r)
+    A(texte(cx1 + 4, yr_tr + 14, cp["total"]["affichee_courte"], "mono", 9, 500,
+            "pivot", tracking=9 * 0.14))
+
+    for b, cy in zip(bats, cys):
+        ya, yr = cy - dec, cy + dec
+        if cy > cys[0]:
+            A(ligne(xa, ya, xr - 3, ya, "encre", 1.2))
+            A(ligne(xr + 3, ya, bx0 - 5, ya, "encre", 1.2))
+        else:
+            A(ligne(xa, ya, bx0 - 5, ya, "encre", 1.2))
+        A(fleche(bx0 - 1, ya, "encre", direction="droite", taille=5))
+        A(rect_bord(bx0, cy - h_bat / 2, bx1 - bx0, h_bat, "papier", "filet-1"))
+        A(texte(bx0 + 8, cy + 4, b["libelle_court"], "sans", 12, 600, "encre", wdth=112))
+        A(ligne(bx0, yr, xr + 5, yr, "encre", 1.2))
+        A(fleche(xr + 1, yr, "encre", direction="gauche", taille=5))
+        n = len(b["compteurs"])
+        for k, c in enumerate(b["compteurs"]):
+            x = xc + (k - (n - 1) / 2) * pas_c
+            _cp_compteur(A, x, yr, r)
+            # Trois étiquettes de 38 px ne tiennent pas dans les 122 px entre
+            # le collecteur et la cellule : seul le compteur unique porte son
+            # diamètre, les trois de l'autre rang restent des cercles (leurs
+            # valeurs vivent à la planche et au JSON).
+            if n == 1:
+                A(texte(x, yr + 13, c["affichee"], "mono", 9, 500, "pivot",
+                        ancre="middle", tracking=9 * 0.14))
+        if b.get("soustraction"):
+            _cp_eventail(A, bx0 - 36, bx0, yr, 3, 6)
+            # sous la cellule, calée à son bord droit — hors de la ligne du
+            # diamètre du tronc
+            A(texte(bx1, cy + h_bat / 2 + 12, b["formule_courte"], "mono", 9, 500,
+                    "encre", ancre="end", tracking=9 * 0.14))
+
+    A("</svg>")
+    bas = max(cy1, yr_tr + 14, cys[-1] + h_bat / 2 + 12)
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": f"le motif seul : la chaufferie, deux collecteurs, {len(bats)} "
+                 f"allers et retours, les cercles des compteurs avec leur diamètre, "
+                 f"l’éventail du bâtiment sans compteur et sa formule courte, le "
+                 f"cercle du tronc — bilan, légendes et phrase laissés à la planche",
+        "bas_du_dessin": f"{bas:.0f} px, marge basse {VH - bas:.0f} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_comptage(donnees):
+    """L'appui du hero : le motif de la chaufferie à l'échelle 1 — cellules
+    nommées, détails en court, compteurs et diamètres, formule de soustraction,
+    la légende du compteur à installer. Sans bilan, phrase ni cartouche."""
+    cp = donnees["comptage"]
+    bats = sorted(cp["batiments"], key=lambda b: b["ordre"])
+    # La boîte fait 98 px : « Chaufferie O » en 13/600 mesure 75 px aux avances
+    # calibrées et ~90 au rendu (les sans-600 sous-mesurent d'environ 20 %,
+    # relevé N08) — 30 px de marge, pas 12.
+    cx0, cx1 = A_MARGE, 122
+    xa, xr = 154, 176
+    bx0, bx1 = 392, AW - A_MARGE
+    h_bat, y0, pas, dec, r = 36, 96, 64, 7, 6
+    xc, pas_c = 284, 52
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    leg_ai = cp["legende_a_installer"]
+    l_ai = mesurer(leg_ai, 10, "mono", 10 * 0.14)
+    A(cercle(bx1 - l_ai - 12, 30.5, 4, "papier", "encre", 1.5))
+    A(texte(bx1, 34, leg_ai, "mono", 10, 500, "pivot", ancre="end",
+            tracking=10 * 0.14))
+
+    cys = [y0 + i * pas for i in range(len(bats))]
+    ya_tr, yr_tr = cys[0] - dec, cys[-1] + dec
+    cy0, cy1 = ya_tr - 20, yr_tr + 20
+    A(rect_bord(cx0, cy0, cx1 - cx0, cy1 - cy0, "calcaire", "filet-1"))
+    ch = cp["chaufferie"]
+    A(texte(cx0 + 12, cy0 + 26, ch["libelle_court"], "sans", 13, 600, "encre", wdth=112))
+    for k, d in enumerate(ch["details"]):
+        A(texte(cx0 + 12, cy0 + 44 + 15 * k, d, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    A(ligne(cx1, ya_tr, xa, ya_tr, "encre", 1.5))
+    A(ligne(xa, ya_tr, xa, cys[-1] - dec, "encre", 1.5))
+    A(texte(cx1 + 6, ya_tr - 6, cp["legende_aller"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(ligne(xr, cys[0] + dec, xr, yr_tr, "encre", 1.5))
+    A(ligne(xr, yr_tr, cx1 + 7, yr_tr, "encre", 1.5))
+    A(fleche(cx1 + 1, yr_tr, "encre", direction="gauche", taille=6))
+    x_tot = (cx1 + xr) / 2
+    _cp_compteur(A, x_tot, yr_tr, r)
+    A(texte(cx1 + 6, yr_tr + 14, cp["legende_retour"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(x_tot, cy1 + 16, cp["total"]["affichee"], "mono", 10, 500, "encre",
+            ancre="middle", tracking=10 * 0.14))
+
+    for b, cy in zip(bats, cys):
+        ya, yr = cy - dec, cy + dec
+        if cy > cys[0]:
+            A(ligne(xa, ya, xr - 4, ya, "encre", 1.5))
+            A(ligne(xr + 4, ya, bx0 - 7, ya, "encre", 1.5))
+        else:
+            A(ligne(xa, ya, bx0 - 7, ya, "encre", 1.5))
+        A(fleche(bx0 - 1, ya, "encre", direction="droite", taille=6))
+        A(rect_bord(bx0, cy - h_bat / 2, bx1 - bx0, h_bat, "papier", "filet-1"))
+        A(texte(bx0 + 10, cy - 3, b["libelle_court"], "sans", 13, 600, "encre", wdth=112))
+        A(texte(bx0 + 10, cy + 13, b["detail"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        A(ligne(bx0, yr, xr + 7, yr, "encre", 1.5))
+        A(fleche(xr + 1, yr, "encre", direction="gauche", taille=6))
+        n = len(b["compteurs"])
+        for k, c in enumerate(b["compteurs"]):
+            x = xc + (k - (n - 1) / 2) * pas_c
+            _cp_compteur(A, x, yr, r)
+            A(texte(x, yr + 20, c["affichee"], "mono", 10, 500, "pivot",
+                    ancre="middle", tracking=10 * 0.14))
+        if b.get("soustraction"):
+            _cp_eventail(A, bx0 - 50, bx0, yr, b["ramifications"], 6)
+            A(texte(xr + 12, yr + 20, b["formule_courte"], "mono", 10, 500, "encre",
+                    tracking=10 * 0.14))
+
+    A("</svg>")
+    bas = cy1 + 16
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"le motif entier à l’échelle 1 : la chaufferie nommée, deux "
+              f"collecteurs, {len(bats)} cellules nommées avec leur détail en "
+              f"court, les cercles des compteurs et leurs diamètres, l’éventail "
+              f"et la formule courte du bâtiment compté par soustraction, le "
+              f"cercle du tronc avec son diamètre ; la légende du compteur à "
+              f"installer en tête — bilan, phrase et cartouche laissés à la planche",
+        bas=f"total sous la chaufferie à y {bas} px, marge basse {AH - bas} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "comptage" in donnees:
+        return composer_comptage(donnees)
     if "terminaux" in donnees:
         return composer_terminaux(donnees)
     if "commande" in donnees:
@@ -3138,6 +3568,8 @@ def composer(donnees):
 
 
 def composer_vignette(donnees):
+    if "comptage" in donnees:
+        return composer_vignette_comptage(donnees)
     if "terminaux" in donnees:
         return composer_vignette_terminaux(donnees)
     if "commande" in donnees:
@@ -3156,6 +3588,8 @@ def composer_vignette(donnees):
 
 
 def composer_appui(donnees):
+    if "comptage" in donnees:
+        return composer_appui_comptage(donnees)
     if "terminaux" in donnees:
         return composer_appui_terminaux(donnees)
     if "commande" in donnees:

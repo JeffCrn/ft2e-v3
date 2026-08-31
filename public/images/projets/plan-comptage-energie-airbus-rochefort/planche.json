@@ -1,0 +1,234 @@
+{
+  "fiche": "plan-comptage-energie-airbus-rochefort",
+  "archetype": "boucle-fluide",
+  "archetype_motif": "La thèse de la fiche est une règle de mesure appliquée à un réseau hydraulique : le compteur d’énergie se pose sur le retour, entre deux longueurs droites, et un bâtiment trop ramifié se compte par soustraction. C’est l’archétype production → distribution → terminaux, lu au retour : la chaufferie O envoie un départ unique vers quatre bâtiments et les retours reviennent chacun à travers un compteur — sauf celui du bâtiment A, dont le réseau se ramifie et qui se déduit d’un compteur général sur le retour commun. Neuvième mécanisme du compositeur, « comptage » : à gauche la chaufferie O — un aller, quatre retours, six compteurs et une soustraction ; à droite le bilan du site — quatre chaufferies, sept compteurs existants en carrés pleins, 18 à installer en cercles vides. Ni sankey (aucune consommation n’est encore mesurée : les largeurs n’auraient rien à proportionner) ; ni tableau-électrique (le mécanisme est hydraulique, et l’archétype vient d’être employé en N08) ; ni chronologie (le déroulé de la mission est un récit, pas un mécanisme — arbitrage N01).",
+  "mecanisme": "comptage",
+  "surtitre": "SCHÉMA DE PRINCIPE · PLAN DE COMPTAGE DE L’ÉNERGIE DE CHAUFFAGE",
+  "titre": "Plan de comptage d’énergie",
+  "sous_titre": "18 compteurs à poser sur quatre chaufferies, un bâtiment compté par soustraction",
+  "cartouche_legende": "ROCHEFORT · QUATRE CHAUFFERIES · 2025",
+  "aria_label": "Schéma de principe d’un plan de comptage de l’énergie de chauffage sur un site industriel. À gauche, la chaufferie O : un départ unique alimente quatre bâtiments, D, B, C et A, et leurs retours reviennent au collecteur en passant chacun par un compteur d’énergie — un compteur en DN 125 pour le bâtiment D, trois pour le bâtiment B, en DN 50 après le circulateur et en DN 65 et DN 40 sur les réseaux des aérothermes, un compteur en DN 100 pour le bâtiment C. Le bâtiment A, dont le réseau se ramifie en une multitude de branches, ne reçoit aucun compteur : un compteur général en DN 200 sur le retour commun mesure le total, et le bâtiment A se compte par soustraction des trois autres. À droite, le bilan du site : quatre chaufferies gaz et 18 départs secondaires, sept compteurs existants — cinq à la chaufferie CH, deux à la chaufferie V — et 18 compteurs à installer, trois à la chaufferie CH, six à la chaufferie O, six à la chaufferie Vauban, trois à la chaufferie V, soit 25 compteurs. Le compteur se pose sur le retour, après cinq diamètres de tuyauterie droite ; un bâtiment trop ramifié se compte par soustraction.",
+  "comptage": {
+    "entete": "LE COMPTEUR SE POSE SUR LE RETOUR · UN BÂTIMENT SUR QUATRE SE COMPTE PAR SOUSTRACTION",
+    "registres": {
+      "gauche": "CHAUFFERIE O · UN DÉPART, QUATRE BÂTIMENTS, SIX COMPTEURS",
+      "droite": "LE SITE · QUATRE CHAUFFERIES, 18 DÉPARTS"
+    },
+    "legende_existant": "COMPTEUR EXISTANT",
+    "legende_a_installer": "COMPTEUR À INSTALLER",
+    "legende_aller": "ALLER",
+    "legende_retour": "RETOUR",
+    "chaufferie": {
+      "libelle": "Chaufferie O",
+      "libelle_court": "Chaufferie O",
+      "details": [
+        "GAZ",
+        "UN DÉPART"
+      ]
+    },
+    "total": {
+      "cle": "co-tot",
+      "libelle": "Compteur général sur le retour commun",
+      "valeur": "200",
+      "unite": "DN",
+      "affichee": "TOTAL · DN 200",
+      "affichee_courte": "DN 200"
+    },
+    "batiments": [
+      {
+        "cle": "d",
+        "ordre": 1,
+        "libelle": "Bâtiment D",
+        "libelle_court": "Bâtiment D",
+        "detail": "UN COMPTEUR",
+        "compteurs": [
+          {
+            "cle": "co-d",
+            "valeur": "125",
+            "unite": "DN",
+            "affichee": "DN 125",
+            "detail": "SUR LE RETOUR"
+          }
+        ],
+        "soustraction": false
+      },
+      {
+        "cle": "b",
+        "ordre": 2,
+        "libelle": "Bâtiment B",
+        "libelle_court": "Bâtiment B",
+        "detail": "TROIS COMPTEURS",
+        "compteurs": [
+          {
+            "cle": "co-b1",
+            "valeur": "50",
+            "unite": "DN",
+            "affichee": "DN 50",
+            "detail": "APRÈS LE CIRCULATEUR"
+          },
+          {
+            "cle": "co-b2",
+            "valeur": "65",
+            "unite": "DN",
+            "affichee": "DN 65",
+            "detail": "RÉSEAU DES AÉROTHERMES"
+          },
+          {
+            "cle": "co-b3",
+            "valeur": "40",
+            "unite": "DN",
+            "affichee": "DN 40",
+            "detail": "RÉSEAU DES AÉROTHERMES"
+          }
+        ],
+        "soustraction": false
+      },
+      {
+        "cle": "c",
+        "ordre": 3,
+        "libelle": "Bâtiment C",
+        "libelle_court": "Bâtiment C",
+        "detail": "UN COMPTEUR",
+        "compteurs": [
+          {
+            "cle": "co-c",
+            "valeur": "100",
+            "unite": "DN",
+            "affichee": "DN 100",
+            "detail": "SUR LE RETOUR"
+          }
+        ],
+        "soustraction": false
+      },
+      {
+        "cle": "a",
+        "ordre": 4,
+        "libelle": "Bâtiment A",
+        "libelle_court": "Bâtiment A",
+        "detail": "PAR SOUSTRACTION",
+        "compteurs": [],
+        "soustraction": true,
+        "ramifications": 4,
+        "formule": "A = TOTAL − D − B − C",
+        "formule_courte": "TOTAL − D − B − C"
+      }
+    ],
+    "bilan": [
+      {
+        "cle": "ch",
+        "ordre": 1,
+        "libelle": "Chaufferie CH",
+        "departs": 8,
+        "existants": 5,
+        "a_installer": 3,
+        "detail": "HUIT DÉPARTS · CINQ EXISTANTS · TROIS À INSTALLER"
+      },
+      {
+        "cle": "o",
+        "ordre": 2,
+        "libelle": "Chaufferie O",
+        "departs": 1,
+        "existants": 0,
+        "a_installer": 6,
+        "detail": "UN DÉPART, QUATRE BÂTIMENTS · SIX À INSTALLER"
+      },
+      {
+        "cle": "vauban",
+        "ordre": 3,
+        "libelle": "Chaufferie Vauban",
+        "departs": 4,
+        "existants": 0,
+        "a_installer": 6,
+        "detail": "QUATRE DÉPARTS · SIX À INSTALLER"
+      },
+      {
+        "cle": "v",
+        "ordre": 4,
+        "libelle": "Chaufferie V",
+        "departs": 5,
+        "existants": 2,
+        "a_installer": 3,
+        "detail": "CINQ DÉPARTS · DEUX EXISTANTS · TROIS À INSTALLER"
+      }
+    ],
+    "totaux": {
+      "existants": 7,
+      "a_installer": 18,
+      "compteurs": 25,
+      "affichee": "SEPT EXISTANTS + 18 À INSTALLER = 25 COMPTEURS"
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Un compteur se pose sur le retour, après cinq diamètres droits ; un bâtiment trop ramifié se compte par soustraction.",
+  "vignette_surtitre": "COMPTAGE PAR SOUSTRACTION",
+  "a_valider_ft2e": [
+    {
+      "objet": "La topologie de la chaufferie O",
+      "la_source_affirme": "Le rapport décrit « un départ unique pour le chauffage des bâtiments A, B, C et D » et désigne chaque compteur sur une photographie ; il ne dessine pas le réseau.",
+      "le_dessin_suppose": "Un collecteur aller et un collecteur retour d’où partent quatre branches parallèles, une par bâtiment — une topologie de principe, pas le tracé réel des canalisations."
+    },
+    {
+      "objet": "Le réseau sur lequel se posent les trois compteurs du bâtiment B",
+      "la_source_affirme": "CO-B1 « sera placé après le circulateur », CO-B2 et CO-B3 « sur les réseaux des aérothermes » — sans dire s’il s’agit de l’aller ou du retour.",
+      "le_dessin_suppose": "Les trois compteurs sur la ligne de retour du bâtiment B, conformément à la règle générale du § 1.3 ; la position réelle peut être sur l’aller."
+    },
+    {
+      "objet": "Les ramifications du bâtiment A",
+      "la_source_affirme": "« Le réseau de chauffage du bâtiment comprend une multitude de ramification » — sans nombre.",
+      "le_dessin_suppose": "Quatre lignes divergentes à l’entrée du bâtiment A, un nombre choisi pour le dessin, qui signifie « trop de branches pour un compteur chacune »."
+    },
+    {
+      "objet": "Le nombre de compteurs de la chaufferie Vauban",
+      "la_source_affirme": "Le § 1.2.4 annonce « un total de 7 compteurs » ; le § 2.3 et le tableau du § 4.1 en décrivent six.",
+      "le_dessin_suppose": "Six cercles pour Vauban, 18 compteurs à installer et 25 au total — le tableau est suivi, la contradiction est en question B2 de la collecte."
+    },
+    {
+      "objet": "Le compteur CCH-CH4 sur l’aller",
+      "la_source_affirme": "Un seul des 18 compteurs est prescrit « sur le réseau aller chauffage » (§ 2.1.2) ; tous les autres sont sur le retour ou en intérieur de bâtiment.",
+      "le_dessin_suppose": "Le bilan du site ne distingue pas aller et retour : huit marques pour la chaufferie CH, sans signaler l’exception. La fiche l’écrit."
+    },
+    {
+      "objet": "Les désignations du site sur la planche",
+      "la_source_affirme": "Le rapport nomme les chaufferies CH, O, V et Vauban et les bâtiments par leurs lettres.",
+      "le_dessin_suppose": "Ces désignations sont reprises telles quelles (« Chaufferie O », « Bâtiment D ») : ce sont des repères internes du site, pas des noms de tiers — question E3 de la collecte."
+    },
+    {
+      "objet": "Le cartouche sans surface et le millésime",
+      "la_source_affirme": "Aucune surface au dossier ; le rapport final est d’avril 2024 ; le classeur FT2E classe l’affaire « Finalisées en 2025 ».",
+      "le_dessin_suppose": "Le cartouche porte la grandeur qui compte le site (« QUATRE CHAUFFERIES ») à la place de la surface, et le millésime du classeur — à corriger en 2024 si B1 le confirme."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 23-083 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Le montant : commande de 8 100 € HT.",
+    "Tous les tiers : le commanditaire (Equans / Axima Concept), le client final et son site (Airbus, Rochefort — nommés dans la fiche, jamais sur le dessin), le service chauffage du site.",
+    "Le millésime d’ouverture (2023) — seul le millésime de livraison paraît, au cartouche.",
+    "Toute géométrie du site : ni le plan de masse, ni l’implantation des chaufferies, ni le tracé réel des réseaux — les quatre bâtiments sont quatre cellules d’égale taille, le réseau un collecteur de principe.",
+    "Les 17 photographies de chaufferies du rapport : elles désignent les emplacements, elles n’entrent pas au dessin.",
+    "La priorisation en cinq rangs et les diamètres des douze autres compteurs : la fiche les porte, la planche ne les répète pas (révision 4)."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "chaufferie O : un tronc aller, un collecteur, 4 cellules, 4 retours dont 3 portent 5 cercles et 1 se termine en éventail sans cercle, un cercle seul sur le tronc de retour — la soustraction est portée par la géométrie ; bilan du site : 7 carrés pleins et 18 cercles vides sur 4 rangs, la somme vaut celle de l’extraction",
+    "topologie": "chaufferie x 56–190 y 292–566, collecteurs x 250 (aller) et 282 (retour), compteurs autour de x 420 au pas 54, cellules x 500–700 ; rangs y 322–538 au pas 72 ; bilan x 760–1144, totaux y 606",
+    "bas_du_dessin": "formule et total à y 570, totaux du bilan à 606, phrase à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 340 x 30 px = 10200 px², soit 1.06 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "le motif seul : la chaufferie, deux collecteurs, 4 allers et retours, les cercles des compteurs avec leur diamètre, l’éventail du bâtiment sans compteur et sa formule courte, le cercle du tronc — bilan, légendes et phrase laissés à la planche",
+    "bas_du_dessin": "178 px, marge basse 22 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier à l’échelle 1 : la chaufferie nommée, deux collecteurs, 4 cellules nommées avec leur détail en court, les cercles des compteurs et leurs diamètres, l’éventail et la formule courte du bâtiment compté par soustraction, le cercle du tronc avec son diamètre ; la légende du compteur à installer en tête — bilan, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "total sous la chaufferie à y 331 px, marge basse 37 px"
+  }
+}

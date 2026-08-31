@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe d’un plan de comptage de l’énergie de chauffage sur un site industriel. À gauche, la chaufferie O : un départ unique alimente quatre bâtiments, D, B, C et A, et leurs retours reviennent au collecteur en passant chacun par un compteur d’énergie — un compteur en DN 125 pour le bâtiment D, trois pour le bâtiment B, en DN 50 après le circulateur et en DN 65 et DN 40 sur les réseaux des aérothermes, un compteur en DN 100 pour le bâtiment C. Le bâtiment A, dont le réseau se ramifie en une multitude de branches, ne reçoit aucun compteur : un compteur général en DN 200 sur le retour commun mesure le total, et le bâtiment A se compte par soustraction des trois autres. À droite, le bilan du site : quatre chaufferies gaz et 18 départs secondaires, sept compteurs existants — cinq à la chaufferie CH, deux à la chaufferie V — et 18 compteurs à installer, trois à la chaufferie CH, six à la chaufferie O, six à la chaufferie Vauban, trois à la chaufferie V, soit 25 compteurs. Le compteur se pose sur le retour, après cinq diamètres de tuyauterie droite ; un bâtiment trop ramifié se compte par soustraction.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · PLAN DE COMPTAGE DE L’ÉNERGIE DE CHAUFFAGE</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Plan de comptage d’énergie</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">18 compteurs à poser sur quatre chaufferies, un bâtiment compté par soustraction</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <circle cx="984.40" cy="186.50" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="1144.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">COMPTEUR À INSTALLER</text>
+  <rect x="814.50" y="182.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <text x="953.90" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">COMPTEUR EXISTANT</text>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE COMPTEUR SE POSE SUR LE RETOUR · UN BÂTIMENT SUR QUATRE SE COMPTE PAR SOUSTRACTION</text>
+  <text x="56.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHAUFFERIE O · UN DÉPART, QUATRE BÂTIMENTS, SIX COMPTEURS</text>
+  <text x="1144.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LE SITE · QUATRE CHAUFFERIES, 18 DÉPARTS</text>
+  <path d="M 730.00 240.00 L 730.00 616.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <rect x="56.00" y="292.00" width="134.00" height="274.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="322.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaufferie O</text>
+  <text x="72.00" y="342.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">GAZ</text>
+  <text x="72.00" y="358.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN DÉPART</text>
+  <path d="M 190.00 314.00 L 250.00 314.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 250.00 314.00 L 250.00 530.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="196.00" y="308.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ALLER</text>
+  <path d="M 282.00 330.00 L 282.00 546.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 282.00 546.00 L 198.00 546.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 191.00 546.00 L 199.00 542.00 L 199.00 550.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="236.00" cy="546.00" r="9.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="196.00" y="532.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RETOUR</text>
+  <text x="236.00" y="570.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">TOTAL · DN 200</text>
+  <path d="M 250.00 314.00 L 492.00 314.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 499.00 314.00 L 491.00 310.00 L 491.00 318.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="500.00" y="300.00" width="200.00" height="44.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="516.00" y="320.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bâtiment D</text>
+  <text x="516.00" y="337.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN COMPTEUR</text>
+  <path d="M 500.00 330.00 L 290.00 330.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 283.00 330.00 L 291.00 326.00 L 291.00 334.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="420.00" cy="330.00" r="9.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="420.00" y="354.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">DN 125</text>
+  <path d="M 250.00 386.00 L 277.00 386.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 287.00 386.00 L 492.00 386.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 499.00 386.00 L 491.00 382.00 L 491.00 390.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="500.00" y="372.00" width="200.00" height="44.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="516.00" y="392.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bâtiment B</text>
+  <text x="516.00" y="409.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TROIS COMPTEURS</text>
+  <path d="M 500.00 402.00 L 290.00 402.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 283.00 402.00 L 291.00 398.00 L 291.00 406.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="366.00" cy="402.00" r="9.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="366.00" y="426.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">DN 50</text>
+  <circle cx="420.00" cy="402.00" r="9.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="420.00" y="426.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">DN 65</text>
+  <circle cx="474.00" cy="402.00" r="9.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="474.00" y="426.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">DN 40</text>
+  <path d="M 250.00 458.00 L 277.00 458.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 287.00 458.00 L 492.00 458.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 499.00 458.00 L 491.00 454.00 L 491.00 462.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="500.00" y="444.00" width="200.00" height="44.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="516.00" y="464.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bâtiment C</text>
+  <text x="516.00" y="481.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN COMPTEUR</text>
+  <path d="M 500.00 474.00 L 290.00 474.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 283.00 474.00 L 291.00 470.00 L 291.00 478.00 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="420.00" cy="474.00" r="9.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="420.00" y="498.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">DN 100</text>
+  <path d="M 250.00 530.00 L 277.00 530.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 287.00 530.00 L 492.00 530.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 499.00 530.00 L 491.00 526.00 L 491.00 534.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="500.00" y="516.00" width="200.00" height="44.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="516.00" y="536.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Bâtiment A</text>
+  <text x="516.00" y="553.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PAR SOUSTRACTION</text>
+  <path d="M 500.00 546.00 L 290.00 546.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 283.00 546.00 L 291.00 542.00 L 291.00 550.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 428.00 546.00 L 500.00 537.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 428.00 546.00 L 500.00 543.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 428.00 546.00 L 500.00 549.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 428.00 546.00 L 500.00 555.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <text x="492.00" y="570.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">A = TOTAL − D − B − C</text>
+  <text x="760.00" y="312.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaufferie CH</text>
+  <rect x="760.00" y="324.00" width="8.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <rect x="780.00" y="324.00" width="8.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <rect x="800.00" y="324.00" width="8.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <rect x="820.00" y="324.00" width="8.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <rect x="840.00" y="324.00" width="8.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <circle cx="864.00" cy="328.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="884.00" cy="328.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="904.00" cy="328.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="760.00" y="348.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HUIT DÉPARTS · CINQ EXISTANTS · TROIS À INSTALLER</text>
+  <text x="760.00" y="384.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaufferie O</text>
+  <circle cx="764.00" cy="400.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="784.00" cy="400.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="804.00" cy="400.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="824.00" cy="400.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="844.00" cy="400.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="864.00" cy="400.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="760.00" y="420.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN DÉPART, QUATRE BÂTIMENTS · SIX À INSTALLER</text>
+  <text x="760.00" y="456.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaufferie Vauban</text>
+  <circle cx="764.00" cy="472.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="784.00" cy="472.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="804.00" cy="472.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="824.00" cy="472.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="844.00" cy="472.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="864.00" cy="472.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="760.00" y="492.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">QUATRE DÉPARTS · SIX À INSTALLER</text>
+  <text x="760.00" y="528.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaufferie V</text>
+  <rect x="760.00" y="540.00" width="8.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <rect x="780.00" y="540.00" width="8.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <circle cx="804.00" cy="544.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="824.00" cy="544.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <circle cx="844.00" cy="544.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.5"/>
+  <text x="760.00" y="564.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CINQ DÉPARTS · DEUX EXISTANTS · TROIS À INSTALLER</text>
+  <rect x="760.00" y="588.00" width="384.00" height="1.00" class="c-filet-2" fill="#00393A29"/>
+  <text x="760.00" y="606.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SEPT EXISTANTS + 18 À INSTALLER = 25 COMPTEURS</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Un compteur se pose sur le retour, après cinq diamètres droits ; un bâtiment trop ramifié se compte par soustraction.</text>
+  <rect x="56.00" y="714.00" width="340.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">ROCHEFORT · QUATRE CHAUFFERIES · 2025</text>
+</svg>
