@@ -231,6 +231,7 @@ est public). Il complète les réponses Q1/Q2 :
 | N06 | 22-013 — Construction de 16 logements, ZAC ÉcoQuartier de L’Houmeau (secteur de Monsidun) | `logements-ecoquartier-l-houmeau` | ✅ rédigée, build 52 pages | ✅ `sankey-energie`, **mécanisme `affectation` créé** (6ᵉ du compositeur — invariant octet des 5 planches sankey existantes rejoué avant la greffe, après la greffe et après la passe apostrophes : 20/20 trois fois ; la passe a ENCORE courbé 6 apostrophes droites — 3 dans les chaînes du mécanisme neuf, 3 dans l’extraction —, piège N03-N05 reconfirmé) — seize logements sans chaufferie commune affectés à trois productions par typologie (13 chaudières gaz individuelles / 1 PAC double service au T4 / 2 T1 tout électriques à CET), second registre : les 8 modules PV de 375 Wc à micro-onduleur, autoconsommation individuelle des logements de l’étage | ✅ ref_029 (8 pièces) | Secteur `Logements` par le classeur (« 22013 · 16 Logements l’Houmeau- Monsidun · L ») ; `annee_livraison: 2025` sur CR de chantier n° 60 du 30/06/2025 (« RÉCEPTION LE 30/06 (hors VRD et espaces verts) ») + classeur — PV de réception absent → B1 ; MOE en groupement conjoint BTB (mandataire) + BAG + FT2E + Acoustex + BF ECO (économiste-OPC, CR préfixés « 543 » — numéro du cotraitant), mission base + EXE + OPC + diag performances énergétiques (FT2E 95 %), part FT2E 30 518,83 € HT (18,22 %) ; programme 2 T1 bis (PLAI) + 2 T2 + 11 T3 + 1 T4, charte ÉcoQuartier (biosourcés 18 kg/m² SP, solaire imposé) ; certification « BEE » (synthèse RE2020) contre « BEE+ » (docx) → B2 ; 8 modules/coffrets pour 7 logements à l’étage → B4 ; valeurs dessinées = DCE 07/2023, DOE absent → B5 ; « logements individuels » (docx) contre « collectifs » (calcul RE2020) → B6 ; questions B1-B6, C, E ouvertes ; T6 : Mathieu Braud et Vincent Jaoul aux CR, DPGF « MB », synthèse RE rédacteurs « KB »/« GM » à identifier |
 | N07 | 23-009 — Reprise de la ventilation de soixante maisons individuelles, cité Louise Magnan, La Rochelle | `maisons-louise-magnan-la-rochelle` | ✅ rédigée, build 53 pages | ✅ `coupe-traversee`, **mécanisme `sortie` créé** (6ᵉ du compositeur — invariant octet des 5 planches existantes rejoué avant la greffe, après la greffe et après la passe apostrophes : 20/20 trois fois ; ⚠ pour la première fois depuis la N03 la passe n’a RIEN courbé — les chaînes de contrôles ont été écrites courbes ET mesurées avant de composer) — AVANT/APRÈS : l’extracteur en coffre et ses gaines souples convergeant sur le seul piquage cuisine, rejet en façade, entrées d’air barrées, contre le caisson sur dallettes et résilient AU-DESSUS de la toiture-terrasse, la traversée carottée-fourreautée-bavettée, un piquage rigide par bouche à trois hauteurs, le sifflet ; puis quatre gabarits de largeur proportionnelle aux débits de caisson (120/150/165/195 m³/h — 8 + 8 + 28 + 16 = 60) | ✅ ref_030 (8 pièces) | Secteur `Logements` par le classeur (« 23009 · 60 maisons Louise Magnan · L ») ; **première fiche en contrat direct avec un bailleur, sans architecte ni groupement** : trois contrats FT2E — diagnostic moisissures 3 100 € HT (13/01/2023, accepté 16/01), mission de base MOE ventilation « 23-009 A » 9 600 € HT (15/03/2023, bon pour accord 29/03), complément DET/AOR percements-coffres-peinture « 23-009 B » 2 250 € HT (accepté 27/09/2023) = 14 950 € HT ; MOA Immobilière Atlantic Aménagement (groupe 3F, Niort) ; 60 maisons de 1972 (8 T2, 8 T3, 28 T4, 16 T6) sur 8 îlots, plans d’origine « 60 logements PRI – ZUP II Périgny » (programme bailleur « GR 0085 », à ne pas prendre pour un numéro d’affaire) ; diagnostic sur 5 maisons visitées (thermographie 15 °C à la jonction toiture/mur, sondage de toiture gorgée d’eau, calcul de condensation 2/3-1/3, débits mesurés sous l’arrêté de 1982) hiérarchisant toiture > ventilation > menuiseries > sol ; trois emplacements de caisson chiffrés (actuel 156 800 / garage 201 992 / toiture-terrasse 198 296 €, marge 1,4), toiture retenue au DCE d’octobre 2023 (CCTP/DPGF « Affaire n° : 23-009 », auteur Mathieu Braud, vérifié Géraldine Michaud ; 19 CR de chantier de Géraldine Michaud — T6) ; lot unique ventilation : caissons EC 120/150/165/195 m³/h, réseau rigide galva calorifugé 25 mm, 80-160 Pa, carottage + fourreau + résine + bitume armé + bavette, 60 sifflets, 185 m² de coffres ; chantier 29/01/2025 → 48 logements terminés le 12/06/2025, `annee_livraison: 2025` sur CR n° 19 du 26/06/2025 (OPR fixées au 03/07/2025) + classeur — PV de réception absent → B1 ; docx commerciaux « 203 095 € » non recoupés → B2 ; DPGF « 24 bouches par typologie » (96 pour 60 maisons) contre 3 bouches par maison aux plans → B3 ; décomposition des débits 165/195 → B4 ; rapport daté 24/01/2023 citant le sondage de février → B5 ; 5 maisons visitées pour 8-10 commandées → B6 ; réfection des toitures (priorité 1 du diagnostic) hors dossier → B7 ; DOE absent → B8 ; typologie `Réhabilitation`, `mission_ft2e` [Audit & diagnostic, CVC] ; aucune surface au dossier → cartouche « LA ROCHELLE · SOIXANTE MAISONS · 2025 » ; relecture éditoriale : 6 corrections appliquées (dont « VMC » remplacé, titre de section « soixante caissons sur soixante toits » ramené à ce que la pièce établit) ; questions B1-B8, C, E ouvertes |
 | N08 | 23-099 — Bornes de recharge pour sept véhicules de service, La Rochelle et Saintes | `bornes-irve-la-rochelle-saintes` | ✅ rédigée, build 54 pages | ✅ `tableau-electrique`, **mécanisme `mutualisation` créé** (5ᵉ du compositeur — invariant octet des 4 planches existantes rejoué avant la greffe, après la greffe et après la retouche : 16/16 trois fois ; la passe apostrophes n’a RIEN courbé, chaînes écrites courbes et mesurées avant de composer, comme en N07) — deux registres : LE BESOIN, deux jauges graduées sur la borne de 7 kW (24 px par kW) où la puissance utile calculée sur l’usage (5,7 et 4,3 kW) est un niveau sous le bord ; LA DISTRIBUTION, une bande d’alimentation de 22 kW (4 px par kW) partagée en trois branches de 7 kW à largeur proportionnelle dont une seule est équipée (borne → quatre points de charge, lecteur de badge), les deux autres en cadres pointillés doublés de deux lignes en toutes lettres | ✅ ref_031 (9 pièces) | **DOSSIER ANNONCÉ MINCE (25 fichiers) — annotation démentie, comme Villedoux et Dufour en 2026-08** : contrat de MOE signé, note de dimensionnement au CCTP, synoptique, DPGF, OS avec montant, 5 CR jusqu’aux OPR → fiche publiée (règle Q3 examinée, non appliquée). Secteur `Monotechnique — Audit` par le classeur (« 23099 · CPAM - IRVE · M »), pas de domaine double ; typologie `Neuf` (installation créée sur sites existants → B6). **Deuxième fiche en contrat direct sans architecte ni groupement** (après Louise Magnan) : proposition ind. A du 16/11/2023 (La Rochelle seul, 3 040 € HT) → ind. B du 27/06/2024 (La Rochelle + Saintes, 4 256 € HT) → **marché de MOE CPAM n° PA 2024 – MO01** signé le 12/07 (CPAM) et le 15/07/2024 (FT2E, V. Jaoul), mission de base APD → AOR. Nature de la mission établie sur pièces : MOE d’une infrastructure IRVE — 4 véhicules de service à La Rochelle, 3 à Saintes, une borne mutualisée 7 kW monophasée par site (CCTP § 1.2 : 500 km/semaine, 20 kWh/100 km, 14 h de charge par nuit → 400 et 300 kWh, 5,7 et 4,3 kW utiles), TD IRVE alimenté en 22 kW tétrapolaire (4 × 63 A diff 500 mA S au TGBT, IG 80 A, 2 × 40 A 30 mA HI, deux emplacements libres — une borne par phase au synoptique EL01 → 12 véhicules), sans modification du raccordement. Marché de travaux PA 2024-02 notifié le 16/10/2024, **48 970,25 € HT**, 2 mois ; chantier Saintes 12/11 → La Rochelle 28-30/11, coupure générale le samedi 14/12, bornes posées les 18 et 19/12, **OPR le 20/12/2024** (CR n° 05) ; `annee_livraison: 2025` sur le classeur seul — ⚠ les OPR sont de décembre 2024, PV absent → B1 (corriger en 2024 si la réception a été prononcée avant le 1ᵉʳ janvier). Le slug et le titre n’emploient pas « CPAM » : **le marché de MOE porte une clause de confidentialité (art. 24, cinq ans) → E1**, à faire valider avant levée du noindex. Aucune trace commerciale hors classeur (docx et plaquette muets). Écarts CCTP : 7 / 7,4 kW et 22 kW / 22 kVA → B4 ; docx absents ; DOE absent → B3. Auteurs (T6) : Eric Moinet (propositions), Vincent Jaoul (CCTP/DPGF, marché, 5 CR), Tanguy Moinet (dessin EL01). Aucune surface → cartouche « LA ROCHELLE ET SAINTES · SEPT POINTS DE CHARGE · 2025 ». Répartition après N08 : L10 T9 I2 P3 C4 **M3** E2. Questions B1-B8, C, E1-E3 ouvertes |
+| N09 | 23-083 — Plan de comptage de l’énergie de chauffage du site Airbus de Rochefort | `plan-comptage-energie-airbus-rochefort` | ✅ rédigée, build 55 pages | ✅ `boucle-fluide`, **mécanisme `comptage` créé** (9ᵉ du compositeur — invariant octet des 8 planches existantes rejoué avant la greffe, après la greffe et après la retouche : 32/32 trois fois ; la passe apostrophes n’a RIEN courbé) — l’archétype lu au RETOUR : la chaufferie O, un départ unique, deux collecteurs, quatre bâtiments dont trois rendent leur retour à travers un cercle (D DN 125, B trois cercles DN 50/65/40, C DN 100) et un se termine en éventail sans cercle (A), un cercle seul sur le tronc de retour (TOTAL · DN 200) — la soustraction est portée par la géométrie ; second registre : le bilan du site, quatre rangs de marques (carré plein = existant, cercle vide = à installer, 7 + 18, somme vérifiée par assertion contre l’extraction). Retouches au rendu : formule de soustraction calée à droite (elle partageait la ligne du total), vignette limitée au diamètre des compteurs uniques (trois étiquettes de 38 px ne tiennent pas en 122), boîte de l’appui élargie (« Chaufferie O » en 13/600 affleurait — sous-mesure des sans-600, N08) | ✅ ref_032 (7 pièces) | **DOSSIER ANNONCÉ MINCE (10 fichiers) — annotation démentie, QUATRIÈME fois** (Villedoux, Dufour, IRVE, Airbus) : rapport de 22 p. (18 compteurs localisés sur photographie avec leur DN, règle de pose, soustraction, priorisation), plan de comptage CVC01 en trois indices, contrat signé, bon de commande → fiche publiée (Q3 examinée, non appliquée). Secteur `Études d’exécution / BIM` par le classeur (« 23083 · Plan de comptage d’énergie - AIRBUS · E ») — contre l’intuition Monotechnique, cohérent avec le précédent École des douanes (mission vendue à l’entreprise = E) ; pas de domaine double ; typologie `Étude`. **Chaîne contractuelle : sous-traitance d’un installateur** — proposition FT2E n° 23-083 du 21/09/2023 (E. Moinet) → bon de commande Axima Concept / Equans n° 22984760 du 06/11/2023, **8 100 € HT**, convention de sous-traitance, autoliquidation TVA ; « Maître d’ouvrage : EQUANS » au rapport et au plan, site Airbus, ZI de l’Arsenal. Mission : bilan des compteurs d’énergie thermique (chauffage) existants et à installer, visite, réunion avec le service chauffage d’Airbus, rapport + plan de synthèse sur plan de masse ; nacelle exclue, eau hors contrat (feuillet manuscrit « Thermique – eau » → B4). Matière : 4 chaufferies gaz (CH, O, Vauban, V), 18 départs secondaires, **7 compteurs existants + 18 à installer = 25**, du DN 40 au DN 200 ; règle du retour et des 5D (DN 50 → 250 mm) ; bâtiment A compté par soustraction (CO-Tot DN 200) ; CCH-CH4 seul sur l’aller → B5 ; Vauban « 7 » au § 1.2.4 contre 6 au tableau → B2 ; DN « ? » des panneaux rayonnants de Liedot 2 → B3 ; priorisation en 5 rangs « sans audit » (indice c, avril 2024). `annee_livraison: 2025` sur le classeur seul — ⚠ dernière pièce = rapport indice c d’avril 2024 → B1 (corriger en 2024 sans suite en 2025). **Airbus nommé dans le titre, le slug et le récit** : la plaquette 2024 le cite parmi les clients industriels ET le corpus secteurs versé par FT2E porte déjà « Comptage Airbus, Rochefort » (cliché 08 Industriel — la couverture du rapport) ; aucune clause de confidentialité jointe à la commande → E1 à confirmer avant levée du noindex ; ni Airbus ni Equans au dessin. Lien ajouté depuis `secteurs/etudes-execution-bim.md`. Aucune trace dans les docx. Auteurs (T6) : Mathieu Braud (rapport), Eric Moinet (proposition, vérification). Aucune surface → cartouche « ROCHEFORT · QUATRE CHAUFFERIES · 2025 ». Relecture éditoriale : 7 corrections appliquées, aucune bloquante (diamètre nominal développé à la première occurrence, h2 sans abréviation, sigle GTC, « confiée par l’installateur » plutôt que « vendue »). ⚠ Le hook Stop a commité et poussé l’état intermédiaire (`6741210`, « chore(deploy) ») pendant l’attente de la relecture — les corrections sont dans `cc5bf84` : deux commits au lieu d’un, ne pas attendre un agent de fond en fin de tour sans avoir commité. Répartition après N09 : L10 T9 I2 P3 C4 M3 **E3**. **Tranche 2025 ÉPUISÉE** (23-075 déjà publié) — les ZIP suivants sont à demander. Questions B1-B9, C, E1-E4 ouvertes |
 
 ## Annexe A — prompt d'initialisation de la session N01 (à coller tel quel en session neuve)
 
@@ -2049,4 +2050,273 @@ SECTORIELLE » ci-dessus tel quel (repartition attendue remise a jour :
 apres la N09, E3 si la fiche est publiee) : la regle est permanente,
 elle ne se resume pas. Si les ZIP des tranches suivantes ne sont pas
 fournis, le prompt N10 commence par les DEMANDER.
+````
+
+## Annexe J — prompt de lancement de la session N10 (à coller tel quel en session neuve)
+
+````
+Session N10/27 - FT2E v3 : chantier des 27 nouvelles fiches references.
+Dixieme dossier - PREMIER D'UNE NOUVELLE TRANCHE (la tranche « livraisons
+2025 » est EPUISEE depuis la N09).
+
+Contexte. FT2E v3 est le site institutionnel du bureau d'etudes FT2E
+(La Rochelle), Astro 6 statique, deploye en demonstration client sur
+https://ft2e-v3.vercel.app (indexation verrouillee - ne pas y toucher).
+Le catalogue porte 32 fiches reelles (23 + Portes-en-Re N01 + Commerces
+de Fors N02 + Residence Aurora N03 + Maison de Pierre Loti N04 + Clocher
+Saint-Sauveur N05 + EcoQuartier de L'Houmeau N06 + Cite Louise Magnan
+N07 + Bornes de recharge La Rochelle et Saintes N08 + Plan de comptage
+Airbus Rochefort N09), chacune illustree d'une planche de schema de
+principe (cinq pieces par dossier). Objectif : 50 fiches. 1 session =
+1 dossier, close par le prompt de la suivante.
+
+EN OUVERTURE - AVANT TOUTE LECTURE : LE FONDS D'ARCHIVES DE LA SUITE
+N'EST PAS FOURNI. Les neuf dossiers publiables de 2025.zip sont traites
+(N01 a N09 ; 23-075 y est deja publie, ref_001). D'apres le classeur
+« REFERENCES SITE FT2E.ods » (references/docs_references/), les tranches
+suivantes sont : « Finalisees en 2024 » (5 affaires : 19110 CDAIR,
+20031 UNDERTECH, 21093 Central Hostel, 21095 Voltaero, 23036 Fountaine
+Pajot), 2023 (5), 2022 (4), 2020 (2), 2019 (1). SI AUCUN ZIP NOUVEAU
+N'EST PRESENT dans C:\claude_code_dev_projects\ft2e_new_archives\
+(os.listdir : seul 2025.zip y est attendu), DEMANDER A L'UTILISATEUR
+le ZIP de la tranche 2024 (chemin, nom, et l'ordre souhaite - a defaut :
+les mieux documentes d'abord, d'apres le compte de fichiers par dossier
+lu par zipfile) et S'ARRETER LA : rien ne peut se faire sans les pieces.
+Consigner la reponse au § 3 du plan (Q1/Q2, tranche 2024) avant de
+derouler.
+
+LIRE ENSUITE, dans cet ordre :
+1. docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md -
+   LE PLAN : § 1 (ce qui a change), § 2 (pipeline 12 etapes), § 3
+   (reponses consignees + COMPLEMENT N02 : le classeur de references
+   FT2E ; Q3 = REGLE DES DOSSIERS MINCES, defaut reconduit), § Suivi
+   (lignes N01 a N09), annexe J (ce prompt).
+2. docs/superpowers/plans/2026-08-07-chantier-references-reelles.md -
+   § Contraintes globales + § Protocole de session + § Regle des
+   dossiers minces (S21-S22, N08 ET N09 : QUATRE dossiers annonces
+   minces se sont reveles complets au depouillement - ne jamais
+   conclure sur le compte de fichiers ; la N09 en avait 10).
+3. docs/superpowers/specs/2026-08-12-planches-references-protocole.md -
+   revision 5 EN ENTIER.
+4. CLAUDE.md, .claude/rules/content-collections.md et french-editorial.md.
+Etalons : src/content/projets/creche-oranger-perigny.md (fiche) et, pour
+une session N complete sur un dossier mince en SOUS-TRAITANCE D'UNE
+ENTREPRISE (typologie Etude, secteur E),
+src/content/projets/plan-comptage-energie-airbus-rochefort.md +
+public/images/projets/plan-comptage-energie-airbus-rochefort/ +
+references/ref_032/ (mecanisme nouveau « comptage » du compositeur
+boucle-fluide, fiche de collecte avec decision Q3 motivee en tete) ;
+pour un contrat direct avec un MOA public :
+src/content/projets/bornes-irve-la-rochelle-saintes.md + ref_031/.
+
+REGLE D'INDEXATION SECTORIELLE - etablie le 2026-08-27, A APPLIQUER A
+LA REDACTION DE CHAQUE FICHE (etape 6 du pipeline), pas apres coup :
+« REFERENCES SITE FT2E.ods » (references/docs_references/, classeur
+fourni par FT2E) FAIT FOI pour le classement sectoriel. Concretement,
+AVANT d'ecrire le frontmatter :
+1. Ouvrir le classeur (python zipfile sur content.xml, ou pandoc) et y
+   retrouver l'affaire PAR SON NUMERO (graphie sans tiret : « 19110 »).
+2. En relever le domaine (legende : L Logements / T Tertiaire & ERP /
+   I Industriel / P Patrimoine / C Coordination SSI /
+   M Monotechnique-Audit / E EXE) -> champ `secteur`.
+3. Si le classeur porte un domaine DOUBLE (« T § C ») : le premier est
+   le `secteur`, le second va au champ `secteur_secondaire` (optionnel
+   au schema depuis le 2026-08-27, garde-fou « doit differer ») - la
+   fiche parait alors dans les deux filtres et sur les deux pages de
+   secteur. Precedents : hotel-yachtman (T § C), maison-pierre-loti-
+   rochefort (P § C, N04).
+4. JAMAIS de deduction depuis le dossier, l'usage RT ou le nom de
+   l'operation : la N02 penchait « Industriel » pour Fors, le classeur
+   dit T - et les 25 fiches ont du etre re-referencees le soir meme
+   (7 bascules, commits ce334b2/09270a3). Le classeur peut contredire
+   l'intuition (Saint-Rogatien, pole commercial : I ; Fors, pole
+   commercial : T ; 23083 « plan de comptage Airbus » : E et non M -
+   confirme en N09, coherent avec l'Ecole des douanes : une mission
+   vendue a l'entreprise est classee E ; 23099 « CPAM » : M - IRVE,
+   pas T) - il gagne.
+5. CONSIGNER la lecture dans la fiche de collecte (ligne « Secteur » :
+   citer l'entree du classeur telle quelle) ; si l'affaire est ABSENTE
+   du classeur ou son domaine illisible -> question B a FT2E et choix
+   provisoire argumente, jamais silencieux.
+6. EN RECETTE (etape 10) : verifier sur le deploiement que la fiche
+   repond au(x) bon(s) filtre(s) de /references (compteurs de chips)
+   et parait sur sa ou ses pages /secteurs/<slug> - sondes precedentes :
+   references/ref_032/sonde-filtres.mjs et sonde-fiche.mjs (URL a
+   adapter). ⚠ Une page /secteurs/<slug> n'affiche que les 4 affaires
+   les plus recentes du secteur (tri par numero decroissant) : une
+   affaire ancienne peut legitimement n'y pas paraitre (N03 : 19-036
+   hors du top 4 de Logements ; 19-096 idem des que Patrimoine depasse
+   4 affaires) - le filtre de /references, lui, montre tout. Les
+   affaires 19-xxx et 20-xxx de la tranche 2024 y seront presque
+   toutes hors du top 4 : c'est attendu.
+   Repartition attendue AVANT la N10 : L10 T9 I2 P3 C4 M3 E3 pour
+   32 fiches (Yachtman T+C et Loti P+C comptent double).
+
+DOSSIER DU JOUR : [A ETABLIR AVEC L'UTILISATEUR - tranche 2024, ZIP a
+fournir ; par defaut le dossier le mieux documente de la tranche].
+ATTENTION DISQUE (~6 Go libres) : supprimer d'abord le repertoire
+extrait de la session precedente (ft2e_new_archives/2025/23-083- Airbus
+- Comptage energie - EQUANS - os.listdir + startswith('23-083'), par
+python shutil.rmtree ; le rm -rf est REFUSE par les permissions). Puis
+extraire LE SEUL dossier du jour depuis le nouveau ZIP PAR PYTHON
+ZIPFILE (members filtres sur le numero d'affaire - les motifs d'unzip
+ne matchent PAS les entrees de ces ZIP, et leurs noms de fichiers
+portent des accents encodes en mojibake : passer TOUJOURS par
+os.listdir / zipfile.namelist(), jamais par un chemin tape). Le ZIP
+est la source, il ne se supprime pas.
+Dossier de travail a creer : references/ref_033/
+Slug cible : a etablir au depouillement (kebab-case sans accents,
+verifier qu'il n'ecrase rien).
+
+CE QUE LES N01-N09 ONT ETABLI (verifiable au depot) :
+- annee_livraison se pose sur le classeur (« Finalisees en 2024 » pour
+  la tranche suivante) ; quand une piece et le classeur se contredisent
+  sur le millesime, le classeur est suivi ET la contradiction est ecrite
+  en B1, jamais tranchee en silence (N08 : OPR de decembre 2024 pour
+  « 2025 » ; N09 : rapport final d'avril 2024 pour « 2025 »). Le PV de
+  reception manque presque toujours -> B1, statut livre.
+- Une mission vendue a une ENTREPRISE (Ecole des douanes/Herve
+  Thermique, Joffre/UFA, N09 Airbus/Equans) se dit telle quelle au champ
+  moa (« Equans - Axima Concept, agence de Perigny, pour le site Airbus
+  de Rochefort ») et le classeur la classe E ; la typologie `Etude`
+  sert a toute mission sans marche de travaux.
+- NOMMER LE CLIENT FINAL : la N09 a etabli Airbus au titre, au slug et
+  au recit sur DEUX pieces publiees par FT2E lui-meme (la plaquette
+  2024, docs/20-source-plaquette-2024.md § Clients industriels cites, et
+  le corpus de cliches des secteurs, src/content/secteurs/*.md - les
+  legendes des cliches nomment des affaires : GREP-LES au croisement
+  commercial, le site est une source). Un nom deja publie par FT2E se
+  reprend, avec E1 ; un nom couvert par une clause de confidentialite
+  (N08 CPAM) reste hors slug et hors titre. Aucun nom de tiers ne monte
+  jamais sur la planche.
+- Archetypes apres N09 : boucle-fluide 9 (comptage, Airbus) - sankey 6
+  - coupe-traversee 6 - tableau-electrique 5 - zonage-ssi 4 -
+  chronologie 2 - planche-chiffree 0 SANS module. VARIER - l'archetype
+  se choisit sur la THESE de la fiche, jamais sur le secteur ; le
+  boucle-fluide est le plus employe, le prochain dossier devrait
+  chercher ailleurs si sa these le permet.
+- Un mecanisme nouveau s'ecrit DANS le compositeur d'archetype
+  (constantes prefixees ; garde-fou de greffe sur le NOM DE LA FONCTION
+  - « composer_comptage » -, pas sur un mot qui peut deja figurer dans
+  le module : la N09 a bute sur « comptage » present ailleurs), et
+  l'invariant octet des planches existantes du meme compositeur se
+  rejoue AVANT la greffe, APRES la greffe et APRES la derniere retouche,
+  dans une copie hors depot (N09 : 32/32 trois fois sur les 8
+  boucle-fluide). Quand le dessin somme des marques (7 + 18), une
+  ASSERTION dans le compositeur compare la somme dessinee aux totaux de
+  l'extraction. ECRIRE LES CHAINES DE CONTROLES COURBES DES L'ECRITURE :
+  zero apostrophe fuie en N07, N08 et N09.
+- ARBITRAGE FT2E (N01) : la planche schematise la SOLUTION APPORTEE,
+  jamais le deroule de l'affaire. Un registre mis en regard (AVANT/APRES,
+  BESOIN/DISTRIBUTION, CHAUFFERIE/BILAN DU SITE) n'est pas un recit.
+- Les avances calibrees de _tronc.mesurer sous-mesurent Archivo 600 au
+  rendu d'environ 20 % (N08, reconfirme N09 : « Chaufferie O » en
+  13/600 mesure 75 px et affleurait une boite de 98) - 30 px de marge a
+  tout libelle sans-600 dans une boite. Trois etiquettes mono de 38 px
+  ne tiennent pas dans 122 px de vignette : n'etiqueter que ce qui
+  tient, les valeurs restent au JSON et a la planche.
+- Quand aucune surface n'existe au dossier, le cartouche porte la
+  grandeur qui compte l'ouvrage (« SOIXANTE MAISONS », « SEPT POINTS DE
+  CHARGE », « QUATRE CHAUFFERIES ») - a_valider_ft2e le dit.
+- Les insecables des heredocs bash sont normalisees DE FACON NON
+  DETERMINISTE sur cette machine - tout fichier portant des insecables
+  s'ecrit par un script Python (Write, puis execution DEPUIS LA RACINE
+  DU DEPOT) avec marqueurs ASCII (~ fine, ^ insecable) remplaces par
+  chr(8239)/chr(160), assertion d'auto-controle CALIBREE SUR LE TEXTE
+  (COMPTER les marqueurs du source et comparer a l'egalite - la N09 a
+  encore devine un seuil, 10 pour 7 posees, et le script a echoue a
+  juste titre) et controle de presence apres relecture du fichier.
+  scripts/injection-typographique.py se passe ENSUITE sur la fiche : il
+  pose les insecables avant : ; et autour des guillemets que les
+  marqueurs n'avaient pas mis (N09 : +28).
+
+DEROULER LE PIPELINE § 2 INTEGRALEMENT : depouillement (pdfinfo /
+pdftotext via python subprocess avec les noms lus par os.listdir ; les
+plans sans couche texte se lisent en rendant leur cartouche a zoom 3
+par pymupdf ; les scans en PNG page a page ; antiword pour les .doc) ->
+releve du numero NN-NNN sur piece FT2E (gare aux numeros des
+cotraitants et des donneurs d'ordres : Equans « 22984760 » et
+« T.1LR.23007-RE » en N09, CPAM « PA 2024 - MO01 » en N08, IAA
+« GR 0085 » en N07, BF ECO « 543 » en N06) -> references/ref_033/ (3 a
+8 pieces) -> croisement commercial (references/docs_references/ - docx
+sectoriels ET classeur ODS - + docs/20-source-plaquette-2024.md + grep
+de src/content/ pour ce que le site publie deja) -> fiche de collecte
+(A/A+ remplies, B-E en questions, ligne Secteur citant le classeur,
+DECISION Q3 motivee en tete) -> DECISION Q3 -> fiche
+src/content/projets/<slug>.md (SECTEUR RELEVE AU CLASSEUR ; taxonomie
+ACTUELLE ; lieu avec code postal entre parentheses ; synthese 480-780
+posee par script ; >= 5 liens internes ; jamais de numero d'affaire NI
+de millesime d'ouverture en prose) -> PLANCHE complete (extraction
+avec a_valider_ft2e non vide, composition par
+scripts/planches/<archetype>.py, controles a 1152 / carte 274-296 /
+appui 552 - REGARDER les PNG, deux retouches sur trois ne se voient
+qu'au rendu -, PNG 2400x1600, apostrophes-planches.py, verser.py) ->
+qualite (typecheck 0, build vert 56 pages, editorial-reviewer,
+controle-liens-internes 33/33 a 5, controle-numeros-affaire 0 fuite,
+releve-numeral sans ecart nouveau) -> COMMIT UNIQUE
+fiche+planche+compositeur (content(references): ajoute la fiche reelle
+<nom> ; git ls-remote avant, depot partage) -> push (le push deploie),
+curl de la fiche AVEC barre oblique finale + marqueur de build, rendu
+controle aux trois bandes (sonde iframe pour les largeurs telephone,
+script pret : references/ref_032/sonde-fiche.mjs, URL a adapter) ET
+CONTROLE DE L'INDEXATION SECTORIELLE (point 6, sonde
+references/ref_032/sonde-filtres.mjs) -> ligne de suivi au plan ->
+PROMPT DE LA SESSION N11 en annexe du plan (script Python ou Write,
+jamais un long heredoc) et reproduit integralement dans le message
+final.
+
+PIEGES VERIFIES EN N01-N09 (en plus de ceux des annexes A et B, tous
+confirmes) :
+- Un heredoc long se fait TRONQUER ou refuser silencieusement - bash
+  COMME python : gros fichiers et scripts par l'outil Write PUIS
+  execution, avec CONTROLE DE PRESENCE des insecables apres coup. Le
+  script s'execute DEPUIS LA RACINE DU DEPOT ; le cwd du shell PERSISTE
+  d'un appel a l'autre (un `cd` vers l'archive laisse le `ls` suivant
+  hors racine - N09) : chemins absolus ou `cd` explicite en tete de
+  chaque commande.
+- Les noms de fichiers des archives portent des accents en mojibake :
+  pdftotext lance depuis bash sur un nom tape echoue (« I/O Error »),
+  le meme via python subprocess avec os.listdir reussit (N09).
+- Un plan PDF sans couche texte (vecteurs vectorises) rend pdftotext
+  vide : rendre le cartouche en PNG (pymupdf, clip + zoom 3) et le lire.
+- injection-typographique.py ne connait pas l'unite « A » (ampere) :
+  poser la fine DANS le texte source et controler apres coup.
+- cairosvg : la copie de controle perd <style> ET l'attribut style de
+  la racine ; filets 8 chiffres a fusionner (#00393A38 -> #C1CFD0,
+  #00393A29 -> #CFDADB, #00393A1F -> #D9E2E3) ; a 1152 le mono se rend
+  ~7 % trop large et le cartouche SEMBLE tronque (N07-N09 : « 202 »
+  pour « 2025 ») - recadrer le cartouche du PNG 2400 pour trancher, le
+  navigateur fait foi ; U+2192, Δ, Ω et le signe moins U+2212 rendent
+  au navigateur. Script pret : rendre_png.py dans le scratchpad de la
+  N09 (copie de la N08) - a reecrire s'il est parti : copie sans <style>,
+  filets fusionnes, planche.png 2400x1600 + ctrl-1152 +
+  ctrl-vignette-274/296 + ctrl-appui-552.
+- PYTHONIOENCODING=utf-8 sur cette machine ; le hook Stop commite et
+  pousse SEUL ce qui traine (⚠ livrables/ porte deux fichiers non
+  suivis anterieurs a la N02 - les laisser) ; /references/ est gitignore
+  (motif ancre) - les pieces sources n'entrent JAMAIS au depot ; npm run
+  preview ne mesure pas la performance ; Chrome refuse les fenetres sous
+  500 px (sonde iframe) ; extract-msg s'installe par pip pour les .msg.
+- La planche n'expose NI le millesime d'ouverture, NI montant, NI tiers
+  (client final, donneur d'ordres, fabricants et marques COMPRIS), NI
+  donnee nominative ; les designations internes d'un site (chaufferie
+  « O », batiment « D ») sont admises avec une entree a_valider_ft2e et
+  une question E ; tout arbitrage de dessin va dans a_valider_ft2e
+  (jamais vide).
+- verser.py repond « deja verse » quand `planche:` est ecrit
+  directement au frontmatter (fiche neuve) : ses controles 1-3 ont
+  TOURNE avant ce message - c'est un succes, pas un refus.
+
+Portee de commit : content(references). Un changement de schema Zod
+eventuel passe par le sous-agent content-modeller et va dans le MEME
+commit que public/admin/config.yml.
+
+Termine par le prompt de lancement de la session N11, en annexe du
+plan du chantier et reproduit integralement dans ton message final -
+la regle de continuite est dans CLAUDE.md parce qu'elle a ete manquee
+deux fois. Le prompt N11 REPREND le bloc « REGLE D'INDEXATION
+SECTORIELLE » ci-dessus tel quel (repartition attendue remise a jour) :
+la regle est permanente, elle ne se resume pas. Si l'utilisateur a
+fourni le ZIP de la tranche 2024 en N10, le prompt N11 nomme le dossier
+suivant de cette tranche et son compte de fichiers.
 ````
