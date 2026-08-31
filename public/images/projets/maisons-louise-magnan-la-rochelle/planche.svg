@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Coupe de principe, avant et après, de la reprise de la ventilation de soixante maisons individuelles à toiture-terrasse. Avant, d’après le relevé du diagnostic de janvier 2023 : l’extracteur est enfermé dans un coffre à l’étage, des gaines souples des années 2000 raccordent la salle de bains et les WC sur le seul piquage de la cuisine — 25 mètres cubes par heure mesurés en cuisine pour 30 à 90 réglementaires —, le rejet se fait en façade et les entrées d’air sont obturées. Après, d’après le dossier de consultation d’octobre 2023 : le caisson d’extraction à moteur à commutation électronique est posé sur la toiture-terrasse, sur des dallettes et un matériau résilient, avec un arrêt cadenassable ; un réseau rigide en acier galvanisé calorifugé monte à travers la dalle par un carottage fourreauté, étanché à la résine et au bitume armé, et couvert d’une bavette ; chaque bouche — cuisine, salle de bains, WC — a son propre piquage, tenu entre 80 et 160 pascals ; le rejet se fait par un sifflet grillagé au-dessus du toit ; les entrées d’air sont vérifiées et les réseaux redescendent dans des coffres peints. En bas, quatre gabarits de largeur proportionnelle donnent le débit du caisson de chaque typologie : huit T2 à 120 mètres cubes par heure, huit T3 à 150, vingt-huit T4 à 165, seize T6 à 195 — soixante maisons. L’extraction quitte le logement : un caisson par toiture, un piquage par bouche, un débit par typologie.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · LA VENTILATION DE SOIXANTE MAISONS</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Cité Louise Magnan</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">L’extraction sort du logement : un caisson par toiture, un débit par typologie</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SOIXANTE MAISONS DE 1972 À TOITURE-TERRASSE · LE RELEVÉ DU DIAGNOSTIC ET LE DOSSIER DE CONSULTATION DU LOT UNIQUE VENTILATION</text>
+  <text x="56.00" y="224.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AVANT · LE RELEVÉ DU DIAGNOSTIC · JANVIER 2023</text>
+  <text x="1144.00" y="224.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">APRÈS · LE LOT UNIQUE VENTILATION · DCE D’OCTOBRE 2023</text>
+  <rect x="94.00" y="284.00" width="4.00" height="216.00" class="c-encre" fill="#00393A"/>
+  <rect x="474.00" y="284.00" width="4.00" height="216.00" class="c-encre" fill="#00393A"/>
+  <path d="M 96.00 300.00 L 476.00 300.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 96.00 400.00 L 476.00 400.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1.5"/>
+  <path d="M 96.00 500.00 L 476.00 500.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="2"/>
+  <path d="M 116.00 502.00 L 107.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 158.00 502.00 L 149.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 200.00 502.00 L 191.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 242.00 502.00 L 233.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 284.00 502.00 L 275.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 326.00 502.00 L 317.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 368.00 502.00 L 359.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 410.00 502.00 L 401.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 452.00 502.00 L 443.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <text x="106.00" y="318.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">R+1</text>
+  <text x="106.00" y="418.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RDC</text>
+  <rect x="340.00" y="316.00" width="100.00" height="40.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2" stroke-dasharray="6 5"/>
+  <rect x="352.00" y="322.00" width="76.00" height="28.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <circle cx="390.00" cy="336.00" r="6.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <circle cx="166.00" cy="322.00" r="5.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <circle cx="166.00" cy="424.00" r="5.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <circle cx="232.00" cy="424.00" r="5.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 171.00 424.00 L 232.00 424.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <path d="M 232.00 419.00 L 232.00 336.00 L 340.00 336.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <path d="M 171.00 322.00 L 232.00 336.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <circle cx="232.00" cy="336.00" r="4.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 428.00 336.00 L 474.00 336.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <path d="M 478.00 336.00 L 498.00 336.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 506.00 336.00 L 498.00 332.00 L 498.00 340.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="88.00" y="346.00" width="16.00" height="10.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <path d="M 89.00 347.00 L 103.00 355.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 89.00 355.00 L 103.00 347.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <rect x="88.00" y="446.00" width="16.00" height="10.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <path d="M 89.00 447.00 L 103.00 455.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 89.00 455.00 L 103.00 447.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="244.00" y="318.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN SEUL</text>
+  <text x="244.00" y="330.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PIQUAGE</text>
+  <text x="466.00" y="372.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">EXTRACTEUR EN COFFRE</text>
+  <text x="466.00" y="386.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">GAINES SOUPLES DES ANNÉES 2000</text>
+  <text x="116.00" y="470.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CUISINE · 25 m³/h MESURÉS POUR 30/90</text>
+  <text x="116.00" y="486.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">BOUCHE SANS DOUBLE DÉBIT</text>
+  <text x="482.00" y="318.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">REJET</text>
+  <text x="482.00" y="332.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EN FAÇADE</text>
+  <text x="56.00" y="526.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TOUTES LES BOUCHES SUR LE PIQUAGE CUISINE · ENTRÉES D’AIR OBTURÉES</text>
+  <rect x="722.00" y="284.00" width="4.00" height="216.00" class="c-encre" fill="#00393A"/>
+  <rect x="1102.00" y="284.00" width="4.00" height="216.00" class="c-encre" fill="#00393A"/>
+  <path d="M 724.00 300.00 L 1104.00 300.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2"/>
+  <path d="M 724.00 400.00 L 786.00 400.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1.5"/>
+  <path d="M 806.00 400.00 L 1104.00 400.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1.5"/>
+  <path d="M 724.00 500.00 L 1104.00 500.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="2"/>
+  <path d="M 744.00 502.00 L 735.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 786.00 502.00 L 777.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 828.00 502.00 L 819.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 870.00 502.00 L 861.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 912.00 502.00 L 903.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 954.00 502.00 L 945.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 996.00 502.00 L 987.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 1038.00 502.00 L 1029.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <path d="M 1080.00 502.00 L 1071.00 510.00" fill="none" class="s-filet-2" stroke="#00393A29" stroke-width="1"/>
+  <text x="734.00" y="318.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">R+1</text>
+  <text x="734.00" y="418.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RDC</text>
+  <rect x="760.00" y="292.00" width="72.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <rect x="766.00" y="284.00" width="14.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <rect x="812.00" y="284.00" width="14.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <rect x="760.00" y="256.00" width="72.00" height="28.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <circle cx="796.00" cy="270.00" r="6.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="790.00" y="284.00" width="12.00" height="164.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <path d="M 796.00 350.00 L 792.50 357.00 L 799.50 357.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 796.00 432.00 L 792.50 439.00 L 799.50 439.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 786.00 286.00 L 786.00 306.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 806.00 286.00 L 806.00 306.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 786.00 294.00 L 778.00 300.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 806.00 294.00 L 814.00 300.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <path d="M 760.00 270.00 L 744.00 270.00 L 744.00 244.00 L 732.00 244.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 724.00 244.00 L 731.00 240.50 L 731.00 247.50 Z" class="c-encre" fill="#00393A"/>
+  <circle cx="900.00" cy="372.00" r="5.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 895.00 372.00 L 802.00 372.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 822.00 368.00 L 822.00 376.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <circle cx="900.00" cy="420.00" r="5.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 895.00 420.00 L 802.00 420.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 822.00 416.00 L 822.00 424.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <circle cx="990.00" cy="448.00" r="5.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 985.00 448.00 L 802.00 448.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 822.00 444.00 L 822.00 452.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1"/>
+  <text x="910.00" y="376.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SDB</text>
+  <text x="910.00" y="424.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">WC</text>
+  <text x="1000.00" y="452.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CUISINE</text>
+  <rect x="716.00" y="346.00" width="16.00" height="10.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <path d="M 748.00 351.00 L 741.00 347.50 L 741.00 354.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="716.00" y="446.00" width="16.00" height="10.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <path d="M 748.00 451.00 L 741.00 447.50 L 741.00 454.50 Z" class="c-encre" fill="#00393A"/>
+  <text x="842.00" y="266.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CAISSON SUR DALLETTES ET RÉSILIENT</text>
+  <text x="842.00" y="280.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MOTEUR EC · ARRÊT CADENASSABLE</text>
+  <path d="M 808.00 302.00 L 836.00 322.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="842.00" y="326.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CAROTTAGE · FOURREAU SCELLÉ</text>
+  <text x="842.00" y="340.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RÉSINE + BITUME ARMÉ · BAVETTE</text>
+  <text x="738.00" y="474.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RÉSEAU RIGIDE GALVANISÉ · CALORIFUGÉ 25 mm</text>
+  <text x="738.00" y="488.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UN PIQUAGE PAR BOUCHE · 80 À 160 Pa</text>
+  <text x="716.00" y="240.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">SIFFLET GRILLAGÉ</text>
+  <text x="684.00" y="526.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DÉPOSE COMPLÈTE · COFFRES PEINTS · ENTRÉES D’AIR VÉRIFIÉES</text>
+  <text x="56.00" y="552.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">QUATRE TYPOLOGIES, QUATRE DÉBITS DE CAISSON — SOIXANTE MAISONS</text>
+  <rect x="56.00" y="566.00" width="192.00" height="44.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="68.00" y="585.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">8 × T2</text>
+  <text x="68.00" y="602.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">120 m³/h</text>
+  <rect x="274.67" y="566.00" width="240.00" height="44.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="286.67" y="585.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">8 × T3</text>
+  <text x="286.67" y="602.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">150 m³/h</text>
+  <rect x="541.33" y="566.00" width="264.00" height="44.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="553.33" y="585.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">28 × T4</text>
+  <text x="553.33" y="602.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">165 m³/h</text>
+  <rect x="832.00" y="566.00" width="312.00" height="44.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="844.00" y="585.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">16 × T6</text>
+  <text x="844.00" y="602.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">195 m³/h</text>
+  <text x="56.00" y="640.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SOIXANTE CAISSONS, SOIXANTE TRAVERSÉES DE DALLE, SOIXANTE SIFFLETS — LE MÊME GESTE DANS CHAQUE MAISON HABITÉE</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">L’extraction quitte le logement : un caisson par toiture, un piquage par bouche, un débit par typologie.</text>
+  <rect x="56.00" y="714.00" width="340.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LA ROCHELLE · SOIXANTE MAISONS · 2025</text>
+</svg>

@@ -1,0 +1,266 @@
+{
+  "fiche": "maisons-louise-magnan-la-rochelle",
+  "archetype": "coupe-traversee",
+  "archetype_motif": "La thèse de la fiche est une traversée : l’extraction quitte le logement — le caisson passe du coffre intérieur à la toiture-terrasse, et le réseau rigide traverse la dalle par un carottage fourreauté, étanché et bavetté, pour un rejet en sifflet au-dessus du toit. C’est l’archétype coupe-traversee (empilement de niveaux, traversée, réservation), mais aucun de ses cinq mécanismes ne le porte : ni l’enveloppe de Marennes, ni l’équilibre d’air de Villedoux, ni l’enjambement de Joffre, ni la portée du Yachtman, ni la colonne 3CEp d’Aurora — d’où le mécanisme nouveau « sortie », qui confronte le relevé du diagnostic (AVANT : un extracteur en coffre, des gaines souples toutes branchées sur le piquage cuisine, un rejet en façade, des entrées d’air obturées) au dossier de consultation (APRÈS : un caisson sur dallettes en toiture, un piquage rigide par bouche, la traversée traitée), puis décline le caisson en quatre gabarits proportionnels aux débits des quatre typologies, comptés jusqu’à soixante. Ni boucle-fluide (huit planches déjà, et l’extraction n’est pas une boucle production → terminaux) ; ni sankey (l’affectation par typologie vient d’être dessinée à L’Houmeau, et il n’y a pas de bilan de flux) ; ni chronologie (le déroulé du diagnostic à la réception est un récit d’affaire, pas un mécanisme — arbitrage N01).",
+  "mecanisme": "sortie",
+  "surtitre": "SCHÉMA DE PRINCIPE · LA VENTILATION DE SOIXANTE MAISONS",
+  "titre": "Cité Louise Magnan",
+  "sous_titre": "L’extraction sort du logement : un caisson par toiture, un débit par typologie",
+  "cartouche_legende": "LA ROCHELLE · SOIXANTE MAISONS · 2025",
+  "aria_label": "Coupe de principe, avant et après, de la reprise de la ventilation de soixante maisons individuelles à toiture-terrasse. Avant, d’après le relevé du diagnostic de janvier 2023 : l’extracteur est enfermé dans un coffre à l’étage, des gaines souples des années 2000 raccordent la salle de bains et les WC sur le seul piquage de la cuisine — 25 mètres cubes par heure mesurés en cuisine pour 30 à 90 réglementaires —, le rejet se fait en façade et les entrées d’air sont obturées. Après, d’après le dossier de consultation d’octobre 2023 : le caisson d’extraction à moteur à commutation électronique est posé sur la toiture-terrasse, sur des dallettes et un matériau résilient, avec un arrêt cadenassable ; un réseau rigide en acier galvanisé calorifugé monte à travers la dalle par un carottage fourreauté, étanché à la résine et au bitume armé, et couvert d’une bavette ; chaque bouche — cuisine, salle de bains, WC — a son propre piquage, tenu entre 80 et 160 pascals ; le rejet se fait par un sifflet grillagé au-dessus du toit ; les entrées d’air sont vérifiées et les réseaux redescendent dans des coffres peints. En bas, quatre gabarits de largeur proportionnelle donnent le débit du caisson de chaque typologie : huit T2 à 120 mètres cubes par heure, huit T3 à 150, vingt-huit T4 à 165, seize T6 à 195 — soixante maisons. L’extraction quitte le logement : un caisson par toiture, un piquage par bouche, un débit par typologie.",
+  "sortie": {
+    "entete": "SOIXANTE MAISONS DE 1972 À TOITURE-TERRASSE · LE RELEVÉ DU DIAGNOSTIC ET LE DOSSIER DE CONSULTATION DU LOT UNIQUE VENTILATION",
+    "registres": {
+      "gauche": "AVANT · LE RELEVÉ DU DIAGNOSTIC · JANVIER 2023",
+      "droite": "APRÈS · LE LOT UNIQUE VENTILATION · DCE D’OCTOBRE 2023"
+    },
+    "niveaux": [
+      "R+1",
+      "RDC"
+    ],
+    "avant": {
+      "pied": "TOUTES LES BOUCHES SUR LE PIQUAGE CUISINE · ENTRÉES D’AIR OBTURÉES",
+      "elements": [
+        {
+          "ordre": 1,
+          "cle": "extracteur",
+          "libelle": "Extracteur en coffre",
+          "valeur": "",
+          "unite": "",
+          "detail": [
+            "EXTRACTEUR EN COFFRE",
+            "GAINES SOUPLES DES ANNÉES 2000"
+          ]
+        },
+        {
+          "ordre": 2,
+          "cle": "cuisine",
+          "libelle": "Bouche cuisine",
+          "valeur": "25",
+          "unite": "m³/h",
+          "detail": [
+            "CUISINE · 25 m³/h MESURÉS POUR 30/90",
+            "BOUCHE SANS DOUBLE DÉBIT"
+          ]
+        },
+        {
+          "ordre": 3,
+          "cle": "piquage",
+          "libelle": "Un seul piquage",
+          "valeur": "",
+          "unite": "",
+          "detail": [
+            "UN SEUL",
+            "PIQUAGE"
+          ]
+        },
+        {
+          "ordre": 4,
+          "cle": "rejet",
+          "libelle": "Rejet en façade",
+          "valeur": "",
+          "unite": "",
+          "detail": [
+            "REJET",
+            "EN FAÇADE"
+          ]
+        },
+        {
+          "ordre": 5,
+          "cle": "entrees",
+          "libelle": "Entrées d’air obturées",
+          "valeur": "",
+          "unite": "",
+          "detail": []
+        }
+      ]
+    },
+    "apres": {
+      "pied": "DÉPOSE COMPLÈTE · COFFRES PEINTS · ENTRÉES D’AIR VÉRIFIÉES",
+      "elements": [
+        {
+          "ordre": 1,
+          "cle": "caisson",
+          "libelle": "Caisson en toiture-terrasse",
+          "valeur": "",
+          "unite": "",
+          "detail": [
+            "CAISSON SUR DALLETTES ET RÉSILIENT",
+            "MOTEUR EC · ARRÊT CADENASSABLE"
+          ]
+        },
+        {
+          "ordre": 2,
+          "cle": "traversee",
+          "libelle": "Traversée de la dalle",
+          "valeur": "",
+          "unite": "",
+          "detail": [
+            "CAROTTAGE · FOURREAU SCELLÉ",
+            "RÉSINE + BITUME ARMÉ · BAVETTE"
+          ]
+        },
+        {
+          "ordre": 3,
+          "cle": "reseau",
+          "libelle": "Réseau rigide",
+          "valeur": "80 à 160",
+          "unite": "Pa",
+          "detail": [
+            "RÉSEAU RIGIDE GALVANISÉ · CALORIFUGÉ 25 mm",
+            "UN PIQUAGE PAR BOUCHE · 80 À 160 Pa"
+          ]
+        },
+        {
+          "ordre": 4,
+          "cle": "bouches",
+          "libelle": "Trois bouches",
+          "valeur": "",
+          "unite": "",
+          "detail": [
+            "SDB",
+            "WC",
+            "CUISINE"
+          ]
+        },
+        {
+          "ordre": 5,
+          "cle": "sifflet",
+          "libelle": "Sifflet de rejet",
+          "valeur": "",
+          "unite": "",
+          "detail": [
+            "SIFFLET GRILLAGÉ"
+          ]
+        },
+        {
+          "ordre": 6,
+          "cle": "entrees",
+          "libelle": "Entrées d’air vérifiées",
+          "valeur": "",
+          "unite": "",
+          "detail": []
+        }
+      ]
+    },
+    "typologies": {
+      "entete": "QUATRE TYPOLOGIES, QUATRE DÉBITS DE CAISSON — SOIXANTE MAISONS",
+      "unite": "m³/h",
+      "gabarits": [
+        {
+          "ordre": 1,
+          "cle": "t2",
+          "libelle": "8 × T2",
+          "maisons": 8,
+          "debit": 120
+        },
+        {
+          "ordre": 2,
+          "cle": "t3",
+          "libelle": "8 × T3",
+          "maisons": 8,
+          "debit": 150
+        },
+        {
+          "ordre": 3,
+          "cle": "t4",
+          "libelle": "28 × T4",
+          "maisons": 28,
+          "debit": 165
+        },
+        {
+          "ordre": 4,
+          "cle": "t6",
+          "libelle": "16 × T6",
+          "maisons": 16,
+          "debit": 195
+        }
+      ],
+      "appui_libelle": "Quatre débits de caisson",
+      "appui_valeur": "120 · 150 · 165 · 195"
+    },
+    "mention_pied": "SOIXANTE CAISSONS, SOIXANTE TRAVERSÉES DE DALLE, SOIXANTE SIFFLETS — LE MÊME GESTE DANS CHAQUE MAISON HABITÉE",
+    "vignette_noeud": "Un caisson par toiture",
+    "appui_appels": [
+      "CAISSON SUR LA TERRASSE",
+      "TRAVERSÉE CAROTTÉE ET ÉTANCHÉE",
+      "UN PIQUAGE RIGIDE PAR BOUCHE"
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "L’extraction quitte le logement : un caisson par toiture, un piquage par bouche, un débit par typologie.",
+  "vignette_surtitre": "L’EXTRACTION SORT DU LOGEMENT",
+  "a_valider_ft2e": [
+    {
+      "objet": "Le registre AVANT généralise le relevé d’une maison",
+      "la_source_affirme": "Le rapport de diagnostic (janvier 2023) relève cinq maisons : dans le T2, toutes les bouches sont connectées sur le seul réseau de la cuisine (25 m³/h mesurés pour 30/90), gaines souples des années 2000, bouche cuisine sans double débit ; dans les autres, entrées d’air obturées par les volets ou scotchées, système arrêté, bouche installée à la place de la grille de rejet. L’estimation des coûts donne le rejet existant « en toiture » pour les T2 et « en façade » pour les T3, T4 et T6.",
+      "le_dessin_suppose": "Un seul dessin AVANT réunit ces constats : extracteur en coffre à l’étage, trois bouches sur le seul piquage cuisine, rejet en façade, entrées d’air obturées — et le débit mesuré porté est celui du T2 visité. Confirmer que cette synthèse est juste pour la majorité des maisons."
+    },
+    {
+      "objet": "Le nombre de bouches par maison",
+      "la_source_affirme": "Les plans CVC01 montrent trois bouches (cuisine, WC, SDB) ; le DPGF compte « 24 » bouches par typologie, soit 96 pour 60 maisons ; les T6 visités ont une quatrième pièce de service (autre salle d’eau).",
+      "le_dessin_suppose": "Trois bouches, chacune sur son piquage — le compte réel posé par typologie est à confirmer (question B3 de la collecte)."
+    },
+    {
+      "objet": "La maison dessinée est un gabarit à deux niveaux",
+      "la_source_affirme": "Les plans de 1972 donnent des T4 et T6 en rez-de-chaussée et étage (plan « R.D.C._ÉTAGE F4 ») et des T2 de plain-pied (« plan de rez-de-chaussée F2 ») ; les T3 ne sont pas décrits au dossier.",
+      "le_dessin_suppose": "Une seule maison de principe, RDC + R+1 + toiture-terrasse, pour les quatre typologies — aucune proportion réelle, aucune distribution de pièces (règle 4). Les T2 de plain-pied n’ont pas de traversée de dalle intermédiaire."
+    },
+    {
+      "objet": "Les débits de caisson ne sont pas décomposés",
+      "la_source_affirme": "Le CCTP fixe 120 (T2), 150 (T3), 165 (T4) et 195 m³/h (T6) et reprend le tableau réglementaire par nombre de pièces principales. 120 = 90 + 15 + 15 et 150 = 105 + 30 + 15 se recomposent exactement ; 165 et 195 admettent plusieurs décompositions (WC unique ou multiples, autre salle d’eau).",
+      "le_dessin_suppose": "Que la largeur de chaque gabarit soit proportionnelle au débit de caisson (1,6 px par m³/h), sans le décomposer par bouche. Confirmer la lecture (question B4)."
+    },
+    {
+      "objet": "Les valeurs dessinées sont celles du dossier de consultation d’octobre 2023, pas du dossier des ouvrages exécutés",
+      "la_source_affirme": "CCTP et DPGF du lot unique (PRO, octobre 2023) : caisson EC sur dallettes et résilient, arrêt cadenassable, réseau rigide galvanisé calorifugé 25 mm, 80 à 160 Pa, carottage + fourreau + résine + bitume armé + bavette, sifflet grillagé. Le CR n° 19 confirme la pose des caissons en toiture et les réglages ; aucun DOE ni rapport d’équilibrage à l’archive.",
+      "le_dessin_suppose": "Que l’exécution est conforme à la prescription — l’en-tête du registre APRÈS nomme le DCE et son mois. Fournir le DOE et les rapports de débits, et le dessin sera repris au besoin."
+    },
+    {
+      "objet": "Le millésime du cartouche",
+      "la_source_affirme": "Le CR n° 19 du 26/06/2025 compte 48 logements terminés au 12/06 et fixe les OPR au 03/07/2025 ; le classeur FT2E range l’affaire en « Finalisées en 2025 ». Le PV de réception est absent de l’archive.",
+      "le_dessin_suppose": "Que le cartouche porte 2025. À confirmer avec le PV (question B1)."
+    },
+    {
+      "objet": "Le cartouche porte un compte de maisons à la place d’une surface",
+      "la_source_affirme": "Aucune pièce du dossier ne donne de surface : le diagnostic, les contrats et le CCTP comptent en maisons (60) et en typologies.",
+      "le_dessin_suppose": "« SOIXANTE MAISONS » dans l’emplacement de la surface, comme « TOUR DE 40 m » à Saint-Sauveur et « 38 000 m³/h » à Capsulae."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 23-009 (champ reference) — il encode le volume annuel d’affaires du bureau ; le numéro de programme du bailleur (GR 0085) avec lui.",
+    "Tous les montants : honoraires des trois contrats, budget du calcul d’honoraires, les trois estimations d’emplacement, le montant de travaux publié par les documents commerciaux.",
+    "Noms de tiers : bailleur et ses interlocuteurs, entreprises de ventilation, de carottage, d’étanchéité et de sécurisation des toitures, bureau d’études structure de l’entreprise, fabricants et modèles prescrits (caisson, bouches), outil de calcul de condensation, guide de recommandations. Les équipements sont désignés par leur fonction.",
+    "Toute donnée nominative des locataires, les adresses et numéros des logements visités ou témoins, les incidents de chantier.",
+    "Les résultats du diagnostic qui ne relèvent pas de la ventilation (thermographie, sondage de toiture, calcul de condensation, menuiseries) — la fiche les porte, le dessin montre la solution retenue.",
+    "Toute géométrie d’ouvrage : les plans de 1972 de l’atelier d’architecture ne sont jamais repris — la maison du dessin est un gabarit de principe à deux niveaux et toiture-terrasse, sans distribution de pièces ni proportion réelle."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "deux maisons de principe identiques (murs, acrotère, toiture-terrasse, dalle, sol) ; à gauche l’extracteur est DANS la maison, en coffre interrompu, et trois gaines souples convergent en un seul nœud avant un rejet en façade, les entrées d’air sont barrées ; à droite le caisson est AU-DESSUS de la toiture, un tronc plein la traverse par un fourreau bavetté, trois branches distinctes s’y piquent à trois hauteurs, le sifflet rejette au-dessus du toit, les entrées d’air sont fléchées vers l’intérieur ; en bas quatre gabarits de largeur proportionnelle aux débits (1.6 px par m³/h) — texte masqué, la sortie du caisson et la multiplication des piquages se lisent",
+    "topologie": "maison AVANT x 96–476 (tronc à x 232, nœud y 336, coffre 340–440, rejet vers x 506) ; maison APRÈS x 724–1104 (tronc à x 796, caisson 760–832 à y 256–284 au-dessus de la toiture y 300, bouches à y 372 / 420 / 448) ; toiture y 300, dalle y 400, sol y 500",
+    "gabarits_debits": "8 × T2 = 120 m³/h = 192 px · 8 × T3 = 150 m³/h = 240 px · 28 × T4 = 165 m³/h = 264 px · 16 × T6 = 195 m³/h = 312 px — écart 26.67 px",
+    "conservation": "8 + 8 + 28 + 16 = 60 maisons",
+    "bas_du_dessin": "sol à 500 (hachures à 510), pieds de registre à 526, gabarits 566–610, mention à 640, phrase à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 340 x 30 px = 10200 px², soit 1.06 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; le débit mesuré du diagnostic et les débits de caisson restent au mono 10 pivot",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "104 signes — 884 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la maison APRÈS seule : caisson sur dallettes au-dessus de la toiture, tronc fléché qui traverse dalle et toiture, trois branches, sifflet, entrées d’air — registre AVANT, appels et gabarits de débit laissés à la planche",
+    "bas_du_dessin": "nœud à y 188, marge basse 12 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "la maison APRÈS à l’échelle 1 : caisson sur dallettes au-dessus de la toiture, tronc fléché qui traverse, trois branches nommées, sifflet, entrées d’air, trois appels et le nœud des quatre débits de caisson — le registre AVANT et les gabarits restent à la planche",
+    "bas_du_dessin": "sol à 296 px (hachures à 304), compte à 292, marge basse 64 px"
+  }
+}

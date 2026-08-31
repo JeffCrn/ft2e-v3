@@ -51,6 +51,14 @@ porte l'extraction :
   unique traversant les niveaux — fumées par le cœur, air de combustion par
   la couronne, clapet à chaque piquage, té de purge en pied — confronté à la
   ventouse individuelle et aux trois gabarits de débit du label.
+- `sortie` — l'extraction quitte le logement (cité Louise Magnan) : deux
+  maisons de principe confrontées, AVANT et APRÈS — à gauche le relevé du
+  diagnostic (extracteur en coffre, gaines souples toutes branchées sur le
+  seul piquage cuisine, rejet en façade, entrées d'air obturées), à droite
+  le dossier de consultation (caisson sur dallettes en toiture-terrasse,
+  traversée carottée, fourreautée et bavettée, un piquage rigide par bouche,
+  sifflet de rejet) ; puis quatre gabarits de largeur proportionnelle aux
+  débits de caisson des quatre typologies, comptés jusqu'à soixante.
 """
 
 import math
@@ -2313,7 +2321,504 @@ def composer_appui_colonne(donnees):
             f"{AH - 324} px")
 
 
+# ── Mécanisme `sortie` — l'extraction quitte le logement (cité Louise Magnan) ─
+# Deux maisons de principe confrontées : AVANT, le relevé du diagnostic — un
+# extracteur en coffre à l'étage, des gaines souples (trait interrompu) qui
+# convergent toutes en UN nœud sur le tronc de la cuisine, un rejet en façade,
+# des entrées d'air barrées ; APRÈS, le dossier de consultation — le caisson sur
+# dallettes et résilient AU-DESSUS de la ligne de toiture, un tronc rigide (bande
+# claire à contour encré) qui traverse la dalle et la toiture par un fourreau
+# bavetté, trois branches distinctes à trois hauteurs — un piquage par bouche —,
+# un sifflet qui rejette au-dessus du toit, des entrées d'air fléchées vers
+# l'intérieur. En bas, quatre gabarits de largeur proportionnelle aux débits de
+# caisson des quatre typologies, comptés jusqu'à soixante.
+# La maison est un gabarit à deux niveaux et toiture-terrasse : aucune proportion
+# ni distribution réelle (règle 4). Constantes préfixées S_ (piège des
+# affectations doublées, relevé le 2026-08-16 sur tableau-electrique.py).
+
+S_Y_REG = 224                 # en-têtes des deux registres
+S_Y_TOIT = 300                # ligne de toiture-terrasse
+S_Y_DALLE = 400               # plancher intermédiaire
+S_Y_SOL = 500                 # ligne de sol
+S_Y_PIED = 526                # ligne de pied de chaque registre
+S_H_ACRO = 16                 # l'acrotère : les murs dépassent la toiture
+S_X0G, S_X1G = 96, 476        # murs de la maison AVANT
+S_X0D, S_X1D = 724, 1104      # murs de la maison APRÈS
+S_REG_G0, S_REG_G1 = MARGE, 560      # emprise du registre gauche
+S_REG_D0, S_REG_D1 = 684, W - MARGE  # emprise du registre droit
+S_R_BOUCHE = 5                # rayon d'une bouche d'extraction
+
+# AVANT
+S_A_TRONC = 232               # abscisse du tronc cuisine (le seul piquage)
+S_A_Y_NOEUD = 336             # ordonnée du nœud unique
+S_A_SDB = (166, 322)          # les trois bouches
+S_A_WC = (166, 424)
+S_A_CUIS = (232, 424)
+S_A_COFFRE = (340, 316, 100, 40)   # x, y, largeur, hauteur du coffre
+S_A_CAISSON = (352, 322, 76, 28)   # l'extracteur, dedans
+S_A_X_LABELS = 116            # colonne des libellés intérieurs
+S_A_X_FIN = 466               # ancre droite des libellés du coffre
+
+# APRÈS
+S_P_TRONC = 796               # abscisse du tronc rigide
+S_P_W_TRONC = 12
+S_P_CAISSON = (760, 256, 72, 28)
+S_P_SDB = (900, 372)          # trois bouches, trois hauteurs
+S_P_WC = (900, 420)
+S_P_CUIS = (990, 448)
+S_P_X_LABELS = 842            # colonne des appels
+S_P_X_INT = 738               # libellés intérieurs du RDC
+
+# Gabarits des typologies
+S_Y_TYPO_ENTETE = 552
+S_Y_GAB = 566
+S_H_GAB = 44
+S_K_GAB = 1.6                 # 1 m³/h = 1,6 px de largeur de gabarit
+S_Y_MENTION = 640
+
+
+def _souple(A, points, epaisseur=1.5, motif="5 4"):
+    """Une gaine souple : trait interrompu, encre — le contraire du conduit
+    plein à bande claire qui dit le réseau rigide."""
+    from _tronc import JETON
+    d = "M " + " L ".join(f"{x:.2f} {y:.2f}" for x, y in points)
+    A(f'  <path d="{d}" fill="none" class="s-encre" stroke="{JETON["encre"]}" '
+      f'stroke-width="{epaisseur}" stroke-dasharray="{motif}"/>')
+
+
+def _maison(A, x0, x1, niveaux, gap_tronc=None):
+    """Le gabarit de maison : deux murs qui dépassent la toiture-terrasse
+    (acrotère), la ligne de toiture, la dalle, le sol hachuré, les niveaux."""
+    for x in (x0, x1):
+        A(rect(x - 2, S_Y_TOIT - S_H_ACRO, 4, S_Y_SOL - S_Y_TOIT + S_H_ACRO,
+               "encre"))
+    A(ligne(x0, S_Y_TOIT, x1, S_Y_TOIT, "encre", 2))
+    if gap_tronc is None:
+        A(ligne(x0, S_Y_DALLE, x1, S_Y_DALLE, "filet-2", 1.5))
+    else:
+        A(ligne(x0, S_Y_DALLE, gap_tronc - 10, S_Y_DALLE, "filet-2", 1.5))
+        A(ligne(gap_tronc + 10, S_Y_DALLE, x1, S_Y_DALLE, "filet-2", 1.5))
+    A(ligne(x0, S_Y_SOL, x1, S_Y_SOL, "filet-1", 2))
+    for k in range(9):
+        x = x0 + 20 + k * 42
+        A(ligne(x, S_Y_SOL + 2, x - 9, S_Y_SOL + 10, "filet-2", 1))
+    for niveau, y in zip(niveaux, (S_Y_TOIT, S_Y_DALLE)):
+        A(texte(x0 + 10, y + 18, niveau, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+
+def _bouche(A, x, y, r=S_R_BOUCHE):
+    A(cercle(x, y, r, "papier", "encre", 1.2))
+
+
+def composer_sortie(donnees):
+    q = donnees["sortie"]
+    av = {e["cle"]: e for e in q["avant"]["elements"]}
+    ap = {e["cle"]: e for e in q["apres"]["elements"]}
+    typo = q["typologies"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête (il nomme les pièces d'où viennent les valeurs) et registres ─
+    controler("en-tête schéma", q["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, q["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("registre gauche", q["registres"]["gauche"], 10, "mono",
+              S_REG_G1 - S_REG_G0, 10 * 0.14)
+    A(texte(S_REG_G0, S_Y_REG, q["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("registre droite", q["registres"]["droite"], 10, "mono",
+              S_REG_D1 - S_REG_D0, 10 * 0.14)
+    A(texte(S_REG_D1, S_Y_REG, q["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Registre gauche — AVANT : l'extracteur en coffre, un seul piquage ────
+    _maison(A, S_X0G, S_X1G, q["niveaux"])
+    cx, cy, cw, ch = S_A_COFFRE
+    rect_interrompu(A, cx + cw / 2, cy, cy + ch, cw, 1.2, "6 5")
+    kx, ky, kw, kh = S_A_CAISSON
+    A(rect_bord(kx, ky, kw, kh, "papier", "filet-1"))
+    A(cercle(kx + kw / 2, ky + kh / 2, 6, "papier", "encre", 1.2))
+    # Les trois bouches et leurs gaines souples, toutes vers le seul nœud.
+    for x, y in (S_A_SDB, S_A_WC, S_A_CUIS):
+        _bouche(A, x, y)
+    _souple(A, [(S_A_WC[0] + S_R_BOUCHE, S_A_WC[1]),
+                (S_A_CUIS[0], S_A_CUIS[1])])
+    _souple(A, [(S_A_CUIS[0], S_A_CUIS[1] - S_R_BOUCHE),
+                (S_A_TRONC, S_A_Y_NOEUD), (cx, S_A_Y_NOEUD)])
+    _souple(A, [(S_A_SDB[0] + S_R_BOUCHE, S_A_SDB[1]),
+                (S_A_TRONC, S_A_Y_NOEUD)])
+    A(cercle(S_A_TRONC, S_A_Y_NOEUD, 4, "clair", "encre", 1.2))
+    # Le rejet en façade : la gaine souple traverse le mur, une flèche sort.
+    _souple(A, [(kx + kw, S_A_Y_NOEUD), (S_X1G - 2, S_A_Y_NOEUD)])
+    A(ligne(S_X1G + 2, S_A_Y_NOEUD, S_X1G + 22, S_A_Y_NOEUD, "encre", 1.5))
+    A(fleche(S_X1G + 30, S_A_Y_NOEUD, "encre", "droite", 8))
+    # Les entrées d'air obturées : un cadre barré dans le mur, à chaque niveau.
+    for y in (346, 446):
+        A(rect_bord(S_X0G - 8, y, 16, 10, "papier", "encre"))
+        A(ligne(S_X0G - 7, y + 1, S_X0G + 7, y + 9, "encre", 1))
+        A(ligne(S_X0G - 7, y + 9, S_X0G + 7, y + 1, "encre", 1))
+    # Les libellés.
+    piq = av["piquage"]
+    for k, l in enumerate(piq["detail"]):
+        controler(f"nœud {k + 1}", l, 10, "mono", cx - (S_A_TRONC + 12), 10 * 0.14)
+        A(texte(S_A_TRONC + 12, 318 + k * 12, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    ext = av["extracteur"]
+    for k, l in enumerate(ext["detail"]):
+        controler(f"extracteur {k + 1}", l, 10, "mono",
+                  S_A_X_FIN - (S_A_TRONC + 12), 10 * 0.14)
+        A(texte(S_A_X_FIN, 372 + k * 14, l, "mono", 10, 500, "pivot",
+                ancre="end", tracking=10 * 0.14))
+    cui = av["cuisine"]
+    for k, l in enumerate(cui["detail"]):
+        controler(f"cuisine {k + 1}", l, 10, "mono", S_X1G - 10 - S_A_X_LABELS,
+                  10 * 0.14)
+        A(texte(S_A_X_LABELS, 470 + k * 16, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    rej = av["rejet"]
+    for k, l in enumerate(rej["detail"]):
+        controler(f"rejet {k + 1}", l, 10, "mono", S_REG_G1 - (S_X1G + 6),
+                  10 * 0.14)
+        A(texte(S_X1G + 6, 318 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    controler("pied avant", q["avant"]["pied"], 10, "mono",
+              S_REG_G1 - S_REG_G0, 10 * 0.14)
+    A(texte(S_REG_G0, S_Y_PIED, q["avant"]["pied"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Registre droit — APRÈS : le caisson sur le toit, un piquage par bouche
+    _maison(A, S_X0D, S_X1D, q["niveaux"], gap_tronc=S_P_TRONC)
+    px, py, pw, ph = S_P_CAISSON
+    # Le résilient, les deux dallettes, le caisson — au-dessus de la toiture.
+    A(rect(px, S_Y_TOIT - 8, pw, 8, "clair"))
+    A(rect(px + 6, py + ph, 14, 8, "encre"))
+    A(rect(px + pw - 20, py + ph, 14, 8, "encre"))
+    A(rect_bord(px, py, pw, ph, "papier", "filet-1"))
+    A(cercle(S_P_TRONC, py + ph / 2, 6, "papier", "encre", 1.2))
+    # Le tronc rigide, de la bouche la plus basse au caisson, à travers tout.
+    conduit_plein(A, S_P_TRONC, py + ph, S_P_CUIS[1], S_P_W_TRONC)
+    for y in (350, 432):
+        A(fleche(S_P_TRONC, y, "encre", "haut", 7))
+    # La traversée de la toiture : fourreau et bavette.
+    for x in (S_P_TRONC - 10, S_P_TRONC + 10):
+        A(ligne(x, S_Y_TOIT - 14, x, S_Y_TOIT + 6, "encre", 1))
+    A(ligne(S_P_TRONC - 10, S_Y_TOIT - 6, S_P_TRONC - 18, S_Y_TOIT, "encre", 1))
+    A(ligne(S_P_TRONC + 10, S_Y_TOIT - 6, S_P_TRONC + 18, S_Y_TOIT, "encre", 1))
+    # Le sifflet de rejet, au-dessus du toit, vers l'extérieur.
+    A(polyligne([(px, py + 14), (px - 16, py + 14), (px - 16, py - 12),
+                 (px - 28, py - 12)], "encre", 1.5))
+    A(fleche(px - 36, py - 12, "encre", "gauche", 7))
+    # Trois bouches, trois branches rigides à trois hauteurs.
+    for x, y in (S_P_SDB, S_P_WC, S_P_CUIS):
+        _bouche(A, x, y)
+        A(ligne(x - S_R_BOUCHE, y, S_P_TRONC + S_P_W_TRONC / 2, y, "encre", 1.5))
+        A(ligne(S_P_TRONC + 26, y - 4, S_P_TRONC + 26, y + 4, "encre", 1))
+    bou = ap["bouches"]
+    for (x, y), l in zip((S_P_SDB, S_P_WC, S_P_CUIS), bou["detail"]):
+        A(texte(x + 10, y + 4, l, "mono", 10, 500, "pivot", tracking=10 * 0.14))
+    # Les entrées d'air : un cadre dans le mur, une flèche vers l'intérieur.
+    for y in (346, 446):
+        A(rect_bord(S_X0D - 8, y, 16, 10, "papier", "encre"))
+        A(fleche(S_X0D + 24, y + 5, "encre", "droite", 7))
+    # Les appels.
+    cai = ap["caisson"]
+    for k, l in enumerate(cai["detail"]):
+        controler(f"caisson {k + 1}", l, 10, "mono", S_X1D - 10 - S_P_X_LABELS,
+                  10 * 0.14)
+        A(texte(S_P_X_LABELS, 266 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    A(ligne(S_P_TRONC + 12, S_Y_TOIT + 2, S_P_X_LABELS - 6, 322, "filet-1", 1))
+    tra = ap["traversee"]
+    for k, l in enumerate(tra["detail"]):
+        controler(f"traversée {k + 1}", l, 10, "mono",
+                  S_X1D - 10 - S_P_X_LABELS, 10 * 0.14)
+        A(texte(S_P_X_LABELS, 326 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    res = ap["reseau"]
+    for k, l in enumerate(res["detail"]):
+        controler(f"réseau {k + 1}", l, 10, "mono", S_X1D - 10 - S_P_X_INT,
+                  10 * 0.14)
+        A(texte(S_P_X_INT, 474 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    sif = ap["sifflet"]
+    # Le libellé du sifflet s'ancre à droite devant la flèche, dans la
+    # gouttière entre les deux registres : de S_REG_G1 à px − 44.
+    controler("sifflet", sif["detail"][0], 10, "mono", (px - 44) - S_REG_G1,
+              10 * 0.14)
+    A(texte(px - 44, py - 16, sif["detail"][0], "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    controler("pied après", q["apres"]["pied"], 10, "mono",
+              S_REG_D1 - S_REG_D0, 10 * 0.14)
+    A(texte(S_REG_D0, S_Y_PIED, q["apres"]["pied"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Les quatre typologies : des gabarits proportionnels aux débits ───────
+    controler("en-tête typologies", typo["entete"], 10, "mono", UTILE,
+              10 * 0.14)
+    A(texte(MARGE, S_Y_TYPO_ENTETE, typo["entete"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    gabarits = typo["gabarits"]
+    largeurs = [g["debit"] * S_K_GAB for g in gabarits]
+    ecart = (UTILE - sum(largeurs)) / (len(gabarits) - 1)
+    x = MARGE
+    for g, w_g in zip(gabarits, largeurs):
+        A(rect_bord(x, S_Y_GAB, w_g, S_H_GAB, "papier", "filet-1"))
+        controler(f"gabarit {g['cle']} libellé", g["libelle"], 15, "sans-600",
+                  w_g - 24)
+        A(texte(x + 12, S_Y_GAB + 19, g["libelle"], "sans", 15, 600, "encre",
+                wdth=112))
+        deb = f'{g["debit"]}{NN}{typo["unite"]}'
+        controler(f"gabarit {g['cle']} débit", deb, 10, "mono", w_g - 24,
+                  10 * 0.14)
+        A(texte(x + 12, S_Y_GAB + 36, deb, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14, tabulaire=True))
+        x += w_g + ecart
+    total = sum(g["maisons"] for g in gabarits)
+
+    # ── Mention de pied, phrase de principe, cartouche ───────────────────────
+    controler("mention de pied", q["mention_pied"], 10, "mono", UTILE,
+              10 * 0.14)
+    A(texte(MARGE, S_Y_MENTION, q["mention_pied"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "deux maisons de principe identiques (murs, acrotère, "
+                         "toiture-terrasse, dalle, sol) ; à gauche l’extracteur "
+                         "est DANS la maison, en coffre interrompu, et trois "
+                         "gaines souples convergent en un seul nœud avant un "
+                         "rejet en façade, les entrées d’air sont barrées ; à "
+                         "droite le caisson est AU-DESSUS de la toiture, un "
+                         "tronc plein la traverse par un fourreau bavetté, "
+                         "trois branches distinctes s’y piquent à trois "
+                         "hauteurs, le sifflet rejette au-dessus du toit, les "
+                         "entrées d’air sont fléchées vers l’intérieur ; en "
+                         "bas quatre gabarits de largeur proportionnelle aux "
+                         f"débits ({S_K_GAB} px par m³/h) — texte masqué, la "
+                         "sortie du caisson et la multiplication des piquages "
+                         "se lisent",
+        "topologie": f"maison AVANT x {S_X0G}–{S_X1G} (tronc à x {S_A_TRONC}, "
+                     f"nœud y {S_A_Y_NOEUD}, coffre {cx}–{cx + cw}, rejet vers "
+                     f"x {S_X1G + 30}) ; maison APRÈS x {S_X0D}–{S_X1D} (tronc "
+                     f"à x {S_P_TRONC}, caisson {px}–{px + pw} à y {py}–{py + ph}"
+                     f" au-dessus de la toiture y {S_Y_TOIT}, bouches à y "
+                     f"{S_P_SDB[1]} / {S_P_WC[1]} / {S_P_CUIS[1]}) ; toiture y "
+                     f"{S_Y_TOIT}, dalle y {S_Y_DALLE}, sol y {S_Y_SOL}",
+        "gabarits_debits": " · ".join(
+            f'{g["libelle"]} = {g["debit"]} m³/h = {w:.0f} px'
+            for g, w in zip(gabarits, largeurs)) + f" — écart {ecart:.2f} px",
+        "conservation": " + ".join(str(g["maisons"]) for g in gabarits)
+                        + f" = {total} maisons",
+        "bas_du_dessin": f"sol à {S_Y_SOL} (hachures à {S_Y_SOL + 10}), pieds "
+                         f"de registre à {S_Y_PIED}, gabarits {S_Y_GAB}–"
+                         f"{S_Y_GAB + S_H_GAB}, mention à {S_Y_MENTION}, phrase "
+                         f"à {Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
+                         f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
+                          "pas chiffrée (révision 4) ; le débit mesuré du "
+                          "diagnostic et les débits de caisson restent au "
+                          "mono 10 pivot",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_sortie(donnees):
+    """La vignette : la maison APRÈS seule — le caisson sur le toit, le tronc
+    qui traverse, trois branches, le sifflet, les entrées d'air.
+
+    Ce qu'elle garde : le motif entier de la sortie. Ce qu'elle laisse : le
+    registre AVANT, les appels, les gabarits de débit — dix annotations dans
+    300 px ne se liraient pas."""
+    q = donnees["sortie"]
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    x0, x1 = 70, 230
+    y_toit, y_dalle, y_sol = 66, 112, 160
+    tx = 120                    # le tronc
+    for x in (x0, x1):
+        A(rect(x - 1.5, y_toit - 8, 3, y_sol - y_toit + 8, "encre"))
+    A(ligne(x0, y_toit, x1, y_toit, "encre", 1.5))
+    A(ligne(x0, y_dalle, tx - 6, y_dalle, "filet-2", 1))
+    A(ligne(tx + 6, y_dalle, x1, y_dalle, "filet-2", 1))
+    A(ligne(x0, y_sol, x1, y_sol, "filet-1", 1.5))
+    for k in range(5):
+        x = x0 + 14 + k * 34
+        A(ligne(x, y_sol + 2, x - 6, y_sol + 7, "filet-2", 0.8))
+    # Caisson sur ses dallettes, au-dessus du toit ; tronc qui traverse.
+    A(rect_bord(100, 46, 40, 14, "papier", "filet-1"))
+    A(rect(104, 60, 8, 6, "encre"))
+    A(rect(128, 60, 8, 6, "encre"))
+    conduit_plein(A, tx, 60, 146, 6)
+    A(fleche(tx, 92, "encre", "haut", 5))
+    A(fleche(tx, 136, "encre", "haut", 5))
+    for x in (tx - 5, tx + 5):
+        A(ligne(x, y_toit - 7, x, y_toit + 3, "encre", 0.8))
+    # Sifflet vers l'extérieur.
+    A(polyligne([(100, 53), (92, 53), (92, 42), (84, 42)], "encre", 1))
+    A(fleche(80, 42, "encre", "gauche", 5))
+    # Trois bouches, trois branches.
+    for x, y in ((176, 96), (176, 128), (206, 146)):
+        A(cercle(x, y, 3, "papier", "encre", 1))
+        A(ligne(x - 3, y, tx + 3, y, "encre", 1))
+    # Entrées d'air fléchées vers l'intérieur.
+    for y in (90, 140):
+        A(rect_bord(x0 - 5, y - 3, 10, 6, "papier", "encre"))
+        A(fleche(x0 + 16, y, "encre", "droite", 4))
+
+    # Le nœud : le motif répété a un nom.
+    A(texte(V_MARGE, 188, q["vignette_noeud"], "sans", 12, 600, "encre",
+            wdth=112))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "la maison APRÈS seule : caisson sur dallettes au-dessus de la "
+                 "toiture, tronc fléché qui traverse dalle et toiture, trois "
+                 "branches, sifflet, entrées d’air — registre AVANT, appels et "
+                 "gabarits de débit laissés à la planche",
+        "bas_du_dessin": "nœud à y 188, marge basse 12 px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_sortie(donnees):
+    """L'appui du hero : la maison APRÈS à l'échelle 1, trois appels, et le
+    nœud chiffré des quatre débits de caisson."""
+    q = donnees["sortie"]
+    typo = q["typologies"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    x0, x1 = 48, 288
+    y_toit, y_dalle, y_sol = 96, 196, 296
+    tx = 176
+    for x in (x0, x1):
+        A(rect(x - 2, y_toit - 12, 4, y_sol - y_toit + 12, "encre"))
+    A(ligne(x0, y_toit, x1, y_toit, "encre", 2))
+    A(ligne(x0, y_dalle, tx - 9, y_dalle, "filet-2", 1))
+    A(ligne(tx + 9, y_dalle, x1, y_dalle, "filet-2", 1))
+    A(ligne(x0, y_sol, x1, y_sol, "filet-1", 1.5))
+    for k in range(6):
+        x = x0 + 18 + k * 42
+        A(ligne(x, y_sol + 2, x - 7, y_sol + 8, "filet-2", 1))
+    for niveau, y in zip(q["niveaux"], (y_toit, y_dalle)):
+        A(texte(x0 + 8, y + 16, niveau, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    # Résilient, dallettes, caisson ; tronc ; fourreau ; sifflet.
+    A(rect(148, y_toit - 6, 56, 6, "clair"))
+    A(rect(154, 84, 10, 6, "encre"))
+    A(rect(188, 84, 10, 6, "encre"))
+    A(rect_bord(148, 62, 56, 22, "papier", "filet-1"))
+    A(cercle(tx, 73, 5, "papier", "encre", 1))
+    conduit_plein(A, tx, 84, 246, 9)
+    for y in (150, 236):
+        A(fleche(tx, y, "encre", "haut", 6))
+    for x in (tx - 8, tx + 8):
+        A(ligne(x, y_toit - 10, x, y_toit + 5, "encre", 1))
+    A(polyligne([(148, 73), (136, 73), (136, 54), (126, 54)], "encre", 1.2))
+    A(fleche(120, 54, "encre", "gauche", 6))
+    # Trois bouches, trois branches, nommées.
+    bou = {e["cle"]: e for e in q["apres"]["elements"]}["bouches"]
+    for (x, y), l in zip(((222, 150), (222, 222), (222, 246)), bou["detail"]):
+        A(cercle(x, y, 4, "papier", "encre", 1))
+        A(ligne(x - 4, y, tx + 4.5, y, "encre", 1.2))
+        A(texte(x + 8, y + 4, l, "mono", 10, 500, "pivot", tracking=10 * 0.14))
+    for y in (150, 240):
+        A(rect_bord(x0 - 6, y - 4, 12, 8, "papier", "encre"))
+        A(fleche(x0 + 18, y, "encre", "droite", 5))
+
+    # Les appels, à droite.
+    x_ap = 300
+    appels = q["appui_appels"]
+    A(ligne(204, 73, x_ap - 8, 108, "filet-1", 1))
+    A(texte(x_ap, 112, appels[0], "mono", 10, 500, "pivot", tracking=10 * 0.14))
+    A(ligne(tx + 8, y_toit + 2, x_ap - 8, 154, "filet-1", 1))
+    A(texte(x_ap, 158, appels[1], "mono", 10, 500, "pivot", tracking=10 * 0.14))
+    A(ligne(tx + 4.5, 186, x_ap - 8, 200, "filet-1", 1))
+    A(texte(x_ap, 204, appels[2], "mono", 10, 500, "pivot", tracking=10 * 0.14))
+
+    # Le nœud chiffré : les quatre débits de caisson, et le compte.
+    A(texte(x_ap, 258, typo["appui_libelle"], "sans", 14, 600, "encre",
+            wdth=112))
+    A(texte(x_ap, 276, f'{typo["appui_valeur"]}{NN}{typo["unite"]}', "mono",
+            11, 500, "pivot", tabulaire=True))
+    compte = " + ".join(str(g["maisons"]) for g in typo["gabarits"]) + " MAISONS"
+    A(texte(x_ap, 292, compte, "mono", 10, 500, "pivot", tracking=10 * 0.14,
+            tabulaire=True))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="la maison APRÈS à l’échelle 1 : caisson sur dallettes au-dessus "
+              "de la toiture, tronc fléché qui traverse, trois branches nommées, "
+              "sifflet, entrées d’air, trois appels et le nœud des quatre débits "
+              "de caisson — le registre AVANT et les gabarits restent à la "
+              "planche",
+        bas=f"sol à {y_sol} px (hachures à {y_sol + 8}), compte à 292, marge "
+            f"basse {AH - (y_sol + 8)} px")
+
+
 def _composer(donnees):
+    if "sortie" in donnees:
+        return composer_sortie(donnees)
     if "colonne" in donnees:
         return composer_colonne(donnees)
     if "equilibre" in donnees:
@@ -2326,6 +2831,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "sortie" in donnees:
+        return composer_vignette_sortie(donnees)
     if "colonne" in donnees:
         return composer_vignette_colonne(donnees)
     if "equilibre" in donnees:
@@ -2338,6 +2845,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "sortie" in donnees:
+        return composer_appui_sortie(donnees)
     if "colonne" in donnees:
         return composer_appui_colonne(donnees)
     if "equilibre" in donnees:
