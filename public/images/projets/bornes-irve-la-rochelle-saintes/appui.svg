@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la recharge de sept véhicules de service sur deux sites. À gauche, le besoin : chaque véhicule parcourt au plus 500 kilomètres par semaine, à 20 kilowattheures aux 100 kilomètres, et stationne 14 heures par nuit, cinq nuits par semaine ; deux jauges posent la puissance utile sous la capacité d’une borne de 7 kilowatts — 5,7 kilowatts pour les quatre véhicules de La Rochelle, soit 400 kilowattheures par semaine sur 70 heures de charge, et 4,3 kilowatts pour les trois véhicules de Saintes, soit 300 kilowattheures. À droite, la distribution prescrite par le lot : depuis le tableau général existant, derrière un disjoncteur différentiel 4 fois 63 ampères sélectif, une alimentation de 22 kilowatts tétrapolaire descend vers le tableau divisionnaire IRVE — interrupteur général 80 ampères, arrêt d’urgence, parafoudre — d’où partent trois phases : la première, protégée par un disjoncteur 2 fois 40 ampères à différentiel 30 milliampères immunisé, alimente une borne mutualisée de 7 kilowatts qui dessert quatre points de charge à prise T2S sur potelet, avec un lecteur de badge déporté ; les deux autres sont réservées à deux bornes identiques, soit douze véhicules au total sans modification du raccordement. Le même tableau équipe les deux sites ; à Saintes, trois points de charge sont raccordés et un quatrième reste disponible.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">UNE BORNE POUR QUATRE</text>
+  <text x="24.00" y="64.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">La Rochelle</text>
+  <text x="24.00" y="80.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">4 VÉHICULES</text>
+  <text x="24.00" y="94.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">400 kWh PAR SEMAINE</text>
+  <text x="24.00" y="108.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">5 NUITS × 14 h = 70 h</text>
+  <rect x="24.00" y="150.80" width="48.00" height="91.20" class="c-clair" fill="#99CCCD"/>
+  <path d="M 24.00 150.80 L 72.00 150.80" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 24.00 130.00 L 24.00 242.00 L 72.00 242.00 L 72.00 130.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 24.00 130.00 L 72.00 130.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 24.00 226.00 L 29.00 226.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 24.00 210.00 L 29.00 210.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 24.00 194.00 L 29.00 194.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 24.00 178.00 L 29.00 178.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 24.00 162.00 L 29.00 162.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 24.00 146.00 L 29.00 146.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="80.00" y="134.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">7 kW · LA BORNE</text>
+  <text x="80.00" y="157.80" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="18" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" font-variant-numeric="tabular-nums">5,7 kW</text>
+  <text x="80.00" y="171.80" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">UTILES</text>
+  <text x="24.00" y="262.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">4 POINTS DE CHARGE</text>
+  <text x="24.00" y="288.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SAINTES · 4,3 kW</text>
+  <text x="24.00" y="302.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">3 POINTS · 1 EN ATTENTE</text>
+  <rect x="314.00" y="56.00" width="100.00" height="24.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="364.00" y="72.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">TGBT EXISTANT</text>
+  <rect x="331.00" y="80.00" width="66.00" height="24.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <text x="405.00" y="96.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">22 kW</text>
+  <rect x="220.00" y="104.00" width="288.00" height="36.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="364.00" y="119.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">TD IRVE</text>
+  <text x="364.00" y="133.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">IG 80 A · ARRÊT D’URGENCE</text>
+  <rect x="257.50" y="140.00" width="21.00" height="36.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <rect x="223.00" y="176.00" width="90.00" height="36.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <text x="268.00" y="191.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">BORNE 7 kW</text>
+  <text x="268.00" y="205.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">MUTUALISÉE</text>
+  <path d="M 353.50 140.00 L 374.50 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 374.50 140.00 L 374.50 176.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 374.50 176.00 L 353.50 176.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 353.50 176.00 L 353.50 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 319.00 176.00 L 409.00 176.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 409.00 176.00 L 409.00 212.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 409.00 212.00 L 319.00 212.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 319.00 212.00 L 319.00 176.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <text x="364.00" y="191.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">RÉSERVE</text>
+  <text x="364.00" y="205.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">7 kW</text>
+  <path d="M 449.50 140.00 L 470.50 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 470.50 140.00 L 470.50 176.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 470.50 176.00 L 449.50 176.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 449.50 176.00 L 449.50 140.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 415.00 176.00 L 505.00 176.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 505.00 176.00 L 505.00 212.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 505.00 212.00 L 415.00 212.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 415.00 212.00 L 415.00 176.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <text x="460.00" y="191.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">RÉSERVE</text>
+  <text x="460.00" y="205.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">7 kW</text>
+  <text x="412.00" y="236.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">UNE BORNE PAR PHASE</text>
+  <text x="412.00" y="250.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">DOUZE VÉHICULES AU TOTAL</text>
+  <path d="M 268.00 212.00 L 268.00 232.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 246.00 232.00 L 290.00 232.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 246.00 232.00 L 246.00 246.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <rect x="228.00" y="246.00" width="36.00" height="3.00" class="c-encre" fill="#00393A"/>
+  <rect x="229.00" y="250.00" width="14.00" height="14.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <rect x="249.00" y="250.00" width="14.00" height="14.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <path d="M 290.00 232.00 L 290.00 246.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <rect x="272.00" y="246.00" width="36.00" height="3.00" class="c-encre" fill="#00393A"/>
+  <rect x="273.00" y="250.00" width="14.00" height="14.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <rect x="293.00" y="250.00" width="14.00" height="14.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <path d="M 262.00 212.00 L 262.00 240.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 262.00 240.00 L 230.00 240.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <path d="M 230.00 240.00 L 230.00 252.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.1" stroke-dasharray="4 5"/>
+  <rect x="225.00" y="252.00" width="10.00" height="10.00" class="c-encre" fill="#00393A"/>
+  <text x="268.00" y="284.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">PLACES 1 À 4 · T2S</text>
+  <text x="200.00" y="340.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SANS MODIFICATION DU RACCORDEMENT</text>
+</svg>

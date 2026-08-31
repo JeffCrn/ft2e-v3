@@ -48,6 +48,13 @@ deux endroits distincts : un tronc triple (36 kVA en triphasé) dans une cellule
 deux postes de plus dans une autre. Les libellés de poste sont nommés une fois,
 en gouttière : cinq jeux identiques seraient illisibles à 184 px de cellule.
 
+Le cinquième mécanisme (`mutualisation`, bornes de recharge de La Rochelle et
+Saintes) a pour sujet la MARGE : deux jauges graduées sur la capacité de la
+borne (7 kW) où la puissance utile calculée sur l'usage (5,7 et 4,3 kW) est un
+niveau qui reste sous le bord ; et une alimentation de 22 kW partagée en trois
+branches de 7 kW à largeur proportionnelle, dont une seule est équipée — la
+réserve se compte, deux cadres vides sur trois.
+
 Cinquième module du chantier après `sankey-energie.py`, `zonage-ssi.py`,
 `coupe-traversee.py` et `boucle-fluide.py`. Le tronc commun (jetons, mesure des
 chasses, insécables, double écriture des couleurs, routine d'exécution) vit dans
@@ -2079,7 +2086,482 @@ def composer_appui_montee(donnees):
                     "le contre-flux tenu à l’échelle de l’appui")
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+# Mécanisme `mutualisation` — bornes de recharge, La Rochelle et Saintes
+# ═════════════════════════════════════════════════════════════════════════════
+# Le motif arrivée → tableau → départs, avec pour sujet la MARGE : une borne
+# de 7 kW suffit à quatre véhicules parce que le besoin se calcule sur l'usage,
+# et l'amont est réservé pour trois fois plus. Deux registres :
+#
+#   1. LE BESOIN (gauche) — une jauge par site, graduée sur la capacité de la
+#      borne (7 kW = 168 px, 24 px par kW) ; la puissance utile calculée au
+#      CCTP (5,7 et 4,3 kW) y est un niveau de remplissage. La géométrie porte
+#      la thèse : le niveau reste sous le bord.
+#   2. LA DISTRIBUTION (droite) — le tableau général, une bande d'alimentation
+#      de 22 kW (4 px par kW), le tableau divisionnaire, et TROIS branches de
+#      7 kW aux largeurs proportionnelles : une seule est équipée (bande pleine,
+#      borne, quatre points de charge), les deux autres sont en pointillé.
+#      La réserve se compte — deux cadres vides sur trois.
+#
+# Tout est topologique : aucun parking, aucune voirie, aucune implantation
+# (règle 4). Le même tableau équipe les deux sites, ce que dit le pied du
+# registre ; Saintes n'a que trois points, sa jauge le dit.
+
+# ── Les tags de registre et le besoin ────────────────────────────────────────
+MU_Y_TAG = 214
+MU_X_SITE = (56, 268)              # x0 des deux colonnes de site
+MU_L_SITE = 200                    # largeur d'une colonne
+MU_Y_NOM = 262                     # le nom du site
+MU_Y_MONO = (282, 296, 310)        # véhicules · énergie · heures
+MU_L_JAUGE = 64                    # largeur de la jauge
+MU_Y_J1, MU_Y_J0 = 330, 498        # sommet (7 kW) et pied (0) de la jauge
+MU_KW_JAUGE = 7                    # la capacité de la borne gradue la jauge
+MU_PX_KW = (MU_Y_J0 - MU_Y_J1) / MU_KW_JAUGE   # 24 px par kW
+MU_X_VALEUR = 72                   # retrait des valeurs à droite de la jauge
+MU_Y_POINTS = 522                  # le compte de points de charge
+
+# ── La distribution ──────────────────────────────────────────────────────────
+MU_XC = 832                        # l'axe du tableau
+MU_TGBT_X0, MU_TGBT_X1 = 732, 932
+MU_TGBT_Y0, MU_TGBT_Y1 = 236, 272
+MU_PX_BANDE = 4.0                  # 1 kW = 4 px de large
+MU_KW_ALIM = 22                    # l'alimentation du tableau IRVE
+MU_KW_BORNE = 7                    # une branche
+MU_TD_X0, MU_TD_X1 = 620, 1044
+MU_TD_Y0, MU_TD_Y1 = 308, 356
+MU_X_PH = (690, 832, 974)          # les trois phases
+MU_L_BOITE = 132                   # borne et réserves
+MU_BOITE_Y0, MU_BOITE_Y1 = 424, 476
+MU_Y_PH = 380                      # les libellés de phase et le départ
+MU_Y_TAG_LIAISON = 500
+MU_Y_RESERVE = (496, 512)          # les deux lignes de la réserve
+MU_X_RESERVE = 772
+MU_Y_TETE = 520                    # la nappe horizontale vers les potelets
+MU_X_POTELET = (654, 746)          # les deux potelets, deux points chacun
+MU_Y_POTELET = 542                 # la tête du potelet
+MU_Y_TPC = 548                     # le sommet des carrés de point de charge
+MU_C_TPC = 22                      # côté d'un point de charge
+MU_X_LB, MU_Y_LB = 607, 552        # le lecteur de badge
+MU_Y_TAG_POINTS = 596
+MU_Y_TAG_BADGE = 616
+MU_Y_SITES = 640
+
+
+def _cadre_pointille(A, x0, y0, x1, y1, cle="encre", epaisseur=1.2):
+    for a, b, c, d in ((x0, y0, x1, y0), (x1, y0, x1, y1),
+                       (x1, y1, x0, y1), (x0, y1, x0, y0)):
+        A(_pointille(a, b, c, d, cle, epaisseur))
+
+
+def composer_mutualisation(donnees):
+    m = donnees["mutualisation"]
+    sites = sorted(m["sites"], key=lambda s: s["ordre"])
+    phases = sorted(m["phases"], key=lambda p: p["ordre"])
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    def mono(x, y, chaine, dispo=None, nom=None, ancre=None, corps=10):
+        if dispo is not None:
+            controler(nom or chaine, chaine, corps, "mono", dispo, corps * 0.14)
+        A(texte(x, y, chaine, "mono", corps, 500, "pivot", ancre=ancre,
+                tracking=corps * 0.14))
+
+    # ── Racine et bloc de titre ──────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+    mono(MARGE, Y_ENTETE, m["entete"], UTILE, "en-tête du schéma")
+
+    # ── Les deux tags de registre ────────────────────────────────────────────
+    l_droite = controler("tag distribution", m["registres"]["droite"], 10,
+                         "mono", 440, 1.4)
+    controler("tag besoin", m["registres"]["gauche"], 10, "mono",
+              W - MARGE - l_droite - MARGE - 40, 1.4)
+    mono(MARGE, MU_Y_TAG, m["registres"]["gauche"])
+    mono(W - MARGE, MU_Y_TAG, m["registres"]["droite"], ancre="end")
+
+    # ── LE BESOIN — une jauge par site, graduée sur la borne ─────────────────
+    niveaux = []
+    for s, x0 in zip(sites, MU_X_SITE):
+        controler(f"nom {s['cle']}", s["libelle"], 15, "sans-600", MU_L_SITE)
+        A(texte(x0, MU_Y_NOM, s["libelle"], "sans", 15, 600, "encre", wdth=112))
+        for y, cle in zip(MU_Y_MONO, ("l_vehicules", "l_energie", "l_heures")):
+            mono(x0, y, s[cle], MU_L_SITE, f"{cle} {s['cle']}")
+        # La jauge : un récipient gradué sur 7 kW, le niveau = la puissance utile.
+        p = float(s["puissance"].replace(",", "."))
+        assert 0 < p <= MU_KW_JAUGE, s["puissance"]
+        y_niv = MU_Y_J0 - p * MU_PX_KW
+        niveaux.append(round(y_niv, 1))
+        A(rect(x0, y_niv, MU_L_JAUGE, MU_Y_J0 - y_niv, "clair"))
+        A(ligne(x0, y_niv, x0 + MU_L_JAUGE, y_niv, "encre", 1.5))
+        A(polyligne([(x0, MU_Y_J1), (x0, MU_Y_J0), (x0 + MU_L_JAUGE, MU_Y_J0),
+                     (x0 + MU_L_JAUGE, MU_Y_J1)], "encre", 1.5))
+        A(ligne(x0, MU_Y_J1, x0 + MU_L_JAUGE, MU_Y_J1, "filet-1", 1))
+        # Les graduations du kilowatt, à gauche, sans chiffre.
+        for k in range(1, MU_KW_JAUGE):
+            yk = MU_Y_J0 - k * MU_PX_KW
+            A(ligne(x0, yk, x0 + 6, yk, "encre", 1.0))
+        # Le bord : la borne. Le niveau : la puissance utile.
+        xv = x0 + MU_X_VALEUR
+        mono(xv, MU_Y_J1 + 4, m["borne"]["tag_jauge"], MU_L_SITE - MU_X_VALEUR,
+             f"tag jauge {s['cle']}")
+        controler(f"puissance {s['cle']}", s["l_puissance"], 22, "sans-700",
+                  MU_L_SITE - MU_X_VALEUR)
+        A(texte(xv, y_niv + 8, s["l_puissance"], "sans", 22, 700, "pivot",
+                wdth=118, tabulaire=True))
+        mono(xv, y_niv + 22, s["l_utiles"], MU_L_SITE - MU_X_VALEUR,
+             f"utiles {s['cle']}")
+        mono(x0, MU_Y_POINTS, s["l_points"], MU_L_SITE, f"points {s['cle']}")
+
+    # ── LA DISTRIBUTION — arrivée, bande de 22 kW, tableau, trois phases ─────
+    tg = m["amont"]["tgbt"]
+    A(rect_bord(MU_TGBT_X0, MU_TGBT_Y0, MU_TGBT_X1 - MU_TGBT_X0,
+                MU_TGBT_Y1 - MU_TGBT_Y0, "calcaire", "filet-1"))
+    A(texte(MU_XC, MU_TGBT_Y0 + 16, tg["l1"], "sans", 13, 600, "encre",
+            wdth=112, ancre="middle"))
+    controler("tgbt l2", tg["l2"], 10, "mono", MU_TGBT_X1 - MU_TGBT_X0 - 12, 1.4)
+    mono(MU_XC, MU_TGBT_Y1 - 6, tg["l2"], ancre="middle")
+
+    l_alim = MU_KW_ALIM * MU_PX_BANDE
+    A(rect_bord(MU_XC - l_alim / 2, MU_TGBT_Y1, l_alim, MU_TD_Y0 - MU_TGBT_Y1,
+                "clair", "encre"))
+    al = m["amont"]["alimentation"]
+    mono(MU_XC + l_alim / 2 + 8, (MU_TGBT_Y1 + MU_TD_Y0) / 2 + 4, al["tag"],
+         W - MARGE - (MU_XC + l_alim / 2 + 8), "tag alimentation")
+    controler("tag raccordement", al["tag_gauche"], 10, "mono",
+              MU_XC - l_alim / 2 - 8 - (MU_X_SITE[1] + MU_L_SITE), 1.4)
+    mono(MU_XC - l_alim / 2 - 8, (MU_TGBT_Y1 + MU_TD_Y0) / 2 + 4,
+         al["tag_gauche"], ancre="end")
+
+    td = m["amont"]["td"]
+    A(rect_bord(MU_TD_X0, MU_TD_Y0, MU_TD_X1 - MU_TD_X0, MU_TD_Y1 - MU_TD_Y0,
+                "calcaire", "filet-1"))
+    A(texte(MU_XC, MU_TD_Y0 + 19, td["l1"], "sans", 13, 600, "encre",
+            wdth=112, ancre="middle"))
+    controler("td l2", td["l2"], 10, "mono", MU_TD_X1 - MU_TD_X0 - 16, 1.4)
+    mono(MU_XC, MU_TD_Y1 - 10, td["l2"], ancre="middle")
+
+    # Trois branches de 7 kW, à largeur proportionnelle : une pleine, deux vides.
+    l_br = MU_KW_BORNE * MU_PX_BANDE
+    for ph, xp in zip(phases, MU_X_PH):
+        x0b, x1b = xp - l_br / 2, xp + l_br / 2
+        bx0, bx1 = xp - MU_L_BOITE / 2, xp + MU_L_BOITE / 2
+        if ph["etat"] == "équipée":
+            A(rect_bord(x0b, MU_TD_Y1, l_br, MU_BOITE_Y0 - MU_TD_Y1, "clair", "encre"))
+            A(rect_bord(bx0, MU_BOITE_Y0, MU_L_BOITE, MU_BOITE_Y1 - MU_BOITE_Y0,
+                        "calcaire", "encre"))
+            controler("borne l1", m["borne"]["l1"], 13, "sans-600", MU_L_BOITE - 8)
+            A(texte(xp, MU_BOITE_Y0 + 20, m["borne"]["l1"], "sans", 13, 600,
+                    "encre", wdth=112, ancre="middle"))
+            controler("borne l2", m["borne"]["l2"], 10, "mono", MU_L_BOITE - 8, 1.4)
+            mono(xp, MU_BOITE_Y0 + 38, m["borne"]["l2"], ancre="middle")
+            dep = m["amont"]["depart"]["tag"]
+            controler("tag départ", dep, 10, "mono",
+                      x0b - 8 - (MU_X_SITE[1] + MU_L_SITE), 1.4)
+            mono(x0b - 8, MU_Y_PH, dep, ancre="end")
+        else:
+            _cadre_pointille(A, x0b, MU_TD_Y1, x1b, MU_BOITE_Y0, "encre", 1.2)
+            _cadre_pointille(A, bx0, MU_BOITE_Y0, bx1, MU_BOITE_Y1, "encre", 1.2)
+            controler(f"réserve l1 {ph['libelle']}", ph["l1"], 10, "mono",
+                      MU_L_BOITE - 8, 1.4)
+            mono(xp, MU_BOITE_Y0 + 22, ph["l1"], ancre="middle")
+            mono(xp, MU_BOITE_Y0 + 38, ph["l2"], MU_L_BOITE - 8,
+                 f"réserve l2 {ph['libelle']}", ancre="middle")
+        mono(x1b + 6, MU_Y_PH, ph["libelle"], 60, f"phase {ph['libelle']}")
+
+    # La réserve, en toutes lettres, sous les deux cadres vides.
+    for y, cle in zip(MU_Y_RESERVE, ("l1", "l2")):
+        mono(MU_X_RESERVE, y, m["reserve"][cle], W - MARGE - MU_X_RESERVE,
+             f"réserve {cle}")
+
+    # ── L'AVAL — la borne dessert quatre points de charge ────────────────────
+    xb = MU_X_PH[0]
+    x_puiss, x_com = xb + 5, xb - 5
+    A(ligne(x_puiss, MU_BOITE_Y1, x_puiss, MU_Y_TETE, "encre", 1.5))
+    A(ligne(MU_X_POTELET[0], MU_Y_TETE, MU_X_POTELET[1], MU_Y_TETE, "encre", 1.5))
+    for xpo in MU_X_POTELET:
+        A(ligne(xpo, MU_Y_TETE, xpo, MU_Y_POTELET, "encre", 1.5))
+        A(rect(xpo - 26, MU_Y_POTELET, 52, 4, "encre"))
+        for dx in (-25, 3):
+            A(rect_bord(xpo + dx, MU_Y_TPC, MU_C_TPC, MU_C_TPC, "calcaire", "encre"))
+            A(cercle(xpo + dx + MU_C_TPC / 2, MU_Y_TPC + MU_C_TPC / 2, 4,
+                     "papier", "encre", 1.2))
+    # La communication : un pointillé de la borne au lecteur de badge.
+    A(_pointille(x_com, MU_BOITE_Y1, x_com, MU_Y_TETE + 12, "encre", 1.2))
+    A(_pointille(x_com, MU_Y_TETE + 12, MU_X_LB + 7, MU_Y_TETE + 12, "encre", 1.2))
+    A(_pointille(MU_X_LB + 7, MU_Y_TETE + 12, MU_X_LB + 7, MU_Y_LB, "encre", 1.2))
+    A(rect(MU_X_LB, MU_Y_LB, 14, 14, "encre"))
+    li = m["aval"]["liaison"]["tag"]
+    controler("tag liaison", li, 10, "mono",
+              x_com - 10 - (MU_X_SITE[1] + MU_L_SITE), 1.4)
+    mono(x_com - 10, MU_Y_TAG_LIAISON, li, ancre="end")
+    pts = m["aval"]["points"]["tag"]
+    controler("tag points", pts, 10, "mono", 2 * (xb - (MU_X_SITE[1] + MU_L_SITE)), 1.4)
+    mono(xb, MU_Y_TAG_POINTS, pts, ancre="middle")
+    mono(560, MU_Y_TAG_BADGE, m["aval"]["badge"]["tag"], W - MARGE - 560,
+         "tag badge")
+    mono(520, MU_Y_SITES, m["aval"]["sites"], W - MARGE - 520, "pied des sites")
+
+    # ── Phrase de principe, cartouche ────────────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"la marge, deux fois : à gauche, deux jauges graduées "
+                         f"sur la borne ({MU_KW_JAUGE} kW = {MU_Y_J0 - MU_Y_J1} px, "
+                         f"{MU_PX_KW:.0f} px par kW) dont le niveau — "
+                         f"{', '.join(s['l_puissance'] for s in sites)} — "
+                         f"reste sous le bord (y {niveaux[0]} et {niveaux[1]} "
+                         f"pour un bord à {MU_Y_J1}) ; à droite, une bande "
+                         f"d’alimentation de {MU_KW_ALIM} kW ({l_alim:.0f} px) "
+                         f"partagée en trois branches de {MU_KW_BORNE} kW "
+                         f"({l_br:.0f} px) dont une seule est pleine",
+        "proportions": f"{MU_PX_BANDE} px par kW sur les bandes — "
+                       f"{l_alim:.0f} = 3 × {l_br:.0f} + {l_alim - 3 * l_br:.0f} "
+                       f"(le kilowatt restant n’est pas dessiné, a_valider_ft2e)",
+        "reserve_comptee": "deux cadres en pointillé sur trois branches, doublés "
+                           "de deux lignes en toutes lettres — jamais le trait seul",
+        "topologie": f"tableau général x {MU_TGBT_X0}–{MU_TGBT_X1}, tableau IRVE "
+                     f"x {MU_TD_X0}–{MU_TD_X1}, phases x "
+                     f"{', '.join(str(x) for x in MU_X_PH)}, potelets x "
+                     f"{', '.join(str(x) for x in MU_X_POTELET)} — arrivée → "
+                     f"tableau → départs, aucune implantation de site",
+        "signes_doubles": "jauge (tag « la borne » au bord, valeur au niveau), "
+                          "bande d’alimentation (tag 22 kW), branches (libellé "
+                          "de phase), réserve (deux lignes), points de charge "
+                          "(tag des places), lecteur de badge (tag), liaison "
+                          "(tag) — chaque signe est doublé d’un texte",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "releve": "aucun — les valeurs dessinées sont les nœuds du mécanisme, "
+                  "pas un relevé (révision 4)",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_mutualisation(donnees):
+    """La vignette : la distribution et une jauge, rien d'autre.
+
+    Ce qu'elle garde : le tableau général, la bande d'alimentation, le tableau
+    IRVE chiffré 22 kW, trois branches dont une pleine, la borne 7 kW et ses
+    quatre points de charge, et la jauge de La Rochelle (5,7 sous 7). Ce
+    qu'elle laisse : Saintes, les protections, les tags, le lecteur de badge."""
+    m = donnees["mutualisation"]
+    site = sorted(m["sites"], key=lambda s: s["ordre"])[0]
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    xc = 138
+    A(rect_bord(xc - 42, 30, 84, 16, "calcaire", "filet-1"))
+    A(texte(xc, 41, "TGBT", "mono", 9, 500, "pivot", ancre="middle", tracking=1.26))
+    u = 1.5
+    A(rect_bord(xc - 22 * u / 2, 46, 22 * u, 16, "clair", "encre"))
+    A(rect_bord(40, 62, 196, 24, "calcaire", "filet-1"))
+    A(texte(xc, 77, f'TD IRVE · 22{NN}kW', "mono", 9, 500, "pivot",
+            ancre="middle", tracking=1.26))
+    for k, xp in enumerate((72, 138, 204)):
+        l_br = 7 * u
+        if k == 0:
+            A(rect_bord(xp - l_br / 2, 86, l_br, 22, "clair", "encre"))
+            A(rect_bord(xp - 30, 108, 60, 22, "calcaire", "encre"))
+            A(texte(xp, 122, f'7{NN}kW', "mono", 9, 500, "pivot",
+                    ancre="middle", tracking=1.26))
+        else:
+            _cadre_pointille(A, xp - l_br / 2, 86, xp + l_br / 2, 108, "encre", 1.0)
+            _cadre_pointille(A, xp - 30, 108, xp + 30, 130, "encre", 1.0)
+            A(texte(xp, 122, "RÉSERVE", "mono", 9, 500, "pivot",
+                    ancre="middle", tracking=1.26))
+    # Quatre points de charge sous la borne, par deux.
+    A(ligne(72, 130, 72, 144, "encre", 1.2))
+    A(ligne(59, 144, 85, 144, "encre", 1.2))
+    for xpo in (59, 85):
+        A(ligne(xpo, 144, xpo, 152, "encre", 1.2))
+        for dx in (-10, 1):
+            A(rect_bord(xpo + dx, 152, 9, 9, "calcaire", "encre"))
+    A(rect(40, 154, 6, 6, "encre"))
+    A(texte(V_MARGE, 178, site["l_points"], "mono", 9, 500, "pivot",
+            tracking=1.26))
+    # La jauge de La Rochelle : 5,7 sous 7.
+    jx0, jy1, jy0, jl = 256, 96, 176, 24
+    p = float(site["puissance"].replace(",", "."))
+    y_niv = jy0 - p / 7 * (jy0 - jy1)
+    A(rect(jx0, y_niv, jl, jy0 - y_niv, "clair"))
+    A(ligne(jx0, y_niv, jx0 + jl, y_niv, "encre", 1.2))
+    A(polyligne([(jx0, jy1), (jx0, jy0), (jx0 + jl, jy0), (jx0 + jl, jy1)],
+                "encre", 1.2))
+    A(ligne(jx0, jy1, jx0 + jl, jy1, "filet-1", 1))
+    A(texte(jx0 + jl / 2, 90, f'7{NN}kW', "mono", 9, 500, "pivot",
+            ancre="middle", tracking=1.26))
+    A(texte(jx0 + jl / 2, 190, site["l_puissance"], "mono", 9, 500, "pivot",
+            ancre="middle", tracking=1.26))
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "la distribution entière — tableau général, bande de 22 kW, "
+                 "tableau IRVE, trois branches dont une pleine, borne 7 kW et "
+                 "quatre points de charge — et la jauge de La Rochelle (5,7 kW "
+                 f"sous 7, niveau à y {y_niv:.1f}) ; Saintes, les protections et "
+                 "les tags laissés à la planche",
+        "bas_du_dessin": "valeur de la jauge à 190 — marge basse 10 px, aucun "
+                         "trait ne touche un bord",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_mutualisation(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, trois nœuds chiffrés.
+
+    Ce qu'il garde : la jauge de La Rochelle chiffrée (5,7 kW utiles sous la
+    borne de 7), la distribution — tableau général, bande de 22 kW, tableau
+    IRVE, trois branches dont une pleine, borne, quatre points de charge,
+    lecteur de badge — et Saintes en deux lignes. Ce qu'il laisse : les
+    protections, les tags de liaison, la phrase et le cartouche."""
+    m = donnees["mutualisation"]
+    sites = sorted(m["sites"], key=lambda s: s["ordre"])
+    lr, st = sites[0], sites[1]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    # La jauge de La Rochelle, chiffrée.
+    A(texte(A_MARGE, 64, lr["libelle"], "sans", 13, 600, "encre", wdth=112))
+    for y, cle in ((80, "l_vehicules"), (94, "l_energie"), (108, "l_heures")):
+        A(texte(A_MARGE, y, lr[cle], "mono", 10, 500, "pivot", tracking=1.4))
+    jx0, jy1, jy0, jl = A_MARGE, 130, 242, 48
+    p = float(lr["puissance"].replace(",", "."))
+    y_niv = jy0 - p / 7 * (jy0 - jy1)
+    A(rect(jx0, y_niv, jl, jy0 - y_niv, "clair"))
+    A(ligne(jx0, y_niv, jx0 + jl, y_niv, "encre", 1.4))
+    A(polyligne([(jx0, jy1), (jx0, jy0), (jx0 + jl, jy0), (jx0 + jl, jy1)],
+                "encre", 1.4))
+    A(ligne(jx0, jy1, jx0 + jl, jy1, "filet-1", 1))
+    for k in range(1, 7):
+        yk = jy0 - k * (jy0 - jy1) / 7
+        A(ligne(jx0, yk, jx0 + 5, yk, "encre", 1.0))
+    A(texte(jx0 + jl + 8, jy1 + 4, m["borne"]["tag_jauge"], "mono", 10, 500,
+            "pivot", tracking=1.4))
+    A(texte(jx0 + jl + 8, y_niv + 7, lr["l_puissance"], "sans", 18, 700,
+            "pivot", wdth=118, tabulaire=True))
+    A(texte(jx0 + jl + 8, y_niv + 21, lr["l_utiles"], "mono", 10, 500, "pivot",
+            tracking=1.4))
+    A(texte(A_MARGE, 262, lr["l_points"], "mono", 10, 500, "pivot", tracking=1.4))
+    A(texte(A_MARGE, 288, f'{st["libelle"].upper()} · {st["l_puissance"]}',
+            "mono", 10, 500, "pivot", tracking=1.4))
+    A(texte(A_MARGE, 302, st["l_points"], "mono", 10, 500, "pivot", tracking=1.4))
+
+    # La distribution.
+    xc = 364
+    A(rect_bord(xc - 50, 56, 100, 24, "calcaire", "filet-1"))
+    A(texte(xc, 72, m["amont"]["tgbt"]["l1"], "sans", 12, 600, "encre",
+            wdth=112, ancre="middle"))
+    u = 3.0
+    A(rect_bord(xc - 22 * u / 2, 80, 22 * u, 24, "clair", "encre"))
+    A(texte(xc + 22 * u / 2 + 8, 96, f'22{NN}kW', "mono", 10, 500, "pivot",
+            tracking=1.4))
+    A(rect_bord(220, 104, 288, 36, "calcaire", "filet-1"))
+    A(texte(xc, 119, m["amont"]["td"]["l1"], "sans", 12, 600, "encre",
+            wdth=112, ancre="middle"))
+    A(texte(xc, 133, "IG 80" + NN + "A · ARRÊT D’URGENCE", "mono", 10, 500,
+            "pivot", ancre="middle", tracking=1.4))
+    for k, xp in enumerate((268, 364, 460)):
+        l_br = 7 * u
+        if k == 0:
+            A(rect_bord(xp - l_br / 2, 140, l_br, 36, "clair", "encre"))
+            A(rect_bord(xp - 45, 176, 90, 36, "calcaire", "encre"))
+            A(texte(xp, 191, "BORNE 7" + NN + "kW", "sans", 12, 600, "encre",
+                    wdth=112, ancre="middle"))
+            A(texte(xp, 205, "MUTUALISÉE", "mono", 10, 500, "pivot",
+                    ancre="middle", tracking=1.4))
+        else:
+            _cadre_pointille(A, xp - l_br / 2, 140, xp + l_br / 2, 176, "encre", 1.1)
+            _cadre_pointille(A, xp - 45, 176, xp + 45, 212, "encre", 1.1)
+            A(texte(xp, 191, "RÉSERVE", "mono", 10, 500, "pivot",
+                    ancre="middle", tracking=1.4))
+            A(texte(xp, 205, "7" + NN + "kW", "mono", 10, 500, "pivot",
+                    ancre="middle", tracking=1.4))
+    A(texte(412, 236, "UNE BORNE PAR PHASE", "mono", 10, 500, "pivot",
+            ancre="middle", tracking=1.4))
+    A(texte(412, 250, "DOUZE VÉHICULES AU TOTAL", "mono", 10, 500, "pivot",
+            ancre="middle", tracking=1.4))
+    # Quatre points de charge, par deux, et le lecteur de badge.
+    A(ligne(268, 212, 268, 232, "encre", 1.4))
+    A(ligne(246, 232, 290, 232, "encre", 1.4))
+    for xpo in (246, 290):
+        A(ligne(xpo, 232, xpo, 246, "encre", 1.4))
+        A(rect(xpo - 18, 246, 36, 3, "encre"))
+        for dx in (-17, 3):
+            A(rect_bord(xpo + dx, 250, 14, 14, "calcaire", "encre"))
+    A(_pointille(262, 212, 262, 240, "encre", 1.1))
+    A(_pointille(262, 240, 230, 240, "encre", 1.1))
+    A(_pointille(230, 240, 230, 252, "encre", 1.1))
+    A(rect(225, 252, 10, 10, "encre"))
+    A(texte(268, 284, "PLACES 1 À 4 · T2S", "mono", 10, 500, "pivot",
+            ancre="middle", tracking=1.4))
+    A(texte(200, 340, "SANS MODIFICATION DU RACCORDEMENT", "mono", 10, 500,
+            "pivot", tracking=1.4))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="le motif entier à l’échelle 1 : la jauge de La Rochelle "
+              f"chiffrée (5,7 kW utiles, niveau à y {y_niv:.1f}, sous la borne "
+              "de 7), la distribution — tableau général, bande de 22 kW, "
+              "tableau IRVE, trois branches dont une pleine, borne mutualisée, "
+              "quatre points de charge et lecteur de badge — et Saintes en deux "
+              "lignes ; protections, tags de liaison, phrase et cartouche "
+              "laissés à la planche",
+        bas="pied de la ligne « sans modification du raccordement » à 340 — "
+            "marge basse 28 px",
+        reserve="deux cadres en pointillé sur trois branches (x 364, 460), "
+                "doublés de deux lignes en toutes lettres")
+
+
 def _composer(donnees):
+    if "mutualisation" in donnees:
+        return composer_mutualisation(donnees)
     if "montee" in donnees:
         return composer_montee(donnees)
     if "essaimage" in donnees:
@@ -2090,6 +2572,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "mutualisation" in donnees:
+        return composer_vignette_mutualisation(donnees)
     if "montee" in donnees:
         return composer_vignette_montee(donnees)
     if "essaimage" in donnees:
@@ -2100,6 +2584,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "mutualisation" in donnees:
+        return composer_appui_mutualisation(donnees)
     if "montee" in donnees:
         return composer_appui_montee(donnees)
     if "essaimage" in donnees:

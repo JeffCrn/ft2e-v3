@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">UNE BORNE POUR QUATRE</text>
+  <rect x="96.00" y="30.00" width="84.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="138.00" y="41.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle">TGBT</text>
+  <rect x="121.50" y="46.00" width="33.00" height="16.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <rect x="40.00" y="62.00" width="196.00" height="24.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="138.00" y="77.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle">TD IRVE · 22 kW</text>
+  <rect x="66.75" y="86.00" width="10.50" height="22.00" class="c-clair s-encre" fill="#99CCCD" stroke="#00393A" stroke-width="1"/>
+  <rect x="42.00" y="108.00" width="60.00" height="22.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <text x="72.00" y="122.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle">7 kW</text>
+  <path d="M 132.75 86.00 L 143.25 86.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 143.25 86.00 L 143.25 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 143.25 108.00 L 132.75 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 132.75 108.00 L 132.75 86.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 108.00 108.00 L 168.00 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 168.00 108.00 L 168.00 130.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 168.00 130.00 L 108.00 130.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 108.00 130.00 L 108.00 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <text x="138.00" y="122.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle">RÉSERVE</text>
+  <path d="M 198.75 86.00 L 209.25 86.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 209.25 86.00 L 209.25 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 209.25 108.00 L 198.75 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 198.75 108.00 L 198.75 86.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 174.00 108.00 L 234.00 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 234.00 108.00 L 234.00 130.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 234.00 130.00 L 174.00 130.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <path d="M 174.00 130.00 L 174.00 108.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0" stroke-dasharray="4 5"/>
+  <text x="204.00" y="122.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle">RÉSERVE</text>
+  <path d="M 72.00 130.00 L 72.00 144.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 59.00 144.00 L 85.00 144.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 59.00 144.00 L 59.00 152.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="49.00" y="152.00" width="9.00" height="9.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <rect x="60.00" y="152.00" width="9.00" height="9.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <path d="M 85.00 144.00 L 85.00 152.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="75.00" y="152.00" width="9.00" height="9.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <rect x="86.00" y="152.00" width="9.00" height="9.00" class="c-calcaire s-encre" fill="#EDF0F2" stroke="#00393A" stroke-width="1"/>
+  <rect x="40.00" y="154.00" width="6.00" height="6.00" class="c-encre" fill="#00393A"/>
+  <text x="14.00" y="178.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">4 POINTS DE CHARGE</text>
+  <rect x="256.00" y="110.86" width="24.00" height="65.14" class="c-clair" fill="#99CCCD"/>
+  <path d="M 256.00 110.86 L 280.00 110.86" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 256.00 96.00 L 256.00 176.00 L 280.00 176.00 L 280.00 96.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 256.00 96.00 L 280.00 96.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1"/>
+  <text x="268.00" y="90.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle">7 kW</text>
+  <text x="268.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle">5,7 kW</text>
+</svg>

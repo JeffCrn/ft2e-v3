@@ -1,0 +1,231 @@
+{
+  "fiche": "bornes-irve-la-rochelle-saintes",
+  "archetype": "tableau-electrique",
+  "archetype_motif": "La thèse de la fiche est un dimensionnement et sa distribution : une borne de 7 kW mutualisée suffit à quatre véhicules parce que le besoin se calcule sur l’usage (500 km par semaine, 14 h de charge par nuit → 5,7 kW utiles), et l’amont est réservé pour trois fois plus (22 kW tétrapolaires, une borne par phase, deux emplacements libres). C’est le motif arrivée → tableau → départs de l’archétype tableau-electrique, avec un mécanisme nouveau, « mutualisation » : à gauche le besoin, deux jauges qui posent la puissance utile de chaque site SOUS la capacité de la borne ; à droite la distribution, une alimentation de 22 kW qui se partage en trois phases dont une seule est équipée, et une borne qui dessert quatre points de charge. Cinquième mécanisme du compositeur après « autoconsommation », « franchissement », « essaimage » et « montee ». Ni sankey (il n’y a pas de bilan de flux annuel, et l’affectation par typologie vient d’être dessinée à L’Houmeau) ; ni boucle-fluide (aucun fluide) ; ni chronologie (le déroulé du chantier est un récit, pas un mécanisme — arbitrage N01).",
+  "mecanisme": "mutualisation",
+  "surtitre": "SCHÉMA DE PRINCIPE · RECHARGE DE VÉHICULES DE SERVICE SUR DEUX SITES",
+  "titre": "Sept points de charge",
+  "sous_titre": "Une borne de 7 kW pour quatre véhicules, l’amont réservé pour trois fois plus",
+  "cartouche_legende": "LA ROCHELLE ET SAINTES · SEPT POINTS DE CHARGE · 2025",
+  "aria_label": "Schéma de principe de la recharge de sept véhicules de service sur deux sites. À gauche, le besoin : chaque véhicule parcourt au plus 500 kilomètres par semaine, à 20 kilowattheures aux 100 kilomètres, et stationne 14 heures par nuit, cinq nuits par semaine ; deux jauges posent la puissance utile sous la capacité d’une borne de 7 kilowatts — 5,7 kilowatts pour les quatre véhicules de La Rochelle, soit 400 kilowattheures par semaine sur 70 heures de charge, et 4,3 kilowatts pour les trois véhicules de Saintes, soit 300 kilowattheures. À droite, la distribution prescrite par le lot : depuis le tableau général existant, derrière un disjoncteur différentiel 4 fois 63 ampères sélectif, une alimentation de 22 kilowatts tétrapolaire descend vers le tableau divisionnaire IRVE — interrupteur général 80 ampères, arrêt d’urgence, parafoudre — d’où partent trois phases : la première, protégée par un disjoncteur 2 fois 40 ampères à différentiel 30 milliampères immunisé, alimente une borne mutualisée de 7 kilowatts qui dessert quatre points de charge à prise T2S sur potelet, avec un lecteur de badge déporté ; les deux autres sont réservées à deux bornes identiques, soit douze véhicules au total sans modification du raccordement. Le même tableau équipe les deux sites ; à Saintes, trois points de charge sont raccordés et un quatrième reste disponible.",
+  "mutualisation": {
+    "entete": "SEPT VÉHICULES DE SERVICE SUR DEUX SITES · CE QUE DEMANDE L’USAGE ET CE QUE PRESCRIT LE LOT IRVE — DCE DE SEPTEMBRE 2024",
+    "registres": {
+      "gauche": "LE BESOIN · 500 km PAR SEMAINE ET PAR VÉHICULE · 20 kWh AUX 100 km",
+      "droite": "LA DISTRIBUTION · DU TABLEAU GÉNÉRAL AUX POINTS DE CHARGE"
+    },
+    "borne": {
+      "libelle": "borne mutualisée",
+      "valeur": "7",
+      "unite": "kW",
+      "detail": "monophasée 230 V / 32 A, jusqu’à quatre points de charge, gestion des cycles de charge",
+      "tag_jauge": "7 kW · LA BORNE",
+      "l1": "BORNE MUTUALISÉE",
+      "l2": "7 kW · 32 A"
+    },
+    "sites": [
+      {
+        "ordre": 1,
+        "cle": "la-rochelle",
+        "libelle": "La Rochelle",
+        "vehicules": 4,
+        "energie": "400",
+        "unite_energie": "kWh par semaine",
+        "heures": "70",
+        "puissance": "5,7",
+        "unite": "kW",
+        "points": 4,
+        "points_libres": 0,
+        "l_vehicules": "4 VÉHICULES",
+        "l_energie": "400 kWh PAR SEMAINE",
+        "l_heures": "5 NUITS × 14 h = 70 h",
+        "l_puissance": "5,7 kW",
+        "l_utiles": "UTILES",
+        "l_points": "4 POINTS DE CHARGE",
+        "detail": "quatre véhicules, 400 kWh par semaine, 70 h de charge, 5,7 kW utiles, quatre points de charge"
+      },
+      {
+        "ordre": 2,
+        "cle": "saintes",
+        "libelle": "Saintes",
+        "vehicules": 3,
+        "energie": "300",
+        "unite_energie": "kWh par semaine",
+        "heures": "70",
+        "puissance": "4,3",
+        "unite": "kW",
+        "points": 3,
+        "points_libres": 1,
+        "l_vehicules": "3 VÉHICULES",
+        "l_energie": "300 kWh PAR SEMAINE",
+        "l_heures": "5 NUITS × 14 h = 70 h",
+        "l_puissance": "4,3 kW",
+        "l_utiles": "UTILES",
+        "l_points": "3 POINTS · 1 EN ATTENTE",
+        "detail": "trois véhicules, 300 kWh par semaine, 70 h de charge, 4,3 kW utiles, trois points de charge et un raccordement disponible"
+      }
+    ],
+    "amont": {
+      "tgbt": {
+        "libelle": "TGBT existant",
+        "l1": "TGBT EXISTANT",
+        "l2": "4 × 63 A · DIFF 500 mA S",
+        "valeur": "63",
+        "unite": "A",
+        "detail": "disjoncteur différentiel 500 mA sélectif ajouté au tableau général de chaque site"
+      },
+      "alimentation": {
+        "libelle": "alimentation du tableau IRVE",
+        "valeur": "22",
+        "unite": "kW",
+        "tag": "22 kW · 5G35 mm²",
+        "tag_gauche": "RACCORDEMENT INCHANGÉ",
+        "detail": "22 kW tétrapolaire, sans modification de la puissance de raccordement"
+      },
+      "td": {
+        "libelle": "TD IRVE",
+        "l1": "TD IRVE",
+        "l2": "IG 80 A · ARRÊT D’URGENCE · PARAFOUDRE · RÉSERVE 30 %",
+        "valeur": "80",
+        "unite": "A",
+        "detail": "interrupteur général 80 A, déclencheur d’arrêt d’urgence hors du local, parafoudre, réserve 30 %"
+      },
+      "depart": {
+        "libelle": "départ de la borne",
+        "tag": "2 × 40 A · 30 mA HI",
+        "valeur": "40",
+        "unite": "A",
+        "detail": "disjoncteur 2 × 40 A à différentiel 30 mA immunisé"
+      }
+    },
+    "phases": [
+      {
+        "ordre": 1,
+        "libelle": "Ph 1",
+        "etat": "équipée",
+        "valeur": "7",
+        "unite": "kW"
+      },
+      {
+        "ordre": 2,
+        "libelle": "Ph 2",
+        "etat": "réserve",
+        "valeur": "7",
+        "unite": "kW",
+        "l1": "RÉSERVE",
+        "l2": "7 kW"
+      },
+      {
+        "ordre": 3,
+        "libelle": "Ph 3",
+        "etat": "réserve",
+        "valeur": "7",
+        "unite": "kW",
+        "l1": "RÉSERVE",
+        "l2": "7 kW"
+      }
+    ],
+    "reserve": {
+      "l1": "DEUX EMPLACEMENTS RÉSERVÉS · UNE BORNE PAR PHASE",
+      "l2": "DOUZE VÉHICULES AU TOTAL, SANS RETOUCHER LE TGBT",
+      "libelle": "réserve",
+      "valeur": "2",
+      "unite": "bornes de 7 kW",
+      "detail": "deux disjoncteurs de plus au tableau, une borne par phase, douze véhicules"
+    },
+    "aval": {
+      "liaison": {
+        "tag": "3G6 mm² + CAT 6A",
+        "libelle": "liaison borne → potelet",
+        "valeur": "6",
+        "unite": "mm²"
+      },
+      "points": {
+        "tag": "PLACES 1 À 4 · PRISE T2S · CÂBLE ATTACHÉ 4 m",
+        "libelle": "points de charge",
+        "valeur": "4",
+        "unite": "points de charge",
+        "detail": "prise T2S, câble attaché de 4 m, deux par potelet scellé à un massif béton"
+      },
+      "badge": {
+        "tag": "LECTEUR DE BADGE DÉPORTÉ · UN BADGE PAR POINT DE CHARGE",
+        "libelle": "lecteur de badge",
+        "valeur": "1",
+        "unite": "badge par point",
+        "detail": "afficheur déporté, un badge par point de charge : la consommation se lit par véhicule"
+      },
+      "sites": "MÊME SCHÉMA SUR LES DEUX SITES · À SAINTES, TROIS POINTS DE CHARGE, UN EN ATTENTE"
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Le dimensionnement part de l’usage, pas de la prise ; l’amont, lui, est prévu pour douze véhicules.",
+  "vignette_surtitre": "UNE BORNE POUR QUATRE",
+  "a_valider_ft2e": [
+    {
+      "objet": "Des valeurs de DCE, pas d’as-built",
+      "la_source_affirme": "Toutes les valeurs du dessin (500 km, 20 kWh/100 km, 14 h, 70 h, 400 et 300 kWh, 5,7 et 4,3 kW, 7 kW, 22 kW, 4 × 63 A, 80 A, 2 × 40 A 30 mA, 5G35 et 3G6 mm², T2S, câble 4 m) viennent du CCTP et du carnet EL01 du DCE de septembre 2024 ; le dossier des ouvrages exécutés n’est pas à l’archive.",
+      "le_dessin_suppose": "Que le matériel posé en décembre 2024 est celui prescrit — l’en-tête du registre nomme le DCE et son mois."
+    },
+    {
+      "objet": "La puissance de la borne : 7 ou 7,4 kW",
+      "la_source_affirme": "Le CCTP écrit « 7 kW » aux §§ 1.2, 3.3 et 3.5 et sur le synoptique, mais « Bornes mutualisées 7.4 kW » au § 2.2 ; et « 22 kW / tétrapolaire » au § 3.1 contre « 22 kVA » au § 2.2.",
+      "le_dessin_suppose": "7 kW et 22 kW, les valeurs majoritaires — la jauge est graduée sur 7."
+    },
+    {
+      "objet": "Une borne par phase",
+      "la_source_affirme": "Le synoptique EL01 (folios 3 et 4) pose la borne équipée sur Ph 1 et deux bornes en réserve sur Ph 2 et Ph 3 ; le CCTP § 3.3 dit seulement « place disponible pour 2 disjoncteurs 2 × 40 A ».",
+      "le_dessin_suppose": "Que la répartition d’une borne monophasée par phase est le principe retenu, et que l’alimentation de 22 kW se partage en trois branches de 7 kW dessinées à largeur proportionnelle — le kilowatt restant n’est pas dessiné."
+    },
+    {
+      "objet": "La position du lecteur de badge",
+      "la_source_affirme": "Le CCTP § 3.5 implante le lecteur RFID « au niveau d’un des poteaux TPC » ; le plan EL01 le pose à côté du potelet des places 1 et 2.",
+      "le_dessin_suppose": "Un lecteur à gauche du premier potelet, relié à la borne par la liaison de communication en pointillé — topologie, pas implantation."
+    },
+    {
+      "objet": "Les jauges du besoin",
+      "la_source_affirme": "Le CCTP § 1.2 calcule 5,7 kW et 4,3 kW de puissance utile et préconise une borne de 7 kW par site, sans tracer de comparaison graphique.",
+      "le_dessin_suppose": "Que la puissance utile se lit comme un niveau dans un récipient gradué sur la capacité de la borne — c’est une image de la marge, pas une donnée nouvelle."
+    },
+    {
+      "objet": "Le titre court « Sept points de charge » et le cartouche",
+      "la_source_affirme": "Aucune surface au dossier ; l’ouvrage n’a pas de nom propre dans les pièces (« Bornes de recharge pour véhicules électriques — CPAM de La Rochelle, CPAM de Saintes »).",
+      "le_dessin_suppose": "Le cartouche porte la grandeur qui compte l’ouvrage (« SEPT POINTS DE CHARGE ») à la place de la surface, et le titre court ne nomme pas le maître d’ouvrage — clause de confidentialité du marché de MOE, question E1 de la collecte."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 23-099 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Tous les montants : marché de travaux 48 970,25 € HT, forfait de maîtrise d’œuvre 4 256 € HT.",
+    "Tous les tiers : le maître d’ouvrage (CPAM de la Charente-Maritime), l’entreprise titulaire, le bureau de contrôle, le coordonnateur SPS, la marque de borne citée « ou équivalent » au CCTP — les équipements sont désignés par leur fonction.",
+    "Le millésime d’ouverture (2023) — seule la livraison 2025 paraît, au cartouche.",
+    "Toute géométrie des sites : ni parking, ni voirie, ni implantation des potelets — les places 1 à 4 sont quatre carrés alignés, le tableau une topologie arrivée → tableau → départs."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "la marge, deux fois : à gauche, deux jauges graduées sur la borne (7 kW = 168 px, 24 px par kW) dont le niveau — 5,7 kW, 4,3 kW — reste sous le bord (y 361.2 et 394.8 pour un bord à 330) ; à droite, une bande d’alimentation de 22 kW (88 px) partagée en trois branches de 7 kW (28 px) dont une seule est pleine",
+    "proportions": "4.0 px par kW sur les bandes — 88 = 3 × 28 + 4 (le kilowatt restant n’est pas dessiné, a_valider_ft2e)",
+    "reserve_comptee": "deux cadres en pointillé sur trois branches, doublés de deux lignes en toutes lettres — jamais le trait seul",
+    "topologie": "tableau général x 732–932, tableau IRVE x 620–1044, phases x 690, 832, 974, potelets x 654, 746 — arrivée → tableau → départs, aucune implantation de site",
+    "signes_doubles": "jauge (tag « la borne » au bord, valeur au niveau), bande d’alimentation (tag 22 kW), branches (libellé de phase), réserve (deux lignes), points de charge (tag des places), lecteur de badge (tag), liaison (tag) — chaque signe est doublé d’un texte",
+    "reserve_profonde": "cartouche 470 x 30 px = 14100 px², soit 1.47 % de la planche",
+    "releve": "aucun — les valeurs dessinées sont les nœuds du mécanisme, pas un relevé (révision 4)",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "99 signes — 842 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la distribution entière — tableau général, bande de 22 kW, tableau IRVE, trois branches dont une pleine, borne 7 kW et quatre points de charge — et la jauge de La Rochelle (5,7 kW sous 7, niveau à y 110.9) ; Saintes, les protections et les tags laissés à la planche",
+    "bas_du_dessin": "valeur de la jauge à 190 — marge basse 10 px, aucun trait ne touche un bord"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier à l’échelle 1 : la jauge de La Rochelle chiffrée (5,7 kW utiles, niveau à y 150.8, sous la borne de 7), la distribution — tableau général, bande de 22 kW, tableau IRVE, trois branches dont une pleine, borne mutualisée, quatre points de charge et lecteur de badge — et Saintes en deux lignes ; protections, tags de liaison, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "pied de la ligne « sans modification du raccordement » à 340 — marge basse 28 px",
+    "reserve": "deux cadres en pointillé sur trois branches (x 364, 460), doublés de deux lignes en toutes lettres"
+  }
+}
