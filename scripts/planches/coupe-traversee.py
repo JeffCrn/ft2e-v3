@@ -3305,7 +3305,425 @@ def composer_appui_frontiere(donnees):
     )
     return "\n".join(out) + "\n", controles
 
+# ── `amorce` : l'épine construite entière, les postes à moitié pleins ───────
+# Le mécanisme de la N19 (groupe scolaire de La Flotte-en-Ré). Une seule
+# primitive, appelée par les TROIS formats et par les TROIS rangs : une épine
+# pleine — jeu de barres, platelage, tronc enterré — et n postes dont les
+# `poses` premiers sont pleins, les suivants interrompus. Le pas et les centres
+# sont DÉRIVÉS de n, jamais choisis format par format ni rang par rang : c'est
+# ce qui interdit aux trois dessins de diverger.
+AM_X_LIB, AM_X_LIB_FIN = MARGE, 236
+AM_X0, AM_X1 = 256, W - MARGE
+AM_T = (232, 376, 520)
+AM_SRC_L, AM_SRC_H = 156, 44
+AM_ECART_SRC = 40
+AM_D_EPINE = 34
+AM_D_PIED_POSTE = 76
+AM_D_ETIQ, AM_D_ETIQ2, AM_D_PIED = 96, 110, 128
+AM_D_SEP = 144
+AM_MACHINE_L, AM_MACHINE_H = 56, 30
+AM_DECK_Y0, AM_DECK_Y1 = 22, 76
+AM_CARRE = 15
+AM_REGARD = 14
+AM_BLOC_L, AM_BLOC_H = 104, 20
+AM_SABOT = 9
+
+
+def _am_centres(x0, x1, n):
+    """Les n centres de poste — DÉRIVÉS du seul nombre de postes.
+
+    Unique source de la géométrie horizontale du mécanisme : la planche,
+    l'appui et la vignette l'appellent, et les trois rangs aussi. Rien
+    d'autre ne place un poste."""
+    pas = (x1 - x0) / n
+    return [x0 + pas * (k + 0.5) for k in range(n)], pas
+
+
+def _am_tirets(A, points, cle="encre", epaisseur=1.4, ech=1.0):
+    """Le trait de la réserve — un seul motif d'interruption pour tout le
+    dessin, de sorte que « interrompu » veuille dire la même chose partout."""
+    from _tronc import JETON
+    d = "M " + " L ".join(f"{x:.2f} {y:.2f}" for x, y in points)
+    A(f'  <path d="{d}" fill="none" class="s-{cle}" stroke="{JETON[cle]}" '
+      f'stroke-width="{epaisseur}" stroke-dasharray="{_am_dash(ech)}"/>')
+
+
+def _am_dash(ech):
+    """Le motif d interruption s echelonne AVEC le dessin.
+
+    A l echelle 0,62 de l appui, un carre de reserve fait 9 px de cote : le
+    motif de la planche n y rendait qu un seul tiret par arete, et le carre se
+    lisait comme un angle casse. Une seule valeur par FORMAT — jamais par
+    glyphe : « interrompu » doit vouloir dire la meme chose partout dans un
+    meme dessin."""
+    a, b = 7.0 * ech, 5.0 * ech
+    return f"{a:.1f} {b:.1f}"
+
+
+def _am_boite_tirets(A, x, y, w, h, cle="encre", epaisseur=1.3, ech=1.0):
+    from _tronc import JETON
+    A(f'  <rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" '
+      f'fill="none" class="s-{cle}" stroke="{JETON[cle]}" '
+      f'stroke-width="{epaisseur}" stroke-dasharray="{_am_dash(ech)}"/>')
+
+
+def _am_postes(A, x0, x1, y_epine, rang, ech=1.0):
+    """Les n postes d'un rang, pleins jusqu'à `poses`, interrompus ensuite.
+
+    Trois glyphes terminaux — `departs`, `alveoles`, `branches` — mais UNE
+    implantation : mêmes centres, même seuil, même motif d'interruption.
+    Rend les centres, le pas et l'abscisse de la frontière posé/réservé."""
+    n, poses, motif = rang["n"], rang["poses"], rang["motif"]
+    centres, pas = _am_centres(x0, x1, n)
+    y_pied = y_epine + AM_D_PIED_POSTE * ech - AM_D_EPINE * ech
+
+    if motif == "alveoles":
+        # Le platelage est entier : un seul cadre plein, refendu en n travées.
+        h = (AM_DECK_Y1 - AM_DECK_Y0) * ech
+        y0 = y_epine - 12 * ech
+        A(rect_bord(x0, y0, x1 - x0, h, "papier", "filet-1"))
+        for k in range(1, n):
+            A(ligne(x0 + pas * k, y0, x0 + pas * k, y0 + h, "filet-2", 1.0))
+        for k, x in enumerate(centres):
+            if k < poses:
+                mw, mh = AM_MACHINE_L * ech, AM_MACHINE_H * ech
+                A(rect_bord(x - mw / 2, y0 + (h - mh) / 2, mw, mh,
+                            "calcaire", "filet-1"))
+                A(cercle(x, y0 + h / 2, 7 * ech, "papier", "encre", 1.3))
+            else:
+                mw, mh = AM_MACHINE_L * ech, AM_MACHINE_H * ech
+                _am_boite_tirets(A, x - mw / 2, y0 + (h - mh) / 2, mw, mh, ech=ech)
+        return centres, pas, x0 + pas * poses
+
+    for k, x in enumerate(centres):
+        if motif == "departs":
+            if k < poses:
+                A(ligne(x, y_epine, x, y_pied, "encre", 1.6))
+                A(ligne(x - AM_SABOT * ech, y_pied, x + AM_SABOT * ech, y_pied,
+                        "encre", 2.0))
+            else:
+                _am_tirets(A, [(x, y_epine), (x, y_pied - AM_CARRE * ech)],
+                           ech=ech)
+                c = AM_CARRE * ech
+                _am_boite_tirets(A, x - c / 2, y_pied - c, c, c, ech=ech)
+        else:  # branches
+            if k < poses:
+                A(ligne(x, y_epine, x, y_pied - AM_BLOC_H * ech, "encre", 1.9))
+                bw, bh = AM_BLOC_L * ech, AM_BLOC_H * ech
+                A(rect_bord(x - bw / 2, y_pied - bh, bw, bh, "calcaire",
+                            "filet-1"))
+            else:
+                # Le regard est PLEIN — il est construit ; seul ce qui le
+                # dépasse est interrompu. C'est l'arbitrage qui porte la thèse :
+                # une réserve n'est pas un vide, c'est un ouvrage qui attend.
+                r = AM_REGARD * ech
+                y_reg = y_epine + (y_pied - y_epine) * 0.42
+                A(ligne(x, y_epine, x, y_reg, "encre", 1.6))
+                A(rect_bord(x - r / 2, y_reg, r, r, "papier", "encre"))
+                _am_tirets(A, [(x, y_reg + r), (x, y_pied + 10 * ech)], ech=ech)
+    return centres, pas, x0 + pas * poses
+
+
+def composer_amorce(donnees):
+    q = donnees["amorce"]
+    rangs = q["rangs"]
+    out = []
+    A = out.append
+    trop = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        l = mesurer(chaine, corps, profil, tracking)
+        if l > dispo:
+            trop.append(f"{nom} : {l:.0f} px pour {dispo:.0f}")
+        return l
+
+    def mono(x, y, chaine, dispo, nom, ancre=None, couleur="pivot", corps=10,
+             tab=False):
+        controler(nom, chaine, corps, "mono", dispo, corps * 0.14)
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14, tabulaire=tab))
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    controler("surtitre", donnees["surtitre"], 11, "mono", UTILE, 11 * 0.14)
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre",
+            wdth=112))
+    controler("titre", donnees["titre"], 30, "sans-700", UTILE)
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    controler("sous-titre", donnees["sous_titre"], 16, "sans-400", UTILE)
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+    mono(MARGE, Y_ENTETE, q["entete"], UTILE, "en-tête schéma")
+
+    releves = []
+    for T, rang in zip(AM_T, rangs):
+        # Colonne de gauche : le rang et sa raison.
+        controler(f'{rang["cle"]} libellé', rang["libelle"], 15, "sans-400",
+                  AM_X_LIB_FIN - AM_X_LIB)
+        A(texte(AM_X_LIB, T + 30, rang["libelle"], "sans", 15, 400, "encre",
+                wdth=100))
+        mono(AM_X_LIB, T + 50, rang["libelle_detail"],
+             AM_X_LIB_FIN - AM_X_LIB, f'{rang["cle"]} raison')
+
+        # Le bloc qui nomme l'épine, puis l'épine elle-même — toujours pleine.
+        y_ep = T + AM_D_EPINE
+        A(rect_bord(AM_X0, T + 12, AM_SRC_L, AM_SRC_H, "calcaire", "filet-1"))
+        controler(f'{rang["cle"]} source', rang["source"]["titre"], 10, "mono",
+                  AM_SRC_L - 16, 10 * 0.14)
+        A(texte(AM_X0 + AM_SRC_L / 2, T + 30, rang["source"]["titre"], "mono",
+                10, 500, "pivot", ancre="middle", tracking=10 * 0.14))
+        controler(f'{rang["cle"]} valeur', rang["source"]["valeur"], 13,
+                  "sans-600", AM_SRC_L - 16)
+        A(texte(AM_X0 + AM_SRC_L / 2, T + 48, rang["source"]["valeur"], "sans",
+                13, 600, "encre", wdth=112, ancre="middle"))
+
+        x_deb = AM_X0 + AM_SRC_L + AM_ECART_SRC
+        ep = 2.6 if rang["motif"] == "branches" else 1.8
+        A(ligne(AM_X0 + AM_SRC_L, y_ep, x_deb, y_ep, "encre", ep))
+        if rang["motif"] != "alveoles":
+            A(ligne(x_deb, y_ep, AM_X1, y_ep, "encre", ep))
+
+        centres, pas, x_front = _am_postes(A, x_deb, AM_X1, y_ep, rang)
+
+        # Le fourreau : un trait fin interrompu qui double le tronc sur toute
+        # sa longueur — la réserve qui n'a pas de poste à elle.
+        if rang.get("fourreau"):
+            # Le fourreau passe AU-DESSUS du tronc, avec son libelle a son
+            # extremite droite. Deux essais sous le tronc ont echoue au PNG :
+            # ancre a droite il traversait la derniere branche, ancre a gauche
+            # il butait sur la boite de la premiere. La bande situee au-dessus
+            # du tronc est la seule ou rien ne descend — les branches vont
+            # toutes vers le bas. La largeur disponible se mesure contre le
+            # BORD des boites, jamais contre le centre des branches : c est
+            # l erreur qui avait laisse passer le second essai.
+            _am_tirets(A, [(AM_X0 + AM_SRC_L, y_ep - 10), (AM_X1, y_ep - 10)],
+                       "filet-1", 1.2)
+            mono(AM_X1, y_ep - 17, rang["fourreau"],
+                 AM_X1 - (AM_X0 + AM_SRC_L), f'{rang["cle"]} fourreau',
+                 ancre="end")
+
+        largeur_poste = pas - 10
+        for k, x in enumerate(centres):
+            mono(x, T + AM_D_ETIQ, rang["etiquettes"][k], largeur_poste,
+                 f'{rang["cle"]} étiquette {k + 1}', ancre="middle",
+                 couleur="encre" if k < rang["poses"] else "pivot")
+            if rang.get("terminaux"):
+                mono(x, T + AM_D_ETIQ2, rang["terminaux"][k], largeur_poste,
+                     f'{rang["cle"]} terminal {k + 1}', ancre="middle")
+
+        mono(AM_X0, T + AM_D_PIED, rang["pied"], AM_X1 - AM_X0,
+             f'{rang["cle"]} pied')
+        if T != AM_T[-1]:
+            A(rect(AM_X_LIB, T + AM_D_SEP, UTILE, 1, "filet-3"))
+
+        releves.append(
+            f'{rang["cle"]} — {rang["n"]} postes au pas de {pas:.1f} px sur '
+            f'x {x_deb:.0f}–{AM_X1}, {rang["poses"]} pleins puis '
+            f'{rang["n"] - rang["poses"]} interrompus, frontière x '
+            f'{x_front:.0f} ({rang["poses"] / rang["n"] * 100:.0f} % du rang)')
+
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+    A("</svg>")
+
+    assert not trop, "dépassements sur la planche : " + " ; ".join(trop)
+
+    ratios = " · ".join(f'{r["poses"]}/{r["n"]}' for r in rangs)
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "trois rangs, une seule primitive — une épine pleine "
+                         "construite à sa taille définitive, et n postes dont "
+                         "les premiers sont pleins et les suivants "
+                         f"interrompus ; la partition se répète : {ratios}. "
+                         "Au troisième rang le regard de vannes est PLEIN (il "
+                         "est construit) et seul le tracé qui le dépasse est "
+                         "interrompu, et s’arrête dans le vide — c’est "
+                         "l’amorce. Texte masqué, la moitié droite de chaque "
+                         "rang se lit comme non encore posée",
+        "primitive_partagee": "_am_centres(x0, x1, n) — pas = (x1 - x0) / n, "
+                              "centre k = x0 + pas (k + 0,5) ; appelée par les "
+                              "trois rangs ET par les trois formats, aucune "
+                              "abscisse de poste n’est écrite à la main",
+        "topologie": " ; ".join(releves),
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas "
+                          "chiffrée (révision 4) ; les seules valeurs sont les "
+                          "trois libellés d’épine, en Archivo 13",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "bas_du_dessin": f"dernier pied à y {AM_T[-1] + AM_D_PIED}, phrase à y "
+                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}, marge basse "
+                         f"{H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            "de la planche",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px pour {UTILE} disponibles",
+        "depassements": "aucun — les "
+                        f"{sum(2 + r['n'] * (2 if r.get('terminaux') else 1) for r in rangs) + 6} "
+                        "chaînes mesurées tiennent sous leur colonne "
+                        "(assertion de composition)",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── La vignette : deux rangs — les alvéoles, puis les branches ──────────────
+AM_V_X0, AM_V_X1 = V_MARGE, VW - V_MARGE
+AM_V_YA, AM_V_YB = 58, 128
+AM_V_DECK_H = 26
+AM_V_BLOC_L, AM_V_BLOC_H = 46, 13
+AM_V_REGARD = 9
+
+
+def composer_vignette_amorce(donnees):
+    """Ce qu'elle garde : les quatre alvéoles à moitié pleines et les trois
+    branches dont une seule arrive. Ce qu'elle laisse : le rang électrique, les
+    libellés de rang, les pieds — treize monos dans 300 px ne se lisent pas."""
+    q = donnees["amorce"]
+    v = q["vignette"]
+    rangs = {r["cle"]: r for r in q["rangs"]}
+    out = []
+    A = out.append
+    trop = []
+
+    def mono(x, y, chaine, dispo, nom, ancre=None, couleur="pivot", corps=9):
+        l = mesurer(chaine, corps, "mono", corps * 0.14)
+        if l > dispo:
+            trop.append(f"{nom} : {l:.0f} px pour {dispo:.0f}")
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14))
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" '
+      f'focusable="false" style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    mono(V_MARGE, 26, donnees["vignette_surtitre"], AM_V_X1 - AM_V_X0,
+         "surtitre")
+
+    # Rang des alvéoles.
+    p = rangs["plateforme"]
+    mono(V_MARGE, 44, v["haut"], AM_V_X1 - AM_V_X0, "haut")
+    centres_a, pas_a = _am_centres(AM_V_X0, AM_V_X1, p["n"])
+    A(rect_bord(AM_V_X0, AM_V_YA, AM_V_X1 - AM_V_X0, AM_V_DECK_H, "papier",
+                "filet-1"))
+    for k in range(1, p["n"]):
+        A(ligne(AM_V_X0 + pas_a * k, AM_V_YA, AM_V_X0 + pas_a * k,
+                AM_V_YA + AM_V_DECK_H, "filet-2", 1.0))
+    mw, mh = pas_a - 22, AM_V_DECK_H - 10
+    for k, x in enumerate(centres_a):
+        if k < p["poses"]:
+            A(rect_bord(x - mw / 2, AM_V_YA + 5, mw, mh, "calcaire", "filet-1"))
+            A(cercle(x, AM_V_YA + AM_V_DECK_H / 2, 4.5, "papier", "encre", 1.2))
+        else:
+            _am_boite_tirets(A, x - mw / 2, AM_V_YA + 5, mw, mh)
+
+    # Rang des branches.
+    r = rangs["reseau"]
+    mono(V_MARGE, 114, v["bas"], AM_V_X1 - AM_V_X0, "bas")
+    centres_b, pas_b = _am_centres(AM_V_X0, AM_V_X1, r["n"])
+    A(ligne(AM_V_X0, AM_V_YB, AM_V_X1, AM_V_YB, "encre", 2.2))
+    for k, x in enumerate(centres_b):
+        if k < r["poses"]:
+            A(ligne(x, AM_V_YB, x, AM_V_YB + 16, "encre", 1.5))
+            A(rect_bord(x - AM_V_BLOC_L / 2, AM_V_YB + 16, AM_V_BLOC_L,
+                        AM_V_BLOC_H, "calcaire", "filet-1"))
+        else:
+            y_reg = AM_V_YB + 12
+            A(ligne(x, AM_V_YB, x, y_reg, "encre", 1.5))
+            A(rect_bord(x - AM_V_REGARD / 2, y_reg, AM_V_REGARD, AM_V_REGARD,
+                        "papier", "encre"))
+            _am_tirets(A, [(x, y_reg + AM_V_REGARD), (x, AM_V_YB + 38)], "encre",
+                       1.2)
+
+    mono(V_MARGE, 180, v["pied"], AM_V_X1 - AM_V_X0, "pied")
+    A("</svg>")
+
+    assert not trop, "dépassements sur la vignette : " + " ; ".join(trop)
+    return "\n".join(out) + "\n", {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "vignette servie à 274-296 px dans une carte — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}, jamais "
+                            "au-dessus de 1,00",
+        "corps_minimal": "9 px dans le repère — rendu à 8,2 px à l’échelle "
+                         "0,91, à 8,9 px à 0,99",
+        "motif": f'{p["n"]} alvéoles au pas de {pas_a:.1f} px dont '
+                 f'{p["poses"]} pleines ; {r["n"]} branches au pas de '
+                 f'{pas_b:.1f} px dont {r["poses"]} arrive à un bloc, les '
+                 f'{r["n"] - r["poses"]} autres s’arrêtent après leur regard',
+        "primitive_partagee": "_am_centres — les mêmes centres que la planche "
+                              "et l’appui, au facteur de largeur près",
+        "marges": f"aucun trait sous x {V_MARGE} ni au-delà de x {AM_V_X1} ; "
+                  f"pied à y 180 pour {VH - V_MARGE} de bas de cadre",
+        "depassements": "aucun — assertion de composition",
+    }
+
+
+# ── L'appui : les trois rangs, sans phrase ni cartouche ────────────────────
+AM_A_X_LIB = A_MARGE
+AM_A_X0, AM_A_X1 = 150, AW - A_MARGE
+AM_A_T = (80, 172, 264)
+AM_A_ECH = 0.62
+
+
+def composer_appui_amorce(donnees):
+    q = donnees["amorce"]
+    a = q["appui"]
+    rangs = {r["cle"]: r for r in q["rangs"]}
+    out = []
+    A = out.append
+    trop = []
+    racine_appui(A, donnees)
+
+    for T, meta in zip(AM_A_T, a["rangs"]):
+        rang = rangs[meta["cle"]]
+        l = mesurer(meta["libelle"], 10, "mono", 10 * 0.14)
+        if l > AM_A_X0 - AM_A_X_LIB - 8:
+            trop.append(f'{meta["cle"]} libellé : {l:.0f} px')
+        A(texte(AM_A_X_LIB, T + 26, meta["libelle"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        y_ep = T + 22
+        ep = 2.2 if rang["motif"] == "branches" else 1.6
+        if rang["motif"] != "alveoles":
+            A(ligne(AM_A_X0, y_ep, AM_A_X1, y_ep, "encre", ep))
+        centres, pas, x_front = _am_postes(A, AM_A_X0, AM_A_X1, y_ep, rang,
+                                           ech=AM_A_ECH)
+
+    A("</svg>")
+    assert not trop, "dépassements sur l’appui : " + " ; ".join(trop)
+
+    ratios = " · ".join(f'{rangs[m["cle"]]["poses"]}/{rangs[m["cle"]]["n"]}'
+                        for m in a["rangs"])
+    return "\n".join(out) + "\n", controles_appui(
+        f"trois rangs à y {AM_A_T} — même primitive qu’à la planche, à "
+        f"l’échelle {AM_A_ECH} ; la partition {ratios} se répète et porte "
+        "seule la démonstration",
+        f"dernier rang jusqu’à y {AM_A_T[-1] + 70}, marge basse "
+        f"{AH - (AM_A_T[-1] + 70)} px",
+        colonnes=f"libellés x {AM_A_X_LIB}–{AM_A_X0 - 8} · dessin x "
+                 f"{AM_A_X0}–{AM_A_X1} ({AM_A_X1 - AM_A_X0} px)",
+        depassements="aucun — assertion de composition",
+    )
+
+
 def _composer(donnees):
+    if "amorce" in donnees:
+        return composer_amorce(donnees)
     if "frontiere" in donnees:
         return composer_frontiere(donnees)
     if "sortie" in donnees:
@@ -3322,6 +3740,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "amorce" in donnees:
+        return composer_vignette_amorce(donnees)
     if "frontiere" in donnees:
         return composer_vignette_frontiere(donnees)
     if "sortie" in donnees:
@@ -3338,6 +3758,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "amorce" in donnees:
+        return composer_appui_amorce(donnees)
     if "frontiere" in donnees:
         return composer_appui_frontiere(donnees)
     if "sortie" in donnees:

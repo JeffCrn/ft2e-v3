@@ -1,0 +1,152 @@
+{
+  "fiche": "chaufferie-ecole-la-flotte-en-re",
+  "archetype": "coupe-traversee",
+  "mecanisme": "amorce",
+  "archetype_motif": "La thèse de la fiche est une partition, et son critère n’est pas le budget mais l’irréversibilité : ce qui ne se reprend pas sans rouvrir la cour d’une école a été dimensionné pour les trois bâtiments du groupe scolaire, ce qui s’ajoute plus tard a été posé au juste besoin de la seule maternelle commandée. Elle n’est pas une lecture plaquée sur le dossier : le plan de masse porte deux « emplacement futur PAC » en toutes lettres à côté des deux machines posées. Le mécanisme est nouveau et se nomme `amorce`, du nom que le métier donne à une branche commencée puis arrêtée : une épine pleine — le jeu de barres, le platelage, le tronc enterré — et n alvéoles dont les premières seules sont pleines, les suivantes en trait interrompu. Le pas et les centres sont DÉRIVÉS de n, jamais choisis, de sorte que les trois formats appellent la même primitive. La démonstration tient à la RÉCURRENCE de la partition d’un rang à l’autre — deux départs sur quatre, deux alvéoles sur quatre, une branche sur trois — et se lit tout texte masqué. `tableau-electrique` a été écarté bien qu’aussi peu chargé : la fiche des bornes IRVE y publie déjà « l’amont réservé pour trois fois plus », et le dessin masqué serait le même. `boucle-fluide` a été écarté pour sa dette de variété (12 planches sur 41) et pour deux voisinages — l’audit ADEI et le foyer de Saint-Martin-de-Ré. `chronologie-affaire` a été écarté parce que les huit mois d’attente du distributeur sont un calendrier d’opération, non une thèse d’ingénierie.",
+  "surtitre": "MONOTECHNIQUE — AUDIT · LA FLOTTE-EN-RÉ (17630) · LOT UNIQUE CHAUFFAGE",
+  "titre": "Groupe scolaire de La Flotte",
+  "sous_titre": "Deux machines posées, une infrastructure dimensionnée pour quatre",
+  "cartouche_legende": "ÉCOLE MATERNELLE · LA FLOTTE-EN-RÉ (17630)",
+  "vignette_surtitre": "LA FLOTTE-EN-RÉ · POSÉ / RÉSERVÉ",
+  "phrase_principe": "Ce qui ne se reprend pas sans rouvrir la cour est dimensionné pour le tout ; ce qui s’ajoute est posé au juste besoin.",
+  "aria_label": "Schéma de principe en trois rangs. Chaque rang montre une épine continue, déjà construite à sa taille définitive, et les postes qu’elle dessert : les premiers sont tracés en trait plein, ils existent ; les suivants sont en trait interrompu, ils sont réservés. Premier rang, l’amont électrique : une logette de comptage de 250 kVA alimente un jeu de barres et quatre départs, dont deux raccordent les pompes à chaleur posées et deux restent en attente. Deuxième rang, la plateforme technique de 14 mètres sur 4 : son platelage est entier, et sur quatre alvéoles deux portent une machine, deux sont vides et portent au plan la mention « emplacement futur ». Troisième rang, le réseau enterré : un tronc pré-isolé court sur 120 mètres de tranchée et dessert trois destinations, dont une seule est raccordée — la sous-station de l’école maternelle ; les deux autres, l’école primaire et l’accueil de loisirs, s’arrêtent sur un regard de vannes construit, au-delà duquel le tracé devient interrompu. Un fourreau aiguillé, en trait fin interrompu, accompagne le tronc sur toute sa longueur. La même partition se répète aux trois rangs : deux sur quatre, deux sur quatre, une sur trois.",
+  "amorce": {
+    "entete": "L’ÉPINE EST CONSTRUITE ENTIÈRE · LES POSTES PLEINS EXISTENT, LES POSTES INTERROMPUS SONT RÉSERVÉS",
+    "rangs": [
+      {
+        "cle": "amont",
+        "motif": "departs",
+        "libelle": "L’amont électrique",
+        "libelle_detail": "SE NÉGOCIE UNE FOIS",
+        "source": {
+          "titre": "LOGETTE C4",
+          "valeur": "250 kVA"
+        },
+        "n": 4,
+        "poses": 2,
+        "etiquettes": [
+          "PAC 1",
+          "PAC 2",
+          "RÉSERVE",
+          "RÉSERVE"
+        ],
+        "pied": "abonnement porté de 72 à 250 kVA — puissance utile cible 200 kVA, soit quatre machines de 49 kVA et leurs auxiliaires"
+      },
+      {
+        "cle": "plateforme",
+        "motif": "alveoles",
+        "libelle": "La plateforme technique",
+        "libelle_detail": "SE BOULONNE UNE FOIS",
+        "source": {
+          "titre": "PLATELAGE",
+          "valeur": "14 m × 4 m"
+        },
+        "n": 4,
+        "poses": 2,
+        "etiquettes": [
+          "MACHINE",
+          "MACHINE",
+          "EMPLACEMENT FUTUR",
+          "EMPLACEMENT FUTUR"
+        ],
+        "pied": "acier galvanisé sur platines, escalier, garde-corps, jupes verticales sur trois côtés"
+      },
+      {
+        "cle": "reseau",
+        "motif": "branches",
+        "libelle": "Le réseau enterré",
+        "libelle_detail": "SE TRANCHE UNE FOIS",
+        "source": {
+          "titre": "LOCAL TECHNIQUE",
+          "valeur": "200 kW"
+        },
+        "n": 3,
+        "poses": 1,
+        "etiquettes": [
+          "ÉCOLE MATERNELLE",
+          "ÉCOLE PRIMAIRE",
+          "ACCUEIL DE LOISIRS"
+        ],
+        "terminaux": [
+          "SOUS-STATION",
+          "REGARD",
+          "REGARD"
+        ],
+        "fourreau": "FOURREAU Ø 63",
+        "pied": "120 mètres de tranchée, réseau pré-isolé, deux regards de vannes posés au droit des bâtiments non traités"
+      }
+    ],
+    "vignette": {
+      "haut": "PLATEFORME · 4 ALVÉOLES",
+      "bas": "RÉSEAU · 3 DESTINATIONS",
+      "pied": "PLEIN = POSÉ · INTERROMPU = RÉSERVÉ"
+    },
+    "appui": {
+      "rangs": [
+        {
+          "cle": "amont",
+          "libelle": "AMONT ÉLECTRIQUE"
+        },
+        {
+          "cle": "plateforme",
+          "libelle": "PLATEFORME"
+        },
+        {
+          "cle": "reseau",
+          "libelle": "RÉSEAU ENTERRÉ"
+        }
+      ]
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "a_valider_ft2e": [
+    "Le CCTP porte « Affaire n° : 21-031 » en page de garde, quand dix-neuf autres occurrences du dossier — dont les cartouches des deux plans et le classeur d’honoraires interne — portent 21-029, seul numéro connu du classeur FT2E. C’est 21-029 qui est publié.",
+    "Le régime d’eau : le CCTP écrit 60/55 °C et l’échangeur « 60/55 côté PAC, 57/52 réseau primaire » ; le plan de masse écrit 60/50. La pièce contractuelle est suivie, et le dessin ne porte aucun régime.",
+    "La puissance unitaire : 76,5 kW au CCTP, « 75 kW unitaire » à la DPGF. Le dessin ne porte aucune des deux — il ne dit que le nombre de machines.",
+    "Aucune surface du groupe scolaire n’existe au dossier : le cartouche de légende porte donc l’ouvrage et la commune, sans surface.",
+    "La plateforme est dessinée en quatre alvéoles de largeur égale : c’est une partition de principe, tirée du nombre de machines, et non la géométrie du platelage de 14 m sur 4, qui n’est pas reproduite.",
+    "Les trois destinations sont alignées sur un tronc rectiligne : la topologie est celle du CCTP, le tracé réel de la tranchée n’est pas repris.",
+    "Le regard de vannes est dessiné plein — il est construit — et seul ce qui le dépasse est interrompu. C’est l’arbitrage de dessin qui porte la thèse : la réserve n’est pas un vide, c’est un ouvrage qui attend.",
+    "L’ordre des rangs est celui de l’irréversibilité décroissante telle que le chantier l’a vécue — l’amont électrique d’abord, qui a coûté huit mois d’attente. À confirmer par FT2E."
+  ],
+  "exclusions_appliquees": [
+    "aucun nom de tiers : ni la commune, ni l’entreprise du lot unique, ni ses sous-traitants, ni l’architecte qui a relayé la demande",
+    "aucun montant, ni de travaux ni d’honoraires",
+    "aucun millésime, ni d’ouverture d’affaire ni de livraison",
+    "aucune marque de matériel, alors que le CCTP en nomme sept",
+    "aucune géométrie d’ouvrage : ni le plan de masse, ni le tracé de la tranchée, ni les proportions du platelage",
+    "aucune donnée nominative : les quatre personnes nommées aux comptes rendus n’apparaissent pas",
+    "les désignations retenues — local technique, école maternelle, école primaire, accueil de loisirs — sont des destinations de réseau du CCTP, pas des tiers"
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "trois rangs, une seule primitive — une épine pleine construite à sa taille définitive, et n postes dont les premiers sont pleins et les suivants interrompus ; la partition se répète : 2/4 · 2/4 · 1/3. Au troisième rang le regard de vannes est PLEIN (il est construit) et seul le tracé qui le dépasse est interrompu, et s’arrête dans le vide — c’est l’amorce. Texte masqué, la moitié droite de chaque rang se lit comme non encore posée",
+    "primitive_partagee": "_am_centres(x0, x1, n) — pas = (x1 - x0) / n, centre k = x0 + pas (k + 0,5) ; appelée par les trois rangs ET par les trois formats, aucune abscisse de poste n’est écrite à la main",
+    "topologie": "amont — 4 postes au pas de 173.0 px sur x 452–1144, 2 pleins puis 2 interrompus, frontière x 798 (50 % du rang) ; plateforme — 4 postes au pas de 173.0 px sur x 452–1144, 2 pleins puis 2 interrompus, frontière x 798 (50 % du rang) ; reseau — 3 postes au pas de 230.7 px sur x 452–1144, 1 pleins puis 2 interrompus, frontière x 683 (33 % du rang)",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; les seules valeurs sont les trois libellés d’épine, en Archivo 13",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "bas_du_dessin": "dernier pied à y 648, phrase à y 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 380 x 30 px = 1.19 % de la planche",
+    "phrase_principe": "118 signes — 996 px pour 1088 disponibles",
+    "depassements": "aucun — les 26 chaînes mesurées tiennent sous leur colonne (assertion de composition)"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "vignette servie à 274-296 px dans une carte — échelle 0.91 à 0.99, jamais au-dessus de 1,00",
+    "corps_minimal": "9 px dans le repère — rendu à 8,2 px à l’échelle 0,91, à 8,9 px à 0,99",
+    "motif": "4 alvéoles au pas de 68.0 px dont 2 pleines ; 3 branches au pas de 90.7 px dont 1 arrive à un bloc, les 2 autres s’arrêtent après leur regard",
+    "primitive_partagee": "_am_centres — les mêmes centres que la planche et l’appui, au facteur de largeur près",
+    "marges": "aucun trait sous x 14 ni au-delà de x 286 ; pied à y 180 pour 186 de bas de cadre",
+    "depassements": "aucun — assertion de composition"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "trois rangs à y (80, 172, 264) — même primitive qu’à la planche, à l’échelle 0.62 ; la partition 2/4 · 2/4 · 1/3 se répète et porte seule la démonstration",
+    "bas_du_dessin": "dernier rang jusqu’à y 334, marge basse 34 px",
+    "colonnes": "libellés x 24–142 · dessin x 150–528 (378 px)",
+    "depassements": "aucun — assertion de composition"
+  }
+}
