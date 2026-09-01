@@ -2356,6 +2356,9 @@ def composer_serrage(donnees):
     mesures = [(z["cle"], e["cle"], e["valeur"],
                 e["valeur"] * (k_pct if e["registre"] == "energie" else k_deg))
                for z in zones for e in z["exigences"]]
+    # Ce qui a REELLEMENT ete dessine : sous le seuil de la marque, une barre
+    # n'est pas une barre. Le bloc rend compte du trace, pas de l'intention.
+    marques = [f"{c}/{k} ({px:.1f} px)" for c, k, v, px in mesures if px < SG_MARQUE]
     controles = {
         "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
         "demonstration":
@@ -2387,6 +2390,12 @@ def composer_serrage(donnees):
                          f"{SG_Y_REPRISES}, phrase à {SG_Y_PHRASE}, cartouche "
                          f"{SG_Y_CARTOUCHE}–{SG_Y_CARTOUCHE + 30}, marge basse "
                          f"{H - SG_Y_CARTOUCHE - 30} px",
+        "marques_de_contact": f"{len(marques)} des {len(mesures)} marges sont "
+                              f"trop courtes pour se lire comme une barre "
+                              f"(< {SG_MARQUE} px) et sont tracées en marque de "
+                              f"contact sur le mur : " + " et ".join(marques)
+                              + " — ce sont les deux « au bord », et ils tombent "
+                                "dans deux registres et deux colonnes différents",
         "depassements": f"{len(mesures) + 12} chaînes mesurées, 0 dépassement",
     }
     return "\n".join(out) + "\n", controles

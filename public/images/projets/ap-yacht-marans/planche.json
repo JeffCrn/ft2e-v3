@@ -48,7 +48,7 @@
             "unite": "%",
             "valeur_affichee": "24,63 %",
             "detail": [
-              "263,8 POUR 350 kWhep/m².an"
+              "263,8 POUR 350 kWhep/m²/an"
             ]
           },
           {
@@ -96,7 +96,7 @@
             "unite": "%",
             "valeur_affichee": "54,6 %",
             "detail": [
-              "63,6 POUR 140,0 kWhep/m².an"
+              "63,6 POUR 140,0 kWhep/m²/an"
             ]
           },
           {
@@ -185,6 +185,7 @@
     "phrase_principe": "110 signes — 935 px mesurés pour 1088 disponibles",
     "reserve_profonde": "cartouche 234 x 30 px = 7020 px², soit 0.73 % de la planche",
     "bas_du_dessin": "détail du registre 2 à 544, reprises à 614, phrase à 688, cartouche 714–744, marge basse 56 px",
+    "marques_de_contact": "2 des 6 marges sont trop courtes pour se lire comme une barre (< 8 px) et sont tracées en marque de contact sur le mur : vestiaires/bbio (2.4 px) et hall/tic (0.0 px) — ce sont les deux « au bord », et ils tombent dans deux registres et deux colonnes différents",
     "depassements": "18 chaînes mesurées, 0 dépassement"
   },
   "controles_vignette": {
