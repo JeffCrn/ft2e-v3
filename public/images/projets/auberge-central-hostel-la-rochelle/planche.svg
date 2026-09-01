@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la mise en sécurité incendie d’une auberge de jeunesse : seize zones de détection réparties sur six niveaux — onze zones de détection automatique, qui distinguent les chambres, les autres locaux et les circulations, et cinq zones de déclencheurs manuels, une par niveau desservi — convergent vers un système de sécurité incendie de catégorie A, adressable point par point, à équipement d’alarme de type 1 et à unité de gestion d’alarme unique, implanté au local de brassage du rez-de-chaussée. En aval, la mise en sécurité ne connaît qu’une échelle : les seize zones commandent une zone d’alarme unique, le bâtiment entier, sans temporisation ; dix d’entre elles, toutes les détections automatiques hors combles, commandent une zone de compartimentage unique, le bâtiment encore. Deux fonctions de sécurité restent hors du centralisateur : les exutoires des cages d’escalier, à commande manuelle sans raccordement au centralisateur, et les clapets coupe-feu du réseau de ventilation, autocommandés par fusible thermique. Le désenfumage des locaux est sans objet, aucun n’atteignant 300 m².">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · ZONAGE ET MISE EN SÉCURITÉ INCENDIE</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Auberge Central Hostel</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Seize zones de détection sur six niveaux, une seule zone de mise en sécurité</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA DÉTECTION · 16 ZONES SUR 6 NIVEAUX</text>
+  <text x="1144.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LA MISE EN SÉCURITÉ · UNE SEULE ZONE</text>
+  <rect x="56.00" y="214.00" width="464.00" height="60.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="236.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Combles</text>
+  <text x="72.00" y="254.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">ZDA C</text>
+  <text x="72.00" y="268.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">COMBLES ET VIDES DE PLUS DE 80 cm</text>
+  <rect x="477.00" y="239.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="56.00" y="280.00" width="464.00" height="60.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="302.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">R+2</text>
+  <text x="72.00" y="320.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">ZDA 2.1 · 2.2 + ZDM 2</text>
+  <text x="72.00" y="334.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHAMBRES · CIRCULATIONS</text>
+  <rect x="495.50" y="306.00" width="8.00" height="8.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="477.00" y="305.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="459.00" y="305.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="56.00" y="346.00" width="464.00" height="60.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="368.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">R+1</text>
+  <text x="72.00" y="386.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">ZDA 1.1 · 1.2 · 1.3 + ZDM 1</text>
+  <text x="72.00" y="400.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHAMBRES · LOCAUX · CIRCULATIONS</text>
+  <rect x="495.50" y="372.00" width="8.00" height="8.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="477.00" y="371.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="459.00" y="371.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="441.00" y="371.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="56.00" y="412.00" width="464.00" height="60.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="434.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Entresol</text>
+  <text x="72.00" y="452.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">ZDA E1 + ZDM E1</text>
+  <text x="72.00" y="466.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LOCAUX</text>
+  <rect x="495.50" y="438.00" width="8.00" height="8.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="477.00" y="437.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="56.00" y="478.00" width="464.00" height="60.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="500.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Rez-de-chaussée</text>
+  <text x="72.00" y="518.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">ZDA 0.1 · 0.2 · 0.3 + ZDM 0</text>
+  <text x="72.00" y="532.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHAMBRES · LOCAUX · CIRCULATIONS</text>
+  <rect x="495.50" y="504.00" width="8.00" height="8.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="477.00" y="503.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="459.00" y="503.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="441.00" y="503.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="56.00" y="544.00" width="464.00" height="60.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="566.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Sous-sol</text>
+  <text x="72.00" y="584.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">ZDA SS1 + ZDM SS1</text>
+  <text x="72.00" y="598.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LOCAUX</text>
+  <rect x="495.50" y="570.00" width="8.00" height="8.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="477.00" y="569.50" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <rect x="570.00" y="367.50" width="230.00" height="83.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="586.00" y="395.50" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">SSI de catégorie A</text>
+  <text x="586.00" y="413.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ADRESSABLE POINT PAR POINT</text>
+  <text x="586.00" y="426.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ALARME DE TYPE 1 · UNE UGA</text>
+  <text x="586.00" y="439.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AU LOCAL DE BRASSAGE, RDC</text>
+  <path d="M 520.00 244.00 L 546.00 244.00 L 546.00 409.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 520.00 310.00 L 546.00 310.00 L 546.00 409.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 520.00 376.00 L 546.00 376.00 L 546.00 409.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 520.00 442.00 L 546.00 442.00 L 546.00 409.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 520.00 508.00 L 546.00 508.00 L 546.00 409.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 520.00 574.00 L 546.00 574.00 L 546.00 409.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 546.00 409.00 L 561.00 409.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 570.00 409.00 L 561.00 404.50 L 561.00 413.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="856.00" y="214.00" width="288.00" height="125.54" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="857.00" y="215.00" width="286.00" height="8.00" class="c-clair" fill="#99CCCD"/>
+  <text x="872.00" y="254.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Zone d’alarme</text>
+  <text x="872.00" y="274.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">LES 16 ZONES · LE BÂTIMENT</text>
+  <text x="872.00" y="288.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">ALARME GÉNÉRALE SANS TEMPORISATION</text>
+  <rect x="856.00" y="351.54" width="288.00" height="78.46" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="872.00" y="379.54" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Zone de compartimentage</text>
+  <text x="872.00" y="399.54" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">10 ZONES SUR 16 · LE BÂTIMENT</text>
+  <text x="872.00" y="413.54" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">PORTES À FERMETURE AUTOMATIQUE</text>
+  <path d="M 800.00 409.00 L 826.00 409.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 826.00 276.77 L 826.00 409.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 826.00 276.77 L 847.00 276.77" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 856.00 276.77 L 847.00 272.27 L 847.00 281.27 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 826.00 390.77 L 847.00 390.77" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 856.00 390.77 L 847.00 386.27 L 847.00 395.27 Z" class="c-encre" fill="#00393A"/>
+  <text x="856.00" y="462.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HORS CENTRALISATEUR</text>
+  <rect x="856.00" y="474.00" width="288.00" height="59.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="872.00" y="498.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Exutoires d’escalier</text>
+  <text x="872.00" y="516.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">COMMANDE MANUELLE · PAS DE CMSI</text>
+  <rect x="856.00" y="545.00" width="288.00" height="59.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="872.00" y="569.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Clapets coupe-feu</text>
+  <text x="872.00" y="587.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">AUTOCOMMANDÉS PAR FUSIBLE</text>
+  <rect x="56.00" y="622.00" width="9.00" height="9.00" class="c-encre" fill="#00393A"/>
+  <text x="73.00" y="630.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZDA · DÉTECTION AUTOMATIQUE</text>
+  <rect x="311.90" y="622.50" width="8.00" height="8.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <text x="328.40" y="630.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ZDM · DÉCLENCHEURS MANUELS</text>
+  <text x="56.00" y="654.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">TABLEAU DE CORRÉLATION : LES 16 ZONES COMMANDENT UNE ZA, 10 D’ENTRE ELLES UNE ZC · DÉSENFUMAGE SANS OBJET, LOCAUX DE MOINS DE 300 m²</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Seize zones disent où le feu a été détecté ; une seule dit ce qui se met en sécurité — le bâtiment.</text>
+  <rect x="56.00" y="714.00" width="275.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LA ROCHELLE · 1 025 m² · 2024</text>
+</svg>

@@ -1,0 +1,240 @@
+{
+  "fiche": "auberge-central-hostel-la-rochelle",
+  "archetype": "zonage-ssi",
+  "archetype_motif": "La these de la fiche est la mise en securite : un immeuble du XVIIᵉ siecle devenu auberge de jeunesse, ou la detection est decoupee finement et la mise en securite ne connait qu’une seule echelle. Le dessin suit ce mecanisme : seize zones de detection reparties sur six niveaux convergent vers une centrale unique, dont toute sortie vaut pour le batiment entier. Il se distingue des quatre planches zonage-ssi deja composees — Sablonceaux oppose un avant et un apres, Coulonges transfere une fonction d’un etage a l’autre, Salignac partage une enveloppe, Loti fait tout partir a la fois depuis deux familles. Ici la demonstration est une CONVERGENCE, et la geometrie la porte deux fois : seize marques comptees a gauche contre deux blocs a droite, dont les hauteurs sont proportionnelles a 16 et 10 ; et deux fonctions de securite dessinees dans le meme registre mais sans aucune liaison avec le centralisateur.",
+  "mecanisme": "convergence",
+  "surtitre": "SCHÉMA DE PRINCIPE · ZONAGE ET MISE EN SÉCURITÉ INCENDIE",
+  "titre": "Auberge Central Hostel",
+  "sous_titre": "Seize zones de détection sur six niveaux, une seule zone de mise en sécurité",
+  "cartouche_legende": "LA ROCHELLE · 1 025 m² · 2024",
+  "aria_label": "Schéma de principe de la mise en sécurité incendie d’une auberge de jeunesse : seize zones de détection réparties sur six niveaux — onze zones de détection automatique, qui distinguent les chambres, les autres locaux et les circulations, et cinq zones de déclencheurs manuels, une par niveau desservi — convergent vers un système de sécurité incendie de catégorie A, adressable point par point, à équipement d’alarme de type 1 et à unité de gestion d’alarme unique, implanté au local de brassage du rez-de-chaussée. En aval, la mise en sécurité ne connaît qu’une échelle : les seize zones commandent une zone d’alarme unique, le bâtiment entier, sans temporisation ; dix d’entre elles, toutes les détections automatiques hors combles, commandent une zone de compartimentage unique, le bâtiment encore. Deux fonctions de sécurité restent hors du centralisateur : les exutoires des cages d’escalier, à commande manuelle sans raccordement au centralisateur, et les clapets coupe-feu du réseau de ventilation, autocommandés par fusible thermique. Le désenfumage des locaux est sans objet, aucun n’atteignant 300 m².",
+  "convergence": {
+    "entete_detection": "LA DÉTECTION · 16 ZONES SUR 6 NIVEAUX",
+    "entete_securite": "LA MISE EN SÉCURITÉ · UNE SEULE ZONE",
+    "entete_hors": "HORS CENTRALISATEUR",
+    "niveaux": [
+      {
+        "cle": "combles",
+        "ordre": 1,
+        "libelle": "Combles",
+        "zda": 1,
+        "zdm": 0,
+        "reperes": "ZDA C",
+        "usages": "COMBLES ET VIDES DE PLUS DE 80 cm",
+        "valeur": "1",
+        "unite": "zone",
+        "detail": "Une zone de détection automatique, sans compartimentage",
+        "libelle_court": "Combles"
+      },
+      {
+        "cle": "r2",
+        "ordre": 2,
+        "libelle": "R+2",
+        "zda": 2,
+        "zdm": 1,
+        "reperes": "ZDA 2.1 · 2.2 + ZDM 2",
+        "usages": "CHAMBRES · CIRCULATIONS",
+        "valeur": "3",
+        "unite": "zones",
+        "detail": "Deux zones automatiques et une zone de déclencheurs manuels",
+        "libelle_court": "R+2"
+      },
+      {
+        "cle": "r1",
+        "ordre": 3,
+        "libelle": "R+1",
+        "zda": 3,
+        "zdm": 1,
+        "reperes": "ZDA 1.1 · 1.2 · 1.3 + ZDM 1",
+        "usages": "CHAMBRES · LOCAUX · CIRCULATIONS",
+        "valeur": "4",
+        "unite": "zones",
+        "detail": "Trois zones automatiques et une zone de déclencheurs manuels",
+        "libelle_court": "R+1"
+      },
+      {
+        "cle": "entresol",
+        "ordre": 4,
+        "libelle": "Entresol",
+        "zda": 1,
+        "zdm": 1,
+        "reperes": "ZDA E1 + ZDM E1",
+        "usages": "LOCAUX",
+        "valeur": "2",
+        "unite": "zones",
+        "detail": "Une zone automatique et une zone de déclencheurs manuels",
+        "libelle_court": "Entresol"
+      },
+      {
+        "cle": "rdc",
+        "ordre": 5,
+        "libelle": "Rez-de-chaussée",
+        "zda": 3,
+        "zdm": 1,
+        "reperes": "ZDA 0.1 · 0.2 · 0.3 + ZDM 0",
+        "usages": "CHAMBRES · LOCAUX · CIRCULATIONS",
+        "valeur": "4",
+        "unite": "zones",
+        "detail": "Trois zones automatiques et une zone de déclencheurs manuels",
+        "libelle_court": "RdC"
+      },
+      {
+        "cle": "sous-sol",
+        "ordre": 6,
+        "libelle": "Sous-sol",
+        "zda": 1,
+        "zdm": 1,
+        "reperes": "ZDA SS1 + ZDM SS1",
+        "usages": "LOCAUX",
+        "valeur": "2",
+        "unite": "zones",
+        "detail": "Une zone automatique et une zone de déclencheurs manuels",
+        "libelle_court": "Sous-sol"
+      }
+    ],
+    "systeme": {
+      "libelle": "SSI de catégorie A",
+      "libelle_appui": "SSI catégorie A",
+      "detail": [
+        "ADRESSABLE POINT PAR POINT",
+        "ALARME DE TYPE 1 · UNE UGA",
+        "AU LOCAL DE BRASSAGE, RDC"
+      ],
+      "detail_appui": [
+        "ALARME DE TYPE 1"
+      ]
+    },
+    "actions": [
+      {
+        "cle": "za",
+        "ordre": 1,
+        "libelle": "Zone d’alarme",
+        "libelle_court": "ZA · le bâtiment",
+        "libelle_vignette": "ZA",
+        "valeur": "16",
+        "unite": "zones sur 16",
+        "tag": "16 / 16",
+        "detail": [
+          "LES 16 ZONES · LE BÂTIMENT",
+          "ALARME GÉNÉRALE SANS TEMPORISATION"
+        ],
+        "alarme": true
+      },
+      {
+        "cle": "zc",
+        "ordre": 2,
+        "libelle": "Zone de compartimentage",
+        "libelle_court": "ZC · le bâtiment",
+        "libelle_vignette": "ZC",
+        "valeur": "10",
+        "unite": "zones sur 16",
+        "tag": "10 / 16",
+        "detail": [
+          "10 ZONES SUR 16 · LE BÂTIMENT",
+          "PORTES À FERMETURE AUTOMATIQUE"
+        ],
+        "alarme": false
+      }
+    ],
+    "hors": [
+      {
+        "cle": "exutoires",
+        "ordre": 1,
+        "libelle": "Exutoires d’escalier",
+        "valeur": "0",
+        "unite": "liaison au centralisateur",
+        "detail": "COMMANDE MANUELLE · PAS DE CMSI"
+      },
+      {
+        "cle": "clapets",
+        "ordre": 2,
+        "libelle": "Clapets coupe-feu",
+        "valeur": "0",
+        "unite": "liaison au centralisateur",
+        "detail": "AUTOCOMMANDÉS PAR FUSIBLE"
+      }
+    ],
+    "legende": [
+      {
+        "marque": "pleine",
+        "libelle": "ZDA · DÉTECTION AUTOMATIQUE"
+      },
+      {
+        "marque": "creuse",
+        "libelle": "ZDM · DÉCLENCHEURS MANUELS"
+      }
+    ],
+    "report": "TABLEAU DE CORRÉLATION : LES 16 ZONES COMMANDENT UNE ZA, 10 D’ENTRE ELLES UNE ZC · DÉSENFUMAGE SANS OBJET, LOCAUX DE MOINS DE 300 m²"
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Seize zones disent où le feu a été détecté ; une seule dit ce qui se met en sécurité — le bâtiment.",
+  "vignette_surtitre": "ZONAGE ET CORRÉLATION",
+  "a_valider_ft2e": [
+    {
+      "objet": "Le compte de dix zones de compartimentage",
+      "la_source_affirme": "Le tableau de corrélation du cahier des charges fonctionnel porte une colonne « N° ZC » remplie sur les onze lignes de détection automatique sauf celle des combles (ZDA C), et vide sur les cinq lignes de déclencheurs manuels.",
+      "le_dessin_suppose": "Que le compartimentage est commandé par dix zones sur seize, et que la colonne vide vaut absence de commande et non omission de saisie. Confirmer, en particulier pour les combles, que le § 4.7 traite séparément « détection dans les combles » sans mentionner la fermeture de zone."
+    },
+    {
+      "objet": "La surface portée au cartouche",
+      "la_source_affirme": "1 025 m² aux trois docx commerciaux FT2E (Réhabilitation Patrimoine, Rénovation CVC, Social et Tertiaire). Aucune pièce du dossier d’affaires ne porte de surface totale : les plans de zones ne donnent que des surfaces de locaux.",
+      "le_dessin_suppose": "Que la surface commerciale est publiable au cartouche — question B5 de la collecte. Préciser s’il s’agit de la surface utile ou de la surface de plancher."
+    },
+    {
+      "objet": "Le millésime porté au cartouche",
+      "la_source_affirme": "Le compte rendu de chantier du 9 avril 2024 annonce la réception « prévue le 16 avril » et la commission de sécurité au 26 avril ; les honoraires d’AOR et de réception du SSI sont facturés le 27 juin 2024 ; le classeur de références range l’affaire dans « Finalisées en 2024 ». Le procès-verbal de réception est absent du dossier.",
+      "le_dessin_suppose": "Que 2024 est le millésime de livraison — question B1 de la collecte. Le dessin ne porte aucune date au jour près."
+    },
+    {
+      "objet": "L’ordre des six niveaux",
+      "la_source_affirme": "Le tableau de corrélation et le tableau du § 4.5 énumèrent les niveaux du sous-sol vers les combles.",
+      "le_dessin_suppose": "L’ordre inverse — des combles au sous-sol —, pour que la pile se lise comme une coupe. Le contenu est identique ; seul le sens de lecture change."
+    },
+    {
+      "objet": "Les deux fonctions dessinées sans liaison",
+      "la_source_affirme": "Pour les exutoires des cages d’escalier : « Mode de déclenchement : télécommandé au travers d’un DCM. Pas de raccordement au CMSI » (§ 4.8). Pour les clapets coupe-feu : « le bâtiment ne constituant qu’une seule zone de compartimentage les clapets seront autocommandés par fusibles » (§ 4.3).",
+      "le_dessin_suppose": "Que l’absence de liaison se dessine — cadres pointillés dans le registre de la mise en sécurité, sans flèche ni collecteur depuis le centralisateur. Confirmer que cette lecture est juste et qu’elle ne se lit pas comme un oubli."
+    },
+    {
+      "objet": "Le libellé « LOCAUX » de l’entresol et du sous-sol",
+      "la_source_affirme": "Le tableau du § 4.5 désigne ZDA E1 par « DAI locaux entresol » et ZDA SS1 par « DAI locaux sous sol », sans autre qualification.",
+      "le_dessin_suppose": "Que « LOCAUX » suffit à ces deux niveaux, là où les trois niveaux d’hébergement portent trois usages distincts. Confirmer qu’aucun local particulier (chaufferie, laverie, local ordures) n’appelle une zone propre."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 21-093 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Montants : honoraires FT2E 26 700 € HT en quatorze factures, travaux TCE 2 332 000 € HT et travaux SSI 19 000 € HT aux docx commerciaux, estimations FT2E des deux lots au DCE.",
+    "Noms de tiers : la maîtrise d’ouvrage, l’architecte, l’architecte d’intérieur, les BET structure et acoustique, l’économiste et les deux ordonnanceurs successifs, et toutes les marques citées aux cahiers des charges.",
+    "Les lots fluides et électricité — production d’eau chaude sanitaire, deux réseaux de ventilation, climatisation à détente directe, chauffage électrique piloté, tableau général et sept tableaux divisionnaires : la fiche les porte, le dessin ne montre qu’un mécanisme.",
+    "Le nombre de lits, les surfaces de locaux et les noms de locaux relevés sur les plans de zones — ils appartiennent au programme, pas au mécanisme.",
+    "Toute géométrie d’ouvrage : les cinq plans de zones du cahier des charges sont posés sur le fond de plan de l’architecte ; le dessin n’en retient que le compte des zones et leur topologie.",
+    "Les jalons de chantier (diffusion du DCE, réception annoncée au 16 avril 2024, commission de sécurité du 26 avril) — la fiche les porte ; un calendrier n’est pas un mécanisme."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "16 marques de zone comptées sur 6 niveaux (11 pleines pour la détection automatique, 5 évidées pour les déclencheurs manuels) convergent par un tronc UNIQUE vers deux zones de mise en sécurité aux hauteurs proportionnelles (16/10 : 126 px / 78 px) ; les 2 fonctions hors centralisateur sont dans le même registre, en filet interrompu, et AUCUN tronc ne les atteint",
+    "comptage": "détection : 1 + 3 + 4 + 2 + 4 + 2 = 16 zones ; compartimentage : 10 zones sur 16",
+    "topologie": "niveaux (x 56–520) → coude x 546 → centrale (x 570–800) → tronc x 826 → mise en sécurité (x 856–1144) ; registre hors centralisateur dans la même colonne, sans liaison",
+    "bas_du_dessin": "piles jusqu’à 604 px, légende à 630, report à 654, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 275 x 30 px = 8250 px², soit 0.86 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée à 274–296 px — échelle 0.91 à 0.99",
+    "motif": "16 marques sur 6 rangées, un tronc unique, deux blocs aux hauteurs proportionnelles (71 px / 44 px) — libellés de niveau, repères, centrale, registre hors centralisateur, report et cartouche laissés à la planche",
+    "corps_minimal": "9 px — rien sous 9, rien ne touche un bord (marge 14 px, bas du dessin 165 px)"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les 6 niveaux avec leurs 16 marques, la centrale au libellé court, les deux zones aux hauteurs proportionnelles (130 px / 82 px) et la bande en filet interrompu du registre hors centralisateur — repères de zone, usages, report, phrase de principe et cartouche laissés à la planche",
+    "bas_du_dessin": "piles jusqu’à 298 px, bande hors centralisateur 310–340 px, marge basse 28 px",
+    "largeur_bande": "457 px pour 480 px disponibles",
+    "boite_centrale": "156 px de large, 132 px utiles pour un libellé de 112 px et un mono de 117 px",
+    "libelles_de_niveau": "colonne de texte 88 px (marques déduites, 4 au plus) — aucun dépassement, marge de 20 % prise sur la sous-mesure d’Archivo 600"
+  }
+}

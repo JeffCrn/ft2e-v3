@@ -1568,6 +1568,508 @@ def composer_appui_inversion(donnees):
         bas=f"piles jusqu’à {y1} px, marge basse {AH - y1} px")
 
 
+# ── Mécanisme `convergence` (2026-09-01) ─────────────────────────────────────
+# La détection est fine, la mise en sécurité ne connaît qu'une échelle. Seize
+# zones réparties sur six niveaux convergent vers une centrale unique dont
+# toute sortie vaut pour le bâtiment entier ; deux fonctions de sécurité sont
+# dessinées dans le registre de droite SANS liaison au centralisateur, parce
+# que le cahier des charges les en exclut nommément.
+#
+# ⚠ Les repères sont préfixés `C_` : deux mécanismes qui affectent le même nom
+# au niveau du module se marchent dessus, et c'est le PREMIER dessin qui se
+# recompose faux (piège du protocole, relevé sur `tableau-electrique.py`).
+C_Y_ENTETE = 190
+C_Y0 = 214                          # haut des deux piles
+C_H_ROW, C_ECART_ROW = 60, 6        # 6 x 60 + 5 x 6 = 390 → la pile finit à 604
+C_N_X0, C_N_X1 = MARGE, 520         # les niveaux
+C_COUDE_X = 546                     # coude des collecteurs niveaux → centrale
+C_B_X0, C_B_W = 570, 230            # la centrale
+C_TRONC_X = 826                     # tronc des départs centrale → mise en sécurité
+C_A_X0, C_A_X1 = 856, W - MARGE     # la mise en sécurité (1144)
+C_H_ACTIONS = 216                   # hauteur de la pile des deux zones
+C_ECART_ACTION = 12
+C_Y_HORS_TAG = 462                  # en-tête du troisième registre
+C_Y_HORS = 474                      # les deux fonctions hors centralisateur
+C_ECART_HORS = 12
+C_Y_LEGENDE = 630
+C_Y_REPORT = 654
+C_Y_PHRASE = 688
+C_Y_CARTOUCHE = 714
+C_H_CARTOUCHE = 30
+C_MARQUE = 9                        # côté de la marque de zone
+C_PAS_MARQUE = 18                   # pas entre deux marques
+C_PAD = 16
+
+
+def _hauteurs_actions(actions, h_totale, ecart):
+    """Hauteurs proportionnelles aux effectifs de zones commandées — la
+    géométrie code la proportion (16/10), jamais réglée à l'œil."""
+    valeurs = [float(a["valeur"]) for a in actions]
+    dispo = h_totale - ecart * (len(actions) - 1)
+    return [dispo * v / sum(valeurs) for v in valeurs]
+
+
+def _rect_pointille(x, y, w, h, fond, filet, motif="5 4"):
+    """Un bloc dont le filet est interrompu : ce qui n'est pas raccordé au
+    centralisateur ne se dessine pas d'un trait plein."""
+    return (f'  <rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" '
+            f'class="c-{fond} s-{filet}" fill="{JETON[fond]}" '
+            f'stroke="{JETON[filet]}" stroke-width="1" '
+            f'stroke-dasharray="{motif}"/>')
+
+
+def _marque_zone(x, y, cote, pleine):
+    """La marque d'une zone de détection : carré plein pour une détection
+    automatique, carré évidé pour une zone de déclencheurs manuels. Rayon 0 —
+    la charte ne connaît qu'un seul cercle, la puce de section. Les deux
+    marques sont toujours doublées du texte qui les nomme (RGAA 3.2)."""
+    if pleine:
+        return rect(x, y, cote, cote, "encre")
+    return (f'  <rect x="{x + 0.5:.2f}" y="{y + 0.5:.2f}" '
+            f'width="{cote - 1:.2f}" height="{cote - 1:.2f}" '
+            f'class="c-papier s-encre" fill="{JETON["papier"]}" '
+            f'stroke="{JETON["encre"]}" stroke-width="1"/>')
+
+
+def _marques_du_niveau(A, n, x_droite, cy, cote=None, pas=None):
+    """Les marques d'un niveau. Le DERNIER emplacement est réservé à la zone de
+    déclencheurs manuels, les zones de détection automatique se rangeant à
+    droite dans les emplacements précédents.
+
+    L'emplacement réservé est le point : la colonne évidée devient continue, et
+    le vide des combles se lit comme ce qu'il est — pas de déclencheur manuel à
+    ce niveau. Aligner les marques d'un seul tenant, comme le faisait la
+    première version, logeait la marque PLEINE des combles dans la colonne des
+    évidées et effaçait la distinction à la lecture (relevé au rendu à
+    1152 px)."""
+    cote = C_MARQUE if cote is None else cote
+    pas = C_PAS_MARQUE if pas is None else pas
+    x_zdm = x_droite - cote
+    for k in range(n["zdm"]):
+        A(_marque_zone(x_zdm - k * pas, cy - cote / 2, cote, False))
+    x_zda = x_zdm - pas
+    for k in range(n["zda"]):
+        A(_marque_zone(x_zda - k * pas, cy - cote / 2, cote, True))
+    return n["zda"] + n["zdm"]
+
+
+def composer_convergence(donnees):
+    cv = donnees["convergence"]
+    niveaux = cv["niveaux"]
+    actions = cv["actions"]
+    hors = cv["hors"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(texte_mesure, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── Les en-têtes de registre — ce qui empêche la planche de mentir ───────
+    controler("en-tête détection", cv["entete_detection"], 10, "mono",
+              C_N_X1 - MARGE, 10 * 0.14)
+    A(texte(MARGE, C_Y_ENTETE, cv["entete_detection"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("en-tête mise en sécurité", cv["entete_securite"], 10, "mono",
+              C_A_X1 - C_A_X0, 10 * 0.14)
+    A(texte(C_A_X1, C_Y_ENTETE, cv["entete_securite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── La pile des six niveaux : le libellé, les repères, les usages, les
+    #    marques. Les marques SONT le compte : seize à gauche, deux blocs à
+    #    droite — c'est la démonstration, et elle tient sans le texte. ────────
+    largeur_marques = 4 * C_PAS_MARQUE
+    dispo_texte = (C_N_X1 - C_PAD) - (C_N_X0 + C_PAD) - largeur_marques - 12
+    centres_niveaux = []
+    total_zda = total_zdm = 0
+    y = C_Y0
+    for n in niveaux:
+        A(rect_bord(C_N_X0, y, C_N_X1 - C_N_X0, C_H_ROW, "calcaire", "filet-1"))
+        controler(f'niveau {n["cle"]}', n["libelle"], 15, "sans-600", dispo_texte)
+        A(texte(C_N_X0 + C_PAD, y + 22, n["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        controler(f'repères {n["cle"]}', n["reperes"], 10, "mono",
+                  dispo_texte, 10 * 0.14)
+        A(texte(C_N_X0 + C_PAD, y + 40, n["reperes"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14, tabulaire=True))
+        controler(f'usages {n["cle"]}', n["usages"], 10, "mono",
+                  dispo_texte, 10 * 0.14)
+        A(texte(C_N_X0 + C_PAD, y + 54, n["usages"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        _marques_du_niveau(A, n, C_N_X1 - C_PAD, y + C_H_ROW / 2)
+        total_zda += n["zda"]
+        total_zdm += n["zdm"]
+        centres_niveaux.append(y + C_H_ROW / 2)
+        y += C_H_ROW + C_ECART_ROW
+    bas_pile = y - C_ECART_ROW
+
+    # ── La centrale, centrée sur la pile des niveaux ─────────────────────────
+    sys_ = cv["systeme"]
+    cy_boite = (C_Y0 + bas_pile) / 2
+    n_det = len(sys_["detail"])
+    h_boite = 44 + n_det * 13
+    y_boite = cy_boite - h_boite / 2
+    A(rect_bord(C_B_X0, y_boite, C_B_W, h_boite, "papier", "filet-1"))
+    base = cy_boite - (n_det * 13 + 4) / 2 + 8
+    controler("libellé centrale", sys_["libelle"], 15, "sans-600",
+              C_B_W - 2 * C_PAD)
+    A(texte(C_B_X0 + C_PAD, base, sys_["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    for k, l in enumerate(sys_["detail"]):
+        controler(f"détail centrale l.{k + 1}", l, 10, "mono",
+                  C_B_W - 2 * C_PAD, 10 * 0.14)
+        A(texte(C_B_X0 + C_PAD, base + 18 + k * 13, l, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # ── Les collecteurs : les six niveaux rejoignent la centrale ─────────────
+    for c in centres_niveaux:
+        A(polyligne([(C_N_X1, c), (C_COUDE_X, c), (C_COUDE_X, cy_boite)],
+                    "encre", 1.5))
+    A(ligne(C_COUDE_X, cy_boite, C_B_X0 - 9, cy_boite, "encre", 1.5))
+    A(fleche(C_B_X0, cy_boite, "encre"))
+
+    # ── La mise en sécurité : deux zones, hauteurs proportionnelles à 16/10 ──
+    hauteurs = _hauteurs_actions(actions, C_H_ACTIONS, C_ECART_ACTION)
+    centres_actions = []
+    y = C_Y0
+    for a_, h in zip(actions, hauteurs):
+        A(rect_bord(C_A_X0, y, C_A_X1 - C_A_X0, h, "calcaire", "filet-1"))
+        if a_.get("alarme"):
+            A(rect(C_A_X0 + 1, y + 1, C_A_X1 - C_A_X0 - 2, H_BARRE, "clair"))
+        décalage = 12 if a_.get("alarme") else 0
+        controler(f'libellé {a_["cle"]}', a_["libelle"], 15, "sans-600",
+                  C_A_X1 - C_A_X0 - 2 * C_PAD)
+        A(texte(C_A_X0 + C_PAD, y + 28 + décalage, a_["libelle"], "sans", 15,
+                600, "encre", wdth=112))
+        for k, l in enumerate(a_["detail"]):
+            controler(f'détail {a_["cle"]} l.{k + 1}', l, 10, "mono",
+                      C_A_X1 - C_A_X0 - 2 * C_PAD, 10 * 0.14)
+            A(texte(C_A_X0 + C_PAD, y + 48 + décalage + k * 14, l, "mono", 10,
+                    500, "pivot", tracking=10 * 0.14, tabulaire=True))
+        centres_actions.append(y + h / 2)
+        y += h + C_ECART_ACTION
+
+    A(ligne(C_B_X0 + C_B_W, cy_boite, C_TRONC_X, cy_boite, "encre", 1.5))
+    # ⚠ La fourche doit ENGLOBER l'ordonnée de la centrale : la pile de droite
+    # est calée en haut et plus courte que celle des niveaux, si bien que
+    # cy_boite tombe SOUS le dernier départ. Une fourche bornée aux seuls
+    # départs laisserait le segment sortant de la centrale pendre dans le vide.
+    y_fourche = [cy_boite] + centres_actions
+    A(ligne(C_TRONC_X, min(y_fourche), C_TRONC_X, max(y_fourche),
+            "encre", 1.5))
+    for c in centres_actions:
+        A(ligne(C_TRONC_X, c, C_A_X0 - 9, c, "encre", 1.5))
+        A(fleche(C_A_X0, c, "encre"))
+
+    # ── Le troisième registre : ce que le centralisateur ne commande PAS.
+    #    Aucun tronc ne le rejoint — l'absence de liaison est le propos. ──────
+    controler("en-tête hors centralisateur", cv["entete_hors"], 10, "mono",
+              C_A_X1 - C_A_X0, 10 * 0.14)
+    A(texte(C_A_X0, C_Y_HORS_TAG, cv["entete_hors"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    h_hors = (bas_pile - C_Y_HORS - C_ECART_HORS * (len(hors) - 1)) / len(hors)
+    y = C_Y_HORS
+    for h_ in hors:
+        A(_rect_pointille(C_A_X0, y, C_A_X1 - C_A_X0, h_hors, "papier", "filet-1"))
+        controler(f'libellé {h_["cle"]}', h_["libelle"], 15, "sans-600",
+                  C_A_X1 - C_A_X0 - 2 * C_PAD)
+        A(texte(C_A_X0 + C_PAD, y + 24, h_["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        controler(f'détail {h_["cle"]}', h_["detail"], 10, "mono",
+                  C_A_X1 - C_A_X0 - 2 * C_PAD, 10 * 0.14)
+        A(texte(C_A_X0 + C_PAD, y + 42, h_["detail"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        y += h_hors + C_ECART_HORS
+
+    # ── La légende des deux marques — la couleur ne porte jamais seule ───────
+    x = MARGE
+    for entree in cv["legende"]:
+        A(_marque_zone(x, C_Y_LEGENDE - C_MARQUE + 1, C_MARQUE,
+                       entree["marque"] == "pleine"))
+        largeur = controler(f'légende {entree["marque"]}', entree["libelle"],
+                            10, "mono", 360, 10 * 0.14)
+        A(texte(x + C_MARQUE + 8, C_Y_LEGENDE, entree["libelle"], "mono", 10,
+                500, "pivot", tracking=10 * 0.14))
+        x += C_MARQUE + 8 + largeur + 40
+
+    # ── Le report : une ligne, pas un bloc ───────────────────────────────────
+    controler("report", cv["report"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, C_Y_REPORT, cv["report"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    controler("phrase de principe", donnees["phrase_principe"], 17,
+              "sans-400", UTILE)
+    A(texte(MARGE, C_Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, C_Y_CARTOUCHE, largeur, C_H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, C_Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    total = total_zda + total_zdm
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"{total} marques de zone comptées sur "
+                         f"{len(niveaux)} niveaux ({total_zda} pleines pour la "
+                         f"détection automatique, {total_zdm} évidées pour les "
+                         f"déclencheurs manuels) convergent par un tronc UNIQUE "
+                         f"vers deux zones de mise en sécurité aux hauteurs "
+                         f"proportionnelles "
+                         f"({actions[0]['valeur']}/{actions[1]['valeur']} : "
+                         f"{hauteurs[0]:.0f} px / {hauteurs[1]:.0f} px) ; "
+                         f"les {len(hors)} fonctions hors centralisateur sont "
+                         f"dans le même registre, en filet interrompu, et "
+                         f"AUCUN tronc ne les atteint",
+        "comptage": f"détection : {' + '.join(str(n['zda'] + n['zdm']) for n in niveaux)}"
+                    f" = {total} zones ; compartimentage : "
+                    f"{actions[1]['valeur']} zones sur {total}",
+        "topologie": f"niveaux (x {C_N_X0}–{C_N_X1}) → coude x {C_COUDE_X} → "
+                     f"centrale (x {C_B_X0}–{C_B_X0 + C_B_W}) → tronc "
+                     f"x {C_TRONC_X} → mise en sécurité (x {C_A_X0}–{C_A_X1}) ; "
+                     f"registre hors centralisateur dans la même colonne, sans "
+                     f"liaison",
+        "bas_du_dessin": f"piles jusqu’à {bas_pile:.0f} px, légende à "
+                         f"{C_Y_LEGENDE}, report à {C_Y_REPORT}, phrase de "
+                         f"principe à {C_Y_PHRASE}, cartouche "
+                         f"{C_Y_CARTOUCHE}–{C_Y_CARTOUCHE + C_H_CARTOUCHE}, "
+                         f"marge basse {H - (C_Y_CARTOUCHE + C_H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {C_H_CARTOUCHE} px = "
+                            f"{largeur * C_H_CARTOUCHE} px², soit "
+                            f"{largeur * C_H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_convergence(donnees):
+    """La vignette : le motif sans son appareil — six rangées de marques, un
+    tronc unique, deux blocs aux hauteurs proportionnelles. Ce qu'elle laisse :
+    les libellés de niveau, les repères de zone, la centrale, le registre hors
+    centralisateur, le report et le cartouche."""
+    cv = donnees["convergence"]
+    niveaux = cv["niveaux"]
+    actions = cv["actions"]
+    out = []
+    A = out.append
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, ("filet-1", "filet-2", "encre"))
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 26, donnees["vignette_surtitre"], "mono", 9, 500,
+            "pivot", tracking=9 * 0.14))
+
+    y0, h_row, ecart = 42, 18, 3
+    n_x0, n_x1 = V_MARGE, 96
+    a_x0, a_x1 = 170, VW - V_MARGE
+    cote, pas = 5, 9
+
+    centres = []
+    y = y0
+    for n in niveaux:
+        A(rect_bord(n_x0, y, n_x1 - n_x0, h_row, "calcaire", "filet-1"))
+        _marques_du_niveau(A, n, n_x1 - 8, y + h_row / 2, cote, pas)
+        centres.append(y + h_row / 2)
+        y += h_row + ecart
+    bas = y - ecart
+
+    # Le tronc unique : c'est lui la démonstration — six rangées, une ligne.
+    cy = (y0 + bas) / 2
+    fourche_in, fourche_out = 104, 140
+    for c in centres:
+        A(polyligne([(n_x1, c), (fourche_in, c), (fourche_in, cy)], "encre", 1.5))
+    A(ligne(fourche_in, cy, fourche_out, cy, "encre", 1.5))
+
+    hauteurs = _hauteurs_actions(actions, bas - y0, 8)
+    y = y0
+    for a_, h in zip(actions, hauteurs):
+        A(rect_bord(a_x0, y, a_x1 - a_x0, h, "calcaire", "filet-1"))
+        if a_.get("alarme"):
+            A(rect(a_x0 + 1, y + 1, a_x1 - a_x0 - 2, 6, "clair"))
+        cyb = y + h / 2
+        décalage = 3 if a_.get("alarme") else 0
+        A(texte(a_x0 + 10, cyb + décalage - 2, a_["libelle_vignette"], "sans",
+                12, 600, "encre", wdth=112))
+        A(texte(a_x0 + 10, cyb + décalage + 12, a_["tag"], "mono", 10, 500,
+                "pivot", tabulaire=True))
+        A(ligne(fourche_out, cyb, a_x0 - 7, cyb, "encre", 1.5))
+        A(fleche(a_x0, cyb, "encre", "droite", 7))
+        y += h + 8
+    A(ligne(fourche_out, y0 + hauteurs[0] / 2,
+            fourche_out, bas - hauteurs[-1] / 2, "encre", 1.5))
+
+    A("</svg>")
+    total = sum(n["zda"] + n["zdm"] for n in niveaux)
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "carte de projet mesurée à 274–296 px — échelle "
+                            f"{274/VW:.2f} à {296/VW:.2f}",
+        "motif": f"{total} marques sur {len(niveaux)} rangées, un tronc unique, "
+                 f"deux blocs aux hauteurs proportionnelles "
+                 f"({hauteurs[0]:.0f} px / {hauteurs[-1]:.0f} px) — libellés de "
+                 f"niveau, repères, centrale, registre hors centralisateur, "
+                 f"report et cartouche laissés à la planche",
+        "corps_minimal": "9 px — rien sous 9, rien ne touche un bord "
+                         f"(marge {V_MARGE} px, bas du dessin {bas:.0f} px)",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_convergence(donnees):
+    """L'appui : le motif entier à l'échelle 1, densité intermédiaire. Il garde
+    les libellés de niveau, les marques, la centrale au libellé court, les deux
+    zones avec leur proportion, et une bande basse pour ce qui reste hors du
+    centralisateur. Il laisse les repères de zone, les usages, le report, la
+    phrase de principe et le cartouche."""
+    cv = donnees["convergence"]
+    niveaux = cv["niveaux"]
+    actions = cv["actions"]
+    sys_ = cv["systeme"]
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1", "filet-2", "filet-3", "encre"))
+
+    y0, h_row, ecart = 76, 32, 6
+    n_x0, n_x1 = A_MARGE, 190
+    b_x0, b_w = 214, 156     # 156 et non 130 : « ALARME DE TYPE 1 » mesure
+    a_x0, a_x1 = 386, AW - A_MARGE   # 117 px et affleurait le filet de droite
+    cote, pas = 7, 13
+
+    # La place libre pour un libellé, marques DÉDUITES : le niveau le plus
+    # fourni en porte quatre, et c'est lui qui borne la colonne de texte.
+    marques_max = max(n["zda"] + n["zdm"] for n in niveaux)
+    dispo_libelle = (n_x1 - 10 - marques_max * pas) - (n_x0 + 10) - 6
+    depassements_appui = []
+    centres = []
+    y = y0
+    for n in niveaux:
+        A(rect_bord(n_x0, y, n_x1 - n_x0, h_row, "calcaire", "filet-1"))
+        cy = y + h_row / 2
+        libelle_n = n.get("libelle_court", n["libelle"])
+        # ⚠ Les avances calibrées sous-mesurent Archivo 600 d'environ 20 % au
+        # rendu (relevé en N08-N09) : la marge est prise ici, pas à l'œil.
+        largeur_n = mesurer(libelle_n, 13, "sans-600") * 1.2
+        if largeur_n > dispo_libelle:
+            depassements_appui.append(
+                f"{n['cle']} : {largeur_n:.0f} px pour {dispo_libelle:.0f} px")
+        A(texte(n_x0 + 10, cy + 4, libelle_n, "sans", 13, 600,
+                "encre", wdth=112))
+        _marques_du_niveau(A, n, n_x1 - 10, cy, cote, pas)
+        centres.append(cy)
+        y += h_row + ecart
+    bas = y - ecart
+
+    cy_boite = (y0 + bas) / 2
+    A(rect_bord(b_x0, cy_boite - 34, b_w, 68, "papier", "filet-1"))
+    A(texte(b_x0 + 12, cy_boite - 4, sys_["libelle_appui"], "sans", 13, 600,
+            "encre", wdth=112))
+    dispo_boite = b_w - 24
+    largeur_sys = mesurer(sys_["libelle_appui"], 13, "sans-600") * 1.2
+    if largeur_sys > dispo_boite:
+        depassements_appui.append(
+            f"centrale : {largeur_sys:.0f} px pour {dispo_boite:.0f} px")
+    for k, l in enumerate(sys_["detail_appui"]):
+        largeur_l = mesurer(l, 10, "mono", 10 * 0.14)
+        if largeur_l > dispo_boite:
+            depassements_appui.append(
+                f"détail centrale l.{k + 1} : {largeur_l:.0f} px pour "
+                f"{dispo_boite:.0f} px")
+        A(texte(b_x0 + 12, cy_boite + 14 + k * 13, l, "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+    coude = (n_x1 + b_x0) / 2
+    for c in centres:
+        A(polyligne([(n_x1, c), (coude, c), (coude, cy_boite)], "encre", 1.5))
+    A(ligne(coude, cy_boite, b_x0 - 8, cy_boite, "encre", 1.5))
+    A(fleche(b_x0, cy_boite, "encre", "droite", 8))
+
+    hauteurs = _hauteurs_actions(actions, bas - y0, 10)
+    tronc = (b_x0 + b_w + a_x0) / 2
+    A(ligne(b_x0 + b_w, cy_boite, tronc, cy_boite, "encre", 1.5))
+    centres_a = []
+    y = y0
+    for a_, h in zip(actions, hauteurs):
+        A(rect_bord(a_x0, y, a_x1 - a_x0, h, "calcaire", "filet-1"))
+        if a_.get("alarme"):
+            A(rect(a_x0 + 1, y + 1, a_x1 - a_x0 - 2, 7, "clair"))
+        cyb = y + h / 2
+        décalage = 4 if a_.get("alarme") else 0
+        A(texte(a_x0 + 12, cyb + décalage - 3, a_["libelle_court"], "sans", 13,
+                600, "encre", wdth=112))
+        A(texte(a_x0 + 12, cyb + décalage + 13, a_["tag"], "mono", 10, 500,
+                "pivot", tabulaire=True))
+        centres_a.append(cyb)
+        y += h + 10
+    A(ligne(tronc, centres_a[0], tronc, centres_a[-1], "encre", 1.5))
+    for c in centres_a:
+        A(ligne(tronc, c, a_x0 - 8, c, "encre", 1.5))
+        A(fleche(a_x0, c, "encre", "droite", 8))
+
+    # La bande basse : ce que le centralisateur ne commande pas, en filet
+    # interrompu et sans liaison — le propos de la planche tient à l'appui.
+    y_hors = bas + 12
+    A(_rect_pointille(n_x0, y_hors, a_x1 - n_x0, 30, "papier", "filet-1"))
+    libelle = cv["entete_hors"] + " · " + " · ".join(
+        h_["libelle"].upper() for h_ in cv["hors"])
+    A(texte(n_x0 + 12, y_hors + 19, libelle, "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    A("</svg>")
+    total = sum(n["zda"] + n["zdm"] for n in niveaux)
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"les {len(niveaux)} niveaux avec leurs {total} marques, la "
+              f"centrale au libellé court, les deux zones aux hauteurs "
+              f"proportionnelles ({hauteurs[0]:.0f} px / {hauteurs[-1]:.0f} px) "
+              f"et la bande en filet interrompu du registre hors "
+              f"centralisateur — repères de zone, usages, report, phrase de "
+              f"principe et cartouche laissés à la planche",
+        bas=f"piles jusqu’à {bas:.0f} px, bande hors centralisateur "
+            f"{y_hors:.0f}–{y_hors + 30:.0f} px, marge basse "
+            f"{AH - (y_hors + 30):.0f} px",
+        largeur_bande=f"{mesurer(libelle, 10, 'mono', 10 * 0.14):.0f} px pour "
+                      f"{a_x1 - n_x0 - 24} px disponibles",
+        boite_centrale=f"{b_w} px de large, {dispo_boite} px utiles pour un "
+                       f"libellé de {largeur_sys:.0f} px et un mono de "
+                       f"{mesurer(sys_['detail_appui'][0], 10, 'mono', 1.4):.0f} px",
+        libelles_de_niveau=f"colonne de texte {dispo_libelle:.0f} px "
+                           f"(marques déduites, {marques_max} au plus) — "
+                           + (", ".join(depassements_appui)
+                              if depassements_appui
+                              else "aucun dépassement, marge de 20 % prise sur "
+                                   "la sous-mesure d’Archivo 600"))
+
+
 if __name__ == "__main__":
     import json as _json
     import sys
@@ -1583,5 +2085,8 @@ if __name__ == "__main__":
     elif "inversion" in _d:
         executer(composer_inversion, composer_vignette_inversion,
                  composer_appui_inversion)
+    elif "convergence" in _d:
+        executer(composer_convergence, composer_vignette_convergence,
+                 composer_appui_convergence)
     else:
         executer(composer, composer_vignette, composer_appui)
