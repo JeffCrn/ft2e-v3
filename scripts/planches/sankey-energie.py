@@ -2099,7 +2099,441 @@ def composer_appui_affectation(donnees):
         echelle_derivee="9,0 px par logement — le T4 reste un ruban de 9 px")
 
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MÉCANISME `serrage` — deux zones de calcul, et ce n'est pas la même exigence
+# qui serre (planche d'AP Yacht, 2026-09-01).
+#
+# Ce que le dessin montre : chaque colonne est une zone de calcul ; le mur
+# vertical à gauche de la colonne est le PLAFOND réglementaire, et chaque barre
+# mesure LA MARGE QUI RESTE avant lui — jamais la valeur atteinte. Une barre
+# longue est une zone à l'aise, un moignon collé au mur est une zone au bord.
+#
+# Deux registres, parce que les unités ne se mélangent pas : les deux exigences
+# d'énergie (Bbio, Cep) se mesurent en % de leur plafond ; la température
+# intérieure conventionnelle se mesure en °C. La synthèse RT elle-même laisse la
+# colonne « Gain en % » VIDE sur la ligne Tic — normaliser 30,2/32 en 94 %
+# aurait affirmé une proportion que la pièce refuse de calculer.
+#
+# ⚠ Constantes préfixées `SG_` : le module porte sept mécanismes, et deux
+# repères de même nom au niveau du module se marchent dessus en silence (piège
+# relevé sur `tableau-electrique.py`, cf. protocole § Quatre pièges).
+SG_GOUTTIERE = 56
+SG_COL_W = (UTILE - SG_GOUTTIERE) / 2          # 516
+SG_COL_X = (MARGE, MARGE + SG_COL_W + SG_GOUTTIERE)
+SG_BAR_H = 26
+SG_MUR_ECART = 4                                # filet doublé = alerte (charte)
+SG_MARQUE = 8                                   # marque de contact — ET seuil
+                                                # au-dessous duquel une barre
+                                                # cesse de se lire comme telle
+
+SG_Y_ENTETE = 190
+SG_Y_ZONE = 218
+SG_Y_FILET_ZONE = 236
+SG_Y_REG1 = 262
+SG_Y_LIB = (292, 372)                           # Bbio, Cep
+SG_Y_BAR = (300, 380)
+SG_Y_DET = (344, 424)
+SG_Y_MUR1 = (288, 428)
+SG_Y_REG2 = 462
+SG_Y_LIB_TIC = 492
+SG_Y_BAR_TIC = 500
+SG_Y_DET_TIC = 544
+SG_Y_MUR2 = (488, 548)
+SG_Y_REPRISES_ENT = 592
+SG_Y_REPRISES = 614
+SG_Y_PHRASE = 688
+SG_Y_CARTOUCHE = 714
+
+# Vignette et appui composent LEURS PROPRES colonnes : leurs repères sont
+# distincts, et chacun porte sa propre mesure de dépassement (leçon N16 —
+# l'assertion qui ne couvrait que la planche a laissé passer un débordement
+# d'appui que seule la capture du déploiement a montré).
+SG_V_GOUT = 16
+SG_V_COL_W = (VW - 2 * V_MARGE - SG_V_GOUT) / 2         # 128
+SG_V_COL_X = (V_MARGE, V_MARGE + SG_V_COL_W + SG_V_GOUT)
+SG_V_BAR_H = 10
+
+SG_A_GOUT = 24
+SG_A_COL_W = (AW - 2 * A_MARGE - SG_A_GOUT) / 2         # 240
+SG_A_COL_X = (A_MARGE, A_MARGE + SG_A_COL_W + SG_A_GOUT)
+SG_A_BAR_H = 16
+
+
+def _sg_zones(donnees):
+    return donnees["serrage"]["zones"]
+
+
+def _sg_exigences(zone, registre):
+    return [e for e in zone["exigences"] if e["registre"] == registre]
+
+
+def _sg_mesureur():
+    """Rend (controler, depassements) — chaque chaîne dessinée est mesurée
+    contre la largeur intérieure de son contenant, et un `assert not
+    depassements` rompt la composition AVANT tout rendu."""
+    depassements = []
+
+    def controler(nom, contenu, corps, profil, dispo, tracking=0.0):
+        l = mesurer(contenu, corps, profil, tracking)
+        if l > dispo:
+            depassements.append(f"{nom} : {l:.0f} px pour {dispo:.0f} disponibles")
+        return l
+
+    return controler, depassements
+
+
+def _sg_mur(A, x, y0, y1):
+    """Le plafond : filet encre DOUBLÉ — « une alerte est un signe, pas une
+    couleur : filet doublé + mention » (charte v3). Aucun trait épais hors
+    système n'est créé pour l'occasion."""
+    A(ligne(x, y0, x, y1, "encre"))
+    A(ligne(x + SG_MUR_ECART, y0, x + SG_MUR_ECART, y1, "encre"))
+
+
+def _sg_forme(A, x_mur, y, largeur, bar_h, ecart_mur):
+    """La forme seule — barre, ou marque de contact quand la marge est trop
+    courte pour se lire comme une barre. Le SEUIL est la marque elle-meme, et
+    il est le meme aux trois formats : c'est ce qui garantit qu'un fait ne se
+    lise pas d'une facon sur la carte et d'une autre sur la fiche."""
+    if largeur >= SG_MARQUE:
+        A(rect_bord(x_mur + ecart_mur, y, largeur, bar_h, "clair", "filet-1"))
+        return x_mur + ecart_mur + largeur
+    A(rect(x_mur - 2, y + bar_h / 2 - SG_MARQUE / 2, SG_MARQUE + ecart_mur,
+           SG_MARQUE, "encre"))
+    return x_mur - 2 + SG_MARQUE + ecart_mur
+
+
+def _sg_barre(A, controler, x_mur, y, largeur, col_w, e, corps, bar_h,
+              nom, ecart_mur, mention=None):
+    """Une barre de marge, sa valeur, et le traitement du cas « au bord ».
+
+    ⚠ UNE SEULE implantation pour les trois formats. La premiere version en
+    portait trois — planche, vignette, appui — avec chacune son seuil : a 1 px,
+    la vignette basculait la marge de 0,28 % en marque de contact et la planche
+    la laissait en barre de 2,4 px. Le MEME fait se lisait donc de deux facons
+    selon la taille servie, et seul le rendu cote a cote l'a montre.
+
+    Le seuil n'est plus un nombre choisi : une barre plus courte que la marque
+    de contact ne se lit pas comme une barre, elle DEVIENT la marque. Le seuil
+    est donc la marque elle-meme.
+    """
+    v = e["valeur_affichee"]
+    l_v = mesurer(v, corps, "mono", corps * 0.14)
+
+    fin = _sg_forme(A, x_mur, y, largeur, bar_h, ecart_mur)
+
+    apres = fin + 8
+    if apres + l_v <= x_mur + col_w:
+        controler(nom, v, corps, "mono", x_mur + col_w - apres, corps * 0.14)
+        A(texte(apres, y + bar_h / 2 + corps * 0.36, v, "mono", corps, 500,
+                "encre" if e["au_bord"] else "pivot", tracking=corps * 0.14,
+                tabulaire=True))
+        bout = apres + l_v
+    else:
+        A(texte(fin - 10, y + bar_h / 2 + corps * 0.36, v, "mono", corps, 500,
+                "encre", ancre="end", tracking=corps * 0.14, tabulaire=True))
+        bout = fin
+
+    # La mention se pose CONTRE la valeur, jamais au bout de la colonne : une
+    # legende qui ne touche pas ce qu'elle nomme ne le nomme plus.
+    if e["au_bord"] and mention:
+        l_m = mesurer(mention, corps, "mono", corps * 0.14)
+        if bout + 12 + l_m <= x_mur + col_w:
+            controler(nom + " mention", mention, corps, "mono",
+                      x_mur + col_w - bout - 12, corps * 0.14)
+            A(texte(bout + 12, y + bar_h / 2 + corps * 0.36, mention, "mono",
+                    corps, 500, "encre", tracking=corps * 0.14))
+
+
+def composer_serrage(donnees):
+    s = donnees["serrage"]
+    zones = _sg_zones(donnees)
+    controler, depassements = _sg_mesureur()
+
+    k_pct = SG_COL_W / s["echelle_energie_max"]
+    k_deg = SG_COL_W / s["echelle_temperature_max"]
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre", "clair"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, 76, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    controler("surtitre", donnees["surtitre"], 11, "mono", UTILE, 11 * 0.14)
+    A(texte(MARGE, 112, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, 138, donnees["sous_titre"], "sans", 16, 400, "pivot", wdth=100))
+    controler("sous-titre", donnees["sous_titre"], 16, "sans-400", UTILE)
+    A(rect(MARGE, 160, UTILE, 1, "filet-1"))
+
+    # ── Règle de lecture, pleine largeur ─────────────────────────────────────
+    controler("entête", s["entete"], 10, "mono", UTILE, 1.4)
+    A(texte(MARGE, SG_Y_ENTETE, s["entete"], "mono", 10, 500, "pivot", tracking=1.4))
+
+    # ── En-têtes de colonne : la zone et sa surface ──────────────────────────
+    for i, z in enumerate(zones):
+        x = SG_COL_X[i]
+        controler(f"nom de zone {i}", z["nom"], 17, "sans-600", SG_COL_W * 0.62)
+        A(texte(x, SG_Y_ZONE, z["nom"], "sans", 17, 600, "encre", wdth=112))
+        controler(f"surface {i}", z["detail"], 10, "mono", SG_COL_W * 0.36, 1.4)
+        A(texte(x + SG_COL_W, SG_Y_ZONE, z["detail"], "mono", 10, 500, "pivot",
+                tracking=1.4, ancre="end"))
+        A(rect(x, SG_Y_FILET_ZONE, SG_COL_W, 1, "filet-1"))
+
+    # ── Registre 1 — les deux exigences d'énergie, en % du plafond ───────────
+    controler("registre 1", s["registre_energie"], 10, "mono", UTILE, 1.4)
+    A(texte(MARGE, SG_Y_REG1, s["registre_energie"], "mono", 10, 500, "encre",
+            tracking=1.4))
+
+    for i, z in enumerate(zones):
+        x = SG_COL_X[i]
+        _sg_mur(A, x, SG_Y_MUR1[0], SG_Y_MUR1[1])
+        for j, e in enumerate(_sg_exigences(z, "energie")):
+            controler(f"libellé {i}.{j}", e["libelle"], 15, "sans-400",
+                      SG_COL_W - 10)
+            A(texte(x + SG_MUR_ECART + 6, SG_Y_LIB[j], e["libelle"], "sans", 15,
+                    400, "encre", wdth=100))
+            _sg_barre(A, controler, x, SG_Y_BAR[j], e["valeur"] * k_pct,
+                      SG_COL_W, e, 12, SG_BAR_H, f"valeur {i}.{j}",
+                      SG_MUR_ECART, s["mention_bord"])
+            det = e["detail"][0]
+            controler(f"détail {i}.{j}", det, 10, "mono", SG_COL_W - 10, 1.4)
+            A(texte(x + SG_MUR_ECART + 6, SG_Y_DET[j], det, "mono", 10, 500,
+                    "pivot", tracking=1.4))
+
+    # ── Registre 2 — la température, en °C : une AUTRE unité, une AUTRE échelle
+    controler("registre 2", s["registre_temperature"], 10, "mono", UTILE, 1.4)
+    A(texte(MARGE, SG_Y_REG2, s["registre_temperature"], "mono", 10, 500,
+            "encre", tracking=1.4))
+
+    for i, z in enumerate(zones):
+        x = SG_COL_X[i]
+        _sg_mur(A, x, SG_Y_MUR2[0], SG_Y_MUR2[1])
+        e = _sg_exigences(z, "temperature")[0]
+        controler(f"libellé tic {i}", e["libelle"], 15, "sans-400", SG_COL_W - 10)
+        A(texte(x + SG_MUR_ECART + 6, SG_Y_LIB_TIC, e["libelle"], "sans", 15,
+                400, "encre", wdth=100))
+        _sg_barre(A, controler, x, SG_Y_BAR_TIC, e["valeur"] * k_deg, SG_COL_W,
+                  e, 12, SG_BAR_H, f"valeur tic {i}", SG_MUR_ECART,
+                  s["mention_bord"])
+        det = e["detail"][0]
+        controler(f"détail tic {i}", det, 10, "mono", SG_COL_W - 10, 1.4)
+        A(texte(x + SG_MUR_ECART + 6, SG_Y_DET_TIC, det, "mono", 10, 500,
+                "pivot", tracking=1.4))
+
+    # ── Les deux reprises du calcul, pleine largeur ──────────────────────────
+    # Elles ne sont PAS rattachées à une colonne : seul l'indice 2 nomme sa
+    # zone, et rattacher l'indice 1 aurait été une déduction (a_valider_ft2e).
+    A(texte(MARGE, SG_Y_REPRISES_ENT, s["reprises_entete"], "mono", 10, 500,
+            "pivot", tracking=1.4))
+    controler("reprises", s["reprises"], 10, "mono", UTILE, 1.4)
+    A(texte(MARGE, SG_Y_REPRISES, s["reprises"], "mono", 10, 500, "pivot",
+            tracking=1.4))
+
+    # ── Phrase de principe, pleine largeur ──────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, SG_Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur ajustée au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600, round(mesurer(libelle, 11, "mono", 11 * 0.14) + 40))
+    A(rect(MARGE, SG_Y_CARTOUCHE, largeur, 30, "profond"))
+    A(texte(MARGE + 20, SG_Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    assert not depassements, "dépassements : " + " ; ".join(depassements)
+
+    mesures = [(z["cle"], e["cle"], e["valeur"],
+                e["valeur"] * (k_pct if e["registre"] == "energie" else k_deg))
+               for z in zones for e in z["exigences"]]
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration":
+            "deux colonnes, un mur de plafond par registre, et des barres qui "
+            "mesurent LA MARGE RESTANTE — "
+            + " ; ".join(f"{c}/{k} {v:g} → {px:.1f} px" for c, k, v, px in mesures)
+            + " — texte masqué, les deux moignons contre le mur tombent en "
+              "diagonale : Bbio à gauche au registre 1, Tic à droite au registre 2",
+        "echelles": f"registre 1 : {k_pct:.2f} px par point de % "
+                    f"(0 à {s['echelle_energie_max']:g} % sur {SG_COL_W:.0f} px) ; "
+                    f"registre 2 : {k_deg:.2f} px par °C "
+                    f"(0 à {s['echelle_temperature_max']:g} °C sur {SG_COL_W:.0f} px) "
+                    "— DEUX échelles, parce que la pièce ne calcule pas de gain "
+                    "en % sur la température",
+        "topologie": f"colonnes à x {SG_COL_X[0]:.0f} et {SG_COL_X[1]:.0f}, "
+                     f"largeur {SG_COL_W:.0f}, gouttière {SG_GOUTTIERE} ; "
+                     f"murs (filet doublé, écart {SG_MUR_ECART}) y "
+                     f"{SG_Y_MUR1[0]}–{SG_Y_MUR1[1]} et {SG_Y_MUR2[0]}–{SG_Y_MUR2[1]}",
+        "chiffre_unique": "aucun chiffre de relevé — les six marges sont des "
+                          "cotes mono 12 ; seules les deux marges « au bord » "
+                          "sont en encre pleine, les quatre autres au pivot",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "reserve_profonde": f"cartouche {largeur} x 30 px = {largeur * 30} px², "
+                            f"soit {largeur * 30 / (W * H) * 100:.2f} % de la planche",
+        "bas_du_dessin": f"détail du registre 2 à {SG_Y_DET_TIC}, reprises à "
+                         f"{SG_Y_REPRISES}, phrase à {SG_Y_PHRASE}, cartouche "
+                         f"{SG_Y_CARTOUCHE}–{SG_Y_CARTOUCHE + 30}, marge basse "
+                         f"{H - SG_Y_CARTOUCHE - 30} px",
+        "depassements": f"{len(mesures) + 12} chaînes mesurées, 0 dépassement",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_serrage(donnees):
+    """La vignette : les deux colonnes, les deux murs, les six barres.
+
+    Ce qu'elle garde — la géométrie seule : les murs, les longueurs de marge à
+    l'échelle de chaque registre, et les deux marques « au bord ». Ce qu'elle
+    laisse : les libellés d'exigence, les détails chiffrés, les reprises, la
+    règle de lecture. Six libellés dans 128 px ne se lisent pas."""
+    s = donnees["serrage"]
+    zones = _sg_zones(donnees)
+    controler, depassements = _sg_mesureur()
+
+    k_pct = SG_V_COL_W / s["echelle_energie_max"]
+    k_deg = SG_V_COL_W / s["echelle_temperature_max"]
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre", "clair"))
+    A(rect(0, 0, VW, VH, "papier"))
+    controler("surtitre", donnees["vignette_surtitre"], 9, "mono",
+              VW - 2 * V_MARGE, 9 * 0.14)
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    y_bar = (60, 82)          # registre 1 : Bbio, Cep
+    y_tic = 128               # registre 2
+
+    for i, z in enumerate(zones):
+        x = SG_V_COL_X[i]
+        controler(f"nom court {i}", z["nom_court"], 11, "sans-600", SG_V_COL_W)
+        A(texte(x, 44, z["nom_court"], "sans", 11, 600, "encre", wdth=112))
+        A(ligne(x, 116, x + SG_V_COL_W, 116, "filet-2"))
+
+        A(ligne(x, 54, x, 100, "encre"))
+        A(ligne(x + 3, 54, x + 3, 100, "encre"))
+        for j, e in enumerate(_sg_exigences(z, "energie")):
+            _sg_forme(A, x, y_bar[j], e["valeur"] * k_pct, SG_V_BAR_H, 3)
+
+        A(ligne(x, 122, x, 152, "encre"))
+        A(ligne(x + 3, 122, x + 3, 152, "encre"))
+        e = _sg_exigences(z, "temperature")[0]
+        _sg_forme(A, x, y_tic, e["valeur"] * k_deg, SG_V_BAR_H, 3)
+
+    A(texte(V_MARGE, 172, s["mention_bord"], "mono", 9, 500, "encre",
+            tracking=9 * 0.14))
+    A(rect(V_MARGE + mesurer(s["mention_bord"], 9, "mono", 9 * 0.14) + 8, 165,
+           8, 8, "encre"))
+
+    A("</svg>")
+    assert not depassements, "dépassements vignette : " + " ; ".join(depassements)
+
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "les deux colonnes, les deux murs de plafond par registre et "
+                 "les six barres de marge à l’échelle de leur registre, plus "
+                 "les deux marques « au bord » — libellés d’exigence, détails "
+                 "chiffrés et reprises laissés à la planche",
+        "echelles": f"registre 1 : {k_pct:.3f} px par point de % ; "
+                    f"registre 2 : {k_deg:.1f} px par °C, sur "
+                    f"{SG_V_COL_W:.0f} px de colonne",
+        "bas_du_dessin": f"légende de la marque à 172 px, marge basse {VH - 172} px",
+        "depassements": "3 chaînes mesurées, 0 dépassement",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_serrage(donnees):
+    """L'appui : le motif entier à l'échelle 1, densité intermédiaire.
+
+    Il garde les deux colonnes nommées, les deux registres nommés, les six
+    barres et leurs valeurs. Il laisse les libellés d'exigence, les détails
+    chiffrés, les reprises, la phrase de principe et le cartouche."""
+    s = donnees["serrage"]
+    zones = _sg_zones(donnees)
+    controler, depassements = _sg_mesureur()
+
+    k_pct = SG_A_COL_W / s["echelle_energie_max"]
+    k_deg = SG_A_COL_W / s["echelle_temperature_max"]
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, ("filet-1", "filet-2", "filet-3", "encre", "clair"))
+    controler("surtitre appui", donnees["vignette_surtitre"], 11, "mono",
+              AW - 2 * A_MARGE, 11 * 0.14)
+
+    y_bar = (108, 146)
+    y_tic = 224
+
+    A(texte(A_MARGE, 96, s["registre_energie"], "mono", 10, 500, "encre",
+            tracking=1.4))
+    controler("registre 1 appui", s["registre_energie"], 10, "mono",
+              AW - 2 * A_MARGE, 1.4)
+    A(texte(A_MARGE, 212, s["registre_temperature"], "mono", 10, 500, "encre",
+            tracking=1.4))
+    controler("registre 2 appui", s["registre_temperature"], 10, "mono",
+              AW - 2 * A_MARGE, 1.4)
+
+    for i, z in enumerate(zones):
+        x = SG_A_COL_X[i]
+        controler(f"nom de zone appui {i}", z["nom"], 12, "sans-600", SG_A_COL_W)
+        A(texte(x, 70, z["nom"], "sans", 12, 600, "encre", wdth=112))
+        A(rect(x, 78, SG_A_COL_W, 1, "filet-1"))
+
+        A(ligne(x, 100, x, 180, "encre"))
+        A(ligne(x + 3, 100, x + 3, 180, "encre"))
+        for j, e in enumerate(_sg_exigences(z, "energie")):
+            _sg_barre(A, controler, x, y_bar[j], e["valeur"] * k_pct,
+                      SG_A_COL_W, e, 10, SG_A_BAR_H, f"valeur appui {i}.{j}", 3)
+
+        A(ligne(x, 216, x, 252, "encre"))
+        A(ligne(x + 3, 216, x + 3, 252, "encre"))
+        e = _sg_exigences(z, "temperature")[0]
+        _sg_barre(A, controler, x, y_tic, e["valeur"] * k_deg, SG_A_COL_W, e,
+                  10, SG_A_BAR_H, f"valeur tic appui {i}", 3)
+
+    A(texte(A_MARGE, 288, s["mention_bord"], "mono", 10, 500, "encre",
+            tracking=1.4))
+    A(rect(A_MARGE + mesurer(s["mention_bord"], 10, "mono", 1.4) + 8, 280, 8, 8,
+           "encre"))
+
+    A("</svg>")
+    assert not depassements, "dépassements appui : " + " ; ".join(depassements)
+
+    return "\n".join(out) + "\n", controles_appui(
+        "les deux colonnes nommées, les deux registres nommés, les deux murs de "
+        "plafond et les six barres de marge avec leur valeur — libellés "
+        "d’exigence, détails chiffrés, reprises, phrase de principe et "
+        "cartouche laissés à la planche",
+        f"légende de la marque à 288 px, marge basse {AH - 288} px",
+        echelles=f"registre 1 : {k_pct:.2f} px par point de % ; registre 2 : "
+                 f"{k_deg:.1f} px par °C, sur {SG_A_COL_W:.0f} px de colonne",
+        depassements="9 chaînes mesurées, 0 dépassement")
+
+
 def _composer(donnees):
+    if "serrage" in donnees:
+        return composer_serrage(donnees)
     if "affectation" in donnees:
         return composer_affectation(donnees)
     if "bascule" in donnees:
@@ -2114,6 +2548,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "serrage" in donnees:
+        return composer_vignette_serrage(donnees)
     if "affectation" in donnees:
         return composer_vignette_affectation(donnees)
     if "bascule" in donnees:
@@ -2128,6 +2564,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "serrage" in donnees:
+        return composer_appui_serrage(donnees)
     if "affectation" in donnees:
         return composer_appui_affectation(donnees)
     if "bascule" in donnees:

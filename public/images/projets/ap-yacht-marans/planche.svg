@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de deux zones de calcul thermique réglementaire sous un même permis. Deux colonnes, une par zone : à gauche la zone restauration et vestiaires, 854 mètres carrés de surface RT ; à droite le hall de production, 1 318 mètres carrés. Chaque colonne s’appuie sur un mur vertical au trait double, qui figure le plafond réglementaire, et chaque barre horizontale mesure la marge restante avant ce plafond, jamais la valeur atteinte. Premier registre, les deux exigences d’énergie, en pourcentage du plafond : côté restauration et vestiaires, le besoin bioclimatique ne laisse que 0,28 pour cent, soit un moignon de barre collé au mur, quand la consommation conventionnelle en garde 24,63 ; côté hall, le besoin bioclimatique garde 5,2 pour cent et la consommation 54,6, la plus longue barre du dessin. Second registre, la température intérieure conventionnelle, en degrés : la zone restauration et vestiaires garde 1,8 degré avant son plafond, le hall n’en garde aucun et sa barre est réduite à une marque posée sur le mur. Les deux serrages tombent ainsi dans des registres différents et dans des colonnes différentes.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · CE QUI RESTE AVANT LE PLAFOND RÉGLEMENTAIRE</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Atelier AP Yacht</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Deux zones conformes, et ce n’est pas la même exigence qui serre</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DEUX ZONES DE CALCUL RT2012 SOUS UN MÊME PERMIS · CHAQUE BARRE MESURE LA MARGE QUI RESTE AVANT LE PLAFOND, JAMAIS LA VALEUR ATTEINTE</text>
+  <text x="56.00" y="218.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Restauration et vestiaires</text>
+  <text x="572.00" y="218.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">854 m² DE SURFACE RT</text>
+  <rect x="56.00" y="236.00" width="516.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="628.00" y="218.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Hall de production</text>
+  <text x="1144.00" y="218.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">1 318 m² DE SURFACE RT</text>
+  <rect x="628.00" y="236.00" width="516.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="262.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">REGISTRE 1 · LES DEUX EXIGENCES D’ÉNERGIE — MARGE EN % DU PLAFOND</text>
+  <path d="M 56.00 288.00 L 56.00 428.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 60.00 288.00 L 60.00 428.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="66.00" y="292.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Besoin bioclimatique</text>
+  <rect x="54.00" y="309.00" width="12.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <text x="74.00" y="317.32" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" letter-spacing="1.68" font-variant-numeric="tabular-nums">0,28 %</text>
+  <text x="137.60" y="317.32" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" letter-spacing="1.68">AU BORD</text>
+  <text x="66.00" y="344.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">249,3 POUR 250 ADMIS</text>
+  <text x="66.00" y="372.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Consommation conventionnelle</text>
+  <rect x="60.00" y="380.00" width="211.82" height="26.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="279.82" y="397.32" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" letter-spacing="1.68" font-variant-numeric="tabular-nums">24,63 %</text>
+  <text x="66.00" y="424.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">263,8 POUR 350 kWhep/m².an</text>
+  <path d="M 628.00 288.00 L 628.00 428.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 632.00 288.00 L 632.00 428.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="638.00" y="292.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Besoin bioclimatique</text>
+  <rect x="632.00" y="300.00" width="44.72" height="26.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="684.72" y="317.32" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" letter-spacing="1.68" font-variant-numeric="tabular-nums">5,2 %</text>
+  <text x="638.00" y="344.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">85,3 POUR 90,0 ADMIS</text>
+  <text x="638.00" y="372.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Consommation conventionnelle</text>
+  <rect x="632.00" y="380.00" width="469.56" height="26.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="1091.56" y="397.32" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" letter-spacing="1.68" text-anchor="end" font-variant-numeric="tabular-nums">54,6 %</text>
+  <text x="638.00" y="424.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">63,6 POUR 140,0 kWhep/m².an</text>
+  <text x="56.00" y="462.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">REGISTRE 2 · LA TEMPÉRATURE INTÉRIEURE CONVENTIONNELLE — MARGE EN °C</text>
+  <path d="M 56.00 488.00 L 56.00 548.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 60.00 488.00 L 60.00 548.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="66.00" y="492.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Température intérieure</text>
+  <rect x="60.00" y="500.00" width="464.40" height="26.00" class="c-clair s-filet-1" fill="#99CCCD" stroke="#00393A38" stroke-width="1"/>
+  <text x="514.40" y="517.32" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" letter-spacing="1.68" text-anchor="end" font-variant-numeric="tabular-nums">1,8 °C</text>
+  <text x="66.00" y="544.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">30,2 POUR 32 °C ADMIS</text>
+  <path d="M 628.00 488.00 L 628.00 548.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 632.00 488.00 L 632.00 548.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="638.00" y="492.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Température intérieure</text>
+  <rect x="626.00" y="509.00" width="12.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <text x="646.00" y="517.32" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" letter-spacing="1.68" font-variant-numeric="tabular-nums">0,0 °C</text>
+  <text x="709.60" y="517.32" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="12" font-weight="500" letter-spacing="1.68">AU BORD</text>
+  <text x="638.00" y="544.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">32 POUR 32 °C ADMIS</text>
+  <text x="56.00" y="592.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE CALCUL A ÉTÉ REPRIS DEUX FOIS</text>
+  <text x="56.00" y="614.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">INDICE PRO 1 — TOITURE ET PLANCHER INTERMÉDIAIRE · INDICE PRO 2 — FACTEUR SOLAIRE DE LA VOÛTE TRANSLUCIDE ET DES LANTERNEAUX DU HALL</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Chaque zone est confortable là où l’autre est au bord : aucune marge n’est transférable d’un calcul à l’autre.</text>
+  <rect x="56.00" y="714.00" width="234.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">MARANS · 2 172 m² · 2023</text>
+</svg>

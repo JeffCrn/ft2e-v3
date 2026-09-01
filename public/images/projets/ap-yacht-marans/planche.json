@@ -1,0 +1,208 @@
+{
+  "fiche": "ap-yacht-marans",
+  "archetype": "sankey-energie",
+  "archetype_motif": "La thèse de la fiche est une proportion, et c’est le domaine propre de sankey-energie : sur un même permis, deux zones de calcul RT2012 sont conformes toutes les deux, mais ce n’est pas la même exigence qui serre. Le mécanisme `serrage` dessine ce que chaque zone garde AVANT son plafond — côté restauration-vestiaires le besoin bioclimatique passe à 0,28 % près et la consommation garde 24,63 % ; côté hall de production la consommation garde 54,6 % mais la température intérieure atteint exactement le plafond. Les deux serrages tombent dans des registres différents et dans des colonnes différentes, ce que la géométrie seule montre : deux moignons de barre contre le mur du plafond, en diagonale. Distinct des six mécanismes déjà publiés de l’archétype, et notamment de `plafonds` (Maubec), où un SEUL indicateur voit son plafond s’effondrer au passage d’une frontière : ici les plafonds ne bougent pas, il y en a trois, et c’est CELUI QUI SERRE qui change de zone. Écarté aussi `greffe` (tableau-electrique, Fountaine Pajot : l’extension sans source neuve, que cette affaire refait à l’identique) et le mécanisme `commande` du siège RESE (trois régimes d’air commandés par ce qui les exige), tous deux déjà publiés.",
+  "titre": "Atelier AP Yacht",
+  "sous_titre": "Deux zones conformes, et ce n’est pas la même exigence qui serre",
+  "cartouche_legende": "MARANS · 2 172 m² · 2023",
+  "surtitre": "SCHÉMA DE PRINCIPE · CE QUI RESTE AVANT LE PLAFOND RÉGLEMENTAIRE",
+  "vignette_surtitre": "DEUX ZONES, DEUX SERRAGES",
+  "serrage": {
+    "entete": "DEUX ZONES DE CALCUL RT2012 SOUS UN MÊME PERMIS · CHAQUE BARRE MESURE LA MARGE QUI RESTE AVANT LE PLAFOND, JAMAIS LA VALEUR ATTEINTE",
+    "plafond_mention": "LE PLAFOND RÉGLEMENTAIRE",
+    "registre_energie": "REGISTRE 1 · LES DEUX EXIGENCES D’ÉNERGIE — MARGE EN % DU PLAFOND",
+    "registre_temperature": "REGISTRE 2 · LA TEMPÉRATURE INTÉRIEURE CONVENTIONNELLE — MARGE EN °C",
+    "echelle_energie_max": 60.0,
+    "echelle_temperature_max": 2.0,
+    "mention_bord": "AU BORD",
+    "reprises_entete": "LE CALCUL A ÉTÉ REPRIS DEUX FOIS",
+    "reprises": "INDICE PRO 1 — TOITURE ET PLANCHER INTERMÉDIAIRE · INDICE PRO 2 — FACTEUR SOLAIRE DE LA VOÛTE TRANSLUCIDE ET DES LANTERNEAUX DU HALL",
+    "zones": [
+      {
+        "ordre": 1,
+        "cle": "vestiaires",
+        "nom": "Restauration et vestiaires",
+        "nom_court": "Vestiaires",
+        "detail": "854 m² DE SURFACE RT",
+        "exigences": [
+          {
+            "ordre": 1,
+            "cle": "bbio",
+            "registre": "energie",
+            "au_bord": true,
+            "libelle": "Besoin bioclimatique",
+            "valeur": 0.28,
+            "unite": "%",
+            "valeur_affichee": "0,28 %",
+            "detail": [
+              "249,3 POUR 250 ADMIS"
+            ]
+          },
+          {
+            "ordre": 2,
+            "cle": "cep",
+            "registre": "energie",
+            "au_bord": false,
+            "libelle": "Consommation conventionnelle",
+            "valeur": 24.63,
+            "unite": "%",
+            "valeur_affichee": "24,63 %",
+            "detail": [
+              "263,8 POUR 350 kWhep/m².an"
+            ]
+          },
+          {
+            "ordre": 3,
+            "cle": "tic",
+            "registre": "temperature",
+            "au_bord": false,
+            "libelle": "Température intérieure",
+            "valeur": 1.8,
+            "unite": "°C",
+            "valeur_affichee": "1,8 °C",
+            "detail": [
+              "30,2 POUR 32 °C ADMIS"
+            ]
+          }
+        ]
+      },
+      {
+        "ordre": 2,
+        "cle": "hall",
+        "nom": "Hall de production",
+        "nom_court": "Hall",
+        "detail": "1 318 m² DE SURFACE RT",
+        "exigences": [
+          {
+            "ordre": 1,
+            "cle": "bbio",
+            "registre": "energie",
+            "au_bord": false,
+            "libelle": "Besoin bioclimatique",
+            "valeur": 5.2,
+            "unite": "%",
+            "valeur_affichee": "5,2 %",
+            "detail": [
+              "85,3 POUR 90,0 ADMIS"
+            ]
+          },
+          {
+            "ordre": 2,
+            "cle": "cep",
+            "registre": "energie",
+            "au_bord": false,
+            "libelle": "Consommation conventionnelle",
+            "valeur": 54.6,
+            "unite": "%",
+            "valeur_affichee": "54,6 %",
+            "detail": [
+              "63,6 POUR 140,0 kWhep/m².an"
+            ]
+          },
+          {
+            "ordre": 3,
+            "cle": "tic",
+            "registre": "temperature",
+            "au_bord": true,
+            "libelle": "Température intérieure",
+            "valeur": 0.0,
+            "unite": "°C",
+            "valeur_affichee": "0,0 °C",
+            "detail": [
+              "32 POUR 32 °C ADMIS"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Chaque zone est confortable là où l’autre est au bord : aucune marge n’est transférable d’un calcul à l’autre.",
+  "aria_label": "Schéma de principe de deux zones de calcul thermique réglementaire sous un même permis. Deux colonnes, une par zone : à gauche la zone restauration et vestiaires, 854 mètres carrés de surface RT ; à droite le hall de production, 1 318 mètres carrés. Chaque colonne s’appuie sur un mur vertical au trait double, qui figure le plafond réglementaire, et chaque barre horizontale mesure la marge restante avant ce plafond, jamais la valeur atteinte. Premier registre, les deux exigences d’énergie, en pourcentage du plafond : côté restauration et vestiaires, le besoin bioclimatique ne laisse que 0,28 pour cent, soit un moignon de barre collé au mur, quand la consommation conventionnelle en garde 24,63 ; côté hall, le besoin bioclimatique garde 5,2 pour cent et la consommation 54,6, la plus longue barre du dessin. Second registre, la température intérieure conventionnelle, en degrés : la zone restauration et vestiaires garde 1,8 degré avant son plafond, le hall n’en garde aucun et sa barre est réduite à une marque posée sur le mur. Les deux serrages tombent ainsi dans des registres différents et dans des colonnes différentes.",
+  "a_valider_ft2e": [
+    {
+      "objet": "La température n’est pas dessinée sur la même échelle que l’énergie",
+      "source": "La synthèse RT laisse la colonne « Gain en % » VIDE sur la ligne Tic, dans les deux tableaux : FT2E ne calcule pas de gain sur la température intérieure conventionnelle.",
+      "dessin": "Le Tic est donc porté dans un SECOND REGISTRE, avec son unité propre (marge en °C, échelle 0 à 2), et non en barre proportionnelle sur l’échelle des pourcentages. Normaliser 30,2/32 à 94 % aurait affirmé une proportion que la pièce refuse de calculer."
+    },
+    {
+      "objet": "L’échelle du registre des pourcentages est plafonnée à 60 %",
+      "source": "La plus grande marge du projet est 54,6 % (Cep du hall).",
+      "dessin": "L’échelle va de 0 à 60 % pour que la plus longue barre ne touche pas le bord de sa colonne. Le choix de 60 est un choix de dessin ; la pièce ne fixe aucune borne haute."
+    },
+    {
+      "objet": "L’échelle du registre des degrés est plafonnée à 2 °C",
+      "source": "Les deux marges de Tic sont 1,8 et 0,0 °C.",
+      "dessin": "Échelle 0 à 2 °C, choisie pour la même raison. La pièce ne fixe pas de plancher de température."
+    },
+    {
+      "objet": "Les deux colonnes ont la même largeur alors que les zones n’ont pas la même surface",
+      "source": "854 m² de surface RT contre 1 318 m².",
+      "dessin": "La géométrie code la MARGE, jamais la surface : deux colonnes égales. Les deux surfaces sont écrites sous le nom de chaque zone pour que la lecture ne s’y trompe pas."
+    },
+    {
+      "objet": "L’ordre des colonnes",
+      "source": "La synthèse RT présente la zone restauration-vestiaires en premier, puis la zone hall production.",
+      "dessin": "L’ordre de la pièce est conservé : vestiaires à gauche, hall à droite."
+    },
+    {
+      "objet": "Les deux reprises du calcul sont citées ensemble, sans être attribuées à une colonne",
+      "source": "Le tableau de révision de la synthèse porte « PRO indice 1, 16/05/2022, Modification toiture et ajout traitement plancher intermédiaire » et « PRO indice 2, 25/05/2022, Modification facteur solaire voûte translucide et lanterneaux Hall production ».",
+      "dessin": "Seul l’indice 2 nomme sa zone. L’indice 1 n’en nomme aucune : les deux sont donc portés sur une ligne pleine largeur au pied du dessin, et non rattachés à une colonne. Rattacher l’indice 1 aux vestiaires aurait été une déduction."
+    },
+    {
+      "objet": "Le plafond est dessiné en filet encre DOUBLE",
+      "source": "Charte v3 : « une alerte est un signe, pas une couleur — filet doublé + mention ».",
+      "dessin": "Le mur du plafond est fait de deux filets de 1 px à 4 px d’écart, doublé de la mention « LE PLAFOND RÉGLEMENTAIRE ». Aucun trait épais hors système n’a été créé pour l’occasion."
+    },
+    {
+      "objet": "La barre de marge nulle du hall",
+      "source": "Tic du hall : 32 °C pour 32 °C admis, soit 0,0 °C de marge.",
+      "dessin": "Une barre de longueur nulle serait invisible : elle est remplacée par une marque carrée posée SUR le mur, doublée de la mention « AU BORD » et de la valeur « 0,0 °C ». Même mention pour le Bbio des vestiaires, dont la barre fait 2,4 px."
+    },
+    {
+      "objet": "La surface publiée au cartouche est la surface RT",
+      "source": "Surfaces RT 854 et 1 318 m² ; surfaces utiles 776 et 1 198 m².",
+      "dessin": "Le cartouche porte 2 172 m², somme des deux surfaces RT que le dessin écrit : la surface du cartouche et celles des colonnes doivent se répondre. Voir la question B6 de la fiche de collecte."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Le numéro d’affaire 21-074 ne paraît nulle part sur le dessin (règle dure 3).",
+    "Aucun nom de tiers : ni le maître d’ouvrage, ni le groupe, ni l’architecte, ni le maître d’œuvre, ni les bureaux d’études cotraitants, ni aucune marque d’équipement.",
+    "Aucun montant : ni le budget de travaux, ni l’estimation des lots techniques, ni les honoraires.",
+    "Les désignations de modèle du constructeur de centrales de traitement d’air ont été ÉCARTÉES du dessin comme du texte : deux d’entre elles ont la graphie d’un numéro d’affaire FT2E, et l’une, « 21-095 », est le numéro réel d’une affaire déjà publiée sur le site.",
+    "Aucune donnée d’exploitation du client : ni cadence, ni effectif de production, ni implantation de postes de travail. Les effectifs de vestiaires relevés au plan restent à la fiche et ne montent pas au dessin.",
+    "Aucune géométrie d’ouvrage : le dessin ne porte ni plan, ni façade, ni coupe réelle. Les deux colonnes sont deux registres de mesure, pas deux bâtiments."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "deux colonnes, un mur de plafond par registre, et des barres qui mesurent LA MARGE RESTANTE — vestiaires/bbio 0.28 → 2.4 px ; vestiaires/cep 24.63 → 211.8 px ; vestiaires/tic 1.8 → 464.4 px ; hall/bbio 5.2 → 44.7 px ; hall/cep 54.6 → 469.6 px ; hall/tic 0 → 0.0 px — texte masqué, les deux moignons contre le mur tombent en diagonale : Bbio à gauche au registre 1, Tic à droite au registre 2",
+    "echelles": "registre 1 : 8.60 px par point de % (0 à 60 % sur 516 px) ; registre 2 : 258.00 px par °C (0 à 2 °C sur 516 px) — DEUX échelles, parce que la pièce ne calcule pas de gain en % sur la température",
+    "topologie": "colonnes à x 56 et 628, largeur 516, gouttière 56 ; murs (filet doublé, écart 4) y 288–428 et 488–548",
+    "chiffre_unique": "aucun chiffre de relevé — les six marges sont des cotes mono 12 ; seules les deux marges « au bord » sont en encre pleine, les quatre autres au pivot",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "phrase_principe": "110 signes — 935 px mesurés pour 1088 disponibles",
+    "reserve_profonde": "cartouche 234 x 30 px = 7020 px², soit 0.73 % de la planche",
+    "bas_du_dessin": "détail du registre 2 à 544, reprises à 614, phrase à 688, cartouche 714–744, marge basse 56 px",
+    "depassements": "18 chaînes mesurées, 0 dépassement"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "les deux colonnes, les deux murs de plafond par registre et les six barres de marge à l’échelle de leur registre, plus les deux marques « au bord » — libellés d’exigence, détails chiffrés et reprises laissés à la planche",
+    "echelles": "registre 1 : 2.133 px par point de % ; registre 2 : 64.0 px par °C, sur 128 px de colonne",
+    "bas_du_dessin": "légende de la marque à 172 px, marge basse 28 px",
+    "depassements": "3 chaînes mesurées, 0 dépassement"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les deux colonnes nommées, les deux registres nommés, les deux murs de plafond et les six barres de marge avec leur valeur — libellés d’exigence, détails chiffrés, reprises, phrase de principe et cartouche laissés à la planche",
+    "bas_du_dessin": "légende de la marque à 288 px, marge basse 80 px",
+    "echelles": "registre 1 : 4.00 px par point de % ; registre 2 : 120.0 px par °C, sur 240 px de colonne",
+    "depassements": "9 chaînes mesurées, 0 dépassement"
+  }
+}
