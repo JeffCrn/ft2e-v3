@@ -2070,6 +2070,591 @@ def composer_appui_convergence(donnees):
                                    "la sous-mesure d’Archivo 600"))
 
 
+# ── Mécanisme `compensation` — Les Cabanes Urbaines, La Rochelle (2026-09-01) ─
+#
+# Sixième mécanisme du compositeur. La thèse n'est ni un découpage, ni un
+# mouvement, ni une convergence : c'est une SUBSTITUTION. Les planchers n'ont
+# pas été traités coupe-feu ; le bâtiment ne forme donc qu'un seul compartiment,
+# et ce que la matière ne fait pas, la détection le fait.
+#
+# La géométrie porte trois affirmations, et rien d'autre :
+#   1. le plan qui manque — deux traits INTERROMPUS entre les trois niveaux,
+#      épaisseur 2 px, motif long : ils ne peuvent pas se confondre avec les
+#      filets de 1 px pleins qui bordent les bandes (piège relevé en N13 et
+#      N14 — deux traits doivent différer par autre chose que leur position) ;
+#   2. ce qui le remplace — les marques de zone, niveau par niveau, avec la
+#      même convention que `convergence` (pleine = détection automatique,
+#      évidée = déclencheurs manuels), toujours doublées du texte ;
+#   3. ce qui en découle — UNE SEULE accolade embrasse l'empilement entier et
+#      aboutit à l'équation que portent les trois plans de zonage de FT2E.
+#      C'est ce qui distingue le dessin de `convergence` : là-bas, chaque
+#      niveau envoyait son collecteur vers un nœud ; ici rien ne converge,
+#      l'accolade dit une ÉGALITÉ, pas un rassemblement.
+#
+# La bande basse est la vérification : deux foyers de contrôle d'efficacité
+# réellement allumés, dont les longueurs de barre sont proportionnelles aux
+# deux temps de déclenchement mesurés au procès-verbal. Ce n'est pas une
+# conservation — rien ne se somme —, c'est une comparaison à échelle commune ;
+# l'interdit posé en N14 (« jamais de schéma proportionnel sur des valeurs qui
+# ne bouclent pas ») ne porte pas sur ce cas, et le rapport dessiné est publié
+# au bloc `controles`.
+
+CP_Y_ENTETE = 190
+CP_Y0 = 204                          # tête de l'empilement des niveaux
+CP_H_ROW = 76
+CP_ECART_ROW = 22                    # l'entre-deux où passe le plancher
+CP_N_X0 = MARGE                      # 56
+CP_N_X1 = 660
+CP_ACCOLADE_X = 682                  # la barre unique de l'accolade
+CP_C_X0 = 704                        # colonne des conséquences
+CP_C_X1 = W - MARGE                  # 1144
+CP_ECART_C = 12
+CP_MARQUE = 9
+CP_PAS_MARQUE = 18
+CP_PAD = 16
+CP_Y_PREUVE_TAG = 506
+CP_Y_PREUVE = 518
+CP_H_PREUVE = 40
+CP_ECART_PREUVE = 10
+CP_BARRE_X = 470                     # origine commune des deux barres
+CP_BARRE_L = 470                     # longueur de la plus longue
+CP_H_BARRE_PREUVE = 10
+CP_Y_LEGENDE = 632
+CP_Y_REPORT = 654
+CP_Y_PHRASE = 686
+CP_Y_CARTOUCHE = 714
+CP_H_CARTOUCHE = 30
+
+
+def _plancher_interrompu(A, x0, x1, y, epaisseur=2.0, motif="12 7"):
+    """Le plan qui manque : un trait interrompu, plus épais que les filets de
+    bande, jamais un filet de 1 px. Ce qui n'arrête pas le feu ne se dessine
+    pas d'un trait plein."""
+    return A(f'  <line x1="{x0:.2f}" y1="{y:.2f}" x2="{x1:.2f}" y2="{y:.2f}" '
+             f'class="s-encre" stroke="{JETON["encre"]}" '
+             f'stroke-width="{epaisseur}" stroke-dasharray="{motif}"/>')
+
+
+def _accolade_compensation(A, x, y_haut, y_bas, x_pile, x_sortie, cy,
+                           epaisseur=1.5, retour=10.0):
+    """L'accolade unique : deux retours vers l'empilement, une barre verticale
+    qui l'embrasse en entier, un départ horizontal vers l'égalité. Elle ne
+    collecte pas des niveaux un à un — elle les prend ensemble."""
+    A(ligne(x_pile, y_haut, x, y_haut, "encre", epaisseur))
+    A(ligne(x_pile, y_bas, x, y_bas, "encre", epaisseur))
+    A(ligne(x, y_haut, x, y_bas, "encre", epaisseur))
+    A(ligne(x, cy, x_sortie - 9, cy, "encre", epaisseur))
+    A(fleche(x_sortie, cy, "encre"))
+    return retour
+
+
+def composer_compensation(donnees):
+    cp = donnees["compensation"]
+    niveaux = cp["niveaux"]
+    consequences = cp["consequences"]
+    preuve = cp["preuve"]
+    out = []
+    A = out.append
+    depassements = []
+    mesures = 0
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0,
+                  marge=1.0):
+        """Chaque chaîne dessinée est mesurée contre la largeur intérieure de
+        son contenant, et l'écart est publié. Un `assert` rompt la composition
+        avant tout rendu (recette de la N14)."""
+        nonlocal mesures
+        mesures += 1
+        largeur = mesurer(texte_mesure, corps, profil, tracking) * marge
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return dispo - largeur
+
+    marges = []
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    marges.append(controler("surtitre", donnees["surtitre"], 11, "mono", UTILE,
+                            11 * 0.14))
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    marges.append(controler("titre", donnees["titre"], 30, "sans-600", UTILE,
+                            marge=1.2))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre",
+            wdth=112))
+    marges.append(controler("sous-titre", donnees["sous_titre"], 16, "sans-400",
+                            UTILE))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-têtes de registre ─────────────────────────────────────────────────
+    marges.append(controler("en-tête coupe", cp["entete_coupe"], 10, "mono",
+                            CP_N_X1 - CP_N_X0, 10 * 0.14))
+    A(texte(CP_N_X0, CP_Y_ENTETE, cp["entete_coupe"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    marges.append(controler("en-tête conséquences", cp["entete_consequence"],
+                            10, "mono", CP_C_X1 - CP_C_X0, 10 * 0.14))
+    A(texte(CP_C_X1, CP_Y_ENTETE, cp["entete_consequence"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── L'empilement des trois niveaux, lu du haut vers le bas comme une coupe
+    #    — et, entre eux, le plan qui manque. ─────────────────────────────────
+    marques_max = max(n["zda"] + n["zdm"] for n in niveaux)
+    dispo_texte = ((CP_N_X1 - CP_PAD) - (CP_N_X0 + CP_PAD)
+                   - marques_max * CP_PAS_MARQUE - 14)
+    total_zda = total_zdm = 0
+    planchers = []
+    y = CP_Y0
+    for i, n in enumerate(niveaux):
+        A(rect_bord(CP_N_X0, y, CP_N_X1 - CP_N_X0, CP_H_ROW, "calcaire",
+                    "filet-1"))
+        marges.append(controler(f'niveau {n["cle"]}', n["libelle"], 15,
+                                "sans-600", dispo_texte, marge=1.2))
+        A(texte(CP_N_X0 + CP_PAD, y + 26, n["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        marges.append(controler(f'usages {n["cle"]}', n["usages"], 10, "mono",
+                                dispo_texte, 10 * 0.14))
+        A(texte(CP_N_X0 + CP_PAD, y + 46, n["usages"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        marges.append(controler(f'repères {n["cle"]}', n["reperes"], 10, "mono",
+                                dispo_texte, 10 * 0.14))
+        A(texte(CP_N_X0 + CP_PAD, y + 64, n["reperes"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14, tabulaire=True))
+        _marques_du_niveau(A, n, CP_N_X1 - CP_PAD, y + CP_H_ROW / 2)
+        total_zda += n["zda"]
+        total_zdm += n["zdm"]
+        if i < len(niveaux) - 1:
+            planchers.append(y + CP_H_ROW + CP_ECART_ROW / 2)
+        y += CP_H_ROW + CP_ECART_ROW
+    bas_pile = y - CP_ECART_ROW
+    cy_pile = (CP_Y0 + bas_pile) / 2
+
+    for y_p in planchers:
+        _plancher_interrompu(A, CP_N_X0, CP_N_X1, y_p)
+    # Le libellé du plan manquant se pose sur le PREMIER entre-deux, à fond
+    # papier : le trait passe dessous et ne le barre pas.
+    libelle_plan = cp["plan_manquant"]
+    # ⚠ La mesure calibrée sous-estime le mono au rendu : sans marge, le
+    # dernier tiret du trait interrompu mord sur la dernière lettre.
+    largeur_plan = mesurer(libelle_plan, 10, "mono", 10 * 0.14) * 1.08
+    marges.append(controler("plan manquant", libelle_plan, 10, "mono",
+                            CP_N_X1 - CP_N_X0 - 2 * CP_PAD, 10 * 0.14))
+    x_plan = CP_N_X0 + CP_PAD
+    A(rect(x_plan - 6, planchers[0] - 8, largeur_plan + 12, 16, "papier"))
+    A(texte(x_plan, planchers[0] + 4, libelle_plan, "mono", 10, 500, "encre",
+            tracking=10 * 0.14))
+
+    # ── L'accolade unique et les trois conséquences ──────────────────────────
+    # Les hauteurs sont DÉRIVÉES du contenu de chaque bloc — jamais
+    # réparties à égalité ni réglées à l'œil : le bloc de l'égalité porte
+    # une barre d'alarme et une ligne de détail de plus, il est donc plus
+    # haut. Le surplus de place se répartit dans le même rapport.
+    besoins = [34 + (12 if c.get("alarme") else 0) + 14 * len(c["detail"])
+               for c in consequences]
+    dispo_c = (bas_pile - CP_Y0) - CP_ECART_C * (len(consequences) - 1)
+    hauteurs_c = [dispo_c * b / sum(besoins) for b in besoins]
+    centres_c = []
+    y = CP_Y0
+    for c, h_c in zip(consequences, hauteurs_c):
+        if c["pointille"]:
+            A(_rect_pointille(CP_C_X0, y, CP_C_X1 - CP_C_X0, h_c, "papier",
+                              "filet-1"))
+        else:
+            A(rect_bord(CP_C_X0, y, CP_C_X1 - CP_C_X0, h_c, "calcaire",
+                        "filet-1"))
+            A(rect(CP_C_X0 + 1, y + 1, CP_C_X1 - CP_C_X0 - 2, H_BARRE, "clair"))
+        décalage = 12 if c.get("alarme") else 0
+        largeur_c = CP_C_X1 - CP_C_X0 - 2 * CP_PAD
+        marges.append(controler(f'conséquence {c["cle"]}', c["libelle"], 15,
+                                "sans-600", largeur_c, marge=1.2))
+        A(texte(CP_C_X0 + CP_PAD, y + 26 + décalage, c["libelle"], "sans", 15,
+                600, "encre", wdth=112))
+        for k, l in enumerate(c["detail"]):
+            marges.append(controler(f'détail {c["cle"]} l.{k + 1}', l, 10,
+                                    "mono", largeur_c, 10 * 0.14))
+            A(texte(CP_C_X0 + CP_PAD, y + 46 + décalage + k * 14, l, "mono",
+                    10, 500, "pivot", tracking=10 * 0.14))
+        centres_c.append(y + h_c / 2)
+        y += h_c + CP_ECART_C
+
+    i_egalite = next(k for k, c in enumerate(consequences)
+                     if not c["pointille"])
+    _accolade_compensation(A, CP_ACCOLADE_X, CP_Y0, bas_pile, CP_N_X1,
+                           CP_C_X0, centres_c[i_egalite])
+
+    # ── La bande basse : la compensation vérifiée au feu réel ────────────────
+    marges.append(controler("en-tête preuve", preuve["entete"], 10, "mono",
+                            UTILE, 10 * 0.14))
+    A(texte(MARGE, CP_Y_PREUVE_TAG, preuve["entete"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    essais = preuve["essais"]
+    plus_long = max(e["secondes"] for e in essais)
+    echelle = CP_BARRE_L / plus_long
+    longueurs = []
+    # Le zéro commun : UNE ligne verticale qui traverse les deux rangées,
+    # tracée avant les barres. Un trait posé à l'origine de chaque barre
+    # disparaissait sous elle (relevé au PNG de contrôle à 1152 px).
+    bas_bande = (CP_Y_PREUVE + len(essais) * CP_H_PREUVE
+                 + (len(essais) - 1) * CP_ECART_PREUVE)
+    A(ligne(CP_BARRE_X, CP_Y_PREUVE - 6, CP_BARRE_X, bas_bande + 6,
+            "encre", 1.0))
+    y = CP_Y_PREUVE
+    for e in essais:
+        A(rect_bord(MARGE, y, UTILE, CP_H_PREUVE, "papier", "filet-3"))
+        dispo_e = CP_BARRE_X - (MARGE + CP_PAD) - 20
+        marges.append(controler(f'essai {e["cle"]}', e["libelle"], 15,
+                                "sans-600", dispo_e, marge=1.2))
+        A(texte(MARGE + CP_PAD, y + 19, e["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        marges.append(controler(f'combustible {e["cle"]}', e["detail"], 10,
+                                "mono", dispo_e, 10 * 0.14))
+        A(texte(MARGE + CP_PAD, y + 34, e["detail"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        longueur = e["secondes"] * echelle
+        longueurs.append(longueur)
+        y_barre = y + (CP_H_PREUVE - CP_H_BARRE_PREUVE) / 2
+        A(rect(CP_BARRE_X, y_barre, longueur, CP_H_BARRE_PREUVE, "encre"))
+        marges.append(controler(f'temps {e["cle"]}', e["valeur"], 13,
+                                "mono",
+                                CP_C_X1 - (CP_BARRE_X + longueur + 12),
+                                13 * 0.14))
+        A(texte(CP_BARRE_X + longueur + 12, y + 25, e["valeur"], "mono",
+                13, 600, "encre", tracking=13 * 0.14, tabulaire=True))
+        y += CP_H_PREUVE + CP_ECART_PREUVE
+    bas_preuve = y - CP_ECART_PREUVE
+
+    # ── La légende des deux marques — la couleur ne porte jamais seule ───────
+    x = MARGE
+    for entree in cp["legende"]:
+        A(_marque_zone(x, CP_Y_LEGENDE - CP_MARQUE + 1, CP_MARQUE,
+                       entree["marque"] == "pleine"))
+        largeur = mesurer(entree["libelle"], 10, "mono", 10 * 0.14)
+        marges.append(controler(f'légende {entree["marque"]}',
+                                entree["libelle"], 10, "mono", 380, 10 * 0.14))
+        A(texte(x + CP_MARQUE + 8, CP_Y_LEGENDE, entree["libelle"], "mono", 10,
+                500, "pivot", tracking=10 * 0.14))
+        x += CP_MARQUE + 8 + largeur + 40
+
+    # ── Le report : le périmètre exact de la détection, une ligne ────────────
+    marges.append(controler("report", cp["report"], 10, "mono", UTILE,
+                            10 * 0.14))
+    A(texte(MARGE, CP_Y_REPORT, cp["report"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    marges.append(controler("phrase de principe", donnees["phrase_principe"],
+                            17, "sans-400", UTILE))
+    A(texte(MARGE, CP_Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, CP_Y_CARTOUCHE, largeur, CP_H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, CP_Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    assert not depassements, (
+        "dépassement de colonne avant rendu : " + " ; ".join(depassements))
+
+    total = total_zda + total_zdm
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"{total} marques de zone sur {len(niveaux)} niveaux "
+                         f"({total_zda} pleines pour la détection automatique, "
+                         f"{total_zdm} évidées pour les déclencheurs manuels) ; "
+                         f"{len(planchers)} planchers dessinés en trait "
+                         f"INTERROMPU de 2 px — le plan qui manque — contre des "
+                         f"filets de bande pleins de 1 px ; UNE accolade "
+                         f"embrasse l’empilement entier et aboutit à l’égalité, "
+                         f"sans collecteur par niveau : rien ne converge, une "
+                         f"seule zone est affirmée",
+        "comptage": f"détection : {' + '.join(str(n['zda'] + n['zdm']) for n in niveaux)}"
+                    f" = {total} zones ; mise en sécurité : 1 zone d’alarme = "
+                    f"1 zone de compartimentage = le bâtiment ; "
+                    f"{len([c for c in consequences if c['pointille']])} "
+                    f"registres en filet interrompu, qu’aucune liaison "
+                    f"n’atteint",
+        "hauteurs_des_consequences": " · ".join(
+            f"{c['cle']} {h:.0f} px pour {b} px de contenu"
+            for c, h, b in zip(consequences, hauteurs_c, besoins)),
+        "zero_commun": f"une ligne verticale unique à x {CP_BARRE_X}, "
+                       f"de y {CP_Y_PREUVE - 6} à {bas_bande + 6} — les deux "
+                       f"barres partent du même zéro",
+        "proportion_des_barres": f"échelle commune {echelle:.4f} px/s — "
+                                 f"{essais[0]['secondes']} s → "
+                                 f"{longueurs[0]:.0f} px, "
+                                 f"{essais[1]['secondes']} s → "
+                                 f"{longueurs[1]:.0f} px ; rapport dessiné "
+                                 f"{longueurs[1] / longueurs[0]:.2f}, rapport "
+                                 f"mesuré au procès-verbal "
+                                 f"{essais[1]['secondes'] / essais[0]['secondes']:.2f} "
+                                 f"— comparaison de deux durées, aucune somme "
+                                 f"n’est affirmée",
+        "topologie": f"empilement (x {CP_N_X0}–{CP_N_X1}, y {CP_Y0}–"
+                     f"{bas_pile:.0f}) → accolade x {CP_ACCOLADE_X} → "
+                     f"conséquences (x {CP_C_X0}–{CP_C_X1}) ; l’accolade "
+                     f"n’aboutit qu’au bloc plein, les deux registres en filet "
+                     f"interrompu ne reçoivent aucune liaison",
+        "bas_du_dessin": f"empilement jusqu’à {bas_pile:.0f} px, bande de "
+                         f"preuve {CP_Y_PREUVE}–{bas_preuve:.0f}, légende à "
+                         f"{CP_Y_LEGENDE}, report à {CP_Y_REPORT}, phrase de "
+                         f"principe à {CP_Y_PHRASE}, cartouche "
+                         f"{CP_Y_CARTOUCHE}–{CP_Y_CARTOUCHE + CP_H_CARTOUCHE}, "
+                         f"marge basse {H - (CP_Y_CARTOUCHE + CP_H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {CP_H_CARTOUCHE} px = "
+                            f"{largeur * CP_H_CARTOUCHE} px², soit "
+                            f"{largeur * CP_H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": f"{mesures} chaînes mesurées, 0 dépassement, marge la "
+                        f"plus faible {min(marges):.1f} px"
+                        if not depassements else depassements,
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_compensation(donnees):
+    """La vignette : le motif sans son appareil — trois bandes de marques, deux
+    planchers interrompus, une accolade, un bloc plein. Ce qu'elle laisse : les
+    libellés d'usage, les repères de zone, les détails des conséquences, la
+    bande de preuve, la légende, le report et le cartouche."""
+    cp = donnees["compensation"]
+    niveaux = cp["niveaux"]
+    consequences = cp["consequences"]
+    out = []
+    A = out.append
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, ("filet-1", "filet-2", "encre"))
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 26, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    y0, h_row, ecart = 46, 30, 14
+    n_x0, n_x1 = V_MARGE, 138
+    c_x0, c_x1 = 186, VW - V_MARGE
+    cote, pas = 5, 9
+
+    planchers = []
+    y = y0
+    for i, n in enumerate(niveaux):
+        A(rect_bord(n_x0, y, n_x1 - n_x0, h_row, "calcaire", "filet-1"))
+        A(texte(n_x0 + 8, y + h_row / 2 + 4, n["libelle_court"], "sans", 11,
+                600, "encre", wdth=112))
+        _marques_du_niveau(A, n, n_x1 - 8, y + h_row / 2, cote, pas)
+        if i < len(niveaux) - 1:
+            planchers.append(y + h_row + ecart / 2)
+        y += h_row + ecart
+    bas = y - ecart
+    for y_p in planchers:
+        # 2 px à 300 comme à 1200 : le trait du plan manquant ne se réduit pas
+        # avec le gabarit, sans quoi il cesse de se distinguer des filets.
+        _plancher_interrompu(A, n_x0, n_x1, y_p, 2.0, "7 4")
+
+    h_c = ((bas - y0) - 8 * (len(consequences) - 1)) / len(consequences)
+    centres_c = []
+    y = y0
+    for c in consequences:
+        if c["pointille"]:
+            A(_rect_pointille(c_x0, y, c_x1 - c_x0, h_c, "papier", "filet-1",
+                              "4 3"))
+        else:
+            A(rect_bord(c_x0, y, c_x1 - c_x0, h_c, "calcaire", "filet-1"))
+            A(rect(c_x0 + 1, y + 1, c_x1 - c_x0 - 2, 6, "clair"))
+        décalage = 3 if c.get("alarme") else 0
+        A(texte(c_x0 + 9, y + h_c / 2 + 4 + décalage, c["libelle_court"],
+                "sans", 11, 600, "encre", wdth=112))
+        centres_c.append(y + h_c / 2)
+        y += h_c + 8
+
+    i_egalite = next(k for k, c in enumerate(consequences)
+                     if not c["pointille"])
+    x_acc = (n_x1 + c_x0) / 2
+    A(ligne(n_x1, y0, x_acc, y0, "encre", 1.5))
+    A(ligne(n_x1, bas, x_acc, bas, "encre", 1.5))
+    A(ligne(x_acc, y0, x_acc, bas, "encre", 1.5))
+    A(ligne(x_acc, centres_c[i_egalite], c_x0 - 7, centres_c[i_egalite],
+            "encre", 1.5))
+    A(fleche(c_x0, centres_c[i_egalite], "encre", "droite", 7))
+
+    A("</svg>")
+    total = sum(n["zda"] + n["zdm"] for n in niveaux)
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "carte de projet mesurée à 274–296 px — échelle "
+                            f"{274/VW:.2f} à {296/VW:.2f}",
+        "motif": f"{total} marques sur {len(niveaux)} bandes, "
+                 f"{len(planchers)} planchers interrompus de 2 px, une "
+                 f"accolade unique et un bloc plein — usages, repères, détails "
+                 f"des conséquences, bande de preuve, légende, report et "
+                 f"cartouche laissés à la planche",
+        "trait_du_plan_manquant": "2,0 px à 300 comme à 1200 — l’épaisseur ne "
+                                  "se réduit pas avec le gabarit, sinon le "
+                                  "trait cesse de se distinguer des filets de "
+                                  "bande (1 px)",
+        "corps_minimal": "9 px — rien sous 9, rien ne touche un bord "
+                         f"(marge {V_MARGE} px, bas du dessin {bas:.0f} px)",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_compensation(donnees):
+    """L'appui : le motif entier à l'échelle 1, densité intermédiaire. Il garde
+    les libellés de niveau, les marques, les planchers interrompus, l'accolade,
+    les trois conséquences au libellé court, et une bande basse pour les deux
+    temps de déclenchement. Il laisse les usages, les repères, les détails, la
+    légende, le report, la phrase de principe et le cartouche."""
+    cp = donnees["compensation"]
+    niveaux = cp["niveaux"]
+    consequences = cp["consequences"]
+    preuve = cp["preuve"]
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1", "filet-2", "filet-3", "encre"))
+
+    y0, h_row, ecart = 60, 50, 24
+    n_x0, n_x1 = A_MARGE, 216
+    c_x0, c_x1 = 296, AW - A_MARGE
+    cote, pas = 7, 13
+    depassements_appui = []
+
+    marques_max = max(n["zda"] + n["zdm"] for n in niveaux)
+    dispo_libelle = (n_x1 - 10 - marques_max * pas) - (n_x0 + 10) - 6
+
+    planchers = []
+    y = y0
+    for i, n in enumerate(niveaux):
+        A(rect_bord(n_x0, y, n_x1 - n_x0, h_row, "calcaire", "filet-1"))
+        cy = y + h_row / 2
+        libelle_n = n["libelle_court"]
+        largeur_n = mesurer(libelle_n, 13, "sans-600") * 1.2
+        if largeur_n > dispo_libelle:
+            depassements_appui.append(
+                f"{n['cle']} : {largeur_n:.0f} px pour {dispo_libelle:.0f} px")
+        A(texte(n_x0 + 10, cy + 4, libelle_n, "sans", 13, 600, "encre",
+                wdth=112))
+        _marques_du_niveau(A, n, n_x1 - 10, cy, cote, pas)
+        if i < len(niveaux) - 1:
+            planchers.append(y + h_row + ecart / 2)
+        y += h_row + ecart
+    bas = y - ecart
+    for y_p in planchers:
+        _plancher_interrompu(A, n_x0, n_x1, y_p, 2.0, "9 5")
+    # Le premier entre-deux porte le libellé, sur fond papier : le trait
+    # passe dessous. Le second reste nu — même graphique, même sens.
+    libelle_plan = cp["plan_manquant_court"]
+    largeur_plan = mesurer(libelle_plan, 9, "mono", 9 * 0.14) * 1.08
+    if largeur_plan > n_x1 - n_x0 - 12:
+        depassements_appui.append(
+            f"plan manquant : {largeur_plan:.0f} px pour "
+            f"{n_x1 - n_x0 - 12} px")
+    # ⚠ Le libellé se pose SOUS le trait, pas dessus : la bande de l’appui ne
+    # fait que 192 px, et un fond papier de 150 px y masquait le trait presque
+    # entier — l’interruption cessait de se lire (relevé au PNG à 552 px).
+    A(texte(n_x0 + 2, planchers[0] + 12, libelle_plan, "mono", 9, 500,
+            "pivot", tracking=9 * 0.14))
+
+    h_c = ((bas - y0) - 10 * (len(consequences) - 1)) / len(consequences)
+    centres_c = []
+    y = y0
+    for c in consequences:
+        if c["pointille"]:
+            A(_rect_pointille(c_x0, y, c_x1 - c_x0, h_c, "papier", "filet-1"))
+        else:
+            A(rect_bord(c_x0, y, c_x1 - c_x0, h_c, "calcaire", "filet-1"))
+            A(rect(c_x0 + 1, y + 1, c_x1 - c_x0 - 2, 7, "clair"))
+        décalage = 4 if c.get("alarme") else 0
+        libelle_c = c["libelle_court"]
+        largeur_c = mesurer(libelle_c, 13, "sans-600") * 1.2
+        if largeur_c > c_x1 - c_x0 - 24:
+            depassements_appui.append(
+                f"{c['cle']} : {largeur_c:.0f} px pour {c_x1 - c_x0 - 24} px")
+        A(texte(c_x0 + 12, y + h_c / 2 - 3 + décalage, libelle_c, "sans", 13,
+                600, "encre", wdth=112))
+        detail_c = c["detail_appui"]
+        largeur_d = mesurer(detail_c, 9, "mono", 9 * 0.14)
+        if largeur_d > c_x1 - c_x0 - 24:
+            depassements_appui.append(
+                f"détail {c['cle']} : {largeur_d:.0f} px pour "
+                f"{c_x1 - c_x0 - 24} px")
+        A(texte(c_x0 + 12, y + h_c / 2 + 13 + décalage, detail_c, "mono", 9,
+                500, "pivot", tracking=9 * 0.14))
+        centres_c.append(y + h_c / 2)
+        y += h_c + 10
+
+    i_egalite = next(k for k, c in enumerate(consequences)
+                     if not c["pointille"])
+    x_acc = (n_x1 + c_x0) / 2
+    A(ligne(n_x1, y0, x_acc, y0, "encre", 1.5))
+    A(ligne(n_x1, bas, x_acc, bas, "encre", 1.5))
+    A(ligne(x_acc, y0, x_acc, bas, "encre", 1.5))
+    A(ligne(x_acc, centres_c[i_egalite], c_x0 - 8, centres_c[i_egalite],
+            "encre", 1.5))
+    A(fleche(c_x0, centres_c[i_egalite], "encre", "droite", 8))
+
+    # La bande basse : les deux temps, à la même échelle qu'à la planche.
+    essais = preuve["essais"]
+    plus_long = max(e["secondes"] for e in essais)
+    barre_x = 150
+    barre_l = 240
+    echelle = barre_l / plus_long
+    y = bas + 22
+    longueurs = []
+    for e in essais:
+        libelle_e = e["libelle_court"]
+        largeur_e = mesurer(libelle_e, 11, "mono", 11 * 0.14)
+        if largeur_e > barre_x - n_x0 - 12:
+            depassements_appui.append(
+                f"{e['cle']} : {largeur_e:.0f} px pour {barre_x - n_x0 - 12} px")
+        A(texte(n_x0, y + 8, libelle_e, "mono", 11, 500, "pivot",
+                tracking=11 * 0.14))
+        longueur = e["secondes"] * echelle
+        longueurs.append(longueur)
+        A(rect(barre_x, y + 1, longueur, 8, "encre"))
+        A(ligne(barre_x, y - 2, barre_x, y + 11, "encre", 1.0))
+        A(texte(barre_x + longueur + 10, y + 8, e["valeur"], "mono", 11, 600,
+                "encre", tracking=11 * 0.14, tabulaire=True))
+        y += 26
+    bas_preuve = y - 26 + 11
+
+    A("</svg>")
+    total = sum(n["zda"] + n["zdm"] for n in niveaux)
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"les {len(niveaux)} niveaux avec leurs {total} marques, les "
+              f"{len(planchers)} planchers interrompus, l’accolade unique, les "
+              f"{len(consequences)} conséquences au libellé court et la bande "
+              f"des deux temps de déclenchement — usages, repères, détails, "
+              f"légende, report, phrase de principe et cartouche laissés à la "
+              f"planche",
+        bas=f"empilement jusqu’à {bas:.0f} px, bande de preuve "
+            f"{bas + 22:.0f}–{bas_preuve:.0f} px, marge basse "
+            f"{AH - bas_preuve:.0f} px",
+        proportion_des_barres=f"échelle {echelle:.4f} px/s — "
+                              f"{longueurs[0]:.0f} px et {longueurs[1]:.0f} px, "
+                              f"rapport {longueurs[1] / longueurs[0]:.2f}",
+        libelles=f"colonne de niveau {dispo_libelle:.0f} px (marques déduites, "
+                 f"{marques_max} au plus) — "
+                 + (", ".join(depassements_appui) if depassements_appui
+                    else "aucun dépassement, marge de 20 % prise sur la "
+                         "sous-mesure d’Archivo 600"))
+
+
 if __name__ == "__main__":
     import json as _json
     import sys
@@ -2085,6 +2670,10 @@ if __name__ == "__main__":
     elif "inversion" in _d:
         executer(composer_inversion, composer_vignette_inversion,
                  composer_appui_inversion)
+    elif "compensation" in _d:
+        executer(composer_compensation,
+                 composer_vignette_compensation,
+                 composer_appui_compensation)
     elif "convergence" in _d:
         executer(composer_convergence, composer_vignette_convergence,
                  composer_appui_convergence)

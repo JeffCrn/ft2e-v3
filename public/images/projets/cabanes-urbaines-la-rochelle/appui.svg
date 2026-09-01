@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la mesure compensatoire de sécurité incendie d’un établissement sportif et culturel de trois niveaux. Les planchers n’ont pas été traités coupe-feu : aucun recoupement horizontal ne sépare les niveaux, et deux traits interrompus le figurent entre les étages. En compensation, la détection est généralisée : quatorze zones sur trois niveaux — onze zones de détection automatique et trois zones de déclencheurs manuels, une par niveau —, soit quatre zones au second étage (pôle santé, salle de yoga, circulations et combles), quatre au premier étage (bureaux, salles d’enseignement, circulations et combles) et six au rez-de-chaussée (salle d’escalade, salle de spectacles et autres locaux, circulations, cuisine, restaurant). L’installation compte 87 détecteurs automatiques et 16 déclencheurs manuels, soit 103 points adressés un à un sur une centrale de catégorie A à équipement d’alarme de type 1 qui en admet 128. Une accolade unique embrasse les trois niveaux et aboutit à l’équation portée par les plans de zonage : une seule zone d’alarme et une seule zone de compartimentage, le bâtiment, sans temporisation. Deux fonctions restent hors du centralisateur, en filet interrompu : les clapets coupe-feu, autocommandés par fusible thermique faute de limite de compartimentage à tenir, et le désenfumage des cages d’escalier, commandé à la main en pied d’escalier. En bande basse, la vérification de la compensation par deux foyers de contrôle d’efficacité allumés à la réception : deux plaques et demie de mousse en salle d’escalade, sous six mètres de hauteur libre, déclenchent en 2 minutes 30 secondes ; neuf bûchettes de hêtre en salle d’enseignement déclenchent en 11 minutes 20 secondes. Les longueurs des deux barres sont proportionnelles à ces deux durées.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">MESURE COMPENSATOIRE</text>
+  <rect x="24.00" y="60.00" width="192.00" height="50.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="34.00" y="89.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">R+2</text>
+  <rect x="199.50" y="82.00" width="6.00" height="6.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="186.00" y="81.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="173.00" y="81.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="160.00" y="81.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="24.00" y="134.00" width="192.00" height="50.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="34.00" y="163.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">R+1</text>
+  <rect x="199.50" y="156.00" width="6.00" height="6.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="186.00" y="155.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="173.00" y="155.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="160.00" y="155.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="24.00" y="208.00" width="192.00" height="50.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="34.00" y="237.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">RdC</text>
+  <rect x="199.50" y="230.00" width="6.00" height="6.00" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1"/>
+  <rect x="186.00" y="229.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="173.00" y="229.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="160.00" y="229.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="147.00" y="229.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <rect x="134.00" y="229.50" width="7.00" height="7.00" class="c-encre" fill="#00393A"/>
+  <line x1="24.00" y1="122.00" x2="216.00" y2="122.00" class="s-encre" stroke="#00393A" stroke-width="2.0" stroke-dasharray="9 5"/>
+  <line x1="24.00" y1="196.00" x2="216.00" y2="196.00" class="s-encre" stroke="#00393A" stroke-width="2.0" stroke-dasharray="9 5"/>
+  <text x="26.00" y="134.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">PLANCHERS NON RECOUPÉS</text>
+  <rect x="296.00" y="60.00" width="232.00" height="59.33" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="308.00" y="86.67" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Planchers</text>
+  <text x="308.00" y="102.67" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">NON TRAITÉ COUPE-FEU</text>
+  <rect x="296.00" y="129.33" width="232.00" height="59.33" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="297.00" y="130.33" width="230.00" height="7.00" class="c-clair" fill="#99CCCD"/>
+  <text x="308.00" y="160.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">ZA01 = ZC01</text>
+  <text x="308.00" y="176.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">SANS TEMPORISATION</text>
+  <rect x="296.00" y="198.67" width="232.00" height="59.33" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="308.00" y="225.33" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Hors CMSI</text>
+  <text x="308.00" y="241.33" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">FUSIBLE · COMMANDE MANUELLE</text>
+  <path d="M 216.00 60.00 L 256.00 60.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 216.00 258.00 L 256.00 258.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 256.00 60.00 L 256.00 258.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 256.00 159.00 L 288.00 159.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 296.00 159.00 L 288.00 155.00 L 288.00 163.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="24.00" y="288.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">Escalade</text>
+  <rect x="150.00" y="281.00" width="52.94" height="8.00" class="c-encre" fill="#00393A"/>
+  <path d="M 150.00 278.00 L 150.00 291.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="212.94" y="288.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="600" letter-spacing="1.54" font-variant-numeric="tabular-nums">2 min 30 s</text>
+  <text x="24.00" y="314.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">Enseignement</text>
+  <rect x="150.00" y="307.00" width="240.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <path d="M 150.00 304.00 L 150.00 317.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <text x="400.00" y="314.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="600" letter-spacing="1.54" font-variant-numeric="tabular-nums">11 min 20 s</text>
+</svg>

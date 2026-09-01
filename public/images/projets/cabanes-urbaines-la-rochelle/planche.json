@@ -1,0 +1,230 @@
+{
+  "fiche": "cabanes-urbaines-la-rochelle",
+  "archetype": "zonage-ssi",
+  "mecanisme": "compensation",
+  "archetype_motif": "La thèse de la fiche est une substitution, pas un découpage : les planchers n’ayant pas été traités coupe-feu, le bâtiment ne forme qu’un seul compartiment, et ce que la matière ne fait pas, la détection le fait — généralisée à tous les locaux, aux combles et aux plénums de plus de 80 cm, sur quatorze zones et trois niveaux. Le dessin suit ce mécanisme : deux traits interrompus entre les niveaux disent le plan qui manque, les marques de zone disent ce qui le remplace, et une accolade unique referme l’empilement sur l’équation que portent les trois plans de zonage de FT2E, « ZA01 = ZC01 = le bâtiment ». Il se distingue des cinq planches zonage-ssi déjà composées : Sablonceaux oppose un avant et un après, Coulonges transfère des personnes d’une zone à l’autre, Salignac partage une enveloppe en deux régimes, Loti fait tout partir à la fois depuis deux familles de détection, Central Hostel fait converger seize zones vers une seule mise en sécurité par un tronc unique. Ici rien ne converge et rien ne se découpe : un plan horizontal est absent, et la détection prend sa place. La bande basse porte la vérification de cette compensation par deux foyers de contrôle d’efficacité réellement allumés, dont les temps de déclenchement sont mesurés au procès-verbal d’essais.",
+  "surtitre": "SCHÉMA DE PRINCIPE · MESURE COMPENSATOIRE ET ZONAGE INCENDIE",
+  "titre": "Les Cabanes Urbaines",
+  "sous_titre": "Des planchers non recoupés, une détection généralisée, une seule zone",
+  "cartouche_legende": "LA ROCHELLE · 503 m² · 2023",
+  "aria_label": "Schéma de principe de la mesure compensatoire de sécurité incendie d’un établissement sportif et culturel de trois niveaux. Les planchers n’ont pas été traités coupe-feu : aucun recoupement horizontal ne sépare les niveaux, et deux traits interrompus le figurent entre les étages. En compensation, la détection est généralisée : quatorze zones sur trois niveaux — onze zones de détection automatique et trois zones de déclencheurs manuels, une par niveau —, soit quatre zones au second étage (pôle santé, salle de yoga, circulations et combles), quatre au premier étage (bureaux, salles d’enseignement, circulations et combles) et six au rez-de-chaussée (salle d’escalade, salle de spectacles et autres locaux, circulations, cuisine, restaurant). L’installation compte 87 détecteurs automatiques et 16 déclencheurs manuels, soit 103 points adressés un à un sur une centrale de catégorie A à équipement d’alarme de type 1 qui en admet 128. Une accolade unique embrasse les trois niveaux et aboutit à l’équation portée par les plans de zonage : une seule zone d’alarme et une seule zone de compartimentage, le bâtiment, sans temporisation. Deux fonctions restent hors du centralisateur, en filet interrompu : les clapets coupe-feu, autocommandés par fusible thermique faute de limite de compartimentage à tenir, et le désenfumage des cages d’escalier, commandé à la main en pied d’escalier. En bande basse, la vérification de la compensation par deux foyers de contrôle d’efficacité allumés à la réception : deux plaques et demie de mousse en salle d’escalade, sous six mètres de hauteur libre, déclenchent en 2 minutes 30 secondes ; neuf bûchettes de hêtre en salle d’enseignement déclenchent en 11 minutes 20 secondes. Les longueurs des deux barres sont proportionnelles à ces deux durées.",
+  "compensation": {
+    "entete_coupe": "LA DÉTECTION · 14 ZONES SUR 3 NIVEAUX",
+    "entete_consequence": "CE QUI EN DÉCOULE",
+    "plan_manquant": "PLANCHERS NON TRAITÉS COUPE-FEU · AUCUN RECOUPEMENT",
+    "plan_manquant_court": "PLANCHERS NON RECOUPÉS",
+    "niveaux": [
+      {
+        "cle": "r2",
+        "ordre": 1,
+        "libelle": "R+2",
+        "libelle_court": "R+2",
+        "zda": 3,
+        "zdm": 1,
+        "reperes": "ZDA 21 · 22 · 31 + ZDM 20",
+        "usages": "PÔLE SANTÉ · SALLE DE YOGA · CIRCULATIONS · COMBLES",
+        "valeur": "4",
+        "unite": "zones",
+        "detail": "Trois zones automatiques, dont les combles, et une zone de déclencheurs manuels"
+      },
+      {
+        "cle": "r1",
+        "ordre": 2,
+        "libelle": "R+1",
+        "libelle_court": "R+1",
+        "zda": 3,
+        "zdm": 1,
+        "reperes": "ZDA 11 · 12 · 13 + ZDM 10",
+        "usages": "BUREAUX · SALLES D’ENSEIGNEMENT · CIRCULATIONS · COMBLES",
+        "valeur": "4",
+        "unite": "zones",
+        "detail": "Trois zones automatiques, dont les combles, et une zone de déclencheurs manuels"
+      },
+      {
+        "cle": "rdc",
+        "ordre": 3,
+        "libelle": "Rez-de-chaussée",
+        "libelle_court": "RdC",
+        "zda": 5,
+        "zdm": 1,
+        "reperes": "ZDA 01 · 02 · 03 · 04 · 05 + ZDM 06",
+        "usages": "ESCALADE · SPECTACLES · CUISINE · RESTAURANT · CIRCULATIONS",
+        "valeur": "6",
+        "unite": "zones",
+        "detail": "Cinq zones automatiques et une zone de déclencheurs manuels"
+      }
+    ],
+    "systeme": {
+      "libelle": "SSI de catégorie A",
+      "detail": [
+        "ADRESSABLE POINT PAR POINT",
+        "ALARME DE TYPE 1 · UNE UGA",
+        "87 DÉTECTEURS + 16 DÉCLENCHEURS",
+        "103 POINTS SUR 128 ADMIS"
+      ],
+      "detail_appui": [
+        "ALARME DE TYPE 1",
+        "103 POINTS SUR 128"
+      ],
+      "valeur": "103",
+      "unite": "points adressés"
+    },
+    "consequences": [
+      {
+        "cle": "absent",
+        "ordre": 1,
+        "libelle": "Compartimentage par les planchers",
+        "libelle_court": "Planchers",
+        "pointille": true,
+        "valeur": "0",
+        "unite": "recoupement",
+        "detail": [
+          "NON TRAITÉ COUPE-FEU",
+          "AUCUNE LIMITE HORIZONTALE"
+        ],
+        "detail_appui": "NON TRAITÉ COUPE-FEU"
+      },
+      {
+        "cle": "equation",
+        "ordre": 2,
+        "libelle": "ZA01 = ZC01 = le bâtiment",
+        "libelle_court": "ZA01 = ZC01",
+        "pointille": false,
+        "alarme": true,
+        "valeur": "1",
+        "unite": "zone",
+        "detail": [
+          "UNE ZONE D’ALARME, UNE DE COMPARTIMENTAGE",
+          "ALARME GÉNÉRALE SANS TEMPORISATION",
+          "PORTES ASSERVIES · DÉVERROUILLAGE DES ISSUES"
+        ],
+        "detail_appui": "SANS TEMPORISATION"
+      },
+      {
+        "cle": "hors",
+        "ordre": 3,
+        "libelle": "Hors centralisateur",
+        "libelle_court": "Hors CMSI",
+        "pointille": true,
+        "valeur": "2",
+        "unite": "fonctions",
+        "detail": [
+          "CLAPETS COUPE-FEU SUR FUSIBLE THERMIQUE",
+          "DÉSENFUMAGE DES ESCALIERS À LA MAIN"
+        ],
+        "detail_appui": "FUSIBLE · COMMANDE MANUELLE"
+      }
+    ],
+    "preuve": {
+      "entete": "LA COMPENSATION VÉRIFIÉE · FOYERS DE CONTRÔLE D’EFFICACITÉ",
+      "essais": [
+        {
+          "cle": "fce-escalade",
+          "ordre": 1,
+          "libelle": "Salle d’escalade",
+          "libelle_court": "Escalade",
+          "detail": "2,5 PLAQUES DE MOUSSE · 6 m SOUS PLAFOND",
+          "detail_court": "MOUSSE",
+          "valeur": "2 min 30 s",
+          "unite": "avant déclenchement",
+          "secondes": 150
+        },
+        {
+          "cle": "fce-enseignement",
+          "ordre": 2,
+          "libelle": "Salle d’enseignement",
+          "libelle_court": "Enseignement",
+          "detail": "9 BÛCHETTES DE HÊTRE · R+1",
+          "detail_court": "BÛCHETTES",
+          "valeur": "11 min 20 s",
+          "unite": "avant déclenchement",
+          "secondes": 680
+        }
+      ]
+    },
+    "legende": [
+      {
+        "marque": "pleine",
+        "libelle": "ZONE DE DÉTECTION AUTOMATIQUE"
+      },
+      {
+        "marque": "evidee",
+        "libelle": "ZONE DE DÉCLENCHEURS MANUELS"
+      }
+    ],
+    "report": "DÉTECTION DANS TOUS LES LOCAUX SAUF SANITAIRES ET ESCALIERS · COMBLES ET PLÉNUMS DE PLUS DE 80 cm COMPRIS"
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Le compartimentage manque dans la matière ; la détection le remplace dans le temps — deux feux réels l’ont mesuré.",
+  "vignette_surtitre": "MESURE COMPENSATOIRE",
+  "a_valider_ft2e": [
+    {
+      "objet": "L’ordre vertical des trois niveaux",
+      "la_source_affirme": "Le tableau de corrélation et le cahier des charges fonctionnel énumèrent les niveaux du bas vers le haut — RdC, R+1, R+2 — et les trois plans de zonage sont des vues en plan, sans coupe.",
+      "le_dessin_suppose": "Que la pile se lit du haut vers le bas comme une coupe (R+2 en tête, RdC en pied), pour que les deux traits interrompus se lisent comme des planchers. Aucune hauteur, aucune épaisseur et aucune position réelle ne sont représentées."
+    },
+    {
+      "objet": "Les repères de zone ZDA et ZDM portés au dessin",
+      "la_source_affirme": "Le tableau de corrélation nomme les quatorze zones ZDA01 à ZDA05, ZDM06, ZDA11 à ZDA13, ZDM10, ZDA21, ZDA22, ZDA31 et ZDM20.",
+      "le_dessin_suppose": "Que ces désignations internes sont publiables. Elles ne nomment aucun tiers et ne portent aucune donnée d’exploitation, mais elles appartiennent au dossier d’identité SSI — voir la question E de la fiche de collecte."
+    },
+    {
+      "objet": "L’usage porté au second étage",
+      "la_source_affirme": "Le cahier des charges fonctionnel décrit le R+2 par « Pôle santé », « Le Dôme » et « Circulations » ; le procès-verbal d’essais fonctionnels, postérieur et en indice B, décrit le même niveau par « Pôle santé », « Salle de yoga » et « Circulations ».",
+      "le_dessin_suppose": "Que la description la plus récente fait foi et porte « SALLE DE YOGA ». « Le Dôme » est vraisemblablement le nom d’usage du même volume."
+    },
+    {
+      "objet": "Le rattachement des combles à une zone de niveau",
+      "la_source_affirme": "Le tableau de corrélation porte ZDA13 « Combles » sous le R+1 et ZDA31 « Combles » sous le R+2, et laisse leur colonne de compartimentage vide.",
+      "le_dessin_suppose": "Que ces deux zones se comptent dans leur niveau de rattachement plutôt que sur un rang propre. Le dessin ne les distingue donc pas des autres marques du niveau ; la ligne de report précise qu’elles sont détectées."
+    },
+    {
+      "objet": "La longueur des deux barres de la bande basse",
+      "la_source_affirme": "Le procès-verbal d’essais fonctionnels indice B, § 4.3, donne deux temps de déclenchement : 2 min 30 s pour le foyer type 2 en salle d’escalade, 11 min 20 s pour le foyer type 3 en salle d’enseignement 1.",
+      "le_dessin_suppose": "Que ces deux durées se comparent à échelle linéaire commune (150 s et 680 s). Il ne s’agit pas d’une conservation — rien ne se somme —, mais d’une comparaison : le rapport dessiné est 4,53, celui des deux mesures."
+    },
+    {
+      "objet": "La position du système de sécurité incendie dans le dessin",
+      "la_source_affirme": "Le cahier des charges fonctionnel implante la centrale « dans un placard technique en RdC », rapidement accessible aux secours et inaccessible au public, avec un report d’alarme dont l’emplacement est à définir avec la maîtrise d’ouvrage.",
+      "le_dessin_suppose": "Que la centrale se pose au centre du dessin, entre l’empilement et ses conséquences, sans figurer son niveau réel. Le dessin ne représente aucune implantation."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 20-045 et ses indices A, B, C et CSSI (champ reference) — ils encodent le volume annuel d’affaires du bureau.",
+    "Montants : honoraires de la mission de coordination SSI, honoraires des contrats de base et de compléments, estimation de travaux des lots techniques.",
+    "Noms de tiers : la maîtrise d’ouvrage, l’architecte, la maîtrise d’œuvre d’exécution et l’OPC, le bureau de contrôle, les BET structure et acoustique, les treize entreprises du chantier.",
+    "Marques et références du matériel de sécurité incendie — centrale, détecteurs, déclencheurs, diffuseurs, alimentation.",
+    "Numéros de tiers relevés au dossier : déclaration de travaux, références constructeur du matériel installé.",
+    "Données d’exploitation : horaires d’ouverture de l’établissement, effectifs, noms des intervenants."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "14 marques de zone sur 3 niveaux (11 pleines pour la détection automatique, 3 évidées pour les déclencheurs manuels) ; 2 planchers dessinés en trait INTERROMPU de 2 px — le plan qui manque — contre des filets de bande pleins de 1 px ; UNE accolade embrasse l’empilement entier et aboutit à l’égalité, sans collecteur par niveau : rien ne converge, une seule zone est affirmée",
+    "comptage": "détection : 4 + 4 + 6 = 14 zones ; mise en sécurité : 1 zone d’alarme = 1 zone de compartimentage = le bâtiment ; 2 registres en filet interrompu, qu’aucune liaison n’atteint",
+    "hauteurs_des_consequences": "absent 73 px pour 62 px de contenu · equation 103 px pour 88 px de contenu · hors 73 px pour 62 px de contenu",
+    "zero_commun": "une ligne verticale unique à x 470, de y 512 à 614 — les deux barres partent du même zéro",
+    "proportion_des_barres": "échelle commune 0.6912 px/s — 150 s → 104 px, 680 s → 470 px ; rapport dessiné 4.53, rapport mesuré au procès-verbal 4.53 — comparaison de deux durées, aucune somme n’est affirmée",
+    "topologie": "empilement (x 56–660, y 204–476) → accolade x 682 → conséquences (x 704–1144) ; l’accolade n’aboutit qu’au bloc plein, les deux registres en filet interrompu ne reçoivent aucune liaison",
+    "bas_du_dessin": "empilement jusqu’à 476 px, bande de preuve 518–608, légende à 632, report à 654, phrase de principe à 686, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 258 x 30 px = 7740 px², soit 0.81 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "depassements": "36 chaînes mesurées, 0 dépassement, marge la plus faible 14.8 px"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée à 274–296 px — échelle 0.91 à 0.99",
+    "motif": "14 marques sur 3 bandes, 2 planchers interrompus de 2 px, une accolade unique et un bloc plein — usages, repères, détails des conséquences, bande de preuve, légende, report et cartouche laissés à la planche",
+    "trait_du_plan_manquant": "2,0 px à 300 comme à 1200 — l’épaisseur ne se réduit pas avec le gabarit, sinon le trait cesse de se distinguer des filets de bande (1 px)",
+    "corps_minimal": "9 px — rien sous 9, rien ne touche un bord (marge 14 px, bas du dessin 164 px)"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "les 3 niveaux avec leurs 14 marques, les 2 planchers interrompus, l’accolade unique, les 3 conséquences au libellé court et la bande des deux temps de déclenchement — usages, repères, détails, légende, report, phrase de principe et cartouche laissés à la planche",
+    "bas_du_dessin": "empilement jusqu’à 258 px, bande de preuve 280–317 px, marge basse 51 px",
+    "proportion_des_barres": "échelle 0.3529 px/s — 53 px et 240 px, rapport 4.53",
+    "libelles": "colonne de niveau 88 px (marques déduites, 6 au plus) — aucun dépassement, marge de 20 % prise sur la sous-mesure d’Archivo 600"
+  }
+}
