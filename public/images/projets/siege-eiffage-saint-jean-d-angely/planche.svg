@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de la récupération d’énergie entre zones d’un même bâtiment. À gauche, l’unité extérieure de la pompe à chaleur à détente directe ; au-dessus d’elle, une flèche mince vers le haut, le rejet, qui ne porte que le solde. De l’unité extérieure partent deux tubes seulement, le liquide et le gaz, tracés en deux traits parallèles jusqu’au boîtier principal. Ce boîtier sépare le liquide du gaz et oriente chaque branche ; il alimente deux boîtiers secondaires, l’un à quatre départs, l’autre à huit, dessinés chacun avec ses départs en éventail. À droite, deux terminaux du même boîtier à huit départs sont nommés : en haut un bureau en demande de froid, qui prend la chaleur de son local ; en bas un bureau en demande de chaud, qui la reçoit. Un trajet épais les relie : il part du terminal froid, revient au boîtier, fait demi-tour à l’intérieur, et redescend vers le terminal chaud. Il ne franchit jamais la ligne des deux tubes et n’atteint jamais l’unité extérieure. En bas, détaché par un filet et hors du système, le local serveur : sa propre machine, aucun boîtier, et sa propre flèche de rejet vers le haut, parce qu’il demande du froid toute l’année et n’a jamais rien à rendre au reste du bâtiment.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · RÉCUPÉRATION D’ÉNERGIE ENTRE ZONES D’UN MÊME BÂTIMENT</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Siège Eiffage Énergie</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">La chaleur ôtée d’un bureau ne sort pas : elle repart vers celui qui la demande</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DE L’UNITÉ EXTÉRIEURE AUX TERMINAUX · CE QUI SORT, CE QUI RESTE DEDANS</text>
+  <text x="56.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CE QUI SORT DU BÂTIMENT</text>
+  <text x="1144.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">CE QUI CIRCULE DEDANS</text>
+  <path d="M 168.00 323.00 L 168.00 277.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 168.00 268.00 L 164.00 276.00 L 172.00 276.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="56.00" y="256.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">REJET — LE SOLDE SEULEMENT</text>
+  <rect x="56.00" y="323.00" width="224.00" height="84.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="68.00" y="353.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Unité extérieure</text>
+  <text x="68.00" y="373.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RÉCUPÉRATION D’ÉNERGIE</text>
+  <path d="M 280.00 351.00 L 396.00 351.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 280.00 379.00 L 396.00 379.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="338.00" y="395.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">Deux tubes</text>
+  <text x="56.00" y="440.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LIQUIDE ET GAZ — IL N’Y EN A PAS DE TROISIÈME</text>
+  <rect x="396.00" y="323.00" width="196.00" height="84.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="408.00" y="353.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Boîtier principal</text>
+  <text x="408.00" y="373.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ORIENTE CHAQUE BRANCHE</text>
+  <path d="M 592.00 351.00 L 620.00 351.00 L 620.00 282.00 L 651.00 282.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 658.00 282.00 L 651.00 278.50 L 651.00 285.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="660.00" y="234.50" width="188.00" height="95.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="672.00" y="258.50" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Boîtier secondaire</text>
+  <text x="672.00" y="274.50" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">QUATRE DÉPARTS</text>
+  <path d="M 848.00 278.50 L 888.00 278.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 291.50 L 888.00 291.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 304.50 L 888.00 304.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 317.50 L 888.00 317.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 592.00 379.00 L 634.00 379.00 L 634.00 448.00 L 651.00 448.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 658.00 448.00 L 651.00 444.50 L 651.00 451.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="660.00" y="374.50" width="188.00" height="147.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="672.00" y="398.50" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Boîtier secondaire</text>
+  <text x="672.00" y="414.50" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HUIT DÉPARTS</text>
+  <path d="M 848.00 418.50 L 888.00 418.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 431.50 L 888.00 431.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 444.50 L 888.00 444.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 457.50 L 888.00 457.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 470.50 L 888.00 470.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 483.50 L 888.00 483.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 496.50 L 888.00 496.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 848.00 509.50 L 888.00 509.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 944.00 418.50 L 791.60 418.50 L 791.60 509.50 L 944.00 509.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.5"/>
+  <text x="660.00" y="348.50" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA CHALEUR TOURNE ICI</text>
+  <text x="660.00" y="364.50" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ELLE NE REMONTE PAS AUX DEUX TUBES</text>
+  <rect x="944.00" y="383.50" width="200.00" height="70.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="956.00" y="408.50" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Demande de froid</text>
+  <text x="956.00" y="426.50" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PREND LA CHALEUR</text>
+  <text x="956.00" y="442.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SONDE DANS CHAQUE LOCAL</text>
+  <rect x="944.00" y="474.50" width="200.00" height="70.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="956.00" y="499.50" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Demande de chaud</text>
+  <text x="956.00" y="517.50" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">REÇOIT LA CHALEUR</text>
+  <text x="956.00" y="533.50" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CONSIGNE PAR ZONE</text>
+  <rect x="56.00" y="558.00" width="1088.00" height="1.00" class="c-filet-2" fill="#00393A29"/>
+  <path d="M 228.00 600.00 L 228.00 582.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 228.00 574.00 L 224.00 582.00 L 232.00 582.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="56.00" y="600.00" width="344.00" height="56.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="68.00" y="624.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Local serveur</text>
+  <text x="68.00" y="642.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MACHINE PROPRE, AUCUN BOÎTIER</text>
+  <text x="420.00" y="634.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">FROID TOUTE L’ANNÉE — RIEN À RENDRE</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">La chaleur retirée d’un bureau n’est pas rejetée à l’extérieur : elle redescend vers un autre par le même couple de tubes.</text>
+  <rect x="56.00" y="714.00" width="340.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SAINT-JEAN-D’ANGÉLY · 1 544 m² · 2023</text>
+</svg>

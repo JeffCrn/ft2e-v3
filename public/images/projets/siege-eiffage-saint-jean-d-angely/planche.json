@@ -1,0 +1,136 @@
+{
+  "fiche": "siege-eiffage-saint-jean-d-angely",
+  "archetype": "boucle-fluide",
+  "mecanisme": "report",
+  "archetype_motif": "La thèse de la fiche est un TRANSPORT ORIENTÉ, ni un bilan ni un découpage : la pompe à chaleur est à détente directe, à récupération d’énergie et de nature à DEUX TUBES, de sorte que ce n’est pas l’unité extérieure qui répartit le chaud et le froid, mais un boîtier principal relayé par des boîtiers secondaires à quatre et à huit départs. La chaleur ôtée d’un bureau en demande de froid ne remonte donc pas aux deux tubes : elle tourne au boîtier et redescend vers un bureau en demande de chaud. La géométrie porte seule la démonstration — un trajet épais qui fait demi-tour DANS le boîtier et ne franchit jamais la ligne des deux tubes, contre une flèche mince qui sort par le haut et ne porte que le solde —, et le dessin a sa contre-épreuve au dossier : le local serveur, qui demande du froid toute l’année et n’a jamais rien à rendre, reçoit sa propre machine SANS BOÎTIER et rejette dehors. Ni sankey (la fiche ne donne aucun bilan à largeurs comparables), ni coupe (rien n’est traversé), ni zonage (rien n’est découpé) : c’est bien une boucle de fluide à nœud d’orientation. Aucune des quarante planches publiées ne porte la récupération ENTRE ZONES — l’atelier Dufour récupère sur l’air rejeté, l’ancien siège de Marennes sur l’échangeur d’une double flux au franchissement de l’enveloppe.",
+  "surtitre": "SCHÉMA DE PRINCIPE · RÉCUPÉRATION D’ÉNERGIE ENTRE ZONES D’UN MÊME BÂTIMENT",
+  "titre": "Siège Eiffage Énergie",
+  "sous_titre": "La chaleur ôtée d’un bureau ne sort pas : elle repart vers celui qui la demande",
+  "cartouche_legende": "SAINT-JEAN-D’ANGÉLY · 1 544 m² · 2023",
+  "aria_label": "Schéma de principe de la récupération d’énergie entre zones d’un même bâtiment. À gauche, l’unité extérieure de la pompe à chaleur à détente directe ; au-dessus d’elle, une flèche mince vers le haut, le rejet, qui ne porte que le solde. De l’unité extérieure partent deux tubes seulement, le liquide et le gaz, tracés en deux traits parallèles jusqu’au boîtier principal. Ce boîtier sépare le liquide du gaz et oriente chaque branche ; il alimente deux boîtiers secondaires, l’un à quatre départs, l’autre à huit, dessinés chacun avec ses départs en éventail. À droite, deux terminaux du même boîtier à huit départs sont nommés : en haut un bureau en demande de froid, qui prend la chaleur de son local ; en bas un bureau en demande de chaud, qui la reçoit. Un trajet épais les relie : il part du terminal froid, revient au boîtier, fait demi-tour à l’intérieur, et redescend vers le terminal chaud. Il ne franchit jamais la ligne des deux tubes et n’atteint jamais l’unité extérieure. En bas, détaché par un filet et hors du système, le local serveur : sa propre machine, aucun boîtier, et sa propre flèche de rejet vers le haut, parce qu’il demande du froid toute l’année et n’a jamais rien à rendre au reste du bâtiment.",
+  "report": {
+    "entete": "DE L’UNITÉ EXTÉRIEURE AUX TERMINAUX · CE QUI SORT, CE QUI RESTE DEDANS",
+    "registres": {
+      "gauche": "CE QUI SORT DU BÂTIMENT",
+      "droite": "CE QUI CIRCULE DEDANS"
+    },
+    "source": {
+      "libelle": "Unité extérieure",
+      "libelle_court": "Unité extérieure",
+      "detail": "RÉCUPÉRATION D’ÉNERGIE",
+      "valeur": "4,37",
+      "unite": "COP",
+      "rejet": "REJET — LE SOLDE SEULEMENT",
+      "rejet_court": "LE SOLDE"
+    },
+    "liaison": {
+      "libelle": "Deux tubes",
+      "libelle_court": "Deux tubes",
+      "detail": "LIQUIDE ET GAZ — IL N’Y EN A PAS DE TROISIÈME",
+      "valeur": "2",
+      "unite": "tubes"
+    },
+    "noeud": {
+      "libelle": "Boîtier principal",
+      "libelle_court": "Boîtier principal",
+      "detail": "ORIENTE CHAQUE BRANCHE"
+    },
+    "boitiers": [
+      {
+        "cle": "quatre",
+        "ordre": 1,
+        "libelle": "Boîtier secondaire",
+        "libelle_court": "Secondaire",
+        "valeur": "4",
+        "unite": "départs",
+        "affichee": "QUATRE DÉPARTS",
+        "detail": "PREMIER GROUPE DE TERMINAUX"
+      },
+      {
+        "cle": "huit",
+        "ordre": 2,
+        "libelle": "Boîtier secondaire",
+        "libelle_court": "Secondaire",
+        "valeur": "8",
+        "unite": "départs",
+        "affichee": "HUIT DÉPARTS",
+        "detail": "LES DEUX TERMINAUX NOMMÉS EN VIENNENT"
+      }
+    ],
+    "terminaux": [
+      {
+        "cle": "froid",
+        "ordre": 1,
+        "libelle": "Bureau en demande de froid",
+        "libelle_court": "Demande de froid",
+        "detail": "SONDE DANS CHAQUE LOCAL",
+        "etat": "PREND LA CHALEUR",
+        "etat_court": "PREND"
+      },
+      {
+        "cle": "chaud",
+        "ordre": 2,
+        "libelle": "Bureau en demande de chaud",
+        "libelle_court": "Demande de chaud",
+        "detail": "CONSIGNE PAR ZONE",
+        "etat": "REÇOIT LA CHALEUR",
+        "etat_court": "REÇOIT"
+      }
+    ],
+    "report_legende": "LA CHALEUR TOURNE ICI",
+    "report_legende_2": "ELLE NE REMONTE PAS AUX DEUX TUBES",
+    "exception": {
+      "libelle": "Local serveur",
+      "libelle_court": "Local serveur",
+      "detail": "MACHINE PROPRE, AUCUN BOÎTIER",
+      "motif": "FROID TOUTE L’ANNÉE — RIEN À RENDRE",
+      "motif_court": "RIEN À RENDRE"
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "La chaleur retirée d’un bureau n’est pas rejetée à l’extérieur : elle redescend vers un autre par le même couple de tubes.",
+  "vignette_surtitre": "RÉCUPÉRATION ENTRE ZONES",
+  "a_valider_ft2e": [
+    "COMPTE DE TERMINAUX — le dessin n’en montre que DEUX, nommés, et figure les autres en départs muets. La DPGF du lot 08 porte trois lignes (boîtier principal, boîtier secondaire 4 sorties, boîtier secondaire 8 sorties) mais SES COLONNES DE QUANTITÉS SONT VIDES : rien n’établit qu’il y ait exactement un boîtier de chaque, ni douze terminaux. Le dessin ne l’affirme donc pas ; il trace quatre et huit départs parce que ce sont les deux modèles nommés au marché. Combien de boîtiers secondaires ont été posés, et combien d’unités intérieures au total ?",
+    "APPARIEMENT DES DEUX TERMINAUX NOMMÉS — le dessin les place tous deux sur le boîtier à huit départs, parce que la récupération ne se fait qu’entre branches d’un MÊME boîtier. Aucune pièce du dossier ne dit sur quel boîtier chaque local est raccordé : c’est un choix de dessin, pris pour que le trajet de report soit vrai.",
+    "ORIENTATION DES DEUX BUREAUX — la fiche explique la simultanéité par l’orientation est-ouest et les vitrages à contrôle solaire que la synthèse RT impose sur ces deux façades. Le DESSIN ne nomme aucune orientation : il dit « demande de froid » et « demande de chaud », qui est ce que la régulation lit. L’appariement bureau exposé / bureau abrité reste au texte.",
+    "LA FLÈCHE DE REJET — elle est tracée MINCE contre le trajet de report à 2,5 px, pour dire que le solde est le petit terme. Aucune pièce ne chiffre ce partage : c’est une hiérarchie de trait, pas une proportion. Aucune largeur du dessin n’est proportionnelle à une puissance.",
+    "LE LOCAL SERVEUR — le CCTP lui donne une unité extérieure et une unité intérieure distinctes, sans mentionner de boîtier ; le dessin en conclut qu’il est hors du système à récupération et le détache par un filet. Confirmez-vous que c’est bien un ensemble autonome, et non une branche du même réseau ?",
+    "RÉGIME DE NEUTRE, PHOTOVOLTAÏQUE, TEMPÉRATURE INTÉRIEURE — trois valeurs du dossier ont été ÉCARTÉES du dessin comme du texte : le CCTP du lot 09 écrit TN à un paragraphe et TT à deux autres ; sa ligne photovoltaïque annonce 160 kVA pour 60 plus 60 ; la ligne Tic de la synthèse RT est vide dans ses trois colonnes. Aucune n’est publiée. Questions B8, B9 et B10 de la fiche de collecte."
+  ],
+  "exclusions_appliquees": [
+    "Aucun nom de tiers : ni le maître d’ouvrage, ni l’architecte mandataire, ni les cotraitants, ni les douze entreprises, ni aucune marque de matériel. Le titre nomme l’ouvrage, comme les quarante planches du corpus.",
+    "Aucun numéro d’affaire, aucun numéro de permis, aucun montant : ni les travaux, ni les honoraires, ni l’estimation des lots techniques.",
+    "Aucune géométrie d’ouvrage : ni les deux bâtiments, ni le hall qui les relie, ni la distribution des bureaux, ni le tracé des liaisons frigorifiques relevé sur les plans. Le dessin est une topologie.",
+    "Aucune donnée d’exploitation : ni les effectifs, ni les horaires, ni les noms de services que portent les plans, où les locaux sont désignés par métier.",
+    "Le bilan électrique du tableau général — 46 kW pour l’armoire CVC sur 86,4 kW distribués — reste au TEXTE : il est vrai et il boucle, mais il appartient à une autre démonstration que celle du dessin."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "un trajet épais de 2.5 px quitte le terminal en demande de froid (y 418), entre dans le boîtier à 8 départs, y fait demi-tour à x 792 — soit 56 px À L’INTÉRIEUR de la boîte — et ressort vers le terminal en demande de chaud (y 510) ; il ne remonte jamais aux deux tubes, tracés 83 px plus haut. Le rejet, lui, est une flèche de 1.0 px — 2.5 fois plus mince que le report",
+    "grandeurs_derivees": "hauteur des boîtiers = pas 13 x (départs − 1) + 44 + 12 → 95 px pour 4 départs et 147 px pour 8 ; demi-tour = 30% de la largeur du boîtier (188 px) ; les deux terminaux nommés prennent le PREMIER et le DERNIER départ, jamais un rang choisi — les trois formats partagent ces trois règles",
+    "topologie": "source x 56–280 y 323–407, deux tubes y 351 et 379, boîtier principal x 396–592, secondaires x 660–848 (cy 282 et 448), départs jusqu’à x 888, terminaux x 944–1144, filet de séparation y 558, local hors système x 56–400 y 600–656",
+    "contre_epreuve": "le local hors système est le seul bloc sans éventail de départs : 4 et 8 départs aux deux boîtiers, 0 chez lui — et sa propre flèche de rejet",
+    "bas_du_dessin": "bloc hors système à y 656, phrase à 688, cartouche 714–744",
+    "reserve_profonde": "cartouche 340 x 30 px = 10200 px², soit 1.06 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "depassements": "28 chaînes mesurées, 0 dépassement, marge la plus faible 7.2 px sur « détail terminal froid »"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "le motif seul et muet : la source et sa flèche mince, les deux tubes, le nœud, les deux éventails à 4 et 8 départs, le trajet épais qui fait demi-tour DANS le second, et sous le filet le bloc sans éventail avec sa propre flèche — aucune valeur, libellés et légendes laissés à la planche",
+    "grandeurs_derivees": "mêmes trois règles que la planche, au pas 6 : hauteurs 28 et 52 px, demi-tour à x 215.2 soit 30% de la largeur du boîtier (56 px)",
+    "bas_du_dessin": "bloc hors système à y 192, marge basse 8 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier à l’échelle 1 : la source nommée et sa flèche de rejet, les deux tubes, le nœud nommé, les deux boîtiers avec leur nombre de départs lu, le trajet épais qui fait demi-tour dans le second, les deux terminaux réduits à leur état — prend, reçoit —, et sous le filet le local hors système avec son motif ; détails, légendes, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "bloc hors système à y 342, marge basse 26 px",
+    "grandeurs_derivees": "mêmes trois règles que la planche, au pas 9 : hauteurs 43 et 79 px, demi-tour à x 396.2 soit 30% de la largeur du boîtier (86 px)"
+  }
+}

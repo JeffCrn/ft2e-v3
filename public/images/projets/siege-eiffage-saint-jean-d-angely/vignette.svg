@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="22.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">RÉCUPÉRATION ENTRE ZONES</text>
+  <path d="M 38.00 86.00 L 38.00 72.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 38.00 66.00 L 35.50 71.00 L 40.50 71.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="14.00" y="86.00" width="48.00" height="30.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 62.00 96.00 L 96.00 96.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 62.00 106.00 L 96.00 106.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="96.00" y="86.00" width="54.00" height="30.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 150.00 96.00 L 158.00 96.00 L 158.00 74.00 L 176.00 74.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="176.00" y="60.00" width="56.00" height="28.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 232.00 65.00 L 244.00 65.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 71.00 L 244.00 71.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 77.00 L 244.00 77.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 83.00 L 244.00 83.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 150.00 106.00 L 166.00 106.00 L 166.00 128.00 L 176.00 128.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <rect x="176.00" y="102.00" width="56.00" height="52.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 232.00 107.00 L 244.00 107.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 113.00 L 244.00 113.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 119.00 L 244.00 119.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 125.00 L 244.00 125.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 131.00 L 244.00 131.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 137.00 L 244.00 137.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 143.00 L 244.00 143.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 232.00 149.00 L 244.00 149.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 262.00 107.00 L 215.20 107.00 L 215.20 149.00 L 262.00 149.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.5"/>
+  <rect x="262.00" y="98.00" width="26.00" height="18.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <rect x="262.00" y="140.00" width="26.00" height="18.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <rect x="14.00" y="162.00" width="272.00" height="1.00" class="c-filet-2" fill="#00393A29"/>
+  <path d="M 59.00 176.00 L 59.00 170.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 59.00 165.00 L 56.50 170.00 L 61.50 170.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="14.00" y="176.00" width="90.00" height="16.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+</svg>

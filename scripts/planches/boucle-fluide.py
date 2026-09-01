@@ -32,7 +32,7 @@ double écriture des couleurs, routine d'exécution) vit dans `_tronc.py` depuis
 le 2026-08-13 — extraction contrôlée par régénération octet à octet des quatre
 planches publiées.
 
-Le module compose CINQ mécanismes de l'archétype, choisis par le bloc que
+Le module compose DOUZE mécanismes de l'archétype, choisis par le bloc que
 porte l'extraction :
 
 - `boucle` — la boucle de récupération (atelier Dufour) : deux conduits qui ne
@@ -4327,9 +4327,553 @@ def composer_appui_regime(donnees):
             f"{AH - (cy['plancher'] + h_em / 2):.0f} px")
 
 
+# ── `report` — la chaleur change de branche au lieu de sortir ────────────────
+# Le douzième mécanisme de l'archétype, et le premier à faire d'un DEMI-TOUR la
+# démonstration. Une unité extérieure, deux tubes seulement, un boîtier
+# principal, deux boîtiers secondaires dont les départs partent en éventail — et
+# un trajet épais qui quitte un terminal en demande de froid, entre dans son
+# boîtier, y fait demi-tour, et ressort vers un terminal en demande de chaud.
+# Il ne franchit jamais la ligne des deux tubes ; ce qui monte à l'unité
+# extérieure n'est que le solde, tracé en flèche mince.
+#
+# La contre-épreuve est dessinée au pied : sous un filet de séparation, un local
+# à machine propre, SANS ÉVENTAIL et avec sa propre flèche de rejet — il demande
+# du froid toute l'année et n'a rien à rendre. Masquer tout le texte laisse lire
+# le mécanisme : un trait qui tourne contre un trait qui sort.
+#
+# ⚠ Trois grandeurs sont DÉRIVÉES et non choisies, pour que les trois formats
+# disent la même chose (leçon de la N17, où un seuil écrit trois fois faisait
+# lire le même fait de deux façons selon la taille servie) :
+#   · la hauteur d'un boîtier vient de son NOMBRE DE DÉPARTS ;
+#   · les deux terminaux nommés se raccordent au PREMIER et au DERNIER départ
+#     du boîtier à huit — jamais à un rang choisi à la main ;
+#   · l'abscisse du demi-tour est une PART de la largeur du boîtier.
+RP_PAS = 13                  # écart entre deux départs (planche)
+RP_MARGE_HAUT = 44           # bande de titre en tête de boîtier — voir ci-dessous
+RP_MARGE_BAS = 12            # marge interne basse
+RP_INSET = 0.30              # part de la largeur du boîtier où le trajet tourne
+RP_EP_REPORT = 2.5           # le trajet de report : le trait épais
+RP_EP_REJET = 1.0            # le rejet : le trait mince — le solde est le petit terme
+
+RP_SX0, RP_SX1 = 56, 280     # unité extérieure
+RP_SY0, RP_S_H = 323, 84
+RP_Y_REJET = 268             # apex de la flèche de rejet
+RP_ECART_TUBES = 28          # entre les deux tubes, centrés sur la source
+RP_NX0, RP_NX1 = 396, 592    # boîtier principal
+RP_BX0, RP_BX1 = 660, 848    # boîtiers secondaires
+RP_B_CY = {"quatre": 282, "huit": 448}
+RP_STUB = 40                 # longueur d'un départ en éventail
+RP_EX0, RP_EX1 = 944, 1144   # les deux terminaux nommés
+RP_E_H = 70
+RP_XLINK = {"quatre": 620, "huit": 634}   # deux coudes distincts : jamais superposés
+RP_SEP_Y = 558               # le filet qui détache l'exception
+RP_XX0, RP_XX1 = 56, 400     # le local serveur
+RP_XY0, RP_X_H = 600, 56
+RP_Y_TUBES_LEGENDE = 440     # sous la source et les tubes, en zone franche
+
+
+def _rp_hauteur_boitier(n, pas, m_haut, m_bas):
+    """La hauteur d'un boîtier est DÉRIVÉE de son nombre de départs.
+
+    Les deux marges sont dissociées parce que le boîtier de la planche porte un
+    titre en tête, et que le trajet de report entre par le PREMIER départ : avec
+    des marges égales, le trait traversait le libellé « Boîtier secondaire ».
+    Seul le PNG l'a montré — deux traits qui se croisent doivent différer par
+    autre chose que leur position, et un trait qui coupe un mot n'est pas un
+    croisement lisible, c'est une faute de composition. La vignette et l'appui,
+    qui n'écrivent rien dans la boîte, passent deux marges égales : la RÈGLE
+    partagée par les trois formats est que la hauteur vient du nombre de
+    départs et que les départs se posent à pas constant depuis la marge haute."""
+    return pas * (n - 1) + m_haut + m_bas
+
+
+def _rp_departs(y_top, n, pas, m_haut):
+    """Les ordonnées des n départs, posées depuis la marge haute du boîtier."""
+    return [y_top + m_haut + i * pas for i in range(n)]
+
+
+def _rp_trajet(x_terminal, x_boite_droite, largeur_boite, y_haut, y_bas):
+    """LE TRAJET DE REPORT — implantation unique, partagée par les trois formats.
+
+    Il part du terminal haut, entre dans le boîtier, y fait demi-tour à une
+    abscisse DÉRIVÉE de la largeur de la boîte, et ressort vers le terminal bas.
+    Rend le tracé et l'abscisse du demi-tour, dont la légende a besoin."""
+    xt = x_boite_droite - largeur_boite * RP_INSET
+    return [(x_terminal, y_haut), (xt, y_haut), (xt, y_bas), (x_terminal, y_bas)], xt
+
+
+def composer_report(donnees):
+    rp = donnees["report"]
+    boitiers = {b["cle"]: b for b in sorted(rp["boitiers"], key=lambda b: b["ordre"])}
+    terminaux = {t["cle"]: t for t in sorted(rp["terminaux"], key=lambda t: t["ordre"])}
+    out = []
+    A = out.append
+    trop = []
+    marges = []
+
+    def poser(nom, contenu, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(contenu, corps, profil, tracking)
+        if largeur > dispo:
+            trop.append(f"{nom} : {largeur:.1f} px pour {dispo:.1f} px")
+        marges.append((nom, dispo - largeur))
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    poser("surtitre", donnees["surtitre"], 11, "mono", UTILE, 11 * 0.14)
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    poser("titre", donnees["titre"], 30, "sans-700", UTILE)
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    poser("sous-titre", donnees["sous_titre"], 16, "sans-400", UTILE)
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête et registres ─────────────────────────────────────────────────
+    A(texte(MARGE, Y_ENTETE, rp["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    poser("en-tête", rp["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_REGISTRES, rp["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_REGISTRES, rp["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+    poser("registres", rp["registres"]["gauche"] + rp["registres"]["droite"],
+          10, "mono", UTILE - 60, 10 * 0.14)
+
+    # ── La source, et la flèche mince du rejet ───────────────────────────────
+    so = rp["source"]
+    cx_src = (RP_SX0 + RP_SX1) / 2.0
+    A(ligne(cx_src, RP_SY0, cx_src, RP_Y_REJET + 9, "encre", RP_EP_REJET))
+    A(fleche(cx_src, RP_Y_REJET, "encre", direction="haut", taille=8))
+    A(texte(RP_SX0, RP_Y_REJET - 12, so["rejet"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    poser("rejet", so["rejet"], 10, "mono", RP_NX0 - RP_SX0, 10 * 0.14)
+
+    dispo_src = RP_SX1 - RP_SX0 - 24
+    A(rect_bord(RP_SX0, RP_SY0, RP_SX1 - RP_SX0, RP_S_H, "calcaire", "filet-1"))
+    A(texte(RP_SX0 + 12, RP_SY0 + 30, so["libelle"], "sans", 17, 600,
+            "encre", wdth=112))
+    poser("libellé source", so["libelle"], 17, "sans-600", dispo_src)
+    A(texte(RP_SX0 + 12, RP_SY0 + 50, so["detail"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    poser("détail source", so["detail"], 10, "mono", dispo_src, 10 * 0.14)
+
+    # ── Les deux tubes, et rien qu'eux ───────────────────────────────────────
+    cy_src = RP_SY0 + RP_S_H / 2.0
+    y_haut_tube = cy_src - RP_ECART_TUBES / 2.0
+    y_bas_tube = cy_src + RP_ECART_TUBES / 2.0
+    for y in (y_haut_tube, y_bas_tube):
+        A(ligne(RP_SX1, y, RP_NX0, y, "encre", 1.5))
+    li = rp["liaison"]
+    A(texte((RP_SX1 + RP_NX0) / 2.0, y_bas_tube + 16, li["libelle"], "mono", 10,
+            500, "encre", ancre="middle", tracking=10 * 0.14))
+    poser("libellé liaison", li["libelle"], 10, "mono",
+          RP_NX0 - RP_SX1 - 8, 10 * 0.14)
+    A(texte(RP_SX0, RP_Y_TUBES_LEGENDE, li["detail"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    poser("détail liaison", li["detail"], 10, "mono", RP_NX0 - RP_SX0, 10 * 0.14)
+
+    # ── Le boîtier principal ─────────────────────────────────────────────────
+    no = rp["noeud"]
+    dispo_noeud = RP_NX1 - RP_NX0 - 24
+    A(rect_bord(RP_NX0, RP_SY0, RP_NX1 - RP_NX0, RP_S_H, "papier", "filet-1"))
+    A(texte(RP_NX0 + 12, RP_SY0 + 30, no["libelle"], "sans", 17, 600,
+            "encre", wdth=112))
+    poser("libellé nœud", no["libelle"], 17, "sans-600", dispo_noeud)
+    A(texte(RP_NX0 + 12, RP_SY0 + 50, no["detail"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    poser("détail nœud", no["detail"], 10, "mono", dispo_noeud, 10 * 0.14)
+
+    # ── Les deux boîtiers secondaires, hauteur DÉRIVÉE du nombre de départs ──
+    largeur_b = RP_BX1 - RP_BX0
+    dispo_b = largeur_b - 24
+    geom = {}
+    for cle, y_depart in (("quatre", y_haut_tube), ("huit", y_bas_tube)):
+        b = boitiers[cle]
+        n = int(b["valeur"])
+        h = _rp_hauteur_boitier(n, RP_PAS, RP_MARGE_HAUT, RP_MARGE_BAS)
+        cy = RP_B_CY[cle]
+        geom[cle] = {"n": n, "h": h, "cy": cy,
+                     "departs": _rp_departs(cy - h / 2.0, n, RP_PAS, RP_MARGE_HAUT)}
+        # la liaison depuis le boîtier principal — un coude par branche
+        xl = RP_XLINK[cle]
+        A(polyligne([(RP_NX1, y_depart), (xl, y_depart), (xl, cy),
+                     (RP_BX0 - 9, cy)], "encre", 1.5))
+        A(fleche(RP_BX0 - 2, cy, "encre", direction="droite", taille=7))
+        A(rect_bord(RP_BX0, cy - h / 2.0, largeur_b, h, "papier", "filet-1"))
+        A(texte(RP_BX0 + 12, cy - h / 2.0 + 24, b["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        poser(f'libellé boîtier {cle}', b["libelle"], 15, "sans-600", dispo_b)
+        A(texte(RP_BX0 + 12, cy - h / 2.0 + 40, b["affichee"], "mono", 10, 500,
+                "encre", tracking=10 * 0.14))
+        poser(f'affichée boîtier {cle}', b["affichee"], 10, "mono", dispo_b,
+              10 * 0.14)
+        for y in geom[cle]["departs"]:
+            A(ligne(RP_BX1, y, RP_BX1 + RP_STUB, y, "encre", 1.0))
+
+    # ── Le trajet de report — la démonstration ───────────────────────────────
+    d8 = geom["huit"]["departs"]
+    y_froid, y_chaud = d8[0], d8[-1]
+    trajet, x_demi_tour = _rp_trajet(RP_EX0, RP_BX1, largeur_b, y_froid, y_chaud)
+    A(polyligne(trajet, "encre", RP_EP_REPORT))
+
+    # la légende du demi-tour, posée au-dessus du boîtier et RELIÉE à lui par un
+    # tiret : une légende doit toucher ce qu'elle nomme (leçon de la N17)
+    y_leg = geom["huit"]["cy"] - geom["huit"]["h"] / 2.0
+    # ⚠ la bande disponible s'arrête à la colonne des terminaux, JAMAIS au bord
+    # de la planche : au premier jet la légende courait jusqu'à x 1095 et
+    # passait sous la boîte « demande de froid », qui la tronquait — ni le
+    # build, ni l'assertion de dépassement, ni le bloc `controles` ne
+    # pouvaient le voir, seul le PNG l'a montré.
+    dispo_leg = RP_EX0 - RP_BX0 - 16
+    for i, cle in enumerate(("report_legende", "report_legende_2")):
+        A(texte(RP_BX0, y_leg - 26 + i * 16, rp[cle], "mono", 10, 500, "encre",
+                tracking=10 * 0.14))
+        poser(f"légende du report {i + 1}", rp[cle], 10, "mono", dispo_leg,
+              10 * 0.14)
+    # ⚠ pas de tiret de rappel entre la légende et la boîte : essayé, il sortait
+    # du bas du mot « PAS » et se lisait comme un artefact, pas comme un repère.
+    # La légende est posée à {} px au-dessus de la boîte où le demi-tour a lieu :
+    # elle la touche, c'''est assez.
+
+    # ── Les deux terminaux nommés ────────────────────────────────────────────
+    dispo_e = RP_EX1 - RP_EX0 - 24
+    for cle, cy in (("froid", y_froid), ("chaud", y_chaud)):
+        t = terminaux[cle]
+        y = cy - RP_E_H / 2.0
+        A(rect_bord(RP_EX0, y, RP_EX1 - RP_EX0, RP_E_H, "papier", "filet-1"))
+        A(texte(RP_EX0 + 12, y + 25, t["libelle_court"], "sans", 17, 600,
+                "encre", wdth=112))
+        poser(f'libellé terminal {cle}', t["libelle_court"], 17, "sans-600",
+              dispo_e)
+        A(texte(RP_EX0 + 12, y + 43, t["etat"], "mono", 10, 500, "encre",
+                tracking=10 * 0.14))
+        poser(f'état {cle}', t["etat"], 10, "mono", dispo_e, 10 * 0.14)
+        A(texte(RP_EX0 + 12, y + 59, t["detail"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        poser(f'détail terminal {cle}', t["detail"], 10, "mono", dispo_e,
+              10 * 0.14)
+
+    # ── La contre-épreuve : le local sorti du système ────────────────────────
+    A(rect(MARGE, RP_SEP_Y, UTILE, 1, "filet-2"))
+    ex = rp["exception"]
+    cx_ex = (RP_XX0 + RP_XX1) / 2.0
+    A(ligne(cx_ex, RP_XY0, cx_ex, RP_XY0 - 18, "encre", RP_EP_REJET))
+    A(fleche(cx_ex, RP_XY0 - 26, "encre", direction="haut", taille=8))
+    dispo_ex = RP_XX1 - RP_XX0 - 24
+    A(rect_bord(RP_XX0, RP_XY0, RP_XX1 - RP_XX0, RP_X_H, "calcaire", "filet-1"))
+    A(texte(RP_XX0 + 12, RP_XY0 + 24, ex["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    poser("libellé exception", ex["libelle"], 15, "sans-600", dispo_ex)
+    A(texte(RP_XX0 + 12, RP_XY0 + 42, ex["detail"], "mono", 10, 500, "encre",
+            tracking=10 * 0.14))
+    poser("détail exception", ex["detail"], 10, "mono", dispo_ex, 10 * 0.14)
+    A(texte(RP_XX1 + 20, RP_XY0 + 34, ex["motif"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    poser("motif exception", ex["motif"], 10, "mono", W - MARGE - RP_XX1 - 20,
+          10 * 0.14)
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    poser("phrase de principe", donnees["phrase_principe"], 17, "sans-400", UTILE)
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    assert not trop, "dépassements de colonne : " + " | ".join(trop)
+    pire = min(marges, key=lambda m: m[1])
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"un trajet épais de {RP_EP_REPORT} px quitte le "
+                         f"terminal en demande de froid (y {y_froid:.0f}), "
+                         f"entre dans le boîtier à {geom['huit']['n']} départs, "
+                         f"y fait demi-tour à x {x_demi_tour:.0f} — soit "
+                         f"{RP_BX1 - x_demi_tour:.0f} px À L’INTÉRIEUR de la "
+                         f"boîte — et ressort vers le terminal en demande de "
+                         f"chaud (y {y_chaud:.0f}) ; il ne remonte jamais aux "
+                         f"deux tubes, tracés {geom['huit']['cy'] - RP_SY0 - RP_S_H / 2:.0f} px "
+                         f"plus haut. Le rejet, lui, est une flèche de "
+                         f"{RP_EP_REJET} px — {RP_EP_REPORT / RP_EP_REJET:.1f} "
+                         f"fois plus mince que le report",
+        "grandeurs_derivees": f"hauteur des boîtiers = pas {RP_PAS} x (départs "
+                              f"− 1) + {RP_MARGE_HAUT} + {RP_MARGE_BAS} → "
+                              f"{geom['quatre']['h']:.0f} px pour "
+                              f"{geom['quatre']['n']} départs et "
+                              f"{geom['huit']['h']:.0f} px pour "
+                              f"{geom['huit']['n']} ; demi-tour = "
+                              f"{RP_INSET:.0%} de la largeur du boîtier "
+                              f"({largeur_b} px) ; les deux terminaux nommés "
+                              f"prennent le PREMIER et le DERNIER départ, "
+                              f"jamais un rang choisi — les trois formats "
+                              f"partagent ces trois règles",
+        "topologie": f"source x {RP_SX0}–{RP_SX1} y {RP_SY0}–{RP_SY0 + RP_S_H}, "
+                     f"deux tubes y {y_haut_tube:.0f} et {y_bas_tube:.0f}, "
+                     f"boîtier principal x {RP_NX0}–{RP_NX1}, secondaires "
+                     f"x {RP_BX0}–{RP_BX1} (cy {RP_B_CY['quatre']} et "
+                     f"{RP_B_CY['huit']}), départs jusqu’à x {RP_BX1 + RP_STUB}, "
+                     f"terminaux x {RP_EX0}–{RP_EX1}, filet de séparation "
+                     f"y {RP_SEP_Y}, local hors système x {RP_XX0}–{RP_XX1} "
+                     f"y {RP_XY0}–{RP_XY0 + RP_X_H}",
+        "contre_epreuve": f"le local hors système est le seul bloc sans "
+                          f"éventail de départs : {geom['quatre']['n']} et "
+                          f"{geom['huit']['n']} départs aux deux boîtiers, 0 "
+                          f"chez lui — et sa propre flèche de rejet",
+        "bas_du_dessin": f"bloc hors système à y {RP_XY0 + RP_X_H}, phrase à "
+                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % de "
+                            f"la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": f"{len(marges)} chaînes mesurées, 0 dépassement, marge "
+                        f"la plus faible {pire[1]:.1f} px sur « {pire[0]} »",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_report(donnees):
+    """La vignette : le motif seul, muet. La source et sa flèche mince, les deux
+    tubes, le nœud, les deux éventails à quatre et huit départs, le trajet épais
+    qui fait demi-tour dans le second — et, sous le filet, le bloc sans éventail
+    avec sa propre flèche. Aucune valeur ne se lit : c'est la géométrie qui
+    porte, et elle suffit."""
+    rp = donnees["report"]
+    boitiers = {b["cle"]: b for b in rp["boitiers"]}
+    pas, marge_int = 6, 5
+    sx0, sx1 = 14, 62
+    sy0, s_h = 86, 30
+    nx0, nx1 = 96, 150
+    bx0, bx1 = 176, 232
+    b_cy = {"quatre": 74, "huit": 128}
+    stub = 12
+    ex0, ex1 = 262, 288
+    e_h = 18
+    sep_y = 162
+    xx0, xx1 = 14, 104
+    xy0, x_h = 176, 16
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    cx_src = (sx0 + sx1) / 2.0
+    A(ligne(cx_src, sy0, cx_src, sy0 - 14, "encre", RP_EP_REJET))
+    A(fleche(cx_src, sy0 - 20, "encre", direction="haut", taille=5))
+    A(rect_bord(sx0, sy0, sx1 - sx0, s_h, "calcaire", "filet-1"))
+
+    cy_src = sy0 + s_h / 2.0
+    ecart = 10
+    y_haut_tube, y_bas_tube = cy_src - ecart / 2.0, cy_src + ecart / 2.0
+    for y in (y_haut_tube, y_bas_tube):
+        A(ligne(sx1, y, nx0, y, "encre", 1.2))
+    A(rect_bord(nx0, sy0, nx1 - nx0, s_h, "papier", "filet-1"))
+
+    largeur_b = bx1 - bx0
+    geom = {}
+    for cle, y_depart in (("quatre", y_haut_tube), ("huit", y_bas_tube)):
+        n = int(boitiers[cle]["valeur"])
+        h = _rp_hauteur_boitier(n, pas, marge_int, marge_int)
+        cy = b_cy[cle]
+        geom[cle] = {"n": n, "h": h, "cy": cy,
+                     "departs": _rp_departs(cy - h / 2.0, n, pas, marge_int)}
+        xl = nx1 + (8 if cle == "quatre" else 16)
+        A(polyligne([(nx1, y_depart), (xl, y_depart), (xl, cy), (bx0, cy)],
+                    "encre", 1.2))
+        A(rect_bord(bx0, cy - h / 2.0, largeur_b, h, "papier", "filet-1"))
+        for y in geom[cle]["departs"]:
+            A(ligne(bx1, y, bx1 + stub, y, "encre", 1.0))
+
+    d8 = geom["huit"]["departs"]
+    y_froid, y_chaud = d8[0], d8[-1]
+    trajet, x_demi_tour = _rp_trajet(ex0, bx1, largeur_b, y_froid, y_chaud)
+    A(polyligne(trajet, "encre", RP_EP_REPORT))
+    for cy in (y_froid, y_chaud):
+        A(rect_bord(ex0, cy - e_h / 2.0, ex1 - ex0, e_h, "papier", "filet-1"))
+
+    A(rect(V_MARGE, sep_y, VW - 2 * V_MARGE, 1, "filet-2"))
+    cx_ex = (xx0 + xx1) / 2.0
+    A(ligne(cx_ex, xy0, cx_ex, xy0 - 6, "encre", RP_EP_REJET))
+    A(fleche(cx_ex, xy0 - 11, "encre", direction="haut", taille=5))
+    A(rect_bord(xx0, xy0, xx1 - xx0, x_h, "calcaire", "filet-1"))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au "
+                         f"pire cas",
+        "motif": "le motif seul et muet : la source et sa flèche mince, les "
+                 "deux tubes, le nœud, les deux éventails à "
+                 f"{geom['quatre']['n']} et {geom['huit']['n']} départs, le "
+                 "trajet épais qui fait demi-tour DANS le second, et sous le "
+                 "filet le bloc sans éventail avec sa propre flèche — aucune "
+                 "valeur, libellés et légendes laissés à la planche",
+        "grandeurs_derivees": f"mêmes trois règles que la planche, au pas "
+                              f"{pas} : hauteurs {geom['quatre']['h']:.0f} et "
+                              f"{geom['huit']['h']:.0f} px, demi-tour à "
+                              f"x {x_demi_tour:.1f} soit {RP_INSET:.0%} de la "
+                              f"largeur du boîtier ({largeur_b} px)",
+        "bas_du_dessin": f"bloc hors système à y {xy0 + x_h}, marge basse "
+                         f"{VH - (xy0 + x_h)} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_report(donnees):
+    """L'appui : le motif entier à l'échelle 1, les organes nommés en court et
+    les deux états lus. Sans phrase ni cartouche."""
+    rp = donnees["report"]
+    boitiers = {b["cle"]: b for b in rp["boitiers"]}
+    terminaux = {t["cle"]: t for t in rp["terminaux"]}
+    pas, marge_int = 9, 8
+    sx0, sx1 = 24, 152
+    sy0, s_h = 150, 44
+    nx0, nx1 = 190, 318
+    bx0, bx1 = 336, 422
+    b_cy = {"quatre": 122, "huit": 216}
+    stub = 18
+    ex0, ex1 = 458, 528
+    e_h = 30
+    sep_y = 284
+    xx0, xx1 = 24, 190
+    xy0, x_h = 312, 30
+
+    out = []
+    A = out.append
+    trop = []
+
+    def controler(nom, contenu, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(contenu, corps, profil, tracking)
+        if largeur > dispo:
+            trop.append(f"{nom} : {largeur:.1f} px pour {dispo:.1f} px")
+
+    racine_appui(A, donnees)
+
+    so = rp["source"]
+    cx_src = (sx0 + sx1) / 2.0
+    A(ligne(cx_src, sy0, cx_src, sy0 - 20, "encre", RP_EP_REJET))
+    A(fleche(cx_src, sy0 - 27, "encre", direction="haut", taille=6))
+    A(texte(sx0, sy0 - 33, so["rejet_court"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    controler("appui · rejet", so["rejet_court"], 10, "mono", sx1 - sx0,
+              10 * 0.14)
+    A(rect_bord(sx0, sy0, sx1 - sx0, s_h, "calcaire", "filet-1"))
+    A(texte(sx0 + 10, sy0 + 27, so["libelle_court"], "sans", 13, 600, "encre",
+            wdth=112))
+    controler("appui · source", so["libelle_court"], 13, "sans-600",
+              sx1 - sx0 - 20)
+
+    cy_src = sy0 + s_h / 2.0
+    ecart = 16
+    y_haut_tube, y_bas_tube = cy_src - ecart / 2.0, cy_src + ecart / 2.0
+    for y in (y_haut_tube, y_bas_tube):
+        A(ligne(sx1, y, nx0, y, "encre", 1.5))
+    A(rect_bord(nx0, sy0, nx1 - nx0, s_h, "papier", "filet-1"))
+    no = rp["noeud"]
+    A(texte(nx0 + 10, sy0 + 27, no["libelle_court"], "sans", 13, 600, "encre",
+            wdth=112))
+    controler("appui · nœud", no["libelle_court"], 13, "sans-600",
+              nx1 - nx0 - 20)
+
+    largeur_b = bx1 - bx0
+    geom = {}
+    for cle, y_depart in (("quatre", y_haut_tube), ("huit", y_bas_tube)):
+        b = boitiers[cle]
+        n = int(b["valeur"])
+        h = _rp_hauteur_boitier(n, pas, marge_int, marge_int)
+        cy = b_cy[cle]
+        geom[cle] = {"n": n, "h": h, "cy": cy,
+                     "departs": _rp_departs(cy - h / 2.0, n, pas, marge_int)}
+        xl = nx1 + (12 if cle == "quatre" else 24)
+        A(polyligne([(nx1, y_depart), (xl, y_depart), (xl, cy), (bx0, cy)],
+                    "encre", 1.5))
+        A(rect_bord(bx0, cy - h / 2.0, largeur_b, h, "papier", "filet-1"))
+        # le libellé se pose AU-DESSUS de la boîte, jamais dedans : à 552 px la
+        # colonne des boîtiers ne fait que 86 px, et « QUATRE DÉPARTS » en
+        # demande 102 — le mettre dedans obligerait à écrire « 4 DÉPARTS »,
+        # contre la convention numérale du corpus
+        A(texte(bx0, cy - h / 2.0 - 6, b["affichee"], "mono", 10, 500,
+                "encre", tracking=10 * 0.14))
+        controler(f'appui · boîtier {cle}', b["affichee"], 10, "mono",
+                  ex0 - bx0, 10 * 0.14)
+        for y in geom[cle]["departs"]:
+            A(ligne(bx1, y, bx1 + stub, y, "encre", 1.0))
+
+    d8 = geom["huit"]["departs"]
+    y_froid, y_chaud = d8[0], d8[-1]
+    trajet, x_demi_tour = _rp_trajet(ex0, bx1, largeur_b, y_froid, y_chaud)
+    A(polyligne(trajet, "encre", RP_EP_REPORT))
+    for cle, cy in (("froid", y_froid), ("chaud", y_chaud)):
+        t = terminaux[cle]
+        A(rect_bord(ex0, cy - e_h / 2.0, ex1 - ex0, e_h, "papier", "filet-1"))
+        A(texte(ex0 + 8, cy + 4, t["etat_court"], "mono", 10, 500, "encre",
+                tracking=10 * 0.14))
+        controler(f'appui · terminal {cle}', t["etat_court"], 10, "mono",
+                  ex1 - ex0 - 16, 10 * 0.14)
+
+    A(rect(A_MARGE, sep_y, AW - 2 * A_MARGE, 1, "filet-2"))
+    ex = rp["exception"]
+    cx_ex = (xx0 + xx1) / 2.0
+    A(ligne(cx_ex, xy0, cx_ex, xy0 - 10, "encre", RP_EP_REJET))
+    A(fleche(cx_ex, xy0 - 16, "encre", direction="haut", taille=6))
+    A(rect_bord(xx0, xy0, xx1 - xx0, x_h, "calcaire", "filet-1"))
+    A(texte(xx0 + 10, xy0 + 19, ex["libelle_court"], "sans", 13, 600, "encre",
+            wdth=112))
+    controler("appui · exception", ex["libelle_court"], 13, "sans-600",
+              xx1 - xx0 - 20)
+    A(texte(xx1 + 16, xy0 + 19, ex["motif_court"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    controler("appui · motif", ex["motif_court"], 10, "mono",
+              AW - A_MARGE - xx1 - 16, 10 * 0.14)
+
+    A("</svg>")
+    assert not trop, "appui — dépassements de colonne : " + " | ".join(trop)
+    return "\n".join(out) + "\n", controles_appui(
+        motif="le motif entier à l’échelle 1 : la source nommée et sa flèche de "
+              "rejet, les deux tubes, le nœud nommé, les deux boîtiers avec "
+              "leur nombre de départs lu, le trajet épais qui fait demi-tour "
+              "dans le second, les deux terminaux réduits à leur état — prend, "
+              "reçoit —, et sous le filet le local hors système avec son "
+              "motif ; détails, légendes, phrase et cartouche laissés à la "
+              "planche",
+        bas=f"bloc hors système à y {xy0 + x_h}, marge basse "
+            f"{AH - (xy0 + x_h)} px",
+        grandeurs_derivees=f"mêmes trois règles que la planche, au pas {pas} : "
+                           f"hauteurs {geom['quatre']['h']:.0f} et "
+                           f"{geom['huit']['h']:.0f} px, demi-tour à "
+                           f"x {x_demi_tour:.1f} soit {RP_INSET:.0%} de la "
+                           f"largeur du boîtier ({largeur_b} px)")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "report" in donnees:
+        return composer_report(donnees)
     if "regime" in donnees:
         return composer_regime(donnees)
     if "cascade" in donnees:
@@ -4354,6 +4898,8 @@ def composer(donnees):
 
 
 def composer_vignette(donnees):
+    if "report" in donnees:
+        return composer_vignette_report(donnees)
     if "regime" in donnees:
         return composer_vignette_regime(donnees)
     if "cascade" in donnees:
@@ -4378,6 +4924,8 @@ def composer_vignette(donnees):
 
 
 def composer_appui(donnees):
+    if "report" in donnees:
+        return composer_appui_report(donnees)
     if "regime" in donnees:
         return composer_appui_regime(donnees)
     if "cascade" in donnees:
