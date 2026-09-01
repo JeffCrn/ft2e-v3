@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de l’alimentation électrique d’une extension industrielle greffée sur une usine en exploitation. À gauche d’une limite verticale, l’atelier existant : un poste de transformation déjà en service de 800 kVA, dont une jauge montre que l’extension prend 500 kVA, réserve de 30 % comprise ; sous ce poste, l’armoire générale basse tension de l’extension, posée dans l’atelier existant et non dans l’extension, avec une arrivée de 4 × 800 ampères en régime TNS ; et, plus bas, la branche barrée de l’armoire de l’atelier 4, neutralisée avant démolition puis déposée. De cette armoire partent deux liaisons qui franchissent la limite, dessinées à des épaisseurs proportionnelles à leur calibre : une liaison épaisse de 4 × 630 ampères vers le tableau général de l’extension, qui se répartit ensuite en quatre départs — ponts roulants en courbe D, éclairage à huit luminaires par phase, enrouleurs par groupes de trois, tableau des bureaux sur mezzanine ; et une liaison deux fois et demie plus fine de 4 × 250 ampères vers l’armoire de la centrale de traitement d’air, posée avant la charpente de la halle qu’elle dessert.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">ALIMENTATION GÉNÉRALE  · EXTENSION D’UN BÂTIMENT INDUSTRIEL EN EXPLOITATION</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Extension Fountaine Pajot</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">L’extension n’a pas de source : ses 500 kVA sont pris sur le poste de l’usine</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="186.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CE QUE L’EXTENSION DEMANDE, ET D’OÙ ELLE LE PREND</text>
+  <text x="56.00" y="214.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L’ATELIER EXISTANT, QUI NE DOIT PAS PERDRE SON ÉLECTRICITÉ</text>
+  <text x="688.00" y="214.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">L’EXTENSION, QUI NE REÇOIT AUCUNE SOURCE PROPRE</text>
+  <path d="M 664.00 232.00 L 664.00 648.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <rect x="56.00" y="240.00" width="244.00" height="68.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="72.00" y="274.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Poste de transformation</text>
+  <text x="72.00" y="294.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EXISTANT  · DÉJÀ EN SERVICE</text>
+  <text x="600.00" y="244.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">800 kVA AU POSTE EXISTANT</text>
+  <rect x="320.00" y="252.00" width="280.00" height="30.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <rect x="320.00" y="252.00" width="175.00" height="30.00" class="c-encre" fill="#00393A"/>
+  <text x="320.00" y="300.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">500 kVA FOISONNÉS, RÉSERVE DE 30 % COMPRISE</text>
+  <path d="M 178.00 308.00 L 178.00 328.00 L 420.00 328.00 L 420.00 348.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.0"/>
+  <rect x="240.00" y="348.00" width="360.00" height="152.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="256.00" y="384.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Armoire générale basse tension</text>
+  <text x="256.00" y="404.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">POSÉE DANS L’ATELIER EXISTANT</text>
+  <text x="256.00" y="424.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ARRIVÉE 4 × 800 A  · RÉGIME TNS</text>
+  <text x="256.00" y="444.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RÉSERVE DE 30 % EN PUISSANCE ET EN PLACE</text>
+  <path d="M 96.00 308.00 L 96.00 560.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 88.50 524.50 L 103.50 539.50 M 103.50 524.50 L 88.50 539.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.0"/>
+  <rect x="106.00" y="524.00" width="217.80" height="18.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="112.00" y="536.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">NEUTRALISÉE AVANT DÉMOLITION</text>
+  <rect x="56.00" y="560.00" width="264.00" height="60.00" class="c-calcaire s-filet-3" fill="#EDF0F2" stroke="#00393A1F" stroke-width="1"/>
+  <text x="72.00" y="588.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Armoire de l’atelier 4</text>
+  <text x="72.00" y="608.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DÉPOSÉE, SES CIRCUITS REPRIS</text>
+  <rect x="600.00" y="373.00" width="72.00" height="14.00" class="c-encre" fill="#00393A"/>
+  <path d="M 688.00 380.00 L 672.00 372.00 L 672.00 388.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="605.40" y="355.00" width="77.20" height="18.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="644.00" y="367.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">4 × 630 A</text>
+  <rect x="688.00" y="348.00" width="456.00" height="64.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="704.00" y="376.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Tableau général de l’extension</text>
+  <text x="704.00" y="396.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MÊMES CARACTÉRISTIQUES QUE L’ARMOIRE GÉNÉRALE</text>
+  <rect x="600.00" y="463.22" width="80.44" height="5.56" class="c-encre" fill="#00393A"/>
+  <path d="M 688.00 466.00 L 680.44 462.22 L 680.44 469.78 Z" class="c-encre" fill="#00393A"/>
+  <rect x="605.40" y="445.22" width="77.20" height="18.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="644.00" y="457.22" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">4 × 250 A</text>
+  <rect x="688.00" y="436.00" width="272.00" height="60.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="704.00" y="464.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Armoire de la centrale d’air</text>
+  <text x="704.00" y="484.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">POSÉE AVANT LA CHARPENTE</text>
+  <path d="M 1100.00 412.00 L 1100.00 528.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.0"/>
+  <rect x="688.00" y="528.00" width="456.00" height="8.00" class="c-encre" fill="#00393A"/>
+  <path d="M 741.25 536.00 L 741.25 568.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <rect x="688.00" y="568.00" width="106.50" height="76.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="741.25" y="600.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">Ponts roulants</text>
+  <text x="741.25" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">COURBE D</text>
+  <path d="M 857.75 536.00 L 857.75 568.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <rect x="804.50" y="568.00" width="106.50" height="76.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="857.75" y="600.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">Éclairage</text>
+  <text x="857.75" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">8 PAR PHASE</text>
+  <path d="M 974.25 536.00 L 974.25 568.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <rect x="921.00" y="568.00" width="106.50" height="76.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="974.25" y="600.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">Enrouleurs</text>
+  <text x="974.25" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">3 PAR CIRCUIT</text>
+  <path d="M 1090.75 536.00 L 1090.75 568.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <rect x="1037.50" y="568.00" width="106.50" height="76.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="1090.75" y="600.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">Bureaux</text>
+  <text x="1090.75" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">SUR MEZZANINE</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">L’armoire générale de l’extension est posée dans l’atelier existant, sur le poste qui y était déjà.</text>
+  <rect x="56.00" y="714.00" width="364.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">AIGREFEUILLE-D’AUNIS  · 2 412 m²  · 2024</text>
+</svg>

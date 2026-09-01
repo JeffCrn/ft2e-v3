@@ -1,0 +1,169 @@
+{
+  "fiche": "extension-fountaine-pajot-aigrefeuille",
+  "archetype": "tableau-electrique",
+  "mecanisme": "greffe",
+  "archetype_motif": "Le motif de l’archétype est arrivée → tableau → départs, et le mécanisme `greffe` porte sur ce qui précède l’arrivée : l’extension ne reçoit aucune source neuve. Ses 500 kVA foisonnés sont pris sur le poste de transformation existant de 800 kVA, et son armoire générale est posée non pas dans l’extension mais dans l’atelier existant, parce que l’usine ne doit pas perdre son électricité pendant les travaux. La géométrie porte seule la démonstration : une jauge où 500 se lit dans 800 ; une limite verticale ; la source et l’armoire toutes deux à gauche de cette limite ; deux franchissements d’épaisseurs proportionnelles aux calibres, dont un seul s’épanouit en peigne de départs ; et, à gauche, une branche barrée — celle de l’atelier que l’extension remplace. Ni sankey ni boucle : rien ne circule ici, une racine se déplace.",
+  "titre": "Extension Fountaine Pajot",
+  "sous_titre": "L’extension n’a pas de source : ses 500 kVA sont pris sur le poste de l’usine",
+  "surtitre": "ALIMENTATION GÉNÉRALE  · EXTENSION D’UN BÂTIMENT INDUSTRIEL EN EXPLOITATION",
+  "cartouche_legende": "AIGREFEUILLE-D’AUNIS  · 2 412 m²  · 2024",
+  "greffe": {
+    "entete": "CE QUE L’EXTENSION DEMANDE, ET D’OÙ ELLE LE PREND",
+    "registres": {
+      "gauche": "L’ATELIER EXISTANT, QUI NE DOIT PAS PERDRE SON ÉLECTRICITÉ",
+      "droite": "L’EXTENSION, QUI NE REÇOIT AUCUNE SOURCE PROPRE"
+    },
+    "jauge": {
+      "ordre": 1,
+      "cle": "puissance",
+      "libelle": "La puissance prise sur le poste existant",
+      "disponible": 800,
+      "demande": 500,
+      "unite": "kVA",
+      "etiquette_disponible": "800 kVA AU POSTE EXISTANT",
+      "etiquette_demande": "500 kVA FOISONNÉS, RÉSERVE DE 30 % COMPRISE",
+      "detail": [
+        "AUCUN POSTE NEUF  · AUGMENTATION DE LA PUISSANCE SOUSCRITE"
+      ]
+    },
+    "source": {
+      "ordre": 2,
+      "cle": "poste",
+      "libelle": "Poste de transformation",
+      "valeur": "800",
+      "unite": "kVA",
+      "detail": [
+        "EXISTANT  · DÉJÀ EN SERVICE"
+      ]
+    },
+    "armoire": {
+      "ordre": 3,
+      "cle": "agbt",
+      "libelle": "Armoire générale basse tension",
+      "valeur": "4 × 800",
+      "unite": "A",
+      "detail": [
+        "POSÉE DANS L’ATELIER EXISTANT",
+        "ARRIVÉE 4 × 800 A  · RÉGIME TNS",
+        "RÉSERVE DE 30 % EN PUISSANCE ET EN PLACE"
+      ]
+    },
+    "franchissements": [
+      {
+        "ordre": 4,
+        "cle": "tgbt",
+        "libelle": "Tableau général de l’extension",
+        "calibre": 630,
+        "valeur": "4 × 630",
+        "unite": "A",
+        "detail": [
+          "MÊMES CARACTÉRISTIQUES QUE L’ARMOIRE GÉNÉRALE"
+        ]
+      },
+      {
+        "ordre": 5,
+        "cle": "cvc3",
+        "libelle": "Armoire de la centrale d’air",
+        "calibre": 250,
+        "valeur": "4 × 250",
+        "unite": "A",
+        "detail": [
+          "POSÉE AVANT LA CHARPENTE"
+        ]
+      }
+    ],
+    "departs": [
+      {
+        "ordre": 6,
+        "cle": "ponts",
+        "libelle": "Ponts roulants",
+        "detail": "COURBE D"
+      },
+      {
+        "ordre": 7,
+        "cle": "eclairage",
+        "libelle": "Éclairage",
+        "detail": "8 PAR PHASE"
+      },
+      {
+        "ordre": 8,
+        "cle": "enrouleurs",
+        "libelle": "Enrouleurs",
+        "detail": "3 PAR CIRCUIT"
+      },
+      {
+        "ordre": 9,
+        "cle": "bureaux",
+        "libelle": "Bureaux",
+        "detail": "SUR MEZZANINE"
+      }
+    ],
+    "retranche": {
+      "ordre": 10,
+      "cle": "at4",
+      "libelle": "Armoire de l’atelier 4",
+      "mention": "NEUTRALISÉE AVANT DÉMOLITION",
+      "detail": [
+        "DÉPOSÉE, SES CIRCUITS REPRIS"
+      ]
+    },
+    "vignette_noeuds": {
+      "armoire": "Armoire",
+      "tgbt": "Extension",
+      "cvc3": "Centrale d’air"
+    },
+    "appui_noeuds": {
+      "armoire": "Armoire générale",
+      "tgbt": "Tableau de l’extension",
+      "cvc3": "Centrale d’air"
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "L’armoire générale de l’extension est posée dans l’atelier existant, sur le poste qui y était déjà.",
+  "vignette_surtitre": "GREFFE SUR L’EXISTANT",
+  "aria_label": "Schéma de principe de l’alimentation électrique d’une extension industrielle greffée sur une usine en exploitation. À gauche d’une limite verticale, l’atelier existant : un poste de transformation déjà en service de 800 kVA, dont une jauge montre que l’extension prend 500 kVA, réserve de 30 % comprise ; sous ce poste, l’armoire générale basse tension de l’extension, posée dans l’atelier existant et non dans l’extension, avec une arrivée de 4 × 800 ampères en régime TNS ; et, plus bas, la branche barrée de l’armoire de l’atelier 4, neutralisée avant démolition puis déposée. De cette armoire partent deux liaisons qui franchissent la limite, dessinées à des épaisseurs proportionnelles à leur calibre : une liaison épaisse de 4 × 630 ampères vers le tableau général de l’extension, qui se répartit ensuite en quatre départs — ponts roulants en courbe D, éclairage à huit luminaires par phase, enrouleurs par groupes de trois, tableau des bureaux sur mezzanine ; et une liaison deux fois et demie plus fine de 4 × 250 ampères vers l’armoire de la centrale de traitement d’air, posée avant la charpente de la halle qu’elle dessert.",
+  "a_valider_ft2e": [
+    "LA BRANCHE BARRÉE. Le dessin rattache l’armoire AT4 de l’atelier 4 au même poste de transformation que l’armoire générale neuve. Le CCTP ne nomme qu’un poste existant sur le site (800 kVA) et prescrit la neutralisation des équipements de l’atelier 4 avant démolition, mais il ne dit pas explicitement de quel poste l’AT4 dépendait. À confirmer, ou à corriger si le site en compte plusieurs.",
+    "LA POSITION DE L’ARMOIRE CVC 3. Le CCTP fixe qu’elle est alimentée par un départ de 4 × 250 A de l’armoire générale et qu’elle est posée avant la mise en œuvre de la charpente de l’atelier d’extension. Il ne dit pas OÙ elle est posée. Le dessin la place du côté extension, parce qu’elle dessert la centrale de traitement d’air du bâtiment de pré-équipement ; si elle est en réalité montée dans l’existant, la liaison fine ne doit pas franchir la limite.",
+    "LES QUATRE DÉPARTS RETENUS. Le tableau général de l’extension en porte davantage : prises 32 A et 20 A, alimentations spécifiques, chauffage électrique, précâblage VDI, détection incendie, vidéosurveillance. Le dessin n’en montre que quatre, choisis pour ce qu’ils disent du bâtiment — les ponts roulants et leur courbe D, l’éclairage à huit luminaires par phase, les enrouleurs par groupes de trois, et le tableau divisionnaire des bureaux. L’ordre de gauche à droite est celui du dessin, pas celui du CCTP.",
+    "L’ÉPAISSEUR DES DEUX FRANCHISSEMENTS est strictement proportionnelle au calibre des disjoncteurs (630 et 250 ampères, rapport 2,52). Ce n’est pas une proportion de puissance transitée, que le dossier ne donne pas : c’est le calibre de la protection, et l’étiquette de chaque liaison le nomme.",
+    "LA JAUGE compare 500 kVA foisonnés à 800 kVA de poste. Les deux valeurs sont littérales et viennent du même CCTP, mais elles ne sont pas de même nature : 800 kVA est la puissance du transformateur, 500 kVA une puissance utile foisonnée réserve comprise. Le rapport dessiné, 62,5 %, n’est donc pas un taux de charge du poste.",
+    "LE MOT « GREFFE » n’est pas du dossier : il nomme le mécanisme du dessin. Le CCTP écrit « les travaux seront réalisés sur un établissement en exploitation » et prescrit « le maintien de la desserte en énergie électrique de l’ensemble des locaux restant en activité ». La planche ne porte pas la citation, faute de place ; l’en-tête de registre la résume."
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire (23-036) : absent du dessin, comme de toute prose de la fiche — il ne vit qu’au frontmatter et au JSON-LD.",
+    "Montants : ni le coût prévisionnel des travaux, ni les honoraires de maîtrise d’œuvre, ni les estimations de lot, ni le chiffrage de l’option de récupération d’énergie.",
+    "Noms de tiers : ni le maître d’ouvrage, ni l’architecte mandataire, ni l’économiste-OPC, ni le bureau d’études structures, ni les entreprises des seize lots, ni aucune marque de matériel.",
+    "Géométrie d’ouvrage : aucune implantation des bâtiments 5, 8-1, 8-2 et 8-3, aucun plan des deux nefs, aucune façade. La limite verticale est topologique — elle sépare deux régimes d’alimentation, pas deux volumes bâtis.",
+    "Données nominatives : aucun nom de personne, ni côté FT2E ni côté client.",
+    "Millésime d’ouverture (2023) : le cartouche porte la livraison, 2024."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_la_jauge": "0.350000 px par kVA — 500 de 800 donne 175.0 px sur 280, soit 62.5 %",
+    "echelle_des_franchissements": "0.022222 px par ampère — 630 A donne 14.00 px et 250 A 5.56 px, rapport dessiné 2.52 pour un rapport de calibres de 2.52",
+    "demonstration": "texte masqué : la source et l’armoire sont toutes deux à gauche de la limite (x 664), qui n’est franchie que par deux bandes de 14.0 et 5.6 px ; une seule ouvre un peigne de 4 départs ; et une branche barrée descend à gauche jusqu’à x 96. Aucun organe de l’extension n’est à gauche, aucun organe de l’existant n’est à droite",
+    "repartition": "registre gauche x 56–600 (544 px), registre droit x 688–1144 (456 px), limite pointillée à x 664 sur 416 px de haut",
+    "departs": "Ponts roulants 106.5 px, Éclairage 106.5 px, Enrouleurs 106.5 px, Bureaux 106.5 px",
+    "depassements": "20 chaînes mesurées contre la largeur de leur contenant, 0 dépassement — marge la plus faible 3.7 px sur « départ/enrouleurs »",
+    "bas_du_dessin": "départs jusqu’à 644, limite jusqu’à 648, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 364 x 30 px = 10920 px², soit 1.14 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la jauge (170 px de demande dans 272 px de ressource), la limite, l’armoire à gauche et les deux bandes inégales (13.0 contre 5.2 px) — détails d’organe, peigne des départs et branche barrée laissés à la planche",
+    "bas_du_dessin": "184 px, marge basse 16 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier à l’échelle 1 : la jauge (315 px de demande dans 504), la limite, l’armoire générale à gauche et les deux franchissements inégaux (12.0 contre 4.8 px) — peigne des départs, branche barrée, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "limite jusqu’à 344 px — marge basse 24 px",
+    "echelle_derivee": "jauge 0.6300 px/kVA, franchissements 0.0190 px/A"
+  }
+}

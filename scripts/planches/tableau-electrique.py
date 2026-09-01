@@ -55,6 +55,17 @@ niveau qui reste sous le bord ; et une alimentation de 22 kW partagée en trois
 branches de 7 kW à largeur proportionnelle, dont une seule est équipée — la
 réserve se compte, deux cadres vides sur trois.
 
+Le mécanisme `greffe` (extension Fountaine Pajot) porte sur ce qui PRÉCÈDE
+l'arrivée : l'extension ne reçoit aucune source neuve. Une jauge montre ses
+500 kVA foisonnés pris dans les 800 kVA d'un poste existant ; une limite
+verticale a, de son seul côté gauche, la source ET l'armoire générale — toute
+la racine de l'arbre est dans le bâtiment qui existait déjà ; deux liaisons
+d'épaisseurs proportionnelles aux calibres (630 et 250 A) la franchissent, dont
+une seule s'épanouit en peigne de départs ; et une branche barrée descend à
+gauche vers l'armoire de l'atelier que l'extension remplace. Les blocs de
+l'existant sont en calcaire, ceux de l'extension en papier — valeur toujours
+doublée du mot.
+
 Cinquième module du chantier après `sankey-energie.py`, `zonage-ssi.py`,
 `coupe-traversee.py` et `boucle-fluide.py`. Le tronc commun (jetons, mesure des
 chasses, insécables, double écriture des couleurs, routine d'exécution) vit dans
@@ -2925,7 +2936,450 @@ def composer_appui_regimes(donnees):
                         f"{kva_max} {rg['unite_groupe']} et {n_max} départs max")
 
 
+# ── Mécanisme 6 : `greffe` — l'extension Fountaine Pajot ─────────────────────
+# Le motif de l'archétype est arrivée → tableau → départs ; `greffe` porte sur
+# ce qui PRÉCÈDE l'arrivée. L'extension ne reçoit aucune source neuve : ses
+# 500 kVA foisonnés sont pris sur un poste existant de 800, et son armoire
+# générale est posée dans l'atelier existant, parce que l'usine ne doit pas
+# perdre son électricité pendant les travaux.
+#
+# La démonstration est portée par quatre faits géométriques, et par eux seuls :
+#   1. une jauge où la demande se lit DANS la ressource (500 dans 800) ;
+#   2. une limite verticale, à gauche de laquelle se tiennent la source ET
+#      l'armoire — c'est-à-dire toute la racine de l'arbre ;
+#   3. deux franchissements d'épaisseurs proportionnelles aux calibres
+#      (630 et 250 A, rapport 2,52), dont un seul s'épanouit en peigne ;
+#   4. une branche barrée à gauche : l'armoire de l'atelier que l'extension
+#      remplace, neutralisée avant démolition.
+#
+# Les blocs de l'existant sont en calcaire, ceux de l'extension en papier — la
+# valeur est doublée du mot (« EXISTANT », « DÉJÀ EN SERVICE ») : la couleur ne
+# porte jamais seule (RGAA 3.2).
+#
+# ⚠ Les repères sont préfixés `GR_` / `GRV_` / `GRA_` : deux mécanismes qui
+# affecteraient le même nom au niveau du module se marcheraient dessus, et
+# c'est le PREMIER dessin qui se recomposerait faux (piège relevé sur ce même
+# fichier le 2026-08-16).
+
+# Rythme de la planche
+GR_Y_ENTETE = 186
+GR_Y_REGISTRE = 214
+
+# La limite — topologique, jamais un mur
+GR_X_LIMITE = 664
+GR_LIM_Y0, GR_LIM_Y1 = 232, 648
+
+# Registre gauche — l'atelier existant
+GR_PO_X0, GR_PO_X1 = 56, 300              # le poste de transformation
+GR_PO_Y0, GR_PO_Y1 = 240, 308
+GR_JA_X0, GR_JA_L = 320, 280              # la jauge de puissance
+GR_JA_Y0, GR_JA_H = 252, 30
+GR_AG_X0, GR_AG_X1 = 240, 600             # l'armoire générale
+GR_AG_Y0, GR_AG_Y1 = 348, 500
+GR_X_TRONC = 178                          # la descente du poste vers l'armoire
+GR_Y_TRONC = 328
+GR_X_ENTREE_AG = 420                      # son point d'entrée dans l'armoire
+GR_X_COUPE = 96                           # la branche barrée
+GR_Y_CROIX = 532
+GR_AT_X0, GR_AT_X1 = 56, 320              # l'armoire de l'atelier démoli
+GR_AT_Y0, GR_AT_Y1 = 560, 620
+
+# Registre droit — l'extension
+GR_TG_X0, GR_TG_X1 = 688, 1144            # le tableau général de l'extension
+GR_TG_Y0, GR_TG_Y1 = 348, 412
+GR_CV_X0, GR_CV_X1 = 688, 960             # l'armoire de la centrale d'air
+GR_CV_Y0, GR_CV_Y1 = 436, 496
+GR_X_DESC_TG = 1100                       # la descente du tableau vers la barre
+GR_Y_BARRE, GR_H_BARRE = 528, 8
+GR_DEP_Y0, GR_DEP_Y1 = 568, 644           # les quatre départs
+GR_DEP_ECART = 10
+
+# Les deux franchissements : y de leur axe, et l'échelle des épaisseurs
+GR_Y_BANDE = {"tgbt": 380, "cvc3": 466}
+GR_E_MAX = 14.0                           # px pour le plus fort calibre
+
+
+def _gr_bande(A, calibre, e_max, calibres, y, x0, x1):
+    """Une liaison dont l'ÉPAISSEUR est le calibre. Rend (épaisseur, taille de
+    pointe) pour le bloc `controles` : la proportion se mesure, elle ne
+    s'affirme pas."""
+    e = e_max * calibre / max(calibres)
+    t = e + 2
+    A(rect(x0, y - e / 2, (x1 - t) - x0, e, "encre"))
+    A(fleche(x1, y, "encre", "droite", t))
+    return e, t
+
+
+def _gr_bloc(A, x0, y0, x1, y1, libelle, details, fond, filet,
+             corps_libelle=15, marge=16, dy_libelle=None, dy_detail=20,
+             mesures=None, cle=""):
+    """Un organe : son cadre, son intitulé en Archivo, ses détails en mono.
+    Chaque chaîne dessinée est MESURÉE contre la largeur intérieure du bloc et
+    versée dans `mesures` — un dépassement doit rompre la composition, pas se
+    découvrir au rendu."""
+    interieur = (x1 - x0) - 2 * marge
+    A(rect_bord(x0, y0, x1 - x0, y1 - y0, fond, filet))
+    y = y0 + (dy_libelle if dy_libelle is not None else 34)
+    A(texte(x0 + marge, y, libelle, "sans", corps_libelle, 400, "encre", wdth=100))
+    if mesures is not None:
+        mesures.append((f"{cle}/intitulé", mesurer(libelle, corps_libelle, "sans-400"),
+                        interieur))
+    for d in details:
+        y += dy_detail
+        A(texte(x0 + marge, y, d, "mono", 10, 500, "pivot", tracking=10 * 0.14))
+        if mesures is not None:
+            mesures.append((f"{cle}/{d[:18]}", mesurer(d, 10, "mono", 10 * 0.14),
+                            interieur))
+
+
+def _gr_jauge(A, x0, y0, largeur, hauteur, disponible, demande,
+              etiq_dispo, etiq_dem):
+    """La jauge : un cadre dont la largeur EST la ressource, un aplat dont la
+    largeur EST la demande. Le rapport se lit sans lire un chiffre."""
+    l_demande = largeur * demande / disponible
+    A(texte(x0 + largeur, y0 - 8, etiq_dispo, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    A(rect_bord(x0, y0, largeur, hauteur, "papier", "filet-1"))
+    A(rect(x0, y0, l_demande, hauteur, "encre"))
+    A(texte(x0, y0 + hauteur + 18, etiq_dem, "mono", 10, 500, "encre",
+            tracking=10 * 0.14))
+    return l_demande
+
+
+def composer_greffe(donnees):
+    gr = donnees["greffe"]
+    calibres = [f["calibre"] for f in gr["franchissements"]]
+    mesures = []
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, strokes=("filet-1", "filet-3", "encre"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400, "pivot",
+            wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête général, puis un en-tête par registre ────────────────────────
+    # Ce sont eux qui empêchent la planche de mentir : sans eux, la limite
+    # verticale ne dirait pas ce qu'elle sépare.
+    A(texte(MARGE, GR_Y_ENTETE, gr["entete"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(MARGE, GR_Y_REGISTRE, gr["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(GR_TG_X0, GR_Y_REGISTRE, gr["registres"]["droite"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    mesures.append(("registre gauche",
+                    mesurer(gr["registres"]["gauche"], 10, "mono", 1.4),
+                    GR_X_LIMITE - MARGE))
+    mesures.append(("registre droit",
+                    mesurer(gr["registres"]["droite"], 10, "mono", 1.4),
+                    W - MARGE - GR_TG_X0))
+
+    # ── La limite ────────────────────────────────────────────────────────────
+    A(_pointille(GR_X_LIMITE, GR_LIM_Y0, GR_X_LIMITE, GR_LIM_Y1, "encre", 1.2,
+                 "5 5"))
+
+    # ── Le poste existant et la jauge de puissance ───────────────────────────
+    src = gr["source"]
+    _gr_bloc(A, GR_PO_X0, GR_PO_Y0, GR_PO_X1, GR_PO_Y1,
+             src["libelle"], src["detail"], "calcaire", "filet-1",
+             mesures=mesures, cle="poste")
+    ja = gr["jauge"]
+    l_dem = _gr_jauge(A, GR_JA_X0, GR_JA_Y0, GR_JA_L, GR_JA_H,
+                      ja["disponible"], ja["demande"],
+                      ja["etiquette_disponible"], ja["etiquette_demande"])
+    mesures.append(("jauge/demande",
+                    mesurer(ja["etiquette_demande"], 10, "mono", 1.4),
+                    GR_X_LIMITE - GR_JA_X0))
+
+    # ── La descente vers l'armoire générale, et l'armoire ────────────────────
+    A(polyligne([(GR_X_TRONC, GR_PO_Y1), (GR_X_TRONC, GR_Y_TRONC),
+                 (GR_X_ENTREE_AG, GR_Y_TRONC), (GR_X_ENTREE_AG, GR_AG_Y0)],
+                "encre", 2.0))
+    ag = gr["armoire"]
+    _gr_bloc(A, GR_AG_X0, GR_AG_Y0, GR_AG_X1, GR_AG_Y1,
+             ag["libelle"], ag["detail"], "papier", "filet-1",
+             dy_libelle=36, mesures=mesures, cle="armoire")
+
+    # ── La branche barrée : l'atelier que l'extension remplace ───────────────
+    at = gr["retranche"]
+    A(ligne(GR_X_COUPE, GR_PO_Y1, GR_X_COUPE, GR_AT_Y0, "encre", 1.6))
+    A(_croix(GR_X_COUPE, GR_Y_CROIX, 15, "encre", 2.0))
+    _etiquette(A, GR_X_COUPE + 16, GR_Y_CROIX + 4, at["mention"], 10)
+    _gr_bloc(A, GR_AT_X0, GR_AT_Y0, GR_AT_X1, GR_AT_Y1,
+             at["libelle"], at["detail"], "calcaire", "filet-3",
+             dy_libelle=28, mesures=mesures, cle="atelier retranché")
+
+    # ── Les deux franchissements ─────────────────────────────────────────────
+    cibles = {
+        "tgbt": (GR_TG_X0, GR_TG_Y0, GR_TG_X1, GR_TG_Y1),
+        "cvc3": (GR_CV_X0, GR_CV_Y0, GR_CV_X1, GR_CV_Y1),
+    }
+    bandes = {}
+    for f in gr["franchissements"]:
+        y = GR_Y_BANDE[f["cle"]]
+        e, t = _gr_bande(A, f["calibre"], GR_E_MAX, calibres, y,
+                         GR_AG_X1, cibles[f["cle"]][0])
+        bandes[f["cle"]] = e
+        etiq = f'{f["valeur"]}{NN}{f["unite"]}'
+        _etiquette(A, (GR_AG_X1 + cibles[f["cle"]][0]) / 2, y - e / 2 - 6,
+                   etiq, 10, ancre="middle")
+        x0, y0, x1, y1 = cibles[f["cle"]]
+        _gr_bloc(A, x0, y0, x1, y1, f["libelle"], f["detail"], "papier",
+                 "filet-1", dy_libelle=28, mesures=mesures, cle=f["cle"])
+
+    # ── Le peigne des départs : un seul des deux franchissements l'ouvre ─────
+    A(ligne(GR_X_DESC_TG, GR_TG_Y1, GR_X_DESC_TG, GR_Y_BARRE, "encre", 2.0))
+    A(rect(GR_TG_X0, GR_Y_BARRE, GR_TG_X1 - GR_TG_X0, GR_H_BARRE, "encre"))
+    departs = gr["departs"]
+    n = len(departs)
+    l_dep = ((GR_TG_X1 - GR_TG_X0) - GR_DEP_ECART * (n - 1)) / n
+    x = GR_TG_X0
+    for d in departs:
+        cx = x + l_dep / 2
+        A(ligne(cx, GR_Y_BARRE + GR_H_BARRE, cx, GR_DEP_Y0, "encre", 1.4))
+        A(rect_bord(x, GR_DEP_Y0, l_dep, GR_DEP_Y1 - GR_DEP_Y0, "papier",
+                    "filet-1"))
+        A(texte(cx, GR_DEP_Y0 + 32, d["libelle"], "sans", 12, 600, "encre",
+                wdth=112, ancre="middle"))
+        A(texte(cx, GR_DEP_Y0 + 54, d["detail"], "mono", 10, 500, "pivot",
+                ancre="middle", tracking=10 * 0.14))
+        mesures.append((f'départ/{d["cle"]}',
+                        max(mesurer(d["libelle"], 12, "sans-600"),
+                            mesurer(d["detail"], 10, "mono", 1.4)), l_dep - 8))
+        x += l_dep + GR_DEP_ECART
+
+    # ── Phrase de principe et cartouche ──────────────────────────────────────
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    mesures.append(("phrase de principe",
+                    mesurer(donnees["phrase_principe"], 17, "sans-400"), UTILE))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600, round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+    A("</svg>")
+
+    # ── Contrôles : aucune affirmation qui ne soit chiffrée ──────────────────
+    trop = [(c, f"{l:.1f} > {d:.1f}") for c, l, d in mesures if l > d]
+    assert not trop, f"dépassements : {trop}"
+    e_tg, e_cv = bandes["tgbt"], bandes["cvc3"]
+    cal = {f["cle"]: f["calibre"] for f in gr["franchissements"]}
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "echelle_de_la_jauge": f"{GR_JA_L/ja['disponible']:.6f} px par "
+                               f"{ja['unite']} — {ja['demande']} de "
+                               f"{ja['disponible']} donne {l_dem:.1f} px sur "
+                               f"{GR_JA_L}, soit "
+                               f"{ja['demande']/ja['disponible']*100:.1f} %",
+        "echelle_des_franchissements":
+            f"{GR_E_MAX/max(cal.values()):.6f} px par ampère — "
+            f"{cal['tgbt']}{NN}A donne {e_tg:.2f} px et {cal['cvc3']}{NN}A "
+            f"{e_cv:.2f} px, rapport dessiné {e_tg/e_cv:.2f} pour un rapport "
+            f"de calibres de {cal['tgbt']/cal['cvc3']:.2f}",
+        "demonstration":
+            f"texte masqué : la source et l’armoire sont toutes deux à gauche "
+            f"de la limite (x {GR_X_LIMITE}), qui n’est franchie que par deux "
+            f"bandes de {e_tg:.1f} et {e_cv:.1f} px ; une seule ouvre un peigne "
+            f"de {len(departs)} départs ; et une branche barrée descend à "
+            f"gauche jusqu’à x {GR_X_COUPE}. Aucun organe de l’extension n’est "
+            f"à gauche, aucun organe de l’existant n’est à droite",
+        "repartition":
+            f"registre gauche x {MARGE}–{GR_AG_X1} ({GR_AG_X1-MARGE} px), "
+            f"registre droit x {GR_TG_X0}–{GR_TG_X1} ({GR_TG_X1-GR_TG_X0} px), "
+            f"limite pointillée à x {GR_X_LIMITE} sur "
+            f"{GR_LIM_Y1-GR_LIM_Y0} px de haut",
+        "departs": ", ".join(f'{d["libelle"]} {l_dep:.1f} px' for d in departs),
+        "depassements": f"{len(mesures)} chaînes mesurées contre la largeur de "
+                        f"leur contenant, 0 dépassement — marge la plus faible "
+                        f"{min(d - l for _, l, d in mesures):.1f} px sur « "
+                        f"{min(mesures, key=lambda m: m[2] - m[1])[0]} »",
+        "bas_du_dessin": f"départs jusqu’à {GR_DEP_Y1}, limite jusqu’à "
+                         f"{GR_LIM_Y1}, phrase de principe à {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE+H_CARTOUCHE}, "
+                         f"marge basse {H-(Y_CARTOUCHE+H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur*H_CARTOUCHE} px², soit "
+                            f"{largeur*H_CARTOUCHE/(W*H)*100:.2f} % de la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── La vignette : la jauge, la limite, et les deux bandes inégales ───────────
+# Six libellés ne se lisent pas dans 300 px : la vignette garde le motif entier
+# et ses deux seules valeurs (500 et 800), et laisse à la planche les détails
+# d'organe, le peigne des départs et la branche barrée.
+GRV_JA_X0, GRV_JA_L = 14.0, 272.0
+GRV_JA_Y0, GRV_JA_H = 40.0, 18.0
+GRV_Y_VAL = 76.0
+GRV_AG_X0, GRV_AG_X1 = 14.0, 112.0
+GRV_AG_Y0, GRV_AG_Y1 = 100.0, 184.0
+GRV_X_LIMITE = 134.0
+GRV_LIM_Y0, GRV_LIM_Y1 = 92.0, 186.0
+GRV_TG_X0, GRV_TG_X1 = 156.0, 286.0
+GRV_TG_Y0, GRV_TG_Y1 = 100.0, 136.0
+GRV_CV_X0, GRV_CV_X1 = 156.0, 272.0
+GRV_CV_Y0, GRV_CV_Y1 = 148.0, 184.0
+GRV_E_MAX = 13.0
+
+
+def composer_vignette_greffe(donnees):
+    gr = donnees["greffe"]
+    ja = gr["jauge"]
+    calibres = [f["calibre"] for f in gr["franchissements"]]
+    noeuds = gr["vignette_noeuds"]
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, strokes=("filet-1", "filet-3", "encre"))
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 24, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # La jauge : la demande DANS la ressource
+    l_dem = GRV_JA_L * ja["demande"] / ja["disponible"]
+    A(rect_bord(GRV_JA_X0, GRV_JA_Y0, GRV_JA_L, GRV_JA_H, "papier", "filet-1"))
+    A(rect(GRV_JA_X0, GRV_JA_Y0, l_dem, GRV_JA_H, "encre"))
+    A(texte(GRV_JA_X0, GRV_Y_VAL, f'{ja["demande"]}{NN}{ja["unite"]}', "mono",
+            10, 500, "encre", tabulaire=True))
+    A(texte(GRV_JA_X0 + GRV_JA_L, GRV_Y_VAL,
+            f'{ja["disponible"]}{NN}{ja["unite"]}', "mono", 10, 500, "pivot",
+            ancre="end", tabulaire=True))
+
+    A(_pointille(GRV_X_LIMITE, GRV_LIM_Y0, GRV_X_LIMITE, GRV_LIM_Y1, "encre",
+                 1.1, "4 4"))
+
+    A(rect_bord(GRV_AG_X0, GRV_AG_Y0, GRV_AG_X1 - GRV_AG_X0,
+                GRV_AG_Y1 - GRV_AG_Y0, "papier", "filet-1"))
+    A(texte(GRV_AG_X0 + 10, 130, noeuds["armoire"], "sans", 12, 600, "encre",
+            wdth=112))
+    A(texte(GRV_AG_X0 + 10, 150, f'{gr["armoire"]["valeur"]}{NN}'
+            f'{gr["armoire"]["unite"]}', "mono", 10, 500, "pivot"))
+
+    cibles = {"tgbt": (GRV_TG_X0, GRV_TG_Y0, GRV_TG_X1, GRV_TG_Y1),
+              "cvc3": (GRV_CV_X0, GRV_CV_Y0, GRV_CV_X1, GRV_CV_Y1)}
+    ep = {}
+    for f in gr["franchissements"]:
+        x0, y0, x1, y1 = cibles[f["cle"]]
+        y = (y0 + y1) / 2
+        e, _t = _gr_bande(A, f["calibre"], GRV_E_MAX, calibres, y,
+                          GRV_AG_X1, x0)
+        ep[f["cle"]] = e
+        A(rect_bord(x0, y0, x1 - x0, y1 - y0, "papier", "filet-1"))
+        A(texte(x0 + 10, y + 4, noeuds[f["cle"]], "sans", 12, 600, "encre",
+                wdth=112))
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au "
+                         f"pire cas",
+        "motif": f"la jauge ({l_dem:.0f} px de demande dans {GRV_JA_L:.0f} px "
+                 f"de ressource), la limite, l’armoire à gauche et les deux "
+                 f"bandes inégales ({ep['tgbt']:.1f} contre {ep['cvc3']:.1f} px) "
+                 f"— détails d’organe, peigne des départs et branche barrée "
+                 f"laissés à la planche",
+        "bas_du_dessin": f"{GRV_CV_Y1:.0f} px, marge basse {VH-GRV_CV_Y1:.0f} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── L'appui : le motif entier à l'échelle 1 ──────────────────────────────────
+GRA_JA_X0, GRA_JA_L = 24.0, 504.0
+GRA_JA_Y0, GRA_JA_H = 56.0, 22.0
+GRA_Y_VAL = 96.0
+GRA_AG_X0, GRA_AG_X1 = 24.0, 236.0
+GRA_AG_Y0, GRA_AG_Y1 = 132.0, 312.0
+GRA_X_LIMITE = 268.0
+GRA_LIM_Y0, GRA_LIM_Y1 = 116.0, 344.0
+GRA_TG_X0, GRA_TG_X1 = 300.0, 528.0
+GRA_TG_Y0, GRA_TG_Y1 = 140.0, 196.0
+GRA_CV_X0, GRA_CV_X1 = 300.0, 496.0
+GRA_CV_Y0, GRA_CV_Y1 = 240.0, 296.0
+GRA_E_MAX = 12.0
+
+
+def composer_appui_greffe(donnees):
+    gr = donnees["greffe"]
+    ja = gr["jauge"]
+    calibres = [f["calibre"] for f in gr["franchissements"]]
+    noeuds = gr["appui_noeuds"]
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees, strokes=("filet-1", "filet-3", "encre"))
+
+    l_dem = GRA_JA_L * ja["demande"] / ja["disponible"]
+    A(rect_bord(GRA_JA_X0, GRA_JA_Y0, GRA_JA_L, GRA_JA_H, "papier", "filet-1"))
+    A(rect(GRA_JA_X0, GRA_JA_Y0, l_dem, GRA_JA_H, "encre"))
+    A(texte(GRA_JA_X0, GRA_Y_VAL, f'{ja["demande"]}{NN}{ja["unite"]}', "mono",
+            10, 500, "encre", tracking=1.4, tabulaire=True))
+    A(texte(GRA_JA_X0 + GRA_JA_L, GRA_Y_VAL,
+            f'{ja["disponible"]}{NN}{ja["unite"]}', "mono", 10, 500, "pivot",
+            ancre="end", tracking=1.4, tabulaire=True))
+
+    A(_pointille(GRA_X_LIMITE, GRA_LIM_Y0, GRA_X_LIMITE, GRA_LIM_Y1, "encre",
+                 1.2, "5 5"))
+
+    A(rect_bord(GRA_AG_X0, GRA_AG_Y0, GRA_AG_X1 - GRA_AG_X0,
+                GRA_AG_Y1 - GRA_AG_Y0, "papier", "filet-1"))
+    A(texte(GRA_AG_X0 + 16, 176, noeuds["armoire"], "sans", 15, 400, "encre",
+            wdth=100))
+    A(texte(GRA_AG_X0 + 16, 198, gr["armoire"]["detail"][0], "mono", 10, 500,
+            "pivot", tracking=1.4))
+    A(texte(GRA_AG_X0 + 16, 218, f'{gr["armoire"]["valeur"]}{NN}'
+            f'{gr["armoire"]["unite"]}', "mono", 10, 500, "pivot", tracking=1.4))
+
+    cibles = {"tgbt": (GRA_TG_X0, GRA_TG_Y0, GRA_TG_X1, GRA_TG_Y1),
+              "cvc3": (GRA_CV_X0, GRA_CV_Y0, GRA_CV_X1, GRA_CV_Y1)}
+    ep = {}
+    for f in gr["franchissements"]:
+        x0, y0, x1, y1 = cibles[f["cle"]]
+        y = (y0 + y1) / 2
+        e, _t = _gr_bande(A, f["calibre"], GRA_E_MAX, calibres, y,
+                          GRA_AG_X1, x0)
+        ep[f["cle"]] = e
+        _etiquette(A, (GRA_AG_X1 + x0) / 2 - 6, y - e / 2 - 6,
+                   f'{f["valeur"]}{NN}{f["unite"]}', 10, ancre="middle")
+        A(rect_bord(x0, y0, x1 - x0, y1 - y0, "papier", "filet-1"))
+        A(texte(x0 + 16, (y0 + y1) / 2 + 6, noeuds[f["cle"]], "sans", 15, 400,
+                "encre", wdth=100))
+    A("</svg>")
+
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"le motif entier à l’échelle 1 : la jauge ({l_dem:.0f} px de "
+              f"demande dans {GRA_JA_L:.0f}), la limite, l’armoire générale à "
+              f"gauche et les deux franchissements inégaux "
+              f"({ep['tgbt']:.1f} contre {ep['cvc3']:.1f} px) — peigne des "
+              f"départs, branche barrée, phrase et cartouche laissés à la "
+              f"planche",
+        bas=f"limite jusqu’à {GRA_LIM_Y1:.0f} px — marge basse "
+            f"{AH-GRA_LIM_Y1:.0f} px",
+        echelle_derivee=f"jauge {GRA_JA_L/ja['disponible']:.4f} px/"
+                        f"{ja['unite']}, franchissements "
+                        f"{GRA_E_MAX/max(calibres):.4f} px/A")
+
+
 def _composer(donnees):
+    if "greffe" in donnees:
+        return composer_greffe(donnees)
     if "regimes" in donnees:
         return composer_regimes(donnees)
     if "mutualisation" in donnees:
@@ -2940,6 +3394,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "greffe" in donnees:
+        return composer_vignette_greffe(donnees)
     if "regimes" in donnees:
         return composer_vignette_regimes(donnees)
     if "mutualisation" in donnees:
@@ -2954,6 +3410,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "greffe" in donnees:
+        return composer_appui_greffe(donnees)
     if "regimes" in donnees:
         return composer_appui_regimes(donnees)
     if "mutualisation" in donnees:
