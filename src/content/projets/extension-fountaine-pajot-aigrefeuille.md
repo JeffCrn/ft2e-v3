@@ -30,116 +30,118 @@ planche: "/images/projets/extension-fountaine-pajot-aigrefeuille/planche.svg"
 Girard. Le chantier naval a fait étendre son
 [bâtiment industriel](/secteurs/industriel-commercial) 5-8 de quelque
 2 412 m², sur un projet conduit par l’agence Sébastien Pellereau, mandataire du
-groupement de maîtrise d’œuvre. FT2E y a porté deux lots techniques sur la
-mission de base complète, de l’esquisse au dossier des ouvrages exécutés :
+groupement de maîtrise d’œuvre. FT2E y a porté deux lots techniques sur une
+mission complète :
 l’[électricité courants forts et courants faibles](/expertises/electricite),
 sécurité incendie comprise, et le [chauffage, la ventilation, la plomberie,
 l’air comprimé et les robinets d’incendie armés](/expertises/cvc).
 
-## L’enjeu : deux nefs de plus sur une usine qui ne s’arrête pas
+## L’enjeu : deux nefs de plus sur un site qui ne s’arrête pas
 
 Le programme tient en peu de lignes. Deux nefs identiques, 23,35 m de travée
-chacune, 8 m sous ferme — la hauteur qui donne la stabilité au feu d’une
-demi-heure exigée par la rubrique 2661 de la nomenclature des installations
+chacune, 8 m sous ferme — une hauteur que l’esquisse relie à la stabilité
+au feu d’une demi-heure exigée par la rubrique 2661 de la nomenclature des installations
 classées. Une allée de circulation de 6 m les sépare. Chacune est prévue pour
 porter deux ponts roulants de 2 × 3,2 tonnes, et la seconde reçoit des
-potences avec zones de retournement des moules. Au premier étage, une mezzanine
-de bureaux de 164 m². Les deux halles ne font pas le même métier : la première,
-dite de pré-équipement, occupe 1 058 m² ; la seconde, dite Fly, en occupe 1 375
+potences et des zones de retournement des moules. Au premier étage, une mezzanine
+de bureaux de 164 m². Les deux nefs ne font pas le même métier : la première,
+dite de pré-équipement, occupe 1 058 m² ; la seconde, dite Fly, occupe 1 375 m²
 et abrite le procédé d’infusion sous vide des coques.
 
 L’extension ne se pose pas sur un terrain libre. Elle prend la place de
 l’atelier 4, désamianté en janvier 2024 puis démoli, et elle se greffe sur un
-site qui continue de produire. Le cahier des charges électrique le pose comme
+site qui continue de produire. Le cahier des charges électrique en fait
 une contrainte de marché : les travaux sont réalisés sur un établissement en
-exploitation, certains sont exécutés en décalé pour ne pas perturber le site, et
+exploitation, certains en horaires décalés pour ne pas perturber le site, et
 la desserte en énergie de tous les locaux restant en activité doit être
 maintenue pendant les phases de bascule.
 
-## La solution : l’armoire générale de l’extension est plantée dans l’usine
+## La solution : l’armoire générale de l’extension n’est pas dans l’extension
 
 L’extension réclame 500 kVA de puissance utile foisonnée, réserve de 30 %
-comprise. Elle ne reçoit pourtant aucune source neuve : le calcul de charge a
-montré que le poste de transformation existant du site, de 800 kVA, pouvait la
-porter, et le lot électricité s’est chargé des démarches techniques auprès
+comprise. Elle ne reçoit pourtant aucune source neuve : son alimentation générale part
+du poste de transformation existant du site, de 800 kVA, et le marché du lot
+électricité met à la charge de l’entreprise les démarches techniques auprès
 d’Enedis pour l’augmentation de la puissance souscrite.
 
 D’où le parti qui commande tout le reste : l’armoire générale basse tension est
-posée non pas dans l’extension, mais dans l’atelier existant. Elle reçoit le
+posée non pas dans l’extension, mais dans l’atelier existant. Elle reçoit l’arrivée du
 poste sur un interrupteur général tétrapolaire de 800 ampères, en régime de
-neutre TNS avec arrivée en TNC, et garde 30 % de réserve en puissance comme en
-encombrement. Deux départs en partent, de calibres très inégaux et de
+neutre TN-S avec arrivée en TN-C, et garde en propre 30 % de réserve, en
+puissance comme en encombrement. Deux départs en sortent, de calibres très inégaux et de
 destinations plus inégales encore : un disjoncteur différentiel sélectif de
 630 ampères alimente le tableau général de l’extension, qui n’existe pas encore
 au moment où l’armoire est posée ; un disjoncteur de 250 ampères alimente
 l’armoire de la centrale de traitement d’air du pré-équipement, montée avant la
-charpente de la halle qu’elle desservira. À l’autre bout, l’armoire de
-l’atelier 4 est neutralisée avant la démolition et déposée, et ce qu’elle
-alimentait encore est repris dans les bureaux.
+charpente de la nef que cette centrale desservira. À l’autre bout, l’armoire de
+l’atelier 4 est neutralisée avant la démolition et déposée, et ses circuits
+sont repris depuis les bureaux.
 
 Le tableau général de l’extension distribue ensuite l’atelier : les ponts
 roulants sur un disjoncteur à courbe D, calibré pour leur appel de démarrage,
 l’éclairage à huit luminaires au plus par phase, les enrouleurs par groupes de
-trois, et un tableau divisionnaire pour la mezzanine de bureaux. Son arrêt
-d’urgence, en façade, ne coupe pas les installations de sécurité ; celui de la
+trois, et un tableau divisionnaire pour la mezzanine de bureaux. L’arrêt
+d’urgence du tableau général, en façade, ne coupe pas les installations de sécurité ; celui de la
 ventilation est accessible depuis deux points au moins de l’établissement, ne
 coupe pas la ventilation permanente, et son câblage résiste au feu.
 
-## Les particularités : deux halles jumelles, deux airs opposés
+## Les particularités : deux nefs jumelles, tout le reste pris sur l’existant
 
 Sous une même enveloppe, les deux nefs reçoivent des traitements d’air
 inverses. Le pré-équipement est ventilé par une seule centrale
 thermodynamique de 24 000 m³/h, munie d’un caisson de mélange à deux volets qui
-permet de basculer en free cooling : son air revient. Le bâtiment Fly ne le peut
-pas. Les prescriptions de la CARSAT y imposent le tout air neuf, sans que l’air
+permet de basculer en free cooling : son air extrait peut être recyclé. Le bâtiment Fly ne le peut
+pas. Les prescriptions de la CARSAT, la caisse d’assurance retraite et de la
+santé au travail, y imposent le tout air neuf, sans que l’air
 extrait entre jamais en contact avec l’air soufflé — il faut donc deux machines,
 une centrale de soufflage de 35 000 m³/h et une centrale de reprise du même
 débit. La contrainte est la même qu’à l’[atelier de composite de Dufour Yachts,
 à Périgny](/references/atelier-dufour-yachts-perigny), et elle a la même
-conséquence : toute la chaleur produite part dehors.
+conséquence : toute la chaleur payée pour tempérer cet air part dehors.
 
 FT2E a donc étudié, et chiffré en option, une récupération d’énergie sur l’air
-extrait par batteries à eau reliées par une boucle glycolée, qui échangent les
+extrait, par batteries à eau reliées en boucle glycolée, qui échangent les
 calories entre les deux flux sans jamais les mettre en contact. Sur la période
 de chauffe étudiée, la consommation de gaz de la centrale passerait de
 173 000 à 22 000 kWh, et la note conclut à un temps de retour compris entre
 quatre et six ans.
 
-Dans les deux halles, l’air est diffusé par des gaines d’acier perforées à très
-haute induction, en pulsion tangentielle, dont la perforation est calculée pour
-garantir un écart de température d’un degré au plus dans le local ; la reprise
+Dans les deux nefs, l’air est diffusé par des gaines d’acier perforées à très
+haute induction, en pulsion tangentielle, dont le percement est calculé pour
+garantir un écart de température de 1 °C au plus dans le local ; la reprise
 se fait par des grilles de 4 375 m³/h à registre de réglage, en partie basse.
 
 La sécurité incendie suit deux périmètres qui ne coïncident ni l’un ni l’autre
-avec le chantier. À la demande de la DREAL, au titre de l’arrêté du 14 février
-2000 sur les installations classées de la rubrique 2661, le
+avec le chantier. À la demande de la direction régionale de l’environnement, de l’aménagement
+et du logement (DREAL), au titre de l’arrêté du 14 février 2000 sur les installations classées de la rubrique 2661, le
 [système de sécurité incendie](/secteurs/coordination-ssi) de catégorie A
 couvre en alarme l’ensemble du bâtiment attenant à l’extension — donc bien
 au-delà des travaux — tandis que la détection automatique, elle, ne couvre que
-la seule zone Fly. Elle s’y fait par aspiration, technique adaptée aux grands
+la zone Fly. Elle s’y fait par aspiration, technique adaptée aux grands
 volumes empoussiérés, et son déclenchement entraîne l’évacuation, le
-désenfumage, et en sous-fonction l’arrêt technique de la ventilation. La
-centrale est posée à l’accueil, dans le bâtiment existant.
+désenfumage et, en sous-fonction, l’arrêt technique de la ventilation. La
+centrale de détection est posée à l’accueil, dans le bâtiment existant.
 
 Le reste des fluides suit la même logique que l’électricité : rien ne se
-produit sur place. L’air comprimé est une prolongation du réseau du bâtiment 8,
-bouclé une fois pour le pré-équipement et deux fois pour le Fly, en aluminium de
+produit sur place. L’air comprimé prolonge le réseau du bâtiment 8 voisin,
+bouclé une fois pour le pré-équipement et deux fois pour le bâtiment Fly, en aluminium de
 50 mm sous 13 bars, avec des attentes à deux raccords rapides et des enrouleurs
-de 12 m aux postes de travail — la même façon de livrer un procédé qu’aux
+de 12 m aux postes de travail — la même façon de livrer ses utilités à un
+procédé qu’aux
 [ateliers pilotes Capsulae de La Rochelle](/references/ateliers-pilotes-capsulae).
-Les robinets d’incendie armés partent du surpresseur existant, l’eau froide des
-sanitaires du bâtiment, le gaz des rampes de l’atelier 5-8 sous 300 mbar. En
-retour, ce que l’extension recouvre doit céder la place : les centrales de
-traitement d’air du 5-8 sont déposées, et les rejets de la ventilation double
+Les robinets d’incendie armés partent du surpresseur existant, l’eau froide du
+réseau sanitaire du bâtiment, le gaz des rampes du bâtiment 5-8 sous
+300 mbar. À l’inverse, ce que l’extension recouvre doit céder la place : les centrales de
+traitement d’air du bâtiment 5-8 sont déposées, et les rejets de la ventilation double
 flux du bâtiment 8 sont dévoyés jusqu’en façade, au-dessus de la construction
 neuve.
 
-## Le résultat
+## Le résultat : seize lots, une réception visée pour octobre 2024
 
 Le chantier a été ouvert le 18 décembre 2023 et conduit en seize lots, sous la
 coordination d’un pilote extérieur au groupement. Les deux lots techniques de
 FT2E ont couru de mars à octobre 2024, et la réception était visée pour le
-18 octobre. C’est la deuxième opération que le bureau accompagne rue du Fief
-Girard, après la restructuration du
-[siège de la RESE](/references/siege-rese-aigrefeuille), elle aussi conduite
-sans interrompre l’activité du site.
+18 octobre. C’est la première des deux opérations que le bureau a conduites
+dans la zone du Fief Girard : la restructuration du
+[siège de la RESE](/references/siege-rese-aigrefeuille), engagée en 2024, se
+mène elle aussi sans interrompre l’activité du site.
