@@ -59,6 +59,13 @@ porte l'extraction :
   traversée carottée, fourreautée et bavettée, un piquage rigide par bouche,
   sifflet de rejet) ; puis quatre gabarits de largeur proportionnelle aux
   débits de caisson des quatre typologies, comptés jusqu'à soixante.
+- `frontiere` — deux régimes de desserte sous un même toit (bâtiment
+  d'assemblage de Saint-Agnant) : un mur plein sépare le hall d'assemblage du
+  plateau de bureaux, et quatre familles de services le rencontrent — l'air
+  traité a sa machine de chaque côté, le 220 V descend d'un maillage de
+  plafond à gauche et monte de la plinthe à droite, l'air comprimé et le
+  triphasé de charge n'ont pas de côté droit du tout. La colonne de droite
+  s'interrompt à mi-hauteur : c'est la démonstration.
 """
 
 import math
@@ -2816,7 +2823,491 @@ def composer_appui_sortie(donnees):
             f"basse {AH - (y_sol + 8)} px")
 
 
+# ── Mécanisme `frontiere` — deux régimes de desserte sous un même toit ───────
+#
+# Bâtiment d'assemblage d'avions de Saint-Agnant (session N13). Le programme de
+# l'utilisateur décrit la desserte zone par zone, et il en sort deux régimes qui
+# ne se ressemblent pas de part et d'autre du mur qui sépare le hall du plateau
+# de bureaux : à gauche les services DESCENDENT d'un maillage de plafond au pas
+# de 10 m et s'arrêtent à 2,50 m ; à droite ils MONTENT de la plinthe. Et deux
+# des quatre familles n'ont pas de côté droit du tout — le programme y écrit
+# « N/A ».
+#
+# La géométrie porte seule les deux démonstrations : l'inversion du sens des
+# piquages d'un côté à l'autre (rang 2), et les deux cellules barrées du bas
+# (rangs 3 et 4), qui laissent la colonne de droite s'interrompre à mi-hauteur.
+# Le rang 4 ajoute une troisième inversion, interne au hall : le triphasé de
+# charge est le seul service qui n'arrive pas du plafond mais du SOL, en deux
+# blocs pleins posés en bordure — la puissance lourde ne pleut pas.
+#
+# ⚠ Toutes les constantes de ce mécanisme portent le préfixe `FR_` : deux
+# mécanismes d'un même module qui affectent le même nom se marchent dessus, la
+# seconde affectation gagne, et c'est le PREMIER dessin qui se recompose faux
+# (piège relevé le 2026-08-16 sur `tableau-electrique.py`).
+FR_Y_REGISTRES = 216
+FR_X_LIB = MARGE                     # colonne des libellés de service
+FR_X_LIB_FIN = 300
+FR_XH0, FR_XH1 = 320, 716            # colonne du hall
+FR_X_MUR = 730                       # la frontière
+FR_EP_MUR = 4
+FR_XB0, FR_XB1 = 744, 1144           # colonne des bureaux
+FR_MUR_Y0, FR_MUR_Y1 = 224, 636
+FR_Y_MUR_LIB = 658
+
+FR_T = (230, 332, 434, 536)          # ordonnée haute des quatre rangs
+FR_D_PLAFOND = 14                    # ligne de plafond, depuis le haut du rang
+FR_D_PIED = 46                       # pied des descentes
+FR_D_SOL = 62                        # ligne de sol
+FR_D_MONO1 = 80
+FR_D_MONO2 = 94
+FR_D_LIB = 30                        # libellé de service
+FR_D_LIB_MONO = 50
+
+FR_N_DESCENTES = 6                   # le maillage, régulier — pas une implantation
+FR_N_MONTEES = 5
+FR_TICK = 5                          # demi-largeur du sabot d'une descente
+FR_BLOC_L, FR_BLOC_H = 128, 40       # machine de traitement d'air
+FR_CHARGE_L, FR_CHARGE_H = 64, 26    # bloc de puissance de charge
+FR_CROIX = 16                        # demi-bras de la croix « sans objet »
+
+
+def _fr_croix(A, cx, cy, bras=FR_CROIX, epaisseur=1.8):
+    """La marque d'absence : deux traits croisés, toujours doublés d'un mot."""
+    A(ligne(cx - bras, cy - bras, cx + bras, cy + bras, "encre", epaisseur))
+    A(ligne(cx - bras, cy + bras, cx + bras, cy - bras, "encre", epaisseur))
+
+
+def _fr_pointille(A, x0, x1, y, cle="filet-1", epaisseur=1.0, pas=9, plein=5):
+    """Un niveau conventionnel — un trait interrompu, jamais une cote d'ouvrage."""
+    x = x0
+    while x < x1:
+        A(ligne(x, y, min(x + plein, x1), y, cle, epaisseur))
+        x += pas
+
+
+def _fr_descentes(A, x0, x1, y_haut, y_pied, n=FR_N_DESCENTES, tick=FR_TICK,
+                  sabot="tick"):
+    """Un maillage de plafond : n descentes régulières, sabot en pied.
+
+    Deux sabots, parce que deux rangs emploient le même maillage et qu'un motif
+    répété à l'identique ne démontre rien : `tick` pour le piquage électrique,
+    `vanne` — un cercle — pour l'attente d'air comprimé, qui se raccorde.
+    Rend leurs abscisses pour le bloc `controles`."""
+    pas = (x1 - x0) / n
+    xs = [x0 + pas * (k + 0.5) for k in range(n)]
+    for x in xs:
+        A(ligne(x, y_haut, x, y_pied, "encre", 1.4))
+        if sabot == "vanne":
+            A(cercle(x, y_pied, tick * 0.9, "papier", "encre", 1.3))
+        else:
+            A(ligne(x - tick, y_pied, x + tick, y_pied, "encre", 1.8))
+    return xs, pas
+
+
+def _fr_montees(A, x0, x1, y_bas, y_tete, n=FR_N_MONTEES, tick=FR_TICK):
+    """L'inverse : n piquages qui montent du sol, sabot en tête."""
+    pas = (x1 - x0) / n
+    xs = [x0 + pas * (k + 0.5) for k in range(n)]
+    for x in xs:
+        A(ligne(x, y_bas, x, y_tete, "encre", 1.4))
+        A(ligne(x - tick, y_tete, x + tick, y_tete, "encre", 1.8))
+    return xs, pas
+
+
+def _fr_gaine(A, x0, x1, y0, y1, xs_souffle):
+    """Une gaine de soufflage : deux filets parallèles et des flèches vers le bas."""
+    A(ligne(x0, y0, x1, y0, "encre", 1.4))
+    A(ligne(x0, y1, x1, y1, "encre", 1.4))
+    for x in xs_souffle:
+        A(ligne(x, y1, x, y1 + 8, "encre", 1.2))
+        A(fleche(x, y1 + 16, "encre", "bas", 8))
+
+
+def composer_frontiere(donnees):
+    q = donnees["frontiere"]
+    rangs = q["rangs"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    def mono(x, y, chaine, dispo, nom, ancre=None, couleur="pivot", corps=10):
+        controler(nom, chaine, corps, "mono", dispo, corps * 0.14)
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14))
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400, "pivot",
+            wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête du schéma, puis les trois registres qu'il découpe ────────────
+    mono(MARGE, Y_ENTETE, q["entete"], UTILE, "en-tête schéma")
+    mono(FR_X_LIB, FR_Y_REGISTRES, q["registres"]["service"],
+         FR_X_LIB_FIN - FR_X_LIB, "registre service")
+    mono(FR_XH0, FR_Y_REGISTRES, q["registres"]["hall"], FR_XH1 - FR_XH0,
+         "registre hall")
+    mono(FR_XB0, FR_Y_REGISTRES, q["registres"]["bureaux"], FR_XB1 - FR_XB0,
+         "registre bureaux")
+
+    # ── Les quatre rangs ─────────────────────────────────────────────────────
+    releves = []
+    for T, rang in zip(FR_T, rangs):
+        y_plaf = T + FR_D_PLAFOND
+        y_pied = T + FR_D_PIED
+        y_sol = T + FR_D_SOL
+
+        # Le service, dans la colonne de gauche.
+        controler(f'{rang["cle"]} libellé', rang["libelle"], 15, "sans-400",
+                  FR_X_LIB_FIN - FR_X_LIB)
+        A(texte(FR_X_LIB, T + FR_D_LIB, rang["libelle"], "sans", 15, 400,
+                "encre", wdth=100))
+        mono(FR_X_LIB, T + FR_D_LIB_MONO, rang["libelle_detail"],
+             FR_X_LIB_FIN - FR_X_LIB, f'{rang["cle"]} détail de libellé')
+
+        # ── Côté hall ───────────────────────────────────────────────────────
+        h = rang["hall"]
+        if h["motif"] == "gaine":
+            A(rect_bord(FR_XH0, T + 16, FR_BLOC_L, FR_BLOC_H, "calcaire",
+                        "filet-1"))
+            controler(f'{rang["cle"]} machine hall', h["machine"], 13,
+                      "sans-600", FR_BLOC_L - 16)
+            A(texte(FR_XH0 + FR_BLOC_L / 2, T + 41, h["machine"], "sans", 13,
+                    600, "encre", wdth=112, ancre="middle"))
+            xs = [FR_XH0 + FR_BLOC_L + 72 + 68 * k for k in range(3)]
+            _fr_gaine(A, FR_XH0 + FR_BLOC_L, FR_XH1, T + 26, T + 40, xs)
+            releves.append(f'{rang["cle"]} hall : gaine {FR_XH0 + FR_BLOC_L}'
+                           f'–{FR_XH1}, {len(xs)} soufflages')
+        elif h["motif"] == "descentes":
+            A(ligne(FR_XH0, y_plaf, FR_XH1, y_plaf, "encre", 1.8))
+            sabot = h.get("sabot", "tick")
+            xs, pas = _fr_descentes(A, FR_XH0, FR_XH1, y_plaf, y_pied,
+                                    sabot=sabot)
+            if h.get("niveau"):
+                _fr_pointille(A, FR_XH0, FR_XH1, y_pied + 8, "filet-1", 1.0)
+            A(ligne(FR_XH0, y_sol, FR_XH1, y_sol, "filet-1", 1.2))
+            releves.append(f'{rang["cle"]} hall : {len(xs)} descentes au pas '
+                           f'de {pas:.1f} px, sabot « {sabot} », plafond y '
+                           f'{y_plaf}, pied y {y_pied}'
+                           + (f', niveau interrompu y {y_pied + 8}'
+                              if h.get("niveau") else '')
+                           + f', sol y {y_sol}')
+        elif h["motif"] == "bordure":
+            A(ligne(FR_XH0, y_sol, FR_XH1, y_sol, "encre", 1.8))
+            xs = [FR_XH0 + 20, FR_XH1 - 20 - FR_CHARGE_L]
+            # Les deux légendes s'ancrent SUR le bord extérieur de leur bloc,
+            # jamais au centre : centrées, elles débordaient de la colonne du
+            # hall des deux côtés (relevé au rendu à 1152 px).
+            ancres = ("start", "end")
+            for x, bloc, ancrage in zip(xs, h["blocs"], ancres):
+                A(rect(x, y_sol - FR_CHARGE_H, FR_CHARGE_L, FR_CHARGE_H,
+                       "encre"))
+                controler(f'{rang["cle"]} {bloc["cle"]} valeur', bloc["valeur"],
+                          10, "mono", FR_CHARGE_L - 8, 10 * 0.14)
+                A(texte(x + FR_CHARGE_L / 2, y_sol - 9, bloc["valeur"], "mono",
+                        10, 500, "voile", ancre="middle", tracking=10 * 0.14,
+                        tabulaire=True))
+                mono(x if ancrage == "start" else x + FR_CHARGE_L,
+                     T + FR_D_MONO1, bloc["libelle"], FR_XH1 - FR_XH0,
+                     f'{rang["cle"]} {bloc["cle"]} libellé', ancre=ancrage)
+            releves.append(f'{rang["cle"]} hall : deux blocs de charge '
+                           f'{FR_CHARGE_L} x {FR_CHARGE_H} px posés sur le sol '
+                           f'y {y_sol}, en bordure (x {xs[0]:.0f} et '
+                           f'{xs[1]:.0f})')
+
+        for k, l in enumerate(h["detail"]):
+            mono(FR_XH0, T + (FR_D_MONO1 if h["motif"] != "bordure"
+                              else FR_D_MONO2) + k * 14, l, FR_XH1 - FR_XH0,
+                 f'{rang["cle"]} hall détail {k + 1}')
+
+        # ── Côté bureaux ────────────────────────────────────────────────────
+        b = rang["bureaux"]
+        if b["motif"] == "gaine":
+            A(rect_bord(FR_XB0, T + 16, FR_BLOC_L, FR_BLOC_H, "calcaire",
+                        "filet-1"))
+            controler(f'{rang["cle"]} machine bureaux', b["machine"], 13,
+                      "sans-600", FR_BLOC_L - 16)
+            A(texte(FR_XB0 + FR_BLOC_L / 2, T + 41, b["machine"], "sans", 13,
+                    600, "encre", wdth=112, ancre="middle"))
+            xs = [FR_XB0 + FR_BLOC_L + 72 + 68 * k for k in range(3)]
+            _fr_gaine(A, FR_XB0 + FR_BLOC_L, FR_XB1, T + 26, T + 40, xs)
+        elif b["motif"] == "montees":
+            A(ligne(FR_XB0, y_sol, FR_XB1, y_sol, "encre", 1.8))
+            xs, pas = _fr_montees(A, FR_XB0, FR_XB1, y_sol, T + 34)
+            releves.append(f'{rang["cle"]} bureaux : {len(xs)} montées au pas '
+                           f'de {pas:.1f} px depuis le sol y {y_sol} — sens '
+                           f'inverse du hall')
+        elif b["motif"] == "absence":
+            _fr_croix(A, (FR_XB0 + FR_XB1) / 2, T + 40)
+            releves.append(f'{rang["cle"]} bureaux : croix — le programme y '
+                           f'écrit « sans objet »')
+
+        for k, l in enumerate(b["detail"]):
+            if b["motif"] == "absence":
+                mono((FR_XB0 + FR_XB1) / 2, T + FR_D_MONO1 + k * 14, l,
+                     FR_XB1 - FR_XB0, f'{rang["cle"]} bureaux détail {k + 1}',
+                     ancre="middle")
+            else:
+                mono(FR_XB0, T + FR_D_MONO1 + k * 14, l, FR_XB1 - FR_XB0,
+                     f'{rang["cle"]} bureaux détail {k + 1}')
+
+    # ── La frontière, posée par-dessus tout le reste ─────────────────────────
+    A(rect(FR_X_MUR, FR_MUR_Y0, FR_EP_MUR, FR_MUR_Y1 - FR_MUR_Y0, "encre"))
+    mono(FR_X_MUR + FR_EP_MUR / 2, FR_Y_MUR_LIB, q["mur"], UTILE,
+         "libellé du mur", ancre="middle", couleur="encre")
+
+    # ── Phrase de principe et cartouche ──────────────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    absences = sum(1 for r in rangs if r["bureaux"]["motif"] == "absence")
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "trois registres — le service, le hall, les bureaux — "
+                         "séparés par un mur plein posé à x "
+                         f"{FR_X_MUR} ; quatre rangs de desserte ; au rang du "
+                         "220 V les piquages DESCENDENT du plafond à gauche et "
+                         "MONTENT du sol à droite, sens strictement inversés ; "
+                         f"les {absences} derniers rangs n’ont pas de côté "
+                         "droit et portent une croix doublée du mot ; au "
+                         "dernier rang la puissance de charge est le seul "
+                         "service qui arrive du SOL dans le hall, en deux blocs "
+                         "pleins posés en bordure — texte masqué, l’inversion "
+                         "et l’interruption de la colonne de droite se lisent",
+        "topologie": " ; ".join(releves),
+        "registres": f'service x {FR_X_LIB}–{FR_X_LIB_FIN} · hall x {FR_XH0}–'
+                     f'{FR_XH1} · mur x {FR_X_MUR}–{FR_X_MUR + FR_EP_MUR} '
+                     f'(y {FR_MUR_Y0}–{FR_MUR_Y1}) · bureaux x {FR_XB0}–'
+                     f'{FR_XB1}',
+        "rangs": " ; ".join(f'{r["cle"]} y {t}–{t + FR_D_MONO2}'
+                            for t, r in zip(FR_T, rangs)),
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas "
+                          "chiffrée (révision 4) ; les valeurs de desserte "
+                          "restent au mono 10 pivot, sauf les deux points de "
+                          "charge, en voile sur leur bloc d’encre",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "bas_du_dessin": f"dernier rang jusqu’à y {FR_T[-1] + FR_D_MONO2}, mur "
+                         f"jusqu’à y {FR_MUR_Y1}, son libellé à y "
+                         f"{FR_Y_MUR_LIB}, phrase à y {Y_PHRASE}, cartouche "
+                         f"{Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, marge "
+                         f"basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── La vignette : deux rangs seulement — l'inversion, puis l'absence ─────────
+FR_V_X_MUR = 168
+FR_V_XG0, FR_V_XG1 = V_MARGE, 160
+FR_V_XD0, FR_V_XD1 = 176, VW - V_MARGE
+FR_V_Y_REG = 44
+FR_V_A_PLAF, FR_V_A_PIED, FR_V_A_SOL = 58, 80, 92
+FR_V_Y_MONO_A = 108
+FR_V_B_SOL = 148
+FR_V_CHARGE_L, FR_V_CHARGE_H = 52, 18
+FR_V_Y_PIED = 180
+
+
+def composer_vignette_frontiere(donnees):
+    """Ce qu'elle garde : le mur, l'inversion des piquages, les deux blocs de
+    charge et la croix. Ce qu'elle laisse : les quatre rangs nommés, les
+    machines de traitement d'air, les détails de desserte — six libellés dans
+    300 px ne se lisent pas."""
+    q = donnees["frontiere"]
+    v = q["vignette"]
+    out = []
+    A = out.append
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" '
+      f'focusable="false" style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+
+    A(texte(V_MARGE, 26, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+    A(texte(V_MARGE, FR_V_Y_REG, v["hall"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+    A(texte(FR_V_XD0, FR_V_Y_REG, v["bureaux"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # Rang A — l'inversion.
+    A(ligne(FR_V_XG0, FR_V_A_PLAF, FR_V_XG1, FR_V_A_PLAF, "encre", 1.6))
+    xs_d, pas_d = _fr_descentes(A, FR_V_XG0, FR_V_XG1, FR_V_A_PLAF,
+                                FR_V_A_PIED, n=4, tick=4)
+    A(ligne(FR_V_XG0, FR_V_A_SOL, FR_V_XG1, FR_V_A_SOL, "filet-1", 1.1))
+    A(ligne(FR_V_XD0, FR_V_A_SOL, FR_V_XD1, FR_V_A_SOL, "encre", 1.6))
+    xs_m, pas_m = _fr_montees(A, FR_V_XD0, FR_V_XD1, FR_V_A_SOL,
+                              FR_V_A_PIED - 8, n=3, tick=4)
+    A(texte(V_MARGE, FR_V_Y_MONO_A, v["rang_a"]["hall"], "mono", 9, 500,
+            "pivot", tracking=9 * 0.14))
+    A(texte(FR_V_XD0, FR_V_Y_MONO_A, v["rang_a"]["bureaux"], "mono", 9, 500,
+            "pivot", tracking=9 * 0.14))
+
+    # Rang B — l'absence, et la puissance qui vient du sol.
+    A(ligne(FR_V_XG0, FR_V_B_SOL, FR_V_XG1, FR_V_B_SOL, "encre", 1.6))
+    for x in (FR_V_XG0 + 4, FR_V_XG1 - 4 - FR_V_CHARGE_L):
+        A(rect(x, FR_V_B_SOL - FR_V_CHARGE_H, FR_V_CHARGE_L, FR_V_CHARGE_H,
+               "encre"))
+        A(texte(x + FR_V_CHARGE_L / 2, FR_V_B_SOL - 5, v["rang_b"]["valeur"],
+                "mono", 9, 500, "voile", ancre="middle", tracking=9 * 0.14,
+                tabulaire=True))
+    _fr_croix(A, (FR_V_XD0 + FR_V_XD1) / 2, FR_V_B_SOL - 12, bras=13,
+              epaisseur=1.6)
+
+    A(texte(V_MARGE, FR_V_Y_PIED, v["pied"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    A(rect(FR_V_X_MUR, 50, 3.5, 120, "encre"))
+    A("</svg>")
+
+    l_pied = mesurer(v["pied"], 9, "mono", 9 * 0.14)
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "vignette servie à 274-296 px dans une carte — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}, jamais "
+                            "au-dessus de 1,00",
+        "corps_minimal": "9 px dans le repère — rendu à 8,2 px à l’échelle "
+                         "0,91, à 8,9 px à 0,99",
+        "motif": f"mur à x {FR_V_X_MUR} ; rang A — {len(xs_d)} descentes au pas "
+                 f"de {pas_d:.1f} px à gauche contre {len(xs_m)} montées au pas "
+                 f"de {pas_m:.1f} px à droite, sens inversés ; rang B — deux "
+                 f"blocs de charge posés sur le sol à gauche, croix à droite",
+        "pied": f'« {v["pied"]} » — {l_pied:.0f} px pour '
+                f'{FR_V_XD1 - V_MARGE} disponibles',
+        "marges": f"aucun trait sous x {V_MARGE} ni au-delà de x "
+                  f"{FR_V_XD1} ; ligne de pied à y {FR_V_Y_PIED} pour "
+                  f"{VH - V_MARGE} de bas de cadre",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── L'appui : les quatre rangs, un mono par côté, sans phrase ni cartouche ───
+FR_A_X_MUR = 286
+FR_A_XG0, FR_A_XG1 = A_MARGE, 278
+FR_A_XD0, FR_A_XD1 = 296, AW - A_MARGE
+FR_A_Y_REG = 62
+FR_A_T = (76, 138, 200, 262)
+FR_A_CHARGE_L, FR_A_CHARGE_H = 56, 20
+FR_A_BLOC_L, FR_A_BLOC_H = 76, 28
+
+
+def composer_appui_frontiere(donnees):
+    q = donnees["frontiere"]
+    a = q["appui"]
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    A(texte(FR_A_XG0, FR_A_Y_REG, a["hall"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    A(texte(FR_A_XD0, FR_A_Y_REG, a["bureaux"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    for T, rang in zip(FR_A_T, a["rangs"]):
+        y_plaf, y_pied, y_sol = T + 10, T + 30, T + 40
+        if rang["motif"] == "gaine":
+            A(rect_bord(FR_A_XG0, T + 6, FR_A_BLOC_L, FR_A_BLOC_H, "calcaire",
+                        "filet-1"))
+            A(texte(FR_A_XG0 + FR_A_BLOC_L / 2, T + 25, rang["machine_hall"],
+                    "sans", 12, 600, "encre", wdth=112, ancre="middle"))
+            _fr_gaine(A, FR_A_XG0 + FR_A_BLOC_L, FR_A_XG1, T + 12, T + 24,
+                      [FR_A_XG0 + FR_A_BLOC_L + 60])
+            A(rect_bord(FR_A_XD0, T + 6, FR_A_BLOC_L, FR_A_BLOC_H, "calcaire",
+                        "filet-1"))
+            A(texte(FR_A_XD0 + FR_A_BLOC_L / 2, T + 25, rang["machine_bureaux"],
+                    "sans", 12, 600, "encre", wdth=112, ancre="middle"))
+            _fr_gaine(A, FR_A_XD0 + FR_A_BLOC_L, FR_A_XD1, T + 12, T + 24,
+                      [FR_A_XD0 + FR_A_BLOC_L + 60])
+        elif rang["motif"] == "inversion":
+            A(ligne(FR_A_XG0, y_plaf, FR_A_XG1, y_plaf, "encre", 1.6))
+            _fr_descentes(A, FR_A_XG0, FR_A_XG1, y_plaf, y_pied, n=4, tick=4)
+            A(ligne(FR_A_XG0, y_sol, FR_A_XG1, y_sol, "filet-1", 1.1))
+            A(ligne(FR_A_XD0, y_sol, FR_A_XD1, y_sol, "encre", 1.6))
+            _fr_montees(A, FR_A_XD0, FR_A_XD1, y_sol, T + 20, n=3, tick=4)
+        elif rang["motif"] == "descentes_absence":
+            A(ligne(FR_A_XG0, y_plaf, FR_A_XG1, y_plaf, "encre", 1.6))
+            _fr_descentes(A, FR_A_XG0, FR_A_XG1, y_plaf, y_pied, n=4, tick=4,
+                          sabot="vanne")
+            _fr_pointille(A, FR_A_XG0, FR_A_XG1, y_pied + 6, "filet-1", 1.0,
+                          pas=8, plein=4)
+            A(ligne(FR_A_XG0, y_sol, FR_A_XG1, y_sol, "filet-1", 1.1))
+            _fr_croix(A, (FR_A_XD0 + FR_A_XD1) / 2, T + 24, bras=12,
+                      epaisseur=1.6)
+        elif rang["motif"] == "bordure_absence":
+            A(ligne(FR_A_XG0, y_sol, FR_A_XG1, y_sol, "encre", 1.6))
+            for x in (FR_A_XG0 + 6, FR_A_XG1 - 6 - FR_A_CHARGE_L):
+                A(rect(x, y_sol - FR_A_CHARGE_H, FR_A_CHARGE_L,
+                       FR_A_CHARGE_H, "encre"))
+                A(texte(x + FR_A_CHARGE_L / 2, y_sol - 6, rang["valeur"],
+                        "mono", 10, 500, "voile", ancre="middle",
+                        tracking=10 * 0.14, tabulaire=True))
+            _fr_croix(A, (FR_A_XD0 + FR_A_XD1) / 2, T + 24, bras=12,
+                      epaisseur=1.6)
+
+        A(texte(FR_A_XG0, T + 54, rang["hall"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        A(texte(FR_A_XD0, T + 54, rang["bureaux"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    A(rect(FR_A_X_MUR, 70, 3, 250, "encre"))
+    A("</svg>")
+
+    largeurs = [(r["cle"], mesurer(r["hall"], 10, "mono", 10 * 0.14),
+                 mesurer(r["bureaux"], 10, "mono", 10 * 0.14))
+                for r in a["rangs"]]
+    trop = [f"{c} : {lg:.0f} / {ld:.0f} px" for c, lg, ld in largeurs
+            if lg > FR_A_XG1 - FR_A_XG0 or ld > FR_A_XD1 - FR_A_XD0]
+    controles = controles_appui(
+        f"quatre rangs à y {FR_A_T}, mur plein à x {FR_A_X_MUR} ; l’inversion "
+        f"des piquages au rang 2 et les deux croix des rangs 3 et 4 portent "
+        f"seules la démonstration",
+        f"dernier mono à y {FR_A_T[-1] + 54}, mur jusqu’à y 320, marge basse "
+        f"{AH - 320} px",
+        colonnes=f"hall x {FR_A_XG0}–{FR_A_XG1} ({FR_A_XG1 - FR_A_XG0} px) · "
+                 f"bureaux x {FR_A_XD0}–{FR_A_XD1} ({FR_A_XD1 - FR_A_XD0} px)",
+        depassements=trop if trop else "aucun — les huit monos tiennent dans "
+                                       "leur colonne",
+    )
+    return "\n".join(out) + "\n", controles
+
 def _composer(donnees):
+    if "frontiere" in donnees:
+        return composer_frontiere(donnees)
     if "sortie" in donnees:
         return composer_sortie(donnees)
     if "colonne" in donnees:
@@ -2831,6 +3322,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "frontiere" in donnees:
+        return composer_vignette_frontiere(donnees)
     if "sortie" in donnees:
         return composer_vignette_sortie(donnees)
     if "colonne" in donnees:
@@ -2845,6 +3338,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "frontiere" in donnees:
+        return composer_appui_frontiere(donnees)
     if "sortie" in donnees:
         return composer_appui_sortie(donnees)
     if "colonne" in donnees:

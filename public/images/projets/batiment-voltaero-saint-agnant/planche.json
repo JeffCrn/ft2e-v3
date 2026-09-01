@@ -1,0 +1,207 @@
+{
+  "fiche": "batiment-voltaero-saint-agnant",
+  "archetype": "coupe-traversee",
+  "archetype_motif": "La thèse de la fiche est une frontière intérieure : un même toit couvre un hall d’assemblage de 5 m sous poutre et un plateau de bureaux, et la desserte n’y obéit pas à la même règle de part et d’autre du mur. C’est une coupe — la démonstration est verticale : à gauche les services DESCENDENT d’un maillage de plafond au pas de 10 m et s’arrêtent à 2,50 m ; à droite ils MONTENT de la plinthe. Et deux des quatre familles n’ont pas de côté droit : le programme y écrit « sans objet ». Le motif se distingue des cinq mécanismes déjà composés dans cet archétype — Marennes traverse une enveloppe, Villedoux compense un air extrait, Joffre enjambe un passage, Aurora empile un conduit collectif, Louise Magnan sort l’extraction du logement : ici rien ne traverse, tout s’oppose. Il se distingue aussi des ateliers Capsulae, qui arrêtaient quatre utilités sur une même limite de MARCHÉ ; la limite est ici un mur, et ce qui change en le franchissant est le SENS du piquage.",
+  "titre": "Bâtiment VoltAero",
+  "surtitre": "BÂTIMENT D’ASSEMBLAGE FINAL D’AVIONS — MAÎTRISE D’ŒUVRE ÉLECTRICITÉ ET FLUIDES",
+  "sous_titre": "Au plafond du hall, en plinthe dans les bureaux — et deux réseaux qui s’arrêtent au mur",
+  "cartouche_legende": "SAINT-AGNANT · HUIT POSTES D’ASSEMBLAGE · 2024",
+  "aria_label": "Schéma de principe en trois registres. À gauche, la colonne des services : air traité, courants forts 220 V et données, air comprimé 6 bars, triphasé 380 V de charge. Au centre, le hall d’assemblage, les ateliers et la logistique. À droite, séparé par un mur plein, le plateau de bureaux, l’accueil et le local informatique. Premier rang, l’air traité : chaque côté a sa machine et ses gaines de soufflage, une machine de traitement thermodynamique pour 18 à 22 degrés Celsius dans le hall, une centrale de traitement d’air à groupes extérieurs pour 19 à 21 degrés Celsius dans les bureaux, plus un groupe dédié au local informatique. Deuxième rang, les courants forts et les données : dans le hall, six descentes régulières partent d’une ligne de plafond et s’arrêtent au-dessus du sol, au pas de 10 mètres du maillage ; dans les bureaux, cinq piquages montent au contraire du sol, en plinthe et au centre des marguerites d’open space. Troisième rang, l’air comprimé à 6 bars asséché et huilé : même maillage de plafond dans le hall, mais les descentes se terminent par une vanne sur un niveau d’attentes arrêté à 2,50 mètres ; côté bureaux, une croix — le programme y écrit sans objet. Quatrième rang, le triphasé de charge : c’est le seul service qui n’arrive pas du plafond mais du sol, en deux blocs pleins posés en bordure, 100 kilowatts près de la ligne d’assemblage et 100 kilowatts au local batterie, sur 300 kilowatts en continu au programme ; côté bureaux, une seconde croix. La colonne de droite s’interrompt ainsi à mi-hauteur, et c’est elle qui porte la démonstration.",
+  "frontiere": {
+    "entete": "PROGRAMME DE L’UTILISATEUR, VERSION 4 — DESSERTE ZONE PAR ZONE · COMPTES RENDUS DE CHANTIER POUR LES MACHINES",
+    "registres": {
+      "service": "SERVICE",
+      "hall": "HALL D’ASSEMBLAGE, ATELIERS ET LOGISTIQUE",
+      "bureaux": "BUREAUX, ACCUEIL ET LOCAL INFORMATIQUE"
+    },
+    "mur": "LE MUR ENTRE LES DEUX ZONES",
+    "rangs": [
+      {
+        "cle": "air",
+        "libelle": "Air traité",
+        "libelle_detail": "CHAUFFAGE ET VENTILATION",
+        "hall": {
+          "motif": "gaine",
+          "machine": "ETT",
+          "detail": [
+            "MACHINE DE TRAITEMENT ET GAINES DE SOUFFLAGE",
+            "18 À 22 °C AU PROGRAMME"
+          ]
+        },
+        "bureaux": {
+          "motif": "gaine",
+          "machine": "CTA",
+          "detail": [
+            "CENTRALE À GROUPES EXTÉRIEURS",
+            "19 À 21 °C · UN GROUPE DÉDIÉ AU LOCAL INFORMATIQUE"
+          ]
+        }
+      },
+      {
+        "cle": "cfo",
+        "libelle": "Courants forts 220 V et données",
+        "libelle_detail": "5 kW PAR POSTE DE TRAVAIL",
+        "hall": {
+          "motif": "descentes",
+          "sabot": "tick",
+          "detail": [
+            "MAILLAGE DE PLAFOND AU PAS DE 10 m",
+            "CHEMINS DE CÂBLES EN PARTIE HAUTE"
+          ]
+        },
+        "bureaux": {
+          "motif": "montees",
+          "detail": [
+            "PLINTHE ET MARGUERITE D’OPEN SPACE",
+            "220 V, TÉLÉPHONIE ET DONNÉES"
+          ]
+        }
+      },
+      {
+        "cle": "air-comprime",
+        "libelle": "Air comprimé 6 bars",
+        "libelle_detail": "ASSÉCHÉ ET HUILÉ",
+        "hall": {
+          "motif": "descentes",
+          "sabot": "vanne",
+          "niveau": true,
+          "detail": [
+            "MAILLAGE DE PLAFOND, MÊME PAS DE 10 m",
+            "ATTENTES ARRÊTÉES À 2,50 m"
+          ]
+        },
+        "bureaux": {
+          "motif": "absence",
+          "detail": [
+            "SANS OBJET AU PROGRAMME"
+          ]
+        }
+      },
+      {
+        "cle": "triphase",
+        "libelle": "Triphasé 380 V de charge",
+        "libelle_detail": "300 kW EN CONTINU AU TOTAL",
+        "hall": {
+          "motif": "bordure",
+          "blocs": [
+            {
+              "cle": "ligne",
+              "valeur": "100 kW",
+              "libelle": "BORDURE DE LIGNE"
+            },
+            {
+              "cle": "batterie",
+              "valeur": "100 kW",
+              "libelle": "LOCAL BATTERIE"
+            }
+          ],
+          "detail": [
+            "ET 100 kW AU PARKING AVION, HORS BÂTIMENT"
+          ]
+        },
+        "bureaux": {
+          "motif": "absence",
+          "detail": [
+            "SANS OBJET AU PROGRAMME"
+          ]
+        }
+      }
+    ],
+    "vignette": {
+      "hall": "HALL",
+      "bureaux": "BUREAUX",
+      "rang_a": {
+        "hall": "PLAFOND, PAS DE 10 m",
+        "bureaux": "PLINTHE"
+      },
+      "rang_b": {
+        "valeur": "100 kW"
+      },
+      "pied": "DEUX RÉSEAUX S’ARRÊTENT AU MUR"
+    },
+    "appui": {
+      "hall": "HALL D’ASSEMBLAGE",
+      "bureaux": "BUREAUX",
+      "rangs": [
+        {
+          "cle": "air",
+          "motif": "gaine",
+          "machine_hall": "ETT",
+          "machine_bureaux": "CTA",
+          "hall": "AIR TRAITÉ 18 À 22 °C",
+          "bureaux": "AIR TRAITÉ 19 À 21 °C"
+        },
+        {
+          "cle": "cfo",
+          "motif": "inversion",
+          "hall": "220 V AU PLAFOND, PAS DE 10 m",
+          "bureaux": "220 V EN PLINTHE"
+        },
+        {
+          "cle": "air-comprime",
+          "motif": "descentes_absence",
+          "hall": "AIR COMPRIMÉ, ATTENTES À 2,50 m",
+          "bureaux": "SANS OBJET"
+        },
+        {
+          "cle": "triphase",
+          "motif": "bordure_absence",
+          "valeur": "100 kW",
+          "hall": "TRIPHASÉ DE CHARGE, EN BORDURE",
+          "bureaux": "SANS OBJET"
+        }
+      ]
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Un même toit ne fait pas un même régime : chaque service y change de sens, de machine — ou n’y existe pas.",
+  "vignette_surtitre": "PLAFOND ET PLINTHE",
+  "a_valider_ft2e": [
+    "SOURCE DES VALEURS DE DESSERTE — les quatre régimes dessinés sont ceux du cahier des charges de l’utilisateur (version 4, § 8.2, 8.4, 8.5 et 8.6), qui est un document d’ENTRÉE, pas une pièce de conception FT2E. Aucun CCTP, DPGF, estimation ni plan de l’affaire n’est présent au dossier d’archives — le sous-répertoire qui devrait les porter contient ceux d’une autre affaire. Le dessin dit donc ce que le programme exigeait et que la maîtrise d’œuvre a dimensionné ; il ne peut pas dire ce qui a été posé. À confronter aux pièces d’exécution.",
+    "LE NOMBRE DE PIQUAGES EST CONVENTIONNEL — six descentes à gauche, cinq montées à droite. Le programme fixe un PAS (10 m au plafond des ateliers et de la FAL) et un principe (plinthe ou marguerite en bureau), jamais un nombre. Le dessin en a choisi un, régulier, pour que le maillage se lise ; aucune implantation réelle n’est reprise.",
+    "LA HAUTEUR DES ATTENTES D’AIR COMPRIMÉ — 2,50 m est la cote confirmée par l’utilisateur le 17 avril 2024 (compte rendu de chantier n° 36), après une demande de la maîtrise d’œuvre du 27 mars. Le dessin la porte comme un NIVEAU d’attentes traversant tout le hall ; la source ne dit pas si toutes les attentes sont à cette altimétrie ou seulement celles qui étaient en question.",
+    "LES DEUX POINTS DE CHARGE DESSINÉS — le programme en compte quatre à 100 kW : en bordure de FAL5, en bordure de FAL8, au local batterie de la logistique et au parking avion. Le dessin n’en montre que DEUX dans le hall (bordure de ligne, local batterie) et renvoie le quatrième au mono, parce qu’il est hors bâtiment. Le rapprochement des deux bordures de ligne en un seul bloc est un choix de lecture.",
+    "« ETT » ET « CTA » — les deux machines sont nommées par les sigles des comptes rendus de chantier (« la machine ETT », « les groupes extérieurs de CTA tertiaire »). Aucune pièce du dossier ne donne leur désignation complète, leur puissance ni leur débit. À compléter, ou à renommer si le sigle ETT n’est pas celui que FT2E emploie.",
+    "LE MUR EST UNE CONVENTION DE DESSIN — le programme distingue les zones fonctionnelles, il ne prescrit pas une paroi unique entre elles. Le trait plein du dessin représente la frontière de RÉGIME, pas une cloison de l’ouvrage, et aucune proportion réelle n’est reprise (règle 4 du protocole).",
+    "LA GRANDEUR DU CARTOUCHE — aucune surface bâtie n’existe au dossier ni au fonds commercial. Le cartouche porte donc « huit postes d’assemblage », nombre de postes de la ligne au programme (§ 6.10). À remplacer par la surface de plancher dès qu’elle sera connue.",
+    "LE RANG DE L’AIR TRAITÉ NE DIT PAS OÙ SONT LES MACHINES — les comptes rendus placent les groupes extérieurs de la centrale tertiaire sur des dalles EXTÉRIEURES, et le local des compresseurs hors du bâtiment ; ils ne disent rien de l’implantation de la machine du hall. Le dessin s’abstient donc de la situer d’un côté ou de l’autre de l’enveloppe."
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire FT2E — absent du dessin (règle 3).",
+    "Montants — marché de maîtrise d’œuvre, avenants, montant des travaux et part FT2E : aucun ne paraît.",
+    "Noms de tiers — ni le maître d’ouvrage, ni l’architecte mandataire, ni les cotraitants, ni les entreprises de travaux ne figurent sur le dessin. Le nom de l’occupant ne paraît qu’au titre d’ouvrage, comme sur les planches Dufour, Capsulae et Undertech.",
+    "Géométrie d’ouvrage — aucune trame de poteaux, aucun plan de la ligne d’assemblage, aucune façade, aucune implantation. Les deux zones sont deux registres de largeur arbitraire.",
+    "Données d’exploitation — les cadences, les effectifs par équipe et le programme d’avion ne paraissent pas."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "trois registres — le service, le hall, les bureaux — séparés par un mur plein posé à x 730 ; quatre rangs de desserte ; au rang du 220 V les piquages DESCENDENT du plafond à gauche et MONTENT du sol à droite, sens strictement inversés ; les 2 derniers rangs n’ont pas de côté droit et portent une croix doublée du mot ; au dernier rang la puissance de charge est le seul service qui arrive du SOL dans le hall, en deux blocs pleins posés en bordure — texte masqué, l’inversion et l’interruption de la colonne de droite se lisent",
+    "topologie": "air hall : gaine 448–716, 3 soufflages ; cfo hall : 6 descentes au pas de 66.0 px, sabot « tick », plafond y 346, pied y 378, sol y 394 ; cfo bureaux : 5 montées au pas de 80.0 px depuis le sol y 394 — sens inverse du hall ; air-comprime hall : 6 descentes au pas de 66.0 px, sabot « vanne », plafond y 448, pied y 480, niveau interrompu y 488, sol y 496 ; air-comprime bureaux : croix — le programme y écrit « sans objet » ; triphase hall : deux blocs de charge 64 x 26 px posés sur le sol y 598, en bordure (x 340 et 632) ; triphase bureaux : croix — le programme y écrit « sans objet »",
+    "registres": "service x 56–300 · hall x 320–716 · mur x 730–734 (y 224–636) · bureaux x 744–1144",
+    "rangs": "air y 230–324 ; cfo y 332–426 ; air-comprime y 434–528 ; triphase y 536–630",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; les valeurs de desserte restent au mono 10 pivot, sauf les deux points de charge, en voile sur leur bloc d’encre",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "bas_du_dessin": "dernier rang jusqu’à y 630, mur jusqu’à y 636, son libellé à y 658, phrase à y 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 413 x 30 px = 12390 px², soit 1.29 % de la planche",
+    "phrase_principe": "106 signes — 901 px mesurés pour 1088 disponibles",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "vignette servie à 274-296 px dans une carte — échelle 0.91 à 0.99, jamais au-dessus de 1,00",
+    "corps_minimal": "9 px dans le repère — rendu à 8,2 px à l’échelle 0,91, à 8,9 px à 0,99",
+    "motif": "mur à x 168 ; rang A — 4 descentes au pas de 36.5 px à gauche contre 3 montées au pas de 36.7 px à droite, sens inversés ; rang B — deux blocs de charge posés sur le sol à gauche, croix à droite",
+    "pied": "« DEUX RÉSEAUX S’ARRÊTENT AU MUR » — 199 px pour 272 disponibles",
+    "marges": "aucun trait sous x 14 ni au-delà de x 286 ; ligne de pied à y 180 pour 186 de bas de cadre"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "quatre rangs à y (76, 138, 200, 262), mur plein à x 286 ; l’inversion des piquages au rang 2 et les deux croix des rangs 3 et 4 portent seules la démonstration",
+    "bas_du_dessin": "dernier mono à y 316, mur jusqu’à y 320, marge basse 48 px",
+    "colonnes": "hall x 24–278 (254 px) · bureaux x 296–528 (232 px)",
+    "depassements": "aucun — les huit monos tiennent dans leur colonne"
+  }
+}

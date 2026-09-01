@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" style="width:100%;height:auto;display:block">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="300.00" height="200.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="14.00" y="26.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">PLAFOND ET PLINTHE</text>
+  <text x="14.00" y="44.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">HALL</text>
+  <text x="176.00" y="44.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">BUREAUX</text>
+  <path d="M 14.00 58.00 L 160.00 58.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 32.25 58.00 L 32.25 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 28.25 80.00 L 36.25 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 68.75 58.00 L 68.75 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 64.75 80.00 L 72.75 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 105.25 58.00 L 105.25 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 101.25 80.00 L 109.25 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 141.75 58.00 L 141.75 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 137.75 80.00 L 145.75 80.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 14.00 92.00 L 160.00 92.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.1"/>
+  <path d="M 176.00 92.00 L 286.00 92.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 194.33 92.00 L 194.33 72.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 190.33 72.00 L 198.33 72.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 231.00 92.00 L 231.00 72.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 227.00 72.00 L 235.00 72.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 267.67 92.00 L 267.67 72.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 263.67 72.00 L 271.67 72.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="14.00" y="108.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">PLAFOND, PAS DE 10 m</text>
+  <text x="176.00" y="108.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">PLINTHE</text>
+  <path d="M 14.00 148.00 L 160.00 148.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <rect x="18.00" y="130.00" width="52.00" height="18.00" class="c-encre" fill="#00393A"/>
+  <text x="44.00" y="143.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle" font-variant-numeric="tabular-nums">100 kW</text>
+  <rect x="104.00" y="130.00" width="52.00" height="18.00" class="c-encre" fill="#00393A"/>
+  <text x="130.00" y="143.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26" text-anchor="middle" font-variant-numeric="tabular-nums">100 kW</text>
+  <path d="M 218.00 123.00 L 244.00 149.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 218.00 149.00 L 244.00 123.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <text x="14.00" y="180.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="9" font-weight="500" letter-spacing="1.26">DEUX RÉSEAUX S’ARRÊTENT AU MUR</text>
+  <rect x="168.00" y="50.00" width="3.50" height="120.00" class="c-encre" fill="#00393A"/>
+</svg>

@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe en trois registres. À gauche, la colonne des services : air traité, courants forts 220 V et données, air comprimé 6 bars, triphasé 380 V de charge. Au centre, le hall d’assemblage, les ateliers et la logistique. À droite, séparé par un mur plein, le plateau de bureaux, l’accueil et le local informatique. Premier rang, l’air traité : chaque côté a sa machine et ses gaines de soufflage, une machine de traitement thermodynamique pour 18 à 22 degrés Celsius dans le hall, une centrale de traitement d’air à groupes extérieurs pour 19 à 21 degrés Celsius dans les bureaux, plus un groupe dédié au local informatique. Deuxième rang, les courants forts et les données : dans le hall, six descentes régulières partent d’une ligne de plafond et s’arrêtent au-dessus du sol, au pas de 10 mètres du maillage ; dans les bureaux, cinq piquages montent au contraire du sol, en plinthe et au centre des marguerites d’open space. Troisième rang, l’air comprimé à 6 bars asséché et huilé : même maillage de plafond dans le hall, mais les descentes se terminent par une vanne sur un niveau d’attentes arrêté à 2,50 mètres ; côté bureaux, une croix — le programme y écrit sans objet. Quatrième rang, le triphasé de charge : c’est le seul service qui n’arrive pas du plafond mais du sol, en deux blocs pleins posés en bordure, 100 kilowatts près de la ligne d’assemblage et 100 kilowatts au local batterie, sur 300 kilowatts en continu au programme ; côté bureaux, une seconde croix. La colonne de droite s’interrompt ainsi à mi-hauteur, et c’est elle qui porte la démonstration.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">BÂTIMENT D’ASSEMBLAGE FINAL D’AVIONS — MAÎTRISE D’ŒUVRE ÉLECTRICITÉ ET FLUIDES</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Bâtiment VoltAero</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Au plafond du hall, en plinthe dans les bureaux — et deux réseaux qui s’arrêtent au mur</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PROGRAMME DE L’UTILISATEUR, VERSION 4 — DESSERTE ZONE PAR ZONE · COMPTES RENDUS DE CHANTIER POUR LES MACHINES</text>
+  <text x="56.00" y="216.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SERVICE</text>
+  <text x="320.00" y="216.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HALL D’ASSEMBLAGE, ATELIERS ET LOGISTIQUE</text>
+  <text x="744.00" y="216.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">BUREAUX, ACCUEIL ET LOCAL INFORMATIQUE</text>
+  <text x="56.00" y="260.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Air traité</text>
+  <text x="56.00" y="280.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHAUFFAGE ET VENTILATION</text>
+  <rect x="320.00" y="246.00" width="128.00" height="40.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="384.00" y="271.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">ETT</text>
+  <path d="M 448.00 256.00 L 716.00 256.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 448.00 270.00 L 716.00 270.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 520.00 270.00 L 520.00 278.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 520.00 286.00 L 516.00 278.00 L 524.00 278.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 588.00 270.00 L 588.00 278.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 588.00 286.00 L 584.00 278.00 L 592.00 278.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 656.00 270.00 L 656.00 278.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 656.00 286.00 L 652.00 278.00 L 660.00 278.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="320.00" y="310.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MACHINE DE TRAITEMENT ET GAINES DE SOUFFLAGE</text>
+  <text x="320.00" y="324.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">18 À 22 °C AU PROGRAMME</text>
+  <rect x="744.00" y="246.00" width="128.00" height="40.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="808.00" y="271.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600" text-anchor="middle">CTA</text>
+  <path d="M 872.00 256.00 L 1144.00 256.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 872.00 270.00 L 1144.00 270.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 944.00 270.00 L 944.00 278.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 944.00 286.00 L 940.00 278.00 L 948.00 278.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 1012.00 270.00 L 1012.00 278.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 1012.00 286.00 L 1008.00 278.00 L 1016.00 278.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 1080.00 270.00 L 1080.00 278.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 1080.00 286.00 L 1076.00 278.00 L 1084.00 278.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="744.00" y="310.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CENTRALE À GROUPES EXTÉRIEURS</text>
+  <text x="744.00" y="324.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">19 À 21 °C · UN GROUPE DÉDIÉ AU LOCAL INFORMATIQUE</text>
+  <text x="56.00" y="362.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Courants forts 220 V et données</text>
+  <text x="56.00" y="382.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">5 kW PAR POSTE DE TRAVAIL</text>
+  <path d="M 320.00 346.00 L 716.00 346.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 353.00 346.00 L 353.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 348.00 378.00 L 358.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 419.00 346.00 L 419.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 414.00 378.00 L 424.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 485.00 346.00 L 485.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 480.00 378.00 L 490.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 551.00 346.00 L 551.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 546.00 378.00 L 556.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 617.00 346.00 L 617.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 612.00 378.00 L 622.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 683.00 346.00 L 683.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 678.00 378.00 L 688.00 378.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 320.00 394.00 L 716.00 394.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.2"/>
+  <text x="320.00" y="412.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MAILLAGE DE PLAFOND AU PAS DE 10 m</text>
+  <text x="320.00" y="426.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CHEMINS DE CÂBLES EN PARTIE HAUTE</text>
+  <path d="M 744.00 394.00 L 1144.00 394.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 784.00 394.00 L 784.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 779.00 366.00 L 789.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 864.00 394.00 L 864.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 859.00 366.00 L 869.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 944.00 394.00 L 944.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 939.00 366.00 L 949.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 1024.00 394.00 L 1024.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 1019.00 366.00 L 1029.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 1104.00 394.00 L 1104.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 1099.00 366.00 L 1109.00 366.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="744.00" y="412.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PLINTHE ET MARGUERITE D’OPEN SPACE</text>
+  <text x="744.00" y="426.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">220 V, TÉLÉPHONIE ET DONNÉES</text>
+  <text x="56.00" y="464.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Air comprimé 6 bars</text>
+  <text x="56.00" y="484.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ASSÉCHÉ ET HUILÉ</text>
+  <path d="M 320.00 448.00 L 716.00 448.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 353.00 448.00 L 353.00 480.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <circle cx="353.00" cy="480.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 419.00 448.00 L 419.00 480.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <circle cx="419.00" cy="480.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 485.00 448.00 L 485.00 480.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <circle cx="485.00" cy="480.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 551.00 448.00 L 551.00 480.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <circle cx="551.00" cy="480.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 617.00 448.00 L 617.00 480.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <circle cx="617.00" cy="480.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 683.00 448.00 L 683.00 480.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <circle cx="683.00" cy="480.00" r="4.50" class="c-papier s-encre" fill="#F7F9FA" stroke="#00393A" stroke-width="1.3"/>
+  <path d="M 320.00 488.00 L 325.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 329.00 488.00 L 334.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 338.00 488.00 L 343.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 347.00 488.00 L 352.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 356.00 488.00 L 361.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 365.00 488.00 L 370.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 374.00 488.00 L 379.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 383.00 488.00 L 388.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 392.00 488.00 L 397.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 401.00 488.00 L 406.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 410.00 488.00 L 415.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 419.00 488.00 L 424.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 428.00 488.00 L 433.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 437.00 488.00 L 442.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 446.00 488.00 L 451.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 455.00 488.00 L 460.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 464.00 488.00 L 469.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 473.00 488.00 L 478.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 482.00 488.00 L 487.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 491.00 488.00 L 496.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 500.00 488.00 L 505.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 509.00 488.00 L 514.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 518.00 488.00 L 523.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 527.00 488.00 L 532.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 536.00 488.00 L 541.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 545.00 488.00 L 550.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 554.00 488.00 L 559.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 563.00 488.00 L 568.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 572.00 488.00 L 577.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 581.00 488.00 L 586.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 590.00 488.00 L 595.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 599.00 488.00 L 604.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 608.00 488.00 L 613.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 617.00 488.00 L 622.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 626.00 488.00 L 631.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 635.00 488.00 L 640.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 644.00 488.00 L 649.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 653.00 488.00 L 658.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 662.00 488.00 L 667.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 671.00 488.00 L 676.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 680.00 488.00 L 685.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 689.00 488.00 L 694.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 698.00 488.00 L 703.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 707.00 488.00 L 712.00 488.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.0"/>
+  <path d="M 320.00 496.00 L 716.00 496.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.2"/>
+  <text x="320.00" y="514.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MAILLAGE DE PLAFOND, MÊME PAS DE 10 m</text>
+  <text x="320.00" y="528.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ATTENTES ARRÊTÉES À 2,50 m</text>
+  <path d="M 928.00 458.00 L 960.00 490.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 928.00 490.00 L 960.00 458.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="944.00" y="514.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">SANS OBJET AU PROGRAMME</text>
+  <text x="56.00" y="566.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Triphasé 380 V de charge</text>
+  <text x="56.00" y="586.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">300 kW EN CONTINU AU TOTAL</text>
+  <path d="M 320.00 598.00 L 716.00 598.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <rect x="340.00" y="572.00" width="64.00" height="26.00" class="c-encre" fill="#00393A"/>
+  <text x="372.00" y="589.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle" font-variant-numeric="tabular-nums">100 kW</text>
+  <text x="340.00" y="616.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="start">BORDURE DE LIGNE</text>
+  <rect x="632.00" y="572.00" width="64.00" height="26.00" class="c-encre" fill="#00393A"/>
+  <text x="664.00" y="589.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle" font-variant-numeric="tabular-nums">100 kW</text>
+  <text x="696.00" y="616.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LOCAL BATTERIE</text>
+  <text x="320.00" y="630.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ET 100 kW AU PARKING AVION, HORS BÂTIMENT</text>
+  <path d="M 928.00 560.00 L 960.00 592.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <path d="M 928.00 592.00 L 960.00 560.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.8"/>
+  <text x="944.00" y="616.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">SANS OBJET AU PROGRAMME</text>
+  <rect x="730.00" y="224.00" width="4.00" height="412.00" class="c-encre" fill="#00393A"/>
+  <text x="732.00" y="658.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">LE MUR ENTRE LES DEUX ZONES</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Un même toit ne fait pas un même régime : chaque service y change de sens, de machine — ou n’y existe pas.</text>
+  <rect x="56.00" y="714.00" width="413.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SAINT-AGNANT · HUIT POSTES D’ASSEMBLAGE · 2024</text>
+</svg>
