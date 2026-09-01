@@ -3721,7 +3721,395 @@ def composer_appui_amorce(donnees):
     )
 
 
+
+# ── `exposition` : le plan de toiture comme frontière ──────────────────────
+# Le mécanisme de la N20 (Maison des Métiers, La Rochelle). Un seul critère
+# trie les organes d'une production de toiture sur un site littoral : doivent-
+# ils être dehors ? Deux régimes en découlent, et UNE implantation les dessine
+# tous les deux — `_ex_organe` reçoit la géométrie de son format dans `g`, et
+# rien d'autre ne place une boîte, un capot, un plot ni une flèche.
+#
+# Deux grandeurs y sont soigneusement distinguées, et c'est la leçon de la N19 :
+#   · les MESURES du dessin (l, h, y…) sont ABSOLUES, propres à chaque format —
+#     une boîte de vignette n'est pas une boîte de planche réduite ;
+#   · l'ÉCHELLE `ech` ne commande que les MOTIFS et les petits accessoires
+#     (interruption, pointe de flèche, plot, brèche du plan), de sorte que
+#     « interrompu » veuille dire la même chose dans les trois dessins.
+# Les abscisses viennent de `_am_centres`, déjà partagée : deux mécanismes qui
+# rangent n objets sur une largeur n'ont aucune raison de le faire deux fois.
+EX_X0, EX_X1 = MARGE, W - MARGE
+EX_Y_BANDE_H = 226
+EX_Y_LIB_LIAISON_H, EX_Y_LIAISON_H = 244, 252
+EX_Y_TOIT = 440
+EX_Y_LIB_TOIT = 432
+EX_Y_BANDE_B = 474
+EX_Y_LIB_LIAISON_B, EX_Y_LIAISON_B = 628, 634
+EX_Y_PIED = 660
+EX_Y_ENCEINTE0, EX_Y_ENCEINTE1 = 462, 648
+EX_EP_TOIT = 6                # écart des deux traits de la terrasse
+EX_BRECHE = 30                # brèche du plan au droit d'une traversée
+EX_PLOT = 8
+
+# La géométrie d'un format : les seules mesures que `_ex_organe` consulte.
+EX_G = dict(l=150, h=44, y_haut=286, y_bas=492, d_capot=18, h_capot=9,
+            ech=1.0)
+
+
+def _ex_toiture(A, x0, x1, y, breches, ech=1.0, epaisseur=1.8):
+    """Le plan de toiture — deux traits parallèles, interrompus au droit de
+    chaque traversée. La brèche EST la traversée : c'est la convention de
+    coupe, et elle vaut pour les trois formats."""
+    b = EX_BRECHE * ech
+    bords = [x0]
+    for cx in sorted(breches):
+        bords += [cx - b / 2, cx + b / 2]
+    bords.append(x1)
+    for dy in (0, EX_EP_TOIT * ech):
+        for k in range(0, len(bords), 2):
+            xa, xb = bords[k], bords[k + 1]
+            if xb - xa > 1:
+                A(ligne(xa, y + dy, xb, y + dy, "encre", epaisseur))
+
+
+def _ex_organe(A, cx, org, g):
+    """Un organe et son régime, à l'abscisse cx.
+
+    `dehors` — la boîte reste au-dessus du plan et reçoit ses protections
+    (capot posé sur elle, grillage anti-volatiles, plots de surélévation).
+    `descend` — une boîte interrompue marque la position abandonnée, une
+    flèche traverse le plan, la boîte pleine est en dessous.
+
+    Rend l'ordonnée du bas de la boîte pleine — la base des libellés — et,
+    pour un organe qui descend, l'abscisse de sa traversée."""
+    ech, L, Hb = g["ech"], g["l"], g["h"]
+    x = cx - L / 2
+    descend = org["regime"] == "descend"
+    y_boite = g["y_bas"] if descend else g["y_haut"]
+
+    if descend:
+        _am_boite_tirets(A, x, g["y_haut"], L, Hb, ech=ech)
+        y0 = g["y_haut"] + Hb + 6 * ech
+        y1 = y_boite - 6 * ech
+        A(ligne(cx, y0, cx, y1 - 9 * ech, "encre", 2.0 * max(ech, 0.7)))
+        A(fleche(cx, y1, "encre", "bas", 9 * ech))
+    else:
+        for p in org.get("protections", ()):
+            if p == "capot":
+                # Un CADRE fermé autour de la machine — « capotage intégral ».
+                # Premier essai : une barre posée au-dessus. Vue au PNG, elle
+                # se lisait comme une seconde boîte plate et pâle, et non
+                # comme une protection ; le grillage de la colonne voisine,
+                # lui, se lisait d'emblée. Deux protections doivent différer
+                # par autre chose que leur position.
+                d = 7 * ech
+                A(polyligne([(x - d, g["y_haut"] - d),
+                             (x + L + d, g["y_haut"] - d),
+                             (x + L + d, g["y_haut"] + Hb + d),
+                             (x - d, g["y_haut"] + Hb + d),
+                             (x - d, g["y_haut"] - d)], "encre", 1.8 * max(ech, 0.7)))
+            elif p == "grille":
+                yg = g["y_haut"] - g["d_capot"]
+                A(ligne(x, yg, x + L, yg, "encre", 1.4))
+                for k in range(7):
+                    xt = x + L * (k + 0.5) / 7
+                    A(ligne(xt, yg, xt, g["y_haut"], "encre", 1.0))
+            elif p == "plots":
+                yp = g["y_haut"] + Hb
+                c = EX_PLOT * ech
+                for s in (-1, 1):
+                    A(rect_bord(cx + s * L / 4 - c / 2, yp, c, c, "calcaire",
+                                "filet-1"))
+                A(ligne(x, yp + c, x + L, yp + c, "encre", 1.6))
+
+    A(rect_bord(x, y_boite, L, Hb, "calcaire", "filet-1"))
+    return y_boite + Hb, (cx if descend else None)
+
+
+def composer_exposition(donnees):
+    q = donnees["exposition"]
+    organes = q["organes"]
+    out = []
+    A = out.append
+    trop = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        l = mesurer(chaine, corps, profil, tracking)
+        if l > dispo:
+            trop.append(f"{nom} : {l:.0f} px pour {dispo:.0f}")
+        return l
+
+    def mono(x, y, chaine, dispo, nom, ancre=None, couleur="pivot", corps=10):
+        controler(nom, chaine, corps, "mono", dispo, corps * 0.14)
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14))
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    controler("surtitre", donnees["surtitre"], 11, "mono", UTILE, 11 * 0.14)
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre",
+            wdth=112))
+    controler("titre", donnees["titre"], 30, "sans-700", UTILE)
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    controler("sous-titre", donnees["sous_titre"], 16, "sans-400", UTILE)
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+    mono(MARGE, Y_ENTETE, q["entete"], UTILE, "en-tête schéma")
+
+    centres, pas = _am_centres(EX_X0, EX_X1, len(organes))
+
+    # La bande haute et la liaison supprimée — au-dessus des protections, la
+    # seule bande où rien ne descend.
+    mono(EX_X0, EX_Y_BANDE_H, q["bande_haute"], UTILE, "bande haute",
+         couleur="encre")
+    mono(EX_X1, EX_Y_LIB_LIAISON_H, q["liaison_supprimee"], UTILE,
+         "liaison supprimée", ancre="end")
+    _am_tirets(A, [(EX_X0, EX_Y_LIAISON_H), (EX_X1, EX_Y_LIAISON_H)],
+               "encre", 1.4)
+
+    # L'enceinte du niveau abrité, tracée AVANT les organes pour qu'ils la
+    # recouvrent. Elle ne porte pas de sens propre : elle donne un corps à la
+    # bande basse, dont la moitié gauche reste vide par construction — rien
+    # ne descend au droit des deux machines qui restent dehors.
+    A(rect_bord(EX_X0, EX_Y_ENCEINTE0, UTILE, EX_Y_ENCEINTE1 - EX_Y_ENCEINTE0,
+                "papier", "filet-3"))
+
+    traversees = []
+    dispo_lib = pas - 16
+    for cx, org in zip(centres, organes):
+        base, tr = _ex_organe(A, cx, org, EX_G)
+        if tr is not None:
+            traversees.append(tr)
+        controler(f'{org["cle"]} nom', org["nom"], 13, "sans-600", dispo_lib)
+        A(texte(cx, base + 36, org["nom"], "sans", 13, 600, "encre",
+                wdth=112, ancre="middle"))
+        mono(cx, base + 54, org["regime_libelle"], dispo_lib,
+             f'{org["cle"]} régime', ancre="middle", couleur="encre")
+        mono(cx, base + 70, org["detail"], dispo_lib, f'{org["cle"]} détail',
+             ancre="middle")
+
+    _ex_toiture(A, EX_X0, EX_X1, EX_Y_TOIT, traversees)
+    mono(EX_X0, EX_Y_LIB_TOIT, q["plan_toiture"], UTILE, "plan de toiture",
+         couleur="encre")
+
+    # La largeur de la bande basse se mesure contre le BORD de la première
+    # boîte qui descend, jamais contre son centre (leçon de la N19).
+    bord = min(traversees) - EX_G["l"] / 2 - 16 - EX_X0
+    mono(EX_X0, EX_Y_BANDE_B, q["bande_basse"], bord, "bande basse",
+         couleur="encre")
+
+    mono(EX_X1, EX_Y_LIB_LIAISON_B, q["liaison_interieure"], UTILE,
+         "liaison intérieure", ancre="end")
+    A(ligne(EX_X0, EX_Y_LIAISON_B, EX_X1, EX_Y_LIAISON_B, "encre", 1.8))
+    mono(EX_X0, EX_Y_PIED, q["pied"], UTILE, "pied")
+
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+    A("</svg>")
+
+    assert not trop, "dépassements sur la planche : " + " ; ".join(trop)
+
+    dehors = [o["cle"] for o in organes if o["regime"] == "dehors"]
+    descend = [o["cle"] for o in organes if o["regime"] == "descend"]
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "une coupe à un seul plan — le plan de toiture, à y "
+                         f"{EX_Y_TOIT}. {len(organes)} organes rangés au même "
+                         f"pas de part et d’autre : {len(dehors)} restent "
+                         "au-dessus et reçoivent leurs protections "
+                         f'({" · ".join(dehors)}), {len(descend)} descendent — '
+                         "boîte interrompue à la position abandonnée, flèche à "
+                         "travers le plan, boîte pleine en dessous "
+                         f'({" · ".join(descend)}). Au-dessus, la liaison de '
+                         "quartier à quartier est interrompue ; en dessous, la "
+                         "liaison intérieure est pleine. Texte masqué, le "
+                         "dessin se lit encore : deux boîtes protégées en haut, "
+                         "deux boîtes en bas, deux flèches qui percent le plan",
+        "primitive_partagee": "_ex_organe(A, cx, org, g) — une seule "
+                              "implantation pour les trois formats et les deux "
+                              "régimes ; `g` porte les MESURES du format "
+                              "(absolues) et `ech` les seuls MOTIFS "
+                              "(interruption, pointe, plot, brèche), de sorte "
+                              "qu’aucun dessin ne soit la réduction d’un "
+                              "autre et que « interrompu » veuille dire la "
+                              "même chose partout. Abscisses par _am_centres "
+                              "et interruptions par _am_dash(ech), déjà "
+                              "partagées avec le mécanisme `amorce`",
+        "topologie": f'{len(organes)} organes au pas de {pas:.1f} px sur x '
+                     f'{EX_X0}–{EX_X1}, centres '
+                     f'{", ".join(f"{c:.0f}" for c in centres)} ; plan de '
+                     f'toiture à y {EX_Y_TOIT} et {EX_Y_TOIT + EX_EP_TOIT}, '
+                     f'{len(traversees)} brèches de {EX_BRECHE} px à x '
+                     f'{", ".join(f"{t:.0f}" for t in traversees)} ; bande '
+                     f'basse bornée à {bord:.0f} px, mesurée contre le bord de '
+                     "la première boîte descendue",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
+                          "pas chiffrée (révision 4) ; les seules valeurs "
+                          "écrites sont les régimes et le niveau d’accueil",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "bas_du_dessin": f"pied à y {EX_Y_PIED}, phrase à y {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
+                         f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            "de la planche",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px pour {UTILE} disponibles",
+        "depassements": f"aucun — les {8 + len(organes) * 3} chaînes mesurées "
+                        "tiennent sous leur colonne (assertion de composition)",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── La vignette : les quatre organes, le plan, la liaison intérieure ───────
+EX_V_X0, EX_V_X1 = V_MARGE, VW - V_MARGE
+EX_V_G = dict(l=44, h=20, y_haut=64, y_bas=140, d_capot=9, h_capot=5,
+              ech=0.6)
+EX_V_Y_TOIT = 116
+EX_V_Y_LIAISON = 170
+# Les deux libellés de bande. Le haut est descendu à 46 et les boîtes à 64 :
+# à 56, le capot de la première colonne montait à 47 et passait sous le
+# libellé — collision invisible au contrôle de largeur, qui ne mesure jamais
+# une occupation.
+EX_V_Y_HAUT, EX_V_Y_BAS, EX_V_Y_PIED = 46, 134, 184
+
+
+def composer_vignette_exposition(donnees):
+    """Ce qu'elle garde : les quatre organes, leurs deux régimes, le plan percé
+    et la liaison intérieure. Ce qu'elle laisse : les noms d'organe, les
+    détails, et la liaison supprimée du haut — à 300 px son trait interrompu
+    passerait à 12 px des boîtes fantômes et les deux interruptions se
+    confondraient."""
+    q = donnees["exposition"]
+    v = q["vignette"]
+    out = []
+    A = out.append
+    trop = []
+
+    def mono(x, y, chaine, dispo, nom, ancre=None, couleur="pivot", corps=9):
+        l = mesurer(chaine, corps, "mono", corps * 0.14)
+        if l > dispo:
+            trop.append(f"{nom} : {l:.0f} px pour {dispo:.0f}")
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14))
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" '
+      f'focusable="false" style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    mono(V_MARGE, 26, donnees["vignette_surtitre"], EX_V_X1 - EX_V_X0,
+         "surtitre")
+
+    centres, pas = _am_centres(EX_V_X0, EX_V_X1, len(q["organes"]))
+    mono(V_MARGE, EX_V_Y_HAUT, v["haut"], EX_V_X1 - EX_V_X0, "haut",
+         couleur="encre")
+    traversees = []
+    for cx, org in zip(centres, q["organes"]):
+        _, tr = _ex_organe(A, cx, org, EX_V_G)
+        if tr is not None:
+            traversees.append(tr)
+    _ex_toiture(A, EX_V_X0, EX_V_X1, EX_V_Y_TOIT, traversees,
+                ech=EX_V_G["ech"], epaisseur=1.4)
+    bord = min(traversees) - EX_V_G["l"] / 2 - 8 - EX_V_X0
+    mono(V_MARGE, EX_V_Y_BAS, v["bas"], bord, "bas", couleur="encre")
+    A(ligne(EX_V_X0, EX_V_Y_LIAISON, EX_V_X1, EX_V_Y_LIAISON, "encre", 1.5))
+    mono(V_MARGE, EX_V_Y_PIED, v["pied"], EX_V_X1 - EX_V_X0, "pied")
+    A("</svg>")
+
+    assert not trop, "dépassements sur la vignette : " + " ; ".join(trop)
+    return "\n".join(out) + "\n", {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "vignette servie à 274-296 px dans une carte — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}, jamais "
+                            "au-dessus de 1,00",
+        "corps_minimal": "9 px dans le repère — rendu à 8,2 px à l’échelle "
+                         "0,91, à 8,9 px à 0,99",
+        "motif": f'{len(q["organes"])} organes au pas de {pas:.1f} px, '
+                 f'{len(traversees)} qui percent le plan ; boîtes de '
+                 f'{EX_V_G["l"]} x {EX_V_G["h"]} px — une composition propre, '
+                 "pas une réduction de la planche — et motif d’interruption à "
+                 f'l’échelle {{EX_V_G["ech"]}}',
+        "primitive_partagee": "_ex_organe et _ex_toiture — les mêmes que la "
+                              "planche et l’appui ; centres par _am_centres",
+        "marges": f"aucun trait sous x {V_MARGE} ni au-delà de x {EX_V_X1} ; "
+                  f"pied à y {EX_V_Y_PIED} pour {VH - V_MARGE} de bas de cadre",
+        "depassements": "aucun — assertion de composition",
+    }
+
+
+# ── L'appui : les quatre organes et leurs libellés courts ──────────────────
+EX_A_X0, EX_A_X1 = A_MARGE, AW - A_MARGE
+EX_A_G = dict(l=92, h=30, y_haut=92, y_bas=210, d_capot=13, h_capot=7,
+              ech=0.7)
+EX_A_Y_TOIT = 162
+EX_A_Y_LIAISON = 300
+
+
+def composer_appui_exposition(donnees):
+    q = donnees["exposition"]
+    a = q["appui"]
+    out = []
+    A = out.append
+    trop = []
+    racine_appui(A, donnees)
+
+    def mono(x, y, chaine, dispo, nom, ancre=None, couleur="pivot", corps=10):
+        l = mesurer(chaine, corps, "mono", corps * 0.14)
+        if l > dispo:
+            trop.append(f"{nom} : {l:.0f} px pour {dispo:.0f}")
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14))
+
+    centres, pas = _am_centres(EX_A_X0, EX_A_X1, len(q["organes"]))
+    mono(A_MARGE, 66, a["haut"], EX_A_X1 - EX_A_X0, "haut", couleur="encre")
+    traversees = []
+    for cx, org, lib in zip(centres, q["organes"], a["libelles"]):
+        base, tr = _ex_organe(A, cx, org, EX_A_G)
+        if tr is not None:
+            traversees.append(tr)
+        mono(cx, base + 26, lib, pas - 10, f'{org["cle"]} libellé',
+             ancre="middle", couleur="encre")
+    _ex_toiture(A, EX_A_X0, EX_A_X1, EX_A_Y_TOIT, traversees,
+                ech=EX_A_G["ech"], epaisseur=1.6)
+    bord = min(traversees) - EX_A_G["l"] / 2 - 10 - EX_A_X0
+    mono(A_MARGE, 188, a["bas"], bord, "bas", couleur="encre")
+    A(ligne(EX_A_X0, EX_A_Y_LIAISON, EX_A_X1, EX_A_Y_LIAISON, "encre", 1.6))
+    mono(A_MARGE, 330, a["pied"], EX_A_X1 - EX_A_X0, "pied")
+    A("</svg>")
+
+    assert not trop, "dépassements sur l’appui : " + " ; ".join(trop)
+    return "\n".join(out) + "\n", controles_appui(
+        f'{len(q["organes"])} organes au pas de {pas:.1f} px — boîtes de '
+        f'{EX_A_G["l"]} x {EX_A_G["h"]} px, motif à l’échelle '
+        f'{EX_A_G["ech"]} ; la partition '
+        f'{sum(1 for o in q["organes"] if o["regime"] == "dehors")} dehors / '
+        f'{len(traversees)} descendus se répète et porte seule la démonstration',
+        f"liaison intérieure à y {EX_A_Y_LIAISON}, pied à y 330, marge basse "
+        f"{AH - 330} px",
+        colonnes=f"dessin x {EX_A_X0}–{EX_A_X1} ({EX_A_X1 - EX_A_X0} px)",
+        depassements="aucun — assertion de composition",
+    )
+
+
 def _composer(donnees):
+    if "exposition" in donnees:
+        return composer_exposition(donnees)
     if "amorce" in donnees:
         return composer_amorce(donnees)
     if "frontiere" in donnees:
@@ -3740,6 +4128,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "exposition" in donnees:
+        return composer_vignette_exposition(donnees)
     if "amorce" in donnees:
         return composer_vignette_amorce(donnees)
     if "frontiere" in donnees:
@@ -3758,6 +4148,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "exposition" in donnees:
+        return composer_appui_exposition(donnees)
     if "amorce" in donnees:
         return composer_appui_amorce(donnees)
     if "frontiere" in donnees:

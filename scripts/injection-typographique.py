@@ -18,6 +18,11 @@ UNITES = [
     # « m » — le lookahead les départagerait, mais l'ordre le dit.
     'MWh/an', 'GWh/an', 'MWh', 'GWh', 'heures', 'mois',
     'kWhep/m²/an', 'kWh/m²/an', 'm³/\\(h·m²\\)', 'W/\\(m²·K\\)', 'W/m²·K', 'kg/m³', 'm³/h',
+    # S23 : un audit de fluide caloporteur apporte les unites d'analyse d'eau.
+    # « mg/L » et « g/L » passent AVANT « L », l'alternance etant ordonnee ;
+    # « °F » (degre francais de durete) se pose comme « °C », a la fine
+    # insecable — le corpus ecrit ses 78 « °C » ainsi, sans exception.
+    'mg/L', 'g/L', '°F',
     'kWhep', 'kWh', 'kVA', 'kWc', 'Wc', 'kW', 'mbar', 'lumens', 'litres', 'lux', 'ans', 'L',
     'm²', 'm³', 'mm', 'cm', 'km', '°C', 'Pa', 'kg', 'lm', 'VA', 'dB', 'm', 'W', 'V', '%', '€',
     'h',

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe en coupe, sur un seul plan : celui de la toiture-terrasse, tracé en travers du dessin et interrompu en deux endroits. Au-dessus s’étend la bande de l’extérieur — air marin, volatiles, eau stagnante ; en dessous, celle du quatrième étage et de ses quatre sous-stations. Quatre organes de la production y sont rangés au même pas, et leur position dit leur régime. Les deux premiers restent au-dessus du plan : la pompe à chaleur sud, remplacée, porte un capot posé sur elle ; la pompe à chaleur nord, remise en état, reçoit un grillage anti-volatiles et deux plots de surélévation qui la décollent de la dalle. Les deux autres franchissent le plan vers le bas : à leur position d’origine ne subsiste qu’une boîte au trait interrompu, une flèche descend et perce le plan par une brèche, et la boîte pleine se trouve en dessous — le module hydraulique déporté en sous-station, puis le ballon tampon déplacé au même endroit. Enfin deux traits horizontaux traversent tout le dessin : en haut, interrompu, le cheminement de quartier à quartier en toiture, supprimé ; en bas, plein, les liaisons entre sous-stations par les plénums intérieurs. Le trait plein marque partout la position retenue, le trait interrompu la position abandonnée.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">LA ROCHELLE · DEHORS / À L’ABRI</text>
+  <text x="24.00" y="66.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DEHORS — AIR MARIN, VOLATILES</text>
+  <path d="M 36.10 87.10 L 137.90 87.10 L 137.90 126.90 L 36.10 126.90 L 36.10 87.10" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.26"/>
+  <rect x="41.00" y="92.00" width="92.00" height="30.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="87.00" y="148.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">PAC SUD</text>
+  <path d="M 167.00 79.00 L 259.00 79.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 173.57 79.00 L 173.57 92.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 186.71 79.00 L 186.71 92.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 199.86 79.00 L 199.86 92.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 213.00 79.00 L 213.00 92.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 226.14 79.00 L 226.14 92.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 239.29 79.00 L 239.29 92.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 252.43 79.00 L 252.43 92.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <rect x="187.20" y="122.00" width="5.60" height="5.60" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <rect x="233.20" y="122.00" width="5.60" height="5.60" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <path d="M 167.00 127.60 L 259.00 127.60" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <rect x="167.00" y="92.00" width="92.00" height="30.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="213.00" y="148.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">PAC NORD</text>
+  <rect x="293.00" y="92.00" width="92.00" height="30.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.3" stroke-dasharray="4.9 3.5"/>
+  <path d="M 339.00 126.20 L 339.00 199.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 339.00 205.80 L 335.85 199.50 L 342.15 199.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="293.00" y="210.00" width="92.00" height="30.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="339.00" y="266.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">MODULE HYD.</text>
+  <rect x="419.00" y="92.00" width="92.00" height="30.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.3" stroke-dasharray="4.9 3.5"/>
+  <path d="M 465.00 126.20 L 465.00 199.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.4"/>
+  <path d="M 465.00 205.80 L 461.85 199.50 L 468.15 199.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="419.00" y="210.00" width="92.00" height="30.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="465.00" y="266.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="middle">BALLON</text>
+  <path d="M 24.00 162.00 L 328.50 162.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 349.50 162.00 L 454.50 162.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 475.50 162.00 L 528.00 162.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 24.00 166.20 L 328.50 166.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 349.50 166.20 L 454.50 166.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <path d="M 475.50 166.20 L 528.00 166.20" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <text x="24.00" y="188.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">À L’ABRI · SOUS-STATION R+4</text>
+  <path d="M 24.00 300.00 L 528.00 300.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.6"/>
+  <text x="24.00" y="330.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PLEIN = RETENU · INTERROMPU = ABANDONNÉ</text>
+</svg>

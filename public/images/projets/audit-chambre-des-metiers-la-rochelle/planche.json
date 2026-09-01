@@ -1,0 +1,124 @@
+{
+  "fiche": "audit-chambre-des-metiers-la-rochelle",
+  "archetype": "coupe-traversee",
+  "mecanisme": "exposition",
+  "archetype_motif": "La thèse de la fiche est une frontière physique et un critère de tri : sur un site littoral sans protection, ce n’est pas le dimensionnement des machines qui a échoué, c’est leur exposition, et la première préconisation range les organes de la production selon une seule question — doivent-ils être dehors ? C’est donc une coupe, et le plan qu’elle montre est un plan réel, celui de la toiture-terrasse : deux organes restent au-dessus et reçoivent leurs protections (capotage intégral, grillage anti-volatiles, châssis surélevés sur plots), deux le franchissent vers le bas pour rejoindre une sous-station du quatrième étage, et le cheminement qui courait d’un quartier à l’autre cesse de traverser au profit des plénums intérieurs. Le mécanisme composé ici est nouveau : `exposition`. Il se distingue des huit planches coupe-traversée déjà publiées, et notamment des deux qu’on pourrait lui croire voisines : à Louise Magnan l’extraction QUITTE le logement pour monter en toiture, ici le mouvement est l’inverse et son motif n’est pas la place mais l’agression du milieu ; à Marennes l’enveloppe est thermique et continue, ici elle est percée à dessein et ce sont les percements qui portent le sens. La lecture de récupération d’énergie entre orientations opposées, que le bâtiment appelait pourtant, a été écartée : la planche du siège d’Eiffage la publie déjà.",
+  "surtitre": "MONOTECHNIQUE — AUDIT · LA ROCHELLE (17000) · AUDIT DES INSTALLATIONS THERMIQUES",
+  "titre": "Maison des Métiers",
+  "sous_titre": "Ce qui peut quitter la toiture la quitte, ce qui doit y rester s’y protège",
+  "cartouche_legende": "MAISON DES MÉTIERS · LA ROCHELLE (17000) · 3 771 m²",
+  "vignette_surtitre": "LA ROCHELLE · DEHORS / À L’ABRI",
+  "phrase_principe": "Sur un site littoral, ce n’est pas le dimensionnement qui a usé les machines, c’est leur exposition.",
+  "aria_label": "Schéma de principe en coupe, sur un seul plan : celui de la toiture-terrasse, tracé en travers du dessin et interrompu en deux endroits. Au-dessus s’étend la bande de l’extérieur — air marin, volatiles, eau stagnante ; en dessous, celle du quatrième étage et de ses quatre sous-stations. Quatre organes de la production y sont rangés au même pas, et leur position dit leur régime. Les deux premiers restent au-dessus du plan : la pompe à chaleur sud, remplacée, porte un capot posé sur elle ; la pompe à chaleur nord, remise en état, reçoit un grillage anti-volatiles et deux plots de surélévation qui la décollent de la dalle. Les deux autres franchissent le plan vers le bas : à leur position d’origine ne subsiste qu’une boîte au trait interrompu, une flèche descend et perce le plan par une brèche, et la boîte pleine se trouve en dessous — le module hydraulique déporté en sous-station, puis le ballon tampon déplacé au même endroit. Enfin deux traits horizontaux traversent tout le dessin : en haut, interrompu, le cheminement de quartier à quartier en toiture, supprimé ; en bas, plein, les liaisons entre sous-stations par les plénums intérieurs. Le trait plein marque partout la position retenue, le trait interrompu la position abandonnée.",
+  "exposition": {
+    "entete": "TRAIT PLEIN = POSITION RETENUE · TRAIT INTERROMPU = POSITION ABANDONNÉE · LA BRÈCHE DU PLAN EST LA TRAVERSÉE",
+    "bande_haute": "EXTÉRIEUR — AIR MARIN, VOLATILES, EAU STAGNANTE",
+    "liaison_supprimee": "CHEMINEMENT DE QUARTIER À QUARTIER EN TOITURE — SUPPRIMÉ",
+    "plan_toiture": "PLAN DE TOITURE",
+    "bande_basse": "NIVEAU R+4 — QUATRE SOUS-STATIONS À L’ABRI",
+    "liaison_interieure": "LIAISONS NE/NO ET SE/SO PAR LES PLÉNUMS INTÉRIEURS",
+    "pied": "UN SEUL CRITÈRE DE TRI : L’ORGANE DOIT-IL ÊTRE DEHORS ?",
+    "organes": [
+      {
+        "cle": "pac-sud",
+        "regime": "dehors",
+        "protections": [
+          "capot"
+        ],
+        "nom": "Pompe à chaleur sud",
+        "regime_libelle": "REMPLACÉE",
+        "detail": "CAPOTAGE INTÉGRAL, ÉPOXY"
+      },
+      {
+        "cle": "pac-nord",
+        "regime": "dehors",
+        "protections": [
+          "grille",
+          "plots"
+        ],
+        "nom": "Pompe à chaleur nord",
+        "regime_libelle": "REMISE EN ÉTAT",
+        "detail": "ANTI-VOLATILES, PLOTS"
+      },
+      {
+        "cle": "module",
+        "regime": "descend",
+        "nom": "Module hydraulique",
+        "regime_libelle": "DÉPORTÉ EN SOUS-STATION",
+        "detail": "CIRCULATEURS À L’ABRI"
+      },
+      {
+        "cle": "ballon",
+        "regime": "descend",
+        "nom": "Ballon tampon",
+        "regime_libelle": "DÉPLACÉ EN SOUS-STATION",
+        "detail": "MOINS DE PERTES, ACCÈS AISÉ"
+      }
+    ],
+    "vignette": {
+      "haut": "TOITURE",
+      "bas": "SOUS-STATION R+4",
+      "pied": "PLEIN = RETENU · INTERROMPU = ABANDONNÉ"
+    },
+    "appui": {
+      "haut": "DEHORS — AIR MARIN, VOLATILES",
+      "bas": "À L’ABRI · SOUS-STATION R+4",
+      "pied": "PLEIN = RETENU · INTERROMPU = ABANDONNÉ",
+      "libelles": [
+        "PAC SUD",
+        "PAC NORD",
+        "MODULE HYD.",
+        "BALLON"
+      ]
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "a_valider_ft2e": [
+    "Le nombre d’organes dessinés. Le rapport d’audit énumère, pour la toiture, bien plus que quatre pièces : deux pompes à chaleur, deux ballons tampons, une centrale double flux, deux caissons d’extraction, les réseaux et leur traçage antigel. La planche n’en retient que quatre, celles que la préconisation 01 déplace ou protège nommément. Faut-il en ajouter ?",
+    "Les protections attribuées organe par organe. Le capotage intégral est prescrit pour la machine de remplacement (« modèle acoustique »), le grillage anti-volatiles et les supports surélevés pour la remise en état de la machine nord. La planche suit cette répartition à la lettre ; en pratique les deux machines recevront sans doute les trois protections.",
+    "Les désignations « sud » et « nord », « NE / NO / SE / SO » et « R+4 ». Ce sont les repères internes du rapport d’audit. Ils ne portent aucune donnée commerciale et ne nomment aucun tiers, mais ils sont publiés : les gardez-vous ?",
+    "Le déplacement du ballon tampon est dessiné comme acquis, alors que le rapport le donne sous réserve — « faisabilité structurelle à valider ». Faut-il le distinguer des autres, par exemple en le laissant au trait interrompu en bas ?",
+    "La brèche du plan de toiture. Elle figure la traversée d’un organe qui change de niveau, ce qui est une convention de coupe et non un percement réel de l’étanchéité. Les vrais percements de la préconisation — crosse dédiée aux câbles, tés souches en tête de colonne — ne sont pas dessinés, faute de place à cette échelle.",
+    "Le trait interrompu signifie ici « position abandonnée ». Sur la planche du groupe scolaire de La Flotte, publiée en août, il signifiait « réservé pour plus tard ». Les deux sens sont légitimes dans leur planche, l’en-tête les lève à chaque fois, mais il faut savoir que le corpus porte désormais les deux."
+  ],
+  "exclusions_appliquees": [
+    "aucun millésime d’ouverture d’affaire, aucun numéro d’affaire",
+    "aucun montant : ni les honoraires, ni les quinze préconisations, ni les quatre scénarios",
+    "aucun tiers : ni l’architecte et le bureau d’études du dossier de construction de 1995, ni le bureau auteur de l’audit de 2015, ni l’exploitant, ni le syndic, ni le laboratoire d’analyses",
+    "aucune marque d’équipement, alors que le rapport en relève une vingtaine",
+    "aucune donnée nominative, alors que les rapports nomment quatre personnes",
+    "aucune géométrie d’ouvrage : le bâtiment est circulaire, la planche n’en montre qu’un plan horizontal et des boîtes",
+    "aucun constat de désordre imputable à un tiers, et rien de la mission d’assistance au constat d’huissier"
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "une coupe à un seul plan — le plan de toiture, à y 440. 4 organes rangés au même pas de part et d’autre : 2 restent au-dessus et reçoivent leurs protections (pac-sud · pac-nord), 2 descendent — boîte interrompue à la position abandonnée, flèche à travers le plan, boîte pleine en dessous (module · ballon). Au-dessus, la liaison de quartier à quartier est interrompue ; en dessous, la liaison intérieure est pleine. Texte masqué, le dessin se lit encore : deux boîtes protégées en haut, deux boîtes en bas, deux flèches qui percent le plan",
+    "primitive_partagee": "_ex_organe(A, cx, org, g) — une seule implantation pour les trois formats et les deux régimes ; `g` porte les MESURES du format (absolues) et `ech` les seuls MOTIFS (interruption, pointe, plot, brèche), de sorte qu’aucun dessin ne soit la réduction d’un autre et que « interrompu » veuille dire la même chose partout. Abscisses par _am_centres et interruptions par _am_dash(ech), déjà partagées avec le mécanisme `amorce`",
+    "topologie": "4 organes au pas de 272.0 px sur x 56–1144, centres 192, 464, 736, 1008 ; plan de toiture à y 440 et 446, 2 brèches de 30 px à x 736, 1008 ; bande basse bornée à 589 px, mesurée contre le bord de la première boîte descendue",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; les seules valeurs écrites sont les régimes et le niveau d’accueil",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "bas_du_dessin": "pied à y 660, phrase à y 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 454 x 30 px = 1.42 % de la planche",
+    "phrase_principe": "100 signes — 850 px pour 1088 disponibles",
+    "depassements": "aucun — les 20 chaînes mesurées tiennent sous leur colonne (assertion de composition)"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "vignette servie à 274-296 px dans une carte — échelle 0.91 à 0.99, jamais au-dessus de 1,00",
+    "corps_minimal": "9 px dans le repère — rendu à 8,2 px à l’échelle 0,91, à 8,9 px à 0,99",
+    "motif": "4 organes au pas de 68.0 px, 2 qui percent le plan ; boîtes de 44 x 20 px — une composition propre, pas une réduction de la planche — et motif d’interruption à l’échelle {EX_V_G[\"ech\"]}",
+    "primitive_partagee": "_ex_organe et _ex_toiture — les mêmes que la planche et l’appui ; centres par _am_centres",
+    "marges": "aucun trait sous x 14 ni au-delà de x 286 ; pied à y 184 pour 186 de bas de cadre",
+    "depassements": "aucun — assertion de composition"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "4 organes au pas de 126.0 px — boîtes de 92 x 30 px, motif à l’échelle 0.7 ; la partition 2 dehors / 2 descendus se répète et porte seule la démonstration",
+    "bas_du_dessin": "liaison intérieure à y 300, pied à y 330, marge basse 38 px",
+    "colonnes": "dessin x 24–528 (504 px)",
+    "depassements": "aucun — assertion de composition"
+  }
+}
