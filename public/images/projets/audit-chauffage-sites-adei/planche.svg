@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe du remplacement d’un générateur de chauffage sur un réseau existant. À gauche, une chaudière fioul ou gaz dessinée en trait interrompu — elle est déposée — surmonte le bloc de la pompe à chaleur qui la remplace. De ce bloc partent deux lignes horizontales, les deux régimes d’eau que la machine peut fournir : en haut le départ à 65 °C d’une pompe à chaleur haute température, en bas le régime d’eau de 35 °C d’une machine standard. À droite, trois familles d’émetteurs relevées sur les sites, placées chacune à la hauteur de ce qu’elle exige. L’aérotherme est au-dessus des deux lignes : le trait qui monte vers lui s’arrête avant de l’atteindre, car il est peu adapté aux régimes de pompe à chaleur, où sa température de soufflage devient trop faible — il faut le déposer. Le radiateur à eau chaude est sur la ligne des 65 °C, mais le trait y traverse d’abord une boîte intercalée, l’isolation : alimenté plus froid, il émet moins, et il ne reste en place qu’à condition que le besoin baisse. Le plancher chauffant est sous la ligne des 35 °C, largement atteint : conçu pour le bas régime, il ne demande rien. La démonstration tient dans les trois traits — un qui s’arrête, un qui passe sous condition, un qui atteint.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-filet-3 { stroke: var(--color-filet-3, #00393A1F); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-clair { stroke: var(--color-clair, #99CCCD); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="1200.00" height="800.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="56.00" y="76.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">SCHÉMA DE PRINCIPE · REMPLACEMENT DE GÉNÉRATEUR SUR RÉSEAU EXISTANT</text>
+  <text x="56.00" y="112.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="30" font-weight="700" font-variation-settings="'wdth' 112, 'wght' 700">Sept sites médico-sociaux</text>
+  <text x="56.00" y="138.00" class="t-sans c-pivot" fill="#336667" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="16" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Le régime d’eau de la pompe à chaleur décide de ce qu’on garde du réseau</text>
+  <rect x="56.00" y="160.00" width="1088.00" height="1.00" class="c-filet-1" fill="#00393A38"/>
+  <text x="56.00" y="190.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DU GÉNÉRATEUR À L’ÉMETTEUR · CE QUE LA PRODUCTION FOURNIT, CE QUE LE RÉSEAU EXIGE</text>
+  <text x="56.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA PRODUCTION REMPLACÉE</text>
+  <text x="1144.00" y="220.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end">LES ÉMETTEURS DÉJÀ POSÉS</text>
+  <rect x="56.00" y="252.00" width="204.00" height="58.00" fill="none" class="s-filet-1" stroke="#00393A38" stroke-width="1.5" stroke-dasharray="6 6"/>
+  <text x="68.00" y="277.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Chaudière fioul ou gaz</text>
+  <text x="68.00" y="296.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DÉPOSÉE</text>
+  <path d="M 158.00 310.00 L 158.00 327.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 158.00 334.00 L 154.50 327.00 L 161.50 327.00 Z" class="c-encre" fill="#00393A"/>
+  <rect x="56.00" y="336.00" width="204.00" height="292.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="68.00" y="366.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Pompe à chaleur</text>
+  <text x="68.00" y="386.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA MACHINE QUI REMPLACE</text>
+  <path d="M 260.00 424.00 L 812.00 424.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 260.00 556.00 L 772.00 556.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <text x="280.00" y="414.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HAUTE TEMPÉRATURE · DÉPART  À 65 °C</text>
+  <text x="280.00" y="444.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE PLUS CHAUD QUE LA MACHINE FOURNIT</text>
+  <text x="280.00" y="546.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">MACHINE STANDARD · RÉGIME D’EAU 35 °C</text>
+  <text x="280.00" y="576.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE RÉGIME DES POMPES À CHALEUR COURANTES</text>
+  <rect x="600.00" y="401.00" width="168.00" height="46.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="612.00" y="419.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="15" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Isoler</text>
+  <text x="612.00" y="437.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RÉDUIRE LE BESOIN</text>
+  <path d="M 560.00 424.00 L 560.00 276.00 L 740.00 276.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 740.00 264.00 L 740.00 288.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="2.0"/>
+  <text x="280.00" y="628.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LE TRAIT QUI S’ARRÊTE : LE RÉGIME N’ATTEINT PAS L’ÉMETTEUR</text>
+  <path d="M 772.00 556.00 L 772.00 596.00 L 803.00 596.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 810.00 596.00 L 803.00 592.50 L 803.00 599.50 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 810.00 424.00 L 803.00 420.50 L 803.00 427.50 Z" class="c-encre" fill="#00393A"/>
+  <rect x="812.00" y="239.00" width="332.00" height="74.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="824.00" y="265.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Aérotherme à eau chaude</text>
+  <text x="824.00" y="285.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ATELIERS ET MAGASINS</text>
+  <text x="824.00" y="302.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">SOUFFLAGE TROP FAIBLE À 35 °C</text>
+  <text x="812.00" y="331.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">Déposer — L’ÉMETTEUR CHANGE</text>
+  <rect x="812.00" y="387.00" width="332.00" height="74.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="824.00" y="413.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Radiateur à eau chaude</text>
+  <text x="824.00" y="433.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">HÉBERGEMENTS, BUREAUX, SALLES</text>
+  <text x="824.00" y="450.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">ÉMISSION PLUS FAIBLE  À 65 °C</text>
+  <text x="812.00" y="479.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">Isoler d’abord — LE BESOIN BAISSE, IL RESTE</text>
+  <rect x="812.00" y="559.00" width="332.00" height="74.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="824.00" y="585.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">Plancher chauffant</text>
+  <text x="824.00" y="605.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">BUREAUX ET VESTIAIRES</text>
+  <text x="824.00" y="622.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">CONÇU POUR LE BAS RÉGIME</text>
+  <text x="812.00" y="651.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">Rien à changer — L’ÉMETTEUR SUIT LA MACHINE</text>
+  <text x="56.00" y="688.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="17" font-weight="400" font-variation-settings="'wdth' 100, 'wght' 400">Le générateur ne se choisit pas seul : l’émetteur déjà posé décide de ce qu’on peut mettre en amont.</text>
+  <rect x="56.00" y="714.00" width="323.00" height="30.00" class="c-profond" fill="#001718"/>
+  <text x="76.00" y="734.00" class="t-mono c-voile" fill="#E1F4F4" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">CHARENTE-MARITIME · 9 131 m² · 2023</text>
+</svg>

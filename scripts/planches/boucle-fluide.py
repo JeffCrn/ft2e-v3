@@ -60,6 +60,14 @@ porte l'extraction :
   d'extraction dimensionnés par zone — et AUCUN nœud central : la
   décentralisation est la démonstration.
 
+- `regime` — ce que l'aval interdit à l'amont (audit de chauffage de sept
+  sites médico-sociaux) : une chaudière déposée, la pompe à chaleur qui la
+  remplace, et les DEUX régimes d'eau qu'elle sait fournir en deux longues
+  horizontales ; à droite trois familles d'émetteurs posées chacune à la
+  hauteur de ce qu'elles exigent — le trait qui monte vers l'aérotherme
+  S'ARRÊTE, celui du radiateur traverse une boîte intercalée (l'isolation),
+  celui du plancher chauffant atteint sans rien franchir.
+
 - `comptage` — le compteur sur le retour (plan de comptage d'énergie d'un site
   industriel, Rochefort) : une chaufferie, un départ unique, quatre retours
   dont trois passent par un cercle et un se termine en éventail sans cercle,
@@ -3912,9 +3920,396 @@ def composer_appui_cascade(donnees):
             f"{AH - (bas_ch + 22)} px")
 
 
+# ── `regime` — ce que l'aval interdit à l'amont ──────────────────────────────
+# Le onzième mécanisme de l'archétype, et le premier à poser une CONDITION
+# D'ADMISSION plutôt qu'un trajet. Une chaudière déposée, la pompe à chaleur qui
+# la remplace, et les DEUX régimes d'eau qu'elle sait fournir tracés en deux
+# longues horizontales. À droite, trois familles d'émetteurs posées chacune à la
+# hauteur de ce qu'elles exigent : l'aérotherme au-dessus des deux lignes — le
+# trait qui monte vers lui s'ARRÊTE —, le radiateur sur la ligne haute
+# température mais derrière une boîte intercalée — l'isolation —, le plancher
+# chauffant sous la ligne basse, franchement atteint.
+#
+# La géométrie porte seule la démonstration : trois traits, un qui s'arrête, un
+# qui passe sous condition, un qui atteint. Masquer tout le texte laisse lire le
+# mécanisme.
+RG_PX0, RG_PX1 = 56, 260        # la colonne de production
+RG_CHY0, RG_CH_H = 252, 58      # la chaudière déposée — contour interrompu
+RG_PACY0, RG_PAC_H = 336, 292   # le bloc de la pompe à chaleur
+RG_EX0, RG_EX1 = 812, 1144      # les trois émetteurs
+RG_EM_H = 74                    # hauteur d'une boîte d'émetteur
+RG_Y_HT = 424                   # la ligne haute température
+RG_Y_STD = 556                  # la ligne du régime standard
+RG_CY_AERO = 276                # au-dessus des deux lignes
+RG_CY_RAD = RG_Y_HT             # SUR la ligne haute température
+RG_CY_PLAN = 596                # sous la ligne du régime standard
+RG_CDX0, RG_CDX1 = 600, 768     # la boîte de condition posée sur le trajet
+RG_CD_H = 46
+RG_MONTX = 560                  # le trait qui monte vers l'aérotherme
+RG_ARRET_X = 740                # et qui s'arrête avant de l'atteindre
+RG_DESCX = 772                  # le trait qui descend vers le plancher
+RG_ETIQ_X = 280                 # les étiquettes de palier, posées sur la ligne
+RG_Y_LEGENDE = 628              # la légende d'arrêt, en zone franche — au
+                                # pied du dessin, jamais sous un détail de palier
+
+RG_CY = {"aerotherme": RG_CY_AERO, "radiateur": RG_CY_RAD, "plancher": RG_CY_PLAN}
+
+
+def _rg_barre_arret(x, y, demi=12):
+    """Le signe d'arrêt : une barre EN TRAVERS du trait qui n'aboutit pas.
+    Le trait courant vers l'émetteur est horizontal — la barre est donc
+    verticale, et se lit comme une butée, jamais comme une extrémité."""
+    return ligne(x, y - demi, x, y + demi, "encre", 2.0)
+
+
+def composer_regime(donnees):
+    rg = donnees["regime"]
+    paliers = {p["cle"]: p for p in sorted(rg["paliers"], key=lambda p: p["ordre"])}
+    emetteurs = sorted(rg["emetteurs"], key=lambda e: e["ordre"])
+    out = []
+    A = out.append
+    trop = []
+
+    def controler(nom, contenu, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(contenu, corps, profil, tracking)
+        if largeur > dispo:
+            trop.append(f"{nom} : {largeur:.1f} px pour {dispo:.1f} px")
+        return dispo - largeur
+
+    marges = []
+
+    def poser(nom, contenu, corps, profil, dispo, tracking=0.0):
+        marges.append((nom, controler(nom, contenu, corps, profil, dispo, tracking)))
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    poser("surtitre", donnees["surtitre"], 11, "mono", UTILE, 11 * 0.14)
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    poser("titre", donnees["titre"], 30, "sans-700", UTILE)
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    poser("sous-titre", donnees["sous_titre"], 16, "sans-400", UTILE)
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête et registres ─────────────────────────────────────────────────
+    A(texte(MARGE, Y_ENTETE, rg["entete"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    poser("en-tête", rg["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_REGISTRES, rg["registres"]["gauche"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, Y_REGISTRES, rg["registres"]["droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+    poser("registres", rg["registres"]["gauche"] + rg["registres"]["droite"],
+          10, "mono", UTILE - 60, 10 * 0.14)
+
+    dispo_prod = RG_PX1 - RG_PX0 - 24
+
+    # ── La chaudière déposée : contour interrompu, elle n'est plus là ────────
+    de = rg["depose"]
+    A(rect_pointille(RG_PX0, RG_CHY0, RG_PX1 - RG_PX0, RG_CH_H, "filet-1"))
+    A(texte(RG_PX0 + 12, RG_CHY0 + 25, de["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    poser("libellé chaudière", de["libelle"], 15, "sans-600", dispo_prod)
+    A(texte(RG_PX0 + 12, RG_CHY0 + 44, de["detail"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    poser("détail chaudière", de["detail"], 10, "mono", dispo_prod, 10 * 0.14)
+
+    # la substitution : une seule flèche, vers le bas
+    cx_prod = (RG_PX0 + RG_PX1) / 2
+    A(ligne(cx_prod, RG_CHY0 + RG_CH_H, cx_prod, RG_PACY0 - 9, "encre", 1.5))
+    A(fleche(cx_prod, RG_PACY0 - 2, "encre", direction="bas", taille=7))
+
+    # ── La pompe à chaleur : elle embrasse les deux lignes de régime ─────────
+    pr = rg["production"]
+    A(rect_bord(RG_PX0, RG_PACY0, RG_PX1 - RG_PX0, RG_PAC_H, "calcaire", "filet-1"))
+    A(texte(RG_PX0 + 12, RG_PACY0 + 30, pr["libelle"], "sans", 17, 600,
+            "encre", wdth=112))
+    poser("libellé production", pr["libelle"], 17, "sans-600", dispo_prod)
+    A(texte(RG_PX0 + 12, RG_PACY0 + 50, pr["detail"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    poser("détail production", pr["detail"], 10, "mono", dispo_prod, 10 * 0.14)
+
+    # ── Les deux lignes de régime, et leur étiquette posée dessus ───────────
+    A(ligne(RG_PX1, RG_Y_HT, RG_EX0, RG_Y_HT, "encre", 1.5))
+    A(ligne(RG_PX1, RG_Y_STD, RG_DESCX, RG_Y_STD, "encre", 1.5))
+    for cle, y, borne in (("ht", RG_Y_HT, RG_CDX0), ("std", RG_Y_STD, RG_DESCX)):
+        p = paliers[cle]
+        A(texte(RG_ETIQ_X, y - 10, p["affichee"], "mono", 10, 500, "encre",
+                tracking=10 * 0.14))
+        poser(f'palier {cle}', p["affichee"], 10, "mono",
+              borne - RG_ETIQ_X - 16, 10 * 0.14)
+        A(texte(RG_ETIQ_X, y + 20, p["detail"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        poser(f'détail palier {cle}', p["detail"], 10, "mono",
+              borne - RG_ETIQ_X - 16, 10 * 0.14)
+
+    # ── La condition posée SUR le trajet de la ligne haute température ──────
+    cd = rg["condition"]
+    A(rect_bord(RG_CDX0, RG_Y_HT - RG_CD_H / 2, RG_CDX1 - RG_CDX0, RG_CD_H,
+                "papier", "filet-1"))
+    A(texte(RG_CDX0 + 12, RG_Y_HT - 5, cd["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    poser("libellé condition", cd["libelle"], 15, "sans-600",
+          RG_CDX1 - RG_CDX0 - 24)
+    A(texte(RG_CDX0 + 12, RG_Y_HT + 13, cd["detail"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    poser("détail condition", cd["detail"], 10, "mono",
+          RG_CDX1 - RG_CDX0 - 24, 10 * 0.14)
+
+    # ── Le trait qui monte vers l'aérotherme, et qui s'arrête ───────────────
+    A(polyligne([(RG_MONTX, RG_Y_HT), (RG_MONTX, RG_CY_AERO),
+                 (RG_ARRET_X, RG_CY_AERO)], "encre", 1.5))
+    A(_rg_barre_arret(RG_ARRET_X, RG_CY_AERO))
+    # la légende se pose en zone franche, sous la ligne basse : partout
+    # ailleurs le trait montant la traverserait — deux traits qui se croisent
+    # doivent différer par autre chose que leur position
+    A(texte(RG_ETIQ_X, RG_Y_LEGENDE, rg["legende_arret"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    poser("légende d’arrêt", rg["legende_arret"], 10, "mono",
+          RG_DESCX - RG_ETIQ_X - 16, 10 * 0.14)
+
+    # ── Le trait qui descend vers le plancher chauffant ─────────────────────
+    A(polyligne([(RG_DESCX, RG_Y_STD), (RG_DESCX, RG_CY_PLAN),
+                 (RG_EX0 - 9, RG_CY_PLAN)], "encre", 1.5))
+    A(fleche(RG_EX0 - 2, RG_CY_PLAN, "encre", direction="droite", taille=7))
+    A(fleche(RG_EX0 - 2, RG_CY_RAD, "encre", direction="droite", taille=7))
+
+    # ── Les trois émetteurs, chacun à la hauteur de ce qu'il exige ──────────
+    dispo_em = RG_EX1 - RG_EX0 - 24
+    for e in emetteurs:
+        cy = RG_CY[e["cle"]]
+        y = cy - RG_EM_H / 2
+        A(rect_bord(RG_EX0, y, RG_EX1 - RG_EX0, RG_EM_H, "papier", "filet-1"))
+        A(texte(RG_EX0 + 12, y + 26, e["libelle"], "sans", 17, 600,
+                "encre", wdth=112))
+        poser(f'libellé {e["cle"]}', e["libelle"], 17, "sans-600", dispo_em)
+        A(texte(RG_EX0 + 12, y + 46, e["detail"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        poser(f'détail {e["cle"]}', e["detail"], 10, "mono", dispo_em, 10 * 0.14)
+        A(texte(RG_EX0 + 12, y + 63, e["exigence"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        poser(f'exigence {e["cle"]}', e["exigence"], 10, "mono", dispo_em,
+              10 * 0.14)
+        # l'issue, sous la boîte : le mot porte, le trait double
+        issue = f'{e["issue"]} — {e["issue_detail"]}'
+        A(texte(RG_EX0, y + RG_EM_H + 18, issue, "mono", 10, 500, "encre",
+                tracking=10 * 0.14))
+        poser(f'issue {e["cle"]}', issue, 10, "mono", RG_EX1 - RG_EX0,
+              10 * 0.14)
+
+    # ── Phrase de principe, pleine largeur ──────────────────────────────────
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    poser("phrase de principe", donnees["phrase_principe"], 17, "sans-400", UTILE)
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ──────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    assert not trop, "dépassements de colonne : " + " | ".join(trop)
+    pire = min(marges, key=lambda m: m[1])
+    bas_plan = RG_CY_PLAN + RG_EM_H / 2 + 18
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": f"une production unique, {len(paliers)} lignes de "
+                         f"régime, {len(emetteurs)} émetteurs posés chacun à la "
+                         f"hauteur de ce qu’il exige — et TROIS TRAITS qui "
+                         f"suffisent à lire le mécanisme sans un mot : celui "
+                         f"qui monte vers l’aérotherme s’arrête sur une barre "
+                         f"{RG_EX0 - RG_ARRET_X} px avant lui, celui qui va au "
+                         f"radiateur traverse d’abord une boîte intercalée, "
+                         f"celui qui descend au plancher l’atteint sans rien "
+                         f"franchir",
+        "topologie": f"production x {RG_PX0}–{RG_PX1} (chaudière y {RG_CHY0}–"
+                     f"{RG_CHY0 + RG_CH_H} en trait interrompu, pompe à chaleur "
+                     f"y {RG_PACY0}–{RG_PACY0 + RG_PAC_H}), ligne haute "
+                     f"température y {RG_Y_HT}, ligne standard y {RG_Y_STD}, "
+                     f"condition x {RG_CDX0}–{RG_CDX1}, montée x {RG_MONTX} "
+                     f"arrêt x {RG_ARRET_X}, émetteurs x {RG_EX0}–{RG_EX1} "
+                     f"y {RG_CY_AERO - RG_EM_H / 2:.0f}, "
+                     f"{RG_CY_RAD - RG_EM_H / 2:.0f}, "
+                     f"{RG_CY_PLAN - RG_EM_H / 2:.0f}",
+        "hierarchie_des_hauteurs": f"aérotherme {RG_CY_AERO} < ligne 65 °C "
+                                   f"{RG_Y_HT} = radiateur {RG_CY_RAD} < ligne "
+                                   f"35 °C {RG_Y_STD} < plancher {RG_CY_PLAN} — "
+                                   f"l’ordre vertical EST l’ordre des exigences",
+        "bas_du_dessin": f"issue du plancher à y {bas_plan:.0f}, phrase à "
+                         f"{Y_PHRASE}, cartouche {Y_CARTOUCHE}–"
+                         f"{Y_CARTOUCHE + H_CARTOUCHE}",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % de "
+                            f"la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": f"{len(marges)} chaînes mesurées, 0 dépassement, marge "
+                        f"la plus faible {pire[1]:.1f} px sur « {pire[0]} »",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_regime(donnees):
+    """La vignette : le motif seul — la pompe à chaleur, les deux lignes
+    chiffrées, les trois boîtes à leur hauteur, le trait qui s'arrête et la
+    boîte intercalée. Deux valeurs se lisent : les deux régimes."""
+    rg = donnees["regime"]
+    paliers = {p["cle"]: p for p in rg["paliers"]}
+    emetteurs = sorted(rg["emetteurs"], key=lambda e: e["ordre"])
+    px0, px1 = 14, 62
+    ex0, ex1 = 214, 286
+    y_ht, y_std = 110, 148
+    cy = {"aerotherme": 56, "radiateur": y_ht, "plancher": 172}
+    h_em, h_pac = 22, 96
+    cdx0, cdx1 = 146, 192
+    montx, arret_x = 118, 190
+    descx = 202
+
+    out = []
+    A = out.append
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    y_pac = (y_ht + y_std) / 2 - h_pac / 2
+    A(rect_pointille(px0, y_pac - 34, px1 - px0, 24, "filet-1", 1.2, "4 4"))
+    A(ligne((px0 + px1) / 2, y_pac - 10, (px0 + px1) / 2, y_pac - 5, "encre", 1.2))
+    A(fleche((px0 + px1) / 2, y_pac - 1, "encre", direction="bas", taille=5))
+    A(rect_bord(px0, y_pac, px1 - px0, h_pac, "calcaire", "filet-1"))
+
+    A(ligne(px1, y_ht, ex0, y_ht, "encre", 1.2))
+    A(ligne(px1, y_std, descx, y_std, "encre", 1.2))
+    A(texte(px1 + 8, y_ht - 6, paliers["ht"]["affichee_courte"], "mono", 9, 500,
+            "encre", tracking=9 * 0.14))
+    A(texte(px1 + 8, y_std - 6, paliers["std"]["affichee_courte"], "mono", 9, 500,
+            "encre", tracking=9 * 0.14))
+
+    A(rect_bord(cdx0, y_ht - 11, cdx1 - cdx0, 22, "papier", "filet-1"))
+    A(polyligne([(montx, y_ht), (montx, cy["aerotherme"]),
+                 (arret_x, cy["aerotherme"])], "encre", 1.2))
+    A(ligne(arret_x, cy["aerotherme"] - 8, arret_x, cy["aerotherme"] + 8,
+            "encre", 2.0))
+    A(polyligne([(descx, y_std), (descx, cy["plancher"]),
+                 (ex0 - 6, cy["plancher"])], "encre", 1.2))
+    A(fleche(ex0 - 1, cy["plancher"], "encre", direction="droite", taille=5))
+    A(fleche(ex0 - 1, cy["radiateur"], "encre", direction="droite", taille=5))
+
+    for e in emetteurs:
+        A(rect_bord(ex0, cy[e["cle"]] - h_em / 2, ex1 - ex0, h_em,
+                    "papier", "filet-1"))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au "
+                         f"pire cas",
+        "motif": "le motif seul : la production, les deux lignes chiffrées, la "
+                 "boîte intercalée, le trait qui s’arrête sur sa barre, et les "
+                 "trois émetteurs muets à leur hauteur — deux valeurs lisibles, "
+                 "les deux régimes ; libellés, exigences et issues laissés à la "
+                 "planche",
+        "bas_du_dessin": f"boîte basse à y {cy['plancher'] + h_em / 2:.0f} px, "
+                         f"marge basse {VH - (cy['plancher'] + h_em / 2):.0f} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_appui_regime(donnees):
+    """L'appui : le motif entier à l'échelle 1 — la production nommée, les deux
+    régimes chiffrés, les trois émetteurs nommés en court avec leur issue.
+    Sans phrase ni cartouche."""
+    rg = donnees["regime"]
+    paliers = {p["cle"]: p for p in rg["paliers"]}
+    emetteurs = sorted(rg["emetteurs"], key=lambda e: e["ordre"])
+    px0, px1 = 24, 128
+    ex0, ex1 = 366, 528
+    y_ht, y_std = 190, 262
+    cy = {"aerotherme": 122, "radiateur": y_ht, "plancher": 304}
+    h_em, h_pac = 40, 150
+    cdx0, cdx1 = 250, 338
+    montx, arret_x = 190, 330
+    descx = 344
+
+    out = []
+    A = out.append
+    racine_appui(A, donnees)
+
+    y_pac = (y_ht + y_std) / 2 - h_pac / 2
+    de, pr = rg["depose"], rg["production"]
+    A(rect_pointille(px0, y_pac - 46, px1 - px0, 34, "filet-1", 1.5, "5 5"))
+    A(texte(px0 + 10, y_pac - 25, de["libelle_court"], "sans", 13, 600,
+            "encre", wdth=112))
+    A(ligne((px0 + px1) / 2, y_pac - 12, (px0 + px1) / 2, y_pac - 8, "encre", 1.5))
+    A(fleche((px0 + px1) / 2, y_pac - 2, "encre", direction="bas", taille=6))
+    A(rect_bord(px0, y_pac, px1 - px0, h_pac, "calcaire", "filet-1"))
+    A(texte(px0 + 10, y_pac + 22, pr["libelle_court"], "sans", 13, 600,
+            "encre", wdth=112))
+
+    A(ligne(px1, y_ht, ex0, y_ht, "encre", 1.5))
+    A(ligne(px1, y_std, descx, y_std, "encre", 1.5))
+    A(texte(px1 + 10, y_ht - 8, paliers["ht"]["affichee_courte"], "mono", 10,
+            500, "encre", tracking=10 * 0.14))
+    A(texte(px1 + 10, y_std - 8, paliers["std"]["affichee_courte"], "mono", 10,
+            500, "encre", tracking=10 * 0.14))
+
+    cd = rg["condition"]
+    A(rect_bord(cdx0, y_ht - 17, cdx1 - cdx0, 34, "papier", "filet-1"))
+    A(texte(cdx0 + 10, y_ht + 4, cd["libelle"], "sans", 13, 600, "encre",
+            wdth=112))
+
+    A(polyligne([(montx, y_ht), (montx, cy["aerotherme"]),
+                 (arret_x, cy["aerotherme"])], "encre", 1.5))
+    A(ligne(arret_x, cy["aerotherme"] - 11, arret_x, cy["aerotherme"] + 11,
+            "encre", 2.0))
+    A(polyligne([(descx, y_std), (descx, cy["plancher"]),
+                 (ex0 - 8, cy["plancher"])], "encre", 1.5))
+    A(fleche(ex0 - 2, cy["plancher"], "encre", direction="droite", taille=6))
+    A(fleche(ex0 - 2, cy["radiateur"], "encre", direction="droite", taille=6))
+
+    for e in emetteurs:
+        y = cy[e["cle"]] - h_em / 2
+        A(rect_bord(ex0, y, ex1 - ex0, h_em, "papier", "filet-1"))
+        A(texte(ex0 + 10, y + 17, e["libelle_court"], "sans", 13, 600,
+                "encre", wdth=112))
+        A(texte(ex0 + 10, y + 32, e["issue"].upper(), "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    A("</svg>")
+    return "\n".join(out) + "\n", controles_appui(
+        motif="le motif entier à l’échelle 1 : la chaudière déposée en trait "
+              "interrompu, la pompe à chaleur, les deux régimes chiffrés, la "
+              "boîte de condition nommée, le trait qui s’arrête sur sa barre, "
+              "et les trois émetteurs nommés en court avec leur issue ; "
+              "détails, exigences, phrase et cartouche laissés à la planche",
+        bas=f"boîte basse à y {cy['plancher'] + h_em / 2:.0f} px, marge basse "
+            f"{AH - (cy['plancher'] + h_em / 2):.0f} px")
+
+
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
 
 def composer(donnees):
+    if "regime" in donnees:
+        return composer_regime(donnees)
     if "cascade" in donnees:
         return composer_cascade(donnees)
     if "comptage" in donnees:
@@ -3937,6 +4332,8 @@ def composer(donnees):
 
 
 def composer_vignette(donnees):
+    if "regime" in donnees:
+        return composer_vignette_regime(donnees)
     if "cascade" in donnees:
         return composer_vignette_cascade(donnees)
     if "comptage" in donnees:
@@ -3959,6 +4356,8 @@ def composer_vignette(donnees):
 
 
 def composer_appui(donnees):
+    if "regime" in donnees:
+        return composer_appui_regime(donnees)
     if "cascade" in donnees:
         return composer_appui_cascade(donnees)
     if "comptage" in donnees:

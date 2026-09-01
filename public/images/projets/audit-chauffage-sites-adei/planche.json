@@ -1,0 +1,152 @@
+{
+  "fiche": "audit-chauffage-sites-adei",
+  "archetype": "boucle-fluide",
+  "mecanisme": "regime",
+  "archetype_motif": "La fiche défend une seule proposition : ce n’est pas le générateur qui commande le remplacement, c’est l’émetteur déjà posé. Le mécanisme est donc bien celui de l’archétype — production, distribution, terminaux — mais LU À L’ENVERS : la contrainte remonte du terminal vers la production, et c’est le régime d’eau que la machine peut fournir qui décide de ce qu’on garde du réseau. Onzième mécanisme de `boucle-fluide`, et le premier à poser une CONDITION D’ADMISSION plutôt qu’un trajet : les dix précédents disent où va le fluide (boucle, utilites, substitution, declinaison, appariement, individualisation, terminaux, comptage, cascade) ou qui commande son départ (commande) ; aucun ne dit ce que l’aval INTERDIT à l’amont. Distinct de `commande` (siège RESE), qui porte sur l’air d’un bâtiment restructuré et sur ce qui déclenche un débit.",
+  "surtitre": "SCHÉMA DE PRINCIPE · REMPLACEMENT DE GÉNÉRATEUR SUR RÉSEAU EXISTANT",
+  "titre": "Sept sites médico-sociaux",
+  "sous_titre": "Le régime d’eau de la pompe à chaleur décide de ce qu’on garde du réseau",
+  "cartouche_legende": "CHARENTE-MARITIME · 9 131 m² · 2023",
+  "aria_label": "Schéma de principe du remplacement d’un générateur de chauffage sur un réseau existant. À gauche, une chaudière fioul ou gaz dessinée en trait interrompu — elle est déposée — surmonte le bloc de la pompe à chaleur qui la remplace. De ce bloc partent deux lignes horizontales, les deux régimes d’eau que la machine peut fournir : en haut le départ à 65 °C d’une pompe à chaleur haute température, en bas le régime d’eau de 35 °C d’une machine standard. À droite, trois familles d’émetteurs relevées sur les sites, placées chacune à la hauteur de ce qu’elle exige. L’aérotherme est au-dessus des deux lignes : le trait qui monte vers lui s’arrête avant de l’atteindre, car il est peu adapté aux régimes de pompe à chaleur, où sa température de soufflage devient trop faible — il faut le déposer. Le radiateur à eau chaude est sur la ligne des 65 °C, mais le trait y traverse d’abord une boîte intercalée, l’isolation : alimenté plus froid, il émet moins, et il ne reste en place qu’à condition que le besoin baisse. Le plancher chauffant est sous la ligne des 35 °C, largement atteint : conçu pour le bas régime, il ne demande rien. La démonstration tient dans les trois traits — un qui s’arrête, un qui passe sous condition, un qui atteint.",
+  "regime": {
+    "entete": "DU GÉNÉRATEUR À L’ÉMETTEUR · CE QUE LA PRODUCTION FOURNIT, CE QUE LE RÉSEAU EXIGE",
+    "registres": {
+      "gauche": "LA PRODUCTION REMPLACÉE",
+      "droite": "LES ÉMETTEURS DÉJÀ POSÉS"
+    },
+    "depose": {
+      "libelle": "Chaudière fioul ou gaz",
+      "detail": "DÉPOSÉE",
+      "libelle_court": "Chaudière"
+    },
+    "production": {
+      "libelle": "Pompe à chaleur",
+      "detail": "LA MACHINE QUI REMPLACE",
+      "libelle_court": "Pompe à chaleur"
+    },
+    "paliers": [
+      {
+        "cle": "ht",
+        "ordre": 1,
+        "libelle": "Haute température",
+        "valeur": "65",
+        "unite": "°C",
+        "affichee": "HAUTE TEMPÉRATURE · DÉPART  À 65 °C",
+        "affichee_courte": "65 °C",
+        "detail": "LE PLUS CHAUD QUE LA MACHINE FOURNIT"
+      },
+      {
+        "cle": "std",
+        "ordre": 2,
+        "libelle": "Régime standard",
+        "valeur": "35",
+        "unite": "°C",
+        "affichee": "MACHINE STANDARD · RÉGIME D’EAU 35 °C",
+        "affichee_courte": "35 °C",
+        "detail": "LE RÉGIME DES POMPES À CHALEUR COURANTES"
+      }
+    ],
+    "emetteurs": [
+      {
+        "cle": "aerotherme",
+        "ordre": 1,
+        "libelle": "Aérotherme à eau chaude",
+        "libelle_court": "Aérotherme",
+        "detail": "ATELIERS ET MAGASINS",
+        "exigence": "SOUFFLAGE TROP FAIBLE À 35 °C",
+        "issue": "Déposer",
+        "issue_detail": "L’ÉMETTEUR CHANGE",
+        "atteint": "non"
+      },
+      {
+        "cle": "radiateur",
+        "ordre": 2,
+        "libelle": "Radiateur à eau chaude",
+        "libelle_court": "Radiateur",
+        "detail": "HÉBERGEMENTS, BUREAUX, SALLES",
+        "exigence": "ÉMISSION PLUS FAIBLE  À 65 °C",
+        "issue": "Isoler d’abord",
+        "issue_detail": "LE BESOIN BAISSE, IL RESTE",
+        "atteint": "sous condition"
+      },
+      {
+        "cle": "plancher",
+        "ordre": 3,
+        "libelle": "Plancher chauffant",
+        "libelle_court": "Plancher chauffant",
+        "detail": "BUREAUX ET VESTIAIRES",
+        "exigence": "CONÇU POUR LE BAS RÉGIME",
+        "issue": "Rien à changer",
+        "issue_detail": "L’ÉMETTEUR SUIT LA MACHINE",
+        "atteint": "oui"
+      }
+    ],
+    "condition": {
+      "libelle": "Isoler",
+      "detail": "RÉDUIRE LE BESOIN"
+    },
+    "legende_arret": "LE TRAIT QUI S’ARRÊTE : LE RÉGIME N’ATTEINT PAS L’ÉMETTEUR"
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Le générateur ne se choisit pas seul : l’émetteur déjà posé décide de ce qu’on peut mettre en amont.",
+  "vignette_surtitre": "RÉGIME ET ÉMETTEURS",
+  "a_valider_ft2e": [
+    {
+      "objet": "Le rapprochement des trois familles d’émetteurs",
+      "la_source_affirme": "Les cinq rapports relèvent leurs émetteurs site par site : radiateurs à eau chaude à Loulay, à Saintes et dans les hébergements et bureaux de Saint-Germain-de-Lusignan ; aérothermes à eau chaude au magasin et à l’atelier de l’ESAT et à l’atelier de Saint-Germain-de-Lusignan ; plancher chauffant aux bureaux et vestiaires de l’ESAT.",
+      "le_dessin_suppose": "Le dessin les regroupe en trois familles et les met en regard d’un régime unique, alors qu’aucun rapport ne dresse ce tableau : c’est une synthèse de lecture, faite à partir de cinq rapports écrits séparément et à deux ans d’intervalle. Les locaux nommés sous chaque famille sont ceux où elle a été relevée, et non une liste exhaustive."
+    },
+    {
+      "objet": "La position de l’aérotherme au-dessus des deux lignes",
+      "la_source_affirme": "Le rapport de l’ESAT écrit que les aérothermes sont peu adaptés à des régimes d’eau de PAC de 35 °C, avec une température de soufflage trop faible ; celui de Saint-Savinien écarte la pompe à chaleur parce que réseaux et émetteurs ne sont pas dimensionnés pour les températures qu’elle fournit.",
+      "le_dessin_suppose": "Le dessin place l’aérotherme au-dessus des DEUX lignes, donc au-dessus des 65 °C aussi. Or les sources n’attestent l’inadaptation qu’à 35 °C : aucun rapport ne dit explicitement qu’un aérotherme ne tiendrait pas sur une pompe à chaleur haute température. Le trait qui monte vers lui part de la ligne des 65 °C et s’arrête, ce qui dit l’insuffisance sans affirmer un seuil que la source ne fixe pas — mais sa hauteur, elle, est un choix du dessin."
+    },
+    {
+      "objet": "La boîte d’isolation intercalée sur la ligne des 65 °C",
+      "la_source_affirme": "Le rapport de Loulay écrit deux fois, une fois par bâtiment, que la ré-isolation « compensera la plus faible émission des radiateurs, impactée par la température de l’eau fournie par les PAC (maxi 65 °) ».",
+      "le_dessin_suppose": "Le dessin en fait une CONDITION D’ADMISSION posée sur le trajet — une boîte que le trait doit traverser. Les rapports la formulent comme une préconisation « indispensable » ou « fortement conseillée », non comme un prérequis contractuel. La force du signe graphique est donc supérieure à celle du texte source."
+    },
+    {
+      "objet": "L’absence de régime pour la chaudière déposée",
+      "la_source_affirme": "Les rapports relèvent la puissance des chaudières déposées (brûleur de 37 à 47 kW au fioul à Loulay, 25 kW au gaz pour les studios) mais AUCUN ne donne leur régime de départ d’eau.",
+      "le_dessin_suppose": "Le bloc de la chaudière ne porte donc aucune température, et aucune ligne n’en part : seule la pompe à chaleur est graduée. C’est un manque assumé plutôt qu’une valeur vraisemblable — la règle dure 1 interdit de poser un régime que la source ne fixe pas. Si FT2E dispose des régimes d’origine, la planche gagnerait un troisième palier au-dessus des deux autres, qui rendrait la chute de température visible."
+    },
+    {
+      "objet": "Les deux sites sans rapport",
+      "la_source_affirme": "Les Boucholeurs et Saint-Genis-de-Saintonge ont chacun un contrat signé mais aucun rapport au dossier d’archives.",
+      "le_dessin_suppose": "Le dessin ne représente que les émetteurs des cinq sites documentés, sans le signaler : le cartouche porte 9 131 m², somme des surfaces de ces cinq sites seulement. La fiche le dit en prose, la planche non."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 21-086 et ses huit indices de contrat A à H — il encode le volume annuel d’affaires du bureau.",
+    "Tous les montants : investissements chiffrés des préconisations, économies annuelles, honoraires des huit contrats.",
+    "Tous les tiers : le maître d’ouvrage signataire (SCI Immobilière du Port), l’association gestionnaire (ADEI) — dont le nom reste au titre long et au récit de la fiche, jamais au dessin — et les marques d’équipement relevées au dossier.",
+    "Toute donnée d’exploitation du client : consommations de fioul, de gaz et d’électricité relevées sur trois ans de factures, prix du kWh constatés par site.",
+    "Les temps de retour et les gains énergétiques : la fiche les porte, le dessin non — et cinq ruptures de bouclage relevées dans les rapports interdisaient de toute façon d’en tirer une proportion."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "une production unique, 2 lignes de régime, 3 émetteurs posés chacun à la hauteur de ce qu’il exige — et TROIS TRAITS qui suffisent à lire le mécanisme sans un mot : celui qui monte vers l’aérotherme s’arrête sur une barre 72 px avant lui, celui qui va au radiateur traverse d’abord une boîte intercalée, celui qui descend au plancher l’atteint sans rien franchir",
+    "topologie": "production x 56–260 (chaudière y 252–310 en trait interrompu, pompe à chaleur y 336–628), ligne haute température y 424, ligne standard y 556, condition x 600–768, montée x 560 arrêt x 740, émetteurs x 812–1144 y 239, 387, 559",
+    "hierarchie_des_hauteurs": "aérotherme 276 < ligne 65 °C 424 = radiateur 424 < ligne 35 °C 556 < plancher 596 — l’ordre vertical EST l’ordre des exigences",
+    "bas_du_dessin": "issue du plancher à y 651, phrase à 688, cartouche 714–744",
+    "reserve_profonde": "cartouche 323 x 30 px = 9690 px², soit 1.01 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "depassements": "29 chaînes mesurées, 0 dépassement, marge la plus faible 11.2 px sur « détail production »"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "le motif seul : la production, les deux lignes chiffrées, la boîte intercalée, le trait qui s’arrête sur sa barre, et les trois émetteurs muets à leur hauteur — deux valeurs lisibles, les deux régimes ; libellés, exigences et issues laissés à la planche",
+    "bas_du_dessin": "boîte basse à y 183 px, marge basse 17 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "le motif entier à l’échelle 1 : la chaudière déposée en trait interrompu, la pompe à chaleur, les deux régimes chiffrés, la boîte de condition nommée, le trait qui s’arrête sur sa barre, et les trois émetteurs nommés en court avec leur issue ; détails, exigences, phrase et cartouche laissés à la planche",
+    "bas_du_dessin": "boîte basse à y 324 px, marge basse 44 px"
+  }
+}
