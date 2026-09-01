@@ -4241,17 +4241,28 @@ def composer_appui_regime(donnees):
     rg = donnees["regime"]
     paliers = {p["cle"]: p for p in rg["paliers"]}
     emetteurs = sorted(rg["emetteurs"], key=lambda e: e["ordre"])
-    px0, px1 = 24, 128
+    px0, px1 = 24, 152
     ex0, ex1 = 366, 528
     y_ht, y_std = 190, 262
     cy = {"aerotherme": 122, "radiateur": y_ht, "plancher": 304}
     h_em, h_pac = 40, 150
     cdx0, cdx1 = 250, 338
-    montx, arret_x = 190, 330
+    montx, arret_x = 206, 330
     descx = 344
 
     out = []
     A = out.append
+    trop = []
+
+    def controler(nom, contenu, corps, profil, dispo, tracking=0.0):
+        """L'appui compose ses propres colonnes : il doit les mesurer lui-même.
+        Sans cette garde, « Pompe à chaleur » a mordu sur le bord de son bloc
+        et n'a été vu qu'à la capture du déploiement, le PNG de contrôle à
+        552 px n'ayant rien signalé."""
+        largeur = mesurer(contenu, corps, profil, tracking)
+        if largeur > dispo:
+            trop.append(f"{nom} : {largeur:.1f} px pour {dispo:.1f} px")
+
     racine_appui(A, donnees)
 
     y_pac = (y_ht + y_std) / 2 - h_pac / 2
@@ -4259,11 +4270,15 @@ def composer_appui_regime(donnees):
     A(rect_pointille(px0, y_pac - 46, px1 - px0, 34, "filet-1", 1.5, "5 5"))
     A(texte(px0 + 10, y_pac - 25, de["libelle_court"], "sans", 13, 600,
             "encre", wdth=112))
+    controler("appui · chaudière", de["libelle_court"], 13, "sans-600",
+              px1 - px0 - 20)
     A(ligne((px0 + px1) / 2, y_pac - 12, (px0 + px1) / 2, y_pac - 8, "encre", 1.5))
     A(fleche((px0 + px1) / 2, y_pac - 2, "encre", direction="bas", taille=6))
     A(rect_bord(px0, y_pac, px1 - px0, h_pac, "calcaire", "filet-1"))
     A(texte(px0 + 10, y_pac + 22, pr["libelle_court"], "sans", 13, 600,
             "encre", wdth=112))
+    controler("appui · production", pr["libelle_court"], 13, "sans-600",
+              px1 - px0 - 20)
 
     A(ligne(px1, y_ht, ex0, y_ht, "encre", 1.5))
     A(ligne(px1, y_std, descx, y_std, "encre", 1.5))
@@ -4276,6 +4291,8 @@ def composer_appui_regime(donnees):
     A(rect_bord(cdx0, y_ht - 17, cdx1 - cdx0, 34, "papier", "filet-1"))
     A(texte(cdx0 + 10, y_ht + 4, cd["libelle"], "sans", 13, 600, "encre",
             wdth=112))
+    controler("appui · condition", cd["libelle"], 13, "sans-600",
+              cdx1 - cdx0 - 20)
 
     A(polyligne([(montx, y_ht), (montx, cy["aerotherme"]),
                  (arret_x, cy["aerotherme"])], "encre", 1.5))
@@ -4293,8 +4310,13 @@ def composer_appui_regime(donnees):
                 "encre", wdth=112))
         A(texte(ex0 + 10, y + 32, e["issue"].upper(), "mono", 10, 500,
                 "pivot", tracking=10 * 0.14))
+        controler(f'appui · {e["cle"]}', e["libelle_court"], 13, "sans-600",
+                  ex1 - ex0 - 20)
+        controler(f'appui · issue {e["cle"]}', e["issue"].upper(), 10, "mono",
+                  ex1 - ex0 - 20, 10 * 0.14)
 
     A("</svg>")
+    assert not trop, "appui — dépassements de colonne : " + " | ".join(trop)
     return "\n".join(out) + "\n", controles_appui(
         motif="le motif entier à l’échelle 1 : la chaudière déposée en trait "
               "interrompu, la pompe à chaleur, les deux régimes chiffrés, la "
