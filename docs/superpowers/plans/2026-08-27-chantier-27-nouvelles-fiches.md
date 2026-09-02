@@ -266,6 +266,7 @@ est public). Il complète les réponses Q1/Q2 :
 | N19 | 21-029 — Remplacement de la chaufferie fioul de l’école maternelle du groupe scolaire, La Flotte-en-Ré | `chaufferie-ecole-la-flotte-en-re` | ✅ rédigée, build 65 pages, synthèse 630 signes, 9 liens internes | ✅ `coupe-traversee`, **mécanisme `amorce` créé** (7ᵉ du compositeur — invariant octet 164/168 AVANT la greffe, 168/168 après, et de nouveau après les quatre retouches de géométrie) — une **épine construite entière** et n postes dont les `poses` premiers seuls sont pleins ; pas et centres **DÉRIVÉS de n** par une primitive unique, `_am_centres`, appelée par les trois rangs ET les trois formats, de sorte qu’aucune abscisse de poste n’est écrite à la main ; la partition se répète **2/4 · 2/4 · 1/3** et porte seule la démonstration, tout texte masqué. Le regard de vannes est dessiné **plein** (il est construit), seul ce qui le dépasse est interrompu — c’est l’amorce | ✅ ref_042 (10 pièces + les 2 sondes recalées) | ⚠ **Le CCTP porte un FAUX numéro en page de garde** (« Affaire n° : 21-031 ») contre **19 occurrences de 21-029** sur sept pièces FT2E — cartouches des deux plans, cinq contrats et classeur d’honoraires interne ; c’est la variante N18 (Eiffage, lot 09) rejouée, et le CCTP est **la seule pièce fausse du dossier**, ses propres en-têtes de pages courantes comprises. `annee_livraison: 2023` (classeur « Finalisées en 2023 » ; le CR n° 9 du 17/10/2023 constate « travaux terminés » et trois réserves **sans prononcer la réception**, les six emplacements du protocole visités en vain → B1). Secteur `Monotechnique — Audit` par le classeur (« 21029 · Ecole primaire et maternelle La Flotte · M ») **contre l’intuition** (une école est un ERP de type R) — et le dépouillement donne raison au classeur : FT2E n’y a tenu qu’**un seul lot technique**, le chauffage, décliné en **cinq missions sur trois ans** sous cinq indices de contrat (4ᵉ confirmation de la règle « un indice n’est pas une affaire », et deux d’entre eux portent le même indice C → B4). **DEUX pièces du dossier n’appartiennent pas à FT2E**, cas nouveau : un **devis concurrent** d’un autre bureau d’études déposé pour comparaison (son nom de fichier le faisait passer pour une étude FT2E), et une **étude d’impact sonore commandée ET payée par l’installateur** en juillet 2024, un an après les travaux — rien n’en est publié, tout est en E1, qui est la question délicate du dossier. `surface_m2` **VIDE** : aucune surface au dossier ni dans les onze docx sectoriels, muets sur cette affaire (B6). **Aucun architecte** sur l’opération (cartouche « XX »). ⚠ **Le site publiait déjà cette affaire** (3ᵉ occurrence après N15 et N17) : un cliché de `/secteurs/monotechnique` légendé « PAC, groupe scolaire de La Flotte » dont l’alt décrit l’écran acoustique de E1, **et une mention en prose sans lien** faute de fiche — **devenue lien avec cette session** (`src/content/secteurs/monotechnique.md`, à signaler). C’est aussi le site qui a fixé la graphie retenue, « La Flotte-en-Ré », contre trois formes au dossier (B2). Trois thèses voisines **écartées** avant composition : le régime d’eau qui commande les émetteurs (publié par l’audit ADEI), la cascade sur ballon à départs comptés (foyer de Saint-Martin-de-Ré), et l’amont réservé pour plus (bornes IRVE, en `tableau-electrique` — d’où le choix de `coupe-traversee`). Recette : filtre M passé de 4 à **5 fiches**, répartition L10 T14 I5 P3 C7 M5 E3 (42 fiches, 47 en pondéré) ; la fiche **n’entre pas** dans le top 4 de `/secteurs/monotechnique` (21-029 est le plus ancien des cinq) — tri documenté, pas un défaut ; vignette servie à **274 px**, sa taille de conception exacte ; les trois bandes contrôlées au déploiement. Relecture éditoriale : **14 corrections appliquées**, dont trois **contradictions avec des fiches publiées** que la rédaction avait laissé passer (ADEI « sept réponses » alors que sa fiche en publie trois ; Villedoux donné en exemple d’un lot mené à la réception alors que son contrat exclut la maîtrise d’œuvre ; foyer CDAIR « a remplacé le fioul », mot que sa fiche ne contient pas) — **et trois constats du relecteur vérifiés FAUX et écartés** (graphie de « mètres » : le corpus écrit 8 espaces ordinaires contre 2 fines ; longueur de la `<title>`, composée sur `ouvrage` et non sur `titre`, 50 signes ; motif des jupes verticales, qui est littéralement au CCTP). Questions B1-B10, C, D, E1-E3 ouvertes ; l’écart **49 / 50** du classeur reste non arbitré, et la section « Finalisées en 2021 » reste vide. |
 | N20 | 22-037 — Audit énergétique de la Maison des Métiers, La Rochelle | `audit-chambre-des-metiers-la-rochelle` | ✅ rédigée, build 66 pages, synthèse 654 signes, 6 liens internes | ✅ `coupe-traversee`, **mécanisme `exposition` créé** (8ᵉ du compositeur — invariant octet 168/168 AVANT la greffe, 172/172 après, et de nouveau après les deux retouches de géométrie et la passe apostrophes) : **le plan de toiture comme frontière d’exposition**, et un seul critère de tri — l’organe doit-il être dehors ? Deux machines restent au-dessus avec leurs protections (cadre de capotage, grillage anti-volatiles, plots), deux franchissent le plan vers une sous-station du R+4 (boîte interrompue à la position abandonnée, flèche, brèche dans le plan, boîte pleine en dessous), et le cheminement de quartier à quartier cesse de traverser. Une seule implantation, `_ex_organe`, pour les trois formats et les deux régimes — et une distinction nouvelle, **les MESURES sont absolues et propres à chaque format, seuls les MOTIFS suivent l’échelle** ; abscisses par `_am_centres` et interruptions par `_am_dash(ech)`, réutilisées du mécanisme `amorce`. Assertion de dépassement **mise à l’épreuve et rompue quatre fois sur les trois formats** avant d’être créditée | ✅ ref_043 (8 pièces + 3 sondes) | **Le dossier le plus volumineux du chantier** (586 fichiers, 659,8 Mo) — extraction filtrée par sous-répertoire, 78 fichiers lisibles retenus. ⚠ **254 des 586 fichiers n’appartiennent pas à FT2E**, et trois pièces majeures sont un **QUATRIÈME régime de propriété**, inédit : le dossier de construction de 1994-1995 du bâtiment audité (CCTP du lot 9, bordereau de prix, étude de faisabilité — 19 Mo à elles trois), d’un autre architecte et d’un autre bureau d’études, récupéré comme matière de travail. Ni leur nom ni leurs valeurs ne se publient, mais ce n’est ni un devis concurrent ni une mission de tiers (les deux cas de la N19) : c’est l’archive de l’ouvrage. Deux autres noms de fichier mentent — `DESCRIPTIFS POUR CCTP 2022 2023.docx` est un **catalogue de textes de prescription d’un fabricant**, et `19xxx-SUIVI.doc` (le « 19xxx » annoncé au prompt) est un **gabarit vierge** de compte rendu FT2E, champs non renseignés. **146 occurrences de 22-037**, aucune autre affaire au dossier ; les 30 autres suites `NN-NNN` sont des modèles de circulateur, des codes postaux, des montants et des kilowattheures. ⚠ **Le classeur dit « Finalisées en 2022 », quatre sources disent 2023** — rapport d’audit du 14/02/2023, étude indice V2 du 12/06/2023, **plaquette 2024** et **CV de l’équipe (édition août 2026)**, ces deux dernières étant des pièces FT2E déjà publiées. `annee_livraison: 2023` (règle N16 des missions d’étude : la date du dernier rapport remis), et la section du classeur va en B1. C’est aussi le croisement commercial qui a donné la **graphie du client, déjà publiée** deux fois. `typologie: Étude` **établi de trois manières** : le contrat exclut par écrit la maîtrise d’œuvre, aucune pièce de DCE FT2E n’existe, aucun compte rendu de chantier. Secteur `Monotechnique — Audit` par le classeur (« 22037 · Audit chambre des métiers · M »), domaine simple, **contre l’intuition** qu’un siège de chambre consulaire appelle. Trois indices de contrat (nu, A, B) pour une seule affaire — **cinquième confirmation** de la règle ; l’indice A est celui qui a été signé, et il l’a été **par le syndic de l’immeuble**, non par le propriétaire à qui il est adressé (B2). L’indice B (380 € HT) porte une **assistance à constat d’huissier** : **rien n’en est publié** — ce serait porter un litige mettant en cause des tiers identifiables (B3). Trois comptes vérifiés deux fois et publiés : **18 sous-stations** (relevé des intitulés = 18 chaînes distinctes, et 1+3+4+3+3+4 à la main), **38 observations** numérotées 1 à 38 sans trou (export PDF du 18/11/2022 qui affiche « Observations 38 » + export tableur du 09/01/2023), **174 heures** dont 60 de relevé. ⚠ **Le scénario 3 ne boucle pas** (793 600 € imprimés contre 787 400 par somme des huit préconisations, écart de 6 200 €) : aucun montant de scénario n’est publié, et rien de proportionnel n’est composé sur cet axe. Ce qui boucle l’est exactement, et c’est ce qui est publié : 68,70 × 0,60 = 41,22 (2030) et × 0,50 = 34,35 (2040), les deux valeurs imprimées à la conclusion, et les ratios kWh EF/(m².an) des quatre scénarios et des quinze préconisations tombent tous sur la **SRT de 4 148,51 m²** de la note Perrenoud — laquelle porte, elle, un en-tête de gabarit (« 22-0xx », « RE2020 », « bâtiment neuf ») dont rien n’a été tiré (B5). Recette : filtre M passé de 5 à **6 fiches**, répartition **L10 T14 I5 P3 C7 M6 E3** (43 fiches, 48 en pondéré) ; la fiche entre **quatrième** du top 4 de `/secteurs/monotechnique` et en chasse 21-086 — tri documenté, pas un défaut ; vignette servie à **274 px**, sa taille de conception exacte ; trois bandes contrôlées au déploiement ; **cartouche mesuré ENTIER au navigateur** (26 px de marge, sonde `sonde-cartouche.mjs` — la coupe vue au PNG est bien l’artéfact cairosvg, **mesuré cette fois plutôt que supposé**) ; Lighthouse accessibilité **100** sur la fiche. Relecture éditoriale : **dix corrections appliquées**, dont une **contradiction avec deux fiches publiées** (« cinq réponses » alors qu’ADEI publie « Les sites ont donné trois réponses » et que La Flotte le reprend déjà), une **déduction fausse** (le « soit » enchaînait les cibles sur la consommation de référence OPERAT, dont −40 % donne 50,4 et non 41,22), et **la clause de clôture manquante**, sans laquelle le présent du § solution se lisait comme un chantier réalisé — **un constat du relecteur vérifié FAUX et écarté** (« CRC4 » est la graphie littérale du rapport et de la préconisation 04). Questions B1-B5, C1-C2, E1-E4 ouvertes ; l’écart **49 / 50** reste non arbitré, et la section « Finalisées en 2021 » reste vide. |
 | N21 | 19-087 — Bâtiment SSLIA de l’aéroport de La Rochelle – Île de Ré | `batiment-sslia-aeroport-la-rochelle` | ✅ rédigée, build 67 pages, synthèse 761 signes, 6 liens internes | ✅ `coupe-traversee`, **mécanisme `retrait` créé** (9ᵉ du compositeur — invariant octet 172/172 AVANT la greffe, 176/176 après, et de nouveau après les huit retouches de rendu ; garde-fou de greffe automatisé : 56 fonctions et 167 constantes existantes contre 3 et 6 nouvelles, préfixe unique `RE_`, zéro collision ; la passe apostrophes n’a RIEN courbé, les chaînes de contrôles ayant été écrites courbes) — le périmètre du calcul RT2012 est plus petit que le bâtiment construit : une enveloppe d’un seul tenant, un mur qui la partage, et un trait épais qui ne ferme que la partie droite — il épouse la façade sur trois côtés et la quitte sur le quatrième, où il descend le long d’un mur INTÉRIEUR ; second registre : deux barres de largeur proportionnelle à la puissance absorbée (1,5 contre 6,7 kW, rapport 4,47), séparées par un filet aligné sur le mur | ✅ ref_044 (10 pièces) | Secteur `Industriel` par le classeur (« 19087 · Bâtiment SSLIA · I », section « Finalisées en 2022 »), domaine simple — le sigle SSLIA désigne le service de secours de la plateforme, PAS la sécurité incendie du bâtiment, et l’architecte lui-même écrit « bâtiment type industriel » dans le courriel fondateur. **Le piège annoncé du « 19.36 » est élucidé sur DEUX pièces** : l’acte d’engagement du marché de MOE porte « Dossier n° 19.36 » en tête de ses cinq pages, et le CR n° 01 donne l’accès extranet « bap.sdarchitectes.com — Login : 19.36 » : c’est le numéro de dossier de SD Architectes, mandataire (4ᵉ numéro de mandataire du chantier après BF ECO « 543 » et « 534 », SEMDAS « 2507 », ARCHITEM « 1821 »). ⚠ Le « 19.37 » des en-têtes de CR 01 à 14 est une COQUILLE, corrigée dès le CR 16 (le CR n° 29 titre par ailleurs « CR N°26 »). ⚠⚠ **Un TROISIÈME numéro FT2E existe et il est isolé** : le classeur d’honoraires du 19/12/2019 porte « N° : 19-125 » quand son jumeau du 01/08/2019 porte 19-087 — une occurrence contre 118 sur les pièces de production, règle de la majorité appliquée, écart porté en B1. Balayage des 80 suites `NN-NNN` du dossier : le reste est code postal, normes (NF C 15-100, 48-150…), référence de coloris de store, durée de vie de LED et cotes de plan — aucune autre affaire. Groupement de MOE : SD Architectes (mandataire, 62,45 %) + Boulard (structures, 13,64 %) + **FT2E (14,89 %, 11 566,83 € HT)** ; marché du 20/02/2020 à 57 800 € HT sur une enveloppe de 680 000 € HT, porté par l’avenant n° 1 du 20/05/2021 à 77 700,11 € HT après que l’AVP n° 3 a arrêté le coût prévisionnel à 971 251,42 € HT (→ B5). Les DEUX estimations FT2E bouclent au centime (138 075,71 et 63 377,08 € HT), et la décomposition du marché de MOE aussi. `annee_livraison: 2022` sur le classeur + le calendrier des OPR — **le PV manque, et le dernier CR CONVOQUE les OPR au 10/11/2022 sans les constater** (piège N18 reconfirmé) → B2. **Aucun compte de comptes rendus n’est publié** : 33 fichiers numérotés 01 à 38, six manquants, une coquille d’en-tête, aucune seconde source. Trois PSE chiffrées au PRO (photovoltaïque 17 100 €, IRVE, ECS solaire) NON suivies jusqu’à leur mise en œuvre → B4 ; onze CR réclament le dossier à soumettre à la DGAC, puis plus rien après le CR n° 14. **Croisement : le site publiait DÉJÀ les trois graphies** (même MOA et même SD Architectes que `batiment-voltaero-saint-agnant`, même BET Boulard que `ateliers-pilotes-capsulae`) — reprises telles quelles ; les onze docx sectoriels et la plaquette sont MUETS, mais le dossier porte le propre « dossier de références industriel » de FT2E (août 2019, 14 opérations, dont une « rénovation d’un hangar » pour le même syndicat mixte — probablement 19008, tranche 2020). Auteurs (T6) : Vincent Jaoul (CCTP et DPGF lot 11, plan de masse), Mathieu Braud (CCTP lot 12), Eric Moinet (vérificateur des deux CCTP, honoraires, contractant), et un dessinateur « YC » à identifier. Aucune surface de plancher au dossier (→ B3) → cartouche « LA ROCHELLE · 316 m² AU CALCUL RT · 2022 », mesuré ENTIER au navigateur (22 px de marge — le PNG cairosvg le coupait, et substituait aussi ▯ aux ≥ et ≤, qui rendent). Recette : Industriel passe de 5 à 6 fiches, 19-087 hors du top 4 de /secteurs/industriel-commercial (tri par numéro décroissant, comportement de gabarit) ; vignette servie à 274 px exactement. Relecture éditoriale : **30 constats appliqués**, dont deux erreurs de fait — un triplet « trois volumes, trois régimes, trois machines » démenti par la phrase suivante (une seule machine dessert les DEUX niveaux calculés), et une chronologie inversée (le SSLIA PRÉCÈDE VoltAero et Capsulae, il ne les suit pas) —, plus un EER pris pour un COP, une résistance sans unité et un « celui qu’il remplace » que la pièce n’écrit pas. ⚠ UN constat a été ÉCARTÉ après vérification sur la pièce — l’agent attribuait au tertiaire le comptage d’énergie de l’article 23, qui est celui de l’habitation — mais le défaut qu’il pointait était réel et la phrase est sortie : les DEUX usages ont leur comptage, ce n’était donc pas une exigence propre à l’étage, et « éclairage » venait de l’article tertiaire. Questions B1-B9, C1-C3, E1-E6 ouvertes |
+| N22 | 20-024 — Projet GAELIC : restructuration d’un bâtiment existant en laboratoires, construction d’un bâtiment de liaison et d’un open space pour Innov’ia, La Rochelle | `gaelic-innov-ia-la-rochelle` | ✅ rédigée, build 68 pages, synthèse 693 signes, 7 liens internes | ✅ `zonage-ssi`, **mécanisme `discordance` créé** (7ᵉ du compositeur — invariant octet 176/176 AVANT la greffe, 180/180 après, et de nouveau après les deux retouches de rendu, la passe apostrophes et le passage de la cote en insécable normale ; garde-fou de greffe automatisé : 33 fonctions et 103 constantes existantes contre 7 et 39 neuves, préfixes `DI_`/`DIV_`/`DIA_`, zéro collision) : la planche oppose deux découpages du même bâtiment — un crochet **continu** sur les deux volumes du calcul RT2012 contre quatre marques **isolées** sur le volume resté sous l’arrêté du 3 mai 2007, et au registre bas une machine par volume plus cinq extractions sous le seul laboratoire ; la frontière entre la liaison et l’open space traverse la bande et **bute** sous le crochet, qui l’ignore. Largeurs proportionnées aux débits (510, 430 et 850 m³/h). Assertion de dépassement prouvée vivante sur **quatre** copies (les trois formats + une largeur bornée par la colonne voisine) ; deux sondes d’accents vivantes (3,37 % d’accents, cinq formes nues exemptées avec justification et égalité des ensembles assertée) ; **aucun trait interrompu** — le corpus lui fait déjà dire deux choses différentes. ⚠ Un défaut que seul le PNG montrait : la bande, à fond opaque, effaçait le trait de frontière tracé avant elle (l’ordre de tracé, encore) | `ref_045` — 8 pièces (deux CCTP, trois études thermiques, le contrat de maîtrise d’œuvre du mandataire, les honoraires DOE, le plan de principe CVC, le dernier CR) + les trois sondes de recette recalées | Secteur **Industriel** au classeur (« 20024 · INNOVIA - GAELIC · I », section « Finalisées en 2022 »), domaine simple — et le dépouillement donne raison au classeur, le CCTP écrivant « bâtiment de type industriel soumis au code du travail ». Recette sur le déploiement : filtre Industriel **7 cartes** (GAELIC présente), **45 cartes** au total, répartition L10 T14 I7 P3 C7 M6 E3 ; cartouche **entier**, 18 px de marge mesurés au navigateur ; vignette servie à **274 px**, sa taille de conception. ⚠ GAELIC n’entre PAS dans le top 4 de `/secteurs/industriel-commercial` — tri par numéro décroissant, 20-024 arrive cinquième : c’est le tri documenté, le filtre fait foi. ⚠ Réception **convoquée** au 28 février 2022 par le dernier CR, **jamais constatée** au dossier — `annee_livraison: 2022` retenu sur le faisceau (OPR du 14 février, levée de réserves, mission DOE commandée, classeur « Finalisées en 2022 »), question B4. ⚠ Le piège du numéro s’est bien présenté : le contrat de maîtrise d’œuvre porte **20.02** (dossier SD Architectes) en gros et 20-024 nulle part ; **222 suites** `NN-NNN` relevées — le plus gros relevé du chantier — toutes établies, 85 occurrences du seul numéro FT2E sur six pièces. ⚠ Aucun compte publié : 43 fichiers de CR numérotés 1–45, trois manquants (22, 23, 34) et un « 5 bis ». ⚠ Le site publiait **déjà** cette affaire sans le savoir : `ateliers-pilotes-capsulae` (22-006) décrit un bâtiment « adossé au bâtiment IDCAPS existant », rue Charles Tellier — c’est précisément le bâtiment que GAELIC restructure. |
 
 ## Annexe A — prompt d'initialisation de la session N01 (à coller tel quel en session neuve)
 
@@ -7946,6 +7947,589 @@ eventuel passe par le sous-agent content-modeller et va dans le MEME
 commit que public/admin/config.yml.
 
 Termine par le prompt de lancement de la session N23, en annexe du
+plan du chantier et reproduit integralement dans ton message final -
+la regle de continuite est dans CLAUDE.md parce qu'elle a ete manquee
+deux fois.
+```
+
+## Annexe W — prompt de lancement de la session N23 (à coller tel quel en session neuve)
+
+```
+Session N23/27 - FT2E v3 : chantier des 27 nouvelles fiches references.
+VINGT-TROISIEME dossier - DERNIER de la tranche « Finalisees en 2022 ».
+
+Contexte. FT2E v3 est le site institutionnel du bureau d'etudes FT2E
+(La Rochelle), Astro 6 statique, deploye en demonstration client sur
+https://ft2e-v3.vercel.app (indexation verrouillee - ne pas y toucher).
+Le catalogue porte 45 fiches reelles (23 + N01 a N22), chacune illustree
+d'une planche de schema de principe (cinq pieces par dossier).
+Objectif : 50 fiches. 1 session = 1 dossier, close par le prompt de la
+suivante. LA TRANCHE 2023 EST CLOSE depuis la N19.
+
+⚠⚠ A FAIRE DES L'OUVERTURE, AVANT TOUTE AUTRE CHOSE : DEMANDER 2020.zip
+A L'UTILISATEUR. Les ZIP presents sur le disque sont 2019, 2022, 2023,
+2024 et 2025. Le dossier du jour est le DERNIER de 2022.zip : sans
+2020.zip, la session N24 n'a plus de dossier a traiter. Le nom du ZIP
+suit l'annee de FINALISATION, pas celle de l'affaire (19008 et 20058
+seront dans 2020.zip, 18026 dans 2019.zip).
+
+LE ZIP DE LA TRANCHE 2022 EST DEJA SUR LE DISQUE :
+C:\claude_code_dev_projects\ft2e_new_archives\2022.zip (663,5 Mo). Le
+repertoire extrait de la N22 a ete SUPPRIME en fin de session : il n'y a
+rien a nettoyer, et C:\claude_code_dev_projects\ft2e_new_archives\extrait
+doit etre vide ou absent. UN SEUL dossier restant, absent du site (a
+reverifier au grep de src/content/projets/*.md) :
+-   29 fichiers, 38,3 Mo : « 20-039- Centre Hospitalier Rochefort-
+    Video surveillance » (classeur M)  <- DOSSIER DU JOUR
+IL N'Y A DONC AUCUNE QUESTION A POSER SUR LE CHOIX DU DOSSIER : derouler
+directement. APRES CE DOSSIER, 2022.zip peut etre supprime du disque
+(les quatre affaires de la tranche auront ete traitees) - le proposer a
+l'utilisateur, ne pas le supprimer sans son accord.
+
+Disque : 4,0 Go libres au 2026-09-02, et le dossier du jour ne pese que
+38 Mo - extraire tout le repertoire 20-039 suffit. Le motif d'extraction
+est zipfile.namelist() + un fragment de chemin (« 20-039 ») ; le rm -rf
+est REFUSE par les permissions : passer par python shutil.rmtree.
+
+⚠⚠ CE DOSSIER EST SENSIBLE PAR SON OBJET MEME, et c'est le troisieme du
+genre. La N20 a rencontre une MISSION sensible qui ne se publie pas ; la
+N21 un OUVRAGE sensible (batiment de securite aeroportuaire) et a pose
+une question E dediee - aucun plan, aucune implantation, aucun detail de
+controle d'acces ni d'alarme au-dela du type reglementaire. Ici les deux
+se cumulent : la VIDEOSURVEILLANCE d'un CENTRE HOSPITALIER. Poser la
+question E DES L'OUVERTURE de la fiche de collecte, et s'interdire par
+defaut : toute implantation de camera, tout champ de vision ou angle
+mort, tout plan de masse ou de niveau, toute localisation de local
+technique ou d'enregistreur, tout detail de stockage, de duree de
+conservation ou d'acces aux images, toute donnee nominative de patient
+ou d'agent. Ce qui reste publiable est l'INGENIERIE : topologie du
+reseau, alimentations, courants faibles, contraintes de site en
+exploitation, exigences reglementaires generales. Si la these ne peut se
+soutenir sans une de ces exclusions, LE DIRE et proposer une these
+autre - ne pas contourner.
+
+⚠ DOSSIER POTENTIELLEMENT MINCE : 29 fichiers seulement, contre 61 pour
+la N22. La regle des dossiers minces (Q3) est reconduite : si la matiere
+ne suffit pas a une fiche honnete, produire la COLLECTE SEULE et
+proposer une substitution, en le motivant en tete de la fiche de
+collecte. Mesurer avant de conclure - la N22 a produit sa DECISION Q3
+sur un tableau de matiere (pieces de conception, pieces thermiques,
+pieces contractuelles, suivi de chantier), pas sur une impression.
+
+LIRE D'ABORD, dans cet ordre :
+1. docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md -
+   LE PLAN : § 1 (ce qui a change), § 2 (pipeline 12 etapes), § 3
+   (reponses consignees Q1/Q2/Q3), § Suivi (lignes N01 a N22),
+   annexe W (ce prompt).
+2. docs/superpowers/plans/2026-08-07-chantier-references-reelles.md -
+   § Contraintes globales + § Protocole de session + § Regle des
+   dossiers minces.
+3. docs/superpowers/specs/2026-08-12-planches-references-protocole.md -
+   revision 5 EN ENTIER.
+4. CLAUDE.md, .claude/rules/content-collections.md et french-editorial.md.
+Etalons : src/content/projets/creche-oranger-perigny.md (fiche) et, pour
+une affaire MONOTECHNIQUE (classeur M, une seule technique) :
+audit-chauffage-sites-adei.md (21086, M simple, sept sites),
+audit-chambre-des-metiers-la-rochelle.md (22037, M simple, N20),
+bornes-irve-la-rochelle-saintes.md (23099, M - IRVE et non T),
+cuisine-groupe-scolaire-villedoux.md et
+passerelle-ecluse-carreau-d-or-marans.md (un seul lot technique).
+Voir aussi public/images/projets/gaelic-innov-ia-la-rochelle/ +
+references/ref_045/ (fiche de collecte N22, avec sa DECISION Q3, son
+§ « LE PIEGE DU NUMERO » et son § « LES REGIMES DE PROPRIETE DES
+PIECES » en tete - c'est elle qui documente le releve de 222 suites
+`NN-NNN`, le numero de mandataire au format AA.NN, et la coquille de
+Siret qui traverse une piece FT2E).
+Les sondes de recette vivent dans references/ref_045/ : sonde-fiche.mjs,
+sonde-filtres.mjs et sonde-cartouche.mjs, DEJA RECALEES SUR LA N22.
+⚠ Leurs selecteurs sont EN DUR sur le texte de la fiche precedente :
+sonde-cartouche cherche « LA ROCHELLE · 935 » dans le cartouche,
+sonde-filtres teste le secteur « Industriel » et la page
+/secteurs/industriel-commercial. LES RECALER AVANT DE CONCLURE - une
+sonde qui ne trouve pas son noeud rend `null` sans echouer, et la
+sonde-fiche de la N22 a rendu « largeurSvg 0 » au palier 1440 sans que
+rien ne soit casse : c'etait son selecteur, pas le rendu. REGARDER LES
+CAPTURES plutot que de conclure sur un chiffre de sonde.
+⚠ sonde-cartouche.mjs et sonde-fiche.mjs prennent un REPERTOIRE en
+argument, pas un fichier ; rendre_png.py aussi. Les trois s'appellent
+DEPUIS LA RACINE du depot.
+
+REGLE D'INDEXATION SECTORIELLE - etablie le 2026-08-27, A APPLIQUER A
+LA REDACTION DE CHAQUE FICHE (etape 6 du pipeline), pas apres coup :
+« REFERENCES SITE FT2E.ods » (references/docs_references/, classeur
+fourni par FT2E) FAIT FOI pour le classement sectoriel. Concretement,
+AVANT d'ecrire le frontmatter :
+1. Ouvrir le classeur (python zipfile sur content.xml, ou pandoc) et y
+   retrouver l'affaire PAR SON NUMERO (graphie sans tiret : « 20039 »).
+2. En relever le domaine (legende : L Logements / T Tertiaire & ERP /
+   I Industriel / P Patrimoine / C Coordination SSI /
+   M Monotechnique-Audit / E EXE) -> champ `secteur`.
+3. Si le classeur porte un domaine DOUBLE (« T § C ») : le premier est
+   le `secteur`, le second va au champ `secteur_secondaire` (optionnel
+   au schema depuis le 2026-08-27, garde-fou « doit differer ») - la
+   fiche parait alors dans les deux filtres et sur les deux pages de
+   secteur. Precedents : hotel-yachtman (T § C), maison-pierre-loti-
+   rochefort (P § C, N04), foyer-cdair-saint-martin-de-re (T § C, N10),
+   auberge-central-hostel-la-rochelle (T § C, N12),
+   cabanes-urbaines-la-rochelle (T § C, N15).
+   LE DOSSIER DU JOUR EST A DOMAINE SIMPLE : 20039 est « M ».
+4. JAMAIS de deduction depuis le dossier, l'usage RT ou le nom de
+   l'operation : la N02 penchait « Industriel » pour Fors, le classeur
+   dit T - et les 25 fiches ont du etre re-referencees le soir meme
+   (7 bascules, commits ce334b2/09270a3). Le classeur peut contredire
+   l'intuition (Saint-Rogatien, pole commercial : I ; Fors, pole
+   commercial : T ; 23083 « plan de comptage Airbus » : E et non M ;
+   23099 « CPAM » : M - IRVE, pas T ; 23036 Fountaine Pajot : I SIMPLE
+   alors que le CV annonce « CFO / CFA / SSI » ; 20045 « THE ROOF »,
+   salle d'escalade et atelier de luthier : T § C et non I ; 21086
+   « Audit chauffage sites ADEI », sept etablissements medico-sociaux :
+   M SIMPLE ; 21074 « AP Yacht - CATANA Group », chantier naval : I
+   SIMPLE ; 20071 « Bureaux EIFFAGE », un siege d'agence avec ses
+   ateliers : T SIMPLE ; 21029 « Ecole primaire et maternelle La
+   Flotte », un ERP de type R : M SIMPLE ; 22037 « Audit chambre des
+   metiers » : M SIMPLE ; 19087 « Batiment SSLIA », dont le sigle
+   evoque la securite incendie et le programme un ERP : I SIMPLE ;
+   20024 « INNOVIA - GAELIC », un laboratoire avec 210 m2 de bureaux :
+   I SIMPLE, et le depouillement a donne raison au classeur, le CCTP
+   ecrivant « batiment de type industriel soumis au code du travail »)
+   - il gagne. ⚠ Un centre hospitalier evoque le tertiaire/ERP : le
+   classeur dit M. NE PAS LE CONTREDIRE.
+5. CONSIGNER la lecture dans la fiche de collecte (ligne « Secteur » :
+   citer l'entree du classeur telle quelle) ; si l'affaire est ABSENTE
+   du classeur ou son domaine illisible -> question B a FT2E et choix
+   provisoire argumente, jamais silencieux.
+6. EN RECETTE (etape 10) : verifier sur le deploiement que la fiche
+   repond au bon filtre de /references (compteurs de chips) et parait
+   sur sa page /secteurs/<slug> - sondes : references/ref_045/
+   sonde-filtres.mjs et references/ref_045/sonde-fiche.mjs (URL a adapter).
+   ⚠ Une page /secteurs/<slug> n'affiche que les 4 affaires les plus
+   recentes du secteur (tri par numero decroissant) ; le filtre de
+   /references, lui, montre tout. Une affaire a DOUBLE domaine doit
+   etre controlee sur LES DEUX filtres et LES DEUX pages de secteur.
+   ⚠ 20-039 est un numero de 2020 et le secteur « Monotechnique —
+   Audit » compte 6 fiches apres la N22 : 23-099 (bornes IRVE), 23-009
+   (maisons Louise Magnan), 22-037 (Maison des Metiers), 21-086 (audit
+   ADEI), 21-029 (chaufferie La Flotte) et 20-058... a reverifier au
+   grep, la liste ci-dessus est indicative. 20-039 s'inserera en fin de
+   tri et n'entrera vraisemblablement PAS dans le top 4 de
+   /secteurs/monotechnique : c'est le tri documente, PAS un defaut, et
+   le filtre de /references fait foi (la N22 a vecu exactement ce cas).
+   Repartition attendue AVANT la N23, MESUREE le 2026-09-02 sur le
+   deploiement par references/ref_045/sonde-filtres.mjs : L10 T14 I7 P3
+   C7 M6 E3 pour 45 fiches, 50 en pondere (Yachtman T+C, Loti P+C, foyer
+   CDAIR T+C, Central Hostel T+C et Cabanes Urbaines T+C comptent double).
+
+DOSSIER DU JOUR : « 20-039- Centre Hospitalier Rochefort- Video
+surveillance » (29 fichiers, 38,3 Mo), classeur « 20039 · Videosurveillance
+CH Rochefort · M ». Points d'attention connus AVANT ouverture :
+(a) ⚠⚠ la sensibilite de l'objet (voir plus haut) - question E des
+    l'ouverture, et une these qui tienne SANS implantation ;
+(b) ⚠ un CENTRE HOSPITALIER est un maitre d'ouvrage public : attendre un
+    marche public, un acte d'engagement, un CCAP, un reglement de
+    consultation. VERIFIER QUI A SIGNE (en N20 le contrat etait adresse
+    au proprietaire et signe du cachet du syndic ; en N21 l'offre de MOE
+    etait signee par le mandataire pour tout le groupement) ;
+(c) ⚠ chercher la reception AUX SIX ENDROITS du protocole : un CR d'OPC
+    portant « RECEPTION DES TRAVAUX » en tete (N11) ; un CR annoncant la
+    reception a une date precise (N12) ; le BILAN DE FACTURATION (N12) ;
+    le DERNIER CR DE CHANTIER, dont l'en-tete remplace « PROCHAINE
+    REUNION » par « RECEPTION le JJ/MM/AAAA » (N13) ; LE CALENDRIER EN
+    TETE DE CHAQUE CR D'OPC (N14) ; et L'EN-TETE DES DERNIERS CR (N15).
+    ⚠ Constater n'est pas prononcer : en N18, N21 et N22 le dernier CR
+    CONVOQUE la reception sans la constater, en N19 il constate
+    « travaux termines » et trois reserves. La N22 a retenu
+    `annee_livraison` sur un FAISCEAU (OPR constatee + levee de reserves
+    annoncee + mission de DOE commandee + classeur), en le motivant en
+    question B - c'est la methode a reprendre, pas un blanc-seing ;
+(d) ⚠ un compte de fichiers n'est pas un compte de choses - RECOMPTER,
+    puis chercher une SECONDE source avant de publier un compte (N19 :
+    neuf CR ET neuf reunions au calcul d'honoraires, donc publiable ;
+    N18 : 46 fichiers numerotes 1-45 puis 49, donc AUCUN compte publie ;
+    N21 : 33 CR numerotes 01 a 38, six manquants, AUCUN compte ; N22 :
+    43 fichiers numerotes 1-45, trois manquants et un « 5 bis », AUCUN
+    compte - et le plan portait treize hottes que le CCTP ne chiffrait
+    pas, donc treize hottes non publiees non plus) ;
+(e) ⚠ une note ou un rapport peut ne pas boucler. La N16 en a releve
+    CINQ, la N18 une, la N19 une, la N20 une. En N21 les deux
+    estimations bouclaient ; en N22 le contrat de MOE bouclait sur les
+    travaux (857 645 + 534 000 = 1 391 645) MAIS presentait DEUX ECARTS
+    D'UN CENTIME sur les honoraires (arrondis de taux) - releves,
+    consignes, et rien de proportionnel publie. Verifier que les
+    sous-totaux somment AVANT de composer quoi que ce soit de
+    proportionnel, et ne rien publier de ce qui ne boucle pas ;
+(f) ⚠ verifier si le site publie DEJA quelque chose de cette affaire ou
+    de ses acteurs (grep de src/content/ - PROSE, LEGENDES ET ALT DES
+    CLICHES) : cinq occurrences deja (N15, N17, N19, N21, N22). En N22
+    le grep a rendu bien plus qu'une graphie : la fiche publiee
+    `ateliers-pilotes-capsulae` decrivait un batiment « adosse au
+    batiment IDCAPS existant », rue Charles Tellier - c'est-a-dire
+    EXACTEMENT le batiment que le dossier du jour restructurait. Le site
+    publiait deja l'affaire sans le savoir. FAIRE CE GREP TOT, il
+    change la fiche.
+Aucun numero 20-039 n'est publie (a reverifier au grep).
+Dossier de travail a creer : references/ref_046/
+Slug cible : a etablir au depouillement (kebab-case sans accents,
+verifier qu'il n'ecrase rien).
+
+CE QUE LES N01-N22 ONT ETABLI (verifiable au depot) :
+- ⚠⚠ QUATRE REGIMES DE PROPRIETE D'UNE PIECE, a distinguer AVANT
+  d'ecrire. (1) piece FT2E - elle fonde la fiche. (2) piece d'un tiers
+  DEPOSEE POUR COMPARAISON (N19 : un devis concurrent dont le nom de
+  fichier le faisait passer pour une etude FT2E) - elle ne se cite
+  jamais. (3) piece d'un tiers COMMANDEE PAR UN TIERS (N19 : une etude
+  d'impact sonore payee par l'installateur) - question a FT2E, rien
+  n'est publie. (4) l'ARCHIVE DE L'OUVRAGE (N20) - le dossier de
+  construction d'origine, recupere comme matiere de travail : elle se
+  LIT et s'EXPLOITE, mais ni son auteur ni ses valeurs ne se publient.
+  ⚠ La N21 y ajoute une CINQUIEME nuance, qui n'est pas un regime mais
+  une prudence : LA PIECE DU MANDATAIRE (acte d'engagement, CCAP,
+  avenants, comptes rendus de chantier - tous rediges par l'architecte).
+  Elle fait foi sur le calendrier et sur les montants, mais son contenu
+  se cite avec la prudence d'un CR d'OPC. C'est l'EN-TETE ou le
+  CARTOUCHE qui tranche le regime - jamais le repertoire, jamais le nom
+  de fichier. ⚠ La N22 confirme par un cas limite : un fichier nomme
+  « contrat Honoraire ENGIE AXIMA » et range dans un repertoire au nom
+  de l'entreprise etait une PROPOSITION D'HONORAIRES FT2E adressee a
+  cette entreprise - regime 1, pas 3. La page de garde tranche.
+- ⚠⚠ UN NOM DE FICHIER MENT (N19, N20, N22). « DESCRIPTIFS POUR CCTP
+  2022 2023.docx » etait un catalogue de textes de prescription d'un
+  fabricant ; « 19xxx-SUIVI.doc » un gabarit vierge de compte rendu
+  FT2E. OUVRIR AVANT DE CONCLURE, y compris les .doc (antiword, ou
+  extraction brute des chaines).
+- ⚠⚠ LE NUMERO FT2E SE RELEVE SUR PLUSIEURS PIECES, ET LA MAJORITE
+  L'EMPORTE. La page de garde d'un CCTP peut porter un faux numero (N18,
+  N19) ; un classeur d'honoraires interne aussi (N21 : « 19-125 », une
+  occurrence contre 118). Les pieces les plus sures sont les CARTOUCHES
+  DE PLANS et les pages de garde des CCTP/DPGF de PRODUCTION. Autres
+  faux deja rencontres : references de modele constructeur, numeros de
+  dossier des mandataires, numeros de permis, surfaces foncieres, codes
+  postaux, references de coloris, durees de vie de LED et NUMEROS DE
+  NORMES (NF X 46-020, NF S 31-010, NF C 15-100).
+  ⚠ RELEVER ENSUITE TOUT `\d{2}[-\s.]\d{2,3}` DU DOSSIER ET ETABLIR, UN
+  PAR UN, CE QUE CHACUN DESIGNE : 30 suites distinctes en N20, 80 en
+  N21, 222 EN N22 - et sur ces 222, une seule etait le numero FT2E. Le
+  gros du bruit venait des NUMEROS DE TELEPHONE et des DATES du tableau
+  de suivi des comptes rendus (« 22/02/21-01/03/21 »), plus les COTES
+  d'un plan au 1/50. Un relevé qui explose n'est pas un relevé qui
+  echoue : il faut juste le classer par famille.
+  ⚠ ET LE NUMERO DU MANDATAIRE EST AU FORMAT AA.NN : la N21 a trouve
+  « 19.36 », la N22 « 20.02 » - ce dernier en gros sur la page de garde
+  du contrat de maitrise d'oeuvre, dans son pied de page, dans le nom du
+  fichier et en tete de la convention de groupement, quand « 20-024 » n'y
+  figurait NULLE PART. Lire la seule piece contractuelle aurait donne un
+  faux numero.
+- ⚠ LE CLASSEUR PEUT ETRE EN ECART D'UN AN, ET LE CROISEMENT COMMERCIAL
+  TRANCHE (N20). Interroger SYSTEMATIQUEMENT a l'etape 4 : les onze docx
+  sectoriels de references/docs_references/, le classeur ODS,
+  docs/20-source-plaquette-2024.md et livrables/cv-ft2e/CV-FT2E.zip.
+  ⚠ Les docx portent parfois la fiche commerciale de l'affaire (N18,
+  decisif) - mais pas toujours : MUETS en N19, N20, N21 ET N22, et il
+  n'existe AUCUN docx « Industriel ». En N22 les CV etaient muets aussi,
+  et la plaquette ne portait que le nom du client dans une liste. C'est
+  un resultat a consigner, pas un echec.
+  ⚠ En revanche la N21 a trouve le propre DOSSIER DE REFERENCES
+  INDUSTRIEL de FT2E DANS le dossier d'affaires lui-meme, depose avec
+  une candidature. CHERCHER CE GENRE DE PIECE dans 01-Commerciale.
+  ⚠ ET NE PAS CONFONDRE DEUX AFFAIRES D'UN MEME CLIENT : ce dossier de
+  references portait « Extension Usine INNOVIA - 5 400 000 € - SHON
+  2400 m2 », chiffres qui NE correspondent PAS a l'affaire 20-024
+  (934,74 m2, 1 391 645 €). C'est une autre operation du meme groupe.
+- ⚠ UN INDICE DE CONTRAT N'EST PAS UNE AFFAIRE - CINQ confirmations
+  (N15, N16, N17, N19, N20). Le depart se fait sur les pieces de
+  PRODUCTION, qui portent le numero SANS indice.
+- ⚠ UNE MISSION PEUT ETRE SENSIBLE ET NE PAS SE PUBLIER (N20). ⚠ Et un
+  OUVRAGE peut l'etre (N21). ⚠ LE DOSSIER DU JOUR CUMULE LES DEUX.
+- ⚠⚠ UNE THESE PEUT ETRE DEJA PUBLIEE - et c'est le risque PRINCIPAL,
+  avec 45 planches au corpus. AVANT d'arreter une these, lire les
+  `sous_titre` ET les `archetype_motif` des 45 planches
+  (PYTHONIOENCODING=utf-8 python -c "..." sur
+  public/images/projets/*/planche.json). La N17 a du abandonner DEUX
+  theses, la N18 une, la N19 TROIS, la N20 une, la N21 une, la N22
+  QUATRE : « une enveloppe, N systemes autonomes » etait deja publie
+  (place-des-chenes-verts, siege-rese, mairie-les-portes-en-re), « une
+  seule enveloppe, deux regimes thermiques » aussi
+  (habitat-inclusif-salignac), « le perimetre du calcul est plus petit
+  que le batiment » aussi (batiment-sslia, la fiche PRECEDENTE), et « la
+  greffe sur l'usine en exploitation » aussi (extension-fountaine-pajot).
+  La these retenue a ete ce qu'aucune ne portait : la NON-COINCIDENCE de
+  deux decoupages tires du MEME texte - un seul usage au calcul, des
+  systemes d'air separes a l'installation. La question n'est pas
+  « est-ce que ca demontre bien ? » mais « est-ce que ca demontre
+  quelque chose que le corpus ne demontre pas deja ? ».
+- Archetypes apres N22 : boucle-fluide 12 - coupe-traversee 10 -
+  sankey-energie 7 - tableau-electrique 7 - zonage-ssi 7 -
+  chronologie-affaire 2 - planche-chiffree 0 SANS module. L'archetype se
+  choisit sur la THESE, jamais sur le secteur ni sur le quota, mais a
+  these egale preferer ce qui n'a pas servi depuis longtemps ; la dette
+  de variete porte sur boucle-fluide (12/45) et coupe-traversee (10/45),
+  et chronologie-affaire n'a pas servi depuis le corpus fondateur
+  (admissible seulement si sa these est d'INGENIERIE, jamais le
+  calendrier d'une operation). ⚠ `planche-chiffree` n'a toujours pas de
+  module : si un dossier l'exige, la decision est de L'ECRIRE ou de
+  retirer l'archetype de la liste fermee, jamais de bricoler.
+  ⚠ ET UN ARCHETYPE SERT AU-DELA DE SON NOM : `zonage-ssi` a porte en
+  N22 un decoupage THERMIQUE ET AERAULIQUE sans aucune SSI, comme il
+  portait deja deux regimes reglementaires a Salignac. C'est le
+  MECANISME qui commande, pas l'intitule.
+- Un mecanisme nouveau s'ecrit DANS le compositeur d'archetype
+  (constantes prefixees par le mecanisme ; garde-fou de greffe sur le
+  NOM DE LA FONCTION ET sur les prefixes de constantes - automatise
+  depuis la N13 : en N22, 33 fonctions et 103 constantes existantes
+  contre 7 et 39 neuves, prefixes `DI_`/`DIV_`/`DIA_`, zero collision),
+  et l'invariant octet se rejoue AVANT la greffe, APRES la greffe et
+  APRES la derniere retouche. `python scripts/planches/invariant.py`
+  couvre les 6 compositeurs et les 45 dossiers (180/180 au 2026-09-02).
+  ⚠ Un dossier neuf dont la planche n'est pas encore composee fait
+  ECHOUER l'invariant : LIRE LE DENOMINATEUR (en N22, « 176/180 » avant
+  la composition signifiait « 176/176 sur l'existant », pas une
+  regression). Composer d'abord, mesurer ensuite.
+- ⚠⚠ SEPARER LES MESURES DE L'ECHELLE DES MOTIFS (N20, reconduit en N21
+  et N22). Les trois formats partagent UNE implantation de leur
+  primitive, mais les MESURES du dessin (abscisses, ordonnees, largeurs
+  de boite) sont ABSOLUES et propres a chaque format. ⚠ Et UN ELEMENT
+  PEUT ETRE ABSENT D'UN FORMAT : en N22 les cinq extractions, les
+  exigences par element et l'article cite sont ABSENTS de la vignette et
+  de l'appui, ou leurs libelles tomberaient sous le plancher de
+  lisibilite. C'est une mesure de format, pas une exception - et elle se
+  CONSIGNE dans le bloc `controles` du format concerne.
+  ⚠ ET LES LIBELLES SE DECLINENT PAR FORMAT : la N22 porte
+  `libelle` (planche, 15 px), `libelle_court` (appui, mono 10) et
+  `libelle_vignette` (vignette, mono 9) - « Laboratoire restructure »,
+  « LABORATOIRE », « LABO ». Un seul libelle pour trois formats deborde.
+- ⚠ METTRE UNE ASSERTION DE DEPASSEMENT DANS LE COMPOSITEUR, SUR LES
+  TROIS FORMATS, ET LA PROUVER VIVANTE. En N20, N21 et N22 la
+  composition est passee du premier coup : l'assertion a donc ete mise a
+  l'epreuve sur QUATRE copies du planche.json portant chacune un libelle
+  allonge a dessein - une par format, plus une sur une largeur bornee
+  par LE BORD DE LA COLONNE VOISINE et non par la marge. Les quatre ont
+  rompu. UNE SONDE QUI N'A JAMAIS ECHOUE NE MESURE RIEN.
+  ⚠⚠ ET SE SOUVENIR DE CE QU'ELLE NE MESURE PAS : elle teste une
+  LARGEUR, jamais une OCCUPATION, jamais un ORDRE DE TRACE. La N21 en a
+  paye deux en occupation ; la N22 en a paye une en ORDRE : le trait de
+  frontiere, trace AVANT la bande, etait integralement EFFACE par le
+  fond opaque des cases. Aucun controle automatique ne le voit - seul le
+  PNG. C'est le meme piege qu'en N21, et il s'est represente.
+- ⚠ REGARDER LES PNG, ET CORRIGER CE QU'ON Y VOIT. La N16 a fait CINQ
+  retouches, la N17 DEUX, la N18 TROIS, la N19 QUATRE, la N20 DEUX, la
+  N21 HUIT, la N22 TROIS : l'ordre de trace (ci-dessus), un appui qui
+  laissait 100 px de marge basse et flottait en haut de son format, et
+  une insecable FINE en grand corps qui disparaissait a l'oeil.
+  ⚠ SUR CE DERNIER POINT, LE TRONC TRANCHE : `NN` (U+202F) pour le texte
+  courant et le mono, `INS` (U+00A0) pour les chiffres en GRAND CORPS -
+  et le corpus fait `.replace(INS, NN)` sur la vignette et l'appui, ou
+  les corps sont plus petits. Le suivre.
+  ⚠ Et AGRANDIR par PIL (crop + resize NEAREST) tout detail douteux,
+  plutot que de plisser les yeux.
+- ⚠⚠ LE BLOC `controles` D'UN planche.json EST DE LA PROSE (N20). Il est
+  ecrit depuis le SOURCE PYTHON du compositeur, et les apostrophes
+  droites qu'on y tape s'y retrouvent. `python
+  scripts/apostrophes-planches.py` (sans argument, en MESURE) le voit :
+  21 apostrophes sur 2 pieces en N20, 0 en N21, 93 SUR 2 PIECES EN N22
+  (83 dans le planche.json ecrit a la main, 10 dans le code greffe). LE
+  REJOUER APRES LA PREMIERE COMPOSITION, puis --appliquer si besoin,
+  puis RECOMPOSER, puis remesurer jusqu'a 0.
+- ⚠⚠ LES DEUX SONDES D'ACCENTS. (1) aucun mot ne doit paraitre en
+  graphie NUE alors que sa graphie ACCENTUEE existe ailleurs dans le
+  meme document ; (2) plancher de 2 % d'accents sur la PROSE GLOBALE (le
+  compte se fait sur la forme DECOMPOSEE, NFD - sur une chaine NFC,
+  comparer a sa forme nue rend 0,00 %). Les deux se mettent a l'epreuve
+  et doivent rompre : la sonde 2 sur une desaccentuation TOTALE, la
+  sonde 1 sur une desaccentuation PARTIELLE (sur un texte entierement
+  desaccentue, la sonde 1 ne trouve plus aucune graphie accentuee et ne
+  peut plus signaler - elle rendrait un faux vert).
+  ⚠ LA SONDE 1 SUR-TIRE, ET C'EST NORMAL : en N21 elle a signale
+  « chauffe », « cote » et « partage » ; en N22 « marques », « porte »,
+  « reference », « reste » et « touche » - verbes conjugues, homographes,
+  et le NOM D'UN CHAMP Zod, qui s'ecrit sans accent par convention de
+  code. NE PAS LA DESARMER : enumerer les exemptions AVEC LEUR
+  JUSTIFICATION VERIFIEE SUR PIECE, et asserter l'EGALITE de l'ensemble
+  signale et de l'ensemble exempte, de sorte qu'une forme nue de plus
+  rompe encore ET qu'une exemption morte rompe aussi.
+  ⚠ Et `a_valider_ft2e`, `archetype_motif` et `exclusions_appliquees`
+  s'ecrivent ACCENTUES : les 45 extractions du corpus le font.
+- Les insecables des heredocs bash sont normalisees DE FACON NON
+  DETERMINISTE sur cette machine. DEUX VOIES, toutes deux eprouvees :
+  (a) ecrire le .md en ESPACES ORDINAIRES et apostrophes droites par
+  l'outil Write, puis passer `python scripts/injection-typographique.py
+  <fichier>` - c'est la voie des N12 a N22, la plus sure ; (b) script
+  Python avec marqueurs ASCII remplaces par chr(8239)/chr(160) et
+  assertion A L'EGALITE comptee sur le source - la voie pour tout
+  fichier que injection-typographique.py ne couvre pas (planche.json,
+  plan du chantier, prompt de continuite).
+  ⚠⚠ ET L'ASSERTION DOIT ETRE CALCULEE, PAS TAPEE : en N22 le compte
+  ecrit a la main (12) etait faux (17), et c'est l'assertion qui l'a
+  arrete. Compter les marqueurs sur le source AVANT substitution
+  (`ligne.count(MARQUEUR)`) plutot que d'annoncer un nombre.
+  ⚠ CHOISIR LES MARQUEURS CONTRE LE CORPUS REEL : le seul choix sur est
+  un caractere qui ne peut pas figurer dans le texte - '\x01', '\x02',
+  '\x03', ecrits en ECHAPPEMENT ASCII dans le source (« # » collisionne
+  avec les titres Markdown, « % » avec « 30 % »).
+  ⚠⚠ ET DANS UNE LIGNE DE TABLEAU MARKDOWN, AUCUNE BARRE VERTICALE
+  NON ECHAPPEE : la N22 a d'abord cite le classeur « 20024 | INNOVIA |
+  I » dans la colonne Notes, ce qui faisait 10 barres au lieu de 8 et
+  cassait le tableau. Le corpus cite avec des POINTS MEDIANS
+  (« 19087 · Batiment SSLIA · I ») - le suivre, et compter les barres
+  apres ecriture.
+  ⚠⚠ UNE ANCRE DE REMPLACEMENT SE VERIFIE PAR repr(), PAS PAR DEDUCTION
+  (N19, rejoue DEUX FOIS en N20 et UNE FOIS en N22). Une ancre prise
+  dans un texte deja passe a injection-typographique.py peut porter une
+  insecable invisible.
+  ⚠ injection-typographique.py protege les lignes d'enum du frontmatter
+  (secteur, typologie, mission_ft2e) : une apostrophe DROITE tapee dans
+  mission_ft2e y RESTE et casse le build. Il NE protege PAS
+  secteur_secondaire. ⚠ Il ne connait pas toutes les unites - il ignore
+  « A » (amperes), « Ω » (ohms), « bars », « metres » et « litres » : la
+  N21 a du poser trois insecables a la main, la N22 une (« 13 bars »).
+  CONTROLER PAR REGEX APRES PASSAGE
+  (`\d[ ](?:m²|m³|mm|kW|L|A|Ω|°C|%|€|bars|W/)`).
+  ⚠ IL NE POSE NI LES ACCENTS NI LES EXPOSANTS NI LES LIGATURES : ecrire
+  « m² », « m³/h », « °C » et « œuvre » directement. La N22 a d'abord
+  redige tout un recit SANS ACCENTS en croyant que le script les
+  poserait - il a fallu tout reecrire.
+  ⚠ Et le CORPUS peut trancher autrement que la regle : mesurer la
+  graphie dominante par grep avant d'ecrire (« kWhep/m²/an » 44 fois,
+  « m³/(h·m²) » 14 fois, fine insecable devant « bars » 4 fois sur 5).
+- ⚠ L'AGENT DE RELECTURE TROUVE DE VRAIES ERREURS DE FAIT SANS AVOIR LES
+  PIECES (N15, N18, N19, N20, N21). LUI DONNER EN CONTEXTE LES FAITS
+  ETABLIS SUR PIECE et lui demander EXPLICITEMENT les chaines exactes
+  avant/apres - il travaille EN LECTURE SEULE, ses outils d'edition
+  normalisent les insecables.
+  ⚠⚠ ET LE VERIFIER, TOUJOURS : en N18 il s'est trompe une fois, en N19
+  trois fois, en N20 une fois. MESURER OU RELIRE LA PIECE AVANT
+  D'APPLIQUER, constat par constat.
+- ⚠ LE CARTOUCHE DE RESERVE PARAIT COUPE SUR LE PNG DE CONTROLE - le
+  rendu cairosvg n'a pas IBM Plex Mono et substitue une chasse ~8 % plus
+  large. NE PAS « corriger » la largeur du cartouche : la formule
+  `mesurer(...) + 40` est commune aux 45 planches. Les N20, N21 et N22
+  l'ont MESURE au navigateur sur le deploiement
+  (references/ref_045/sonde-cartouche.mjs) : cartouche entier, 26 puis
+  22 puis 18 px de marge a droite. ⚠ cairosvg substitue AUSSI un ▯ aux
+  caracteres « ≥ » et « ≤ », qui rendent parfaitement au navigateur (la
+  N22 en a quatre sur sa planche) : ne pas reecrire un libelle sur la
+  foi du PNG.
+- ⚠ NE PAS REECRIRE rendre_png.py : il est au depot depuis la N12.
+  Usage : `python scripts/planches/rendre_png.py
+  public/images/projets/<slug> <repertoire>`. REGARDER LES QUATRE
+  controles. ⚠ Il s'appelle depuis la RACINE du depot. ⚠ ET LE REJOUER
+  APRES LA DERNIERE RETOUCHE : en N22 le planche.png publie a failli
+  rester en retard d'une version sur les SVG.
+- ⚠ UN HEREDOC BASH PEUT MANGER UN ANTISLASH, ECHOUER SUR UNE APOSTROPHE
+  ET MANGER LES ACCENTS (N15, N16, N17, N20). Pour tout script non
+  trivial : outil Write dans le SCRATCHPAD, puis execution. C'est aussi
+  la regle qui evite que le hook Stop commite des scripts a usage unique.
+  ⚠ ET NE JAMAIS TAPER UN CHEMIN D'ARCHIVES : les noms portent des
+  accents et des apostrophes typographiques. Passer par os.walk +
+  fragments de nom. Le petit module `lire.py` du scratchpad
+  (trouver/un/texte/png/docx/xlsx/xls/msg sur pymupdf, zipfile, openpyxl
+  et xlrd) se rejoue de session en session. ⚠ Et un PDF SCANNE n'a pas
+  de couche texte : la N22 a du rendre les 15 pages du contrat de MOE en
+  PNG par pymupdf (zoom 2) et les lire a l'oeil - c'est la seule voie.
+- Le hook Stop commite et pousse SEUL ce qui traine, et il PEUT
+  COMMITTER LE LIVRABLE ENTIER. L'historique etant pousse sur un depot
+  PARTAGE, il ne se reecrit pas. Pour l'eviter : garder les scripts a
+  usage unique DANS LE SCRATCHPAD, hors depot, COMMITTER TOT des que le
+  build est vert, et reserver un second commit a la passe editoriale et
+  aux documents de suivi (⚠ livrables/ porte deux fichiers non suivis
+  anterieurs a la N02 - les laisser). ⚠ `git add` par CHEMINS EXPLICITES,
+  jamais `git add -A`.
+- /references/ est gitignore (motif ancre) - les pieces sources
+  n'entrent JAMAIS au depot ; npm run preview ne mesure pas la
+  performance ; Chrome refuse les fenetres sous 500 px (sonde iframe).
+- La planche n'expose NI le millesime d'ouverture, NI montant, NI tiers
+  (MOA, mandataire, architecte, installateur, MARQUES comprises), NI
+  donnee nominative ; les designations internes (reperes de zone,
+  numeros de tableau, destinations de reseau, orientations, quartiers,
+  niveaux, noms de volumes de programme et usages reglementaires) sont
+  admises avec une entree a_valider_ft2e et une question E ; tout
+  arbitrage de dessin va dans a_valider_ft2e (jamais vide).
+  ⚠ ET SAVOIR CE QUE LE CORPUS A DEJA FAIT DIRE A UN SIGNE : le trait
+  interrompu signifie « position abandonnee » sur la planche de la
+  Maison des Metiers et « reserve pour plus tard » sur celle du groupe
+  scolaire de La Flotte. Les deux sont legitimes, l'en-tete les leve a
+  chaque fois - mais il faut le savoir avant d'en ajouter un troisieme.
+  C'est pourquoi les N21 et N22 n'emploient AUCUN trait interrompu : la
+  N22 dit l'isolement par des marques SEPAREES et l'appartenance par un
+  trait CONTINU, ce qui ne demande aucune convention nouvelle.
+
+⚠ CE QUI RESTE APRES CE DOSSIER, ET L'ECART 49 / 50 TOUJOURS NON TRANCHE.
+Le classeur porte, apres celui-ci : « Finalisees en 2020 » (2 : 19008
+Batiment industriel Aeroport LR ELIXIR I, 20058 Diag legionelles du port
+de plaisance M) et « Finalisees en 2019 » (1 : 18026 Atelier numerique
+Fountaine Pajot I). Soit 3 dossiers restants pour 46 fiches en ligne
+apres la N23 : LE CLASSEUR NE MENE QU'A 49, PAS A 50. La question a ete
+portee aux messages finaux des N16 a N22 et N'A TOUJOURS PAS ETE
+ARBITREE PAR FT2E : la reposer tant qu'elle reste ouverte. Ne pas
+fabriquer une fiche pour combler l'ecart.
+⚠ PISTE RELEVEE EN N17, TOUJOURS OUVERTE ET REVERIFIEE EN N22 : le
+classeur porte une section « Finalisees en 2021 » qui est VIDE - en-tete
+de section, en-tete de colonnes, et aucune ligne. C'est le seul millesime
+sans entree, entre 2020 (2 entrees) et 2022 (4 entrees). L'hypothese a
+soumettre a FT2E est qu'une affaire manque a cette section, ce qui
+expliquerait l'ecart exactement. A verifier avec eux, pas a supposer.
+
+DEROULER LE PIPELINE § 2 INTEGRALEMENT : depouillement (pdfinfo /
+pdftotext, ou pymupdf via python subprocess avec les noms lus par
+os.listdir ; les plans sans couche texte et les marches scannes se
+lisent en rendant leurs pages en PNG par pymupdf, zoom 2-3 ; antiword
+pour les .doc, xlrd pour les .xls, openpyxl pour les .xlsx,
+extract-msg pour les .msg) -> CONTROLE DE LA PAGE DE GARDE DE CHAQUE
+PIECE TECHNIQUE, ET DE SON REGIME DE PROPRIETE (les quatre, plus la
+prudence due aux pieces du mandataire) -> releve du numero NN-NNN SUR
+PLUSIEURS PIECES FT2E, et ETABLISSEMENT DE CE QUE DESIGNE CHAQUE AUTRE
+SUITE `NN-NNN` DU DOSSIER -> references/ref_046/ (3 a 8 pieces) ->
+croisement commercial (references/docs_references/ - docx sectoriels ET
+classeur ODS - + docs/20-source-plaquette-2024.md +
+livrables/cv-ft2e/CV-FT2E.zip + toute piece commerciale FT2E TROUVEE AU
+DOSSIER + grep de src/content/ pour ce que le site publie deja, LEGENDES
+ET ALT DES CLICHES COMPRIS) -> fiche de collecte (A/A+ remplies, B-E en
+questions dont la QUESTION E DE SENSIBILITE, ligne Secteur citant le
+classeur, DECISION Q3 motivee en tete) -> LECTURE DES 45 SOUS-TITRES ET
+DES 45 `archetype_motif` pour verifier qu'aucune these voisine n'est
+deja publiee -> fiche src/content/projets/<slug>.md (SECTEUR RELEVE AU
+CLASSEUR ; taxonomie ACTUELLE ; lieu avec code postal entre parentheses ;
+synthese 480-780 ; >= 5 liens internes ; une CLAUSE DE CLOTURE en dernier
+paragraphe ; jamais de numero d'affaire NI de millesime d'ouverture en
+prose ; ACCENTS, EXPOSANTS ET LIGATURES ECRITS A LA MAIN ; convention
+numerale finale - nom du NOMBRE en un seul mot en lettres, nombre
+COMPOSE en chiffres, unites et mesures toujours en chiffres, citations
+intouchees ; verifier par `python scripts/releve-numeral.py`, dont la
+section « Nombres COMPOSES ecrits en lettres » doit rendre 0) ->
+PLANCHE complete (extraction avec a_valider_ft2e non vide, apostrophes
+courbes ET ACCENTS des l'ecriture, DEUX SONDES D'ACCENTS prouvees
+vivantes, composition par scripts/planches/<archetype>.py avec assertion
+de depassement SUR LES TROIS FORMATS, PROUVEE VIVANTE sur quatre copies,
+primitives PARTAGEES, MESURES distinguees des MOTIFS et LIBELLES
+DECLINES PAR FORMAT, rendus par scripts/planches/rendre_png.py depuis la
+RACINE, controles a 1152 / carte 274-296 / appui 552 - REGARDER les
+quatre PNG, VERIFIER L'ORDRE DE TRACE, et AGRANDIR par PIL tout detail
+douteux -, apostrophes-planches.py en MESURE **APRES la premiere
+composition** puis jusqu'a 0, invariant.py, verser.py) -> qualite
+(typecheck 0, build vert 69 pages, editorial-reviewer EN LECTURE SEULE,
+ET VERIFIER CHACUN DE SES CONSTATS SUR LA PIECE OU PAR MESURE,
+controle-liens-internes 46/46 a 5, controle-numeros-affaire 0 fuite,
+releve-numeral sans ecart nouveau) -> COMMIT (content(references):
+ajoute la fiche reelle <nom> et sa planche ; git ls-remote avant, depot
+partage, `git add` par chemins explicites) -> push (le push deploie),
+curl de la fiche AVEC barre oblique finale + marqueur de build, rendu
+controle aux trois bandes (references/ref_045/sonde-fiche.mjs, slug et
+URL a adapter), CARTOUCHE MESURE (sonde-cartouche.mjs, SELECTEUR A
+RECALER) ET CONTROLE DE L'INDEXATION SECTORIELLE (point 6, sonde
+references/ref_045/sonde-filtres.mjs, SECTEUR A RECALER, appelee DEPUIS
+LA RACINE) -> ligne de suivi au plan -> PROMPT DE LA SESSION N24 en
+annexe du plan (script Python ou Write, jamais un long heredoc) et
+reproduit integralement dans le message final.
+Le prompt N24 REPREND le bloc « REGLE D'INDEXATION SECTORIELLE » tel quel
+(repartition remise a jour) ET porte le PREMIER dossier de la tranche
+2020 (19008 Batiment industriel Aeroport LR ELIXIR, classeur I, ou 20058
+Diag legionelles du port de plaisance, classeur M - le mieux documente
+d'abord). Il RAPPELLE aussi l'ecart 49 / 50 tant qu'il n'est pas tranche,
+et la piste de la section « Finalisees en 2021 » vide au classeur.
+
+Portee de commit : content(references). Un changement de schema Zod
+eventuel passe par le sous-agent content-modeller et va dans le MEME
+commit que public/admin/config.yml.
+
+Termine par le prompt de lancement de la session N24, en annexe du
 plan du chantier et reproduit integralement dans ton message final -
 la regle de continuite est dans CLAUDE.md parce qu'elle a ete manquee
 deux fois.

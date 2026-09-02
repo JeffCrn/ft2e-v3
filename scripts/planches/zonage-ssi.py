@@ -33,7 +33,8 @@ désormais deux occurrences et peut remonter dans un module commun — décision
 de dépôt, pas de session.
 """
 
-from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH, A_MARGE,
+from _tronc import (NN, INS, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH,
+                    A_MARGE,
                     JETON, mesurer, echapper, texte, rect, rect_bord, ligne,
                     polyligne, fleche, cercle, entete_style, replier,
                     racine_appui, controles_appui, executer)
@@ -2850,7 +2851,7 @@ def composer_discordance(donnees):
                   l_cta - 24, 10 * 0.14)
         A(texte(bx + 12, DI_Y_CTA + 16, air["libelle_centrale"], "mono", 10,
                 500, "pivot", tracking=10 * 0.14))
-        cote = f'{v["debit"]}{NN}{v["unite"]}'
+        cote = f'{v["debit"]}{INS}{v["unite"]}'
         controler(f'débit {v["cle"]}', cote, 18, "sans-700", l_cta - 24)
         A(texte(bx + 12, DI_Y_CTA + 34, cote, "sans", 18, 700, "encre",
                 wdth=118, tabulaire=True))
