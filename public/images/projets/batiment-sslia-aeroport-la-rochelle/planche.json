@@ -1,0 +1,152 @@
+{
+  "fiche": "batiment-sslia-aeroport-la-rochelle",
+  "archetype": "coupe-traversee",
+  "archetype_motif": "La thèse de la fiche est un RETRAIT : le périmètre du calcul RT2012 est plus petit que le bâtiment construit, parce que la remise des véhicules est tenue sous 12 °C et sort du calcul. La démonstration est une coupe — elle se lit verticalement, et elle ne se lit qu’en coupe : la limite descend le long d’un mur INTÉRIEUR, coupe le plancher intermédiaire, et traverse une porte ; et les deux niveaux qu’elle enferme ne portent pas la même exigence de perméabilité parce qu’ils ne portent pas le même usage réglementaire. Le motif se distingue des huit mécanismes déjà composés dans cet archétype : Marennes traverse une enveloppe, Villedoux compense un air extrait, Joffre enjambe un passage, Aurora empile un conduit, Louise Magnan sort l’extraction du logement, VoltAero oppose deux dessertes de part et d’autre d’un mur, La Flotte amorce une infrastructure, la Maison des Métiers trie des organes sur un plan de toiture. Ici rien ne traverse et rien ne s’oppose : une limite RECULE à l’intérieur, et tout ce qu’elle rencontre est requalifié — un mur devient une façade, une porte devient une menuiserie extérieure, un plancher intermédiaire devient une paroi sur local non chauffé. Il se distingue aussi de Salignac (zonage-ssi, mécanisme partage), où deux volumes CHAUFFÉS relevaient de deux réglementations de part et d’autre d’une limite qui ne correspondait à aucun mur : ici la limite suit un mur, et ce qui est dehors n’est pas soumis à une autre règle — il n’est soumis à aucune.",
+  "titre": "Bâtiment SSLIA",
+  "sous_titre": "Le volume tenu sous 12 °C sort du calcul, et le mur qui le borde devient une façade",
+  "cartouche_legende": "LA ROCHELLE · 316 m² AU CALCUL RT · 2022",
+  "surtitre": "SSLIA — AÉROPORT DE LA ROCHELLE – ÎLE DE RÉ — PÉRIMÈTRE DU CALCUL RT2012",
+  "phrase_principe": "Le périmètre du calcul thermique est plus petit que le bâtiment : la limite passe à l’intérieur, le long d’un mur.",
+  "vignette_surtitre": "LE PÉRIMÈTRE RECULE",
+  "aria_label": "Coupe de principe. Une enveloppe construite d’un seul tenant est partagée par un mur en deux parties. À gauche, la remise des véhicules, un seul volume de 185 mètres carrés, tenue sous 12 degrés : elle reste hors du périmètre du calcul thermique. À droite, deux niveaux superposés, l’étage lu comme du logement collectif et le rez-de-chaussée comme des bureaux, avec deux exigences de perméabilité à l’air différentes, 1,00 puis 1,7 mètre cube par heure et par mètre carré sous 4 pascals. Un trait épais ferme ces deux niveaux seuls : c’est le périmètre calculé, et il n’épouse la façade que sur trois côtés. Sur le quatrième, il quitte l’enveloppe et descend le long du mur intérieur, qui reçoit alors la composition d’une façade — 120 millimètres d’isolant, résistance supérieure à 3,75, coefficient de transmission plafonné à 0,249. La porte qui le franchit reçoit le coefficient d’une menuiserie extérieure, 2,00, et le plancher intermédiaire un coefficient de réduction de pont thermique de 0,40, calculé pour un local à 10 degrés. Sous la coupe, deux barres de largeur proportionnelle à la puissance absorbée en chauffage : la remise reçoit sa propre machine, 1,5 kilowatt pour le seul hors gel, contre 6,7 kilowatts pour les deux niveaux calculés.",
+  "retrait": {
+    "entete": "COUPE DE PRINCIPE — CE QUE LE CALCUL RT2012 ENFERME, ET CE QU’IL LAISSE DEHORS",
+    "legende_enveloppe": "ENVELOPPE CONSTRUITE",
+    "legende_perimetre": "PÉRIMÈTRE DU CALCUL RT2012",
+    "hors_calcul": {
+      "cle": "remise",
+      "libelle": "REMISE DES VÉHICULES · 185 m²",
+      "valeur": "185",
+      "unite": "m²",
+      "statut": "HORS DU PÉRIMÈTRE DE CALCUL",
+      "detail": "CONSIGNE DE CHAUFFAGE < 12 °C",
+      "mention": "AUCUN USAGE AU SENS DU CALCUL"
+    },
+    "niveaux": [
+      {
+        "cle": "etage",
+        "libelle": "ÉTAGE — LOGEMENT COLLECTIF",
+        "valeur": "1,00",
+        "unite": "m³/(h·m²) SOUS 4 Pa",
+        "detail": "PERMÉABILITÉ À L’AIR 1,00 m³/(h·m²) SOUS 4 Pa"
+      },
+      {
+        "cle": "rdc",
+        "libelle": "REZ-DE-CHAUSSÉE — BUREAUX",
+        "valeur": "1,7",
+        "unite": "m³/(h·m²) SOUS 4 Pa",
+        "detail": "PERMÉABILITÉ À L’AIR 1,7 m³/(h·m²) SOUS 4 Pa"
+      }
+    ],
+    "consequences": [
+      {
+        "cle": "mur",
+        "libelle": "MUR INTÉRIEUR · ISOLANT 120 mm · R ≥ 3,75 · Up ≤ 0,249",
+        "detail": "LA COMPOSITION DE LA FAÇADE, SUR UNE PAROI INTÉRIEURE"
+      },
+      {
+        "cle": "plancher",
+        "libelle": "PLANCHER INTERMÉDIAIRE · PONT THERMIQUE RÉDUIT, b = 0,40",
+        "detail": "COEFFICIENT CALCULÉ POUR UN LOCAL À 10 °C"
+      },
+      {
+        "cle": "porte",
+        "libelle": "PORTE INTÉRIEURE · Uw ≤ 2,00",
+        "detail": "LE COEFFICIENT D’UNE MENUISERIE EXTÉRIEURE"
+      }
+    ],
+    "machines": {
+      "entete": "PUISSANCE ABSORBÉE EN CHAUFFAGE — LA LARGEUR EST PROPORTIONNELLE",
+      "postes": [
+        {
+          "cle": "remise",
+          "bord": "gauche",
+          "libelle": "1,5 kW ABSORBÉS",
+          "valeur": 1.5,
+          "unite": "kW",
+          "role": "HORS GEL SEUL · COP 4,00",
+          "detail": "MACHINE DÉDIÉE À LA REMISE"
+        },
+        {
+          "cle": "tertiaire",
+          "bord": "droite",
+          "libelle": "6,7 kW ABSORBÉS",
+          "valeur": 6.7,
+          "unite": "kW",
+          "role": "CHAUFFAGE ET RAFRAÎCHISSEMENT · COP 5,00",
+          "detail": "LES DEUX NIVEAUX CALCULÉS"
+        }
+      ]
+    },
+    "vignette": {
+      "hors": "HORS CALCUL",
+      "consigne": "< 12 °C",
+      "haut": "LOGEMENT",
+      "bas": "BUREAUX",
+      "pied": "LE PÉRIMÈTRE CALCULÉ EST PLUS PETIT"
+    },
+    "appui": {
+      "hors": "REMISE · 185 m²",
+      "statut": "HORS DU CALCUL",
+      "consigne": "< 12 °C",
+      "haut": "ÉTAGE — LOGEMENT COLLECTIF",
+      "bas": "REZ-DE-CHAUSSÉE — BUREAUX",
+      "legende_enveloppe": "ENVELOPPE CONSTRUITE",
+      "legende_perimetre": "PÉRIMÈTRE DU CALCUL",
+      "consequence": "LE MUR INTÉRIEUR EST ISOLÉ COMME UNE FAÇADE",
+      "pied": "LA LIMITE DU CALCUL PASSE À L’INTÉRIEUR DU BÂTIMENT"
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "a_valider_ft2e": [
+    "La géométrie de la coupe. Le dessin est un gabarit de principe : un rectangle partagé par un mur, deux niveaux à droite, un seul volume à gauche. Aucune proportion, aucune hauteur, aucune implantation de l’ouvrage n’est reprise (règle dure 4). Le plan de principe montre en réalité l’espace opérationnel entouré sur deux côtés par les locaux de service, et une mezzanine de 52,09 m² le surplombe : le dessin ne le dit pas, et ne prétend pas le dire.",
+    "Le côté de la remise. Le dessin place la remise à GAUCHE et les deux niveaux calculés à DROITE. Aucune pièce ne fixe cette orientation ; c’est un arbitrage de lecture — de gauche à droite, du hors-calcul vers le calculé.",
+    "La porte. Le plan de principe porte plusieurs passages entre les locaux de service et l’espace opérationnel. Le dessin n’en montre qu’UNE, sur la limite, parce que la synthèse RT2012 ne prescrit qu’une ligne : « Porte intérieure, localisation : vers le local opérationnel, Uw ≤ 2,00 ». Le nombre réel de portes sur cette limite n’est pas établi, et il n’est pas dessiné.",
+    "Le plancher. La synthèse écrit que le pont thermique de plancher intermédiaire « donne EN PARTIE dans le local opérationnel » et qu’un coefficient d’atténuation b = 0,40 s’applique « sur les linéaires donnant dans le local opérationnel ». Le dessin marque ce point unique sur la limite ; il ne dit pas quelle fraction du linéaire est concernée, que la pièce ne donne pas.",
+    "Les deux machines. Les largeurs sont proportionnelles à la PUISSANCE ABSORBÉE EN CHAUFFAGE déclarée au CCTP du lot fluides — 6,7 et 1,5 kW —, à 40 px par kilowatt. Ce sont des puissances absorbées certifiées au sens de la réglementation thermique, non des puissances de chauffage restituées ni des puissances installées. La troisième machine du bâtiment — la pompe à chaleur air-eau qui produit l’eau chaude sanitaire — n’est pas dessinée : elle ne chauffe aucun des trois volumes et n’entre pas dans la démonstration.",
+    "La surface du cartouche. Le cartouche annonce 316 m² « au calcul RT », arrondi de la surface RT de 315,64 m² relevée à la synthèse. Ce n’est PAS la surface du bâtiment, que le dossier ne donne pas — c’est précisément la surface que le calcul retient, ce que la planche démontre.",
+    "Les désignations internes. Le dessin nomme trois volumes du programme (« remise des véhicules », « rez-de-chaussée », « étage ») et deux usages réglementaires (« bureaux », « logement collectif »). Ce sont des désignations de programme et de réglementation, non des données d’exploitation.",
+    "Le trait épais. Le périmètre calculé est dessiné en trait plein épais, l’enveloppe construite en filet fin. Le corpus emploie déjà le trait INTERROMPU dans deux sens différents — « position abandonnée » à la Maison des Métiers, « réservé pour plus tard » au groupe scolaire de La Flotte. Cette planche n’emploie aucun trait interrompu, pour ne pas en ajouter un troisième sens."
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire : absent du dessin (exclusion permanente 3).",
+    "Numéro de dossier du mandataire : absent du dessin.",
+    "Montants : le marché de maîtrise d’œuvre, sa répartition entre cotraitants et les estimations des deux lots restent au dossier de collecte.",
+    "Noms de tiers : maîtrise d’ouvrage, architecte mandataire, bureau d’études structures, entreprises, bureau de contrôle et coordonnateur — aucun ne figure au dessin.",
+    "Marques : les références constructeur des pompes à chaleur et des équipements de ventilation ne figurent pas au dessin.",
+    "Données nominatives : les personnes citées à l’acte d’engagement et aux comptes rendus de chantier ne figurent nulle part.",
+    "Géométrie d’autrui : aucune cote, aucune implantation, aucun contour de l’ouvrage n’est repris des plans (règle dure 4)."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "une enveloppe construite d’un seul tenant, x 276–1144, partagée par un mur à x 560 ; à droite deux niveaux séparés par un plancher à y 396, à gauche un seul volume. Le trait épais du périmètre calculé ne ferme que la partie droite : il épouse l’enveloppe sur trois côtés et la quitte sur le quatrième, où il descend le long d’un mur INTÉRIEUR. Texte masqué, le dessin se lit encore : un rectangle fin, un rectangle épais plus petit dedans, et l’écart entre les deux est exactement le volume qui sort du calcul",
+    "primitive_partagee": "_re_coupe(A, g) — une seule implantation pour les trois formats ; `g` porte les MESURES du format (absolues) et `ech` les seuls MOTIFS (épaisseurs, largeur du bloc-porte), de sorte qu’aucun dessin ne soit la réduction d’un autre et que « épais » veuille dire la même chose partout",
+    "topologie": "enveloppe 868 x 278 px, mur de partage à x 560 (33 % à gauche) ; plancher intermédiaire y 396 sur x 560–1144 ; porte y 456–500 à cheval sur le mur ; trois amorces rattachent les requalifications au mur, à la naissance du plancher et à la porte",
+    "proportionnalite": "barres de puissance absorbée à 40 px par kW : 60 px pour 1,5 kW contre 268 px pour 6,7 kW, rapport 4.47 — égal au rapport des puissances (4.47)",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; les seules valeurs écrites sont les deux perméabilités, les trois coefficients de la limite et les deux puissances absorbées",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "bas_du_dessin": "barres 570–598, rôles à y 634, phrase à y 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 364 x 30 px = 1.14 % de la planche",
+    "phrase_principe": "114 signes — 969 px pour 1088 disponibles",
+    "depassements": "aucun — 22 chaînes mesurées sous leur colonne (assertion de composition)"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "vignette servie à 274-296 px dans une carte — échelle 0.91 à 0.99, jamais au-dessus de 1,00",
+    "corps_minimal": "9 px dans le repère — rendu à 8,2 px à l’échelle 0,91, à 8,9 px à 0,99",
+    "motif": "enveloppe 272 x 90 px, mur à x 118, plancher à y 112 — une composition propre, pas une réduction de la planche : les mesures sont absolues et seul le motif suit l’échelle 0.55",
+    "primitive_partagee": "_re_coupe — la même que la planche et l’appui",
+    "marges": "aucun trait sous x 14 ni au-delà de x 286 ; pied à y 178 pour 186 de bas de cadre",
+    "depassements": "aucun — assertion de composition"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "enveloppe 504 x 176 px, mur de partage à x 210, plancher à y 176 — même primitive qu’à la planche, motifs à l’échelle 0.7 ; le trait épais ne ferme que la partie droite et porte seul la démonstration",
+    "bas_du_dessin": "conséquence à y 300, pied à y 330, marge basse 38 px",
+    "colonnes": "dessin x 24–528 (504 px), volume hors calcul 186 px, volume calculé 318 px",
+    "depassements": "aucun — assertion de composition"
+  }
+}

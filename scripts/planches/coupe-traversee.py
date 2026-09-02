@@ -4107,7 +4107,364 @@ def composer_appui_exposition(donnees):
     )
 
 
+
+# ── `retrait` : le périmètre du calcul recule à l'intérieur ─────────────────
+# Le mécanisme de la N21 (bâtiment SSLIA, aéroport de La Rochelle). Une seule
+# enveloppe construite, partagée par un mur ; le périmètre du calcul RT2012
+# n'enferme que la partie droite, parce que la remise des véhicules est tenue
+# sous 12 °C et sort du calcul. Le trait épais quitte donc la façade sur un
+# seul côté et descend le long d'un mur INTÉRIEUR : c'est la démonstration, et
+# elle tient sans un mot.
+#
+# Les deux grandeurs restent distinguées (leçon de la N20) :
+#   · les MESURES du dessin (abscisses, ordonnées) sont ABSOLUES et propres à
+#     chaque format — une coupe de vignette n'est pas une coupe de planche
+#     réduite ;
+#   · l'ÉCHELLE `ech` ne commande que les MOTIFS et les petits accessoires
+#     (épaisseurs de trait, largeur du bloc-porte, longueur des amorces), de
+#     sorte que « épais » veuille dire la même chose dans les trois dessins.
+RE_G = dict(x0=276, x_mur=560, x1=1144,
+            y_toit=250, y_plancher=396, y_sol=528,
+            porte=(456, 500), ech=1.0)
+
+RE_V_G = dict(x0=14, x_mur=118, x1=286,
+              y_toit=62, y_plancher=112, y_sol=152,
+              porte=None, ech=0.55)
+
+RE_A_G = dict(x0=24, x_mur=210, x1=528,
+              y_toit=76, y_plancher=176, y_sol=252,
+              porte=None, ech=0.70)
+
+RE_PX_PAR_KW = 40.0        # échelle des deux barres de puissance absorbée
+RE_Y_REG2 = 552            # en-tête du second registre
+RE_Y_BOITE, RE_H_BOITE = 570, 28
+RE_Y_LIB_KW, RE_Y_LIB_ROLE = 618, 634
+
+
+def _re_coupe(A, g):
+    """L'enveloppe construite, son mur de partage, le plancher intermédiaire,
+    le périmètre calculé et la porte — une seule implantation pour les trois
+    formats.
+
+    Ordre de tracé : l'aplat calcaire du volume calculé d'abord, le filet fin
+    de l'enveloppe ensuite (il doit se voir par-dessus l'aplat), puis le trait
+    épais du périmètre, qui recouvre le filet sur les trois côtés où les deux
+    coïncident — le quatrième est la démonstration.
+
+    Rend les ordonnées utiles aux appels de cote."""
+    ech = g["ech"]
+    x0, xm, x1 = g["x0"], g["x_mur"], g["x1"]
+    yt, yp, ys = g["y_toit"], g["y_plancher"], g["y_sol"]
+    ep_env = 1.6 * max(ech, 0.7)
+    ep_per = 3.4 * max(ech, 0.62)
+    ep_pla = 1.6 * max(ech, 0.7)
+
+    A(rect(xm, yt, x1 - xm, ys - yt, "calcaire"))
+
+    for a, b in (((x0, yt), (x1, yt)), ((x1, yt), (x1, ys)),
+                 ((x1, ys), (x0, ys)), ((x0, ys), (x0, yt))):
+        A(ligne(a[0], a[1], b[0], b[1], "filet-1", ep_env))
+
+    A(ligne(xm, yp, x1, yp, "encre", ep_pla))
+
+    if g["porte"] is not None:
+        py0, py1 = g["porte"]
+        lp = 14 * ech
+        A(rect(xm - lp / 2, py0, lp, py1 - py0, "clair"))
+
+    A(polyligne([(xm, yt), (x1, yt), (x1, ys), (xm, ys), (xm, yt)],
+                "encre", ep_per))
+
+    return dict(x_mur=xm, y_plancher=yp)
+
+
+def _re_barre(A, cx, poste, y, h, px_par_kw):
+    """Une barre de puissance absorbée, largeur proportionnelle, et sa flèche
+    de desserte vers le volume qui la reçoit."""
+    w = poste["valeur"] * px_par_kw
+    A(rect_bord(cx - w / 2, y, w, h, "clair", "filet-1"))
+    return w
+
+
+def composer_retrait(donnees):
+    q = donnees["retrait"]
+    hc = q["hors_calcul"]
+    g = RE_G
+    out = []
+    A = out.append
+    trop = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        l = mesurer(chaine, corps, profil, tracking)
+        if l > dispo:
+            trop.append(f"{nom} : {l:.0f} px pour {dispo:.0f}")
+        return l
+
+    def mono(x, y, chaine, dispo, nom, ancre=None, couleur="pivot", corps=10):
+        controler(nom, chaine, corps, "mono", dispo, corps * 0.14)
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14))
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    controler("surtitre", donnees["surtitre"], 11, "mono", UTILE, 11 * 0.14)
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre",
+            wdth=112))
+    controler("titre", donnees["titre"], 30, "sans-700", UTILE)
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    controler("sous-titre", donnees["sous_titre"], 16, "sans-400", UTILE)
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+    mono(MARGE, Y_ENTETE, q["entete"], UTILE, "en-tête schéma")
+
+    x0, xm, x1 = g["x0"], g["x_mur"], g["x1"]
+    yt, yp, ys = g["y_toit"], g["y_plancher"], g["y_sol"]
+
+    # Les deux légendes de ligne, chacune AU-DESSUS du segment qu'elle nomme :
+    # à gauche l'enveloppe seule, à droite l'enveloppe et le périmètre confondus.
+    mono(x0, yt - 12, q["legende_enveloppe"], xm - x0 - 12, "légende enveloppe")
+    mono(xm, yt - 12, q["legende_perimetre"], x1 - xm, "légende périmètre",
+         couleur="encre")
+
+    ancres = _re_coupe(A, g)
+
+    # Le volume hors calcul — libellé, statut, consigne, puis la mention qui
+    # occupe le milieu du volume : ce qu'il est au sens du calcul, c'est-à-dire
+    # rien.
+    x_g, dispo_g = x0 + 20, xm - x0 - 40
+    mono(x_g, 276, hc["libelle"], dispo_g, "remise libellé", couleur="encre")
+    mono(x_g, 294, hc["statut"], dispo_g, "remise statut", couleur="encre")
+    mono(x_g, 312, hc["detail"], dispo_g, "remise consigne")
+    mono(x_g, 410, hc["mention"], dispo_g, "remise mention")
+
+    # Les deux niveaux calculés — alignés à droite, chacun dans son volume.
+    x_d, dispo_d = x1 - 20, x1 - xm - 40
+    for niveau, y in zip(q["niveaux"], (276, 424)):
+        mono(x_d, y, niveau["libelle"], dispo_d, f'{niveau["cle"]} libellé',
+             ancre="end", couleur="encre")
+        mono(x_d, y + 18, niveau["detail"], dispo_d, f'{niveau["cle"]} détail',
+             ancre="end")
+
+    # Les trois requalifications, contre la limite. Chacune porte une amorce
+    # qui la rattache au point du dessin qu'elle qualifie — le mur, la
+    # naissance du plancher, la porte.
+    x_c, dispo_c = xm + 22, x1 - (xm + 22)
+    y_conseq = {"mur": 326, "plancher": 366, "porte": 468}
+    for c in q["consequences"]:
+        y = y_conseq[c["cle"]]
+        mono(x_c, y, c["libelle"], dispo_c, f'{c["cle"]} libellé',
+             couleur="encre")
+        mono(x_c, y + 16, c["detail"], dispo_c, f'{c["cle"]} détail')
+        if c["cle"] == "mur":
+            A(ligne(xm + 4, y - 4, x_c - 6, y - 4, "encre", 1.4))
+        elif c["cle"] == "plancher":
+            A(polyligne([(x_c - 6, y - 4), (xm + 12, y - 4), (xm + 12, yp)],
+                        "encre", 1.4))
+        else:
+            A(ligne(xm + 8, y - 4, x_c - 6, y - 4, "encre", 1.4))
+
+    # Second registre : la puissance absorbée en chauffage, à largeur
+    # proportionnelle. Une barre par volume, sous le volume qu'elle dessert.
+    m = q["machines"]
+    mono(x0, RE_Y_REG2, m["entete"], UTILE, "en-tête machines", couleur="encre")
+    A(ligne(xm, RE_Y_REG2 + 8, xm, RE_Y_LIB_ROLE + 8, "filet-2", 1.4))
+    centres = {"gauche": (x0 + xm) / 2, "droite": (xm + x1) / 2}
+    largeurs = {}
+    for poste in m["postes"]:
+        cx = centres[poste["bord"]]
+        w = _re_barre(A, cx, poste, RE_Y_BOITE, RE_H_BOITE, RE_PX_PAR_KW)
+        largeurs[poste["cle"]] = w
+        borne = (xm - x0 - 24) if poste["bord"] == "gauche" else (x1 - xm - 24)
+        mono(cx, RE_Y_LIB_KW, poste["libelle"], borne,
+             f'{poste["cle"]} puissance', ancre="middle", couleur="encre")
+        mono(cx, RE_Y_LIB_ROLE, poste["role"], borne, f'{poste["cle"]} rôle',
+             ancre="middle")
+
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+    A("</svg>")
+
+    assert not trop, "dépassements sur la planche : " + " ; ".join(trop)
+
+    rap = largeurs["tertiaire"] / largeurs["remise"]
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "une enveloppe construite d’un seul tenant, x "
+                         f"{x0}–{x1}, partagée par un mur à x {xm} ; à droite "
+                         f"deux niveaux séparés par un plancher à y {yp}, à "
+                         "gauche un seul volume. Le trait épais du périmètre "
+                         "calculé ne ferme que la partie droite : il épouse "
+                         "l’enveloppe sur trois côtés et la quitte sur le "
+                         "quatrième, où il descend le long d’un mur "
+                         "INTÉRIEUR. Texte masqué, le dessin se lit encore : "
+                         "un rectangle fin, un rectangle épais plus petit "
+                         "dedans, et l’écart entre les deux est exactement le "
+                         "volume qui sort du calcul",
+        "primitive_partagee": "_re_coupe(A, g) — une seule implantation pour "
+                              "les trois formats ; `g` porte les MESURES du "
+                              "format (absolues) et `ech` les seuls MOTIFS "
+                              "(épaisseurs, largeur du bloc-porte), de sorte "
+                              "qu’aucun dessin ne soit la réduction d’un autre "
+                              "et que « épais » veuille dire la même chose "
+                              "partout",
+        "topologie": f"enveloppe {x1 - x0} x {ys - yt} px, mur de partage à x "
+                     f"{xm} ({(xm - x0) / (x1 - x0) * 100:.0f} % à gauche) ; "
+                     f"plancher intermédiaire y {yp} sur x {xm}–{x1} ; porte "
+                     f"y {g['porte'][0]}–{g['porte'][1]} à cheval sur le mur ; "
+                     "trois amorces rattachent les requalifications au mur, à "
+                     "la naissance du plancher et à la porte",
+        "proportionnalite": f"barres de puissance absorbée à "
+                            f"{RE_PX_PAR_KW:.0f} px par kW : "
+                            f"{largeurs['remise']:.0f} px pour 1,5 kW contre "
+                            f"{largeurs['tertiaire']:.0f} px pour 6,7 kW, "
+                            f"rapport {rap:.2f} — égal au rapport des "
+                            f"puissances ({6.7/1.5:.2f})",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est "
+                          "pas chiffrée (révision 4) ; les seules valeurs "
+                          "écrites sont les deux perméabilités, les trois "
+                          "coefficients de la limite et les deux puissances "
+                          "absorbées",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "bas_du_dessin": f"barres {RE_Y_BOITE}–{RE_Y_BOITE + RE_H_BOITE}, "
+                         f"rôles à y {RE_Y_LIB_ROLE}, phrase à y {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
+                         f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            "de la planche",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px pour {UTILE} disponibles",
+        "depassements": "aucun — 22 chaînes mesurées sous leur colonne "
+                        "(assertion de composition)",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+def composer_vignette_retrait(donnees):
+    """Ce qu'elle garde : l'enveloppe, le mur, le plancher, le périmètre épais
+    et la porte — la géométrie entière, qui porte seule la thèse. Ce qu'elle
+    laisse : les trois requalifications, les deux perméabilités et le registre
+    des puissances ; à 300 px, six lignes de mono se confondraient."""
+    q = donnees["retrait"]
+    v = q["vignette"]
+    g = RE_V_G
+    out = []
+    A = out.append
+    trop = []
+
+    def mono(x, y, chaine, dispo, nom, ancre=None, couleur="pivot", corps=9):
+        l = mesurer(chaine, corps, "mono", corps * 0.14)
+        if l > dispo:
+            trop.append(f"{nom} : {l:.0f} px pour {dispo:.0f}")
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14))
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" '
+      f'focusable="false" style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    mono(V_MARGE, 26, donnees["vignette_surtitre"], g["x1"] - g["x0"],
+         "surtitre")
+
+    _re_coupe(A, g)
+
+    x0, xm, x1 = g["x0"], g["x_mur"], g["x1"]
+    mono(x0 + 8, 80, v["hors"], xm - x0 - 16, "hors", couleur="encre")
+    mono(x0 + 8, 94, v["consigne"], xm - x0 - 16, "consigne")
+    mono(x1 - 8, 80, v["haut"], x1 - xm - 16, "haut", ancre="end",
+         couleur="encre")
+    mono(x1 - 8, 132, v["bas"], x1 - xm - 16, "bas", ancre="end",
+         couleur="encre")
+    mono(V_MARGE, 178, v["pied"], x1 - x0, "pied")
+    A("</svg>")
+
+    assert not trop, "dépassements sur la vignette : " + " ; ".join(trop)
+    return "\n".join(out) + "\n", {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "vignette servie à 274-296 px dans une carte — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}, jamais "
+                            "au-dessus de 1,00",
+        "corps_minimal": "9 px dans le repère — rendu à 8,2 px à l’échelle "
+                         "0,91, à 8,9 px à 0,99",
+        "motif": f"enveloppe {x1 - x0} x {g['y_sol'] - g['y_toit']} px, mur à "
+                 f"x {xm}, plancher à y {g['y_plancher']} — une composition "
+                 "propre, pas une réduction de la planche : les mesures sont "
+                 f"absolues et seul le motif suit l’échelle {g['ech']}",
+        "primitive_partagee": "_re_coupe — la même que la planche et l’appui",
+        "marges": f"aucun trait sous x {V_MARGE} ni au-delà de x {x1} ; pied à "
+                  f"y 178 pour {VH - V_MARGE} de bas de cadre",
+        "depassements": "aucun — assertion de composition",
+    }
+
+
+def composer_appui_retrait(donnees):
+    q = donnees["retrait"]
+    a = q["appui"]
+    g = RE_A_G
+    out = []
+    A = out.append
+    trop = []
+    racine_appui(A, donnees)
+
+    def mono(x, y, chaine, dispo, nom, ancre=None, couleur="pivot", corps=10):
+        l = mesurer(chaine, corps, "mono", corps * 0.14)
+        if l > dispo:
+            trop.append(f"{nom} : {l:.0f} px pour {dispo:.0f}")
+        A(texte(x, y, chaine, "mono", corps, 500, couleur, ancre=ancre,
+                tracking=corps * 0.14))
+
+    x0, xm, x1 = g["x0"], g["x_mur"], g["x1"]
+    mono(x0, g["y_toit"] - 10, a["legende_enveloppe"], xm - x0 - 10,
+         "légende enveloppe")
+    mono(xm, g["y_toit"] - 10, a["legende_perimetre"], x1 - xm,
+         "légende périmètre", couleur="encre")
+
+    _re_coupe(A, g)
+
+    mono(x0 + 10, 104, a["hors"], xm - x0 - 20, "hors", couleur="encre")
+    mono(x0 + 10, 122, a["statut"], xm - x0 - 20, "statut", couleur="encre")
+    mono(x0 + 10, 140, a["consigne"], xm - x0 - 20, "consigne")
+    mono(x1 - 10, 104, a["haut"], x1 - xm - 20, "haut", ancre="end",
+         couleur="encre")
+    mono(x1 - 10, 208, a["bas"], x1 - xm - 20, "bas", ancre="end",
+         couleur="encre")
+    mono(x0, 300, a["consequence"], x1 - x0, "conséquence", couleur="encre")
+    mono(x0, 330, a["pied"], x1 - x0, "pied")
+    A("</svg>")
+
+    assert not trop, "dépassements sur l’appui : " + " ; ".join(trop)
+    return "\n".join(out) + "\n", controles_appui(
+        f"enveloppe {x1 - x0} x {g['y_sol'] - g['y_toit']} px, mur de partage "
+        f"à x {xm}, plancher à y {g['y_plancher']} — même primitive qu’à la "
+        f"planche, motifs à l’échelle {g['ech']} ; le trait épais ne ferme que "
+        "la partie droite et porte seul la démonstration",
+        f"conséquence à y 300, pied à y 330, marge basse {AH - 330} px",
+        colonnes=f"dessin x {x0}–{x1} ({x1 - x0} px), volume hors calcul "
+                 f"{xm - x0} px, volume calculé {x1 - xm} px",
+        depassements="aucun — assertion de composition",
+    )
+
+
 def _composer(donnees):
+    if "retrait" in donnees:
+        return composer_retrait(donnees)
     if "exposition" in donnees:
         return composer_exposition(donnees)
     if "amorce" in donnees:
@@ -4128,6 +4485,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "retrait" in donnees:
+        return composer_vignette_retrait(donnees)
     if "exposition" in donnees:
         return composer_vignette_exposition(donnees)
     if "amorce" in donnees:
@@ -4148,6 +4507,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "retrait" in donnees:
+        return composer_appui_retrait(donnees)
     if "exposition" in donnees:
         return composer_appui_exposition(donnees)
     if "amorce" in donnees:
