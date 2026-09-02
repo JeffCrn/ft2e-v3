@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe de deux découpages superposés d’un même bâtiment. La bande centrale porte les trois volumes de l’opération, de gauche à droite : le laboratoire restructuré, le bâtiment de liaison et l’open space, leurs largeurs proportionnées aux débits de leurs centrales de ventilation. Au-dessus, le découpage réglementaire : un crochet continu embrasse la liaison et l’open space en une seule zone de calcul RT2012, d’un seul usage industriel, tandis que le laboratoire, resté sous l’arrêté du 3 mai 2007, ne porte que des marques isolées, une par élément touché — mur, toiture, plancher, équipement —, que rien ne relie entre elles. Au-dessous, le découpage de l’air : un crochet par volume, trois centrales double flux indépendantes de 510, 430 et 850 mètres cubes par heure, et sous le seul laboratoire cinq extractions dédiées, une par local d’essai, de 100 à 190 mètres cubes par heure, dont l’air est rejeté sans repasser par aucun échangeur. La frontière entre la liaison et l’open space existe pour l’air et n’existe pas pour le calcul : un trait vertical la remonte et bute contre le crochet continu.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-filet-2 { stroke: var(--color-filet-2, #00393A29); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">DEUX DÉCOUPAGES</text>
+  <text x="24.00" y="72.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">PAR ÉLÉMENTS</text>
+  <text x="175.60" y="72.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RT2012 — UN SEUL CALCUL</text>
+  <path d="M 167.60 112.00 L 167.60 92.00 L 528.00 92.00 L 528.00 112.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <path d="M 52.72 92.00 L 52.72 112.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <path d="M 81.44 92.00 L 81.44 112.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <path d="M 110.16 92.00 L 110.16 112.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <path d="M 138.88 92.00 L 138.88 112.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <rect x="24.00" y="136.00" width="143.60" height="54.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="33.00" y="158.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LABORATOIRE</text>
+  <text x="33.00" y="176.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">EXISTANT REMANIÉ</text>
+  <rect x="167.60" y="136.00" width="121.07" height="54.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="176.60" y="158.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LIAISON</text>
+  <text x="176.60" y="176.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">NEUF</text>
+  <rect x="288.67" y="136.00" width="239.33" height="54.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="297.67" y="158.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">OPEN SPACE</text>
+  <text x="297.67" y="176.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">NEUF</text>
+  <path d="M 288.67 112.00 L 288.67 190.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <path d="M 281.67 112.00 L 295.67 112.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <path d="M 95.80 190.00 L 95.80 228.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <rect x="41.23" y="228.00" width="109.13" height="30.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="95.80" y="248.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" text-anchor="middle" font-variant-numeric="tabular-nums">510 m³/h</text>
+  <path d="M 228.13 190.00 L 228.13 228.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <rect x="182.13" y="228.00" width="92.02" height="30.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="228.13" y="248.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" text-anchor="middle" font-variant-numeric="tabular-nums">430 m³/h</text>
+  <path d="M 408.34 190.00 L 408.34 228.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.75"/>
+  <rect x="352.34" y="228.00" width="112.00" height="30.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="408.34" y="248.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="700" font-variation-settings="'wdth' 118, 'wght' 700" text-anchor="middle" font-variant-numeric="tabular-nums">850 m³/h</text>
+  <text x="24.00" y="300.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">LA FRONTIÈRE DE DROITE EXISTE POUR L’AIR, PAS POUR LE CALCUL</text>
+</svg>

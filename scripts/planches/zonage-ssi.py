@@ -2655,6 +2655,490 @@ def composer_appui_compensation(donnees):
                          "sous-mesure d’Archivo 600"))
 
 
+
+# ── Mécanisme `discordance` (2026-09-02) ─────────────────────────────────────
+# Deux découpages d'un même bâtiment qui ne se recouvrent pas. Au-dessus de la
+# bande, le découpage RÉGLEMENTAIRE : un crochet continu embrasse les deux
+# volumes neufs en une seule zone de calcul, tandis que le volume restructuré
+# ne porte que des marques isolées — la réglementation par éléments n'embrasse
+# rien. Au-dessous, le découpage de l'AIR : une descente et une machine par
+# volume, aucune mutualisée, plus cinq extractions sous le seul laboratoire.
+#
+# La démonstration se lit texte masqué : continu contre discret en haut, un
+# contre trois en bas. Et une frontière — celle qui sépare la liaison de l'open
+# space — traverse la bande, descend vers deux machines distinctes, et BUTE
+# contre le crochet du calcul, qui l'ignore.
+#
+# ⚠ Aucun trait interrompu : le corpus lui fait déjà dire deux choses
+# différentes (« position abandonnée » à la Maison des Métiers, « réserve pour
+# plus tard » au groupe scolaire de La Flotte). L'isolement se dit ici par des
+# marques SÉPARÉES, l'appartenance par un trait CONTINU.
+#
+# ⚠ Mesures ABSOLUES par format ; `ech` ne commande que les motifs et les
+# petits accessoires (épaisseurs, pointes). Les extractions sont ABSENTES de la
+# vignette et de l'appui (`postes=None`) : c'est une mesure de format.
+
+DI_Y_H1 = 210          # régime — ligne 1
+DI_Y_H2 = 226          # régime — ligne 2
+DI_Y_H3 = 242          # cote / exigences — ligne 3
+DI_Y_H4 = 258          # exigences — ligne 4 (colonne des éléments seule)
+DI_Y_CROCH_H = 264     # sommet du crochet du calcul et des marques isolées
+DI_H_CROCH_H = 24      # pied à 288 — c'est là que bute la frontière ignorée
+DI_Y_NOTE_LIM = 304
+DI_Y_BANDE = 316
+DI_H_BANDE = 74        # bas de bande à 390
+DI_Y_CTA = 424
+DI_H_CTA = 40
+DI_L_CTA_MAX = 200
+DI_Y_TAG_B = 494
+DI_Y_DET_B = 510
+DI_Y_EXTR_TAG = 542
+DI_Y_EXTR0 = 566
+DI_PAS_EXTR = 22
+DI_Y_PHRASE = 688
+DI_Y_CARTOUCHE = 714
+DI_H_CARTOUCHE = 30
+DI_MARQUE = 7
+DI_PAD = 14
+
+
+def _di_largeurs(volumes, span):
+    """Largeur de chaque volume, proportionnée au débit de sa centrale.
+
+    Le dossier ne donne pas la surface volume par volume — seulement local par
+    local, sans dire quel local tient dans quel volume. Proportionner sur les
+    débits est un choix consigné dans `a_valider_ft2e` : il code une donnée que
+    la source établit, au lieu d'en supposer une qu'elle n'établit pas.
+    """
+    total = sum(v["debit"] for v in volumes)
+    return [span * v["debit"] / total for v in volumes], total
+
+
+def _di_bornes(volumes, x0, span):
+    largeurs, total = _di_largeurs(volumes, span)
+    bornes, x = [], x0
+    for l in largeurs:
+        bornes.append((x, x + l))
+        x += l
+    return bornes, largeurs, total
+
+
+def _di_crochet(A, x0, x1, y_sommet, h, epaisseur, vers_le_bas=True):
+    """Accolade carrée : deux montants et une traverse. Ouverte vers le bas
+    (registre du calcul) ou vers le haut (registre de l'air)."""
+    y1 = y_sommet + h if vers_le_bas else y_sommet - h
+    A(polyligne([(x0, y1), (x0, y_sommet), (x1, y_sommet), (x1, y1)],
+                "encre", epaisseur))
+
+
+def _di_marques_isolees(A, x0, x1, n, y_sommet, h, epaisseur):
+    """n traits verticaux que RIEN ne relie — le régime par éléments."""
+    pas = (x1 - x0) / (n + 1)
+    for k in range(n):
+        x = x0 + pas * (k + 1)
+        A(ligne(x, y_sommet, x, y_sommet + h, "encre", epaisseur))
+    return [x0 + pas * (k + 1) for k in range(n)]
+
+
+def composer_discordance(donnees):
+    d = donnees["discordance"]
+    volumes = d["volumes"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(
+                f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    bornes, largeurs, total = _di_bornes(volumes, MARGE, UTILE)
+    i_calc = [k for k, v in enumerate(volumes) if v["dans_le_calcul"]]
+    x_calc0 = bornes[i_calc[0]][0]
+    x_calc1 = bornes[i_calc[-1]][1]
+    x_hors0, x_hors1 = bornes[0]
+    # La frontière que le calcul ignore : entre les deux volumes du calcul.
+    x_ignoree = bornes[i_calc[0]][1]
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre",
+            wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-tête du schéma ────────────────────────────────────────────────────
+    controler("en-tête schéma", d["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, d["entete"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ── Registre HAUT, colonne des éléments (hors calcul) ────────────────────
+    el = d["elements"]
+    dispo_g = x_hors1 - x_hors0 - 8
+    for cle, y in (("tag", DI_Y_H1), ("detail", DI_Y_H2)):
+        controler(f"éléments {cle}", el[cle], 10, "mono", dispo_g, 10 * 0.14)
+        A(texte(x_hors0, y, el[cle], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    marques = el["marques"]
+    milieu = (len(marques) + 1) // 2
+    for k, (y, groupe) in enumerate(((DI_Y_H3, marques[:milieu]),
+                                     (DI_Y_H4, marques[milieu:]))):
+        ligne_txt = " · ".join(f'{m["libelle"]}{NN}{m["valeur"]}'
+                               for m in groupe)
+        controler(f"exigences l.{k + 1}", ligne_txt, 10, "mono", dispo_g,
+                  10 * 0.14)
+        A(texte(x_hors0, y, ligne_txt, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14, tabulaire=True))
+    _di_marques_isolees(A, x_hors0, x_hors1, len(marques),
+                        DI_Y_CROCH_H, DI_H_CROCH_H, 2.0)
+
+    # ── Registre HAUT, colonne du calcul ─────────────────────────────────────
+    ca = d["calcul"]
+    dispo_d = x_calc1 - x_calc0 - 8
+    for cle, y in (("tag", DI_Y_H1), ("detail", DI_Y_H2), ("cote", DI_Y_H3)):
+        controler(f"calcul {cle}", ca[cle], 10, "mono", dispo_d, 10 * 0.14)
+        A(texte(x_calc0 + 10, y, ca[cle], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14, tabulaire=(cle == "cote")))
+    _di_crochet(A, x_calc0, x_calc1, DI_Y_CROCH_H, DI_H_CROCH_H, 2.0)
+
+    y_butee = DI_Y_CROCH_H + DI_H_CROCH_H
+    controler("note de limite", d["note_limite"], 10, "mono",
+              W - MARGE - (x_ignoree + 12), 10 * 0.14)
+    A(texte(x_ignoree + 12, DI_Y_NOTE_LIM, d["note_limite"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── La bande : les trois volumes, largeur ∝ débit de leur centrale ───────
+    for (x0, x1), v in zip(bornes, volumes):
+        A(rect_bord(x0, DI_Y_BANDE, x1 - x0, DI_H_BANDE, "calcaire", "filet-1"))
+        controler(f'volume {v["cle"]}', v["libelle"], 15, "sans-600",
+                  x1 - x0 - 2 * DI_PAD)
+        A(texte(x0 + DI_PAD, DI_Y_BANDE + 30, v["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        controler(f'mention {v["cle"]}', v["mention"], 10, "mono",
+                  x1 - x0 - 2 * DI_PAD, 10 * 0.14)
+        A(texte(x0 + DI_PAD, DI_Y_BANDE + 52, v["mention"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # ── La frontière que le calcul ignore : elle traverse la bande et bute ──
+    # ⚠ APRÈS la bande : les cases ont un fond opaque et l'effaceraient.
+    A(ligne(x_ignoree, y_butee, x_ignoree, DI_Y_BANDE + DI_H_BANDE,
+            "encre", 2.0))
+    A(ligne(x_ignoree - 9, y_butee, x_ignoree + 9, y_butee, "encre", 2.0))
+
+    # ── Registre BAS : une descente et une machine par volume ────────────────
+    air = d["air"]
+    y_bas_bande = DI_Y_BANDE + DI_H_BANDE
+    for (x0, x1), v in zip(bornes, volumes):
+        cx = (x0 + x1) / 2
+        l_cta = min(DI_L_CTA_MAX, (x1 - x0) * 0.72)
+        bx = cx - l_cta / 2
+        A(ligne(cx, y_bas_bande, cx, DI_Y_CTA, "encre", 2.0))
+        A(rect_bord(bx, DI_Y_CTA, l_cta, DI_H_CTA, "papier", "filet-1"))
+        controler(f'cta {v["cle"]}', air["libelle_centrale"], 10, "mono",
+                  l_cta - 24, 10 * 0.14)
+        A(texte(bx + 12, DI_Y_CTA + 16, air["libelle_centrale"], "mono", 10,
+                500, "pivot", tracking=10 * 0.14))
+        cote = f'{v["debit"]}{NN}{v["unite"]}'
+        controler(f'débit {v["cle"]}', cote, 18, "sans-700", l_cta - 24)
+        A(texte(bx + 12, DI_Y_CTA + 34, cote, "sans", 18, 700, "encre",
+                wdth=118, tabulaire=True))
+
+    for cle, y in (("tag", DI_Y_TAG_B), ("detail", DI_Y_DET_B)):
+        controler(f"air {cle}", air[cle], 10, "mono", UTILE, 10 * 0.14)
+        A(texte(MARGE, y, air[cle], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    # ── Les extractions : des marques isolées, sous le seul premier volume ───
+    ex = d["extractions"]
+    controler("extractions tag", ex["tag"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, DI_Y_EXTR_TAG, ex["tag"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    x_val = x_hors1 - 26
+    x_lib = x_hors0 + DI_MARQUE + 9
+    for k, poste in enumerate(ex["postes"]):
+        y = DI_Y_EXTR0 + k * DI_PAS_EXTR
+        A(rect(x_hors0, y - DI_MARQUE, DI_MARQUE, DI_MARQUE, "encre"))
+        valeur = f'{poste["valeur"]}{NN}{ex["unite"]}'
+        l_val = mesurer(valeur, 10, "mono", 10 * 0.14)
+        controler(f'extraction {k + 1}', poste["libelle"], 10, "mono",
+                  x_val - l_val - 10 - x_lib, 10 * 0.14)
+        A(texte(x_lib, y, poste["libelle"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+        A(texte(x_val, y, valeur, "mono", 10, 500, "encre",
+                ancre="end", tracking=10 * 0.14, tabulaire=True))
+        A(fleche(x_val + 14, y + 1, "encre", "bas", 8))
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    controler("phrase de principe", donnees["phrase_principe"], 17,
+              "sans-400", UTILE)
+    A(texte(MARGE, DI_Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, DI_Y_CARTOUCHE, largeur, DI_H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, DI_Y_CARTOUCHE + 20, libelle, "mono", 11, 500,
+            "voile", tracking=11 * 0.14))
+
+    A("</svg>")
+
+    assert not depassements, (
+        "dépassement(s) sur la planche : " + " ; ".join(depassements))
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "deux découpages superposés d’une même bande : au "
+                         f"registre haut, un crochet continu sur {len(i_calc)} "
+                         f"volumes contre {len(el['marques'])} marques que rien "
+                         "ne relie ; au registre bas, une descente et une "
+                         f"machine par volume, {len(volumes)} en tout, aucune "
+                         "mutualisée. La frontière ignorée du calcul traverse "
+                         "la bande et bute sur la traverse du crochet — "
+                         "continu contre discret, un contre trois",
+        "proportion": "largeurs ∝ débits des centrales : "
+                      + " / ".join(f'{v["debit"]}' for v in volumes)
+                      + f" m³/h sur {total} — "
+                      + " / ".join(f"{l:.1f}" for l in largeurs)
+                      + f" px sur {UTILE}",
+        "frontiere_ignoree": f"x {x_ignoree:.1f} — trait de "
+                             f"{DI_Y_BANDE + DI_H_BANDE} à {y_butee}, arrêté "
+                             f"{y_butee - DI_Y_CROCH_H} px sous la traverse du "
+                             f"crochet du calcul (x {x_calc0:.1f} à "
+                             f"{x_calc1:.1f}) : il ne la touche pas",
+        "extractions": f'{len(ex["postes"])} marques isolées sous le seul '
+                       f'volume hors calcul (x {x_hors0:.0f} à {x_hors1:.0f}), '
+                       "chacune sa flèche de rejet — aucune reprise dessinée",
+        "bas_du_dessin": f"machines jusqu’à {DI_Y_CTA + DI_H_CTA}, mentions "
+                         f"d’air à {DI_Y_TAG_B}–{DI_Y_DET_B}, extractions "
+                         f"{DI_Y_EXTR_TAG}–"
+                         f"{DI_Y_EXTR0 + (len(ex['postes']) - 1) * DI_PAS_EXTR}"
+                         f", phrase à {DI_Y_PHRASE}, cartouche "
+                         f"{DI_Y_CARTOUCHE}–{DI_Y_CARTOUCHE + DI_H_CARTOUCHE}, "
+                         f"marge basse {H - (DI_Y_CARTOUCHE + DI_H_CARTOUCHE)} px",
+        "reserve_profonde": f"cartouche {largeur} x {DI_H_CARTOUCHE} px = "
+                            f"{largeur * DI_H_CARTOUCHE} px², soit "
+                            f"{largeur * DI_H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            "de la planche",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "depassements": "aucun — toutes les lignes mesurées sous leur colonne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── Vignette : le motif seul ─────────────────────────────────────────────────
+DIV_Y_SURTITRE = 30
+DIV_Y_CROCH_H = 48
+DIV_H_CROCH_H = 14
+DIV_Y_BANDE = 76
+DIV_H_BANDE = 40
+DIV_Y_CTA = 138
+DIV_H_CTA = 22
+DIV_PAD = 6
+
+
+def composer_vignette_discordance(donnees):
+    d = donnees["discordance"]
+    volumes = d["volumes"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+
+    span = VW - 2 * V_MARGE
+    bornes, largeurs, total = _di_bornes(volumes, V_MARGE, span)
+    i_calc = [k for k, v in enumerate(volumes) if v["dans_le_calcul"]]
+    x_calc0, x_calc1 = bornes[i_calc[0]][0], bornes[i_calc[-1]][1]
+    x_hors0, x_hors1 = bornes[0]
+    x_ignoree = bornes[i_calc[0]][1]
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" '
+      f'focusable="false" style="width:100%;height:auto;display:block">')
+    entete_style(A, ("filet-1", "filet-2", "encre"))
+    A(rect(0, 0, VW, VH, "papier"))
+
+    controler("surtitre", donnees["vignette_surtitre"], 9, "mono", span,
+              9 * 0.14)
+    A(texte(V_MARGE, DIV_Y_SURTITRE, donnees["vignette_surtitre"], "mono", 9,
+            500, "pivot", tracking=9 * 0.14))
+
+    # Registre haut : le crochet continu contre les marques isolées.
+    _di_crochet(A, x_calc0, x_calc1, DIV_Y_CROCH_H, DIV_H_CROCH_H, 1.5)
+    _di_marques_isolees(A, x_hors0, x_hors1, len(d["elements"]["marques"]),
+                        DIV_Y_CROCH_H, DIV_H_CROCH_H, 1.5)
+
+    y_butee = DIV_Y_CROCH_H + DIV_H_CROCH_H
+
+    for (x0, x1), v in zip(bornes, volumes):
+        A(rect_bord(x0, DIV_Y_BANDE, x1 - x0, DIV_H_BANDE, "calcaire",
+                    "filet-1"))
+        controler(f'volume {v["cle"]}', v["libelle_vignette"], 9, "mono",
+                  x1 - x0 - 2 * DIV_PAD, 9 * 0.14)
+        A(texte(x0 + DIV_PAD, DIV_Y_BANDE + 24, v["libelle_vignette"], "mono",
+                9, 500, "encre", tracking=9 * 0.14))
+
+    # La frontière ignorée — tracée APRÈS la bande, dont le fond est opaque.
+    A(ligne(x_ignoree, y_butee, x_ignoree, DIV_Y_BANDE + DIV_H_BANDE,
+            "encre", 1.5))
+    A(ligne(x_ignoree - 5, y_butee, x_ignoree + 5, y_butee, "encre", 1.5))
+
+    # Registre bas : une descente et une machine par volume.
+    y_bas = DIV_Y_BANDE + DIV_H_BANDE
+    for (x0, x1), v in zip(bornes, volumes):
+        cx = (x0 + x1) / 2
+        l_cta = min(76, (x1 - x0) * 0.72)
+        A(ligne(cx, y_bas, cx, DIV_Y_CTA, "encre", 1.5))
+        A(rect_bord(cx - l_cta / 2, DIV_Y_CTA, l_cta, DIV_H_CTA, "papier",
+                    "filet-1"))
+        cote = f'{v["debit"]}'
+        controler(f'débit {v["cle"]}', cote, 10, "sans-700", l_cta - 10)
+        A(texte(cx, DIV_Y_CTA + 15, cote, "sans", 10, 700, "encre", wdth=118,
+                ancre="middle", tabulaire=True))
+
+    A("</svg>")
+
+    assert not depassements, (
+        "dépassement(s) sur la vignette : " + " ; ".join(depassements))
+
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px "
+                         "au pire cas",
+        "motif": f"la bande à {len(volumes)} volumes proportionnés aux débits, "
+                 f"le crochet continu sur {len(i_calc)} d’entre eux contre "
+                 f"{len(d['elements']['marques'])} marques isolées, la "
+                 "frontière ignorée qui bute, et une machine chiffrée par "
+                 "volume — exigences, article, extractions, phrase de principe "
+                 "et cartouche laissés à la planche",
+        "bas_du_dessin": f"machines jusqu’à {DIV_Y_CTA + DIV_H_CTA} px, marge "
+                         f"basse {VH - (DIV_Y_CTA + DIV_H_CTA)} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── Appui : densité intermédiaire ────────────────────────────────────────────
+DIA_Y_TAG = 72
+DIA_Y_CROCH_H = 92
+DIA_H_CROCH_H = 20
+DIA_Y_BANDE = 136
+DIA_H_BANDE = 54
+DIA_Y_CTA = 228
+DIA_H_CTA = 30
+DIA_Y_NOTE = 300
+DIA_PAD = 9
+
+
+def composer_appui_discordance(donnees):
+    d = donnees["discordance"]
+    volumes = d["volumes"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+
+    span = AW - 2 * A_MARGE
+    bornes, largeurs, total = _di_bornes(volumes, A_MARGE, span)
+    i_calc = [k for k, v in enumerate(volumes) if v["dans_le_calcul"]]
+    x_calc0, x_calc1 = bornes[i_calc[0]][0], bornes[i_calc[-1]][1]
+    x_hors0, x_hors1 = bornes[0]
+    x_ignoree = bornes[i_calc[0]][1]
+
+    racine_appui(A, donnees, ("filet-1", "filet-2", "encre"))
+
+    # Les deux régimes, en tête de chaque colonne — libellés courts.
+    controler("appui régime hors calcul", d["elements"]["tag_court"], 10,
+              "mono", x_hors1 - x_hors0 - 4, 10 * 0.14)
+    A(texte(x_hors0, DIA_Y_TAG, d["elements"]["tag_court"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("appui régime calcul", d["calcul"]["tag_court"], 10, "mono",
+              x_calc1 - x_calc0 - 4, 10 * 0.14)
+    A(texte(x_calc0 + 8, DIA_Y_TAG, d["calcul"]["tag_court"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    _di_crochet(A, x_calc0, x_calc1, DIA_Y_CROCH_H, DIA_H_CROCH_H, 1.75)
+    _di_marques_isolees(A, x_hors0, x_hors1, len(d["elements"]["marques"]),
+                        DIA_Y_CROCH_H, DIA_H_CROCH_H, 1.75)
+
+    y_butee = DIA_Y_CROCH_H + DIA_H_CROCH_H
+
+    for (x0, x1), v in zip(bornes, volumes):
+        A(rect_bord(x0, DIA_Y_BANDE, x1 - x0, DIA_H_BANDE, "calcaire",
+                    "filet-1"))
+        controler(f'appui volume {v["cle"]}', v["libelle_court"], 10, "mono",
+                  x1 - x0 - 2 * DIA_PAD, 10 * 0.14)
+        A(texte(x0 + DIA_PAD, DIA_Y_BANDE + 22, v["libelle_court"], "mono", 10,
+                500, "encre", tracking=10 * 0.14))
+        controler(f'appui mention {v["cle"]}', v["mention"], 10, "mono",
+                  x1 - x0 - 2 * DIA_PAD, 10 * 0.14)
+        A(texte(x0 + DIA_PAD, DIA_Y_BANDE + 40, v["mention"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+
+    # La frontière ignorée — tracée APRÈS la bande, dont le fond est opaque.
+    A(ligne(x_ignoree, y_butee, x_ignoree, DIA_Y_BANDE + DIA_H_BANDE,
+            "encre", 1.75))
+    A(ligne(x_ignoree - 7, y_butee, x_ignoree + 7, y_butee, "encre", 1.75))
+
+    y_bas = DIA_Y_BANDE + DIA_H_BANDE
+    for (x0, x1), v in zip(bornes, volumes):
+        cx = (x0 + x1) / 2
+        l_cta = min(112, (x1 - x0) * 0.76)
+        A(ligne(cx, y_bas, cx, DIA_Y_CTA, "encre", 1.75))
+        A(rect_bord(cx - l_cta / 2, DIA_Y_CTA, l_cta, DIA_H_CTA, "papier",
+                    "filet-1"))
+        cote = f'{v["debit"]}{NN}{v["unite"]}'
+        controler(f'appui débit {v["cle"]}', cote, 13, "sans-700", l_cta - 10)
+        A(texte(cx, DIA_Y_CTA + 20, cote, "sans", 13, 700, "encre", wdth=118,
+                ancre="middle", tabulaire=True))
+
+    controler("appui note", d["note_courte"], 10, "mono", span, 10 * 0.14)
+    A(texte(A_MARGE, DIA_Y_NOTE, d["note_courte"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    A("</svg>")
+
+    assert not depassements, (
+        "dépassement(s) sur l’appui : " + " ; ".join(depassements))
+
+    return "\n".join(out) + "\n", controles_appui(
+        motif=f"la bande à {len(volumes)} volumes proportionnés aux débits, "
+              f"le crochet continu sur {len(i_calc)} d’entre eux contre "
+              f"{len(d['elements']['marques'])} marques isolées, la frontière "
+              "ignorée qui bute, une machine chiffrée par volume et les deux "
+              "régimes nommés court — les exigences par élément, l’article 20 "
+              "et les cinq extractions sont ABSENTS de ce format : mesure de "
+              "format, pas exception (leurs libellés tomberaient sous le "
+              "plancher de lisibilité)",
+        bas=f"machines jusqu’à {DIA_Y_CTA + DIA_H_CTA} px, note à "
+            f"{DIA_Y_NOTE} px, marge basse {AH - DIA_Y_NOTE} px",
+        proportion="largeurs ∝ débits : "
+                   + " / ".join(f"{l:.1f}" for l in largeurs)
+                   + f" px sur {span}")
+
 if __name__ == "__main__":
     import json as _json
     import sys
@@ -2674,6 +3158,9 @@ if __name__ == "__main__":
         executer(composer_compensation,
                  composer_vignette_compensation,
                  composer_appui_compensation)
+    elif "discordance" in _d:
+        executer(composer_discordance, composer_vignette_discordance,
+                 composer_appui_discordance)
     elif "convergence" in _d:
         executer(composer_convergence, composer_vignette_convergence,
                  composer_appui_convergence)

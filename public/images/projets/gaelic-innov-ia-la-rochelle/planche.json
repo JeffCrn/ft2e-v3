@@ -1,0 +1,179 @@
+{
+  "fiche": "gaelic-innov-ia-la-rochelle",
+  "archetype": "zonage-ssi",
+  "archetype_motif": "La thèse de la fiche est une DISCORDANCE de découpages, et c’est le domaine propre de zonage-ssi : un même bâtiment, deux façons de le partager, qui ne se recouvrent pas. Le mécanisme `discordance` superpose les deux sur la même bande : au-dessus, le découpage réglementaire — un crochet continu qui embrasse les deux volumes neufs en une seule zone d’un seul usage, et, sur le volume restructuré, des marques isolées qui ne se relient à rien, parce que la réglementation par éléments n’embrasse rien ; au-dessous, le découpage de l’air — un crochet par volume, aucun mutualisé, et cinq extractions de plus sous le seul laboratoire. La démonstration est géométrique et se lit texte masqué : continu contre discret en haut, un contre trois en bas, et une frontière qui existe pour l’air sans exister pour le calcul. Aucun trait interrompu n’est employé : le corpus lui fait déjà dire deux choses différentes.",
+  "surtitre": "SCHÉMA DE PRINCIPE · DEUX DÉCOUPAGES D’UN MÊME BÂTIMENT",
+  "titre": "Laboratoires GAELIC",
+  "sous_titre": "Un seul usage au calcul, une centrale par volume",
+  "cartouche_legende": "LA ROCHELLE · 935 m² · 2022",
+  "aria_label": "Schéma de principe de deux découpages superposés d’un même bâtiment. La bande centrale porte les trois volumes de l’opération, de gauche à droite : le laboratoire restructuré, le bâtiment de liaison et l’open space, leurs largeurs proportionnées aux débits de leurs centrales de ventilation. Au-dessus, le découpage réglementaire : un crochet continu embrasse la liaison et l’open space en une seule zone de calcul RT2012, d’un seul usage industriel, tandis que le laboratoire, resté sous l’arrêté du 3 mai 2007, ne porte que des marques isolées, une par élément touché — mur, toiture, plancher, équipement —, que rien ne relie entre elles. Au-dessous, le découpage de l’air : un crochet par volume, trois centrales double flux indépendantes de 510, 430 et 850 mètres cubes par heure, et sous le seul laboratoire cinq extractions dédiées, une par local d’essai, de 100 à 190 mètres cubes par heure, dont l’air est rejeté sans repasser par aucun échangeur. La frontière entre la liaison et l’open space existe pour l’air et n’existe pas pour le calcul : un trait vertical la remonte et bute contre le crochet continu.",
+  "discordance": {
+    "entete": "UN MÊME ARRÊTÉ PARTAGE CE BÂTIMENT DE DEUX FAÇONS QUI NE SE RECOUVRENT PAS",
+    "calcul": {
+      "tag": "RT2012 — UN SEUL CALCUL POUR L’ENSEMBLE",
+      "detail": "UNE ZONE, UN GROUPE, UN USAGE : « INDUSTRIE »",
+      "cote": "441,73 m² UTILES · L’OPEN SPACE ET L’ACCUEIL RATTACHÉS À LA PRODUCTION",
+      "tag_court": "RT2012 — UN SEUL CALCUL"
+    },
+    "elements": {
+      "tag": "ARRÊTÉ DU 3 MAI 2007",
+      "detail": "UNE EXIGENCE PAR ÉLÉMENT TOUCHÉ",
+      "marques": [
+        {
+          "libelle": "MUR",
+          "valeur": "R ≥ 2,90"
+        },
+        {
+          "libelle": "TOITURE",
+          "valeur": "R ≥ 3,30"
+        },
+        {
+          "libelle": "PLANCHER",
+          "valeur": "R ≥ 2,70"
+        },
+        {
+          "libelle": "ÉQUIPEMENT",
+          "valeur": "COP MIN."
+        }
+      ],
+      "tag_court": "PAR ÉLÉMENTS"
+    },
+    "volumes": [
+      {
+        "cle": "laboratoire",
+        "libelle": "Laboratoire restructuré",
+        "libelle_court": "LABORATOIRE",
+        "mention": "EXISTANT REMANIÉ",
+        "debit": 510,
+        "unite": "m³/h",
+        "dans_le_calcul": false,
+        "libelle_vignette": "LABO"
+      },
+      {
+        "cle": "liaison",
+        "libelle": "Bâtiment de liaison",
+        "libelle_court": "LIAISON",
+        "mention": "NEUF",
+        "debit": 430,
+        "unite": "m³/h",
+        "dans_le_calcul": true,
+        "libelle_vignette": "LIAISON"
+      },
+      {
+        "cle": "open-space",
+        "libelle": "Open space",
+        "libelle_court": "OPEN SPACE",
+        "mention": "NEUF",
+        "debit": 850,
+        "unite": "m³/h",
+        "dans_le_calcul": true,
+        "libelle_vignette": "OPEN SPACE"
+      }
+    ],
+    "air": {
+      "tag": "ART. 20 — DES USAGES NETTEMENT DIFFÉRENTS, DES SYSTÈMES INDÉPENDANTS",
+      "detail": "TROIS CENTRALES DOUBLE FLUX, AUCUNE MUTUALISÉE — ÉCHANGEUR À CONTRE-COURANT, JUSQU’À 80 %",
+      "libelle_centrale": "CTA"
+    },
+    "extractions": {
+      "tag": "ET SOUS LE SEUL LABORATOIRE, UNE EXTRACTION PAR LOCAL D’ESSAI — L’AIR EST REJETÉ, JAMAIS REPRIS",
+      "postes": [
+        {
+          "libelle": "MAQUETTES LIQUIDES",
+          "valeur": 190
+        },
+        {
+          "libelle": "CARACTÉRISATIONS",
+          "valeur": 175
+        },
+        {
+          "libelle": "PILOTE DE LABORATOIRE",
+          "valeur": 150
+        },
+        {
+          "libelle": "MAQUETTE POUDRE",
+          "valeur": 100
+        },
+        {
+          "libelle": "LIQUIDES / SOLIDE",
+          "valeur": 100
+        }
+      ],
+      "unite": "m³/h"
+    },
+    "note_limite": "CETTE FRONTIÈRE EXISTE POUR L’AIR ET N’EXISTE PAS POUR LE CALCUL",
+    "note_courte": "LA FRONTIÈRE DE DROITE EXISTE POUR L’AIR, PAS POUR LE CALCUL"
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Le calcul compte ce bâtiment comme un ; la ventilation le tient pour trois, et le laboratoire pour cinq de plus.",
+  "vignette_surtitre": "DEUX DÉCOUPAGES",
+  "a_valider_ft2e": [
+    {
+      "objet": "La largeur des trois volumes sur la bande",
+      "la_source_affirme": "Les trois centrales double flux du CCTP du lot 14 portent des débits maximaux de 510, 430 et 850 m³/h. Les surfaces des trois volumes, elles, ne sont pas données volume par volume : le plan porte des surfaces local par local, et la répartition de chaque local entre les trois volumes n’est explicite ni au CCTP ni au contrat.",
+      "le_dessin_suppose": "Que la largeur d’un volume peut coder le débit de sa centrale plutôt que sa surface. C’est un choix : il évite de proportionner sur une somme de surfaces que le dossier n’établit pas, mais un lecteur pourrait lire ces largeurs comme des surfaces. La cote de débit est portée sous chaque volume pour lever l’ambiguïté."
+    },
+    {
+      "objet": "Les quatre éléments marqués sur le volume restructuré",
+      "la_source_affirme": "La note de conformité RT existant reproduit les articles applicables de l’arrêté du 3 mai 2007 modifié, et retient des exigences sur les murs (R ≥ 2,90 en zone CEE), les toitures terrasses (R ≥ 3,30), les planchers bas (R ≥ 2,70), les pompes à chaleur (COP minimal), l’eau chaude sanitaire, le refroidissement, la ventilation et l’éclairage.",
+      "le_dessin_suppose": "Que quatre marques suffisent à figurer un régime qui en compte davantage. Le dessin retient les trois parois et la famille des équipements, et n’en fait pas un inventaire : le propos est que ces exigences ne se relient pas entre elles, pas leur nombre exact."
+    },
+    {
+      "objet": "L’ordre des trois volumes de gauche à droite",
+      "la_source_affirme": "Le CCTP décrit la phase 1 comme « laboratoire + liaison brute vers l’existant » et la phase 2 comme « bureaux + équipement liaison brute » ; le bâtiment de liaison relie l’existant au reste.",
+      "le_dessin_suppose": "Que l’ordre laboratoire → liaison → open space peut être posé de gauche à droite. Il traduit une relation de programme, pas une implantation : aucune orientation, aucune distance et aucune géométrie d’ouvrage ne sont reproduites."
+    },
+    {
+      "objet": "La citation de l’article 20 sur le dessin",
+      "la_source_affirme": "La synthèse RT2012 de FT2E cite l’article 20 de l’arrêté du 28 décembre 2012 : « la ventilation des locaux ou groupes de locaux ayant des occupations ou des usages nettement différents doit être assurée par des systèmes indépendants ».",
+      "le_dessin_suppose": "Qu’une référence réglementaire publique peut figurer sur une planche. Le corpus porte déjà des mentions de RT2012, de RE2020 et de l’arrêté du 3 mai 2007 ; l’article est ici le pivot de la démonstration, puisque c’est lui qui sépare ce que le zonage de calcul réunit."
+    },
+    {
+      "objet": "Le nom du bâtiment et les désignations de locaux",
+      "la_source_affirme": "Le contrat de maîtrise d’œuvre, les deux CCTP, les études thermiques et les cartouches de plans nomment tous l’opération « GAELIC » ; les cinq locaux d’essai portent au plan les désignations reprises sur la planche.",
+      "le_dessin_suppose": "Que ce nom d’usage et ces désignations internes sont publiables. Ils ne nomment aucun tiers, ne portent aucune donnée commerciale, et ne permettent de reconstituer aucune implantation."
+    },
+    {
+      "objet": "Le mot « restructuré » porté par le premier volume",
+      "la_source_affirme": "Le contrat de maîtrise d’œuvre intitule l’opération « Restructuration d’un bâtiment existant en laboratoire, construction d’un bâtiment de liaison et Open Space ».",
+      "le_dessin_suppose": "Que la distinction existant / neuf peut se dire d’un mot sur la bande. C’est elle qui commande le régime réglementaire de chaque volume, et le dessin serait illisible sans elle."
+    }
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire 20-024 (champ reference) — il encode le volume annuel d’affaires du bureau.",
+    "Millésime d’ouverture de l’affaire (2020) — le cartouche ne porte que le millésime de réception.",
+    "Montant des travaux et honoraires de maîtrise d’œuvre — aucune donnée commerciale sur une planche.",
+    "Nom du maître d’ouvrage, de son occupant, de l’architecte mandataire, du BET structures, de l’OPC, du bureau de contrôle et des quinze entreprises titulaires — aucun tiers n’est nommé.",
+    "Marques et modèles des centrales de traitement d’air, de la pompe à chaleur, des caissons d’extraction et des équipements de procédé — le dessin ne porte que les débits, qui sont la donnée d’ingénierie.",
+    "Géométrie de l’ouvrage : aucune cote, aucun niveau, aucune orientation, aucune trame, aucune implantation — la bande est une topologie de programme, pas un plan.",
+    "Surfaces des locaux relevées au plan d’architecte — seule la surface utile RT, calculée par FT2E, est portée.",
+    "Données nominatives : auteurs et vérificateurs des pièces, interlocuteurs du maître d’ouvrage, conducteurs de travaux."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "deux découpages superposés d’une même bande : au registre haut, un crochet continu sur 2 volumes contre 4 marques que rien ne relie ; au registre bas, une descente et une machine par volume, 3 en tout, aucune mutualisée. La frontière ignorée du calcul traverse la bande et bute sur la traverse du crochet — continu contre discret, un contre trois",
+    "proportion": "largeurs ∝ débits des centrales : 510 / 430 / 850 m³/h sur 1790 — 310.0 / 261.4 / 516.6 px sur 1088",
+    "frontiere_ignoree": "x 627.4 — trait de 390 à 288, arrêté 24 px sous la traverse du crochet du calcul (x 366.0 à 1144.0) : il ne la touche pas",
+    "extractions": "5 marques isolées sous le seul volume hors calcul (x 56 à 366), chacune sa flèche de rejet — aucune reprise dessinée",
+    "bas_du_dessin": "machines jusqu’à 464, mentions d’air à 494–510, extractions 542–654, phrase à 688, cartouche 714–744, marge basse 56 px",
+    "reserve_profonde": "cartouche 258 x 30 px = 7740 px², soit 0.81 % de la planche",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur colonne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la bande à 3 volumes proportionnés aux débits, le crochet continu sur 2 d’entre eux contre 4 marques isolées, la frontière ignorée qui bute, et une machine chiffrée par volume — exigences, article, extractions, phrase de principe et cartouche laissés à la planche",
+    "bas_du_dessin": "machines jusqu’à 160 px, marge basse 40 px"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "la bande à 3 volumes proportionnés aux débits, le crochet continu sur 2 d’entre eux contre 4 marques isolées, la frontière ignorée qui bute, une machine chiffrée par volume et les deux régimes nommés court — les exigences par élément, l’article 20 et les cinq extractions sont ABSENTS de ce format : mesure de format, pas exception (leurs libellés tomberaient sous le plancher de lisibilité)",
+    "bas_du_dessin": "machines jusqu’à 258 px, note à 300 px, marge basse 68 px",
+    "proportion": "largeurs ∝ débits : 143.6 / 121.1 / 239.3 px sur 504"
+  }
+}
