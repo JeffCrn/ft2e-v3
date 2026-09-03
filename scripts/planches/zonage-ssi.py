@@ -3140,6 +3140,496 @@ def composer_appui_discordance(donnees):
                    + " / ".join(f"{l:.1f}" for l in largeurs)
                    + f" px sur {span}")
 
+# ══════════════════════════════════════════════════════════════════════════════
+# MÉCANISME `gradation` — la fiche « Vidéosurveillance hospitalière » (N23)
+#
+# Ce n'est pas une SSI, et c'est bien `zonage-ssi` : le mécanisme de l'archétype
+# est une BANDE PARTAGÉE PAR DES FRONTIÈRES, et il a déjà porté deux régimes
+# thermiques à Salignac et deux découpages discordants à GAELIC. Ce qu'il porte
+# ici est neuf : la frontière ne sépare pas deux périmètres, elle GRADUE une
+# seule grandeur continue — la densité de pixels sur le champ observé — en trois
+# objectifs d'exploitation, chacun appelant son matériel ; et cette grandeur
+# revient fermer la boucle à la réception.
+#
+# La géométrie porte seule la démonstration, texte masqué : trois témoins de
+# même longueur physique subdivisés à 12, 25 et 50 intervalles — un mètre de
+# scène à la densité exigée —, quatre blocs de matériel reliés chacun à
+# l'objectif qui le commande, dont un objectif qui envoie DEUX branches, et un
+# chemin de retour qui traverse la planche.
+#
+# Préfixes de constantes : GR_ (planche), GRV_ (vignette), GRA_ (appui).
+# Aucun n'existait au module — relevé le 2026-09-03 : 40 fonctions et
+# 142 constantes en place, préfixes GR/GRV/GRA libres, zéro collision.
+# ══════════════════════════════════════════════════════════════════════════════
+
+GR_Y_ENTETE = 194
+GR_O_X0 = MARGE                      # colonne des objectifs
+GR_O_X1 = 680
+GR_T_X0 = 744                        # colonne des types de matériel
+GR_T_X1 = 1144
+GR_Y0 = 210
+GR_H_OBJ = 100
+GR_ECART_OBJ = 16
+GR_H_TYPE = 77
+GR_ECART_TYPE = 8
+GR_PAD = 20
+GR_TEM_X = 416                       # le témoin de densité, dans la colonne objectifs
+GR_TEM_L = 240
+GR_TEM_H = 22
+GR_X_COUDE = 712                     # le coude des liaisons, entre les deux colonnes
+GR_Y_RETOUR = 620
+GR_X_RETOUR = 200
+GR_Y_REPORT = GR_Y_ENTETE   # la légende du témoin EST un en-tête de registre
+GR_Y_PHRASE = 686
+GR_Y_CARTOUCHE = 714
+GR_H_CARTOUCHE = 30
+
+
+def _temoin_densite(A, x, y, largeur, hauteur, intervalles, retrait=4.0):
+    """Un mètre de scène subdivisé à la densité exigée.
+
+    C'est la pièce qui porte la thèse sans un mot : trois témoins de MÊME
+    longueur physique, subdivisés à 12, 25 et 50 — l'identification est
+    quatre fois plus dense que la surveillance générale, et cela se voit.
+
+    Les deux bornes sont en encre pleine (elles délimitent le mètre), les
+    graduations intérieures en pivot et plus courtes (ce sont des cotes
+    secondaires, jamais des filets porteurs). La ligne de base ferme la règle.
+    """
+    A(ligne(x, y, x, y + hauteur, "encre", 1.5))
+    A(ligne(x + largeur, y, x + largeur, y + hauteur, "encre", 1.5))
+    A(ligne(x, y + hauteur, x + largeur, y + hauteur, "encre", 1.0))
+    pas = largeur / intervalles
+    for k in range(1, intervalles):
+        gx = x + k * pas
+        A(ligne(gx, y + retrait, gx, y + hauteur - retrait, "pivot", 1.0))
+    return pas
+
+
+def _liaison_gradation(A, x0, y0, x1, y1, x_coude, epaisseur=1.5):
+    """Le seuil commande le matériel : un trait coudé, une flèche à l'arrivée.
+    Un objectif peut en envoyer plusieurs — c'est le cas de la reconnaissance,
+    que deux optiques servent selon la distance de la scène."""
+    A(polyligne([(x0, y0), (x_coude, y0), (x_coude, y1), (x1 - 9, y1)],
+                "encre", epaisseur))
+    A(fleche(x1, y1, "encre"))
+
+
+def _retour_gradation(A, x_depart, y_depart, y_ligne, x_arrivee, y_arrivee,
+                      epaisseur=1.5):
+    """La boucle : ce qui a choisi la caméra revient la recevoir. Le chemin
+    part du bas de la colonne du matériel, traverse la planche entière vers la
+    gauche et remonte vers les objectifs. Tracé APRÈS les blocs — un trait posé
+    avant un fond opaque disparaît sous lui (relevé en N21 et rejoué en N22)."""
+    A(polyligne([(x_depart, y_depart), (x_depart, y_ligne),
+                 (x_arrivee, y_ligne), (x_arrivee, y_arrivee + 9)],
+                "encre", epaisseur))
+    A(fleche(x_arrivee, y_arrivee, "encre", direction="haut"))
+
+
+def composer_gradation(donnees):
+    g = donnees["gradation"]
+    objectifs = g["objectifs"]
+    types = g["types"]
+    out = []
+    A = out.append
+    depassements = []
+    mesures = 0
+
+    def controler(nom, texte_mesure, corps, profil, dispo, tracking=0.0,
+                  marge=1.0):
+        """Chaque chaîne dessinée est mesurée contre la largeur intérieure de
+        son contenant. Un `assert` rompt la composition AVANT tout rendu — et
+        cette sonde a été mise à l'épreuve sur les trois formats (N23)."""
+        nonlocal mesures
+        mesures += 1
+        largeur = mesurer(texte_mesure, corps, profil, tracking) * marge
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return dispo - largeur
+
+    marges = []
+
+    # ── Racine ───────────────────────────────────────────────────────────────
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A, ("filet-1", "filet-2", "filet-3", "encre", "pivot"))
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    marges.append(controler("surtitre", donnees["surtitre"], 11, "mono", UTILE,
+                            11 * 0.14))
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500, "pivot",
+            tracking=11 * 0.14))
+    marges.append(controler("titre", donnees["titre"], 30, "sans-600", UTILE,
+                            marge=1.2))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre",
+            wdth=112))
+    marges.append(controler("sous-titre", donnees["sous_titre"], 16, "sans-400",
+                            UTILE))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-têtes de registre — ce qui empêche la planche de mentir ───────────
+    marges.append(controler("en-tête étude", g["entete_etude"], 10, "mono",
+                            GR_O_X1 - GR_O_X0, 10 * 0.14))
+    A(texte(GR_O_X0, GR_Y_ENTETE, g["entete_etude"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+    marges.append(controler("en-tête types", g["entete_types"], 10, "mono",
+                            GR_T_X1 - GR_T_X0, 10 * 0.14))
+    A(texte(GR_T_X1, GR_Y_ENTETE, g["entete_types"], "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14))
+    # L'échelle du témoin EST un en-tête de registre : elle nomme le périmètre
+    # de la colonne qu'elle surmonte. Posée en bas de planche elle se lisait
+    # comme la légende du chemin de retour ; posée juste sous les témoins elle
+    # le jouxtait encore (deux relevés successifs au PNG à 1152).
+    # La borne n'est PAS la colonne des objectifs — sur la ligne des en-têtes,
+    # ce qui limite est l'en-tête voisin. Elle se CALCULE depuis sa largeur
+    # mesurée, jamais depuis une abscisse de colonne : posée à GR_T_X0 elle
+    # refusait une légende qui tenait (assertion rompue, à raison, en N23).
+    _fin_entete_types = GR_T_X1 - mesurer(g["entete_types"], 10, "mono",
+                                          10 * 0.14)
+    marges.append(controler("échelle du témoin", g["temoin_legende"], 10,
+                            "mono", _fin_entete_types - GR_TEM_X - 24,
+                            10 * 0.14))
+    A(texte(GR_TEM_X, GR_Y_REPORT, g["temoin_legende"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── Les trois objectifs, du moins au plus exigeant ───────────────────────
+    # La largeur du texte est BORNÉE par le témoin, jamais par la colonne : le
+    # témoin est à abscisse fixe et c'est lui qui commande la place restante.
+    dispo_texte = GR_TEM_X - 16 - (GR_O_X0 + GR_PAD)
+    centres_obj = {}
+    intervalles = {}
+    pas_dessine = {}
+    for i, o in enumerate(objectifs):
+        y = GR_Y0 + i * (GR_H_OBJ + GR_ECART_OBJ)
+        A(rect_bord(GR_O_X0, y, GR_O_X1 - GR_O_X0, GR_H_OBJ, "calcaire",
+                    "filet-1"))
+        marges.append(controler(f'objectif {o["cle"]}', o["libelle"], 15,
+                                "sans-600", dispo_texte, marge=1.2))
+        A(texte(GR_O_X0 + GR_PAD, y + 32, o["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        marges.append(controler(f'détail {o["cle"]}', o["detail"], 10, "mono",
+                                dispo_texte, 10 * 0.14))
+        A(texte(GR_O_X0 + GR_PAD, y + 54, o["detail"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        # Le seuil, au-dessus de son témoin — c'est la grandeur, en clair.
+        marges.append(controler(f'seuil {o["cle"]}', o["valeur"], 13, "mono",
+                                GR_TEM_L, 13 * 0.14))
+        A(texte(GR_TEM_X, y + 40, o["valeur"], "mono", 13, 600, "encre",
+                tracking=13 * 0.14, tabulaire=True))
+        n = o["seuil"] // g["temoin_pas"]
+        intervalles[o["cle"]] = n
+        pas_dessine[o["cle"]] = _temoin_densite(
+            A, GR_TEM_X, y + 52, GR_TEM_L, GR_TEM_H, n)
+        centres_obj[o["cle"]] = y + GR_H_OBJ / 2
+    bas_obj = GR_Y0 + 2 * (GR_H_OBJ + GR_ECART_OBJ) + GR_H_OBJ
+
+    # ── Les quatre types dérivés ─────────────────────────────────────────────
+    dispo_type = GR_T_X1 - GR_T_X0 - 2 * GR_PAD
+    centres_type = {}
+    for j, t in enumerate(types):
+        y = GR_Y0 + j * (GR_H_TYPE + GR_ECART_TYPE)
+        A(rect_bord(GR_T_X0, y, GR_T_X1 - GR_T_X0, GR_H_TYPE, "papier",
+                    "filet-1"))
+        marges.append(controler(f'type {t["cle"]}', t["libelle"], 15,
+                                "sans-600", dispo_type / 2, marge=1.2))
+        A(texte(GR_T_X0 + GR_PAD, y + 26, t["libelle"], "sans", 15, 600,
+                "encre", wdth=112))
+        marges.append(controler(f'définition {t["cle"]}', t["definition"], 13,
+                                "mono", dispo_type / 2, 13 * 0.14))
+        A(texte(GR_T_X1 - GR_PAD, y + 26, t["definition"], "mono", 13, 600,
+                "encre", ancre="end", tracking=13 * 0.14, tabulaire=True))
+        for k, ligne_mono in enumerate((t["optique"], t["nuit"], t["detail"])):
+            marges.append(controler(f'{t["cle"]} l.{k + 1}', ligne_mono, 10,
+                                    "mono", dispo_type, 10 * 0.14))
+            A(texte(GR_T_X0 + GR_PAD, y + 44 + k * 15, ligne_mono, "mono", 10,
+                    500, "pivot", tracking=10 * 0.14))
+        centres_type[t["cle"]] = y + GR_H_TYPE / 2
+    bas_type = GR_Y0 + 3 * (GR_H_TYPE + GR_ECART_TYPE) + GR_H_TYPE
+
+    # ── Les liaisons : le seuil commande le matériel ─────────────────────────
+    # Tracées APRÈS les deux colonnes : un trait posé avant un fond opaque
+    # passe dessous et disparaît (le piège de la N22, rejoué de la N21).
+    liaisons = 0
+    for o in objectifs:
+        for cle_t in o["types"]:
+            _liaison_gradation(A, GR_O_X1, centres_obj[o["cle"]],
+                               GR_T_X0, centres_type[cle_t], GR_X_COUDE)
+            liaisons += 1
+
+    # ── La boucle : la réception vérifie sur le même seuil ───────────────────
+    x_depart = (GR_T_X0 + GR_T_X1) / 2
+    _retour_gradation(A, x_depart, bas_type, GR_Y_RETOUR, GR_X_RETOUR, bas_obj)
+    tag = g["retour"]["tag"]
+    marges.append(controler("tag de retour", tag, 10, "mono",
+                            x_depart - (GR_X_RETOUR + 30) - 12, 10 * 0.14))
+    A(texte(GR_X_RETOUR + 30, GR_Y_RETOUR - 8, tag, "mono", 10, 500, "encre",
+            tracking=10 * 0.14))
+
+    # ── L'échelle du témoin — une convention de dessin se déclare ────────────
+
+
+    # ── Phrase de principe, pleine largeur ───────────────────────────────────
+    marges.append(controler("phrase de principe", donnees["phrase_principe"],
+                            17, "sans-400", UTILE))
+    A(texte(MARGE, GR_Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, GR_Y_CARTOUCHE, largeur, GR_H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, GR_Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    assert not depassements, (
+        "dépassement de colonne avant rendu : " + " ; ".join(depassements))
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration":
+            "une seule grandeur — la densité de pixels sur le champ — graduée "
+            f"par {len(objectifs)} seuils, et {len(types)} types de matériel "
+            f"qui en dérivent ; {liaisons} liaisons pour "
+            f"{len(objectifs)} objectifs : le seuil intermédiaire en envoie "
+            "DEUX (la même exigence, deux optiques selon la distance de la "
+            "scène). Un chemin de retour part du bas de la colonne du matériel "
+            "et remonte vers les objectifs : le critère de choix est le "
+            "critère de recette",
+        "temoins":
+            f"un trait pour {g['temoin_pas']}{NN}px/ml sur {GR_TEM_L} px de "
+            "mètre témoin — "
+            + " · ".join(f"{o['seuil']} → {intervalles[o['cle']]} intervalles "
+                         f"de {pas_dessine[o['cle']]:.1f} px"
+                         for o in objectifs)
+            + f" ; rapport dessiné {intervalles[objectifs[-1]['cle']] / intervalles[objectifs[0]['cle']]:.2f}"
+            f" pour un rapport réel {objectifs[-1]['seuil'] / objectifs[0]['seuil']:.2f}"
+            " — exact, le pas 5 divisant les trois seuils sans arrondi",
+        "colonnes":
+            f"objectifs {GR_O_X0}–{GR_O_X1} ({GR_O_X1 - GR_O_X0} px), "
+            f"matériel {GR_T_X0}–{GR_T_X1} ({GR_T_X1 - GR_T_X0} px) ; "
+            f"les deux colonnes finissent au même y ({bas_obj} et {bas_type})",
+        "ordre_de_trace":
+            "fond, blocs opaques, PUIS liaisons et chemin de retour — un trait "
+            "tracé avant un fond opaque disparaît sous lui, sans qu’aucun "
+            "contrôle automatique ne le voie (N21, rejoué en N22)",
+        "mesures": f"{mesures} chaînes mesurées contre leur contenant, "
+                   f"marge minimale {min(marges):.1f} px",
+        "bas_du_dessin": f"cartouche jusqu’à {GR_Y_CARTOUCHE + GR_H_CARTOUCHE} px, "
+                         f"marge basse {H - GR_Y_CARTOUCHE - GR_H_CARTOUCHE} px",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── Vignette ─────────────────────────────────────────────────────────────────
+GRV_Y_SURTITRE = 26
+GRV_Y0 = 44
+GRV_H = 38
+GRV_ECART = 8
+GRV_TEM_X = 118
+GRV_TEM_L = 168
+GRV_TEM_H = 14
+
+
+def composer_vignette_gradation(donnees):
+    """La vignette : le motif de l'archétype, sans son appareil — trois
+    densités croissantes et leur seuil. Les quatre types, les en-têtes de
+    registre et le chemin de retour sont ABSENTS de ce format : leurs libellés
+    tomberaient sous le plancher de lisibilité de 9 px. Mesure de format, pas
+    exception."""
+    g = donnees["gradation"]
+    objectifs = g["objectifs"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, t, corps, profil, dispo, tracking=0.0, marge=1.0):
+        largeur = mesurer(t, corps, profil, tracking) * marge
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return dispo - largeur
+
+    marges = []
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A, ("filet-1", "encre", "pivot"))
+    A(rect(0, 0, VW, VH, "papier"))
+
+    marges.append(controler("surtitre", donnees["vignette_surtitre"], 9, "mono",
+                            VW - 2 * V_MARGE, 9 * 0.14))
+    A(texte(V_MARGE, GRV_Y_SURTITRE, donnees["vignette_surtitre"], "mono", 9,
+            500, "pivot", tracking=9 * 0.14))
+
+    dispo = GRV_TEM_X - 8 - V_MARGE
+    intervalles = {}
+    pas_dessine = {}
+    for i, o in enumerate(objectifs):
+        y = GRV_Y0 + i * (GRV_H + GRV_ECART)
+        marges.append(controler(f'libellé {o["cle"]}', o["libelle_vignette"],
+                                12, "sans-600", dispo, marge=1.2))
+        A(texte(V_MARGE, y + 15, o["libelle_vignette"], "sans", 12, 600,
+                "encre", wdth=112))
+        marges.append(controler(f'valeur {o["cle"]}', o["valeur"], 10, "mono",
+                                dispo, 10 * 0.14))
+        A(texte(V_MARGE, y + 31, o["valeur"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14, tabulaire=True))
+        n = o["seuil"] // g["temoin_pas"]
+        intervalles[o["cle"]] = n
+        pas_dessine[o["cle"]] = _temoin_densite(
+            A, GRV_TEM_X, y + 12, GRV_TEM_L, GRV_TEM_H, n, retrait=2.5)
+
+    A("</svg>")
+    assert not depassements, (
+        "dépassement vignette : " + " ; ".join(depassements))
+
+    bas = GRV_Y0 + 2 * (GRV_H + GRV_ECART) + GRV_H
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "corps_minimal": "9 px (surtitre mono) — rendu à 8,2 px dans une carte "
+                         "de 274 px, 8,9 px à 296 px",
+        "motif": f"{len(objectifs)} densités croissantes, "
+                 + " · ".join(f"{intervalles[o['cle']]} intervalles de "
+                              f"{pas_dessine[o['cle']]:.1f} px"
+                              for o in objectifs)
+                 + " — la densité se lit sans un mot",
+        "absents_de_ce_format":
+            "les quatre types de matériel, les deux en-têtes de registre, le "
+            "chemin de retour et la légende du témoin — leurs libellés "
+            "tomberaient sous 9 px : mesure de format, pas exception",
+        "marges": f"marge minimale {min(marges):.1f} px ; bas du dessin {bas} px "
+                  f"pour {VH} — dégagement {VH - bas} px, aucun bord touché",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── Appui ────────────────────────────────────────────────────────────────────
+GRA_O_X0 = A_MARGE
+GRA_O_X1 = 300
+GRA_T_X0 = 330
+GRA_T_X1 = AW - A_MARGE
+GRA_Y0 = 56
+GRA_H_OBJ = 70
+GRA_ECART_OBJ = 12
+GRA_H_TYPE = 51
+GRA_ECART_TYPE = 9
+GRA_TEM_X = 32
+GRA_TEM_L = 260
+GRA_TEM_H = 12
+GRA_X_COUDE = 315
+GRA_Y_RETOUR = 310
+GRA_X_RETOUR = 100
+
+
+def composer_appui_gradation(donnees):
+    """L'appui du hero : le motif entier à l'échelle 1, densité intermédiaire.
+    Il garde les deux colonnes, les liaisons et la boucle — c'est le mécanisme.
+    Il laisse la portée des illuminateurs, le détail d'emploi des types, les
+    détails d'objectif et les en-têtes de registre."""
+    g = donnees["gradation"]
+    objectifs = g["objectifs"]
+    types = g["types"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, t, corps, profil, dispo, tracking=0.0, marge=1.0):
+        largeur = mesurer(t, corps, profil, tracking) * marge
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return dispo - largeur
+
+    marges = []
+    racine_appui(A, donnees, ("filet-1", "encre", "pivot"))
+
+    dispo_obj = GRA_O_X1 - 8 - (GRA_O_X0 + 8)
+    centres_obj = {}
+    intervalles = {}
+    pas_dessine = {}
+    for i, o in enumerate(objectifs):
+        y = GRA_Y0 + i * (GRA_H_OBJ + GRA_ECART_OBJ)
+        A(rect_bord(GRA_O_X0, y, GRA_O_X1 - GRA_O_X0, GRA_H_OBJ, "calcaire",
+                    "filet-1"))
+        marges.append(controler(f'objectif {o["cle"]}', o["libelle_court"], 13,
+                                "sans-600", dispo_obj, marge=1.2))
+        A(texte(GRA_O_X0 + 8, y + 22, o["libelle_court"], "sans", 13, 600,
+                "encre", wdth=112))
+        marges.append(controler(f'valeur {o["cle"]}', o["valeur"], 10, "mono",
+                                dispo_obj, 10 * 0.14))
+        A(texte(GRA_O_X0 + 8, y + 38, o["valeur"], "mono", 10, 500, "pivot",
+                tracking=10 * 0.14, tabulaire=True))
+        n = o["seuil"] // g["temoin_pas"]
+        intervalles[o["cle"]] = n
+        pas_dessine[o["cle"]] = _temoin_densite(
+            A, GRA_TEM_X, y + 46, GRA_TEM_L, GRA_TEM_H, n, retrait=2.5)
+        centres_obj[o["cle"]] = y + GRA_H_OBJ / 2
+    bas_obj = GRA_Y0 + 2 * (GRA_H_OBJ + GRA_ECART_OBJ) + GRA_H_OBJ
+
+    dispo_type = GRA_T_X1 - GRA_T_X0 - 24
+    centres_type = {}
+    for j, t in enumerate(types):
+        y = GRA_Y0 + j * (GRA_H_TYPE + GRA_ECART_TYPE)
+        A(rect_bord(GRA_T_X0, y, GRA_T_X1 - GRA_T_X0, GRA_H_TYPE, "papier",
+                    "filet-1"))
+        marges.append(controler(f'type {t["cle"]}', t["libelle_court"], 12,
+                                "sans-600", dispo_type / 2, marge=1.2))
+        A(texte(GRA_T_X0 + 12, y + 22, t["libelle_court"], "sans", 12, 600,
+                "encre", wdth=112))
+        marges.append(controler(f'définition {t["cle"]}', t["definition"], 10,
+                                "mono", dispo_type / 2, 10 * 0.14))
+        A(texte(GRA_T_X1 - 12, y + 22, t["definition"], "mono", 10, 500,
+                "encre", ancre="end", tracking=10 * 0.14, tabulaire=True))
+        marges.append(controler(f'optique {t["cle"]}', t["optique_courte"], 10,
+                                "mono", dispo_type, 10 * 0.14))
+        A(texte(GRA_T_X0 + 12, y + 39, t["optique_courte"], "mono", 10, 500,
+                "pivot", tracking=10 * 0.14))
+        centres_type[t["cle"]] = y + GRA_H_TYPE / 2
+    bas_type = GRA_Y0 + 3 * (GRA_H_TYPE + GRA_ECART_TYPE) + GRA_H_TYPE
+
+    liaisons = 0
+    for o in objectifs:
+        for cle_t in o["types"]:
+            _liaison_gradation(A, GRA_O_X1, centres_obj[o["cle"]],
+                               GRA_T_X0, centres_type[cle_t], GRA_X_COUDE,
+                               epaisseur=1.2)
+            liaisons += 1
+
+    x_depart = (GRA_T_X0 + GRA_T_X1) / 2
+    _retour_gradation(A, x_depart, bas_type, GRA_Y_RETOUR, GRA_X_RETOUR,
+                      bas_obj, epaisseur=1.2)
+    tag = g["retour"]["tag_court"]
+    marges.append(controler("tag de retour", tag, 10, "mono",
+                            x_depart - (GRA_X_RETOUR + 16) - 10, 10 * 0.14))
+    A(texte(GRA_X_RETOUR + 16, GRA_Y_RETOUR - 7, tag, "mono", 10, 500, "encre",
+            tracking=10 * 0.14))
+
+    A("</svg>")
+    assert not depassements, ("dépassement appui : " + " ; ".join(depassements))
+
+    controles = controles_appui(
+        motif=f"{len(objectifs)} objectifs gradués, {len(types)} types de "
+              f"matériel, {liaisons} liaisons dont deux issues du seuil "
+              "intermédiaire, et le chemin de retour — le mécanisme entier ; "
+              "les portées d’illuminateur, les détails d’emploi, les détails "
+              "d’objectif, les en-têtes de registre et la légende du témoin "
+              "sont ABSENTS de ce format : mesure de format, pas exception",
+        bas=f"chemin de retour à {GRA_Y_RETOUR} px, marge basse "
+            f"{AH - GRA_Y_RETOUR} px",
+        temoins=" · ".join(f"{o['seuil']} → {intervalles[o['cle']]} intervalles "
+                           f"de {pas_dessine[o['cle']]:.1f} px"
+                           for o in objectifs),
+        marges=f"marge minimale {min(marges):.1f} px")
+    return "\n".join(out) + "\n", controles
+
+
 if __name__ == "__main__":
     import json as _json
     import sys
@@ -3162,6 +3652,9 @@ if __name__ == "__main__":
     elif "discordance" in _d:
         executer(composer_discordance, composer_vignette_discordance,
                  composer_appui_discordance)
+    elif "gradation" in _d:
+        executer(composer_gradation, composer_vignette_gradation,
+                 composer_appui_gradation)
     elif "convergence" in _d:
         executer(composer_convergence, composer_vignette_convergence,
                  composer_appui_convergence)

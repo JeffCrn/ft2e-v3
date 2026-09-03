@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 368" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;height:auto;display:block" aria-label="Schéma de principe d’une chaîne de dimensionnement en vidéosurveillance. À gauche, trois objectifs d’exploitation empilés du moins au plus exigeant, chacun converti en un seuil de densité de pixels sur le champ observé : comprendre les actions demande 60 pixels par mètre, reconnaître une personne 125, l’identifier formellement 250. En regard de chaque objectif, un témoin dessine un mètre de scène subdivisé à la densité exigée : douze intervalles pour le premier seuil, vingt-cinq pour le deuxième, cinquante pour le troisième — la densité se voit. À droite, quatre types de caméra dérivés de ces seuils, chacun relié par un trait à l’objectif qui le commande, et décrits par leur définition, leur focale et la portée de leur illuminateur infrarouge. Le seuil intermédiaire envoie deux branches : le même niveau de reconnaissance appelle deux optiques différentes selon que la scène est à cinq ou à vingt mètres. En bas, un chemin de retour part des quatre types, traverse toute la planche vers la gauche et remonte vers les objectifs : à la réception, chaque vue est vérifiée sur le seuil même qui a choisi sa caméra.">
+<style>
+  .c-profond { fill: var(--color-profond, #001718); }
+  .c-encre { fill: var(--color-encre, #00393A); }
+  .c-pivot { fill: var(--color-pivot, #336667); }
+  .c-clair { fill: var(--color-clair, #99CCCD); }
+  .c-voile { fill: var(--color-voile, #E1F4F4); }
+  .c-papier { fill: var(--color-papier, #F7F9FA); }
+  .c-calcaire { fill: var(--color-calcaire, #EDF0F2); }
+  .c-filet-1 { fill: var(--color-filet-1, #00393A38); }
+  .c-filet-2 { fill: var(--color-filet-2, #00393A29); }
+  .c-filet-3 { fill: var(--color-filet-3, #00393A1F); }
+  .s-filet-1 { stroke: var(--color-filet-1, #00393A38); }
+  .s-encre { stroke: var(--color-encre, #00393A); }
+  .s-pivot { stroke: var(--color-pivot, #336667); }
+  .t-sans { font-family: "Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif; }
+  .t-mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+</style>
+  <rect x="0.00" y="0.00" width="552.00" height="368.00" class="c-papier" fill="#F7F9FA"/>
+  <text x="24.00" y="34.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="11" font-weight="500" letter-spacing="1.54">TROIS SEUILS, QUATRE TYPES</text>
+  <rect x="24.00" y="56.00" width="276.00" height="70.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="32.00" y="78.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">SURVEILLANCE</text>
+  <text x="32.00" y="94.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">60 px/ml</text>
+  <path d="M 32.00 102.00 L 32.00 114.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 292.00 102.00 L 292.00 114.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 32.00 114.00 L 292.00 114.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 53.67 104.50 L 53.67 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 75.33 104.50 L 75.33 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 97.00 104.50 L 97.00 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 118.67 104.50 L 118.67 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 140.33 104.50 L 140.33 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 162.00 104.50 L 162.00 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 183.67 104.50 L 183.67 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 205.33 104.50 L 205.33 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 227.00 104.50 L 227.00 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 248.67 104.50 L 248.67 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 270.33 104.50 L 270.33 111.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <rect x="24.00" y="138.00" width="276.00" height="70.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="32.00" y="160.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">RECONNAISSANCE</text>
+  <text x="32.00" y="176.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">125 px/ml</text>
+  <path d="M 32.00 184.00 L 32.00 196.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 292.00 184.00 L 292.00 196.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 32.00 196.00 L 292.00 196.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 42.40 186.50 L 42.40 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 52.80 186.50 L 52.80 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 63.20 186.50 L 63.20 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 73.60 186.50 L 73.60 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 84.00 186.50 L 84.00 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 94.40 186.50 L 94.40 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 104.80 186.50 L 104.80 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 115.20 186.50 L 115.20 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 125.60 186.50 L 125.60 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 136.00 186.50 L 136.00 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 146.40 186.50 L 146.40 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 156.80 186.50 L 156.80 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 167.20 186.50 L 167.20 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 177.60 186.50 L 177.60 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 188.00 186.50 L 188.00 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 198.40 186.50 L 198.40 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 208.80 186.50 L 208.80 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 219.20 186.50 L 219.20 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 229.60 186.50 L 229.60 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 240.00 186.50 L 240.00 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 250.40 186.50 L 250.40 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 260.80 186.50 L 260.80 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 271.20 186.50 L 271.20 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 281.60 186.50 L 281.60 193.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <rect x="24.00" y="220.00" width="276.00" height="70.00" class="c-calcaire s-filet-1" fill="#EDF0F2" stroke="#00393A38" stroke-width="1"/>
+  <text x="32.00" y="242.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="13" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">IDENTIFICATION</text>
+  <text x="32.00" y="258.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" font-variant-numeric="tabular-nums">250 px/ml</text>
+  <path d="M 32.00 266.00 L 32.00 278.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 292.00 266.00 L 292.00 278.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.5"/>
+  <path d="M 32.00 278.00 L 292.00 278.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.0"/>
+  <path d="M 37.20 268.50 L 37.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 42.40 268.50 L 42.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 47.60 268.50 L 47.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 52.80 268.50 L 52.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 58.00 268.50 L 58.00 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 63.20 268.50 L 63.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 68.40 268.50 L 68.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 73.60 268.50 L 73.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 78.80 268.50 L 78.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 84.00 268.50 L 84.00 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 89.20 268.50 L 89.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 94.40 268.50 L 94.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 99.60 268.50 L 99.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 104.80 268.50 L 104.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 110.00 268.50 L 110.00 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 115.20 268.50 L 115.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 120.40 268.50 L 120.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 125.60 268.50 L 125.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 130.80 268.50 L 130.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 136.00 268.50 L 136.00 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 141.20 268.50 L 141.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 146.40 268.50 L 146.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 151.60 268.50 L 151.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 156.80 268.50 L 156.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 162.00 268.50 L 162.00 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 167.20 268.50 L 167.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 172.40 268.50 L 172.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 177.60 268.50 L 177.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 182.80 268.50 L 182.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 188.00 268.50 L 188.00 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 193.20 268.50 L 193.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 198.40 268.50 L 198.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 203.60 268.50 L 203.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 208.80 268.50 L 208.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 214.00 268.50 L 214.00 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 219.20 268.50 L 219.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 224.40 268.50 L 224.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 229.60 268.50 L 229.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 234.80 268.50 L 234.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 240.00 268.50 L 240.00 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 245.20 268.50 L 245.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 250.40 268.50 L 250.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 255.60 268.50 L 255.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 260.80 268.50 L 260.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 266.00 268.50 L 266.00 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 271.20 268.50 L 271.20 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 276.40 268.50 L 276.40 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 281.60 268.50 L 281.60 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <path d="M 286.80 268.50 L 286.80 275.50" fill="none" class="s-pivot" stroke="#336667" stroke-width="1.0"/>
+  <rect x="330.00" y="56.00" width="198.00" height="51.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="342.00" y="78.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">TYPE 1</text>
+  <text x="516.00" y="78.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end" font-variant-numeric="tabular-nums">2 MP</text>
+  <text x="342.00" y="95.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">4,7–94 mm · ZOOM × 20</text>
+  <rect x="330.00" y="116.00" width="198.00" height="51.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="342.00" y="138.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">TYPE 2</text>
+  <text x="516.00" y="138.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end" font-variant-numeric="tabular-nums">5 MP</text>
+  <text x="342.00" y="155.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">1,45 mm · 180°</text>
+  <rect x="330.00" y="176.00" width="198.00" height="51.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="342.00" y="198.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">TYPE 3</text>
+  <text x="516.00" y="198.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end" font-variant-numeric="tabular-nums">2 MP</text>
+  <text x="342.00" y="215.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">4–9 / 12–40 mm</text>
+  <rect x="330.00" y="236.00" width="198.00" height="51.00" class="c-papier s-filet-1" fill="#F7F9FA" stroke="#00393A38" stroke-width="1"/>
+  <text x="342.00" y="258.00" class="t-sans c-encre" fill="#00393A" font-family='"Archivo Variable", Archivo, "Helvetica Neue", Arial, sans-serif' font-size="12" font-weight="600" font-variation-settings="'wdth' 112, 'wght' 600">TYPE 4</text>
+  <text x="516.00" y="258.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40" text-anchor="end" font-variant-numeric="tabular-nums">5 MP</text>
+  <text x="342.00" y="275.00" class="t-mono c-pivot" fill="#336667" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">DÔME · 4–9 mm</text>
+  <path d="M 300.00 91.00 L 315.00 91.00 L 315.00 81.50 L 321.00 81.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 330.00 81.50 L 321.00 77.00 L 321.00 86.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 300.00 173.00 L 315.00 173.00 L 315.00 141.50 L 321.00 141.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 330.00 141.50 L 321.00 137.00 L 321.00 146.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 300.00 173.00 L 315.00 173.00 L 315.00 201.50 L 321.00 201.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 330.00 201.50 L 321.00 197.00 L 321.00 206.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 300.00 255.00 L 315.00 255.00 L 315.00 261.50 L 321.00 261.50" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 330.00 261.50 L 321.00 257.00 L 321.00 266.00 Z" class="c-encre" fill="#00393A"/>
+  <path d="M 429.00 287.00 L 429.00 310.00 L 100.00 310.00 L 100.00 299.00" fill="none" class="s-encre" stroke="#00393A" stroke-width="1.2"/>
+  <path d="M 100.00 290.00 L 95.50 299.00 L 104.50 299.00 Z" class="c-encre" fill="#00393A"/>
+  <text x="116.00" y="303.00" class="t-mono c-encre" fill="#00393A" font-family='"IBM Plex Mono", ui-monospace, monospace' font-size="10" font-weight="500" letter-spacing="1.40">RÉCEPTION · VUE PAR VUE</text>
+</svg>

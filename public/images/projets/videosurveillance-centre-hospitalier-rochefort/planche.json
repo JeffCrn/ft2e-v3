@@ -1,0 +1,167 @@
+{
+  "fiche": "videosurveillance-centre-hospitalier-rochefort",
+  "archetype": "zonage-ssi",
+  "archetype_motif": "La thèse de la fiche est un DÉCOUPAGE, et c’est le domaine propre de zonage-ssi : une grandeur continue — la densité de pixels sur le champ — que trois seuils partagent en trois objectifs d’exploitation, chacun appelant son matériel. L’archétype est retenu pour son MÉCANISME et non pour son intitulé, comme il portait déjà deux régimes thermiques à Salignac et deux découpages discordants à GAELIC : ici aucune SSI, mais la même bande partagée par des frontières. Le mécanisme `gradation` y ajoute ce qu’aucune des 45 planches ne porte — la frontière ne sépare pas deux périmètres, elle GRADUE une seule grandeur, et cette grandeur revient fermer la boucle à la réception.",
+  "surtitre": "SCHÉMA DE PRINCIPE · DU SEUIL DE DÉFINITION AU CHOIX DE LA CAMÉRA",
+  "titre": "Vidéosurveillance hospitalière",
+  "sous_titre": "Trois seuils de définition choisissent le matériel, puis prononcent la réception",
+  "cartouche_legende": "ROCHEFORT · DEUX SITES · 2022",
+  "aria_label": "Schéma de principe d’une chaîne de dimensionnement en vidéosurveillance. À gauche, trois objectifs d’exploitation empilés du moins au plus exigeant, chacun converti en un seuil de densité de pixels sur le champ observé : comprendre les actions demande 60 pixels par mètre, reconnaître une personne 125, l’identifier formellement 250. En regard de chaque objectif, un témoin dessine un mètre de scène subdivisé à la densité exigée : douze intervalles pour le premier seuil, vingt-cinq pour le deuxième, cinquante pour le troisième — la densité se voit. À droite, quatre types de caméra dérivés de ces seuils, chacun relié par un trait à l’objectif qui le commande, et décrits par leur définition, leur focale et la portée de leur illuminateur infrarouge. Le seuil intermédiaire envoie deux branches : le même niveau de reconnaissance appelle deux optiques différentes selon que la scène est à cinq ou à vingt mètres. En bas, un chemin de retour part des quatre types, traverse toute la planche vers la gauche et remonte vers les objectifs : à la réception, chaque vue est vérifiée sur le seuil même qui a choisi sa caméra.",
+  "gradation": {
+    "entete_etude": "ÉTUDE — L’OBJECTIF DEVIENT UN SEUIL",
+    "entete_types": "QUATRE TYPES DÉRIVÉS",
+    "unite": "px/ml",
+    "temoin_pas": 5,
+    "temoin_legende": "UN TRAIT POUR 5 px/ml, SUR UN MÈTRE DE SCÈNE",
+    "objectifs": [
+      {
+        "cle": "surveillance",
+        "libelle": "Surveillance générale",
+        "libelle_court": "SURVEILLANCE",
+        "libelle_vignette": "VOIR",
+        "detail": "COMPRENDRE LES ACTIONS DANS LE CHAMP",
+        "seuil": 60,
+        "valeur": "60 px/ml",
+        "unite": "px/ml",
+        "types": [
+          "type-1"
+        ]
+      },
+      {
+        "cle": "reconnaissance",
+        "libelle": "Reconnaissance",
+        "libelle_court": "RECONNAISSANCE",
+        "libelle_vignette": "RECONNAÎTRE",
+        "detail": "RECONNAÎTRE UNE PERSONNE SANS ZOOMER",
+        "seuil": 125,
+        "valeur": "125 px/ml",
+        "unite": "px/ml",
+        "types": [
+          "type-2",
+          "type-3"
+        ]
+      },
+      {
+        "cle": "identification",
+        "libelle": "Identification",
+        "libelle_court": "IDENTIFICATION",
+        "libelle_vignette": "IDENTIFIER",
+        "detail": "IDENTIFIER SUR LA VUE COMPLÈTE DU VISAGE",
+        "seuil": 250,
+        "valeur": "250 px/ml",
+        "unite": "px/ml",
+        "types": [
+          "type-4"
+        ]
+      }
+    ],
+    "types": [
+      {
+        "cle": "type-1",
+        "libelle": "Type 1",
+        "libelle_court": "TYPE 1",
+        "objectif": "surveillance",
+        "definition": "2 MP",
+        "optique": "FOCALE 4,7–94 mm · ZOOM OPTIQUE × 20",
+        "optique_courte": "4,7–94 mm · ZOOM × 20",
+        "nuit": "ILLUMINATEUR INFRAROUGE 150 m",
+        "detail": "LES GRANDES DISTANCES, DE NUIT",
+        "valeur": "2 MP",
+        "unite": "MP"
+      },
+      {
+        "cle": "type-2",
+        "libelle": "Type 2",
+        "libelle_court": "TYPE 2",
+        "objectif": "reconnaissance",
+        "definition": "5 MP",
+        "optique": "FOCALE FIXE 1,45 mm · 180° × 120°",
+        "optique_courte": "1,45 mm · 180°",
+        "nuit": "ILLUMINATEUR INFRAROUGE 15 m",
+        "detail": "LA SCÈNE PROCHE, DANS UN RAYON DE 5 m",
+        "valeur": "5 MP",
+        "unite": "MP"
+      },
+      {
+        "cle": "type-3",
+        "libelle": "Type 3",
+        "libelle_court": "TYPE 3",
+        "objectif": "reconnaissance",
+        "definition": "2 MP",
+        "optique": "FOCALE VARIABLE 4–9 OU 12–40 mm · 70°",
+        "optique_courte": "4–9 / 12–40 mm",
+        "nuit": "ILLUMINATEUR INFRAROUGE 30 OU 50 m",
+        "detail": "LA MÊME EXIGENCE JUSQU’À 20 m",
+        "valeur": "2 MP",
+        "unite": "MP"
+      },
+      {
+        "cle": "type-4",
+        "libelle": "Type 4",
+        "libelle_court": "TYPE 4",
+        "objectif": "identification",
+        "definition": "5 MP",
+        "optique": "DÔME · FOCALE VARIABLE 4–9 mm",
+        "optique_courte": "DÔME · 4–9 mm",
+        "nuit": "ILLUMINATEUR INFRAROUGE 30 m",
+        "detail": "L’INTÉRIEUR, DANS UN RAYON DE 10 m",
+        "valeur": "5 MP",
+        "unite": "MP"
+      }
+    ],
+    "retour": {
+      "tag": "RÉCEPTION — CHAQUE VUE VÉRIFIÉE SUR LE SEUIL QUI A CHOISI SA CAMÉRA",
+      "tag_court": "RÉCEPTION · VUE PAR VUE",
+      "tag_vignette": "LA MÊME MESURE À LA RECETTE"
+    }
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "phrase_principe": "Ce qui a choisi la caméra est ce qui la reçoit : le seuil de définition, mesuré sur la vue.",
+  "vignette_surtitre": "TROIS SEUILS, QUATRE TYPES",
+  "a_valider_ft2e": [
+    "LE RATTACHEMENT DU TYPE 1 À LA SURVEILLANCE GÉNÉRALE EST DÉDUIT, NON ÉCRIT. Le CCTP énonce le seuil de trois des quatre types — 125 px/ml pour les types 2 et 3, 250 pour le type 4 — mais n’en cite aucun pour le type 1. Le dessin le range sous la surveillance générale d’après son emploi décrit (allées circulables, zones distantes, visualiser un véhicule qui transite). À confirmer.",
+    "L’ÉCHELLE DU TÉMOIN EST UNE CONVENTION DE DESSIN : un trait pour 5 px/ml sur un mètre de scène, soit douze, vingt-cinq et cinquante intervalles. Le pas de 5 est le plus grand diviseur commun des trois seuils, ce qui rend les trois témoins exacts et sans arrondi ; il ne figure dans aucune pièce.",
+    "LES SEUILS PORTÉS SONT CEUX DU CCTP (250 / 125 / 60 px/ml). Les deux propositions d’honoraires, antérieures d’un an, citent l’arrêté de 2007 à 300 / 120 / moins de 120. La planche retient la pièce de production, mise en consultation. À trancher.",
+    "LA BOUCLE DE RÉCEPTION EST UNE LECTURE CROISÉE DE TROIS PIÈCES, non une phrase du CCTP : le contrat de maîtrise d’œuvre prévoit que « les vérifications de chaque vue seront réalisées en présence du maître d’ouvrage et de la maîtrise d’œuvre », le planning d’exécution intitule sa tâche « Validation des vues / Réception », et les trois comptes rendus portent une rubrique « Réception des vues ». Que ce soit LE SEUIL qui y soit vérifié est déduit de ces trois pièces.",
+    "LA PORTÉE INFRAROUGE DU TYPE 3 EST DONNÉE DEUX FOIS : 50 m à sa fiche technique, « 30 ou 50 m » au paragraphe des objectifs. La planche porte la seconde graphie, plus large.",
+    "L’ORDRE DES TROIS OBJECTIFS SUIT L’EXIGENCE CROISSANTE, et non l’ordre du CCTP, qui les énonce du plus exigeant au moins exigeant.",
+    "AUCUN COMPTE N’EST PORTÉ — ni caméras, ni répartiteurs. La DPGF est un cadre vierge de quantités et aucune seconde source ne les confirme.",
+    "LE MILLÉSIME DU CARTOUCHE EST CELUI DE LA FINALISATION AU CLASSEUR FT2E : aucune pièce du dossier ne prononce la réception."
+  ],
+  "exclusions_appliquees": [
+    "Aucune implantation, aucune localisation de poste, aucun champ de vision situé — le CCTP et les trois plans les portent, la planche non.",
+    "Aucun repère de caméra ni de répartiteur : les nommer reviendrait à cartographier l’infrastructure de sûreté d’un établissement de santé.",
+    "Aucun plan de masse ni de niveau, aucune géométrie d’ouvrage.",
+    "Aucune donnée de stockage, de durée de conservation ni d’accès aux images.",
+    "Aucune marque ni référence de modèle — le CCTP en nomme sept, toutes assorties de « ou techniquement équivalent ».",
+    "Aucun montant, aucun numéro d’affaire, aucun millésime d’ouverture.",
+    "Aucun nom de tiers : maîtrise d’ouvrage, entreprises, éditeurs.",
+    "Aucune donnée nominative."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "une seule grandeur — la densité de pixels sur le champ — graduée par 3 seuils, et 4 types de matériel qui en dérivent ; 4 liaisons pour 3 objectifs : le seuil intermédiaire en envoie DEUX (la même exigence, deux optiques selon la distance de la scène). Un chemin de retour part du bas de la colonne du matériel et remonte vers les objectifs : le critère de choix est le critère de recette",
+    "temoins": "un trait pour 5 px/ml sur 240 px de mètre témoin — 60 → 12 intervalles de 20.0 px · 125 → 25 intervalles de 9.6 px · 250 → 50 intervalles de 4.8 px ; rapport dessiné 4.17 pour un rapport réel 4.17 — exact, le pas 5 divisant les trois seuils sans arrondi",
+    "colonnes": "objectifs 56–680 (624 px), matériel 744–1144 (400 px) ; les deux colonnes finissent au même y (542 et 542)",
+    "ordre_de_trace": "fond, blocs opaques, PUIS liaisons et chemin de retour — un trait tracé avant un fond opaque disparaît sous lui, sans qu’aucun contrôle automatique ne le voie (N21, rejoué en N22)",
+    "mesures": "37 chaînes mesurées contre leur contenant, marge minimale 29.4 px",
+    "bas_du_dessin": "cartouche jusqu’à 744 px, marge basse 56 px"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "corps_minimal": "9 px (surtitre mono) — rendu à 8,2 px dans une carte de 274 px, 8,9 px à 296 px",
+    "motif": "3 densités croissantes, 12 intervalles de 14.0 px · 25 intervalles de 6.7 px · 50 intervalles de 3.4 px — la densité se lit sans un mot",
+    "absents_de_ce_format": "les quatre types de matériel, les deux en-têtes de registre, le chemin de retour et la légende du témoin — leurs libellés tomberaient sous 9 px : mesure de format, pas exception",
+    "marges": "marge minimale 20.0 px ; bas du dessin 174 px pour 200 — dégagement 26 px, aucun bord touché"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "3 objectifs gradués, 4 types de matériel, 4 liaisons dont deux issues du seuil intermédiaire, et le chemin de retour — le mécanisme entier ; les portées d’illuminateur, les détails d’emploi, les détails d’objectif, les en-têtes de registre et la légende du témoin sont ABSENTS de ce format : mesure de format, pas exception",
+    "bas_du_dessin": "chemin de retour à 310 px, marge basse 58 px",
+    "temoins": "60 → 12 intervalles de 21.7 px · 125 → 25 intervalles de 10.4 px · 250 → 50 intervalles de 5.2 px",
+    "marges": "marge minimale 20.0 px"
+  }
+}
