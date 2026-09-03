@@ -47,6 +47,21 @@ Thumbs.db
 # CV de l'équipe — données personnelles, jamais commitées.
 /cv/
 
+# Pièces de travail déposées dans `livrables/` — empaquetages et synthèses
+# régénérables, arbitrées le 2026-09-03.
+#
+# ⚠ Le premier motif vise le ZIP SEUL, et non `/livrables/cv-ft2e/` en entier :
+#   les douze CV individuels de ce dossier sont DÉJÀ SUIVIS, et un `.gitignore`
+#   n'a aucun effet sur un fichier suivi. Ignorer le dossier ferait seulement
+#   *paraître* ignoré ce qui reste versionné — un motif qui ment sur son objet.
+#   ⚠ À signaler tel quel : ces douze pièces sont des données personnelles
+#   nominatives, dans l'historique d'un dépôt partagé, alors que `/cv/` ci-dessus
+#   déclare qu'un CV ne se commite jamais. Les retirer demande une réécriture
+#   d'historique — c'est un arbitrage, pas une correction (cf. les 25 visuels).
+/livrables/cv-ft2e/*.zip
+# Le second est daté par glob : la synthèse se refait, elle ne se cumule pas.
+/livrables/synthese-referencement-cliches-secteurs-*.pdf
+
 # Fonds documentaire client (archives de références) — volumineux, jamais commité.
 /references/
 
