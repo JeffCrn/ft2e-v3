@@ -267,3 +267,44 @@ Ce qui a changé depuis, en renvois — le détail vit dans les plans :
 - Le prompt opératoire de la reprise des chantiers accueil/motion reste
   l'annexe B du plan motion, lue avec ses compléments (annexe C, § 11-12 du
   plan bloc-secteurs).
+
+
+---
+
+# Addendum du 2026-09-03 — le chantier des références est CLOS à 47 fiches
+
+*L'état ci-dessus reste celui du 2026-08-17, et l'addendum du 2026-08-27 celui du
+chantier motion. Ce second addendum ne les remplace pas : il ajoute ce que les
+vingt-quatre sessions du chantier des nouvelles fiches ont changé.*
+
+- **47 fiches de références réelles**, 47 dossiers de planches complets, build 70 pages.
+  Le compte qui fait foi est le § Suivi du plan
+  (`docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md`), plus vingt-trois ;
+  il se mesure par `ls src/content/projets/*.md | wc -l`.
+- **Le chantier est CLOS à 47, par arbitrage de l'utilisateur rendu le 2026-09-03**, et
+  non par renonciation de session. `2020.zip` n'existe pas ; les affaires `19-008` et
+  `20-058` ne figurent dans aucune archive présente ; le classeur FT2E lui-même n'a jamais
+  mené qu'à quarante-neuf affaires. **Aucune fiche n'a été fabriquée pour combler l'écart.**
+  ⚠ Piste laissée ouverte à FT2E, à vérifier et non à supposer : la section
+  « Finalisées en 2021 » du classeur est **entièrement vide** — seul millésime sans entrée,
+  entre 2020 (deux) et 2022 (quatre).
+- **Répartition sectorielle mesurée sur le déploiement** : L10 T14 I8 P3 C7 M7 E3, soit
+  52 en pondéré (cinq fiches à double domaine comptent double). Les sept secteurs sont
+  peuplés.
+- **Archétypes de planches** : boucle-fluide 12 · coupe-traversée 11 · zonage-ssi 8 ·
+  sankey-énergie 7 · tableau-électrique 7 · chronologie-affaire 2 · **planche-chiffrée 0,
+  et son module n'existe toujours pas** — le point du rang B est inchangé, et il est
+  désormais le seul archétype que 47 planches n'ont jamais exercé.
+- `python scripts/planches/invariant.py` : **188/188** pièces identiques octet à octet.
+  ⚠ Un dossier neuf non encore composé fait baisser le **numérateur** : lire le
+  dénominateur avant de conclure à une régression.
+- **Les insécables du corpus dessiné (rang D) grossissent avec le corpus** : le relevé du
+  2026-08-17 portait sur 23 dossiers, il y en a 47. Le chantier est inchangé dans sa
+  nature — correction à la source, régénération, invariant, contrôle du rendu aux trois
+  tailles — mais son volume a doublé.
+- **L'échéance datée du § 5 porte désormais sur QUINZE affaires**, non quatorze :
+  `MILLESIME_LIVRAISON_ANNONCE = 2026` s'affiche sur toutes les fiches dont la réception
+  n'est pas prononcée sur pièce. ⚠ La réponse au build rouge du 1ᵉʳ janvier 2027 reste
+  d'aller relever les réceptions, jamais de pousser la constante.
+- **Le prompt de reprise ne porte plus de dossier** : annexe Y du plan du chantier. Il
+  porte la question à poser à FT2E et la liste des points ouverts.
