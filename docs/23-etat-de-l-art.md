@@ -120,21 +120,56 @@ photographies d’équipe sont dans le même cas.
 
 ### Rang D — exécutable dans le dépôt, sans attendre personne
 
-**Les insécables du corpus dessiné.** ⚠ **Le compte dépend entièrement de la population
-mesurée**, et les relevés antérieurs n’en nommaient qu’une. Remesuré le 2026-08-17 :
+**Les insécables du corpus dessiné — les `aria_label` sont FAITS le 2026-09-03, les deux
+autres populations restent ouvertes.** ⚠ **Le compte dépend entièrement de la population
+mesurée**, et les relevés antérieurs n'en nommaient qu'une. Remesuré sur les **47**
+dossiers le 2026-09-03 :
 
-| Population | Écarts | Dossiers | Servi au visiteur ? |
-|---|---|---|---|
-| Texte **dessiné** (`<text>` des 69 SVG) | **12** | 8 / 23 | oui, à l’écran |
-| Texte **lu** (`aria-label` des 69 SVG) | **114** | 22 / 23 | oui, **prononcé par les lecteurs d’écran** |
-| Champs éditoriaux du `planche.json` | 602 | 23 / 23 | non, ne sort jamais du dépôt |
+| Population | Écarts | Dossiers | Servi au visiteur ? | État |
+|---|---|---|---|---|
+| Texte **lu** (`aria_label`) | **175** | 46 / 47 | oui, **prononcé par les lecteurs d'écran** | ✅ **corrigé le 2026-09-03** |
+| Texte **dessiné** (`<text>` des SVG) | **64** | 27 / 47 | oui, à l'écran | ouvert |
+| Champs éditoriaux du `planche.json` | 2 160 | 47 / 47 | non, ne sort jamais du dépôt | ouvert |
 
-Les 114 des `aria-label` ne figuraient dans aucun relevé antérieur, et ce sont les plus
-conséquents : c’est de l’accessibilité, pas de la mise en page. ⚠ **Ne PAS lancer
-`scripts/injection-typographique.py` sur ce corpus** : il déplace le dessin, les
-compositeurs mesurant leurs chaînes pour poser la géométrie et U+202F n’ayant pas la
-chasse d’une espace ordinaire. C’est un chantier avec correction à la source,
-régénération des 23 dossiers et contrôle du rendu aux trois tailles de lecture.
+⚠ **Les 175 ne se comparent PAS aux 114 du relevé du 2026-08-17**, et pas seulement parce
+que le corpus est passé de 23 à 47 dossiers : **le motif a changé.** Le relevé de 2026-08-17
+ne comptait que les insécables *manquantes* ; celui-ci compte aussi les insécables **mal
+caractérisées** — 18 fines (U+202F) posées devant une ponctuation double là où la règle du
+dépôt veut une insécable large (U+00A0). Le motif canonique de
+`injection-typographique.py` cherche `[ ]`, une espace **ordinaire littérale** : une fine
+déjà posée lui est invisible et **passe tout contrôle sans être conforme**. Le corpus
+portait donc deux conventions contradictoires pour le même cas, et aucun instrument ne
+pouvait le dire. *Un relevé n'est comparable qu'à périmètre ET à motif constants* — c'est
+la même leçon que le lexique de `releve-numeral.py`, qui a produit trois sous-comptes
+avant qu'on la retienne.
+
+Ce qui a été fait, et pourquoi cela seulement : `aria_label` **n'est jamais dessiné**.
+`_tronc.py:219` et les six compositeurs ne l'écrivent qu'en attribut sur la racine SVG,
+`PlancheReference.astro` le pose sur le conteneur de la vignette (`aria-hidden` à la
+source), et **aucun appel à `_tronc.mesurer` ne le touche** : aucune géométrie n'en
+dépend. Instrument rejouable, contrôle autant que correcteur :
+`scripts/insecables-aria-planches.py` (sans argument il mesure, `--appliquer` il écrit ;
+son lexique d'unités est **importé** de `injection-typographique.py`, jamais recopié).
+Preuves de la passe : invariant 188/188 avant et après, 92 SVG identiques octet à octet
+une fois l'`aria-label` retiré, blocs `controles` recalculés inchangés, et les 47 fiches
+servant la chaîne corrigée sur ses **trois** chemins de rendu.
+
+⚠ **Ne PAS lancer `scripts/injection-typographique.py` sur les deux populations
+restantes** : il déplace le dessin, les compositeurs mesurant leurs chaînes pour poser la
+géométrie et U+202F n'ayant pas la chasse d'une espace ordinaire. Le texte dessiné est un
+chantier avec correction à la source, régénération des 47 dossiers, invariant octet **et
+contrôle du rendu aux trois tailles de lecture** — c'est ce dernier point qui le sépare de
+celui des `aria_label`, qui n'en avait structurellement pas besoin.
+
+⚠ **Et l'insécable ne change presque rien à ce qui est PRONONCÉ.** Sur les 175 corrigées,
+**3 seulement** modifient l'écoute : les séparateurs de milliers, qu'un synthétiseur lit
+« un, trois cent dix-huit » sans elles. Les 145 espaces devant la ponctuation double sont
+de la conformité typographique, inaudible — une insécable empêche un « : » de basculer en
+début de ligne, et un `aria-label` n'est jamais mis en page. Le classement en rang D reste
+juste (le champ **est** prononcé, et `french-editorial.md` l'inscrit explicitement dans son
+périmètre), mais **ne pas le présenter comme un gain d'accessibilité qu'il n'est pas.** Le
+passage NVDA ci-dessous doit d'ailleurs vérifier l'inverse : que U+202F ne gêne aucun
+synthétiseur ni aucun afficheur braille.
 
 **Le LCP mobile est AU seuil, pas sous le seuil.** Sept mesures sur les deux pages les
 plus lourdes : 1 656, 1 658, 1 681, 1 768, 1 806, 1 807 et 1 815 ms pour un budget de
@@ -143,10 +178,22 @@ systématiquement du mauvais côté** — l’accueil bascule sur un tir, `/equi
 autre. ⚠ **Ne pas traiter cela comme un défaut de `/equipe/`**, ce serait optimiser la
 mauvaise page. La fiche projet descend à 1 068 ms.
 
-**Deux pièces non suivies** dans des répertoires qui ne sont pas ignorés :
-`livrables/cv-ft2e/CV-FT2E.zip` et `docs/maquettes/`. Sans incidence sur le build. Trois
-issues chacune : suivre, ignorer, retirer. Décision de l’utilisateur, pas défaut à
-corriger.
+**Deux pièces non suivies — TRANCHÉ le 2026-09-03 : ignorées**, motifs ancrés au
+`.gitignore`. ⚠ L'énoncé antérieur de ce paragraphe était **périmé sur les deux moitiés** :
+il nommait `docs/maquettes/`, suivi depuis (trois fichiers), et ignorait
+`livrables/synthese-referencement-cliches-secteurs-2026-08-26.pdf`, apparu après. Les
+pièces réellement en attente au 2026-09-03 étaient ce PDF et
+`livrables/cv-ft2e/CV-FT2E.zip`.
+
+⚠ **Ce que l'arbitrage a mis au jour, et qui reste OUVERT** : `livrables/cv-ft2e/` porte
+**douze CV nominatifs déjà suivis** — six membres de l'équipe, en `.docx` et `.pdf` —,
+c'est-à-dire des données personnelles dans l'historique d'un dépôt **partagé**, alors que
+le motif `/cv/` du même `.gitignore` déclare qu'un CV ne se commite jamais. *La règle
+existe et se contourne par un autre chemin.* Le motif ajouté vise donc le **ZIP seul** :
+ignorer le dossier entier n'aurait rien retiré — un `.gitignore` est sans effet sur un
+fichier suivi — et aurait seulement fait *paraître* ignoré ce qui reste versionné, soit un
+motif qui ment sur son objet. Les retirer demande une réécriture d'historique : **arbitrage
+de l'utilisateur, même statut que les 25 visuels du rang B.**
 
 **Hors dette, questions de périmètre** : le formulaire de contact n’a pas de backend, et
 le site n’est pas migré sur `ft2e.fr`. Procédure de migration et de levée du verrou SEO
@@ -278,9 +325,11 @@ chantier motion. Ce second addendum ne les remplace pas : il ajoute ce que les
 vingt-quatre sessions du chantier des nouvelles fiches ont changé.*
 
 - **47 fiches de références réelles**, 47 dossiers de planches complets, build 70 pages.
-  Le compte qui fait foi est le § Suivi du plan
-  (`docs/superpowers/plans/2026-08-27-chantier-27-nouvelles-fiches.md`), plus vingt-trois ;
-  il se mesure par `ls src/content/projets/*.md | wc -l`.
+  ⚠ **Le compte qui fait foi est la mesure directe** — `ls src/content/projets/*.md | wc -l`
+  — et rien d'autre. La formule « lignes du § Suivi du plan, plus vingt-trois », écrite ici
+  le 2026-09-03 au matin, **a été retirée le soir même** : elle supposait qu'une session
+  produit une fiche, ce qui a cessé d'être vrai à la N25 (session de clôture, aucune fiche)
+  et lui faisait annoncer 48 pour 47.
 - **Le chantier est CLOS à 47, par arbitrage de l'utilisateur rendu le 2026-09-03**, et
   non par renonciation de session. `2020.zip` n'existe pas ; les affaires `19-008` et
   `20-058` ne figurent dans aucune archive présente ; le classeur FT2E lui-même n'a jamais
@@ -298,13 +347,87 @@ vingt-quatre sessions du chantier des nouvelles fiches ont changé.*
 - `python scripts/planches/invariant.py` : **188/188** pièces identiques octet à octet.
   ⚠ Un dossier neuf non encore composé fait baisser le **numérateur** : lire le
   dénominateur avant de conclure à une régression.
-- **Les insécables du corpus dessiné (rang D) grossissent avec le corpus** : le relevé du
-  2026-08-17 portait sur 23 dossiers, il y en a 47. Le chantier est inchangé dans sa
-  nature — correction à la source, régénération, invariant, contrôle du rendu aux trois
-  tailles — mais son volume a doublé.
+- **Les insécables du corpus dessiné (rang D)** : le relevé du 2026-08-17 portait sur
+  23 dossiers, il y en a 47. ⚠ **Ce point a été partiellement soldé le jour même, par la
+  session N25** — les `aria_label` sont faits, le texte dessiné et les champs éditoriaux
+  restent ouverts. Le § 4 rang D a été repris et fait foi ; ne pas lire ce point-ci
+  comme si le chantier était entier.
 - **L'échéance datée du § 5 porte désormais sur QUINZE affaires**, non quatorze :
   `MILLESIME_LIVRAISON_ANNONCE = 2026` s'affiche sur toutes les fiches dont la réception
   n'est pas prononcée sur pièce. ⚠ La réponse au build rouge du 1ᵉʳ janvier 2027 reste
   d'aller relever les réceptions, jamais de pousser la constante.
 - **Le prompt de reprise ne porte plus de dossier** : annexe Y du plan du chantier. Il
   porte la question à poser à FT2E et la liste des points ouverts.
+
+
+---
+
+# Addendum du 2026-09-03, session N25 — la question posée à FT2E, et ce qu'elle a soldé
+
+*La N25 ne produit aucune fiche : elle porte la question d'ouverture à l'utilisateur et
+solde ce qu'elle peut. Quatre décisions rendues, trois exécutées le jour même.*
+
+## Les quatre décisions
+
+| Question | Décision rendue |
+|---|---|
+| Reste-t-il de la matière ? | **Non — clos à 47.** Ni recherche de `2020.zip`, ni versement hors classeur, ni question à FT2E sur 2021. L'écart de trois fiches à l'objectif initial de cinquante est **assumé et définitif.** |
+| Chantier de la session | **Les insécables des `aria_label`** — la seule part du rang D exécutable sans arbitrage ni pièce à recevoir |
+| Les deux pièces de `livrables/` | **Ignorées**, motifs ancrés |
+| `2019.zip` | **Supprimé.** Le répertoire `ft2e_new_archives/` est désormais VIDE |
+
+⚠ **PLUS AUCUNE ARCHIVE N'EXISTE SUR CE DISQUE.** Les cinq ZIP ont été supprimés — 2022
+en fin de N23, trois autres hors session, 2019 en N25 sur décision de l'utilisateur.
+Toutes leurs affaires étaient traitées : **aucune matière n'est perdue.** Mais plus aucune
+vérification sur pièce n'est possible localement, pour aucune des 47 fiches — elle passera
+désormais par l'utilisateur.
+
+⚠ **La piste « Finalisées en 2021 » est VÉRIFIÉE, et NON LEVÉE.** Le classeur
+`references/docs_references/REFERENCES SITE FT2E.ods` a été relu en N25 par `zipfile` sur
+son `content.xml` : la section porte son en-tête de section **et** son en-tête de colonnes,
+et **zéro ligne**. C'est le seul millésime vide, entre 2020 (deux entrées) et 2022
+(quatre). Ce n'est donc pas une année sans affaires finalisées, c'est **une section jamais
+remplie** — quelqu'un a préparé le tableau et ne l'a pas rempli. La question reste entière
+pour FT2E ; l'utilisateur a choisi de ne pas la poser maintenant.
+
+**Le classeur, remesuré sur pièce** : 50 lignes pour **49 affaires distinctes** — `23-075`
+y figure deux fois (« Crêche de Périgny » en 2026, « Extension crêche Périgny UDAF » en
+2025). Le compte de quarante-neuf est confirmé, et non repris de mémoire.
+
+⚠ **Le classeur se contredit lui-même**, et c'est un piège pour qui le relira : sa cellule
+« Nb Projet » annonce `L10 T11 I9 P2 C2 M8 E3 = 45`, quand ses propres lignes donnent
+T = 15 et C = 7. *Un total agrégé ne se recalcule pas quand on ajoute des lignes sous lui*
+— même famille que le compte de fiches de `CLAUDE.md`, faux treize sessions durant. **Ne
+pas prendre ce 45 pour une mesure**, ni le confronter à la répartition du site.
+
+## Ce que la N25 a livré, et à quel prix de preuve
+
+175 écarts corrigés à la source sur les 47 `planche.json`, 47 dossiers régénérés, 138
+pièces modifiées. La chaîne de preuve, dans l'ordre où elle a été faite : invariant
+**188/188** avant → diff **confiné à 46 lignes, toutes des `aria_label`** → 47/47 dossiers
+régénérés → **92 SVG identiques octet à octet une fois l'`aria-label` retiré** (donc aucun
+dessin n'a bougé) → blocs `controles` recalculés **inchangés** (donc les compositeurs ont
+mesuré la même géométrie) → invariant **188/188** rétabli → typecheck 0 erreur, build 70
+pages → **47 fiches sur 47 servant la chaîne corrigée sur ses trois chemins de rendu** →
+rendu contrôlé en capture à 390 et 1920 px.
+
+⚠ **Deux contrôles ont crié à tort avant d'être corrigés**, et c'est la leçon
+transportable de la session : le premier ne voyait pas l'échappement HTML (`&amp;` sur la
+fiche `ateliers-pilotes-capsulae`), le second pas l'échappement CSS (`\.`, `\/` dans les
+sélecteurs Tailwind). Dans les deux cas l'artefact était sain et l'instrument trop étroit.
+**Quand un contrôle signale une régression, le suspecter avant de suspecter le dépôt** —
+c'est le même défaut que le lexique de `releve-numeral.py`, sous une autre forme.
+
+## Ce qui reste ouvert après la N25
+
+Inchangé pour l'essentiel — le § 4 fait foi, et son rang D a été repris. En un coup d'œil :
+
+- **Rang A** : Decap OAuth, trois gestes hors dépôt (`docs/22` § 0).
+- **Rang B** : réception de la crèche de l'Oranger, les 25 visuels dans l'historique,
+  `planche-chiffree` jamais exercé par 47 planches, validations FT2E du bloc secteurs,
+  questions B et E des 24 fiches de collecte. **Et désormais les douze CV nominatifs**
+  dans l'historique d'un dépôt partagé — voir le rang D, § « Deux pièces non suivies ».
+- **Rang C** : les huit photographies d'équipe générées par IA.
+- **Rang D** : le texte dessiné (64 écarts) et les champs éditoriaux (2 160) du corpus,
+  le passage NVDA jamais fait par un humain, l'option 0 du motion (TraceFlux débranché),
+  le LCP mobile au seuil.

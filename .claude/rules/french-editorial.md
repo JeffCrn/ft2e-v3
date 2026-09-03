@@ -60,7 +60,34 @@ régénération écrase. Instrument rejouable, contrôle autant que correcteur :
 doublon.** Ce dernier applique la typographie entière — insécables comprises — ce qui
 convient au Markdown mais **déplace le dessin** d'une planche : les compositeurs
 mesurent leurs chaînes pour poser la géométrie, et U+202F n'a pas la même chasse
-qu'une espace. Les insécables du corpus dessiné restent donc un chantier ouvert.
+qu'une espace.
+
+**Les insécables du corpus dessiné : les `aria_label` sont FAITS le 2026-09-03, le reste
+est ouvert.** L'instrument est `scripts/insecables-aria-planches.py` — même dessin que le
+précédent : sans argument il mesure, `--appliquer` il écrit, et il **importe** le lexique
+d'unités de `injection-typographique.py` au lieu de le recopier.
+
+Sa portée est **un seul champ**, et c'est un choix de sûreté, pas de prudence :
+`aria_label` n'est **jamais dessiné** — seul `_tronc.py:219` l'écrit, en attribut sur la
+racine SVG —, aucun appel à `_tronc.mesurer` ne le touche, donc **aucune géométrie n'en
+dépend**. Le texte dessiné, lui, ne peut pas être corrigé sans recette au rendu aux trois
+tailles de lecture, et reste un chantier à part (64 écarts au 2026-09-03, contre 2 160
+dans les champs éditoriaux qui ne sortent jamais du dépôt).
+
+⚠ **Deux gestes, pas un — et c'est le second qui manquait à tous les relevés antérieurs.**
+Le script ajoute les insécables manquantes *et* normalise celles qui sont posées au
+mauvais caractère. Le motif canonique cherche `[ ]`, une espace **ordinaire littérale** :
+une U+202F déjà posée devant un « : » lui est invisible et **passe tout contrôle sans être
+conforme**. Le corpus portait ainsi deux conventions contradictoires pour le même cas —
+18 fines contre 5 insécables larges — sans qu'aucun instrument puisse le dire. La classe
+d'espaces du nouveau motif est élargie aux trois formes.
+
+⚠ **Ne pas vendre cette passe comme un gain d'accessibilité.** Sur 175 écarts corrigés,
+**3 seulement** changent ce qu'un lecteur d'écran prononce : les séparateurs de milliers,
+lus « un, trois cent dix-huit » sans elles. Une insécable empêche un signe de basculer en
+début de ligne, et **un `aria-label` n'est jamais mis en page**. La correction est juste —
+la règle ci-dessus met explicitement le champ dans son périmètre — mais son bénéfice est
+la conformité, pas l'écoute.
 
 ⚠ **Une apostrophe droite n'est pas toujours une apostrophe.** Dans le corpus
 dessiné, 3 596 d'entre elles sont de la syntaxe de police
