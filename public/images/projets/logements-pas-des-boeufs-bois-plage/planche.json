@@ -6,7 +6,7 @@
   "titre": "Pas des Bœufs, dix maisons",
   "sous_titre": "Deux typologies, deux machines thermodynamiques par maison",
   "cartouche_legende": "LE BOIS-PLAGE-EN-RÉ · 548 m² · 2022",
-  "aria_label": "Schéma de principe de l’appariement des équipements par typologie : trois services à rendre dans chaque maison — chauffage, eau chaude sanitaire, ventilation — et deux machines par logement. Dans les sept T2, une pompe à chaleur air-air multisplit en chaud seul porte le chauffage, et le chauffe-eau thermodynamique porte à la fois l’eau chaude et la ventilation, son caisson d’extraction simple flux étant intégré au ballon. Dans les trois T3, une pompe à chaleur air-eau double service porte ensemble le chauffage et l’eau chaude par son ballon intégré, et la ventilation revient à un groupe hygroréglable indépendant.",
+  "aria_label": "Schéma de principe de l’appariement des équipements par typologie : trois services à rendre dans chaque maison — chauffage, eau chaude sanitaire, ventilation — et deux machines par logement. Dans les sept T2, une pompe à chaleur air-air multisplit en chaud seul porte le chauffage, et le chauffe-eau thermodynamique porte à la fois l’eau chaude et la ventilation, son caisson d’extraction simple flux étant intégré au ballon. Dans les trois T3, une pompe à chaleur air-eau double service porte ensemble le chauffage et l’eau chaude par son ballon intégré, et la ventilation revient à un groupe hygroréglable indépendant.",
   "appariement": {
     "entete": "TROIS SERVICES PAR MAISON — CHAUFFAGE, EAU CHAUDE, VENTILATION · DEUX MACHINES POUR LES PORTER",
     "registres": {

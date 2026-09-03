@@ -6,7 +6,7 @@
   "titre": "Crèche de l’Oranger",
   "sous_titre": "L’électricité produite en toiture, la chaleur diffusée par le sol",
   "cartouche_legende": "PÉRIGNY · 157 m² · 2024",
-  "aria_label": "Schéma de principe électrique de l’extension : en toiture, 48 modules photovoltaïques totalisant 17,5 kilowatts-crête alimentent la distribution du bâtiment en autoconsommation, le surplus étant revendu au réseau et l’appoint soutiré au même point ; parmi les départs, une pompe à chaleur air/eau de 7,5 kilowatts porte chaque kilowattheure électrique à 4,6 kilowattheures de chaleur (COP 4,60), le complément étant pris à l’air extérieur, et cette chaleur est diffusée au sol par un plancher chauffant à très basse température, au régime 30/35 degrés.",
+  "aria_label": "Schéma de principe électrique de l’extension : en toiture, 48 modules photovoltaïques totalisant 17,5 kilowatts-crête alimentent la distribution du bâtiment en autoconsommation, le surplus étant revendu au réseau et l’appoint soutiré au même point ; parmi les départs, une pompe à chaleur air/eau de 7,5 kilowatts porte chaque kilowattheure électrique à 4,6 kilowattheures de chaleur (COP 4,60), le complément étant pris à l’air extérieur, et cette chaleur est diffusée au sol par un plancher chauffant à très basse température, au régime 30/35 degrés.",
   "tableau": {
     "entete": "L’ÉNERGIE DU BÂTIMENT · PRODUITE EN TOITURE, ÉCHANGÉE AU RÉSEAU, DIFFUSÉE PAR LE SOL",
     "tag_toiture": "EN TOITURE · LA PRODUCTION",

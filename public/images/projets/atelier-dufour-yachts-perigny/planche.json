@@ -6,7 +6,7 @@
   "titre": "Atelier Dufour Yachts",
   "sous_titre": "Un quart du besoin de chauffage repris sur un air que les prescriptions obligent à jeter",
   "cartouche_legende": "PÉRIGNY · 38 000 m³/h · 2026",
-  "aria_label": "Schéma de principe de la récupération de chaleur fatale : deux conduits d’air superposés ne se rencontrent jamais — en haut, l’air extrait du process passe sur une batterie de récupération avant d’être rejeté dehors ; en bas, les 38 000 m³/h d’air neuf imposés passent sur la seconde batterie, puis sur l’appoint gaz et la pompe à chaleur, avant d’être soufflés dans l’atelier. Une boucle d’eau glycolée, seule à traverser entre les deux conduits, reprend 146 045 kWh par an sur l’air extrait — le quart du besoin de chauffage.",
+  "aria_label": "Schéma de principe de la récupération de chaleur fatale : deux conduits d’air superposés ne se rencontrent jamais — en haut, l’air extrait du process passe sur une batterie de récupération avant d’être rejeté dehors ; en bas, les 38 000 m³/h d’air neuf imposés passent sur la seconde batterie, puis sur l’appoint gaz et la pompe à chaleur, avant d’être soufflés dans l’atelier. Une boucle d’eau glycolée, seule à traverser entre les deux conduits, reprend 146 045 kWh par an sur l’air extrait — le quart du besoin de chauffage.",
   "boucle": {
     "entete": "LA ZONE DU PROCESS · 38 000 m³/h D’AIR NEUF IMPOSÉS PAR LES PRESCRIPTIONS CARSAT, SANS RECYCLAGE",
     "registres": {

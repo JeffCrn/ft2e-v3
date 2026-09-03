@@ -6,7 +6,7 @@
   "titre": "Résidence intergénérationnelle",
   "sous_titre": "Un lot photovoltaïque autonome porte une zone de calcul sous le zéro",
   "cartouche_legende": "SAINT-AGNANT · 870 m² · 2022",
-  "aria_label": "Schéma de principe du bilan d’énergie primaire d’une zone de calcul. Une opération de logements est partagée en deux zones : les logements d’un côté, l’espace commun de l’autre, un dixième de la surface. La production d’un lot photovoltaïque autonome alimente les services généraux de la seule zone commune. Le plafond réglementaire de cette zone autorise une consommation de 90 kWhep/m²/an ; son bilan s’établit à −221,8 kWhep/m²/an, au-dessous du zéro, soit deux fois et demie la profondeur de la bande autorisée — la production dépasse les besoins de la zone.",
+  "aria_label": "Schéma de principe du bilan d’énergie primaire d’une zone de calcul. Une opération de logements est partagée en deux zones : les logements d’un côté, l’espace commun de l’autre, un dixième de la surface. La production d’un lot photovoltaïque autonome alimente les services généraux de la seule zone commune. Le plafond réglementaire de cette zone autorise une consommation de 90 kWhep/m²/an ; son bilan s’établit à −221,8 kWhep/m²/an, au-dessous du zéro, soit deux fois et demie la profondeur de la bande autorisée — la production dépasse les besoins de la zone.",
   "bascule": {
     "entete": "L’OPÉRATION EN DEUX ZONES DE CALCUL · LE BILAN D’ÉNERGIE PRIMAIRE DE LA SECONDE",
     "unite": "kWhep/m²/an",

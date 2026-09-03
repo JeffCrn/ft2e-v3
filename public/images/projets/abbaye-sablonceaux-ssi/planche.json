@@ -6,7 +6,7 @@
   "titre": "Abbaye de Sablonceaux",
   "sous_titre": "Dissocier les alarmes d’un site patrimonial occupé",
   "cartouche_legende": "SABLONCEAUX · 3 370 m² · 2026",
-  "aria_label": "Schéma de principe du zonage de l’alarme incendie : un même déclenchement de détecteur est suivi avant et après travaux. Avant : le SDI d’origine, une seule zone d’alarme sans temporisation, sonne l’évacuation générale des 3 370 m². Après : la centrale de catégorie A, adressable point par point, ne diffuse l’alarme que dans la zone concernée — quatre zones d’alarme dont une provisionnée pour le bâtiment Figuier ; l’aile François-Xavier, hors zonage, passe en détecteurs avertisseurs autonomes de fumée.",
+  "aria_label": "Schéma de principe du zonage de l’alarme incendie : un même déclenchement de détecteur est suivi avant et après travaux. Avant : le SDI d’origine, une seule zone d’alarme sans temporisation, sonne l’évacuation générale des 3 370 m². Après : la centrale de catégorie A, adressable point par point, ne diffuse l’alarme que dans la zone concernée — quatre zones d’alarme dont une provisionnée pour le bâtiment Figuier ; l’aile François-Xavier, hors zonage, passe en détecteurs avertisseurs autonomes de fumée.",
   "releve_entete": "L’AFFAIRE · DU DIAGNOSTIC À LA RÉCEPTION · 2023–2026",
   "zonage": {
     "entete": "UN MÊME DÉCLENCHEMENT, SUIVI AVANT ET APRÈS TRAVAUX",

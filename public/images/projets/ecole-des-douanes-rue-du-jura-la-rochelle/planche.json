@@ -6,7 +6,7 @@
   "titre": "École des douanes",
   "sous_titre": "La charge ne vient pas de l’enveloppe",
   "cartouche_legende": "LA ROCHELLE · 1 657 m² · 2026",
-  "aria_label": "Diagramme de flux des apports de chaleur d’une salle de cours en été : cinq postes d’origine interne — occupants, ordinateurs, éclairage, renouvellement d’air, vidéoprojecteur et baie de brassage — convergent vers un flux large de 8 414 watts ; un sixième poste, les apports de l’enveloppe par le mur et la baie, forme à côté un filet de 217 watts. Le rapport des deux est la démonstration de la planche.",
+  "aria_label": "Diagramme de flux des apports de chaleur d’une salle de cours en été : cinq postes d’origine interne — occupants, ordinateurs, éclairage, renouvellement d’air, vidéoprojecteur et baie de brassage — convergent vers un flux large de 8 414 watts ; un sixième poste, les apports de l’enveloppe par le mur et la baie, forme à côté un filet de 217 watts. Le rapport des deux est la démonstration de la planche.",
   "sankey": {
     "unite": "W",
     "entete": "UNE SALLE DE COURS DU REZ-DE-CHAUSSÉE · 63 m² · MATIN DE JUILLET",

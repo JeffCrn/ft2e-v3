@@ -7,7 +7,7 @@
   "titre": "Maison de Pierre Loti",
   "sous_titre": "Mettre en sécurité un musée classé sans toucher à ses décors",
   "cartouche_legende": "ROCHEFORT · 1 200 m² · 2025",
-  "aria_label": "Schéma de principe de la mise en sécurité incendie : deux familles de détection — 46 détecteurs radio sur piles avec huit déclencheurs manuels radio, et 38 détecteurs filaires avec onze déclencheurs — convergent vers une centrale adressable de catégorie A à équipement d’alarme de type 1. Le bâtiment ne forme qu’une seule zone d’alarme : toute détection commande simultanément l’alarme générale à 90 dB, la remise en lumière des salles que la scénographie tamise, l’arrêt de la sonorisation et l’arrêt des centrales de traitement d’air. L’alarme se reporte à l’accueil et au bâtiment DAC, avec renvoi vers un poste de télésurveillance.",
+  "aria_label": "Schéma de principe de la mise en sécurité incendie : deux familles de détection — 46 détecteurs radio sur piles avec huit déclencheurs manuels radio, et 38 détecteurs filaires avec onze déclencheurs — convergent vers une centrale adressable de catégorie A à équipement d’alarme de type 1. Le bâtiment ne forme qu’une seule zone d’alarme : toute détection commande simultanément l’alarme générale à 90 dB, la remise en lumière des salles que la scénographie tamise, l’arrêt de la sonorisation et l’arrêt des centrales de traitement d’air. L’alarme se reporte à l’accueil et au bâtiment DAC, avec renvoi vers un poste de télésurveillance.",
   "inversion": {
     "entete_detection": "LA DÉTECTION · 15 ZONES · DE LA CAVE AUX COMBLES",
     "entete_actions": "LA MISE EN SÉCURITÉ · UNE SEULE ZONE D’ALARME",
