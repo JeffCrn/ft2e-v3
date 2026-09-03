@@ -8599,7 +8599,7 @@ rien a nettoyer, et ...\extrait doit etre vide ou absent. 2022.zip A ETE
 SUPPRIME EN FIN DE N23 avec l'accord de l'utilisateur, ses quatre affaires
 etant toutes traitees. NE PAS SUPPRIMER 2019.zip AVANT D'AVOIR FINI - c'est
 la seule source du dossier du jour ; le proposer ensuite.
-Disque : 4,0 Go libres au 2026-09-03. Le dossier du jour pese 38,8 Mo -
+Disque : 4,6 Go libres au 2026-09-03, apres suppression de 2022.zip. Le dossier du jour pese 38,8 Mo -
 extraire tout le repertoire 18-026 suffit. Le motif d'extraction est
 zipfile.namelist() + un fragment de chemin (« 18-026 ») ; le rm -rf est
 REFUSE par les permissions : passer par python shutil.rmtree.
