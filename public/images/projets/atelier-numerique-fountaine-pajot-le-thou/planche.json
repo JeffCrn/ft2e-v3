@@ -1,0 +1,156 @@
+{
+  "fiche": "atelier-numerique-fountaine-pajot-le-thou",
+  "archetype": "coupe-traversee",
+  "archetype_motif": "La thèse de la fiche est une RESTITUTION : l’aspiration des machines est un ouvrage du procédé, hors des marchés du bureau, et elle prend à l’atelier son air en continu ; rendre cet air est au marché, et c’est ce qui dimensionne la moitié du lot fluides. La démonstration est une coupe et ne se lit qu’en coupe : l’air entre par le haut à la gaine perforée, descend, est capté au ras des postes et quitte le cadre à droite en franchissant la limite des marchés ; la chaleur de confort descend du même plafond SANS CONDUIT et ne quitte rien. Les trois départs de la chaufferie portent la thèse par leur seule épaisseur, tracée à l’échelle de leurs diamètres nominaux (DN 80, DN 50, DN 33) : le plus gros ne chauffe personne. Le motif se distingue des neuf mécanismes déjà composés dans cet archétype, et surtout de `equilibre` (Villedoux), qui en est l’exact négatif : là-bas un AUDIT constate trois compensations MANQUANTES sous une toiture, et la géométrie montre que partout l’air monte et que nulle part il ne redescend ; ici la compensation EXISTE, elle est l’ouvrage principal du lot, et ce qui se démontre est son poids. Il se distingue de `atelier-dufour-yachts-perigny` (boucle-fluide), où une boucle glycolée RÉCUPÈRE entre deux flux d’air : ici l’air extrait est chargé de poussière de bois, aucun échangeur ne le traverse, et rien ne se récupère. Et de `ateliers-pilotes-capsulae`, où le bâtiment DONNE ses utilités au procédé et s’arrête à une limite : ici le procédé PREND au bâtiment, et le bâtiment suit. Un sankey aurait proportionné des puissances que le dossier ne donne pas pour deux des trois départs ; un zonage n’aurait rien à découper.",
+  "titre": "Atelier numérique, Le Thou",
+  "sous_titre": "L’aspiration prend l’air hors marché, la compensation le rend au marché",
+  "cartouche_legende": "LE THOU · 6 304 m² · 2019",
+  "surtitre": "ATELIER DE DÉCOUPE ET D’USINAGE NUMÉRIQUES — COMPENSATION D’AIR DU PROCÉDÉ",
+  "phrase_principe": "L’air part avec les copeaux : le chauffage des postes ne passe donc pas par lui.",
+  "vignette_surtitre": "CE QUI PART, CE QUI RESTE",
+  "aria_label": "Coupe de principe d’un atelier industriel. À gauche, hors du volume, une chaufferie de quatre chaudières à condensation de 145 kilowatts montées en cascade derrière une bouteille de découplage. Trois départs en sortent, tracés à l’échelle de leurs diamètres nominaux. Le plus gros, de diamètre nominal 80, alimente une batterie à eau chaude de 400 kilowatts logée dans une centrale de traitement d’air : celle-ci rend à l’atelier 40 mille mètres cubes par heure, diffusés sur toute la longueur du plafond par une gaine circulaire perforée, dont l’air descend vers les postes. Le deuxième, de diamètre nominal 50, alimente des panneaux rayonnants à eau suspendus sous cette gaine, en régime 65 sur 50, qui maintiennent 19 degrés dans les zones ateliers : leur chaleur descend sans aucun conduit et reste dans le volume. Le troisième, de diamètre nominal 33, le plus fin, quitte le dessin vers les vestiaires, le réfectoire et les sanitaires. En bas, au ras de trois postes de travail, des captations reprennent l’air chargé et le conduisent vers la droite, où il franchit une limite verticale marquée limite des marchés du bureau. Au-delà de cette limite, une ligne d’aspiration de 40 kilowatts, ouvrage du procédé, qui appartient au maître d’ouvrage et prend cet air en continu.",
+  "restitution": {
+    "entete": "COUPE DE PRINCIPE · L’AIR DE LA HALLE, ET CE QUI LA CHAUFFE",
+    "entete_droite": "HORS DES MARCHÉS DU BUREAU",
+    "limite": "LIMITE DES MARCHÉS DU BUREAU",
+    "legende_traits": "TRAIT PLEIN · L’AIR — FLÈCHES SANS CONDUIT · LE RAYONNEMENT",
+    "halle": "HALLE D’ATELIER",
+    "production": {
+      "libelle": "Chaufferie gaz à condensation",
+      "libelle_court": "Chaufferie",
+      "libelle_vignette": "Chaufferie",
+      "valeur": "4 × 145",
+      "unite": "kW",
+      "detail": [
+        "QUATRE CHAUDIÈRES EN CASCADE",
+        "BOUTEILLE DE DÉCOUPLAGE"
+      ]
+    },
+    "hors_marche": {
+      "libelle": "Aspiration des machines",
+      "libelle_court": "Aspiration",
+      "libelle_vignette": "Aspiration",
+      "valeur": "40",
+      "unite": "kW",
+      "detail": [
+        "OUVRAGE DU PROCÉDÉ",
+        "UN DÉPART AU TABLEAU"
+      ],
+      "mention": "ELLE PREND L’AIR EN CONTINU"
+    },
+    "postes": {
+      "libelle": "Postes de découpe, d’usinage et de ponçage",
+      "libelle_court": "Postes de travail",
+      "libelle_vignette": "Postes",
+      "captation": "CAPTATION AU RAS DU POSTE",
+      "nombre_dessine": 3
+    },
+    "departs": [
+      {
+        "ordre": 1,
+        "cle": "compensation",
+        "libelle": "Centrale de compensation d’air",
+        "libelle_court": "Compensation",
+        "libelle_vignette": "Compensation",
+        "diametre": "DN 80",
+        "dn": 80,
+        "valeur": "40 000",
+        "unite": "m³/h",
+        "detail": [
+          "BATTERIE À EAU CHAUDE 400 kW · 75/60 °C",
+          "GAINE CIRCULAIRE PERFORÉE"
+        ],
+        "destin": "L’AIR SORT AVEC LES COPEAUX",
+        "vecteur": "air"
+      },
+      {
+        "ordre": 2,
+        "cle": "rayonnant",
+        "libelle": "Panneaux rayonnants de la halle",
+        "libelle_court": "Panneaux rayonnants",
+        "libelle_vignette": "Rayonnants",
+        "diametre": "DN 50",
+        "dn": 50,
+        "valeur": "+19",
+        "unite": "°C",
+        "detail": [
+          "RÉGIME 65/50 · TROIS ZONES RÉGULÉES",
+          "AUCUN CONDUIT D’AIR"
+        ],
+        "destin": "LA CHALEUR RESTE DANS LE VOLUME",
+        "vecteur": "rayonnement"
+      },
+      {
+        "ordre": 3,
+        "cle": "services",
+        "libelle": "Vestiaires, réfectoire, sanitaires",
+        "libelle_court": "Vestiaires",
+        "libelle_vignette": "Vestiaires",
+        "diametre": "DN 33",
+        "dn": 33,
+        "valeur": "1 800",
+        "unite": "m³/h",
+        "detail": [
+          "RÉCUPÉRATEUR ROTATIF 86,4 %"
+        ],
+        "destin": "HORS DE LA HALLE",
+        "vecteur": "hors"
+      }
+    ]
+  },
+  "releve": [],
+  "releve_secondaire": [],
+  "a_valider_ft2e": [
+    "La géométrie de la coupe. Le dessin est un gabarit de principe : un rectangle de halle, une chaufferie à gauche, trois postes alignés au sol. Aucune proportion, aucune hauteur, aucune portée, aucune implantation de l’ouvrage ne sont reproduites — le dossier porte sept plans A0 au 1/100, dont aucune géométrie n’est passée au dessin (règle dure 4).",
+    "Le nombre de postes dessinés. Le dossier nomme 18 départs de force procédé, dont douze machines de découpe, d’usinage, de ponçage et de traitement de surface. La planche en dessine TROIS : c’est le minimum qui montre un alignement de captations sous une gaine, et ce n’est pas un décompte.",
+    "L’épaisseur des trois départs est tracée à l’échelle de leurs diamètres nominaux, qui sont fermes (DN 80, DN 50, DN 33 à la décomposition du prix). Ce n’est PAS une échelle de débit ni de puissance : le cahier des charges donne les débits d’eau « à titre indicatif », et les puissances de deux des trois départs ne figurent nulle part. Un diamètre nominal n’est pas proportionnel à une puissance, et le dessin ne le dit pas.",
+    "La position de la centrale de compensation. Le cahier des charges la localise « local ventilation » ; le dessin la place en haut à gauche de la halle, là où son départ entre. C’est une commodité de lecture, pas une implantation.",
+    "Le nombre de chaudières. Le cahier des charges prescrit à son § 4.1.2 un module de QUATRE chaudières de 145 kW en cascade, et en donne quatre fois chaque caractéristique ; mais ses § 4.1.9 et 4.1.13 en listent DEUX. La décomposition du prix ne tranche pas — c’est un cadre à quantités vides. Le dessin retient quatre, sur la description détaillée, et la question est portée à la collecte (B.3).",
+    "Le débit de l’aspiration n’est pas dessiné, parce qu’il n’est écrit nulle part : le dossier ne donne que le débit de la COMPENSATION, 40 000 m³/h. Le dessin porte donc 40 kW du côté de l’aspiration — sa puissance électrique au tableau — et 40 000 m³/h du côté de la compensation. Les deux valeurs ne se comparent pas, et le dessin ne les compare pas.",
+    "La mention « un départ au tableau ». Le tableau des alimentations désigne cette ligne « Ligne 60 kW » et lui affecte 40 kW dans sa colonne de puissance unitaire. Le dessin retient 40 kW, la valeur de la colonne (question B.5 de la collecte).",
+    "Les flèches courtes sans conduit, sous les panneaux rayonnants, figurent un transfert par rayonnement. C’est une convention de lecture, doublée du mot « AUCUN CONDUIT D’AIR » : aucun signe graphique ne porte seul.",
+    "Le trait de limite des marchés est une convention du dessin, pas une limite physique. Il traduit deux faits du dossier : l’aspiration ne figure dans aucun des deux cahiers des charges du bureau, et le tableau des alimentations lui réserve un simple départ parmi ceux que le bâtiment tient à la disposition du procédé."
+  ],
+  "exclusions_appliquees": [
+    "Numéro d’affaire : absent du dessin (exclusion permanente 3).",
+    "Numéros du mandataire — il y en a deux au dossier, tous deux au format AA.NN : absents du dessin.",
+    "Montants : l’enveloppe de travaux, l’estimation des lots techniques, les honoraires du groupement et leur répartition entre les quatre cotraitants sont absents du dessin.",
+    "Noms de tiers : ni maître d’ouvrage, ni architecte, ni cotraitants, ni entreprise, ni bureau de contrôle ne paraissent au dessin.",
+    "Marques et modèles : les 18 équipements de procédé que le cahier des charges nomme, et la quinzaine de marques d’équipements techniques prescrits, sont absents du dessin — il n’y figure que des fonctions.",
+    "Implantation des machines : les plans la portent poste par poste au 1/100 ; le dessin aligne trois postes indifférenciés.",
+    "Géométrie de l’ouvrage : aucune façade, aucune trame, aucune portée, aucun niveau réel. Le rectangle de halle est un gabarit de principe (règle dure 4).",
+    "Données d’exploitation du client : cadences, effectifs, volumes produits — le dossier n’en porte pas, et le dessin n’en suppose aucune."
+  ],
+  "controles": {
+    "gabarit": "1200 x 800 — rapport 1.5000 (3:2 exact)",
+    "demonstration": "l’air fait une traversée complète et ne revient pas : il entre par la gaine perforée (y 336), descend en 3 filets, est capté au ras des 3 postes (y 536), remonte au collecteur (y 518) et franchit la limite (x 940) ; le rayonnement, lui, descend des panneaux SANS AUCUN conduit et ne quitte pas le volume — texte masqué, un seul des deux vecteurs sort du cadre",
+    "echelle_des_departs": "épaisseur = DN x 0.16 : DN 80 → 12.8 px, DN 50 → 8.0 px, DN 33 → 5.3 px — rapport 2.42 entre le plus gros et le plus fin ; les diamètres nominaux sont fermes (DPGF), les débits d’eau du CCTP ne le sont pas et ne sont pas dessinés",
+    "topologie": "chaufferie x 56–212 (hors halle) → trois départs → halle x 240–880 (plafond 252, sol 640) → limite des marchés x 940 → aspiration x 960–1144",
+    "reserve_profonde": "cartouche 242 x 30 px = 7260 px², soit 0.76 % de la planche",
+    "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas chiffrée (révision 4) ; les quatre valeurs restent au mono 10 pivot, en cote de leur organe",
+    "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle 0,96 (1152 / 1200)",
+    "bas_du_dessin": "sol à 640, libellé des postes à 660, phrase de principe à 688, cartouche 714–744, marge basse 56 px",
+    "phrase_principe": "80 signes — 680 px mesurés pour 1088 disponibles",
+    "bornes_calculees": "deux bornes sont MESURÉES et non lues sur une constante : la légende des traits s’arrête à 873 px (bord gauche de l’en-tête droit, ancré à la marge), la mention de captation à 318 px (bord gauche du destin de l’air)",
+    "depassements": "aucun — toutes les lignes mesurées sous leur borne"
+  },
+  "controles_vignette": {
+    "gabarit": "300 x 200 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "carte de projet mesurée de 274 à 296 px — échelle 0.91 à 0.99",
+    "corps_minimal": "9 px dans le repère — rendu à 8.2 px au pire cas",
+    "motif": "la halle, la gaine perforée et ses trois descentes d’air, les trois panneaux dont le rayonnement descend sans conduit, le collecteur qui franchit la limite, et le nœud chiffré de la compensation ; chaufferie détaillée, cotes de diamètre, libellés d’organe et mentions sont laissés à la planche",
+    "elements_absents": "les trois cotes de diamètre nominal, les libellés de la chaufferie, du bloc d’aspiration et des postes, la mention de captation et le destin des deux vecteurs — mesure de format, pas exception",
+    "bas_du_dessin": "nœud chiffré à y 184, marge basse 16 px",
+    "depassements": "aucun — surtitre et nœud mesurés sous leur borne"
+  },
+  "controles_appui": {
+    "gabarit": "552 x 368 — rapport 1.5000 (3:2 exact)",
+    "echelle_de_rendu": "colonne média du hero mesurée à ~552 px — échelle 1.00 : les corps écrits sont les corps lus",
+    "corps_minimal": "10 px dans le repère — rendu à 10 px (échelle 1,0)",
+    "motif": "la halle, la gaine perforée et ses trois descentes d’air, les trois panneaux dont le rayonnement descend sans conduit, le collecteur qui franchit la limite des marchés, et deux nœuds chiffrés — ce que la compensation rend, ce que l’aspiration prend",
+    "bas_du_dessin": "nœuds chiffrés à y 336, marge basse 32 px",
+    "elements_absents": "les trois cotes de diamètre nominal, les détails d’organe, les mentions de destin et le libellé des postes — mesure de format, pas exception",
+    "echelle_des_departs": "les deux départs dessinés gardent leur rapport d’épaisseur (8 px pour le DN 80, 5 px pour le DN 50) ; le DN 33, qui quitte le dessin, est absent de ce format",
+    "depassements": "aucun — surtitre et deux nœuds mesurés sous leur borne"
+  }
+}

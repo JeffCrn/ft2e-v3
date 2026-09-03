@@ -72,7 +72,7 @@ import math
 import re as _re
 
 from _tronc import (NN, W, H, MARGE, UTILE, VW, VH, V_MARGE, AW, AH, A_MARGE,
-                    mesurer, echapper, texte, rect, rect_bord, ligne,
+                    mesurer, replier, echapper, texte, rect, rect_bord, ligne,
                     polyligne, fleche, cercle, entete_style, racine_appui,
                     controles_appui, executer)
 
@@ -1874,6 +1874,714 @@ def composer_appui_portee(donnees):
               "chiffrés à l’échelle 1 — répétiteurs, escalier, légende et "
               "niveaux nommés laissés à la planche",
         bas=f"enceinte jusqu’à 340 px, marge basse {AH - 340} px")
+
+
+# ── Mécanisme `restitution` — l'air pris hors marché, rendu au marché ────────
+#
+# La thèse : l'aspiration des machines est un ouvrage du procédé, hors des
+# marchés du bureau ; elle prend à l'atelier son air, et le rendre EST au
+# marché. La coupe suit l'air — il entre en haut par la gaine perforée,
+# descend, est capté au ras des postes, franchit la limite des marchés et
+# quitte le dessin — tandis que la chaleur de confort descend du même plafond
+# SANS CONDUIT et ne quitte rien. Les trois départs de la chaufferie sont
+# tracés à l'échelle de leurs diamètres nominaux : le plus gros ne chauffe
+# personne.
+#
+# ⚠ Toutes les mesures de ce bloc sont ABSOLUES et propres au format planche.
+# La vignette et l'appui ont les leurs (préfixes RSV_ et RSA_) : les trois
+# formats partagent l'implantation des primitives, jamais les coordonnées.
+
+RS_Y_LEGENDE = 216            # légende des traits, et en-tête du hors-marché
+RS_Y_LIMITE_LIB = 240         # la mention qui nomme le trait de limite
+
+RS_HALLE0, RS_HALLE1 = 240, 880       # emprise de la halle (gabarit de principe)
+RS_Y_PLAFOND = 252
+RS_Y_SOL = 640
+
+RS_X_LIMITE = 940             # le trait de limite des marchés
+RS_Y_LIM0, RS_Y_LIM1 = 244, 660
+
+RS_CH0, RS_CH1 = 56, 212      # la chaufferie, hors halle, à gauche
+RS_CH_Y0, RS_CH_Y1 = 330, 470
+RS_N_CHAUD = 4                # module de quatre chaudières (CCTP § 4.1.2)
+
+RS_K_DN = 0.16                # px par unité de diamètre nominal — DN 80 → 12,8 px
+RS_Y_D80, RS_Y_D50, RS_Y_D33 = 356, 400, 444  # sorties de la chaufferie
+RS_X_MONTEE = 220             # colonne de la montée du DN 80
+RS_X_DESCENTE = 236           # colonne du DN 50 vers son collecteur
+RS_X_D33 = 228                # le DN 33 descend DANS LE COULOIR, hors des
+                              # colonnes de texte — il traversait « 4 × 145 kW »
+
+RS_CTA = (250, 262, 150, 54)  # centrale de compensation : x, y, largeur, hauteur
+RS_X_TXT_CTA = 416            # ses libellés, à droite du caisson
+
+RS_Y_GAINE = 336              # gaine circulaire perforée
+RS_H_GAINE = 14
+RS_X_GAINE1 = 860
+RS_AIR_X = (465, 635, 820)    # les descentes d'air, DANS LES INTERVALLES
+                              # entre les panneaux : les deux vecteurs se
+                              # partagent le plafond sans se confondre
+RS_AIR_Y0, RS_AIR_Y1 = 356, 384
+
+RS_Y_COLL50 = 408             # collecteur des panneaux rayonnants
+RS_X_COLL50 = 840
+RS_PAN_X = (320, 490, 660)    # trois panneaux rayonnants
+RS_PAN_W, RS_PAN_H = 120, 10
+RS_Y_PAN = 416
+RS_RAY_Y0, RS_RAY_Y1 = 432, 456        # le rayonnement : des flèches, aucun conduit
+
+RS_Y_DET_PAN = 480            # détails des panneaux, deux lignes
+RS_Y_MENTIONS = 508           # captation (gauche) · destin de l'air (droite)
+
+RS_Y_COLL_ASP = 518           # collecteur de l'air capté
+RS_H_COLL_ASP = 12
+RS_POSTE_X = (320, 490, 660)
+RS_POSTE_W = 120
+RS_Y_POSTE0, RS_Y_POSTE1 = 566, 626
+RS_Y_CAPT0, RS_Y_CAPT1 = 536, 562      # la captation, entre poste et collecteur
+
+RS_Y_LIB_POSTES = 660         # sous le sol
+
+RS_ASP = (960, 462, 184, 118) # le bloc hors marché : x, y, largeur, hauteur
+RS_Y_ASP_MENTION = 602
+
+RS_Y_D33_BAS = 570            # le départ des services, qui quitte le dessin
+RS_X_D33_FIN = 70
+
+
+def _rs_epaisseur(dn):
+    """Épaisseur d'un départ, à l'échelle de son diamètre nominal."""
+    return dn * RS_K_DN
+
+
+def _rs_perfore(A, x0, x1, y, h):
+    """La gaine perforée : un conduit plein, ponctué de ses perforations.
+
+    ⚠ Ordre des arguments : x0, x1, PUIS y. Un appel positionnel les a
+    intervertis une fois — la gaine se traçait alors à y 860, hors du repère
+    de 800, et rien ne le signalait : l’assertion de dépassement mesure des
+    LARGEURS, jamais une occupation. Seul le PNG l’a montré.
+    """
+    A(rect(x0, y, x1 - x0, h, "clair"))
+    A(ligne(x0, y, x1, y, "encre", 1.5))
+    A(ligne(x0, y + h, x1, y + h, "encre", 1.5))
+    n = int((x1 - x0) // 24)
+    for i in range(1, n):
+        cx = x0 + i * 24
+        A(ligne(cx, y + h - 3, cx, y + h, "encre", 1))
+
+
+def _rs_rayon(A, cx, y0, y1):
+    """Le rayonnement : trois traits divergents, sans conduit ni gaine."""
+    for dx in (-9, 0, 9):
+        A(ligne(cx, y0, cx + dx * 1.6, y1, "encre", 1))
+        A(fleche(cx + dx * 1.6, y1 + 4, "encre", "bas", 6))
+
+
+def _rs_replier_mono(chaine, corps, dispo, tracking_em=0.14):
+    """Replie une ligne mono EN MESURANT SON INTERLETTRAGE.
+
+    ⚠ `replier` du tronc mesure sans tracking : sur du mono à 0,14 em, il
+    laisse passer près d’un quart de largeur en trop, et l’assertion de
+    dépassement rompt ensuite. Un facteur correctif approché ne suffit pas non
+    plus — il a laissé passer une ligne à 243 px pour 226 disponibles, à un
+    demi-pixel près du seuil. On replie donc en mesurant chaque essai avec son
+    tracking réel. Le tronc n’est pas touché : l’invariant octet des planches
+    publiées en dépend.
+    """
+    tr = corps * tracking_em
+    if mesurer(chaine, corps, "mono", tr) <= dispo:
+        return [chaine]
+    lignes, courante = [], ""
+    for mot in chaine.split(" "):
+        essai = f"{courante} {mot}".strip()
+        if courante and mesurer(essai, corps, "mono", tr) > dispo:
+            lignes.append(courante)
+            courante = mot
+        else:
+            courante = essai
+    if courante:
+        lignes.append(courante)
+    return lignes
+
+
+def _rs_captation(A, x0, x1, y0, y1):
+    """La captation : une hotte tronconique au ras du poste."""
+    A(polyligne([(x0, y1), (x0 + 26, y0), (x1 - 26, y0), (x1, y1)],
+                "encre", 1.5))
+
+
+def composer_restitution(donnees):
+    q = donnees["restitution"]
+    dep = {e["cle"]: e for e in q["departs"]}
+    prod, hors, postes = q["production"], q["hors_marche"], q["postes"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+      f'preserveAspectRatio="xMidYMid meet" role="img" '
+      f'style="width:100%;height:auto;display:block" '
+      f'aria-label="{echapper(donnees["aria_label"])}">')
+    entete_style(A)
+    A(rect(0, 0, W, H, "papier"))
+
+    # ── Bloc de titre ────────────────────────────────────────────────────────
+    A(texte(MARGE, Y_SURTITRE, donnees["surtitre"], "mono", 11, 500,
+            "pivot", tracking=11 * 0.14))
+    A(texte(MARGE, Y_TITRE, donnees["titre"], "sans", 30, 700, "encre", wdth=112))
+    A(texte(MARGE, Y_SOUSTITRE, donnees["sous_titre"], "sans", 16, 400,
+            "pivot", wdth=100))
+    A(rect(MARGE, Y_FILET_TITRE, UTILE, 1, "filet-1"))
+
+    # ── En-têtes : le périmètre du dessin, et celui qui lui échappe ──────────
+    controler("en-tête schéma", q["entete"], 10, "mono", UTILE, 10 * 0.14)
+    A(texte(MARGE, Y_ENTETE, q["entete"], "mono", 10, 500, "pivot",
+            tracking=10 * 0.14))
+
+    # ⚠ La borne de la légende n'est PAS une abscisse de colonne : c'est le
+    # bord gauche MESURÉ de l'en-tête droit, qui est ancré à la marge droite
+    # (piège N23 — une borne se calcule, elle ne se lit pas sur une constante).
+    l_entete_d = mesurer(q["entete_droite"], 10, "mono", 10 * 0.14)
+    x_entete_d = W - MARGE - l_entete_d
+    controler("légende des traits", q["legende_traits"], 10, "mono",
+              x_entete_d - MARGE - 24, 10 * 0.14)
+    A(texte(MARGE, RS_Y_LEGENDE, q["legende_traits"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(W - MARGE, RS_Y_LEGENDE, q["entete_droite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+    controler("mention de limite", q["limite"], 10, "mono",
+              RS_X_LIMITE - 10 - MARGE, 10 * 0.14)
+    A(texte(RS_X_LIMITE - 10, RS_Y_LIMITE_LIB, q["limite"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    e80 = _rs_epaisseur(dep["compensation"]["dn"])
+    e50 = _rs_epaisseur(dep["rayonnant"]["dn"])
+    e33 = _rs_epaisseur(dep["services"]["dn"])
+
+    # ── La halle : un gabarit de principe, percé par ce qui entre et sort ────
+    cx, cy, cw, ch = RS_CTA
+    # plafond
+    A(ligne(RS_HALLE0, RS_Y_PLAFOND, RS_HALLE1, RS_Y_PLAFOND, "encre", 2))
+    # sol
+    A(ligne(RS_HALLE0, RS_Y_SOL, RS_X_LIMITE, RS_Y_SOL, "encre", 2))
+    # mur gauche, interrompu aux deux traversées d'eau
+    for a, b in ((RS_Y_PLAFOND, cy + ch / 2 - e80 / 2 - 3),
+                 (cy + ch / 2 + e80 / 2 + 3, RS_Y_COLL50 - e50 / 2 - 3),
+                 (RS_Y_COLL50 + e50 / 2 + 3, RS_Y_SOL)):
+        if b > a:
+            A(ligne(RS_HALLE0, a, RS_HALLE0, b, "encre", 2))
+    # mur droit, interrompu au collecteur de l'air capté
+    for a, b in ((RS_Y_PLAFOND, RS_Y_COLL_ASP - 3),
+                 (RS_Y_COLL_ASP + RS_H_COLL_ASP + 3, RS_Y_SOL)):
+        A(ligne(RS_HALLE1, a, RS_HALLE1, b, "encre", 2))
+    A(texte(RS_HALLE0 + 12, RS_Y_PLAFOND - 8, q["halle"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+
+    # ── La chaufferie, hors de la halle ─────────────────────────────────────
+    lib_ch = replier(prod["libelle"], 15, RS_CH1 - RS_CH0, "sans-600")
+    for k, l in enumerate(lib_ch):
+        controler(f"libellé chaufferie {k + 1}", l, 15, "sans-600",
+                  RS_CH1 - RS_CH0)
+        A(texte(RS_CH0, RS_CH_Y0 - 14 - (len(lib_ch) - 1 - k) * 18, l,
+                "sans", 15, 600, "encre", wdth=112))
+    A(rect_bord(RS_CH0, RS_CH_Y0, RS_CH1 - RS_CH0, RS_CH_Y1 - RS_CH_Y0,
+                "papier", "filet-1"))
+    # les quatre chaudières, en cascade : la répétition du module EST le signe
+    h_mod = (RS_CH_Y1 - RS_CH_Y0 - 20) / RS_N_CHAUD
+    for i in range(RS_N_CHAUD):
+        A(rect(RS_CH0 + 14, RS_CH_Y0 + 10 + i * h_mod + 3,
+               56, h_mod - 8, "calcaire"))
+        A(rect_bord(RS_CH0 + 14, RS_CH_Y0 + 10 + i * h_mod + 3,
+                    56, h_mod - 8, "calcaire", "filet-1"))
+    # la bouteille de découplage : la colonne verticale que tous les départs voient
+    A(rect(RS_CH0 + 92, RS_CH_Y0 + 13, 12, RS_CH_Y1 - RS_CH_Y0 - 26, "clair"))
+    A(rect_bord(RS_CH0 + 92, RS_CH_Y0 + 13, 12, RS_CH_Y1 - RS_CH_Y0 - 26,
+                "clair", "encre"))
+    for i in range(RS_N_CHAUD):
+        yy = RS_CH_Y0 + 10 + i * h_mod + h_mod / 2 - 1
+        A(ligne(RS_CH0 + 70, yy, RS_CH0 + 92, yy, "encre", 1.5))
+    valeur_ch = f'{prod["valeur"]}{NN}{prod["unite"]}'
+    controler("valeur chaufferie", valeur_ch, 10, "mono", 180, 10 * 0.14)
+    A(texte(RS_CH0, RS_CH_Y1 + 20, valeur_ch, "mono", 10, 500, "pivot",
+            tracking=10 * 0.14, tabulaire=True))
+    dispo_ch = RS_X_D33 - RS_CH0 - 12
+    lignes_ch = []
+    for l in prod["detail"]:
+        lignes_ch += _rs_replier_mono(l, 10, dispo_ch)
+    for k, l in enumerate(lignes_ch):
+        controler(f"détail chaufferie {k + 1}", l, 10, "mono", dispo_ch,
+                  10 * 0.14)
+        A(texte(RS_CH0, RS_CH_Y1 + 36 + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    # ── Les trois départs, tracés à l'échelle de leur diamètre nominal ───────
+    # DN 80 — vers la centrale de compensation
+    y_cta = cy + ch / 2
+    A(polyligne([(RS_CH1, RS_Y_D80), (RS_X_MONTEE, RS_Y_D80),
+                 (RS_X_MONTEE, y_cta), (cx, y_cta)], "encre", e80))
+    # DN 50 — vers le collecteur des panneaux
+    A(polyligne([(RS_CH1, RS_Y_D50), (RS_X_DESCENTE, RS_Y_D50),
+                 (RS_X_DESCENTE, RS_Y_COLL50), (RS_X_COLL50, RS_Y_COLL50)],
+                "encre", e50))
+    # DN 33 — le plus fin, qui quitte le dessin par la gauche
+    A(polyligne([(RS_CH1, RS_Y_D33), (RS_X_D33, RS_Y_D33),
+                 (RS_X_D33, RS_Y_D33_BAS),
+                 (RS_X_D33_FIN + 8, RS_Y_D33_BAS)], "encre", e33))
+    A(fleche(RS_X_D33_FIN, RS_Y_D33_BAS, "encre", "gauche", 9))
+    svc = dep["services"]
+    lib_svc = replier(svc["libelle"], 15, 168, "sans-600")
+    for k, l in enumerate(lib_svc):
+        controler(f"libellé services {k + 1}", l, 15, "sans-600", 168)
+        A(texte(RS_X_D33_FIN, RS_Y_D33_BAS + 24 + k * 18, l, "sans", 15, 600,
+                "encre", wdth=112))
+    y_svc = RS_Y_D33_BAS + 24 + len(lib_svc) * 18
+    dispo_svc = RS_POSTE_X[0] - RS_X_D33_FIN - 24
+    lignes_svc = []
+    for l in [f'{svc["diametre"]} · {svc["valeur"]}{NN}{svc["unite"]}',
+              svc["destin"]] + svc["detail"]:
+        lignes_svc += _rs_replier_mono(l, 10, dispo_svc)
+    for k, l in enumerate(lignes_svc):
+        controler(f"détail services {k + 1}", l, 10, "mono", dispo_svc,
+                  10 * 0.14)
+        A(texte(RS_X_D33_FIN, y_svc + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    # ── La compensation : la centrale, sa gaine, l'air qui descend ──────────
+    cpn = dep["compensation"]
+    A(rect_bord(cx, cy, cw, ch, "papier", "filet-1"))
+    # la batterie : des ailettes, dans la veine
+    for i in range(6):
+        A(ligne(cx + 24 + i * 9, cy + 12, cx + 24 + i * 9, cy + ch - 12,
+                "encre", 1.5))
+    lib_cta = replier(cpn["libelle"], 15, W - MARGE - RS_X_TXT_CTA, "sans-600")
+    for k, l in enumerate(lib_cta):
+        controler(f"libellé centrale {k + 1}", l, 15, "sans-600",
+                  W - MARGE - RS_X_TXT_CTA)
+        A(texte(RS_X_TXT_CTA, cy + 12 + k * 18, l, "sans", 15, 600, "encre",
+                wdth=112))
+    y_cta_det = cy + 12 + len(lib_cta) * 18
+    for k, l in enumerate([cpn["diametre"]] + cpn["detail"]):
+        controler(f"détail centrale {k + 1}", l, 10, "mono",
+                  W - MARGE - RS_X_TXT_CTA, 10 * 0.14)
+        A(texte(RS_X_TXT_CTA, y_cta_det + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+    # la gaine perforée, et l'air qui en descend
+    A(ligne(cx + cw / 2, cy + ch, cx + cw / 2, RS_Y_GAINE, "encre", 8))
+    _rs_perfore(A, cx + cw / 2 - 8, RS_X_GAINE1, RS_Y_GAINE, RS_H_GAINE)
+    cote_air = f'{cpn["valeur"]}{NN}{cpn["unite"]}'
+    controler("cote de la gaine", cote_air, 10, "mono", 200, 10 * 0.14)
+    A(texte(RS_X_GAINE1, RS_Y_GAINE - 8, cote_air, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14, tabulaire=True))
+    for x in RS_AIR_X:
+        A(ligne(x, RS_AIR_Y0, x, RS_AIR_Y1, "encre", 1.5))
+        A(fleche(x, RS_AIR_Y1 + 4, "encre", "bas", 9))
+
+    # ── Le rayonnement : les panneaux, et des flèches sans conduit ───────────
+    ray = dep["rayonnant"]
+    controler("libellé panneaux", ray["libelle"], 15, "sans-600",
+              RS_X_COLL50 - RS_PAN_X[0] - 120)
+    A(texte(RS_PAN_X[0], RS_Y_COLL50 - 12, ray["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+    cote_ray = f'{ray["diametre"]} · {ray["valeur"]}{NN}{ray["unite"]}'
+    controler("cote des panneaux", cote_ray, 10, "mono", 200, 10 * 0.14)
+    A(texte(RS_X_COLL50, RS_Y_COLL50 - 12, cote_ray, "mono", 10, 500, "pivot",
+            ancre="end", tracking=10 * 0.14, tabulaire=True))
+    for x in RS_PAN_X:
+        A(ligne(x + RS_PAN_W / 2, RS_Y_COLL50, x + RS_PAN_W / 2, RS_Y_PAN,
+                "encre", 2))
+        A(rect(x, RS_Y_PAN, RS_PAN_W, RS_PAN_H, "clair"))
+        A(rect_bord(x, RS_Y_PAN, RS_PAN_W, RS_PAN_H, "clair", "encre"))
+        for c in (x + 26, x + RS_PAN_W / 2, x + RS_PAN_W - 26):
+            _rs_rayon(A, c, RS_RAY_Y0, RS_RAY_Y1)
+    l_lib_ray = mesurer(ray["libelle"], 15, "sans-600")
+    l_cote_ray = mesurer(cote_ray, 10, "mono", 10 * 0.14)
+    x_haut = RS_PAN_X[0] + l_lib_ray + 20
+    controler("détail panneaux 2 (en ligne)", ray["detail"][1], 10, "mono",
+              (RS_X_COLL50 - l_cote_ray - 20) - x_haut, 10 * 0.14)
+    A(texte(x_haut, RS_Y_COLL50 - 12, ray["detail"][1], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("détail panneaux 1", ray["detail"][0], 10, "mono", 420,
+              10 * 0.14)
+    A(texte(RS_PAN_X[0], RS_Y_DET_PAN, ray["detail"][0], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    controler("destin du rayonnement", ray["destin"], 10, "mono", 300,
+              10 * 0.14)
+    A(texte(RS_X_GAINE1, RS_Y_DET_PAN, ray["destin"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    # ── Les postes, leurs captations, et l'air qui s'en va ───────────────────
+    # ⚠ Les deux mentions de cette ligne se partagent la largeur : la borne de
+    # la gauche est le bord gauche MESURÉ de la droite, jamais une constante.
+    l_destin = mesurer(cpn["destin"], 10, "mono", 10 * 0.14)
+    x_destin = RS_X_GAINE1 - l_destin
+    controler("mention de captation", postes["captation"], 10, "mono",
+              x_destin - RS_POSTE_X[0] - 24, 10 * 0.14)
+    A(texte(RS_POSTE_X[0], RS_Y_MENTIONS, postes["captation"], "mono", 10, 500,
+            "pivot", tracking=10 * 0.14))
+    A(texte(RS_X_GAINE1, RS_Y_MENTIONS, cpn["destin"], "mono", 10, 500,
+            "pivot", ancre="end", tracking=10 * 0.14))
+
+    A(rect(RS_POSTE_X[0], RS_Y_COLL_ASP, RS_X_LIMITE - RS_POSTE_X[0],
+           RS_H_COLL_ASP, "clair"))
+    A(rect_bord(RS_POSTE_X[0], RS_Y_COLL_ASP, RS_X_LIMITE - RS_POSTE_X[0],
+                RS_H_COLL_ASP, "clair", "encre"))
+    for x in RS_POSTE_X:
+        A(rect_bord(x, RS_Y_POSTE0, RS_POSTE_W, RS_Y_POSTE1 - RS_Y_POSTE0,
+                    "calcaire", "filet-1"))
+        _rs_captation(A, x + 16, x + RS_POSTE_W - 16, RS_Y_CAPT0, RS_Y_CAPT1)
+        A(ligne(x + RS_POSTE_W / 2, RS_Y_COLL_ASP + RS_H_COLL_ASP,
+                x + RS_POSTE_W / 2, RS_Y_CAPT0, "encre", 5))
+        A(fleche(x + RS_POSTE_W / 2, RS_Y_COLL_ASP + RS_H_COLL_ASP - 2,
+                 "encre", "haut", 9))
+    controler("libellé postes", postes["libelle"], 15, "sans-600", 560)
+    A(texte(RS_POSTE_X[0], RS_Y_LIB_POSTES, postes["libelle"], "sans", 15, 600,
+            "encre", wdth=112))
+
+    # ── La limite des marchés, et ce qui est au-delà ─────────────────────────
+    A(ligne(RS_X_LIMITE, RS_Y_LIM0, RS_X_LIMITE, RS_Y_LIM1, "encre", 2))
+    ax, ay, aw, ah = RS_ASP
+    A(fleche(ax - 2, RS_Y_COLL_ASP + RS_H_COLL_ASP / 2, "encre", "droite", 10))
+    A(rect_bord(ax, ay, aw, ah, "papier", "filet-1"))
+    lib_asp = replier(hors["libelle"], 15, aw - 24, "sans-600")
+    for k, l in enumerate(lib_asp):
+        controler(f"libellé aspiration {k + 1}", l, 15, "sans-600", aw - 24)
+        A(texte(ax + 12, ay + 24 + k * 18, l, "sans", 15, 600, "encre",
+                wdth=112))
+    y_asp = ay + 24 + len(lib_asp) * 18 + 4
+    for k, l in enumerate([f'{hors["valeur"]}{NN}{hors["unite"]}']
+                          + hors["detail"]):
+        controler(f"détail aspiration {k + 1}", l, 10, "mono", aw - 24,
+                  10 * 0.14)
+        A(texte(ax + 12, y_asp + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14, tabulaire=(k == 0)))
+    for k, l in enumerate(_rs_replier_mono(hors["mention"], 10, W - MARGE - ax)):
+        controler(f"mention aspiration {k + 1}", l, 10, "mono",
+                  W - MARGE - ax, 10 * 0.14)
+        A(texte(ax, RS_Y_ASP_MENTION + k * 14, l, "mono", 10, 500, "pivot",
+                tracking=10 * 0.14))
+
+    # ── Phrase de principe, pleine largeur utile ─────────────────────────────
+    l_phrase = controler("phrase de principe", donnees["phrase_principe"], 17,
+                         "sans-400", UTILE)
+    A(texte(MARGE, Y_PHRASE, donnees["phrase_principe"], "sans", 17, 400,
+            "encre", wdth=100))
+
+    # ── Cartouche — largeur AJUSTÉE au texte, jamais codée ───────────────────
+    libelle = donnees["cartouche_legende"]
+    largeur = min(600,
+                  round(mesurer(libelle, 11, "mono", tracking=11 * 0.14) + 40))
+    A(rect(MARGE, Y_CARTOUCHE, largeur, H_CARTOUCHE, "profond"))
+    A(texte(MARGE + 20, Y_CARTOUCHE + 20, libelle, "mono", 11, 500, "voile",
+            tracking=11 * 0.14))
+
+    A("</svg>")
+
+    controles = {
+        "gabarit": f"{W} x {H} — rapport {W/H:.4f} (3:2 exact)",
+        "demonstration": "l’air fait une traversée complète et ne revient pas : "
+                         f"il entre par la gaine perforée (y {RS_Y_GAINE}), "
+                         f"descend en {len(RS_AIR_X)} filets, est capté au ras "
+                         f"des {len(RS_POSTE_X)} postes (y {RS_Y_CAPT0}), "
+                         f"remonte au collecteur (y {RS_Y_COLL_ASP}) et "
+                         f"franchit la limite (x {RS_X_LIMITE}) ; le "
+                         "rayonnement, lui, descend des panneaux SANS AUCUN "
+                         "conduit et ne quitte pas le volume — texte masqué, "
+                         "un seul des deux vecteurs sort du cadre",
+        "echelle_des_departs": f"épaisseur = DN x {RS_K_DN} : "
+                               f"DN 80 → {e80:.1f} px, DN 50 → {e50:.1f} px, "
+                               f"DN 33 → {e33:.1f} px — rapport "
+                               f"{e80/e33:.2f} entre le plus gros et le plus "
+                               "fin ; les diamètres nominaux sont fermes (DPGF), "
+                               "les débits d’eau du CCTP ne le sont pas et ne "
+                               "sont pas dessinés",
+        "topologie": f"chaufferie x {RS_CH0}–{RS_CH1} (hors halle) → trois "
+                     f"départs → halle x {RS_HALLE0}–{RS_HALLE1} "
+                     f"(plafond {RS_Y_PLAFOND}, sol {RS_Y_SOL}) → limite des "
+                     f"marchés x {RS_X_LIMITE} → aspiration x {RS_ASP[0]}–"
+                     f"{RS_ASP[0] + RS_ASP[2]}",
+        "reserve_profonde": f"cartouche {largeur} x {H_CARTOUCHE} px = "
+                            f"{largeur * H_CARTOUCHE} px², soit "
+                            f"{largeur * H_CARTOUCHE / (W * H) * 100:.2f} % "
+                            f"de la planche",
+        "chiffre_unique": "aucun chiffre de relevé — la démonstration n’est pas "
+                          "chiffrée (révision 4) ; les quatre valeurs restent "
+                          "au mono 10 pivot, en cote de leur organe",
+        "corps_minimal": "10 px dans le repère — rendu à 9,60 px à l’échelle "
+                         f"0,96 (1152 / {W})",
+        "bas_du_dessin": f"sol à {RS_Y_SOL}, libellé des postes à "
+                         f"{RS_Y_LIB_POSTES}, phrase de principe à {Y_PHRASE}, "
+                         f"cartouche {Y_CARTOUCHE}–{Y_CARTOUCHE + H_CARTOUCHE}, "
+                         f"marge basse {H - (Y_CARTOUCHE + H_CARTOUCHE)} px",
+        "phrase_principe": f"{len(donnees['phrase_principe'])} signes — "
+                           f"{l_phrase:.0f} px mesurés pour {UTILE} disponibles",
+        "bornes_calculees": "deux bornes sont MESURÉES et non lues sur une "
+                            f"constante : la légende des traits s’arrête à "
+                            f"{x_entete_d - MARGE - 24:.0f} px (bord gauche de "
+                            f"l’en-tête droit, ancré à la marge), la mention de "
+                            f"captation à {x_destin - RS_POSTE_X[0] - 24:.0f} px "
+                            "(bord gauche du destin de l’air)",
+        "depassements": depassements if depassements
+                        else "aucun — toutes les lignes mesurées sous leur borne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── Vignette du mécanisme `restitution` — repère propre, mesures propres ─────
+RSV_HALLE0, RSV_HALLE1 = 34, 232
+RSV_Y_PLAF, RSV_Y_SOL = 62, 168
+RSV_X_LIMITE = 250
+RSV_Y_GAINE, RSV_H_GAINE = 82, 7
+RSV_AIR_X = (52, 113, 175)    # dans les intervalles, jamais sur un panneau
+RSV_Y_PAN = 112
+RSV_PAN_X = (60, 122, 184)
+RSV_PAN_W = 44
+RSV_Y_COLL = 138
+RSV_POSTE_Y = 150
+RSV_CH = (16, 76, 14, 62)     # la chaufferie, réduite à son module répété
+
+
+def composer_vignette_restitution(donnees):
+    """La vignette : le motif, sans son appareil.
+
+    Ce qu'elle garde : la halle, la gaine perforée et l'air qui descend, les
+    trois panneaux et leur rayonnement sans conduit, le collecteur qui franchit
+    la limite, et le nœud chiffré de la compensation. Ce qu'elle laisse : la
+    chaufferie détaillée, les trois cotes de diamètre, les postes, les libellés
+    d'organe et toutes les mentions — douze annotations dans 300 px ne se
+    liraient pas.
+    """
+    q = donnees["restitution"]
+    dep = {e["cle"]: e for e in q["departs"]}
+    cpn = dep["compensation"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    A(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VW} {VH}" '
+      f'preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" '
+      f'style="width:100%;height:auto;display:block">')
+    entete_style(A)
+    A(rect(0, 0, VW, VH, "papier"))
+    controler("surtitre de vignette", donnees["vignette_surtitre"], 9, "mono",
+              VW - 2 * V_MARGE, 9 * 0.14)
+    A(texte(V_MARGE, 22, donnees["vignette_surtitre"], "mono", 9, 500, "pivot",
+            tracking=9 * 0.14))
+
+    # la halle
+    A(ligne(RSV_HALLE0, RSV_Y_PLAF, RSV_HALLE1, RSV_Y_PLAF, "encre", 1.5))
+    A(ligne(RSV_HALLE0, RSV_Y_SOL, RSV_X_LIMITE, RSV_Y_SOL, "encre", 1.5))
+    A(ligne(RSV_HALLE0, RSV_Y_PLAF, RSV_HALLE0, RSV_Y_SOL, "encre", 1.5))
+    for a, b in ((RSV_Y_PLAF, RSV_Y_COLL - 2), (RSV_Y_COLL + 7, RSV_Y_SOL)):
+        A(ligne(RSV_HALLE1, a, RSV_HALLE1, b, "encre", 1.5))
+
+    # la chaufferie : quatre modules empilés, le signe de la cascade
+    chx, chy, chw, chh = RSV_CH
+    for i in range(4):
+        A(rect_bord(chx, chy + i * (chh / 4) + 1, chw, chh / 4 - 2,
+                    "calcaire", "filet-1"))
+    A(polyligne([(chx + chw, chy + 8), (28, chy + 8), (28, RSV_Y_GAINE + 3),
+                 (44, RSV_Y_GAINE + 3)], "encre", 4))
+    A(polyligne([(chx + chw, chy + chh - 8), (30, chy + chh - 8),
+                 (30, RSV_Y_PAN - 8), (RSV_PAN_X[0], RSV_Y_PAN - 8)],
+                "encre", 2.5))
+
+    # la gaine perforée, et l'air qui descend
+    A(rect(44, RSV_Y_GAINE, RSV_HALLE1 - 56, RSV_H_GAINE, "clair"))
+    A(rect_bord(44, RSV_Y_GAINE, RSV_HALLE1 - 56, RSV_H_GAINE, "clair", "encre"))
+    for x in RSV_AIR_X:
+        A(ligne(x, RSV_Y_GAINE + RSV_H_GAINE, x, RSV_Y_GAINE + 20, "encre", 1))
+        A(fleche(x, RSV_Y_GAINE + 24, "encre", "bas", 6))
+
+    # les panneaux : le rayonnement descend, sans conduit
+    for x in RSV_PAN_X:
+        A(ligne(x + RSV_PAN_W / 2, RSV_Y_PAN - 8, x + RSV_PAN_W / 2, RSV_Y_PAN,
+                "encre", 1.5))
+        A(rect(x, RSV_Y_PAN, RSV_PAN_W, 5, "clair"))
+        A(rect_bord(x, RSV_Y_PAN, RSV_PAN_W, 5, "clair", "encre"))
+        for c in (x + 10, x + RSV_PAN_W / 2, x + RSV_PAN_W - 10):
+            for dx in (-4, 0, 4):
+                A(ligne(c, RSV_Y_PAN + 5, c + dx, RSV_Y_PAN + 17, "encre", 0.8))
+
+    # le collecteur de l'air capté, qui franchit la limite
+    A(rect(60, RSV_Y_COLL, RSV_X_LIMITE - 60, 5, "clair"))
+    A(rect_bord(60, RSV_Y_COLL, RSV_X_LIMITE - 60, 5, "clair", "encre"))
+    for x in RSV_PAN_X:
+        A(ligne(x + RSV_PAN_W / 2, RSV_POSTE_Y, x + RSV_PAN_W / 2,
+                RSV_Y_COLL + 5, "encre", 2))
+        A(rect_bord(x + 8, RSV_POSTE_Y, RSV_PAN_W - 16, 14, "calcaire",
+                    "filet-1"))
+    A(fleche(RSV_X_LIMITE + 12, RSV_Y_COLL + 2.5, "encre", "droite", 8))
+
+    # la limite des marchés
+    A(ligne(RSV_X_LIMITE, 56, RSV_X_LIMITE, RSV_Y_SOL + 6, "encre", 1.5))
+
+    # le nœud chiffré : la compensation
+    controler("nœud de vignette", cpn["libelle_vignette"], 12, "sans-600",
+              VW - 2 * V_MARGE
+              - mesurer(f'{cpn["valeur"]}{NN}{cpn["unite"]}', 10, "mono") - 16)
+    A(texte(V_MARGE, 184, cpn["libelle_vignette"], "sans", 12, 600, "encre",
+            wdth=112))
+    A(texte(VW - V_MARGE, 184, f'{cpn["valeur"]}{NN}{cpn["unite"]}',
+            "mono", 10, 500, "pivot", ancre="end", tabulaire=True))
+
+    A("</svg>")
+    controles = {
+        "gabarit": f"{VW} x {VH} — rapport {VW/VH:.4f} (3:2 exact)",
+        "echelle_de_rendu": f"carte de projet mesurée de 274 à 296 px — "
+                            f"échelle {274/VW:.2f} à {296/VW:.2f}",
+        "corps_minimal": f"9 px dans le repère — rendu à {9*274/VW:.1f} px au pire cas",
+        "motif": "la halle, la gaine perforée et ses trois descentes d’air, "
+                 "les trois panneaux dont le rayonnement descend sans conduit, "
+                 "le collecteur qui franchit la limite, et le nœud chiffré de "
+                 "la compensation ; chaufferie détaillée, cotes de diamètre, "
+                 "libellés d’organe et mentions sont laissés à la planche",
+        "elements_absents": "les trois cotes de diamètre nominal, les libellés "
+                            "de la chaufferie, du bloc d’aspiration et des "
+                            "postes, la mention de captation et le destin des "
+                            "deux vecteurs — mesure de format, pas exception",
+        "bas_du_dessin": "nœud chiffré à y 184, marge basse 16 px",
+        "depassements": depassements if depassements
+                        else "aucun — surtitre et nœud mesurés sous leur borne",
+    }
+    return "\n".join(out) + "\n", controles
+
+
+# ── Appui du mécanisme `restitution` — 552 x 368, échelle 1,0 ────────────────
+RSA_HALLE0, RSA_HALLE1 = 96, 424
+RSA_Y_PLAF, RSA_Y_SOL = 96, 300
+RSA_X_LIMITE = 452
+RSA_Y_GAINE, RSA_H_GAINE = 128, 9
+RSA_AIR_X = (126, 226, 326)   # dans les intervalles, jamais sur un panneau
+RSA_Y_COLL50 = 178
+RSA_PAN_X = (140, 240, 340)
+RSA_PAN_W = 72
+RSA_Y_PAN = 186
+RSA_Y_COLL = 248
+RSA_POSTE_Y = 266
+RSA_CH = (32, 148, 40, 96)
+
+
+def composer_appui_restitution(donnees):
+    """L'appui : le motif entier, deux nœuds chiffrés, le surtitre court.
+
+    Densité intermédiaire (protocole rév. 5) : la traversée complète et la
+    limite des marchés, avec la compensation et l’aspiration chiffrées. Sont
+    ABSENTS de ce format : les trois cotes de diamètre, les détails d’organe,
+    les mentions de destin et le libellé des postes.
+    """
+    q = donnees["restitution"]
+    dep = {e["cle"]: e for e in q["departs"]}
+    cpn, hors = dep["compensation"], q["hors_marche"]
+    out = []
+    A = out.append
+    depassements = []
+
+    def controler(nom, chaine, corps, profil, dispo, tracking=0.0):
+        largeur = mesurer(chaine, corps, profil, tracking)
+        if largeur > dispo:
+            depassements.append(f"{nom} : {largeur:.0f} px pour {dispo:.0f} px")
+        return largeur
+
+    controler("surtitre d’appui", donnees["vignette_surtitre"], 11, "mono",
+              AW - 2 * A_MARGE, 11 * 0.14)
+    racine_appui(A, donnees)
+
+    # la halle
+    A(ligne(RSA_HALLE0, RSA_Y_PLAF, RSA_HALLE1, RSA_Y_PLAF, "encre", 2))
+    A(ligne(RSA_HALLE0, RSA_Y_SOL, RSA_X_LIMITE, RSA_Y_SOL, "encre", 2))
+    A(ligne(RSA_HALLE0, RSA_Y_PLAF, RSA_HALLE0, RSA_Y_SOL, "encre", 2))
+    for a, b in ((RSA_Y_PLAF, RSA_Y_COLL - 3), (RSA_Y_COLL + 9, RSA_Y_SOL)):
+        A(ligne(RSA_HALLE1, a, RSA_HALLE1, b, "encre", 2))
+
+    # la chaufferie et ses deux départs de calibres inégaux
+    chx, chy, chw, chh = RSA_CH
+    for i in range(4):
+        A(rect_bord(chx, chy + i * (chh / 4) + 1.5, chw, chh / 4 - 3,
+                    "calcaire", "filet-1"))
+    A(polyligne([(chx + chw, chy + 12), (84, chy + 12), (84, RSA_Y_GAINE + 4),
+                 (112, RSA_Y_GAINE + 4)], "encre", 8))
+    A(polyligne([(chx + chw, chy + chh - 12), (88, chy + chh - 12),
+                 (88, RSA_Y_COLL50), (RSA_PAN_X[-1] + RSA_PAN_W, RSA_Y_COLL50)],
+                "encre", 5))
+
+    # la gaine perforée et l'air qui descend
+    A(rect(112, RSA_Y_GAINE, RSA_HALLE1 - 136, RSA_H_GAINE, "clair"))
+    A(rect_bord(112, RSA_Y_GAINE, RSA_HALLE1 - 136, RSA_H_GAINE, "clair",
+                "encre"))
+    for x in RSA_AIR_X:
+        A(ligne(x, RSA_Y_GAINE + RSA_H_GAINE, x, RSA_Y_GAINE + 26, "encre", 1.5))
+        A(fleche(x, RSA_Y_GAINE + 31, "encre", "bas", 8))
+
+    # les panneaux : le rayonnement, sans conduit
+    for x in RSA_PAN_X:
+        A(ligne(x + RSA_PAN_W / 2, RSA_Y_COLL50, x + RSA_PAN_W / 2, RSA_Y_PAN,
+                "encre", 2))
+        A(rect(x, RSA_Y_PAN, RSA_PAN_W, 7, "clair"))
+        A(rect_bord(x, RSA_Y_PAN, RSA_PAN_W, 7, "clair", "encre"))
+        for c in (x + 16, x + RSA_PAN_W / 2, x + RSA_PAN_W - 16):
+            for dx in (-6, 0, 6):
+                A(ligne(c, RSA_Y_PAN + 7, c + dx, RSA_Y_PAN + 24, "encre", 1))
+
+    # le collecteur, les postes, la traversée de la limite
+    A(rect(140, RSA_Y_COLL, RSA_X_LIMITE - 140, 9, "clair"))
+    A(rect_bord(140, RSA_Y_COLL, RSA_X_LIMITE - 140, 9, "clair", "encre"))
+    for x in RSA_PAN_X:
+        A(ligne(x + RSA_PAN_W / 2, RSA_POSTE_Y, x + RSA_PAN_W / 2,
+                RSA_Y_COLL + 9, "encre", 3))
+        A(rect_bord(x + 12, RSA_POSTE_Y, RSA_PAN_W - 24, 22, "calcaire",
+                    "filet-1"))
+    A(ligne(RSA_X_LIMITE, 84, RSA_X_LIMITE, RSA_Y_SOL + 10, "encre", 2))
+    A(fleche(RSA_X_LIMITE + 20, RSA_Y_COLL + 4.5, "encre", "droite", 9))
+
+    # deux nœuds chiffrés : ce qui est rendu, ce qui prend
+    # ⚠ Chaque nœud est borné par son VOISIN, jamais par la marge : à gauche
+    # la valeur ancrée à AW/2+40, à droite celle ancrée à la marge droite.
+    controler("nœud gauche d’appui", cpn["libelle_vignette"], 12, "sans-600",
+              (AW / 2 + 40) - A_MARGE
+              - mesurer(f'{cpn["valeur"]}{NN}{cpn["unite"]}', 10, "mono") - 16)
+    controler("nœud droit d’appui", hors["libelle_vignette"], 12, "sans-600",
+              (AW - A_MARGE) - (AW / 2 + 76)
+              - mesurer(f'{hors["valeur"]}{NN}{hors["unite"]}', 10, "mono") - 16)
+    A(texte(A_MARGE, 336, cpn["libelle_vignette"], "sans", 12, 600, "encre",
+            wdth=112))
+    A(texte(AW / 2 + 40, 336, f'{cpn["valeur"]}{NN}{cpn["unite"]}',
+            "mono", 10, 500, "pivot", ancre="end", tabulaire=True))
+    A(texte(AW / 2 + 76, 336, hors["libelle_vignette"], "sans", 12, 600,
+            "encre", wdth=112))
+    A(texte(AW - A_MARGE, 336, f'{hors["valeur"]}{NN}{hors["unite"]}',
+            "mono", 10, 500, "pivot", ancre="end", tabulaire=True))
+
+    A("</svg>")
+    controles = controles_appui(
+        "la halle, la gaine perforée et ses trois descentes d’air, les trois "
+        "panneaux dont le rayonnement descend sans conduit, le collecteur qui "
+        "franchit la limite des marchés, et deux nœuds chiffrés — ce que la "
+        "compensation rend, ce que l’aspiration prend",
+        "nœuds chiffrés à y 336, marge basse 32 px",
+        elements_absents="les trois cotes de diamètre nominal, les détails "
+                         "d’organe, les mentions de destin et le libellé des "
+                         "postes — mesure de format, pas exception",
+        echelle_des_departs="les deux départs dessinés gardent leur rapport "
+                            "d’épaisseur (8 px pour le DN 80, 5 px pour le "
+                            "DN 50) ; le DN 33, qui quitte le dessin, est "
+                            "absent de ce format",
+        depassements=depassements if depassements
+                     else "aucun — surtitre et deux nœuds mesurés sous leur borne",
+    )
+    return "\n".join(out) + "\n", controles
 
 
 # ═══ Dispatch — le bloc de l'extraction choisit le mécanisme ═════════════════
@@ -4463,6 +5171,8 @@ def composer_appui_retrait(donnees):
 
 
 def _composer(donnees):
+    if "restitution" in donnees:
+        return composer_restitution(donnees)
     if "retrait" in donnees:
         return composer_retrait(donnees)
     if "exposition" in donnees:
@@ -4485,6 +5195,8 @@ def _composer(donnees):
 
 
 def _composer_vignette(donnees):
+    if "restitution" in donnees:
+        return composer_vignette_restitution(donnees)
     if "retrait" in donnees:
         return composer_vignette_retrait(donnees)
     if "exposition" in donnees:
@@ -4507,6 +5219,8 @@ def _composer_vignette(donnees):
 
 
 def _composer_appui(donnees):
+    if "restitution" in donnees:
+        return composer_appui_restitution(donnees)
     if "retrait" in donnees:
         return composer_appui_retrait(donnees)
     if "exposition" in donnees:
