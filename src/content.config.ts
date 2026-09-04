@@ -27,6 +27,47 @@ const SECTEURS = [
  * le mot s'affiche en chip de filtre sur `/references`.
  */
 const TYPOLOGIES = ['Neuf', 'Réhabilitation', 'Extension', 'Étude', "Études d’exécution"] as const;
+/**
+ * Les onze pages piliers du cocon sémantique — les quatre expertises, puis
+ * les sept secteurs — en graphie d’URL, exactement comme le site les sert.
+ *
+ * La relation article → pilier se déclare UNE SEULE FOIS, sur l’article
+ * (champ `piliers` de la collection `actualites`), et les pages piliers
+ * ramassent les articles qui les désignent. Aucun champ `articles_lies` en
+ * regard sur `expertises` ni sur `secteurs` — ce serait une seconde vérité à
+ * tenir en cohérence, et c’est toujours la copie, jamais l’original, qui se
+ * désynchronise (même motif que le titre de planche et l’alternative de
+ * vignette, déjà tranché deux fois dans ce dépôt).
+ *
+ * Énumération fermée plutôt que chaîne libre, parce qu’une chaîne libre rend
+ * le lien mort possible et ne le signale qu’au rendu. L’énumération le rend
+ * impossible par construction, le build refusant un pilier qui n’existe pas.
+ * Les deux collections visées sont de cardinalité FIXE — quatre expertises et
+ * sept secteurs, voir `.claude/rules/content-collections.md` — donc la liste
+ * ne se périmera pas au fil de l’édition.
+ *
+ * ⚠ C’est en contrepartie une liste À TENIR, et c’est le prix de la garantie.
+ * Toute page d’expertise ou de secteur ajoutée, renommée ou retirée doit être
+ * reportée ici ET dans le widget « Piliers du cocon sémantique » de
+ * `public/admin/config.yml`, au sein du même commit.
+ *
+ * Ordre — celui du site : les quatre expertises puis les sept secteurs,
+ * chaque groupe par `ordre` croissant de son frontmatter.
+ */
+const PILIERS = [
+  '/expertises/audit-diagnostic',
+  '/expertises/etude-thermique',
+  '/expertises/cvc',
+  '/expertises/electricite',
+  '/secteurs/logements',
+  '/secteurs/tertiaire-erp',
+  '/secteurs/industriel-commercial',
+  '/secteurs/patrimoine',
+  '/secteurs/coordination-ssi',
+  '/secteurs/monotechnique',
+  '/secteurs/etudes-execution-bim',
+] as const;
+
 const MISSIONS = ['CVC', 'Thermique', 'Électricité CFO', 'Électricité CFA', 'Photovoltaïque', 'SSI', 'BIM', "Études d’exécution", 'Audit & diagnostic'] as const;
 
 const projets = defineCollection({
@@ -239,6 +280,20 @@ const actualites = defineCollection({
     categories: z.array(z.enum([
       'Chantier en cours', 'Livraison', 'Événement', 'Article technique', 'Vie du cabinet',
     ])),
+    /**
+     * Pages piliers dont l’article est un satellite — le cocon sémantique de
+     * `.claude/rules/seo-geo.md`, qui veut 3 à 5 articles satellites par page
+     * pilier. La relation ne se déclare QUE là, et les onze pages piliers
+     * ramassent les articles qui les nomment.
+     *
+     * La PREMIÈRE entrée est le pilier principal, celui dont l’article est le
+     * satellite au sens du PDF de proposition. Les suivantes sont des
+     * rattachements secondaires.
+     *
+     * Optionnel, parce qu’une actualité de la vie du cabinet n’est satellite
+     * d’aucun pilier. Renseigné, le champ porte de une à trois entrées.
+     */
+    piliers: z.array(z.enum(PILIERS)).min(1).max(3).optional(),
     en_avant: z.boolean().default(false),
     demo: z.boolean().default(false),
   }),

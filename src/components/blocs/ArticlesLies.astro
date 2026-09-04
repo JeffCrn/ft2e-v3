@@ -1,0 +1,61 @@
+---
+import CarteActualite from './CarteActualite.astro';
+import { articlesDuPilier } from '../../lib/articles';
+
+interface Props {
+  /** Chemin de la page pilier qui appelle — « /expertises/cvc », « /secteurs/logements ». */
+  pilier: string;
+}
+
+// Le pied de cocon d'une page pilier : les articles techniques qui la
+// désignent. `.claude/rules/seo-geo.md` demande 3 à 5 satellites par pilier ;
+// avant ce bloc, les onze pages en portaient ZÉRO (mesure du 2026-09-04).
+//
+// Le bloc ne se rend pas quand la page n'a pas encore de satellite, et c'est
+// délibéré : un titre de section suivi d'un vide se lit comme une page en
+// panne, pas comme un fonds à venir. Les six articles de lancement ne
+// couvrent pas les onze piliers.
+//
+// La résolution et l'ordre vivent dans `src/lib/articles.ts`, pas ici : c'est
+// là que le contrat du champ `piliers` est appliqué, et que le lien mort
+// échoue bruyamment.
+const { pilier } = Astro.props;
+const articles = await articlesDuPilier(pilier);
+---
+
+{articles.length > 0 && (
+  <section class="pb-16 md:pb-20">
+    <div class="max-w-[1200px] mx-auto px-4 md:px-6">
+      <div class="flex items-center gap-3">
+        <span class="puce-section" aria-hidden="true"></span>
+        <p class="mono-label text-pivot">pour aller plus loin</p>
+      </div>
+      <div class="flex flex-wrap items-baseline gap-x-5 gap-y-2 mt-4 mb-6">
+        <h2 class="type-section text-[22px] md:text-[24px]">
+          <span class="text-encre">Articles techniques</span>
+          <span class="text-clair" aria-hidden="true">/sur ce sujet</span>
+        </h2>
+        <a href="/actualites" class="mono-label font-normal text-pivot hover:text-encre motion-safe:transition-colors motion-safe:duration-[260ms] motion-safe:ease-[var(--ease-blueprint)]">
+          voir toutes les actualités →
+        </a>
+      </div>
+      {/* Grille de `/actualites` — deux colonnes puis trois, gouttière de 24.
+          Pas de plafond de largeur à poser sur la carte : sa vignette est la
+          hachure `duotone-media`, pas un dessin, donc aucune sur-échelle de
+          filet de 1 px à craindre (contrairement à `CarteProjet`).
+
+          Pas de `data-plan-groupe` non plus : la cascade d'A11 ne joue sur
+          AUCUNE grille de ces deux gabarits — ni « références liées » ni
+          « références du secteur ». L'ajouter ici seul ferait cascader la
+          grille du bas d'une page pendant que celle du dessus reste posée,
+          ce qui se lirait comme un défaut de fabrication. Un bloc neuf
+          s'aligne sur son voisin immédiat, pas sur un composant d'une autre
+          page. */}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((article) => (
+          <CarteActualite article={article} />
+        ))}
+      </div>
+    </div>
+  </section>
+)}

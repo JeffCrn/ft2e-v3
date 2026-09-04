@@ -5,6 +5,7 @@ import HeroPage from '../../components/blocs/HeroPage.astro';
 import FAQ from '../../components/blocs/FAQ.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 import CarteProjet from '../../components/blocs/CarteProjet.astro';
+import ArticlesLies from '../../components/blocs/ArticlesLies.astro';
 import JsonLd from '../../components/seo/JsonLd.astro';
 
 export async function getStaticPaths() {
@@ -136,6 +137,9 @@ const jsonLd = {
       </div>
     </section>
   )}
+
+  {/* ─── Articles techniques du cocon (seo-geo.md) ─── */}
+  <ArticlesLies pilier={`/expertises/${expertise.id}`} />
 
   <CtaFinal />
 

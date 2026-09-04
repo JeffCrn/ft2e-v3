@@ -294,6 +294,27 @@ collections:
           - "Vie du cabinet"
         hint: "Liste close : le build refuse toute autre valeur."
 
+      - label: "Piliers du cocon sémantique"
+        name: "piliers"
+        widget: "select"
+        multiple: true
+        required: false
+        min: 1
+        max: 3
+        options:
+          - { label: "Expertise — Audit & diagnostic", value: "/expertises/audit-diagnostic" }
+          - { label: "Expertise — Étude thermique RT/RE", value: "/expertises/etude-thermique" }
+          - { label: "Expertise — Chauffage, ventilation, climatisation", value: "/expertises/cvc" }
+          - { label: "Expertise — Électricité CFO/CFA", value: "/expertises/electricite" }
+          - { label: "Secteur — Logements", value: "/secteurs/logements" }
+          - { label: "Secteur — Tertiaire / ERP", value: "/secteurs/tertiaire-erp" }
+          - { label: "Secteur — Industriel", value: "/secteurs/industriel-commercial" }
+          - { label: "Secteur — Patrimoine", value: "/secteurs/patrimoine" }
+          - { label: "Secteur — Coordination SSI", value: "/secteurs/coordination-ssi" }
+          - { label: "Secteur — Monotechnique — Audit", value: "/secteurs/monotechnique" }
+          - { label: "Secteur — Études d’exécution / BIM", value: "/secteurs/etudes-execution-bim" }
+        hint: "Une à trois pages, parmi les quatre expertises et les sept secteurs. La PREMIÈRE entrée est le pilier principal, celui dont l’article est le satellite. Les suivantes sont des rattachements secondaires. Laisser vide pour une actualité qui ne dépend d’aucun pilier."
+
       - label: "Mis en avant"
         name: "en_avant"
         widget: "boolean"

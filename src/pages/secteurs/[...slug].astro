@@ -4,6 +4,7 @@ import { Picture } from 'astro:assets';
 import PageLayout from '../../layouts/PageLayout.astro';
 import HeroPage from '../../components/blocs/HeroPage.astro';
 import CarteProjet from '../../components/blocs/CarteProjet.astro';
+import ArticlesLies from '../../components/blocs/ArticlesLies.astro';
 import CoinsCuivre from '../../components/primitives/CoinsCuivre.astro';
 import CtaFinal from '../../components/blocs/CtaFinal.astro';
 import FAQ from '../../components/blocs/FAQ.astro';
@@ -149,6 +150,9 @@ const projetsSecteur = (await getCollection('projets'))
       </div>
     </section>
   )}
+
+  {/* ─── Articles techniques du cocon (seo-geo.md) ─── */}
+  <ArticlesLies pilier={`/secteurs/${secteur.id}`} />
 
   <CtaFinal />
 
