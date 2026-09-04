@@ -441,3 +441,64 @@ Inchangé pour l'essentiel — le § 4 fait foi, et son rang D a été repris. E
 - **Rang D** : le texte dessiné (64 écarts) et les champs éditoriaux (2 160) du corpus,
   le passage NVDA jamais fait par un humain, l'option 0 du motion (TraceFlux débranché),
   le LCP mobile au seuil.
+
+## Addendum du 2026-09-04 — la N26 ouvre le chantier des six articles SEO
+
+**Ce point de reprise avait un angle mort, et c'est le plus coûteux du projet :** il
+recensait scrupuleusement ce qui restait ouvert *dans le dépôt*, et pas ce qui restait
+dû *au contrat*. La Phase 4 de `docs/12-cadrage-jalons.md` n'est pas close, et son seul
+critère de sortie qui ne dépende de personne d'autre était à **zéro sur six** : les six
+articles SEO de lancement, inclus au périmètre non facturé (`docs/17`, PDF p. 23).
+
+Aucun des quatre rangs ci-dessus ne le portait, parce qu'ils décrivent de la **dette** —
+ce qui est là et qu'il faut réparer — et que ceci est de la **production** : ce qui
+n'est pas là et qu'il faut faire. Un point de reprise trié par dette fait
+systématiquement descendre la production sous le polissage.
+
+### Ce que la mesure a trouvé, et qui a changé la nature du chantier
+
+| | Avant la N26 | Après |
+|---|---|---|
+| Articles techniques publiés | **0** — la seule actualité porte `demo: true` | **2** |
+| Pages piliers desservies par un article | **0 / 11** | **4 / 11** |
+| Mécanisme de maillage pilier → article | **inexistant** | champ `piliers`, `src/lib/articles.ts`, `ArticlesLies.astro` |
+
+`.claude/rules/seo-geo.md` exige 3 à 5 articles satellites par page pilier depuis
+l'origine du projet. **La règle existait sans rien pour la porter** : aucun champ,
+aucun rendu, aucun contrôle. Le chantier n'était donc pas « écrire six textes », c'était
+« câbler six textes » — un article non maillé n'aurait servi ni le visiteur ni le
+référencement.
+
+### Deux affirmations non étayées, relevées sur les pages piliers
+
+Le grep préalable à l'écriture — celui que le protocole des fiches impose et qui a payé
+six sessions sur sept — a trouvé que le site **affirme déjà** ce que rien n'étaye :
+
+- `expertises/electricite.md` : « la GTB permet de réduire les consommations de **15 à
+  25 %** par le seul ajustement des plages horaires » ;
+- `expertises/cvc.md`, FAQ : « la géothermie sur sondes verticales offre un meilleur
+  rendement (**COP 4 à 5**) ».
+
+Ce sont des ordres de grandeur de marché, qu'aucune pièce FT2E ne porte. Ils sont de la
+**dette éditoriale antérieure**, pas un défaut du chantier — les deux articles de la N26
+ne les reprennent pas. ⚠ **Le COP est au chemin direct de l'article n° 3** (PAC
+aérothermique contre géothermique) : à arbitrer avant de l'écrire, faute de quoi
+l'article contredira la page qu'il est censé servir. Trois issues au § 6 du plan.
+
+### Ce qui reste ouvert après la N26
+
+Les quatre rangs sont inchangés. S'y ajoutent, au **rang de production** :
+
+- **quatre articles sur six** (PAC, Revit/EXE, décret tertiaire, IRVE) — sujets arrêtés
+  par `docs/17` mais dits « à valider en cadrage » : les écrire n'est pas les valider ;
+- ⚠ **six articles ne couvriront jamais onze piliers.** Même les six écrits, le cocon
+  plafonnera vers 8 piliers sur 11, et aucun n'atteindra les 3 à 5 satellites demandés.
+  C'est **structurel**, pas un défaut d'exécution : à dire à FT2E plutôt qu'à laisser
+  découvrir — soit le périmètre s'arrête à six (il est contractuel), soit des articles
+  supplémentaires font l'objet d'un devis ;
+- **la Phase 5 reste non commencée** : formulaire sans backend, Plausible annoncé dans
+  `/politique-confidentialite` sans qu'aucun script soit installé (report décidé par
+  l'utilisateur le 2026-09-04), redirections 301, Search Console, formation CMS, DNS.
+
+Plan du chantier, décisions et prompt de la N27 :
+`docs/superpowers/plans/2026-09-04-chantier-six-articles-seo.md`.
