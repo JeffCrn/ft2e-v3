@@ -502,3 +502,92 @@ Les quatre rangs sont inchangés. S'y ajoutent, au **rang de production** :
 
 Plan du chantier, décisions et prompt de la N27 :
 `docs/superpowers/plans/2026-09-04-chantier-six-articles-seo.md`.
+
+---
+
+## Addendum du 2026-09-04 (soir) — la N27 CLÔT le chantier des six articles
+
+**Six articles sur six sont publiés.** Le critère de sortie de Phase 4 qui était
+entièrement dans notre camp est atteint. Il ne reste à la Phase 4 **qu'un seul
+critère non atteint, et il est HORS DÉPÔT** : Decap testé et pris en main par
+FT2E, que l'OAuth casse en production (rang A, `docs/22` § 0).
+
+### Ce que la N27 a livré
+
+| | Après N26 | Après N27 |
+|---|---|---|
+| Articles techniques publiés | 2 | **6** |
+| Pages piliers desservies | 4 / 11 | **8 / 11** |
+| Liens internes du site | 400 | **434** |
+| Pages au build | 72 | **76** |
+
+Les quatre articles : PAC aérothermique ou géothermique · Études d'exécution :
+qui les porte · Décret tertiaire 2030 · IRVE en logement collectif neuf.
+Commit `7410a67`, portée `content(actualites)`.
+
+### Une affirmation non étayée est tombée, l'autre reste
+
+✅ **Le « COP 4 à 5 » de la FAQ de `expertises/cvc.md` est retiré** (commit
+`95d5218`). La réponse est réécrite sur le critère que le corpus établit — le
+régime d'eau que les émetteurs acceptent, relevé à l'audit ADEI.
+
+⚠ **L'issue « le remplacer par une valeur du corpus » a été ÉCARTÉE, et il faut
+savoir pourquoi avant de la reproposer ailleurs** : le « 4,65 de COP » de
+`fougerou-sainte-marie-de-re` est certifié **à +7 °C sur une PAC air/eau double
+service**. L'attribuer à la géothermie aurait remplacé un chiffre de marché par
+un chiffre **faux**. Une substitution ne vaut que si la valeur dit la même chose.
+
+🔴 **Reste en ligne, même statut** : `expertises/electricite.md` — « la GTB
+permet de réduire les consommations de **15 à 25 %** ». Aucune pièce FT2E
+derrière. Sans urgence (aucun article ne s'y appuie), à arbitrer avec FT2E.
+
+### Deux sujets ont été réancrés — la mesure l'a imposé
+
+Les titres 3 et 4 de `docs/17` présupposaient une matière que le corpus n'a pas :
+**22 fiches citent une PAC mais UNE SEULE la géothermie** (un cas d'usure, sans
+COP) ; **28 fiches citent l'exécution mais UNE SEULE nomme Revit**. Arbitrage
+rendu en ouverture de session : réancrer sur la matière réelle, sujets voisins.
+
+Le comptage antérieur (« 25 fichiers », « 37 fichiers ») était celui de l'**union**
+des termes grep, pas de chacun — et un total d'union ne se distingue pas d'un
+total par sujet.
+
+⚠⚠ **Piège d'instrument à ne pas redécouvrir** : `grep -E "g[ée]othermi"` rend
+**zéro** sur un corpus qui porte « géothermique ». Une classe de caractères sur
+un `é` compare des **octets**, pas des caractères, et le motif dégénère en
+`geothermi` sans accent. Le premier relevé de la N27 a donc annoncé « aucune
+affaire géothermique » — plausible, et faux. Même cause pour `[ée]xecution`.
+Ancrer sur le mot littéral, et donner à tout relevé une **sonde témoin** qui doit
+trouver un hit connu.
+
+### Le plafond du cocon est atteint, et il est structurel
+
+**8 piliers sur 11 desservis, et c'est le maximum que six articles permettent.**
+Trois pages n'ont aucun satellite — `/secteurs/industriel-commercial`,
+`/secteurs/patrimoine`, `/secteurs/monotechnique` — et **aucun des huit desservis
+n'atteint les 3 à 5 satellites** que `.claude/rules/seo-geo.md` demande : le mieux
+est `/secteurs/logements` avec trois.
+
+Ce n'est pas un défaut d'exécution, et ce n'était pas rattrapable : six articles
+ne couvrent pas onze piliers. **À dire à FT2E** — soit le périmètre s'arrête à
+six (il est contractuel, `docs/17` p. 23), soit des articles supplémentaires font
+l'objet d'un devis. Le maillage, lui, n'est plus à bâtir : un article neuf déclare
+ses `piliers` au frontmatter et la page pilier le ramasse.
+
+⚠ Et le rappel qui ne bouge pas : `docs/17` dit les six sujets « à valider en
+cadrage ». **Les avoir écrits ne les valide pas.**
+
+### Ce qui reste ouvert après la N27
+
+Les quatre rangs sont inchangés (A hors dépôt, B suspendu à FT2E, C photographies
+d'équipe, D polissage). Le **rang de production**, lui, ne porte plus d'article :
+
+- la **Phase 4** ne tient plus qu'au rang A — Decap ;
+- la **Phase 5 reste non commencée** : formulaire sans backend, Plausible annoncé
+  dans `/politique-confidentialite` sans qu'aucun script soit installé (report
+  décidé par l'utilisateur le 2026-09-04), redirections 301, Search Console,
+  formation CMS, bascule DNS.
+
+Bilan de clôture, points ouverts et prompt de la N28 :
+`docs/superpowers/plans/2026-09-04-chantier-six-articles-seo.md` § 5 à 7 et
+annexe B.

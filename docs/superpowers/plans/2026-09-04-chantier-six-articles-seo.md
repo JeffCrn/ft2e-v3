@@ -1,7 +1,10 @@
 # Chantier des six articles SEO de lancement
 
 > Ouvert le 2026-09-04 (session N26). **Le critère de sortie est celui de la
-> Phase 4 de `docs/12-cadrage-jalons.md` : six articles publiés.** Deux le sont.
+> Phase 4 de `docs/12-cadrage-jalons.md` : six articles publiés.**
+> **Les six le sont depuis le 2026-09-04 — le chantier est CLOS** (deux en
+> session N26, quatre en N27). Bilan de clôture au § 5, ce qui reste ouvert
+> au § 6, et le plafond structurel du cocon au § 7.
 
 ## 1. Pourquoi ce chantier, et pourquoi maintenant
 
@@ -88,7 +91,9 @@ relevées, et non reprises dans les articles :
   **15 à 25 %** par le seul ajustement des plages horaires » : chiffre de marché,
   aucune pièce FT2E derrière ;
 - `expertises/cvc.md` (FAQ) — « la géothermie sur sondes verticales offre un
-  meilleur rendement (**COP 4 à 5**) » : même statut.
+  meilleur rendement (**COP 4 à 5**) » : même statut. ✅ **Réglé le 2026-09-04**
+  (commit `95d5218`) : le chiffre est retiré et la réponse réécrite sur le
+  critère du corpus. Détail et issue écartée au § 6.1.
 
 Ces deux affirmations sont **de la dette éditoriale existante**, pas un défaut
 introduit par le chantier. Les reprendre dans un article l'aurait propagée. Elles
@@ -97,7 +102,8 @@ restent à arbitrer avec FT2E (voir § 6).
 ### 3.5 Le bloc ne se rend pas quand le pilier n'a pas de satellite
 
 Un titre de section suivi d'un vide se lit comme une page en panne, pas comme un
-fonds à venir. Sept piliers sur onze sont dans ce cas aujourd'hui.
+fonds à venir. Sept piliers sur onze étaient dans ce cas après la N26 ; ils
+sont **trois** depuis la N27, et ils le resteront (§ 7).
 
 ## 4. Ce qui est fait — session N26 du 2026-09-04
 
@@ -146,62 +152,137 @@ de métier — c'est ce qui les rend sourçables et citables :
 | `injection-typographique.py` | apostrophes droites restantes **0** |
 | Lighthouse a11y (mobile, preview) | **100/100 sans violation** sur `/secteurs/logements/`, `/expertises/etude-thermique/` et une page d'article |
 | Rendu | captures à 1920/1440/768/390 — bloc, index, deux articles |
+## 5. Les quatre derniers articles — FAITS le 2026-09-04 (session N27)
 
-## 5. Ce qui reste — quatre articles
+**Le chantier est CLOS : six articles sur six.** Le critère de sortie de Phase 4
+qui était entièrement dans notre camp est atteint.
 
-Sujets arrêtés par `docs/17-perimetre-livrable.md` (PDF p. 23).
-⚠ **Ils y sont dits « à valider en cadrage » : les écrire n'est pas les
-valider.** Ne pas s'en autoriser un septième.
-
-| № | Sujet | Pilier principal | Rattachement suggéré |
+| № | Article | Pilier principal | Rattachement |
 |---|---|---|---|
-| 3 | Choisir entre PAC aérothermique et géothermique | `/expertises/cvc` | `/secteurs/logements` |
-| 4 | Études d'exécution sur Revit : retours d'expérience | `/secteurs/etudes-execution-bim` | `/expertises/cvc` |
-| 5 | Décret tertiaire 2030 : où en êtes-vous ? | `/expertises/audit-diagnostic` | `/secteurs/tertiaire-erp` |
-| 6 | IRVE et bornes de recharge en logement collectif neuf | `/expertises/electricite` | `/secteurs/logements` |
+| 3 | PAC aérothermique ou géothermique : ce qui décide vraiment | `/expertises/cvc` | `/secteurs/logements` |
+| 4 | Études d’exécution : qui les porte, et ce que cela change | `/secteurs/etudes-execution-bim` | `/expertises/cvc` |
+| 5 | Décret tertiaire 2030 : où en êtes-vous, et sur quoi agir ? | `/expertises/audit-diagnostic` | `/secteurs/tertiaire-erp` |
+| 6 | IRVE en logement collectif neuf : réserver plutôt qu’équiper | `/expertises/electricite` | `/secteurs/logements` |
 
-Matière relevée au 2026-09-04 (`grep -ril` sur `src/content/`) :
+### 5.1 Deux sujets ont été réancrés, et c’est une mesure qui l’a imposé
 
-- **PAC / géothermie** — 25 fichiers, dont `chaufferie-ecole-la-flotte-en-re`,
-  `place-des-chenes-verts-saint-rogatien`, `atelier-dufour-yachts-perigny`,
-  `cabanes-urbaines-la-rochelle` (PAC réversible 70 kW en relève de chaudière).
-- **Revit / EXE** — 37 fichiers, dont `exe-residence-horizon-mediatim` (quinze
-  diffusions de janvier à avril 2026), `plan-comptage-energie-airbus-rochefort`,
-  `ancien-siege-communautaire-marennes`.
-- **Décret tertiaire** — 7 fichiers seulement, dont
-  `centre-formation-ormeau-du-pied-saintes` (décret Éco Énergie Tertiaire du
-  23 juillet 2019, audit dédié au contrat), `audit-chambre-des-metiers-la-rochelle`,
-  `cuisine-groupe-scolaire-villedoux`. **C'est le sujet le plus mince du lot** :
-  vérifier la matière avant de s'engager, et prévoir de s'appuyer davantage sur
-  le texte réglementaire.
-- **IRVE** — 9 fichiers, dont `bornes-irve-la-rochelle-saintes`,
-  `habitat-inclusif-salignac-sur-charente` (fourreaux sur 100 % des places,
-  22 kVA réservés), `logements-pas-des-boeufs-bois-plage` (90 kVA installés,
-  71 kVA après foisonnement, recharge comprise).
+⚠ **Les titres 3 et 4 de `docs/17` présupposaient une matière que le corpus n’a
+pas.** Le constat a été porté à l’utilisateur en ouverture de la N27, avec la
+question du COP, et l’arbitrage a été rendu : réancrer les deux sur la matière
+réelle, sujets voisins.
 
-Après ces quatre, le cocon atteindra au mieux **8 piliers sur 11** desservis, et
-aucun n'aura les 3 à 5 satellites que `seo-geo.md` demande. **C'est structurel :
-six articles ne couvrent pas onze piliers.** Le dire à FT2E plutôt que de le
-laisser découvrir — soit le périmètre s'arrête à six (il est contractuel), soit
-des articles supplémentaires font l'objet d'un devis (`docs/17` § « hors
-périmètre »).
+| Titre annoncé | Ce que la mesure a trouvé | Sujet retenu |
+|---|---|---|
+| « Choisir entre PAC aérothermique et géothermique » | **22** fiches citent une PAC, **1** cite la géothermie — et c’est un cas d’usure, sans COP | ce qui décide n’est pas le rendement mais le régime d’eau, et les émetteurs le fixent |
+| « Études d’exécution sur Revit : retours d’expérience » | **28** fiches citent l’exécution, **1** nomme Revit | qui porte l’étude d’exécution — la MOE, l’installateur, ou personne |
 
-## 6. Points ouverts nés de ce chantier
+**Le comptage du § 5 antérieur (« 25 fichiers PAC/géothermie », « 37 fichiers
+Revit/EXE ») était celui de l’UNION des termes grep, pas de chacun.** Un total
+d’union se lit comme un total par sujet et ne se distingue pas de lui : c’est ce
+qui a fait annoncer une matière abondante là où elle était d’un dossier.
 
-1. **Deux affirmations non étayées sur les pages piliers** (§ 3.4) : la GTB à
-   « 15 à 25 % » et le COP « 4 à 5 » de la géothermie. Aucune pièce FT2E ne les
-   porte. ⚠ **Le COP est au chemin direct de l'article n° 3** — l'arbitrer avant
-   de l'écrire, ou l'article devra contourner la FAQ de sa propre page pilier.
-   Trois issues : retirer le chiffre, le remplacer par une valeur relevée au
-   corpus (`fougerou-sainte-marie-de-re` porte « 4,65 de COP »), ou le faire
-   confirmer par FT2E comme ordre de grandeur assumé.
-2. **L'article de lancement porte `demo: true` et 0 lien interne**, sous le seuil
-   de 5 de `seo-geo.md`. Il est antérieur au chantier et hors de son périmètre.
-   À arbitrer : le mailler et lever son `demo`, ou le laisser tel quel.
-3. **Une carte seule occupe un tiers de la largeur** du bloc à 1920 px. Le motif
-   est **déjà celui de `/actualites`**, qui n'a affiché qu'une carte pendant tout
-   le projet — le changer ici créerait l'incohérence. Ne se résorbera pas
-   complètement : plusieurs piliers n'auront qu'un article.
+⚠⚠ **Et le comptage par terme a lui-même failli mentir.** `grep -E "g[ée]othermi"`
+ne trouve **rien** dans un corpus qui porte « géothermique » : une classe de
+caractères sur un `é` compare des **octets**, pas des caractères, et le motif
+dégénère silencieusement en `geothermi` sans accent. Le premier relevé de la N27
+a donc annoncé **zéro** affaire géothermique — un chiffre parfaitement plausible,
+et faux. Même cause pour `[ée]xecution`. **Parade appliquée : ancrer sur le mot
+littéral, et donner à tout relevé une sonde témoin qui doit trouver un hit
+connu.**
+
+### 5.2 Ce que chaque article établit
+
+Comme les deux premiers, chacun rapporte une **régularité mesurée sur le
+corpus**, non une généralité de métier :
+
+- **article 3** — les COP des dossiers vont de 2,22 à 5,00, et l’écart n’est pas
+  un écart de qualité : 2,22 est relevé **à −2 °C sur un régime 60/55** (La
+  Flotte), 4,65 **à +7 °C sur un régime 50/45** (Le Fougerou), 4,60 **sur un
+  plancher en 30/35** (crèche de l’Oranger). Ce qui fixe le régime, ce sont les
+  émetteurs — d’où les trois réponses de l’audit ADEI (plancher / radiateur /
+  aérotherme), et le site où la PAC a été **écartée** ;
+- **article 4** — l’étude d’exécution est portée par la MOE (**5** fiches), par
+  l’installateur (**4** fiches), ou **par personne** : à l’atelier numérique
+  Fountaine Pajot, le contrat de MOE confie le visa sans la production, et
+  l’entreprise a dû commander les plans le chantier déjà ouvert ;
+- **article 5** — le classement des préconisations ne suit pas le montant des
+  travaux (6 à 453 ans de retour à la Maison des Métiers), et **aucune des deux
+  trajectoires ne se joue sur l’enveloppe** ; à Villedoux, isoler la toiture
+  demanderait 70 000 € pour 68 € par an quand la ventilation en fait gagner 542 ;
+- **article 6** — en logement collectif neuf, le lot électricité **réserve** au
+  lieu d’équiper (fourreaux sur 100 % des places, 22 kVA à Salignac), et la
+  recharge entre au bilan **après** le foisonnement (90 kVA ramenés par 0,63
+  **puis** augmentés de 15 kVA = 71 kVA utiles au Pas des Bœufs).
+
+### 5.3 La règle de sourçage a mordu sur nos propres phrases
+
+Trois formulations ont été **retirées avant publication** parce qu’elles
+divisaient deux valeurs publiées : « un rapport de plus de deux », « plus d’un
+cinquième », « six mois après l’ouverture du chantier » — cette dernière fausse
+de surcroît (5,5 mois). Arithmétiquement justes, elles fabriquent un nombre
+qu’aucun dossier ne porte, et **un ratio dérivé est indiscernable d’un ratio
+relevé une fois l’article publié.**
+
+### 5.4 Recette de la N27
+
+| Contrôle | Résultat |
+|---|---|
+| `npm run typecheck` | **0 erreur**, 107 hints — ligne de base inchangée |
+| `npm run build` | **76 pages** (72 + 4 exactement) |
+| `controle-liens-internes.py` | **0 lien mort**, 434 liens, 47/47 fiches à 5 liens |
+| Liens internes distincts par article | **9, 10, 7 et 8** — seuil de 5 |
+| Cocon sémantique | **8 / 11** piliers desservis, contre 4 |
+| Bloc `ArticlesLies` mesuré sur `dist/` | **0 écart** sur les 11 piliers, cartes comptées une à une |
+| `releve-numeral.py` | **0** nombre composé écrit en lettres |
+| `injection-typographique.py` | apostrophes droites restantes **0** |
+| Rendu à 1440 et 390 | **0 débordement horizontal**, exactement 1 `h1` par page |
+| Lighthouse a11y (mobile) | **100/100 sans violation** sur `/secteurs/logements/`, `/expertises/cvc/` et une page d’article |
+
+⚠ **`releve-numeral.py` ne lit que `src/content/projets/*.md`** (ligne 170) : son
+« 0 composé en lettres » ne dit **rien** des articles. Il a été rejoué sur
+`actualites/` par **import de ses propres fonctions** — lexique et flexion
+compris, jamais recopiés. La recette du prompt de la N27 le citait comme s’il
+validait les articles : c’est corrigé dans le prompt de la N28.
+
+## 6. Points ouverts
+
+1. ✅ **Le COP « 4 à 5 » de la FAQ CVC est réglé** (commit `95d5218`, 2026-09-04).
+   Le chiffre est retiré et la réponse réécrite sur le critère du corpus — le
+   régime d’eau que les émetteurs acceptent. **L’issue « le remplacer par une
+   valeur du corpus » a été écartée, et il faut savoir pourquoi avant de la
+   reproposer** : le « 4,65 de COP » de `fougerou-sainte-marie-de-re` est certifié
+   **à +7 °C sur une PAC AIR/EAU double service**. L’attribuer à la géothermie
+   remplacerait un chiffre de marché par un chiffre **faux**.
+2. 🔴 **Reste ouvert, même statut** : `expertises/electricite.md` affirme « la GTB
+   permet de réduire les consommations de **15 à 25 %** par le seul ajustement des
+   plages horaires ». Aucune pièce FT2E derrière. Sans urgence — aucun des six
+   articles ne s’y appuie —, mais à arbitrer avec FT2E, par les mêmes trois issues.
+3. **L’article de lancement porte `demo: true` et 0 lien interne**, sous le seuil
+   de 5 de `seo-geo.md`. Antérieur au chantier, hors de son périmètre. À arbitrer :
+   le mailler et lever son `demo`, ou le laisser tel quel.
+4. **Une carte seule occupe un tiers de la largeur** du bloc à 1920 px. Le motif
+   est déjà celui de `/actualites`. Ne se résorbera pas : cinq piliers sur les
+   huit desservis n’ont qu’un article.
+
+## 7. Le plafond est structurel, et il se dit à FT2E
+
+**Les six articles sont écrits, et le cocon plafonne à 8 piliers sur 11.** Trois
+pages n’ont aucun satellite — `/secteurs/industriel-commercial`,
+`/secteurs/patrimoine`, `/secteurs/monotechnique` —, et **aucun des huit desservis
+n’atteint les 3 à 5 satellites que `.claude/rules/seo-geo.md` demande** : le
+mieux est `/secteurs/logements` avec trois.
+
+Ce n’est pas un défaut d’exécution : six articles ne couvrent pas onze piliers,
+et c’était vrai avant d’écrire la première ligne. Deux issues, et c’est une
+décision commerciale, pas technique :
+
+- le périmètre s’arrête à six — **il est contractuel**, `docs/17` p. 23 ;
+- des articles supplémentaires font l’objet d’un **devis** (`docs/17` § « hors
+  périmètre »). Le maillage, lui, n’est plus à construire : un article neuf
+  déclare ses `piliers` au frontmatter et la page pilier le ramasse.
+
+⚠ Et le rappel qui n’a pas bougé : **`docs/17` dit les six sujets « à valider en
+cadrage ». Les avoir écrits ne les valide pas.**
 
 ## Annexe A — prompt de lancement de la session N27
 
@@ -437,4 +518,176 @@ que public/admin/config.yml.
 Terminer par le prompt de lancement de la session suivante, en annexe du
 plan et reproduit integralement dans le message final - la regle de
 continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
+```
+
+## Annexe B — prompt de lancement de la session N28
+
+> Autoportant : collé dans une session neuve, il ne suppose aucun contexte des
+> précédentes. Reproduit intégralement dans le message final de la N27,
+> conformément à la règle de continuité de `CLAUDE.md`.
+>
+> ⚠ **Il ne porte pas un chantier, il porte une QUESTION** — le chantier des six
+> articles est clos, et ce qui reste en Phase 4 et 5 ne dépend plus seulement de
+> nous.
+
+```
+Session N28 - FT2E v3. LE CHANTIER DES SIX ARTICLES SEO EST CLOS, 6 SUR 6.
+Cette session N'ECRIT PAS UN SEPTIEME ARTICLE et NE PRODUIT AUCUNE FICHE :
+les deux chantiers sont clos (47 fiches, 6 articles). Elle ouvre par une
+QUESTION, parce que ce qui reste ne depend plus seulement de nous.
+
+Contexte. FT2E v3 est le site institutionnel du bureau d'etudes FT2E (La
+Rochelle), Astro 6 statique, deploye en demonstration client sur
+https://ft2e-v3.vercel.app (indexation verrouillee par triple securite -
+robots.txt, meta noindex, header X-Robots-Tag : NE PAS Y TOUCHER sans
+validation FT2E, procedure dans docs/19-migration-production.md).
+
+ETAT MESURE AU 2026-09-04, apres la N27
+- 47 fiches, 7 actualites (1 de lancement demo:true + 6 articles techniques),
+  76 pages au build, typecheck 0 erreur / 107 hints (ligne de base).
+- Cocon semantique : 8 des 11 pages piliers desservies. PLAFOND ATTEINT.
+- controle-liens-internes : 0 lien mort, 434 liens, 47/47 fiches a 5 liens.
+- Lighthouse a11y 100/100 sans violation sur les pages touchees.
+
+/!\/!\ LA QUESTION A POSER EN OUVERTURE, ET ELLE COMMANDE TOUTE LA SESSION.
+La Phase 4 a desormais UN SEUL critere de sortie non atteint, et il est HORS
+DEPOT : Decap teste et pris en main par FT2E, ce que l'OAuth casse en
+production (HTTP 500, « Configuration OAuth manquante » sur
+/api/auth?provider=github). Rien n'est en cause dans le depot - il manque
+OAUTH_GITHUB_CLIENT_ID / _SECRET sur Vercel et la callback
+https://ft2e-v3.vercel.app/api/callback sur l'OAuth App GitHub. Trois gestes
+hors depot, avec leur commande de controle : docs/22-prise-en-main-decap.md § 0.
+La question a soumettre est donc : QUE FAIT-ON DE CETTE SESSION ?
+  (a) l'utilisateur pose les trois gestes hors depot pendant la session, et on
+      recette la connexion Decap de bout en bout - c'est ce qui CLOT la Phase 4 ;
+  (b) on ouvre la Phase 5, dont plus rien ne depend d'un tiers : le formulaire
+      de contact sans backend, les redirections 301, la preparation de la
+      bascule DNS ft2e.fr. /!\ Plausible est ANNONCE dans
+      /politique-confidentialite sans qu'aucun script soit installe - report
+      DECIDE par l'utilisateur le 2026-09-04, ne pas le rouvrir seul ;
+  (c) on prend le rang D (polissage) - a ne proposer qu'en dernier, voir
+      l'avertissement de tri ci-dessous.
+/!\ NE PAS TRIER LES CHANTIERS PAR " EXECUTABLE SANS ATTENDRE PERSONNE " - ce
+critere favorise le polissage et ecarte la production. Trier par CRITERE DE
+SORTIE NON ATTEINT. C'est une correction que l'utilisateur a deja faite en N25.
+
+/!\ CE QU'IL FAUT DIRE A FT2E, ET NE PAS LAISSER DECOUVRIR
+Les six articles sont ecrits et le cocon PLAFONNE a 8 piliers sur 11. Trois
+pages n'ont aucun satellite (/secteurs/industriel-commercial,
+/secteurs/patrimoine, /secteurs/monotechnique) et AUCUN des huit desservis
+n'atteint les 3 a 5 satellites que .claude/rules/seo-geo.md demande - le mieux
+est /secteurs/logements avec trois. C'est STRUCTUREL : six articles ne couvrent
+pas onze piliers, et c'etait vrai avant la premiere ligne ecrite. Soit le
+perimetre s'arrete a six (il est CONTRACTUEL, docs/17 p. 23), soit des articles
+supplementaires font l'objet d'un devis. Le maillage, lui, n'est plus a batir.
+/!\ docs/17 dit aussi les six sujets « a valider en cadrage » : les avoir
+ecrits ne les valide pas.
+
+/!\ UNE AFFIRMATION NON ETAYEE RESTE EN LIGNE, ET ELLE EST CONNUE
+expertises/electricite.md : « la GTB permet de reduire les consommations de
+15 a 25 % par le seul ajustement des plages horaires ». Aucune piece FT2E ne
+porte ce chiffre. Le jumeau - le « COP 4 a 5 » de la FAQ de expertises/cvc.md -
+a ete retire le 2026-09-04 (commit 95d5218) et remplace par le critere que le
+corpus etablit. Trois issues pour la GTB, les memes : retirer le chiffre et
+garder le qualitatif ; le remplacer par une valeur relevee au corpus ; le faire
+confirmer par FT2E comme ordre de grandeur assume et le marquer comme tel.
+/!\ Avant de proposer la deuxieme : VERIFIER QUE LA VALEUR DIT LA MEME CHOSE.
+C'est ce qui a fait ecarter l'issue (b) pour le COP - le « 4,65 » du corpus est
+certifie a +7 °C sur une PAC AIR/EAU, pas en geothermie ; l'y transposer aurait
+remplace un chiffre de marche par un chiffre FAUX.
+
+LIRE D'ABORD, dans cet ordre
+1. docs/23-etat-de-l-art.md § 4 - le point de reprise, qui fait foi sur ce qui
+   est clos et ce qui est ouvert.
+2. docs/superpowers/plans/2026-09-04-chantier-six-articles-seo.md § 5 a 7 - le
+   bilan de cloture du chantier des articles et ses points ouverts.
+3. docs/12-cadrage-jalons.md - les criteres de sortie des phases 4 et 5.
+4. CLAUDE.md et les six fichiers de .claude/rules/.
+
+CE QUI RESTE OUVERT (docs/23-etat-de-l-art.md § 4 fait foi)
+  RANG A - hors depot : Decap OAuth casse en production. Trois gestes,
+    docs/22-prise-en-main-decap.md § 0. A REFAIRE au changement de domaine, la
+    callback portant l'adresse du site.
+  RANG B - suspendu a FT2E : reception de la creche de l'Oranger (NE JAMAIS
+    FABRIQUER UN MILLESIME), les 25 visuels dans l'historique, planche-chiffree
+    jamais exerce, les validations du bloc secteurs (dont les artefacts
+    d'agrandissement generatif releves sur les cliches retenus), les questions B
+    et E des 24 fiches de collecte, et les DOUZE CV NOMINATIFS de
+    livrables/cv-ft2e/ - donnees personnelles dans l'historique d'un depot
+    partage, alors que le motif /cv/ du .gitignore declare qu'un CV ne se
+    commite jamais. Leur retrait demande une reecriture d'historique :
+    arbitrage, pas correction.
+  RANG C - les huit photographies d'equipe generees par IA.
+  RANG D - POLISSAGE, ne pas le prendre avant la production : le texte dessine
+    des planches (64 ecarts) et leurs champs editoriaux (2 160), le passage NVDA
+    jamais fait par un humain, l'option 0 du motion (TraceFlux debranche), le
+    LCP mobile au seuil.
+  PHASE 5 non commencee : formulaire de contact sans backend, Plausible annonce
+    sans script (report decide), redirections 301, Search Console, formation CMS
+    2 h, bascule DNS ft2e.fr.
+
+/!\/!\ L'ECHEANCE DATEE, ET LA SEULE MANIERE D'Y REPONDRE.
+src/lib/projets.ts porte MILLESIME_LIVRAISON_ANNONCE = 2026 et un garde-fou qui
+FAIT ECHOUER LE BUILD AU 1er JANVIER 2027, sur les quinze affaires dont la
+reception n'est pas prononcee (mesurer :
+grep -L annee_livraison src/content/projets/*.md | wc -l).
+/!\ NE JAMAIS pousser la constante a 2027 : cela desarmerait le garde-fou pour
+s'epargner l'echec qu'on lui demande de produire. La reponse est d'aller relever
+les receptions - rang B, donc chez FT2E.
+
+PIEGES D'OUTILLAGE DE CETTE MACHINE - ils ne se redecouvrent pas
+- /!\ QUAND UN CONTROLE CRIE, SUSPECTER LE CONTROLE AVANT LE DEPOT. Sept
+  fausses alertes en quatre sessions, toutes venant de l'instrument. Parade :
+  donner a l'instrument des asserts qui le font ECHOUER quand il ne sait pas
+  lire (aucun antislash dans un chemin construit, un compte d'entrees exact,
+  et une SONDE TEMOIN qui doit trouver un hit connu).
+- /!\ UNE CLASSE DE CARACTERES SUR UNE LETTRE ACCENTUEE NE MORD PAS.
+  `grep -E "g[ee]othermi"` (avec e accent aigu dans la classe) rend ZERO sur un
+  corpus qui porte « geothermique » : la classe compare des OCTETS. Releve en
+  N27, il a failli faire conclure « aucune affaire geothermique au corpus ».
+  Meme cause pour `[ee]xecution`. Ancrer sur le mot litteral.
+- /!\ UN COMPTAGE PAR UNION DE TERMES N'EST PAS UN COMPTAGE PAR SUJET.
+  `grep -ril "PAC|geothermie"` a rendu « 25 fichiers » la ou la geothermie seule
+  en compte UN. Un total d'union ne se distingue pas d'un total par sujet.
+- /!\ Les insecables ne s'ecrivent JAMAIS en litteral dans une source : les
+  outils d'ecriture les normalisent de facon non deterministe. Ecrire SANS,
+  puis lancer  python scripts/injection-typographique.py <fichier.md>
+  ( « droites restantes 0 » attendu ). Corollaire : un Edit dont le old_string
+  porte une espace ordinaire NE TROUVERA PAS une ligne qui porte U+00A0 -
+  passer par python, et ancrer sur la LIGNE, pas sur une chaine reconstruite.
+- /!\ Les gros heredocs bash echouent, et un heredoc MANGE LES ANTISLASH d'un
+  script Python (un '\n' devenu une chaine non terminee, deux fois : N26 et
+  N27). Ecrire les scripts par l'outil d'ecriture, dans le scratchpad.
+- /!\ astro.config.mjs porte trailingSlash: 'always' : une sonde qui appelle
+  /expertises/cvc SANS barre finale recoit 404 sur astro preview, alors que
+  Vercel sert les deux en 200. Toujours poser la barre finale.
+- /!\ Un script du scratchpad ne resout pas node_modules par le nom : importer
+  puppeteer-core par CHEMIN ABSOLU, et c'est
+  node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js (PAS de esm/).
+- /!\ astro preview rend 304 sur une page deja vue : poser setCacheEnabled(false)
+  et tolerer 304. Et FERMER le serveur en fin de session (taskkill sur le PID du
+  port 4321) : un serveur orphelin fausse la session suivante.
+- /!\ releve-numeral.py ne lit QUE src/content/projets (ligne 170). Pour mesurer
+  une actualite, IMPORTER ses fonctions plutot que recopier son lexique.
+- `npm run captures` EXISTE pour un jeu multi-paliers : NE PAS LE REBATIR. Sa
+  table ROUTES est CURATEE (14 gabarits) et --route filtre sur le nom de DOSSIER
+  de cette table. Les pages d'article n'y sont pas ; une sonde puppeteer jetable
+  a suffi deux fois.
+- /!\ LES BACKTICKS D'UN MESSAGE DE COMMIT SONT EXECUTES PAR BASH quand on passe
+  par -m " ... ". Passer par `git commit -F <fichier>`, immunise.
+- La CLI vercel repond " Not authorized " : c'est le PUSH qui deploie. Verifier
+  par un MARQUEUR DU BUILD, jamais par un delai. Depot PARTAGE : rejouer
+  git status au moment de committer.
+- npm run preview NE MESURE PAS LA PERFORMANCE (aucune compression, 0,8 s de
+  biais). La performance se mesure sur le deploiement.
+- PYTHONIOENCODING=utf-8 devant toute commande python qui imprime des accents.
+
+Portee de commit : selon le travail retenu - feat(cms) ou docs(cms) pour Decap,
+feat(contact) pour le formulaire, seo(...) pour les redirections, docs(...) pour
+le point de suivi. Un changement de schema Zod passe par le sous-agent
+content-modeller et va dans le MEME commit que public/admin/config.yml.
+
+Terminer par le prompt de lancement de la session suivante, en annexe du plan
+du chantier retenu et reproduit integralement dans le message final - la regle
+de continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
 ```
