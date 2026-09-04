@@ -1040,3 +1040,84 @@ au-dessus de 768) — et c'est CETTE valeur que le script lit en computed
 style comme seuil de déclenchement : une seule cote, dans le CSS du
 composant. Mesuré au navigateur à 1 280 : clic sur Monotechnique depuis
 scrollY 1 445 → ancre posée à 102 px exactement, résultats en vue.
+
+## 13. Session du 2026-09-04 — les correspondances FT2E sont reçues et appliquées
+
+**Le point n° 1 des « validations FT2E » du § 6 est levé pour sa moitié la plus
+bloquante.** FT2E a versé son tableau de correspondances,
+`assets/sources/secteurs/correspondance Site projet.odt` — 61 lignes, une par cliché
+source, deux colonnes (« Intitulé », « Projet »).
+
+### Le croisement — 44 sur 44, zéro clé orpheline
+
+Le document nomme ses clichés en **trois graphies incohérentes** : `gros-collectif-02`
+et `ERP-01` (le nom de fichier tel quel), `Industriel -01` puis `Industriel-12` (espace
+avant le tiret, puis sans), `Coordination SSI - 01` (espaces des deux côtés). La clé a
+donc été **normalisée** — préfixe en minuscules, numéro sur deux chiffres — avant
+rapprochement. Résultat : **les 44 clichés publiés trouvent tous leur projet, aucune clé
+introuvable.**
+
+⚠ **Un rapprochement flou a d'abord été essayé pour relier chaque projet à sa fiche de
+référence, et il a été JETÉ** : il appariait « Écomusée du Port des Salines » à
+`batiment-sslia-aeroport-la-rochelle` sur le seul mot « port », et « Vidéosurveillance —
+Hôpital de Rochefort » à `maison-pierre-loti-rochefort` sur « rochefort ». Le compte qu'il
+rendait — « 34 clichés sur 44 ont une fiche » — n'était pas une mesure. **Seul le
+croisement par clé exacte a été retenu et publié.**
+
+### 20 légendes reprises
+
+| Nature | Nombre |
+|---|---|
+| Légendes **génériques** devenues des noms de projet | **17** |
+| Doublons levés dans un même secteur | **2** |
+| Graphie alignée sur le `titreCourt()` | **1** |
+
+**La règle suivie n'a pas été inventée pour l'occasion** : quand le projet d'un cliché a
+une fiche publiée, la légende reprend son `titreCourt()`. Trois légendes du corpus le
+faisaient déjà — « EHPAD Aliénor d'Aquitaine », « Pôle commercial de Fors », « Mairie des
+Portes-en-Ré ». Sinon, le libellé du document, ramené au style de la maison : nom en tête,
+pas de capitales hurlantes, commune seulement si elle désambiguïse.
+
+⚠ **UN VRAI DÉFAUT D'ACCESSIBILITÉ, TROUVÉ SANS LE CHERCHER.** Les clichés 01 et 03 de
+`coordination-ssi` portaient la **même légende** — « EHPAD Aliénor d'Aquitaine ». Or
+`CoupeSecteurs.astro` pose la légende dans un `aria-label` (« Cliché 3 sur 4 — *légende*,
+*secteur* ») : **deux entrées d'une même liste étaient indistinguables au lecteur
+d'écran.** Le document FT2E les distingue (« VTP coffrets Relayage » contre « Centrale SSI
+cat A ») et les `alt` du site aussi — *seule la légende ne le disait pas*. Corrigé en
+« …, coffrets » et « …, centrale SSI ».
+
+⚠ **Deux légendes restent descriptives**, et ce n'est pas un oubli : « réseaux existants »
+et « sous-station ». Le document FT2E ne nomme pas de projet pour elles non plus
+(« Réseau existant », « Sous station ») — ce sont des photographies d'**organe**, pas
+d'ouvrage. Les forcer aurait été fabriquer une référence.
+
+### Ce que cette passe change, et ce qu'elle ne change pas
+
+**L'effet sur l'écoute est réel et direct** : « cliché 3 sur 4 — *site en plaine*,
+Industriel » devient « — *Bâtiment VoltAero*, Industriel ». C'est la différence avec la
+passe d'insécables de la veille, dont 3 corrections sur 175 seulement changeaient ce
+qu'un lecteur d'écran prononce.
+
+⚠ **Le gel du film n'est plus bloqué, mais il n'est PAS fait.** L'attente des
+correspondances était sa condition ; elle est levée. Le geler reste un **arbitrage** :
+le film est tiré au hasard à chaque déploiement (arbitrage D du § 6), et c'est un parti
+pris, pas un provisoire.
+
+### Recette
+
+- diff **confiné** : 20 lignes, toutes des `legende` ;
+- 44 légendes, **0 doublon** dans un même secteur, toutes dans les bornes Zod 3–40 ;
+- typecheck 0 erreur, build 70 pages ;
+- `dist/index.html` : **27 `aria-label`** de clichés, tous nommant un projet ;
+- **cartouches mesurés au navigateur** à 390, 768 et 1440 px sur quatre secteurs —
+  aucun débordement, les légendes longues (35 et 39 signes) replient sur deux lignes,
+  trois à 390 px, comme le commentaire du schéma l'annonce ;
+- déploiement vérifié en 17 s par **marqueur déterministe** — les pages secteurs servent
+  toujours `cliches[0]`, là où le film de l'accueil est tiré au hasard.
+
+### Reste ouvert sur cette pièce
+
+Les validations FT2E du § 6 point 1 **hors correspondances** (les 17 écartés et leurs
+motifs, les artefacts d'agrandissement génératif relevés sur plusieurs des 44 retenus,
+le crédit © FT2E, le principe du tirage à chaque déploiement) ; le **passage NVDA**,
+toujours dû ; le **gel du film**, désormais possible et non arbitré.

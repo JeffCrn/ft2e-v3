@@ -9415,268 +9415,245 @@ continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
 
 ## Annexe Z — prompt de lancement de la session N26 (à coller tel quel en session neuve)
 
-⚠ **Comme l'annexe Y, ce prompt ne porte pas de dossier d'affaires** — le chantier des
-références est clos et le restera. Il porte **une question à poser en ouverture** (des
-données personnelles dans l'historique d'un dépôt partagé) et **un chantier exécutable**
-(les insécables du texte DESSINÉ), qui est le pendant difficile de celui que la N25 a fait
-sur les `aria_label` : même méthode, mais **il déplace le dessin**, donc il exige une
-recette au rendu que le précédent n'exigeait pas.
+⚠ **Cette annexe a été RÉÉCRITE le 2026-09-04.** Sa première rédaction proposait les
+insécables du texte dessiné ; l'utilisateur l'a écartée le jour même — *« rattacher les
+wagons, et non s'engager dans une voie qui a peu d'intérêt pour la suite ; il reste encore
+du travail de production à réaliser »*. Le défaut de méthode est nommable et vaut d'être
+retenu : **les chantiers avaient été triés par « exécutable sans attendre personne » au
+lieu de « critère de sortie non atteint »**. Le premier critère favorise mécaniquement le
+polissage, qui n'a aucune dépendance, et écarte la production, qui en a presque toujours
+une. La carte ci-dessous est mesurée contre `docs/12-cadrage-jalons.md`.
 
 ```
 Session N26 - FT2E v3. LE CHANTIER DES REFERENCES EST CLOS A 47 FICHES.
-Cette session ne produit PAS de fiche. Elle pose UNE question, puis
-solde le pendant difficile du chantier des insecables.
+Cette session ne produit PAS de fiche de reference. Elle reprend le
+travail de PRODUCTION laisse en plan avant les 24 nouvelles fiches.
 
 Contexte. FT2E v3 est le site institutionnel du bureau d'etudes FT2E
 (La Rochelle), Astro 6 statique, deploye en demonstration client sur
 https://ft2e-v3.vercel.app (indexation verrouillee par triple securite -
 robots.txt, meta noindex, header X-Robots-Tag : NE PAS Y TOUCHER sans
 validation FT2E, procedure dans docs/19-migration-production.md).
-Le catalogue porte 47 fiches de references reelles, chacune illustree
-d'une planche de schema de principe (cinq pieces par dossier :
-planche.json, planche.svg, appui.svg, vignette.svg, planche.png).
 
 /!\/!\ CE QUI EST CLOS, ET QU'IL NE FAUT PAS ROUVRIR
 
-Le chantier ouvert le 2026-08-27 visait 50 fiches. Il en a livre 24
-(N01 a N24), portant le catalogue de 23 a 47, et il s'arrete la.
-L'utilisateur a rendu l'arbitrage DEUX FOIS : en ouverture de la N24,
-puis de nouveau en ouverture de la N25, ou les trois voies de matiere
-lui ont ete presentees une par une et ou il a repondu "clos a 47".
-NE PAS LES REPRESENTER. NE PAS FABRIQUER DE FICHE POUR COMBLER L'ECART.
+Le chantier des references est CLOS a 47 fiches. L'arbitrage a ete rendu
+DEUX FOIS par l'utilisateur - en ouverture de la N24, puis de nouveau en
+ouverture de la N25, ou les trois voies de matiere lui ont ete presentees
+une par une. NE PAS LES REPRESENTER. NE JAMAIS FABRIQUER DE FICHE.
+Plus aucune archive n'existe sur ce disque : toute verification sur piece
+passe desormais par l'utilisateur.
 
-Mesure faite en N25 sur le classeur, par python zipfile sur content.xml :
-50 lignes pour 49 affaires DISTINCTES (23-075 y figure deux fois). La
-section "Finalisees en 2021" est ENTIEREMENT VIDE - en-tete de section,
-en-tete de colonnes, zero ligne, seul millesime sans entree. C'est une
-piste laissee a FT2E, VERIFIEE et non levee ; l'utilisateur a choisi de
-ne pas la poser. /!\ Le classeur se contredit par ailleurs : sa cellule
-"Nb Projet" annonce L10 T11 I9 P2 C2 M8 E3 = 45 quand ses lignes donnent
-T=15 et C=7. NE PAS PRENDRE CE 45 POUR UNE MESURE.
+/!\ NE PAS TRIER LES CHANTIERS PAR « EXECUTABLE SANS ATTENDRE PERSONNE ».
+C'est l'erreur de la N25, redressee par l'utilisateur. Ce critere
+favorise le polissage (aucune dependance) et ecarte la production (qui en
+a presque toujours une). TRIER PAR CRITERE DE SORTIE NON ATTEINT.
 
-/!\/!\ PLUS AUCUNE ARCHIVE N'EXISTE SUR CE DISQUE. Les cinq ZIP ont ete
-supprimes, 2019.zip en N25 sur decision de l'utilisateur ; le repertoire
-C:\claude_code_dev_projects\ft2e_new_archives\ est VIDE. Toutes leurs
-affaires etaient traitees, aucune matiere n'est perdue - mais toute
-verification sur piece passe desormais par l'utilisateur.
+OU EN EST LE PRODUIT - mesure le 2026-09-04 contre docs/12-cadrage-jalons.md
+
+  PHASE 4 (Developpement) - N'EST PAS CLOSE
+    30 fiches projets reelles ......... FAIT - 47, depasse
+    6 articles SEO publies ............ ZERO  <-- le seul critere de
+                                        sortie entierement dans notre camp
+    Decap teste par un membre FT2E .... bloque OAuth (hors depot)
+    Lighthouse 5 routes ............... conforme (exception D1)
+
+  PHASE 5 (Recettage et lancement) - non commencee
+    formulaire de contact sans backend, Plausible ANNONCE dans
+    /politique-confidentialite mais AUCUN script installe (l'utilisateur
+    a choisi de le REPORTER le 2026-09-04), redirections 301, Search
+    Console, formation CMS 2 h, bascule DNS ft2e.fr.
 
 CE QUE CETTE SESSION DOIT FAIRE - dans cet ordre
 
 1. POSER LA QUESTION A L'UTILISATEUR, EN OUVERTURE, avant tout travail.
-   La N25 a trouve, sans la chercher, une chose qui demande un arbitrage :
-   livrables/cv-ft2e/ porte DOUZE CV NOMINATIFS DEJA SUIVIS (six membres
-   de l'equipe, en .docx et .pdf), c'est-a-dire des DONNEES PERSONNELLES
-   dans l'historique d'un depot PARTAGE - alors que le motif /cv/ du
-   .gitignore declare, en toutes lettres, qu'un CV ne se commite jamais.
-   La regle existe et se contourne par un autre chemin.
-   /!\ Les retirer demande une REECRITURE D'HISTORIQUE, qui invalide tous
-   les SHA cites dans les plans et les regles - meme statut que les 25
-   visuels du rang B. C'est un arbitrage, pas une correction : NE RIEN
-   FAIRE SANS REPONSE. Trois issues : laisser (et l'ecrire comme un
-   risque assume), retirer par reecriture, ou demander a l'equipe.
-   Si la reponse ne debloque rien de technique, poursuivre au point 2.
+   La carte ci-dessus designe LES SIX ARTICLES DE LANCEMENT, mais c'est
+   son appel. Presenter les options avec ce qui les departage :
 
-2. LE CHANTIER : LES INSECABLES DU TEXTE DESSINE.
-   C'est le pendant DIFFICILE de ce que la N25 a fait sur les aria_label.
-   Etat mesure au 2026-09-03, sur les 47 dossiers (§ 4 rang D de
-   docs/23-etat-de-l-art.md, qui fait foi) :
+   (a) LES SIX ARTICLES SEO (recommande) - critere de sortie de Phase 4,
+       dans le perimetre NON FACTURE (docs/17-perimetre-livrable.md p. 23),
+       sujets deja arretes, matiere technique deja publiee dans les 47
+       fiches, et RIEN NE LES BLOQUE ;
+   (b) la Phase 5 : brancher le formulaire, installer Plausible ou
+       corriger la page qui l'annonce, preparer les 301 ;
+   (c) le bloc secteurs : gel du film (arbitrage), validations FT2E ;
+   (d) la reduction de dette, en pause depuis le 2026-08-17.
 
-       aria_label ................ 175 ecarts - FAIT en N25
-       texte DESSINE .............  64 ecarts, 27 dossiers sur 47 - OUVERT
-       champs editoriaux ......... 2160 ecarts, 47/47 - OUVERT, sans effet
-                                   (ils ne sortent jamais du depot)
+2. SI LES ARTICLES SONT RETENUS - ce qu'il faut savoir avant d'ecrire.
 
-   /!\/!\ CE CHANTIER N'EST PAS LE PRECEDENT. La difference tient en une
-   phrase : les compositeurs MESURENT les chaines dessinees pour poser la
-   geometrie (_tronc.mesurer, qui distingue FINE, INSEC et l'avance
-   courante), et U+202F n'a pas la chasse d'une espace ordinaire. CHAQUE
-   INSECABLE AJOUTEE DEPLACE LE DESSIN. Il faut donc, en plus de tout ce
-   qu'a fait la N25 :
-     - une recette AU RENDU aux trois tailles de lecture (planche >= 880,
-       appui 480-879, vignette < 480) sur CHACUN des 27 dossiers touches ;
-     - une verification que les assertions de depassement des compositeurs
-       tiennent toujours (elles mesurent des LARGEURS) ;
-     - un controle du cartouche ENTIER au navigateur, pas au PNG (cairosvg
-       coupe : artefact connu, re-verifie en N20 et N21).
-   /!\ NE PAS lancer scripts/injection-typographique.py sur ce corpus : il
-   applique la typographie ENTIERE et n'a aucune idee de la geometrie.
+   LE COCON SEMANTIQUE N'EXISTE PAS. Mesure du 2026-09-04 :
+       4 pages expertises -> 0 lien vers un article
+       7 pages secteurs   -> 0 lien vers un article
+       1 seul article en ligne, et il porte demo: true
+   Or .claude/rules/seo-geo.md exige 3 a 5 articles satellites par page
+   pilier. Un article qui ne serait pas MAILLE ne servirait a rien : le
+   chantier n'est pas « ecrire six textes », c'est « cabler six textes ».
 
-   LA METHODE QUI A MARCHE EN N25, a reprendre telle quelle :
-     a. invariant de reference AVANT tout :
-        `python scripts/planches/invariant.py` -> doit rendre 188/188
-        (/!\ lire le DENOMINATEUR : un dossier neuf non compose fait
-        baisser le numerateur sans qu'il y ait de regression) ;
-     b. correction A LA SOURCE, dans les planche.json, jamais dans les SVG
-        (ce sont des sorties, la premiere regeneration les ecrase) ;
-     c. verifier que le diff est CONFINE aux champs voulus - la N25 l'a
-        prouve : 46 fichiers, 46 lignes, toutes des aria_label ;
-     d. regenerer les 47 dossiers : pour chaque dossier, lire l'archetype
-        dans son planche.json et lancer scripts/planches/<archetype>.py
-        <dossier> ; c'est ce que fait invariant.py, mais en place et non
-        sur copie ;
-     e. rejouer l'invariant -> 188/188 rattrape ;
-     f. /!\ LA PREUVE QUI COMPTE ICI EST L'INVERSE DE CELLE DE LA N25 :
-        la N25 prouvait que RIEN n'avait bouge (92 SVG identiques octet a
-        octet une fois l'aria-label retire). Ici le dessin VA bouger, et
-        il faut prouver qu'il bouge BIEN - donc REGARDER, aux trois
-        tailles, chacun des dossiers touches. Un invariant vert ne dit
-        que la reproductibilite, jamais la justesse du dessin.
+   LES SIX SUJETS SONT ARRETES (docs/17-perimetre-livrable.md) :
+     1. RE2020 en logement collectif : trois leviers de conception
+        -> satellite de /expertises/etude-thermique
+     2. Coordination SSI dans un ERP de 5e categorie : ce qui change
+        -> satellite de /secteurs/coordination-ssi
+     3. Choisir entre PAC aerothermique et geothermique
+        -> satellite de /expertises/cvc
+     4. Etudes d'execution sur Revit : retours d'experience
+        -> satellite de /secteurs/etudes-execution-bim
+     5. Decret tertiaire 2030 : ou en etes-vous ?
+        -> satellite de /expertises/audit-diagnostic
+     6. IRVE et bornes de recharge en logement collectif neuf
+        -> satellite de /expertises/electricite
+   /!\ docs/17 les dit « a valider en cadrage ». Les ecrire n'est pas les
+   valider : le signaler a l'utilisateur, ne pas s'en autoriser un septieme.
 
-   /!\/!\ LE PIEGE QUE LA N25 A TROUVE, ET QUI VAUT ENCORE ICI : il y a
-   DEUX gestes, pas un. Le motif canonique de injection-typographique.py
-   cherche [ ], une espace ORDINAIRE LITTERALE. Une U+202F deja posee
-   devant un deux-points lui est INVISIBLE et passe donc tout controle
-   sans etre conforme. Le corpus portait ainsi DEUX conventions
-   contradictoires pour le meme cas - 18 fines contre 5 insecables larges
-   dans les seuls aria_label - sans qu'aucun instrument puisse le dire.
-   La classe d'espaces du motif doit etre ELARGIE aux trois formes, pour
-   NORMALISER autant qu'AJOUTER. La regle qui departage est celle du
-   depot (.claude/rules/french-editorial.md) :
-       U+00A0 avant : ; ! ?  et autour des guillemets
-       U+202F entre un nombre et son unite, et en separateur de milliers
+   /!\/!\ LA REGLE DE SOURCAGE, ET ELLE EST STRICTE. Une fiche de
+   reference est sourcee piece par piece sur un dossier d'affaires. UN
+   ARTICLE N'A PAS DE DOSSIER. Il ne peut donc s'appuyer que sur :
+     - les 47 fiches DEJA PUBLIEES (elles-memes sourcees sur piece) -
+       c'est la matiere principale, et elle est abondante ;
+     - le texte reglementaire lui-meme (RE2020, arrete du 3 mai 2007,
+       decret tertiaire), cite comme tel.
+   NE RIEN AVANCER QUI NE SOIT PAS DANS L'UNE DES DEUX. Pas de chiffre
+   de marche, pas de « generalement », pas d'ordre de grandeur invente.
+   Le grep de src/content/ AVANT d'ecrire : six sessions sur sept du
+   chantier des fiches ont trouve que le site AFFIRMAIT DEJA quelque
+   chose sur le sujet, sans rien pour l'etayer. C'est la que sont les
+   liens les plus naturels, et c'est aussi la que sont les pieges.
 
-   /!\ ET NE PAS SURVENDRE LE RESULTAT. Sur les 175 corrigees en N25,
-   TROIS seulement changent ce qu'un lecteur d'ecran prononce (les
-   separateurs de milliers, lus "un, trois cent dix-huit" sans elles) :
-   une insecable empeche un signe de basculer en debut de ligne, et un
-   aria-label n'est jamais mis en page. Sur le texte DESSINE, en revanche,
-   l'effet est VISIBLE et c'est tout l'enjeu - c'est de la mise en page,
-   et c'est pour cela que la recette au rendu est requise ici.
+   LE GABARIT (schema Zod de la collection actualites,
+   src/content.config.ts) :
+     titre       5-80 signes   - 50-70 vise, factuel, jamais racoleur
+     chapo       40-280 signes - 2-3 phrases qui annoncent sans resumer
+     date        ISO 8601
+     auteur      optionnel
+     categories  enum - « Article technique » pour les six
+     en_avant    booleen
+     demo        booleen - FALSE, ce sont de vrais articles
+   /!\ AUCUN champ image, et c'est DELIBERE (2026-08-16) : un champ
+   qu'un editeur remplit sans qu'il paraisse nulle part promet une
+   illustration que le site ne sert pas. Ne pas le retablir.
+   Nom de fichier : YYYY-MM-titre-court.md, kebab-case sans accents.
 
-   L'INSTRUMENT EXISTE ET SE REUTILISE :
-   scripts/insecables-aria-planches.py (sans argument il mesure,
-   --appliquer il ecrit). Son lexique d'unites est IMPORTE de
-   injection-typographique.py, jamais recopie - GARDER CE TRAIT : une
-   liste recopiee diverge au premier ajout, defaut connu TROIS fois sur
-   le lexique de releve-numeral.py. Pour etendre au texte dessine :
-   ELARGIR LA PORTEE DE CHAMPS, pas reecrire les regles.
-   /!\ Son lexique ignore "metres" ecrit en toutes lettres (releve en
-   N25 : deux occurrences en U+00A0 laissees telles quelles, elles sont
-   insecables donc non fautives). L'ajouter change AUSSI le comportement
-   sur le corpus Markdown : c'est une decision, pas un oubli a corriger.
+   LE MAILLAGE, qui est la moitie du travail :
+     - chaque article lie SA page pilier et 2 a 3 fiches de reference ;
+     - chaque page pilier lie SES articles satellites (c'est ce qui
+       manque aujourd'hui : 0 sur 11 pages) ;
+     - minimum 5 liens internes contextuels par page de contenu ;
+     - controler par `python scripts/controle-liens-internes.py`, qui
+       verifie les liens du Markdown contre les routes de dist/ - le
+       build statique ne les valide PAS.
+
+   LA VOIX : .claude/rules/french-editorial.md. Sobre, technique,
+   chaleureuse. Aucun superlatif. Et la regle des nombres y est MESUREE,
+   pas decretee - quantite a nom d'un seul mot en lettres (« sept
+   niveaux »), a nom compose en chiffres (« 21 logements »), mesure
+   toujours en chiffres. Controle : `python scripts/releve-numeral.py`.
 
 3. CE QUI RESTE OUVERT PAR AILLEURS (docs/23-etat-de-l-art.md § 4 fait
-   foi, avec ses DEUX addendums du 2026-09-03 en pied) :
-   RANG A - hors depot : Decap OAuth casse en production (/admin/ rend 200
-     mais /api/auth?provider=github rend HTTP 500 "Configuration OAuth
-     manquante"). RIEN n'est en cause dans le depot : trois gestes hors
-     depot, au § 0 de docs/22-prise-en-main-decap.md.
-   RANG B - suspendu a FT2E : la reception de la creche de l'Oranger (NE
+   foi, avec ses addendums du 2026-09-03 en pied) :
+   RANG A - hors depot : Decap OAuth casse en production (HTTP 500,
+     « Configuration OAuth manquante »). RIEN n'est en cause dans le
+     depot : trois gestes hors depot, docs/22-prise-en-main-decap.md § 0.
+   RANG B - suspendu a FT2E : reception de la creche de l'Oranger (NE
      JAMAIS FABRIQUER UN MILLESIME), les 25 visuels dans l'historique,
-     l'archetype planche-chiffree que 47 planches n'ont jamais exerce,
-     les validations du bloc secteurs (artefacts d'agrandissement
-     generatif, 17 legendes), les questions B et E des 24 fiches de
-     collecte, et DESORMAIS les douze CV du point 1.
-   RANG C - les huit photographies d'equipe generees par IA : elles se
-     levent au reportage photographique, pas par une validation.
-   RANG D - executable : le texte dessine (point 2), les champs
-     editoriaux, LE PASSAGE NVDA jamais fait par un humain, l'option 0 du
-     motion (TraceFlux debranche, 900 ms, non arbitre), le LCP mobile AU
-     seuil (1 656 a 1 815 ms pour un budget de 1 800 - /!\ ne pas traiter
-     cela comme un defaut de /equipe/, aucune page n'est systematiquement
-     du mauvais cote).
+     planche-chiffree jamais exerce, les validations du bloc secteurs,
+     les questions B et E des 24 fiches de collecte, et les DOUZE CV
+     NOMINATIFS de livrables/cv-ft2e/ - donnees personnelles dans
+     l'historique d'un depot partage, alors que le motif /cv/ du
+     .gitignore declare qu'un CV ne se commite jamais. Leur retrait
+     demande une reecriture d'historique : arbitrage, pas correction.
+   RANG C - les huit photographies d'equipe generees par IA.
+   RANG D - le texte dessine (64 ecarts) et les champs editoriaux
+     (2 160) des planches, le passage NVDA jamais fait par un humain,
+     l'option 0 du motion (TraceFlux debranche), le LCP mobile au seuil.
+     /!\ Ce rang est du POLISSAGE : ne pas le prendre avant la production.
 
 4. /!\/!\ L'ECHEANCE DATEE, ET LA SEULE MANIERE D'Y REPONDRE.
    src/lib/projets.ts porte MILLESIME_LIVRAISON_ANNONCE = 2026 et un
-   garde-fou qui FAIT ECHOUER LE BUILD AU 1er JANVIER 2027. Le site
-   annonce cette annee sur les QUINZE affaires dont la reception n'est
-   pas prononcee sur piece (mesurer :
+   garde-fou qui FAIT ECHOUER LE BUILD AU 1er JANVIER 2027, sur les
+   QUINZE affaires dont la reception n'est pas prononcee (mesurer :
    grep -L annee_livraison src/content/projets/*.md | wc -l).
-   /!\ NE JAMAIS repondre en poussant la constante a 2027 : cela
-   desarmerait le garde-fou pour s'epargner exactement l'echec qu'on lui
-   demande de produire. La reponse est d'aller relever les receptions
-   aupres de FT2E - c'est le rang B.
+   /!\ NE JAMAIS pousser la constante a 2027 : cela desarmerait le
+   garde-fou pour s'epargner l'echec qu'on lui demande de produire. La
+   reponse est d'aller relever les receptions - rang B.
 
 LIRE D'ABORD, dans cet ordre :
-1. docs/23-etat-de-l-art.md EN ENTIER, ses DEUX addendums du 2026-09-03
-   compris (celui de la N24, puis celui de la N25 en pied).
-2. .claude/rules/french-editorial.md, § "Tout contenu textuel comprend le
-   corpus DESSINE" - il porte la regle des insecables et l'etat du
-   chantier apres la N25.
-3. docs/superpowers/specs/2026-08-12-planches-references-protocole.md,
-   revision 5, pour tout ce qui touche a la geometrie d'une planche.
-4. CLAUDE.md et les six fichiers de .claude/rules/.
+1. docs/17-perimetre-livrable.md - ce qui est du, ce qui ne l'est pas.
+2. docs/12-cadrage-jalons.md § Phase 4 et 5 - les criteres de sortie.
+3. docs/23-etat-de-l-art.md EN ENTIER, addendums compris.
+4. .claude/rules/seo-geo.md § Cocon semantique, et
+   .claude/rules/french-editorial.md EN ENTIER si l'on ecrit.
+5. CLAUDE.md et les six fichiers de .claude/rules/.
 
 PIEGES D'OUTILLAGE DE CETTE MACHINE - ils ne se redecouvrent pas
-- /!\ UN COMPTE DERIVE MENT DES QUE SA PREMISSE CHANGE. La regle "nombre
-  de lignes du § Suivi, plus vingt-trois" a ete RETIREE de CLAUDE.md le
-  2026-09-03 : elle supposait qu'une session produit une fiche, ce qui a
-  cesse d'etre vrai a la N25, et elle annoncait 48 pour 47. LE SEUL COMPTE
-  QUI FAIT FOI EST `ls src/content/projets/*.md | wc -l`.
-- /!\ QUAND UN CONTROLE CRIE, SUSPECTER LE CONTROLE AVANT LE DEPOT. La
-  N25 a eu DEUX fausses alertes de suite, toutes deux venant de
-  l'instrument : l'une ne voyait pas l'echappement HTML (&amp; sur la
-  fiche ateliers-pilotes-capsulae), l'autre pas l'echappement CSS des
-  selecteurs Tailwind. Un instrument plus etroit que son objet produit
-  des zeros et des alertes qui ressemblent a des mesures.
+- /!\ QUAND UN CONTROLE CRIE, SUSPECTER LE CONTROLE AVANT LE DEPOT. Cinq
+  fausses alertes en deux sessions, toutes venant de l'instrument :
+  echappement HTML (&amp;) invisible a une recherche de sous-chaine ;
+  echappement CSS (\. \/) invisible a un test de selecteur Tailwind ;
+  rapprochement flou de libelles appariant « Ecomusee du Port des
+  Salines » a « batiment-sslia-AEROPORT-la-rochelle » sur le seul mot
+  « port ». Un instrument plus etroit que son objet rend un chiffre
+  plausible, pas une erreur.
+- /!\ UNE ANCRE DE REMPLACEMENT SE VERIFIE PAR repr(), JAMAIS PAR
+  DEDUCTION. Les documents portent leurs insecables : « **Bloc
+  secteurs**\xa0: » ne se trouve pas avec une espace ordinaire. Parade :
+  construire l'ancre en REGEX ou chaque espace vaut [ \u202f\u00a0], et
+  asserter UNE occurrence. Verifie deux fois en N25 et N26.
+- /!\ ET RELIRE LE RESULTAT, pas seulement l'ancre. Un replace_all sur
+  un FRAGMENT ne corrige pas toutes les occurrences semantiques : en
+  N26 la chaine « avant » a ete reparee et la « apres » non, et un nom
+  propre tronque (« EHPAD Alienor 'Aquitaine ») a ete ecrit. Le
+  garde-fou du script verifiait l'ancre SOURCE, pas la valeur CIBLE.
+- /!\ LES BACKTICKS D'UN MESSAGE DE COMMIT SONT EXECUTES PAR BASH quand
+  on passe par -m "…". Deux fois en N25/N26 : `legende` et
+  `ls … | wc -l` ont ete remplaces par leur sortie. Passer par
+  `git commit -F <fichier>`, immunise.
+- /!\ UN COMPTE DERIVE MENT DES QUE SA PREMISSE CHANGE. La regle
+  « lignes du § Suivi, plus vingt-trois » a ete RETIREE de CLAUDE.md le
+  2026-09-03 (elle annoncait 48 pour 47). LE SEUL COMPTE QUI FAIT FOI EST
+  `ls src/content/projets/*.md | wc -l`.
 - Les insecables sont normalisees DE FACON NON DETERMINISTE par les
-  outils d'ecriture. Parade eprouvee en N25 : NE JAMAIS ECRIRE
-  D'INSECABLE EN LITTERAL dans un fichier source - les construire par
-  chr(160)/chr(8239), et controler par une ASSERTION CALCULEE (relire le
-  fichier ecrit, comparer a la chaine attendue), jamais par un nombre
-  tape. /!\ json.dumps echappe les caracteres de controle meme sous
-  ensure_ascii=False, mais PAS U+00A0 ni U+202F, qui sont des
-  separateurs : verifie en N25, les 1219 fines du corpus survivent a
-  l'aller-retour.
-- /!\ Les gros heredocs bash echouent sur cette machine ("unexpected EOF
-  while looking for matching quote"), deux fois en N25 sur des scripts de
-  150+ lignes. Ecrire les scripts par l'outil d'ecriture, pas par heredoc.
-- injection-typographique.py NE POSE NI ACCENTS NI EXPOSANTS NI LIGATURES
-  et ignore plusieurs unites (A, V, volts, DN, bars, px/ml, MP, MHz,
-  Gb/s, To, Mo, AWG, mA) : controler par regex apres passage.
-- UNE ANCRE DE REMPLACEMENT SE VERIFIE PAR repr() OU PAR COMPTAGE, PAS
-  PAR DEDUCTION. Parade generale : construire l'ancre en REGEX ou chaque
-  espace vaut [ \u202f\u00a0], et asserter UNE occurrence.
-- Le hook Stop commite et pousse SEUL ce qui traine, sur un depot PARTAGE
-  dont l'historique ne se reecrit pas. Scripts a usage unique DANS LE
-  SCRATCHPAD, committer tot des que le build est vert, `git add` par
-  CHEMINS EXPLICITES, jamais `git add -A`.
-- La CLI vercel repond "Not authorized" : c'est le PUSH qui deploie.
-  Verifier par curl AVEC barre oblique finale et par un MARQUEUR DU
-  BUILD, jamais par un delai d'attente.
-- npm run preview NE MESURE PAS LA PERFORMANCE (aucune compression, 0,8 s
-  de biais sur la chaine bloquante). La performance se mesure sur le
-  deploiement.
-- `npm run captures` EXISTE pour un jeu de captures multi-paliers : NE PAS
-  LE REBATIR. /!\ Sa table ROUTES est CURATEE (14 gabarits, pas 70 pages)
-  et --route filtre sur le nom de DOSSIER de cette table, pas sur l'URL :
-  les trois fiches photographiables sont 08-fiche-nerea, 09 (Marans) et
-  10 (EHPAD). Ses cinq paliers - 390, 768, 1024, 1440, 1920 - couvrent
-  exactement les trois bandes de planche. /!\ Son en-tete annonce encore
-  "46 routes dont 23 fiches" : perime, il y en a 70 et 47.
-- Les sondes de recette de la N24 vivent dans references/ref_047/ :
-  sonde-fiche.mjs, sonde-cartouche.mjs, sonde-filtres.mjs. Leurs
-  selecteurs sont EN DUR sur la fiche de la N24 : LES RECALER avant
-  usage. /!\ sonde-fiche et sonde-cartouche prennent un REPERTOIRE en
-  argument, pas un fichier ; scripts/planches/rendre_png.py aussi ; les
-  trois s'appellent DEPUIS LA RACINE du depot.
+  outils d'ecriture : ne JAMAIS en ecrire en litteral dans une source,
+  les construire par chr(160)/chr(8239), et controler par une ASSERTION
+  CALCULEE (relire le fichier, comparer a la chaine attendue).
+- /!\ Les gros heredocs bash echouent sur cette machine (« unexpected
+  EOF while looking for matching quote »), y compris quotes. Ecrire les
+  scripts par l'outil d'ecriture.
+- /!\ Un script du scratchpad ne resout pas node_modules par le nom :
+  importer puppeteer-core par chemin absolu
+  (node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js).
+- `npm run captures` EXISTE pour un jeu de captures multi-paliers : NE
+  PAS LE REBATIR. Sa table ROUTES est CURATEE (14 gabarits, pas 70
+  pages) et --route filtre sur le nom de DOSSIER de cette table.
+  Paliers 390, 768, 1024, 1440, 1920.
+- La CLI vercel repond « Not authorized » : c'est le PUSH qui deploie.
+  Verifier par un MARQUEUR DU BUILD, jamais par un delai. Un marqueur
+  DETERMINISTE vaut mieux qu'un aleatoire : les pages secteurs servent
+  toujours cliches[0], le film de l'accueil est tire au hasard.
+- npm run preview NE MESURE PAS LA PERFORMANCE (aucune compression,
+  0,8 s de biais). La performance se mesure sur le deploiement.
 - PYTHONIOENCODING=utf-8 devant toute commande python qui imprime des
   accents.
 
-ETAT MESURE DU DEPOT AU 2026-09-03, APRES LA N25
-- 47 fiches, 47 dossiers de planches complets, build 70 pages, typecheck
-  0 erreur (105 hints : c'est la ligne de base, pas une regression).
-- `python scripts/planches/invariant.py` : 188/188 pieces identiques
-  octet a octet (6 compositeurs, 47 dossiers).
-- Insecables SERVIES au lecteur d'ecran : 172 U+00A0 et 144 U+202F dans
-  les aria_label, sur trois chemins de rendu chacune.
-- Repartition sectorielle : L10 T14 I8 P3 C7 M7 E3, 52 en pondere.
-- Archetypes : boucle-fluide 12, coupe-traversee 11, zonage-ssi 8,
-  sankey-energie 7, tableau-electrique 7, chronologie-affaire 2,
-  planche-chiffree 0 SANS MODULE.
-- controle-liens-internes : 0 mort, 47/47 atteignent 5 liens.
+ETAT MESURE DU DEPOT AU 2026-09-04
+- 47 fiches, 47 dossiers de planches, build 70 pages, typecheck 0 erreur
+  (105 hints = ligne de base).
+- invariant des planches : 188/188 octet a octet.
+- 1 seule actualite, et elle porte demo: true.
+- 44 cliches de secteurs, 44 legendes, ZERO doublon dans un secteur, 2
+  legendes descriptives assumees (le document FT2E ne nomme pas de
+  projet pour elles).
+- controle-liens-internes : 0 mort, 47/47 fiches atteignent 5 liens ;
+  mais 0 lien depuis une page pilier vers un article.
 - controle-numeros-affaire : 0 fuite hors JSON-LD.
 - releve-numeral : 0 nombre compose ecrit en lettres.
-- 0 marqueur [DEMO] dans src/content/.
-- Espace disque : ~2,8 Go libres, volume a 100 %. /!\
-  livrables/captures-portfolio pese 96 Mo et dist/ 63 Mo : les deux sont
-  gitignores et REGENERABLES en une commande, c'est la ou reprendre de la
-  place si besoin.
+- Espace disque : ~2,8 Go libres, volume a 100 %.
+  livrables/captures-portfolio (96 Mo) et dist/ (63 Mo) sont gitignores
+  et regenerables : c'est la qu'on reprend de la place.
 
-Portee de commit selon le travail retenu : a11y(references) ou
-style(references) pour les insecables du texte dessine, docs(...) pour un
-point de suivi. Un changement de schema Zod passe par le sous-agent
-content-modeller et va dans le MEME commit que public/admin/config.yml.
+Portee de commit : content(actualites) pour les articles, seo(...) pour
+le maillage des pages piliers, docs(...) pour un point de suivi. Un
+changement de schema Zod passe par le sous-agent content-modeller et va
+dans le MEME commit que public/admin/config.yml.
 
 Termine par le prompt de lancement de la session suivante, en annexe du
 plan et reproduit integralement dans le message final - la regle de
