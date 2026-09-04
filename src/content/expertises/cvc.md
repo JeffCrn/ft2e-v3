@@ -14,14 +14,14 @@ typique_pour: [Logements, "Tertiaire / ERP", Industriel, "Monotechnique — Audi
 missions_liees: [CVC]
 faq:
   - question: "PAC air-eau ou géothermie : comment choisir ?"
-    reponse: "Le choix dépend du contexte : la géothermie sur sondes verticales offre un meilleur rendement (COP 4 à 5) mais nécessite un investissement initial plus élevé et un terrain adapté. La PAC air-eau convient aux projets où l’espace extérieur est limité."
+    reponse: "Ce n’est pas le rendement annoncé qui décide, c’est le régime d’eau que les émetteurs acceptent : une machine haute température livre son eau à 65 °C, une machine standard à 35 °C, là où une chaudière ne connaissait pas cette limite. En neuf, l’émetteur se choisit avec la machine. En rénovation, il est déjà posé et il commande — le plancher chauffant s’en accommode sans réserve, le radiateur demande qu’on isole d’abord, l’aérotherme demande qu’on le dépose. La géothermie y ajoute la question de la source, qui se relève sur le terrain et s’entretient dans la durée."
   - question: "FT2E intervient-il en phase chantier ?"
     reponse: "Oui. En mission complète, FT2E assure le visa des plans d’exécution, le suivi de chantier et la réception des installations. Cette continuité entre conception et réalisation garantit la cohérence technique."
 ---
 
 ## Concevoir le confort, maîtriser l’énergie
 
-Le lot CVC (chauffage, ventilation, climatisation) représente souvent le poste le plus consommateur d’énergie d’un bâtiment. Sa conception conditionne le confort des occupants autant que la facture énergétique à long terme. FT2E dimensionne les installations CVC en partant des besoins réels — déperditions thermiques, apports internes, renouvellement d’air réglementaire — pour aboutir à des systèmes justes, sobres et maintenables. À l’[École des douanes, rue du Jura à La Rochelle](/references/ecole-des-douanes-rue-du-jura-la-rochelle), le relevé de ces besoins montre que l’ensoleillement et l’écart de température pèsent moins de 7 % de la charge de climatisation — tout le reste vient des occupants et de leurs équipements. Chaque choix technique est documenté : note de calcul, schéma de principe, spécification détaillée au CCTP.
+Le lot CVC (chauffage, ventilation, climatisation) représente souvent le poste le plus consommateur d’énergie d’un bâtiment. Sa conception conditionne le confort des occupants autant que la facture énergétique à long terme. FT2E dimensionne les installations CVC en partant des besoins réels — déperditions thermiques, apports internes, renouvellement d’air réglementaire — pour aboutir à des systèmes justes, sobres et maintenables. À l’[École des douanes, rue du Jura à La Rochelle](/references/ecole-des-douanes-rue-du-jura-la-rochelle), le relevé de ces besoins montre que l’ensoleillement et l’écart de température pèsent moins de 7 % de la charge de climatisation — tout le reste vient des occupants et de leurs équipements. Chaque choix technique est documenté : note de calcul, schéma de principe, spécification détaillée au CCTP.
 
 ## Du chauffage au traitement d’air : une approche intégrée
 
