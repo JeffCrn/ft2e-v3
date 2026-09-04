@@ -301,9 +301,19 @@ Ce qui a changé depuis, en renvois — le détail vit dans les plans :
   → § 10-12 de `docs/superpowers/plans/2026-08-17-chantier-bloc-secteurs.md`.
 - **Taxonomie** : « Industriel », « Coordination SSI » en 5, et le secteur 6
   est « **Monotechnique — Audit** » depuis le 2026-08-27 (BREAKING `3a24cdf`).
-- **Bloc secteurs** : restent les 17 correspondances de clichés à légender
-  puis le gel du film, les validations FT2E (liste au § 9 du plan
-  bloc-secteurs), le passage NVDA humain.
+- **Bloc secteurs** : ⚠ **les correspondances de clichés sont REÇUES et appliquées
+  le 2026-09-04.** FT2E a versé son tableau `correspondance Site projet.odt`
+  (61 lignes, une par cliché source) : les 44 clichés publiés y trouvent tous leur
+  projet, **zéro clé orpheline**. 17 légendes génériques sont devenues des noms de
+  projet, plus 3 reprises — dont un vrai défaut d'accessibilité, deux clichés du
+  même secteur portant la même légende, donc indistinguables dans la liste que
+  `CoupeSecteurs.astro` donne au lecteur d'écran. **Il ne reste que deux légendes
+  descriptives** — « réseaux existants » et « sous-station » —, et c'est fidèle :
+  le document FT2E ne nomme pas de projet pour ces deux-là non plus, ce sont des
+  photographies d'organe et non d'ouvrage. ⚠ **Le gel du film n'est plus bloqué,
+  mais il n'est pas fait** : le film est tiré au hasard à chaque déploiement
+  (arbitrage D), le geler est un arbitrage, pas une conséquence. Restent les
+  validations FT2E (liste au § 9 du plan bloc-secteurs) et le passage NVDA humain.
 - **Decap** : blocage OAuth inchangé (`docs/22-prise-en-main-decap.md` § 0,
   trois gestes hors dépôt, ajournés en connaissance de cause).
 - **NOUVEAU CHANTIER ouvert le 2026-08-27 : 27 nouvelles fiches références**

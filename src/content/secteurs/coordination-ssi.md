@@ -4,15 +4,15 @@ accroche: "La coordination des systèmes de sécurité incendie portée comme un
 ordre: 5
 cliches:
   - image: "/images/secteurs/coordination-ssi/01.jpeg"
-    legende: "EHPAD Aliénor d’Aquitaine"
+    legende: "EHPAD Aliénor d’Aquitaine, coffrets"
     alt: "Coffrets de relayage alignés sur trois rangs dans un local technique, conduits orange en attente."
     credit: "© FT2E"
   - image: "/images/secteurs/coordination-ssi/02.jpeg"
-    legende: "Cabanes urbaines"
+    legende: "Les Cabanes Urbaines"
     alt: "Essai au feu réel dans une salle d’escalade, foyer calibré posé au centre du tapis de réception."
     credit: "© FT2E"
   - image: "/images/secteurs/coordination-ssi/03.jpeg"
-    legende: "EHPAD Aliénor d’Aquitaine"
+    legende: "EHPAD Aliénor d’Aquitaine, centrale SSI"
     alt: "Centrale de sécurité incendie et tableau répétiteur, plans des zones de détection affichés au mur."
     credit: "© FT2E"
   - image: "/images/secteurs/coordination-ssi/04.jpeg"

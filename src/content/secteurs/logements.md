@@ -24,7 +24,7 @@ cliches:
     credit: "© FT2E"
     famille: "petit-collectif"
   - image: "/images/secteurs/logements/petit-collectif-03.jpeg"
-    legende: "villa urbaine"
+    legende: "L’Orangerie du Parc, 20 logements"
     alt: "Petit collectif urbain à toiture zinc, garde-corps ajourés et mur de clôture sur rue."
     credit: "© FT2E"
     famille: "petit-collectif"

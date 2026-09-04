@@ -12,7 +12,7 @@ cliches:
     alt: "Tour gothique et portail classique à colonnes d’une église de centre ancien, sur son parvis."
     credit: "© FT2E"
   - image: "/images/secteurs/patrimoine/03.jpeg"
-    legende: "passerelle"
+    legende: "Passerelle du Carreau d’Or"
     alt: "Passerelle métallique au platelage acier, garde-corps câblés et main courante bois, sur un canal."
     credit: "© FT2E"
   - image: "/images/secteurs/patrimoine/04.jpeg"
