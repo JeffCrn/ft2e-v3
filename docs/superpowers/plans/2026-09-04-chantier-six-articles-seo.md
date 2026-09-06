@@ -520,7 +520,19 @@ plan et reproduit integralement dans le message final - la regle de
 continuite est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
 ```
 
-## Annexe B — prompt de lancement de la session N28
+## Annexe B — prompt Decap / Phase 5 · ⚠ REPORTÉ, ce n’est plus la N28
+
+> ⚠ **Ce prompt n’est plus celui de la session suivante.** Le 2026-09-06,
+> FT2E a demandé une reprise du monogramme, et l’utilisateur en a fait le
+> chantier immédiat : la N28 est le chantier du monogramme
+> (`docs/superpowers/plans/2026-09-06-chantier-monogramme.md`, annexe A).
+>
+> Ce texte reste valable comme **matière pour l’étape 2 (finalisation)** de
+> la trajectoire de production, et son inventaire des rangs A à D fait
+> toujours foi. ⚠ Une réserve à y porter : la mise en production se fera
+> **sur OVH**, ce qui couple le blocage Decap à la migration — voir le § 7.1
+> du plan du monogramme.
+
 
 > Autoportant : collé dans une session neuve, il ne suppose aucun contexte des
 > précédentes. Reproduit intégralement dans le message final de la N27,

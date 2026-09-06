@@ -591,3 +591,101 @@ d'équipe, D polissage). Le **rang de production**, lui, ne porte plus d'article
 Bilan de clôture, points ouverts et prompt de la N28 :
 `docs/superpowers/plans/2026-09-04-chantier-six-articles-seo.md` § 5 à 7 et
 annexe B.
+
+---
+
+## Addendum du 2026-09-06 — demande client sur le monogramme, et la trajectoire de production
+
+FT2E a demandé une reprise du monogramme, et l'utilisateur en a fait le **chantier
+immédiat de la session N28** — devant le sujet Decap / Phase 5, dont le prompt est
+reporté. Il a aussi arrêté l'ordre des étapes jusqu'à la mise en production.
+
+### La demande
+
+1. **Resserrer légèrement l'approche** du mot F T 2 E, jugé un peu trop espacé.
+2. **Changer la signature** « BUREAU D'ÉTUDES TECHNIQUES », jugée trop générique et
+   trop longue (« ça dépasse en longueur le logo au-dessus »). Trois pistes à tester,
+   sur une ou deux lignes : « BUREAU FLUIDES », « BUREAU FLUIDES ET THERMIQUE »,
+   « BET FLUIDES & THERMIQUES ». ⚠ Les graphies transmises portaient deux coquilles
+   (« BUREU », « TERMIQUES »), rectifiées ici ; le libellé exact reste à arrêter.
+
+### Ce que la mesure a établi avant tout travail
+
+⚠⚠ **`src/components/layout/Logo.astro` est la transcription EXACTE du dessin de
+référence de la charte** — vérifié caractère par caractère contre
+`branding-v3-bis/FT2E-charte-graphique-rev2.1-source.html` : mêmes chemins, mêmes
+`translate(5,5)` / `(104,16)` / `35` / `72` / `107`, mêmes `font-size="8.5"` et
+`letter-spacing="2.6"`, même texte de signature. **Les deux demandes modifient donc
+la charte ; elles ne corrigent aucune dérive d'implémentation.** D'où deux
+amendements d'application à ouvrir — **A15** (approche) et **A16** (signature) —
+dans la lignée d'A9, A10 et A11–A14, à consigner dans
+`.claude/rules/tailwind-design-tokens.md`, qui fait foi sur le design.
+
+Mesures au navigateur, dans la police réellement chargée, en unités du `viewBox`
+de 330 :
+
+| | Unités | vs le mot |
+|---|---|---|
+| **Mot FT2E** (largeur d'encre) | **131,0** | — |
+| Signature actuelle « BUREAU D'ÉTUDES TECHNIQUES » | **200,2** | **× 1,53** |
+| « BUREAU FLUIDES » | 107,8 | × 0,82 ✅ |
+| « BUREAU FLUIDES ET THERMIQUE » | 207,9 | × 1,59 ⛔ **plus longue que l'actuelle** |
+| « BET FLUIDES & THERMIQUES » | 184,8 | × 1,41 |
+| Deux lignes (toutes pistes) | 84,7 à 107,8 | ✅ |
+
+**Le client a raison, et c'est chiffré** : la signature fait une fois et demie la
+largeur du mot. **Des trois pistes, une seule tient sur une ligne**, et l'une d'elles
+aggrave exactement le défaut qu'elle vient corriger. Sur deux lignes, toutes tiennent.
+
+Les trois écarts optiques du mot valent **11,0 unités, exactement** — le « 2 » est
+tracé au trait quand F, T et E sont pleins, mais le dessin compense déjà. Le
+resserrement est donc un reparamétrage à une variable : `T → 24+g`, `2 → 50+2g`,
+`E → 74+3g`, largeur `= 98+3g` (`g = 11` redonne l'état actuel).
+
+### Un point de fond, et il n'est pas graphique
+
+« BUREAU FLUIDES » est la seule piste qui résout la longueur sur une ligne, mais elle
+**rétrécit le périmètre annoncé**. Le site présente quatre expertises et sept
+secteurs — dont **Électricité**, **Coordination SSI** et **Études d'exécution / BIM** —
+le pied de page dit « Fluides, thermique, électricité, SSI, BIM », et les 47 fiches le
+démontrent. Une signature qui n'annonce que les fluides contredirait la moitié du site.
+**C'est un arbitrage de positionnement, à rendre par FT2E en connaissance de cet écart.**
+
+### La formule vit à six endroits, en deux couches
+
+**Signature** (ce qui nomme) : le `<text>` dessiné de `Logo.astro`, son `aria-label`,
+et `SITE_TAGLINE` dans `constants.ts`. **Description** (ce qui explique) : le JSON-LD
+`description` et `alternateName`, la prose du pied, les `description` de pages.
+Les deux couches **peuvent** diverger — « bureau d'études techniques » reste la requête
+que `seo-geo.md` fait vivre dans le `LocalBusiness` — à condition que ce soit décidé.
+✅ `public/favicon.svg` n'est pas concerné (marque seule, sans lettres).
+
+### La trajectoire de production, arrêtée par l'utilisateur
+
+1. le monogramme · 2. la finalisation · 3. **la relecture complète des contenus par le
+client**, qui remonte ses corrections — rien ne se fige avant ce retour · 4. les
+corrections puis un **audit complet et approfondi** · 5. la bascule et la **mise en
+production sur le serveur OVH**.
+
+⚠⚠ **La cible est OVH, pas Vercel, et cela change deux choses connues.**
+
+- **Le proxy OAuth de Decap est une fonction Vercel.** `api/auth.js` et
+  `api/callback.js` sont des handlers Node au format Vercel, lus par `process.env` —
+  un mutualisé OVH ne les exécutera pas tels quels. `docs/09-deploiement-ovh.md` retient
+  Webhosting Pro (PHP 8.x, « Node.js disponible » : affirmation du PDF jamais vérifiée).
+  Deux chemins à arbitrer : réécrire le proxy en **PHP**, ou **garder le proxy sur
+  Vercel** pendant qu'OVH sert le site (Decap admet un `base_url` distinct).
+  **Conséquence : réparer l'OAuth aujourd'hui ne survit pas nécessairement à la
+  bascule — le rang A et la migration sont désormais couplés.**
+- **Le déblocage de l'indexation se fait à la bascule.** Les trois verrous sont
+  dimensionnés pour Vercel ; sur OVH le `X-Robots-Tag` passe par le `.htaccess` que
+  `docs/09` prévoit déjà. `docs/19-migration-production.md` est **à réconcilier avec
+  `docs/09`**.
+
+⚠ Et l'échéance datée : `MILLESIME_LIVRAISON_ANNONCE = 2026` **fait échouer le build au
+1ᵉʳ janvier 2027**, sur les quinze affaires sans réception prononcée. Elle tombe *avant*
+la mise en production si le calendrier glisse — à signaler à l'étape 4, et jamais à
+« corriger » en poussant la constante.
+
+Plan, mesures, cinq arbitrages et prompt de la N28 :
+`docs/superpowers/plans/2026-09-06-chantier-monogramme.md`.
