@@ -524,3 +524,305 @@ Terminer par le prompt de lancement de la session suivante, en annexe de ce plan
 et reproduit integralement dans le message final - la regle de continuite est
 dans CLAUDE.md parce qu'elle a ete manquee deux fois.
 ```
+
+## 8. Bilan de la session N28 — le chantier est CLOS, avec deux réserves
+
+**Arbitrages rendus par FT2E le 2026-09-11** (les cinq du § 5, dont trois
+répondus et deux laissés ouverts) :
+
+| № | Question | Réponse |
+|---|---|---|
+| **A** | Valeur de `g` | **8** — `translate` 32 / 66 / 98, mot à 122,0 unités (− 6,9 %) |
+| **B** | Libellé | **BUREAU FLUIDES / ET THERMIQUE** |
+| **C** | Une ligne ou deux | **deux**, et **justifiées** sur l'empan du mot |
+| **D** | Graphie | « BUREAU », pas « BET » ; « THERMIQUE » au singulier ; pas d'esperluette |
+| **E** | Portée | ⚠ **non rendu** — voir § 8.3 |
+
+Commit : `feat(design-system)` — `Logo.astro`, `.claude/rules/tailwind-design-tokens.md`
+(A15 et A16) et `CLAUDE.md` dans le même commit, comme la règle l'exige.
+
+### 8.1 Ce que la mesure a corrigé en cours de route
+
+**La justification a été demandée après coup, et elle a changé la nature du
+travail.** Le § 2.2 classait des candidats par longueur ; justifier impose de
+poser un bord sur un autre, ce qui demande une tout autre précision.
+
+⚠ **Deux relevés antérieurs se sont révélés impropres à cet usage**, et le plan
+les portait tels quels :
+
+1. **`getBBox()` sur un `<text>` ne mesure pas l'encre.** Il rend la boîte des
+   **approches**, espace traînant après la dernière lettre compris — vérifié par
+   sonde témoin : un signe unique y grandit exactement d'autant que
+   l'interlettrage. **Toutes les largeurs publiées avant le 2026-09-11 sont donc
+   des largeurs d'approche** : 200,2 pour la signature de la charte, 107,8 pour
+   « BUREAU FLUIDES », etc. Elles classent correctement les candidats — c'est
+   pour cela que le § 2.2 reste valable — mais une signature calée dessus
+   finirait **4 à 6 unités trop courte**, sans que rien ne le signale. Le contour
+   réel passe par `actualBoundingBoxLeft/Right` du Canvas.
+2. **Justifier en chasse fixe impose un interlettrage PAR LIGNE.** `encre(s) =
+   encre(0) + (n − 1)·s`, donc `s = (W − encre(0)) / (n − 1)` : deux lignes de
+   longueurs différentes ne peuvent pas partager leur interlettrage. La charte
+   n'en prescrivait qu'un, 2,6 — c'est ce qui fait de A16 un amendement et non un
+   réglage. Mesurés : **3,823** (BUREAU FLUIDES, 14 signes) et **5,536**
+   (ET THERMIQUE, 12 signes).
+
+**Un résultat contre-intuitif, à connaître avant de proposer un autre libellé :
+c'est la ligne la plus COURTE qui s'ouvre le plus.** « BET FLUIDES » (11 signes)
+aurait demandé **6,500**, soit 0,77 em. Le couple BET était plus *homogène*
+(rapport × 1,17 entre ses deux lignes, contre × 1,45 pour BUREAU) mais beaucoup
+plus lâche. Il n'y a pas de réglage qui donne les deux.
+
+**Un point de géométrie qui commande A15**, relevé avant tout calcul : les trois
+écarts du mot sont égaux à l'encre *bien que* le « 2 » soit tracé au trait quand
+F, T et E sont pleins. Cela ne tient qu'à une chose — **le groupe du 2 ne déclare
+aucun `stroke-linecap`**, donc `butt` par défaut. Avec `round`, les écarts
+autour du 2 vaudraient 7,5 au lieu de 11, et `g = 8` les refermerait à 4,5.
+
+### 8.2 Recette exécutée
+
+| Contrôle | Attendu | Mesuré |
+|---|---|---|
+| `npm run typecheck` | 0 erreur, 107 hints | **0 / 107** ✅ |
+| `npm run build` | 76 pages | **76** ✅ |
+| Largeur du mot au rendu | 122,0 unités de `viewBox` | **122,0** aux deux largeurs ✅ |
+| Débordement horizontal, 1440 et 390 | nul | **0** ✅ |
+| Blanc à droite du verrouillage | à mesurer | **+ 4,4 px** en navigation (161,3 de boîte, 110,5 d'encre), **+ 6,0 px** au pied (220 / 150,7) — aucun décalage de mise en page ✅ |
+| Formes servies | 44 / 60 / 30 px | **44 et 60 à 1440 ; 30 (cadre) et 60 à 390** ✅ |
+| Zone de protection de 24 unités | vérifiée | ✅ — l'encre ayant rétréci, le dégagement **augmente** ; aucune reprise nécessaire |
+| Lighthouse a11y | inchangé (exception D1) | **96**, violation unique `text-clair` `aria-hidden` à 1,54 sur calcaire ✅ |
+
+### 8.3 ⚠ Ce qui reste ouvert — deux réserves à porter à FT2E
+
+**a) L'arbitrage E n'a pas été rendu, et il se voit à l'écran.** La formule vit à
+six endroits ; seul le `<text>` dessiné a changé. Conséquences visibles
+aujourd'hui :
+
+- **l'`aria-label` du monogramme dit encore « FT2E — bureau d'études
+  techniques ».** Le SVG portant `role="img"`, un lecteur d'écran n'énonce **que**
+  cet attribut et **jamais** le texte dessiné : un visiteur aveugle entend autre
+  chose que ce qu'un visiteur voyant lit. Les deux nomment la même société — ce
+  n'est pas un défaut bloquant, c'est un arbitrage non rendu ;
+- **`SITE_TAGLINE` affiche « BUREAU D'ÉTUDES TECHNIQUES, LA ROCHELLE »** dans la
+  barre d'en-tête au-dessus de 1 280 px, **sur la même ligne** que le monogramme
+  resserré. Les deux formules cohabitent.
+
+La couche **description** (JSON-LD, `alternateName`, pied de page, `description`
+de pages) n'a pas bougé, et c'est une décision écrite sous A16 : *une signature
+nomme, une description explique*. « Bureau d'études techniques » reste la requête
+que les moteurs indexent.
+
+**b) Le périmètre annoncé rétrécit — le point du § 5 reste entier.** Le site
+présente quatre expertises et sept secteurs, dont Électricité, Coordination SSI
+et Études d'exécution / BIM ; quarante-sept fiches le démontrent. La signature
+n'annonce plus que les fluides et la thermique. **C'est aujourd'hui la couche
+description qui porte le périmètre complet.** Si FT2E veut un jour aligner les
+deux couches, c'est la description qui décidera, pas le dessin.
+
+**c) Une divergence de source, tranchée par le texte.** La réponse de FT2E nomme
+« Bureau, deux lignes » avec ses mesures (107,8 · 92,4), tandis que l'image
+annotée qui l'accompagnait montrait « **BET** FLUIDES / ET THERMIQUE ». Le texte
+étant explicite et chiffré, et l'annotation portant sur la *composition*
+(« texte justifié ou centré sous logo »), c'est « BUREAU » qui a été posé.
+**À confirmer en ouverture de N29** — c'est un mot à changer, pas un chantier.
+
+### 8.4 Épreuves
+
+Page d'épreuves comparées, composée dans les jetons FT2E, avec curseur d'écart et
+mise en situation : publiée en artefact le 2026-09-11 (version 2 = état posé).
+Elle porte les quatre compositions en présence, l'arithmétique de la
+justification et les deux réserves ci-dessus.
+
+## Annexe B — prompt de lancement de la session N29
+
+> Autoportant : collé dans une session neuve, il ne suppose aucun contexte des
+> précédentes. Reproduit intégralement dans le message final de la N28,
+> conformément à la règle de continuité de `CLAUDE.md`.
+
+```
+Session N29 - FT2E v3. ETAPE 2 DE LA TRAJECTOIRE : LA FINALISATION.
+Cette session ne produit NI fiche, NI article, NI refonte de logo : les trois
+chantiers sont clos (47 fiches, 6 articles, monogramme amende A15/A16 le
+2026-09-11). Elle PREPARE LA RELECTURE CLIENT, qui est l'etape 3.
+
+Contexte. FT2E v3 est le site institutionnel du bureau d'etudes FT2E (La
+Rochelle), Astro 6 statique, deploye en demonstration client sur
+https://ft2e-v3.vercel.app (indexation verrouillee par TRIPLE SECURITE -
+robots.txt, meta noindex, header X-Robots-Tag : NE PAS Y TOUCHER sans
+validation FT2E, procedure dans docs/19-migration-production.md).
+
+LA TRAJECTOIRE, ARRETEE PAR L'UTILISATEUR LE 2026-09-06 - l'ordre est DONNE,
+il ne se reordonne pas par commodite d'execution :
+  1. le monogramme                                      FAIT (N28)
+  2. LA FINALISATION                                    <- cette session
+  3. la RELECTURE COMPLETE DES CONTENUS PAR LE CLIENT, qui remonte ses
+     corrections - RIEN NE SE FIGE AVANT CE RETOUR
+  4. les corrections, puis un AUDIT COMPLET ET APPROFONDI
+  5. la bascule et la MISE EN PRODUCTION SUR LE SERVEUR OVH
+/!\ NE PAS TRIER LES CHANTIERS PAR " EXECUTABLE SANS ATTENDRE PERSONNE " : ce
+critere favorise le polissage et ecarte la production.
+/!\ COROLLAIRE DIRECT POUR CETTE SESSION : l'etape 3 est une RELECTURE. Tout
+ce qui serait re-ecrit maintenant sera peut-etre corrige par le client dans
+quelques jours. La finalisation porte donc sur ce qui NE DEPEND PAS du texte :
+les reserves ouvertes, la coherence technique, la preparation du dossier de
+relecture. PAS sur une passe de reecriture editoriale.
+
+/!\/!\ TROIS RESERVES OUVERTES PAR LA N28 - A PORTER A FT2E EN OUVERTURE
+  a) LE LIBELLE DE LA SIGNATURE EST A CONFIRMER. La reponse de FT2E nommait
+     " Bureau, deux lignes " avec ses mesures (107,8 . 92,4), mais l'IMAGE
+     ANNOTEE qui l'accompagnait montrait " BET FLUIDES / ET THERMIQUE ". Le
+     texte etant explicite et chiffre, et l'annotation portant sur la
+     composition (" texte justifie ou centre sous logo "), c'est " BUREAU
+     FLUIDES / ET THERMIQUE " qui a ete pose. C'EST UN MOT A CHANGER, PAS UN
+     CHANTIER - mais il faut le demander.
+     /!\ SI LE LIBELLE CHANGE, LES INTERLETTRAGES SE RECALCULENT : en chasse
+     fixe, s = (W - encre(0)) / (n - 1) avec W = 122,0 (l'empan du mot a
+     g = 8). Ne JAMAIS ajuster la valeur a l'oeil jusqu'a ce que " ca tombe
+     bien ". Valeurs en place : 3,823 (BUREAU FLUIDES, 14 signes) et 5,536
+     (ET THERMIQUE, 12 signes). Pour BET FLUIDES (11 signes) ce serait 6,500.
+     /!\ ET L'ENCRE NE SE MESURE PAS AVEC getBBox() : cette boite inclut
+     l'espace trainant apres la derniere lettre (sonde temoin : un signe
+     unique y grandit d'autant que l'interlettrage). Passer par
+     actualBoundingBoxLeft/Right du Canvas. Les largeurs publiees avant le
+     2026-09-11 sont des largeurs d'APPROCHE.
+  b) L'ARBITRAGE E N'A PAS ETE RENDU, et il se voit a l'ecran. Seul le <text>
+     dessine a change. Restent en " bureau d'etudes techniques " :
+       - Logo.astro, l'aria-label du monogramme. Le SVG porte role="img",
+         donc un lecteur d'ecran n'enonce QUE cet attribut et JAMAIS le texte
+         dessine : un visiteur aveugle entend autre chose que ce qu'un
+         visiteur voyant lit. Pas bloquant, mais non arbitre.
+       - constants.ts, SITE_TAGLINE : la barre d'en-tete au-dessus de 1 280 px
+         affiche " BUREAU D'ETUDES TECHNIQUES, LA ROCHELLE " SUR LA MEME LIGNE
+         que le monogramme resserre.
+     La couche DESCRIPTION (JSON-LD, alternateName, pied, description de
+     pages) n'a PAS bouge, et c'est une decision ecrite sous A16 : une
+     signature NOMME, une description EXPLIQUE. " Bureau d'etudes techniques "
+     est la requete que les moteurs indexent (.claude/rules/seo-geo.md).
+  c) LE PERIMETRE ANNONCE RETRECIT. Le site presente quatre expertises et
+     sept secteurs, dont Electricite, Coordination SSI et Etudes d'execution /
+     BIM ; 47 fiches le demontrent (IRVE, courants faibles, SSI de categorie A,
+     maquette Revit). La signature n'annonce plus que les fluides et la
+     thermique. C'est la couche description qui porte le perimetre complet.
+     ARBITRAGE DE POSITIONNEMENT, pas de composition.
+
+LIRE D'ABORD, dans cet ordre
+1. docs/23-etat-de-l-art.md § 4 - ce qui est clos, ce qui est ouvert, et qui
+   peut le lever. FAIT FOI sur le reste a faire.
+2. docs/superpowers/plans/2026-09-06-chantier-monogramme.md § 8 - le bilan de
+   la N28, les trois reserves et la recette executee.
+3. CLAUDE.md et les six fichiers de .claude/rules/.
+4. .claude/rules/tailwind-design-tokens.md § Les amendements - A15 et A16 y
+   sont consignes, et ce fichier FAIT FOI sur le design.
+
+CE QUI RESTE OUVERT PAR AILLEURS (docs/23-etat-de-l-art.md § 4 fait foi)
+  RANG A - hors depot : Decap OAuth casse en production (HTTP 500 sur
+    /api/auth?provider=github). Trois gestes, docs/22-prise-en-main-decap.md
+    § 0. /!\ COUPLE A LA MIGRATION OVH, voir ci-dessous.
+  RANG B - suspendu a FT2E : reception de la creche de l'Oranger (NE JAMAIS
+    FABRIQUER UN MILLESIME), les 25 visuels dans l'historique, planche-chiffree
+    jamais exerce, les validations du bloc secteurs (dont les artefacts
+    d'agrandissement generatif releves sur les cliches retenus), les questions
+    B et E des 24 fiches de collecte, et les DOUZE CV NOMINATIFS de
+    livrables/cv-ft2e/ - donnees personnelles dans l'historique d'un depot
+    PARTAGE, alors que le motif /cv/ du .gitignore declare qu'un CV ne se
+    commite jamais. Retrait = reecriture d'historique : ARBITRAGE, pas
+    correction.
+  RANG C - les huit photographies d'equipe generees par IA (marquees DEMO).
+  RANG D - polissage : texte dessine des planches (64 ecarts typographiques)
+    et champs editoriaux (2 160), passage NVDA jamais fait par un humain,
+    option 0 du motion (TraceFlux debranche), LCP mobile au seuil.
+  UNE AFFIRMATION NON ETAYEE RESTE EN LIGNE : expertises/electricite.md, " la
+    GTB permet de reduire les consommations de 15 a 25 % ". Aucune piece FT2E.
+    Le jumeau - le " COP 4 a 5 " de la FAQ CVC - a ete retire le 2026-09-04
+    (commit 95d5218). /!\ Avant de proposer " remplacer par une valeur du
+    corpus " : VERIFIER QUE LA VALEUR DIT LA MEME CHOSE. C'est ce qui a fait
+    ecarter cette issue pour le COP.
+  COCON SEMANTIQUE : 8 piliers sur 11, PLAFOND STRUCTUREL et definitif. Trois
+    pages sans satellite, aucune aux 3-5 que seo-geo.md demande. Six articles
+    ne couvrent pas onze piliers. Perimetre contractuel a six (docs/17 p. 23),
+    au-dela un devis. A DIRE A FT2E.
+
+/!\/!\ LA PRODUCTION SUR OVH CHANGE DEUX CHOSES CONNUES
+  a) LE PROXY OAUTH DE DECAP EST UNE FONCTION VERCEL. api/auth.js et
+     api/callback.js sont des handlers Node au format Vercel
+     (export default function handler(req, res), process.env). Un mutualise OVH
+     NE LES EXECUTERA PAS tels quels. docs/09-deploiement-ovh.md retient
+     l'offre Webhosting Pro (PHP 8.x, " Node.js disponible " - affirmation du
+     PDF JAMAIS VERIFIEE). Deux chemins a arbitrer : reecrire le proxy en PHP,
+     ou GARDER le proxy sur Vercel pendant qu'OVH sert le site (Decap admet un
+     base_url distinct). CONSEQUENCE : reparer l'OAuth aujourd'hui ne survit
+     pas necessairement a la bascule - le rang A et la migration sont COUPLES.
+  b) LE DEBLOCAGE DE L'INDEXATION SE FAIT A LA BASCULE. Les trois verrous sont
+     dimensionnes pour Vercel ; sur OVH le X-Robots-Tag passe par le .htaccess
+     que docs/09 prevoit deja. docs/19-migration-production.md est A
+     RECONCILIER avec docs/09.
+
+/!\/!\ L'ECHEANCE DATEE, ET LA SEULE MANIERE D'Y REPONDRE.
+src/lib/projets.ts porte MILLESIME_LIVRAISON_ANNONCE = 2026 et un garde-fou qui
+FAIT ECHOUER LE BUILD AU 1er JANVIER 2027, sur les affaires dont la reception
+n'est pas prononcee (mesurer : grep -L annee_livraison src/content/projets/*.md
+| wc -l).
+/!\ NE JAMAIS pousser la constante a 2027 : cela desarmerait le garde-fou pour
+s'epargner l'echec qu'on lui demande de produire. La reponse est d'aller relever
+les receptions - rang B, donc chez FT2E. L'echeance tombe AVANT la mise en
+production si le calendrier glisse : A SIGNALER A L'ETAPE 4 (audit).
+
+PIEGES D'OUTILLAGE DE CETTE MACHINE - ils ne se redecouvrent pas
+- /!\ QUAND UN CONTROLE CRIE, SUSPECTER LE CONTROLE AVANT LE DEPOT. Parade :
+  des asserts qui font ECHOUER l'instrument quand il ne sait pas lire, et une
+  SONDE TEMOIN qui doit trouver un hit connu. En N28, deux controles ont crie
+  a tort (une ancre retapee, une assertion sur un texte que je n'avais pas
+  ecrit) et UN a crie a raison (getBBox qui ne mesure pas l'encre).
+- /!\ LES ANCRES DE REMPLACEMENT SE LISENT DU FICHIER, JAMAIS NE SE RETAPENT.
+  Le depot MELE apostrophes droites (') et typographiques (') dans les MEMES
+  fichiers, et porte des insecables U+00A0 a des endroits qu'on ne devine pas.
+  Une ancre retapee ne mord pas, en silence. Lire, puis remplacer.
+- /!\ POUR MESURER DU TEXTE, LA POLICE DOIT ETRE CHARGEE. Poser l'assert
+  document.fonts.check("8.5px 'IBM Plex Mono'") apres document.fonts.ready.
+- /!\ UNE CLASSE DE CARACTERES SUR UNE LETTRE ACCENTUEE NE MORD PAS.
+  grep -E "g[ee]othermi" rend ZERO sur un corpus qui porte " geothermique " :
+  la classe compare des OCTETS. Ancrer sur le mot litteral.
+- /!\ UN COMPTAGE PAR UNION DE TERMES N'EST PAS UN COMPTAGE PAR SUJET.
+- /!\ Les insecables ne s'ecrivent JAMAIS en litteral dans une source : les
+  outils d'ecriture les normalisent de facon non deterministe. Ecrire SANS,
+  puis lancer  python scripts/injection-typographique.py <fichier.md>
+  (" droites restantes 0 " attendu).
+- /!\ LES GROS HEREDOCS BASH ECHOUENT, ET UN HEREDOC MANGE LES ANTISLASH d'un
+  script Python (trois fois : N26, N27 et ENCORE en N28, sur un antislash de
+  continuation de ligne). Ecrire les scripts par l'outil d'ecriture.
+- /!\ astro.config.mjs porte trailingSlash: 'always' : une sonde qui appelle
+  /expertises/cvc SANS barre finale recoit 404 sur astro preview, alors que
+  Vercel sert les deux en 200. Toujours poser la barre finale.
+- /!\ Un script du scratchpad ne resout pas node_modules par le nom : importer
+  puppeteer-core par CHEMIN ABSOLU en file:/// (un chemin nu " C:/... " est
+  refuse par le chargeur ESM de Node), et c'est
+  node_modules/puppeteer-core/lib/puppeteer/puppeteer-core.js (PAS de esm/).
+- /!\ scrollIntoView PUIS getBoundingClientRect DANS LE MEME evaluate() rend un
+  rectangle d'AVANT le defilement : la capture tombe ailleurs (constate en
+  N28). Defiler, laisser passer deux trames (double requestAnimationFrame),
+  puis mesurer.
+- /!\ npm run preview ne se lance PAS avec un & dans un appel Bash au premier
+  plan. Le lancer en tache de fond, ATTENDRE par une boucle sur curl (jamais
+  par un delai), et le FERMER en fin de session : un serveur orphelin fausse
+  la session suivante.
+- /!\ astro preview rend 304 sur une page deja vue : setCacheEnabled(false) et
+  TOLERER 304 dans les asserts de statut.
+- `npm run captures` EXISTE pour un jeu multi-paliers : NE PAS LE REBATIR. Sa
+  table ROUTES est CURATEE (14 gabarits) et --route filtre sur le nom de
+  DOSSIER de cette table.
+- /!\ LES BACKTICKS D'UN MESSAGE DE COMMIT SONT EXECUTES PAR BASH quand on
+  passe par -m " ... ". Passer par `git commit -F <fichier>`, immunise.
+- La CLI vercel repond " Not authorized " : c'est le PUSH qui deploie. Verifier
+  par un MARQUEUR DU BUILD, jamais par un delai. Depot PARTAGE : rejouer
+  git status au moment de committer.
+- npm run preview NE MESURE PAS LA PERFORMANCE (aucune compression, 0,8 s de
+  biais sur la chaine bloquante). La performance se mesure sur le deploiement.
+- PYTHONIOENCODING=utf-8 devant toute commande python qui imprime des accents.
+
+Portee de commit : selon l'objet - fix(...) / a11y(...) / docs(...). Tout
+changement de dessin va DANS LE MEME COMMIT que son amendement dans
+.claude/rules/tailwind-design-tokens.md.
+
+Terminer par le prompt de lancement de la session suivante, en annexe de ce
+plan et reproduit integralement dans le message final - la regle de continuite
+est dans CLAUDE.md parce qu'elle a ete manquee deux fois.
+```
