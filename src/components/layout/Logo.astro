@@ -1,9 +1,24 @@
 ---
-// Monogramme FT2E — charte v3 (dessin inchangé depuis la planche 04).
+// Monogramme FT2E — charte v3, § 07, AMENDÉ le 2026-09-11 sur demande FT2E.
 // Un cadre ouvert sur ses flancs (l'ouvrage) traversé par un tracé qui en
 // sort de 6,5 unités : le réseau. Extrémités arrondies pour le flux, angles
 // vifs pour le cadre — la distinction tient à la forme, pas à la valeur.
 // Ni ombre ni contour ; hauteur minimale à l'écran : 28 px.
+//
+// ⚠ CE DESSIN N'EST PLUS LA TRANSCRIPTION LITTÉRALE DE LA CHARTE, et ce n'est
+// pas une dérive : deux amendements d'application le gouvernent, consignés au
+// registre de `.claude/rules/tailwind-design-tokens.md`, qui fait foi.
+//   A15 — l'approche du mot, de 11 à 8 unités d'écart (translates 32 / 66 / 98).
+//   A16 — la signature, « BUREAU FLUIDES / ET THERMIQUE » sur deux lignes
+//         justifiées sur l'empan du mot.
+// Ne pas « corriger » ces valeurs vers le PDF de la charte : c'est la charte
+// qui a changé. Le détail du calcul est en regard de chaque bloc ci-dessous.
+//
+// ⚠ Le verrouillage reste 330 × 90 — la charte le prescrit pour « marque + mot »
+// comme pour « marque + mot + signature ». Resserrer le mot n'a donc pas
+// rétréci la boîte : il a augmenté le blanc à sa droite, et c'est voulu.
+// Réduire le viewBox pour le rattraper changerait les proportions du
+// verrouillage, ce que l'interdit du § 07 refuse.
 //
 // version :
 //   principal     → sur papier : flux au profond, cadre et mot au pivot
@@ -74,24 +89,72 @@ const a11y = decoratif
       <path class={couleurs.trait} stroke-linejoin="miter" d="M3.5,42 V3.5 H76.5 V42 M76.5,66 V76.5 H3.5 V66" />
       <path class={couleurs.flux} stroke-linecap="round" stroke-linejoin="round" d="M-3,54 H26 V26 H54 V54 H83" />
     </g>
+    {/* AMENDEMENT A15 — l'approche du mot, resserrée de 11 à 8 unités.
+        Les translate ne sont pas choisis un par un : ils dérivent de l'écart `g`
+        par T = 24 + g, 2 = 50 + 2g, E = 74 + 3g, la largeur d'encre du mot valant
+        98 + 3g. g = 11 redonnerait 35 / 72 / 107 et les 131,0 unités de la charte ;
+        g = 8 donne 32 / 66 / 98 et 122,0 — soit − 6,9 %.
+        Les trois écarts restent égaux entre eux, comme dans le dessin d'origine.
+        Ce qui le permet : le « 2 » est au trait quand F, T et E sont pleins, mais
+        son groupe ne déclare AUCUN stroke-linecap — la valeur par défaut est
+        `butt`, sa barre s'arrête net à 0 et à 24, et l'arc déborde vers l'intérieur
+        de sa boîte. NE PAS y ajouter de linecap : les écarts deviendraient
+        inégaux de 3,5 unités de part et d'autre du 2, sans que rien ne le dise. */}
     <g transform="translate(104,16)">
       <path class={couleurs.aplat} d="M0,0 H24 V7 H7 V17.5 H19 V24.5 H7 V40 H0 Z" />
-      <path class={couleurs.aplat} transform="translate(35,0)" d="M0,0 H26 V7 H16.5 V40 H9.5 V7 H0 Z" />
-      <g transform="translate(72,0)" fill="none" class={couleurs.flux} stroke-width="7">
+      <path class={couleurs.aplat} transform="translate(32,0)" d="M0,0 H26 V7 H16.5 V40 H9.5 V7 H0 Z" />
+      <g transform="translate(66,0)" fill="none" class={couleurs.flux} stroke-width="7">
         <path d="M3.5,12 A8.5,8.5 0 0 1 20.5,12 C20.5,19 17,27.5 3,36.5" />
         <path d="M0,36.5 H24" />
       </g>
-      <path class={couleurs.aplat} transform="translate(107,0)" d="M0,0 H24 V7 H7 V16.5 H18 V23.5 H7 V33 H24 V40 H0 Z" />
+      <path class={couleurs.aplat} transform="translate(98,0)" d="M0,0 H24 V7 H7 V16.5 H18 V23.5 H7 V33 H24 V40 H0 Z" />
     </g>
     {baseline && (
-      <text
-        x="104"
-        y="74"
-        font-family="'IBM Plex Mono', monospace"
-        font-size="8.5"
-        letter-spacing="2.6"
-        class={couleurs.aplat}
-      >BUREAU D’ÉTUDES TECHNIQUES</text>
+      <Fragment>
+        {/* AMENDEMENT A16 — la signature, sur deux lignes JUSTIFIÉES sur l'empan
+            du mot (x = 104 à 226, soit ses 122,0 unités d'encre à g = 8).
+
+            ⚠ Les interlettrages ci-dessous se RECALCULENT, ils ne se retouchent
+            pas à l'œil. En chasse fixe, l'encre d'une ligne est affine en
+            l'interlettrage : encre(s) = encre(0) + (n − 1) · s, où n est le nombre
+            de SIGNES, espace comprise. D'où, pour couvrir l'empan W :
+                s = (W − encre(0)) / (n − 1)
+            Mesuré dans la police réellement chargée, à 8,5 :
+                BUREAU FLUIDES  n = 14  encre(0) = 72,3  →  s = 3,823
+                ET THERMIQUE    n = 12  encre(0) = 61,1  →  s = 5,536
+            Deux lignes de longueurs différentes donnent donc deux interlettrages
+            différents — la charte n'en prescrivait qu'un, 2,6. C'est l'objet même
+            de l'amendement ; changer un mot de la signature oblige à refaire ce
+            calcul, jamais à ajuster la valeur jusqu'à ce que « ça tombe bien ».
+
+            ⚠ Et l'encre ne se mesure PAS avec getBBox() sur un <text> : cette
+            boîte inclut l'espace traînant après la dernière lettre (vérifié — un
+            signe unique y grandit d'autant que l'interlettrage). Les 200,2 et
+            107,8 des relevés antérieurs sont des largeurs d'approche, pas d'encre.
+            Le contour réel passe par actualBoundingBoxLeft/Right du Canvas.
+
+            Les lignes de base à 68 et 79,5 ne sont pas arbitraires non plus :
+            la hauteur de capitale d'IBM Plex Mono vaut 0,698 em, soit 5,93 à 8,5.
+            Le bloc s'étend donc de 62,07 à 79,5, de centre optique 70,8 — celui
+            de la ligne unique de la charte à y = 74 (68,07 → 74, centre 71,0).
+            La signature n'a pas bougé de place ; elle s'est dépliée autour d'elle. */}
+        <text
+          x="104"
+          y="68"
+          font-family="'IBM Plex Mono', monospace"
+          font-size="8.5"
+          letter-spacing="3.823"
+          class={couleurs.aplat}
+        >BUREAU FLUIDES</text>
+        <text
+          x="104"
+          y="79.5"
+          font-family="'IBM Plex Mono', monospace"
+          font-size="8.5"
+          letter-spacing="5.536"
+          class={couleurs.aplat}
+        >ET THERMIQUE</text>
+      </Fragment>
     )}
   </svg>
 )}

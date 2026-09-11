@@ -2,7 +2,7 @@
 
 **Scope** : tout fichier utilisant Tailwind (`.astro`, `.tsx`, `.html`).
 
-**Référence** : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026), bundle `branding-v3-bis/` — remplace la révision 2 (`branding-v3/`) et la révision 1 (`branding-v2/`). La 2.1 conserve la structure de la 2 et corrige **huit prescriptions** consignées à son § 16 (registre des amendements) : elles sont reportées ci-dessous sous les repères A1 à A8. **A9 à A14 s'y ajoutent, qui ne viennent pas du PDF** : ce sont des amendements d'application, arbitrés ici (A9 le 2026-08-15, index des références en grille de cartes ; A10 le 2026-08-25, ouverture de tranche de la coupe des secteurs ; A11 à A14 le 2026-08-27, l'infléchissement motion demandé par FT2E — révélation ample et cascade, voile des clichés-liens, transitions de pages, compteur du relevé). Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
+**Référence** : « FT2E Charte graphique » document 10 · **révision 2.1** (08.2026), bundle `branding-v3-bis/` — remplace la révision 2 (`branding-v3/`) et la révision 1 (`branding-v2/`). La 2.1 conserve la structure de la 2 et corrige **huit prescriptions** consignées à son § 16 (registre des amendements) : elles sont reportées ci-dessous sous les repères A1 à A8. **A9 à A16 s'y ajoutent, qui ne viennent pas du PDF** : ce sont des amendements d'application, arbitrés ici (A9 le 2026-08-15, index des références en grille de cartes ; A10 le 2026-08-25, ouverture de tranche de la coupe des secteurs ; A11 à A14 le 2026-08-27, l'infléchissement motion demandé par FT2E — révélation ample et cascade, voile des clichés-liens, transitions de pages, compteur du relevé ; A15 et A16 le 2026-09-11, le monogramme repris sur demande client — approche du mot et signature). ⚠ **A15 et A16 ne corrigent aucune dérive** : le dessin qu'ils amendent était la transcription exacte du § 07. Spec d'application : `docs/superpowers/specs/2026-08-06-ft2e-charte-v3-plans-profondeur.md`.
 
 **Autorité** : en cas de contradiction entre la charte et un support existant, la charte prévaut. En cas de contradiction interne à la charte, **la mesure prévaut sur la règle**.
 
@@ -68,7 +68,7 @@ Sept rangs, pas huit. Chacun se distingue du précédent par **au moins deux par
 - **Substitution** (gabarit imposé, courrier bureautique) : **Arial** en normale ou grasse, sans variation de chasse ; **Consolas** ou **Menlo** pour le mono. Aucune autre, et **aucun serif**.
 - `.type-annexe` (chasse 72) a été **supprimé** : la 2.1 ne compte que sept rangs, et la hiérarchie passe par la graisse et l'opacité.
 
-## Les amendements — huit de la charte (§ 16), six d'application (A9 à A14)
+## Les amendements — huit de la charte (§ 16), huit d'application (A9 à A16)
 
 | № | Objet | Révision 2 | Révision 2.1 — ce qui s'applique |
 |---|---|---|---|
@@ -228,6 +228,140 @@ Le survol est une bascule de valeur **dans la rampe**, jamais une couleur nouvel
 Implantation : `initCompteurs` (`src/pages/index.astro`), courbe unique évaluée
 numériquement.
 
+### A15 — l'approche du mot F T 2 E (2026-09-11)
+
+**A15 est, comme A9 à A14, un amendement d'application** — mais il se distingue
+de tous les précédents sur un point qu'il faut avoir en tête avant d'y toucher :
+les autres corrigeaient une prescription devenue fausse (A9 visait une vignette
+disparue) ou comblaient un silence de la charte (A4, A5). **Celui-ci, non.** Le
+dessin en place était la **transcription exacte** du § 07 — vérifié chemin par
+chemin contre `branding-v3-bis/FT2E-charte-graphique-rev2.1-source.html`. FT2E
+demande un changement de la charte, en connaissance de cause.
+
+| № | Objet | Révision 2.1 | Ce qui s'applique |
+|---|---|---|---|
+| A15 | Approche du mot | écarts de 11,0 unités — `translate` 35 / 72 / 107, mot 131,0 | **écarts de 8,0 unités** — `translate` 32 / 66 / 98, mot **122,0** (− 6,9 %) |
+
+**Les trois `translate` ne se saisissent pas un par un : ils dérivent.** L'écart
+`g` est la seule variable du mot, et tout en découle :
+
+```
+T  →  translate(24 + g, 0)
+2  →  translate(50 + 2g, 0)
+E  →  translate(74 + 3g, 0)
+largeur d'encre du mot  =  98 + 3g
+```
+
+`g = 11` redonne le dessin de la charte, `g = 8` celui qui s'applique. Toute
+reprise de l'approche passe par cette formule — **jamais par un
+`letter-spacing`** : « le mot est dessiné, jamais composé », et le § 07 en fait
+un interdit nommé.
+
+⚠ **Ce qui rend `g` légitime, et qu'un refactor peut détruire sans un mot.** Les
+trois écarts sont égaux *à l'encre* alors que le « 2 » est tracé au trait quand
+F, T et E sont pleins. Un trait déborde normalement de la moitié de son épaisseur,
+soit 3,5 unités de chaque côté — les écarts autour du 2 vaudraient alors 7,5 et
+non 11, et les resserrer uniformément les refermerait à 4,5. Si ce n'est pas le
+cas, c'est que **le groupe du 2 ne déclare aucun `stroke-linecap`** : la valeur
+par défaut SVG est `butt`, sa barre s'arrête net à 0 et à 24, et l'arc — dont la
+tangente est verticale à ses extrémités — déborde vers l'*intérieur* de sa boîte.
+**Ne jamais ajouter de `stroke-linecap` à ce groupe**, ni l'uniformiser avec le
+flux du cadre, qui est en `round` et doit le rester.
+
+⚠ **Le verrouillage ne bouge pas : 330 × 90.** La charte le prescrit pour
+« marque + mot » comme pour « marque + mot + signature ». Le mot rétréci ne
+rétrécit donc pas la boîte — **il augmente le blanc à sa droite**, et les deux
+appels emploient `w-auto`. Mesuré au rendu : 4,4 px de blanc en plus à 44 px de
+haut (navigation), 6,0 px à 60 px (pied). Aucun décalage de mise en page, la
+boîte étant inchangée. **Ne pas réduire le `viewBox` pour rattraper ce blanc** :
+ce serait changer les proportions du verrouillage, ce que l'interdit du § 07
+refuse nommément. Le blanc est voulu.
+
+### A16 — la signature sur deux lignes justifiées (2026-09-11)
+
+| № | Objet | Révision 2.1 | Ce qui s'applique |
+|---|---|---|---|
+| A16 | Signature du verrouillage complet | « BUREAU D'ÉTUDES TECHNIQUES », **une ligne**, mono 8,5, **interlettrage 2,6** | **« BUREAU FLUIDES / ET THERMIQUE »**, deux lignes, mono 8,5, **interlettrage propre à chaque ligne** — justifiées sur l'empan du mot |
+
+Le motif est mesuré, pas ressenti : la signature de la charte faisait **une fois
+et demie la largeur du mot** qu'elle accompagne. Le réglage retenu par FT2E la
+fait couvrir cet empan **exactement**, ni plus ni moins — de `x = 104` à
+`x = 226`, les 122,0 unités du mot à `g = 8`.
+
+**L'interlettrage se recalcule, il ne se retouche pas.** En chasse fixe, l'encre
+d'une ligne est affine en l'interlettrage — `encre(s) = encre(0) + (n − 1)·s`,
+où `n` compte les **signes, espace comprise**. D'où, pour couvrir l'empan `W` :
+
+```
+s = (W − encre(0)) / (n − 1)
+```
+
+| Ligne | n | encre(0) | interlettrage | en em |
+|---|---|---|---|---|
+| BUREAU FLUIDES | 14 | 72,3 | **3,823** | 0,45 |
+| ET THERMIQUE | 12 | 61,1 | **5,536** | 0,65 |
+
+**Deux lignes de longueurs différentes donnent deux interlettrages différents —
+c'est arithmétique, pas négociable**, et c'est ce qui fait de A16 un amendement
+et non un réglage : la charte n'en prescrivait qu'un, 2,6. Corollaire pour qui
+changerait un mot de la signature : **refaire ce calcul**, jamais ajuster la
+valeur jusqu'à ce que « ça tombe bien ». Et c'est la ligne la plus **courte** qui
+s'ouvre le plus, à rebours de l'intuition.
+
+⚠ **L'encre ne se mesure pas avec `getBBox()` sur un `<text>`.** Cette boîte est
+celle des **approches**, espace traînant après la dernière lettre compris —
+vérifié par sonde témoin : un signe unique y grandit exactement d'autant que
+l'interlettrage. Une signature calée sur cette mesure finirait 4 à 6 unités trop
+courte, et rien ne le signalerait. Le contour réel passe par
+`actualBoundingBoxLeft/Right` du Canvas. **Les largeurs publiées avant le
+2026-09-11 — 200,2 pour la signature de la charte, 107,8 pour « BUREAU
+FLUIDES » — sont des largeurs d'approche** : elles classent correctement les
+candidats, elles ne servent pas à aligner un bord sur un autre.
+
+**Les lignes de base sont dérivées elles aussi**, à 68 et 79,5. La hauteur de
+capitale d'IBM Plex Mono vaut 0,698 em, soit 5,93 à 8,5 : le bloc s'étend de
+62,07 à 79,5, de centre optique **70,8** — celui de la ligne unique de la charte
+à `y = 74`, qui allait de 68,07 à 74, centre **71,0**. La signature n'a pas
+changé de place ; elle s'est dépliée autour d'elle. L'interligne de 11,5 laisse
+5,57 entre le pied d'une ligne et la tête de la suivante, ce qu'appelle un
+interlettrage de cette ouverture.
+
+**Ce que A16 ne touche pas, et c'est une décision.** La formule vit à six
+endroits du dépôt, répartis en deux couches : **une signature nomme, une
+description explique.** Seule la première change.
+
+| Emplacement | Couche | État |
+|---|---|---|
+| `Logo.astro` — le `<text>` dessiné | signature | **changé** |
+| `Logo.astro` — l'`aria-label` du monogramme | signature | **inchangé — non arbitré** |
+| `constants.ts` — `SITE_TAGLINE` | signature | **inchangé — non arbitré** |
+| `constants.ts` — `description` du JSON-LD | description | inchangé, par principe |
+| `constants.ts` — `alternateName` | description | inchangé, par principe |
+| `Footer.astro` et les `description` de pages | description | inchangé, par principe |
+
+« Bureau d'études techniques » reste la requête que les moteurs indexent et que
+`seo-geo.md` fait vivre dans le `LocalBusiness` : la retirer de la couche
+description coûterait du référencement sans rien gagner au dessin.
+
+⚠ **Deux points restent ouverts et attendent FT2E — ne pas les refermer en
+silence.**
+
+1. **L'`aria-label` dit autre chose que le dessin.** Le monogramme porte
+   `role="img"`, donc un lecteur d'écran n'énonce que cet attribut et **jamais**
+   le `<text>` dessiné : un visiteur aveugle entend « bureau d'études techniques »
+   là où un visiteur voyant lit « BUREAU FLUIDES ET THERMIQUE ». Les deux nomment
+   la même société, ce n'est pas un défaut bloquant — c'est un arbitrage (portée
+   de A16) qui n'a pas été rendu.
+2. **Le périmètre annoncé rétrécit.** Le site présente quatre expertises et sept
+   secteurs, dont **Électricité**, **Coordination SSI** et **Études d'exécution /
+   BIM** ; le pied de page dit « Fluides, thermique, électricité, SSI, BIM » et
+   quarante-sept fiches le démontrent — IRVE, courants faibles, SSI de catégorie A,
+   maquette Revit. Une signature qui n'annonce que les fluides et la thermique
+   **dit moins que le site ne montre**. C'est un arbitrage de positionnement,
+   porté à FT2E, et la couche description le compense aujourd'hui. Si FT2E veut
+   un jour aligner les deux couches, c'est **la description qui décidera**, pas
+   le dessin.
+
 **Implantation de la légende et des équerres (§ 13)** — la charte veut la légende **en bas à gauche** *et* les équerres intactes (« repère de tirage, jamais un encadrement ») : les deux ne peuvent pas se disputer l'angle. La géométrie tranche, et elle est **dérivée**, jamais réglée à l'œil. Les jetons `--equerre-cote` (18 px) et `--equerre-retrait` (5 px) donnent `--equerre-gouttiere` (28 px), dont découlent à la fois les quatre équerres de `CoinsCuivre` et la recette `.legende-media` :
 
 - **horizontalement** : `left: gouttière`, `max-width: 100% − 2 × gouttière` — les deux équerres basses sont dégagées quelle que soit la longueur de la légende, qui déborde vers le haut, où aucune équerre ne l'attend ;
@@ -274,7 +408,7 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
 - **Planche de fiche** (`PlancheReference.astro`) : le dessin est **présent à toutes les largeurs** depuis le 2026-08-15 — il ne cède plus la place à sa lecture sous `lg`. Trois compositions distinctes, une par bande, **plafonnées à leur taille de conception et centrées**, jamais étirées : `planche.svg` (1200 × 800) au-dessus de **880 px**, `appui.svg` (552 × 368) de **480 à 879**, `vignette.svg` (300 × 200) en dessous de **480**. Les bornes viennent du **plancher de lisibilité du mono, 6,5 px** (mono minimal mesuré sur les 23 dossiers : 10 / 10 / 9 px), **pas de la grille Tailwind** — elles s'écrivent en `@media` dans le `<style>` du composant. **Aucune échelle au-dessus de 1,00** : la sur-échelle épaissit les filets de 1 px, c'est le défaut fondateur du dispositif. **La figure est le dessin, son cartouche et l'agrandissement — rien d'autre** : le repli de lecture textuel a été supprimé le 2026-08-15, parce qu'il s'intercalait entre l'illustration et le contenu réel de la page (jusqu'à 1 181 px de valeurs synthétiques avant le premier mot du sujet). L'équivalent textuel passe par `role="img"` + `aria_label` sur la vignette, qui est `aria-hidden` à la source. L'agrandissement est proposé à toutes les largeurs et prend **deux états sous 940 px** — ajusté à l'ouverture, puis 860 px pour lire, avec parcours au doigt. Détail et mesures : `docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`.
 - **Média du hero de l'accueil** (`src/pages/index.astro`, slot `media` de `Hero.astro`) : depuis le 2026-08-26, un **cliché du corpus secteurs** (« Aurora, 147 logements », arbitrage FT2E — l'appui de la fiche vedette, plan posé blanc sur papier tramé, « flottait dans le vide ») aux trois signatures média : duotone 197°, équerres voile, cartouche de réserve (A8). Rapport 3:2, colonne de **7/12** (l'accroche tient dans 5 — elle est bornée à 46ch), lien vers `/references/?secteur=…` au motif du cliché principal de la coupe, **bureau seul (≥ 1 024 px)** — arbitrage LCP du 2026-08-27 : affiché au téléphone, le cliché devenait l'élément LCP mobile et coûtait 150–200 ms (7 tirs, 1 823–2 013 ms pour un budget de 1 800) ; masqué sous `lg`, le hero mobile redevient textuel et le LCP revient à son état « au seuil ». `eager` + `fetchpriority="high"` : candidat LCP au bureau — se mesure sur le déploiement après tout changement. La légende, l'alt et le crédit sont relus depuis la collection secteurs (une seule source, échec bruyant si le cliché quitte le corpus). Le plafond `.appui-hero` (552 px) est parti avec l'appui : il protégeait les filets de 1 px d'un dessin contre la sur-échelle — la règle du plafond porte sur le dessin, elle survit partout où un dessin est servi (`CarteProjet`, `PlancheReference`).
 - **Relevé encré** (fiche projet) : `.plan-encre`, chiffres `.releve-chiffre text-voile`, étiquettes `mono-label text-clair` — la réserve profonde de l'écran.
-- **Monogramme** (`Logo.astro`) : dessin inchangé (cadre ouvert + flux débordant) ; **hauteur minimale 28 px** à l'écran ; sous 180 px de place : `forme="cadre"`. Ne se déforme pas, ne reçoit ni ombre ni contour ; le débord ne se recadre jamais.
+- **Monogramme** (`Logo.astro`) : cadre ouvert + flux débordant, **amendé le 2026-09-11** — approche du mot à 8 unités d’écart (`translate` 32 / 66 / 98, **A15**) et signature « BUREAU FLUIDES / ET THERMIQUE » sur deux lignes justifiées sur l’empan du mot (**A16**). Verrouillage **330 × 90 inchangé** : le mot resserré augmente le blanc à sa droite, et c’est voulu. **Hauteur minimale 28 px** à l'écran ; sous 180 px de place : `forme="cadre"`. Ne se déforme pas, ne reçoit ni ombre ni contour ; le débord ne se recadre jamais.
 - **Équerres** (`CoinsCuivre.astro`) : 4 équerres 1 px au voile, **18 px de côté**, en retrait de 5 px dans les angles du média. Repère de tirage, pas un encadrement — jamais de cadre autour d'une image.
 - **Images** : tout passe au duotone 197° (point noir `#001718`, point blanc `#E1F4F4`, gamma neutre) via `duotone-photo` / `duotone-media` (hachure placeholder). Jamais de couleurs natives, **deux annotations mono au maximum par image**. Toute **légende** se pose dans un cartouche de réserve `.cartouche-legende` (voile sur profond, 16,24) et jamais à même le cliché (amendement A8) ; les équerres restent en voile sur l'image.
 
