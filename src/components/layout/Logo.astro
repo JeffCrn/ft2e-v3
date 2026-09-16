@@ -9,8 +9,8 @@
 // pas une dérive : deux amendements d'application le gouvernent, consignés au
 // registre de `.claude/rules/tailwind-design-tokens.md`, qui fait foi.
 //   A15 — l'approche du mot, de 11 à 8 unités d'écart (translates 32 / 66 / 98).
-//   A16 — la signature, « BUREAU FLUIDES / ET THERMIQUE » sur deux lignes
-//         justifiées sur l'empan du mot.
+//   A16 — la signature, « BET FLUIDES / ET THERMIQUE » sur deux lignes
+//         justifiées sur l'empan du mot (libellé arrêté le 2026-09-16).
 // Ne pas « corriger » ces valeurs vers le PDF de la charte : c'est la charte
 // qui a changé. Le détail du calcul est en regard de chaque bloc ci-dessous.
 //
@@ -120,12 +120,19 @@ const a11y = decoratif
             de SIGNES, espace comprise. D'où, pour couvrir l'empan W :
                 s = (W − encre(0)) / (n − 1)
             Mesuré dans la police réellement chargée, à 8,5 :
-                BUREAU FLUIDES  n = 14  encre(0) = 72,3  →  s = 3,823
-                ET THERMIQUE    n = 12  encre(0) = 61,1  →  s = 5,536
+                BET FLUIDES   n = 11  encre(0) = 57,0  →  s = 6,500  (0,765 em)
+                ET THERMIQUE  n = 12  encre(0) = 61,1  →  s = 5,536  (0,651 em)
             Deux lignes de longueurs différentes donnent donc deux interlettrages
             différents — la charte n'en prescrivait qu'un, 2,6. C'est l'objet même
             de l'amendement ; changer un mot de la signature oblige à refaire ce
             calcul, jamais à ajuster la valeur jusqu'à ce que « ça tombe bien ».
+
+            Et c'est la ligne la plus COURTE qui s'ouvre le plus, à rebours de
+            l'intuition : onze signes sur l'empan de douze en demandent davantage.
+            Le libellé retenu le 2026-09-16 tire parti de cette mécanique — ses
+            deux lignes ne diffèrent que d'un rapport 1,17, contre 1,45 pour le
+            « BUREAU FLUIDES » de la première pose, qui était moins ouvert mais
+            plus inégal d'une ligne à l'autre.
 
             ⚠ Et l'encre ne se mesure PAS avec getBBox() sur un <text> : cette
             boîte inclut l'espace traînant après la dernière lettre (vérifié — un
@@ -143,9 +150,9 @@ const a11y = decoratif
           y="68"
           font-family="'IBM Plex Mono', monospace"
           font-size="8.5"
-          letter-spacing="3.823"
+          letter-spacing="6.5"
           class={couleurs.aplat}
-        >BUREAU FLUIDES</text>
+        >BET FLUIDES</text>
         <text
           x="104"
           y="79.5"

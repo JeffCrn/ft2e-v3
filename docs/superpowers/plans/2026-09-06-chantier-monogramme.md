@@ -533,7 +533,7 @@ répondus et deux laissés ouverts) :
 | № | Question | Réponse |
 |---|---|---|
 | **A** | Valeur de `g` | **8** — `translate` 32 / 66 / 98, mot à 122,0 unités (− 6,9 %) |
-| **B** | Libellé | **BUREAU FLUIDES / ET THERMIQUE** |
+| **B** | Libellé | **BET FLUIDES / ET THERMIQUE** — arrêté le 2026-09-16, après une première pose en « BUREAU FLUIDES » le 2026-09-11 |
 | **C** | Une ligne ou deux | **deux**, et **justifiées** sur l'empan du mot |
 | **D** | Graphie | « BUREAU », pas « BET » ; « THERMIQUE » au singulier ; pas d'esperluette |
 | **E** | Portée | ⚠ **non rendu** — voir § 8.3 |
@@ -618,7 +618,19 @@ n'annonce plus que les fluides et la thermique. **C'est aujourd'hui la couche
 description qui porte le périmètre complet.** Si FT2E veut un jour aligner les
 deux couches, c'est la description qui décidera, pas le dessin.
 
-**c) Une divergence de source, tranchée par le texte.** La réponse de FT2E nomme
+**c) ✅ RÉSERVE LEVÉE le 2026-09-16 — le libellé est arrêté à « BET FLUIDES /
+ET THERMIQUE ».** L'utilisateur a confirmé « BET » *et* le pluriel de
+« FLUIDES ». Les interlettrages ont été recalculés — **6,500 et 5,536**, et non
+3,823 et 5,536 — conformément à A16 : changer un mot oblige à refaire le calcul.
+Gain incident, mesuré : les deux lignes ne diffèrent plus que d'un rapport
+**1,17** contre **1,45** à la première pose, parce que onze signes et douze
+s'ouvrent de façon plus voisine que quatorze et douze. Le dessin est plus
+homogène, au prix d'un interlettrage plus large.
+
+Ce qui suit est conservé pour mémoire, parce qu'il explique pourquoi la
+première pose avait porté « BUREAU ».
+
+**La divergence de source, tranchée le 2026-09-11 par le texte.** La réponse de FT2E nomme
 « Bureau, deux lignes » avec ses mesures (107,8 · 92,4), tandis que l'image
 annotée qui l'accompagnait montrait « **BET** FLUIDES / ET THERMIQUE ». Le texte
 étant explicite et chiffré, et l'annotation portant sur la *composition*

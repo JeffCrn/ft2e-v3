@@ -281,7 +281,7 @@ refuse nommément. Le blanc est voulu.
 
 | № | Objet | Révision 2.1 | Ce qui s'applique |
 |---|---|---|---|
-| A16 | Signature du verrouillage complet | « BUREAU D'ÉTUDES TECHNIQUES », **une ligne**, mono 8,5, **interlettrage 2,6** | **« BUREAU FLUIDES / ET THERMIQUE »**, deux lignes, mono 8,5, **interlettrage propre à chaque ligne** — justifiées sur l'empan du mot |
+| A16 | Signature du verrouillage complet | « BUREAU D’ÉTUDES TECHNIQUES », **une ligne**, mono 8,5, **interlettrage 2,6** | **« BET FLUIDES / ET THERMIQUE »**, deux lignes, mono 8,5, **interlettrage propre à chaque ligne** — justifiées sur l’empan du mot |
 
 Le motif est mesuré, pas ressenti : la signature de la charte faisait **une fois
 et demie la largeur du mot** qu'elle accompagne. Le réglage retenu par FT2E la
@@ -298,15 +298,32 @@ s = (W − encre(0)) / (n − 1)
 
 | Ligne | n | encre(0) | interlettrage | en em |
 |---|---|---|---|---|
-| BUREAU FLUIDES | 14 | 72,3 | **3,823** | 0,45 |
-| ET THERMIQUE | 12 | 61,1 | **5,536** | 0,65 |
+| BET FLUIDES | 11 | 57,0 | **6,500** | 0,765 |
+| ET THERMIQUE | 12 | 61,1 | **5,536** | 0,651 |
 
 **Deux lignes de longueurs différentes donnent deux interlettrages différents —
 c'est arithmétique, pas négociable**, et c'est ce qui fait de A16 un amendement
 et non un réglage : la charte n'en prescrivait qu'un, 2,6. Corollaire pour qui
 changerait un mot de la signature : **refaire ce calcul**, jamais ajuster la
-valeur jusqu'à ce que « ça tombe bien ». Et c'est la ligne la plus **courte** qui
-s'ouvre le plus, à rebours de l'intuition.
+valeur jusqu'à ce que « ça tombe bien ». Et c’est la ligne la plus **courte** qui
+s’ouvre le plus, à rebours de l’intuition — onze signes sur l’empan de douze en
+demandent davantage.
+
+**Le libellé a été arrêté en deux temps, et la mécanique ci-dessus a servi à
+l’arbitrage.** La première pose du 2026-09-11 portait « BUREAU FLUIDES / ET
+THERMIQUE » : interlettrages de 3,823 et 5,536, donc plus proches de la normale,
+mais d’un rapport de **1,45** entre les deux lignes — l’inégalité se voyait. Le
+libellé retenu le **2026-09-16** est plus ouvert (0,765 et 0,651 em) mais ses
+deux lignes ne diffèrent que de **1,17**. On choisit entre deux lignes d’aspect
+homogène mais très ouvertes, et deux lignes plus normalement composées mais
+d’ouvertures inégales : c’est le prix de la justification en chasse fixe, et il
+se paie d’un côté ou de l’autre.
+
+⚠ **« BET » et non « bureau », « FLUIDES » et non « fluide ».** `french-editorial.md`
+valide déjà la graphie **BET** ; et le site écrit la discipline au pluriel **69
+fois contre 11** — les onze singuliers désignant tous un fluide *physique*
+(caloporteur, R32, aval), jamais le métier. Un « BET FLUIDE » serait le seul
+singulier de métier du site, et se lirait comme le fluide.
 
 ⚠ **L'encre ne se mesure pas avec `getBBox()` sur un `<text>`.** Cette boîte est
 celle des **approches**, espace traînant après la dernière lettre compris —
@@ -332,7 +349,7 @@ description explique.** Seule la première change.
 
 | Emplacement | Couche | État |
 |---|---|---|
-| `Logo.astro` — le `<text>` dessiné | signature | **changé** |
+| `Logo.astro` — le `<text>` dessiné | signature | **changé** (libellé arrêté le 2026-09-16) |
 | `Logo.astro` — l'`aria-label` du monogramme | signature | **inchangé — non arbitré** |
 | `constants.ts` — `SITE_TAGLINE` | signature | **inchangé — non arbitré** |
 | `constants.ts` — `description` du JSON-LD | description | inchangé, par principe |
@@ -349,7 +366,7 @@ silence.**
 1. **L'`aria-label` dit autre chose que le dessin.** Le monogramme porte
    `role="img"`, donc un lecteur d'écran n'énonce que cet attribut et **jamais**
    le `<text>` dessiné : un visiteur aveugle entend « bureau d'études techniques »
-   là où un visiteur voyant lit « BUREAU FLUIDES ET THERMIQUE ». Les deux nomment
+   là où un visiteur voyant lit « BET FLUIDES ET THERMIQUE ». Les deux nomment
    la même société, ce n'est pas un défaut bloquant — c'est un arbitrage (portée
    de A16) qui n'a pas été rendu.
 2. **Le périmètre annoncé rétrécit.** Le site présente quatre expertises et sept
@@ -408,7 +425,7 @@ L'ombre est toujours de l'encre translucide, **jamais du noir**. Aucun flou > 70
 - **Planche de fiche** (`PlancheReference.astro`) : le dessin est **présent à toutes les largeurs** depuis le 2026-08-15 — il ne cède plus la place à sa lecture sous `lg`. Trois compositions distinctes, une par bande, **plafonnées à leur taille de conception et centrées**, jamais étirées : `planche.svg` (1200 × 800) au-dessus de **880 px**, `appui.svg` (552 × 368) de **480 à 879**, `vignette.svg` (300 × 200) en dessous de **480**. Les bornes viennent du **plancher de lisibilité du mono, 6,5 px** (mono minimal mesuré sur les 23 dossiers : 10 / 10 / 9 px), **pas de la grille Tailwind** — elles s'écrivent en `@media` dans le `<style>` du composant. **Aucune échelle au-dessus de 1,00** : la sur-échelle épaissit les filets de 1 px, c'est le défaut fondateur du dispositif. **La figure est le dessin, son cartouche et l'agrandissement — rien d'autre** : le repli de lecture textuel a été supprimé le 2026-08-15, parce qu'il s'intercalait entre l'illustration et le contenu réel de la page (jusqu'à 1 181 px de valeurs synthétiques avant le premier mot du sujet). L'équivalent textuel passe par `role="img"` + `aria_label` sur la vignette, qui est `aria-hidden` à la source. L'agrandissement est proposé à toutes les largeurs et prend **deux états sous 940 px** — ajusté à l'ouverture, puis 860 px pour lire, avec parcours au doigt. Détail et mesures : `docs/superpowers/specs/2026-08-16-responsive-planches-fiches.md`.
 - **Média du hero de l'accueil** (`src/pages/index.astro`, slot `media` de `Hero.astro`) : depuis le 2026-08-26, un **cliché du corpus secteurs** (« Aurora, 147 logements », arbitrage FT2E — l'appui de la fiche vedette, plan posé blanc sur papier tramé, « flottait dans le vide ») aux trois signatures média : duotone 197°, équerres voile, cartouche de réserve (A8). Rapport 3:2, colonne de **7/12** (l'accroche tient dans 5 — elle est bornée à 46ch), lien vers `/references/?secteur=…` au motif du cliché principal de la coupe, **bureau seul (≥ 1 024 px)** — arbitrage LCP du 2026-08-27 : affiché au téléphone, le cliché devenait l'élément LCP mobile et coûtait 150–200 ms (7 tirs, 1 823–2 013 ms pour un budget de 1 800) ; masqué sous `lg`, le hero mobile redevient textuel et le LCP revient à son état « au seuil ». `eager` + `fetchpriority="high"` : candidat LCP au bureau — se mesure sur le déploiement après tout changement. La légende, l'alt et le crédit sont relus depuis la collection secteurs (une seule source, échec bruyant si le cliché quitte le corpus). Le plafond `.appui-hero` (552 px) est parti avec l'appui : il protégeait les filets de 1 px d'un dessin contre la sur-échelle — la règle du plafond porte sur le dessin, elle survit partout où un dessin est servi (`CarteProjet`, `PlancheReference`).
 - **Relevé encré** (fiche projet) : `.plan-encre`, chiffres `.releve-chiffre text-voile`, étiquettes `mono-label text-clair` — la réserve profonde de l'écran.
-- **Monogramme** (`Logo.astro`) : cadre ouvert + flux débordant, **amendé le 2026-09-11** — approche du mot à 8 unités d’écart (`translate` 32 / 66 / 98, **A15**) et signature « BUREAU FLUIDES / ET THERMIQUE » sur deux lignes justifiées sur l’empan du mot (**A16**). Verrouillage **330 × 90 inchangé** : le mot resserré augmente le blanc à sa droite, et c’est voulu. **Hauteur minimale 28 px** à l'écran ; sous 180 px de place : `forme="cadre"`. Ne se déforme pas, ne reçoit ni ombre ni contour ; le débord ne se recadre jamais.
+- **Monogramme** (`Logo.astro`) : cadre ouvert + flux débordant, **amendé le 2026-09-11** — approche du mot à 8 unités d’écart (`translate` 32 / 66 / 98, **A15**) et signature « BET FLUIDES / ET THERMIQUE » sur deux lignes justifiées sur l’empan du mot (**A16**). Verrouillage **330 × 90 inchangé** : le mot resserré augmente le blanc à sa droite, et c’est voulu. **Hauteur minimale 28 px** à l'écran ; sous 180 px de place : `forme="cadre"`. Ne se déforme pas, ne reçoit ni ombre ni contour ; le débord ne se recadre jamais.
 - **Équerres** (`CoinsCuivre.astro`) : 4 équerres 1 px au voile, **18 px de côté**, en retrait de 5 px dans les angles du média. Repère de tirage, pas un encadrement — jamais de cadre autour d'une image.
 - **Images** : tout passe au duotone 197° (point noir `#001718`, point blanc `#E1F4F4`, gamma neutre) via `duotone-photo` / `duotone-media` (hachure placeholder). Jamais de couleurs natives, **deux annotations mono au maximum par image**. Toute **légende** se pose dans un cartouche de réserve `.cartouche-legende` (voile sur profond, 16,24) et jamais à même le cliché (amendement A8) ; les équerres restent en voile sur l'image.
 
