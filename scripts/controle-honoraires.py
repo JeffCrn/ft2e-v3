@@ -7,6 +7,12 @@
 # une conformité qu'on n'a pas mesurée.
 import io, os, re, sys, glob
 
+# La sortie porte des accents et des symboles : sans cela le script echoue
+# sur cp1252 avec UnicodeEncodeError, et un controle qui plante selon
+# l'environnement n'est pas un controle. Ne pas dependre de PYTHONIOENCODING.
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MONTANT = re.compile(r'\d[\d\u00a0\u202f\u2009 ]*[,.]?\d*\s*(?:€|&#8364;|&euro;)')
 TAUX = re.compile(r'taux[^.;]{0,40}?\d+[,.]?\d*\s*%', re.I)
