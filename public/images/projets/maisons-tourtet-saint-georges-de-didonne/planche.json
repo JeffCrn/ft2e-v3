@@ -283,7 +283,7 @@
   ],
   "exclusions_appliquees": [
     "Numéro d’affaire 19-033 (champ reference) — il encode le volume annuel d’affaires du bureau.",
-    "Montants : l’estimation de maîtrise d’œuvre (1 589 790 € HT), nos deux lots (255 677 € HT, dont 159 806 en plomberie-chauffage-ventilation et 95 871 en électricité) — cités par la fiche, jamais au dessin.",
+    "Tout montant, de travaux comme d’honoraires : aucune donnée commerciale n’est portée au dessin — ni montant de travaux, ni estimation de lot, ni honoraires, ni taux de mission.",
     "Noms de tiers : la maîtrise d’ouvrage, l’architecte, le certificateur, le fabricant et les références commerciales de la chaudière et des caissons de ventilation, les deux entreprises titulaires, l’organisme de qualification de la pose photovoltaïque — le dessin ne nomme que des grandeurs.",
     "Toute géométrie d’ouvrage : ni plan, ni façade, ni la bande des dix maisons accolées, ni le profil de la parcelle et de sa nappe — le dessin n’a qu’un axe des temps et une échelle d’écart, et ne reproduit aucune forme.",
     "Les données que la fiche porte déjà et que le mécanisme n’appelle pas : l’équipement (puissance et modulation de la chaudière, rendements, débit d’eau chaude, puissance des caissons, micro-onduleurs, inclinaison et orientation des modules), l’enveloppe poste par poste (épaisseurs d’isolant, coefficients de transmission, ponts thermiques, perméabilité), le terrain et le piézomètre, l’électricité (12 kVA par logement, 76 kVA pour l’opération), le suivi de chantier (visas, visites, comptes rendus, opérations préalables) et les quatorze lots de travaux.",

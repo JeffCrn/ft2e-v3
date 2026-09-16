@@ -57,8 +57,8 @@ Le contrat de maîtrise d’œuvre nous confie une mission de base — avant-pro
 
 ## Le résultat : réception globale prononcée le 18 février 2026
 
-Les trois lots que nous avons conçus et suivis représentent 132 943,94 € HT de travaux : 65 807,61 € pour le lot 09, ventilation, plomberie et sanitaire, 43 617,13 € pour le lot 10, électricité courants forts et courants faibles, 23 519,20 € pour le lot 11b, photovoltaïque. L’estimation prévisionnelle de l’opération entière, celle qui sert d’assiette aux honoraires, s’élevait à 642 550 € HT.
+Les trois lots que nous avons conçus et suivis représentent 132 943,94 € HT de travaux : 65 807,61 € pour le lot 09, ventilation, plomberie et sanitaire, 43 617,13 € pour le lot 10, électricité courants forts et courants faibles, 23 519,20 € pour le lot 11b, photovoltaïque. L’estimation prévisionnelle de l’opération entière s’élevait à 642 550 € HT.
 
-Le marché de maîtrise d’œuvre a été arrêté à 46 906,15 € HT, soit un taux de rémunération de 7,3 %. Notre part, celle des trois lots techniques et de la thermique, s’établit à 10 727,44 € HT. L’étude de faisabilité de 2023, qui a précédé le marché, avait été rémunérée 3 139,01 € HT pour la partie fluides et thermique.
+Au sein de la mission de maîtrise d’œuvre, FT2E porte les trois lots techniques et la thermique. Une étude de faisabilité, en 2023, avait précédé le marché pour cette même partie fluides et thermique.
 
 Les opérations préalables à la réception se sont tenues le 28 janvier 2026. La réception globale des travaux et la levée des réserves ont été prononcées le 18 février 2026 : les épreuves prévues au marché ont été effectuées et jugées concluantes, les dossiers des ouvrages exécutés fournis. Le décompte général définitif du lot électricité a été arrêté le 26 février 2026.

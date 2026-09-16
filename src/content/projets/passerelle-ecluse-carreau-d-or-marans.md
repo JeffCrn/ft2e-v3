@@ -51,7 +51,7 @@ Dernière particularité, arrêtée elle aussi dès la réunion de préparation�
 
 ## Le résultat : trois lots, 715 395 € HT de travaux, chantier en cours
 
-Le tableau de répartition des honoraires du 6 mai 2024 attribue à FT2E 11,5 % de la mission de maîtrise d’œuvre, soit 6 762 € HT sur 58 800 € HT — une mission de base augmentée des [études d’exécution](/secteurs/etudes-execution-bim), hors OPC (ordonnancement, pilotage et coordination), calculée au taux de 8 % sur une enveloppe de travaux estimée à 735 000 € HT.
+La répartition arrêtée le 6 mai 2024 confie l’électricité à FT2E au sein de la mission de maîtrise d’œuvre — une mission de base augmentée des [études d’exécution](/secteurs/etudes-execution-bim), hors OPC (ordonnancement, pilotage et coordination), sur une enveloppe de travaux estimée à 735 000 € HT.
 
 Les marchés notifiés en juin et juillet 2025 sont restés sous cette estimation : 479 473 € HT pour la structure métallique, la serrurerie et la motorisation, 189 922 € HT pour le gros œuvre et la maçonnerie de pierre, 46 000 € HT pour l’électricité, soit 715 395 € HT au total. Le lot que nous avons conçu et que nous suivons représente 6,4 % du montant des travaux.
 

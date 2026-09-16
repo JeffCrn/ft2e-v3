@@ -156,7 +156,7 @@
   ],
   "exclusions_appliquees": [
     "Numéro d’affaire 19-110 (champ reference) — il encode le volume annuel d’affaires du bureau.",
-    "Tous les montants : coût d’objectif 2 076 401 € HT, honoraires du groupement et leur répartition.",
+    "Tout montant, de travaux comme d’honoraires : aucune donnée commerciale n’est portée au dessin — ni montant de travaux, ni estimation de lot, ni honoraires, ni taux de mission.",
     "Tous les tiers : le maître d’ouvrage et son mandataire (CDAIR, SEMDAS — nommés dans la fiche, jamais sur le dessin), l’architecte, le BET structure, l’installateur, les marques des équipements (chaudières, compteurs, réseaux pré-isolés, ballon).",
     "Le millésime d’ouverture (2019) — seul le millésime de livraison paraît, au cartouche.",
     "Toute géométrie de l’ouvrage : ni plan, ni façade, ni implantation — les cellules sont des bandes topologiques d’égale taille."

@@ -28,7 +28,7 @@ Le bâtiment ne partait pourtant pas de rien. Réaménagé en 2014-2015 lors de 
 
 ## Le relevé, puis le calcul
 
-Les deux propositions d’honoraires sont établies le 17 novembre 2025. Le contrat de sous-traitance est signé le 13 mars 2026 et fixe un délai de 25 jours courant du 16. Le premier relevé a lieu le lendemain du départ de ce délai, mardi 17 mars au matin, dans un bâtiment en activité ; une seconde visite suit le 2 avril.
+Les deux propositions de mission sont établies le 17 novembre 2025. Le contrat de sous-traitance est signé le 13 mars 2026 et fixe un délai de 25 jours courant du 16. Le premier relevé a lieu le lendemain du départ de ce délai, mardi 17 mars au matin, dans un bâtiment en activité ; une seconde visite suit le 2 avril.
 
 La mission tient en trois phases — relever, calculer, rapporter — et la première est la plus déterminante : [relever la nature exacte des parois et des vitrages](/expertises/audit-diagnostic). Les murs sont en voile béton doublé de 8,5 cm de laine de verre, pour un coefficient de transmission de 0,354 W/(m²·K). Les planchers hauts, isolés de 10 cm de polyuréthane sous dalle, tiennent à 0,218. Le plancher bas, lui, est une dalle de 18 cm posée sur terre-plein sans isolant : 3,166 W/(m²·K). Les liaisons suivent le même partage — 0,02 W/(m·K) pour un angle de murs extérieurs, 1,10 pour la jonction du mur et du plancher intermédiaire.
 
@@ -52,6 +52,6 @@ Le rapport a été remis le 13 avril 2026. Le bâtiment demande 152 947 W en
 
 La somme brute des maximums de chaque local s’établit, elle, à 154 959 W. Les 2 012 W d’écart ne sont pas une approximation : c’est le foisonnement, la constatation que les salles ne culminent pas à la même heure. Il est faible ici, parce qu’un bâtiment d’enseignement fonctionne de façon très synchrone — un argument de plus pour ne pas compter sur la diversité des usages comme sur une marge.
 
-La prestation, arrêtée à 2 800 € HT, a été constatée achevée le 30 avril 2026. Le procès-verbal signé à Rochefort porte six évaluations, toutes à 5/5, du respect du planning à la qualité du suivi administratif.
+La prestation a été constatée achevée le 30 avril 2026. Le procès-verbal signé à Rochefort porte six évaluations, toutes à 5/5, du respect du planning à la qualité du suivi administratif.
 
-Une seconde proposition d’honoraires accompagnait la première, pour la maîtrise d’œuvre de l’installation elle-même — avant-projet définitif, projet, cahier des charges et dossier de consultation des entreprises. Elle attend sa suite, comme la mission de suivi énergétique proposée à l’[atelier Dufour Yachts, à Périgny](/references/atelier-dufour-yachts-perigny).
+Une seconde proposition de mission accompagnait la première, pour la maîtrise d’œuvre de l’installation elle-même — avant-projet définitif, projet, cahier des charges et dossier de consultation des entreprises. Elle attend sa suite, comme la mission de suivi énergétique proposée à l’[atelier Dufour Yachts, à Périgny](/references/atelier-dufour-yachts-perigny).

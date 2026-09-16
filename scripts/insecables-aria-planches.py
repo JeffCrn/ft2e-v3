@@ -24,9 +24,15 @@ aujourd'hui :
    demande une recette au rendu aux trois tailles. Chantier à part.
 
 3. les champs éditoriaux (`archetype_motif`, `a_valider_ft2e`,
-   `exclusions_appliquees`, `controles*`) — HORS PORTÉE. Ils ne sortent jamais
-   du dépôt : les corriger ne change rien pour personne, et `controles*` est
-   réécrit par `_tronc.executer` à chaque régénération.
+   `exclusions_appliquees`, `controles*`) — HORS PORTÉE POUR CE SCRIPT.
+   ⚠ Mais ils SORTENT du dépôt, contrairement à ce que cette note affirmait
+   jusqu’au 2026-09-16 : `public/` est recopié tel quel dans `dist/`, donc chaque
+   planche.json est téléchargeable à son URL, champs non affichés compris. C’est
+   par là que des montants d’honoraires ont été publiés sans que personne les voie.
+   Ce qui les met hors de portée de CE script est autre chose : un JSON n'est
+   jamais mis en page, donc une insécable n'y empêche aucun rejet en début de
+   ligne — et `controles*` est réécrit par `_tronc.executer` à chaque
+   régénération. La typographie n'y change rien ; le CONTENU, lui, est public.
 
 C'est aussi pourquoi ce script n'a PAS de passe sur `scripts/planches/*.py`, à
 la différence de `apostrophes-planches.py` : un compositeur ne fabrique jamais

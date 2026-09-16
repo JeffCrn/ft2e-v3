@@ -180,7 +180,7 @@
   ],
   "exclusions_appliquees": [
     "Numéro d’affaire 25-097 (champ reference) — il encode le volume annuel d’affaires du bureau.",
-    "Montants : le lot chauffage-ventilation-plomberie à 199 000 € HT, la mission à 2 860 € HT — cités par la fiche, jamais au dessin.",
+    "Tout montant, de travaux comme d’honoraires : aucune donnée commerciale n’est portée au dessin — ni montant de travaux, ni estimation de lot, ni honoraires, ni taux de mission.",
     "Noms de tiers : le promoteur et son groupe (maîtrise d’ouvrage), l’installateur titulaire du lot, le bureau d’études de conception du dossier de consultation, l’architecte — le dessin dit « l’installateur » et « les indices », sans nommer personne.",
     "Données que la fiche porte déjà : le décompte des quinze diffusions, les trois profondeurs d’engravures (30, 40 et 90 mm), la note de déperditions EN 12831 (101 pages, −4 °C), les consommations RE2020 (62,7 et 70,5 kWhep/m²/an), les équipements (gainables multizones appairés, chauffe-eau thermodynamique de 185 litres) — matière du texte de la fiche ou d’autres archétypes, pas de la chronologie.",
     "Toute géométrie d’ouvrage : les niveaux sont des bandes topologiques d’égale hauteur — ni façade, ni plan, ni l’angle des deux rues ; l’empilement code l’ordre des niveaux, jamais leur forme."

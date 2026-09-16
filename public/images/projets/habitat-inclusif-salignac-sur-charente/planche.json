@@ -136,7 +136,7 @@
   ],
   "exclusions_appliquees": [
     "Numéro d’affaire 23-095 (champ reference) — il encode le volume annuel d’affaires du bureau.",
-    "Montants : les quatre postes chiffrés à 272 000 € HT et l’opération portée à 1 200 000 € HT.",
+    "Tout montant, de travaux comme d’honoraires : aucune donnée commerciale n’est portée au dessin — ni montant de travaux, ni estimation de lot, ni honoraires, ni taux de mission.",
     "Noms de tiers : la maîtrise d’ouvrage, la fédération destinataire — jusque dans le nom d’ouvrage « Habitat inclusif ADMR », le titre s’arrête à « Habitat inclusif » —, l’architecte et l’architecte des Bâtiments de France avec son avis.",
     "Toute géométrie d’ouvrage : ni implantation, ni circulation, ni orientation — les cellules codent le nombre de studios, jamais leur position ; la limite du dessin est topologique.",
     "Les indicateurs et marges que la fiche porte déjà : Cep,nr 84,0 pour 88,2, Bbio −50,3 % et −5,2 %, degrés-heures, Tic 28,6 °C pour 33,7, COP 2,66 et 4,29, 405 m³/h, bilans électriques (119 kVA, 42 kW, 36 kVA, IRVE) — matière du texte, pas du dessin.",

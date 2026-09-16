@@ -124,6 +124,83 @@ Deux conséquences pour qui édite une fiche :
 - Pas d'emphase agressive (gras minimal, italique pour précisions techniques).
 - Pas de HTML inline sauf cas justifié (`<sup>`, `<sub>`).
 
+## Aucun honoraire FT2E ne se publie — demande client du 2026-09-16
+
+**Le site ne porte jamais ce que FT2E a perçu.** Ni montant, ni taux, ni part de
+groupement, ni le vocabulaire qui y renvoie. La règle vaut pour tout ce qui est
+servi : le corps de la fiche, le frontmatter, et **les cinq pièces de la planche**.
+
+Ce qui est **interdit** :
+
+- un montant d'honoraires, de forfait de mission ou de marché de maîtrise
+  d'œuvre — le sien comme celui du groupement ;
+- un **taux** de rémunération ou de mission (« 7,3 % », « calculée au taux de
+  8 % »), et toute **part** (« 11,5 % de la mission ») : un taux appliqué à une
+  enveloppe publiée **redonne le montant** ;
+- une **assiette** présentée comme telle (« l'estimation qui sert d'assiette aux
+  honoraires ») — elle dit au lecteur quoi multiplier ;
+- le vocabulaire : « proposition d'honoraires », « note d'honoraires », « calcul
+  d'honoraires », « honoraires facturés ». Écrire **« proposition de mission »**,
+  « contrat », « la mission s'achève ».
+
+Ce qui **reste publiable**, et la frontière est celle-là : **les chiffres du
+maître d'ouvrage, pas la rémunération du bureau.** Montant des marchés de
+travaux, estimations de lots, coût d'objectif, enveloppe prévisionnelle,
+investissements et économies d'un scénario d'étude — ce sont les chiffres de
+l'opération, ils démontrent la portée d'une mission sans dire ce qu'elle a
+rapporté. ⚠ **Sauf s'ils sont accompagnés d'un taux** : l'enveloppe plus le taux
+font l'honoraire.
+
+⚠ **Le numéro d'affaire est déjà traité, et pour un motif voisin** : la graphie
+`NN-NNN` encode le rang dans l'année, donc le volume annuel d'affaires du
+bureau. Il est publié parce que FT2E l'a voulu (règle 10), et les planches
+l'excluent de leur dessin. Ne pas confondre les deux décisions.
+
+### ⚠ La planche ne s'arrête pas au dessin : son JSON est SERVI
+
+`public/` est recopié tel quel dans `dist/`. **Chaque `planche.json` est donc
+téléchargeable à son URL** — `https://<site>/images/projets/<slug>/planche.json`
+—, y compris les champs que personne n'affiche : `exclusions_appliquees`,
+`a_valider_ft2e`, `archetype_motif`, `controles`.
+
+C'est par là que les honoraires ont fui, et d'une manière qui mérite d'être
+retenue : **le champ qui recensait ce que la planche avait écarté le citait pour
+le prouver.** « Tout montant : … honoraires (13 030 € HT dont 3 200 pour la
+coordination SSI) ». Une note qui consigne ce qu'on a retiré, en le recopiant,
+ne retire rien. Relevé le 2026-09-16 : **41 dossiers sur 47** portaient un
+montant dans leur JSON, contre une quinzaine dans la prose — le corpus le moins
+regardé était le plus exposé.
+
+Un commentaire de `scripts/insecables-aria-planches.py` affirmait que ces champs
+« ne sortent jamais du dépôt ». L'hypothèse était raisonnable et n'avait jamais
+été vérifiée. **Un champ non affiché n'est pas un champ non publié.**
+
+Formulation à employer dans `exclusions_appliquees`, qui dit l'exclusion sans la
+documenter par l'exemple :
+
+> Tout montant, de travaux comme d'honoraires : aucune donnée commerciale n'est
+> portée au dessin — ni montant de travaux, ni estimation de lot, ni honoraires,
+> ni taux de mission.
+
+### Le contrôle
+
+Il se rejoue, et il porte sur les **trois corpus servis à la fois** — la prose,
+les JSON de `public/` **et leur copie dans `dist/`**, plus le HTML produit :
+
+```bash
+python scripts/controle-honoraires.py      # sortie 1 s il trouve une faute
+```
+
+⚠ **Ne pas refaire ce contrôle en `grep -P`.** Sur cette machine il refuse la
+locale — « -P supports only unibyte and UTF-8 locales » — et rend **0**, un zéro
+qui ressemble à un succès. Mesuré le 2026-09-16 : la sonde témoin, qui devait
+trouver un montant de travaux, rendait 0 elle aussi, et les trois contrôles
+« verts » n avaient rien mesuré. Le script porte donc **une sonde témoin qui le
+fait échouer quand son motif ne mord plus**.
+
+⚠ **Le contrôle sur `src/` ne suffit pas** : c est `dist/` qui est servi, et il
+contient `public/` recopié. Le script inspecte les deux.
+
 ## Tests à exécuter
 
 - Au build : Astro valide toutes les collections via Zod. **Build qui échoue = collection invalide.**

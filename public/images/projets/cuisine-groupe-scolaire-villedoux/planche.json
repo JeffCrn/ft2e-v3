@@ -148,7 +148,7 @@
   ],
   "exclusions_appliquees": [
     "Numéro d’affaire 25-010 (champ reference) — il encode le volume annuel d’affaires du bureau.",
-    "Montants : honoraires de 5 100 € HT, facture d’électricité de 24 425 € HT, et les six préconisations chiffrées (70 000 € / 68 € par an pour la toiture, 43 600 / 128 pour les murs, 44 800 / 542 pour la ventilation, 11 000 / 402 pour l’éclairage).",
+    "Tout montant, de travaux comme d’honoraires : aucune donnée commerciale n’est portée au dessin — ni montant de travaux, ni estimation de lot, ni honoraires, ni taux de mission.",
     "Noms de tiers : la maîtrise d’ouvrage communale et l’éditeur du logiciel de simulation — le dessin ne nomme personne.",
     "Le modèle énergétique entier — 37 116 kWhef/an, 61 % de chauffage, Ubat 0,484 W/m²·K « Bonne », 102 474 kWh facturés, répartition des usages : la fiche le porte déjà, et la thèse du dessin est aéraulique, pas thermique.",
     "La chaufferie bois collective : premier poste de consommation, mais le rapport n’y porte aucune préconisation — elle n’entre pas dans le mécanisme dessiné.",

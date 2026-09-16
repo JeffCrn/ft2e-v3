@@ -63,6 +63,6 @@ De cette règle découle le dernier chapitre du rapport, intitulé « Analyse d
 
 L’étude conclut que la récupération est réalisable : un quart du besoin de chauffage repris sur un air que les prescriptions sanitaires obligent à jeter, 74 % de consommation en moins, et une facture allégée. Elle établit aussi qu’un surcoût de 136 464 € à 26 ans de retour ne se décide pas sans aide, et elle en chiffre le plafond.
 
-Notre mission s’arrête là. Honoraires : 4 500 € HT pour les deux temps, en contrat direct avec l’industriel, sans maîtrise d’œuvre ni suivi de travaux — le même cadre que l’[audit énergétique du restaurant scolaire de Villedoux](/references/cuisine-groupe-scolaire-villedoux), dont le contrat excluait aussi la maîtrise d’œuvre. Une mission de suivi énergétique — un relevé par mois pendant deux ans sur le système de récupération — a été proposée en même temps ; elle n’a pas été commandée à ce jour.
+Notre mission s’arrête là : un contrat direct avec l’industriel pour les deux temps, sans maîtrise d’œuvre ni suivi de travaux — le même cadre que l’[audit énergétique du restaurant scolaire de Villedoux](/references/cuisine-groupe-scolaire-villedoux), dont le contrat excluait aussi la maîtrise d’œuvre. Une mission de suivi énergétique — un relevé par mois pendant deux ans sur le système de récupération — a été proposée en même temps ; elle n’a pas été commandée à ce jour.
 
 La décision du maître d’ouvrage et le dispositif d’aide finalement retenu compléteront cette fiche.

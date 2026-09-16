@@ -51,7 +51,7 @@ réglementaire de labellisation, la mission d’exécution et le test de perméa
 murs anciens les équipements d’un hébergement collectif — et de démontrer que
 l’établissement se met en sécurité. FT2E a contracté directement avec le maître
 d’ouvrage, la SCI du 16 rue de l’Escale, sur un projet de SMART Architecture, et
-par deux fois : une proposition d’honoraires pour les lots techniques en octobre
+par deux fois : une première proposition de mission pour les lots techniques en octobre
 2021, une seconde pour la coordination du système de sécurité incendie un mois
 plus tard.
 
@@ -139,13 +139,13 @@ compartimentage.
 Les études sont diffusées au printemps 2022 ; le chantier ouvre à l’automne. Le
 compte rendu du 9 avril 2024 annonce la réception du chantier et celle du lot
 courants forts et courants faibles pour la mi-avril, la commission de sécurité
-le 26 avril et l’ouverture de l’établissement dans la foulée. Les honoraires
-d’assistance aux opérations de réception et de réception du SSI sont facturés à
-la fin du mois de juin.
+le 26 avril et l’ouverture de l’établissement dans la foulée. La mission
+s’achève avec l’assistance aux opérations de réception et la réception du
+système de sécurité incendie, à la fin du mois de juin.
 
 Sur les deux lots qu’il a rédigés, le bureau avait estimé 536 315 € HT de
 travaux — 257 930 € pour la plomberie, la ventilation et la climatisation,
-278 385 € pour l’électricité. Sa propre mission, coordination SSI comprise, aura
-tenu en 26 700 € HT et quatorze notes d’honoraires étalées sur deux ans et demi.
+278 385 € pour l’électricité. Sa propre mission, coordination SSI
+comprise, se sera étalée sur deux ans et demi.
 C’est le même architecte que sur [le parc Undertech, à La
 Pallice](/references/undertech-la-pallice-la-rochelle), livré la même année.

@@ -195,7 +195,7 @@
   ],
   "exclusions_appliquees": [
     "Numéro d’affaire 23-099 (champ reference) — il encode le volume annuel d’affaires du bureau.",
-    "Tous les montants : marché de travaux 48 970,25 € HT, forfait de maîtrise d’œuvre 4 256 € HT.",
+    "Tout montant, de travaux comme d’honoraires : aucune donnée commerciale n’est portée au dessin — ni montant de travaux, ni estimation de lot, ni honoraires, ni taux de mission.",
     "Tous les tiers : le maître d’ouvrage (CPAM de la Charente-Maritime), l’entreprise titulaire, le bureau de contrôle, le coordonnateur SPS, la marque de borne citée « ou équivalent » au CCTP — les équipements sont désignés par leur fonction.",
     "Le millésime d’ouverture (2023) — seule la livraison 2025 paraît, au cartouche.",
     "Toute géométrie des sites : ni parking, ni voirie, ni implantation des potelets — les places 1 à 4 sont quatre carrés alignés, le tableau une topologie arrivée → tableau → départs."

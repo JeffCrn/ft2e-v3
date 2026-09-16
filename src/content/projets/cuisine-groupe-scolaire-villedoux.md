@@ -31,9 +31,9 @@ Le restaurant scolaire de Villedoux sert 270 repas par jour en période scolaire
 
 ## L’enjeu : deux questions dans une seule commande
 
-La proposition d’honoraires énumère sept objectifs, de l’état des lieux énergétique à la hiérarchisation des actions sur plusieurs années. Derrière cette liste, la commune posait deux questions distinctes. La première était immédiate : d’où vient cette humidité, et comment l’arrêter ? La seconde était patrimoniale : que faut-il engager, et dans quel ordre, pour qu’un bâtiment de 18 ans cesse de se dégrader et coûte moins cher à faire fonctionner ?
+La proposition de mission énumère sept objectifs, de l’état des lieux énergétique à la hiérarchisation des actions sur plusieurs années. Derrière cette liste, la commune posait deux questions distinctes. La première était immédiate : d’où vient cette humidité, et comment l’arrêter ? La seconde était patrimoniale : que faut-il engager, et dans quel ordre, pour qu’un bâtiment de 18 ans cesse de se dégrader et coûte moins cher à faire fonctionner ?
 
-Notre mission s’arrêtait au rapport, comme sur l’[étude de faisabilité de l’atelier Dufour Yachts](/references/atelier-dufour-yachts-perigny). Le contrat exclut par écrit la maîtrise d’œuvre des travaux et la gestion des aides financières : il fallait relever, calculer, chiffrer des scénarios, et rien de plus. Honoraires : 5 100 € HT pour l’ensemble, en contrat direct avec la commune.
+Notre mission s’arrêtait au rapport, comme sur l’[étude de faisabilité de l’atelier Dufour Yachts](/references/atelier-dufour-yachts-perigny). Le contrat exclut par écrit la maîtrise d’œuvre des travaux et la gestion des aides financières : il fallait relever, calculer, chiffrer des scénarios, et rien de plus. Le contrat a été passé en direct avec la commune.
 
 ## La visite : un voyant qui affiche la marche, une machine qui ne souffle pas
 

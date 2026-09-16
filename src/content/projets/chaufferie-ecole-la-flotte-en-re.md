@@ -45,7 +45,7 @@ Du local technique part un réseau enterré pré-isolé, sur 120 mètres de tran
 
 ## La particularité : le poste le plus long était le poste anticipé
 
-Le chantier s’est tenu en neuf réunions, de mai 2022 à octobre 2023 — exactement le nombre que le calcul d’honoraires avait prévu. Les fouilles archéologiques, les tranchées et la reprise des surfaces ont été menées dans le même été. L’alimentation électrique, elle, est restée à 90 % de septembre à mai : près de huit mois d’attente du distributeur, une saison de chauffe entière, et un compte rendu qui, faute de mieux, fixe la réunion suivante « à définir suivant travaux ENEDIS ».
+Le chantier s’est tenu en neuf réunions, de mai 2022 à octobre 2023 — exactement le nombre que la mission avait prévu. Les fouilles archéologiques, les tranchées et la reprise des surfaces ont été menées dans le même été. L’alimentation électrique, elle, est restée à 90 % de septembre à mai : près de huit mois d’attente du distributeur, une saison de chauffe entière, et un compte rendu qui, faute de mieux, fixe la réunion suivante « à définir suivant travaux ENEDIS ».
 
 C’est le paradoxe de l’anticipation : le poste dimensionné pour les extensions à venir est celui qui a coûté le plus de temps.
 
